@@ -1,30 +1,32 @@
 {
-	"name": "html5-boilerplate.docpad",
+	"name": "html5-boilerplate-frontend.docpad",
 	"version": "0.1.0",
 	"private": true,
-	"description": "HTML5 Boilerplate skeleton for DocPad. Bare essentials for building a modern website with best practices.",
-	"homepage": "https://github.com/docpad/html5-boilerplate.docpad",
+	"description": "HTML5 Boilerplate skeleton for DocPad. Bare essentials for building a modern website with best practices. Adds frontend plugins asset compilation.",
+	"homepage": "https://github.com/lukekarrys/html5-boilerplate.docpad",
 	"keywords": [
 		"docpad-skeleton",
 		"docpad",
 		"website",
 		"skeleton",
 		"html5 boilerplate",
-		"h5bp"
+		"h5bp",
+		"grunt"
 	],
 	"author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
 	"maintainers": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Luke Karrys (http://lukekarrys.com)"
 	],
 	"contributors": [
-		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)"
+		"Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
+		"Luke Karrys (http://lukekarrys.com)"
 	],
 	"bugs": {
-		"url": "https://github.com/docpad/html5-boilerplate.docpad/issues"
+		"url": "https://github.com/lukekarrys/html5-boilerplate.docpad/issues"
 	},
 	"repository" : {
 		"type" : "git",
-		"url" : "http://github.com/docpad/html5-boilerplate.docpad.git"
+		"url" : "http://github.com/lukekarrys/html5-boilerplate.docpad.git"
 	},
 	"engines" : {
 		"node": "0.8.x",
@@ -37,7 +39,11 @@
 		"docpad-plugin-marked": "2.x",
 		"docpad-plugin-partials": "2.x",
 		"docpad-plugin-stylus": "2.x",
-		"docpad-plugin-text": "2.x"
+		"docpad-plugin-text": "2.x",
+		"grunt": "~0.3.17",
+		"grunt-css": "~0.3.2",
+		"bal-util": "~1.15.3",
+		"underscore": "~1.4.3"
 	},
 	"devDependencies": {
 		"docpad-plugin-livereload": "2.x"
