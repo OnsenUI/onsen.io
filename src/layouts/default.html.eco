@@ -17,8 +17,16 @@
 	<!-- DocPad Meta -->
 	<%- @getBlock('meta').toHTML() %>
 
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
 	<!-- DocPad Styles + Our Own -->
 	<%- @getBlock('styles').add(@getGruntedStyles()).toHTML() %>
+
+	<link rel="stylesheet" href="/styles/layout.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -38,12 +46,41 @@
     <![endif]-->
 
 	<header></header>
-	<article>
-		<%- @content %>
-	</article>
+	<!-- <div class="container"> -->
+		<div class="row">
+		  <div class="col-md-3 left-menu">
+		  	<div class="container">
+		  		<h1><%= @framework.displayName %></h1>
+		  		<section>
+		  			<% for directive in @framework.directives: %>
+		  			<h2><%= @framework.codeName %>-<%= directive.name %></h2>
+		  			<ul>
+		  				<% for method in directive.methods: %>
+		  					<li>
+		  						<%= method %>
+		  					</li>
+		  				<% end %>
+		  			</ul>
+		  			<% end %>
+		  		</section>
+		  	</div>
+		  </div>
+		  <div class="col-md-9 col-md-offset-3 main-content">
+		  	<article>
+				<%- @content %>
+			</article>
+		  </div>
+		</div>
+	<!-- </div> -->
+	
 	<footer></footer>
 
 	<!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
+	
+	
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

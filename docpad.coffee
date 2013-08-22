@@ -1,13 +1,41 @@
 # The DocPad Configuration File
 # It is simply a CoffeeScript Object which is parsed by CSON
 docpadConfig = {
-
+	
 	# =================================
 	# Template Data
 	# These are variables that will be accessible via our templates
 	# To access one of these within our templates, refer to the FAQ: https://github.com/bevry/docpad/wiki/FAQ
 
 	templateData:
+
+		framework:
+			displayName: 'Monaca UI'
+			codeName: 'mi'
+			directives: [
+				{
+					name: 'screen'
+					methods: [
+						'presentPage',
+						'dismissPage'
+					]
+				},
+				{
+					name: 'navigator'
+					methods: [
+						'pushPage',
+						'popPage',
+						'resetToPage'
+					]
+				},
+				{
+					name: 'sliding-menu'
+					methods: [
+						'setBehindPage',
+						'setAbovePage'						
+					]
+				}
+			]		
 
 		# Specify some site properties
 		site:
@@ -21,7 +49,7 @@ docpadConfig = {
 			]
 
 			# The default title of our website
-			title: "Your Website"
+			title: "Maccha"
 
 			# The website description (for SEO)
 			description: """
@@ -80,6 +108,12 @@ docpadConfig = {
 			_.map scripts, (value) ->
 				return value.replace 'out', ''
 
+	# =================================
+	# Collections
+	
+	collections:        
+		pages: ->
+			@getCollection('documents').findAllLive({relativeOutDirPath:'references'},[title:1])
 
 	# =================================
 	# DocPad Events
