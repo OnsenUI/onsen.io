@@ -1,0 +1,47 @@
+---
+layout: 'default'
+title: 'Home'
+---
+
+<div class="page">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="jumbotron space-top">
+          <h1>Maccha</h1>
+          <blockquote>
+            <p>
+              <small>Write a lot less, do a lot more!</small>
+            </p>
+          </blockquote>
+          <p>
+            Maccha is HTML5 UI framework for building mobile application.
+          </p>
+          <p>
+            It is designed to be:
+            <ul>
+              <li>Blazing fast</li>
+              <li>Dead simple</li>
+              <li>And powerful</li>
+            </ul>
+          </p>
+        </div>
+
+        <a href="#/getting_started">
+          <button type="button" class="btn btn-primary round getting-started-btn">
+            <h3>Let's get STARTED!</h3>
+          </button>
+        </a>
+
+      </div>
+
+      <div class="col-md-6">
+        <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
+          <iframe src="http://10.0.0.60:3000" width="320" height="550" style="border-color: black;"></iframe>
+        </div>
+      </div>
+
+      <p></p>
+    </div>
+  </div>
+</div>

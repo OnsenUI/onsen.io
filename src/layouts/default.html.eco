@@ -27,6 +27,7 @@
 	<%- @getBlock('styles').add(@getGruntedStyles()).toHTML() %>
 
 	<link rel="stylesheet" href="/styles/layout.css">
+	<link rel="stylesheet" href="/styles/main.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -45,8 +46,34 @@
         <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
 
-	<header></header>
-	<!-- <div class="container"> -->
+
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Maccha</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#/getting_started">Getting Started</a></li>
+            <li><a href="#/docs">Docs</a></li>
+            <li><a href="#/docs">Samples</a></li>
+          </ul>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <div class="main-content">
+    	<%- @content %>
+    </div>
+
+
+	<!-- 
 		<div class="row">
 		  <div class="col-md-3 left-menu">
 		  	<div class="container">
@@ -71,9 +98,9 @@
 			</article>
 		  </div>
 		</div>
-	<!-- </div> -->
 	
-	<footer></footer>
+	
+	-->
 
 	<!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
