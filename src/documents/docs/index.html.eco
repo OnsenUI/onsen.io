@@ -7,31 +7,31 @@ title: 'Docs'
   <div class="row full-width full-height space-top45">
     <div class="col-md-2 left-menu affix">
       <div class="container">
-        <section>
+        <section id="sidemenu">
         	<% for directive in @framework.directives: %>
           <div>
-            <a href="#<%= directive.name %>">
+            <a class="link round-padding" href="#<%= directive.name %>">
               <h2 class="directive_name"><%= @framework.codeName %>-<%= directive.name %></h2>
             </a> 
             <section>
               <% if directive.attributes && directive.attributes.length > 0: %>
-                <a href="#<%= directive.name %>-attributes">
+                <a class="link round-padding" href="#<%= directive.name %>-attributes">
                   <div class="gray space-top">Attributes:</div>
                 </a>
                 <% for attribute in directive.attributes: %>
                   <div>
-                    <a href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
+                    <a class="round-padding" href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
                   </div>
                 <% end %>
               <% end %>
               
               <% if directive.methods && directive.methods.length > 0: %>
-                <a href="#<%= directive.name %>-methods">
+                <a class="link round-padding" href="#<%= directive.name %>-methods">
                   <div class="gray space-top">Methods:</div>
                 </a>
                 <% for method in directive.methods: %>
                   <div>
-                    <a href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+                    <a class="round-padding" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
                   </div>
                 <% end %>
               <% end %>              
@@ -41,8 +41,8 @@ title: 'Docs'
         </section>
       </div>
     </div>
-    <div class="col-md-9 col-md-offset-2">
-      <div class="container">        
+    <div class="col-md-9 col-md-offset-2 right-side space-top50">
+      <div class="container right-container">        
 
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">

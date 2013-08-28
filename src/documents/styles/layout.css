@@ -1,7 +1,19 @@
 body {
 	background-color: #F7F7F9;
+	overflow: hidden;
 }
 
 .main-content {
 
+}
+
+.right-side {
+	position: relative;
+	height: 100%;
+}
+
+.right-container {
+	position: absolute;
+	height: 100%;
+	overflow: scroll;
 }

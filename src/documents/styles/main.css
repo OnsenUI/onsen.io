@@ -37,6 +37,10 @@ body {
   margin-top: 45px;
 }
 
+.space-top50 {
+  margin-top: 50px;
+}
+
 .round {
   border-radius: 50%;
 }
@@ -108,4 +112,17 @@ body {
   height: 51px; 
   margin-top: -51px; 
   visibility: hidden;
+}
+
+.link {
+  display: inline-block;
+}
+
+.round-padding {
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.selected {  
+  background-color: lightgray;
 }
