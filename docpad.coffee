@@ -19,6 +19,7 @@ docpadConfig = {
 				      en: 'The root element. This is usually put inside <body> tag.',
 				      jp: ''
 				    },
+				    examplePartial: 'screen_example',
 				    demoURL: 'http://10.0.0.60:8000/app/screen_demo.html',
 				    attributes: [
 				      {
@@ -52,6 +53,7 @@ docpadConfig = {
 				      en: 'Manages the page navigation backed by page stack.',
 				      jp: ''
 				    },
+				    examplePartial: 'navigator_example',
 				    demoURL: 'http://10.0.0.60:8000/app/navigator_demo.html',
 				    attributes: [
 				      {
