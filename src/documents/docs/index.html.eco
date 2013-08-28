@@ -1,0 +1,128 @@
+---
+layout: 'default'
+title: 'Docs'
+---
+
+<div class="page">
+  <div class="row full-width full-height space-top40">
+    <div class="col-md-2 left-menu affix">
+      <div class="container">
+        <section>
+        	<% for directive in @framework.directives: %>
+          <div>
+            <h3 class="directive_name"><%= @framework.codeName %>-<%= directive.name %></h3>
+            <section>
+
+              <% for method in directive.methods: %>
+              <div>
+                <a href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+              </div>
+              <% end %>
+            </section>
+          </div>
+          <% end %>
+        </section>
+      </div>
+    </div>
+    <div class="col-md-9 col-md-offset-2">
+      <div class="container">
+        <% for directive in @framework.directives: %>
+        <div ng-repeat="directive in framework.directives">
+          <div class="page-header">
+            <h2><%= @framework.codeName %>-<%= directive.name %></h2>
+          </div>
+
+          <div class="row space-top">
+            <div class="col-md-8">
+              <section class="space-top">
+                <h4 class="gray">Description</h4>
+                <p><%= directive.description.en %></p>
+              </section>
+
+              <section class="space-top40">
+                <h4 class="gray">Attributes</h4>
+                <% if !directive.attributes || directive.attributes.length == 0: %>
+                <section ng-show="!directive.attributes || directive.attributes.length === 0">
+                  <p class="text-muted">
+                    This tag has no attribute
+                  </p>
+                </section>
+                <% end %>
+                <% if directive.attributes && directive.attributes.length > 0: %>
+                <section ng-show="directive.attributes.length > 0"
+                  class="round-corner gray-border">
+                  <table class="table">
+                    <thead class="heading-bg-color">
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for attribute in directive.attributes: %>
+                      <tr ng-repeat="attribute in directive.attributes">
+                        <td><%= attribute.name %></td>
+                        <td><%= attribute.description.en %></td>
+                      </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+                </section>
+                <% end %>
+              </section>
+
+              <section class="space-top40">
+                <h4 class="gray">Methods</h4>
+                <% if !directive.methods || directive.methods.length == 0: %>
+                <section ng-show="!directive.methods || directive.methods.length === 0">
+                  <p class="text-muted">
+                    This tag has no method
+                  </p>
+                </section>
+                <% end %>
+                <% if directive.methods && directive.methods.length > 0: %>
+                <section ng-show="directive.methods.length > 0" class="round-corner gray-border">
+                  <table class="table">
+                    <thead class="heading-bg-color">
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% for method in directive.methods: %>
+                      <tr ng-repeat="method in directive.methods">
+                        <td><code><%= method.name %><%= method.parametters %></code></td>
+                        <td><%= method.description.en %></td>
+                      </tr>
+                      <% end %>
+                    </tbody>
+                  </table>
+
+                </section>
+                <% end %>
+              </section>
+
+              <div class="space-top40">
+               
+              </div>
+            </div>
+            <% if directive.demoURL: %>
+            <div class="col-md-4" ng-show="directive.demoURL !== undefined">
+              <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
+                <iframe src="<%= directive.demoURL %>" width="320" height="550" style="border-color: black;"></iframe>
+              </div>
+            </div>
+            <% end %>
+          </div>
+
+        </div>
+        <% end %>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

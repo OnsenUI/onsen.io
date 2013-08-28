@@ -13,29 +13,194 @@ docpadConfig = {
 			displayName: 'Monaca UI'
 			codeName: 'mi'
 			directives: [
-				{
-					name: 'screen'
-					methods: [
-						'presentPage',
-						'dismissPage'
-					]
-				},
-				{
-					name: 'navigator'
-					methods: [
-						'pushPage',
-						'popPage',
-						'resetToPage'
-					]
-				},
-				{
-					name: 'sliding-menu'
-					methods: [
-						'setBehindPage',
-						'setAbovePage'						
-					]
-				}
-			]		
+				  {
+				    name: 'screen',
+				    description: {
+				      en: 'The root element. This is usually put inside <body> tag.',
+				      jp: ''
+				    },
+				    demoURL: 'http://10.0.0.60:8000/app/screen_demo.html',
+				    attributes: [
+				      {
+				        name: 'page',
+				        description: {
+				          en: 'The root page of this screen element',
+				          jp: ''
+				        }
+				      }
+				    ],
+				    methods: [
+				      {
+				        name: 'presentPage',
+				        parametters: '( pageUrl )',
+				        description: {
+				          en: 'Presents a page',
+				          jp: ''
+				        }
+				      }, {
+				        name: 'dismissPage',
+				        parametters: '( )',
+				        description: {
+				          en: 'Dismisses the page that was presented',
+				          jp: ''
+				        }
+				      }
+				    ]
+				  }, {
+				    name: 'navigator',
+				    description: {
+				      en: 'Manages the page navigation backed by page stack.',
+				      jp: ''
+				    },
+				    demoURL: 'http://10.0.0.60:8000/app/navigator_demo.html',
+				    attributes: [
+				      {
+				        name: 'page',
+				        description: {
+				          en: 'The root page of the navigator',
+				          jp: ''
+				        }
+				      }, {
+				        name: 'title',
+				        description: {
+				          en: 'The title in the toolbar',
+				          jp: ''
+				        }
+				      }, {
+				        name: 'left-button-icon',
+				        description: {
+				          en: "The icon name of the toolbar's left button icon",
+				          jp: ''
+				        }
+				      }, {
+				        name: 'right-button-icon',
+				        description: {
+				          en: "The icon name of the toolbar's right button icon",
+				          jp: ''
+				        }
+				      }, {
+				        name: 'on-left-button-click',
+				        description: {
+				          en: "Event handler when toolbar's left button is clicked",
+				          jp: ''
+				        }
+				      }, {
+				        name: 'on-right-button-click',
+				        description: {
+				          en: "Event handler when toolbar's right button is clicked",
+				          jp: ''
+				        }
+				      }
+				    ],
+				    methods: [
+				      {
+				        name: 'pushPage',
+				        parametters: '( pageUrl, title )',
+				        description: {
+				          en: "Pushes the specified pageUrl into the page stack and setting the title to the Toolbar's title",
+				          jp: ""
+				        }
+				      }, {
+				        name: 'popPage',
+				        parametters: '( )',
+				        description: {
+				          en: "Pops current page from the page stack",
+				          jp: ""
+				        }
+				      }, {
+				        name: 'resetToPage',
+				        parametters: '( pageUrl, title )',
+				        description: {
+				          en: "Clears page stack and add the specified pageUrl to the page stack. If title is specified, it will bet set into Toolbar's title",
+				          jp: ""
+				        }
+				      }
+				    ]
+				  }, {
+				    name: 'sliding-menu',
+				    description: {
+				      en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.",
+				      jp: ""
+				    },
+				    demoURL: 'http://10.0.0.60:8000/app/sliding_menu_demo.html',
+				    attributes: [
+				      {
+				        name: 'behind-page',
+				        description: {
+				          en: 'The url of the page to be set to the behind layer.',
+				          jp: ''
+				        }
+				      }, {
+				        name: 'above-page',
+				        description: {
+				          en: 'The url of the page to be set to the above layer.',
+				          jp: ''
+				        }
+				      }
+				    ],
+				    methods: [
+				      {
+				        name: 'setAbovePage',
+				        parametters: '( pageUrl )',
+				        description: {
+				          en: "Show the page specified in pageUrl in the above layer",
+				          jp: ""
+				        }
+				      }, {
+				        name: 'setBehindPage',
+				        parametters: '( pageUrl )',
+				        description: {
+				          en: "Show the page specified in pageUrl in the behind layer",
+				          jp: ""
+				        }
+				      }, {
+				        name: 'openMenu',
+				        parametters: '( )',
+				        description: {
+				          en: "Slide the above layer to reveal the layer behind.",
+				          jp: ""
+				        }
+				      }, {
+				        name: 'closeMenu',
+				        parametters: '( )',
+				        description: {
+				          en: "Slide the above layer to hide the layer behind.",
+				          jp: ""
+				        }
+				      }, {
+				        name: 'toggleMenu',
+				        parametters: '( )',
+				        description: {
+				          en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind",
+				          jp: ""
+				        }
+				      }
+				    ]
+				  }, {
+				    name: 'scroller',
+				    description: {
+				      en: "Makes the content inside this tag scrollable.",
+				      jp: ""
+				    },
+				    demoURL: 'http://10.0.0.60:8000/app/scroller_demo.html',
+				    methods: []
+				  }, {
+				    name: 'list',
+				    description: {
+				      en: "The container for list-item. Similar to <ul> but styled for mobile.",
+				      jp: ""
+				    },
+				    demoURL: 'http://10.0.0.60:8000/app/list_demo.html',
+				    methods: []
+				  }, {
+				    name: 'list-item',
+				    description: {
+				      en: "Works like <li> but styled for mobile. Must be put inside list tag.",
+				      jp: ""
+				    },
+				    methods: []
+				  }
+				];		
 
 		# Specify some site properties
 		site:
