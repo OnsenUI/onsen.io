@@ -9,7 +9,7 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <div class="page">
+    <div class="page center">
         <h1>Hello, I am Page 1</h1>
         <monaca-button ng-click="monaca.presentPage('page2.html')">
             Present Page 2
@@ -19,7 +19,7 @@ encoding: 'utf8'
 
 *page2.html*
 
-    <div class="page">
+    <div class="page center">
         <h1>Hello, I am Page 2</h1>
         <monaca-button ng-click="monaca.dismissPage()">
             Dismiss Page

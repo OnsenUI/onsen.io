@@ -124,6 +124,7 @@ docpadConfig = {
 				      en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.",
 				      jp: ""
 				    },
+				    examplePartial: 'sliding_menu_example',
 				    demoURL: 'http://10.0.0.60:8000/app/sliding_menu_demo.html',
 				    attributes: [
 				      {
@@ -184,6 +185,7 @@ docpadConfig = {
 				      en: "Makes the content inside this tag scrollable.",
 				      jp: ""
 				    },
+				    examplePartial: 'scroller_example',
 				    demoURL: 'http://10.0.0.60:8000/app/scroller_demo.html',
 				    methods: []
 				  }, {
@@ -192,6 +194,7 @@ docpadConfig = {
 				      en: "The container for list-item. Similar to <ul> but styled for mobile.",
 				      jp: ""
 				    },
+				    examplePartial: 'list_example',
 				    demoURL: 'http://10.0.0.60:8000/app/list_demo.html',
 				    methods: []
 				  }, {
