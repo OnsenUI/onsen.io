@@ -10,14 +10,31 @@ title: 'Docs'
         <section>
         	<% for directive in @framework.directives: %>
           <div>
-            <h3 class="directive_name"><%= @framework.codeName %>-<%= directive.name %></h3>
+            <a href="#<%= directive.name %>">
+              <h2 class="directive_name"><%= @framework.codeName %>-<%= directive.name %></h2>
+            </a> 
             <section>
-
-              <% for method in directive.methods: %>
-              <div>
-                <a href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
-              </div>
+              <% if directive.attributes && directive.attributes.length > 0: %>
+                <a href="#<%= directive.name %>-attributes">
+                  <div class="gray space-top">Attributes:</div>
+                </a>
+                <% for attribute in directive.attributes: %>
+                  <div>
+                    <a href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
+                  </div>
+                <% end %>
               <% end %>
+              
+              <% if directive.methods && directive.methods.length > 0: %>
+                <a href="#<%= directive.name %>-methods">
+                  <div class="gray space-top">Methods:</div>
+                </a>
+                <% for method in directive.methods: %>
+                  <div>
+                    <a href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+                  </div>
+                <% end %>
+              <% end %>              
             </section>
           </div>
           <% end %>
@@ -29,7 +46,7 @@ title: 'Docs'
 
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">
-          <div class="page-header">
+          <div class="page-header" id="<%= directive.name %>">
             <h2><%= @framework.codeName %>-<%= directive.name %></h2>
           </div>
 
@@ -41,7 +58,7 @@ title: 'Docs'
               </section>
 
               <section class="space-top45">
-                <h4 class="gray">Attributes</h4>
+                <h4 id="<%= directive.name %>-attributes" class="gray">Attributes</h4>
                 <% if !directive.attributes || directive.attributes.length == 0: %>
                 <section ng-show="!directive.attributes || directive.attributes.length === 0">
                   <p class="text-muted">
@@ -61,7 +78,7 @@ title: 'Docs'
                     </thead>
                     <tbody>
                       <% for attribute in directive.attributes: %>
-                      <tr ng-repeat="attribute in directive.attributes">
+                      <tr id="<%= directive.name %>-<%= attribute.name %>" ng-repeat="attribute in directive.attributes">
                         <td><%= attribute.name %></td>
                         <td><%= attribute.description.en %></td>
                       </tr>
@@ -73,7 +90,7 @@ title: 'Docs'
               </section>
 
               <section class="space-top45">
-                <h4 class="gray">Methods</h4>
+                <h4 id="<%= directive.name %>-methods" class="gray">Methods</h4>
                 <% if !directive.methods || directive.methods.length == 0: %>
                 <section ng-show="!directive.methods || directive.methods.length === 0">
                   <p class="text-muted">
@@ -92,7 +109,7 @@ title: 'Docs'
                     </thead>
                     <tbody>
                       <% for method in directive.methods: %>
-                      <tr ng-repeat="method in directive.methods">
+                      <tr id="<%= directive.name %>-<%= method.name %>" ng-repeat="method in directive.methods">
                         <td><code><%= method.name %><%= method.parametters %></code></td>
                         <td><%= method.description.en %></td>
                       </tr>
