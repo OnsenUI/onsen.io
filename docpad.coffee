@@ -122,7 +122,42 @@ docpadConfig = {
 				        }
 				      }
 				    ]
-				  }, {
+				  }, 
+				  {
+				    name: 'tabbar',
+				    description: {
+				      en: 'Used with tabbar-item to manage pages using tabs.',
+				      jp: ''
+				    },				    
+				    methods: []				      
+				  }, 
+				  {
+				    name: 'tabbar-item',
+				    description: {
+				      en: 'Represents a tab inside tabbar. Each tabbar-item represents a page',
+				      jp: ''
+				    },
+				    examplePartial: 'tabbar_example',
+				    demoURL: 'http://10.0.0.60:8000/app/tabbar_demo.html',
+				    attributes: [
+				    	{
+					        name: 'page',
+					        description: {
+					          en: 'The page that this tabbar-item points to',
+					          jp: ''
+				        	}
+				        },
+				        {
+					        name: 'active',
+					        description: {
+					          en: 'Set wether this tab should be active or not. Valid values are [true/false]',
+					          jp: ''
+				        	}
+				        }			      
+				    ],
+				    methods: []				      
+				  }, 
+				  {
 				    name: 'sliding-menu',
 				    description: {
 				      en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.",
