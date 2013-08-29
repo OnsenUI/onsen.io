@@ -4,7 +4,7 @@ title: 'Docs'
 ---
 
 <div class="page">
-  <div class="full-width full-height space-top45">
+  <div class="full-width full-height">
     <div class="col-md-2 left-menu affix">      
         <section id="sidemenu">
         	<% for directive in @framework.directives: %>
@@ -16,24 +16,28 @@ title: 'Docs'
             <section>
               <% if directive.attributes && directive.attributes.length > 0: %>
                 <a class="link round-padding" href="#<%= directive.name %>-attributes">
-                  <div class="gray">Attributes:</div>
-                </a>
+                  <div class="gray"><%= @CONSTANTS.attributes.en %>:</div>
+                </a> 
+                <div class="margin-left">                              
                 <% for attribute in directive.attributes: %>
                   <div>
                     <a class="round-padding" href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
                   </div>
                 <% end %>
+                </div>
               <% end %>
               
               <% if directive.methods && directive.methods.length > 0: %>
                 <a class="link round-padding" href="#<%= directive.name %>-methods">
                   <div class="gray">Methods:</div>
                 </a>
-                <% for method in directive.methods: %>
-                  <div>
-                    <a class="round-padding" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
-                  </div>
-                <% end %>
+                <div class="margin-left">                              
+                  <% for method in directive.methods: %>
+                    <div>
+                      <a class="round-padding" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+                    </div>
+                  <% end %>
+                </div>
               <% end %>              
             </section>
           </div>

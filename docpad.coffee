@@ -8,6 +8,10 @@ docpadConfig = {
 	# To access one of these within our templates, refer to the FAQ: https://github.com/bevry/docpad/wiki/FAQ
 
 	templateData:
+		CONSTANTS:
+			attributes:
+				en: 'Attributes',
+				jp: '属性'
 
 		framework:
 			displayName: 'Monaca UI'
