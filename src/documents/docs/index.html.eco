@@ -4,19 +4,19 @@ title: 'Docs'
 ---
 
 <div class="page">
-  <div class="row full-width full-height space-top45">
-    <div class="col-md-2 left-menu affix">
-      <div class="container">
+  <div class="full-width full-height space-top45">
+    <div class="col-md-2 left-menu affix">      
         <section id="sidemenu">
         	<% for directive in @framework.directives: %>
           <div>
+            <div class="space-top"></div>
             <a class="link round-padding" href="#<%= directive.name %>">
-              <h2 class="directive_name"><%= @framework.codeName %>-<%= directive.name %></h2>
+              <div class="directive_name font-1_5 bold"><%= @framework.codeName %>-<%= directive.name %></div>
             </a> 
             <section>
               <% if directive.attributes && directive.attributes.length > 0: %>
                 <a class="link round-padding" href="#<%= directive.name %>-attributes">
-                  <div class="gray space-top">Attributes:</div>
+                  <div class="gray">Attributes:</div>
                 </a>
                 <% for attribute in directive.attributes: %>
                   <div>
@@ -27,7 +27,7 @@ title: 'Docs'
               
               <% if directive.methods && directive.methods.length > 0: %>
                 <a class="link round-padding" href="#<%= directive.name %>-methods">
-                  <div class="gray space-top">Methods:</div>
+                  <div class="gray">Methods:</div>
                 </a>
                 <% for method in directive.methods: %>
                   <div>
@@ -39,20 +39,20 @@ title: 'Docs'
           </div>
           <% end %>
         </section>
-      </div>
     </div>
-    <div class="col-md-9 col-md-offset-2 right-side space-top50">
-      <div class="container right-container">        
+    <div class="col-md-10 col-md-offset-2 right-side space-top50">
+      <div class="container right-container"> 
+        <div class="space-top50"></div>       
 
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">
           <span class="anchor" id="<%= directive.name %>"></span>
           <div class="page-header">
-            <h2><%= @framework.codeName %>-<%= directive.name %></h2>
+            <h1><%= @framework.codeName %>-<%= directive.name %></h1>
           </div>
 
           <div class="row space-top">
-            <div class="col-md-9">
+            <div class="col-md-8">
               <section class="space-top">
                 <h4 class="gray">Description</h4>
                 <p><%= directive.description.en %></p>
@@ -125,30 +125,39 @@ title: 'Docs'
                 </section>
                 <% end %>
               </section>
+            </div> 
+            <div class="col-md-4"></div>
+          </div>
 
+          <div class="row">
+            <div class="col-md-8">
               <% if directive.examplePartial: %>
-              <div class="space-top45">
-                <h4 class="gray">Example</h4>
-                <%- @partial(directive.examplePartial) %>
-              </div>
+                <div class="space-top45">
+                  <h4 class="gray">Example</h4>
+                  <%- @partial(directive.examplePartial) %>
+                </div>
               <% end %>
             </div>
-            <% if directive.demoURL: %>
-            <div class="col-md-3" ng-show="directive.demoURL !== undefined">
-              <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
-                <iframe src="<%= directive.demoURL %>" width="320" height="550" style="border-color: black;"></iframe>
-              </div>
+            <div class="col-md-4 no-padding move-left15">
+               <% if directive.demoURL: %>
+                <div class="col-md-3" ng-show="directive.demoURL !== undefined">
+                  <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
+                    <iframe src="<%= directive.demoURL %>" width="320" height="550" style="border-color: black;"></iframe>
+                  </div>
+                </div>
+              <% end %>
             </div>
-            <% end %>
           </div>
 
         </div>
         <% end %>
 
+        <div class="space-top50"></div>
       </div>
-
+              
     </div>
 
   </div>
 
-</div>
+</div> <!-- page -->
+
