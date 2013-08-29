@@ -78,6 +78,7 @@ body {
 .left-menu {
   box-shadow: 0 0 1px 2px lightgray;
   top: 50px;
+  padding: 5px;
   bottom: 0;
   overflow-y: auto;
 }
@@ -98,8 +99,7 @@ body {
 }
 
 .directive_name {
-  color: #777;
-  margin: 25px 0 10px 0;
+  color: #777; 
 }
 
 .gray {
@@ -119,10 +119,26 @@ body {
 }
 
 .round-padding {
-  padding: 10px;
+  padding: 5px;
   border-radius: 4px;
 }
 
 .selected {  
   background-color: lightgray;
+}
+
+.font-1_5 {
+  font-size: 1.5em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.move-left15{
+  margin-left: -15px;
 }

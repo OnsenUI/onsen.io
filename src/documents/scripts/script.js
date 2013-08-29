@@ -1,6 +1,5 @@
-// /* Author:
 
-//  */
+
 
 // var topRange = 200, // measure from the top of the viewport to X pixels down
 // 	edgeMargin = 20, // margin above the top or margin from the end of the page
