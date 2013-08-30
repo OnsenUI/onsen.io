@@ -4,22 +4,22 @@ encoding: 'utf8'
 
 *index.html*
 
-    <monaca-sliding-menu behind-page="menu.html" above-page="page1.html">
-    </monaca-sliding-menu>
+    <ns-sliding-menu behind-page="menu.html" above-page="page1.html">
+    </ns-sliding-menu>
 
 
 *menu.html*
 
-    <monaca-list>
-        <monaca-list-item 
-            ng-click="monaca.toggleMenu(); monaca.setAbovePage('page1.html')">
+    <ns-list>
+        <ns-list-item 
+            ng-click="ns.slidingMenu.toggleMenu(); ns.slidingMenu.setAbovePage('page1.html')">
             Page 1
-        </monaca-list-item>
-        <monaca-list-item 
-            ng-click="monaca.toggleMenu(); monaca.setAbovePage('page2.html')">
+        </ns-list-item>
+        <ns-list-item 
+            ng-click="ns.slidingMenu.toggleMenu(); ns.slidingMenu.setAbovePage('page2.html')">
             Page 2
-        </monaca-list-item>
-    </monaca-list>
+        </ns-list-item>
+    </ns-list>
 
 
 *page1.html*

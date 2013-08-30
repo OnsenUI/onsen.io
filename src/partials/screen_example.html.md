@@ -4,16 +4,16 @@ encoding: 'utf8'
 
 *index.html*
 
-    <monaca-screen page="page1.html"></monaca-screen>
+    <ns-screen page="page1.html"></ns-screen>
 
 
 *page1.html*
 
     <div class="page center">
         <h1>Hello, I am Page 1</h1>
-        <monaca-button ng-click="monaca.presentPage('page2.html')">
+        <ns-button ng-click="ns.screen.presentPage('page2.html')">
             Present Page 2
-        </monaca-button>
+        </ns-button>
     </div>
 
 
@@ -21,7 +21,7 @@ encoding: 'utf8'
 
     <div class="page center">
         <h1>Hello, I am Page 2</h1>
-        <monaca-button ng-click="monaca.dismissPage()">
+        <ns-button ng-click="ns.screen.dismissPage()">
             Dismiss Page
-        </monaca-button>
+        </ns-button>
     </div>

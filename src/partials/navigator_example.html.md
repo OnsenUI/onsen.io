@@ -4,16 +4,16 @@ encoding: 'utf8'
 
 *index.html*
 
-    <monaca-navigator page="page1.html" title="Page 1"></monaca-navigator>
+    <ns-navigator page="page1.html" title="Page 1"></ns-navigator>
 
 
 *page1.html*
 
     <div class="page center">
         <h1>Hello, I am Page 1</h1>
-        <monaca-button ng-click="monaca.pushpage('page2.html', 'Page 2')">
+        <ns-button ng-click="ns.navigator.pushpage('page2.html', 'Page 2')">
             Push Page 2
-        </monaca-button>
+        </ns-button>
     </div>
 
 
@@ -21,7 +21,7 @@ encoding: 'utf8'
 
     <div class="page center">
         <h1>Hello, I am Page 2</h1>
-        <monaca-button ng-click="monaca.popPage()">
+        <ns-button ng-click="ns.navigator.popPage()">
             Pop Page
-        </monaca-button>
+        </ns-button>
     </div>

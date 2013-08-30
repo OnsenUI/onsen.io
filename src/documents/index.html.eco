@@ -8,14 +8,14 @@ title: 'Home'
     <div class="row">
       <div class="col-md-6">
         <div class="jumbotron space-top">
-          <h1>Maccha</h1>
+          <h1><%= @framework.displayName %></h1>
           <blockquote>
             <p>
               <small>Write a lot less, do a lot more!</small>
             </p>
           </blockquote>
           <p>
-            Maccha is a HTML5 UI framework for building mobile application.
+            <%= @framework.displayName %> is a HTML5 UI framework for building mobile application.
           </p>
           <p>
             It is designed to be:

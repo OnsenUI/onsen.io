@@ -4,14 +4,14 @@ encoding: 'utf8'
 
 *index.html*
 
-    <monaca-list>
-        <monaca-list-item>
+    <ns-list>
+        <ns-list-item>
             <h3>Numbers:</h3>
-        </monaca-list-item>
-        <monaca-list-item>One</monaca-list-item>
-        <monaca-list-item>Two</monaca-list-item>
-        <monaca-list-item>Three</monaca-list-item>
-        <monaca-list-item>Four</monaca-list-item>
-        <monaca-list-item>Five</monaca-list-item>
-        <monaca-list-item>Six</monaca-list-item>
-    </monaca-list>
+        </ns-list-item>
+        <ns-list-item>One</ns-list-item>
+        <ns-list-item>Two</ns-list-item>
+        <ns-list-item>Three</ns-list-item>
+        <ns-list-item>Four</ns-list-item>
+        <ns-list-item>Five</ns-list-item>
+        <ns-list-item>Six</ns-list-item>
+    </ns-list>

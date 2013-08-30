@@ -4,17 +4,17 @@ encoding: 'utf8'
 
 *index.html*
 
-    <monaca-tabbar>
-        <monaca-tabbar-item page="pages/tabbar/page1.html">
+    <ns-tabbar>
+        <ns-tabbar-item page="pages/tabbar/page1.html">
             One
-        </monaca-tabbar-item> 
-        <monaca-tabbar-item active="true" page="pages/tabbar/page2.html">
+        </ns-tabbar-item> 
+        <ns-tabbar-item active="true" page="pages/tabbar/page2.html">
             Two
-        </monaca-tabbar-item> 
-        <monaca-tabbar-item page="pages/tabbar/page3.html">
+        </ns-tabbar-item> 
+        <ns-tabbar-item page="pages/tabbar/page3.html">
             Three
-        </monaca-tabbar-item> 
-    </monaca-tabbar>
+        </ns-tabbar-item> 
+    </ns-tabbar>
 
 
 *page1.html*

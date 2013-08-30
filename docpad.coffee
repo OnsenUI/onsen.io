@@ -14,8 +14,8 @@ docpadConfig = {
 				jp: '属性'
 
 		framework:
-			displayName: 'Monaca UI'
-			codeName: 'mi'
+			displayName: 'Onsen UI'
+			codeName: 'ns'
 			directives: [
 				  {
 				    name: 'screen',
