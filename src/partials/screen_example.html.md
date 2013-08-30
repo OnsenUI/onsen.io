@@ -4,16 +4,16 @@ encoding: 'utf8'
 
 *index.html*
 
-    <ns-screen page="page1.html"></ns-screen>
+    <ons-screen page="page1.html"></ons-screen>
 
 
 *page1.html*
 
     <div class="page center">
         <h1>Hello, I am Page 1</h1>
-        <ns-button ng-click="ns.screen.presentPage('page2.html')">
+        <ons-button ng-click="ons.screen.presentPage('page2.html')">
             Present Page 2
-        </ns-button>
+        </ons-button>
     </div>
 
 
@@ -21,7 +21,7 @@ encoding: 'utf8'
 
     <div class="page center">
         <h1>Hello, I am Page 2</h1>
-        <ns-button ng-click="ns.screen.dismissPage()">
+        <ons-button ng-click="ons.screen.dismissPage()">
             Dismiss Page
-        </ns-button>
+        </ons-button>
     </div>

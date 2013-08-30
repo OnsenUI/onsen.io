@@ -4,14 +4,14 @@ encoding: 'utf8'
 
 *index.html*
 
-    <ns-list>
-        <ns-list-item>
+    <ons-list>
+        <ons-list-item>
             <h3>Numbers:</h3>
-        </ns-list-item>
-        <ns-list-item>One</ns-list-item>
-        <ns-list-item>Two</ns-list-item>
-        <ns-list-item>Three</ns-list-item>
-        <ns-list-item>Four</ns-list-item>
-        <ns-list-item>Five</ns-list-item>
-        <ns-list-item>Six</ns-list-item>
-    </ns-list>
+        </ons-list-item>
+        <ons-list-item>One</ons-list-item>
+        <ons-list-item>Two</ons-list-item>
+        <ons-list-item>Three</ons-list-item>
+        <ons-list-item>Four</ons-list-item>
+        <ons-list-item>Five</ons-list-item>
+        <ons-list-item>Six</ons-list-item>
+    </ons-list>

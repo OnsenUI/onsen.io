@@ -4,22 +4,22 @@ encoding: 'utf8'
 
 *index.html*
 
-    <ns-sliding-menu behind-page="menu.html" above-page="page1.html">
-    </ns-sliding-menu>
+    <ons-sliding-menu behind-page="menu.html" above-page="page1.html">
+    </ons-sliding-menu>
 
 
 *menu.html*
 
-    <ns-list>
-        <ns-list-item 
-            ng-click="ns.slidingMenu.toggleMenu(); ns.slidingMenu.setAbovePage('page1.html')">
+    <ons-list>
+        <ons-list-item 
+            ng-click="ons.slidingMenu.toggleMenu(); ons.slidingMenu.setAbovePage('page1.html')">
             Page 1
-        </ns-list-item>
-        <ns-list-item 
-            ng-click="ns.slidingMenu.toggleMenu(); ns.slidingMenu.setAbovePage('page2.html')">
+        </ons-list-item>
+        <ons-list-item 
+            ng-click="ons.slidingMenu.toggleMenu(); ons.slidingMenu.setAbovePage('page2.html')">
             Page 2
-        </ns-list-item>
-    </ns-list>
+        </ons-list-item>
+    </ons-list>
 
 
 *page1.html*

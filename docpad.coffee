@@ -15,7 +15,7 @@ docpadConfig = {
 
 		framework:
 			displayName: 'Onsen UI'
-			codeName: 'ns'
+			codeName: 'ons'
 			directives: [
 				  {
 				    name: 'screen',

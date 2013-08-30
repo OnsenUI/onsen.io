@@ -4,17 +4,17 @@ encoding: 'utf8'
 
 *index.html*
 
-    <ns-tabbar>
-        <ns-tabbar-item page="pages/tabbar/page1.html">
+    <ons-tabbar>
+        <ons-tabbar-item page="pages/tabbar/page1.html">
             One
-        </ns-tabbar-item> 
-        <ns-tabbar-item active="true" page="pages/tabbar/page2.html">
+        </ons-tabbar-item> 
+        <ons-tabbar-item active="true" page="pages/tabbar/page2.html">
             Two
-        </ns-tabbar-item> 
-        <ns-tabbar-item page="pages/tabbar/page3.html">
+        </ons-tabbar-item> 
+        <ons-tabbar-item page="pages/tabbar/page3.html">
             Three
-        </ns-tabbar-item> 
-    </ns-tabbar>
+        </ons-tabbar-item> 
+    </ons-tabbar>
 
 
 *page1.html*
