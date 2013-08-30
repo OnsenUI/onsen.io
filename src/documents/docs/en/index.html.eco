@@ -46,7 +46,6 @@ title: 'Docs'
     </div>
     <div class="col-md-10 col-md-offset-2 right-side space-top50">
       <div class="container right-container"> 
-        <div class="space-top50"></div>       
 
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">
@@ -163,5 +162,6 @@ title: 'Docs'
 
   </div>
 
-</div> <!-- page -->
+</div>
+<script src="/scripts/navigation_highlighter.js"></script>
 

@@ -62,48 +62,20 @@
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="#/getting_started/en/">Getting Started</a></li>
-            <li><a href="docs/en/">Docs</a></li>
+            <li><a href="/docs/en/">Docs</a></li>
+            <li><a href="/concept/en/">Concept</a></li>
             <li><a href="#/docs">Samples</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 
+    <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+    
     <div class="main-content">
     	<%- @content %>
     </div>
 
-
-	<!-- 
-		<div class="row">
-		  <div class="col-md-3 left-menu">
-		  	<div class="container">
-		  		<h1><%= @framework.displayName %></h1>
-		  		<section>
-		  			<% for directive in @framework.directives: %>
-		  			<h2><%= @framework.codeName %>-<%= directive.name %></h2>
-		  			<ul>
-		  				<% for method in directive.methods: %>
-		  					<li>
-		  						<%= method %>
-		  					</li>
-		  				<% end %>
-		  			</ul>
-		  			<% end %>
-		  		</section>
-		  	</div>
-		  </div>
-		  <div class="col-md-9 col-md-offset-3 main-content">
-		  	<article>
-				<%- @content %>
-			</article>
-		  </div>
-		</div>
-	
-	
-	-->
-
-	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
 	
