@@ -50,9 +50,7 @@ title: 'Docs'
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">
           <span class="anchor" id="<%= directive.name %>"></span>
-          <div class="page-header">
-            <h1><%= @framework.codeName %>-<%= directive.name %></h1>
-          </div>
+          <h1><%= @framework.codeName %>-<%= directive.name %></h1>
 
           <div class="row space-top">
             <div class="col-md-8">

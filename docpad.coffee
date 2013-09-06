@@ -14,10 +14,10 @@ docpadConfig = {
 		CONSTANTS:
 			attributes:
 				en: 'Attributes',
-				jp: '属性'
+				ja: '属性'
 			methods:
 				en: 'Methods',
-				jp: ''
+				ja: ''
 
 		framework:
 			displayName: 'Onsen UI'
@@ -27,7 +27,7 @@ docpadConfig = {
 				    name: 'screen',
 				    description: {
 				      en: 'The root element. This is usually put inside <body> tag.',
-				      jp: ''
+				      ja: ''
 				    },
 				    examplePartial: 'screen_example',
 				    demoURL: 'http://10.0.0.60:8000/app/screen_demo.html',
@@ -36,7 +36,7 @@ docpadConfig = {
 				        name: 'page',
 				        description: {
 				          en: 'The root page of this screen element',
-				          jp: ''
+				          ja: ''
 				        }
 				      }
 				    ],
@@ -46,14 +46,14 @@ docpadConfig = {
 				        parametters: '( pageUrl )',
 				        description: {
 				          en: 'Presents a page',
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'dismissPage',
 				        parametters: '( )',
 				        description: {
 				          en: 'Dismisses the page that was presented',
-				          jp: ''
+				          ja: ''
 				        }
 				      }
 				    ]
@@ -61,7 +61,7 @@ docpadConfig = {
 				    name: 'navigator',
 				    description: {
 				      en: 'Manages the page navigation backed by page stack.',
-				      jp: ''
+				      ja: ''
 				    },
 				    examplePartial: 'navigator_example',
 				    demoURL: 'http://10.0.0.60:8000/app/navigator_demo.html',
@@ -70,37 +70,37 @@ docpadConfig = {
 				        name: 'page',
 				        description: {
 				          en: 'The root page of the navigator',
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'title',
 				        description: {
 				          en: 'The title in the toolbar',
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'left-button-icon',
 				        description: {
 				          en: "The icon name of the toolbar's left button icon",
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'right-button-icon',
 				        description: {
 				          en: "The icon name of the toolbar's right button icon",
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'on-left-button-click',
 				        description: {
 				          en: "Event handler when toolbar's left button is clicked",
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'on-right-button-click',
 				        description: {
 				          en: "Event handler when toolbar's right button is clicked",
-				          jp: ''
+				          ja: ''
 				        }
 				      }
 				    ],
@@ -110,21 +110,21 @@ docpadConfig = {
 				        parametters: '( pageUrl, title )',
 				        description: {
 				          en: "Pushes the specified pageUrl into the page stack and setting the title to the Toolbar's title",
-				          jp: ""
+				          ja: ""
 				        }
 				      }, {
 				        name: 'popPage',
 				        parametters: '( )',
 				        description: {
 				          en: "Pops current page from the page stack",
-				          jp: ""
+				          ja: ""
 				        }
 				      }, {
 				        name: 'resetToPage',
 				        parametters: '( pageUrl, title )',
 				        description: {
 				          en: "Clears page stack and add the specified pageUrl to the page stack. If title is specified, it will bet set into Toolbar's title",
-				          jp: ""
+				          ja: ""
 				        }
 				      }
 				    ]
@@ -133,7 +133,7 @@ docpadConfig = {
 				    name: 'tabbar',
 				    description: {
 				      en: 'Used with tabbar-item to manage pages using tabs.',
-				      jp: ''
+				      ja: ''
 				    },				    
 				    methods: []				      
 				  }, 
@@ -141,7 +141,7 @@ docpadConfig = {
 				    name: 'tabbar-item',
 				    description: {
 				      en: 'Represents a tab inside tabbar. Each tabbar-item represents a page',
-				      jp: ''
+				      ja: ''
 				    },
 				    examplePartial: 'tabbar_example',
 				    demoURL: 'http://10.0.0.60:8000/app/tabbar_demo.html',
@@ -150,14 +150,14 @@ docpadConfig = {
 					        name: 'page',
 					        description: {
 					          en: 'The page that this tabbar-item points to',
-					          jp: ''
+					          ja: ''
 				        	}
 				        },
 				        {
 					        name: 'active',
 					        description: {
 					          en: 'Set wether this tab should be active or not. Valid values are [true/false]',
-					          jp: ''
+					          ja: ''
 				        	}
 				        }			      
 				    ],
@@ -167,7 +167,7 @@ docpadConfig = {
 				    name: 'sliding-menu',
 				    description: {
 				      en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.",
-				      jp: ""
+				      ja: ""
 				    },
 				    examplePartial: 'sliding_menu_example',
 				    demoURL: 'http://10.0.0.60:8000/app/sliding_menu_demo.html',
@@ -176,13 +176,13 @@ docpadConfig = {
 				        name: 'behind-page',
 				        description: {
 				          en: 'The url of the page to be set to the behind layer.',
-				          jp: ''
+				          ja: ''
 				        }
 				      }, {
 				        name: 'above-page',
 				        description: {
 				          en: 'The url of the page to be set to the above layer.',
-				          jp: ''
+				          ja: ''
 				        }
 				      }
 				    ],
@@ -192,35 +192,35 @@ docpadConfig = {
 				        parametters: '( pageUrl )',
 				        description: {
 				          en: "Show the page specified in pageUrl in the above layer",
-				          jp: ""
+				          ja: ""
 				        }
 				      }, {
 				        name: 'setBehindPage',
 				        parametters: '( pageUrl )',
 				        description: {
 				          en: "Show the page specified in pageUrl in the behind layer",
-				          jp: ""
+				          ja: ""
 				        }
 				      }, {
 				        name: 'openMenu',
 				        parametters: '( )',
 				        description: {
 				          en: "Slide the above layer to reveal the layer behind.",
-				          jp: ""
+				          ja: ""
 				        }
 				      }, {
 				        name: 'closeMenu',
 				        parametters: '( )',
 				        description: {
 				          en: "Slide the above layer to hide the layer behind.",
-				          jp: ""
+				          ja: ""
 				        }
 				      }, {
 				        name: 'toggleMenu',
 				        parametters: '( )',
 				        description: {
 				          en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind",
-				          jp: ""
+				          ja: ""
 				        }
 				      }
 				    ]
@@ -228,7 +228,7 @@ docpadConfig = {
 				    name: 'scroller',
 				    description: {
 				      en: "Makes the content inside this tag scrollable.",
-				      jp: ""
+				      ja: ""
 				    },
 				    examplePartial: 'scroller_example',
 				    demoURL: 'http://10.0.0.60:8000/app/scroller_demo.html',
@@ -237,7 +237,7 @@ docpadConfig = {
 				    name: 'list',
 				    description: {
 				      en: "The container for list-item. Similar to <ul> but styled for mobile.",
-				      jp: ""
+				      ja: ""
 				    },
 				    examplePartial: 'list_example',
 				    demoURL: 'http://10.0.0.60:8000/app/list_demo.html',
@@ -246,7 +246,7 @@ docpadConfig = {
 				    name: 'list-item',
 				    description: {
 				      en: "Works like <li> but styled for mobile. Must be put inside list tag.",
-				      jp: ""
+				      ja: ""
 				    },
 				    methods: []
 				  }

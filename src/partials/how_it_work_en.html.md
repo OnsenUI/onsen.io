@@ -4,15 +4,15 @@ encoding: 'utf-8'
 
 # How things is put together
 
-Onsen UI make building application simple using one thing every web developer already know, the tag.
+Onsen UI make building application simple using one concept every web developer already know, the tag.
 
 
-## Page management
+# Page management
 
 Onsen UI provides some tags for managing pages. Those tags include screen, navigator, tabbar, and sliding-menu. Each have different UI and page placeholders. For illustration, see how to use navigator below.
 
 
-### How to use Navigator
+# How to use Navigator
 
 Navigator provides a toolbar and a page placeholder. The toolbar has left button, right button, and title accessible via attributes. 
 
@@ -41,7 +41,7 @@ To pop the last page out of navigator's page stack, we would use:
 
 <iframe width="100%" height="650px" src="navigator_animation"></iframe>
 
-## Creating complex UI easily by combining page management tags
+# Creating complex UI easily by combining page management tags
 
 In the **How to use Navigator** section, we showed you how easy it is to use Navigator to manage pages and toolbar.
 
