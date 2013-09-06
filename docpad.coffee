@@ -242,12 +242,156 @@ docpadConfig = {
 				    examplePartial: 'list_example',
 				    demoURL: 'http://10.0.0.60:8000/app/list_demo.html',
 				    methods: []
-				  }, {
+				  }, 
+				  {
 				    name: 'list-item',
 				    description: {
 				      en: "Works like <li> but styled for mobile. Must be put inside list tag.",
 				      ja: ""
 				    },
+				    methods: []
+				  },
+				  {
+				    name: 'button',
+				    description: {
+				      en: "Button component. It includes a spinner useful for showing work in progress",
+				      ja: ""
+				    },
+				    examplePartial: 'button_example',
+				    demoURL: 'http://10.0.0.60:8000/app/button_demo.html',
+				    attributes: [
+				      {
+				        name: 'type',
+				        description: {
+				          en: "The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ].",
+				          ja: ''
+				        }
+				      }, 
+				      {
+				        name: 'should-spin',
+				        description: {
+				          en: 'Wether the button shoud switch to show spinner.',
+				          ja: ''
+				        }
+				      },
+				      {
+				        name: 'animation',
+				        description: {
+				          en: "The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-on' ]. The default is 'slide-left'.",
+				          ja: ''
+				        }
+				      },
+				      {
+				        name: 'disabled',
+				        description: {
+				          en: 'Wether the button shoud be disabled.',
+				          ja: ''
+				        }
+				      }
+				    ],
+				    methods: []
+				  },
+				  {
+				    name: 'select',
+				    description: {
+				      en: "Wrapper around select tag but styled for mobile.",
+				      ja: ""
+				    },
+				    examplePartial: 'select_example',
+				    demoURL: 'http://10.0.0.60:8000/app/select_demo.html',
+				    attributes: [],
+				    methods: []
+				  },
+				  {
+				    name: 'text-input',
+				    description: {
+				      en: "Component for doing text input.",
+				      ja: ""
+				    },
+				    examplePartial: 'text_input_example',
+				    demoURL: 'http://10.0.0.60:8000/app/text_input_demo.html',
+				    attributes: [
+				      {
+				        name: 'placeholder',
+				        description: {
+				          en: "The placeholder inside the input area.",
+				          ja: ''
+				        }
+				      }, 
+				      {
+				        name: 'disabled',
+				        description: {
+				          en: 'Wether the input should be disabled.',
+				          ja: ''
+				        }
+				      }
+				    ],
+				    methods: []
+				  },
+				  {
+				    name: 'search-input',
+				    description: {
+				      en: "Component for inputting search text.",
+				      ja: ""
+				    },
+				    examplePartial: 'search_input_example',
+				    demoURL: 'http://10.0.0.60:8000/app/search_input_demo.html',
+				    attributes: [
+				      {
+				        name: 'placeholder',
+				        description: {
+				          en: "The placeholder inside the search input.",
+				          ja: ''
+				        }
+				      }, 
+				      {
+				        name: 'disabled',
+				        description: {
+				          en: 'Wether the input should be disabled.',
+				          ja: ''
+				        }
+				      }
+				    ],
+				    methods: []
+				  },
+				  {
+				    name: 'text-area',
+				    description: {
+				      en: "Component for inputting text.",
+				      ja: ""
+				    },
+				    examplePartial: 'text_area_example',
+				    demoURL: 'http://10.0.0.60:8000/app/text_area_demo.html',
+				    attributes: [
+				      {
+				        name: 'rows',
+				        description: {
+				          en: "The number of rows.",
+				          ja: ''
+				        }
+				      },
+				      {
+				        name: 'cols',
+				        description: {
+				          en: "The number of columns.",
+				          ja: ''
+				        }
+				      }, 
+				      {
+				        name: 'placeholder',
+				        description: {
+				          en: "The placeholder inside the text area.",
+				          ja: ''
+				        }
+				      }, 
+				      {
+				        name: 'disabled',
+				        description: {
+				          en: 'Wether the input should be disabled.',
+				          ja: ''
+				        }
+				      }
+				    ],
 				    methods: []
 				  }
 				];		

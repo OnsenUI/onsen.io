@@ -141,10 +141,14 @@ title: 'Docs'
             </div>
             <div class="col-md-4 no-padding move-left15">
                <% if directive.demoURL: %>
-                <div class="col-md-3" ng-show="directive.demoURL !== undefined">
-                  <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
-                    <iframe src="<%= directive.demoURL %>" width="320" height="550" style="border-color: black;"></iframe>
+                <div class="col-md-3 relative" ng-show="directive.demoURL !== undefined">
+                  <div class="absolute click-through">
+                    <img src="<%= @rootUrl %>images/iPhone5Frame.png">
                   </div>
+
+                  <div class="absolute fit-iphone-frame">
+                    <iframe src="<%= directive.demoURL %>" width="321" height="569" style="border-color: black;"></iframe>
+                  </div> 
                 </div>
               <% end %>
             </div>

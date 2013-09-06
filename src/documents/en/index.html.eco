@@ -3,28 +3,32 @@ layout: 'default'
 title: 'Home'
 ---
 
-<div class="page scroll-y padding-top70 padding-bottom70">
+<div class="page scroll-y padding-top30 padding-bottom70">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <div class="jumbotron">
-          <h1><%= @framework.displayName %></h1>
-          <blockquote>
+          <div class="full center">
+            <img src="<%= @rootUrl %>images/logo/onsen_with_text.png" alt="">
+            <blockquote>
+              <p>
+                <small>Relax</small>
+              </p>
+            </blockquote>
+          </div>
+          <div class="full font-2rem">
             <p>
-              <small>Relax</small>
+              <%= @framework.displayName %> is an HTML5 UI framework for building modern mobile application.
             </p>
-          </blockquote>
-          <p>
-            <%= @framework.displayName %> is an HTML5 UI framework for building mobile application.
-          </p>
-          <p>
-            It is designed to be:
-            <ul>
-              <li>Simple</li>
-              <li>Fast</li>
-              <li>And powerful</li>
-            </ul>
-          </p>
+            <p>
+              Designed to be:
+              <ul>
+                <li>Simple</li>
+                <li>Fast</li>
+                <li>And powerful</li>
+              </ul>
+            </p>
+          </div>    
         </div>
 
         <a href="#/getting_started">
@@ -35,10 +39,13 @@ title: 'Home'
 
       </div>
 
-      <div class="col-md-6">
-        <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
-          <iframe src="http://10.0.0.60:3000" width="320" height="550" style="border-color: black;"></iframe>
-        </div>
+      <div class="col-md-6 relative">
+        <div class="absolute click-through">
+          <img src="<%= @rootUrl %>images/iPhone5Frame.png">
+        </div>        
+        <div class="absolute fit-iphone-frame">
+          <iframe src="http://10.0.0.60:3000" width="321" height="569" style="border-color: black;"></iframe>
+        </div> 
       </div>
 
       <p></p>
