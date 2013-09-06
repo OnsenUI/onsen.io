@@ -130,18 +130,19 @@ title: 'Docs'
             <div class="col-md-4"></div>
           </div>
 
+          <% if directive.examplePartial: %>            
           <div class="row">
-            <div class="col-md-8">
-              <% if directive.examplePartial: %>
-                <div class="space-top45">
-                  <h4 class="gray">Example</h4>
-                  <%- @partial(directive.examplePartial) %>
-                </div>
-              <% end %>
+            <div class="col-md-12 space-top45">
+              <h4 class="gray">Example</h4>
+            </div>
+          </div>
+          <div class="row example-box">                                    
+            <div class="col-md-8">              
+              <%- @partial(directive.examplePartial) %>              
             </div>
             <div class="col-md-4 no-padding move-left15">
                <% if directive.demoURL: %>
-                <div class="col-md-3 relative" ng-show="directive.demoURL !== undefined">
+                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img src="<%= @rootUrl %>images/iPhone5Frame.png">
                   </div>
@@ -153,6 +154,7 @@ title: 'Docs'
               <% end %>
             </div>
           </div>
+          <% end %>
 
         </div>
         <% end %>
