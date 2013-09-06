@@ -277,7 +277,7 @@ docpadConfig = {
 				      {
 				        name: 'animation',
 				        description: {
-				          en: "The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-on' ]. The default is 'slide-left'.",
+				          en: "The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'.",
 				          ja: ''
 				        }
 				      },
