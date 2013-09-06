@@ -399,7 +399,7 @@ docpadConfig = {
 		# Specify some site properties
 		site:
 			# The production url of our website
-			url: "http://website.com"
+			url: "http://docs.monaca.mobi/onsen/en"
 
 			# Here are some old site urls that you would like to redirect from
 			oldUrls: [
@@ -408,16 +408,16 @@ docpadConfig = {
 			]
 
 			# The default title of our website
-			title: "Maccha"
+			title: "OnsenUI"
 
 			# The website description (for SEO)
 			description: """
-				When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+				Onsen UI, HTML5 UI framework for modern mobile application.
 				"""
 
 			# The website keywords (for SEO) separated by commas
 			keywords: """
-				place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
+				onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast.
 				"""
 
 
