@@ -1,5 +1,5 @@
 ---
-layout: 'default'
+layout: 'default_ja'
 title: 'Docs'
 ---
 
@@ -7,7 +7,7 @@ title: 'Docs'
   <div class="full-width full-height">
     <div class="col-md-2 left-menu affix">      
         <section id="sidemenu">
-        	<% for directive in @framework.directives: %>
+          <% for directive in @framework.directives: %>
           <div>
             <div class="space-top"></div>
             <a class="link round-padding" href="#<%= directive.name %>">
@@ -16,7 +16,7 @@ title: 'Docs'
             <section>
               <% if directive.attributes && directive.attributes.length > 0: %>
                 <a class="link round-padding" href="#<%= directive.name %>-attributes">
-                  <div class="gray"><%= @CONSTANTS.attributes.jp %>:</div>
+                  <div class="gray"><%= @CONSTANTS.attributes.ja %>:</div>
                 </a> 
                 <div class="margin-left">                              
                 <% for attribute in directive.attributes: %>
@@ -44,22 +44,19 @@ title: 'Docs'
           <% end %>
         </section>
     </div>
-    <div class="col-md-10 col-md-offset-2 right-side space-top50">
+    <div class="col-md-10 col-md-offset-2 right-side">
       <div class="container right-container"> 
-        <div class="space-top50"></div>       
 
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">
           <span class="anchor" id="<%= directive.name %>"></span>
-          <div class="page-header">
-            <h1><%= @framework.codeName %>-<%= directive.name %></h1>
-          </div>
+          <h1><%= @framework.codeName %>-<%= directive.name %></h1>
 
           <div class="row space-top">
             <div class="col-md-8">
               <section class="space-top">
                 <h4 class="gray">Description</h4>
-                <p><%= directive.description.en %></p>
+                <p><%= directive.description.ja %></p>
               </section>
 
               <section class="space-top45">
@@ -87,7 +84,7 @@ title: 'Docs'
                       <span class="anchor" id="<%= directive.name %>-<%= attribute.name %>"></span>
                       <tr ng-repeat="attribute in directive.attributes">
                         <td><%= attribute.name %></td>
-                        <td><%= attribute.description.en %></td>
+                        <td><%= attribute.description.ja %></td>
                       </tr>
                       <% end %>
                     </tbody>
@@ -120,7 +117,7 @@ title: 'Docs'
                       <span class="anchor" id="<%= directive.name %>-<%= method.name %>"></span>
                       <tr ng-repeat="method in directive.methods">
                         <td><code><%= method.name %><%= method.parametters %></code></td>
-                        <td><%= method.description.en %></td>
+                        <td><%= method.description.ja %></td>
                       </tr>
                       <% end %>
                     </tbody>
@@ -144,10 +141,14 @@ title: 'Docs'
             </div>
             <div class="col-md-4 no-padding move-left15">
                <% if directive.demoURL: %>
-                <div class="col-md-3" ng-show="directive.demoURL !== undefined">
-                  <div style="background-image:url('http://coenraets.org/blog/wp-content/uploads/2013/06/iphone5.png');background-repeat:no-repeat;margin: 0px 0px 0px 0px;padding: 145px 0px 0px 27px;width:375px;height:820px;">
-                    <iframe src="<%= directive.demoURL %>" width="320" height="550" style="border-color: black;"></iframe>
+                <div class="col-md-3 relative" ng-show="directive.demoURL !== undefined">
+                  <div class="absolute click-through">
+                    <img src="<%= @rootUrl %>images/iPhone5Frame.png">
                   </div>
+
+                  <div class="absolute fit-iphone-frame">
+                    <iframe src="<%= directive.demoURL %>" width="321" height="569" style="border-color: black;"></iframe>
+                  </div> 
                 </div>
               <% end %>
             </div>
@@ -163,5 +164,6 @@ title: 'Docs'
 
   </div>
 
-</div> <!-- page -->
+</div>
+<script src="<%= @rootUrl %>scripts/navigation_highlighter.js"></script>
 
