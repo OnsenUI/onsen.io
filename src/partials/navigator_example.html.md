@@ -11,7 +11,7 @@ encoding: 'utf8'
 
     <div class="page center">
         <h1>Hello, I am Page 1</h1>
-        <ons-button ng-click="ons.navigator.pushpage('page2.html', 'Page 2')">
+        <ons-button ng-click="ons.navigator.pushPage('page2.html', 'Page 2')">
             Push Page 2
         </ons-button>
     </div>
