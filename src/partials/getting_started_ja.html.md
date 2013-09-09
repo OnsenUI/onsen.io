@@ -2,45 +2,44 @@
 encoding: 'utf-8'
 ---
 
-# Starting a new project
+# 新しいプロジェクトを作成する
 
-### 1. Go to Dashboard
+### 1. ダッシュボードに移動
 
-Go to Dashboard and click **New Project**
-![dashboard](new_project.png)
+ダッシュボードで **新しいプロジェクト** をクリックする。
+![ダッシュボード](new_project.png)
+
+### 2. Onsenテンプレートを選択する
+
+![テンプレート](choose_template.png)
+
+### 3. さらなる開発
+Onsen UIのプロジェクトの作成はこれで完了です。
+使い方やサンプルは[ドキュメント](/docs/ja)を参照してください。
 
 
-### 2. Choose one Onsen UI template that best fit your project type
+# 既存のプロジェクトにOnsen UIプラグインを追加する
 
-![template](choose_template.png)
+### 1. プロジェクトにOnsen UIプラグインを設定
 
-### 3. Where to go from here
-Now you have Onsen UI installed.
-See examples in the [Docs page](/docs/en) page for how to use Onsen UI components.
+メニューの設定 -> プラグイン設定を選択します。
+![プラグイン設定](config_plugin_settings.png)
 
-
-# Adding Onsen UI to an existing project
-
-### 1. Add Onsen UI plugin
-
-Go to Config -> Plugin Settings...
-![plugin](config_plugin_settings.png)
-
-Select Onsen UI
+プラグイン設定画面でOnsen UIプラグインにチェックします。
 ![select](check_onsen_ui.png)
 
-### 2. Activate Onsen UI plugin
+### 2. Onsen UIプラグインの有効化
 
-Add ng-app to html tag.
+htmlタグの"ng-app"要素を以下のように設定します。
 
     <html ng-app="myApp">
 
-Define your app name and tell angular to load Onsen UI directives module
+scriptタグ内でOnsen UIプラグインのロード処理を記述します。
 
     angular.module('myApp', ['onsen.directives']);
 
 ![activate](add_ng_app.png)
 
-### 3. Where to go from here
-Now you have Onsen UI installed.
-See examples in the [Docs page](/docs/en) page for how to use Onsen UI components.
+### 3. さらなる開発
+Onsen UIプラグインの設定はこれで完了です。
+使い方やサンプルは[ドキュメント](/docs/ja)を参照してください。

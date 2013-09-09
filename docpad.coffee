@@ -17,7 +17,7 @@ docpadConfig = {
 				ja: '属性'
 			methods:
 				en: 'Methods',
-				ja: ''
+				ja: 'メソッド'
 
 		framework:
 			displayName: 'Onsen UI'
@@ -27,7 +27,7 @@ docpadConfig = {
 				    name: 'screen',
 				    description: {
 				      en: 'The root element. This is usually put inside <body> tag.',
-				      ja: ''
+				      ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
 				    },
 				    examplePartial: 'screen_example',
 				    demoURL: 'http://10.0.0.60:8000/app/screen_demo.html',
@@ -36,7 +36,7 @@ docpadConfig = {
 				        name: 'page',
 				        description: {
 				          en: 'The root page of this screen element',
-				          ja: ''
+				          ja: '表示するページのURL'
 				        }
 				      }
 				    ],
@@ -46,14 +46,14 @@ docpadConfig = {
 				        parametters: '( pageUrl )',
 				        description: {
 				          en: 'Presents a page',
-				          ja: ''
+				          ja: '指定したURLのページを画面全体にスクリーン表示します。'
 				        }
 				      }, {
 				        name: 'dismissPage',
 				        parametters: '( )',
 				        description: {
 				          en: 'Dismisses the page that was presented',
-				          ja: ''
+				          ja: 'スクリーン表示したページを閉じて前ページに戻ります。'
 				        }
 				      }
 				    ]
@@ -61,7 +61,7 @@ docpadConfig = {
 				    name: 'navigator',
 				    description: {
 				      en: 'Manages the page navigation backed by page stack.',
-				      ja: ''
+				      ja: 'ページのナビゲーションと画面上部のツールバーを提供します。遷移元ページのスタック管理を行うことができます。'
 				    },
 				    examplePartial: 'navigator_example',
 				    demoURL: 'http://10.0.0.60:8000/app/navigator_demo.html',
@@ -70,37 +70,37 @@ docpadConfig = {
 				        name: 'page',
 				        description: {
 				          en: 'The root page of the navigator',
-				          ja: ''
+				          ja: 'ナビゲーションのrootとなるページURLを指定します。'
 				        }
 				      }, {
 				        name: 'title',
 				        description: {
 				          en: 'The title in the toolbar',
-				          ja: ''
+				          ja: 'ナビゲーションツールバーに表示されるタイトルを指定します。'
 				        }
 				      }, {
 				        name: 'left-button-icon',
 				        description: {
 				          en: "The icon name of the toolbar's left button icon",
-				          ja: ''
+				          ja: 'ナビゲーターツールバー内の左側に配置されるボタンのアイコンを指定します。'
 				        }
 				      }, {
 				        name: 'right-button-icon',
 				        description: {
 				          en: "The icon name of the toolbar's right button icon",
-				          ja: ''
+				          ja: 'ナビゲーターツールバー内の右側に配置されるボタンのアイコンを指定します。'
 				        }
 				      }, {
 				        name: 'on-left-button-click',
 				        description: {
 				          en: "Event handler when toolbar's left button is clicked",
-				          ja: ''
+				          ja: 'ナビゲーターツールバー内の左側に配置されるボタンのクリックイベントを指定します。'
 				        }
 				      }, {
 				        name: 'on-right-button-click',
 				        description: {
 				          en: "Event handler when toolbar's right button is clicked",
-				          ja: ''
+				          ja: 'ナビゲーターツールバー内の右側に配置されるボタンのクリックイベントを指定します。'
 				        }
 				      }
 				    ],
@@ -110,21 +110,21 @@ docpadConfig = {
 				        parametters: '( pageUrl, title )',
 				        description: {
 				          en: "Pushes the specified pageUrl into the page stack and setting the title to the Toolbar's title",
-				          ja: ""
+				          ja: "遷移したいページのURLと遷移先のナビゲーターツールバーのタイトルを指定し、次のページに遷移します。遷移元のページはページスタックに保存されます。"
 				        }
 				      }, {
 				        name: 'popPage',
 				        parametters: '( )',
 				        description: {
 				          en: "Pops current page from the page stack",
-				          ja: ""
+				          ja: "ページスタックに保存された一つ前のページに戻ります。"
 				        }
 				      }, {
 				        name: 'resetToPage',
 				        parametters: '( pageUrl, title )',
 				        description: {
 				          en: "Clears page stack and add the specified pageUrl to the page stack. If title is specified, it will bet set into Toolbar's title",
-				          ja: ""
+				          ja: "すべての遷移元ページスタックをクリアします。ページのURLとナビゲーターツールバーのタイトルを指定してページスタックに追加することが可能です。"
 				        }
 				      }
 				    ]
@@ -133,7 +133,7 @@ docpadConfig = {
 				    name: 'tabbar',
 				    description: {
 				      en: 'Used with tabbar-item to manage pages using tabs.',
-				      ja: ''
+				      ja: 'ページの切り替えを管理するタブ機能を提供します。'
 				    },				    
 				    methods: []				      
 				  }, 
@@ -141,7 +141,7 @@ docpadConfig = {
 				    name: 'tabbar-item',
 				    description: {
 				      en: 'Represents a tab inside tabbar. Each tabbar-item represents a page',
-				      ja: ''
+				      ja: '<ons-tabbar-item>タグでタブバー内に配置されるタブ項目を定義します。'
 				    },
 				    examplePartial: 'tabbar_example',
 				    demoURL: 'http://10.0.0.60:8000/app/tabbar_demo.html',
@@ -150,14 +150,14 @@ docpadConfig = {
 					        name: 'page',
 					        description: {
 					          en: 'The page that this tabbar-item points to',
-					          ja: ''
+					          ja: 'タブ項目を選択した時に表示するページURLを指定します。'
 				        	}
 				        },
 				        {
 					        name: 'active',
 					        description: {
 					          en: 'Set wether this tab should be active or not. Valid values are [true/false]',
-					          ja: ''
+					          ja: 'タブ項目が選択された状態にするかどうかを[true/false]で指定します。'
 				        	}
 				        }			      
 				    ],
@@ -167,7 +167,7 @@ docpadConfig = {
 				    name: 'sliding-menu',
 				    description: {
 				      en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.",
-				      ja: ""
+				      ja: "2つのページを利用したスライディングUIを提供します。手前のページをスライドさせることで背後のページをメニューリストなどとして表示することができます。"
 				    },
 				    examplePartial: 'sliding_menu_example',
 				    demoURL: 'http://10.0.0.60:8000/app/sliding_menu_demo.html',
@@ -176,13 +176,13 @@ docpadConfig = {
 				        name: 'behind-page',
 				        description: {
 				          en: 'The url of the page to be set to the behind layer.',
-				          ja: ''
+				          ja: '背後のページとしてURLを指定します。'
 				        }
 				      }, {
 				        name: 'above-page',
 				        description: {
 				          en: 'The url of the page to be set to the above layer.',
-				          ja: ''
+				          ja: '手前のページに表示するURLを指定します。'
 				        }
 				      }
 				    ],
@@ -192,35 +192,35 @@ docpadConfig = {
 				        parametters: '( pageUrl )',
 				        description: {
 				          en: "Show the page specified in pageUrl in the above layer",
-				          ja: ""
+				          ja: "手前ページをURL指定し、表示します。"
 				        }
 				      }, {
 				        name: 'setBehindPage',
 				        parametters: '( pageUrl )',
 				        description: {
 				          en: "Show the page specified in pageUrl in the behind layer",
-				          ja: ""
+				          ja: "背景ページをURL指定し、表示します。"
 				        }
 				      }, {
 				        name: 'openMenu',
 				        parametters: '( )',
 				        description: {
 				          en: "Slide the above layer to reveal the layer behind.",
-				          ja: ""
+				          ja: "手前のページをスライドさせ、スライドしたエリアに背後のページを表示します。"
 				        }
 				      }, {
 				        name: 'closeMenu',
 				        parametters: '( )',
 				        description: {
 				          en: "Slide the above layer to hide the layer behind.",
-				          ja: ""
+				          ja: "手前のページをスライドさせ、背後のページを隠します。"
 				        }
 				      }, {
 				        name: 'toggleMenu',
 				        parametters: '( )',
 				        description: {
 				          en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind",
-				          ja: ""
+				          ja: "手前のページがスライドしていない場合はスライドし、背後のページを表示します。手前のページがすでにスライドしている場合は手前のページを背後のページを隠すようにスライドします。"
 				        }
 				      }
 				    ]
@@ -228,7 +228,7 @@ docpadConfig = {
 				    name: 'scroller',
 				    description: {
 				      en: "Makes the content inside this tag scrollable.",
-				      ja: ""
+				      ja: "<ons-scroller>タグ内のコンテンツにスクロール表示を提供します。"
 				    },
 				    examplePartial: 'scroller_example',
 				    demoURL: 'http://10.0.0.60:8000/app/scroller_demo.html',
@@ -237,7 +237,7 @@ docpadConfig = {
 				    name: 'list',
 				    description: {
 				      en: "The container for list-item. Similar to <ul> but styled for mobile.",
-				      ja: ""
+				      ja: "リストコンポーネントとして提供します。"
 				    },
 				    examplePartial: 'list_example',
 				    demoURL: 'http://10.0.0.60:8000/app/list_demo.html',
@@ -247,7 +247,7 @@ docpadConfig = {
 				    name: 'list-item',
 				    description: {
 				      en: "Works like <li> but styled for mobile. Must be put inside list tag.",
-				      ja: ""
+				      ja: "<ons-list-item>タグではリストコンポーネント内で表示するリスト項目を定義します。"
 				    },
 				    methods: []
 				  },
@@ -255,7 +255,7 @@ docpadConfig = {
 				    name: 'button',
 				    description: {
 				      en: "Button component. It includes a spinner useful for showing work in progress",
-				      ja: ""
+				      ja: "ボタンコンポーネントです。用意されたタイプからボタンのスタイルを選択可能です。またボタンを押下した際にスピナーアニメーションすることができます。"
 				    },
 				    examplePartial: 'button_example',
 				    demoURL: 'http://10.0.0.60:8000/app/button_demo.html',
@@ -264,28 +264,28 @@ docpadConfig = {
 				        name: 'type',
 				        description: {
 				          en: "The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ].",
-				          ja: ''
+				          ja: "ボタンのタイプを指定します。指定可能な値は[ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ] です。"
 				        }
 				      }, 
 				      {
 				        name: 'should-spin',
 				        description: {
 				          en: 'Wether the button shoud switch to show spinner.',
-				          ja: ''
+				          ja: 'ボタン押下時にスピナーアニメーションを表示するかを[true/false]で指定します。'
 				        }
 				      },
 				      {
 				        name: 'animation',
 				        description: {
 				          en: "The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'.",
-				          ja: ''
+				          ja: "ボタン内に表示されたスピナーとテキストをアニメーションさせることができます。指定可能な値は [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]です。デフォルトは'slide-left'が設定されています。"
 				        }
 				      },
 				      {
 				        name: 'disabled',
 				        description: {
 				          en: 'Wether the button shoud be disabled.',
-				          ja: ''
+				          ja: 'ボタンを入力可能状態を[true/false]で指定します。'
 				        }
 				      }
 				    ],
@@ -295,7 +295,7 @@ docpadConfig = {
 				    name: 'select',
 				    description: {
 				      en: "Wrapper around select tag but styled for mobile.",
-				      ja: ""
+				      ja: "モバイル用のドロップダウンリストコンポーネントです。"
 				    },
 				    examplePartial: 'select_example',
 				    demoURL: 'http://10.0.0.60:8000/app/select_demo.html',
@@ -306,7 +306,7 @@ docpadConfig = {
 				    name: 'text-input',
 				    description: {
 				      en: "Component for doing text input.",
-				      ja: ""
+				      ja: "テキストボックスコンポーネントです。"
 				    },
 				    examplePartial: 'text_input_example',
 				    demoURL: 'http://10.0.0.60:8000/app/text_input_demo.html',
@@ -315,14 +315,14 @@ docpadConfig = {
 				        name: 'placeholder',
 				        description: {
 				          en: "The placeholder inside the input area.",
-				          ja: ''
+				          ja: '未入力のテキストボックスに表示するプレースホルダを指定します。'
 				        }
 				      }, 
 				      {
 				        name: 'disabled',
 				        description: {
 				          en: 'Wether the input should be disabled.',
-				          ja: ''
+				          ja: 'テキストボックスの入力可否を[true/false]で指定します。'
 				        }
 				      }
 				    ],
@@ -332,7 +332,7 @@ docpadConfig = {
 				    name: 'search-input',
 				    description: {
 				      en: "Component for inputting search text.",
-				      ja: ""
+				      ja: "検索フィールドコンポーネントです。"
 				    },
 				    examplePartial: 'search_input_example',
 				    demoURL: 'http://10.0.0.60:8000/app/search_input_demo.html',
@@ -341,14 +341,14 @@ docpadConfig = {
 				        name: 'placeholder',
 				        description: {
 				          en: "The placeholder inside the search input.",
-				          ja: ''
+				          ja: '未入力の検索フィールドに表示するプレースホルダを指定します。'
 				        }
 				      }, 
 				      {
 				        name: 'disabled',
 				        description: {
 				          en: 'Wether the input should be disabled.',
-				          ja: ''
+				          ja: '検索フィールドの入力可否を[true/false]で指定します。'
 				        }
 				      }
 				    ],
@@ -358,7 +358,7 @@ docpadConfig = {
 				    name: 'text-area',
 				    description: {
 				      en: "Component for inputting text.",
-				      ja: ""
+				      ja: "テキスト入力エリアコンポーネントです。"
 				    },
 				    examplePartial: 'text_area_example',
 				    demoURL: 'http://10.0.0.60:8000/app/text_area_demo.html',
@@ -367,28 +367,28 @@ docpadConfig = {
 				        name: 'rows',
 				        description: {
 				          en: "The number of rows.",
-				          ja: ''
+				          ja: 'テキストエリアの表示行数を指定します。指定した行数を超えて入力するとテキストエリアが縦にスクロール表示されます。'
 				        }
 				      },
 				      {
 				        name: 'cols',
 				        description: {
 				          en: "The number of columns.",
-				          ja: ''
+				          ja: 'テキストエリアの1行の文字数を指定します。指定した文字数を超えて入力すると、超過した文字は折り返し改行されて表示されます。'
 				        }
 				      }, 
 				      {
 				        name: 'placeholder',
 				        description: {
 				          en: "The placeholder inside the text area.",
-				          ja: ''
+				          ja: '未入力のテキストエリアに表示するプレースホルダを指定します。'
 				        }
 				      }, 
 				      {
 				        name: 'disabled',
 				        description: {
 				          en: 'Wether the input should be disabled.',
-				          ja: ''
+				          ja: 'テキストエリアの入力可否を[true/false]で指定します。'
 				        }
 				      }
 				    ],

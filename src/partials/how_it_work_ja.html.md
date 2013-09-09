@@ -2,54 +2,63 @@
 encoding: 'utf-8'
 ---
 
-# How things is put together
+# Onsen UIとは
 
-Onsen UI make building application simple using one concept every web developer already know, the tag.
-
-
-# Page management
-
-Onsen UI provides some tags for managing pages. Those tags include screen, navigator, tabbar, and sliding-menu. Each have different UI and page placeholders. For illustration, see how to use navigator below.
+Onsen UIはHTMLタグによって簡単・シンプルにアプリのユーザインタフェース開発できるフレームワークです。
 
 
-# How to use Navigator
+# ページ管理
 
-Navigator provides a toolbar and a page placeholder. The toolbar has left button, right button, and title accessible via attributes. 
+Onsen UIはナビゲーション・タブ・スライディングメニューなどのページ管理機能を持ったコンポーネントを提供しています。
 
-
-E.g. to set the title to "Page 1", we would write:
-
-    <ons-navigator title="Page 1" />
+コンポーネントのタグを記述することによって画面遷移とアニメーションを簡単に実現することができます。
 
 
-To link a page to the placeholder, we would add **page="PAGE_URL"**:
+# ナビゲーターの使い方
+
+ナビゲーターはツールバーと画面遷移などを主としたページ管理機能を提供します。
+ツールバーは左右のボタンと動的に変更可能なタイトルを備えています。
+
+
+まず"ons-navigator"タグを指定します。
 
     <ons-navigator title="Page 1" page="page1.html" />
 
-To push another page to the navigator's page stack, we would use:
+"title"要素はナビゲーターのツールバータイトルとなります。
+"page"要素はナビゲーターで表示したいページURLを指定します。
+ここではタイトルとして"Page 1"、表示したいページとして"page1.html"を設定しています。  
+
+
+ナビゲーションを使って他のページ遷移したい場合はpushPageメソッドを使用します、
 
     ons.navigator.pushPage('page2.html', 'Page 2');
 
-*Notice:*
-Notice how Navigator provice transition animation, toolbar's title and back button management for free.
 
-To pop the last page out of navigator's page stack, we would use:
+1つ前に表示したページに戻りたい場合はpopPageメソッドを使用してください。
 
     ons.navigator.popPage();
 
-#### See it in action
+*開発者コメント:*
+Onsen UIのナビゲーターでは、開発者が複雑な実装を意識せずに済むよう、画面遷移やそれに伴うアニメーション、バックボタン、ツールバータイトルなどモバイルUIで必須となるコンポーネントを提供しています。
+
+
+#### チュートリアル アニメーション
 
 <iframe width="100%" height="650px" src="navigator_animation"></iframe>
 
-# Creating complex UI easily by combining page management tags
+# コンポーネントの組み合わせによってより複雑なUIを実現する
 
-In the **How to use Navigator** section, we showed you how easy it is to use Navigator to manage pages and toolbar.
 
-But you are not limitted to that. You may combine Navigator with other page management tags to create complex UI with ease.
+ **ナビゲーターの使い方** では簡単なナビゲーターとツールバー、ページ管理の使い方を説明しました。
 
-To illustrate that, let's look at example below where we put a page inside Navigator, and put Navigator inside Tabbar.
+Onsen UIでは、ナビゲーターと他のコンポーネントを組み合わせることによってより複雑なUIを実現することができます。
 
-### Tabbar, Navigator, and Page
+下記の例は、タブ項目の1つのページの中にさらにナビゲーターが存在するケースです。
+
+*開発者コメント:*
+同じようなUIを持つアプリとして、iOSデフォルトのミュージックアプリや写真アプリなどが挙げられます。これらのアプリはタブバーによるタブ切り替えと、タブが持つページ内のナビゲーションをそれぞれ組み合わせてUIが作られています。
+
+### タブバー内にナビゲーターを持つページの例
 
 *index.html*
 
@@ -101,13 +110,12 @@ To illustrate that, let's look at example below where we put a page inside Navig
         </monaca-list>      
     </div>
 
-#### See it in action
+#### チュートリアル アニメーション  
 
 <iframe width="100%" height="650px" src="tabbar_navigator_page_animation"></iframe>
 
 
-### Try other combinations
+### 様々なUIへのチャレンジ
 
-Different combination, produces different UI. In the example above, instead of putting the Navigator inside Tabbar, you may instead put the Tabbar inside Navigator. 
-
-You will see the different when you push a new page to the navigator.
+Onsen UIコンポーネントの組み合わせで多様なUIを作成することができます。
+上記の例とは逆に、ナビゲーターの中にページ内にタブを持たせるような構造も実現することができます。ナビゲーターのpushPageメソッドなどで画面遷移を行うと、異なるタブを持ったページなどに遷移することができます。
