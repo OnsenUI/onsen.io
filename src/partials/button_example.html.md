@@ -11,7 +11,7 @@ utf-8
 
 *type.html*
 
-    <div class="table-cell align-right">
+    <div>
         <h3>Types</h3>
         
         <ons-button>Default</ons-button>
@@ -27,7 +27,7 @@ utf-8
         <ons-button type="large--cta">large--cta</ons-button>
     </div>
 
-    <div class="table-cell align-left">
+    <div>
         <h3>Disabled</h3>
         
         <ons-button disabled="true">Default</ons-button>
