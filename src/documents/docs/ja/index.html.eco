@@ -145,11 +145,11 @@ title: 'Docs'
                <% if directive.demoURL: %>
                 <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
-                    <img src="<%= @rootUrl %>images/iPhone5Frame.png">
+                    <img width="309" src="<%= @rootUrl %>images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="<%= directive.demoURL %>" width="321" height="569" style="border-color: black;"></iframe>
+                    <iframe src="<%= directive.demoURL %>" width="260" height="460" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               <% end %>
