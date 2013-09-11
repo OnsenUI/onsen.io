@@ -3,10 +3,26 @@ layout: 'integrated_ja'
 title: 'Docs'
 ---
 
-<div class="page">
+<style type="text/css" media="screen">
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+   
+  ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      border-radius: 10px;
+  }
+   
+  ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+  }
+</style>
+
+<div class="">
   <div class="full-width full-height">
-    <div class="col-md-2 left-menu affix">      
-        <section id="sidemenu">
+    <div class="col-md-2">      
+        <section id="sidemenu" class="left-menu">
           <% for directive in @framework.directives: %>
           <div>
             <div class="space-top"></div>
@@ -42,11 +58,12 @@ title: 'Docs'
             </section>
           </div>
           <% end %>
-        </section>
-        <p class="padding-bottom70"></p>
+          <p class="padding-bottom70"></p>
+        </section>        
+
     </div>
-    <div class="col-md-10 col-md-offset-2 right-side">
-      <div class="right-container"> 
+    <div class="col-md-10 right-side">
+      <div class=""> 
 
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">

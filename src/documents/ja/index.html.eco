@@ -3,8 +3,8 @@ layout: 'integrated_ja'
 title: 'Home'
 ---
 
-<div class="page scroll-y padding-top30 padding-bottom70">
-  <div class="container">
+<div class="padding-top30 padding-bottom70">
+  <div class="container-bootstrap">
     <div class="row">
       <div class="col-md-6">
         <div class="jumbotron">
@@ -16,16 +16,16 @@ title: 'Home'
               </p>
             </blockquote>
           </div>
-          <div class="full font-2rem">
+          <div class="full">
             <p>
               HTML5 Mobile UIフレームワーク
             </p>
             <p>
               <%= @framework.displayName %>の特徴
-              <ul>
-                <li>シンプルで使いやすい機能</li>
-                <li>フラットデザインUIコンポーネント</li>
-                <li>スムーズなアニメーション</li>
+              <ul class="margin-left40">
+                <li class="list-style-circle">シンプルで使いやすい機能</li>
+                <li class="list-style-circle">フラットデザインUIコンポーネント</li>
+                <li class="list-style-circle">スムーズなアニメーション</li>
               </ul>
             </p>
           </div>    

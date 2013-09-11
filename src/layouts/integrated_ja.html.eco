@@ -210,54 +210,55 @@
   </script>
   </head>
 <body id="" data-lang="en">
-  <header class="global">
-    <div class="headcont">
-      <p class="site-logo"><a href="/"><img src="/static/img/common/logo-monaca-docs.png" alt="" /></a></p>
-      <nav class="global"><ul>
-                      <li
-                        ><a href="/en/learning/">Tutorial</a></li>
-                                  <li
-                        ><a href="/en/sampleapp/samples/">Sample Apps</a></li>
-                                  <li
-                        ><a href="/en/manual/">Manual</a></li>
-                                  <li><a href="/en/reference/">API</a></li>
-            <li class="current"><a href='/onsen/en/index.html'>Onsen UI</a></li>                      <li
-                        ><a href="/en/faq/">FAQs</a></li>
-                            </ul></nav>
-      <div class="search">
-        <gcse:searchbox-only></gcse:searchbox-only>
+  <div id="header-container">
+    <header class="global">
+      <div class="headcont">
+        <p class="site-logo"><a href="/"><img src="/static/img/common/logo-monaca-docs.png" alt="" /></a></p>
+        <nav class="global"><ul>
+                        <li
+                          ><a href="/en/learning/">Tutorial</a></li>
+                                    <li
+                          ><a href="/en/sampleapp/samples/">Sample Apps</a></li>
+                                    <li
+                          ><a href="/en/manual/">Manual</a></li>
+                                    <li><a href="/en/reference/">API</a></li>
+              <li class="current"><a href='/onsen/en/index.html'>Onsen UI</a></li>                      <li
+                          ><a href="/en/faq/">FAQs</a></li>
+                              </ul></nav>
+        <div class="search">
+          <gcse:searchbox-only></gcse:searchbox-only>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
   
     <div class="nav-local">
-    	<ul class="nav-local-list">
+      <ul class="nav-local-list">
         <li class="active"><a href="<%= @rootUrl %>ja/">Home</a></li>
             <li><a href="<%= @rootUrl %>getting_started/ja/">Getting Started</a></li>
             <li><a href="<%= @rootUrl %>docs/ja/">Docs</a></li>
             <li><a href="<%= @rootUrl %>how_it_works/ja/">How It Works</a></li> 
-    	</ul>
+      </ul>
     </div>
+  </div>
+
+    <section>
+      <!-- onsenui -->
+
+      <div class="main-content bootstrap-font">
+        <%- @content %>
+      </div>
+
+      <!-- DocPad Scripts + Our Own -->
+      <%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
+
+
+      <!-- end onsen ui -->
+    </section>
   
-  <div class="wrapperall">
+  
   <div class="contwrap">
   <section class="global">
-    
-
-    <!-- onsenui -->
-
-    <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
-
-    <div class="main-content">
-      <%- @content %>
-    </div>
-
-    <!-- DocPad Scripts + Our Own -->
-    <%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
-
-
-    <!-- end onsen ui -->
-
+        
     <div id="comment-1" class="comments">
       <div class="closed">
         <div class="btn-open">Send Feedback</div>

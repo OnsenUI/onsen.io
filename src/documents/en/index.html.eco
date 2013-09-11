@@ -3,8 +3,8 @@ layout: 'integrated_en'
 title: 'Home'
 ---
 
-<div class="page scroll-y padding-top30 padding-bottom70">
-  <div class="container">
+<div class="padding-top30 padding-bottom70 bootstrap-font">
+  <div class="container-bootstrap">
     <div class="row">
       <div class="col-md-6">
         <div class="jumbotron">
@@ -16,16 +16,16 @@ title: 'Home'
               </p>
             </blockquote>
           </div>
-          <div class="full font-2rem">
+          <div class="full">
             <p>
               <%= @framework.displayName %> is an HTML5 UI framework for building modern mobile application.
             </p>
             <p>
               Designed to be:
-              <ul>
-                <li>Simple</li>
-                <li>Fast</li>
-                <li>And powerful</li>
+              <ul class="margin-left40">
+                <li class="list-style-circle">Simple</li>
+                <li class="list-style-circle">Fast</li>
+                <li class="list-style-circle">And powerful</li>
               </ul>
             </p>
           </div>    

@@ -3,8 +3,15 @@ layout: 'integrated_ja'
 title: 'How It Works'
 ---
 
-<div class="page scroll-y padding-top70 padding-bottom70">
-  <div class="container">
+<style type="text/css" media="screen">
+ 	iframe {
+ 		border: 1px solid lightgray;
+ 		border-radius: 4px;
+ 	}
+</style>
+
+<div class="padding-top70 padding-bottom70">
+  <div class="container-bootstrap">
     <div class="row">
       <div class="col-md-11">
         <%- @partial('how_it_work_ja') %>    
