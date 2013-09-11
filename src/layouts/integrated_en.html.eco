@@ -1,0 +1,310 @@
+
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+
+  <!-- onsen ui -->
+<!-- Site Properities -->
+  <title><%= @getPreparedTitle() %></title>
+  <meta name="description" content="<%= @getPreparedDescription() %>" />
+  <meta name="keywords" content="<%= @getPreparedKeywords() %>" />
+
+  <!-- DocPad Meta -->
+  <%- @getBlock('meta').toHTML() %>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+  <!-- DocPad Styles + Our Own -->
+    
+  <link rel="stylesheet" href="<%= @rootUrl %>styles/layout.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>styles/main.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>styles/highlight_github.css">
+
+  <!-- Icons -->
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
+  <!-- For first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
+  <!-- For iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
+  <!-- For third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+
+  <!-- end onsen ui -->
+
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  <script src="/static/js/jquery.fancybox.pack.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:500,700' rel="stylesheet">
+  <link href="/static/css/jquery.fancybox.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="/static/js/html5shiv.js"></script>
+  <script type="text/javascript" src="/static/js/selectivizr-min.js"></script>
+  <![endif]-->
+        
+    <script type="text/javascript" src="/static/js/util.js"></script>
+  <script type="text/javascript">
+    $(function(){
+      var opened = false;
+      var commentForm = $('.comments');
+      $('body').click(function(e) {
+        if (opened && !$.contains(commentForm[0], e.target)) {
+          commentForm.find('.closed').css('display','block');
+          commentForm.find('.opened').css('display','none');
+          opened = false;
+        }
+      });
+      $('.btn-open').click(function() {
+        var $thisForm = $(this).closest('.comments');
+        $thisForm.find('.closed').css('display','none');
+        $thisForm.find('.opened').css('display','block');
+        $thisForm.find('input[name=name]').focus();
+        opened = true;
+      });
+      $('.btn-send').click(function() {
+        var $thisForm = $(this).closest('.comments');
+        $thisForm.find('.icon-loading').css('display', 'inline');
+        $(this).attr('disabled', 'disabled');
+        
+        $.ajaxSetup({crossDomain : true});
+        var params = {
+          message : $("textarea[name=message]", $thisForm).val().replace(/^\s+|\s+$/g, ""),
+          email   : $("input[name=email]", $thisForm).val().replace(/^\s+|\s+$/g, ""),
+          name    : $("input[name=name]", $thisForm).val().replace(/^\s+|\s+$/g, ""),
+          type    : "docs",
+          from    : document.domain,
+          url     : document.URL
+        };
+        $.post("https://web.monaca.mobi/api/feedback", params, function() {
+          $thisForm.find('.icon-loading').css('display','none');
+          $thisForm.find('.btn-send').css('display','none');
+          $thisForm.find('.thanks').css('display','block');
+        }).error(function() {
+                      alert("Failed to send feedback.");
+                    $thisForm.find('.icon-loading').css('display','none');
+          $thisForm.find('.btn-send').removeAttr('disabled');
+        });
+        return false;
+      });
+
+      $("a.external").each(function() {
+          if ($(this).attr("href").indexOf("http") != -1) {
+            $(this).attr("target", "_blank").addClass("internet-link");
+         }
+         });
+      $(".section img").each(function() {
+          if ($(this).css("width") !== "0px") {
+            var parent = $(this).parent().get(0);
+            if (parent.tagName.toUpperCase() === "A") {
+              if (parent.href.indexOf(".png") > 0 || parent.href.indexOf(".jpg") > 0) {
+                parent.className += " fancybox";
+              }
+            }
+          }
+          });
+      $(".fancybox").fancybox({
+        closeBtn: false,
+        openEffect: 'elastic',
+        modal: false
+          
+        });
+    });
+    
+    //Create Link object.
+    var Link = (function(){
+
+      var url = String(location.href);
+      var newUrl = "";
+      var detecter = detectLang(url);
+
+      //This function is used to detect language.
+      function detectLang(url){
+        return "en";
+      };
+      
+      //This function is uded to switch language to another one.
+      function switchLang(){ 
+
+          switch(detecter){
+              case "en":
+                  newUrl = url.replace(/en/,'ja');
+              break;
+
+              case "ja":
+                  newUrl = url.replace(/ja/,'en');
+              break;
+          }
+
+          location.href = newUrl;
+      };
+
+      //This function is used to open AsialBlog with the specified language.
+      function openBlog(){
+
+          switch(detecter){
+              case "en":
+                  window.open('http://blog.asial.co.jp/?lang=en');
+              break;
+
+              case "ja":
+                  window.open('http://blog.asial.co.jp/');
+              break;        
+          }
+      };
+
+      function openHp(){
+
+          switch(detecter){
+              case "en": 
+                  window.open('http://www.asial.co.jp/en/');
+              break;
+
+              case "ja":
+                  window.open('http://www.asial.co.jp/'); 
+              break;        
+          }
+      }      
+
+      return{
+          //return function to trnsit to another language page.
+          switchLang : switchLang,
+          openBlog : openBlog,
+          openHp : openHp
+      };
+
+    }()); 
+
+  </script>
+  <link rel="stylesheet" href="/static/css/common.css?20121122" type="text/css" />
+  <link rel="stylesheet" href="/static/css/highlight.css?20121122" type="text/css" />
+  <link rel="stylesheet" href="/static/css/print.css?20121122" type="text/css" media="print" />
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-526750-24']);
+    _gaq.push(['_setDomainName', '.monaca.mobi']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    (function() {
+      var cx = '016015690073112865802:2gplfrfztx8';
+      var gcse = document.createElement('script'); gcse.type = 'text/javascript'; gcse.async = true;
+      gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+          '//www.google.co.jp/cse/cse.js?cx=' + cx;
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(gcse, s);
+    })();
+  </script>
+  </head>
+<body id="" data-lang="en">
+  <header class="global">
+    <div class="headcont">
+      <p class="site-logo"><a href="/"><img src="/static/img/common/logo-monaca-docs.png" alt="" /></a></p>
+      <nav class="global"><ul>
+                      <li
+                        ><a href="/en/learning/">Tutorial</a></li>
+                                  <li
+                        ><a href="/en/sampleapp/samples/">Sample Apps</a></li>
+                                  <li
+                        ><a href="/en/manual/">Manual</a></li>
+                                  <li><a href="/en/reference/">API</a></li>
+            <li class="current"><a href='/onsen/en/index.html'>Onsen UI</a></li>                      <li
+                        ><a href="/en/faq/">FAQs</a></li>
+                            </ul></nav>
+      <div class="search">
+        <gcse:searchbox-only></gcse:searchbox-only>
+      </div>
+    </div>
+  </header>
+  
+    <div class="nav-local">
+    	<ul class="nav-local-list">
+        <li class="active"><a href="<%= @rootUrl %>en/">Home</a></li>
+            <li><a href="<%= @rootUrl %>getting_started/en/">Getting Started</a></li>
+            <li><a href="<%= @rootUrl %>docs/en/">Docs</a></li>
+            <li><a href="<%= @rootUrl %>how_it_works/en/">How It Works</a></li> 
+    	</ul>
+    </div>
+  
+  <div class="wrapperall">
+  <div class="contwrap">
+  <section class="global">
+    
+
+    <!-- onsenui -->
+
+    <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
+    <div class="main-content">
+      <%- @content %>
+    </div>
+
+    <!-- DocPad Scripts + Our Own -->
+    <%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
+
+
+    <!-- end onsen ui -->
+
+    <div id="comment-1" class="comments">
+      <div class="closed">
+        <div class="btn-open">Send Feedback</div>
+        <a class="btn-blue" disabled>Submit</a>
+      </div>
+      <div class="opened">
+        <h2>Send Feedback</h2>
+        <form>
+          <table>
+            <tr>
+              <th>Your name<span class="required">*</span></th>
+              <td><input type="text" name="name" id="form_name" /></td>
+            </tr>
+            <tr>
+              <th>E-mail<span class="required">*</span></th>
+              <td><input type="text" name="email" id="form_email" /></td>
+            </tr>
+            <tr>
+              <th>Message<span class="required">*</span></th>
+              <td><textarea name="message" id="form_message"></textarea></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td>
+                <a class="btn-send btn-blue" />Submit</a><img src="/static/img/common/icon_loading.gif" alt="Loading…" class="icon-loading" />
+                                  <p class="thanks">Thank you for your feedback!</p>
+                              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+    </div>
+  </section>
+  </div><!-- /contwrap -->
+  
+  
+    <footer class="global">
+    <ul class="footer-nav">
+      <li><a href="http://monaca.mobi/page/license">EULA</a></li>
+      <li><a href="http://monaca.mobi/page/policy">Policy</a></li>
+      <li><a href="http://monaca.mobi/page/contact">Contact Us</a></li>
+      <li><a href="#" onclick="Link.switchLang()">日本語版</a></li>
+    </ul>
+    <p class="copyright">Copyright &copy; 2011- Asial Corporation. All rights reserved.</p>
+    <a href="#" onclick="Link.openHp()" ><img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" /></a>
+  </footer>
+    
+</body>
+</html>
+
