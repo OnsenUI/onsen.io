@@ -175,7 +175,7 @@ page: 'docs'
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="<%= directive.demoURL %>" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="260" height="460" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               <% end %>

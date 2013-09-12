@@ -30,7 +30,7 @@ docpadConfig = {
 				      ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
 				    },
 				    examplePartial: 'screen_example',
-				    demoURL: 'http://10.0.0.60:8000/app/screen_demo.html',
+				    demoURL: 'demo/app/screen_demo.html',
 				    attributes: [
 				      {
 				        name: 'page',
@@ -64,7 +64,7 @@ docpadConfig = {
 				      ja: 'ページのナビゲーションと画面上部のツールバーを提供します。遷移元ページのスタック管理を行うことができます。'
 				    },
 				    examplePartial: 'navigator_example',
-				    demoURL: 'http://10.0.0.60:8000/app/navigator_demo.html',
+				    demoURL: 'demo/app/navigator_demo.html',
 				    attributes: [
 				      {
 				        name: 'page',
@@ -144,7 +144,7 @@ docpadConfig = {
 				      ja: '<ons-tabbar-item>タグでタブバー内に配置されるタブ項目を定義します。'
 				    },
 				    examplePartial: 'tabbar_example',
-				    demoURL: 'http://10.0.0.60:8000/app/tabbar_demo.html',
+				    demoURL: 'demo/app/tabbar_demo.html',
 				    attributes: [
 				    	{
 					        name: 'page',
@@ -170,7 +170,7 @@ docpadConfig = {
 				      ja: "2つのページを利用したスライディングUIを提供します。手前のページをスライドさせることで背後のページをメニューリストなどとして表示することができます。"
 				    },
 				    examplePartial: 'sliding_menu_example',
-				    demoURL: 'http://10.0.0.60:8000/app/sliding_menu_demo.html',
+				    demoURL: 'demo/app/sliding_menu_demo.html',
 				    attributes: [
 				      {
 				        name: 'behind-page',
@@ -231,7 +231,7 @@ docpadConfig = {
 				      ja: "<ons-scroller>タグ内のコンテンツにスクロール表示を提供します。"
 				    },
 				    examplePartial: 'scroller_example',
-				    demoURL: 'http://10.0.0.60:8000/app/scroller_demo.html',
+				    demoURL: 'demo/app/scroller_demo.html',
 				    methods: []
 				  }, {
 				    name: 'list',
@@ -240,7 +240,7 @@ docpadConfig = {
 				      ja: "リストコンポーネントとして提供します。"
 				    },
 				    examplePartial: 'list_example',
-				    demoURL: 'http://10.0.0.60:8000/app/list_demo.html',
+				    demoURL: 'demo/app/list_demo.html',
 				    methods: []
 				  }, 
 				  {
@@ -258,7 +258,7 @@ docpadConfig = {
 				      ja: "ボタンコンポーネントです。用意されたタイプからボタンのスタイルを選択可能です。またボタンを押下した際にスピナーアニメーションすることができます。"
 				    },
 				    examplePartial: 'button_example',
-				    demoURL: 'http://10.0.0.60:8000/app/button_demo.html',
+				    demoURL: 'demo/app/button_demo.html',
 				    attributes: [
 				      {
 				        name: 'type',
@@ -298,7 +298,7 @@ docpadConfig = {
 				      ja: "モバイル用のドロップダウンリストコンポーネントです。"
 				    },
 				    examplePartial: 'select_example',
-				    demoURL: 'http://10.0.0.60:8000/app/select_demo.html',
+				    demoURL: 'demo/app/select_demo.html',
 				    attributes: [],
 				    methods: []
 				  },
@@ -309,7 +309,7 @@ docpadConfig = {
 				      ja: "テキストボックスコンポーネントです。"
 				    },
 				    examplePartial: 'text_input_example',
-				    demoURL: 'http://10.0.0.60:8000/app/text_input_demo.html',
+				    demoURL: 'demo/app/text_input_demo.html',
 				    attributes: [
 				      {
 				        name: 'placeholder',
@@ -335,7 +335,7 @@ docpadConfig = {
 				      ja: "検索フィールドコンポーネントです。"
 				    },
 				    examplePartial: 'search_input_example',
-				    demoURL: 'http://10.0.0.60:8000/app/search_input_demo.html',
+				    demoURL: 'demo/app/search_input_demo.html',
 				    attributes: [
 				      {
 				        name: 'placeholder',
@@ -361,7 +361,7 @@ docpadConfig = {
 				      ja: "テキスト入力エリアコンポーネントです。"
 				    },
 				    examplePartial: 'text_area_example',
-				    demoURL: 'http://10.0.0.60:8000/app/text_area_demo.html',
+				    demoURL: 'demo/app/text_area_demo.html',
 				    attributes: [
 				      {
 				        name: 'rows',

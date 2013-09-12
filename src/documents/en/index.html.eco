@@ -45,7 +45,7 @@ page: 'home'
           <img src="<%= @rootUrl %>images/iPhone5Frame.png">
         </div>        
         <div class="absolute fit-iphone-frame-big">
-          <iframe src="http://10.0.0.60:8000/app/kitchen_sink.html" width="321" height="569" style="border-color: black;"></iframe>
+          <iframe src="<%= @rootUrl %>demo/app/kitchen_sink.html" width="321" height="569" style="border-color: black;"></iframe>
         </div> 
       </div>
 
