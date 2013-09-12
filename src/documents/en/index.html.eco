@@ -1,6 +1,7 @@
 ---
 layout: 'integrated_en'
 title: 'Home'
+page: 'home'
 ---
 
 <div class="padding-top30 padding-bottom70 bootstrap-font">
@@ -53,3 +54,13 @@ title: 'Home'
   </div>
 
 </div>
+
+<footer class="global">
+  <ul class="footer-nav">
+    <li><a href="http://monaca.mobi/page/license">EULA</a></li>
+    <li><a href="http://monaca.mobi/page/policy">Policy</a></li>      
+    <li><a href="<%= @rootUrl %>ja">日本語版</a></li>
+  </ul>
+  <p class="copyright">Copyright &copy; 2011- Asial Corporation. All rights reserved.</p>
+  <a href="#" onclick="Link.openHp()" ><img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" /></a>
+</footer>

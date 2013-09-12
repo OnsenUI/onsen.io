@@ -1,6 +1,7 @@
 ---
 layout: 'integrated_en'
 title: 'Docs'
+page: 'docs'
 ---
 
 <style type="text/css" media="screen">
@@ -186,6 +187,26 @@ title: 'Docs'
         <% end %>
 
         <div class="space-top50"></div>
+
+        <footer class="global">
+          <ul class="footer-nav">
+            <li>
+              <a href="http://monaca.mobi/page/license">EULA</a>
+            </li>
+            <li>
+              <a href="http://monaca.mobi/page/policy">Policy</a>
+            </li>
+            <li>
+              <a href="<%= @rootUrl %>docs/ja/">日本語版</a>
+            </li>
+          </ul>
+          <p class="copyright">
+            Copyright &copy; 2011- Asial Corporation. All rights reserved.
+          </p>
+          <a href="#" onclick="Link.openHp()" >
+            <img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" />
+          </a>
+        </footer>
       </div>
               
     </div>

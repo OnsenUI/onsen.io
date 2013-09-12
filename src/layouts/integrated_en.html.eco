@@ -243,9 +243,9 @@
     <div class="nav-local">
       <ul class="nav-local-list">
         <li class="active"><a href="<%= @rootUrl %>en/">Home</a></li>
-            <li><a href="<%= @rootUrl %>getting_started/en/">Getting Started</a></li>
-            <li><a href="<%= @rootUrl %>docs/en/">Docs</a></li>
-            <li><a href="<%= @rootUrl %>how_it_works/en/">How It Works</a></li> 
+        <li><a href="<%= @rootUrl %>getting_started/en/">Getting Started</a></li>
+        <li><a href="<%= @rootUrl %>docs/en/">Docs</a></li>
+        <li><a href="<%= @rootUrl %>how_it_works/en/">How It Works</a></li> 
       </ul>
     </div>
   </div>
@@ -262,58 +262,7 @@
 
 
       <!-- end onsen ui -->
-    </section>
-  
-  
-  <div class="contwrap">
-  <section class="global">
-        
-    <div id="comment-1" class="comments">
-      <div class="closed">
-        <div class="btn-open">Send Feedback</div>
-        <a class="btn-blue" disabled>Submit</a>
-      </div>
-      <div class="opened">
-        <h2>Send Feedback</h2>
-        <form>
-          <table>
-            <tr>
-              <th>Your name<span class="required">*</span></th>
-              <td><input type="text" name="name" id="form_name" /></td>
-            </tr>
-            <tr>
-              <th>E-mail<span class="required">*</span></th>
-              <td><input type="text" name="email" id="form_email" /></td>
-            </tr>
-            <tr>
-              <th>Message<span class="required">*</span></th>
-              <td><textarea name="message" id="form_message"></textarea></td>
-            </tr>
-            <tr>
-              <th></th>
-              <td>
-                <a class="btn-send btn-blue" />Submit</a><img src="/static/img/common/icon_loading.gif" alt="Loading…" class="icon-loading" />
-                                  <p class="thanks">Thank you for your feedback!</p>
-                              </td>
-            </tr>
-          </table>
-        </form>
-      </div>
-    </div>
-  </section>
-  </div><!-- /contwrap -->
-  
-  
-    <footer class="global">
-    <ul class="footer-nav">
-      <li><a href="http://monaca.mobi/page/license">EULA</a></li>
-      <li><a href="http://monaca.mobi/page/policy">Policy</a></li>
-      <li><a href="http://monaca.mobi/page/contact">Contact Us</a></li>
-      <li><a href="#" onclick="Link.switchLang()">日本語版</a></li>
-    </ul>
-    <p class="copyright">Copyright &copy; 2011- Asial Corporation. All rights reserved.</p>
-    <a href="#" onclick="Link.openHp()" ><img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" /></a>
-  </footer>
+    </section>   
     
 </body>
 </html>
