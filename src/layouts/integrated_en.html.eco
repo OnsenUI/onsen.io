@@ -242,13 +242,36 @@
     
     <div class="nav-local">
       <ul class="nav-local-list">
-        <li class="active"><a href="<%= @rootUrl %>en/">Home</a></li>
-        <li><a href="<%= @rootUrl %>getting_started/en/">Getting Started</a></li>
-        <li><a href="<%= @rootUrl %>docs/en/">Docs</a></li>
-        <li><a href="<%= @rootUrl %>how_it_works/en/">How It Works</a></li> 
+        <% if @getDocument().toJSON().page == 'home': %>
+          <li class="current"><a href="<%= @rootUrl %>en/">Home</a></li>
+        <% else: %>
+          <li><a href="<%= @rootUrl %>en/">Home</a></li>
+        <% end %>
+
+
+        <% if @getDocument().toJSON().page == 'getting_started': %>
+          <li class="current"><a href="<%= @rootUrl %>getting_started/en/">Getting Started</a></li>
+        <% else: %>
+          <li><a href="<%= @rootUrl %>getting_started/en/">Getting Started</a></li>
+        <% end %>
+
+
+        <% if @getDocument().toJSON().page == 'docs': %>
+          <li class="current"><a href="<%= @rootUrl %>docs/en/">Docs</a></li>
+        <% else: %>
+          <li><a href="<%= @rootUrl %>docs/en/">Docs</a></li>
+        <% end %>
+
+
+        <% if @getDocument().toJSON().page == 'how_it_works': %>
+          <li class="current"><a href="<%= @rootUrl %>how_it_works/en/">How It Works</a></li> 
+        <% else: %>
+          <li><a href="<%= @rootUrl %>how_it_works/en/">How It Works</a></li> 
+        <% end %>
+        
       </ul>
     </div>
-  </div>
+  </div>    
 
     <section>
       <!-- onsenui -->
