@@ -54,7 +54,7 @@ page: 'docs'
               
               <% if directive.methods && directive.methods.length > 0: %>
                 <a class="link round-padding" href="#<%= directive.name %>-methods">
-                  <div class="gray">Methods:</div>
+                  <div class="gray"><%= @CONSTANTS.methods.en %>:</div>
                 </a>
                 <div class="margin-left">                              
                   <% for method in directive.methods: %>
