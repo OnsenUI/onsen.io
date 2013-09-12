@@ -16,7 +16,7 @@ Go to Dashboard and click **New Project**
 
 ### 3. Where to go from here
 Now you have Onsen UI installed.
-See examples in the [Docs page](/docs/en) page for how to use Onsen UI components.
+See examples in the [Docs page](/onsen/docs/en) page for how to use Onsen UI components.
 
 
 # Adding Onsen UI to an existing project
@@ -43,4 +43,4 @@ Define your app name and tell angular to load Onsen UI directives module
 
 ### 3. Where to go from here
 Now you have Onsen UI installed.
-See examples in the [Docs page](/docs/en) page for how to use Onsen UI components.
+See examples in the [Docs page](/onsen/docs/en) page for how to use Onsen UI components.
