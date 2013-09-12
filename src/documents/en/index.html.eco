@@ -6,7 +6,7 @@ title: 'Home'
 <div class="padding-top30 padding-bottom70 bootstrap-font">
   <div class="container-bootstrap">
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-xs-6">
         <div class="jumbotron">
           <div class="full center">
             <img src="<%= @rootUrl %>images/logo/onsen_with_text.png" alt="">
@@ -39,7 +39,7 @@ title: 'Home'
 
       </div>
 
-      <div class="col-md-6 relative">
+      <div class="col-md-6 col-xs-6 relative">
         <div class="absolute click-through">
           <img src="<%= @rootUrl %>images/iPhone5Frame.png">
         </div>        
