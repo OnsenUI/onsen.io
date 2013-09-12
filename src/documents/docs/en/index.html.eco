@@ -29,7 +29,7 @@ title: 'Docs'
 
 <div class="">
   <div class="full-width full-height">
-    <div class="col-md-2">      
+    <div class="col-md-2 col-xs-2">      
         <section id="sidemenu" class="left-menu">
         	<% for directive in @framework.directives: %>
           <div>
@@ -70,7 +70,7 @@ title: 'Docs'
         </section>
         
     </div>
-    <div class="col-md-10 right-side">
+    <div class="col-md-10 col-xs-10 right-side">
       <div class=""> 
 
         <% for directive in @framework.directives: %>
@@ -79,7 +79,7 @@ title: 'Docs'
           <h1><%= @framework.codeName %>-<%= directive.name %></h1>
 
           <div class="row space-top">
-            <div class="col-md-8">
+            <div class="col-md-8 col-xs-8">
               <section class="space-top">
                 <h4 class="gray">Description</h4>
                 <p><%= directive.description.en %></p>
@@ -153,20 +153,20 @@ title: 'Docs'
                 <% end %>
               </section>
             </div> 
-            <div class="col-md-4"></div>
+            <div class="col-md-4 col-xs-4"></div>
           </div>
 
           <% if directive.examplePartial: %>            
           <div class="row">
-            <div class="col-md-12 space-top45">
+            <div class="col-md-12 col-xs-12 space-top45">
               <h4 class="gray">Example</h4>
             </div>
           </div>
           <div class="row example-box">                                    
-            <div class="col-md-8">              
+            <div class="col-md-8 col-xs-8">              
               <%- @partial(directive.examplePartial) %>              
             </div>
-            <div class="col-md-4 no-padding move-left15">
+            <div class="col-md-4 col-xs-4 no-padding move-left15">
                <% if directive.demoURL: %>
                 <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
