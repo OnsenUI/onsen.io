@@ -40,7 +40,8 @@ page: 'home'
         <div class="absolute fit-iphone-frame-big">
           <iframe src="<%= @rootUrl %>demo/app/kitchen_sink.html" width="321" height="569" style="border-color: black;"></iframe>
         </div> 
-        <div class="run-in-mobile-btn">
+        <div class="iphone-box"></div>
+        <div class="run-fullscreen-btn">
           Click <a href="<%= @rootUrl %>demo/app/kitchen_sink.html">here </a> to run in full window.
         </div>
       </div>
