@@ -4,24 +4,24 @@ encoding: 'utf-8'
 
 # Starting a new project
 
-### 1. Go to Dashboard
+## 1. Go to Dashboard
 
 Go to Dashboard and click **New Project**
 ![dashboard](new_project.png)
 
 
-### 2. Choose one Onsen UI template that best fit your project type
+## 2. Choose one Onsen UI template that best fit your project type
 
 ![template](choose_template.png)
 
-### 3. Where to go from here
+## 3. Where to go from here
 Now you have Onsen UI installed.
 See examples in the [Docs page](/onsen/docs/en) page for how to use Onsen UI components.
 
 
 # Adding Onsen UI to an existing project
 
-### 1. Add Onsen UI plugin
+## 1. Add Onsen UI plugin
 
 Go to Config -> Plugin Settings...
 ![plugin](config_plugin_settings.png)
@@ -29,7 +29,7 @@ Go to Config -> Plugin Settings...
 Select Onsen UI
 ![select](check_onsen_ui.png)
 
-### 2. Activate Onsen UI plugin
+## 2. Activate Onsen UI plugin
 
 Add ng-app to html tag.
 
@@ -41,6 +41,6 @@ Define your app name and tell angular to load Onsen UI directives module
 
 ![activate](add_ng_app.png)
 
-### 3. Where to go from here
+## 3. Where to go from here
 Now you have Onsen UI installed.
 See examples in the [Docs page](/onsen/docs/en) page for how to use Onsen UI components.
