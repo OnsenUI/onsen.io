@@ -5,7 +5,6 @@
 	var leftMenu = document.querySelector('.left-menu');
 
 	function onScroll(e) {
-		console.log('scrolled:' + window.scrollY);
 		window.scrollY >= origOffsetY ? leftMenu.classList.add('sticky') :
 			leftMenu.classList.remove('sticky');
 	}
@@ -15,9 +14,7 @@
 
 
 (function() {
-	console.log('ready');
 	var links = $('.link');
-	console.log(links);
 	var sections = [];
 	var linkMap = {};
 
@@ -31,13 +28,9 @@
 		linkMap[id] = link;
 	}
 
-	console.log('linkMap ', linkMap);
-
-
 
 	var scrollWrapper = document;
 	var offset = 60;
-	console.log('scrollerWrapper:' + scrollWrapper);
 	scrollWrapper.addEventListener('scroll', function() {
 		for (var i = sections.length - 1; i >= 0; i--) {
 			var scrolled = window.scrollY + offset;
@@ -46,10 +39,8 @@
 			
 			if (scrolled > position ) {
 				var id = '#' + section.attr('id');
-				console.log('reached ' + id);
 				links.removeClass('selected');
 				var link = linkMap.id;
-				console.log('link', link);
 				linkMap[id].addClass('selected');
 				break;
 			}
