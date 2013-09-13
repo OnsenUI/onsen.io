@@ -20,9 +20,7 @@
 
 	for (var i = 0; i < links.length; i++) {
 		var link = $(links[i]);
-		console.log('link ' + link.html());
 		var id = link.attr('href');
-		console.log('href = ' + id);
 		var section = $(id);
 		sections.push(section);
 		linkMap[id] = link;
