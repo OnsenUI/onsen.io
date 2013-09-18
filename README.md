@@ -1,3 +1,12 @@
+# Pushing to production
+ssh -A www@192.168.0.90
+cd /data.prod/docs.monaca.mobi
+do necessary git pull and merge to master
+monaca deploy -y /data.prod/docs.monaca.mobi/
+
+
+
+
 # [HTML5 Boilerplate](http://html5boilerplate.com/) skeleton for [DocPad](https://github.com/bevry/docpad)
 Bare essentials for building a modern website with best practices
 

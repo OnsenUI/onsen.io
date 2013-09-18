@@ -83,31 +83,31 @@ Onsen UIでは、ナビゲーターと他のコンポーネントを組み合わ
 *company_list.html*
 
     <div class='page'>
-        <monaca-list class="center">
-            <monaca-list-item>
+        <ons-list class="center">
+            <ons-list-item>
                 <h3><i class="icon-apple"></i> Apple</h3>
-            </monaca-list-item>
+            </ons-list-item>
 
-            <monaca-list-item>
+            <ons-list-item>
                 <h3><i class="icon-android"></i> Android</h3>
-            </monaca-list-item>
+            </ons-list-item>
 
-            <monaca-list-item>
+            <ons-list-item>
                 <h3><i class="icon-windows"></i> Winows</h3>
-            </monaca-list-item>         
+            </ons-list-item>         
 
-            <monaca-list-item>
+            <ons-list-item>
                 <h3><i class="icon-html5"></i> HTML5</h3>
-            </monaca-list-item>
+            </ons-list-item>
 
-            <monaca-list-item>
+            <ons-list-item>
                 <h3><i class="icon-css3"></i> CSS3</h3>
-            </monaca-list-item>         
+            </ons-list-item>         
 
-            <monaca-list-item>
+            <ons-list-item>
                 <h3><i class="icon-github"></i> GitHub</h3>
-            </monaca-list-item>             
-        </monaca-list>      
+            </ons-list-item>             
+        </ons-list>      
     </div>
 
 #### チュートリアル アニメーション  

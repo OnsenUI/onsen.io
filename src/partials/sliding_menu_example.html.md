@@ -26,9 +26,9 @@ encoding: 'utf8'
 
     <div class="page center bg-gray">
         <h1>Hello, I am Page 1</h1>
-        <monaca-button ng-click="monaca.toggleMenu()">
+        <ons-button ng-click="ons.slidingMenu.toggleMenu()">
             Toggle Menu
-        </monaca-button>
+        </ons-button>
     </div>
 
 
@@ -36,7 +36,7 @@ encoding: 'utf8'
 
     <div class="page center bg-orange">
         <h1>Hello, I am Page 2</h1>
-        <monaca-button ng-click="monaca.toggleMenu()">
+        <ons-button ng-click="ons.slidingMenu.toggleMenu()">
             Toggle Menu
-        </monaca-button>    
+        </ons-button>    
     </div>
