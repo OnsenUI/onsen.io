@@ -38,11 +38,11 @@ page: 'home'
           <img src="<%= @rootUrl %>images/iPhone5Frame.png">
         </div>        
         <div class="absolute fit-iphone-frame-big">
-          <iframe src="<%= @rootUrl %>demo/app/kitchen_sink.html" width="321" height="569" style="border-color: black;"></iframe>
+          <iframe src="<%= @rootUrl %>OnsenUI/demo/kitchen_sink.html" width="321" height="569" style="border-color: black;"></iframe>
         </div> 
         <div class="iphone-box"></div>
         <div class="run-fullscreen-btn">
-          Click <a href="<%= @rootUrl %>demo/app/kitchen_sink.html">here </a> to run in full window.
+          Click <a href="<%= @rootUrl %>OnsenUI/demo/kitchen_sink.html">here </a> to run in full window.
         </div>
       </div>
 
@@ -54,7 +54,7 @@ page: 'home'
 
 <footer class="global width90">
   <ul class="footer-nav">
-    <iframe src="http://ghbtns.com/github-btn.html?user=monaca&repo=OnsenUI&type=watch&count=true&size=large"
+    <iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=watch&count=true&size=large"
   allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
   </ul>
 </footer>
