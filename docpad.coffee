@@ -8,8 +8,7 @@ docpadConfig = {
 	# To access one of these within our templates, refer to the FAQ: https://github.com/bevry/docpad/wiki/FAQ
 	
 	templateData:
-		# rootUrl: '/'
-		rootUrl: '/onsen/'
+		rootUrl: '/'
 
 		CONSTANTS:
 			attributes:
