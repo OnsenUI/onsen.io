@@ -1,0 +1,17 @@
+.right-side {
+	position: relative;
+	height: 100%;
+}
+
+.right-container {
+	position: absolute;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	left: 30px;
+	right: 0;
+}
+
+iframe {
+	max-width: none !important;
+}
