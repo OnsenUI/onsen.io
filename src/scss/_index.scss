@@ -1,0 +1,56 @@
+#home {
+
+#keyvisual {
+  background-color: #ccc;
+  padding: 60px 0;
+	margin-bottom: 100px;
+	h1 {
+		color: $onsen-red;
+		font-size: (60px/$basefont)+rem;
+		line-height: (63/60);
+		margin-bottom: 30px;
+	}
+
+	h2 {
+		color: #666;
+		font-size: (30px/$basefont)+rem;
+		font-weight: 400;
+		line-height: (35/30);
+		margin-bottom: 50px;
+	}
+
+	.btn-download {
+		font-weight: 400;
+		line-height: 16px;
+		padding-top: 20px;
+		.version {
+			font-size: 0.86rem;
+		}
+	}
+}
+
+.features {
+	.feature {
+		h2 {
+			font-size: (44px/$basefont)+rem;
+			margin-bottom: 30px;
+		}
+		p {
+			font-size: (22px/$basefont)+rem;
+			line-height: 2;
+		};
+	}
+}
+
+.getstarted {
+	background-color: #f5f5f5;
+	padding: 30px 0;;
+	text-align: center;
+	.btn-start {
+		font-weight: 400;
+		margin: 0 auto;
+		text-align: left;
+	}
+}
+
+}

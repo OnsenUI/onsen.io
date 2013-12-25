@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+header.common {
+	@include box-sizing(border-box);
+	margin: 0 auto;
+	padding-top: 11px;
+	width: $width;
+	height: 60px;
+	position: relative;
+	text-align: left;
+
+	.logo {
+		position: absolute;
+		top: 11px;
+		left: 0;
+	}
+
+	.gnav {
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 60px;
+		line-height: 60px;
+		
+		li {
+			color: #a6a6a6;
+			display: inline;
+			font-size: 16px;
+			margin: 0 19px;
+			.active {
+				border-bottom: 1px solid #000;
+				color: #ff1a33;
+			}
+			@include all-a(#a6a6a6);
+		}
+	}
+}

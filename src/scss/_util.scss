@@ -1,0 +1,67 @@
+@charset "UTF-8";
+
+$basefont: 13px;
+$width: 1100px;
+$onsen-red: #ff0f38;
+
+$prefixes: -webkit-, -moz-, -ms-, -o-, '';
+
+@mixin all-a($color,$underline: none) {
+	@if $underline == all-none {
+		a:link,a:visited,a:hover,a:active { color: $color; text-decoration: none; }
+	}
+	@else if $underline == none {
+		a:link,a:visited { color: $color; text-decoration: none; }
+		a:hover { color: $color; text-decoration: underline; }
+		a:active { color: $color; text-decoration: none; }
+	}
+	@else if $underline == all-underline {
+		a:link,a:visited,a:hover,a:active {color: $color; text-decoration: underline;}
+	}
+	@else {
+		a:link,a:visited {color: $color; text-decoration: underline;}
+		a:hover {color: $color; text-decoration: none;}
+		a:active {color: $color; text-decoration: underline;}	
+	}
+}
+
+@mixin link-underline($type) {
+  @if $type == line {
+    &:link,
+    &:visited {
+      text-decoration: underline;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  } @else if $type == all-line {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  } @else if $type == none {
+    &:link,
+    &:visited {
+      text-decoration: none;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  } @else if $type == all-none {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+
