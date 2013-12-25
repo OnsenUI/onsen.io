@@ -1,0 +1,144 @@
+@charset "UTF-8";
+
+@import 'compass/css3';
+@import 'util';
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+pre {
+	white-space: -moz-pre-wrap;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+}
+
+p {
+	margin-bottom: 1em;
+	word-wrap: break-word;
+}
+  
+
+
+
+/***********************************************/
+/* Basic tags                                  */
+/***********************************************/
+
+html {
+	font: 13px/1.4 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+	font-family: Arial;
+}
+
+body {
+	border-top: 4px solid #ff1a33;
+	min-width: $width;
+	text-align: center;
+}
+
+h1,h2,h3,h4,h5,h6 {font-weight: 700;}
+table{border-collapse:collapse;border-spacing:0}
+textarea,input{margin:0;padding:0}
+caption,th{text-align:left}
+td,th{vertical-align: top}
+fieldset,img,abbr{ border:none;}
+li{ list-style-type:none; }
+em { font-style: italic; }
+img, iframe, object { max-width : 100%; } 
+.lt-ie9 img, .lt-ie9 object { width:auto; } 
+
+a img {
+	@include transition(opacity 80ms);
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+
+
+.btn,
+%btn-default {
+	background-repeat: no-repeat;
+	background-position: left center;
+	border-radius: 4px;
+	display: inline-block;
+	padding: 5px 10px;
+	text-align: center;
+	@include link-underline(all-none);
+	&:hover {
+		opacity: 0.7;
+	}
+}
+
+.btn-red {
+	@extend %btn-default;
+	background-color: $onsen-red;
+	color: white;
+}
+
+.btn-big {
+	font-size: 2rem;
+	font-weight: 700;
+	padding: 10px 40px;
+}
+
+.btn-download {
+	background-image: url(/img/common/ico_download.png);
+	background-size: 20px 20px;
+	padding-left: 80px;
+	text-align: left;
+}
+
+.btn-big.btn-download {
+	backgroun-size: auto;
+	padding-left: 50px;
+}
+
+@import 'header';
+@import 'footer';
+@import 'content';
+@import 'index';

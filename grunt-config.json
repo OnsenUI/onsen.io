@@ -16,5 +16,40 @@
       "src": ["out/styles/all.css"],
       "dest": "out/styles/all.min.css"
     }
-  }
+  },
+	"watch": {
+		"js": {
+			"files": ["src/js/**/*/js"],
+			"tasks": ["js"],
+			"options": {
+				"debounceDelay": 1000
+			}
+		},
+		"css": {
+			"files": ["src/scss/*.scss"],
+			"tasks": ["css"],
+			"options": {
+				"debounceDelay": 300
+			}
+		},
+		"all": {
+			"files": ["<%= watch.js.files %>", "<%= watch.css.files %>"],
+			"tasks": ["js", "css"],
+			"options": "<%= watch.js.options %>"
+		}
+	},
+	"compass": {
+		"dev": {
+			"options": {
+				"config": "config.rb",
+				"environment": "development"
+			}
+		},
+		"prod": {
+			"options": {
+				"config": "config.rb",
+				"environment": "production"
+			}
+		}
+	}
 }
