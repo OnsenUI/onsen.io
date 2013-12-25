@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Home | Onsen UI</title>
+	<title>Getting Started | Onsen UI</title>
 	<meta name="description" content="Onsen UI, HTML5 UI framework for modern mobile application." />
 	<meta name="keywords" content="onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast." />
 
@@ -55,13 +55,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/ja/">Onsen UI</a>
+          <a class="navbar-brand" href="/en/">Onsen UI</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/ja/">Home</a></li>
-            <li><a href="/getting_started/ja/">Getting Started</a></li>
-            <li><a href="/docs/ja/">Docs</a></li>
+            <li class="active"><a href="/en/">Home</a></li>
+            <li><a href="/getting_started/en/">Getting Started</a></li>
+            <li><a href="/docs/en/">Docs</a></li>
           </ul>
         </div><!--/.navbar-collapse -->
       </div>
@@ -70,60 +70,61 @@
     <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 
     <div class="main-content">
-    	<div class="padding-top30 padding-bottom70">
-  <div class="container-bootstrap">
-    <div class="row">
-      <div class="col-md-6 col-xs-6">
-        <div class="jumbotron">
-          <div class="full center">
-            <img src="/images/logo/onsen_with_text.png" alt="">
-            <blockquote>
-              <p>
-                <small>Relax</small>
-              </p>
-            </blockquote>
-          </div>
-          <div class="full">
-            <p>
-              HTML5 Mobile UIフレームワーク
-            </p>
-            <p>
-              Onsen UIの特徴
-              <ul class="margin-left40">
-                <li class="list-style-circle">シンプルで使いやすい機能</li>
-                <li class="list-style-circle">フラットデザインUIコンポーネント</li>
-                <li class="list-style-circle">スムーズなアニメーション</li>
-              </ul>
-            </p>
-          </div>    
-        </div>        
+    	<div class="padding-top70 padding-bottom70">
+	<div class="container-bootstrap">
+		<div class="row">
+			<div class="col-md-11 col-xs-11">
+				<h1 id="starting-a-new-project">Starting a new project</h1>
+<h2 id="1-go-to-dashboard">1. Go to Dashboard</h2>
+<p>Go to Dashboard and click <strong>New Project</strong>
+<img src="new_project.png" alt="dashboard"></p>
+<h2 id="2-choose-one-onsen-ui-template-that-best-fit-your-project-type">2. Choose one Onsen UI template that best fit your project type</h2>
+<p><img src="choose_template.png" alt="template"></p>
+<h2 id="3-where-to-go-from-here">3. Where to go from here</h2>
+<p>Now you have Onsen UI installed.
+See examples in the <a href="/onsen/docs/en">Docs page</a> page for how to use Onsen UI components.</p>
+<h1 id="adding-onsen-ui-to-an-existing-project">Adding Onsen UI to an existing project</h1>
+<h2 id="1-add-onsen-ui-plugin">1. Add Onsen UI plugin</h2>
+<p>Go to Config -&gt; Plugin Settings...
+<img src="config_plugin_settings.png" alt="plugin"></p>
+<p>Select Onsen UI
+<img src="check_onsen_ui.png" alt="select"></p>
+<h2 id="2-activate-onsen-ui-plugin">2. Activate Onsen UI plugin</h2>
+<p>Add ng-app to html tag.</p>
+<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">ng-app</span>=<span class="value">"myApp"</span>&gt;</span></code></pre>
+<p>Define your app name and tell angular to load Onsen UI directives module</p>
+<pre class="highlight"><code class="ruby">angular.<span class="class"><span class="keyword">module</span>('<span class="title">myApp</span>', ['<span class="title">onsen</span>.<span class="title">directives</span>']);</span></code></pre>
+<p><img src="add_ng_app.png" alt="activate"></p>
+<h2 id="3-where-to-go-from-here">3. Where to go from here</h2>
+<p>Now you have Onsen UI installed.
+See examples in the <a href="/onsen/docs/en">Docs page</a> page for how to use Onsen UI components.</p>
 
-      </div>
 
-      <div class="col-md-6 col-xs-6 iphone-box">
-        <div class="absolute click-through">
-          <img src="/images/iPhone5Frame.png">
-        </div>        
-        <div class="absolute fit-iphone-frame-big">
-          <iframe src="/OnsenUI/demo/kitchen_sink.html" width="321" height="569" style="border-color: black;"></iframe>
-        </div> 
-        <div class="iphone-box"></div>
-        <div class="run-fullscreen-btn">
-          フルスクリーンでご覧になりたい場合は<br> <a href="/OnsenUI/demo/kitchen_sink.html">こちら</a> をクリックしてください。
-        </div>
-      </div>
+				<p></p>
+			</div>
+		</div>
 
-      <p></p>
-    </div>
-  </div>
-
+	</div>
 </div>
 
-<footer class="global width90">
-  <ul class="footer-nav">
-    <iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=watch&count=true&size=large"
-  allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>
-  </ul>
+<footer class="global">
+	<ul class="footer-nav">
+		<li>
+			<a href="http://monaca.mobi/page/license">EULA</a>
+		</li>
+		<li>
+			<a href="http://monaca.mobi/page/policy">Policy</a>
+		</li>
+		<li>
+			<a href="/getting_started/ja/">日本語版</a>
+		</li>
+	</ul>
+	<p class="copyright">
+		Copyright &copy; 2011- Asial Corporation. All rights reserved.
+	</p>
+	<a href="#" onclick="Link.openHp()" >
+		<img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" />
+	</a>
 </footer>
     </div>
 
