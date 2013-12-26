@@ -15,19 +15,10 @@
 	<meta name="keywords" content="onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast." />
 
 	<!-- DocPad Meta -->
-	<meta name="generator" content="DocPad v6.51.6" />
+	<meta name="generator" content="DocPad v6.59.6" />
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
-
-	<!-- DocPad Styles + Our Own -->
-		
-	<link rel="stylesheet" href="/styles/layout.css">
-	<link rel="stylesheet" href="/styles/main.css">
-	<link rel="stylesheet" href="/styles/highlight_github.css">
+	<!-- DocPad Styles + Our Own -->	
+	<link rel="stylesheet" href="/css/style.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -42,35 +33,24 @@
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
 </head>
 <body>
-    <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+	<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+	<![endif]-->
 
 
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/ja/">Onsen UI</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/ja/">Home</a></li>
-            <li><a href="/getting_started/ja/">Getting Started</a></li>
-            <li><a href="/docs/ja/">Docs</a></li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+	<header id="header-container" class="common">
+		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
+		<ul class="gnav">
+			<li><a href="#">Getting Started</a></li>
+			<li><a href="#">Docs</a></li>
+			<li><a href="#">Customize</a></li>
+			<li><a href="#">Blog</a></li>
+		</ul>
+	</header>
 
-    <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 
-    <div class="main-content">
-    	<style type="text/css" media="screen">
+	<section id="docs" class="content">
+		<style type="text/css" media="screen">
   ::-webkit-scrollbar {
     width: 4px;
   }
@@ -1855,8 +1835,29 @@
 </div>
 <script src="/scripts/navigation_highlighter.js"></script>
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-    </div>
+	</section>
 
+
+	<footer class="common">
+		<ul class="gnav">
+			<li><a href="#">Getting Started</a></li>
+			<li><a href="#">Docs</a></li>
+			<li><a href="#">Customize</a></li>
+			<li><a href="#">Blog</a></li>
+		</ul>
+
+		<div class="footer-cont">
+			<p class="social">
+				<a href="#" target="_blank"><span class="socialicn twitter">&nbsp;</span></a>
+				<a href="https://github.com/OnsenUI/OnsenUI" target="_blank"><span class="socialicn github">&nbsp;</span></a>
+			</p>
+
+			<p class="copyright">Copyright &copy; 2013 Asial Corporation. All rights reserved.</p>
+			<p class="helpmenu"><a href="#">Privacy Policy</a></p>
+		</div>
+	</footer>
+
+	
 	<!-- DocPad Scripts + Our Own -->
 	<script >(function(){
 	/* Did we just livereload? */
@@ -1904,11 +1905,9 @@ var inject = function(){
 		inject();
 	}
 })();</script><script defer="defer"  src="/scripts/all.min.js"></script>
-	
-	
 
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>
 </html>
