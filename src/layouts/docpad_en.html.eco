@@ -18,7 +18,8 @@
 	<%- @getBlock('meta').toHTML() %>
 
 	<!-- DocPad Styles + Our Own -->	
-	<link rel="stylesheet" href="<%= @rootUrl %>styles/style.css">
+	<link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+	<link rel="stylesheet" href="<%= @rootUrl %>styles/highlight_github.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -31,8 +32,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
-<body>
+
+<body id="<%- @document.page %>">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
@@ -48,8 +52,7 @@
 		</ul>
 	</header>
 
-
-	<section id="<%- @document.page %>" class="content">
+	<section class="content">
 		<%- @content %>
 	</section>
 
@@ -73,11 +76,9 @@
 		</div>
 	</footer>
 
-	
 	<!-- DocPad Scripts + Our Own -->
 	<%- @getBlock('scripts').add(@getGruntedScripts()).toHTML() %>
 
-	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>

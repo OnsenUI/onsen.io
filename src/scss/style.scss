@@ -105,6 +105,7 @@ a img {
 	background-repeat: no-repeat;
 	background-position: left center;
 	border-radius: 4px;
+	@include box-sizing(border-box);
 	display: inline-block;
 	padding: 5px 10px;
 	text-align: center;
@@ -117,25 +118,42 @@ a img {
 .btn-red {
 	@extend %btn-default;
 	background-color: $onsen-red;
+	border: 1px solid #d00000;
 	color: white;
 }
 
 .btn-big {
-	font-size: 2rem;
+	font-size: (30px/$basefont)+rem;
 	font-weight: 700;
-	padding: 10px 40px;
+	padding: 18px 40px;
 }
 
 .btn-download {
-	background-image: url(/img/common/ico_download.png);
+	background-image: url(/images/common/ico_download.png);
 	background-size: 20px 20px;
 	padding-left: 80px;
 	text-align: left;
 }
 
+.btn-start {
+	background-image: url(/images/common/ico_getstarted.png);
+	background-position: 40px center;
+	padding-left: 100px;
+	text-align: left;
+}
+
 .btn-big.btn-download {
-	backgroun-size: auto;
-	padding-left: 50px;
+	background-size: auto;
+	background-position: 50px center;
+	padding: 22px 60px 22px 120px;
+}
+
+.simulator {
+	background: url(/images/common/mock_bg.png) no-repeat center center;
+	@include box-sizing(border-box);
+	padding: 99px 10px 10px 56px;
+	width: 392px;
+	height: 694px;
 }
 
 @import 'header';
