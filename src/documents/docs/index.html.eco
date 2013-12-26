@@ -28,19 +28,30 @@ page: 'docs'
   }
 </style>
 
+  <link rel="stylesheet" href="<%= @rootUrl %>styles/main.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>styles/highlight_github.css">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+  <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
 <div class="">
   <div class="full-width full-height">
     <div class="col-md-2 col-xs-2">      
         <section id="sidemenu" class="left-menu">
         	<% for directive in @framework.directives: %>
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#<%= directive.name %>">
-              <div class="directive_name font-1_5 bold"><%= @framework.codeName %>-<%= directive.name %></div>
+            <a class="link directive-name round-padding" href="#<%= directive.name %>">
+              <div class="font-1_5 bold"><%= @framework.codeName %>-<%= directive.name %></div>
             </a> 
             <section>
               <% if directive.attributes && directive.attributes.length > 0: %>
-                <a class="link round-padding" href="#<%= directive.name %>-attributes">
+                <a class="directive-attribute link round-padding" href="#<%= directive.name %>-attributes">
                   <div class="gray"><%= @CONSTANTS.attributes.en %>:</div>
                 </a> 
                 <div class="margin-left">                              

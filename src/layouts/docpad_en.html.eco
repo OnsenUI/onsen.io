@@ -17,8 +17,8 @@
 	<!-- DocPad Meta -->
 	<%- @getBlock('meta').toHTML() %>
 
-	<!-- DocPad Styles + Our Own -->
-	<link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+	<!-- DocPad Styles + Our Own -->	
+	<link rel="stylesheet" href="<%= @rootUrl %>styles/style.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -38,7 +38,7 @@
 	<![endif]-->
 
 
-	<header class="common">
+	<header id="header-container" class="common">
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<ul class="gnav">
 			<li><a href="#">Getting Started</a></li>
