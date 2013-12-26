@@ -15,19 +15,10 @@
 	<meta name="keywords" content="onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast." />
 
 	<!-- DocPad Meta -->
-	<meta name="generator" content="DocPad v6.51.6" />
+	<meta name="generator" content="DocPad v6.59.6" />
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
-
-	<!-- DocPad Styles + Our Own -->
-		
-	<link rel="stylesheet" href="/styles/layout.css">
-	<link rel="stylesheet" href="/styles/main.css">
-	<link rel="stylesheet" href="/styles/highlight_github.css">
+	<!-- DocPad Styles + Our Own -->	
+	<link rel="stylesheet" href="/css/style.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -42,35 +33,24 @@
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
 </head>
 <body>
-    <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+	<!--[if lt IE 7]>
+			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+	<![endif]-->
 
 
-    <div class="navbar navbar-default navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/en/">Onsen UI</a>
-        </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="/en/">Home</a></li>
-            <li><a href="/getting_started/en/">Getting Started</a></li>
-            <li><a href="/docs/en/">Docs</a></li>
-          </ul>
-        </div><!--/.navbar-collapse -->
-      </div>
-    </div>
+	<header id="header-container" class="common">
+		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
+		<ul class="gnav">
+			<li><a href="#">Getting Started</a></li>
+			<li><a href="#">Docs</a></li>
+			<li><a href="#">Customize</a></li>
+			<li><a href="#">Blog</a></li>
+		</ul>
+	</header>
 
-    <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 
-    <div class="main-content">
-    	<style type="text/css" media="screen">
+	<section id="docs" class="content">
+		<style type="text/css" media="screen">
   ::-webkit-scrollbar {
     width: 4px;
   }
@@ -94,19 +74,30 @@
   }
 </style>
 
+  <link rel="stylesheet" href="/styles/main.css">
+  <link rel="stylesheet" href="/styles/highlight_github.css">
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+  <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
+
 <div class="">
   <div class="full-width full-height">
     <div class="col-md-2 col-xs-2">      
         <section id="sidemenu" class="left-menu">
         	
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#screen">
-              <div class="directive_name font-1_5 bold">ons-screen</div>
+            <a class="link directive-name round-padding" href="#screen">
+              <div class="font-1_5 bold">ons-screen</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#screen-attributes">
+                <a class="directive-attribute link round-padding" href="#screen-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -137,14 +128,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#navigator">
-              <div class="directive_name font-1_5 bold">ons-navigator</div>
+            <a class="link directive-name round-padding" href="#navigator">
+              <div class="font-1_5 bold">ons-navigator</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#navigator-attributes">
+                <a class="directive-attribute link round-padding" href="#navigator-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -199,10 +190,10 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#tabbar">
-              <div class="directive_name font-1_5 bold">ons-tabbar</div>
+            <a class="link directive-name round-padding" href="#tabbar">
+              <div class="font-1_5 bold">ons-tabbar</div>
             </a> 
             <section>
               
@@ -211,14 +202,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#tabbar-item">
-              <div class="directive_name font-1_5 bold">ons-tabbar-item</div>
+            <a class="link directive-name round-padding" href="#tabbar-item">
+              <div class="font-1_5 bold">ons-tabbar-item</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#tabbar-item-attributes">
+                <a class="directive-attribute link round-padding" href="#tabbar-item-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -238,14 +229,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#sliding-menu">
-              <div class="directive_name font-1_5 bold">ons-sliding-menu</div>
+            <a class="link directive-name round-padding" href="#sliding-menu">
+              <div class="font-1_5 bold">ons-sliding-menu</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#sliding-menu-attributes">
+                <a class="directive-attribute link round-padding" href="#sliding-menu-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -292,10 +283,10 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#scroller">
-              <div class="directive_name font-1_5 bold">ons-scroller</div>
+            <a class="link directive-name round-padding" href="#scroller">
+              <div class="font-1_5 bold">ons-scroller</div>
             </a> 
             <section>
               
@@ -304,10 +295,10 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#list">
-              <div class="directive_name font-1_5 bold">ons-list</div>
+            <a class="link directive-name round-padding" href="#list">
+              <div class="font-1_5 bold">ons-list</div>
             </a> 
             <section>
               
@@ -316,10 +307,10 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#list-item">
-              <div class="directive_name font-1_5 bold">ons-list-item</div>
+            <a class="link directive-name round-padding" href="#list-item">
+              <div class="font-1_5 bold">ons-list-item</div>
             </a> 
             <section>
               
@@ -328,14 +319,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#button">
-              <div class="directive_name font-1_5 bold">ons-button</div>
+            <a class="link directive-name round-padding" href="#button">
+              <div class="font-1_5 bold">ons-button</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#button-attributes">
+                <a class="directive-attribute link round-padding" href="#button-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -363,10 +354,10 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#select">
-              <div class="directive_name font-1_5 bold">ons-select</div>
+            <a class="link directive-name round-padding" href="#select">
+              <div class="font-1_5 bold">ons-select</div>
             </a> 
             <section>
               
@@ -375,14 +366,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#text-input">
-              <div class="directive_name font-1_5 bold">ons-text-input</div>
+            <a class="link directive-name round-padding" href="#text-input">
+              <div class="font-1_5 bold">ons-text-input</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#text-input-attributes">
+                <a class="directive-attribute link round-padding" href="#text-input-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -402,14 +393,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#search-input">
-              <div class="directive_name font-1_5 bold">ons-search-input</div>
+            <a class="link directive-name round-padding" href="#search-input">
+              <div class="font-1_5 bold">ons-search-input</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#search-input-attributes">
+                <a class="directive-attribute link round-padding" href="#search-input-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -429,14 +420,14 @@
             </section>
           </div>          
           
-          <div>
+          <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link round-padding" href="#text-area">
-              <div class="directive_name font-1_5 bold">ons-text-area</div>
+            <a class="link directive-name round-padding" href="#text-area">
+              <div class="font-1_5 bold">ons-text-area</div>
             </a> 
             <section>
               
-                <a class="link round-padding" href="#text-area-attributes">
+                <a class="directive-attribute link round-padding" href="#text-area-attributes">
                   <div class="gray">Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
@@ -1854,8 +1845,29 @@
 </div>
 <script src="/scripts/navigation_highlighter.js"></script>
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-    </div>
+	</section>
 
+
+	<footer class="common">
+		<ul class="gnav">
+			<li><a href="#">Getting Started</a></li>
+			<li><a href="#">Docs</a></li>
+			<li><a href="#">Customize</a></li>
+			<li><a href="#">Blog</a></li>
+		</ul>
+
+		<div class="footer-cont">
+			<p class="social">
+				<a href="#" target="_blank"><span class="socialicn twitter">&nbsp;</span></a>
+				<a href="https://github.com/OnsenUI/OnsenUI" target="_blank"><span class="socialicn github">&nbsp;</span></a>
+			</p>
+
+			<p class="copyright">Copyright &copy; 2013 Asial Corporation. All rights reserved.</p>
+			<p class="helpmenu"><a href="#">Privacy Policy</a></p>
+		</div>
+	</footer>
+
+	
 	<!-- DocPad Scripts + Our Own -->
 	<script >(function(){
 	/* Did we just livereload? */
@@ -1903,11 +1915,9 @@ var inject = function(){
 		inject();
 	}
 })();</script><script defer="defer"  src="/scripts/all.min.js"></script>
-	
-	
 
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
-	<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>
 </html>
