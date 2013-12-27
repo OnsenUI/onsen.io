@@ -93,7 +93,7 @@ page: 'docs'
         <% for directive in @framework.directives: %>
         <div ng-repeat="directive in framework.directives">
           <span class="anchor" id="<%= directive.name %>"></span>
-          <h1><%= @framework.codeName %>-<%= directive.name %></h1>
+          <h1 class="onsen-red h1-separator"><%= @framework.codeName %>-<%= directive.name %></h1>
 
           <div class="row space-top">
             <div class="col-md-8 col-xs-8">
@@ -103,8 +103,7 @@ page: 'docs'
               </section>
 
               <section class="space-top45">
-                <span class="anchor" id="<%= directive.name %>-attributes"></span>
-                <h4 class="gray">Attributes</h4>
+                <span class="anchor" id="<%= directive.name %>-attributes"></span>                
                 <% if !directive.attributes || directive.attributes.length == 0: %>
                 <section ng-show="!directive.attributes || directive.attributes.length === 0">
                   <p class="text-muted">
@@ -116,11 +115,10 @@ page: 'docs'
                 <section ng-show="directive.attributes.length > 0"
                   class="round-corner gray-border">
                   <table class="table">
-                    <thead class="heading-bg-color">
+                    <thead class="table-head">
                       <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
+                        <th colspan="2">Attributes</th>
+                      </tr>                      
                     </thead>
                     <tbody>
                       <% for attribute in directive.attributes: %>
@@ -137,8 +135,7 @@ page: 'docs'
               </section>
 
               <section class="space-top45">
-                <span class="anchor" id="<%= directive.name %>-methods"></span>
-                <h4 class="gray">Methods</h4>
+                <span class="anchor" id="<%= directive.name %>-methods"></span>                
                 <% if !directive.methods || directive.methods.length == 0: %>
                 <section ng-show="!directive.methods || directive.methods.length === 0">
                   <p class="text-muted">
@@ -149,11 +146,10 @@ page: 'docs'
                 <% if directive.methods && directive.methods.length > 0: %>
                 <section ng-show="directive.methods.length > 0" class="round-corner gray-border">
                   <table class="table">
-                    <thead class="heading-bg-color">
+                    <thead class="table-head">
                       <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                      </tr>
+                        <th colspan="2">Methods</th>
+                      </tr>                      
                     </thead>
                     <tbody>
                       <% for method in directive.methods: %>
