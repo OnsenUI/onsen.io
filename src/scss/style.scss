@@ -78,6 +78,7 @@ body {
 	border-top: 4px solid #ff1a33;
 	min-width: $width;
 	text-align: center;
+	&:after {content: ""; clear: both; display: block;}
 }
 
 h1,h2,h3,h4,h5,h6 {font-weight: 700;}
@@ -91,10 +92,13 @@ em { font-style: italic; }
 img, iframe, object { max-width : 100%; } 
 .lt-ie9 img, .lt-ie9 object { width:auto; } 
 
-a img {
-	@include transition(opacity 80ms);
-	&:hover {
-		opacity: 0.7;
+a {
+	@include all-link-state(#333);
+	img {
+		@include transition(opacity 80ms);
+		&:hover {
+			opacity: 0.7;
+		}
 	}
 }
 
@@ -117,6 +121,7 @@ a img {
 
 .btn-red {
 	@extend %btn-default;
+	@include all-link-state(white, all-none);
 	background-color: $onsen-red;
 	border: 1px solid #d00000;
 	color: white;
@@ -158,5 +163,6 @@ a img {
 
 @import 'header';
 @import 'footer';
+@import 'aside';
 @import 'content';
 @import 'index';

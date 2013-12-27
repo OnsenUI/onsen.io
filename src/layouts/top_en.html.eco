@@ -45,28 +45,17 @@
 	<header id="header-container" class="common">
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<ul class="gnav">
-			<li><a href="/getting_started/">Getting Started</a></li>
+			<li><a href="#">Getting Started</a></li>
 			<li><a href="#">Docs</a></li>
 			<li><a href="#">Customize</a></li>
 			<li><a href="#">Blog</a></li>
 		</ul>
 	</header>
 
-	<aside class="common">
-		<h1><%- @document.title %></h1> 	
-
-		<% if @document.toc: %>
-			<ol class="toc">
-			<% for toc in @document.toc: %>
-				<li><a href="<%= toc.href %>"><%= toc.name %></a></li>
-			<% end %>
-			</ol>
-		<% end %>
-	</aside>
-
 	<section class="content">
 		<%- @content %>
 	</section>
+
 
 	<footer class="common">
 		<ul class="gnav">

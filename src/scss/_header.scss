@@ -31,7 +31,9 @@ header.common {
 				border-bottom: 1px solid #000;
 				color: #ff1a33;
 			}
-			@include all-a(#a6a6a6);
+			a {
+				@include all-link-state(#a6a6a6);
+			}
 		}
 	}
 }

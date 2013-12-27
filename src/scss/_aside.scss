@@ -1,0 +1,26 @@
+aside.common {
+	float: left;;
+	margin-right: 30px;
+	padding: 58px 0 100px;
+	overflow: hidden;
+	width: $aside-width;
+
+	h1 {
+		font-size: (22px/$basefont)+rem;
+		margin-bottom: 18px;
+		padding-left: 30px;
+		text-align: left;
+	}
+
+	.toc {
+		background-color: #f5f5f5;
+		padding: 25px;
+		text-align: left;
+		li {
+			font-size: (18px/$basefont)+rem;
+			line-height: 100%;
+			list-style-type: decimal;
+			margin: 0 0 22px 25px;
+		};
+	}
+}
