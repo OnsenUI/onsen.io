@@ -9,20 +9,20 @@ $prefixes: -webkit-, -moz-, -ms-, -o-, '';
 
 @mixin all-link-state($color,$underline: none) {
 	@if $underline == all-none {
-		a:link,a:visited,a:hover,a:active { color: $color; text-decoration: none; }
+		&:link,&:visited,&:hover,&:active { color: $color; text-decoration: none; }
 	}
 	@else if $underline == none {
-		a:link,a:visited { color: $color; text-decoration: none; }
-		a:hover { color: $color; text-decoration: underline; }
-		a:active { color: $color; text-decoration: none; }
+		&:link,&:visited { color: $color; text-decoration: none; }
+		&:hover { color: $color; text-decoration: underline; }
+		&:active { color: $color; text-decoration: none; }
 	}
 	@else if $underline == all-underline {
-		a:link,a:visited,a:hover,a:active {color: $color; text-decoration: underline;}
+		&:link,&:visited,&:hover,&:active {color: $color; text-decoration: underline;}
 	}
 	@else {
-		a:link,a:visited {color: $color; text-decoration: underline;}
-		a:hover {color: $color; text-decoration: none;}
-		a:active {color: $color; text-decoration: underline;}	
+		&:link,&:visited {color: $color; text-decoration: underline;}
+		&:hover {color: $color; text-decoration: none;}
+		&:active {color: $color; text-decoration: underline;}	
 	}
 }
 
