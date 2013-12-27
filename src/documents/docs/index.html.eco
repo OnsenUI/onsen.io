@@ -44,167 +44,170 @@ page: 'docs'
 
   <script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 
-<div class="">
+
   <div class="full-width full-height">
-    <div class="col-md-3 col-xs-3">      
-        <section id="sidemenu" class="left-menu">
-        	<% for directive in @framework.directives: %>
-          <div class="side-bar-color">
-            <div class="space-top"></div>
-            <a class="link directive-name round-padding gray" is-parent="true" href="#<%= directive.name %>">
-              <div class="font-1_5 bold"><%= @framework.codeName %>-<%= directive.name %></div>
-            </a> 
-            <section>
-              <% if directive.attributes && directive.attributes.length > 0: %>
-                <a class="directive-attribute link round-padding" href="#<%= directive.name %>-attributes" data-parent="#<%= directive.name %>">
-                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> <%= @CONSTANTS.attributes.en %>:</div>
-                </a> 
-                <div class="margin-left">                              
-                <% for attribute in directive.attributes: %>
-                  <div>
-                    <a class="round-padding gray" href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
-                  </div>
-                <% end %>
-                </div>
-              <% end %>
-              
-              <% if directive.methods && directive.methods.length > 0: %>
-                <a class="link round-padding" href="#<%= directive.name %>-methods" data-parent="#<%= directive.name %>">
-                  <div class="gray bold"><i class="fa fa-circle red indicator"></i><%= @CONSTANTS.methods.en %>:</div>
-                </a>
-                <div class="margin-left">                              
-                  <% for method in directive.methods: %>
+    <div class="row">
+      <div class="col-md-3 col-xs-3">      
+          <section id="sidemenu" class="left-menu">
+          	<% for directive in @framework.directives: %>
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#<%= directive.name %>">
+                <div class="font-1_5 bold"><%= @framework.codeName %>-<%= directive.name %></div>
+              </a> 
+              <section>
+                <% if directive.attributes && directive.attributes.length > 0: %>
+                  <a class="directive-attribute link round-padding" href="#<%= directive.name %>-attributes" data-parent="#<%= directive.name %>">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> <%= @CONSTANTS.attributes.en %>:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  <% for attribute in directive.attributes: %>
                     <div>
-                      <a class="round-padding gray" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+                      <a class="round-padding gray" href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
                     </div>
                   <% end %>
-                </div>
-              <% end %>              
-            </section>
-          </div>          
-          <% end %>
-          <p class="padding-bottom70"></p>
-        </section>
-        
-    </div>
-    <div class="col-md-9 col-xs-9 right-side">
-      <div class=""> 
-
-        <% for directive in @framework.directives: %>
-        <div ng-repeat="directive in framework.directives">
-          <span class="anchor" id="<%= directive.name %>"></span>
-          <h1 class="onsen-red h1-separator"><%= @framework.codeName %>-<%= directive.name %></h1>
-
-          <div class="row space-top">
-            <div class="col-md-8 col-xs-8">
-              <section class="space-top">
-                <h4 class="gray">Description</h4>
-                <p><%= directive.description.en %></p>
-              </section>
-
-              <section class="space-top45">
-                <span class="anchor" id="<%= directive.name %>-attributes"></span>                
-                <% if !directive.attributes || directive.attributes.length == 0: %>
-                <section ng-show="!directive.attributes || directive.attributes.length === 0">
-                  <p class="text-muted">
-                    This tag has no attribute
-                  </p>
-                </section>
-                <% end %>
-                <% if directive.attributes && directive.attributes.length > 0: %>
-                <section ng-show="directive.attributes.length > 0"
-                  class="round-corner gray-border">
-                  <table class="table">
-                    <thead class="table-head">
-                      <tr>
-                        <th colspan="2">Attributes</th>
-                      </tr>                      
-                    </thead>
-                    <tbody>
-                      <% for attribute in directive.attributes: %>
-                      <span class="anchor" id="<%= directive.name %>-<%= attribute.name %>"></span>
-                      <tr ng-repeat="attribute in directive.attributes">
-                        <td><%= attribute.name %></td>
-                        <td><%= attribute.description.en %></td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </section>
-                <% end %>
-              </section>
-
-              <section class="space-top45">
-                <span class="anchor" id="<%= directive.name %>-methods"></span>                
-                <% if !directive.methods || directive.methods.length == 0: %>
-                <section ng-show="!directive.methods || directive.methods.length === 0">
-                  <p class="text-muted">
-                    This tag has no method
-                  </p>
-                </section>
-                <% end %>
-                <% if directive.methods && directive.methods.length > 0: %>
-                <section ng-show="directive.methods.length > 0" class="round-corner gray-border">
-                  <table class="table">
-                    <thead class="table-head">
-                      <tr>
-                        <th colspan="2">Methods</th>
-                      </tr>                      
-                    </thead>
-                    <tbody>
-                      <% for method in directive.methods: %>
-                      <span class="anchor" id="<%= directive.name %>-<%= method.name %>"></span>
-                      <tr ng-repeat="method in directive.methods">
-                        <td><code><%= method.name %><%= method.parametters %></code></td>
-                        <td><%= method.description.en %></td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                  </table>
-
-                </section>
-                <% end %>
-              </section>
-            </div> 
-            <div class="col-md-4 col-xs-4"></div>
-          </div>
-
-          <% if directive.examplePartial: %>            
-          <div class="row">
-            <div class="col-md-12 col-xs-12 space-top45">
-              <h4 class="gray">Example</h4>
-            </div>
-          </div>
-          <div class="row example-box">                                    
-            <div class="col-md-8 col-xs-8">              
-              <%- @partial(directive.examplePartial) %>              
-            </div>
-            <div class="col-md-4 col-xs-4 no-padding move-left15">
-               <% if directive.demoURL: %>
-                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
-                  <div class="absolute click-through">
-                    <img width="309" src="<%= @rootUrl %>images/iPhone5Frame.png">
                   </div>
+                <% end %>
+                
+                <% if directive.methods && directive.methods.length > 0: %>
+                  <a class="link round-padding" href="#<%= directive.name %>-methods" data-parent="#<%= directive.name %>">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i><%= @CONSTANTS.methods.en %>:</div>
+                  </a>
+                  <div class="margin-left">                              
+                    <% for method in directive.methods: %>
+                      <div>
+                        <a class="round-padding gray" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+                      </div>
+                    <% end %>
+                  </div>
+                <% end %>              
+              </section>
+            </div>          
+            <% end %>
+            <p class="padding-bottom70"></p>
+          </section>
+          
+      </div>
+      <div class="col-md-9 col-xs-9 right-side">
+        
+            <% for directive in @framework.directives: %>
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="<%= directive.name %>"></span>
+                  <h1 class="onsen-red h1-separator"><%= @framework.codeName %>-<%= directive.name %></h1>            
+                    
+                  <section class="space-top">              
+                    <p><%= directive.description.en %></p>
+                  </section>
 
-                  <div class="absolute fit-iphone-frame">
-                    <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="201" height="357" style="border-color: black;"></iframe>
-                  </div> 
+                  <section class="space-top45">
+                    <span class="anchor" id="<%= directive.name %>-attributes"></span>                
+                    <% if !directive.attributes || directive.attributes.length == 0: %>
+                    <section ng-show="!directive.attributes || directive.attributes.length === 0">
+                      <p class="text-muted">
+                        This tag has no attribute
+                      </p>
+                    </section>
+                    <% end %>
+                    <% if directive.attributes && directive.attributes.length > 0: %>
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          <% for attribute in directive.attributes: %>
+                          <span class="anchor" id="<%= directive.name %>-<%= attribute.name %>"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td><%= attribute.name %></td>
+                            <td><%= attribute.description.en %></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+                    </section>
+                    <% end %>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="<%= directive.name %>-methods"></span>                
+                    <% if !directive.methods || directive.methods.length == 0: %>
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    <% end %>
+                    <% if directive.methods && directive.methods.length > 0: %>
+                    <section ng-show="directive.methods.length > 0" class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Methods</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          <% for method in directive.methods: %>
+                          <span class="anchor" id="<%= directive.name %>-<%= method.name %>"></span>
+                          <tr ng-repeat="method in directive.methods">
+                            <td><code><%= method.name %><%= method.parametters %></code></td>
+                            <td><%= method.description.en %></td>
+                          </tr>
+                          <% end %>
+                        </tbody>
+                      </table>
+
+                    </section>
+                    <% end %>
+                  </section>
+                    
+                  <% if directive.examplePartial: %>   
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <%- @partial(directive.examplePartial) %>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  <% end %>
+                            
+
                 </div>
-              <% end %>
-            </div>
-          </div>
-          <% end %>
+              </div>
 
-        </div>
-        <% end %>
+              <div class="col-md-4 col-xs-4 no-padding">
+                <% if directive.examplePartial: %>
+                  <% if directive.demoURL: %>
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="<%= @rootUrl %>images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="238" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                  <% end %>            
+                <% end %>
+              </div>
+            </div>
+            <% end %>        
         
       </div>
-              
-    </div>
 
+    </div>
   </div>
 
-</div>
 <script src="<%= @rootUrl %>scripts/navigation_highlighter.js"></script>
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 
