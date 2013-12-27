@@ -19,6 +19,10 @@ page: 'docs'
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
   }
 
+  footer.common {
+    display: none;
+  }
+
   iframe {
     max-width: none;
   }
@@ -28,6 +32,7 @@ page: 'docs'
   }
 </style>
 
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="<%= @rootUrl %>styles/main.css">
   <link rel="stylesheet" href="<%= @rootUrl %>styles/highlight_github.css">
 
@@ -41,36 +46,36 @@ page: 'docs'
 
 <div class="">
   <div class="full-width full-height">
-    <div class="col-md-2 col-xs-2">      
+    <div class="col-md-3 col-xs-3">      
         <section id="sidemenu" class="left-menu">
         	<% for directive in @framework.directives: %>
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#<%= directive.name %>">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#<%= directive.name %>">
               <div class="font-1_5 bold"><%= @framework.codeName %>-<%= directive.name %></div>
             </a> 
             <section>
               <% if directive.attributes && directive.attributes.length > 0: %>
-                <a class="directive-attribute link round-padding" href="#<%= directive.name %>-attributes">
-                  <div class="gray"><%= @CONSTANTS.attributes.en %>:</div>
+                <a class="directive-attribute link round-padding" href="#<%= directive.name %>-attributes" data-parent="#<%= directive.name %>">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> <%= @CONSTANTS.attributes.en %>:</div>
                 </a> 
                 <div class="margin-left">                              
                 <% for attribute in directive.attributes: %>
                   <div>
-                    <a class="round-padding" href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
+                    <a class="round-padding gray" href="#<%= directive.name %>-<%= attribute.name %>"><%= attribute.name %></a>
                   </div>
                 <% end %>
                 </div>
               <% end %>
               
               <% if directive.methods && directive.methods.length > 0: %>
-                <a class="link round-padding" href="#<%= directive.name %>-methods">
-                  <div class="gray"><%= @CONSTANTS.methods.en %>:</div>
+                <a class="link round-padding" href="#<%= directive.name %>-methods" data-parent="#<%= directive.name %>">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i><%= @CONSTANTS.methods.en %>:</div>
                 </a>
                 <div class="margin-left">                              
                   <% for method in directive.methods: %>
                     <div>
-                      <a class="round-padding" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
+                      <a class="round-padding gray" href="#<%= directive.name %>-<%= method.name %>"><%= method.name %></a>
                     </div>
                   <% end %>
                 </div>
@@ -82,7 +87,7 @@ page: 'docs'
         </section>
         
     </div>
-    <div class="col-md-10 col-xs-10 right-side">
+    <div class="col-md-9 col-xs-9 right-side">
       <div class=""> 
 
         <% for directive in @framework.directives: %>
@@ -180,13 +185,13 @@ page: 'docs'
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                <% if directive.demoURL: %>
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="<%= @rootUrl %>images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               <% end %>
@@ -196,28 +201,7 @@ page: 'docs'
 
         </div>
         <% end %>
-
-        <div class="space-top50"></div>
-
-        <footer class="global">
-          <ul class="footer-nav">
-            <li>
-              <a href="http://monaca.mobi/page/license">EULA</a>
-            </li>
-            <li>
-              <a href="http://monaca.mobi/page/policy">Policy</a>
-            </li>
-            <li>
-              <a href="<%= @rootUrl %>docs/ja/">日本語版</a>
-            </li>
-          </ul>
-          <p class="copyright">
-            Copyright &copy; 2011- Asial Corporation. All rights reserved.
-          </p>
-          <a href="#" onclick="Link.openHp()" >
-            <img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" />
-          </a>
-        </footer>
+        
       </div>
               
     </div>

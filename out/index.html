@@ -19,6 +19,7 @@
 
 	<!-- DocPad Styles + Our Own -->	
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/styles/highlight_github.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -31,8 +32,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
-<body>
+
+<body id="home">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
@@ -41,73 +45,109 @@
 	<header id="header-container" class="common">
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
+			<li><a href="/getting_started/">Getting Started</a></li>
 			<li><a href="#">Docs</a></li>
 			<li><a href="#">Customize</a></li>
 			<li><a href="#">Blog</a></li>
 		</ul>
 	</header>
 
-
-	<section id="home" class="content">
-		<div id="keyvisual">
+	<section class="content">
+		<div id="keyvisual"><div>
 	<h1>The Answer for PhoneGap UI Development</h1>
-	<h2>OnsenUI is an HTML5 UI framework for<br />building modern mobile applications</h2>
+	<h2>OnsenUI is an HTML5 UI Framework for<br />Building Mobile App Front End</h2>
 	<a class="btn-red btn-big btn-download" href="#">Download<br /><span class="version">Version 0.0.0</span></a>
-</div>
+	<div class="social">
+		<iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=watch&count=true&size=medium"
+   allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"></iframe>	
+	</div>
+</div></div>
 
 <div class="features">
-	<div class="feature">
-		<h2>Front-end development support for hybrid apps</h2>
+	<div id="feature-hybrid" class="feature"><div>
+		<h2>New & Improved Hybrid Apps</h2>
 		<div class="feature-cont">
-			<p>text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text</p>
+      <img src="/images/index/top_image01.png" alt="">
+			<p>OnsenUI is a front-end development tool that radically improves PhoneGap/Cordova apps. Differing from previous frameworks, it is highly flexible and gives hybrid apps a native look and feel on all platforms. And when used with Monaca, it is simple to add backend features and device support, resulting in a publishable app.</p>
 		</div>
-		<img src="" alt="">
-	</div>
+	</div></div>
 
-	<div class="feature">
-		<h2>Customizable</h2>
+	<div id="feature-customize" class="feature"><div>
+		<div class="simulator"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="282" height="500"></iframe></div>
 		<div class="feature-cont">
-			<p>text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text</p>
+			<h2>Customizable</h2>
+			<p>A powerful feature of OnsenUI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code.</p>
+			<ul class="selecttheme">
+			  <li class="current">Blue</li>
+				<li>Green</li>
+				<li>Yellow</li>
+				<li>Orange</li>
+				<li>Pink</li>
+			  <li>Purple</li>
+			</ul>
 		</div>
-		<img src="" alt="">
-	</div>
+	</div></div>
 
-	<div class="feature">
-		<h2>Easy to use</h2>
+	<div id="feature-easy" class="feature"><div>
 		<div class="feature-cont">
-			<p>text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text</p>
+			<h2>Easy To Use</h2>
+			<p>Simply adding a few lines of code will give your application UI components - navigation bars, tab bars, buttons, etc. Since OnsenUI uses AngularJS directives, you can flexibily develop your own original UI components.</p>
 		</div>
-		<img src="" alt="">
-	</div>
+		<ul class="feature-easy-example">
+      <li>
+				<h3>Navigation Bar</h3>
+				<img src="/images/index/top_image03_1.png" alt="">
+				<pre class="highlighted"><code class="vhdl">&lt;ons-navigator title=<span class="attribute">&quot;Page 1&quot;</span>&gt; &lt;/ons-navigator&gt;</code></pre>
+			</li>
+      <li>
+				<h3>Button</h3>
+				<img src="/images/index/top_image03_2.png" alt="">
+				<pre class="highlighted"><code class="vhdl">&lt;ons-button&gt; &lt;/ons-button&gt;</code></pre>
+			</li>
+      <li>
+				<h3>Switch</h3>
+				<img src="/images/index/top_image03_3.png" alt="">
+				<pre class="highlighted"><code class="vhdl">&lt;ons-switch&gt; &lt;/ons-switch&gt;</code></pre>
+			</li>
+		</ul>
+	</div></div>
 
-	<div class="feature">
-		<h2>Beautiful &amp; smooth</h2>
+	<div id="feature-beauty" class="feature"><div>
+		<div class="simulator"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="282" height="500"></iframe></div>
 		<div class="feature-cont">
-			<p>text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text</p>
+			<h2>Beautiful &amp; Smooth</h2>
+			<p>Simply adding a few lines of code will give your application UI components - navigation bars, tab bars, buttons, etc. Since OnsenUI uses AngularJS directives, you can flexibily develop your own original UI components.</p>
 		</div>
-		<img src="" alt="">
-	</div>
+	</div></div>
 
-	<div class="feature">
-		<h2>GUI tool coming soon</h2>
+	<div id="feature-gui" class="feature"><div>
+		<img src="/images/index/top_image05.png" alt="">
 		<div class="feature-cont">
-			<p>text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text	text text</p>
+			<h2>GUI Tool Coming Soon</h2>
+			<p>Simply adding a few lines of code will give your application UI components - navigation bars, tab bars, buttons, etc. Since OnsenUI uses AngularJS directives, you can flexibily develop your own original UI components.</p>
 		</div>
-		<img src="" alt="">
-	</div>
+	</div></div>
 </div><!-- /features -->
 
 
 <div class="getstarted">
-	<a class="btn-big btn-red btn-start" href="#">Get Started</a>
+	<a class="btn-big btn-red btn-start" href="#">Get Started, It's Free!</a>
 </div>
+
+<script type="text/javascript">
+$(function() {
+  $('.selecttheme li').click(function() {
+		$('.selecttheme li').removeClass('current');
+		$(this).addClass('current');
+	});
+});
+</script>
 	</section>
 
 
 	<footer class="common">
 		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
+			<li><a href="/getting_started/">Getting Started</a></li>
 			<li><a href="#">Docs</a></li>
 			<li><a href="#">Customize</a></li>
 			<li><a href="#">Blog</a></li>
@@ -124,7 +164,6 @@
 		</div>
 	</footer>
 
-	
 	<!-- DocPad Scripts + Our Own -->
 	<script >(function(){
 	/* Did we just livereload? */
@@ -173,7 +212,6 @@ var inject = function(){
 	}
 })();</script><script defer="defer"  src="/scripts/all.min.js"></script>
 
-	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>

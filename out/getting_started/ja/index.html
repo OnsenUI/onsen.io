@@ -19,6 +19,7 @@
 
 	<!-- DocPad Styles + Our Own -->	
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/styles/highlight_github.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -31,8 +32,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
-<body>
+
+<body id="getting_started">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
@@ -40,17 +44,26 @@
 
 	<header id="header-container" class="common">
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
-		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
-		</ul>
+		<nav>
+			<ul class="gnav">
+				<li><a href="/getting_started/">Getting Started</a></li>
+				<li><a href="#">Docs</a></li>
+				<li><a href="#">Customize</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</nav>
 	</header>
 
 
-	<section id="getting_started" class="content">
-		<div class="padding-top70 padding-bottom70">
+	<article class="common">
+		<header class="article-info">
+			<h1>Getting Started</h1> 	
+
+			
+		</header>
+
+		<div class="content">
+			<div class="padding-top70 padding-bottom70">
 	<div class="container-bootstrap">
 		<div class="row">
 			<div class="col-md-11 col-xs-11">
@@ -105,16 +118,18 @@
 		<img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" />
 	</a>
 </footer>
-	</section>
-
+		</div>
+	</article>
 
 	<footer class="common">
-		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
-		</ul>
+		<nav>
+			<ul class="gnav">
+				<li><a href="#">Getting Started</a></li>
+				<li><a href="#">Docs</a></li>
+				<li><a href="#">Customize</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</nav>
 
 		<div class="footer-cont">
 			<p class="social">
@@ -127,7 +142,6 @@
 		</div>
 	</footer>
 
-	
 	<!-- DocPad Scripts + Our Own -->
 	<script >(function(){
 	/* Did we just livereload? */
@@ -176,7 +190,6 @@ var inject = function(){
 	}
 })();</script><script defer="defer"  src="/scripts/all.min.js"></script>
 
-	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>

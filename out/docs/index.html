@@ -19,6 +19,7 @@
 
 	<!-- DocPad Styles + Our Own -->	
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/styles/highlight_github.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -31,8 +32,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
-<body>
+
+<body id="docs">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
@@ -40,17 +44,26 @@
 
 	<header id="header-container" class="common">
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
-		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
-		</ul>
+		<nav>
+			<ul class="gnav">
+				<li><a href="/getting_started/">Getting Started</a></li>
+				<li><a href="#">Docs</a></li>
+				<li><a href="#">Customize</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</nav>
 	</header>
 
 
-	<section id="docs" class="content">
-		<style type="text/css" media="screen">
+	<article class="common">
+		<header class="article-info">
+			<h1>Docs</h1> 	
+
+			
+		</header>
+
+		<div class="content">
+			<style type="text/css" media="screen">
   ::-webkit-scrollbar {
     width: 4px;
   }
@@ -65,6 +78,10 @@
       -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
   }
 
+  footer.common {
+    display: none;
+  }
+
   iframe {
     max-width: none;
   }
@@ -74,6 +91,7 @@
   }
 </style>
 
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <link rel="stylesheet" href="/styles/main.css">
   <link rel="stylesheet" href="/styles/highlight_github.css">
 
@@ -87,40 +105,40 @@
 
 <div class="">
   <div class="full-width full-height">
-    <div class="col-md-2 col-xs-2">      
+    <div class="col-md-3 col-xs-3">      
         <section id="sidemenu" class="left-menu">
         	
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#screen">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#screen">
               <div class="font-1_5 bold">ons-screen</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#screen-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#screen-attributes" data-parent="#screen">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#screen-page">page</a>
+                    <a class="round-padding gray" href="#screen-page">page</a>
                   </div>
                 
                 </div>
               
               
               
-                <a class="link round-padding" href="#screen-methods">
-                  <div class="gray">Methods:</div>
+                <a class="link round-padding" href="#screen-methods" data-parent="#screen">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i>Methods:</div>
                 </a>
                 <div class="margin-left">                              
                   
                     <div>
-                      <a class="round-padding" href="#screen-presentPage">presentPage</a>
+                      <a class="round-padding gray" href="#screen-presentPage">presentPage</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#screen-dismissPage">dismissPage</a>
+                      <a class="round-padding gray" href="#screen-dismissPage">dismissPage</a>
                     </div>
                   
                 </div>
@@ -130,59 +148,59 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#navigator">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#navigator">
               <div class="font-1_5 bold">ons-navigator</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#navigator-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#navigator-attributes" data-parent="#navigator">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#navigator-page">page</a>
+                    <a class="round-padding gray" href="#navigator-page">page</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#navigator-title">title</a>
+                    <a class="round-padding gray" href="#navigator-title">title</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#navigator-left-button-icon">left-button-icon</a>
+                    <a class="round-padding gray" href="#navigator-left-button-icon">left-button-icon</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#navigator-right-button-icon">right-button-icon</a>
+                    <a class="round-padding gray" href="#navigator-right-button-icon">right-button-icon</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#navigator-on-left-button-click">on-left-button-click</a>
+                    <a class="round-padding gray" href="#navigator-on-left-button-click">on-left-button-click</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#navigator-on-right-button-click">on-right-button-click</a>
+                    <a class="round-padding gray" href="#navigator-on-right-button-click">on-right-button-click</a>
                   </div>
                 
                 </div>
               
               
               
-                <a class="link round-padding" href="#navigator-methods">
-                  <div class="gray">Methods:</div>
+                <a class="link round-padding" href="#navigator-methods" data-parent="#navigator">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i>Methods:</div>
                 </a>
                 <div class="margin-left">                              
                   
                     <div>
-                      <a class="round-padding" href="#navigator-pushPage">pushPage</a>
+                      <a class="round-padding gray" href="#navigator-pushPage">pushPage</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#navigator-popPage">popPage</a>
+                      <a class="round-padding gray" href="#navigator-popPage">popPage</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#navigator-resetToPage">resetToPage</a>
+                      <a class="round-padding gray" href="#navigator-resetToPage">resetToPage</a>
                     </div>
                   
                 </div>
@@ -192,7 +210,7 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#tabbar">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#tabbar">
               <div class="font-1_5 bold">ons-tabbar</div>
             </a> 
             <section>
@@ -204,22 +222,22 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#tabbar-item">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#tabbar-item">
               <div class="font-1_5 bold">ons-tabbar-item</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#tabbar-item-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#tabbar-item-attributes" data-parent="#tabbar-item">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#tabbar-item-page">page</a>
+                    <a class="round-padding gray" href="#tabbar-item-page">page</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#tabbar-item-active">active</a>
+                    <a class="round-padding gray" href="#tabbar-item-active">active</a>
                   </div>
                 
                 </div>
@@ -231,51 +249,51 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#sliding-menu">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#sliding-menu">
               <div class="font-1_5 bold">ons-sliding-menu</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#sliding-menu-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#sliding-menu-attributes" data-parent="#sliding-menu">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#sliding-menu-behind-page">behind-page</a>
+                    <a class="round-padding gray" href="#sliding-menu-behind-page">behind-page</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#sliding-menu-above-page">above-page</a>
+                    <a class="round-padding gray" href="#sliding-menu-above-page">above-page</a>
                   </div>
                 
                 </div>
               
               
               
-                <a class="link round-padding" href="#sliding-menu-methods">
-                  <div class="gray">Methods:</div>
+                <a class="link round-padding" href="#sliding-menu-methods" data-parent="#sliding-menu">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i>Methods:</div>
                 </a>
                 <div class="margin-left">                              
                   
                     <div>
-                      <a class="round-padding" href="#sliding-menu-setAbovePage">setAbovePage</a>
+                      <a class="round-padding gray" href="#sliding-menu-setAbovePage">setAbovePage</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#sliding-menu-setBehindPage">setBehindPage</a>
+                      <a class="round-padding gray" href="#sliding-menu-setBehindPage">setBehindPage</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#sliding-menu-openMenu">openMenu</a>
+                      <a class="round-padding gray" href="#sliding-menu-openMenu">openMenu</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#sliding-menu-closeMenu">closeMenu</a>
+                      <a class="round-padding gray" href="#sliding-menu-closeMenu">closeMenu</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding" href="#sliding-menu-toggleMenu">toggleMenu</a>
+                      <a class="round-padding gray" href="#sliding-menu-toggleMenu">toggleMenu</a>
                     </div>
                   
                 </div>
@@ -285,7 +303,7 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#scroller">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#scroller">
               <div class="font-1_5 bold">ons-scroller</div>
             </a> 
             <section>
@@ -297,7 +315,7 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#list">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#list">
               <div class="font-1_5 bold">ons-list</div>
             </a> 
             <section>
@@ -309,7 +327,7 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#list-item">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#list-item">
               <div class="font-1_5 bold">ons-list-item</div>
             </a> 
             <section>
@@ -321,30 +339,30 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#button">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#button">
               <div class="font-1_5 bold">ons-button</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#button-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#button-attributes" data-parent="#button">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#button-type">type</a>
+                    <a class="round-padding gray" href="#button-type">type</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#button-should-spin">should-spin</a>
+                    <a class="round-padding gray" href="#button-should-spin">should-spin</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#button-animation">animation</a>
+                    <a class="round-padding gray" href="#button-animation">animation</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#button-disabled">disabled</a>
+                    <a class="round-padding gray" href="#button-disabled">disabled</a>
                   </div>
                 
                 </div>
@@ -356,7 +374,7 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#select">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#select">
               <div class="font-1_5 bold">ons-select</div>
             </a> 
             <section>
@@ -368,22 +386,22 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#text-input">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#text-input">
               <div class="font-1_5 bold">ons-text-input</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#text-input-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#text-input-attributes" data-parent="#text-input">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#text-input-placeholder">placeholder</a>
+                    <a class="round-padding gray" href="#text-input-placeholder">placeholder</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#text-input-disabled">disabled</a>
+                    <a class="round-padding gray" href="#text-input-disabled">disabled</a>
                   </div>
                 
                 </div>
@@ -395,22 +413,22 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#search-input">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#search-input">
               <div class="font-1_5 bold">ons-search-input</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#search-input-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#search-input-attributes" data-parent="#search-input">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#search-input-placeholder">placeholder</a>
+                    <a class="round-padding gray" href="#search-input-placeholder">placeholder</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#search-input-disabled">disabled</a>
+                    <a class="round-padding gray" href="#search-input-disabled">disabled</a>
                   </div>
                 
                 </div>
@@ -422,30 +440,30 @@
           
           <div class="side-bar-color">
             <div class="space-top"></div>
-            <a class="link directive-name round-padding" href="#text-area">
+            <a class="link directive-name round-padding gray" is-parent="true" href="#text-area">
               <div class="font-1_5 bold">ons-text-area</div>
             </a> 
             <section>
               
-                <a class="directive-attribute link round-padding" href="#text-area-attributes">
-                  <div class="gray">Attributes:</div>
+                <a class="directive-attribute link round-padding" href="#text-area-attributes" data-parent="#text-area">
+                  <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
                 </a> 
                 <div class="margin-left">                              
                 
                   <div>
-                    <a class="round-padding" href="#text-area-rows">rows</a>
+                    <a class="round-padding gray" href="#text-area-rows">rows</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#text-area-cols">cols</a>
+                    <a class="round-padding gray" href="#text-area-cols">cols</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#text-area-placeholder">placeholder</a>
+                    <a class="round-padding gray" href="#text-area-placeholder">placeholder</a>
                   </div>
                 
                   <div>
-                    <a class="round-padding" href="#text-area-disabled">disabled</a>
+                    <a class="round-padding gray" href="#text-area-disabled">disabled</a>
                   </div>
                 
                 </div>
@@ -459,7 +477,7 @@
         </section>
         
     </div>
-    <div class="col-md-10 col-xs-10 right-side">
+    <div class="col-md-9 col-xs-9 right-side">
       <div class=""> 
 
         
@@ -567,13 +585,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/screen_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/screen_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -723,13 +741,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/navigator_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/navigator_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -880,13 +898,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/tabbar_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/tabbar_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1036,13 +1054,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/sliding_menu_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/sliding_menu_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1109,13 +1127,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/scroller_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/scroller_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1189,13 +1207,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/list_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/list_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1420,13 +1438,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/button_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/button_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1498,13 +1516,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/select_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/select_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1594,13 +1612,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/text_input_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/text_input_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1690,13 +1708,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/search_input_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/search_input_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1798,13 +1816,13 @@
             </div>
             <div class="col-md-4 col-xs-4 no-padding move-left15">
                
-                <div class="col-md-3 relative iphone-box" ng-show="directive.demoURL !== undefined">
+                <div class="relative iphone-box" ng-show="directive.demoURL !== undefined">
                   <div class="absolute click-through">
                     <img width="309" src="/images/iPhone5Frame.png">
                   </div>
 
                   <div class="absolute fit-iphone-frame">
-                    <iframe src="/OnsenUI/demo/text_area_demo.html" width="260" height="460" style="border-color: black;"></iframe>
+                    <iframe src="/OnsenUI/demo/text_area_demo.html" width="201" height="357" style="border-color: black;"></iframe>
                   </div> 
                 </div>
               
@@ -1814,28 +1832,7 @@
 
         </div>
         
-
-        <div class="space-top50"></div>
-
-        <footer class="global">
-          <ul class="footer-nav">
-            <li>
-              <a href="http://monaca.mobi/page/license">EULA</a>
-            </li>
-            <li>
-              <a href="http://monaca.mobi/page/policy">Policy</a>
-            </li>
-            <li>
-              <a href="/docs/ja/">日本語版</a>
-            </li>
-          </ul>
-          <p class="copyright">
-            Copyright &copy; 2011- Asial Corporation. All rights reserved.
-          </p>
-          <a href="#" onclick="Link.openHp()" >
-            <img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" />
-          </a>
-        </footer>
+        
       </div>
               
     </div>
@@ -1845,16 +1842,18 @@
 </div>
 <script src="/scripts/navigation_highlighter.js"></script>
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
-	</section>
-
+		</div>
+	</article>
 
 	<footer class="common">
-		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
-		</ul>
+		<nav>
+			<ul class="gnav">
+				<li><a href="#">Getting Started</a></li>
+				<li><a href="#">Docs</a></li>
+				<li><a href="#">Customize</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</nav>
 
 		<div class="footer-cont">
 			<p class="social">
@@ -1867,7 +1866,6 @@
 		</div>
 	</footer>
 
-	
 	<!-- DocPad Scripts + Our Own -->
 	<script >(function(){
 	/* Did we just livereload? */
@@ -1916,7 +1914,6 @@ var inject = function(){
 	}
 })();</script><script defer="defer"  src="/scripts/all.min.js"></script>
 
-	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>

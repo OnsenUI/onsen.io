@@ -17,13 +17,20 @@
 	var links = $('.link');
 	var sections = [];
 	var linkMap = {};
+	var currentParent;
 
 	for (var i = 0; i < links.length; i++) {
 		var link = $(links[i]);
 		var id = link.attr('href');
+		var isParent = link.attr('is-parent') === "true" || false;
+		if(isParent){
+			currentParent = link;
+		}
 		var section = $(id);
 		sections.push(section);
-		linkMap[id] = link;
+		linkMap[id] = {};
+		linkMap[id].link = link;
+		linkMap[id].parent = currentParent;
 	}
 
 
@@ -39,7 +46,8 @@
 				var id = '#' + section.attr('id');
 				links.removeClass('selected');
 				var link = linkMap.id;
-				linkMap[id].addClass('selected');
+				linkMap[id].link.addClass('selected');
+				linkMap[id].parent.addClass('selected');
 				break;
 			}
 		};

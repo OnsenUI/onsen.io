@@ -4,7 +4,23 @@
 }
 
 .directive-attribute.selected {
-  background-color: green;
+  
+}
+
+.directive-attribute::before {
+
+}
+
+.indicator {
+  opacity: 0;
+}
+
+.selected .indicator {
+  opacity: 1;
+}
+
+.red {
+  color: red;
 }
 
 .gray {
@@ -30,7 +46,7 @@
 .sticky {
   position: fixed;
   top: 0;
-  width: 14.5%;
+  width: 19%;
 }
 
 .bootstrap-font {
@@ -89,8 +105,8 @@ h3{
 }
 
 .fit-iphone-frame{
-  top: 95px;
-  left: 42px;
+  top: 75px;
+  left: 22px;
 }
 
 .fit-iphone-frame-big{
@@ -250,7 +266,7 @@ h3{
 }
 
 .margin-left {
-  margin-left: 5px;
+  margin-left: 30px;
 }
 
 .margin-left40{
