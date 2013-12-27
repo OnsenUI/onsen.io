@@ -9,9 +9,9 @@ body#home {
   background: url(/images/index/va_bg.jpg) no-repeat center center #ccc;
 	@include box-sizing(border-box);
 	height: 600px;
-  padding: 60px 0 0;
 	margin-bottom: 100px;
   > div {
+		background: url(/images/index/va_device.png) no-repeat 518px 50px;
 		margin: 0 auto;
 		position: relative;
 		width: $width;
@@ -22,6 +22,7 @@ body#home {
 		font-size: (60px/$basefont)+rem;
 		line-height: (63/60);
 		margin-bottom: 20px;
+		padding-top: 60px;
 	}
 
 	h2 {
@@ -42,13 +43,18 @@ body#home {
 	}
 
 	.social {
+		background: none rgba(255,255,255,0.4);
+		@include box-sizing(border-box);
 		position: absolute;
-		bottom: 30px;
+		bottom: -35px;
 		left: 0;
+		padding-top: 40px;
 		text-align: center;
-		margin: 0 auto;
-		width: $width;
-		iframe {
+		width: 100%;
+		min-width: $width;
+		height: 100px;
+		> * {
+			text-align: center;
 			vertical-align: middle;
 		}
 	}

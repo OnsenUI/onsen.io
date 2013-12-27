@@ -14,50 +14,75 @@ toc:
 ---
 
 
-<div class="section-h2">
-	<h2 id="tutorial">1.Video tutorial</h2>
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-	</p>
+<div id="tutorial" class="section-h2">
+	<h2>1.Video tutorial</h2>
+	<iframe src="//www.youtube-nocookie.com/embed/La75cmuxAs0?rel=0" width="810" height="456" frameborder="0" allowfullscreen></iframe>
 </div>
 
 
-<div class="section-h2">
-	<h2 id="template">2.Choose a template</h2>
-
-
-	<p>
+<div id="template" class="section-h2">
+	<h2>2.Choose a template</h2>
+	<p style="margin-bottom: 40px;">
 		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
 		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
 		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
 		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
 	</p>
+
+	<ul class="examples">
+		<li>
+			<h3>Minimum</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="138" height="244"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+		<li>
+			<h3>Sliding Menu</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="138" height="244"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+		<li>
+			<h3>Tabbar</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="138" height="244"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+		<li>
+			<h3>Master-Detail</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="138" height="244"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+	</ul>
 </div>
 
 
-<div class="section-h2">
-	<h2 id="run">3.Run the project</h2>
+<div id="run" class="section-h2">
+	<h2>3.Run the project</h2>
+	<p>Open terminal and cd to the project folder you just download.</p>
+	<p class="highlighted"><b>Type: </b>scripts/web/-server.js</p>
 
+	<p>Then navigate your browser to</p>
+	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
 
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-	</p>
+	<p>Case code explanation</p>
+	<pre class="highlighted"><code>&lt;div class=&quot;page center&quot;&gt;
+	&lt;h1&gt;Hello, I am Page 1&lt;/h1&gt;
+	&lt;ons-button ng-click=“ons.screen.presentPage(‘page2.html’)”&gt;
+		Present Page 2
+	&lt;/ons-button&gt;
+&lt;/div&gt;
+&lt;div class=“page center”&gt;
+	&lt;h1&gt;Hello, I am Page 1&lt;/h1&gt;
+	&lt;ons-button ng-click=“ons.screen.presentPage(‘page2.html’)”&gt;
+		Present Page 2
+	&lt;/ons-button&gt;
+&lt;/div&gt;</code></pre>
+
 </div>
 
 
-<div class="section-h2">
-	<h2 id="addfeature">4.Start adding your awesome app feature</h2>
+<div id="addfeature" class="section-h2">
+	<h2>4.Start adding your awesome app feature</h2>
 
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-	</p>
+	<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
+	<p>You may want to look at &quot;demo&quot; folder for sample codes.<br />Run the demo code by navigating your browser to:</p>
+	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
 </div>
