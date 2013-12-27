@@ -46,9 +46,9 @@
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<ul class="gnav">
 			<li><a href="/getting_started/">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
+			<li><a href="/docs/">Docs</a></li>
+			<!-- <li><a href="#">Customize</a></li> -->
+			<li><a href="http://blog.onsenui.io">Blog</a></li>
 		</ul>
 	</header>
 
@@ -57,7 +57,7 @@
 	<div>
 		<h1>The Answer to PhoneGap UI Development</h1>
 		<h2>Onsen UI is an HTML5 UI Framework for<br />Building Mobile App Front End</h2>
-		<a class="btn-red btn-big btn-download" href="#">Download<br /><span class="version">Version 0.0.0</span></a>
+		<a class="btn-red btn-big btn-download" href="https://github.com/OnsenUI/OnsenUI/archive/0.7.0.zip">Download<br /><span class="version">Version 0.7.0</span></a>
 	</div>
 
 	<div class="social">
@@ -79,17 +79,17 @@
 	</div></div>
 
 	<div id="feature-customize" class="feature"><div>
-		<div class="simulator"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="282" height="500"></iframe></div>
+		<div class="simulator"><iframe id="theme-iframe" src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="284" height="500"></iframe></div>
 		<div class="feature-cont">
 			<h2>Customizable</h2>
 			<p>A powerful feature of Onsen UI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code.</p>
 			<ul class="selecttheme">
-			  <li class="current">Blue</li>
-				<li>Green</li>
-				<li>Yellow</li>
-				<li>Orange</li>
-				<li>Pink</li>
-			  <li>Purple</li>
+			  <li id="blue" class="current">Blue</li>
+				<li id="green">Green</li>
+				<li id="yellow">Yellow</li>
+				<li id="orange">Orange</li>
+				<li id="pink">Pink</li>
+			  <li id="purple">Purple</li>
 			</ul>
 		</div>
 	</div></div>
@@ -119,7 +119,7 @@
 	</div></div>
 
 	<div id="feature-beauty" class="feature"><div>
-		<div class="simulator"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="282" height="500"></iframe></div>
+		<div class="simulator"><iframe src="http://kruyvanna.github.io/Blog_Demos/monaca_tunes/app/" width="284http://monaca.mobi/en/page/policy" height="500"></iframe></div>
 		<div class="feature-cont">
 			<h2>Beautiful &amp; Smooth</h2>
 			<p>Simply adding a few lines of code will give your application UI components - navigation bars, tab bars, buttons, etc. Since Onsen UI uses AngularJS directives, you can flexibily develop your own original UI components.</p>
@@ -137,14 +137,18 @@
 
 
 <div class="getstarted">
-	<a class="btn-big btn-red btn-start" href="#">Get Started, It's Free!</a>
+	<a class="btn-big btn-red btn-start" href="/getting_started/">Get Started, It's Free!</a>
 </div>
 
 <script type="text/javascript">
 $(function() {
-  $('.selecttheme li').click(function() {
+  $('.selecttheme li').click(function(e) {
 		$('.selecttheme li').removeClass('current');
 		$(this).addClass('current');
+		var color = $(this).attr('id');
+		var url = "http://kruyvanna.github.io/Blog_Demos/onsen_ui/kitchen_sink_with_themes/kitchen_sink_" + color + ".html"
+
+		$('#theme-iframe').attr('src', url);
 	});
 });
 </script>
@@ -154,19 +158,19 @@ $(function() {
 	<footer class="common">
 		<ul class="gnav">
 			<li><a href="/getting_started/">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
+			<li><a href="/docs/">Docs</a></li>
+			<!-- <li><a href="#">Customize</a></li> -->
+			<li><a href="http://blog.onsenui.io">Blog</a></li>
 		</ul>
 
 		<div class="footer-cont">
 			<p class="social">
-				<a href="#" target="_blank"><span class="socialicn twitter">&nbsp;</span></a>
+				<a href="https://twitter.com/Onsen_UI" target="_blank"><span class="socialicn twitter">&nbsp;</span></a>
 				<a href="https://github.com/OnsenUI/OnsenUI" target="_blank"><span class="socialicn github">&nbsp;</span></a>
 			</p>
 
 			<p class="copyright">Copyright &copy; 2013 Asial Corporation. All rights reserved.</p>
-			<p class="helpmenu"><a href="#">Privacy Policy</a></p>
+			<p class="helpmenu"><a href="http://monaca.mobi/en/page/policy">Privacy Policy</a></p>
 		</div>
 	</footer>
 
