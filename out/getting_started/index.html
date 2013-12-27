@@ -42,17 +42,17 @@
 	<![endif]-->
 
 
-	<header id="header-container" class="common">
+	<header id="header-container" class="common"><div>
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<nav>
 			<ul class="gnav">
-				<li><a href="/getting_started/">Getting Started</a></li>
+				<li class="current"><a href="/getting_started/">Getting Started</a></li>
 				<li><a href="#">Docs</a></li>
 				<li><a href="#">Customize</a></li>
 				<li><a href="#">Blog</a></li>
 			</ul>
 		</nav>
-	</header>
+	</div></header>
 
 
 	<article class="common">
@@ -77,52 +77,69 @@
 		</header>
 
 		<div class="content">
-			<div class="section-h2">
-	<h2 id="tutorial">1.Video tutorial</h2>
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-	</p>
+			<div id="tutorial" class="section-h2">
+	<h2>1.Video tutorial</h2>
+	<iframe src="//www.youtube-nocookie.com/embed/La75cmuxAs0?rel=0" width="810" height="456" frameborder="0" allowfullscreen></iframe>
 </div>
 
 
-<div class="section-h2">
-	<h2 id="template">2.Choose a template</h2>
-
-
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+<div id="template" class="section-h2">
+	<h2>2.Choose a template</h2>
+	<p style="margin-bottom: 40px;">
+		Select a template that best suits your project. Then click Download.
 	</p>
+
+	<ul class="examples">
+		<li>
+			<h3>Minimum</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="214" height="344"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+		<li>
+			<h3>Sliding Menu</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="214" height="344"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+	</ul>
+
+	<ul class="examples">
+		<li>
+			<h3>Minimum</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="214" height="344"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>
+		<li>
+			<h3>Sliding Menu</h3>
+			<div class="simulator-small"><iframe src="http://docs.monaca.mobi/onsen/OnsenUI/demo/kitchen_sink.html" width="214" height="344"></iframe></div>
+			<a class="btn-download" href="#">Download</a>
+		</li>		
+	</ul>
 </div>
 
 
-<div class="section-h2">
-	<h2 id="run">3.Run the project</h2>
-
-
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-	</p>
+<div id="run" class="section-h2">
+	<h2>3.Install Nodejs</h2>
+	<p>Download and run the installer from <a href="http://nodejs.org" title="">nodejs.org</a></p>	
 </div>
 
+<div id="run" class="section-h2">
+	<h2>4.Run the project</h2>
+	<p>Extract the zip file you just downloaded.</p>
+	<p>Open the terminal (command line) and cd to the extracted folder.</p>
+		
+	<p class="highlighted"><b>Type: </b>scripts/web-server.js</p>
 
-<div class="section-h2">
-	<h2 id="addfeature">4.Start adding your awesome app feature</h2>
+	<p>Then navigate your browser to</p>
+	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
 
-	<p>
-		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
-	</p>
+</div>
+
+<div id="addfeature" class="section-h2">
+	<h2>5.Start adding your awesome app feature</h2>
+
+	<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
+	<p>You may want to look at &quot;demo&quot; folder for sample codes.<br />Run the demo code by navigating your browser to:</p>
+	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
 </div>
 		</div>
 	</article>
@@ -198,5 +215,8 @@ var inject = function(){
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+	<script type="text/javascript">
+		hljs.initHighlightingOnLoad();
+	</script>
 </body>
 </html>

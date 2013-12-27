@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+footer.common {
+	color: #666;
+	line-height: 120%;
+	margin: 0 auto;
+	padding-bottom: 53px;
+	position: relative;
+	text-align: center;
+	min-width: $width;
+
+	.gnav {
+		border-top: 1px solid #e7e7e7;
+		border-bottom: 1px solid #e7e7e7;
+		margin-bottom: 40px;
+		min-width: $width;
+		height: 66px;
+		line-height: 66px;
+
+		li {
+			color: #a6a6a6;
+			display: inline;
+			font-size: 16px;
+			font-weight: 400;
+			margin: 0 19px;
+			.active {
+				border-bottom: 1px solid #000;
+				color: #ff1a33;
+			}
+			a {
+				@include all-link-state(#a6a6a6, all-none);
+			}
+		}
+	}
+
+	.footer-cont {
+		margin: 0 auto;
+		width: $width;
+
+		.social {
+			margin-bottom: 44px;
+
+			.socialicn {
+				background: none no-repeat 0 0;
+				display: inline-block;
+				margin: 0 24px;
+				width: 42px;
+				height: 42px;
+				&:hover {
+					background-position: 0 -42px;
+				}
+			}
+
+			.twitter {
+				background-image: url(/images/footer/ico_twitter.png);
+			}
+			.github {
+				background-image: url(/images/footer/ico_github.png);
+			}
+		}
+
+		.copyright {
+			position: absolute;
+			top: 192px; 
+			left: 100px;
+		}
+
+		.helpmenu {
+			position: absolute;
+			top: 192px;
+			right: 100px;
+			a {
+				@include all-link-state(#4457ff);
+			}
+		}
+	}
+}

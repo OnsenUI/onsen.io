@@ -172,11 +172,11 @@ a {
 
 .simulator-small {
 	background: url(/images/common/mock_bg.png) no-repeat center center;
-	background-size: 160px 336px;
-	@include box-sizing(border-box);
-	padding: 48px 11px 30px 12px;
-	width: 160px;
-	height: 336px;
+  background-size: 250px 450px;
+  @include box-sizing(border-box);  
+  padding: 64px 10px 28px 18px;
+  width: 250px;
+  height: 450px;	
 }
 
 p.highlighted {

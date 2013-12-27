@@ -30,6 +30,17 @@ page: 'docs'
   a:link, a:visited {   
     text-decoration: none;
   }
+
+  .content {
+    margin: 0;
+    padding: 0;
+    width: auto;
+  }
+
+  .article-info {
+    display: none;
+  }
+
 </style>
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -194,7 +205,7 @@ page: 'docs'
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="<%= @rootUrl %><%= directive.demoURL %>" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                   <% end %>            

@@ -42,17 +42,17 @@
 	<![endif]-->
 
 
-	<header id="header-container" class="common">
+	<header id="header-container" class="common"><div>
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<nav>
 			<ul class="gnav">
-				<li><a href="/getting_started/">Getting Started</a></li>
+				<li class=""><a href="/getting_started/">Getting Started</a></li>
 				<li><a href="#">Docs</a></li>
 				<li><a href="#">Customize</a></li>
 				<li><a href="#">Blog</a></li>
 			</ul>
 		</nav>
-	</header>
+	</div></header>
 
 
 	<article class="common">
@@ -89,6 +89,17 @@
   a:link, a:visited {   
     text-decoration: none;
   }
+
+  .content {
+    margin: 0;
+    padding: 0;
+    width: auto;
+  }
+
+  .article-info {
+    display: none;
+  }
+
 </style>
 
   <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
@@ -594,7 +605,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/screen_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/screen_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -751,7 +762,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/navigator_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/navigator_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -911,7 +922,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/tabbar_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/tabbar_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1068,7 +1079,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/sliding_menu_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/sliding_menu_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1144,7 +1155,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/scroller_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/scroller_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1227,7 +1238,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/list_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/list_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1461,7 +1472,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/button_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/button_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1542,7 +1553,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/select_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/select_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1640,7 +1651,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/text_input_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/text_input_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1738,7 +1749,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/search_input_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/search_input_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1848,7 +1859,7 @@
                       </div>
 
                       <div class="absolute fit-iphone-frame">
-                        <iframe src="/OnsenUI/demo/text_area_demo.html" width="238" height="420" style="border-color: black;"></iframe>
+                        <iframe src="/OnsenUI/demo/text_area_demo.html" width="215" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -1938,5 +1949,8 @@ var inject = function(){
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+	<script type="text/javascript">
+		hljs.initHighlightingOnLoad();
+	</script>
 </body>
 </html>
