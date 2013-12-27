@@ -21,13 +21,14 @@ footer.common {
 			color: #a6a6a6;
 			display: inline;
 			font-size: 16px;
+			font-weight: 400;
 			margin: 0 19px;
 			.active {
 				border-bottom: 1px solid #000;
 				color: #ff1a33;
 			}
 			a {
-				@include all-link-state(#a6a6a6);
+				@include all-link-state(#a6a6a6, all-none);
 			}
 		}
 	}
