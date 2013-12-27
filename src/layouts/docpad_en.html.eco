@@ -46,7 +46,7 @@
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<nav>
 			<ul class="gnav">
-				<li><a href="/getting_started/">Getting Started</a></li>
+				<li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/getting_started/">Getting Started</a></li>
 				<li><a href="#">Docs</a></li>
 				<li><a href="#">Customize</a></li>
 				<li><a href="#">Blog</a></li>

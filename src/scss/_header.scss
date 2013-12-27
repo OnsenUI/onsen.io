@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 header.common {
+	border-bottom: 1px solid #e7e7e7;
 	@include box-sizing(border-box);
 	margin: 0 auto;
 	padding-top: 11px;
@@ -24,11 +25,14 @@ header.common {
 		
 		li {
 			color: #a6a6a6;
-			display: inline;
+			display: inline-block;
 			font-size: 16px;
-			margin: 0 19px;
-			.active {
-				border-bottom: 1px solid #000;
+			font-weight: 400;
+			height: 59px;
+			margin: 0 4px;
+			padding: 0 15px;
+			&.current {
+				border-bottom: 1px solid #f00;
 				color: #ff1a33;
 			}
 			a {
