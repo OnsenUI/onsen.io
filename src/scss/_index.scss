@@ -5,8 +5,13 @@ header.common {
 }
 
 .content {
+	color: #888;
 	margin-left: 0;
+	padding-top: 0;
 	width: auto;
+	h2 {
+		color: #333;
+	}
 }
 
 #keyvisual {
@@ -22,7 +27,7 @@ header.common {
 		height: 100%;
 	}
 	h1 {
-		color: $onsen-red;
+		color: #eae5e5;
 		font-size: (60px/$basefont)+rem;
 		line-height: (63/60);
 		margin-bottom: 20px;
@@ -30,7 +35,7 @@ header.common {
 	}
 
 	h2 {
-		color: #666;
+		color: #b8b4b4;
 		font-size: (30px/$basefont)+rem;
 		font-weight: 400;
 		line-height: (35/30);
