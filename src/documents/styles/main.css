@@ -1,10 +1,39 @@
+.h1-separator {
+  border-bottom: 2px solid #FF1A33;
+}
+
+.table-head {
+  background-color: #7b878c;
+  color: #fff;
+}
+
 .directive-name.selected {
   color: #fff;
   background-color: #ff1a33;
 }
 
 .directive-attribute.selected {
-  background-color: green;
+  
+}
+
+.directive-attribute::before {
+
+}
+
+.indicator {
+  opacity: 0;
+}
+
+.selected .indicator {
+  opacity: 1;
+}
+
+.red {
+  color: red;
+}
+
+.onsen-red {
+  color: #ff1a33;
 }
 
 .gray {
@@ -30,7 +59,7 @@
 .sticky {
   position: fixed;
   top: 0;
-  width: 14.5%;
+  width: 19%;
 }
 
 .bootstrap-font {
@@ -89,13 +118,17 @@ h3{
 }
 
 .fit-iphone-frame{
-  top: 95px;
-  left: 42px;
+  top: 87px;
+  left: 25px;
 }
 
 .fit-iphone-frame-big{
-  top: 118px;
-  left: 48px;
+  top: 87px;
+  left: 25px;
+}
+
+.margin-top-150 {
+  margin-top: 150px;
 }
 
 .iphone-box {
@@ -233,7 +266,7 @@ h3{
 }
 
 .no-padding {
-  padding: 0;
+  padding: 0 !important;
 }
 
 .move-left15{
@@ -250,7 +283,7 @@ h3{
 }
 
 .margin-left {
-  margin-left: 5px;
+  margin-left: 30px;
 }
 
 .margin-left40{

@@ -19,6 +19,7 @@
 
 	<!-- DocPad Styles + Our Own -->	
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/styles/highlight_github.css">
 
 	<!-- Icons -->
 	<!-- Favicon -->
@@ -31,8 +32,11 @@
 	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
-<body>
+
+<body id="getting_started">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
@@ -40,82 +44,98 @@
 
 	<header id="header-container" class="common">
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
-		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
-		</ul>
+		<nav>
+			<ul class="gnav">
+				<li><a href="/getting_started/">Getting Started</a></li>
+				<li><a href="#">Docs</a></li>
+				<li><a href="#">Customize</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</nav>
 	</header>
 
 
-	<section id="getting_started" class="content">
-		<div class="padding-top70 padding-bottom70">
-	<div class="container-bootstrap">
-		<div class="row">
-			<div class="col-md-11 col-xs-11">
-				<h1 id="starting-a-new-project">Starting a new project</h1>
-<h2 id="1-go-to-dashboard">1. Go to Dashboard</h2>
-<p>Go to Dashboard and click <strong>New Project</strong>
-<img src="new_project.png" alt="dashboard"></p>
-<h2 id="2-choose-one-onsen-ui-template-that-best-fit-your-project-type">2. Choose one Onsen UI template that best fit your project type</h2>
-<p><img src="choose_template.png" alt="template"></p>
-<h2 id="3-where-to-go-from-here">3. Where to go from here</h2>
-<p>Now you have Onsen UI installed.
-See examples in the <a href="/onsen/docs/en">Docs page</a> page for how to use Onsen UI components.</p>
-<h1 id="adding-onsen-ui-to-an-existing-project">Adding Onsen UI to an existing project</h1>
-<h2 id="1-add-onsen-ui-plugin">1. Add Onsen UI plugin</h2>
-<p>Go to Config -&gt; Plugin Settings...
-<img src="config_plugin_settings.png" alt="plugin"></p>
-<p>Select Onsen UI
-<img src="check_onsen_ui.png" alt="select"></p>
-<h2 id="2-activate-onsen-ui-plugin">2. Activate Onsen UI plugin</h2>
-<p>Add ng-app to html tag.</p>
-<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">html</span> <span class="attribute">ng-app</span>=<span class="value">"myApp"</span>&gt;</span></code></pre>
-<p>Define your app name and tell angular to load Onsen UI directives module</p>
-<pre class="highlight"><code class="ruby">angular.<span class="class"><span class="keyword">module</span>('<span class="title">myApp</span>', ['<span class="title">onsen</span>.<span class="title">directives</span>']);</span></code></pre>
-<p><img src="add_ng_app.png" alt="activate"></p>
-<h2 id="3-where-to-go-from-here">3. Where to go from here</h2>
-<p>Now you have Onsen UI installed.
-See examples in the <a href="/onsen/docs/en">Docs page</a> page for how to use Onsen UI components.</p>
+	<article class="common">
+		<header class="article-info">
+			<h1>Getting Started</h1> 	
 
+			
+				<nav>
+					<ol class="toc">
+					
+						<li><a href="#tutorial">Video tutorial</a></li>
+					
+						<li><a href="#template">Choose a template</a></li>
+					
+						<li><a href="#run">Run the project</a></li>
+					
+						<li><a href="#addfeature">Start adding your awesome app feature</a></li>
+					
+					</ol>
+				</nav>
+			
+		</header>
 
-				<p></p>
-			</div>
-		</div>
-
-	</div>
+		<div class="content">
+			<div class="section-h2">
+	<h2 id="tutorial">1.Video tutorial</h2>
+	<p>
+		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+	</p>
 </div>
 
-<footer class="global">
-	<ul class="footer-nav">
-		<li>
-			<a href="http://monaca.mobi/page/license">EULA</a>
-		</li>
-		<li>
-			<a href="http://monaca.mobi/page/policy">Policy</a>
-		</li>
-		<li>
-			<a href="/getting_started/ja/">日本語版</a>
-		</li>
-	</ul>
-	<p class="copyright">
-		Copyright &copy; 2011- Asial Corporation. All rights reserved.
-	</p>
-	<a href="#" onclick="Link.openHp()" >
-		<img src="/static/img/common/footer_site_logo.png" alt="Asial Corporation Japan" class="footer-logo" />
-	</a>
-</footer>
-	</section>
 
+<div class="section-h2">
+	<h2 id="template">2.Choose a template</h2>
+
+
+	<p>
+		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+	</p>
+</div>
+
+
+<div class="section-h2">
+	<h2 id="run">3.Run the project</h2>
+
+
+	<p>
+		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+	</p>
+</div>
+
+
+<div class="section-h2">
+	<h2 id="addfeature">4.Start adding your awesome app feature</h2>
+
+	<p>
+		aaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+		aaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa <br />
+	</p>
+</div>
+		</div>
+	</article>
 
 	<footer class="common">
-		<ul class="gnav">
-			<li><a href="#">Getting Started</a></li>
-			<li><a href="#">Docs</a></li>
-			<li><a href="#">Customize</a></li>
-			<li><a href="#">Blog</a></li>
-		</ul>
+		<nav>
+			<ul class="gnav">
+				<li><a href="#">Getting Started</a></li>
+				<li><a href="#">Docs</a></li>
+				<li><a href="#">Customize</a></li>
+				<li><a href="#">Blog</a></li>
+			</ul>
+		</nav>
 
 		<div class="footer-cont">
 			<p class="social">
@@ -128,7 +148,6 @@ See examples in the <a href="/onsen/docs/en">Docs page</a> page for how to use O
 		</div>
 	</footer>
 
-	
 	<!-- DocPad Scripts + Our Own -->
 	<script >(function(){
 	/* Did we just livereload? */
@@ -177,7 +196,6 @@ var inject = function(){
 	}
 })();</script><script defer="defer"  src="/scripts/all.min.js"></script>
 
-	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 </body>
