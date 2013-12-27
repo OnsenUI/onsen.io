@@ -1,8 +1,13 @@
+article.common {
+	margin: 0 auto;
+	width: $width;
+}
+
 .content {
 	margin: 0 0 0 ($aside-width + 30px);
 	padding: 50px 0 100px;
 	text-align: left;
-	width: 100%;
+	width: ($width - $aside-width - 30px);
 
 	h2 {
 		font-size: (36px/$basefont)+rem;
