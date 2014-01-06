@@ -5,7 +5,7 @@ page: 'home'
 ---
 
 
-<div id="keyvisual">
+<div id="keyvisual" class="relative">
 	<div>
 		<h1>The Answer to PhoneGap UI Development</h1>
 		<h2>Onsen UI is an HTML5 UI Framework for<br />Building Mobile App Front End</h2>
@@ -30,21 +30,23 @@ page: 'home'
 		</div>
 	</div></div>
 
-	<div id="feature-customize" class="feature"><div>
-		<div class="simulator"><iframe id="theme-iframe" src="http://kruyvanna.github.io/Blog_Demos/onsen_ui/kitchen_sink_with_themes/kitchen_sink_blue.html" width="284" height="500"></iframe></div>
-		<div class="feature-cont">
-			<h2>Customizable</h2>
-			<p>A powerful feature of Onsen UI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code.</p>
-			<ul class="selecttheme">
-			  <li id="blue" class="current">Blue</li>
-				<li id="green">Green</li>
-				<li id="yellow">Yellow</li>
-				<li id="orange">Orange</li>
-				<li id="pink">Pink</li>
-			  <li id="purple">Purple</li>
-			</ul>
+	<div id="feature-customize" class="feature">
+		<div class="relative">
+			<div class="simulator"><iframe id="theme-iframe" src="http://kruyvanna.github.io/Blog_Demos/onsen_ui/kitchen_sink_with_themes/kitchen_sink_blue.html" width="284" height="500"></iframe></div>
+			<div class="feature-cont">
+				<h2>Customizable</h2>
+				<p>A powerful feature of Onsen UI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code.</p>
+				<ul class="selecttheme">
+				  <li id="blue" class="current">Blue</li>
+					<li id="green">Green</li>
+					<li id="yellow">Yellow</li>
+					<li id="orange">Orange</li>
+					<li id="pink">Pink</li>
+				  <li id="purple">Purple</li>
+				</ul>
+			</div>
 		</div>
-	</div></div>
+	</div>
 
 	<div id="feature-easy" class="feature"><div>
 		<div class="feature-cont">
@@ -70,13 +72,15 @@ page: 'home'
 		</ul>
 	</div></div>
 
-	<div id="feature-beauty" class="feature"><div>
-		<div class="simulator"><iframe src="http://kruyvanna.github.io/Blog_Demos/monaca_tunes/app/" width="284http://monaca.mobi/en/page/policy" height="500"></iframe></div>
-		<div class="feature-cont">
-			<h2>Beautiful &amp; Smooth</h2>
-			<p>Based on the Topcoat CSS framework and with CSS animation, Onsen UI provides a native-like look & feel to PhoneGap apps. Unlike hybrid apps of the past, Onsen UI does not sacrifice user experience for hybrid development.</p>
+	<div id="feature-beauty" class="feature">
+		<div class="relative">
+			<div class="simulator"><iframe src="http://kruyvanna.github.io/Blog_Demos/monaca_tunes/app/" width="284http://monaca.mobi/en/page/policy" height="500"></iframe></div>
+			<div class="feature-cont">
+				<h2>Beautiful &amp; Smooth</h2>
+				<p>Based on the Topcoat CSS framework and with CSS animation, Onsen UI provides a native-like look & feel to PhoneGap apps. Unlike hybrid apps of the past, Onsen UI does not sacrifice user experience for hybrid development.</p>
+			</div>
 		</div>
-	</div></div>
+	</div>
 
 	<div id="feature-gui" class="feature"><div>
 		<img src="/images/index/top_image05.png" alt="">
