@@ -19,10 +19,10 @@ header.common {
 	@include box-sizing(border-box);
 	height: 600px;
 	margin-bottom: 100px;
+	position: relative;
   > div {
 		background: url(/images/index/va_device.png) no-repeat 518px 50px;
 		margin: 0 auto;
-		position: relative;
 		width: $width;
 		height: 100%;
 	}
@@ -55,7 +55,7 @@ header.common {
 		background: none rgba(255,255,255,0.4);
 		@include box-sizing(border-box);
 		position: absolute;
-		bottom: 15px;
+		bottom: 0;
 		left: 0;
 		padding-top: 40px;
 		text-align: center;
