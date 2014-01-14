@@ -13,6 +13,8 @@ toc:
    href: '#run'
  - name: 'Start adding your awesome app feature'
    href: '#addfeature'
+ - name: 'Building your app'
+   href: '#build'
  - name: 'Use with Monaca'
    href: '#monaca'
 ---
@@ -81,6 +83,16 @@ toc:
 	<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
 	<p>You may want to look at &quot;demo&quot; folder for sample codes.<br />Run the demo code by navigating your browser to:</p>
 	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
+</div>
+
+<div id="build" classs="section-h2">
+	<h2>6. Build your app:</h2>	
+	<p>You can use Cordova to build Onsen UI project</p>
+	<p class="highlighted"><b>Type: </b>npm install -g cordova</p>
+	<p class="highlighted">cordova create MyApp && cd MyApp</p>
+	<p>copy all the files in the <strong>app</strong> folder of the template to MyApp/www folder</p>
+	<p class="highlighted">cordova platform add android</p>
+	<p class="highlighted">cordova build android</p>
 </div>
 
 <div id="monaca" classs="section-h2">
