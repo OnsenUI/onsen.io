@@ -689,6 +689,65 @@
               </section>
             </div>          
             
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#if-orientation">
+                <div class="font-1_5 bold">ons-if-orientation</div>
+              </a> 
+              <section>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#if-platform">
+                <div class="font-1_5 bold">ons-if-platform</div>
+              </a> 
+              <section>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#icon">
+                <div class="font-1_5 bold">ons-icon</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#icon-attributes" data-parent="#icon">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#icon-rows">rows</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#icon-cols">cols</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#icon-placeholder">placeholder</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#icon-disabled">disabled</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                              
+              </section>
+            </div>          
+            
             <p class="padding-bottom70"></p>
           </section>
           
@@ -2821,6 +2880,410 @@
 
                       <div class="absolute fit-iphone-frame">
                         <iframe src="/OnsenUI/demo/text_area_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="if-orientation"></span>
+                  <h1 class="onsen-red h1-separator">ons-if-orientation</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element. See example on how to use</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="if-orientation-attributes"></span>                
+                    
+                    <section ng-show="!directive.attributes || directive.attributes.length === 0">
+                      <p class="text-muted">
+                        This tag has no attribute
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="if-orientation-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>    
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ons-if-orientation</span>=<span class="hljs-value">"portrait"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Portrait content here!<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ons-if-orientation</span>=<span class="hljs-value">"landscape"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Landscape content here!<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/if_orientation_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="if-platform"></span>
+                  <h1 class="onsen-red h1-separator">ons-if-platform</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element. See example on how to use</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="if-platform-attributes"></span>                
+                    
+                    <section ng-show="!directive.attributes || directive.attributes.length === 0">
+                      <p class="text-muted">
+                        This tag has no attribute
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="if-platform-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="applescript">&lt;ons-page <span class="hljs-type">class</span>=<span class="hljs-string">"center"</span>&gt;    
+      &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"Android"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> Android.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"iOS"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> iOS.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"BlackBerry"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> BlackBerry.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"chrome"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> Chrome.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"safari"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> Safari.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"firefox"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> Firefox.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"Opera"</span>&gt;
+        &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> Opera.&lt;/h1&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/ons-page&gt;
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/if_platform_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="icon"></span>
+                  <h1 class="onsen-red h1-separator">ons-icon</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Wrapper for font-awesome icon [ http://fontawesome.io/icons/ ].</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="icon-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="icon-rows"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>rows</td>
+                            <td>The number of rows.</td>
+                          </tr>
+                          
+                          <span class="anchor" id="icon-cols"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>cols</td>
+                            <td>The number of columns.</td>
+                          </tr>
+                          
+                          <span class="anchor" id="icon-placeholder"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>placeholder</td>
+                            <td>The placeholder inside the text area.</td>
+                          </tr>
+                          
+                          <span class="anchor" id="icon-disabled"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>disabled</td>
+                            <td>Wether the input should be disabled.</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="icon-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-scroller</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">section</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"padding-left: 40px"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Icon<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"bars"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Size<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"bars"</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                lg
+                <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"bars"</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"2x"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                2x
+                <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"bars"</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"3x"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                3x
+                <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"bars"</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"4x"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                4x
+                <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"bars"</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"5x"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                5x
+                <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Spin<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"spinner"</span> <span class="hljs-attribute">spin</span>=<span class="hljs-value">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"refresh"</span> <span class="hljs-attribute">spin</span>=<span class="hljs-value">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Fixed width<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>For use with list so that the icons align vertically<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h4</span>&gt;</span>Wihtout fixed width<span class="hljs-tag">&lt;/<span class="hljs-title">h4</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"text-align: left; list-style: none; padding: 0;"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"book"</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                        Library
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"pencil"</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                        Applications
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"cogs"</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                        Settings
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h4</span>&gt;</span>With fixed width<span class="hljs-tag">&lt;/<span class="hljs-title">h4</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"text-align: left; list-style: none; padding: 0;"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"book"</span> <span class="hljs-attribute">fixed-width</span>=<span class="hljs-value">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                        Library
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"pencil"</span> <span class="hljs-attribute">fixed-width</span>=<span class="hljs-value">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                        Applications
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">li</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"lg"</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"cogs"</span> <span class="hljs-attribute">fixed-width</span>=<span class="hljs-value">"true"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                        Settings
+                    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Rotate<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Normal
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span> <span class="hljs-attribute">rotate</span>=<span class="hljs-value">"90"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Rotate 90
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span> <span class="hljs-attribute">rotate</span>=<span class="hljs-value">"180"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Rotate 180
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span> <span class="hljs-attribute">rotate</span>=<span class="hljs-value">"270"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Rotate 270
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Flip<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Normal
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span> <span class="hljs-attribute">flip</span>=<span class="hljs-value">"horizontal"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Flip Horizontal
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"shield"</span> <span class="hljs-attribute">flip</span>=<span class="hljs-value">"vertical"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+                    Flip Vertical
+                <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Color<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"trash-o"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: #E74C3C"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"thumbs-up"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: #3498DB"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"heart"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: #E74C3C"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"star"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"color: #F39C12"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">br</span>/&gt;</span>
+
+        <span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-scroller</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/icon_demo.html" width="237" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               

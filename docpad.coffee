@@ -399,7 +399,7 @@ docpadConfig = {
 					}
 				}],
 				methods: []
-			},{
+			}, {
 				name: 'checkbox',
 				description: {
 					en: "Checkbox component"
@@ -423,7 +423,7 @@ docpadConfig = {
 					}
 				}],
 				methods: []
-			},{
+			}, {
 				name: 'select',
 				description: {
 					en: "Wrapper around select tag but styled for mobile."
@@ -478,6 +478,53 @@ docpadConfig = {
 				},
 				examplePartial: 'text_area_example',
 				demoURL: 'OnsenUI/demo/text_area_demo.html',
+				attributes: [{
+					name: 'rows',
+					description: {
+						en: "The number of rows."
+					}
+				}, {
+					name: 'cols',
+					description: {
+						en: "The number of columns."
+					}
+				}, {
+					name: 'placeholder',
+					description: {
+						en: "The placeholder inside the text area."
+					}
+				}, {
+					name: 'disabled',
+					description: {
+						en: 'Wether the input should be disabled.'
+					}
+				}],
+				methods: []
+			}, {
+				name: 'if-orientation',
+				description: {
+					en: "Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element. See example on how to use"
+				},
+				examplePartial: 'if_orientation_example',
+				demoURL: 'OnsenUI/demo/if_orientation_demo.html',
+				attributes: [],
+				methods: []
+			}, {
+				name: 'if-platform',
+				description: {
+					en: "Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element. See example on how to use"
+				},
+				examplePartial: 'if_platform_example',
+				demoURL: 'OnsenUI/demo/if_platform_demo.html',
+				attributes: [],
+				methods: []
+			}, {
+				name: 'icon',
+				description: {
+					en: "Wrapper for font-awesome icon [ http://fontawesome.io/icons/ ]."
+				},
+				examplePartial: 'icon_example',
+				demoURL: 'OnsenUI/demo/icon_demo.html',
 				attributes: [{
 					name: 'rows',
 					description: {
