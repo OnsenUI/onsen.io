@@ -726,19 +726,81 @@
                   <div class="margin-left">                              
                   
                     <div>
-                      <a class="round-padding gray" href="#icon-rows">rows</a>
+                      <a class="round-padding gray" href="#icon-icon">icon</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding gray" href="#icon-cols">cols</a>
+                      <a class="round-padding gray" href="#icon-size">size</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding gray" href="#icon-placeholder">placeholder</a>
+                      <a class="round-padding gray" href="#icon-rotate">rotate</a>
                     </div>
                   
                     <div>
-                      <a class="round-padding gray" href="#icon-disabled">disabled</a>
+                      <a class="round-padding gray" href="#icon-flip">flip</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#icon-fixed-width">fixed-width</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#icon-spin">spin</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#row">
+                <div class="font-1_5 bold">ons-row</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#row-attributes" data-parent="#row">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#row-align">align</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#col">
+                <div class="font-1_5 bold">ons-col</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#col-attributes" data-parent="#col">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#col-align">align</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#col-size">size</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#col-offset">offset</a>
                     </div>
                   
                   </div>
@@ -2649,8 +2711,15 @@
   text: {{text}}
 <span class="hljs-subst">&lt;</span>/div<span class="hljs-subst">&gt;</span>
 
-<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span> ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"text"</span> placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
-<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span> placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span> disabled<span class="hljs-subst">=</span><span class="hljs-string">"true"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span> 
+    ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"text"</span> 
+    placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
+
+<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span> 
+    placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span> 
+    disabled<span class="hljs-subst">=</span><span class="hljs-string">"true"</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -2747,8 +2816,15 @@
   searching: {{searchText}}
 <span class="hljs-subst">&lt;</span>/div<span class="hljs-subst">&gt;</span>
 
-<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span> ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"searchText"</span> placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Search"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
-<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span> placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Search"</span> disabled<span class="hljs-subst">=</span><span class="hljs-string">"true"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span> 
+    ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"searchText"</span> 
+    placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Search"</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
+
+<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span> 
+    placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Search"</span> 
+    disabled<span class="hljs-subst">=</span><span class="hljs-string">"true"</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-search</span><span class="hljs-attribute">-input</span><span class="hljs-subst">&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -2857,8 +2933,16 @@
   text: {{text}}
 <span class="hljs-subst">&lt;</span>/div<span class="hljs-subst">&gt;</span>
 
-<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-area</span> <span class="hljs-keyword">rows</span><span class="hljs-subst">=</span><span class="hljs-string">"6"</span> cols<span class="hljs-subst">=</span><span class="hljs-string">"36"</span> ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"text"</span> placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span><span class="hljs-subst">/</span><span class="hljs-subst">&gt;</span>  
-<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-area</span> <span class="hljs-keyword">rows</span><span class="hljs-subst">=</span><span class="hljs-string">"6"</span> cols<span class="hljs-subst">=</span><span class="hljs-string">"36"</span> placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span> disabled<span class="hljs-subst">=</span><span class="hljs-string">"true"</span><span class="hljs-subst">/</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-area</span> 
+    <span class="hljs-keyword">rows</span><span class="hljs-subst">=</span><span class="hljs-string">"6"</span> cols<span class="hljs-subst">=</span><span class="hljs-string">"36"</span> 
+    ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"text"</span> 
+    placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span><span class="hljs-subst">/</span><span class="hljs-subst">&gt;</span>  
+
+<span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-text</span><span class="hljs-attribute">-area</span> 
+    <span class="hljs-keyword">rows</span><span class="hljs-subst">=</span><span class="hljs-string">"6"</span> 
+    cols<span class="hljs-subst">=</span><span class="hljs-string">"36"</span> 
+    placeholder<span class="hljs-subst">=</span><span class="hljs-string">"Type here"</span> 
+    disabled<span class="hljs-subst">=</span><span class="hljs-string">"true"</span><span class="hljs-subst">/</span><span class="hljs-subst">&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -3013,7 +3097,7 @@
                         <div class="col-md-12 col-xs-12">              
                           <p><em>index.html</em></p>
 <pre class="highlight"><code class="applescript">&lt;ons-page <span class="hljs-type">class</span>=<span class="hljs-string">"center"</span>&gt;    
-      &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"Android"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> ons-<span class="hljs-keyword">if</span>-platform=<span class="hljs-string">"Android"</span>&gt;
         &lt;h1&gt;Show <span class="hljs-keyword">me</span> only <span class="hljs-keyword">if</span> <span class="hljs-command">run</span> <span class="hljs-keyword">in</span> Android.&lt;/h1&gt;
     &lt;/<span class="hljs-keyword">div</span>&gt;
 
@@ -3093,28 +3177,40 @@
                         </thead>
                         <tbody>
                           
-                          <span class="anchor" id="icon-rows"></span>
+                          <span class="anchor" id="icon-icon"></span>
                           <tr ng-repeat="attribute in directive.attributes">
-                            <td>rows</td>
-                            <td>The number of rows.</td>
+                            <td>icon</td>
+                            <td>The icon name. set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;. See all icons here [ http://fontawesome.io/icons/ ]</td>
                           </tr>
                           
-                          <span class="anchor" id="icon-cols"></span>
+                          <span class="anchor" id="icon-size"></span>
                           <tr ng-repeat="attribute in directive.attributes">
-                            <td>cols</td>
-                            <td>The number of columns.</td>
+                            <td>size</td>
+                            <td>The sizes of the icon. Valid values are [lg/2x/3x/4x//5x]</td>
                           </tr>
                           
-                          <span class="anchor" id="icon-placeholder"></span>
+                          <span class="anchor" id="icon-rotate"></span>
                           <tr ng-repeat="attribute in directive.attributes">
-                            <td>placeholder</td>
-                            <td>The placeholder inside the text area.</td>
+                            <td>rotate</td>
+                            <td>The degree to rotate the icon. Valid values are [90/180/270]</td>
                           </tr>
                           
-                          <span class="anchor" id="icon-disabled"></span>
+                          <span class="anchor" id="icon-flip"></span>
                           <tr ng-repeat="attribute in directive.attributes">
-                            <td>disabled</td>
-                            <td>Wether the input should be disabled.</td>
+                            <td>flip</td>
+                            <td>Flip the icon. Valid values are [horizontal/vertial]</td>
+                          </tr>
+                          
+                          <span class="anchor" id="icon-fixed-width"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>fixed-width</td>
+                            <td>When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]</td>
+                          </tr>
+                          
+                          <span class="anchor" id="icon-spin"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>spin</td>
+                            <td>Wether to spin the icon. Valid values are [true/false]</td>
                           </tr>
                           
                         </tbody>
@@ -3284,6 +3380,318 @@
 
                       <div class="absolute fit-iphone-frame">
                         <iframe src="/OnsenUI/demo/icon_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="row"></span>
+                  <h1 class="onsen-red h1-separator">ons-row</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Use &lt;ons-row&gt; and &lt;ons-col&gt; grid system to layout component. By default, all &lt;ons-col&gt; inside a &lt;ons-row&gt; will have the same width. You can specify any &lt;ons-col&gt; to have a specific width and let others take the remaining width in a &lt;ons-row&gt;. You can event vertical align each &lt;ons-col&gt; in a &lt;ons-row&gt;</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="row-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="row-align"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>align</td>
+                            <td>Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center]</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="row-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="col"></span>
+                  <h1 class="onsen-red h1-separator">ons-col</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Use with &lt;ons-row&gt; to layout component</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="col-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="col-align"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>align</td>
+                            <td>Vertical align the column. Valid values are [top/center/bottom]</td>
+                          </tr>
+                          
+                          <span class="anchor" id="col-size"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>size</td>
+                            <td>The size of the column in percentage. Valid values are [10/20/25/33/67/75/80/90]</td>
+                          </tr>
+                          
+                          <span class="anchor" id="col-offset"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>offset</td>
+                            <td>Offset the column. Valid values are [10/20/25/33/67/75/80/90]</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="col-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="xml">  <span class="hljs-tag">&lt;<span class="hljs-title">ons-scroller</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"padding: 10px"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Equally spaced<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Full height<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          Full-height, even when my content doesn't fill the space.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis velit non gravida venenatis. Praesent consequat lectus purus, ut scelerisque velit condimentum eu. Maecenas sagittis ante ut turpis varius interdum. Quisque tellus ipsum, eleifend non ipsum id, suscipit ultricies neque.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Individual Sizing<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"50"</span>&gt;</span>Col size="50"<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span> 
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"33"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>Col size="33"<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"25"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>Col size="25"<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>Col<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"33"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>Col size="33<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">h2</span>&gt;</span>Alignment Features<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Top-aligned Grid Cells<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span> <span class="hljs-attribute">align</span>=<span class="hljs-value">"top"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be top-aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          Pellentesque sagittis vel erat ac laoreet. Phasellus ac aliquet enim, eu aliquet sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar porta leo, eu ultricies nunc sollicitudin vitae. Curabitur pulvinar dolor lectus, quis porta turpis ullamcorper nec. Quisque eget varius turpis, quis iaculis nibh.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be top-aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Bottom-aligned Grid Cells<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span> <span class="hljs-attribute">align</span>=<span class="hljs-value">"bottom"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be bottom-aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          Pellentesque sagittis vel erat ac laoreet. Phasellus ac aliquet enim, eu aliquet sem. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed pulvinar porta leo, eu ultricies nunc sollicitudin vitae. Curabitur pulvinar dolor lectus, quis porta turpis ullamcorper nec. Quisque eget varius turpis, quis iaculis nibh.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be bottom-aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+
+     <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Vertically Centered Grid Cells<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span> <span class="hljs-attribute">align</span>=<span class="hljs-value">"center"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be vertically-centered with the cell to its right.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          Curabitur pulvinar dolor lectus, quis porta turpis ullamcorper nec. Quisque eget varius turpis, quis iaculis nibh. Ut interdum ligula id metus hendrerit cursus. Integer eu leo felis. Aenean commodo ultrices nunc, sit amet blandit elit gravida in. Sed est ligula, ornare ac nisi adipiscing, iaculis facilisis tellus. Nullam vel facilisis libero. Duis semper lobortis elit, vitae dictum erat.<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>Mixed Vertical Alignment<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-row</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">align</span>=<span class="hljs-value">"top"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be top aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          Curabitur pulvinar dolor lectus, quis porta turpis ullamcorper nec. Quisque eget varius turpis, quis iaculis nibh. Ut interdum ligula id metus hendrerit cursus. Integer eu leo felis. Aenean commodo ultrices nunc, sit amet blandit elit gravida in. Sed est ligula, ornare ac nisi adipiscing, iaculis facilisis tellus.<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">align</span>=<span class="hljs-value">"center"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be center-aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">ons-col</span> <span class="hljs-attribute">align</span>=<span class="hljs-value">"bottom"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"Demo"</span>&gt;</span>
+          This cell should be bottom-aligned.
+        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">ons-col</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-row</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-scroller</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/grid_demo.html" width="237" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               

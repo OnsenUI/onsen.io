@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-29 */
+/*! onsenui - v0.7.0 - 2014-01-30 */
 angular.module('templates-main', ['templates/bottom_toolbar.tpl', 'templates/button.tpl', 'templates/checkbox.tpl', 'templates/column.tpl', 'templates/icon.tpl', 'templates/if_orientation.tpl', 'templates/if_platform.tpl', 'templates/list.tpl', 'templates/list_item.tpl', 'templates/navigator.tpl', 'templates/navigator_toolbar.tpl', 'templates/page.tpl', 'templates/radio_button.tpl', 'templates/row.tpl', 'templates/screen.tpl', 'templates/scroller.tpl', 'templates/search_input.tpl', 'templates/select.tpl', 'templates/sliding_menu.tpl', 'templates/split_view.tpl', 'templates/tab_bar.tpl', 'templates/tab_bar_item.tpl', 'templates/text_area.tpl', 'templates/text_input.tpl']);
 
 angular.module("templates/bottom_toolbar.tpl", []).run(["$templateCache", function($templateCache) {
@@ -378,10 +378,10 @@ limitations under the License.
 				ngTrueValue: '@',
 				ngFalseValue: '@'
 			},
-			transclude: false,
+			transclude: true,
 			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/checkbox.tpl',
 			link: function($scope, element, attrs, ngModel){
-				var checkbox = element.find('input');
+				var checkbox = element.find('input');				
 				var checked = false;
 				attrs.$observe('disabled', function(disabled){
 					if(disabled === undefined){
@@ -392,8 +392,8 @@ limitations under the License.
 				});
 
 				if(ngModel){					
-					ngModel.$render = function() {
-						checked = ( ngModel.$viewValue == "true" );
+					ngModel.$render = function() {						
+						checked = ( ngModel.$viewValue == 'true' || ngModel.$viewValue == $scope.ngTrueValue );
 						checkbox.attr('checked', checked);
 					};
 
@@ -495,15 +495,7 @@ limitations under the License.
 					}else{
 						$scope.fixedWidth = '';						
 					}
-				});
-
-				attrs.$observe('inverse', function(inverse){
-					if(inverse === "true"){
-						$scope.inverse = 'inverse';
-					}else{
-						$scope.inverse = '';						
-					}
-				});
+				});				
 			}
 		};
 	});
@@ -526,8 +518,7 @@ limitations under the License.
 
 				function getLandscapeOrPortraitFromInteger(orientation){
 					if(orientation === undefined ){
-						console.log('not orientation');
-						return window.screen.width > window.screen.height ? 'landscape' : 'portrait';
+						return window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
 					}
 
 					if(orientation == 90 || orientation == -90){
@@ -542,7 +533,12 @@ limitations under the License.
 				$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 
 				window.addEventListener("orientationchange", function() {
-					console.log('orientation changed' + window.orientation);
+					$scope.$apply(function(){
+						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
+					});
+				}, false);
+
+				window.addEventListener("resize", function() {
 					$scope.$apply(function(){
 						$scope.orientation = getLandscapeOrPortraitFromInteger(window.orientation);
 					});

@@ -466,8 +466,7 @@ docpadConfig = {
 				}, {
 					name: 'disabled',
 					description: {
-						en: 'Wether the input should be disabled.',
-						ja: '検索フィールドの入力可否を[true/false]で指定します。'
+						en: 'Wether the input should be disabled.'
 					}
 				}],
 				methods: []
@@ -526,24 +525,70 @@ docpadConfig = {
 				examplePartial: 'icon_example',
 				demoURL: 'OnsenUI/demo/icon_demo.html',
 				attributes: [{
-					name: 'rows',
+					name: 'icon',
 					description: {
-						en: "The number of rows."
+						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ http://fontawesome.io/icons/ ]'
 					}
 				}, {
-					name: 'cols',
+					name: 'size',
 					description: {
-						en: "The number of columns."
+						en: "The sizes of the icon. Valid values are [lg/2x/3x/4x//5x]"
 					}
 				}, {
-					name: 'placeholder',
+					name: 'rotate',
 					description: {
-						en: "The placeholder inside the text area."
+						en: "The degree to rotate the icon. Valid values are [90/180/270]"
 					}
 				}, {
-					name: 'disabled',
+					name: 'flip',
 					description: {
-						en: 'Wether the input should be disabled.'
+						en: 'Flip the icon. Valid values are [horizontal/vertial]'
+					}
+				}, {
+					name: 'fixed-width',
+					description: {
+						en: 'When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are [true/false]'
+					}
+				}, {
+					name: 'spin',
+					description: {
+						en: 'Wether to spin the icon. Valid values are [true/false]'
+					}
+				}],
+				methods: []
+			}, {
+				name: 'row',
+				description: {
+					en: "Use <ons-row> and <ons-col> grid system to layout component. By default, all <ons-col> inside a <ons-row> will have the same width. You can specify any <ons-col> to have a specific width and let others take the remaining width in a <ons-row>. You can event vertical align each <ons-col> in a <ons-row>"
+				},				
+				attributes: [{
+					name: 'align',
+					description: {
+						en: "Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center]"
+					}
+				}],
+				methods: []
+			}, {
+				name: 'col',
+				description: {
+					en: "Use with <ons-row> to layout component"
+				},
+				examplePartial: 'grid_example',
+				demoURL: 'OnsenUI/demo/grid_demo.html',
+				attributes: [{
+					name: 'align',
+					description: {
+						en: "Vertical align the column. Valid values are [top/center/bottom]"
+					}
+				}, {
+					name: 'size',
+					description: {
+						en: 'The size of the column in percentage. Valid values are [10/20/25/33/67/75/80/90]'
+					}
+				}, {
+					name: 'offset',
+					description: {
+						en: 'Offset the column. Valid values are [10/20/25/33/67/75/80/90]'
 					}
 				}],
 				methods: []
