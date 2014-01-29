@@ -187,26 +187,22 @@ docpadConfig = {
 				attributes: [{
 					name: 'page',
 					description: {
-						en: 'The page that this tabbar-item points to',
-						ja: 'タブ項目を選択した時に表示するページURLを指定します。'
+						en: 'The page that this tabbar-item points to'
 					}
 				}, {
 					name: 'icon',
 					description: {
-						en: 'The icon of the tab. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home"',
-						ja: 'タブ項目を選択した時に表示するページURLを指定します。'
+						en: 'The icon of the tab. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here'
 					}
 				}, {
 					name: 'label',
 					description: {
-						en: 'The label of the tab',
-						ja: 'タブ項目を選択した時に表示するページURLを指定します。'
+						en: 'The label of the tab'
 					}
 				}, {
 					name: 'active',
 					description: {
-						en: 'Set wether this tab should be active or not. Valid values are [true/false]',
-						ja: 'タブ項目が選択された状態にするかどうかを[true/false]で指定します。'
+						en: 'Set wether this tab should be active or not. Valid values are [true/false]'
 					}
 				}],
 				methods: []
@@ -321,8 +317,7 @@ docpadConfig = {
 			}, {
 				name: 'scroller',
 				description: {
-					en: "Makes the content inside this tag scrollable.",
-					ja: "<ons-scroller>タグ内のコンテンツにスクロール表示を提供します。"
+					en: "Makes the content inside this tag scrollable."
 				},
 				examplePartial: 'scroller_example',
 				demoURL: 'OnsenUI/demo/scroller_demo.html',
@@ -330,8 +325,7 @@ docpadConfig = {
 			}, {
 				name: 'list',
 				description: {
-					en: "The container for list-item. Similar to <ul> but styled for mobile.",
-					ja: "リストコンポーネントとして提供します。"
+					en: "The container for list-item. Similar to <ul> but styled for mobile."
 				},
 				examplePartial: 'list_example',
 				demoURL: 'OnsenUI/demo/list_demo.html',
@@ -339,49 +333,100 @@ docpadConfig = {
 			}, {
 				name: 'list-item',
 				description: {
-					en: "Works like <li> but styled for mobile. Must be put inside list tag.",
-					ja: "<ons-list-item>タグではリストコンポーネント内で表示するリスト項目を定義します。"
+					en: "Works like <li> but styled for mobile. Must be put inside list tag."
 				},
 				methods: []
 			}, {
 				name: 'button',
 				description: {
-					en: "Button component. It includes a spinner useful for showing work in progress",
-					ja: "ボタンコンポーネントです。用意されたタイプからボタンのスタイルを選択可能です。またボタンを押下した際にスピナーアニメーションすることができます。"
+					en: "Button component. It includes a spinner useful for showing work in progress"
 				},
 				examplePartial: 'button_example',
 				demoURL: 'OnsenUI/demo/button_demo.html',
 				attributes: [{
 					name: 'type',
 					description: {
-						en: "The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ].",
-						ja: "ボタンのタイプを指定します。指定可能な値は[ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ] です。"
+						en: "The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ]"
 					}
 				}, {
 					name: 'should-spin',
 					description: {
-						en: 'Wether the button shoud switch to show spinner.',
-						ja: 'ボタン押下時にスピナーアニメーションを表示するかを[true/false]で指定します。'
+						en: 'Wether the button shoud switch to show spinner'						
 					}
 				}, {
 					name: 'animation',
 					description: {
-						en: "The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'.",
-						ja: "ボタン内に表示されたスピナーとテキストをアニメーションさせることができます。指定可能な値は [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]です。デフォルトは'slide-left'が設定されています。"
+						en: "The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'"
 					}
 				}, {
 					name: 'disabled',
 					description: {
-						en: 'Wether the button shoud be disabled.',
-						ja: 'ボタンを入力可能状態を[true/false]で指定します。'
+						en: 'Wether the button shoud be disabled.'
 					}
 				}],
 				methods: []
 			}, {
+				name: 'radio-button',
+				description: {
+					en: "Radio button component"
+				},
+				examplePartial: 'radio_button_example',
+				demoURL: 'OnsenUI/demo/radio_button_demo.html',
+				attributes: [{
+					name: 'ng-model',
+					description: {
+						en: "The model to bind to"
+					}
+				}, {
+					name: 'value',
+					description: {
+						en: 'The value to be set to the model when this button is selected'						
+					}
+				}, {
+					name: 'left-label',
+					description: {
+						en: "The label to be shown on the left of the button"
+					}
+				}, {
+					name: 'right-label',
+					description: {
+						en: 'The label to be shown on the right of the button'
+					}
+				}, {
+					name: 'name',
+					description: {
+						en: 'The group name of this radio button'
+					}
+				}],
+				methods: []
+			},{
+				name: 'checkbox',
+				description: {
+					en: "Checkbox component"
+				},
+				examplePartial: 'checkbox_example',
+				demoURL: 'OnsenUI/demo/checkbox_demo.html',
+				attributes: [{
+					name: 'ng-model',
+					description: {
+						en: "The model to bind to"
+					}
+				}, {
+					name: 'ng-true-value',
+					description: {
+						en: 'The value to be set to the model when this checkbox is checked'
+					}
+				}, {
+					name: 'ng-false-value',
+					description: {
+						en: "The value to be set to the model when this checkbox is unchecked"
+					}
+				}],
+				methods: []
+			},{
 				name: 'select',
 				description: {
-					en: "Wrapper around select tag but styled for mobile.",
-					ja: "モバイル用のドロップダウンリストコンポーネントです。"
+					en: "Wrapper around select tag but styled for mobile."
 				},
 				examplePartial: 'select_example',
 				demoURL: 'OnsenUI/demo/select_demo.html',
@@ -390,38 +435,33 @@ docpadConfig = {
 			}, {
 				name: 'text-input',
 				description: {
-					en: "Component for doing text input.",
-					ja: "テキストボックスコンポーネントです。"
+					en: "Component for doing text input."
 				},
 				examplePartial: 'text_input_example',
 				demoURL: 'OnsenUI/demo/text_input_demo.html',
 				attributes: [{
 					name: 'placeholder',
 					description: {
-						en: "The placeholder inside the input area.",
-						ja: '未入力のテキストボックスに表示するプレースホルダを指定します。'
+						en: "The placeholder inside the input area."
 					}
 				}, {
 					name: 'disabled',
 					description: {
-						en: 'Wether the input should be disabled.',
-						ja: 'テキストボックスの入力可否を[true/false]で指定します。'
+						en: 'Wether the input should be disabled.'
 					}
 				}],
 				methods: []
 			}, {
 				name: 'search-input',
 				description: {
-					en: "Component for inputting search text.",
-					ja: "検索フィールドコンポーネントです。"
+					en: "Component for inputting search text."
 				},
 				examplePartial: 'search_input_example',
 				demoURL: 'OnsenUI/demo/search_input_demo.html',
 				attributes: [{
 					name: 'placeholder',
 					description: {
-						en: "The placeholder inside the search input.",
-						ja: '未入力の検索フィールドに表示するプレースホルダを指定します。'
+						en: "The placeholder inside the search input."
 					}
 				}, {
 					name: 'disabled',
@@ -434,34 +474,29 @@ docpadConfig = {
 			}, {
 				name: 'text-area',
 				description: {
-					en: "Component for inputting text.",
-					ja: "テキスト入力エリアコンポーネントです。"
+					en: "Component for inputting text."
 				},
 				examplePartial: 'text_area_example',
 				demoURL: 'OnsenUI/demo/text_area_demo.html',
 				attributes: [{
 					name: 'rows',
 					description: {
-						en: "The number of rows.",
-						ja: 'テキストエリアの表示行数を指定します。指定した行数を超えて入力するとテキストエリアが縦にスクロール表示されます。'
+						en: "The number of rows."
 					}
 				}, {
 					name: 'cols',
 					description: {
-						en: "The number of columns.",
-						ja: 'テキストエリアの1行の文字数を指定します。指定した文字数を超えて入力すると、超過した文字は折り返し改行されて表示されます。'
+						en: "The number of columns."
 					}
 				}, {
 					name: 'placeholder',
 					description: {
-						en: "The placeholder inside the text area.",
-						ja: '未入力のテキストエリアに表示するプレースホルダを指定します。'
+						en: "The placeholder inside the text area."
 					}
 				}, {
 					name: 'disabled',
 					description: {
-						en: 'Wether the input should be disabled.',
-						ja: 'テキストエリアの入力可否を[true/false]で指定します。'
+						en: 'Wether the input should be disabled.'
 					}
 				}],
 				methods: []

@@ -520,6 +520,76 @@
             
             <div class="side-bar-color">
               <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#radio-button">
+                <div class="font-1_5 bold">ons-radio-button</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#radio-button-attributes" data-parent="#radio-button">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#radio-button-ng-model">ng-model</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#radio-button-value">value</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#radio-button-left-label">left-label</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#radio-button-right-label">right-label</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#radio-button-name">name</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#checkbox">
+                <div class="font-1_5 bold">ons-checkbox</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#checkbox-attributes" data-parent="#checkbox">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#checkbox-ng-model">ng-model</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#checkbox-ng-true-value">ng-true-value</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#checkbox-ng-false-value">ng-false-value</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
               <a class="link directive-name round-padding gray" is-parent="true" href="#select">
                 <div class="font-1_5 bold">ons-select</div>
               </a> 
@@ -1287,7 +1357,7 @@
                           <span class="anchor" id="tabbar-item-icon"></span>
                           <tr ng-repeat="attribute in directive.attributes">
                             <td>icon</td>
-                            <td>The icon of the tab. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;</td>
+                            <td>The icon of the tab. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here</td>
                           </tr>
                           
                           <span class="anchor" id="tabbar-item-label"></span>
@@ -1976,19 +2046,19 @@
                           <span class="anchor" id="button-type"></span>
                           <tr ng-repeat="attribute in directive.attributes">
                             <td>type</td>
-                            <td>The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ].</td>
+                            <td>The type of the button. Can be any of [ 'quiet', 'large', 'large--quiet', 'cta', 'large--cta' ]</td>
                           </tr>
                           
                           <span class="anchor" id="button-should-spin"></span>
                           <tr ng-repeat="attribute in directive.attributes">
                             <td>should-spin</td>
-                            <td>Wether the button shoud switch to show spinner.</td>
+                            <td>Wether the button shoud switch to show spinner</td>
                           </tr>
                           
                           <span class="anchor" id="button-animation"></span>
                           <tr ng-repeat="attribute in directive.attributes">
                             <td>animation</td>
-                            <td>The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'.</td>
+                            <td>The animation when the button transitions to and from the spinner. Can be any of [ 'expand-left', 'expand-right', 'expand-up', 'expand-down', 'slide-left', 'slide-right', 'slide-up', 'slide-down', 'zoom-out', 'zoom-in' ]. The default is 'slide-left'</td>
                           </tr>
                           
                           <span class="anchor" id="button-disabled"></span>
@@ -2131,6 +2201,239 @@
 
                       <div class="absolute fit-iphone-frame">
                         <iframe src="/OnsenUI/demo/button_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="radio-button"></span>
+                  <h1 class="onsen-red h1-separator">ons-radio-button</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Radio button component</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="radio-button-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="radio-button-ng-model"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>ng-model</td>
+                            <td>The model to bind to</td>
+                          </tr>
+                          
+                          <span class="anchor" id="radio-button-value"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>value</td>
+                            <td>The value to be set to the model when this button is selected</td>
+                          </tr>
+                          
+                          <span class="anchor" id="radio-button-left-label"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>left-label</td>
+                            <td>The label to be shown on the left of the button</td>
+                          </tr>
+                          
+                          <span class="anchor" id="radio-button-right-label"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>right-label</td>
+                            <td>The label to be shown on the right of the button</td>
+                          </tr>
+                          
+                          <span class="anchor" id="radio-button-name"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>name</td>
+                            <td>The group name of this radio button</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="radio-button-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="lasso"><span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-page</span> class<span class="hljs-subst">=</span><span class="hljs-string">"center"</span><span class="hljs-subst">&gt;</span>    
+      <span class="hljs-subst">&lt;</span>h2<span class="hljs-subst">&gt;</span>Choose Level<span class="hljs-subst">&lt;</span>/h2<span class="hljs-subst">&gt;</span>
+      <span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-radio</span><span class="hljs-attribute">-button</span> ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"level"</span> value<span class="hljs-subst">=</span><span class="hljs-string">"Easy"</span> right<span class="hljs-attribute">-label</span><span class="hljs-subst">=</span><span class="hljs-string">"Easy"</span> name<span class="hljs-subst">=</span><span class="hljs-string">"level-group"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-radio</span><span class="hljs-attribute">-button</span><span class="hljs-subst">&gt;</span>
+
+      <span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-radio</span><span class="hljs-attribute">-button</span> ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"level"</span> value<span class="hljs-subst">=</span><span class="hljs-string">"Medium"</span> right<span class="hljs-attribute">-label</span><span class="hljs-subst">=</span><span class="hljs-string">"Medium"</span> name<span class="hljs-subst">=</span><span class="hljs-string">"level-group"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-radio</span><span class="hljs-attribute">-button</span><span class="hljs-subst">&gt;</span>
+
+      <span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-radio</span><span class="hljs-attribute">-button</span> ng<span class="hljs-attribute">-model</span><span class="hljs-subst">=</span><span class="hljs-string">"level"</span> value<span class="hljs-subst">=</span><span class="hljs-string">"Hard"</span> right<span class="hljs-attribute">-label</span><span class="hljs-subst">=</span><span class="hljs-string">"Hard"</span> name<span class="hljs-subst">=</span><span class="hljs-string">"level-group"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-radio</span><span class="hljs-attribute">-button</span><span class="hljs-subst">&gt;</span>
+
+      <span class="hljs-subst">&lt;</span>h3<span class="hljs-subst">&gt;</span>{{level}}<span class="hljs-subst">&lt;</span>/h3<span class="hljs-subst">&gt;</span>
+  <span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-page</span><span class="hljs-subst">&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/radio_button_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="checkbox"></span>
+                  <h1 class="onsen-red h1-separator">ons-checkbox</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Checkbox component</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="checkbox-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="checkbox-ng-model"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>ng-model</td>
+                            <td>The model to bind to</td>
+                          </tr>
+                          
+                          <span class="anchor" id="checkbox-ng-true-value"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>ng-true-value</td>
+                            <td>The value to be set to the model when this checkbox is checked</td>
+                          </tr>
+                          
+                          <span class="anchor" id="checkbox-ng-false-value"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>ng-false-value</td>
+                            <td>The value to be set to the model when this checkbox is unchecked</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="checkbox-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>    
+  <span class="hljs-tag">&lt;<span class="hljs-title">section</span>&gt;</span>      
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-checkbox</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"agree"</span>&gt;</span>
+      True or False?
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-checkbox</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">agree</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>  
+  <span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-title">section</span>&gt;</span>      
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-checkbox</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"answer"</span> <span class="hljs-attribute">ng-true-value</span>=<span class="hljs-value">"YES"</span> <span class="hljs-attribute">ng-false-value</span>=<span class="hljs-value">"NO"</span>&gt;</span>
+      Yes or No?
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-checkbox</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">answer</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>  
+  <span class="hljs-tag">&lt;/<span class="hljs-title">section</span>&gt;</span> 
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</span></code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/checkbox_demo.html" width="237" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
