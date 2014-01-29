@@ -36,7 +36,7 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Page 1</h1>
         <ons-button 
             ng-click="ons.slidingMenu.toggleMenu()">
@@ -49,14 +49,14 @@ encoding: 'utf8'
         <p>
             You can also swipe the page left and right.
         </p>
-    </div>
+    </ons-page>
 
 
 *page2.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Page 2</h1>
         <ons-button ng-click="ons.slidingMenu.toggleMenu()">
             Toggle Menu
         </ons-button>   
-    </div>
+    </ons-page>

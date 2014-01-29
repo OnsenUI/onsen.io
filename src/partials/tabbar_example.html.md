@@ -23,20 +23,20 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Hello, I am Page 1</h1> 
-    </div>
+    </ons-page>
 
 
 *page2.html*
 
-    <div class="page center bg-orange">
+    <ons-page class="center bg-orange">
         <h1>Hello, I am Page 2</h1> 
-    </div>
+    </ons-page>
 
 
 *page3.html*
 
-    <div class="page center bg-green">
+    <ons-page class="center bg-green">
         <h1>Hello, I am Page 3</h1> 
-    </div>
+    </ons-page>

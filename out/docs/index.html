@@ -235,6 +235,57 @@
             
             <div class="side-bar-color">
               <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#navigator-toolbar">
+                <div class="font-1_5 bold">ons-navigator-toolbar</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#navigator-toolbar-attributes" data-parent="#navigator-toolbar">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#navigator-toolbar-title">title</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#navigator-toolbar-left-button-icon">left-button-icon</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#navigator-toolbar-right-button-icon">right-button-icon</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#navigator-toolbar-on-left-button-click">on-left-button-click</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#navigator-toolbar-on-right-button-click">on-right-button-click</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#bottom-toolbar">
+                <div class="font-1_5 bold">ons-bottom-toolbar</div>
+              </a> 
+              <section>
+                
+                
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
               <a class="link directive-name round-padding gray" is-parent="true" href="#tabbar">
                 <div class="font-1_5 bold">ons-tabbar</div>
               </a> 
@@ -327,6 +378,68 @@
                     
                       <div>
                         <a class="round-padding gray" href="#sliding-menu-toggleMenu">toggleMenu</a>
+                      </div>
+                    
+                  </div>
+                              
+              </section>
+            </div>          
+            
+            <div class="side-bar-color">
+              <div class="space-top"></div>
+              <a class="link directive-name round-padding gray" is-parent="true" href="#split-view">
+                <div class="font-1_5 bold">ons-split-view</div>
+              </a> 
+              <section>
+                
+                  <a class="directive-attribute link round-padding" href="#split-view-attributes" data-parent="#split-view">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i> Attributes:</div>
+                  </a> 
+                  <div class="margin-left">                              
+                  
+                    <div>
+                      <a class="round-padding gray" href="#split-view-secondary-page">secondary-page</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#split-view-main-page">main-page</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#split-view-main-page-width">main-page-width</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#split-view-collapse">collapse</a>
+                    </div>
+                  
+                  </div>
+                
+                
+                
+                  <a class="link round-padding" href="#split-view-methods" data-parent="#split-view">
+                    <div class="gray bold"><i class="fa fa-circle red indicator"></i>Methods:</div>
+                  </a>
+                  <div class="margin-left">                              
+                    
+                      <div>
+                        <a class="round-padding gray" href="#split-view-setMainPage">setMainPage</a>
+                      </div>
+                    
+                      <div>
+                        <a class="round-padding gray" href="#split-view-setSecondaryPage">setSecondaryPage</a>
+                      </div>
+                    
+                      <div>
+                        <a class="round-padding gray" href="#split-view-open">open</a>
+                      </div>
+                    
+                      <div>
+                        <a class="round-padding gray" href="#split-view-close">close</a>
+                      </div>
+                    
+                      <div>
+                        <a class="round-padding gray" href="#split-view-toggle">toggle</a>
                       </div>
                     
                   </div>
@@ -593,19 +706,19 @@
                           <p><em>index.html</em></p>
 <pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-screen</span> <span class="hljs-attribute">page</span>=<span class="hljs-value">"page1.html"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">ons-screen</span>&gt;</span>
 </code></pre><p><em>page1.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello, I am Page 1<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ons-button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.screen.presentPage('page2.html')"</span>&gt;</span>
         Present Page 2
     <span class="hljs-tag">&lt;/<span class="hljs-title">ons-button</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre><p><em>page2.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello, I am Page 2<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ons-button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.screen.dismissPage()"</span>&gt;</span>
         Dismiss Page
     <span class="hljs-tag">&lt;/<span class="hljs-title">ons-button</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -641,7 +754,7 @@
                   <h1 class="onsen-red h1-separator">ons-page</h1>            
                     
                   <section class="space-top">              
-                    <p>Should be used as root component of each page</p>
+                    <p>Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put &lt;ons-scroller&gt; inside this component.</p>
                   </section>
 
                   <section class="space-top45">
@@ -668,6 +781,24 @@
                     
                   </section>
                     
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>    
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page Content<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>    
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
                   
                             
 
@@ -675,6 +806,18 @@
               </div>
 
               <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/page_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
                 
               </div>
             </div>
@@ -796,7 +939,7 @@
 <pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-navigator</span> <span class="hljs-attribute">page</span>=<span class="hljs-value">"page1.html"</span> <span class="hljs-attribute">title</span>=<span class="hljs-value">"Page 1"</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">ons-navigator</span>&gt;</span>
 </code></pre><p><em>page1.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page 1<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ons-button</span> 
         <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.navigator.pushPage('pages/navigator/page2.html', { title: 'Page 2' })"</span>&gt;</span>
@@ -808,9 +951,9 @@
         <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.navigator.popPage()"</span>&gt;</span>
         Pop Page
     <span class="hljs-tag">&lt;/<span class="hljs-title">ons-button</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre><p><em>page2.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page 2<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ons-button</span> 
         <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.navigator.pushPage('pages/navigator/page1.html', { title: 'Page 1' })"</span>&gt;</span>
@@ -822,7 +965,7 @@
         <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.navigator.popPage()"</span>&gt;</span>
         Pop Page
     <span class="hljs-tag">&lt;/<span class="hljs-title">ons-button</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -844,6 +987,221 @@
 
                       <div class="absolute fit-iphone-frame">
                         <iframe src="/OnsenUI/demo/navigator_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="navigator-toolbar"></span>
+                  <h1 class="onsen-red h1-separator">ons-navigator-toolbar</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Instead of specifying options object in ons.navigator.pushPage(), you can specify it inside the target page using this component.</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="navigator-toolbar-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="navigator-toolbar-title"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>title</td>
+                            <td>The title of the toolbar</td>
+                          </tr>
+                          
+                          <span class="anchor" id="navigator-toolbar-left-button-icon"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>left-button-icon</td>
+                            <td>The icon name of the toolbar's left button icon</td>
+                          </tr>
+                          
+                          <span class="anchor" id="navigator-toolbar-right-button-icon"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>right-button-icon</td>
+                            <td>The icon name of the toolbar's right button icon</td>
+                          </tr>
+                          
+                          <span class="anchor" id="navigator-toolbar-on-left-button-click"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>on-left-button-click</td>
+                            <td>Event handler when toolbar's left button is clicked</td>
+                          </tr>
+                          
+                          <span class="anchor" id="navigator-toolbar-on-right-button-click"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>on-right-button-click</td>
+                            <td>Event handler when toolbar's right button is clicked</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="navigator-toolbar-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-navigator</span> <span class="hljs-attribute">page</span>=<span class="hljs-value">"page1.html"</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-navigator</span>&gt;</span>
+</code></pre><p><em>page1.html</em></p>
+<pre class="highlight"><code class="lasso"><span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-page</span> class<span class="hljs-subst">=</span><span class="hljs-string">"center"</span><span class="hljs-subst">&gt;</span>
+    <span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-navigator</span><span class="hljs-attribute">-toolbar</span> title<span class="hljs-subst">=</span><span class="hljs-string">"Page 1"</span><span class="hljs-subst">&gt;</span>      
+    <span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-navigator</span><span class="hljs-attribute">-toolbar</span><span class="hljs-subst">&gt;</span>
+    <span class="hljs-subst">&lt;</span>h1<span class="hljs-subst">&gt;</span>Page <span class="hljs-number">1</span><span class="hljs-subst">&lt;</span>/h1<span class="hljs-subst">&gt;</span>
+    <span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-button</span> ng<span class="hljs-attribute">-click</span><span class="hljs-subst">=</span><span class="hljs-string">"ons.navigator.pushPage('pages/navigator_with_navigator_toolbar/page2.html')"</span><span class="hljs-subst">&gt;</span>push Page <span class="hljs-number">2</span><span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-button</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-page</span><span class="hljs-subst">&gt;</span>
+</code></pre><p><em>page2.html</em></p>
+<pre class="highlight"><code class="lasso"><span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-page</span><span class="hljs-subst">&gt;</span>
+    <span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-navigator</span><span class="hljs-attribute">-toolbar</span> 
+        title<span class="hljs-subst">=</span><span class="hljs-string">"Page 2"</span> 
+        right<span class="hljs-attribute">-button</span><span class="hljs-attribute">-icon</span><span class="hljs-subst">=</span><span class="hljs-string">"fa fa-lg fa-angle-right"</span> 
+        <span class="hljs-keyword">on</span><span class="hljs-attribute">-right</span><span class="hljs-attribute">-button</span><span class="hljs-attribute">-click</span><span class="hljs-subst">=</span><span class="hljs-string">"ons.navigator.pushPage('pages/navigator_with_navigator_toolbar/page3.html')"</span><span class="hljs-subst">&gt;</span>      
+    <span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-navigator</span><span class="hljs-attribute">-toolbar</span><span class="hljs-subst">&gt;</span>
+    <span class="hljs-subst">&lt;</span>h1<span class="hljs-subst">&gt;</span>Page <span class="hljs-number">2</span><span class="hljs-subst">&lt;</span>/h1<span class="hljs-subst">&gt;</span>
+    <span class="hljs-subst">&lt;</span>p<span class="hljs-subst">&gt;</span>
+        click the top right icon <span class="hljs-keyword">to</span> push Page <span class="hljs-number">3</span>
+    <span class="hljs-subst">&lt;</span>/p<span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-page</span><span class="hljs-subst">&gt;</span>
+</code></pre><p><em>page3.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page 3<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/navigator_with_navigator_toolbar.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="bottom-toolbar"></span>
+                  <h1 class="onsen-red h1-separator">ons-bottom-toolbar</h1>            
+                    
+                  <section class="space-top">              
+                    <p>Use this component to have toolbar position at the bottom of the page</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="bottom-toolbar-attributes"></span>                
+                    
+                    <section ng-show="!directive.attributes || directive.attributes.length === 0">
+                      <p class="text-muted">
+                        This tag has no attribute
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="bottom-toolbar-methods"></span>                
+                    
+                    <section ng-show="!directive.methods || directive.methods.length === 0">
+                      <p class="text-muted">
+                        This tag has no method
+                      </p>
+                    </section>
+                    
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>    
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page Content<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>    
+
+    <span class="hljs-tag">&lt;<span class="hljs-title">ons-bottom-toolbar</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">ons-icon</span> <span class="hljs-attribute">icon</span>=<span class="hljs-value">"home"</span> <span class="hljs-attribute">size</span>=<span class="hljs-value">"2x"</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">ons-icon</span>&gt;</span>      
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ons-bottom-toolbar</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/bottom_toolbar_demo.html" width="237" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               
@@ -988,17 +1346,17 @@
       page<span class="hljs-subst">=</span><span class="hljs-string">"pages/tabbar/page3.html"</span><span class="hljs-subst">&gt;&lt;</span>/ons<span class="hljs-attribute">-tabbar</span><span class="hljs-attribute">-item</span><span class="hljs-subst">&gt;</span> 
 <span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-tabbar</span><span class="hljs-subst">&gt;</span>
 </code></pre><p><em>page1.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello, I am Page 1<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span> 
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre><p><em>page2.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center bg-orange"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center bg-orange"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello, I am Page 2<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span> 
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre><p><em>page3.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center bg-green"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center bg-green"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Hello, I am Page 3<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span> 
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -1155,7 +1513,7 @@
 
 <span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre><p><em>page1.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page 1<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ons-button</span> 
         <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.slidingMenu.toggleMenu()"</span>&gt;</span>
@@ -1168,14 +1526,14 @@
     <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>
         You can also swipe the page left and right.
     <span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre><p><em>page2.html</em></p>
-<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"page center"</span>&gt;</span>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page 2<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">ons-button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.slidingMenu.toggleMenu()"</span>&gt;</span>
         Toggle Menu
     <span class="hljs-tag">&lt;/<span class="hljs-title">ons-button</span>&gt;</span>   
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
 </code></pre>              
                         </div>
                         
@@ -1197,6 +1555,189 @@
 
                       <div class="absolute fit-iphone-frame">
                         <iframe src="/OnsenUI/demo/sliding_menu_demo.html" width="237" height="420" style="border-color: black;"></iframe>
+                      </div> 
+                    </div>
+                              
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-8 col-xs-8"> 
+                <div ng-repeat="directive in framework.directives">
+                  <span class="anchor" id="split-view"></span>
+                  <h1 class="onsen-red h1-separator">ons-split-view</h1>            
+                    
+                  <section class="space-top">              
+                    <p>devids the screen into left and right section. This component can also act as sliding menu which can be controlled by 'collapse' attribute</p>
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="split-view-attributes"></span>                
+                    
+                    
+                    <section ng-show="directive.attributes.length > 0"
+                      class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Attributes</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="split-view-secondary-page"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>secondary-page</td>
+                            <td>The url of the page on the left</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-main-page"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>main-page</td>
+                            <td>The url of the page on the right</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-main-page-width"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>main-page-width</td>
+                            <td>Main page's width percentage. The width of secondary page take the remaining percentage</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-collapse"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>collapse</td>
+                            <td>Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. &quot;portrait&quot; means the view will collapse when device is in portrait orientation. &quot;landscape&quot; means the view will collapse when device is in landscape orientation. &quot;width ##px&quot; means the view will collapse when the window width is smaller than the specified ##px</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+                    </section>
+                    
+                  </section>
+
+                  <section class="space-top45">
+                    <span class="anchor" id="split-view-methods"></span>                
+                    
+                    
+                    <section ng-show="directive.methods.length > 0" class="round-corner gray-border">
+                      <table class="table">
+                        <thead class="table-head">
+                          <tr>
+                            <th colspan="2">Methods</th>
+                          </tr>                      
+                        </thead>
+                        <tbody>
+                          
+                          <span class="anchor" id="split-view-setMainPage"></span>
+                          <tr ng-repeat="method in directive.methods">
+                            <td><code>setMainPage( pageUrl )</code></td>
+                            <td>Show the page specified in pageUrl in the right section</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-setSecondaryPage"></span>
+                          <tr ng-repeat="method in directive.methods">
+                            <td><code>setSecondaryPage( pageUrl )</code></td>
+                            <td>Show the page specified in pageUrl in the left section</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-open"></span>
+                          <tr ng-repeat="method in directive.methods">
+                            <td><code>open( )</code></td>
+                            <td>Reveal the secondary page if the view is in collapse mode</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-close"></span>
+                          <tr ng-repeat="method in directive.methods">
+                            <td><code>close( )</code></td>
+                            <td>hide the secondary page if the view is in collapse mode</td>
+                          </tr>
+                          
+                          <span class="anchor" id="split-view-toggle"></span>
+                          <tr ng-repeat="method in directive.methods">
+                            <td><code>toggle( )</code></td>
+                            <td>Reveal the secondary page if it is currently hidden, otherwies, reveal it</td>
+                          </tr>
+                          
+                        </tbody>
+                      </table>
+
+                    </section>
+                    
+                  </section>
+                    
+                     
+                  <section class="space-top45">  
+                      <div class="row">
+                        <div class="col-md-12 col-xs-12 space-top45">
+                          <h4 class="gray">Example</h4>
+                        </div>
+                      </div>
+                      <div class="row example-box">                                    
+                        <div class="col-md-12 col-xs-12">              
+                          <p><em>index.html</em></p>
+<pre class="highlight"><code class="lasso"><span class="hljs-subst">&lt;</span>ons<span class="hljs-attribute">-split</span><span class="hljs-attribute">-view</span> 
+    secondary<span class="hljs-attribute">-page</span><span class="hljs-subst">=</span><span class="hljs-string">"secondary.html"</span> 
+    main<span class="hljs-attribute">-page</span><span class="hljs-subst">=</span><span class="hljs-string">"page1.html"</span> 
+    main<span class="hljs-attribute">-page</span><span class="hljs-attribute">-width</span><span class="hljs-subst">=</span><span class="hljs-string">"70"</span> 
+    collapse<span class="hljs-subst">=</span><span class="hljs-string">"width 650px"</span><span class="hljs-subst">&gt;</span>
+<span class="hljs-subst">&lt;</span>/ons<span class="hljs-attribute">-split</span><span class="hljs-attribute">-view</span><span class="hljs-subst">&gt;</span>
+</code></pre><p><em>menu.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"fa-ul"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">ons-list-item</span> 
+            <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.splitView.toggle();
+                ons.splitView.setMainPage('page1.html');"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"fa-li fa fa-home fa-lg"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"top: 25%"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
+            Page 1
+        <span class="hljs-tag">&lt;/<span class="hljs-title">ons-list-item</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-title">ons-list-item</span> 
+            <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"ons.splitView.toggle(); 
+                ons.splitView.setMainPage('page2.html');"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">i</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"fa-li fa fa-gear fa-lg"</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">"top: 25%"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">i</span>&gt;</span>
+            Page 2
+        <span class="hljs-tag">&lt;/<span class="hljs-title">ons-list-item</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre><p><em>page1.html</em></p>
+<pre class="highlight"><code class="livecodeserver">&lt;ons-page class=<span class="hljs-string">"center"</span> style=<span class="hljs-string">"padding: 10px"</span>&gt;
+    &lt;h1&gt;Page <span class="hljs-number">1</span>&lt;/h1&gt;
+    &lt;p&gt;
+        This spitview collapses when <span class="hljs-operator">the</span> width is less than <span class="hljs-number">650</span>px.
+    &lt;/p&gt;    
+    &lt;p&gt;
+        When <span class="hljs-operator">in</span> collapse mode, you can swipe left <span class="hljs-operator">and</span> <span class="hljs-constant">right</span> <span class="hljs-built_in">to</span> <span class="hljs-built_in">close</span> <span class="hljs-operator">and</span> <span class="hljs-built_in">open</span> <span class="hljs-operator">the</span> secondary page.
+    &lt;/p&gt;    
+&lt;/ons-page&gt;
+</code></pre><p><em>page2.html</em></p>
+<pre class="highlight"><code class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ons-page</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"center"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Page 2<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ons-page</span>&gt;</span>
+</code></pre>              
+                        </div>
+                        
+                      </div>
+                  </section>
+                  
+                            
+
+                </div>
+              </div>
+
+              <div class="col-md-4 col-xs-4 no-padding">
+                
+                  
+                    <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                      <div class="absolute click-through">
+                        <img width="309" src="/images/iPhone5Frame.png">
+                      </div>
+
+                      <div class="absolute fit-iphone-frame">
+                        <iframe src="/OnsenUI/demo/split_view_demo_width.html" width="237" height="420" style="border-color: black;"></iframe>
                       </div> 
                     </div>
                               

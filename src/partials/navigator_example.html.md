@@ -10,7 +10,7 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Page 1</h1>
         <ons-button 
             ng-click="ons.navigator.pushPage('pages/navigator/page2.html', { title: 'Page 2' })">
@@ -22,12 +22,12 @@ encoding: 'utf8'
             ng-click="ons.navigator.popPage()">
             Pop Page
         </ons-button>
-    </div>
+    </ons-page>
 
 
 *page2.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Page 2</h1>
         <ons-button 
             ng-click="ons.navigator.pushPage('pages/navigator/page1.html', { title: 'Page 1' })">
@@ -39,4 +39,4 @@ encoding: 'utf8'
             ng-click="ons.navigator.popPage()">
             Pop Page
         </ons-button>
-    </div>
+    </ons-page>

@@ -9,19 +9,19 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Hello, I am Page 1</h1>
         <ons-button ng-click="ons.screen.presentPage('page2.html')">
             Present Page 2
         </ons-button>
-    </div>
+    </ons-page>
 
 
 *page2.html*
 
-    <div class="page center">
+    <ons-page class="center">
         <h1>Hello, I am Page 2</h1>
         <ons-button ng-click="ons.screen.dismissPage()">
             Dismiss Page
         </ons-button>
-    </div>
+    </ons-page>

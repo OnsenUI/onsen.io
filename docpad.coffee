@@ -54,9 +54,11 @@ docpadConfig = {
 			}, {
 				name: 'page',
 				description: {
-					en: 'Should be used as root component of each page',
+					en: 'Should be used as root component of each page. The content inside page component is not scrollable. If you need scroll behavior, you can put <ons-scroller> inside this component.',
 					ja: 'ページの切り替えを管理するタブ機能を提供します。'
 				},
+				examplePartial: 'page_example',
+				demoURL: 'OnsenUI/demo/page_demo.html',
 				methods: []
 			}, {
 				name: 'navigator',
@@ -126,10 +128,52 @@ docpadConfig = {
 					}
 				}]
 			}, {
+				name: 'navigator-toolbar',
+				description: {
+					en: 'Instead of specifying options object in ons.navigator.pushPage(), you can specify it inside the target page using this component.',
+					ja: 'ページの切り替えを管理するタブ機能を提供します。'
+				},
+				methods: [],
+				demoURL: 'OnsenUI/demo/navigator_with_navigator_toolbar.html',
+				examplePartial: 'navigator_with_navigator_toolbar_example',
+				attributes: [{
+					name: 'title',
+					description: {
+						en: 'The title of the toolbar'
+					}
+				}, {
+					name: 'left-button-icon',
+					description: {
+						en: "The icon name of the toolbar's left button icon"
+					}
+				}, {
+					name: 'right-button-icon',
+					description: {
+						en: "The icon name of the toolbar's right button icon"
+					}
+				}, {
+					name: 'on-left-button-click',
+					description: {
+						en: "Event handler when toolbar's left button is clicked"
+					}
+				}, {
+					name: 'on-right-button-click',
+					description: {
+						en: "Event handler when toolbar's right button is clicked"
+					}
+				}]
+			}, {
+				name: 'bottom-toolbar',
+				description: {
+					en: 'Use this component to have toolbar position at the bottom of the page'
+				},
+				demoURL: 'OnsenUI/demo/bottom_toolbar_demo.html',
+				examplePartial: 'bottom_toolbar_example',
+				methods: []
+			}, {
 				name: 'tabbar',
 				description: {
-					en: 'Used with tabbar-item to manage pages using tabs.',
-					ja: 'ページの切り替えを管理するタブ機能を提供します。'
+					en: 'Used with tabbar-item to manage pages using tabs.'
 				},
 				methods: []
 			}, {
@@ -169,58 +213,109 @@ docpadConfig = {
 			}, {
 				name: 'sliding-menu',
 				description: {
-					en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.",
-					ja: "2つのページを利用したスライディングUIを提供します。手前のページをスライドさせることで背後のページをメニューリストなどとして表示することができます。"
+					en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind."					
 				},
 				examplePartial: 'sliding_menu_example',
 				demoURL: 'OnsenUI/demo/sliding_menu_demo.html',
 				attributes: [{
 					name: 'behind-page',
 					description: {
-						en: 'The url of the page to be set to the behind layer.',
-						ja: '背後のページとしてURLを指定します。'
+						en: 'The url of the page to be set to the behind layer.'
 					}
 				}, {
 					name: 'above-page',
 					description: {
-						en: 'The url of the page to be set to the above layer.',
-						ja: '手前のページに表示するURLを指定します。'
+						en: 'The url of the page to be set to the above layer.'
 					}
 				}],
 				methods: [{
 					name: 'setAbovePage',
 					parametters: '( pageUrl )',
 					description: {
-						en: "Show the page specified in pageUrl in the above layer",
-						ja: "手前ページをURL指定し、表示します。"
+						en: "Show the page specified in pageUrl in the above layer"
 					}
 				}, {
 					name: 'setBehindPage',
 					parametters: '( pageUrl )',
 					description: {
-						en: "Show the page specified in pageUrl in the behind layer",
-						ja: "背景ページをURL指定し、表示します。"
+						en: "Show the page specified in pageUrl in the behind layer"
 					}
 				}, {
 					name: 'openMenu',
 					parametters: '( )',
 					description: {
-						en: "Slide the above layer to reveal the layer behind.",
-						ja: "手前のページをスライドさせ、スライドしたエリアに背後のページを表示します。"
+						en: "Slide the above layer to reveal the layer behind."
 					}
 				}, {
 					name: 'closeMenu',
 					parametters: '( )',
 					description: {
-						en: "Slide the above layer to hide the layer behind.",
-						ja: "手前のページをスライドさせ、背後のページを隠します。"
+						en: "Slide the above layer to hide the layer behind."
 					}
 				}, {
 					name: 'toggleMenu',
 					parametters: '( )',
 					description: {
-						en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind",
-						ja: "手前のページがスライドしていない場合はスライドし、背後のページを表示します。手前のページがすでにスライドしている場合は手前のページを背後のページを隠すようにスライドします。"
+						en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind"
+					}
+				}]
+			}, {
+				name: 'split-view',
+				description: {
+					en: "devids the screen into left and right section. This component can also act as sliding menu which can be controlled by 'collapse' attribute"
+				},
+				examplePartial: 'split_view_example',
+				demoURL: 'OnsenUI/demo/split_view_demo_width.html',
+				attributes: [{
+					name: 'secondary-page',
+					description: {
+						en: 'The url of the page on the left'
+					}
+				}, {
+					name: 'main-page',
+					description: {
+						en: 'The url of the page on the right'
+					}
+				},{
+					name: 'main-page-width',
+					description: {
+						en: "Main page's width percentage. The width of secondary page take the remaining percentage"
+					}
+				},{
+					name: 'collapse',
+					description: {
+						en: 'Specify the collapse behavior. Valid values are [portrait/landscape/width ##px]. "portrait" means the view will collapse when device is in portrait orientation. "landscape" means the view will collapse when device is in landscape orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px'
+					}
+				}],
+				methods: [{
+					name: 'setMainPage',
+					parametters: '( pageUrl )',
+					description: {
+						en: "Show the page specified in pageUrl in the right section"
+					}
+				}, {
+					name: 'setSecondaryPage',
+					parametters: '( pageUrl )',
+					description: {
+						en: "Show the page specified in pageUrl in the left section"
+					}
+				}, {
+					name: 'open',
+					parametters: '( )',
+					description: {
+						en: "Reveal the secondary page if the view is in collapse mode"
+					}
+				}, {
+					name: 'close',
+					parametters: '( )',
+					description: {
+						en: "hide the secondary page if the view is in collapse mode"
+					}
+				}, {
+					name: 'toggle',
+					parametters: '( )',
+					description: {
+						en: "Reveal the secondary page if it is currently hidden, otherwies, reveal it"
 					}
 				}]
 			}, {
