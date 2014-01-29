@@ -181,6 +181,11 @@
   border-radius: 4px;
 }
 
+.topcoat-button__spinner {
+  border: 3px solid #454545;
+  border: 3px solid var-color__button;
+}
+
 .topcoat-button:hover,
 .topcoat-button--quiet:hover,
 .topcoat-button--large:hover,
@@ -647,6 +652,11 @@
   border-radius: 4px;
 }
 
+.topcoat-button__spinner {
+  border: 3px solid #454545;
+  border: 3px solid var-color__button;
+}
+
 .topcoat-button:hover,
 .topcoat-button--quiet:hover,
 .topcoat-button--large:hover,
@@ -1090,6 +1100,7 @@ input[type="checkbox"]:checked + .topcoat-checkbox__checkmark:after {
   border: var-border--checkbox;
   border-radius: 3px;
   box-shadow: inset 0 1px #fff;
+  left: 0;
 }
 
 .topcoat-checkbox__checkmark {
@@ -1121,6 +1132,7 @@ input[type="checkbox"]:focus + .topcoat-checkbox__checkmark:before {
 
 input[type="checkbox"]:active + .topcoat-checkbox__checkmark:before {
   border: 1px solid #9daca9;
+  border: var-border--checkbox--active;
   background-color: #d2d6d6;
   background-color: var-background-color--down--checkbox;
   border: var-border--checkbox--active;
@@ -2095,6 +2107,7 @@ input[type="radio"]:checked + .topcoat-radio-button__checkmark:after {
   color: #454545;
   color: var-color--radio-button;
   line-height: 1.063rem;
+  text-align: left;
 }
 
 .topcoat-radio-button__checkmark:before {

@@ -22,22 +22,22 @@ docpadConfig = {
 			displayName: 'Onsen UI'
 			codeName: 'ons'
 			directives: [
-				  {
+				{
 				    name: 'screen',
 				    description: {
-				      en: 'The root element. This is usually put inside <body> tag.',
-				      ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
+				      	en: 'The root element. This is usually put inside <body> tag.',
+				      	ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
 				    },
 				    examplePartial: 'screen_example',
 				    demoURL: 'OnsenUI/demo/screen_demo.html',
 				    attributes: [
-				      {
-				        name: 'page',
-				        description: {
-				          en: 'The root page of this screen element',
-				          ja: '表示するページのURL'
-				        }
-				      }
+				      	{
+				        	name: 'page',
+				        	description: {
+				          		en: 'The root page of this screen element',
+				          		ja: '表示するページのURL'
+				        	}
+				      	}
 				    ],
 				    methods: [
 				      {
@@ -56,7 +56,7 @@ docpadConfig = {
 				        }
 				      }
 				    ]
-				  }, {
+				}, {
 				    name: 'navigator',
 				    description: {
 				      en: 'Manages the page navigation backed by page stack.',
@@ -106,9 +106,9 @@ docpadConfig = {
 				    methods: [
 				      {
 				        name: 'pushPage',
-				        parametters: '( pageUrl, title )',
+				        parametters: '( pageUrl, options )',
 				        description: {
-				          en: "Pushes the specified pageUrl into the page stack and setting the title to the Toolbar's title",
+				          en: "Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator",
 				          ja: "遷移したいページのURLと遷移先のナビゲーターツールバーのタイトルを指定し、次のページに遷移します。遷移元のページはページスタックに保存されます。"
 				        }
 				      }, {
@@ -120,9 +120,9 @@ docpadConfig = {
 				        }
 				      }, {
 				        name: 'resetToPage',
-				        parametters: '( pageUrl, title )',
+				        parametters: '( pageUrl, options )',
 				        description: {
-				          en: "Clears page stack and add the specified pageUrl to the page stack. If title is specified, it will bet set into Toolbar's title",
+				          en: "Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator",
 				          ja: "すべての遷移元ページスタックをクリアします。ページのURLとナビゲーターツールバーのタイトルを指定してページスタックに追加することが可能です。"
 				        }
 				      }
@@ -149,6 +149,20 @@ docpadConfig = {
 					        name: 'page',
 					        description: {
 					          en: 'The page that this tabbar-item points to',
+					          ja: 'タブ項目を選択した時に表示するページURLを指定します。'
+				        	}
+				        },
+				        {
+					        name: 'icon',
+					        description: {
+					          en: 'The icon of the tab. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home"',
+					          ja: 'タブ項目を選択した時に表示するページURLを指定します。'
+				        	}
+				        },
+				        {
+					        name: 'label',
+					        description: {
+					          en: 'The label of the tab',
 					          ja: 'タブ項目を選択した時に表示するページURLを指定します。'
 				        	}
 				        },

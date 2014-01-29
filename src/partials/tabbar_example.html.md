@@ -5,15 +5,19 @@ encoding: 'utf8'
 *index.html*
 
     <ons-tabbar>
-        <ons-tabbar-item page="pages/tabbar/page1.html">
-            One
-        </ons-tabbar-item> 
-        <ons-tabbar-item active="true" page="pages/tabbar/page2.html">
-            Two
-        </ons-tabbar-item> 
-        <ons-tabbar-item page="pages/tabbar/page3.html">
-            Three
-        </ons-tabbar-item> 
+        <ons-tabbar-item 
+          icon="home"
+          label="Home"
+          page="pages/tabbar/page1.html"
+          active="true"></ons-tabbar-item> 
+        <ons-tabbar-item 
+          icon="comment"
+          label="Comments"          
+          page="pages/tabbar/page2.html"></ons-tabbar-item> 
+        <ons-tabbar-item 
+          icon="gear"
+          label="Settings"
+          page="pages/tabbar/page3.html"></ons-tabbar-item> 
     </ons-tabbar>
 
 

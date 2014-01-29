@@ -1,5 +1,5 @@
 ---
-utf-8
+encoding: 'utf8'
 ---
 
 *index.html*

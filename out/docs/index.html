@@ -250,6 +250,14 @@
                     </div>
                   
                     <div>
+                      <a class="round-padding gray" href="#tabbar-item-icon">icon</a>
+                    </div>
+                  
+                    <div>
+                      <a class="round-padding gray" href="#tabbar-item-label">label</a>
+                    </div>
+                  
+                    <div>
                       <a class="round-padding gray" href="#tabbar-item-active">active</a>
                     </div>
                   
@@ -695,8 +703,8 @@
                           
                           <span class="anchor" id="navigator-pushPage"></span>
                           <tr ng-repeat="method in directive.methods">
-                            <td><code>pushPage( pageUrl, title )</code></td>
-                            <td>Pushes the specified pageUrl into the page stack and setting the title to the Toolbar's title</td>
+                            <td><code>pushPage( pageUrl, options )</code></td>
+                            <td>Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator</td>
                           </tr>
                           
                           <span class="anchor" id="navigator-popPage"></span>
@@ -707,8 +715,8 @@
                           
                           <span class="anchor" id="navigator-resetToPage"></span>
                           <tr ng-repeat="method in directive.methods">
-                            <td><code>resetToPage( pageUrl, title )</code></td>
-                            <td>Clears page stack and add the specified pageUrl to the page stack. If title is specified, it will bet set into Toolbar's title</td>
+                            <td><code>resetToPage( pageUrl, options )</code></td>
+                            <td>Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator</td>
                           </tr>
                           
                         </tbody>
@@ -728,21 +736,36 @@
                       <div class="row example-box">                                    
                         <div class="col-md-12 col-xs-12">              
                           <p><em>index.html</em></p>
-<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">ons-navigator</span> <span class="attribute">page</span>=<span class="value">"page1.html"</span> <span class="attribute">title</span>=<span class="value">"Page 1"</span>&gt;</span><span class="tag">&lt;/<span class="title">ons-navigator</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">ons-navigator</span> <span class="attribute">page</span>=<span class="value">"page1.html"</span> <span class="attribute">title</span>=<span class="value">"Page 1"</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">ons-navigator</span>&gt;</span></code></pre>
 <p><em>page1.html</em></p>
-<pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span>"&gt;
-    &lt;<span class="title">h1</span>&gt;<span class="title">Hello</span>, <span class="title">I</span> <span class="title">am</span> <span class="title">Page</span> 1&lt;/<span class="title">h1</span>&gt;
-    &lt;<span class="title">ons</span>-<span class="title">button</span> <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">navigator</span>.<span class="title">pushPage</span>('<span class="title">page2</span>.<span class="title">html</span>', '<span class="title">Page</span> 2')"&gt;
-        <span class="title">Push</span> <span class="title">Page</span> 2
-    &lt;/<span class="title">ons</span>-<span class="title">button</span>&gt;
-&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"page center"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Page 1<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ons-button</span> 
+        <span class="attribute">ng-click</span>=<span class="value">"ons.navigator.pushPage('pages/navigator/page2.html', { title: 'Page 2' })"</span>&gt;</span>
+        Push Page 2
+    <span class="tag">&lt;/<span class="title">ons-button</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Pop<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ons-button</span> 
+        <span class="attribute">ng-click</span>=<span class="value">"ons.navigator.popPage()"</span>&gt;</span>
+        Pop Page
+    <span class="tag">&lt;/<span class="title">ons-button</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p><em>page2.html</em></p>
-<pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span>"&gt;
-    &lt;<span class="title">h1</span>&gt;<span class="title">Hello</span>, <span class="title">I</span> <span class="title">am</span> <span class="title">Page</span> 2&lt;/<span class="title">h1</span>&gt;
-    &lt;<span class="title">ons</span>-<span class="title">button</span> <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">navigator</span>.<span class="title">popPage</span>()"&gt;
-        <span class="title">Pop</span> <span class="title">Page</span>
-    &lt;/<span class="title">ons</span>-<span class="title">button</span>&gt;
-&lt;/<span class="title">div</span>&gt;</span></code></pre>
+<pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"page center"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">h1</span>&gt;</span>Page 2<span class="tag">&lt;/<span class="title">h1</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ons-button</span> 
+        <span class="attribute">ng-click</span>=<span class="value">"ons.navigator.pushPage('pages/navigator/page1.html', { title: 'Page 1' })"</span>&gt;</span>
+        Push Page 1
+    <span class="tag">&lt;/<span class="title">ons-button</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">h2</span>&gt;</span>Pop<span class="tag">&lt;/<span class="title">h2</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">ons-button</span> 
+        <span class="attribute">ng-click</span>=<span class="value">"ons.navigator.popPage()"</span>&gt;</span>
+        Pop Page
+    <span class="tag">&lt;/<span class="title">ons-button</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre>
               
                         </div>
                         
@@ -846,6 +869,18 @@
                             <td>The page that this tabbar-item points to</td>
                           </tr>
                           
+                          <span class="anchor" id="tabbar-item-icon"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>icon</td>
+                            <td>The icon of the tab. To use font-awesome icon, just set the icon name without &quot;fa-&quot; prefix. eg. to use &quot;fa-home&quot; icon, set it to &quot;home&quot;</td>
+                          </tr>
+                          
+                          <span class="anchor" id="tabbar-item-label"></span>
+                          <tr ng-repeat="attribute in directive.attributes">
+                            <td>label</td>
+                            <td>The label of the tab</td>
+                          </tr>
+                          
                           <span class="anchor" id="tabbar-item-active"></span>
                           <tr ng-repeat="attribute in directive.attributes">
                             <td>active</td>
@@ -881,15 +916,19 @@
                         <div class="col-md-12 col-xs-12">              
                           <p><em>index.html</em></p>
 <pre class="highlight"><code class="xml"><span class="tag">&lt;<span class="title">ons-tabbar</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">ons-tabbar-item</span> <span class="attribute">page</span>=<span class="value">"pages/tabbar/page1.html"</span>&gt;</span>
-        One
-    <span class="tag">&lt;/<span class="title">ons-tabbar-item</span>&gt;</span> 
-    <span class="tag">&lt;<span class="title">ons-tabbar-item</span> <span class="attribute">active</span>=<span class="value">"true"</span> <span class="attribute">page</span>=<span class="value">"pages/tabbar/page2.html"</span>&gt;</span>
-        Two
-    <span class="tag">&lt;/<span class="title">ons-tabbar-item</span>&gt;</span> 
-    <span class="tag">&lt;<span class="title">ons-tabbar-item</span> <span class="attribute">page</span>=<span class="value">"pages/tabbar/page3.html"</span>&gt;</span>
-        Three
-    <span class="tag">&lt;/<span class="title">ons-tabbar-item</span>&gt;</span> 
+    <span class="tag">&lt;<span class="title">ons-tabbar-item</span> 
+      <span class="attribute">icon</span>=<span class="value">"home"</span>
+      <span class="attribute">label</span>=<span class="value">"Home"</span>
+      <span class="attribute">page</span>=<span class="value">"pages/tabbar/page1.html"</span>
+      <span class="attribute">active</span>=<span class="value">"true"</span>&gt;</span><span class="tag">&lt;/<span class="title">ons-tabbar-item</span>&gt;</span> 
+    <span class="tag">&lt;<span class="title">ons-tabbar-item</span> 
+      <span class="attribute">icon</span>=<span class="value">"comment"</span>
+      <span class="attribute">label</span>=<span class="value">"Comments"</span>          
+      <span class="attribute">page</span>=<span class="value">"pages/tabbar/page2.html"</span>&gt;</span><span class="tag">&lt;/<span class="title">ons-tabbar-item</span>&gt;</span> 
+    <span class="tag">&lt;<span class="title">ons-tabbar-item</span> 
+      <span class="attribute">icon</span>=<span class="value">"gear"</span>
+      <span class="attribute">label</span>=<span class="value">"Settings"</span>
+      <span class="attribute">page</span>=<span class="value">"pages/tabbar/page3.html"</span>&gt;</span><span class="tag">&lt;/<span class="title">ons-tabbar-item</span>&gt;</span> 
 <span class="tag">&lt;/<span class="title">ons-tabbar</span>&gt;</span></code></pre>
 <p><em>page1.html</em></p>
 <pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span>"&gt;
@@ -1033,32 +1072,52 @@
                       <div class="row example-box">                                    
                         <div class="col-md-12 col-xs-12">              
                           <p><em>index.html</em></p>
-<pre class="highlight"><code class="brainfuck">&lt;<span class="comment">ons</span><span class="literal">-</span><span class="comment">sliding</span><span class="literal">-</span><span class="comment">menu</span> <span class="comment">behind</span><span class="literal">-</span><span class="comment">page="menu</span><span class="string">.</span><span class="comment">html"</span> <span class="comment">above</span><span class="literal">-</span><span class="comment">page="page1</span><span class="string">.</span><span class="comment">html"</span>&gt;
+<pre class="highlight"><code class="brainfuck">&lt;<span class="comment">ons</span><span class="literal">-</span><span class="comment">sliding</span><span class="literal">-</span><span class="comment">menu</span> 
+    <span class="comment">behind</span><span class="literal">-</span><span class="comment">page="menu</span><span class="string">.</span><span class="comment">html"</span> 
+    <span class="comment">above</span><span class="literal">-</span><span class="comment">page="page1</span><span class="string">.</span><span class="comment">html"</span>&gt;
 &lt;<span class="comment">/ons</span><span class="literal">-</span><span class="comment">sliding</span><span class="literal">-</span><span class="comment">menu</span>&gt;</code></pre>
 <p><em>menu.html</em></p>
-<pre class="highlight"><code class="brainfuck">&lt;<span class="comment">ons</span><span class="literal">-</span><span class="comment">list</span>&gt;
-    &lt;<span class="comment">ons</span><span class="literal">-</span><span class="comment">list</span><span class="literal">-</span><span class="comment">item</span> 
-        <span class="comment">ng</span><span class="literal">-</span><span class="comment">click="ons</span><span class="string">.</span><span class="comment">slidingMenu</span><span class="string">.</span><span class="comment">toggleMenu();</span> <span class="comment">ons</span><span class="string">.</span><span class="comment">slidingMenu</span><span class="string">.</span><span class="comment">setAbovePage('page1</span><span class="string">.</span><span class="comment">html')"</span>&gt;
-        <span class="comment">Page</span> <span class="comment">1</span>
-    &lt;<span class="comment">/ons</span><span class="literal">-</span><span class="comment">list</span><span class="literal">-</span><span class="comment">item</span>&gt;
-    &lt;<span class="comment">ons</span><span class="literal">-</span><span class="comment">list</span><span class="literal">-</span><span class="comment">item</span> 
-        <span class="comment">ng</span><span class="literal">-</span><span class="comment">click="ons</span><span class="string">.</span><span class="comment">slidingMenu</span><span class="string">.</span><span class="comment">toggleMenu();</span> <span class="comment">ons</span><span class="string">.</span><span class="comment">slidingMenu</span><span class="string">.</span><span class="comment">setAbovePage('page2</span><span class="string">.</span><span class="comment">html')"</span>&gt;
-        <span class="comment">Page</span> <span class="comment">2</span>
-    &lt;<span class="comment">/ons</span><span class="literal">-</span><span class="comment">list</span><span class="literal">-</span><span class="comment">item</span>&gt;
-&lt;<span class="comment">/ons</span><span class="literal">-</span><span class="comment">list</span>&gt;</code></pre>
+<pre class="highlight"><code class="actionscript">&lt;ons-page&gt;
+    &lt;ul <span class="class"><span class="keyword">class</span>="<span class="title">fa</span>-<span class="title">ul</span>"&gt;
+
+        &lt;<span class="title">ons</span>-<span class="title">list</span>-<span class="title">item</span> 
+            <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">toggleMenu</span>(); 
+            <span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">setAbovePage</span>('<span class="title">pages</span>/<span class="title">sliding_menu</span>/<span class="title">page1</span>.<span class="title">html</span>')"&gt;
+            &lt;<span class="title">i</span> <span class="title">class</span>="<span class="title">fa</span>-<span class="title">li</span> <span class="title">fa</span> <span class="title">fa</span>-<span class="title">home</span> <span class="title">fa</span>-<span class="title">lg</span>" <span class="title">style</span>="<span class="title">top</span>: 25%"&gt;&lt;/<span class="title">i</span>&gt;
+            <span class="title">Page</span> 1
+        &lt;/<span class="title">ons</span>-<span class="title">list</span>-<span class="title">item</span>&gt;
+
+        &lt;<span class="title">ons</span>-<span class="title">list</span>-<span class="title">item</span> 
+            <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">toggleMenu</span>(); 
+            <span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">setAbovePage</span>('<span class="title">pages</span>/<span class="title">sliding_menu</span>/<span class="title">page2</span>.<span class="title">html</span>')"&gt;
+            &lt;<span class="title">i</span> <span class="title">class</span>="<span class="title">fa</span>-<span class="title">li</span> <span class="title">fa</span> <span class="title">fa</span>-<span class="title">gear</span> <span class="title">fa</span>-<span class="title">lg</span>" <span class="title">style</span>="<span class="title">top</span>: 25%"&gt;&lt;/<span class="title">i</span>&gt;
+            <span class="title">Page</span> 2
+        &lt;/<span class="title">ons</span>-<span class="title">list</span>-<span class="title">item</span>&gt;
+
+    &lt;/<span class="title">ul</span>&gt;
+
+&lt;/<span class="title">ons</span>-<span class="title">page</span>&gt;</span></code></pre>
 <p><em>page1.html</em></p>
-<pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span> <span class="title">bg</span>-<span class="title">gray</span>"&gt;
-    &lt;<span class="title">h1</span>&gt;<span class="title">Hello</span>, <span class="title">I</span> <span class="title">am</span> <span class="title">Page</span> 1&lt;/<span class="title">h1</span>&gt;
-    &lt;<span class="title">ons</span>-<span class="title">button</span> <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">toggleMenu</span>()"&gt;
+<pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span>"&gt;
+    &lt;<span class="title">h1</span>&gt;<span class="title">Page</span> 1&lt;/<span class="title">h1</span>&gt;
+    &lt;<span class="title">ons</span>-<span class="title">button</span> 
+        <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">toggleMenu</span>()"&gt;
         <span class="title">Toggle</span> <span class="title">Menu</span>
     &lt;/<span class="title">ons</span>-<span class="title">button</span>&gt;
+
+    &lt;<span class="title">p</span>&gt;
+        <span class="title">To</span> <span class="title">close</span> <span class="title">and</span> <span class="title">open</span> <span class="title">menu</span>,
+    &lt;/<span class="title">p</span>&gt;
+    &lt;<span class="title">p</span>&gt;
+        <span class="title">You</span> <span class="title">can</span> <span class="title">also</span> <span class="title">swipe</span> <span class="title">the</span> <span class="title">page</span> <span class="title">left</span> <span class="title">and</span> <span class="title">right</span>.
+    &lt;/<span class="title">p</span>&gt;
 &lt;/<span class="title">div</span>&gt;</span></code></pre>
 <p><em>page2.html</em></p>
-<pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span> <span class="title">bg</span>-<span class="title">orange</span>"&gt;
-    &lt;<span class="title">h1</span>&gt;<span class="title">Hello</span>, <span class="title">I</span> <span class="title">am</span> <span class="title">Page</span> 2&lt;/<span class="title">h1</span>&gt;
+<pre class="highlight"><code class="axapta">&lt;<span class="keyword">div</span> <span class="class"><span class="keyword">class</span>="<span class="title">page</span> <span class="title">center</span>"&gt;
+    &lt;<span class="title">h1</span>&gt;<span class="title">Page</span> 2&lt;/<span class="title">h1</span>&gt;
     &lt;<span class="title">ons</span>-<span class="title">button</span> <span class="title">ng</span>-<span class="title">click</span>="<span class="title">ons</span>.<span class="title">slidingMenu</span>.<span class="title">toggleMenu</span>()"&gt;
         <span class="title">Toggle</span> <span class="title">Menu</span>
-    &lt;/<span class="title">ons</span>-<span class="title">button</span>&gt;    
+    &lt;/<span class="title">ons</span>-<span class="title">button</span>&gt;   
 &lt;/<span class="title">div</span>&gt;</span></code></pre>
               
                         </div>
@@ -1133,9 +1192,9 @@
                         <div class="col-md-12 col-xs-12">              
                           <p><em>index.html</em></p>
 <pre class="highlight"><code class="java">&lt;ons-scroller <span class="class"><span class="keyword">class</span>="<span class="title">center</span>"&gt;
-    &lt;<span class="title">h1</span>&gt;<span class="title">Hi</span>! <span class="title">I</span> <span class="title">am</span> <span class="title">now</span> <span class="title">scrollable</span>!&lt;/<span class="title">h1</span>&gt;
+    &lt;<span class="title">h2</span>&gt;<span class="title">I</span> <span class="title">am</span> <span class="title">now</span> <span class="title">scrollable</span>!&lt;/<span class="title">h2</span>&gt;
     &lt;<span class="title">h3</span>&gt;<span class="title">Happy</span> <span class="title">scrolling</span>!&lt;/<span class="title">h3</span>&gt;
-&lt;/<span class="title">ons</span>-<span class="title">scroller</span>&gt;</span></code></pre>
+  &lt;/<span class="title">ons</span>-<span class="title">scroller</span>&gt;</span></code></pre>
               
                         </div>
                         
