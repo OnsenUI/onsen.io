@@ -52,6 +52,13 @@ docpadConfig = {
 					}
 				}]
 			}, {
+				name: 'page',
+				description: {
+					en: 'Should be used as root component of each page',
+					ja: 'ページの切り替えを管理するタブ機能を提供します。'
+				},
+				methods: []
+			}, {
 				name: 'navigator',
 				description: {
 					en: 'Manages the page navigation backed by page stack.',
