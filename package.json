@@ -33,10 +33,10 @@
     "npm": "1.1.x"
   },
   "dependencies": {
-    "docpad": "~6.59.6",
+    "docpad": "~6.63.0",
     "docpad-plugin-coffeescript": "~2.2.3",
     "docpad-plugin-eco": "~2.0.3",
-    "docpad-plugin-marked": "~2.1.2",
+    "docpad-plugin-marked": "~2.2.0",
     "docpad-plugin-partials": "~2.8.1",
     "docpad-plugin-stylus": "~2.5.0",
     "docpad-plugin-text": "~2.3.2",
@@ -45,17 +45,27 @@
     "bal-util": "~1.15.3",
     "underscore": "~1.4.3",
     "docpad-plugin-coffeekup": "~2.2.0",
-    "docpad-plugin-handlebars": "~2.2.2",
-    "docpad-plugin-highlightjs": "~2.1.9"
+    "docpad-plugin-handlebars": "~2.3.0",
+    "docpad-plugin-highlightjs": "~2.2.0"
   },
   "devDependencies": {
-    "docpad-plugin-livereload": "~2.5.4",
+    "docpad-plugin-livereload": "~2.5.6",
     "grunt": "~0.4.2",
     "grunt-contrib-watch": "~0.4.2",
-    "grunt-contrib-compass": "~0.7.0"
+    "grunt-contrib-compass": "~0.7.0",
+    "docpad-plugin-marked": "~2.2.0",
+    "docpad-plugin-coffeescript": "~2.2.3",
+    "docpad-plugin-partials": "~2.8.1",
+    "docpad-plugin-text": "~2.3.2",
+    "docpad-plugin-handlebars": "~2.3.0",
+    "docpad-plugin-eco": "~2.0.3",
+    "docpad-plugin-highlightjs": "~2.2.0",
+    "docpad-plugin-stylus": "~2.5.0",
+    "docpad": "~6.63.0",
+    "docpad-plugin-coffeekup": "~2.2.0"
   },
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
-      "start": "node_modules/docpad/bin/docpad-server"
+    "start": "node_modules/docpad/bin/docpad-server"
   }
 }
