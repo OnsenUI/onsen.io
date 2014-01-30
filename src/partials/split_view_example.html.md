@@ -7,7 +7,7 @@ encoding: 'utf8'
     <ons-split-view 
         secondary-page="secondary.html" 
         main-page="page1.html" 
-        main-page-width="70" 
+        main-page-width="70%" 
         collapse="width 650px">
     </ons-split-view>
 
