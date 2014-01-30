@@ -1458,6 +1458,10 @@ limitations under the License.
 						}.bind(this);
 
 						scope.ons.screen.dismissPage = function() {
+							if(screenItems.length < 2){
+								// cant dismiss anymore
+								return;
+							}
 							var currentPage = screenItems.pop();
 							this.animateOutBehindPage();
 							currentPage.attr("class", "screen-page transition unmodal");
@@ -1956,6 +1960,9 @@ limitations under the License.
 
 					shouldCollapse: function() {
 						var orientation = window.orientation;
+						if(orientation === undefined ){
+							orientation = window.innerWidth > window.innerHeight ? 90 : 0;
+						}
 
 						switch (scope.collapse) {
 							case undefined:
