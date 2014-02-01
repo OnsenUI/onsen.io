@@ -75,6 +75,7 @@ body {
   border-top: 3px solid #ff1a33;
   min-width: 1100px;
   text-align: center;
+  -webkit-text-size-adjust: 100%;
 }
 body:after {
   content: "";
@@ -225,7 +226,7 @@ a img:hover {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  padding: 99px 10px 10px 55px;
+  padding: 99px 10px 10px 56px;
   width: 392px;
   height: 694px;
 }
@@ -465,11 +466,11 @@ body#home #keyvisual {
   box-sizing: border-box;
   height: 600px;
   margin-bottom: 100px;
+  position: relative;
 }
 body#home #keyvisual > div {
   background: url(/images/index/va_device.png) no-repeat 518px 50px;
   margin: 0 auto;
-  position: relative;
   width: 1100px;
   height: 100%;
 }
@@ -698,8 +699,9 @@ body#getting_started .examples:after {
 }
 body#getting_started .examples li {
   float: left;
-  margin: 25px;
-  text-align: center;  
+  margin: 0 auto 40px;
+  text-align: center;
+  width: 50%;
 }
 body#getting_started .examples li h3 {
   font-size: 20px;
@@ -716,4 +718,40 @@ body#getting_started .examples li .btn-download {
 body#getting_started #run b {
   font-weight: 700;
   margin-right: 15px;
+}
+
+body#docs ul.segment-control {
+  font-size: 0px;
+  text-align: center;
+}
+body#docs ul.segment-control > li {
+  display: inline-block;
+  font-size: 1.45rem;
+  font-weight: 200;
+  width: 120px;
+  height: 37px;
+  border: 1px solid #ccc;
+  margin-left: -1px;
+  border-radius: 0px;
+  text-align: center;
+  color: #666;
+  line-height: 37px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  transition: all 200ms linear, color 200ms linear, font-weight 200ms linear, border-color 200ms linear;
+}
+body#docs ul.segment-control > li:first-child {
+  border-radius: 4px 0 0 4px;
+}
+body#docs ul.segment-control > li:last-child {
+  border-radius: 0 4px 4px 0;
+}
+body#docs ul.segment-control > li.current {
+  background-color: #DB4138;
+  color: white;
+  border-color: #992C28;
+  font-weight: 500;
+  transition: none;
+  position: relative;
+  z-index: 1;
 }

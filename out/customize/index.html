@@ -10,7 +10,7 @@
 	<meta name="viewport" content="width=device-width" />
 
 	<!-- Site Properities -->
-	<title>Getting Started | Onsen UI</title>
+	<title>Customize | Onsen UI</title>
 	<meta name="description" content="Onsen UI, HTML5 UI framework for modern mobile application." />
 	<meta name="keywords" content="onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast." />
 
@@ -36,7 +36,7 @@
 	<script src="http://code.jquery.com/jquery-2.0.2.min.js"></script>
 </head>
 
-<body id="getting_started">
+<body id="customize">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
 	<![endif]-->
@@ -46,10 +46,10 @@
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<nav>
 			<ul class="gnav">
-				<li class="current"><a href="/getting_started/">Getting Started</a></li>
+				<li class=""><a href="/getting_started/">Getting Started</a></li>
 				<li class=""><a href="/howtouse/">How to Use</a></li>
 				<li class=""><a href="/docs/">Reference</a></li>
-				<li class=""><a href="/customize/">Customize</a></li>
+				<li class="current"><a href="/customize/">Customize</a></li>
 				<li class=""><a href="/forum.html">Forum</a></li>
 				<li><a href="http://blog.onsenui.io">Blog</a></li>
 			</ul>
@@ -59,113 +59,13 @@
 
 	<article class="common">
 		<header class="article-info">
-			<h1>Getting Started</h1> 	
+			<h1>Customize</h1> 	
 
-			
-				<nav>
-					<ol class="toc">
-					
-						<li><a href="#tutorial">Video tutorial</a></li>
-					
-						<li><a href="#template">Choose a template</a></li>
-					
-						<li><a href="#nodejs">Install nodejs</a></li>
-					
-						<li><a href="#run">Run the project</a></li>
-					
-						<li><a href="#addfeature">Start adding your awesome app feature</a></li>
-					
-						<li><a href="#build">Building your app</a></li>
-					
-						<li><a href="#monaca">Use with Monaca</a></li>
-					
-					</ol>
-				</nav>
 			
 		</header>
 
 		<div class="content">
-			<div id="tutorial" class="section-h2">
-	<h2>1.Video tutorial</h2>
-	<iframe src="//www.youtube-nocookie.com/embed/Qo6eJ0ilD8Q?rel=0" width="810" height="456" frameborder="0" allowfullscreen></iframe>
-</div>
-
-
-<div id="template" class="section-h2">
-	<h2>2.Choose a template</h2>
-	<p style="margin-bottom: 40px;">
-		Select a template that best suits your project. Then click Download.
-	</p>
-
-	<ul class="examples">
-		<li>
-			<h3>Minimum</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/minimum/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/minimum.zip">Download</a>
-		</li>
-		<li>
-			<h3>Sliding Menu</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/sliding_menu/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/sliding_menu.zip">Download</a>
-		</li>
-	</ul>
-
-	<ul class="examples">
-		<li>
-			<h3>Tab bar</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/tab_bar/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/tab_bar.zip">Download</a>
-		</li>
-		<li>
-			<h3>Master-Detail</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/master_detail/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/master_detail.zip">Download</a>
-		</li>		
-	</ul>
-</div>
-
-
-<div id="nodejs" class="section-h2">
-	<h2>3.Install nodejs</h2>
-	<p>Download and run the installer from <a href="http://nodejs.org" title="">nodejs.org</a></p>	
-</div>
-
-<div id="run" class="section-h2">
-	<h2>4.Run the project</h2>
-	<p>Extract the zip file you just downloaded.</p>
-	<p>Open the terminal (command line) and cd to the extracted folder.</p>
-		
-	<p class="highlighted"><b>Type: </b>scripts/web-server.js</p>
-
-	<p>Then navigate your browser to</p>
-	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
-
-</div>
-
-<div id="addfeature" class="section-h2">
-	<h2>5.Start adding your awesome app feature</h2>
-
-	<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
-	<p>You may want to look at &quot;demo&quot; folder for sample codes.<br />Run the demo code by navigating your browser to:</p>
-	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
-</div>
-
-<div id="build" classs="section-h2">
-	<h2>6. Build your app:</h2>	
-	<p>You can use Cordova to build Onsen UI project</p>
-	<p class="highlighted"><b>Type: </b>npm install -g cordova</p>
-	<p class="highlighted">cordova create MyApp && cd MyApp</p>
-	<p>copy all the files in the <strong>app</strong> folder of the template to MyApp/www folder</p>
-	<p class="highlighted">cordova platform add android</p>
-	<p class="highlighted">cordova build android</p>
-	<p class="highlighted">cordova emulate android</p>
-</div>
-
-<div id="monaca" classs="section-h2">
-	<h2>Use with Monaca</h2>
-	<p><a href="http://monaca.mobi/" style="color: #439ECC">Monaca</a> is a leading HTML5 development platform that gives developers the power to create rich UI PhoneGap apps that run at native speed. When used with Monaca, it is simple to add backend features and device support, resulting in a publishable app. <a style="color: #439ECC" href="http://docs.monaca.mobi/en/onsenui/">Here</a> is how to use Onsen UI in Monaca. 
-	</p>	
-</div>
+			<h2>Customize</h2>
 		</div>
 	</article>
 
