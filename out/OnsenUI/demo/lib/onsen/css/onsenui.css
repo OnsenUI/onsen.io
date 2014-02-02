@@ -1,4 +1,4 @@
-/*! onsenui - v0.7.0 - 2014-01-30 */
+/*! onsenui - v0.7.0 - 2014-02-02 */
 /*
 Copyright 2013 ASIAL CORPORATION, KRUY VANNA, HIROSHI SHIKATA
 
@@ -263,6 +263,27 @@ ons-screen {
   height: 100%;
 }
 
+.screen-page__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.onsen_screen-black-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;  
+  background-color: black;
+}
+
+.onsen_screen-black-mask.hide {
+  opacity: 0;  
+}
+
 .screen-page.center {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);   
@@ -276,14 +297,15 @@ ons-screen {
     box-shadow: 0 -10px 5px -5px rgba(0, 0, 0, 0.2);    
 }
 
-.screen-page.transition .page{
+.screen-page.transition .screen-page__container{
   -webkit-transition-duration: 400ms;
   transition-duration: 400ms;
   -webkit-animation-timing-function: cubic-bezier(.1, .7, .1, 1);
   animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.screen-page.unmodal .page {
+
+.screen-page.unmodal .screen-page__container {
     opacity: 1;
 }
 
@@ -301,7 +323,7 @@ ons-screen {
     transform: translate3d(0, -10%, 0);    
 }
 
-.screen-page.modal-behind .page{
+.screen-page.modal-behind .screen-page__container{
   opacity: 0.9;
 }
 /*
@@ -320,6 +342,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+
+.navigator-toolbar__content {
+  width: 100%;
+  height: 100%;
+}
 
 .onsen_navigator-pager {
   position: absolute;
@@ -378,9 +405,12 @@ limitations under the License.
     animation-timing-function: cubic-bezier(.1, .7, .1, 1);
 }
 
-.onsen_navigator-title {
-    width: 60%;
-    left: 20%;
+.onsen_navigator-title {    
+  width: 44%;
+  left: 28%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .onsen_navigator-title.animate-right {
@@ -398,8 +428,10 @@ limitations under the License.
   transform: translateX(-36%); opacity: 0;
 }
 
-.topcoat-navigation-bar__item {
+.onsen_navigator-item {
   position: absolute !important;
+  top: 0;
+  bottom: 1px;
 }
 
 /* TODO: */
@@ -428,8 +460,7 @@ limitations under the License.
 }
 
 
-.onsen_navigator__left-button-container {  
-  height: 2.5rem;
+.onsen_navigator__left-button-container {   
   left: 0;
   width: 20px;
   text-align: right;
@@ -471,7 +502,8 @@ limitations under the License.
     width: 25%;
     left: 0;
     text-align: left !important;
-    margin-left: 22px !important;
+    margin-left: 25px !important;
+    padding-left: 0 !important;
 }
 
 .onsen_navigator-back-label.transition {
@@ -1062,18 +1094,19 @@ ons-navigator {
     overflow: hidden;
 }
 
-
-.onsen_navigation-bar-height {
-    line-height: 2.5rem;
-}
-
 .topcoat-navigation-bar {    
-    border-bottom: 1px solid lightgray;;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+
 }
 
 #right-section-icon {
-    min-height: 40px;
+    height: 100%;
     display: block;
+}
+
+#left-section {
+    height: 100%;
 }
 .page {
     position: absolute;
@@ -1195,6 +1228,7 @@ limitations under the License.
   bottom: 0;
   left: 0;
   right: 0;
+  opacity: 0;
   background-color: black;
 }
 
@@ -1210,8 +1244,8 @@ limitations under the License.
 }
 
 .open{    
-    -webkit-transform: translate3d(70%, 0, 0);    
-    transform: translate3d(70%, 0, 0);
+    -webkit-transform: translate3d(92%, 0, 0);    
+    transform: translate3d(92%, 0, 0);
 }
 
 .close{    
@@ -1225,12 +1259,14 @@ limitations under the License.
 }
 
 .behind {
-    -webkit-transform: translate3d(-10%, 0, 0);
+    opacity: 0; /* initially hidden */
+    -webkit-transform: translate3d(-10%, 0, 0); /* initially hidden */
     transform: translate3d(-10%, 0, 0);
+    width: 100% !important;
 }
 
 .above {
-    box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);
+    /*box-shadow: -10px 0 10px -5px rgba(0, 0, 0, 0.2);*/
 }
 
 .full-screen {
@@ -1263,6 +1299,8 @@ limitations under the License.
 */
 
 .secondary {
+	opacity: 0;
+	width: 100%;
     -webkit-transform: translate3d(-10%, 0, 0);
     transform: translate3d(-10%, 0, 0);
     overflow: hidden;
