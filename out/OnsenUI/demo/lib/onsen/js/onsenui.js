@@ -88,7 +88,7 @@ angular.module("templates/navigator.tpl", []).run(["$templateCache", function($t
     "			</div>\n" +
     "		</div>	\n" +
     "	</div>\n" +
-    "	<div class=\"relative navigator-content\">\n" +
+    "	<div class=\"relative navigator-content topcoat-page__bg\">\n" +
     "		\n" +
     "	</div>    \n" +
     "	\n" +
@@ -6282,12 +6282,6 @@ Modernizr.load=function(){yepnope.apply(window,[].slice.call(arguments,0));};
 		Modernizr.addTest(
 			'overflowtouch',
 			window.getComputedStyle && window.getComputedStyle(elem).getPropertyValue('-webkit-overflow-scrolling') == 'touch');
-	});
-
-	yepnope({
-		test: Modernizr.overflowtouch,
-		// nope: ['lib/onsen/css/polyfill/sliding_menu_polyfill.css']
-		nope: ['plugins/onsenui/0.6.0/css/polyfill/sliding_menu_polyfill.css']
 	});
 
 })();

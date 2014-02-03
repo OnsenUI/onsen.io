@@ -18,6 +18,7 @@ is now
 	});
 
 
+
 ## ons-tabbar-item
 
 	<ons-tab-bar-item>
@@ -29,3 +30,10 @@ is now
 	<ons-tab-bar-item
 		label="YOUR LABEL HERE">
 	</ons-tab-bar-item>
+
+you can also add icon as well
+
+	<ons-tab-bar-item
+		label="YOUR LABEL HERE"
+		icon="camera">
+	</ons-tab-bar-item>	

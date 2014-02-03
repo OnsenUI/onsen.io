@@ -19,6 +19,7 @@
 
 	<!-- DocPad Styles + Our Own -->	
 	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/styles/font_awesome/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/styles/highlight_github.css">
 
 	<!-- Icons -->
@@ -85,7 +86,99 @@
 		</header>
 
 		<div class="content">
-			<div id="tutorial" class="section-h2">
+			<style type="text/css" media="screen">
+
+	::-webkit-scrollbar {
+	  	width: 4px;
+	  	height: 2px;
+	}
+	   
+	::-webkit-scrollbar-track {
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+	    border-radius: 10px;
+	    height: 2px;
+	}
+	   
+	::-webkit-scrollbar-thumb {
+	    border-radius: 10px;
+	    height: 2px;
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	}
+
+	.template-iframe {
+	  width: 250px;
+	  height: 450px;
+	  box-shadow: 0px 0px 10px #ccc;
+	}
+
+	.template-iframe-landscape {
+	  width: 500px;
+	  height: 300px;
+	  box-shadow: 0px 0px 10px #ccc;
+	}
+
+
+	.templates-container {
+		position: relative;
+		overflow-y: hidden;
+		overflow-x: scroll;						
+	}
+
+	.flex {												
+		width: 2600px;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.flex-item {
+		margin: 15px;
+		display: inline-block;
+	}
+
+	.handle {
+		position: absolute;
+		top: 45%;
+		padding: 5px;
+		border-radius: 4px;
+		background-color: rgba(0,0,0,0.5);
+	}
+
+	.handle.left{
+		left: 10px;
+	}
+
+	.handle.right {					
+		right: 10px;
+	}
+
+	.center {
+		align-self: center;
+	}
+
+	.template-title {
+		text-align: center;
+		font-weight: bold !important;
+		color: #ccc !important;
+		margin: 10px;
+	}
+
+	.btn-download {
+		margin: 15px auto;
+		display: block;
+		width: 150px;
+	}
+
+	.blue-link {
+		color: #4F82FF;
+	}
+
+	.blue-link:visited {
+		color: #2251C3;
+	}
+	
+</style>
+
+<div id="tutorial" class="section-h2">
 	<h2>1.Video tutorial</h2>
 	<iframe src="//www.youtube-nocookie.com/embed/Qo6eJ0ilD8Q?rel=0" width="810" height="456" frameborder="0" allowfullscreen></iframe>
 </div>
@@ -94,34 +187,78 @@
 <div id="template" class="section-h2">
 	<h2>2.Choose a template</h2>
 	<p style="margin-bottom: 40px;">
-		Select a template that best suits your project. Then click Download.
+		Try before you buy! Play with the templates below live! When you find one that suits you, click Download button below it.
 	</p>
 
-	<ul class="examples">
-		<li>
-			<h3>Minimum</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/minimum/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/minimum.zip">Download</a>
-		</li>
-		<li>
-			<h3>Sliding Menu</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/sliding_menu/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/sliding_menu.zip">Download</a>
-		</li>
-	</ul>
+			
+	<div class="templates-container">		
+		<div class="flex">
+			<div class="flex-item center">
+				<i class="fa fa-circle"></i>
+			</div>
 
-	<ul class="examples">
-		<li>
-			<h3>Tab bar</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/tab_bar/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/tab_bar.zip">Download</a>
-		</li>
-		<li>
-			<h3>Master-Detail</h3>
-			<div class="simulator-small"><iframe src="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/master_detail/app/" width="214" height="324"></iframe></div>
-			<a class="btn-download" href="http://kruyvanna.github.io/Blog_Demos/onsenui_project_templates/master_detail.zip">Download</a>
-		</li>		
-	</ul>
+			<div class="flex-item">
+				<h3 class="template-title">Minimum</h3>
+				<div class="template-iframe">
+					<iframe src="/OnsenUI/project_templates/minimum/app/" width="250" height="450"></iframe>
+				</div>			
+				<a class="btn-download" href="/OnsenUI/project_templates/minimum.zip">Download</a>
+			</div>
+			
+			<div class="flex-item">
+				<h3 class="template-title">Sliding Menu</h3>
+				<div class="template-iframe">
+					<iframe src="/OnsenUI/project_templates/sliding_menu/app/" width="250" height="450"></iframe>
+				</div>						
+				<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu.zip">Download</a>
+			</div>
+
+			<div class="flex-item">
+				<h3 class="template-title">Sliding Menu & Navigator</h3>
+				<div class="template-iframe">
+					<iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="250" height="450"></iframe>
+				</div>						
+				<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a>
+			</div>
+
+			<div class="flex-item">
+				<h3 class="template-title">Tab bar</h3>
+				<div class="template-iframe">
+					<iframe src="/OnsenUI/project_templates/tab_bar/app/" width="250" height="450"></iframe>
+				</div>	
+				<a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a>
+			</div>
+			
+			<div class="flex-item">
+				<h3 class="template-title">Master-Detail</h3>
+				<div class="template-iframe">
+					<iframe src="/OnsenUI/project_templates/master_detail/app/" width="250" height="450"></iframe>
+				</div>	
+				<a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a>
+			</div>		
+
+			<div class="flex-item center">
+				<h3 class="template-title">Split View</h3>
+				<div class="template-iframe-landscape">
+					<iframe src="/OnsenUI/project_templates/split_view/app/" width="500" height="300"></iframe>
+				</div>	
+				<a class="btn-download" href="/OnsenUI/project_templates/split_view.zip">Download</a>
+			</div>		
+
+			<div class="flex-item center">
+				<h3 class="template-title">Split View & Navigator</h3>
+				<div class="template-iframe-landscape">
+					<iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="500" height="300"></iframe>
+				</div>	
+				<a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a>
+			</div>	
+
+			<div class="flex-item center">
+				<i class="fa fa-circle"></i>
+			</div>
+		</div>		
+	</div>		
+
 </div>
 
 
@@ -146,7 +283,12 @@
 	<h2>5.Start adding your awesome app feature</h2>
 
 	<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
-	<p>You may want to look at &quot;demo&quot; folder for sample codes.<br />Run the demo code by navigating your browser to:</p>
+	<p>You may want to download the <a class="blue-link" href="/OnsenUI/demo.zip" title="demos">Demos</a> for sample codes.
+	</p>
+
+	<p>To run the demo</p>
+	<p class="highlighted"><b>Type: </b>scripts/web-server.js</p>
+	<p>Then navigate your browser to</p>		
 	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
 </div>
 
