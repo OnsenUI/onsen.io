@@ -265,6 +265,43 @@ p.highlighted a:active {
   margin-bottom: 30px;
 }
 
+ul.segment-control {
+  font-size: 0px;
+  display: inline-block;
+  padding-left: 1px;
+}
+ul.segment-control > li {
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 200;
+  width: 120px;
+  height: 37px;
+  border: 1px solid #ccc;
+  margin-left: -1px;
+  border-radius: 0px;
+  text-align: center;
+  color: #666;
+  line-height: 37px;
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  transition: all 200ms linear, color 200ms linear, font-weight 200ms linear, border-color 200ms linear;
+}
+ul.segment-control > li:first-child {
+  border-radius: 4px 0 0 4px;
+}
+ul.segment-control > li:last-child {
+  border-radius: 0 4px 4px 0;
+}
+ul.segment-control > li.current {
+  background-color: #DB4138;
+  color: white;
+  border-color: #992C28;
+  font-weight: 500;
+  transition: none;
+  position: relative;
+  z-index: 1;
+}
+
 header.common {
   border-bottom: 1px solid #e7e7e7;
   height: 60px;
@@ -718,40 +755,4 @@ body#getting_started .examples li .btn-download {
 body#getting_started #run b {
   font-weight: 700;
   margin-right: 15px;
-}
-
-body#docs ul.segment-control {
-  font-size: 0px;
-  text-align: center;
-}
-body#docs ul.segment-control > li {
-  display: inline-block;
-  font-size: 1.45rem;
-  font-weight: 200;
-  width: 120px;
-  height: 37px;
-  border: 1px solid #ccc;
-  margin-left: -1px;
-  border-radius: 0px;
-  text-align: center;
-  color: #666;
-  line-height: 37px;
-  cursor: pointer;
-  -webkit-font-smoothing: antialiased;
-  transition: all 200ms linear, color 200ms linear, font-weight 200ms linear, border-color 200ms linear;
-}
-body#docs ul.segment-control > li:first-child {
-  border-radius: 4px 0 0 4px;
-}
-body#docs ul.segment-control > li:last-child {
-  border-radius: 0 4px 4px 0;
-}
-body#docs ul.segment-control > li.current {
-  background-color: #DB4138;
-  color: white;
-  border-color: #992C28;
-  font-weight: 500;
-  transition: none;
-  position: relative;
-  z-index: 1;
 }

@@ -15,7 +15,7 @@
 	<meta name="keywords" content="onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast." />
 
 	<!-- DocPad Meta -->
-	<meta name="generator" content="DocPad v6.63.0" />
+	<meta name="generator" content="DocPad v6.63.3" />
 
 	<!-- DocPad Styles + Our Own -->	
 	<link rel="stylesheet" href="/css/style.css">
@@ -47,8 +47,7 @@
 		<nav>
 			<ul class="gnav">
 				<li class=""><a href="/getting_started/">Getting Started</a></li>
-				<li class=""><a href="/howtouse/">How to Use</a></li>
-				<li class="current"><a href="/docs/">Reference</a></li>
+				<li class="current"><a href="/docs/">Docs</a></li>
 				<li class=""><a href="/customize/">Customize</a></li>
 				<li class=""><a href="/forum.html">Forum</a></li>
 				<li><a href="http://blog.onsenui.io">Blog</a></li>
@@ -817,48 +816,8 @@
       </div>
       <div class="col-md-9 col-xs-9 right-side">
 
-        <div class="theme-switch" style="margin-top: 50px;">
+        <div class="theme-switch" style="margin-top: 50px; text-align: center">
 
-          <script type="text/javascript">
-          // theme switcher
-          $(function() {
-            var themes = {
-              ios : 'lib/onsen/css/topcoat-mobile-onsen-ios7.css',
-              android : 'lib/onsen/css/topcoat-mobile-onsen-android4_4.css'
-            };
-
-            $('ul.theme-switch-control.segment-control > li').click(function() {
-              $('ul.theme-switch-control.segment-control > li').removeClass('current');
-              $(this).addClass('current');
-
-              var themeName = $(this).data('theme-name');
-              setTimeout(function() {
-                changeTheme(themeName);
-              }, 200);
-            });
-
-            function changeTheme(themeName) {
-              $('div.fit-iphone-frame > iframe').each(function() {
-                $('link[rel=stylesheet]', this.contentDocument).filter(function() {
-                  console.log(this.href);
-                  return isThemeCSSLink(this);
-                }).each(function() {
-                  this.href = themes[themeName];
-                })
-              });
-            }
-
-            function isThemeCSSLink(linkElement) {
-              var href = linkElement.href;
-              for (var key in themes) {
-                if (href.indexOf(themes[key], href.length - themes[key].length) !== -1) {
-                  return true;
-                }
-              }
-              return false;
-            }
-          });
-          </script>
 
           <ul class="theme-switch-control segment-control">
             <li class="current" data-theme-name="ios">iOS</li>
@@ -3756,6 +3715,7 @@
     </div>
   </div>
 
+<script src="/scripts/theme_switcher.js"></script>
 <script src="/scripts/navigation_highlighter.js"></script>
 <script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
 		</div>
@@ -3765,8 +3725,7 @@
 		<nav>
 			<ul class="gnav">
 				<li><a href="/getting_started/">Getting Started</a></li>
-				<li><a href="/howtouse/">How to Use</a></li>
-				<li><a href="/docs/">Reference</a></li>
+				<li><a href="/docs/">Docs</a></li>
 				<li><a href="/customize/">Customize</a></li>
 				<li><a href="/forum.html">Forum</a></li>
 				<li><a href="http://blog.onsenui.io">Blog</a></li>

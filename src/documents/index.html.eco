@@ -36,7 +36,14 @@ page: 'home'
 			<div class="simulator"><iframe id="theme-iframe" src="http://kruyvanna.github.io/Blog_Demos/onsen_ui/kitchen_sink_with_themes/kitchen_sink_blue.html" width="284" height="500"></iframe></div>
 			<div class="feature-cont">
 				<h2>Customizable</h2>
-				<p>A powerful feature of Onsen UI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code.</p>
+                <p>A powerful feature of Onsen UI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code. See <a href="/cutomize/">Customize page</a> which go into details.</p>
+
+                <ul class="segment-control theme-switch-control" data-demo-iframe-selector="div.simulator > iframe">
+				  <li class="current">iOS</li>
+				  <li>Android</li>
+				</ul>
+
+
 				<ul class="selecttheme">
 				  <li id="blue" class="current">Blue</li>
 					<li id="green">Green</li>
@@ -109,3 +116,4 @@ $(function() {
 	});
 });
 </script>
+<script type="text/javascript" src="/scripts/theme_switcher.js"></script>
