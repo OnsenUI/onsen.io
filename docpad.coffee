@@ -398,7 +398,8 @@ docpadConfig = {
 						en: 'The group name of this radio button'
 					}
 				}],
-				methods: []
+				methods: [],
+				note: 'Square box may be displayed for radio button in Android 2.3'
 			}, {
 				name: 'checkbox',
 				description: {
@@ -431,7 +432,8 @@ docpadConfig = {
 				examplePartial: 'select_example',
 				demoURL: 'OnsenUI/demo/select_demo.html',
 				attributes: [],
-				methods: []
+				methods: [],
+				note: 'Ons-select does not work in Android 2.3.'
 			}, {
 				name: 'text-input',
 				description: {
@@ -555,7 +557,8 @@ docpadConfig = {
 						en: 'Wether to spin the icon. Valid values are [true/false]'
 					}
 				}],
-				methods: []
+				methods: [],
+				note: 'For Android 4.3 and earlier, and iOS6 and earlier, if Flip, Rotate, Spin etc. effects are applied to ons-icon, the app may become unstable when scrolling.'
 			}, {
 				name: 'row',
 				description: {
@@ -567,7 +570,8 @@ docpadConfig = {
 						en: "Short hand attribute for aligning all colum in a row. Valid values are [top/bottom/center]"
 					}
 				}],
-				methods: []
+				methods: [],
+				note: 'For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.'
 			}, {
 				name: 'col',
 				description: {
@@ -591,7 +595,8 @@ docpadConfig = {
 						en: 'Offset the column. Valid values are [10/20/25/33/67/75/80/90]'
 					}
 				}],
-				methods: []
+				methods: [],
+				note: 'For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.'
 			}];	
 
 		# Specify some site properties

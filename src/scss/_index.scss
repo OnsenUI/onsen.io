@@ -117,6 +117,8 @@ header.common {
 
 		&#feature-customize {
 			@include box-sizing(border-box);
+
+			height: 690px;
 			.feature-cont {
 				padding: 118px 400px 0 0;
 			}
@@ -125,43 +127,61 @@ header.common {
 				top: -100px;
 				right: 0;
 			}
-			.selecttheme {
-				background: url(/images/index/top_image02_1.png) no-repeat 135px 0;
-				margin-top: 80px;
-				padding:  40px 0 60px 400px;
-				li {
-					background-color: #999;
-					border: 3px solid #fff;
-					border-radius: 35px;
-					@include box-shadow(0 0 0 7px rgba(229,229,229,0));
-					@include transition(box-shadow 0.5s);
-					cursor: pointer;
-					display: inline-block;
-					margin: 0 14px 36px;
-					text-indent: -9999px;
-					width: 50px;
-					height: 50px;
+			#choose-theme {
+				position: relative;
+				width: 740px;
+				height: 250px;
 
-					&:nth-child(1) {
-						background-color: #00b6c0;
+				>img#choose-theme-image {
+					position: absolute;
+					left: 85px;
+					top: 20px;
+				}
+
+				>div.themes {
+					font-size: 0px; 
+					position: absolute; 
+					left: 390px; 
+					top: 88px; 
+					font-size: 0px;
+
+					> a {
+						background-image: url(/images/index/btn_theme_onsen_normal.png);
+						display: inline-block;
+						width: 90px;
+						height: 90px;
+						margin-right: 20px;
+						cursor: pointer;
 					}
-					&:nth-child(2) {
-						background-color: #69b948;
+
+					> a[data-theme=android] {
+						background-image: url(/images/index/btn_theme_android_normal.png);
+						&:hover {
+							background-image: url(/images/index/btn_theme_android_hover.png);
+						}
+						&.selected, &.selected:hover {
+							background-image: url(/images/index/btn_theme_android_selected.png);
+						}
 					}
-					&:nth-child(3) {
-						background-color: #f4ba3f;
+
+					> a[data-theme=ios] {
+						background-image: url(/images/index/btn_theme_ios_normal.png);
+						&:hover {
+							background-image: url(/images/index/btn_theme_ios_hover.png);
+						}
+						&.selected, &.selected:hover {
+							background-image: url(/images/index/btn_theme_ios_selected.png);
+						}
 					}
-					&:nth-child(4) {
-						background-color: #e26827;
-					}
-					&:nth-child(5) {
-						background-color: #ee5276;
-					}
-					&:nth-child(6) {
-						background-color: #a94b93;
-					}
-					&.current {
-						@include box-shadow(0 0 0 7px rgba(229,229,229,1));
+
+					> a[data-theme=onsen] {
+						background-image: url(/images/index/btn_theme_onsen_normal.png);
+						&:hover {
+							background-image: url(/images/index/btn_theme_onsen_hover.png);
+						}
+						&.selected, &.selected:hover {
+							background-image: url(/images/index/btn_theme_onsen_selected.png);
+						}
 					}
 				}
 			}
