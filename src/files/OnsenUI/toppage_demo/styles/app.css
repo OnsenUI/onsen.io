@@ -7,6 +7,18 @@ body {
   /*  background-color: #153A5F;*/
 }
 
+.iso7-no-active:active {
+    background-color: #fff !important;
+}
+
+.android-no-active:active {
+    background-color: #fff !important;
+}
+
+.onsen-no-active:active {
+    background-color: transparent !important;
+}
+
 .dark-container {
     background-color: #454646;
 }
@@ -33,15 +45,15 @@ body {
 }
 
 .bg-orange {
-    background-color: lightsalmon;
+    background-color: lightsalmon !important;
 }
 
 .bg-gray {
-    background-color: lightgray;
+    background-color: lightgray !important;
 }
 
 .bg-green {
-    background-color: lightseagreen;
+    background-color: lightseagreen !important;
 }
 
 .space-top {
