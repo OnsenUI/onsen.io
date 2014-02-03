@@ -445,26 +445,7 @@ limitations under the License.
 				size: '@',
 				offst: '@'
 			},			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl'//,
-			// controller: function($scope, $attrs){
-			// 	$attrs.$observe('align', function(align){
-			// 		if(align){
-			// 			$scope.align = align;
-			// 		}					
-			// 	});
-
-			// 	$attrs.$observe('size', function(size){
-			// 		if(size){
-			// 			$scope.size = size;
-			// 		}					
-			// 	});
-
-			// 	$attrs.$observe('offset', function(offset){
-			// 		if(offset){
-			// 			$scope.offset = offset;	
-			// 		}
-			// 	});				
-			// }
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/column.tpl'
 		};
 	});
 })();
@@ -1456,14 +1437,7 @@ limitations under the License.
 			scope: {
 				align: '@'
 			},			
-			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl'//,
-			// controller: function($scope, $attrs){
-			// 	$attrs.$observe('align', function(align){
-			// 		if(align){
-			// 			$scope.align = align;
-			// 		}					
-			// 	});				
-			// }
+			templateUrl: ONSEN_CONSTANTS.DIRECTIVE_TEMPLATE_URL + '/row.tpl'
 		};
 	});
 })();
