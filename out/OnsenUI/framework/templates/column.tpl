@@ -1,1 +1,0 @@
-<div class="col col-{{align}} col-{{size}} col-{{offset}}" ng-transclude></div>
