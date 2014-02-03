@@ -112,6 +112,7 @@ page: 'docs'
         </div>
         
             <% for directive in @framework.directives: %>
+
             <div class="row">
               <div class="col-md-8 col-xs-8"> 
                 <div ng-repeat="directive in framework.directives">
@@ -153,6 +154,7 @@ page: 'docs'
                     </section>
                     <% end %>
                   </section>
+
 
                   <section class="space-top45">
                     <span class="anchor" id="<%= directive.name %>-methods"></span>                
@@ -201,7 +203,12 @@ page: 'docs'
                       </div>
                   </section>
                   <% end %>
-                            
+
+                  <% if directive.note: %>   
+                  <section class="space-top">  
+                    <p>Known issue: <%= directive.note %></p>
+                  </section>
+                  <% end %>
 
                 </div>
               </div>
@@ -220,7 +227,10 @@ page: 'docs'
                     </div>
                   <% end %>            
                 <% end %>
+
               </div>
+
+                            
             </div>
             <% end %>        
         

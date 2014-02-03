@@ -476,6 +476,14 @@ article.common {
   font-weight: 400;
   margin-bottom: 10px;
 }
+.content h3 {
+  font-size: 1.75rem;
+  margin-bottom: 8px;
+}
+.content h4 {
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
 .content h3, .content h4, .content h5, .content h6 {
   color: #333;
   font-weight: 400;
@@ -599,6 +607,7 @@ body#home .features .feature#feature-customize {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  height: 690px;
 }
 body#home .features .feature#feature-customize .feature-cont {
   padding: 118px 400px 0 0;
@@ -608,51 +617,57 @@ body#home .features .feature#feature-customize .simulator {
   top: -100px;
   right: 0;
 }
-body#home .features .feature#feature-customize .selecttheme {
-  background: url(/images/index/top_image02_1.png) no-repeat 135px 0;
-  margin-top: 80px;
-  padding: 40px 0 60px 400px;
+body#home .features .feature#feature-customize #choose-theme {
+  position: relative;
+  width: 740px;
+  height: 250px;
 }
-body#home .features .feature#feature-customize .selecttheme li {
-  background-color: #999;
-  border: 3px solid #fff;
-  border-radius: 35px;
-  -webkit-box-shadow: 0 0 0 7px rgba(229, 229, 229, 0);
-  -moz-box-shadow: 0 0 0 7px rgba(229, 229, 229, 0);
-  box-shadow: 0 0 0 7px rgba(229, 229, 229, 0);
-  -webkit-transition: box-shadow 0.5s;
-  -moz-transition: box-shadow 0.5s;
-  -o-transition: box-shadow 0.5s;
-  transition: box-shadow 0.5s;
-  cursor: pointer;
+body#home .features .feature#feature-customize #choose-theme > img#choose-theme-image {
+  position: absolute;
+  left: 85px;
+  top: 20px;
+}
+body#home .features .feature#feature-customize #choose-theme > div.themes {
+  font-size: 0px;
+  position: absolute;
+  left: 390px;
+  top: 88px;
+  font-size: 0px;
+}
+body#home .features .feature#feature-customize #choose-theme > div.themes > a {
+  background-image: url(/images/index/btn_theme_onsen_normal.png);
   display: inline-block;
-  margin: 0 14px 36px;
-  text-indent: -9999px;
-  width: 50px;
-  height: 50px;
+  width: 90px;
+  height: 90px;
+  margin-right: 20px;
+  cursor: pointer;
 }
-body#home .features .feature#feature-customize .selecttheme li:nth-child(1) {
-  background-color: #00b6c0;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=android] {
+  background-image: url(/images/index/btn_theme_android_normal.png);
 }
-body#home .features .feature#feature-customize .selecttheme li:nth-child(2) {
-  background-color: #69b948;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=android]:hover {
+  background-image: url(/images/index/btn_theme_android_hover.png);
 }
-body#home .features .feature#feature-customize .selecttheme li:nth-child(3) {
-  background-color: #f4ba3f;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=android].selected, body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=android].selected:hover {
+  background-image: url(/images/index/btn_theme_android_selected.png);
 }
-body#home .features .feature#feature-customize .selecttheme li:nth-child(4) {
-  background-color: #e26827;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=ios] {
+  background-image: url(/images/index/btn_theme_ios_normal.png);
 }
-body#home .features .feature#feature-customize .selecttheme li:nth-child(5) {
-  background-color: #ee5276;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=ios]:hover {
+  background-image: url(/images/index/btn_theme_ios_hover.png);
 }
-body#home .features .feature#feature-customize .selecttheme li:nth-child(6) {
-  background-color: #a94b93;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=ios].selected, body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=ios].selected:hover {
+  background-image: url(/images/index/btn_theme_ios_selected.png);
 }
-body#home .features .feature#feature-customize .selecttheme li.current {
-  -webkit-box-shadow: 0 0 0 7px #e5e5e5;
-  -moz-box-shadow: 0 0 0 7px #e5e5e5;
-  box-shadow: 0 0 0 7px #e5e5e5;
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=onsen] {
+  background-image: url(/images/index/btn_theme_onsen_normal.png);
+}
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=onsen]:hover {
+  background-image: url(/images/index/btn_theme_onsen_hover.png);
+}
+body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=onsen].selected, body#home .features .feature#feature-customize #choose-theme > div.themes > a[data-theme=onsen].selected:hover {
+  background-image: url(/images/index/btn_theme_onsen_selected.png);
 }
 body#home .features .feature#feature-easy {
   padding: 126px 0 150px;
