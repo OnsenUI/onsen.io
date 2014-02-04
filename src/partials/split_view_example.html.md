@@ -12,7 +12,7 @@ encoding: 'utf8'
     </ons-split-view>
 
 
-*menu.html*
+*secondary.html*
 
     <ons-page>
         <ul class="fa-ul">
