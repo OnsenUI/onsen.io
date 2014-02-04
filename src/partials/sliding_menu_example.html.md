@@ -17,14 +17,14 @@ encoding: 'utf8'
 
             <ons-list-item 
                 ng-click="ons.slidingMenu.toggleMenu(); 
-                ons.slidingMenu.setAbovePage('pages/sliding_menu/page1.html')">
+                ons.slidingMenu.setAbovePage('page1.html')">
                 <i class="fa-li fa fa-home fa-lg" style="top: 25%"></i>
                 Page 1
             </ons-list-item>
 
             <ons-list-item 
                 ng-click="ons.slidingMenu.toggleMenu(); 
-                ons.slidingMenu.setAbovePage('pages/sliding_menu/page2.html')">
+                ons.slidingMenu.setAbovePage('page2.html')">
                 <i class="fa-li fa fa-gear fa-lg" style="top: 25%"></i>
                 Page 2
             </ons-list-item>
