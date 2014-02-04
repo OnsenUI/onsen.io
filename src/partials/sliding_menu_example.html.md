@@ -16,6 +16,7 @@ encoding: 'utf8'
         <ul class="fa-ul">
 
             <ons-list-item 
+                class="topcoat-list__item_active"
                 ng-click="ons.slidingMenu.toggleMenu(); 
                 ons.slidingMenu.setAbovePage('page1.html')">
                 <i class="fa-li fa fa-home fa-lg" style="top: 25%"></i>
@@ -23,6 +24,7 @@ encoding: 'utf8'
             </ons-list-item>
 
             <ons-list-item 
+                class="topcoat-list__item_active"
                 ng-click="ons.slidingMenu.toggleMenu(); 
                 ons.slidingMenu.setAbovePage('page2.html')">
                 <i class="fa-li fa fa-gear fa-lg" style="top: 25%"></i>
