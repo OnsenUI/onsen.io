@@ -18,14 +18,14 @@ header.article-info {
 
 header.article-info .toc, .toc {
 	background-color: #f5f5f5;
-	padding: 15px 25px;
+	padding: 8px 25px;
 	text-align: left;
 	a {
 		@include all-link-state(#333);
 	}
 	li {
 		font-size: (18px/$basefont)+rem;
-		line-height: 2;
-		margin: 0;
+		line-height: 1.2;
+		margin: 18px 0;
 	};
 }

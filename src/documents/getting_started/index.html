@@ -7,238 +7,165 @@ toc:
    href: '#tutorial'
  - name: '2. Choose a template'
    href: '#template'
- - name: '3. Install nodejs'
-   href: '#nodejs'
- - name: '4. Run the project'
+ - name: '3. Run the project'
    href: '#run'
- - name: '5. Start adding your awesome app feature'
+ - name: '4. Start adding your awesome app feature'
    href: '#addfeature'
- - name: '6. Building your app'
+ - name: '5. Building your app'
    href: '#build'
+ - name: '次に参照すること'
+   href: '#details'
  - name: 'Use with Monaca'
    href: '#monaca'
 ---
 
-<style type="text/css" media="screen">
+<h2 id="tutorial">1. Video tutorial</h2>
+<iframe src="//www.youtube-nocookie.com/embed/Qo6eJ0ilD8Q?rel=0" width="810" height="456" frameborder="0" allowfullscreen></iframe>
 
-	::-webkit-scrollbar {
-	  	width: 4px;
-	  	height: 2px;
-	}
-	   
-	::-webkit-scrollbar-track {
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-	    border-radius: 10px;
-	    height: 2px;
-	}
-	   
-	::-webkit-scrollbar-thumb {
-	    border-radius: 10px;
-	    height: 2px;
-	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-	}
+<h2 id="template">2. Choose a template</h2>
+<p style="margin-bottom: 40px;">
+	Try before you buy! Play with the templates below live! When you find one that suits you, click Download button below it.
+</p>
 
-	.template-iframe {
-	  width: 250px;
-	  height: 450px;
-	  box-shadow: 0px 0px 10px #ccc;
-	}
-
-	.template-iframe-landscape {
-	  width: 500px;
-	  height: 300px;
-	  box-shadow: 0px 0px 10px #ccc;
-	}
-
-
-	.templates-container {
-		position: relative;
-		overflow-y: hidden;
-		overflow-x: scroll;						
-	}
-
-	.flex {												
-		width: 2600px;
-		display: flex;
-		flex-direction: row;
-	}
-
-	.flex-item {
-		margin: 15px;
-		display: inline-block;
-	}
-
-	.handle {
-		position: absolute;
-		top: 45%;
-		padding: 5px;
-		border-radius: 4px;
-		background-color: rgba(0,0,0,0.5);
-	}
-
-	.handle.left{
-		left: 10px;
-	}
-
-	.handle.right {					
-		right: 10px;
-	}
-
-	.center {
-		align-self: center;
-	}
-
-	.template-title {
-		text-align: center;
-		font-weight: bold !important;
-		color: #ccc !important;
-		margin: 10px;
-		font-size: 1rem !important;
-	}
-
-	.btn-download {
-		margin: 15px auto;
-		display: block;
-		width: 150px;
-	}
-
-	.blue-link {
-		color: #4F82FF;
-	}
-
-	.blue-link:visited {
-		color: #2251C3;
-	}
-	
-</style>
-
-<div id="tutorial" class="section-h2">
-	<h2>1. Video tutorial</h2>
-	<iframe src="//www.youtube-nocookie.com/embed/Qo6eJ0ilD8Q?rel=0" width="810" height="456" frameborder="0" allowfullscreen></iframe>
-</div>
-
-
-<div id="template" class="section-h2">
-	<h2>2. Choose a template</h2>
-	<p style="margin-bottom: 40px;">
-		Try before you buy! Play with the templates below live! When you find one that suits you, click Download button below it.
-	</p>
-
-			
-	<div class="templates-container">		
-		<div class="flex">
-			<div class="flex-item center">
-				<i class="fa fa-circle"></i>
-			</div>
-
-			<div class="flex-item">
-				<h3 class="template-title">Minimum</h3>
-				<div class="template-iframe">
-					<iframe src="/OnsenUI/project_templates/minimum/app/" width="250" height="450"></iframe>
-				</div>			
-				<a class="btn-download" href="/OnsenUI/project_templates/minimum.zip">Download</a>
-			</div>
-			
-			<div class="flex-item">
-				<h3 class="template-title">Sliding Menu</h3>
-				<div class="template-iframe">
-					<iframe src="/OnsenUI/project_templates/sliding_menu/app/" width="250" height="450"></iframe>
-				</div>						
-				<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu.zip">Download</a>
-			</div>
-
-			<div class="flex-item">
-				<h3 class="template-title">Sliding Menu & Navigator</h3>
-				<div class="template-iframe">
-					<iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="250" height="450"></iframe>
-				</div>						
-				<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a>
-			</div>
-
-			<div class="flex-item">
-				<h3 class="template-title">Tab bar</h3>
-				<div class="template-iframe">
-					<iframe src="/OnsenUI/project_templates/tab_bar/app/" width="250" height="450"></iframe>
-				</div>	
-				<a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a>
-			</div>
-			
-			<div class="flex-item">
-				<h3 class="template-title">Master-Detail</h3>
-				<div class="template-iframe">
-					<iframe src="/OnsenUI/project_templates/master_detail/app/" width="250" height="450"></iframe>
-				</div>	
-				<a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a>
-			</div>		
-
-			<div class="flex-item center">
-				<h3 class="template-title">Split View</h3>
-				<div class="template-iframe-landscape">
-					<iframe src="/OnsenUI/project_templates/split_view/app/" width="500" height="300"></iframe>
-				</div>	
-				<a class="btn-download" href="/OnsenUI/project_templates/split_view.zip">Download</a>
-			</div>		
-
-			<div class="flex-item center">
-				<h3 class="template-title">Split View & Navigator</h3>
-				<div class="template-iframe-landscape">
-					<iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="500" height="300"></iframe>
-				</div>	
-				<a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a>
-			</div>	
-
-			<div class="flex-item center">
-				<i class="fa fa-circle"></i>
-			</div>
-		</div>		
-	</div>		
-
-</div>
-
-
-<div id="nodejs" class="section-h2">
-	<h2>3. Install nodejs</h2>
-	<p>Download and run the installer from <a href="http://nodejs.org" title="">nodejs.org</a></p>	
-</div>
-
-<div id="run" class="section-h2">
-	<h2>4. Run the project</h2>
-	<p>Extract the zip file you just downloaded.</p>
-	<p>Open the terminal (command line) and cd to the extracted folder.</p>
 		
-	<p class="highlighted"><b>Type: </b>scripts/web-server.js</p>
+<div class="templates-container">		
+	<div class="flex">
+		<div class="flex-item center">
+			<i class="fa fa-circle"></i>
+		</div>
 
-	<p>Then navigate your browser to</p>
-	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
+		<div class="flex-item">
+			<h3 class="template-title">Minimum</h3>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/minimum/app/" width="250" height="450"></iframe>
+			</div>			
+			<a class="btn-download" href="/OnsenUI/project_templates/minimum.zip">Download</a>
+		</div>
+		
+		<div class="flex-item">
+			<h3 class="template-title">Sliding Menu</h3>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/sliding_menu/app/" width="250" height="450"></iframe>
+			</div>						
+			<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu.zip">Download</a>
+		</div>
 
-</div>
+		<div class="flex-item">
+			<h3 class="template-title">Sliding Menu & Navigator</h3>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="250" height="450"></iframe>
+			</div>						
+			<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a>
+		</div>
 
-<div id="addfeature" class="section-h2">
-	<h2>5. Start adding your awesome app feature</h2>
+		<div class="flex-item">
+			<h3 class="template-title">Tab bar</h3>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/tab_bar/app/" width="250" height="450"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a>
+		</div>
+		
+		<div class="flex-item">
+			<h3 class="template-title">Master-Detail</h3>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/master_detail/app/" width="250" height="450"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a>
+		</div>		
 
-	<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
-	<p>You may want to download the <a class="blue-link" href="/OnsenUI/demo.zip" title="demos">Demos</a> for sample codes.
-	</p>
+		<div class="flex-item center">
+			<h3 class="template-title">Split View</h3>
+			<div class="template-iframe-landscape">
+				<iframe src="/OnsenUI/project_templates/split_view/app/" width="500" height="300"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/split_view.zip">Download</a>
+		</div>		
 
-	<p>To run the demo</p>
-	<p class="highlighted"><b>Type: </b>scripts/web-server.js</p>
-	<p>Then navigate your browser to</p>		
-	<p class="highlighted"><a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
-</div>
+		<div class="flex-item center">
+			<h3 class="template-title">Split View & Navigator</h3>
+			<div class="template-iframe-landscape">
+				<iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="500" height="300"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a>
+		</div>	
 
-<div id="build" classs="section-h2">
-	<h2>6. Build your app:</h2>	
-	<p>You can use Cordova to build Onsen UI project</p>
-	<p class="highlighted"><b>Type: </b>npm install -g cordova</p>
-	<p class="highlighted">cordova create MyApp && cd MyApp</p>
-	<p>copy all the files in the <strong>app</strong> folder of the template to MyApp/www folder</p>
-	<p class="highlighted">cordova platform add android</p>
-	<p class="highlighted">cordova build android</p>
-	<p class="highlighted">cordova emulate android</p>
-</div>
+		<div class="flex-item center">
+			<i class="fa fa-circle"></i>
+		</div>
+	</div>		
+</div>		
 
-<div id="monaca" classs="section-h2">
-	<h2>Use with Monaca</h2>
-	<p><a href="http://monaca.mobi/" style="color: #439ECC">Monaca</a> is a leading HTML5 development platform that gives developers the power to create rich UI PhoneGap apps that run at native speed. When used with Monaca, it is simple to add backend features, debug and build the project, resulting in a publishable app. <a style="color: #439ECC" href="http://docs.monaca.mobi/en/onsenui/">Here</a> is how to use Onsen UI in Monaca. 
-	</p>	
-</div>
+<h2 id="run">3. Run the project</h2>
+<p>Extract the zip file you just downloaded.</p>
+<p>Open the terminal (command line) and cd to the extracted folder.</p>
+	
+<pre><code>$ node scripts/web-server.js</code></pre>
+
+<p>Then navigate your browser to <a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
+
+<p>Onsen UIはコマンドラインツールにNode.jsを使っています。動かない場合は、<a href="http://nodejs.org" title="">nodejs.org</a>へアクセスしてNode.jsをインストールして下さい。</p>	
+
+
+<h2 id="addfeature">4. Start adding your awesome app feature</h2>
+
+<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
+<p>You may want to download the <a href="/OnsenUI/demo.zip" title="demos">Demos</a> for sample codes.
+</p>
+
+<h3>To run the demo</h3>
+
+<p>You can use Cordova to build Onsen UI project. Type in terminal: </p>
+<pre><code>$ scripts/web-server.js</code></pre>
+<p>Then navigate your browser to <a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
+
+<h2 id="build" >5. Build your app</h2>	
+
+<p>You can use Cordova to build Onsen UI project. Type in terminal: </p>
+
+<pre><code>$ npm install -g cordova
+$ cordova create MyApp &amp;&amp; cd MyApp</code></pre>
+
+<p>copy all the files in the <strong>app</strong> folder of the template to MyApp/www folder</p>
+
+<pre><code>$ cordova platform add android
+$ cordova build android
+$ cordova emulate android</code></pre>
+
+
+<h2 id="details">次に参照すること</h2>
+
+<h3>UIコンポーネント</h3>
+
+<p>Onsen UIには、モバイルアプリ用の様々なUIコンポーネントが用意されています。コンポーネントの一覧や使い方を参照するには、<a href="/docs/components.html">Components</a>のページを見て下さい。</p>
+
+<h3>Onsen UIを使ったアプリ開発</h3>
+
+<p>Onsen UIを使って、本格的にアプリを開発したい場合には、ドキュメントの以下のページを参照して下さい。</p>
+
+<ul>
+	<li>App Development with Onsen UI
+		<ul>
+			<li><a href="/docs/overview.html">Overview</a></li>
+			<li><a href="/docs/angular_controller.html">Angular Controller</a></li>
+			<li><a href="/docs/page_navigation.html">Page Navigation</a></li>
+			<li><a href="/docs/tabbar_navigation.html">Tabbar Navigation</a></li>
+			<li><a href="/docs/list_view.html">List View</a></li>
+			<li><a href="/docs/sliding_menu.html">Sliding Menu Navigation</a></li>
+			<li><a href="/docs/event_handling">Event Handling</a></li>
+			<li><a href="/docs/best_practice.html">Best Practice</a></li>
+		</ul>
+	</li>
+</ul>
+
+<h3>サポート</h3>
+<p>Onsen UIを使っていて、分からないところや困った場合には、<a href="/forum.html">Forum</a>へ投稿してOnsen UIチームに教えてください。Onsen UIチームの開発者やコミュニティが答えます。</p>
+
+<h3>バグレポート</h3>
+<p>Onsen UIのクオリティの向上に協力して下さい。バグを見つけたら、Onsen UIのgithubプロジェクトの<a href="https://github.com/onsenui/onsenui/issues">Issues</a>へ投稿して下さい。</p>
+
+
+
+<h2 id="monaca">Use with Monaca</h2>
+<p><a href="http://monaca.mobi/">Monaca</a> is a leading HTML5 development platform that gives developers the power to create rich UI PhoneGap apps that run at native speed. When used with Monaca, it is simple to add backend features, debug and build the project, resulting in a publishable app. <a href="http://docs.monaca.mobi/en/onsenui/">Here</a> is how to use Onsen UI in Monaca. 
+</p>

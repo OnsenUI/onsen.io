@@ -74,6 +74,10 @@
 
 		<div class="content">
 			<%- @content %>
+
+			<% if @document.needHelp: %>
+				<%- @partial('need_help') %>
+			<% end %>
 		</div>
 	</article>
 

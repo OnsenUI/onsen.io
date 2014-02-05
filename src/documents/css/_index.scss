@@ -124,7 +124,7 @@ header.common {
 			}
 			.simulator {
 				position: absolute;
-				top: -100px;
+				top: -50px;
 				right: 0;
 			}
 			#choose-theme {
@@ -189,15 +189,20 @@ header.common {
 		
 		&#feature-easy {
 			padding: 126px 0 150px;
+
 			.feature-cont {
 				float: right;
 				width: 430px;
 			}
+
 			.feature-easy-example {
 				position: relative;
 				width: 600px;
+				height: 400px;
 
-        li {
+				li {
+					margin: 0;
+					list-style-type: none;
 					&:nth-child(1) {
 					}
 					&:nth-child(2) {
@@ -237,7 +242,7 @@ header.common {
 			}
 			.simulator {
 				position: absolute;
-				top: -100px;
+				top: -50px;
 				right: 0;
 			}
 		}
