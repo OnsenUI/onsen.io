@@ -96,7 +96,7 @@ img, iframe, object { max-width : 100%; }
 .lt-ie9 img, .lt-ie9 object { width:auto; } 
 
 a {
-	@include all-link-state(#333);
+	@include all-link-state(#439ECC);
 	img {
 		@include transition(opacity 80ms);
 		&:hover {
@@ -104,7 +104,6 @@ a {
 		}
 	}
 }
-
 
 
 .btn,

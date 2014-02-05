@@ -14,15 +14,19 @@ header.article-info {
 		text-align: left;
 	}
 
-	.toc {
-		background-color: #f5f5f5;
-		padding: 25px;
-		text-align: left;
-		li {
-			font-size: (18px/$basefont)+rem;
-			line-height: 100%;
-			list-style-type: decimal;
-			margin: 0 0 22px 25px;
-		};
+}
+
+header.article-info .toc, .toc {
+	background-color: #f5f5f5;
+	padding: 25px;
+	text-align: left;
+	a {
+		@include all-link-state(#333);
 	}
+	li {
+		font-size: (18px/$basefont)+rem;
+		line-height: 100%;
+		list-style-type: decimal;
+		margin: 0 0 22px 25px;
+	};
 }

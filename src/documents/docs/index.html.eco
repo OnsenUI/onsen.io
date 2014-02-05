@@ -59,7 +59,7 @@ page: 'docs'
   <div class="full-width full-height">
     <div class="row">
       <div class="col-md-3 col-xs-3">      
-          <section id="sidemenu" class="left-menu">
+          <section id="sidemenu" class="left-menu toc">
           	<% for directive in @framework.directives: %>
             <div class="side-bar-color">
               <div class="space-top"></div>
