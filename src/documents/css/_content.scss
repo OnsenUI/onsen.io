@@ -10,25 +10,96 @@ article.common {
 	text-align: left;
 	width: ($width - $aside-width - 30px);
 
+	&.no-aside {
+		width: ($width - $aside-width);
+		margin: 0 auto;
+	}
+
 	h2 {
 		color: #333;
 		font-size: (36px/$basefont)+rem;
 		font-weight: 400;
 		margin-bottom: 10px
 	}
+
 	h3 {
 		font-size: (28px/$basefont)+rem;
 		margin-bottom: 8px
 	}
+
 	h4 {
 		font-size: (24px/$basefont)+rem;
 		margin-bottom: 6px
 	}
+
 	h3, h4, h5, h6 {
 		color: #333;
 		font-weight: 400;
 	}
+
+	ul > li {
+		list-style-type: square;
+		margin-left: 2rem;
+	}
+
+	ol > li {
+		list-style-type: decimal;
+		margin-left: 2rem;
+	}
+
+	li {
+		line-height: 1.8;
+	}
+
 	.section-h2 {
 		margin-bottom: 70px;
 	}
+
+	ul.segment-control {
+		font-size: 0px;
+		display: inline-block;
+		padding: 0 0 0 1px;
+		margin: 0;
+
+		> li {
+			display: inline-block;
+			font-size: 15px;
+			font-weight: 200;
+			width: 120px;
+			height: 37px;
+			border: 1px solid #ccc;
+			padding: 0;
+			margin: 0 0 0 -1px;
+			border-radius: 0px;
+			text-align: center;
+			color: #666;
+			line-height: 37px;
+			cursor: pointer;
+			-webkit-font-smoothing: antialiased;
+			transition:
+			all 200ms linear,
+			color 200ms linear,
+			font-weight 200ms linear,
+			border-color 200ms linear;
+
+			&:first-child {
+				border-radius: 4px 0 0 4px;
+			}
+
+			&:last-child {
+				border-radius: 0 4px 4px 0;
+			}
+
+			&.current {
+				background-color: #DB4138;
+				color: white;
+				border-color: #992C28;
+				font-weight: 500;
+				transition: none;
+				position: relative;
+				z-index: 1;
+			}
+		}
+	}
+
 }
