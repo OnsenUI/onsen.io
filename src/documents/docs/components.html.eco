@@ -178,7 +178,7 @@ page: 'components'
                     </div>
 
                     <div class="absolute fit-iphone-frame">
-                      <iframe src="about:blank" data-src="<%= @rootUrl %><%= directive.demoURL %>" width="237" height="420" style="border-color: black;"></iframe>
+                        <iframe src="data:text/html,<body%20style='background-color:#eee;overflow:hidden;'></body>" data-src="<%= @rootUrl %><%= directive.demoURL %>" width="237" height="420" style="border-color: black;"></iframe>
                     </div> 
                   </div>
                 <% end %>            
