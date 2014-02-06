@@ -174,11 +174,15 @@ page: 'components'
                 <% if directive.demoURL: %>
                   <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
                     <div class="absolute click-through">
-                      <img width="309" src="<%= @rootUrl %>images/iPhone5Frame.png">
+                      <img width="282" src="<%= @rootUrl %>images/iPhone5Frame.png">
                     </div>
 
                     <div class="absolute fit-iphone-frame">
-                        <iframe src="data:text/html,<body%20style='background-color:#eee;overflow:hidden;'></body>" data-src="<%= @rootUrl %><%= directive.demoURL %>" width="237" height="420" style="border-color: black;"></iframe>
+                        <iframe 
+                            class="simulater-iframe"
+                            src="data:text/html,<body%20style='background-color:#000;overflow:hidden;'></body>" 
+                            data-src="<%= @rootUrl %><%= directive.demoURL %>" 
+                            width="320" height="568"></iframe>
                     </div> 
                   </div>
                 <% end %>            

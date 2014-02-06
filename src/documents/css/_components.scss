@@ -19,6 +19,18 @@ body#components {
 
 	iframe {
 		max-width: none;
+		&.simulater-iframe {
+			border-color: black; 
+			-webkit-transform:scale(0.74); 
+			-moz-transform:scale(0.74); 
+			-ms-transform:scale(0.74); 
+			-webkit-transform-origin: left top;
+			-moz-transform-origin: left top;
+			-ms-transform-origin: left top;
+
+			transform:scale(0.74); 
+			transform-origin: left top;
+		}
 	}
 
 	a:link, a:visited {   
@@ -41,30 +53,44 @@ body#components {
 
 	.table-head {
 		background-color: #7b878c;
+		background-color: #999;
 		color: #fff;
 	}
 
 	table.table {
 		margin: 1rem 0;
-		th {
-			border-width: 0px;
-		}
-		tr {
-			border-left: 1px solid #ddd;
-			border-right: 1px solid #ddd;
-			&:last-child {
-				border-bottom: 1px solid #ddd;
+		> tbody {
+			> tr {
+				border-left: 1px solid #ddd;
+				border-right: 1px solid #ddd;
+				border-top: 1px solid #ddd;
+				&:last-child {
+					border-bottom: 1px solid #ddd;
+				}
+				&:first-child {
+					border-top: 0px solid #ddd;
+				}
+				> td {
+					border-top-width: 0px;
+				}
 			}
 		}
 		thead > tr {
 			border-left: 1px solid #7B878C;
 			border-right: 1px solid #7B878C;
+			border-left: 1px solid #999;
+			border-right: 1px solid #999;
 			border-bottom: 0px;
+
+			> th {
+				border-width: 0px;
+			}
 		}
 	}
 
 	.left-menu {
 		padding: 50px 0 0 0;
+		margin: 0;
 		overflow-y: auto;
 		background-color: #fff;
 		width: 230px;
@@ -73,6 +99,7 @@ body#components {
 			display: inline-block;
 			padding-left: 12px;
 			line-height: 2;
+			transition: background-color 100ms linear, color 100ms linear;
 
 			&:hover {
 				text-decoration: underline;
@@ -81,6 +108,8 @@ body#components {
 			&.selected, &.selected a {
 				color: #fff !important;
 				background-color: #ff1a33;
+				font-weight: 400;
+				transition: none;
 			}
 
 		}

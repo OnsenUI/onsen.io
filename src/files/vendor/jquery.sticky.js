@@ -9,7 +9,11 @@
 // Description: Makes an element on the page stick on the screen as you scroll
 //       It will only set the 'top' and 'position' of your element, you
 //       might need to adjust the width in some cases.
+//
 
+
+
+// NOTE: This code is cutsomized for Onsen UI Website by Mitsunori KUBOTA.
 (function($) {
   var defaults = {
       topSpacing: 0,
@@ -41,17 +45,21 @@
               .css('top', '');
             s.stickyElement.parent().removeClass(s.className);
             s.currentTop = null;
+
+            s.stickyElement.css('max-height', windowHeight - s.stickyElement.offset().top);
           }
-        }
-        else {
+        } else {
           var newTop = documentHeight - s.stickyElement.outerHeight()
             - s.topSpacing - s.bottomSpacing - scrollTop - extra;
+
           if (newTop < 0) {
             newTop = newTop + s.topSpacing;
           } else {
             newTop = s.topSpacing;
           }
+
           if (s.currentTop != newTop) {
+            console.log('s.currentTop != newTop');
             s.stickyElement
               .css('position', 'fixed')
               .css('top', newTop);
@@ -62,12 +70,16 @@
 
             s.stickyElement.parent().addClass(s.className);
             s.currentTop = newTop;
+
           }
+
+          s.stickyElement.css('max-height', windowHeight);
         }
       }
     },
     resizer = function() {
       windowHeight = $window.height();
+      this.scroller();
     },
     methods = {
       init: function(options) {
@@ -90,7 +102,7 @@
           }
 
           var stickyWrapper = stickyElement.parent();
-          stickyWrapper.css('height', stickyElement.outerHeight());
+          stickyElement.css('max-height', $window.height() - stickyElement.offset().top);
           sticked.push({
             topSpacing: o.topSpacing,
             bottomSpacing: o.bottomSpacing,
