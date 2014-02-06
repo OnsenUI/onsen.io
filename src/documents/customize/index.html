@@ -2,6 +2,7 @@
 layout: 'docpad_en'
 title: 'Customize'
 page: 'customize'
+needHelp: true
 toc: 
  - name: 'How to Customize CSS in Onsen UI'
    href: '#customize-css'
@@ -57,7 +58,7 @@ Override the classes you want to change in a CSS file you created beforehand.
 For example, this is how to override if you want to apply a blue (#0000ff) color to the button’s background color.
 </p>
 
-<pre><code>.topcoat-button {
+<pre><code class="css">.topcoat-button {
   background-color:  #0000ff;
 }
 </code></pre>
@@ -141,17 +142,17 @@ We are going to show you how to customize these Onsen UI elements.</p>
 
 <p>In order to customize Onsen UI elements, you will need to clone a template file from the Onsen UI project in GitHub, edit the template file, and then build it again.</p>
 
-<p>* Please note that you need to install Node.js before customizing.</p>
+<p>* Please note that you need to install <a href="http://nodejs.org" target="_blank">Node.js</a> before customizing.</p>
 
-<p>First, clone a project from the Onsen UI project in GitHub, and create the project locally.</p>
+<p>First, clone a project from the Onsen UI project in GitHub, and create the project locally. </p>
 
-<a href="https://github.com/OnsenUI/OnsenUI">https://github.com/OnsenUI/OnsenUI</a>
+<p><a href="https://github.com/OnsenUI/OnsenUI">https://github.com/OnsenUI/OnsenUI</a></p>
 
-<pre><code>$ git clone git@github.com:OnsenUI/OnsenUI.git</code></pre>
+<pre><code class="bash">$ git clone git@github.com:OnsenUI/OnsenUI.git</code></pre>
 
 <p>Next, execute the "npm install" command in the root folder of the newly created Onsen UI project, and install the required modules.</p>
 
-<pre><code>$ npm install</code></pre>
+<pre><code class="bash">$ npm install</code></pre>
 
 
 <h3>2. How to Edit the Onsen UI Components</h3>
@@ -193,7 +194,7 @@ When you are ready to begin editing, go to the framework/template directory, ope
 
 <p>After you have completed the editing, execute the "grunt" command, and build the customized Onsen UI project.</p>
 
-<pre><code>$ grunt</code></pre>
+<pre><code class="bash">$ grunt</code></pre>
 
 <p>When the project has been successfully built, the customized Onsen UI file will be generated in the build folder.</p>
 

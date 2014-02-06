@@ -192,7 +192,11 @@ p.highlighted {
 
 .highlighted {
 	margin-bottom: 30px;
-};
+}
+
+.relative {
+	position: relative;
+}
 
 @import 'header';
 @import 'footer';
@@ -201,3 +205,4 @@ p.highlighted {
 @import 'index';
 @import 'docs';
 @import 'getting_started';
+@import 'components';

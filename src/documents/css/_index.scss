@@ -15,12 +15,12 @@ header.common {
 }
 
 #keyvisual {
-  background: url(/images/index/va_bg.jpg) no-repeat center center #ccc;
+	background: url(/images/index/va_bg.jpg) no-repeat center center #ccc;
 	@include box-sizing(border-box);
 	height: 600px;
 	margin-bottom: 100px;
 	position: relative;
-  > div {
+	> div {
 		background: url(/images/index/va_device.png) no-repeat 518px 50px;
 		margin: 0 auto;
 		width: $width;
@@ -39,7 +39,7 @@ header.common {
 		font-size: (30px/$basefont)+rem;
 		font-weight: 400;
 		line-height: (35/30);
-		margin-bottom: 60px;
+		margin: 30px 0 40px 0;
 	}
 
 	.btn-download {

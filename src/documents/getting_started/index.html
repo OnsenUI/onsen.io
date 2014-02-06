@@ -13,8 +13,8 @@ toc:
    href: '#addfeature'
  - name: '5. Building your app'
    href: '#build'
- - name: '次に参照すること'
-   href: '#details'
+ - name: '次のステップ'
+   href: '#nextstep'
  - name: 'Use with Monaca'
    href: '#monaca'
 ---
@@ -97,43 +97,47 @@ toc:
 </div>		
 
 <h2 id="run">3. Run the project</h2>
+
 <p>Extract the zip file you just downloaded.</p>
+
 <p>Open the terminal (command line) and cd to the extracted folder.</p>
 	
-<pre><code>$ node scripts/web-server.js</code></pre>
+<pre><code class="bash">$ node scripts/web-server.js</code></pre>
 
 <p>Then navigate your browser to <a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
 
-<p>Onsen UIはコマンドラインツールにNode.jsを使っています。動かない場合は、<a href="http://nodejs.org" title="">nodejs.org</a>へアクセスしてNode.jsをインストールして下さい。</p>	
+<p>Onsen UIはコマンドラインツールにNode.jsを使っています。Node.jsをインストールするには、<a href="http://nodejs.org" title="">nodejs.org</a>からパッケージをインストールして下さい。</p>	
 
 
 <h2 id="addfeature">4. Start adding your awesome app feature</h2>
 
 <p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
-<p>You may want to download the <a href="/OnsenUI/demo.zip" title="demos">Demos</a> for sample codes.
-</p>
+
+<p>You may want to download the <a href="/OnsenUI/demo.zip" title="demos">Demos</a> for sample codes.</p>
 
 <h3>To run the demo</h3>
 
-<p>You can use Cordova to build Onsen UI project. Type in terminal: </p>
-<pre><code>$ scripts/web-server.js</code></pre>
-<p>Then navigate your browser to <a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
+<p>Open the terminal (command line) and cd to the extracted folder.</p>
+
+<pre><code class="bash">$ node scripts/web-server.js</code></pre>
+
+<p>Then navigate your browser to <a href="http://localhost:8000/demo/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
 
 <h2 id="build" >5. Build your app</h2>	
 
 <p>You can use Cordova to build Onsen UI project. Type in terminal: </p>
 
-<pre><code>$ npm install -g cordova
+<pre><code class="bash">$ npm install -g cordova
 $ cordova create MyApp &amp;&amp; cd MyApp</code></pre>
 
 <p>copy all the files in the <strong>app</strong> folder of the template to MyApp/www folder</p>
 
-<pre><code>$ cordova platform add android
+<pre><code class="bash">$ cordova platform add android
 $ cordova build android
 $ cordova emulate android</code></pre>
 
 
-<h2 id="details">次に参照すること</h2>
+<h2 id="nextstep">次のステップ</h2>
 
 <h3>UIコンポーネント</h3>
 
