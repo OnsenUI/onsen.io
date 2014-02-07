@@ -59,8 +59,6 @@
 
 	<article class="common">
 		<header class="article-info">
-			<h1><%- @document.title %></h1> 	
-
 			<% if @document.toc: %>
 				<nav>
 					<ol class="toc">

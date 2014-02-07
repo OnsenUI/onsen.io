@@ -1,5 +1,5 @@
 header.article-info {
-	float: left;;
+	float: right;
 	margin-right: 30px;
 	padding: 58px 0 100px;
 	overflow: hidden;
@@ -24,8 +24,8 @@ header.article-info .toc, .toc {
 		@include all-link-state(#333);
 	}
 	li {
-		font-size: (18px/$basefont)+rem;
+		font-size: (16px/$basefont)+rem;
 		line-height: 1.2;
-		margin: 18px 0;
+		margin: 14px 0;
 	};
 }
