@@ -78,7 +78,7 @@
     },
     resizer = function() {
       windowHeight = $window.height();
-      this.scroller();
+      scroller();
     },
     methods = {
       init: function(options) {

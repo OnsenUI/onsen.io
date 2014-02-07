@@ -72,7 +72,7 @@ p {
 html {
 	//font: 13px/1.4 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
 	font-size: $basefont;
-	font-family: Arial, sans-serif;
+	font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.4;
 }
 
@@ -202,7 +202,6 @@ p.highlighted {
 @import 'footer';
 @import 'aside';
 @import 'content';
-@import 'index';
-@import 'docs';
-@import 'getting_started';
-@import 'components';
+@import 'page_index';
+@import 'page_getting_started';
+@import 'page_components';

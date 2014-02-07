@@ -76,7 +76,7 @@ article.common {
 
 		> li {
 			display: inline-block;
-			font-size: 15px;
+			font-size: (15px/$basefont)+rem;
 			font-weight: 200;
 			width: 90px;
 			height: 32px;

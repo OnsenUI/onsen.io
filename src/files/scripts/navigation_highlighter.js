@@ -1,6 +1,6 @@
 
 (function() {
-	var links = $('.link');
+	var links = $('.directive-name');
 	var sections = [];
 	var iframes = [];
 	var linkMap = {};
@@ -27,22 +27,30 @@
 
 	var scrollWrapper = document;
 	var offset = 60;
+	var timeoutIds = [];
+	function addDelayedLoadDemo(iframe) {
+		iframe = $(iframe);
+		var src = iframe.data('src');
+		if (iframe.attr('src') !== src) {
+			timeoutIds.push(setTimeout(function() {
+				iframe.attr('src', src);
+			}, 200));
+		}
+	}
 	scrollWrapper.addEventListener('scroll', function() {
+		for (var i = 0; i < timeoutIds.length; i++) {
+			clearTimeout(timeoutIds[i]);
+		}
+		timeoutIds = [];
 		for (var i = sections.length - 1; i >= 0; i--) {
 			var scrolled = window.scrollY + offset;
 			var section = sections[i];
 			var position = section.offset().top;
 			
 			if (scrolled > position) {
-				if (iframes[i]) {
-					var iframe = $(iframes[i]);
-					var src = iframe.data('src');
-					if (iframe.attr('src') !== src) {
-						setTimeout(function() {
-							iframe.attr('src', src);
-						}, 0);
-					}
-				}
+				iframes[i] && addDelayedLoadDemo(iframes[i]);
+				iframes[i - 1] && addDelayedLoadDemo(iframes[i - 1]);
+				iframes[i + 1] && addDelayedLoadDemo(iframes[i + 1]);
 
 				var id = '#' + section.attr('id');
 				links.removeClass('selected');
