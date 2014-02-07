@@ -59,7 +59,6 @@
           }
 
           if (s.currentTop != newTop) {
-            console.log('s.currentTop != newTop');
             s.stickyElement
               .css('position', 'fixed')
               .css('top', newTop);

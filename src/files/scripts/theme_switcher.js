@@ -16,7 +16,6 @@ $(function() {
       $(this).addClass('current');
 
       var $iframe = $(this).parents('div.directive-container').find('iframe');
-      console.log($iframe);
 
       setTimeout(function() {
         changeTheme(themeName, $iframe);
@@ -26,7 +25,6 @@ $(function() {
     function changeTheme(themeName, $iframe) {
       $iframe.each(function() {
         $('link[rel=stylesheet]', this.contentDocument).filter(function() {
-          console.log(this.href);
           return isThemeCSSLink(this);
         }).each(function() {
           this.href = themes[themeName];
@@ -43,4 +41,6 @@ $(function() {
       }
       return false;
     }
+  
+
 });
