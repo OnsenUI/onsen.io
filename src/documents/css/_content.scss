@@ -15,10 +15,13 @@ article.common {
 		margin: 0 auto;
 	}
 
-	h2 {
+	h2, h3, h4, h5 {
 		color: #333;
+		font-weight: 400;
+	}
+
+	h2 {
 		font-size: (42px/$basefont)+rem;
-		font-weight: 100;
 		margin: 70px 0 20px 0;
 		&:first-child {
 			margin-top: 0;
@@ -30,7 +33,7 @@ article.common {
 		margin: 36px 0 14px 0;
 	}
 
-	h2 + h3, h3 + h4 {
+	h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
 		margin-top: 0px;
 	}
 
@@ -42,11 +45,6 @@ article.common {
 	h5, h6 {
 		font-size: (14px/$basefont)+rem;
 		margin: 28px 0 8px 0;
-	}
-
-	h3, h4, h5, h6 {
-		color: #333;
-		font-weight: 500;
 	}
 
 	ul > li {
