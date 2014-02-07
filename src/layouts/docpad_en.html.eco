@@ -64,9 +64,17 @@
 				<nav>
 					<ol class="toc">
 						<li><h2><%= @document.title %></h2></li>
-					<% for toc in @document.toc: %>
-						<li><a href="<%= toc.href %>"><%= toc.name %></a></li>
-					<% end %>
+						<% for toc in @document.toc: %>
+						<li><a href="<%= toc.href %>"><%= toc.name %></a>
+							<% if toc.sub: %>
+							<ol>
+								<% for sub in toc.sub: %>
+								<li><a href="<%= sub.href %>"><%= sub.name %></a></li>
+								<% end %>
+							</ol>
+							<% end %>
+						</li>
+						<% end %>
 					</ol>
 				</nav>
 			<% end %>
