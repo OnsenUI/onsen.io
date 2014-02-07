@@ -10,17 +10,21 @@ $(function() {
     iframeSelector = iframeSelector || 'div.fit-iphone-frame > iframe';
 
     $('ul.theme-switch-control.segment-control > li').click(function() {
-      $('ul.theme-switch-control.segment-control > li').removeClass('current');
+      var themeName = $(this).data('theme-name');
+
+      $(this).parent('ul').find('li').removeClass('current');
       $(this).addClass('current');
 
-      var themeName = $(this).data('theme-name');
+      var $iframe = $(this).parents('div.directive-container').find('iframe');
+      console.log($iframe);
+
       setTimeout(function() {
-        changeTheme(themeName);
+        changeTheme(themeName, $iframe);
       }, 200);
     });
 
-    function changeTheme(themeName) {
-      $(iframeSelector).each(function() {
+    function changeTheme(themeName, $iframe) {
+      $iframe.each(function() {
         $('link[rel=stylesheet]', this.contentDocument).filter(function() {
           console.log(this.href);
           return isThemeCSSLink(this);

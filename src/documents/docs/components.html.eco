@@ -56,16 +56,6 @@ page: 'components'
         
     </div>
     <div class="col-md-9 col-xs-9 right-side">
-
-      <div class="theme-switch" style="margin-top: 50px; text-align: center">
-
-
-        <ul class="theme-switch-control segment-control">
-          <li class="current" data-theme-name="ios">iOS</li>
-          <li data-theme-name="android">Android</li>
-        </ul>
-
-      </div>
       
           <% for directive in @framework.directives: %>
 
@@ -172,18 +162,32 @@ page: 'components'
             <div class="col-md-4 col-xs-4 no-padding">
               <% if directive.examplePartial: %>
                 <% if directive.demoURL: %>
-                  <div class="relative iphone-box margin-top-150" ng-show="directive.demoURL !== undefined">
+                  <div class="relative margin-top-150" ng-show="directive.demoURL !== undefined">
                     <div class="absolute click-through">
                       <img width="282" src="<%= @rootUrl %>images/iPhone5Frame.png">
                     </div>
 
                     <div class="absolute fit-iphone-frame">
+                        <% if directive is @framework.directives[0]: %>
                         <iframe 
                             class="simulater-iframe"
-                            src="data:text/html,<body%20style='background-color:#000;overflow:hidden;'></body>" 
+                            src="<%= @rootUrl %><%= directive.demoURL %>" 
+                            width="320" height="568"></iframe>
+                        <% else: %>
+                        <iframe 
+                            class="simulater-iframe"
+                            src="data:text/html,<body%20style='background-color:#f9f9f9;overflow:hidden;'></body>" 
                             data-src="<%= @rootUrl %><%= directive.demoURL %>" 
                             width="320" height="568"></iframe>
+                        <% end %>
                     </div> 
+                  </div>
+
+                  <div style="position: absolute; top: 760px; left: 55px;">
+                    <ul class="theme-switch-control segment-control">
+                      <li class="current" data-theme-name="ios">iOS</li>
+                      <li data-theme-name="android">Android</li>
+                    </ul>
                   </div>
                 <% end %>            
               <% end %>
