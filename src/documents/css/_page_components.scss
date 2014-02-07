@@ -37,7 +37,7 @@ body#components {
 		}
 
 		div.demo {
-			background-image: url('/images/iPhone5Frame.png');
+			background-image: url('/images/iPhone5cFrame.png');
 			background-position: 0px 0px;
 			background-repeat: no-repeat;
 			height: 1000px;
@@ -49,6 +49,7 @@ body#components {
 				max-width: none;
 				&.simulater-iframe {
 					border-color: black; 
+					background-color: #f9f9f9;
 				}
 			}
 		}
@@ -133,16 +134,19 @@ body#components {
 				width: 100%;
 				padding-left: 12px;
 				line-height: 2;
+				color: #333;
+				font-size: (14px/$basefont)+rem;
 				transition: background-color 100ms linear, color 100ms linear;
 
 				&:hover {
 					text-decoration: underline;
 				}
 
-				&.selected, &.selected a {
+				&.selected, &.selected:visited, &.selected:link {
 					color: #fff !important;
 					background-color: $onsen-red;
 					font-weight: 400;
+					text-decoration: underline;
 					transition: none;
 				}
 			}
@@ -201,6 +205,7 @@ body#components {
 		border-left: 2px solid lightgray;
 		padding-left: 14px;
 		margin-left: -14px;
+		font-size: (14px/$basefont)+rem;
 	}
 
 	.example-box pre {

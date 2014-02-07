@@ -114,13 +114,13 @@ page: 'components'
                 <iframe 
                     class="simulater-iframe"
                     src="<%= @rootUrl %><%= directive.demoURL %>" 
-                    width="320" height="568"></iframe>
+                    width="320" height="570"></iframe>
                 <% else: %>
                 <iframe 
                     class="simulater-iframe"
                     src="data:text/html,<body%20style='background-color:#f9f9f9;overflow:hidden;'></body>" 
                     data-src="<%= @rootUrl %><%= directive.demoURL %>" 
-                    width="320" height="568"></iframe>
+                    width="320" height="570"></iframe>
                 <% end %>
             </div> 
             <div style="position: absolute; top: 830px; left: 0px; text-align: center; width:400px">
