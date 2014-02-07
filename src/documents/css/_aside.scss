@@ -5,12 +5,11 @@ header.article-info {
 	overflow: hidden;
 	width: $aside-width;
 
-	h1 {
+	h2 {
 		color: #333;
-		font-size: (22px/$basefont)+rem;
+		font-size: (20px/$basefont)+rem;
 		font-weight: 400;
 		margin-bottom: 18px;
-		padding-left: 25px;
 		text-align: left;
 	}
 
@@ -20,11 +19,8 @@ header.article-info .toc, .toc {
 	background-color: #f5f5f5;
 	padding: 8px 25px;
 	text-align: left;
-	a {
-		@include all-link-state(#333);
-	}
 	li {
-		font-size: (16px/$basefont)+rem;
+		font-size: (18px/$basefont)+rem;
 		line-height: 1.2;
 		margin: 14px 0;
 	};

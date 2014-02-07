@@ -59,15 +59,18 @@
 
 	<article class="common">
 		<header class="article-info">
+
 			<% if @document.toc: %>
 				<nav>
 					<ol class="toc">
+						<li><h2><%= @document.title %></h2></li>
 					<% for toc in @document.toc: %>
 						<li><a href="<%= toc.href %>"><%= toc.name %></a></li>
 					<% end %>
 					</ol>
 				</nav>
 			<% end %>
+
 		</header>
 
 		<div class="content">
