@@ -3,10 +3,11 @@ header.article-info {
 	padding: 58px 0 100px;
 	overflow: hidden;
 	width: $aside-width;
+	float: right;
 
 	h2 {
 		color: #333;
-		font-size: (20px/$basefont)+rem;
+		font-size: (18px/$basefont)+rem;
 		font-weight: 400;
 		margin-bottom: 18px;
 		text-align: left;
@@ -19,13 +20,13 @@ header.article-info .toc, .toc {
 	padding: 8px 25px;
 	text-align: left;
 	> li {
-		font-size: (18px/$basefont)+rem;
+		font-size: (16px/$basefont)+rem;
 		line-height: 1.2;
 		margin: 14px 0;
 		li {
 			line-height: 1.2;
-			margin: 12px 0;
-			margin-left: 12px;
+			margin: 14px 0;
+			margin-left: 18px;
 			font-size: (16px/$basefont)+rem;
 		}
 	};
