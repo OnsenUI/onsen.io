@@ -24,8 +24,8 @@ body#components {
 	}
 
 	div.right-col {
-		width: 760px;
-		margin-left: 230px;
+		width: 500px;
+		margin-left: 200px;
 
 		.directive-container {
 			min-height: 1000px;
@@ -105,7 +105,7 @@ body#components {
 
 	div.left-col {
 		float: left;
-		width: 230px;
+		width: 200px;
 
 		::-webkit-scrollbar {
 			width: 4px;
@@ -127,7 +127,7 @@ body#components {
 			overflow-y: auto;
 			overflow-x: hidden;
 			background-color: #fff;
-			width: 200px;
+			width: 170px;
 
 			a.directive-name {
 				display: inline-block;
@@ -135,6 +135,7 @@ body#components {
 				padding-left: 12px;
 				line-height: 2;
 				color: #333;
+				border-radius: 4px;
 				font-size: (14px/$basefont)+rem;
 				transition: background-color 100ms linear, color 100ms linear;
 
