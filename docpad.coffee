@@ -29,6 +29,10 @@ docpadConfig = {
 				},
 				examplePartial: 'screen_example',
 				demoURL: 'OnsenUI/demo/screen_demo.html',
+				relatedResources: [{
+					href : 'http://google.com',
+					text : 'google'
+				}],
 				attributes: [{
 					name: 'page',
 					description: {

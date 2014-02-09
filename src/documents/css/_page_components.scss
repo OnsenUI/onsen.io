@@ -25,7 +25,7 @@ body#components {
 
 	div.right-col {
 		width: 500px;
-		margin-left: 200px;
+		margin-left: 190px;
 
 		.directive-container {
 			min-height: 1000px;
@@ -35,20 +35,24 @@ body#components {
 				padding-top: 40px;
 			}
 
-			section.directive-example {
-				font-size: (14px/$basefont)+rem;
+			> div > section {
+				margin: 8px 0 32px;
+				
+				&.directive-example {
+					font-size: (14px/$basefont)+rem;
 
-				> pre {
-					font-size: (14px/$basefont)+rem;
-					border-width: 0px;
-					border-radius: 0px;
-					margin-top: 4px;
-				}
-				> p {
-					font-size: (14px/$basefont)+rem;
-					margin: 1rem 0 4px 0;
+					> pre {
+						font-size: (14px/$basefont)+rem;
+						border-radius: 0px;
+						margin-top: 4px;
+					}
+					> p {
+						font-size: (14px/$basefont)+rem;
+						margin: 1rem 0 4px 0;
+					}
 				}
 			}
+
 
 			table {
 				width: 100%;
@@ -76,24 +80,32 @@ body#components {
 							padding: 8px;
 							border-top-width: 0px;
 
-							> code {
+							&.attribute-name, > code {
+								margin: 8px 0;
 								white-space: nowrap;
+								font-family: 'Menlo Regular', 'Menlo', 'Consolas', monospace;
+								color: #10108F;
+								font-size: 14px;
+							}
+
+							&.attribute-name {
+								color: #5E299A;
 							}
 						}
 					}
 				}
 				> thead {
-					background-color: #999;
-					color: #fff;
+					background-color: #fff;
+					color: #333;
+					border-bottom: 2px solid #ddd;
 
 					> tr {
-						border-left: 1px solid #999;
-						border-right: 1px solid #999;
-						border-bottom: 0px;
+						border-width: 0px;
 
 						> th {
-							padding: 8px;
+							padding: 4px 8px;
 							border-width: 0px;
+							font-size: 18px;
 						}
 					}
 				}
@@ -123,7 +135,7 @@ body#components {
 
 	div.left-col {
 		float: left;
-		width: 200px;
+		width: 190px;
 
 		::-webkit-scrollbar {
 			width: 4px;
@@ -191,6 +203,10 @@ body#components {
 		margin-bottom: 15px;
 	}
 
+	h4 {
+		margin-bottom: 0px;
+	}
+
 	.fit-iphone-frame {
 		top: 119px;
 		left: 34px;
@@ -209,16 +225,17 @@ body#components {
 		padding: 0 0 0 1px;
 		margin: 0;
 
-		$segment-color: #FF0F38;
+		$segment-color: $onsen-red;
+		$segment-color-light: $onsen-red-light;
 
 		> li {
 			display: inline-block;
 			font-size: (15px/$basefont)+rem;
 			font-weight: 200;
-			width: 90px;
+			min-width: 90px;
 			height: 32px;
 			border: 1px solid $segment-color;
-			padding: 0;
+			padding: 0 8px;
 			margin: 0 0 0 -1px;
 			border-radius: 0px;
 			text-align: center;
@@ -250,6 +267,15 @@ body#components {
 				transition: none;
 				position: relative;
 				z-index: 1;
+
+				&:hover {
+					background-color: $segment-color;
+				}
+			}
+
+			&:hover {
+				background-color: $segment-color-light;
+				transition: none;
 			}
 		}
 	}
