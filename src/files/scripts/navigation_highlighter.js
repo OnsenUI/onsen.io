@@ -6,61 +6,58 @@
 	var linkMap = {};
 	var currentParent;
 
-	var directiveContainers = $('div.directive-container');
+	(function() {
+		var directiveContainers = $('div.directive-container');
 
-	for (var i = 0; i < links.length; i++) {
-		var link = $(links[i]);
-		var id = link.attr('href');
-		var isParent = link.attr('is-parent') === "true" || false;
-		if (isParent) {
-			currentParent = link;
+		for (var i = 0; i < links.length; i++) {
+			var link = $(links[i]);
+			var id = link.attr('href');
+			var isParent = link.attr('is-parent') === "true" || false;
+			if (isParent) {
+				currentParent = link;
+			}
+			var section = $(id);
+			sections.push(section);
+			iframes[i] = $(directiveContainers[i]).find('iframe')[0];
+			linkMap[id] = {};
+			linkMap[id].link = link;
+			linkMap[id].parent = currentParent;
 		}
-		var section = $(id);
-		sections.push(section);
-		iframes[i] = $(directiveContainers[i]).find('iframe')[0];
-		linkMap[id] = {};
-		linkMap[id].link = link;
-		linkMap[id].parent = currentParent;
-	}
-
-	directiveContainers = null;
+	})();
 
 	var scrollWrapper = document;
-	var offset = 60;
-	var timeoutIds = [];
-	function addDelayedLoadDemo(iframe) {
-		iframe = $(iframe);
-		var src = iframe.data('src');
-		if (iframe.attr('src') !== src) {
-			timeoutIds.push(setTimeout(function() {
-				iframe.attr('src', src);
-			}, 200));
+	var offset = 200;
+
+	function loadDemo(iframe) {
+		var $iframe = $(iframe);
+		var scrollY = window.scrollY;
+
+		if ($iframe.attr('src') !== $iframe.data('src')) {
+			setTimeout(function() {
+				if (window.scrollY === scrollY) {
+					$iframe.attr('src', $iframe.data('src'));
+				}
+			}, 300);
 		}
 	}
+
 	scrollWrapper.addEventListener('scroll', function() {
-		for (var i = 0; i < timeoutIds.length; i++) {
-			clearTimeout(timeoutIds[i]);
-		}
-		timeoutIds = [];
+		var scrolled = window.scrollY + ($(window).height() / 2);
+
 		for (var i = sections.length - 1; i >= 0; i--) {
-			var scrolled = window.scrollY + offset;
 			var section = sections[i];
 			var position = section.offset().top;
 			
 			if (scrolled > position) {
-				iframes[i] && addDelayedLoadDemo(iframes[i]);
-				iframes[i - 1] && addDelayedLoadDemo(iframes[i - 1]);
-				iframes[i + 1] && addDelayedLoadDemo(iframes[i + 1]);
+				iframes[i] && loadDemo(iframes[i]);
 
 				var id = '#' + section.attr('id');
 				links.removeClass('selected');
-				var link = linkMap.id;
 				linkMap[id].link.addClass('selected');
 				linkMap[id].parent.addClass('selected');
 				break;
 			}
 		};
-
 	});
 
 })();

@@ -34,6 +34,71 @@ body#components {
 			&:first-child {
 				padding-top: 40px;
 			}
+
+			section.directive-example {
+				font-size: (14px/$basefont)+rem;
+
+				> pre {
+					font-size: (14px/$basefont)+rem;
+					border-width: 0px;
+					border-radius: 0px;
+					margin-top: 4px;
+				}
+				> p {
+					font-size: (14px/$basefont)+rem;
+					margin: 1rem 0 4px 0;
+				}
+			}
+
+			table {
+				width: 100%;
+				max-width: 100%;
+				border-collapse: collapse;
+				border-spacing: 0;
+				box-sizing: border-box;
+				font-size: (14px/$basefont)+rem;
+				margin: 1rem 0;
+				> tbody {
+					> tr {
+						border-left: 0px solid #ddd;
+						border-right: 0px solid #ddd;
+						border-top: 1px solid #ddd;
+						&:last-child {
+							border-bottom: 1px solid #ddd;
+						}
+						&:first-child {
+							border-top: 0px solid #ddd;
+						}
+						> th {
+							padding: 8px;
+						}
+						> td {
+							padding: 8px;
+							border-top-width: 0px;
+
+							> code {
+								white-space: nowrap;
+							}
+						}
+					}
+				}
+				> thead {
+					background-color: #999;
+					color: #fff;
+
+					> tr {
+						border-left: 1px solid #999;
+						border-right: 1px solid #999;
+						border-bottom: 0px;
+
+						> th {
+							padding: 8px;
+							border-width: 0px;
+						}
+					}
+				}
+			}
+
 		}
 
 		div.demo {
@@ -54,53 +119,6 @@ body#components {
 			}
 		}
 
-		table {
-			width: 100%;
-			max-width: 100%;
-			border-collapse: collapse;
-			border-spacing: 0;
-			box-sizing: border-box;
-			font-size: (14px/$basefont)+rem;
-			margin: 1rem 0;
-			> tbody {
-				> tr {
-					border-left: 1px solid #ddd;
-					border-right: 1px solid #ddd;
-					border-top: 1px solid #ddd;
-					&:last-child {
-						border-bottom: 1px solid #ddd;
-					}
-					&:first-child {
-						border-top: 0px solid #ddd;
-					}
-					> th {
-						padding: 8px;
-					}
-					> td {
-						padding: 8px;
-						border-top-width: 0px;
-					}
-				}
-			}
-			> thead {
-				background-color: #7b878c;
-				background-color: #999;
-				color: #fff;
-
-				> tr {
-					border-left: 1px solid #7B878C;
-					border-right: 1px solid #7B878C;
-					border-left: 1px solid #999;
-					border-right: 1px solid #999;
-					border-bottom: 0px;
-
-					> th {
-						padding: 8px;
-						border-width: 0px;
-					}
-				}
-			}
-		}
 	}
 
 	div.left-col {
@@ -130,14 +148,14 @@ body#components {
 			width: 170px;
 
 			a.directive-name {
-				display: inline-block;
-				width: 100%;
-				padding-left: 12px;
+				display: block;
+				padding-left: 8px;
 				line-height: 2;
-				color: #333;
+				color: #666;
 				border-radius: 4px;
 				font-size: (14px/$basefont)+rem;
 				transition: background-color 100ms linear, color 100ms linear;
+				vertical-align: middle;
 
 				&:hover {
 					text-decoration: underline;
@@ -152,20 +170,6 @@ body#components {
 				}
 			}
 		}
-
-	}
-
-
-	.directive-attribute.selected {
-		
-	}
-
-	.directive-attribute::before {
-
-	}
-
-	.gray {
-		color: #333;
 	}
 
 	h1 {
@@ -193,30 +197,60 @@ body#components {
 		position: absolute;
 	}
 
-	.fit-iphone-frame-big {
-		top: 87px;
-		left: 25px;
-	}
-
-	.margin-top-150 {
-		margin-top: 150px;
-	}
-
-	.example-box {
-		border-left: 2px solid lightgray;
-		padding-left: 14px;
-		margin-left: -14px;
-		font-size: (14px/$basefont)+rem;
-	}
-
-	.example-box pre {
-		border-width: 0px;
-		border-radius: 0px;
-	}
-
 	.anchor {
 		display: block;
 		height: 0px;	 
 		visibility: hidden;
+	}
+
+	ul.segment-control {
+		font-size: 0px;
+		display: inline-block;
+		padding: 0 0 0 1px;
+		margin: 0;
+
+		$segment-color: #FF0F38;
+
+		> li {
+			display: inline-block;
+			font-size: (15px/$basefont)+rem;
+			font-weight: 200;
+			width: 90px;
+			height: 32px;
+			border: 1px solid $segment-color;
+			padding: 0;
+			margin: 0 0 0 -1px;
+			border-radius: 0px;
+			text-align: center;
+			background-color: white;
+			color: $segment-color;
+			line-height: 32px;
+			cursor: pointer;
+			-webkit-font-smoothing: antialiased;
+			transition:
+			all 200ms linear,
+			color 200ms linear,
+			font-weight 200ms linear,
+			border-color 200ms linear;
+			font-weight: 400;
+
+			&:first-child {
+				border-radius: 4px 0 0 4px;
+			}
+
+			&:last-child {
+				border-radius: 0 4px 4px 0;
+			}
+
+			&.current {
+				background-color: $segment-color;
+				color: white;
+				border-color: $segment-color;
+				font-weight: 400;
+				transition: none;
+				position: relative;
+				z-index: 1;
+			}
+		}
 	}
 }

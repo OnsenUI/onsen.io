@@ -69,55 +69,6 @@ article.common {
 		margin: 0;
 	}
 
-	ul.segment-control {
-		font-size: 0px;
-		display: inline-block;
-		padding: 0 0 0 1px;
-		margin: 0;
-
-		$segment-color: #999;
-
-		> li {
-			display: inline-block;
-			font-size: (15px/$basefont)+rem;
-			font-weight: 200;
-			width: 90px;
-			height: 32px;
-			border: 1px solid $segment-color;
-			padding: 0;
-			margin: 0 0 0 -1px;
-			border-radius: 0px;
-			text-align: center;
-			background-color: white;
-			color: $segment-color;
-			line-height: 32px;
-			cursor: pointer;
-			-webkit-font-smoothing: antialiased;
-			transition:
-			all 200ms linear,
-			color 200ms linear,
-			font-weight 200ms linear,
-			border-color 200ms linear;
-			font-weight: 400;
-
-			&:first-child {
-				border-radius: 4px 0 0 4px;
-			}
-
-			&:last-child {
-				border-radius: 0 4px 4px 0;
-			}
-
-			&.current {
-				background-color: #eee; //$segment-color;
-				border-color: $segment-color;
-				font-weight: 400;
-				transition: none;
-				position: relative;
-				z-index: 1;
-			}
-		}
-	}
 
 	div.need-help {
 		margin: 52px 0 0 0;
