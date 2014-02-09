@@ -672,6 +672,11 @@ docpadConfig = {
 			_.map scripts, (value) ->
 				return value.replace 'out', ''
 
+	watchOptions:
+		catchupDelay: 0
+
+	regenerateDelay: 0
+
 	# =================================
 	# Collections
 	
