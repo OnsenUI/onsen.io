@@ -27,6 +27,9 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: 200;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -84,9 +87,10 @@ body {
 	&:after {content: ""; clear: both; display: block;}
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	font-weight: 200;
 }
 
-h1,h2,h3,h4,h5,h6 {font-weight: 700;}
+h1,h2,h3,h4,h5,h6 {font-weight: 100;}
 table{border-collapse:collapse;border-spacing:0}
 textarea,input{margin:0;padding:0}
 caption,th{text-align:left}
@@ -107,6 +111,13 @@ a {
 	}
 }
 
+hr {
+	color: transparent;
+	border-width: 0px;
+	height: 1px;
+	background-color: #E7E7E7;
+	margin: 32px 0;
+}
 
 .btn,
 %btn-default {
@@ -188,6 +199,12 @@ p.highlighted {
 	a {
 		@include all-link-state(#439ecc)
 	}
+}
+
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
 }
 
 .highlighted {

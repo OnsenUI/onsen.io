@@ -48,6 +48,7 @@
 			<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 			<ul class="gnav">
 				<li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">Getting Started</a></li>
+				<li class="<%- if @document.page is 'components' then 'current' %>"><a href="/guide/components.html">Components</a></li>
 				<li class="<%- if @document.page is 'docs' then 'current' %>"><a href="/docs/">Docs</a></li>
 				<li class="<%- if @document.page is 'customize' then 'current' %>"><a href="/guide/customize.html">Customize</a></li>
 				<li class="<%- if @document.page is 'forum' then 'current' %>"><a href="/forum.html">Forum</a></li>
@@ -60,7 +61,10 @@
 		<div id="content">
 			<%- @content %>
 
+
 			<% if @document.needHelp: %>
+				<hr>
+
 				<%- @partial('need_help') %>
 			<% end %>
 		</div>
@@ -70,6 +74,7 @@
 	<footer id="footer-container">
 		<ul class="gnav">
 			<li><a href="/guide/getting_started.html">Getting Started</a></li>
+			<li><a href="/guide/components.html">Components</a></li>
 			<li><a href="/docs/">Docs</a></li>
 			<li><a href="/guide/customize.html">Customize</a></li>
 			<li><a href="/forum.html">Forum</a></li>

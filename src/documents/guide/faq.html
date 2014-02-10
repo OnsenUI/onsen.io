@@ -1,16 +1,86 @@
 ---
-layout: 'docpad_en'
+layout: 'default_en'
 page: 'faq'
 title: 'FAQ'
 needHelp: true
+toc: false
 ---
 
 <h2>FAQ</h2>
 
 <ul>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
+	<li><a href="#faq1">ng-appやng-controller、ng-clickとは何ですか?</a></li>
+	<li><a href="#faq2">onclick属性の代わりにng-click属性を使う理由は何ですか?</a></li>
+	<li><a href="#faq3">Angular.jsを使う利点は何ですか?</a></li>
+	<li><a href="#faq4">ons-screen要素を使っても、ページが読み込まれません</a></li>
+	<li><a href="#faq5">ons-icon要素のアイコンが表示されません</a></li>
+	<li><a href="#faq6">Onsen UIで提供されているテーマの見た目を変えるにはどうすれば良いですか?</a></li>
 </ul>
+
+<hr>
+
+<h3 id="faq1">Q. ng-appやng-controller、ng-clickとは何ですか?</h3>
+
+<p><a href="http://angularjs.org" target="_blank">Angular.js</a>のディレクティブです。Onsen UIはAngular.jsをベースにして開発されています。Onsen UIを使うということは、Angular.jsもつかうことになります。</p>
+
+<p>Angular.jsが提供するディレクティブの一覧を見るには、以下のリンクを参照して下さい。</p>
+
+<ul>
+	<li><a href="http://docs.angularjs.org/api/" target="_blank">AngularJS API Docs</a></li>
+</ul>
+
+<hr>
+
+<h3 id="faq2">Q. onclick属性の代わりにng-click属性を使う理由は何ですか?</h3>
+
+<p>ng-click属性では、<a href="http://angularjs.org" target="_blank">Angular.js</a>のスコープを参照することができますが、onclick属性ではできません。</p>
+
+<p>ons.navigator.pushPage()関数などのOnsen UIを変化させるための関数は、Angular.jsのスコープに定義されています。従って、onclick属性ではなくng-click属性を使う必要があります。</p>
+
+<hr>
+
+<h3 id="faq3">Q. Angular.jsを使う利点は何ですか?</h3>
+
+<p><a href="http://angularjs.org/" target="_blank">Angular.js</a>は、googleによって開発されているHTML5アプリのためのフレームワークです。</p>
+
+<p>Angular.jsを使うことで、以下のような利点を得ることが出来ます。</p>
+
+<ul>
+	<li>強力なデータバインディングを利用できる</li>
+	<li>テンプレートシステムを利用できる</li>
+	<li>DIコンテナを利用できる</li>
+	<li>アプリケーションのコードをモジュール化できる</li>
+</ul>
+
+<p>また、Onsen UIのカスタム要素は、Angular.jsが提供する<a href="http://docs.angularjs.org/guide/directive" targte="_blank">ディレクティブ</a>の仕組みを用いて実装されています。</p>
+
+<hr>
+
+<h3 id="faq4">Q. ons-screen要素で、ページが読み込まれません</h3>
+
+<p>Onsen UIのJavaScriptファイルを読み込んでいることと、ng-app属性を正しく設定できていること、Onsen UIのディレクティブを読み込んでいることを確認して下さい。</p>
+
+<p>詳細は、<a href="/guide/bootstrap">Bootstrap</a>のページを参照して下さい。</p>
+
+<hr>
+
+<h3 id="faq5">Q. ons-icon要素のアイコンが表示されません</h3>
+
+<p>考えられる原因は、font-awesomeのCSSファイルを読み込んでいないか、指定しているアイコン名が間違っているかのどちらかです。</p>
+
+<p>以下のようなCSSファイルを読み込んでいることを確認して下さい。</p>
+
+<pre><code>
+&lt;link rel="stylesheet" href="lib/onsen/css/font_awesome/css/font-awesome.min.css"&gt;
+</code></pre>
+
+<p>アイコンの表示方法やアイコン名については、<a href="/guide/icon.html">Icon</a>のページを参照してください。</p>
+
+<hr>
+
+<h3 id="faq6">Q. Onsen UIで提供されているテーマの見た目を変えるにはどうすれば良いですか?</h3>
+
+<p>Onsen UIのテーマは、通常のウェブページと同じようにCSSで記述されています。テーマの見た目を変更するには、CSSを記述してテーマのスタイルを上書きしてください。</p>
+
+<p><a href="/guide/customize.html">Customzie</a>のページを参照して下さい。テーマ自体に関しては、<a href="/guide/theme.html">Theme</a>のページを参照して下さい。</p>
 

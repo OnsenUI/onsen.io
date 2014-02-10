@@ -30,7 +30,6 @@ header.common {
 			color: #a6a6a6;
 			display: inline-block;
 			font-size: 16px;
-			font-weight: 400;
 			height: 59px;
 			margin: 0 4px;
 			padding: 0 15px;
@@ -42,9 +41,11 @@ header.common {
 				}
 			}
 			a {
-				@include all-link-state(#a6a6a6, all-none);
+				@include all-link-state(#999, all-none);
+				transition: color 200ms linear;
 				&:hover {
-					color: #ff1a33;
+					transition: color 50ms linear;
+					color: $onsen-red;
 				}
 			}
 		}

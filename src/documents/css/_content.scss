@@ -12,6 +12,8 @@ section#content-container {
 
 		> ol.toc {
 			background-color: #f5f5f5;
+			border-top: 1px solid #ccc;
+			border-bottom: 1px solid #ccc;
 			padding: 8px 25px;
 			text-align: left;
 
@@ -32,7 +34,6 @@ section#content-container {
 		h2 {
 			color: #333;
 			font-size: (18px/$basefont)+rem;
-			font-weight: 400;
 			margin-bottom: 18px;
 			text-align: left;
 		}
@@ -53,20 +54,23 @@ section#content-container {
 		width: ($width - $aside-width);
 
 		h2, h3, h4, h5 {
-			color: #333;
-			font-weight: 400;
+			color: #000;
 		}
 
 		h2 {
-			font-size: (42px/$basefont)+rem;
+			font-size: (32px/$basefont)+rem;
 			margin: 70px 0 20px 0;
 			&:first-child {
 				margin-top: 0;
 			}
 		}
 
+		hr + h2 {
+			margin-top: 36px;
+		}
+
 		h3 {
-			font-size: (28px/$basefont)+rem;
+			font-size: (24px/$basefont)+rem;
 			margin: 36px 0 14px 0;
 		}
 
@@ -107,8 +111,8 @@ section#content-container {
 		}
 
 		div.need-help {
-			margin: 52px 0 0 0;
-			background-color: #f9f9f9;
+			margin: 36px 0 0 0;
+			background-color: #f5f5f5;
 			padding: 8px 12px;
 			> h2 {
 				font-size: (24px/$basefont)+rem;

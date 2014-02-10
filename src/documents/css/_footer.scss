@@ -22,7 +22,6 @@ footer#footer-container {
 			color: #a6a6a6;
 			display: inline-block;
 			font-size: 16px;
-			font-weight: 400;
 			margin: 0 19px;
 
 			// for social button
@@ -34,7 +33,12 @@ footer#footer-container {
 				color: #ff1a33;
 			}
 			a {
-				@include all-link-state(#a6a6a6, all-none);
+				@include all-link-state(#999, all-none);
+				transition: color 200ms linear;
+				&:hover {
+					transition: color 50ms linear;
+					color: $onsen-red;
+				}
 			}
 		}
 	}
@@ -77,6 +81,11 @@ footer#footer-container {
 			right: 100px;
 			a {
 				@include all-link-state(#999);
+				transition: color 200ms linear;
+				&:hover {
+					transition: color 50ms linear;
+					color: $onsen-red;
+				}
 			}
 		}
 	}
