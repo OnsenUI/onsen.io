@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-footer.common {
+footer#footer-container {
 	color: #666;
 	line-height: 120%;
 	margin: 0 auto;
@@ -16,6 +16,7 @@ footer.common {
 		min-width: $width;
 		height: 66px;
 		line-height: 66px;
+        text-align: center;
 
 		li {
 			color: #a6a6a6;

@@ -1,85 +1,121 @@
-article.common {
+section#content-container {
 	margin: 0 auto;
 	width: $width;
-}
-
-.content {
-	color: #666;
-	margin: 0;
-	padding: 50px 20px 100px 0;
+	position: relative;
 	text-align: left;
-	width: ($width - $aside-width - 30px);
 
-	&.no-aside {
-		width: ($width - $aside-width);
-		margin: 0 auto;
-	}
+	> aside#content-info, div.sticky-wrapper > aside#content-info {
+		padding: 58px 0 100px;
+		overflow: hidden;
+		float: right;
+		width: $aside-width;
 
-	h2, h3, h4, h5 {
-		color: #333;
-		font-weight: 400;
-	}
+		> ol.toc {
+			background-color: #f5f5f5;
+			padding: 8px 25px;
+			text-align: left;
 
-	h2 {
-		font-size: (42px/$basefont)+rem;
-		margin: 70px 0 20px 0;
-		&:first-child {
-			margin-top: 0;
+			> li {
+				font-size: (16px/$basefont)+rem;
+				line-height: 1.2;
+				margin: 14px 0;
+
+				li {
+					line-height: 1.2;
+					margin: 14px 0;
+					margin-left: 18px;
+					font-size: (16px/$basefont)+rem;
+				}
+			}
+		}
+
+		h2 {
+			color: #333;
+			font-size: (18px/$basefont)+rem;
+			font-weight: 400;
+			margin-bottom: 18px;
+			text-align: left;
 		}
 	}
 
-	h3 {
-		font-size: (28px/$basefont)+rem;
-		margin: 36px 0 14px 0;
-	}
-
-	h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
-		margin-top: 0px;
-	}
-
-	h4 {
-		font-size: (20px/$basefont)+rem;
-		margin: 28px 0 8px 0;
-	}
-
-	h5, h6 {
-		font-size: (14px/$basefont)+rem;
-		margin: 28px 0 8px 0;
-	}
-
-	ul > li {
-		list-style-type: square;
-		margin-left: 2rem;
-	}
-
-	ol > li {
-		list-style-type: decimal;
-		margin-left: 2rem;
-	}
-
-	li {
-		line-height: 1.8;
-	}
-
-	p, pre, ul, ol {
-		margin: 1rem 0;
-	}
-
-	li > ul {
+	> aside#content-info + div#content, div.sticky-wrapper + div#content {
+		width: ($width - $aside-width - 30px);
 		margin: 0;
+		padding-right: 30px;
 	}
 
+	> div#content {
 
-	div.need-help {
-		margin: 52px 0 0 0;
-		background-color: #f9f9f9;
-		padding: 8px 12px;
-		> h2 {
-			font-size: (24px/$basefont)+rem;
+		color: #666;
+		margin: 0 auto;
+		padding: 50px 0px 100px 0;
+		text-align: left;
+		width: ($width - $aside-width);
+
+		h2, h3, h4, h5 {
+			color: #333;
+			font-weight: 400;
 		}
-		> p {
+
+		h2 {
+			font-size: (42px/$basefont)+rem;
+			margin: 70px 0 20px 0;
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+
+		h3 {
+			font-size: (28px/$basefont)+rem;
+			margin: 36px 0 14px 0;
+		}
+
+		h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
+			margin-top: 0px;
+		}
+
+		h4 {
+			font-size: (20px/$basefont)+rem;
+			margin: 28px 0 8px 0;
+		}
+
+		h5, h6 {
+			font-size: (14px/$basefont)+rem;
+			margin: 28px 0 8px 0;
+		}
+
+		ul > li {
+			list-style-type: square;
+			margin-left: 2rem;
+		}
+
+		ol > li {
+			list-style-type: decimal;
+			margin-left: 2rem;
+		}
+
+		li {
+			line-height: 1.8;
+		}
+
+		p, pre, ul, ol {
+			margin: 1rem 0;
+		}
+
+		li > ul {
 			margin: 0;
 		}
-	}
 
+		div.need-help {
+			margin: 52px 0 0 0;
+			background-color: #f9f9f9;
+			padding: 8px 12px;
+			> h2 {
+				font-size: (24px/$basefont)+rem;
+			}
+			> p {
+				margin: 0;
+			}
+		}
+	}
 }

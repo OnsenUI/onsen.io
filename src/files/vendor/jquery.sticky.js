@@ -89,6 +89,7 @@
           var stickyId = stickyElement.attr('id');
           var wrapper = $('<div></div>')
             .attr('id', stickyId + '-sticky-wrapper')
+            .css({width : stickyElement.outerWidth() + "px"})
             .addClass(o.wrapperClassName);
           stickyElement.wrapAll(wrapper);
 
@@ -97,7 +98,7 @@
           }
 
           if (stickyElement.css("float") == "right") {
-            stickyElement.css({"float":"none"}).parent().css({"float":"right"});
+            stickyElement.css({float:"none"}).parent().css({float:"right"});
           }
 
           var stickyWrapper = stickyElement.parent();

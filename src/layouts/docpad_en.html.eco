@@ -57,40 +57,38 @@
 	</div></header>
 
 
-	<article class="common">
-		<header class="article-info">
+	<section id="content-container" class="clearfix">
+		<aside id="content-info">
 
 			<% if @document.toc: %>
-				<nav>
-					<ol class="toc">
-						<li><h2><%= @document.title %></h2></li>
-						<% for toc in @document.toc: %>
-						<li><a href="<%= toc.href %>"><%= toc.name %></a>
-							<% if toc.sub: %>
-							<ol>
-								<% for sub in toc.sub: %>
-								<li><a href="<%= sub.href %>"><%= sub.name %></a></li>
-								<% end %>
-							</ol>
+				<ol class="toc">
+					<li><h2><%= @document.title %></h2></li>
+					<% for toc in @document.toc: %>
+					<li><a href="<%= toc.href %>"><%= toc.name %></a>
+						<% if toc.sub: %>
+						<ol>
+							<% for sub in toc.sub: %>
+							<li><a href="<%= sub.href %>"><%= sub.name %></a></li>
 							<% end %>
-						</li>
+						</ol>
 						<% end %>
-					</ol>
-				</nav>
+					</li>
+					<% end %>
+				</ol>
 			<% end %>
 
-		</header>
+		</aside>
 
-		<div class="content">
+		<div id="content">
 			<%- @content %>
 
 			<% if @document.needHelp: %>
 				<%- @partial('need_help') %>
 			<% end %>
 		</div>
-	</article>
+	</section>
 
-	<footer class="common">
+	<footer id="footer-container">
 		<nav>
 			<ul class="gnav">
 				<li><a href="/guide/getting_started.html">Getting Started</a></li>
@@ -135,11 +133,10 @@
 	<script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
 	<script>
 	$(function() {
-		$('header.article-info').sticky({
+		$('aside#content-info').sticky({
 			topSpacing : 0, 
-			bottomSpacing : $('footer.common').height(), 
-			parent : $('div.content')[0]}
-		);
+			bottomSpacing : $('footer#footer-container').height()
+		});
 	});
 	</script>
 
