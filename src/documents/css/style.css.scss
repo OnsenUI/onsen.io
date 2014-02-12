@@ -74,7 +74,9 @@ p {
 
 html {
 	//font: 13px/1.4 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-	font-size: $basefont;
+	// ここで指定しているフォントサイズに応じて、全ての要素のフォントサイズが変わります
+
+	font-size: 16px;;
 	font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.4;
 }
@@ -87,10 +89,11 @@ body {
 	&:after {content: ""; clear: both; display: block;}
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-weight: 200;
 }
 
-h1,h2,h3,h4,h5,h6 {font-weight: 100;}
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 200;
+}
 table{border-collapse:collapse;border-spacing:0}
 textarea,input{margin:0;padding:0}
 caption,th{text-align:left}
