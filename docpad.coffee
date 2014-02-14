@@ -83,7 +83,7 @@ docpadConfig = {
 				}, {
 					name: 'left-button-icon',
 					description: {
-						en: "The icon name of the toolbar's left button icon",
+						en: "The icon name of the toolbar's left button icon. Too add your own icon, put the name of your css class, and in your css set the properties like background-image, width, height ...",
 						ja: 'ナビゲーターツールバー内の左側に配置されるボタンのアイコンを指定します。'
 					}
 				}, {
@@ -104,12 +104,17 @@ docpadConfig = {
 						en: "Event handler when toolbar's right button is clicked",
 						ja: 'ナビゲーターツールバー内の右側に配置されるボタンのクリックイベントを指定します。'
 					}
+				}, {
+					name: 'hide-toolbar',
+					description: {
+						en: "Wether to hide the toolbar. Valid values are [true/false] or anguluar expression. eg {{ shouldHide }}"						
+					}
 				}],
 				methods: [{
 					name: 'pushPage',
 					parametters: '( pageUrl, options )',
 					description: {
-						en: "Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator",
+						en: "Pushes the specified pageUrl into the page stack and if options object is specified, apply the options. the options object include all the attributes of this navigator but replace the hyphen '-' with camel-case letter. eg. pushPage('page2.html', {leftButtonIcon: 'fa fa-save'}",
 						ja: "遷移したいページのURLと遷移先のナビゲーターツールバーのタイトルを指定し、次のページに遷移します。遷移元のページはページスタックに保存されます。"
 					}
 				}, {
@@ -175,7 +180,13 @@ docpadConfig = {
 				description: {
 					en: 'Used with tabbar-item to manage pages using tabs.'
 				},
-				methods: []
+				methods: [],
+				attributes: [{
+					name: 'hide-tabbar',
+					description: {
+						en: 'Wether to hide the tabbar. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}'
+					}
+				}]
 			}, {
 				name: 'tabbar-item',
 				description: {
