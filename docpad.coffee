@@ -89,7 +89,7 @@ docpadConfig = {
 				}, {
 					name: 'right-button-icon',
 					description: {
-						en: "The icon name of the toolbar's right button icon",
+						en: "The icon name of the toolbar's right button icon. Too add your own icon, put the name of your css class, and in your css set the properties like background-image, width, height ...",
 						ja: 'ナビゲーターツールバー内の右側に配置されるボタンのアイコンを指定します。'
 					}
 				}, {
