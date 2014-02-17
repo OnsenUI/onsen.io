@@ -264,6 +264,18 @@ docpadConfig = {
 					description: {
 						en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind"
 					}
+				}, {
+					name: 'swipable',
+					parametters: '( )',
+					description: {
+						en: "Wether to enable swipe interaction"
+					}
+				}, {
+					name: 'swipeTargetWidth',
+					parametters: '( )',
+					description: {
+						en: "The width of swipable area calculated from the left. Eg. Use this to enable swipe only when the finger touch on the left edge."
+					}
 				}]
 			}, {
 				name: 'split-view',
