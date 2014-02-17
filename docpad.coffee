@@ -181,9 +181,9 @@ docpadConfig = {
 				},
 				methods: [],
 				attributes: [{
-					name: 'hide-tabbar',
+					name: 'hide-tabs',
 					description: {
-						en: 'Wether to hide the tabbar. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}'
+						en: 'Wether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}'
 					}
 				}]
 			}, {
