@@ -135,8 +135,7 @@ docpadConfig = {
 			}, {
 				name: 'navigator-toolbar',
 				description: {
-					en: 'Instead of specifying options object in ons.navigator.pushPage(), you can specify it inside the target page using this component.',
-					ja: 'ページの切り替えを管理するタブ機能を提供します。'
+					en: 'Instead of specifying options object in ons.navigator.pushPage(), you can specify it inside the target page using this component. If you define custom methods for on-left-button-click and on-right-button-click, ons-navigator-toolbar will look for them in the Scope of the ons-navigator.'					
 				},
 				methods: [],
 				demoURL: 'OnsenUI/demo/navigator_with_navigator_toolbar.html',
