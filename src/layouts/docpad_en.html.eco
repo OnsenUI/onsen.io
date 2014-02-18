@@ -59,11 +59,12 @@
 
 
 	<section id="content-container" class="clearfix">
+		<% if @document.toc or @document.autotoc: %>
 		<aside id="content-info">
 
+			<h2><%= @document.title %></h2>
 			<% if @document.toc: %>
 				<ol class="toc">
-					<li><h2><%= @document.title %></h2></li>
 					<% for toc in @document.toc: %>
 					<li><a href="<%= toc.href %>"><%= toc.name %></a>
 						<% if toc.sub: %>
@@ -78,7 +79,11 @@
 				</ol>
 			<% end %>
 
+			<% if !@document.toc and @document.autotoc: %>
+				<%- @partial('toc.html.eco', {tocItems: @document.tableOfContents[0].children}) %>
+			<% end %>
 		</aside>
+		<% end %>
 
 		<div id="content">
 			<%- @content %>
