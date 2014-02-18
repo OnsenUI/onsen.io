@@ -1,6 +1,16 @@
 # The DocPad Configuration File
 # It is simply a CoffeeScript Object which is parsed by CSON
 docpadConfig = {
+
+	# =================================
+	# Plugins configulation
+	plugins:
+
+		tableofcontents:
+			requireMetadata: true
+			requiredMetadataField: 'autotoc'
+			headerSelectors: 'h3, h4'
+
 	
 	# =================================
 	# Template Data
