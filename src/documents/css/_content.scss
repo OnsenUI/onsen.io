@@ -56,11 +56,11 @@ section#content-container {
 		width: ($width - $aside-width);
 
 		h2, h3, h4, h5 {
-			color: #000;
+			color: #333;
 		}
 
 		h2 {
-			font-size: (32px/$basefont)+rem;
+			font-size: (40px/$basefont)+rem;
 			margin: 70px 0 20px 0;
 			&:first-child {
 				margin-top: 0;
@@ -72,7 +72,7 @@ section#content-container {
 		}
 
 		h3 {
-			font-size: (24px/$basefont)+rem;
+			font-size: (30px/$basefont)+rem;
 			margin: 36px 0 14px 0;
 		}
 
@@ -81,12 +81,12 @@ section#content-container {
 		}
 
 		h4 {
-			font-size: (20px/$basefont)+rem;
+			font-size: (26px/$basefont)+rem;
 			margin: 28px 0 8px 0;
 		}
 
 		h5, h6 {
-			font-size: (14px/$basefont)+rem;
+			font-size: (22px/$basefont)+rem;
 			margin: 28px 0 8px 0;
 		}
 
@@ -113,9 +113,6 @@ section#content-container {
 		}
 
 		div.need-help {
-			margin: 36px 0 0 0;
-			background-color: #f5f5f5;
-			padding: 8px 12px;
 			> h2 {
 				font-size: (24px/$basefont)+rem;
 			}
