@@ -218,6 +218,53 @@ p.highlighted {
 	position: relative;
 }
 
+div#github-ribbon-container {
+	position: absolute;
+	overflow: hidden;
+	top: 0px;
+	right: 0px;
+	width: 180px;
+	height: 180px;
+
+	a#github-ribbon, a#github-ribbon:visited {
+		display: inline-block;
+		position: absolute;
+		top: -50px;
+		right: -140px;
+		height: 44px;
+		width: 300px;
+		border: 1px solid #ddd;
+		background-color: white;
+		color: #999;
+		line-height: 44px;
+		font-weight: 400;
+		font-size: 16px;
+
+		-webkit-transform: rotate(45deg);
+		-webkit-transform-origin: left top;
+		-moz-transform: rotate(45deg);
+		-moz-transform-origin: left top;
+		-ms-transform: rotate(45deg);
+		-ms-transform-origin: left top;
+		transform: rotate(45deg);
+		transform-origin: left top;
+
+		//-webkit-transition: all 200ms linear;
+		//-moz-transition: all 200ms linear;
+		//-ms-transition: all 200ms linear;
+		//transition: all 200ms linear;
+
+		//&:hover {
+		//	background-color: $onsen-red;
+		//	border-color: $onsen-red;
+		//	color: white;
+		//	text-decoration: none;
+		//}
+	}
+
+}
+
+
 @import 'header';
 @import 'footer';
 @import 'content';

@@ -1,10 +1,14 @@
 body#home {
 
-	header#header-container {
+	> #github-ribbon-container {
+		display: none;
+	}
+
+	> header#header-container {
 		border-bottom: none;
 	}
 
-	section#content-container {
+	> section#content-container {
 		width: 100%;
 
 		div#content {
