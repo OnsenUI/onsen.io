@@ -10,7 +10,7 @@ section#content-container {
 		float: right;
 		width: $aside-width;
 		border: 1px solid #ddd;
-		padding: 20px 25px 8px 25px;
+		padding: 14px 18px 4px 18px;
 		-webkit-box-sizing: border-box;
 		-moz-box-sizing: border-box;
 		-ms-box-sizing: border-box;
@@ -36,8 +36,9 @@ section#content-container {
 		h2 {
 			color: #333;
 			font-size: (18px/$basefont)+rem;
-			margin-bottom: 18px;
 			text-align: left;
+			margin: 0 0 14px 0;
+			padding: 0;
 		}
 	}
 
