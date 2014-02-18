@@ -9,7 +9,8 @@ docpadConfig = {
 		tableofcontents:
 			requireMetadata: true
 			requiredMetadataField: 'autotoc'
-			headerSelectors: 'h3, h4'
+			headerSelectors: 'h3'
+			rootHeaderLevel: 3
 
 	
 	# =================================

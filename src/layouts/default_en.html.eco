@@ -59,7 +59,14 @@
 
 	<section id="content-container" class="no-aside">
 		<div id="content">
-			<%- @content %>
+			<% if !@document.toc and @document.autotoc and @document.tableOfContents: %>
+			
+				<% tocHtml = @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
+				<%- @content.replace('===TOC===', tocHtml) %>
+			<% else: %>
+				<%- @content %>
+			<% end %>
+
 
 
 			<% if @document.needHelp: %>

@@ -57,7 +57,6 @@
 		</nav>
 	</div></header>
 
-
 	<section id="content-container" class="clearfix">
 		<% if @document.toc or @document.autotoc: %>
 		<aside id="content-info">
@@ -79,8 +78,8 @@
 				</ol>
 			<% end %>
 
-			<% if !@document.toc and @document.autotoc: %>
-				<%- @partial('toc.html.eco', {tocItems: @document.tableOfContents[0].children}) %>
+			<% if !@document.toc and @document.autotoc and @document.tableOfContents: %>
+				<%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
 			<% end %>
 		</aside>
 		<% end %>
