@@ -38,7 +38,7 @@ JavaScriptファイルは読み込まずに、CSSファイルのみを読み込�
 
 <img src="http://placehold.jp/24/cccccc/ffffff/320x640.png">
 
-UIコンポーネントをどのように記述するかについては、[Components](/guide/components.html)のページを参照して下さい。
+カスタムエレメントとして提供されているUIコンポーネントのHTMLをどのように記述するかについては、[Components](/guide/components.html)のページを参照して下さい。
 
 ### 関連するリソース
 
