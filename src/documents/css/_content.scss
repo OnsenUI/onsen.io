@@ -47,6 +47,21 @@ section#content-container {
 
 	> div#content {
 
+		::-webkit-scrollbar {
+			width: 4px;
+			height: 4px;
+		}
+
+		::-webkit-scrollbar-track {
+			border-radius: 10px;
+			background-color: #eee;
+		}
+
+		::-webkit-scrollbar-thumb {
+			border-radius: 10px;
+			background-color: #999;
+		}
+
 		color: #666;
 		margin: 0 auto;
 		padding: 50px 0px 100px 0;
