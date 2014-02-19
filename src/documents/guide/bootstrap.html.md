@@ -61,17 +61,17 @@ JavaScriptファイルは、OnsenUIとAngular.jsのJavaScriptファイルを読�
 	  <script src="lib/onsen/js/angular/angular.js"></script>    
 	  <script src="lib/onsen/js/onsenui.js"></script>    
 
-### onsen.directivesモジュールの読み込み
+### モジュールの初期化
+
+html要素にはAngular.jsを初期化のために、<a href="http://docs.angularjs.org/api/ng/directive/ngApp">ng-app</a>属性にmyAppという値を指定しています。ng-app属性を指定すると、読み込んだAngular.jsが起動されます。
 
 	<html lang="en" ng-app="myApp">
 
-Angular.jsの初期化のために、ng-app属性にmyAppという値を指定しています。
+次に、myAppというモジュールがOnsen UIの提供するonsen.directivesモジュールを利用することを宣言します。これにより、ons-screenやons-navigator-toolbarなどのカスタム要素が読み込まれます。
 
 	  <script>
 	    angular.module('myApp', ['onsen.directives']);
 	  </script>
-
-次に、myAppというモジュールがOnsen UIの提供するonsen.directivesモジュールを利用することを宣言します。これにより、ons-screenやons-navigator-toolbarなどのカスタム要素などの機能が読み込まれます。
 
 ### ons-screen要素の宣言
 
@@ -81,7 +81,7 @@ Angular.jsの初期化のために、ng-app属性にmyAppという値を指定�
 
 ### 関連するリソース
 
- * [Themes](/guide/theme.html)
+ * [Getting Started](/guide/getting_started.html)
  * [AngularJS](http://docs.angularjs.org/guide/)
  * [Using Onsen UI without JavaScript](/guide/using_without_javascript.html)
 
