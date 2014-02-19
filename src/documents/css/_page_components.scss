@@ -3,8 +3,7 @@
 body#components {
 
 	* {
-		-webkit-box-sizing: border-box;
-		box-sizing: border-box;
+		@include box-sizing(border-box);
 	}
 
 	section#content-container {
@@ -240,7 +239,6 @@ body#components {
 			display: none;
 		}
 	}
-
 
 	h1 {
 		margin: 0 0 20px;

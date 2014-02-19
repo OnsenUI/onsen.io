@@ -27,8 +27,6 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
 	font-weight: 200;
 }
 /* HTML5 display-role reset for older browsers */
@@ -75,7 +73,6 @@ p {
 html {
 	//font: 13px/1.4 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
 	// ここで指定しているフォントサイズに応じて、全ての要素のフォントサイズが変わります
-
 	font-size: 16px;;
 	font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.4;
@@ -239,26 +236,15 @@ div#github-ribbon-container {
 		font-weight: 400;
 		font-size: 16px;
 
-		-webkit-transform: rotate(45deg);
-		-webkit-transform-origin: left top;
-		-moz-transform: rotate(45deg);
-		-moz-transform-origin: left top;
-		-ms-transform: rotate(45deg);
-		-ms-transform-origin: left top;
-		transform: rotate(45deg);
-		transform-origin: left top;
+		@include transform(rotate(45deg));
+		@include transform-origin(left, top);
+		@include transition(color 200ms linear);
 
-		//-webkit-transition: all 200ms linear;
-		//-moz-transition: all 200ms linear;
-		//-ms-transition: all 200ms linear;
-		//transition: all 200ms linear;
-
-		//&:hover {
-		//	background-color: $onsen-red;
-		//	border-color: $onsen-red;
-		//	color: white;
-		//	text-decoration: none;
-		//}
+		&:hover {
+			color: $onsen-red;
+			text-decoration: none;
+			@include transition(none);
+		}
 	}
 
 }

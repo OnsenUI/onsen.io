@@ -11,10 +11,7 @@ section#content-container {
 		width: $aside-width;
 		border: 1px solid #ddd;
 		padding: 14px 18px 4px 18px;
-		-webkit-box-sizing: border-box;
-		-moz-box-sizing: border-box;
-		-ms-box-sizing: border-box;
-		box-sizing: border-box;
+		@include box-sizing(border-box);
 
 		> ul {
 			text-align: left;
