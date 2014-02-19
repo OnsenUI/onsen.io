@@ -1,0 +1,75 @@
+---
+layout: 'default_en'
+page: 'faq'
+title: 'FAQ'
+needHelp: true
+autotoc: true
+---
+
+## FAQ
+
+===TOC===
+
+----
+
+### Q. ng-appやng-controller、ng-clickとは何ですか?
+
+<a href="http://angularjs.org" target="_blank">Angular.js</a>のディレクティブです。Onsen UIはAngular.jsをベースにして開発されています。Onsen UIを使うということは、Angular.jsもつかうことになります。
+
+Angular.jsが提供するディレクティブの一覧を見るには、以下のリンクを参照して下さい。
+
+ * <a href="http://docs.angularjs.org/api/" target="_blank">AngularJS API Docs</a>
+
+----
+
+### Q. onclick属性の代わりにng-click属性を使う理由は何ですか?
+
+ng-click属性では、<a href="http://angularjs.org" target="_blank">Angular.js</a>のスコープを参照することができますが、onclick属性ではできません。
+
+ons.navigator.pushPage()関数などのOnsen UIを変化させるための関数は、Angular.jsのスコープに定義されています。従って、onclick属性ではなくng-click属性を使う必要があります。
+
+----
+
+### Q. Angular.jsを使う利点は何ですか?
+
+<a href="http://angularjs.org/" target="_blank">Angular.js</a>は、googleによって開発されているHTML5アプリのためのフレームワークです。
+
+<p>Angular.jsを使うことで、以下のような利点を得ることが出来ます。</p>
+
+ * 強力なデータバインディングを利用できる
+ * テンプレートシステムを利用できる
+ * DIコンテナを利用できる
+ * アプリケーションのコードをモジュール化できる
+
+<p>また、Onsen UIのカスタム要素は、Angular.jsが提供する<a href="http://docs.angularjs.org/guide/directive" targte="_blank">ディレクティブ</a>の仕組みを用いて実装されています。</p>
+
+ * <a href="http://angularjs.org" target="_blank">AngularJS — Superheroic JavaScript MVW Framework</a></li>
+
+----
+
+### Q. ons-screen要素で、ページが読み込まれません
+
+<p>Onsen UIのJavaScriptファイルを読み込んでいることと、ng-app属性を正しく設定できていること、Onsen UIのディレクティブを読み込んでいることを確認して下さい。</p>
+
+<p>詳細は、<a href="/guide/bootstrap">Bootstrap</a>のページを参照して下さい。</p>
+
+----
+
+### Q. ons-icon要素のアイコンが表示されません
+
+<p>考えられる原因は、font-awesomeのCSSファイルを読み込んでいないか、指定しているアイコン名が間違っているかのどちらかです。</p>
+
+<p>以下のようなCSSファイルを読み込んでいることを確認して下さい。</p>
+
+<pre><code>&lt;link rel="stylesheet" href="lib/onsen/css/font_awesome/css/font-awesome.min.css"&gt;</code></pre>
+
+<p>アイコンの表示方法やアイコン名については、<a href="/guide/icon.html">Icon</a>のページを参照してください。</p>
+
+----
+
+### Q. Onsen UIで提供されているテーマの見た目を変えるにはどうすれば良いですか?
+
+<p>Onsen UIのテーマは、通常のウェブページと同じようにCSSで記述されています。テーマの見た目を変更するには、CSSを記述してテーマのスタイルを上書きしてください。</p>
+
+<p><a href="/guide/customize.html">Customzie</a>のページを参照して下さい。テーマ自体に関しては、<a href="/guide/theme.html">Theme</a>のページを参照して下さい。</p>
+
