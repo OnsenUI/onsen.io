@@ -41,8 +41,7 @@ AngularJS offers following advantages:
  * DI containers (injectors)
  * Application code modularization
 
- Onsen UI custom elements are implemented with the <a href="http://docs.angularjs.org/guide/directive" targte="_blank">AngularJS directive</a> framework.
-
+Onsen UI custom elements are implemented with the <a href="http://docs.angularjs.org/guide/directive" targte="_blank">AngularJS directive</a> framework.
 
  * <a href="http://angularjs.org" target="_blank">AngularJS — Superheroic JavaScript MVW Framework</a></li>
 
@@ -52,7 +51,7 @@ AngularJS offers following advantages:
 
 Please make sure that the Onsen UI JavaScript file is loading, that the correct ng-app attribute is set, and the Onsen UI directive is loading.
 
-Please refer to the Bootstrap page for details.
+Please refer to the <a href="/guide/bootstrap.html">Bootstrap</a> page for details.
 
 ----
 
@@ -64,7 +63,7 @@ Please make sure the below CSS file has been loaded:
 
     <link rel="stylesheet" href="lib/onsen/css/font_awesome/css/font-awesome.min.css">
 
-Please refer to the Icons page for how to display and name icons.
+Please refer to the <a href="/guide/icon.html">Icons</a> page for how to display and name icons.
 
 ----
 
