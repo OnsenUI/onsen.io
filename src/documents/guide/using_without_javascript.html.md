@@ -8,27 +8,20 @@ autotoc: true
 
 ## Using Onsen UI without JavaScript
 
-Onsen UIは、Angular.jsやカスタムエレメントを使ってモバイルアプリケーションのUIを開発しますが、UIコンポーネントを使うのに、必ずしもJavaScriptやAngular.jsを使わなければいけないわけではありません。
+Onsen UI uses AngularJS and custom elements to develop mobile app UIs. However, it does not necessarily mean that you must always use JavaScript or AngularJS to use UI components.
 
-このページでは、JavaScriptやAngular.jsを導入せずに、Onsen UIのテーマだけを読み込んでUIコンポーネントを利用する手順を紹介します。
+This page will describe how to load only the Onsen UI themes and use UI components without JavaScript or AngularJS.
 
-### JavaScript無しで利用する
+### Loading the Onsen UI Resources
 
-Onsen UIのテーマは、CSSフレームワークの<a href="http://topcoat.io">topcoat</a>をベースに作成されています。 topcoatは、HTML5アプリケーションに利用できるUIコンポーネントを記述するためのCSSフレームワークです。
-
-JavaScript無しで利用できる
-
-
-### Onsen UIのリソースを読み込む
-
-JavaScriptファイルは読み込まずに、CSSファイルのみを読み込みます。head要素内に以下のようにしてOnsen UIが提供するCSSを読み込みます。
+Load only the CSS file and not the JavaScript file. Load the CSS file provided from Onsen UI by inserting the below code in the head element.
 
 	<link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
 	<link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
 
-### タグを記述する
+### Writing Tags
 
-画面の上部にナビゲーションツールバー表示したい場合には、body要素以下に次のように記述します。
+Insert the below code to display the navigation toolbar at the top of the screen.
 
 	<div class="topcoat-navigation-bar">
 		<div class="topcoat-navigation-bar__item center full">
@@ -38,9 +31,9 @@ JavaScriptファイルは読み込まずに、CSSファイルのみを読み込�
 
 <img src="http://placehold.jp/24/cccccc/ffffff/320x640.png">
 
-カスタムエレメントとして提供されているUIコンポーネントのHTMLをどのように記述するかについては、[Components](/guide/components.html)のページを参照して下さい。
+Please refer to the [Components](/guide/components.html) page for how to write HTML for UI components, which are provided as custom elements.
 
-### 関連するリソース
+### Related Resources
 
  * <a href="/guide/components.html">Components</a>
  * <a href="/guide/theme.html">Theme</a>

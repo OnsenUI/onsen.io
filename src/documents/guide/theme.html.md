@@ -6,42 +6,41 @@ needHelp: true
 autotoc: true
 ---
 
-## Theme
+## Themes
 
-Onsen UIでは、UIコンポーネントの見た目を切り替えることができるテーマが用意されています。アプリ開発者は、開発するアプリに合わせて適切な見た目を持つテーマを適用できます。
+Onsen UI offers several themes to provide different styles for the UI components. App developers can choose a theme that best fits your app.
 
-このページでは、Onsen UIのテーマを扱い方について記述します。
+This page will describe how to use the Onsen UI themes.
 
-### 利用できるテーマ
+### Available Themes
 
-Onsen UIでは現在提供されているテーマは、以下の３つです。
-
+Onsen UI currently has three available themes:
 
  * ios7
  * android4_4
  * onsen
 
-
 <p><img src="http://placehold.jp/24/cccccc/ffffff/810x300.png"></p>
 
-### テーマを切り替える
+### Changing Themes
 
-Onsen UIでは、テーマは全て単一のCSSファイルとして提供されています。テーマを切り替える方法は、HTML中で読み込むCSSファイルを切り替えるだけです。
+Onsen UI provides each theme in a single CSS file. All you need to do to switch the theme is change the CSS file when loading it with the HTML.
+
+    ...
+
+### Applying Dynamic Themes
+
+You can also change themes dynamically, specific to the device or browser currently running the app.
 
 	...
 
-### テーマを動的に切り替える
+### Expanding Themes
 
-アプリを実行する端末やブラウザに応じてテーマを切り替えることもできます。
+You can expand on existing themes by overwriting styles with CSS, just as you would do with a normal web page.
 
-	...
+Please refer to the theme customization section of the <a href="/guide/cutomize.html">Customize</a> page for details.
 
-### テーマを拡張する
-
-既存のテーマを拡張したい場合には、普通のウェブページのコーディングでやるように、CSSでスタイルを上書きします。
-
-詳しくは、Themeのカスタマイズについて記述している<a href="/guide/cutomize.html">Customize</a>のページを参照して下さい。
-
-### 関連するリソース
+### Related resources
 
  * <a href="/guide/cutomize.html">Customize</a>
+

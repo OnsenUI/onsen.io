@@ -3,57 +3,45 @@ layout: 'docpad_en'
 page: 'icon'
 title: 'Icon'
 needHelp: true
-toc:
-  - name: 'アイコンを表示する'
-    href: '#ons-icon'
-  - name: 'アイコン名を指定する'
-    href: '#icon-name'
-  - name: 'FontAwesomeの利点'
-    href: '#icon-name'
-  - name: '関連するリソース'
-    href: '#font-awesome'
+autotoc: true
 ---
 
-## Icon
+## Icons
 
 <img src="http://placehold.jp/24/cccccc/ffffff/600x200.png">
 
-Onsen UIでは、モバイルアプリでよく用いられる典型的なアイコンを簡単に表示するための仕組みが予め用意されています。アプリ開発者は、Onsen UIに予め含まれている<a href="http://fortawesome.github.io/Font-Awesome/">FontAwesome</a>のアイコンをons-icon要素をつかって簡単に表示できます。
+Onsen UI has a built-in framework to easily display popular icons that are frequently used with mobile apps. App developers can quickly display the <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icons included with Onsen UI by using an ons-icon element.
 
-このページでは、Onsen UIでアイコンを表示する方法やそれらの仕組みについて説明します。
+This page will describe how to display an icon in Onsen UI and how it works.
 
-### アイコンを表示する
+### Displaying an Icon
 
-<a href="/guide/components.html#icon">ons-icon要素</a>を使うと、以下のようにicon属性を使ってアイコン名を指定して表示できます。
+By using an <a href="/guide/components.html#icon">ons-icon element</a>, you can specify and display an icon name with the icon attribute as below:
 
 <pre><code class="js">&lt;ons-icon icon="bars" size="5x" &gt;&lt;/ons-icon&gt;</code></pre>
 
-このコードはブラウザでは以下のように表示されます。
+This code will be displayed on the screen as shown below:
 
 <img src="http://placehold.jp/24/cccccc/ffffff/100x100.png">
 
-また、FontAwesomeのアイコンはons-icon要素を用いなくても、以下の様に記述することでも表示できます。
+You can also display a Font Awesome icon by inserting the below code, instead of using an ons-icon element.
 
-	<i class="fa fa-bars fa-5x"></i>
+    <i class="fa fa-bars fa-5x"></i>
 
-詳細はFontAwesomeの<a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_blank">Examplesページ</a>を参照して下さい。 
+Please refer to the <a href="http://fortawesome.github.io/Font-Awesome/examples/" target="_blank">Examples section</a> of the Font Awesome page for details.
 
-### アイコン名を指定する
+### Specifying an Icon Name
 
-ons-icon要素のicon属性には、表示するアイコン名を指定します。どのアイコン名がどのようなアイコンを表示するのかについては、FontAwesomeの<a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">アイコンの一覧ページ</a>を参照して下さい。
+Specify an icon name in the icon attribute of the ons-icon element. Please refer to the <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">icon list</a> of the Font Awesome page for the names and styles for each icon.
 
-### サイズをピクセル単位で指定する
+### Specifying an icon pixel size
 
-FontAwesomeのアイコンは、ベクタデータをウェブフォントを使って表示しています。従って、ピクセル単位でアイコンの大きさを指定するには、ons-icon要素のstyleにfont-sizeスタイルプロパティを以下のように設定します。
+A Font Awesome icon uses vector data that gets converted into a web font icon. Therefore, you can change an icon’s size by setting the pixel value in the font-size style property of the ons-icon element as below:
 
-	<ons-icon name="bars" style="font-size: 90px"></ons-icon>
+    <ons-icon name="bars" style="font-size: 90px"></ons-icon>
 
-### FontAwesomeの利点
+### Related Resources
 
-Onsen UIでは、このアイコンをfontawesomeというアイコンライブラリを同梱しています。fontawesomeはベクターアイコンを簡単に表示するためのライブラリです。fontawesomeは、アイコンのベクターデータ表示にウェブフォントを使っています。フォントはベクターデータ
-
-### 関連するリソース
-
- * <a href="/guide/components.html#icon">ons-icon要素</a>
- * <a href="http://fortawesome.github.io/Font-Awesome/">FontAwesome</a>
+ * <a href="/guide/components.html#icon">ons-icon element</a>
+ * <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>
 

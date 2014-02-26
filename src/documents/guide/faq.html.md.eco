@@ -12,64 +12,65 @@ autotoc: true
 
 ----
 
-### Q. ng-appやng-controller、ng-clickとは何ですか?
+### Q. What is ng-app, ng-controller or ng-click?
 
-<a href="http://angularjs.org" target="_blank">Angular.js</a>のディレクティブです。Onsen UIはAngular.jsをベースにして開発されています。Onsen UIを使うということは、Angular.jsもつかうことになります。
+They are <a href="http://angularjs.org" target="_blank">Angular.js</a> directives. Onsen UI is based on AngularJS. Using Onsen UI means using AngularJS.
 
-Angular.jsが提供するディレクティブの一覧を見るには、以下のリンクを参照して下さい。
+Please refer to the link below for the complete list of AngularJS directives.
 
  * <a href="http://docs.angularjs.org/api/" target="_blank">AngularJS API Docs</a>
 
 ----
 
-### Q. onclick属性の代わりにng-click属性を使う理由は何ですか?
+### Q. What is the reason to use the ng-click attribute instead of the onclick attribute?
 
-ng-click属性では、<a href="http://angularjs.org" target="_blank">Angular.js</a>のスコープを参照することができますが、onclick属性ではできません。
+Because the ng-click attribute can reference AngularJS scopes while the onclick attribute can't.
 
-ons.navigator.pushPage()関数などのOnsen UIを変化させるための関数は、Angular.jsのスコープに定義されています。従って、onclick属性ではなくng-click属性を使う必要があります。
+Functions to change Onsen UI like ons.navigator.pushPage() are set with AngularJS scopes. Therefore, these need the ng-click attribute not the onclick attribute.
 
 ----
 
-### Q. Angular.jsを使う利点は何ですか?
+### Q. What are the advantages of using AngularJS?
 
-<a href="http://angularjs.org/" target="_blank">Angular.js</a>は、googleによって開発されているHTML5アプリのためのフレームワークです。
+<a href="http://angularjs.org/" target="_blank">Angular.js</a> is a framework for HTML5 apps developed by Google.
 
-<p>Angular.jsを使うことで、以下のような利点を得ることが出来ます。</p>
+AngularJS offers following advantages:
 
- * 強力なデータバインディングを利用できる
- * テンプレートシステムを利用できる
- * DIコンテナを利用できる
- * アプリケーションのコードをモジュール化できる
+ * Powerful data binding
+ * Templates
+ * DI containers (injectors)
+ * Application code modularization
 
-<p>また、Onsen UIのカスタム要素は、Angular.jsが提供する<a href="http://docs.angularjs.org/guide/directive" targte="_blank">ディレクティブ</a>の仕組みを用いて実装されています。</p>
+ Onsen UI custom elements are implemented with the <a href="http://docs.angularjs.org/guide/directive" targte="_blank">AngularJS directive</a> framework.
+
 
  * <a href="http://angularjs.org" target="_blank">AngularJS — Superheroic JavaScript MVW Framework</a></li>
 
 ----
 
-### Q. ons-screen要素で、ページが読み込まれません
+### Q. I can't load a page with the ons-screen element, why?
 
-<p>Onsen UIのJavaScriptファイルを読み込んでいることと、ng-app属性を正しく設定できていること、Onsen UIのディレクティブを読み込んでいることを確認して下さい。</p>
+Please make sure that the Onsen UI JavaScript file is loading, that the correct ng-app attribute is set, and the Onsen UI directive is loading.
 
-<p>詳細は、<a href="/guide/bootstrap">Bootstrap</a>のページを参照して下さい。</p>
-
-----
-
-### Q. ons-icon要素のアイコンが表示されません
-
-<p>考えられる原因は、font-awesomeのCSSファイルを読み込んでいないか、指定しているアイコン名が間違っているかのどちらかです。</p>
-
-<p>以下のようなCSSファイルを読み込んでいることを確認して下さい。</p>
-
-<pre><code>&lt;link rel="stylesheet" href="lib/onsen/css/font_awesome/css/font-awesome.min.css"&gt;</code></pre>
-
-<p>アイコンの表示方法やアイコン名については、<a href="/guide/icon.html">Icon</a>のページを参照してください。</p>
+Please refer to the Bootstrap page for details.
 
 ----
 
-### Q. Onsen UIで提供されているテーマの見た目を変えるにはどうすれば良いですか?
+### Q. I can't display an icon with the ons-icon element, why?
 
-<p>Onsen UIのテーマは、通常のウェブページと同じようにCSSで記述されています。テーマの見た目を変更するには、CSSを記述してテーマのスタイルを上書きしてください。</p>
+Possible causes are either that the font-awesome CSS file is not loading, or a wrong icon name is set.
 
-<p><a href="/guide/customize.html">Customzie</a>のページを参照して下さい。テーマ自体に関しては、<a href="/guide/theme.html">Theme</a>のページを参照して下さい。</p>
+Please make sure the below CSS file has been loaded:
+
+    <link rel="stylesheet" href="lib/onsen/css/font_awesome/css/font-awesome.min.css">
+
+Please refer to the Icons page for how to display and name icons.
+
+----
+
+### Q. How can I change a look and feel of the Onsen UI themes?
+
+Onsen UI themes are written in CSS just like normal web pages. You can change any theme's appearance by overwriting the theme’s CSS style.
+
+Please refer to the <a href="/guide/customize.html">Customzie</a> page for details. Please refer to the <a href="/guide/theme.html">Theme</a> page for details about working with themes.
 
