@@ -637,7 +637,7 @@ docpadConfig = {
 
 			# The website description (for SEO)
 			description: """
-				Onsen UI, HTML5 UI framework for modern mobile application.
+				Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.
 				"""
 
 			# The website keywords (for SEO) separated by commas
