@@ -1,0 +1,154 @@
+---
+layout: 'docpad_en'
+title: 'Getting Started'
+page: 'getting_started'
+autotoc: true
+---
+
+<h2>Getting Started</h2>
+
+<p>Onsen UIはモバイルHTML5アプリのユーザーインターフェイスを開発するためのUIフレームワークです。<a href="http://angularjs.org" target="_blank">Angular.js</a>と<a href="http://topcoat.com" target="_blank">Topcoat</a>をベースにして開発されています。</p>
+
+<p>このページでは、初めてOnsen UIを利用する人のためにOnsen UIを導入して試す手順を説明します。</p>
+
+<!-- <iframe src="//www.youtube-nocookie.com/embed/Qo6eJ0ilD8Q?rel=0" width="480" height="300" frameborder="0" allowfullscreen style="overflow: hidden"></iframe> -->
+
+<h3 id="template">1. Choose a template</h3>
+<p style="margin-bottom: 40px;">
+	Try before you buy! Play with the templates below live! When you find one that suits you, click Download button below it.
+</p>
+
+		
+<div class="templates-container">		
+	<div class="flex">
+		<div class="flex-item center">
+			<i class="fa fa-circle"></i>
+		</div>
+
+		<div class="flex-item">
+			<h4>Minimum</h4>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/minimum/app/" width="320" height="570"></iframe>
+			</div>			
+			<a class="btn-download" href="/OnsenUI/project_templates/minimum.zip">Download</a>
+		</div>
+
+		<div class="flex-item">
+			<h4>Sliding Menu</h4>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/sliding_menu/app/" width="320" height="570"></iframe>
+			</div>						
+			<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu.zip">Download</a>
+		</div>
+
+		<div class="flex-item">
+			<h4>Sliding Menu & Navigator</h4>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="320" height="570"></iframe>
+			</div>						
+			<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a>
+		</div>
+
+		<div class="flex-item">
+			<h4>Tab bar</h4>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/tab_bar/app/" width="320" height="570"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a>
+		</div>
+		
+		<div class="flex-item">
+			<h4>Master-Detail</h4>
+			<div class="template-iframe">
+				<iframe src="/OnsenUI/project_templates/master_detail/app/" width="320" height="570"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a>
+		</div>		
+
+		<div class="flex-item center">
+			<h4>Split View</h4>
+			<div class="template-iframe-landscape">
+				<iframe src="/OnsenUI/project_templates/split_view/app/" width="570" height="320"></iframe>
+			</div>	
+			<a class="btn-download" href="/OnsenUI/project_templates/split_view.zip">Download</a>
+		</div>
+
+		<div class="flex-item center">
+			<h4>Split View & Navigator</h4>
+			<div class="template-iframe-landscape">
+				<iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="570" height="320"></iframe>
+			</div>
+			<a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a>
+		</div>
+
+		<div class="flex-item center">
+			<i class="fa fa-circle"></i>
+		</div>
+	</div>		
+</div>		
+
+<h3 id="run">2. Run the project</h3>
+
+<p>Extract the zip file you just downloaded.</p>
+
+<p>Open the terminal (command line) and cd to the extracted folder.</p>
+	
+<pre><code class="bash">$ node scripts/web-server.js</code></pre>
+
+<p>Then navigate your browser to <a href="http://localhost:8000/app/index.html" target="_blank">http://localhost:8000/app/index.html</a></p>
+
+<p>Onsen UIはコマンドラインツールにNode.jsを使っています。Node.jsをインストールするには、<a href="http://nodejs.org" title="">nodejs.org</a>からパッケージをインストールして下さい。</p>	
+
+
+<h3 id="addfeature">3. Start adding your awesome app feature</h3>
+
+<p>Your project root is &quot;app&quot; folder. Use your favorite IDE and start adding awesome feature to your app.</p>
+
+<p>You may want to download the <a href="/OnsenUI/demo.zip" title="demos">Demos</a> for sample codes.</p>
+
+<h4>To run the demo</h4>
+
+<p>Open the terminal (command line) and cd to the extracted folder.</p>
+
+<pre><code class="bash">$ node scripts/web-server.js</code></pre>
+
+<p>Then navigate your browser to <a href="http://localhost:8000/demo/index.html" target="_blank">http://localhost:8000/demo/index.html</a></p>
+
+<h3 id="build" >4. Build your app</h3>	
+
+<p>You can use Cordova to build Onsen UI project. Type in terminal: </p>
+
+<pre><code class="bash">$ npm install -g cordova
+$ cordova create MyApp &amp;&amp; cd MyApp</code></pre>
+
+<p>copy all the files in the <strong>app</strong> folder of the template to MyApp/www folder</p>
+
+<pre><code class="bash">$ cordova platform add android
+$ cordova build android
+$ cordova emulate android</code></pre>
+
+
+<h3 id="nextstep">次のステップ</h3>
+
+<p>Onsen UIで簡単なTODOアプリを作成するための流れを知るには、<a href="/guide/tutorial.html">チュートリアル</a>を参照して下さい。Onsen UIで利用できるUIコンポーネントの一覧や使い方を参照するには、<a href="/docs/components.html">Components</a>を参照して下さい。</p>
+
+<ul>
+	<li><a href="/docs/index.html">Docs</a></li>
+	<li><a href="/guide/components.html">Components</a></li>
+</ul>
+
+
+<h4 id="monaca">Use with Monaca</h4>
+
+<p><a href="http://monaca.mobi/">Monaca</a> is a leading HTML5 development platform that gives developers the power to create rich UI PhoneGap apps that run at native speed. When used with Monaca, it is simple to add backend features, debug and build the project, resulting in a publishable app. <a href="http://docs.monaca.mobi/en/onsenui/">Here</a> is how to use Onsen UI in Monaca. 
+</p>
+
+
+<h4 id="support">サポート</h4>
+
+<p>Onsen UIを使っていて、分からないところや困った場合には、<a href="/forum.html">Forum</a>へ投稿してOnsen UIチームに教えてください。Onsen UIチームやコミュニティが答えます。</p>
+
+<h4 id="bugreport">バグレポート</h4>
+
+<p>Onsen UIのクオリティの向上に協力して下さい。バグを見つけたら、Onsen UIのgithubプロジェクトの<a href="https://github.com/onsenui/onsenui/issues">Issues</a>へ投稿して下さい。</p>
+

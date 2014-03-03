@@ -4,115 +4,168 @@ title: 'Home'
 page: 'home'
 ---
 
-<link rel="stylesheet" href="<%= @rootUrl %>styles/index.css">
+<div id="keyvisual">
+	<div class="keyvisual-content">
+		<div class="keyvisual-main">
+			<h1>The Answer to<br>PhoneGap UI Development</h1>
+			<h2>A Custom Elements-Based HTML5 UI Framework</h2>
 
-<div id="keyvisual" class="relative">
-	<div>
-		<h1>The Answer to PhoneGap UI Development</h1>
-        <h2>Onsen UI is a Custom Elements-Based <br>HTML5 UI Framework for Building<br>Your Mobile Front End</h2>
-		<a class="btn-red btn-big btn-download" href="/OnsenUI/project_templates/onsen_ui.zip">Download<br /><span class="version">Version 1.0.0</span></a>
-	</div>
+			<a class="getting-started" href="/guide/getting_started.html">
+				Getting Started
+				<img src="/images/index/right-arrow.png" style="">
+			</a><!--
+			--><a class="download" href="/OnsenUI/project_templates/minimum.zip">Download v<strong>1.0.1</strong></a>
+			<span class="license">Apache License</span>
+		</div>
 
-	<div class="social">
-		<iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=watch&count=true&size=medium" allowtransparency="true" frameborder="0" scrolling="0" width="120" height="20"></iframe>	
-		<iframe src="http://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=fork&count=true&size=medium" allowtransparency="true" frameborder="0" scrolling="0" width="120" height="20"></iframe>	
-		<a href="https://twitter.com/share" data-text="Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End." class="twitter-share-button" data-url="http://onsenui.io/" data-via="Onsen_UI" data-related="Onsen_UI">Tweet</a>
-		<a href="https://twitter.com/Onsen_UI" class="twitter-follow-button" data-show-count="false">Follow @Onsen_UI</a>
-		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+		<div class="social">
+
+			<img src="/images/index/github-icon-mini.png" class="github-icon-mini">
+			<a class="github-star" href="https://github.com/OnsenUI/OnsenUI/stargazers">
+				<strong></strong> Stars
+			</a>
+
+			<img src="/images/index/twitter-icon-mini.png" class="twitter-icon-mini">
+			<a class="twitter-follower" href="https://twitter.com/Onsen_UI">
+				<strong></strong> Followers
+			</a>
+		</div>
 	</div>
 </div>
 
-<div class="features">
-	<div id="feature-hybrid" class="feature"><div>
-		<h2>New & Improved Hybrid Apps</h2>
-		<div class="feature-cont">
-      <img src="/images/index/top_image01.png" alt="">
-			<p>Onsen UI is a front-end development tool that radically improves PhoneGap/Cordova apps. Differing from previous frameworks, it is highly flexible and gives hybrid apps a native look and feel on all platforms. And when used with <a href="http://monaca.mobi/en/">Monaca</a>, it is simple to add backend features and device support, resulting in a publishable app.</p>
-		</div>
-	</div></div>
+<div class="supported-browsers">
+	<h2>Supported Browsers</h2>
 
-	<div id="feature-customize" class="feature">
-		<div class="relative">
-			<div class="simulator"><iframe id="theme-iframe" style="box-shadow: 0 0 8px" src="http://onsenui.github.io/theme-demo/ios2.html" width="300" height="565"></iframe></div>
-			<div class="feature-cont">
-				<h2>Customizable</h2>
-				<p>A powerful feature of Onsen UI is its customizability. In addition to the themes provided, you can develop your own themes. Each component in a theme can also be customized, by modifying the HTML and CSS code. See <a href="/customize/">Customize page</a> which go into details.</p>
+	<ul>
+		<li class="browser-android">Android2.3.4+<br>Browser</li>
+		<li class="browser-ios">iOS6+<br>Mobile Safari</li>
+		<li class="browser-chrome">Chrome</li>
+		<li class="browser-safari">Safari</li>
+	</ul>
+</div>
 
-				<div id="choose-theme">
-					<script>
-					$(function() {
-						var elements = $('#choose-theme > div.themes > a').click(function() {
-							if (!$(this).hasClass('selected')) {
-								elements.removeClass('selected');
-								$(this).addClass('selected');
-								var address = $(this).data('url');
-								$('iframe#theme-iframe').attr('src', address);
-							}
-						});
-					});
-					</script>
+<div class="main-features">
 
-					<img src="/images/index/top_image02_1.png" 
-						id ="choose-theme-image"
-						title="" width="260" height="130">
+	<div class="feature made-for-app">
+		<h2>Made for Mobile Hybrid App</h2>
 
-					<div class="themes">
-						<a data-theme="onsen" data-url="http://onsenui.github.io/theme-demo/onsen_blue.html"></a>
-						<a data-theme="ios" data-url="http://onsenui.github.io/theme-demo/ios2.html" class="selected"></a>
-						<a data-theme="android" data-url="http://onsenui.github.io/theme-demo/android2.html"></a>
-					</div>
-					
-				</div>
-			</div>
-		</div>
+		<p>
+			Onsen UI is a front-end development framework for 
+			PhoneGap/Cordova hybrid apps. It focuses on the creation of usable mobile applications.
+			Also, used with <a href="http://monaca.mobi">Monaca</a>, it is simple to develop backend features and add device support.
+		</p>
 	</div>
 
-	<div id="feature-easy" class="feature"><div>
-		<div class="feature-cont">
-			<h2>Easy To Use</h2>
-			<p>Simply adding a few lines of code will give your application UI components - navigation bars, tab bars, buttons, etc. Since Onsen UI uses AngularJS directives, you can flexibily develop your own original UI components.</p>
-		</div>
-		<ul class="feature-easy-example">
-      <li>
-				<h3>Navigation Bar</h3>
-				<img src="/images/index/top_image03_1.png" alt="">
-				<pre class="highlighted"><code>&lt;ons-navigator title=&quot;Page 1&quot;&gt; &lt;/ons-navigator&gt;</code></pre>
-			</li>
-      <li>
-				<h3>Button</h3>
-				<img src="/images/index/top_image03_2.png" alt="">
-				<pre class="highlighted"><code>&lt;ons-button&gt; &lt;/ons-button&gt;</code></pre>
-			</li>
-      <li>
-				<h3>Switch</h3>
-				<img src="/images/index/top_image03_3.png" alt="">
-				<pre class="highlighted"><code>&lt;ons-switch&gt; &lt;/ons-switch&gt;</code></pre>
-			</li>
-		</ul>
-	</div></div>
+	<div class="feature custom-elements-based">
+		<h2>Custom Elements-Based</h2>
 
-	<div id="feature-beauty" class="feature">
-		<div class="relative">
-			<div class="simulator"><iframe style="box-shadow: 0 0 10px #000" src="http://onsenui.github.io/monaca_tunes/app/" width="320" height="568"></iframe></div>
-			<div class="feature-cont">
-				<h2>Beautiful &amp; Smooth</h2>
-				<p>Based on the Topcoat CSS framework and with CSS animation, Onsen UI provides a native-like look & feel to PhoneGap apps. Unlike hybrid apps of the past, Onsen UI does not sacrifice user experience for hybrid development.</p>
-			</div>
-		</div>
+		<p>
+			By simply adding a few lines of code, it becomes possible to create the 
+			UI components(<a href="/guide/components.html#navigator-toolbar">navigation bars</a>, <a href="/guide/components.html#tabbar-item">tab bars</a>, <a href="/guide/components.html#button">buttons</a>, etc.) 
+			necessary for your application. 
+		</p>
 	</div>
 
-	<div id="feature-gui" class="feature"><div>
-		<img src="/images/index/top_image05.png" alt="">
-		<div class="feature-cont">
-			<h2>GUI Tool Coming Soon</h2>
-			<p>With drag & drop support, our GUI tool makes all aspects of front-end development dramatically easier - from page management to UI component layout. Currently under development, it is scheduled for release in early April.</p>
-		</div>
-	</div></div>
-</div><!-- /features -->
+	<div class="feature built-with">
+		<h2>Built with Angularjs & Topcoat</h2>
 
+		<p>
+			Onsen UI 1.0 is developed using
+			<a href="http://angularjs.org">Angular.js</a> and <a href="http://topcoat.io">Topcoat</a>.
+			Due to its robust architecture structure for mobile applications,
+			you can take advantage of the powerful features of Angular.js. 
+		</p>
+	</div>
+
+	<div class="feature beautiful-and-smooth">
+		<h2>Beautiful & Smooth</h2>
+
+		<p>
+			Based on the Topcoat CSS framework, and adding CSS animation,
+			OnsenUI can provide a native-like look &amp; feel. Unlike other hybrid apps so far,
+			it does not sacrifice the user experience in a mobile environment.
+		</p>
+	</div>
+</div>
+
+<div class="other-features">
+	<h2>Other Features</h2>
+
+	<div class="sub-feature free-and-opensource">
+		<h3>Free and Open Source</h3>
+
+		<p>
+			Onsen UI is released under the Apache License and development is housed on
+			<a href="http://github.com/OnsenUI/OnsenUI">Github</a>. It is free and open for anyone to use.
+		</p>
+	</div>
+
+	<div class="sub-feature font-awesome">
+		<h3>Bundled Font-Awesome</h3>
+
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+		</p>
+	</div>
+
+	<div class="sub-feature selectable-theme">
+		<h3>Selectable Themes</h3>
+
+		<p>
+			Provides many different themes, with native-like designs, 
+			and you can always build or customize your very own.
+		</p>
+	</div>
+
+	<div class="sub-feature customizable">
+		<h3>Customizable</h3>
+
+		<p>
+			By relying on HTML and CSS, Onsen UI is highly customizable to
+			suit the many needs that come with development and design.
+		</p>
+	</div>
+
+	<div class="sub-feature screen-transition">
+		<h3>Screen Transition</h3>
+
+		<p>App operations have a native-like user experience (UX) with smooth animations on cross platform PhoneGap/Cordova apps.</p>
+	</div>
+
+	<div class="sub-feature gui-tool">
+		<h3>GUI Tool Coming Soon</h3>
+
+		<p>
+			With drag &amp; drop support, our GUI tool will make all aspects of front-end 
+			development much easier. Scheduled for release in early July.
+		</p>
+	</div>
+</div>
 
 <div class="getstarted">
-	<a class="btn-big btn-red btn-start" href="/getting_started/">Get Started, It's Free!</a>
+	<a class="" href="/getting_started/">
+		Get Started, It's Free!
+		<img src="/images/index/right-arrow.png">
+	</a>
 </div>
 
-<script type="text/javascript" src="/scripts/theme_switcher.js"></script>
+<script>
+// augaaaaaaaaaaaaaaaaaaaaa
+$.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
+	if(data && data.data.watchers) {
+		$('div.social a.github-star strong').text(data.data.watchers);
+	}
+}).error(function() {
+	$('div.social img.github-icon-mini').remove();
+	$('div.social a.github-star').remove();
+});
+
+$.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
+	if(data && data.followers_count) {
+		$('div.social > a.twitter-follower > strong').text(data.followers_count);
+	}
+}).error(function() {
+	$('div.social  img.twitter-icon-mini').remove();
+	$('div.social  a.twitter-follower').remove();
+});
+</script>

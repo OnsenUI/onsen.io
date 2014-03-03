@@ -27,6 +27,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-weight: 200;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -60,6 +61,7 @@ pre {
 p {
 	margin-bottom: 1em;
 	word-wrap: break-word;
+	line-height: 1.8;
 }
   
 
@@ -71,20 +73,25 @@ p {
 
 html {
 	//font: 13px/1.4 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-	font-size: $basefont;
-	font-family: Arial, sans-serif;
+	// ここで指定しているフォントサイズに応じて、全ての要素のフォントサイズが変わります
+	font-size: 16px;;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	line-height: 1.4;
 }
 
 body {
-	border-top: 3px solid #ff1a33;
+	border-top: 1px solid $onsen-red;
 	min-width: $width;
 	text-align: center;
 	-webkit-text-size-adjust: 100%;
 	&:after {content: ""; clear: both; display: block;}
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
-h1,h2,h3,h4,h5,h6 {font-weight: 700;}
+h1,h2,h3,h4,h5,h6 {
+	font-weight: 200;
+}
 table{border-collapse:collapse;border-spacing:0}
 textarea,input{margin:0;padding:0}
 caption,th{text-align:left}
@@ -96,7 +103,7 @@ img, iframe, object { max-width : 100%; }
 .lt-ie9 img, .lt-ie9 object { width:auto; } 
 
 a {
-	@include all-link-state(#333);
+	@include all-link-state(#FF1A33);
 	img {
 		@include transition(opacity 80ms);
 		&:hover {
@@ -105,13 +112,19 @@ a {
 	}
 }
 
-
+hr {
+	color: transparent;
+	border-width: 0px;
+	height: 1px;
+	background-color: #E7E7E7;
+	margin: 32px 0;
+}
 
 .btn,
 %btn-default {
 	background-repeat: no-repeat;
 	background-position: left center;
-	border-radius: 4px;
+	border-radius: 6px;
 	@include box-sizing(border-box);
 	display: inline-block;
 	padding: 5px 10px;
@@ -126,7 +139,6 @@ a {
 	@extend %btn-default;
 	@include all-link-state(white, all-none);
 	background-color: $onsen-red;
-	border: 1px solid #d00000;
 	color: white;
 }
 
@@ -172,11 +184,11 @@ a {
 
 .simulator-small {
 	background: url(/images/common/mock_bg.png) no-repeat center center;
-  background-size: 250px 450px;
-  @include box-sizing(border-box);  
-  padding: 64px 10px 28px 18px;
-  width: 250px;
-  height: 450px;	
+	background-size: 250px 450px;
+	@include box-sizing(border-box);  
+	padding: 64px 10px 28px 18px;
+	width: 250px;
+	height: 450px;	
 }
 
 p.highlighted {
@@ -189,59 +201,60 @@ p.highlighted {
 	}
 }
 
+.clearfix:after {
+	content: "";
+	clear: both;
+	display: block;
+}
+
 .highlighted {
 	margin-bottom: 30px;
-};
+}
 
-ul.segment-control {
-  font-size: 0px;
-  display: inline-block;
-  padding-left: 1px;
+.relative {
+	position: relative;
+}
 
-  > li {
-    display: inline-block;
-    font-size: 15px;
-    font-weight: 200;
-    width: 120px;
-    height: 37px;
-    border: 1px solid #ccc;
-    margin-left: -1px;
-    border-radius: 0px;
-    text-align: center;
-    color: #666;
-    line-height: 37px;
-    cursor: pointer;
-    -webkit-font-smoothing: antialiased;
-    transition:
-    all 200ms linear,
-    color 200ms linear,
-    font-weight 200ms linear,
-    border-color 200ms linear;
+div#github-ribbon-container {
+	position: absolute;
+	overflow: hidden;
+	top: 1px;
+	right: 0px;
+	width: 180px;
+	height: 180px;
 
-    &:first-child {
-      border-radius: 4px 0 0 4px;
-          }
+	a#github-ribbon, a#github-ribbon:visited {
+		display: inline-block;
+		position: absolute;
+		top: -50px;
+		right: -140px;
+		height: 44px;
+		width: 300px;
+		border: 1px solid #ddd;
+		background-color: white;
+		color: #999;
+		line-height: 44px;
+		font-weight: 400;
+		font-size: 16px;
 
-          &:last-child {
-            border-radius: 0 4px 4px 0;
-          }
+		@include transform(rotate(45deg));
+		@include transform-origin(left, top);
+		@include transition(color 200ms linear);
 
-          &.current {
-            background-color: #DB4138;
-            color: white;
-            border-color: #992C28;
-            font-weight: 500;
-            transition: none;
-            position: relative;
-            z-index: 1;
-          }
-      }
-  }
+		&:hover {
+			color: $onsen-red;
+			text-decoration: none;
+			@include transition(none);
+		}
+	}
+
+}
+
 
 @import 'header';
 @import 'footer';
-@import 'aside';
 @import 'content';
-@import 'index';
-@import 'gettingstarted';
-@import 'docs';
+
+@import 'page_index';
+@import 'page_getting_started';
+@import 'page_components';

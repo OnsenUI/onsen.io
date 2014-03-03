@@ -1,6 +1,17 @@
 # The DocPad Configuration File
 # It is simply a CoffeeScript Object which is parsed by CSON
 docpadConfig = {
+
+	# =================================
+	# Plugins configulation
+	plugins:
+
+		tableofcontents:
+			requireMetadata: true
+			requiredMetadataField: 'autotoc'
+			headerSelectors: 'h3'
+			rootHeaderLevel: 3
+
 	
 	# =================================
 	# Template Data
@@ -29,6 +40,10 @@ docpadConfig = {
 				},
 				examplePartial: 'screen_example',
 				demoURL: 'OnsenUI/demo/screen_demo.html',
+				relatedResources: [{
+					href : 'http://google.com',
+					text : 'google'
+				}],
 				attributes: [{
 					name: 'page',
 					description: {
@@ -697,6 +712,11 @@ docpadConfig = {
 				return value && value.indexOf('.min.js') > -1
 			_.map scripts, (value) ->
 				return value.replace 'out', ''
+
+	watchOptions:
+		catchupDelay: 0
+
+	regenerateDelay: 0
 
 	# =================================
 	# Collections

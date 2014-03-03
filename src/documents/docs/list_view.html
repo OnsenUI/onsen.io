@@ -1,0 +1,83 @@
+---
+layout: 'docpad_en'
+page: 'appdev.listview'
+title: 'List View'
+needHelp: true
+toc:
+ - name: 'リストビューを表示する'
+   href: '#1'
+ - name: '配列の内容を表示する'
+   href: '#2'
+ - name: '関連するリソース'
+   href: '#3'
+---
+
+<h2>List View</h2>
+
+<p><img src="http://placehold.jp/24/cccccc/ffffff/220x360.png"></p>
+
+<p>モバイルアプリでは、上記のようなリストビューをよく用います。リストビューは、不特定多数の要素を上から下に並べて見せるのによく用いられます。このページでは、Onsen UIのons-list要素とons-list-item要素を使ってリストビューを扱う方法を記述します。</p>
+
+<h3>リストビューを表示する</h3>
+
+<p>ons-list要素は、ons-page要素や通常のページ下に置くことができます。ons-list要素の直下には必ずons-list-item要素を置きます。基本となるコードは以下です。</p>
+
+<pre><code>&lt;!-- index.html --&gt;
+&lt;ons-screen page="listview.html" &gt; &lt;/ons-page&gt;
+</code></pre>
+
+<pre><code>&lt;!-- listview.html --&gt;
+&lt;ons-page&gt;
+  &lt;ons-list&gt;
+    &lt;ons-list-item&gt;
+      List Item
+    &lt;/ons-list-item&gt;
+    &lt;ons-list-item&gt;
+      List Item
+    &lt;/ons-list-item&gt;
+  &lt;/ons-list&gt;
+&lt;/ons-page&gt;
+</code></pre>
+
+<p>このコードを実装すると、以下のように表示されます。</p>
+
+<p><img src="http://placehold.jp/24/cccccc/ffffff/220x360.png"></p>
+
+<h3>配列の内容を表示する</h3>
+
+<p>JavaScriptのデータをリストビューに表示するには、Angular.jsのコントローラを定義したのち、ons-list-item要素の属性にng-repeat属性を指定して以下のように記述します</p>
+
+<pre><code>// TODO
+// app.js
+var app = angular.module('app', ['angular-touch', 'onsen.directives']);
+
+app.controller('ListViewController', function($scope) {
+  $scope.items = [
+    'Item A',
+    'Item B'
+  ];
+});
+</code></pre>
+
+<pre><code>&lt;!-- listview.html --&gt;
+// TODO: まともにコードを書く
+&lt;ons-page&gt;
+  &lt;div ng-controller="ListViewController"&gt;
+    &lt;ons-list&gt;
+      &lt;ons-list-item ng-repeat="item as items"&gt;
+      &lt;/ons-list-item&gt;
+    &lt;/ons-list&gt;
+  &lt;/div&gt;
+&lt;/ons-page&gt;
+</code></pre>
+
+<p><a href="">ng-repeat属性</a>、<a href="">ng-init属性</a>の詳細は、Angular.jsのドキュメントを参照して下さい。</p>
+
+<h3>関連するリソース</h3>
+
+<ul>
+	<li><a href="/guide/components.html#list">ons-list要素</a></li>
+	<li><a href="/guide/components.html#list-item">ons-list-item要素</a></li>
+	<li><a href="http://docs.angularjs.org/api/ng.directive:ngRepeat" target="_blank">AngularJS: ngRepeat</a></li>
+</ul>
+

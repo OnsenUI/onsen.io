@@ -2,7 +2,7 @@
 
 header.common {
 	border-bottom: 1px solid #e7e7e7;
-	height: 60px;
+	height: 72px;
 
 	> div {
 		@include box-sizing(border-box);
@@ -15,7 +15,7 @@ header.common {
 
 	.logo {
 		position: absolute;
-		top: 11px;
+		top: 19px;
 		left: 0;
 	}
 
@@ -23,15 +23,14 @@ header.common {
 		position: absolute;
 		top: 0;
 		right: 0;
-		height: 60px;
-		line-height: 60px;
+		height: 72px;
+		line-height: 72px;
 		
 		li {
 			color: #a6a6a6;
 			display: inline-block;
 			font-size: 16px;
-			font-weight: 400;
-			height: 59px;
+			height: 72px;
 			margin: 0 4px;
 			padding: 0 15px;
 			&.current {
@@ -42,9 +41,11 @@ header.common {
 				}
 			}
 			a {
-				@include all-link-state(#a6a6a6, all-none);
+				@include all-link-state(#666, all-none);
+				transition: color 200ms linear;
 				&:hover {
-					color: #ff1a33;
+					transition: color 50ms linear;
+					color: $onsen-red;
 				}
 			}
 		}

@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-footer.common {
+footer#footer-container {
 	color: #666;
 	line-height: 120%;
 	margin: 0 auto;
@@ -11,24 +11,33 @@ footer.common {
 
 	.gnav {
 		border-top: 1px solid #e7e7e7;
-		border-bottom: 1px solid #e7e7e7;
 		margin-bottom: 40px;
 		min-width: $width;
 		height: 66px;
 		line-height: 66px;
+        text-align: center;
 
 		li {
 			color: #a6a6a6;
-			display: inline;
+			display: inline-block;
 			font-size: 16px;
-			font-weight: 400;
 			margin: 0 19px;
+
+			// for social button
+			> iframe, > div > iframe, > div.fb-share-button > span {
+				vertical-align: middle !important;
+			}
 			.active {
 				border-bottom: 1px solid #000;
 				color: #ff1a33;
 			}
 			a {
-				@include all-link-state(#a6a6a6, all-none);
+				@include all-link-state(#666, all-none);
+				transition: color 200ms linear;
+				&:hover {
+					transition: color 50ms linear;
+					color: $onsen-red;
+				}
 			}
 		}
 	}
@@ -71,6 +80,11 @@ footer.common {
 			right: 100px;
 			a {
 				@include all-link-state(#999);
+				transition: color 200ms linear;
+				&:hover {
+					transition: color 50ms linear;
+					color: $onsen-red;
+				}
 			}
 		}
 	}

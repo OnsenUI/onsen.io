@@ -1,0 +1,103 @@
+
+body#getting_started {
+
+	.examples {
+		&:after {content: ""; clear: both; display: block;}
+		li {
+			float: left;
+			margin: 0 auto 40px;
+			text-align: center;
+			width: 50%;
+			h3 {
+				font-size: 20px;
+				margin-bottom: 10px;
+			}
+			.simulator-small {
+				margin: 0 auto 20px;
+				text-align: left;
+			}
+			.btn-download {
+				margin: 0 auto;
+				text-align: left;
+			}
+		}
+	}
+
+	#run {
+		b {
+			font-weight: 700;
+			margin-right: 15px;
+		}
+	}
+
+	.template-iframe {
+		width: 320px;
+		height: 570px;
+		border: 1px solid #ccc;
+	}
+
+	.template-iframe-landscape {
+		width: 570px;
+		height: 320px;
+		border: 1px solid #ccc;
+	}
+
+	.templates-container {
+		position: relative;
+		overflow-y: hidden;
+		overflow-x: scroll;
+	}
+
+	.flex {
+		width: 3200px;
+		display: flex;
+		flex-direction: row;
+	}
+
+	.flex-item {
+		margin: 15px;
+		display: inline-block;
+	}
+
+	.handle {
+		position: absolute;
+		top: 45%;
+		padding: 5px;
+		border-radius: 4px;
+		background-color: rgba(0,0,0,0.5);
+	}
+
+	.handle.left{
+		left: 10px;
+	}
+
+	.handle.right {					
+		right: 10px;
+	}
+
+	.center {
+		align-self: center;
+	}
+
+	.template-title {
+		text-align: center;
+		font-weight: bold !important;
+		color: #ccc !important;
+		margin: 10px;
+		font-size: 1rem !important;
+	}
+
+	.btn-download {
+		margin: 15px auto;
+		display: block;
+		width: 150px;
+	}
+
+	.blue-link {
+		color: #4F82FF;
+	}
+
+	.blue-link:visited {
+		color: #2251C3;
+	}
+}
