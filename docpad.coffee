@@ -205,6 +205,11 @@ docpadConfig = {
 						en: 'The icon of the tab. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here'
 					}
 				}, {
+					name: 'active-icon',
+					description: {
+						en: 'The icon of the tab when active. To use font-awesome icon, just set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here'
+					}
+				}, {
 					name: 'label',
 					description: {
 						en: 'The label of the tab'
@@ -232,6 +237,21 @@ docpadConfig = {
 					name: 'above-page',
 					description: {
 						en: 'The url of the page to be set to the above layer.'
+					}
+				}, {
+					name: 'swipable',					
+					description: {
+						en: "Wether to enable swipe interaction"
+					}
+				}, {
+					name: 'swipe-target-width',					
+					description: {
+						en: "The width of swipable area calculated from the left (in pixel). Eg. Use this to enable swipe only when the finger touch on the left edge."
+					}
+				}, {
+					name: 'max-slide-distance',					
+					description: {
+						en: "How far the above page will slide open (in pixel)."
 					}
 				}],
 				methods: [{
@@ -263,18 +283,6 @@ docpadConfig = {
 					parametters: '( )',
 					description: {
 						en: "Slide the above layer to reveal the layer behind if it is currently hidden, otherwies, hide the layer behind"
-					}
-				}, {
-					name: 'swipable',
-					parametters: '( )',
-					description: {
-						en: "Wether to enable swipe interaction"
-					}
-				}, {
-					name: 'swipeTargetWidth',
-					parametters: '( )',
-					description: {
-						en: "The width of swipable area calculated from the left. Eg. Use this to enable swipe only when the finger touch on the left edge."
 					}
 				}]
 			}, {
