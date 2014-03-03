@@ -656,16 +656,16 @@ docpadConfig = {
 			]
 
 			# The default title of our website
-			title: "Onsen UI"
+			title: "The Answer to PhoneGap UI Development | Onsen UI"
 
 			# The website description (for SEO)
 			description: """
-				Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.
+				A Custom Elements-Based HTML5 UI Framework.
 				"""
 
 			# The website keywords (for SEO) separated by commas
 			keywords: """
-				onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast.
+				phonegap, cordova, custom-elements, onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast
 				"""
 		# -----------------------------
 		# Helper Functions
@@ -676,7 +676,7 @@ docpadConfig = {
 		getPreparedTitle: ->
 			# if we have a document title, then we should use that and suffix the site's title onto it
 			if @document.title
-				"#{@document.title} | #{@site.title}"
+				"#{@document.title} | Onsen UI"
 			# if our document does not have it's own title, then we should just use the site's title
 			else
 				@site.title
