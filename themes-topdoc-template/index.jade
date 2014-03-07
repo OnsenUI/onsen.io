@@ -1,0 +1,165 @@
+- document.relativeSource = document.relativeSource.replace('../../../out', '')
+!!! 5
+html
+	head
+		meta(charset='utf-8')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+		meta(name='viewport', content='width=device-width')
+
+		title Themes | Onsen UI
+		meta(name='description', content='Onsen UI, HTML5 UI framework for modern mobile application.')
+		meta(name='keywords', content='onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast.')
+
+		link(rel='stylesheet', href='/css/style.css')
+		link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+		link(rel='stylesheet', href='/css/highlight_xcode.css')
+
+		link(rel = 'stylesheet', type = 'text/css', href = document.relativeSource)
+
+		link(rel='shortcut icon', href='/icons/favicon.ico')
+
+		script(src='/vendor/jquery.js')
+		script.
+			$(function(){
+				var docNavs = $('.docNav');
+				docNavs.change(function(e) {
+					window.location.href = e.target[e.target.selectedIndex].value;
+				});
+
+				$('a.toggle-code').click(function() {
+					var a = $(this);
+					a.siblings('section.code').toggle();
+
+					var message = a.text();
+					a.text(a.data('message'));
+					a.data('message', message);
+
+					return false;
+				});
+			});
+
+			$(function() {
+				$('div#theme-aside > div').sticky({
+					topSpacing : 0,
+					bottomSpacing : $('footer#footer-container').height() + 240
+				});
+			});
+
+
+	body#themes
+		header#header-container.common
+			div
+				a(href='/')
+					img.logo(src='/images/header/onsen_logo.png', alt='Onsen UI')
+				nav
+					ul.gnav
+						li: a(href='/guide/getting_started.html') Getting Started
+						li: a(href='/guide/components.html') Components
+						li: a(href='/docs/') Docs
+						li.current: a(href='/themes') Themes
+						li: a(href='/guide/customize.html') Customize
+						li: a(href='/forum.html') Forum
+						li: a(href='http://blog.onsenui.io') Blog
+		section#theme-container.clearfix
+			#content
+				#theme-aside
+					div 
+						div.combo
+							select.docNav
+								- each item in nav
+									- item.title = item.title.replace(/Topcoat Mobile/, '')
+									- if(item.url == document.url)
+										option(value=item.url, selected="selected")=item.title
+									- else
+										option(value=item.url)=item.title
+						ul#component-names
+							- each component in document.components
+								li: a(href='#'+component.slug)=component.name
+				#theme
+					h2=document.title.replace(/Topcoat Mobile/, '') + ' Theme'
+
+					article.component
+						h3 Using this theme
+
+						section.code(style="display:block; color: #333; border: 1px solid #ddd; padding: 8px 8px;")
+							= '<link rel="stylesheet" type="text/css" href="'
+							a(href = document.relativeSource)=document.relativeSource
+							= '">'
+
+					- each component in document.components
+						article.component(id=component.slug)
+							header
+								h3=component.name
+							section.component
+								div.markup(style="width: 320px; position: relative;")!=component.markup
+							- if(component.examples)
+								section.examples
+									h4 Examples
+									ul
+										- each example_url, example_text in component.examples
+											li: a(href = example_url)!= example_text
+							footer.showcode
+								a(href="#", class="toggle-code", data-message="Hide code snippets") Show code snippets
+								section.code
+									div
+										pre.html
+											code(data-language="html")=component.markup
+
+				div(style="clear: both")
+			div(style='clear: both;')
+
+		footer#footer-container
+			nav
+				ul.gnav
+					li: a(href='/guide/getting_started.html') Getting Started
+					li: a(href='/guide/components.html') Components
+					li: a(href='/docs/') Docs
+					li: a(href='/themes/') Themes
+					li: a(href='/guide/customize.html') Customize
+					li: a(href='/forum.html') Forum
+					li: a(href='http://blog.onsenui.io') Blog
+					li
+						// twitter button 
+						a.twitter-share-button(href='https://twitter.com/share', data-text='Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.', data-url='http://onsenui.io/', data-via='Onsen_UI', data-related='Onsen_UI') Tweet
+						script.
+							!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+						// google plus button 
+						.g-plusone(data-size='medium', data-action='share')
+						// facebook share button 
+						//
+							<div class="fb-share-button" data-href="http://onsenui.io" data-type="button"></div>
+			.footer-cont
+				p.social
+					a(href='https://twitter.com/Onsen_UI', target='_blank')
+						span.socialicn.twitter  
+					a(href='https://github.com/OnsenUI/OnsenUI', target='_blank')
+						span.socialicn.github  
+				p.copyright Copyright © 2014 Asial Corporation. All rights reserved.
+				p.helpmenu
+					a(href='http://monaca.mobi/en/page/policy') Privacy Policy
+
+		// Latest compiled and minified JavaScript 
+		script(src='/vendor/highlight.min.js')
+		script(type='text/javascript').
+			hljs.initHighlightingOnLoad();
+		script(src='/vendor/jquery.sticky.js')
+
+		script.
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-526750-29', 'onsenui.io');
+			ga('send', 'pageview');
+
+		script(type='text/javascript').
+			(function() {
+				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+				po.src = 'https://apis.google.com/js/platform.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+			})();
+
+		#github-ribbon-container
+			a#github-ribbon(target='_blank', href='http://github.com/OnsenUI/OnsenUI')
+				| Folk me on GitHub
+
