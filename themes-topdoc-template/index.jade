@@ -62,19 +62,6 @@ html
 						li: a(href='http://blog.onsenui.io') Blog
 		section#theme-container.clearfix
 			#content
-				#theme-aside
-					div 
-						div.combo
-							select.docNav
-								- each item in nav
-									- item.title = item.title.replace(/Topcoat Mobile/, '')
-									- if(item.url == document.url)
-										option(value=item.url, selected="selected")=item.title
-									- else
-										option(value=item.url)=item.title
-						ul#component-names
-							- each component in document.components
-								li: a(href='#'+component.slug)=component.name
 				#theme
 					h2=document.title.replace(/Topcoat Mobile/, '') + ' Theme'
 
@@ -104,6 +91,20 @@ html
 									div
 										pre.html
 											code(data-language="html")=component.markup
+
+				#theme-aside
+					div 
+						div.combo
+							select.docNav
+								- each item in nav
+									- item.title = item.title.replace(/Topcoat Mobile/, '')
+									- if(item.url == document.url)
+										option(value=item.url, selected="selected")=item.title
+									- else
+										option(value=item.url)=item.title
+						ul#component-names
+							- each component in document.components
+								li: a(href='#'+component.slug)=component.name
 
 				div(style="clear: both")
 			div(style='clear: both;')
@@ -138,7 +139,7 @@ html
 				p.helpmenu
 					a(href='http://monaca.mobi/en/page/policy') Privacy Policy
 
-		// Latest compiled and minified JavaScript 
+
 		script(src='/vendor/highlight.min.js')
 		script(type='text/javascript').
 			hljs.initHighlightingOnLoad();
