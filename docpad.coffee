@@ -39,7 +39,7 @@ docpadConfig = {
 					ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
 				},
 				examplePartial: 'screen_example',
-				demoURL: 'OnsenUI/demo/screen_demo.html',
+				demoURL: 'OnsenUI/demo/screen/',
 				relatedResources: [{
 					href : 'http://google.com',
 					text : 'google'
@@ -73,7 +73,7 @@ docpadConfig = {
 					ja: 'ページの切り替えを管理するタブ機能を提供します。'
 				},
 				examplePartial: 'page_example',
-				demoURL: 'OnsenUI/demo/page_demo.html',
+				demoURL: 'OnsenUI/demo/page/',
 				methods: []
 			}, {
 				name: 'navigator',
@@ -82,7 +82,7 @@ docpadConfig = {
 					ja: 'ページのナビゲーションと画面上部のツールバーを提供します。遷移元ページのスタック管理を行うことができます。'
 				},
 				examplePartial: 'navigator_example',
-				demoURL: 'OnsenUI/demo/navigator_demo.html',
+				demoURL: 'OnsenUI/demo/navigator/',
 				attributes: [{
 					name: 'page',
 					description: {
@@ -149,7 +149,7 @@ docpadConfig = {
 					ja: 'ページの切り替えを管理するタブ機能を提供します。'
 				},
 				methods: [],
-				demoURL: 'OnsenUI/demo/navigator_with_navigator_toolbar.html',
+				demoURL: 'OnsenUI/demo/navigator_with_navigator_toolbar/',
 				examplePartial: 'navigator_with_navigator_toolbar_example',
 				attributes: [{
 					name: 'title',
@@ -182,7 +182,7 @@ docpadConfig = {
 				description: {
 					en: 'Use this component to have toolbar position at the bottom of the page'
 				},
-				demoURL: 'OnsenUI/demo/bottom_toolbar_demo.html',
+				demoURL: 'OnsenUI/demo/bottom_toolbar/',
 				examplePartial: 'bottom_toolbar_example',
 				methods: []
 			}, {
@@ -198,7 +198,7 @@ docpadConfig = {
 					ja: '<ons-tabbar-item>タグでタブバー内に配置されるタブ項目を定義します。'
 				},
 				examplePartial: 'tabbar_example',
-				demoURL: 'OnsenUI/demo/tabbar_demo.html',
+				demoURL: 'OnsenUI/demo/tabbar/',
 				attributes: [{
 					name: 'page',
 					description: {
@@ -227,7 +227,7 @@ docpadConfig = {
 					en: "Facebook/Path like sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind."					
 				},
 				examplePartial: 'sliding_menu_example',
-				demoURL: 'OnsenUI/demo/sliding_menu_demo.html',
+				demoURL: 'OnsenUI/demo/sliding_menu/',
 				attributes: [{
 					name: 'behind-page',
 					description: {
@@ -276,7 +276,7 @@ docpadConfig = {
 					en: "devids the screen into left and right section. This component can also act as sliding menu which can be controlled by 'collapse' attribute"
 				},
 				examplePartial: 'split_view_example',
-				demoURL: 'OnsenUI/demo/split_view_demo_width.html',
+				demoURL: 'OnsenUI/demo/split_view/',
 				attributes: [{
 					name: 'secondary-page',
 					description: {
@@ -335,7 +335,7 @@ docpadConfig = {
 					en: "Makes the content inside this tag scrollable."
 				},
 				examplePartial: 'scroller_example',
-				demoURL: 'OnsenUI/demo/scroller_demo.html',
+				demoURL: 'OnsenUI/demo/scroller/',
 				methods: []
 			}, {
 				name: 'list',
@@ -343,7 +343,7 @@ docpadConfig = {
 					en: "The container for list-item. Similar to <ul> but styled for mobile."
 				},
 				examplePartial: 'list_example',
-				demoURL: 'OnsenUI/demo/list_demo.html',
+				demoURL: 'OnsenUI/demo/list/',
 				methods: []
 			}, {
 				name: 'list-item',
@@ -357,7 +357,7 @@ docpadConfig = {
 					en: "Button component. It includes a spinner useful for showing work in progress"
 				},
 				examplePartial: 'button_example',
-				demoURL: 'OnsenUI/demo/button_demo.html',
+				demoURL: 'OnsenUI/demo/button/',
 				attributes: [{
 					name: 'type',
 					description: {
@@ -386,7 +386,7 @@ docpadConfig = {
 					en: "Radio button component"
 				},
 				examplePartial: 'radio_button_example',
-				demoURL: 'OnsenUI/demo/radio_button_demo.html',
+				demoURL: 'OnsenUI/demo/radio_button/',
 				attributes: [{
 					name: 'ng-model',
 					description: {
@@ -421,7 +421,7 @@ docpadConfig = {
 					en: "Checkbox component"
 				},
 				examplePartial: 'checkbox_example',
-				demoURL: 'OnsenUI/demo/checkbox_demo.html',
+				demoURL: 'OnsenUI/demo/checkbox/',
 				attributes: [{
 					name: 'ng-model',
 					description: {
@@ -445,7 +445,7 @@ docpadConfig = {
 					en: "Wrapper around select tag but styled for mobile."
 				},
 				examplePartial: 'select_example',
-				demoURL: 'OnsenUI/demo/select_demo.html',
+				demoURL: 'OnsenUI/demo/select/',
 				attributes: [],
 				methods: [],
 				note: 'Ons-select does not work in Android 2.3.'
@@ -455,7 +455,7 @@ docpadConfig = {
 					en: "Component for doing text input."
 				},
 				examplePartial: 'text_input_example',
-				demoURL: 'OnsenUI/demo/text_input_demo.html',
+				demoURL: 'OnsenUI/demo/text_input/',
 				attributes: [{
 					name: 'placeholder',
 					description: {
@@ -474,7 +474,7 @@ docpadConfig = {
 					en: "Component for inputting search text."
 				},
 				examplePartial: 'search_input_example',
-				demoURL: 'OnsenUI/demo/search_input_demo.html',
+				demoURL: 'OnsenUI/demo/search_input/',
 				attributes: [{
 					name: 'placeholder',
 					description: {
@@ -493,7 +493,7 @@ docpadConfig = {
 					en: "Component for inputting text."
 				},
 				examplePartial: 'text_area_example',
-				demoURL: 'OnsenUI/demo/text_area_demo.html',
+				demoURL: 'OnsenUI/demo/textarea/',
 				attributes: [{
 					name: 'rows',
 					description: {
@@ -522,7 +522,7 @@ docpadConfig = {
 					en: "Conditionally display content depending on screen orientation. Valid values are [portrait/landscape]. Different from other components, this component is used as attribute in any element. See example on how to use"
 				},
 				examplePartial: 'if_orientation_example',
-				demoURL: 'OnsenUI/demo/if_orientation_demo.html',
+				demoURL: 'OnsenUI/demo/if_orientation/',
 				attributes: [],
 				methods: []
 			}, {
@@ -531,7 +531,7 @@ docpadConfig = {
 					en: "Conditionally display content depending on the platform/browser. Valid values are [ios/android/blackberry/chrome/safari/firefox/opera]. Different from other components, this component is used as attribute in any element. See example on how to use"
 				},
 				examplePartial: 'if_platform_example',
-				demoURL: 'OnsenUI/demo/if_platform_demo.html',
+				demoURL: 'OnsenUI/demo/if_platform/',
 				attributes: [],
 				methods: []
 			}, {
@@ -540,7 +540,7 @@ docpadConfig = {
 					en: "Wrapper for font-awesome icon [ http://fontawesome.io/icons/ ]."
 				},
 				examplePartial: 'icon_example',
-				demoURL: 'OnsenUI/demo/icon_demo.html',
+				demoURL: 'OnsenUI/demo/icon/',
 				attributes: [{
 					name: 'icon',
 					description: {
@@ -593,7 +593,7 @@ docpadConfig = {
 					en: "Use with <ons-row> to layout component"
 				},
 				examplePartial: 'grid_example',
-				demoURL: 'OnsenUI/demo/grid_demo.html',
+				demoURL: 'OnsenUI/demo/grid/',
 				attributes: [{
 					name: 'align',
 					description: {
