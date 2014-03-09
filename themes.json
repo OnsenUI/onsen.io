@@ -1,0 +1,1666 @@
+{
+  "topcoat-mobile-onsen-android4_4": {
+    "document": {
+      "title": "topcoat-mobile-onsen-android4_4",
+      "filename": "topcoat-mobile-onsen-android4_4.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-android4_4.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-android4_4.css",
+      "url": "topcoat-mobile-onsen-android4_4.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-blue": {
+    "document": {
+      "title": "topcoat-mobile-onsen-blue",
+      "filename": "topcoat-mobile-onsen-blue.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-blue.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-blue.css",
+      "url": "topcoat-mobile-onsen-blue.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-green": {
+    "document": {
+      "title": "topcoat-mobile-onsen-green",
+      "filename": "topcoat-mobile-onsen-green.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-green.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-green.css",
+      "url": "topcoat-mobile-onsen-green.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-ios7": {
+    "document": {
+      "title": "topcoat-mobile-onsen-ios7",
+      "filename": "topcoat-mobile-onsen-ios7.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-ios7.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-ios7.css",
+      "url": "topcoat-mobile-onsen-ios7.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-orange": {
+    "document": {
+      "title": "topcoat-mobile-onsen-orange",
+      "filename": "topcoat-mobile-onsen-orange.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-orange.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-orange.css",
+      "url": "topcoat-mobile-onsen-orange.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-pink": {
+    "document": {
+      "title": "topcoat-mobile-onsen-pink",
+      "filename": "topcoat-mobile-onsen-pink.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-pink.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-pink.css",
+      "url": "topcoat-mobile-onsen-pink.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-purple": {
+    "document": {
+      "title": "topcoat-mobile-onsen-purple",
+      "filename": "topcoat-mobile-onsen-purple.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-purple.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-purple.css",
+      "url": "topcoat-mobile-onsen-purple.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  },
+  "topcoat-mobile-onsen-yellow": {
+    "document": {
+      "title": "topcoat-mobile-onsen-yellow",
+      "filename": "topcoat-mobile-onsen-yellow.css",
+      "source": "out/OnsenUI/themes/css/topcoat-mobile-onsen-yellow.css",
+      "components": [
+        {
+          "name": "Button",
+          "description": "A simple button",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<button class=\"topcoat-button\">Button</button>\r    <button class=\"topcoat-button\" disabled>Button</button>",
+          "slug": "button"
+        },
+        {
+          "name": "Button:Quiet",
+          "markup": "<button class=\"topcoat-button--quiet\">Button</button>\r<button class=\"topcoat-button--quiet\" disabled>Button</button>",
+          "slug": "buttonquiet"
+        },
+        {
+          "name": "Button:Large",
+          "markup": "<button class=\"topcoat-button--large\" >Button</button><br>\r<button class=\"topcoat-button--large\" disabled>Button</button>",
+          "slug": "buttonlarge"
+        },
+        {
+          "name": "Button:LargeQuiet",
+          "markup": "<button class=\"topcoat-button--large--quiet\">Button</button>\r<button class=\"topcoat-button--large--quiet\" disabled>Button</button>",
+          "slug": "buttonlargequiet"
+        },
+        {
+          "name": "Button:CallToAction",
+          "markup": "<button class=\"topcoat-button--cta\" >Button</button>\r<button class=\"topcoat-button--cta\" disabled>Button</button>",
+          "slug": "buttoncalltoaction"
+        },
+        {
+          "name": "Button:LargeCallToAction",
+          "markup": "<button class=\"topcoat-button--large--cta\" >Button</button><br>\r<button class=\"topcoat-button--large--cta\" disabled>Button</button>",
+          "slug": "buttonlargecalltoaction"
+        },
+        {
+          "name": "Button Bar",
+          "description": "Component of grouped buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<div class=\"topcoat-button-bar\" style=\"width:240px\">\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>\r\r<br>\r\r<div class=\"topcoat-button-bar\" style=\"width:280px\">\r  <div class=\"topcoat-button-bar__item active\">\r    <button class=\"topcoat-button-bar__button\">One</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Two</button>\r  </div>\r  <div class=\"topcoat-button-bar__item\">\r    <button class=\"topcoat-button-bar__button\">Three</button>\r  </div>\r</div>",
+          "slug": "button-bar"
+        },
+        {
+          "name": "Icon Button",
+          "description": "Like button, but it has an icon.",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<p>Icon Button</p>\r<button class=\"topcoat-icon-button\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r\r<p>Quiet Icon Button</p>\r<button class=\"topcoat-icon-button--quiet\">\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>\r<button class=\"topcoat-icon-button--quiet\" disabled>\r  <i class=\"fa fa-bell\" style=\"font-size:17px\"></i> Label\r</button>",
+          "slug": "icon-button"
+        },
+        {
+          "name": "Checkbox",
+          "description": "Default skin for Topcoat checkbox",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Checkbox</p>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox\">\r  <input type=\"checkbox\" disabled>\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>\r\r<p>Checkbox(noborder)</p>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  OFF\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  ON\r</label>\r<br><br>\r<label class=\"topcoat-checkbox--noborder\">\r  <input type=\"checkbox\" disabled checked=\"checked\">\r  <div class=\"topcoat-checkbox__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "checkbox"
+        },
+        {
+          "name": "List",
+          "description": "Topcoat default list skin",
+          "markup": "<p>List</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>List(noborder)</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list--noborder\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r      <li class=\"topcoat-list__item\">\r        <span class=\"topcoat-list__item__line-height\">Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>\r<br>\r<p>Category Header</p>\r<div class=\"topcoat-list topcoat-list--noborder\">\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r  <h3 class=\"topcoat-list__header\">Category</h3>\r  <ul class=\"topcoat-list__container\">\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r    <li class=\"topcoat-list__item topcoat-list__item__line-height\">\r      Item\r    </li>\r  </ul>\r</div>\r<br>\r<p>Tappable</p>\r<div class=\"page\">\r  <br>\r  <div class=\"topcoat-list topcoat-list\">\r    <ul class=\"topcoat-list__container\">\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r      <li class=\"topcoat-list__item topcoat-list__item--tappable\">\r        <span class=\"topcoat-list__item__line-height\">Tappable Item</span>\r      </li>\r    </ul>\r  </div>\r  <br>\r</div>",
+          "slug": "list"
+        },
+        {
+          "name": "Navigation Bar",
+          "description": "A place where navigation goes to drink",
+          "markup": "<div class=\"topcoat-navigation-bar\">\r    <div class=\"topcoat-navigation-bar__item center full\">\r        <h1 class=\"topcoat-navigation-bar__title\">Navigation Bar</h1>\r    </div>\r</div>\r\r<br><br><br>\r\r<div class=\"topcoat-navigation-bar topcoat-navigation-bar--bottom\">\r    <div class=\"topcoat-navigation-bar__line-height\" style=\"text-align:center\">Bottom Toolbar</div>\r</div>",
+          "slug": "navigation-bar"
+        },
+        {
+          "name": "Notification",
+          "description": "Notification badge",
+          "markup": "<span class=\"topcoat-notification\">1</span>\r<br><br>\r<span class=\"topcoat-notification\">10</span>\r<br><br>\r<span class=\"topcoat-notification\">999</span>\r<br><br>\r<span class=\"topcoat-notification\">9999</span>",
+          "slug": "notification"
+        },
+        {
+          "name": "Page",
+          "description": "Default skin for Onsen UI Page",
+          "modifiers": null,
+          "markup": "<div class=\"page\" style=\"height:200px\">\r</div>",
+          "slug": "page"
+        },
+        {
+          "name": "Radio Button",
+          "description": "A button that can play music, but usually just plays ads.",
+          "modifiers": null,
+          "markup": "<!-- NO LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- LEFT LABEL -->\r<label class=\"topcoat-radio-button\">\r  Left label\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r</label>\r<br>\r<br>\r<!-- RIGHT LABEL -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\">\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Right label\r</label>\r<br>\r<br>\r<!-- DISABLED -->\r<label class=\"topcoat-radio-button\">\r  <input type=\"radio\" name=\"topcoat\" Disabled>\r  <div class=\"topcoat-radio-button__checkmark\"></div>\r  Disabled\r</label>",
+          "slug": "radio-button"
+        },
+        {
+          "name": "Range",
+          "description": "Range input",
+          "modifiers": {
+            ":active": "Active state",
+            ":disabled": "Disabled state",
+            ":focus": "Focused"
+          },
+          "markup": "<input type=\"range\" class=\"topcoat-range\">\r<input type=\"range\" class=\"topcoat-range\" disabled>",
+          "slug": "range"
+        },
+        {
+          "name": "Search Input",
+          "description": "A text input designed for searching.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\">\r\r<br>\r\r<input type=\"search\" value=\"\" placeholder=\"Search\" class=\"topcoat-search-input\" disabled>",
+          "slug": "search-input"
+        },
+        {
+          "name": "Switch",
+          "description": "Default skin for Topcoat switch",
+          "modifiers": {
+            ":focus": "Focus state",
+            ":disabled": "Disabled state"
+          },
+          "markup": "<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\">\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" checked>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>\r<br>\r<br>\r<label class=\"topcoat-switch\">\r  <input type=\"checkbox\" class=\"topcoat-switch__input\" disabled>\r  <div class=\"topcoat-switch__toggle\"></div>\r</label>",
+          "slug": "switch"
+        },
+        {
+          "name": "Tab Bar",
+          "description": "Component of tab buttons",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Tabbar(label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label>\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-a\">\r    <button class=\"topcoat-tab-bar__button\">\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label>\r</div>\r<br>\r\r<p>Tabbar(icon+label)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r      <div class=\"onsen_tab-bar__label\">Comments</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-video-camera\"></i>\r      <div class=\"onsen_tab-bar__label\">Videos</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-b\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r      <div class=\"onsen_tab-bar__label\">Settings</div>\r    </button>\r  </label> \r</div>\r<br>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-folder\"></i>\r      <div class=\"onsen_tab-bar__label\">One</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-heart\"></i>\r      <div class=\"onsen_tab-bar__label\">Two</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-stop\"></i>\r      <div class=\"onsen_tab-bar__label\">Three</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r      <div class=\"onsen_tab-bar__label\">Four</div>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-bb\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-cloud\"></i>\r      <div class=\"onsen_tab-bar__label\">Five</div>\r    </button>\r  </label> \r</div>\r<br>\r\r<p>Tabbar(icon)</p>\r<div class=\"topcoat-tab-bar\">\r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-star\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-comment\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-circle\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-play fa-rotate-270\"></i>\r    </button>\r  </label> \r  <label class=\"topcoat-tab-bar__item\">\r    <input type=\"radio\" name=\"tab-bar-c\" checked=\"checked\">\r    <button class=\"topcoat-tab-bar__button\">\r      <i class=\"fa fa-2x fa-gear\"></i>\r    </button>\r  </label> \r</div>",
+          "slug": "tab-bar"
+        },
+        {
+          "name": "Text input",
+          "description": "Topdoc text input",
+          "modifiers": {
+            ":disabled": "Disabled state",
+            ":focus": "Focused",
+            ":invalid": "Hover state"
+          },
+          "markup": "<p>Text Input(border)</p>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(transparent)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--transparent\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">\r\r<p>Text Input(underbar)</p>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\">\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"\" disabled>\r<br>\r<br>\r<input type=\"text\" class=\"topcoat-text-input topcoat-text-input--underbar\" placeholder=\"text\" value=\"fail\" pattern=\"not-fail\">",
+          "slug": "text-input"
+        },
+        {
+          "name": "Textarea",
+          "description": "A whole area, just for text.",
+          "modifiers": {
+            ":disabled": "Disabled state"
+          },
+          "markup": "<p>Textarea(border)</p>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>\r<br>\r<p>Textarea(transparent)</p>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\"></textarea>\r<br>\r<textarea class=\"topcoat-textarea--transparent\" rows=\"3\" placeholder=\"Textarea\" disabled></textarea>",
+          "slug": "textarea"
+        }
+      ],
+      "relativeSource": "../out/OnsenUI/themes/css/topcoat-mobile-onsen-yellow.css",
+      "url": "topcoat-mobile-onsen-yellow.css"
+    },
+    "nav": [
+      {
+        "title": "topcoat-mobile-onsen-android4_4",
+        "url": "topcoat-mobile-onsen-android4_4.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-blue",
+        "url": "topcoat-mobile-onsen-blue.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-green",
+        "url": "topcoat-mobile-onsen-green.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-ios7",
+        "url": "topcoat-mobile-onsen-ios7.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-orange",
+        "url": "topcoat-mobile-onsen-orange.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-pink",
+        "url": "topcoat-mobile-onsen-pink.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-purple",
+        "url": "topcoat-mobile-onsen-purple.css"
+      },
+      {
+        "title": "topcoat-mobile-onsen-yellow",
+        "url": "topcoat-mobile-onsen-yellow.css"
+      }
+    ],
+    "project": {
+      "title": "onsenui-website-repo"
+    },
+    "templateData": {
+      "title": "onsenui-website-repo"
+    }
+  }
+}

@@ -21,6 +21,8 @@ docpadConfig = {
 	templateData:
 		rootUrl: '/'
 
+		themes: require('./themes')
+
 		CONSTANTS:
 			attributes:
 				en: 'Attributes',
@@ -692,8 +694,8 @@ docpadConfig = {
 	# Collections
 	
 	collections:        
-		pages: ->
-			@getCollection('documents').findAllLive({relativeOutDirPath:'references'},[title:1])
+		guidePages: ->
+			@getCollection('html').findAllLive({relativeOutDirPath:'guide'},[title:1])
 
 	# =================================
 	# DocPad Events

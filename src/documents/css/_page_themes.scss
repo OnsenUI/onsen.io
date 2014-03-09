@@ -14,19 +14,25 @@ body#themes {
 		width: 1100px;
 		margin-top: 10px;
 		margin-bottom: 80px;
+		position: relative;
 	}
 
 	section#theme-container > div#content > #theme {
 		width: 900px;
-		float: right;
 		padding-top: 42px;
+		position: relative;
+		right: 0px;
+		margin-left: 200px;
 	}
 
 	section#theme-container > div#content > #theme-aside {
 		width: 200px;
+		position: absolute;
+		left: 0px;
+		top: 0px;
 	}
 
-	section#theme-container > div#content > #theme-aside > div > div {
+	section#theme-container > div#content > #theme-aside > div > div > div {
 		padding-top: 42px;
 	}
 
@@ -60,33 +66,74 @@ body#themes {
 		text-decoration: underline;
 	}
 
-	article.component {
+	section.component {
 		margin: 10px 0 80px 0;
+		min-height: 900px;
+		width: 490px;
 	}
 
 	section.code {
-		display: none;
+	}
+	
+	.example-box {
+		position: absolute;
+		right: -404px;
+		top: 0px;
+		width: 384px;
+		height: 805px;
+		background-image: url(/images/iPhone5CFrame.png);
+		background-repeat: no-repeat;
+		background-position: left top;
+		.example-box-inner {
+			margin: 120px 0 0 34px;
+			width: 320px;
+			height: 570px;
+			background-color: #eee;
+			overflow: hidden;
+			position: relative;
+		}
 	}
 
-	section.code pre {
+	div.markup {
+		margin: 8px 0 14px 0;
+	}
+
+	div.code pre {
 		font-size: 14px;
 		line-height: 1.4;
 		font-weight: 500;
 	}
 
 	h2 {
-		font-size: 28px;
-		font-weight: 200;
-		margin: 0 0 16px 0;
-		padding: 0 0 4px 0;
+		font-size: (30px/$basefont)+rem;
+		margin: 70px 0 20px 0;
+		&:first-child {
+			margin-top: 0;
+		}
 		border-bottom: 1px solid #ddd;
 	}
 
+	hr + h2 {
+		margin-top: 36px;
+	}
+
 	h3 {
-		font-size: 24px;
-		font-weight: 200;
-		margin: 14px 0 16px 0;
-		padding: 4px 0;
+		font-size: (22px/$basefont)+rem;
+		margin: 36px 0 14px 0;
+	}
+
+	h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
+		margin-top: 0px;
+	}
+
+	h4 {
+		font-size: (18px/$basefont)+rem;
+		margin: 28px 0 8px 0;
+	}
+
+	h5, h6 {
+		font-size: (14px/$basefont)+rem;
+		margin: 28px 0 8px 0;
 	}
 }
 

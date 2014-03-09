@@ -218,6 +218,7 @@ p.highlighted {
 div#github-ribbon-container {
 	position: absolute;
 	overflow: hidden;
+	display: none;
 	top: 1px;
 	right: 0px;
 	width: 180px;
@@ -247,7 +248,12 @@ div#github-ribbon-container {
 			@include transition(none);
 		}
 	}
+}
 
+@media screen and (min-width: 1400px) {
+	div#github-ribbon-container {
+		display: block;
+	}
 }
 
 

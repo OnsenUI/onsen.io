@@ -1,0 +1,96 @@
+---
+layout: 'themes'
+title: 'Themes'
+page: 'themes'
+---
+
+<% theme = 'topcoat-mobile-onsen-ios7' %>
+<link rel="stylesheet" type="text/css" href="/OnsenUI/themes/css/<%= theme %>.css">
+
+<div id="theme">
+	<h2><%= theme %> Theme</h2>
+
+	<h3>How to Load This Theme</h3>
+	<section style="display:block; color: #333; border: 1px solid #ddd; padding: 8px 8px;" class="code">
+		&lt;link rel="stylesheet" type="text/css" href="<a href="/OnsenUI/themes/css/topcoat-mobile-onsen-ios7.css">onsen/css/<%= theme %>.css</a>"&gt;
+	</section>
+
+	<% components = @themes[theme].document.components %>
+	<% for component, i in components: %>
+		<% if (component.name.indexOf(':') == -1): %>
+		<section class="component">
+		<% end %>
+
+		<% if (component.name.indexOf(':') == -1): %>
+		<h3 id="#<%= component.slug %>"><%= component.name %></a></h3>
+		<div style="position: relative">
+			<div class="example-box">
+				<div class="example-box-inner">
+					<div class="page">
+						<%- component.markup %>
+					</div>
+				</div>
+			</div>
+		</div>
+		<% else: %>
+		<h4 id="#<%= component.slug %>"><%= component.name %></a></h4>
+		<% end %>
+
+		<div class="markup" style="width: 320px; position: relative">
+			<%- component.markup %>
+		</div>
+
+		<div class="code">
+			<div><pre class="html"><code data-language="html"><%= component.markup %></code></pre></div>
+		</div>
+
+		<% if (!components[i + 1]) or (components[i + 1] and components[i + 1].name and components[i + 1].name.indexOf(':') == -1): %>
+		</section>
+		<% end %>
+
+	<% end %>
+</div>
+
+<div id="theme-aside">
+	<div>
+		<div>
+			<div class="combo"><select class="docNav">
+				<% for themeName in Object.keys(@themes): %>
+					<option value="<%= themeName %>.html"><%= themeName.replace(/^topcoat-mobile-/, '') %></option>
+				<% end %>
+			</select></div>
+
+			<ul id="component-names">
+				<% for component in @themes[theme].document.components: %>
+					<% if (component.name.indexOf(':') == -1): %>
+						<li><a href="#<%= component.slug %>"><%= component.name %></a></li>
+					<% end %>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript" src='/vendor/jquery.sticky.js'></script>
+<script type="text/javascript">
+
+$(function(){
+	var docNavs = $('.docNav');
+	docNavs.change(function(e) {
+		window.location.href = e.target[e.target.selectedIndex].value;
+	});
+
+	$(function() {
+		$('div#theme-aside > div').sticky({
+			topSpacing : 0,
+			bottomSpacing : $('footer#footer-container').height() + 240
+		});
+	});
+});
+
+</script>
+
+<script src="/vendor/highlight.min.js"></script>
+<script type="text/javascript">                 
+	hljs.initHighlightingOnLoad();
+</script>
