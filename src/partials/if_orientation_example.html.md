@@ -4,12 +4,12 @@ encoding: 'utf8'
 
 *index.html*
 
-	<ons-page class="center">    
-  		<div ons-if-orientation="portrait">
-			<h1>Portrait content here!</h1>
+	<ons-navigator title="Orientation Detection">
+		<div ons-if-orientation="portrait">
+			<p>Portrait content here!</p>
 		</div>
-
+		
 		<div ons-if-orientation="landscape">
-			<h1>Landscape content here!</h1>
+			<p>Landscape content here!</p>
 		</div>
-  	</ons-page>
+	</ons-navigator>

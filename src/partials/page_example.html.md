@@ -6,4 +6,4 @@ encoding: 'utf8'
 
 	<ons-page class="center">    
     	<h1>Page Content</h1>    
-  	</ons-page>
+	</ons-page>
