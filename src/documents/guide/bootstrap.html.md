@@ -8,11 +8,11 @@ autotoc: true
 
 ## Bootstrap
 
-Onsen UIはモバイルHTML5用のUIフレームワークです。このページでは、ユーザがOnsen UIフレームワークを使う際に、どのような初期化のための手続きを取るのかについて説明します。
+Onsen UI is a UI framework for mobile HTML5. This page will describe the initialization processes to start using the Onsen UI framework.
 
-### エントリポイント
+### The Entry Point
 
-Onsen UIを使った[最小限のプロジェクト](/OnsenUI/project_templates/minimum.zip)では、アプリのエントリポイントのindex.htmlに以下のようなコードを記述します。 
+For the [Minimum Project](/OnsenUI/project_templates/onsen-minimum.zip) of Onsen UI, insert the below code in index.html to serve as the entry point for your app.
 
 	<!doctype html>
 	<html lang="en" ng-app="myApp">
@@ -40,49 +40,49 @@ Onsen UIを使った[最小限のプロジェクト](/OnsenUI/project_templates/
 	</body>
 	</html>
 
-このHTMLでは、以下のことをやっています。
+This HTML processes the following:
 
- * Onsen UIのリソースの読み込み
- * Angular.jsとOnsen UIの初期化
- * ons-screen要素の宣言
+ * Loading the Onsen UI resources
+ * Initializing AngularJS and Onsen UI
+ * Declaring an ons-screen Element
 
-### リソースの読み込み
+### Loading Resources
 
-CSSには、アプリケーション固有のCSSファイルとOnsen UIのCSSファイルを読み込んでいます。
+Load the application-specific CSS file and the Onsen UI CSS file with the CSS.
 
 	  <link rel="stylesheet" href="styles/app.css"/>
 	  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
 	  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
 
-topcoat-mobile-onsen-ios7.cssは、Onsen UIのテーマです。読み込むCSSファイルをtopcot-mobile-onsen-ios7.cssから別のものにすると、テーマを切り替えることができます。詳細は、[Theme](/guide/theme.html)のページを参照して下さい。
+topcoat-mobile-onsen-ios7.css is an Onsen UI theme. You can change the theme by replacing topcot-mobile-onsen-ios7.css with another file when loading the CSS file. Please refer to the [Themes](/themes/) page for details.
 
-JavaScriptファイルは、OnsenUIとAngular.jsのJavaScriptファイルを読み込んでいます。
+Load the Onsen UI and AngularJS JavaScript files with the JavaScript file.
 
 	  <script src="lib/onsen/js/angular/angular.js"></script>    
 	  <script src="lib/onsen/js/onsenui.js"></script>    
 
-### モジュールの初期化
+### Initializing Modules
 
-html要素にはAngular.jsを初期化のために、<a href="http://docs.angularjs.org/api/ng/directive/ngApp">ng-app</a>属性にmyAppという値を指定しています。ng-app属性を指定すると、読み込んだAngular.jsが起動されます。
+Set myApp value to <a href="http://docs.angularjs.org/api/ng/directive/ngApp">ng-app</a> attribute in the html element to initialize AngularJS. Specify the ng-app attribute to boot the loaded AngularJS.
 
 	<html lang="en" ng-app="myApp">
 
-次に、myAppというモジュールがOnsen UIの提供するonsen.directivesモジュールを利用することを宣言します。これにより、ons-screenやons-navigator-toolbarなどのカスタム要素が読み込まれます。
+Next, declare that myApp module uses the onsen.directives module from Onsen UI. This declaration will load custom elements like ons-screen and the ons-navigator-toolbar.
 
 	  <script>
 	    angular.module('myApp', ['onsen.directives']);
 	  </script>
 
-### ons-screen要素の宣言
+### Declaring an ons-screen Element
 
-最後に、body要素以下にons-screen要素を宣言しています。page属性には、一番最初に表示される画面を設定します。
+The final step is to declare an ons-screen element after the body element. Set the first screen to the page attribute.
 
 	  <ons-screen page="home_navigator.html"></ons-screen>
 
-### 関連するリソース
+### Related Resources
 
  * [Getting Started](/guide/getting_started.html)
+ * [Themes](/themes/)
  * [AngularJS](http://docs.angularjs.org/guide/)
  * [Using Onsen UI without JavaScript](/guide/using_without_javascript.html)
-
 

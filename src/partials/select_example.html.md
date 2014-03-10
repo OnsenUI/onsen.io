@@ -4,13 +4,14 @@ encoding: 'utf8'
 
 *index.html*
 
-    <div>
-      selected: {{selectedValue}}
-    </div>
-
-    <ons-select ng-model="selectedValue">    
-      <option>One</option>    
-      <option>Two</option>
-      <option>Three</option>
-    </ons-select>
+    <ons-page>
+	    <div class="space-top">
+	      selected: {{selectedValue}}
+	    </div>
+	    <ons-select ng-model="selectedValue">    
+	      <option value="One">One</option>
+	      <option value="Two">Two</option>
+	      <option value="Three">Three</option>
+	    </ons-select>
+	</ons-page>
 

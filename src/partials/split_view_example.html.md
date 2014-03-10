@@ -4,38 +4,43 @@ encoding: 'utf8'
 
 *index.html*
 
-    <ons-split-view 
-        secondary-page="secondary.html" 
-        main-page="page1.html" 
-        main-page-width="70%" 
-        collapse="width 650px">
-    </ons-split-view>
+    <ons-screen>
+        <ons-split-view 
+          secondary-page="secondary.html" 
+          main-page="page1.html" 
+          main-page-width="40%" 
+          collapse="width 650px">
+        </ons-split-view>
+    </ons-screen>
 
 
 *secondary.html*
 
     <ons-page>
-        <ul class="fa-ul">
 
-            <ons-list-item 
-                class="topcoat-list__item_active"
-                ng-click="ons.splitView.toggle();
-                    ons.splitView.setMainPage('page1.html');">
-                <i class="fa-li fa fa-home fa-lg" style="top: 25%"></i>
-                Page 1
-            </ons-list-item>
+      <ul class="topcoat-list">
 
-            <ons-list-item 
-                class="topcoat-list__item_active"
-                ng-click="ons.splitView.toggle(); 
-                    ons.splitView.setMainPage('page2.html');">
-                <i class="fa-li fa fa-gear fa-lg" style="top: 25%"></i>
-                Page 2
-            </ons-list-item>
+        <ons-list-item
+          class="topcoat-list__item--tappable topcoat-list__item__line-height" 
+          ng-click="
+            ons.splitView.toggle();
+            ons.splitView.setMainPage('page1.html');">
+          <i class="fa fa-home fa-lg" style="color: #666"></i>
+          &nbsp; Page 1
+        </ons-list-item>
 
-        </ul>
+        <ons-list-item 
+          class="topcoat-list__item--tappable topcoat-list__item__line-height"
+          ng-click="
+            ons.splitView.toggle();
+            ons.splitView.setMainPage('page2.html');">
+          <i class="fa fa-gear fa-lg" style="color: #666"></i>
+          &nbsp; Page 2
+        </ons-list-item>
 
+      </ul>
     </ons-page>
+
 
 
 *page1.html*

@@ -31,11 +31,11 @@ Insert the below code to display the navigation toolbar at the top of the screen
 
 <img src="http://placehold.jp/24/cccccc/ffffff/320x640.png">
 
-Please refer to the [Components](/guide/components.html) page for how to write HTML for UI components, which are provided as custom elements.
+Please refer to the [Themes](/themes/) page for how to write HTML for UI components, which are provided as custom elements.
 
 ### Related Resources
 
  * <a href="/guide/components.html">Components</a>
- * <a href="/guide/theme.html">Theme</a>
+ * <a href="/themes">Themes</a>
  * <a href="/guide/bootstrap.html">Bootstrap</a>
 

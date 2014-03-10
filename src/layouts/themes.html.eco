@@ -17,7 +17,7 @@
 	<!-- DocPad Meta -->
 	<%- @getBlock('meta').toHTML() %>
 
-	<!-- DocPad Styles + Our Own -->	
+	<!-- DocPad Styles + Our Own -->
 	<link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
 	<link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
 	<link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
@@ -44,56 +44,13 @@
 
 	<%- @partial('header.html.eco') %>
 
-	<section id="content-container" class="clearfix">
-		<% if @document.toc or @document.autotoc: %>
-		<aside id="content-info">
-
-			<h2><%= @document.title %></h2>
-			<% if @document.toc: %>
-				<ul>
-					<% for toc in @document.toc: %>
-					<li><a href="<%= toc.href %>"><%= toc.name %></a>
-						<% if toc.sub: %>
-						<ul>
-							<% for sub in toc.sub: %>
-							<li><a href="<%= sub.href %>"><%= sub.name %></a></li>
-							<% end %>
-						</ul>
-						<% end %>
-					</li>
-					<% end %>
-				</ul>
-			<% end %>
-
-			<% if !@document.toc and @document.autotoc and @document.tableOfContents: %>
-				<%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
-			<% end %>
-		</aside>
-		<% end %>
-
+	<section id="theme-container" class="clearfix">
 		<div id="content">
 			<%- @content %>
-
-			<% if @document.needHelp: %>
-				<hr>
-
-				<%- @partial('need_help') %>
-			<% end %>
 		</div>
 	</section>
 
 	<%- @partial('footer.html') %>
-
-	<script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
-	<script>
-	$(function() {
-		$('aside#content-info').sticky({
-			topSpacing : 0, 
-			bottomSpacing : $('footer#footer-container').height()
-		});
-	});
-	</script>
-
 
 </body>
 </html>
