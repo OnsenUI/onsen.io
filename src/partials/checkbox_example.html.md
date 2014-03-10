@@ -4,20 +4,24 @@ encoding: 'utf8'
 
 *index.html*
 
+    <ons-page style="padding: 0px;">
 
-    <ons-page class="center">    
-      <section>      
+      <section style="padding: 10px;">      
         <ons-checkbox ng-model="agree">
           True or False?
         </ons-checkbox>
-        <h3>{{agree}}</h3>  
+        <span>{{agree}}</span>  
       </section>
 
-      <section>      
-        <ons-checkbox ng-model="answer" ng-true-value="YES" ng-false-value="NO">
+      <section style="padding: 10px;">      
+        <ons-checkbox 
+          ng-model="answer" 
+          ng-true-value="YES" 
+          ng-false-value="NO">
           Yes or No?
         </ons-checkbox>
-        <h3>{{answer}}</h3>  
-      </section> 
+        <span>{{answer}}</span>  
+      </section>
+      
     </ons-page>
 
