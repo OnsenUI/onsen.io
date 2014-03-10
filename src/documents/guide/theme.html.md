@@ -10,7 +10,7 @@ autotoc: true
 
 Onsen UI offers several themes to provide different styles for the UI components. App developers can choose a theme that best fits your app.
 
-This page will describe how to use the Onsen UI themes.
+This page will describe how to use the <a href="/themes">Onsen UI themes</a>.
 
 ### Available Themes
 
