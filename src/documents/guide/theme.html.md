@@ -20,25 +20,36 @@ Onsen UI currently has three available themes:
  * android4_4
  * onsen
 
-<p><img src="http://placehold.jp/24/cccccc/ffffff/810x300.png"></p>
-
 ### Changing Themes
 
 Onsen UI provides each theme in a single CSS file. All you need to do to switch the theme is change the CSS file when loading it with the HTML.
 
-    ...
+    <!-- case for using ios7 theme -->
+    <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
+
+    <!-- case for using android4_4 theme -->
+    <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-android4_4.css">
+
+    <!-- case for using onsen-blue theme -->
+    <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-blue.css">
 
 ### Applying Dynamic Themes
 
 You can also change themes dynamically, specific to the device or browser currently running the app.
 
-	...
+    <script type="text/javascript">
+    if ($.os.iphone) {
+        document.write('<link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">');
+    } else {
+        document.write('<link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-blue.css">');
+    }
+    </script>
 
 ### Expanding Themes
 
 You can expand on existing themes by overwriting styles with CSS, just as you would do with a normal web page.
 
-Please refer to the theme customization section of the <a href="/guide/cutomize.html">Customize</a> page for details.
+Please refer to the theme customization section of the <a href="/guide/cutomize.html">Customize</a> page and <a href="/themes/">Themes</a> page for details.
 
 ### Related resources
 
