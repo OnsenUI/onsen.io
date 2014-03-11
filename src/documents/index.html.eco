@@ -149,22 +149,23 @@ page: 'home'
 </div>
 
 <script>
-// augaaaaaaaaaaaaaaaaaaaaa
-$.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
-	if(data && data.data.watchers) {
-		$('div.social a.github-star strong').text(data.data.watchers);
-	}
-}).error(function() {
-	$('div.social img.github-icon-mini').remove();
-	$('div.social a.github-star').remove();
-});
+$(function() {
+	$.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
+		if(data && data.data.watchers) {
+			$('div.social a.github-star strong').text(data.data.watchers);
+		}
+	}).error(function() {
+		$('div.social img.github-icon-mini').remove();
+		$('div.social a.github-star').remove();
+	});
 
-$.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
-	if(data && data.followers_count) {
-		$('div.social > a.twitter-follower > strong').text(data.followers_count);
-	}
-}).error(function() {
-	$('div.social  img.twitter-icon-mini').remove();
-	$('div.social  a.twitter-follower').remove();
+	$.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
+		if(data && data.followers_count) {
+			$('div.social > a.twitter-follower > strong').text(data.followers_count);
+		}
+	}).error(function() {
+		$('div.social  img.twitter-icon-mini').remove();
+		$('div.social  a.twitter-follower').remove();
+	});
 });
 </script>
