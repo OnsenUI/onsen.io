@@ -662,7 +662,7 @@ docpadConfig = {
 
 			# The website description (for SEO)
 			description: """
-				A Custom Elements-Based HTML5 UI Framework.
+				Onsen UI from Monaca is a Custom Elements-Based HTML5 UI Framework for Building PhoneGap/Cordova Hybrid apps
 				"""
 
 			# The website keywords (for SEO) separated by commas
