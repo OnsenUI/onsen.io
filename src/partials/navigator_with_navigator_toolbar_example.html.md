@@ -5,17 +5,17 @@ encoding: 'utf8'
 *index.html*
 
     <ons-navigator
-      title="Page 1"
-      right-button-icon="fa fa-lg fa-bars"
-      on-right-button-click="ons.navigator.pushPage('page2.html')">      
+        title="Page 1"
+        right-button-icon="fa fa-lg fa-bars"
+        on-right-button-click="ons.navigator.pushPage('page2.html')">      
       
-      <ons-page class="center">
-      <h1>Page 1</h1>
-      <ons-button 
-        ng-click="ons.navigator.pushPage('page2.html')">
-        Push Page 2
-      </ons-button>
-      </ons-page>
+        <ons-page class="center">
+            <h1>Page 1</h1>
+            <ons-button 
+                ng-click="ons.navigator.pushPage('page2.html')">
+                Push Page 2
+            </ons-button>
+        </ons-page>
     </ons-navigator>  
 
 

@@ -40,27 +40,27 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <ons-page class="center">
-        <h1>Page 1</h1>
-        <ons-button 
-            ng-click="ons.slidingMenu.toggleMenu()">
-            Toggle Menu
-        </ons-button>
-        
-        <p>
-            To close and open menu,
-        </p>
-        <p>
-            You can also swipe the page left and right.
-        </p>
-    </ons-page>
+    <ons-navigator title="Page 1"
+        left-button-icon="fa fa-lg fa-bars"
+        on-left-button-click="ons.slidingMenu.toggleMenu()">
+        <ons-page class="center">
+            <h1>Page 1</h1>
+            <ons-button ng-click="ons.slidingMenu.toggleMenu()">Toggle Menu</ons-button>
+
+            <p> Click "Toggle Menu" to close/open menu, </p>
+            <p> You can also swipe the page left/right.  </p>
+            <img src="../images/ico_swipe_right_s.png" alt="">
+        </ons-page>
+    </ons-navigator>
 
 
 *page2.html*
 
-    <ons-page class="center">
-        <h1>Page 2</h1>
-        <ons-button ng-click="ons.slidingMenu.toggleMenu()">
-            Toggle Menu
-        </ons-button>   
-    </ons-page>
+    <ons-navigator title="Page 2"
+        left-button-icon="fa fa-lg fa-bars"
+        on-left-button-click="ons.slidingMenu.toggleMenu()">
+        <ons-page class="center">
+            <h1>Page 2</h1>
+            <ons-button ng-click="ons.slidingMenu.toggleMenu()">Toggle Menu</ons-button>
+        </ons-page>
+    </ons-navigator>

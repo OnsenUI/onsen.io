@@ -22,20 +22,17 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <ons-page class="center">
-        <h1>Hello, I am Page 1</h1> 
-    </ons-page>
+    <ons-navigator title="Page 1">
+    </ons-navigator>
 
 
 *page2.html*
 
-    <ons-page class="center bg-orange">
-        <h1>Hello, I am Page 2</h1> 
-    </ons-page>
+    <ons-navigator title="Page 2">
+    </ons-navigator>
 
 
 *page3.html*
 
-    <ons-page class="center bg-green">
-        <h1>Hello, I am Page 3</h1> 
-    </ons-page>
+    <ons-navigator title="Page 3">
+    </ons-navigator>
