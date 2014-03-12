@@ -29,8 +29,6 @@ Insert the below code to display the navigation toolbar at the top of the screen
 		</div>
 	</div>
 
-<img src="http://placehold.jp/24/cccccc/ffffff/320x640.png">
-
 Please refer to the [Themes](/themes/) page for how to write HTML for UI components, which are provided as custom elements.
 
 ### Related Resources
