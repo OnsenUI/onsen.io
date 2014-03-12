@@ -4,7 +4,7 @@ encoding: 'utf8'
 
 *index.html*
 
-    <ons-navigator>
+    <ons-navigator
       title="Page 1"
       right-button-icon="fa fa-lg fa-bars"
       on-right-button-click="ons.navigator.pushPage('page2.html')">      
