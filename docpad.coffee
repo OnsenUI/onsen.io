@@ -268,7 +268,7 @@ docpadConfig = {
 				}, {
 					name: 'max-slide-distance',					
 					description: {
-						en: "How far the above page will slide open (in pixel)."
+						en: "How far the above page will slide open. Can specify both in px and %"
 					}
 				}],
 				methods: [{
