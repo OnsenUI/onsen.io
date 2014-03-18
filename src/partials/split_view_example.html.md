@@ -45,19 +45,19 @@ encoding: 'utf8'
 
 *page1.html*
 
-    <ons-page class="center" style="padding: 10px">
+    <ons-navigator title="Page 1">
+      <ons-page class="center" style="padding: 10px">
         <h1>Page 1</h1>
-        <p>
-            This spitview collapses when the width is less than 650px.
-        </p>    
-        <p>
-            When in collapse mode, you can swipe left and right to close and open the secondary page.
-        </p>    
-    </ons-page>
+        <p>This spitview collapses when the width is less than 650px.</p>
+        <p>When in collapse mode, you can swipe left and right to close and open the secondary page.</p>
+      </ons-page>
+    </ons-navigator>
 
 
 *page2.html*
 
-    <ons-page class="center">
+    <ons-navigator title="Page 2">
+      <ons-page class="center">
         <h1>Page 2</h1>
-    </ons-page> 
+      </ons-page>
+    </ons-navigator>

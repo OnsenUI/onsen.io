@@ -8,7 +8,7 @@ autotoc: true
 
 ## Icons
 
-<img src="http://placehold.jp/24/cccccc/ffffff/600x200.png">
+<img src="/images/docs/fontawesome.png">
 
 Onsen UI has a built-in framework to easily display popular icons that are frequently used with mobile apps. App developers can quickly display the <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icons included with Onsen UI by using an ons-icon element.
 
@@ -22,7 +22,7 @@ By using an <a href="/guide/components.html#icon">ons-icon element</a>, you can 
 
 This code will be displayed on the screen as shown below:
 
-<img src="http://placehold.jp/24/cccccc/ffffff/100x100.png">
+<img src="/images/docs/fontawesome-bars.png">
 
 You can also display a Font Awesome icon by inserting the below code, instead of using an ons-icon element.
 
