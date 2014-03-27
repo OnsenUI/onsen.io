@@ -155,3 +155,10 @@ The Onsen UI team developers and your peers in the community will work together 
 <p>We appreciate your support to help improve the quality of Onsen UI.
 If you find any bugs in Onsen UI, you can report to us from <a href="https://github.com/onsenui/onsenui/issues">Issues</a> in the github project.</p>
 
+<script>
+	$(function() {
+		$('.templates-container .btn-download').click(function() {
+			ga('send', 'event', 'website', 'download');
+		});
+	});
+</script>
