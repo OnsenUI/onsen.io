@@ -148,31 +148,11 @@ hr {
 	padding: 18px 40px;
 }
 
-.btn-download {
-	@extend .btn-red;
-	background-image: url(/images/common/ico_download.png);
-	background-position: 20px center;
-	background-size: 24px 17px;
-	padding-left: 54px;
-	padding-right: 20px;
-	text-align: left;
-	&.btn-big {
-		background-size: auto;
-		padding-left: 80px;
-	}
-}
-
 .btn-start {
 	background-image: url(/images/common/ico_getstarted.png);
 	background-position: 40px center;
 	padding-left: 100px;
 	text-align: left;
-}
-
-.btn-big.btn-download {
-	background-size: auto;
-	background-position: 50px center;
-	padding: 22px 60px 22px 120px;
 }
 
 .simulator {
