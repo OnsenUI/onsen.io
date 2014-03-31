@@ -196,11 +196,23 @@ docpadConfig = {
 				description: {
 					en: 'Used with tabbar-item to manage pages using tabs.'
 				},
-				methods: [],
+				methods: [{
+					name: 'setActiveTab',
+					parametters: '( index )',
+					description: {
+						en: 'Set the tab of the specified index active. index starts from 0.'					
+					}
+				}],
 				attributes: [{
 					name: 'hide-tabs',
 					description: {
 						en: 'Wether to hide the tabs. Valid values are [true/false] or angular binding. eg: {{ shouldHide }}'
+					}
+				},
+				{
+					name: 'on-active-tab-changed',
+					description: {
+						en: 'Get called when active tab changed. Support parameters are $index and $tabItem. eg. on-active-tab-changed="tabChanged($index, $tabItem)".'
 					}
 				}]
 			}, {
