@@ -167,5 +167,10 @@ $(function() {
 		$('div.social  img.twitter-icon-mini').remove();
 		$('div.social  a.twitter-follower').remove();
 	});
+
+	// event tracking
+	$('#keyvisual .download').click(function() {
+		ga('send', 'event', 'website', 'download');
+	});
 });
 </script>

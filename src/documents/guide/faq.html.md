@@ -57,11 +57,7 @@ Please refer to the <a href="/guide/bootstrap.html">Bootstrap</a> page for detai
 
 ### Q. I can't display an icon with the ons-icon element, why?
 
-Possible causes are either that the font-awesome CSS file is not loading, or a wrong icon name is set.
-
-Please make sure the below CSS file has been loaded:
-
-    <link rel="stylesheet" href="lib/onsen/css/font_awesome/css/font-awesome.min.css">
+The cause could be wrong icon name is set.
 
 Please refer to the <a href="/guide/icon.html">Icons</a> page for how to display and name icons.
 

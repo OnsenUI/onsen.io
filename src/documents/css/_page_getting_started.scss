@@ -1,28 +1,6 @@
 
 body#getting_started {
 
-	.examples {
-		&:after {content: ""; clear: both; display: block;}
-		li {
-			float: left;
-			margin: 0 auto 40px;
-			text-align: center;
-			width: 50%;
-			h3 {
-				font-size: 20px;
-				margin-bottom: 10px;
-			}
-			.simulator-small {
-				margin: 0 auto 20px;
-				text-align: left;
-			}
-			.btn-download {
-				margin: 0 auto;
-				text-align: left;
-			}
-		}
-	}
-
 	#run {
 		b {
 			font-weight: 700;
@@ -40,6 +18,10 @@ body#getting_started {
 		width: 570px;
 		height: 320px;
 		border: 1px solid #ccc;
+	}
+
+	.template-footer {
+		text-align: center;
 	}
 
 	.templates-container {
@@ -87,10 +69,26 @@ body#getting_started {
 		font-size: 1rem !important;
 	}
 
+
 	.btn-download {
-		margin: 15px auto;
-		display: block;
-		width: 150px;
+		@extend .btn-red;
+		padding-left: 10px;
+		padding-right: 10px;
+		text-align: left;
+		border-radius: 4px;
+
+		margin: 15px 0;
+		display: inline-block;
+		width: auto;
+		@include transition(all 0.5s ease);
+
+		&:hover {
+			@include transition(all 0.1s ease);
+		}
+
+		&:active {
+			@include transition(none);
+		}
 	}
 
 	.blue-link {

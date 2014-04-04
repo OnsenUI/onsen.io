@@ -49,10 +49,10 @@ You can also change themes dynamically, specific to the device or browser curren
 
 You can expand on existing themes by overwriting styles with CSS, just as you would do with a normal web page.
 
-Please refer to the theme customization section of the <a href="/guide/cutomize.html">Customize</a> page and <a href="/themes/">Themes</a> page for details.
+Please refer to the theme customization section of the <a href="/guide/customize.html">Customize</a> page and <a href="/themes/">Themes</a> page for details.
 
 ### Related resources
 
- * <a href="/guide/cutomize.html">Customize</a>
+ * <a href="/guide/customize.html">Customize</a>
  * <a href="/themes/">Themes</a>
 

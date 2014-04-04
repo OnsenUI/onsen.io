@@ -7,7 +7,7 @@ autotoc: true
 
 <h2>Getting Started</h2>
 
-<p>Onsen UI is a UI framework to develop the user interface for mobile HTML5 apps. The framework is based on <a href="http://angularjs.org" target="_blank">Angular.js</a> and <a href="http://topcoat.com" target="_blank">Topcoat</a>.</p>
+<p>Onsen UI is a UI framework to develop the user interface for mobile HTML5 apps. The framework is based on <a href="http://angularjs.org" target="_blank">Angular.js</a> and <a href="http://topcoat.io" target="_blank">Topcoat</a>.</p>
 
 <p>This page will describe how to install and try out Onsen UI for first-time users.</p>
 
@@ -29,8 +29,10 @@ autotoc: true
 			<h4>Minimum</h4>
 			<div class="template-iframe">
 				<iframe src="/OnsenUI/project_templates/minimum/app/" width="320" height="570"></iframe>
-			</div>			
-			<a class="btn-download" href="/OnsenUI/project_templates/minimum.zip">Download</a>
+			</div>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/minimum.zip">Download</a>
+			</div>
 		</div>
 
 		<div class="flex-item">
@@ -38,7 +40,9 @@ autotoc: true
 			<div class="template-iframe">
 				<iframe src="/OnsenUI/project_templates/sliding_menu/app/" width="320" height="570"></iframe>
 			</div>						
-			<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu.zip">Download</a>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu.zip">Download</a>
+			</div>
 		</div>
 
 		<div class="flex-item">
@@ -46,7 +50,9 @@ autotoc: true
 			<div class="template-iframe">
 				<iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="320" height="570"></iframe>
 			</div>						
-			<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a>
+			</div>
 		</div>
 
 		<div class="flex-item">
@@ -54,7 +60,9 @@ autotoc: true
 			<div class="template-iframe">
 				<iframe src="/OnsenUI/project_templates/tab_bar/app/" width="320" height="570"></iframe>
 			</div>	
-			<a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a>
+			</div>
 		</div>
 		
 		<div class="flex-item">
@@ -62,7 +70,9 @@ autotoc: true
 			<div class="template-iframe">
 				<iframe src="/OnsenUI/project_templates/master_detail/app/" width="320" height="570"></iframe>
 			</div>	
-			<a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a>
+			</div>
 		</div>		
 
 		<div class="flex-item center">
@@ -70,7 +80,9 @@ autotoc: true
 			<div class="template-iframe-landscape">
 				<iframe src="/OnsenUI/project_templates/split_view/app/" width="570" height="320"></iframe>
 			</div>	
-			<a class="btn-download" href="/OnsenUI/project_templates/split_view.zip">Download</a>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/split_view.zip">Download</a>
+			</div>
 		</div>
 
 		<div class="flex-item center">
@@ -78,7 +90,9 @@ autotoc: true
 			<div class="template-iframe-landscape">
 				<iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="570" height="320"></iframe>
 			</div>
-			<a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a>
+			<div class="template-footer">
+				<a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a>
+			</div>
 		</div>
 
 		<div class="flex-item center">
@@ -155,3 +169,10 @@ The Onsen UI team developers and your peers in the community will work together 
 <p>We appreciate your support to help improve the quality of Onsen UI.
 If you find any bugs in Onsen UI, you can report to us from <a href="https://github.com/onsenui/onsenui/issues">Issues</a> in the github project.</p>
 
+<script>
+	$(function() {
+		$('.templates-container .btn-download').click(function() {
+			ga('send', 'event', 'website', 'download');
+		});
+	});
+</script>
