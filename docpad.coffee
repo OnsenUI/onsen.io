@@ -148,6 +148,18 @@ docpadConfig = {
 						en: "Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator",
 						ja: "すべての遷移元ページスタックをクリアします。ページのURLとナビゲーターツールバーのタイトルを指定してページスタックに追加することが可能です。"
 					}
+				}, {
+					name: 'getCurrentPage',
+					parametters: '( )',
+					description: {
+						en: "Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options"						
+					}
+				}, {
+					name: 'getPages',
+					parametters: '( )',
+					description: {
+						en: "Retrieve the entire page stages of the navigator."
+					}
 				}]
 			}, {
 				name: 'navigator-toolbar',
