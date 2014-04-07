@@ -581,14 +581,14 @@ docpadConfig = {
 			}, {
 				name: 'icon',
 				description: {
-					en: "Wrapper for font-awesome icon [ http://fontawesome.io/icons/ ]."
+					en: "Wrapper for font-awesome icon [ <a href='http://fontawesome.io/icons/'>http://fontawesome.io/icons/</a> ]."
 				},
 				examplePartial: 'icon_example',
 				demoURL: 'OnsenUI/demo/icon/',
 				attributes: [{
 					name: 'icon',
 					description: {
-						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ http://fontawesome.io/icons/ ]'
+						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a> ]'
 					}
 				}, {
 					name: 'size',
