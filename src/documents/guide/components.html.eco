@@ -23,7 +23,7 @@ page: 'components'
         <h1 class="h1-separator"><%= @framework.codeName %>-<%= directive.name %></h1>            
           
         <section>              
-          <p><%= directive.description.en %></p>
+          <p><%- directive.description.en %></p>
         </section>
 
         <span class="anchor" id="<%= directive.name %>-attributes"></span>                
@@ -46,7 +46,7 @@ page: 'components'
               <span class="anchor" id="<%= directive.name %>-<%= attribute.name %>"></span>
               <tr ng-repeat="attribute in directive.attributes">
                 <td class="attribute-name"><%= attribute.name %></td>
-                <td><%= attribute.description.en %></td>
+                <td><%- attribute.description.en %></td>
               </tr>
               <% end %>
             </tbody>

@@ -148,6 +148,18 @@ docpadConfig = {
 						en: "Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator",
 						ja: "すべての遷移元ページスタックをクリアします。ページのURLとナビゲーターツールバーのタイトルを指定してページスタックに追加することが可能です。"
 					}
+				}, {
+					name: 'getCurrentPage',
+					parametters: '( )',
+					description: {
+						en: "Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options"						
+					}
+				}, {
+					name: 'getPages',
+					parametters: '( )',
+					description: {
+						en: "Retrieve the entire page stages of the navigator."
+					}
 				}]
 			}, {
 				name: 'navigator-toolbar',
@@ -581,14 +593,14 @@ docpadConfig = {
 			}, {
 				name: 'icon',
 				description: {
-					en: "Wrapper for font-awesome icon [ http://fontawesome.io/icons/ ]."
+					en: "Wrapper for font-awesome icon [ <a href='http://fontawesome.io/icons/'>http://fontawesome.io/icons/</a> ]."
 				},
 				examplePartial: 'icon_example',
 				demoURL: 'OnsenUI/demo/icon/',
 				attributes: [{
 					name: 'icon',
 					description: {
-						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ http://fontawesome.io/icons/ ]'
+						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a> ]'
 					}
 				}, {
 					name: 'size',

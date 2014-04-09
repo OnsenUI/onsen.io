@@ -34,3 +34,29 @@ encoding: 'utf8'
             Pop Page
         </ons-button>
     </ons-page>
+
+
+Another example of how to use getCurrentPage()
+----------------------------------------------
+
+    // Pass parameters to another page
+    ons.navigator.pushPage("path/to/page.html", {foo: "bar"})
+
+    // Retrieve parameters from the other page
+    ons.navigator.getCurrentPage().options.foo //  "bar"
+
+    // Retrieve the current page
+    ons.navigator.getCurrentPage().options.page //  "path/to/page.html"
+
+    // Retrieve the entire stack
+    ons.navigator.getPages() //  [pageObj1, pageObg2, ... , pageObj3]
+
+    // Example of using the stack to change the behavior of the back button
+     document.addEventListener("backbutton", function (e) {
+                if ($rootScope.ons.navigator.getPages().length > 1) {
+                    e.preventDefault();
+                    $rootScope.ons.navigator.popPage();
+                }
+                else
+                    navigator.app.exitApp();
+    }, false);
