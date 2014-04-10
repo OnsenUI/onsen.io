@@ -37,8 +37,8 @@ docpadConfig = {
 			directives: [{
 				name: 'screen',
 				description: {
-					en: 'The root element. This is usually put inside <body> tag.',
-					ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
+					en: 'The root element. This is usually put inside &lt;body&gt; tag.',
+					ja: '画面全体を切り替えるスクリーンコンポーネントです。&lt;body&lt;タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
 				},
 				examplePartial: 'screen_example',
 				demoURL: 'OnsenUI/demo/screen/',
