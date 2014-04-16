@@ -37,8 +37,8 @@ docpadConfig = {
 			directives: [{
 				name: 'screen',
 				description: {
-					en: 'The root element. This is usually put inside <body> tag.',
-					ja: '画面全体を切り替えるスクリーンコンポーネントです。<body>タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
+					en: 'The root element. This is usually put inside &lt;body&gt; tag.',
+					ja: '画面全体を切り替えるスクリーンコンポーネントです。&lt;body&lt;タグ内に記述して上下のアニメーションでページ表示を切り替えます。'
 				},
 				examplePartial: 'screen_example',
 				demoURL: 'OnsenUI/demo/screen/',
@@ -147,6 +147,18 @@ docpadConfig = {
 					description: {
 						en: "Clears page stack and add the specified pageUrl to the page stack. If options object is specified, apply the options. the options object include all the attributes of this navigator",
 						ja: "すべての遷移元ページスタックをクリアします。ページのURLとナビゲーターツールバーのタイトルを指定してページスタックに追加することが可能です。"
+					}
+				}, {
+					name: 'getCurrentPage',
+					parametters: '( )',
+					description: {
+						en: "Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method. eg. ons.navigator.getCurrentPage().options"						
+					}
+				}, {
+					name: 'getPages',
+					parametters: '( )',
+					description: {
+						en: "Retrieve the entire page stages of the navigator."
 					}
 				}]
 			}, {
@@ -569,14 +581,14 @@ docpadConfig = {
 			}, {
 				name: 'icon',
 				description: {
-					en: "Wrapper for font-awesome icon [ http://fontawesome.io/icons/ ]."
+					en: "Wrapper for font-awesome icon [ <a href='http://fontawesome.io/icons/'>http://fontawesome.io/icons/</a> ]."
 				},
 				examplePartial: 'icon_example',
 				demoURL: 'OnsenUI/demo/icon/',
 				attributes: [{
 					name: 'icon',
 					description: {
-						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ http://fontawesome.io/icons/ ]'
+						en: 'The icon name. set the icon name without "fa-" prefix. eg. to use "fa-home" icon, set it to "home". See all icons here [ <a href="http://fontawesome.io/icons/">http://fontawesome.io/icons/</a> ]'
 					}
 				}, {
 					name: 'size',
