@@ -1,0 +1,69 @@
+@charset "UTF-8";
+
+$basefont: 16px;
+$width: 1100px;
+$aside-width: 260px;
+$onsen-red: #ff0f38;
+$onsen-red-light: #fff5f7;
+
+$prefixes: -webkit-, -moz-, -ms-, -o-, '';
+
+@mixin all-link-state($color,$underline: none) {
+	@if $underline == all-none {
+		&:link,&:visited,&:hover,&:active { color: $color; text-decoration: none; }
+	}
+	@else if $underline == none {
+		&:link,&:visited { color: $color; text-decoration: none; }
+		&:hover { color: $color; text-decoration: underline; }
+		&:active { color: $color; text-decoration: none; }
+	}
+	@else if $underline == all-underline {
+		&:link,&:visited,&:hover,&:active {color: $color; text-decoration: underline;}
+	}
+	@else {
+		&:link,&:visited {color: $color; text-decoration: underline;}
+		&:hover {color: $color; text-decoration: none;}
+		&:active {color: $color; text-decoration: underline;}	
+	}
+}
+
+@mixin link-underline($type) {
+  @if $type == line {
+    &:link,
+    &:visited {
+      text-decoration: underline;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  } @else if $type == all-line {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  } @else if $type == none {
+    &:link,
+    &:visited {
+      text-decoration: none;
+    }
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: underline;
+    }
+  } @else if $type == all-none {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active,
+    &:focus {
+      text-decoration: none;
+    }
+  }
+}
+

@@ -1,6 +1,20 @@
+YAML = require 'yamljs'
+
 # The DocPad Configuration File
 # It is simply a CoffeeScript Object which is parsed by CSON
 docpadConfig = {
+
+	# Environments
+	# Language specific configuration
+	# $ docpad run --env en
+	# $ docpad generate --env en
+	environments:
+        en:
+            documentsPaths: ['documents_en']
+            outPath: 'out_en'
+        ja:
+            documentsPaths: ['documents_ja']
+            outPath: 'out_ja'
 
 	# =================================
 	# Plugins configulation
@@ -671,28 +685,8 @@ docpadConfig = {
 			}];	
 
 		# Specify some site properties
-		site:
-			# The production url of our website
-			url: "http://docs.monaca.mobi/onsen/en"
-
-			# Here are some old site urls that you would like to redirect from
-			oldUrls: [
-				'www.website.com',
-				'website.herokuapp.com'
-			]
-
-			# The default title of our website
-			title: "The Answer to PhoneGap UI Development | Onsen UI"
-
-			# The website description (for SEO)
-			description: """
-				Onsen UI from Monaca is a Custom Elements-Based HTML5 UI Framework for Building PhoneGap/Cordova Hybrid apps
-				"""
-
-			# The website keywords (for SEO) separated by commas
-			keywords: """
-				phonegap, cordova, custom-elements, onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast
-				"""
+		site: {}
+			
 		# -----------------------------
 		# Helper Functions
 
@@ -757,6 +751,16 @@ docpadConfig = {
 	# Here we can define handlers for events that DocPad fires
 	# You can find a full listing of events on the DocPad Wiki
 	events:
+
+		generateBefore: (opts) ->
+			# Get current language from DocPad environment
+			lang = @docpad.config.env
+			# Load translated strings for current language
+			@docpad.getConfig().templateData.site = (YAML.load "src/lang/#{lang}.yml")
+			# Configure Moment.js
+			# moment.lang(lang)
+			# Configure Richtypo.js
+			# richtypo.lang(lang)
 
 		# Server Extend
 		# Used to add our own custom routes to the server before the docpad routes are added
