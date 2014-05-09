@@ -34,6 +34,11 @@
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
 
+	<!-- Alternate language -->
+	<% if @fileExist(@getAlternateLangFilePath(@document)): %>
+		<link rel="alternate" href="<%= @getAlternateSiteURL() %><%= @document.url %>" hreflang="<%= @getAlternateLang() %>" />
+	<% end %>
+
 	<script src="/vendor/jquery.js"></script>
 </head>
 

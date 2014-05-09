@@ -34,14 +34,19 @@
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
 
+	<!-- Alternate language -->
+	<% if @fileExist(@getAlternateLangFilePath(@document)): %>
+		<link rel="alternate" href="<%= @getAlternateSiteURL() %><%= @document.url %>" hreflang="<%= @getAlternateLang() %>" />
+	<% end %>
+
 	<script src="/vendor/jquery.js"></script>
 </head>
 
 <body id="<%- @document.page %>">
 	<!--[if lt IE 7]>
 			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-	<![endif]-->
-
+	<![endif]-->	
+		
 	<%- @partial('header.html.eco') %>
 
 	<section id="content-container" class="no-aside">

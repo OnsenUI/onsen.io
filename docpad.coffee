@@ -1,4 +1,5 @@
 YAML = require 'yamljs'
+fs = require 'fs'
 
 # The DocPad Configuration File
 # It is simply a CoffeeScript Object which is parsed by CSON
@@ -732,6 +733,36 @@ docpadConfig = {
 				return value && value.indexOf('.min.js') > -1
 			_.map scripts, (value) ->
 				return value.replace 'out', ''
+
+		fileExist: (path) ->
+			return fs.existsSync(path)
+
+		alternateLangFileExist: (doc) ->
+			lang = docpad.config.env
+			alternateLang = 'en';			
+			alternateLang = 'ja' if lang == 'en'
+			alternateFilePath = doc.fullPath.replace( '_' + lang, '_' + alternateLang);			
+			exist = fs.existsSync(alternateFilePath)
+			return exist
+
+		getAlternateLangFilePath: (doc) ->
+			lang = docpad.config.env
+			alternateLang = 'en';			
+			alternateLang = 'ja' if lang == 'en'
+			alternateFilePath = doc.fullPath.replace( '_' + lang, '_' + alternateLang);
+			return alternateFilePath
+
+		getAlternateSiteURL: ->
+			lang = docpad.config.env
+			url = 'http://onsenui.io'
+			url = 'http://jp.onsenui.io' if lang == 'en'
+			return url
+
+		getAlternateLang: ->
+			lang = docpad.config.env
+			alternateLang = 'en';			
+			alternateLang = 'ja' if lang == 'en'
+			return alternateLang
 
 	watchOptions:
 		catchupDelay: 0
