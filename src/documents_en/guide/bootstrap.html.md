@@ -12,7 +12,7 @@ Onsen UI is a UI framework for mobile HTML5. This page will describe the initial
 
 ### The Entry Point
 
-For the [Minimum Project](/OnsenUI/project_templates/onsen-minimum.zip) of Onsen UI, insert the below code in index.html to serve as the entry point for your app.
+For the [Minimum Project](/OnsenUI/project_templates/onsen_ui.zip) of Onsen UI, insert the below code in index.html to serve as the entry point for your app.
 
 	<!doctype html>
 	<html lang="en" ng-app="myApp">

@@ -74,7 +74,7 @@ section#content-container {
 
 		h2 {
 			font-size: (30px/$basefont)+rem;
-			margin: 70px 0 20px 0;
+			margin: 70px 0 20px 0px;
 			&:first-child {
 				margin-top: 0;
 			}
@@ -86,7 +86,7 @@ section#content-container {
 
 		h3 {
 			font-size: (22px/$basefont)+rem;
-			margin: 36px 0 14px 0;
+			margin: 36px 0 20px 0px;
 		}
 
 		h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
@@ -96,11 +96,13 @@ section#content-container {
 		h4 {
 			font-size: (18px/$basefont)+rem;
 			margin: 28px 0 8px 0;
+      font-weight: bold;
 		}
 
 		h5, h6 {
-			font-size: (14px/$basefont)+rem;
+			font-size: (15px/$basefont)+rem;
 			margin: 28px 0 8px 0;
+      font-weight: bold;
 		}
 
 		ul > li {
@@ -133,5 +135,16 @@ section#content-container {
 				margin: 0;
 			}
 		}
+
+    code {
+      font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+      font-weight: bolder;
+      color: green;
+    }
+
+    a > code {
+      color: red;
+    }
+
 	}
 }

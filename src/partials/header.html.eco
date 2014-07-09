@@ -2,11 +2,10 @@
 	<div>				
 		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
 		<ul class="gnav">
-			<li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">Getting Started</a></li>
+			<li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/docs/getting_started.html">Getting Started</a></li>
 			<li class="<%- if @document.page is 'components' then 'current' %>"><a href="/guide/components.html">Components</a></li>
-			<li class="<%- if @document.page is 'docs' then 'current' %>"><a href="/docs/">Docs</a></li>
-			<li class="<%- if @document.page is 'themes' then 'current' %>"><a href="/themes/">Themes</a></li>
-			<li class="<%- if @document.page is 'customize' then 'current' %>"><a href="/guide/customize.html">Customize</a></li>
+			<li class="<%- if @document.page is 'docs' then 'current' %>"><a href="/docs/overview.html">Guide</a></li>
+			<li class="<%- if @document.page is 'themes' then 'current' %>"><a href="http://components.onsenui.io/">Themes</a></li>
 			<li class="<%- if @document.page is 'forum' then 'current' %>"><a href="/forum.html">Forum</a></li>
 			<li><a href="http://onsenui.io/blog/">Blog</a></li>
 		</ul>
