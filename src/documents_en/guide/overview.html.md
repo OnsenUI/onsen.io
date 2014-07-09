@@ -467,37 +467,78 @@ Onsen UI provides various components for building forms.
 ＜コード（type, should-spin, animation, disabledを変えてみたパターン）＞
 ＜スクリーンショット＞
 
-To execute the code when the button is tapped, use `onclick` or `ng-click` attribute.
+To detect a tap event, use `onclick` or `ng-click` attribute.
 
 ＜コード（ng-clickを使った場合）＞
 
 #### Switch
 
-CSSで実装する方法を説明する。
+`<ons-switch>` is the element to display a switch. A switch has an off and on state, and the state can be get by the component's `isChecked` API.
+
+```
+<script>
+function getState() {
+  alert(mySwitch.isChecked() ? 'ON' : 'OFF');
+}
+</script>
+<ons-switch var="mySwitch"></ons-switch>
+```
 
 #### Text input
 
-inputタグのtype=textと、textareaについては、CSSで実装する方法を説明する。
+Text input and textarea do not have their own custom elements. However, you can apply a specific class name to display in Onsen UI styles.
 
-＜コード（それぞれを使ったパターン）＞
+- Text input
+
+  ```
+  <input class="text-input" id="my-input">
+  ```
+
+- Text area
+
+  ```
+  <textarea class="textarea" id="my-textarea"></textarea>
+  ```
+
 ＜スクリーンショット＞
 
-document.getElementByIdとか$("#id")で
+For both cases, you can use `getElementById` or jQuery's selector to obtain the component value.
+
+```
+alert(document.getElementById("my-input").value);
+alert($("#my-input").val());
+```
 
 #### Search input
 
-type=searchにすればいい class=search-iput
+Similar to text input, you can display a search input by setting input type as `search` and applying `search-input` class.
 
-document.getElementByIdとか$("#id")で
+```
+<input type="search" class="search-input">
+```
 
-#### Check Box
+＜スクリーンショット＞
 
-CSSで各
+#### Check box and radio button
 
-#### Radio button
+Check box and radio button are provided as CSS components. Therefore, use the following HTML snippet to display each component.
 
-CSSで各
+```
+<label class="checkbox">
+  <input type="checkbox">
+  <div class="checkbox__checkmark></div>
+  <span class="ons-checkbox-inner"></span>
+</label>
+```
 
+```
+<label class="radio-button">
+  <input type="radio">
+  <div class="radio-button__checkmark></div>
+</label>
+```
+
+＜スクリーンショット＞
 
 ### Layouting
 
