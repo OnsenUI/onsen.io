@@ -1,0 +1,971 @@
+---
+layout: 'docpad_en'
+page: 'overview'
+title: 'Onsen UI Documentation'
+needHelp: true
+autotoc: true
+---
+
+## Onsen UI Guide
+
+### Loading Onsen UI in Your Project
+
+Note: For more quicker instructions to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+Even though Onsen UI use AngularJS to provide custom elements, it is *not required* to use with AngularJS. Onsen UI can be used with jQuery (or with any JS frameworks), and of course with AngularJS.
+
+#### Using Onsen UI with jQuery (or with any JS frameworks)
+
+Though Onsen UI is based in AngularJS, it provides a way to use without understanding AngularJS. For example, the below is the sample app that is using Onsen UI with jQuery:
+
+```
+<ons-screen>
+  <ons-navigator>
+  <p>This is a sample code with Onsen UI</p>
+  <ons-button>Next Page</ons-button>
+</ons-screen>
+```
+
+As you seen in the code, it has two tricks. One is `var` attribute, the another is `ons.compile` function.
+
+When you specify `var` attribute when defining a component, the object is also defined in a `window` object. For details, please see [access to the component object from your code](#from-code).
+
+`ons.compile` function converts your custom elements based HTML to a normal DOM structure. Because current standard browser does not support custom elements by default, you need to call this function every time to make the magic happen.
+
+#### Using Onsen UI with AngularJS
+
+Onsen UI is actually an AngularJS module. Here is the minimum boilerplate:
+
+```
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5, user-scalable=no">
+<link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+<link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+<script src="lib/onsen/js/angular/angular.js"></script>
+<script src="lib/onsen/js/onsenui.js"></script>
+<script>
+  ons.bootstrap();
+  ons.ready(function() {
+    // Initialize code here
+  });
+</script>
+<body>
+  <ons-page>
+    <!-- Page content here -->
+  </ons-page>
+</body>
+```
+
+As seen in this sample code, you can omit `ng-app` attribute and AngularJS module definition by calling `ons.bootstrap` function.
+
+### Managing Multiple Pages
+
+It is important to think about how you want to interact to the user by providing what types of UI patterns. Onsen UI supports 4 commonly used UI patterns. It is important to know that you can combine two or more patterns in your app. For example, a sliding-menu app can also have page navigations.
+
+#### Navigation pattern
+
+This is the most common pattern if you want to have a parent-child relationship between pages. You can link to a child page from a button or a list item. In Onsen UI, you can follow the pattern by using [ons-navigator](#) and [ons-toolbar](#).
+
+#### Sliding menu pattern
+
+Also referred as a Menu pattern, it is useful if the app needs many pages in the same level. In Onsen UI, [ons-sliding-menu](#) tag supports this pattern. It also has swipe support when displaying or hiding sliding menu.
+
+#### Tab bar pattern
+
+More commonly in iPhone and iPad apps, tab-bar is displayed in the bottom of the page. Usually the tab bar items have an icon and a text. This pattern is frequently used when you want to provide several features in the app. Onsen UI way to display tab-bar is to use [ons-tabbar](#) tag.
+
+#### Split view pattern
+
+This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate information. [ons-split-view](#) tag allows you to have this pattern. It also has capability to transform to a sliding-menu pattern on smaller devices or displayed vertically.
+
+### Page Navigation
+
+In Onsen UI, a page navigation is done by the [`<ons-navigator>`](#). Ons-navigator is a navigation controller that does not have a displayed content. Therefore, you usually use a [`<ons-toolbar>`](#) and add a toolbar on top of the page. Navigator provides screen transition with smooth animation, and is used to create a parent-child relationship.
+
+#### `<ons-navigator>` overview
+
+Ons-navigator is a page-stack manager + page transition animator. A page that is added on top of the page stack is going to be transitioned with animation. All page stacks are described as `<ons-page>` elements; therefore only `ons-page` tags can be placed directly under a `<ons-navigator>` element.
+
+Commonly `<ons-toolbar>` element is placed under `<ons-page>` element to provide a back button and the page title.
+
+#### Display a new page
+
+When add a new page to the stack, use `pushPage` API in the navigator object. You can use `var` attribute of `<ons-navigator>` to refer the navigator object from JavaScript code.
+
+Example:
+
+```
+<ons-navigator var="myNavigator"></ons-navigator>
+
+<script>
+var options = {
+  animation: 'slide', // What animation to use
+  onTransitionEnd: function() {} // Called when finishing transition animation
+};
+myNavigator.pushPage("page2.html", options);
+</script>      
+```
+
+As seen in the code, you can set configuration options in the second parameter of `pushPage` API.
+
+#### Returning from a page
+
+Similarly, use `popPage` API to remove the current foreground page from the stack.
+
+Example:
+
+```
+<ons-navigator var="myNavigator"></ons-navigator>
+
+<script>
+myNavigator.pushPage("page2.html");
+</script>
+```
+
+#### Transition animation
+
+`popPage` and `pushPage` API provides 3 common animation patterns: `slide`, `lift`, `fade` and `none`.
+
+1. Slide effect (default)
+
+  The animation effect differs between iOS and Android to correspond to the native transition.
+
+  ```
+  navigator.pushPage("page2.html", { animation: "slide" }):
+  ```
+
+  <スクリーン>
+
+2. Lift effect
+
+  ```
+  navigator.pushPage("page2.html", { animation: "lift" }):
+  ```
+
+  <スクリーン>
+
+3. Fade-in & fade-out effect
+
+  ```
+  navigator.pushPage("page2.html", { animation: "fade" }):
+  ```
+
+  <スクリーン>
+
+4. No effect
+
+  ```
+  navigator.pushPage("page2.html", { animation: "none" }):
+  ```
+
+  <スクリーン>
+
+Furthermore, you can customize the transition animation by specifying a new `NavigatorTransitionAnimator` object to the `animation` parameter.
+
+```
+pushPage('page2.html', {animation: new MyCustomAnimator})
+```
+
+For more details, please see `NavigatorTransitionAnimator` source code located under `framework/view`.
+
+#### Managing page stacks
+
+Navigator has several other APIs to manage page stacks. It is useful to have a fine-grain control.
+
+##### navigator.getCurrentPage()
+
+Get a `page` object of the current page. A `page` object has following properties and functions.
+
+- `destroy()` function
+
+  When it is called, the page is removed from the page stack.
+
+- `options` object
+
+  An object that hold page configurations. See `pushPage` description for details.
+
+##### navigator.getPages()
+
+Returns an array of page objects from the navigator. See `navigator.getCurrentPage` API for the details about page object.
+
+```
+// Remove the 2nd topmost page from the page stack
+var pages = navigator.getPages();
+pages[1].destroy();
+// Now a popPage() will display the 3rd page
+```
+
+##### navigator.resetToPage(page, options)
+
+Clears page stack and add the specified page to the new stack. The `options` parameter corresponds to the `navigator.pushPage` API.
+
+#### Adding a toolbar
+
+A toolbar is defined as `<ons-toolbar>` tag. Here is the typical example of a toolbar.
+
+```
+<ons-toolbar>
+  <div class="left">
+    <ons-back-button>Back</ons-back-button>
+  </div>
+  <div class="center">
+    Title
+  </div>
+  <div class="right">
+    Right content
+  </div>
+</ons-toolbar>
+```
+
+<上のスクリーンショット>
+
+The toolbar is divided into 3 sections (left, center, and right), and those can be specified from class names as `left`, `center`, and `right`. You can use `<ons-icon>` to display an icon, `<ons-toolbar-button>` or `<ons-back-button>` to place an button, or insert any HTML content.
+
+Here are several examples when using `<ons-toolbar>`.
+
+1. Example with a button and an icon
+
+  ```
+  <ons-toolbar>
+    <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
+    <div class="center">Button and Icon</div>
+    <div class="right"><ons-toolbar-button><ons-icon icon="bars"></ons-icon></ons-toolbar-button></div>
+  </ons-toolbar>
+  ```
+
+2. Example with a search box
+
+  ```
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">Search Box</div>
+    <div class="right"><ons-search-box></ons-search-box></div>
+  </ons-toolbar>
+  ```
+
+3. Example with custom image
+
+  ```
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center"><img src="custom_title.png"></div>
+    <div class="right"><ons-search-box></ons-search-box></div>
+  </ons-toolbar>
+  ```
+
+#### Android back button support
+
+Onsen UI supports Android back button by default. So, if the app is running on an Android device and using Cordova, pressing the back button will trigger a `popPage` API.
+
+Therefore, if you want to only show a back button when accessed from iOS devices, here is the way to do.
+
+```
+<ons-toolbar>
+  <div class="left"><ons-back-button ons-if-platform="ios">Back</ons-back-button></div>
+  <div class="center"><img src="custom_title.png"></div>
+  <div class="right"><ons-search-box></ons-search-box></div>
+</ons-toolbar>
+```
+
+#### Navigation events
+
+`<ons-navigator>` has several events that can be hooked to the navigator and do specific jobs. For example, it could be useful when cancelling the page transition.
+
+There are 4 events where you can attach to the navigator: `prepush`, `postpush`, `prepop`, `postpop`. They are called before / after the `pushPage` or `popPage` transition.
+
+The callback can get an `event` object. The `event` object has several properties for manipulation. For example, the following code cancels the `pushPage` in certain condition.
+
+```
+ons.ready(function() {
+  myNavigator.on('prepush', function(event) {
+    if (needsCancel) {
+      event.cancel();
+    }
+  });
+});
+```
+
+##### `prepush` and `prepop` event
+
+Fired before the pushPage starts. The event has following parameters.
+
+- `currentPage`: Page object. See [Managing Page Stacks](#) for details.
+- `cancel()`: Call this function to cancel transition.
+- `navigator`: `<ons-navigator>` object.
+
+##### `postpush` and `postpop` event
+
+Fired before the pushPage starts. The event has following parameters.
+
+- `leavePage`: Page object of the current page.
+- `enterPage`: Page object of the new page.
+- `navigator`: `<ons-navigator>` object.
+
+### Using Sliding Menu
+
+Sliding menu consists of two-pages, which are referred as above page and behind page. The behind page is the menu page which is displayed from the edge. You can display the behind page when tapping a button, or swiping from the edge of the screen. The behind page can have any HTML content, and typically contains a menu. The above page will display the main content. You can also place a `<ons-navigator>` in the above page to allow navigation to even more pages.
+
+#### `<Ons-sliding-menu>` Overview
+
+`<ons-sliding-menu>` has an `above-page` and a `behind-page`. Those pages must be specified initially as attributes in a `<ons-sliding-menu>` tag. Also it has `side` attribute to specify which side the behind page is located.
+
+```
+<ons-sliding-menu above-page="page1.html" behind-page="menu.html" side="right" var="menu" type="push">
+</ons-navigator>
+
+<script type="text/ons-template" id="page1.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Page 1</div>
+      <div class="right">
+        <ons-toolbar-button onclick="menu.toggleMenu();"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+
+    <h1 style="text-align: center">Page1</h1>
+  </ons-page>
+</script>
+
+<script type="text/ons-template" id="menu.html">
+  <ons-list>
+    <ons-list-item modifier="chevron" onclick="menu.setAbovePage('page1.html', { closeMenu: true })">
+      page1.html
+    </ons-list-item>
+  </ons-list>
+</script>
+```
+
+#### Opening / closing menu
+
+`<ons-sliding-menu>` provides following APIs to handle menu actions: `openMenu`, `closeMenu`, and `toggleMenu`.
+
+Here is the example adding a toolbar and a button in `above-page`, and control the menu from JavaScript.
+
+＜例＞
+
+#### Setting above and behind page by JavaScript
+
+To change the above and behind page manually, use `setAbovePage` and `setBehindPage` API. `setAbovePage` and `setBehindPage` can have a optional parameter for the second argument.
+
+  - `closeMenu`: Set to `true` if you want to close menu.
+  - `callback`: Specify a callback after the animation is finished.
+
+```
+<ons-sliding-menu above-page="above1.html" behind-page="menu.html" side="left" var="myMenu" type="overlay"></ons-sliding-menu>
+<script type="text/ons-template" id="above.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="myMenu.toggleMenu();"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+      </div>
+      <div class="center">Page 1</div>
+    </ons-toolbar>
+    <h1 style="text-align: center">Page 1</h1>
+  </ons-page>
+</script>
+<script type="text/ons-template" id="menu.html">
+  <ons-list>
+    <ons-list-item modifier="chevron" onclick="myMenu.setAbovePage('above1.html', {closeMenu: true})">
+      above1.html
+    </ons-list-item>
+    <ons-list-item modifier="chevron" onclick="myMenu.setAbovePage('above2.html', {closeMenu: true})">
+      above2.html
+    </ons-list-item>
+  </ons-list>
+</script>
+```
+
+#### Swipe support
+
+If you set `swipable` attribute in `<ons-sliding-menu>`, it detects swipe actions and opens/closes the menu. Please aware that you also need to specify `swipe-target-width` and `max-slide-distance` to enable swipe support.
+
+#### Animation type
+
+You can specify the animation effect at `type` attribute. The available values are `reveal`, `push` and `overlay`. The default type is `reveal`.
+
+#### Sliding menu events
+
+There are 4 events where you can attach to the sliding menu object: `preopen`, `postopen`, `preclose`, `postclose`.
+
+```
+<script>
+ons.ready(function() {
+  mySlidingMenu.on('preopen', function() {
+    console.log("Menu page is going to open");
+  });
+});
+</script>
+<ons-sliding-menu var="mySlidingMenu">
+```
+
+### Using Tab Bar
+
+A tab bar is composed from a <ons-tabbar> tag and its <ons-tabbar-item> tags. Usually a tab bar has three to five a tab bar items, and rendered with icons and texts. Each tab bar item is assigned to the different page, and the display changes without animation.
+
+#### `<ons-tabbar>` overview
+
+To place a tab bar into your app, place a `<ons-tabbar>` element. A `<ons-tabbar>` element only accepts `<ons-tabbar-item>` under the element, so the typical tab bar setup is something like the one below.
+
+```
+<ons-tabbar>
+  <ons-tabbar-item page="page1.html" label="page1">
+  <ons-tabbar-item page="page2.html" label="page2">
+</ons-tabbar>
+```
+
+＜スクリーンショット＞
+
+#### Customizing tab bar
+
+Tab bar item can have an `icon` attribute and a `label` attribute. For the icon attribute, please specify the same icon name used in `<ons-icon>` element.
+
+#### Tab bar events
+
+`<ons-tab-bar>` has `prechange` and `postchange` event that are fired before or after the page switch. The event has following parameters.
+
+- `index`: Next page index.
+- `tabItem`: Object containing the next page.
+
+### Using Lists
+
+List is a very popular pattern to display a set of information in scrollable view. Onsen UI supports scrollable list by using `ons-list` and `ons-list-item` tags. You can also set `<ons-scrollable>` tag to add momentum scrolling. (本当？)
+
+#### `<ons-list>` overview
+
+To create a list, insert a `<ons-list>` tag and `<ons-list-item>` tags under the `<ons-list>` tag. Typically you want to combine with `<ons-scrollable>` tag to make the list item scrollable.
+
+#### Basic list
+
+Here is the basic `<ons-list>` example with scrollable content.
+
+＜コード＞
+＜スクリーンショット＞
+
+#### List with right arrow icon
+
+This list is usually used with `<ons-navigator>`.
+
+＜コード＞
+＜スクリーンショット＞
+
+#### List with forms
+
+List is also frequently used in the setting page. Here is the example list with some form elements.
+
+＜コード＞
+＜スクリーンショット＞
+
+### Using Form Components
+
+Onsen UI provides various components for building forms.
+
+#### Button
+
+`<ons-button>` renders a button with different face types. You can change the appearance by using `type`, `should-spin`, `animation` and `disabled` attributes.
+
+＜コード（type, should-spin, animation, disabledを変えてみたパターン）＞
+＜スクリーンショット＞
+
+To execute the code when the button is tapped, use `onclick` or `ng-click` attribute.
+
+＜コード（ng-clickを使った場合）＞
+
+#### Switch
+
+CSSで実装する方法を説明する。
+
+#### Text input
+
+inputタグのtype=textと、textareaについては、CSSで実装する方法を説明する。
+
+＜コード（それぞれを使ったパターン）＞
+＜スクリーンショット＞
+
+document.getElementByIdとか$("#id")で
+
+#### Search input
+
+type=searchにすればいい class=search-iput
+
+document.getElementByIdとか$("#id")で
+
+#### Check Box
+
+CSSで各
+
+#### Radio button
+
+CSSで各
+
+
+### Layouting
+
+Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also concatenate two ore more grids in a row or column into one grid.
+
+#### `<ons-row>` and `<ons-col>` overview
+
+The layout can be performed by combining `<ons-row>` and `<ons-col>` tags. The width and height can be adjusted in a flexible way.
+
+By default, all `<ons-col>` inside a `<ons-row>` will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
+
+`<ons-row>` has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes.
+
+#### Layout example
+
+You can see following example to understand how `<ons-row>` and `<ons-col>` can provide flexible component placement.
+
+```
+<style type="text/css" media="screen">
+  .col {
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: hidden;
+    padding: 4px;
+    color: #999;
+  }
+</style>
+<ons-page>
+  <h3>Equally spaced</h3>
+  <ons-row>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+  </ons-row>
+  <p></p>
+  <ons-row>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+  </ons-row>
+  <p></p>
+  <ons-row>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+  </ons-row>
+
+  <h3>Full height</h3>
+  <ons-row>
+    <ons-col>
+      <div class="Demo">
+        This column's height will grow to the same height as the tallest column.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis velit non gravida venenatis. Praesent consequat lectus purus, ut scelerisque velit condimentum eu.
+      </div>
+    </ons-col>
+  </ons-row>
+
+  <h3>Individual Sizing</h3>
+  <ons-row>
+    <ons-col size="50">Col size="50"</ons-col>
+    <ons-col>Col</ons-col>
+    <ons-col>Col</ons-col>
+  </ons-row>
+  <p></p>
+  <ons-row>
+    <ons-col>
+      <div class="Demo">Col</div>
+    </ons-col>
+    <ons-col size="33">
+      <div class="Demo">Col size="33"</div>
+    </ons-col>
+  </ons-row>
+  <p></p>
+  <ons-row>
+    <ons-col size="25">
+      <div class="Demo">Col size="25"</div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">Col</div>
+    </ons-col>
+    <ons-col size="33">
+      <div class="Demo">Col size="33</div>
+    </ons-col>
+  </ons-row>
+
+  <h3>Top-aligned Grid Cells</h3>
+  <ons-row align="top">
+    <ons-col>
+      <div class="Demo">
+        This cell should be top-aligned.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        This cell should be top-aligned.
+      </div>
+    </ons-col>
+  </ons-row>
+
+  <h3>Bottom-aligned Grid Cells</h3>
+  <ons-row align="bottom">
+    <ons-col>
+      <div class="Demo">
+        This cell should be bottom-aligned.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        This cell should be bottom-aligned.
+      </div>
+    </ons-col>
+  </ons-row>
+
+  <h3>Vertically Centered Grid Cells</h3>
+  <ons-row align="center">
+    <ons-col>
+      <div class="Demo">
+        This cell should be vertically-centered with the cell to its right.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua.</div>
+    </ons-col>
+  </ons-row>
+
+  <h3>Mixed Vertical Alignment</h3>
+  <ons-row>
+    <ons-col align="top">
+      <div class="Demo">
+        This cell should be top aligned.
+      </div>
+    </ons-col>
+    <ons-col>
+      <div class="Demo">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+          tempor incididunt ut labore et dolore magna aliqua.
+      </div>
+    </ons-col>
+    <ons-col align="center">
+      <div class="Demo">
+        This cell should be center-aligned.
+      </div>
+    </ons-col>
+    <ons-col align="bottom">
+      <div class="Demo">
+        This cell should be bottom-aligned.
+      </div>
+    </ons-col>
+  </ons-row>
+</ons-page>
+```
+
+＜スクリーンショット＞
+
+### Using Icons
+
+Onsen UI provides more than 400 icons provided by [Font Awesome](http://fontawesome.github.io/). The list of available icons can be found from [Font Awesome website]([http://fortawesome.github.io/Font-Awesome/icons/]).
+
+#### `<ons-icon>` overview
+
+When displaying an icon, `<ons-icon>` tag can be used. You can specify which icon to display by specifying to the icon attribute. Please remove the trailing `"fa-"` from the Font Awesome website.
+
+Here are some examples.
+
+```
+<ons-icon icon="angle-left">
+<ons-icon icon="angle-left">
+```
+
+＜スクリーンショット＞
+
+Also, you can specify the icon size to display by using size attribute.
+
+```
+<ons-icon icon="angle-left" size="medium">
+```
+
+＜スクリーンショット＞
+
+Furthermore, you can rotate the icon.
+
+```
+<ons-icon icon="angle-left" size="medium" rotate="90deg">  
+```
+
+＜スクリーンショット＞
+
+#### Icon animations
+
+Icon can have an animation effect. This is useful for displaying spinners.
+
+```
+<ons-icon icon="angle-left" animation="yes">
+```
+
+＜スクリーンショット＞
+
+### Multi-screen support
+
+Onsen UI supports the responsive design, where you can apply different CSS styles for different screen sizes. To do so, you will use the CSS Media Query and separate CSS definitions based on your preference.
+
+Furthermore, Onsen UI supports a Split View user interface, where you can have two columns in a larger or horizontal screen, and one column for a smaller screen. It provides an easy way for the developer to both support smartphones and tablets without defining particular CSS styles.
+
+#### Using CSS Media Query
+
+CSS Media Query can be used to separate CSS definition based on screen resolution, screen size, and/or aspect ratio.
+
+For example, the following media queries is an example to separate various screen sizes.
+
+```
+<style>
+@media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ }
+@media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
+@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+</style>
+```
+
+＜スクリーンショット＞
+
+#### Using `<ons-split-view>` component
+
+`<ons-split-view>` tag is used to provide interface that separates the screen into two parts. `<ons-split-view>` has an option to specify when not to display in split view, but instead display as a standard sliding menu view. This is very helpful when you want to also support smartphones and smaller screen devices.
+
+`<ons-split-view>` has following attributes.
+
+- `main-page`: Specify a page to display on the main section.
+- `secondary-page`: Specify a page to display on the side section.
+
+##### Specify when to collapse
+
+`<ons-split-view>` has `collapse` attribute to specify when to collapse. The possible values are `portrait`, `landscape`, or `width ##px` (i.e. `width 300px`). For example, if set as `portrait` and the device is in portrait orientation, the secondary page is hidden.
+
+＜スクリーンショット＞
+
+### Utility APIs
+
+Onsen UI also provides several general purpose APIs to help developing your app easier. 
+
+#### `ons.ready` function
+
+`ons.ready` function is called when Onsen UI initialization is done. If the app is running under Cordova or PhoneGap, it also wait until the initialization (`ondeviceready` event) finish.
+
+This event is very useful to hide the splash screen to avoid a black screen during the page load. For example, following code will hide the splash screen once Onsen UI is loaded completely.
+
+```
+ons.ready(function() {
+  // Hide Cordova splash screen when Onsen UI is loaded completely
+  // API reference: https://github.com/apache/cordova-plugin-splashscreen/blob/master/doc/index.md
+  navigator.splashscreen.hide()
+});
+```
+
+### `ons.bootstrap` function
+
+`ons.bootstrap` function is a handy way to load Onsen UI with one line of code. What is really does is adding Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
+
+#### Platform detection
+
+`ons-if-platform` attribute is useful when only displaying contents under a specific platform. This attribute can be set within any tags.
+
+```
+<div ons-if-platform="ios">Content for only iPhone and iPad users</div>
+```
+
+#### Landscape / portrait detection
+
+Similar to `ons-if-platform` attribute, `ons-if-orientation` attribute can be used to switch content between portrait and landscape.
+
+```
+<div ons-if-orientation="portrait">Content only shown for portrait</div>
+```
+
+### Calling Component APIs from JavaScript
+
+Some components have JavaScript functions to provide features that needs to be called after launching the program. For instance, `ons-navigator` has `pushPage` or `popPage` API to display or hide a new page.
+
+In order to call those APIs, you need to assign a variable to the component by using `var` attribute. For instance, you can assign a variable called `"myNavigator"` by the following code.
+
+```
+<ons-navigator var="myNavigator">
+```
+
+Now, `myNavigator` has become a variable that can be accessed from anywhere in your code. More precisely, `myNavigator` has defined as a `window` property, and also in the AngularJS global scope.
+
+Therefore, if you are using a plain JavaScript or jQuery, you can refer the variable like the code below.
+
+```
+<script>
+$("onclick").function() {
+  myNavigator.pushPage("");
+}
+</script>
+```
+
+Or, AngularJS way like the following code.
+
+```
+<script>
+$("onclick").function() {
+  myNavigator.pushPage("");
+}
+</script>
+```
+
+### Event Handling
+
+Some components supports events. By using those events, you can hook your code to a specific action in the component and customize the behavior.
+
+To add a handler to a event, use `addEventListener` API of the target component. Therefore, you need to define a variable of the component, as described in the previous section.
+
+```
+<script>
+myNavigator.addEventListener("prepush", function() {
+  // Things to do
+});
+</script>
+```
+
+#### Tap & click event
+
+The most frequently used action is a tap on the element, which event can be triggered by `onclick` handler.
+
+```
+<ons-button onclick="alert('You tapped me!')">Click Me</ons-button>
+```
+
+Also, if you are familiar with AngularJS events, you can also get the same event by `ng-click` handler.
+
+```
+<ons-button ng-click="alert('You tapped me!')">Click Me</ons-button>
+```
+
+In both cases, thanks to the fastclick library, there is no 300ms delay when detecting the event. This means the app responds much quicker to the user interactions.
+
+#### Page init event
+
+`page-init` event is called after `<ons-page>` is initialized. Use this event to alter the behavior on each pages.
+
+```
+<script>
+$(document.body).on('pageinit', '#my-page', function() {
+  $('.my-content', this).text("I am fine!");
+})
+</script>
+
+<ons-page id="my-page">
+  <div>Hello, how are you?</div>
+  <div class="my-content">Change me</div>
+</ons-page>
+```
+
+#### Component events
+
+`<ons-navigator>`, `<ons-sliding-menu>` and `<ons-tabbar>` provides some events to control the behavior before and after the user interaction. For more details, please see the document for each component.
+
+### Defining Multiple Pages in Single HTML
+
+Some components require to specify another HTML page. For instance, a `<ons-sliding-menu>` needs to specify a start up page in following format.
+
+```
+<ons-sliding-menu
+  behind-page="menu.html"
+  above-page="content.html">
+</ons-sliding-menu>
+```
+
+Instead of creating a menu.html and content.html separately, you can also define the page content in the same page. This can be done by creating a `script` tag and set type as `"text/ons-template"`.
+
+```
+<script type="text/ons-template" id="main.html">
+  <!-- Here, we define the HTML content for main.html -->
+  <div>
+    Hello, this is the content of main.html
+  </div>
+</script>
+
+<script type="text/ons-template" id="content.html">
+  <!-- Here, we define the HTML content for content.html -->
+  <div>
+    Hello, this is the content of content.html
+  </div>
+</script>
+```
+
+This is a micro-templating technique, and is very useful when you want to maintain smaller amount of files.
+
+### Customize Onsen UI components
+
+You can customize Onsen UI components based on what you want to achieve. You can either customize its look & feel, or go more deeper into the component and modify its underlying JavaScript or HTML code.
+
+#### Customizing its look and feel
+
+Onsen UI styles are defined in a CSS file called `onsenui.css` and `onsen-css-components.css`. These files has all definitions. All components are fully customizable by editing the file.
+
+Or, you can also use [Onsen CSS Components](http://components.onsenui.io/) to customize pre-defined colors. After the customization, you can download and replace to the existing `onsenui-css-components.css` to reflect the changes.
+
+#### Overriding CSS styles
+
+There are some situations where you want to apply a different style to a specific component. In such case, you can use modifier attribute to override its style definition.
+
+For example, if you want to apply a thick border only to a specific button, you can define like the one below.
+
+```
+<ons-button modifier="thick">Thick Button</ons-button>
+```
+
+Then, write the appropriate style code under the style tag or in the css file.
+
+```
+<style>
+.button-thick {
+  border: 10px;
+}
+</style>
+```
+
+＜スクリーンショット＞
+
+If the component has inner element, `--inner` class will be appended to that element.
+
+＜何かいいサンプルがないか？＞
+
+#### Customizing underlying HTML
+
+If you need to customize the underlying HTML code, you need to understand about AngularJS directive. AngularJS directive is a way to combine HTML code and JavaScript into a HTML tag.
+
+HTML code for each components are located under the framework's `templates` directory. For instance, the HTML code for `<ons-button>` is found in `framework/templates/button.tpl`.
+
+```
+<button class="{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}">
+  <span class="label ons-button-inner" ng-transclude></span>
+  <span class="spinner button__spinner {{modifierTemplater('button--*__spinner')}}"></span>
+</button>
+```
+
+After modifying the template files, you need to build Onsen UI because all the template files are cached and stored in `framework/directives/templates.js` file. See [Building Onsen UI]() section for more details.
+
+#### Customizing JavaScript code
+
+The JavaScript code for each component is located in the `directives` directory.
+
+#### Building Onsen UI
+
+If you need to build Onsen UI manually, there is a gulp task for that purpose.
+
+```
+$ gulp build
+```
+
+This will build Onsen UI and generates distributable files.
+
