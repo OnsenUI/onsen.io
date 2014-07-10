@@ -6,6 +6,8 @@ needHelp: true
 autotoc: true
 ---
 
+<script async src="//codepen.io/assets/embed/ei.js"></script>
+
 ## Onsen UI Guide
 
 ### Loading Onsen UI in Your Project
@@ -135,15 +137,11 @@ myNavigator.pushPage("page2.html");
   navigator.pushPage("page2.html", { animation: "slide" }):
   ```
 
-  <スクリーン>
-
 2. Lift effect
 
   ```
   navigator.pushPage("page2.html", { animation: "lift" }):
   ```
-
-  <スクリーン>
 
 3. Fade-in & fade-out effect
 
@@ -151,15 +149,13 @@ myNavigator.pushPage("page2.html");
   navigator.pushPage("page2.html", { animation: "fade" }):
   ```
 
-  <スクリーン>
-
 4. No effect
 
   ```
   navigator.pushPage("page2.html", { animation: "none" }):
   ```
 
-  <スクリーン>
+<%- @partial('codepen', { id: "yrhtv" } ) %>
 
 Furthermore, you can customize the transition animation by specifying a new `NavigatorTransitionAnimator` object to the `animation` parameter.
 
@@ -240,7 +236,7 @@ Here are several examples when using `<ons-toolbar>`.
   <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">Search Box</div>
-    <div class="right"><ons-search-box></ons-search-box></div>
+    <div class="right"><ons-search-input></ons-search-input></div>
   </ons-toolbar>
   ```
 
@@ -250,7 +246,7 @@ Here are several examples when using `<ons-toolbar>`.
   <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center"><img src="custom_title.png"></div>
-    <div class="right"><ons-search-box></ons-search-box></div>
+    <div class="right"><ons-search-input></ons-search-input></div>
   </ons-toolbar>
   ```
 
@@ -312,7 +308,7 @@ Sliding menu consists of two-pages, which are referred as above page and behind 
 
 ```
 <ons-sliding-menu above-page="page1.html" behind-page="menu.html" side="right" var="menu" type="push">
-</ons-navigator>
+</ons-sliding-menu>
 
 <script type="text/ons-template" id="page1.html">
   <ons-page>
@@ -409,8 +405,8 @@ To place a tab bar into your app, place a `<ons-tabbar>` element. A `<ons-tabbar
 
 ```
 <ons-tabbar>
-  <ons-tabbar-item page="page1.html" label="page1">
-  <ons-tabbar-item page="page2.html" label="page2">
+  <ons-tabbar-item page="page1.html" label="page1"></ons-tabbar-item>
+  <ons-tabbar-item page="page2.html" label="page2"></ons-tabbar-item>
 </ons-tabbar>
 ```
 
@@ -731,7 +727,7 @@ Here are some examples.
 Also, you can specify the icon size to display by using size attribute.
 
 ```
-<ons-icon icon="angle-left" size="medium">
+<ons-icon icon="angle-left" size="40px">
 ```
 
 ＜スクリーンショット＞
@@ -739,7 +735,7 @@ Also, you can specify the icon size to display by using size attribute.
 Furthermore, you can rotate the icon.
 
 ```
-<ons-icon icon="angle-left" size="medium" rotate="90deg">  
+<ons-icon icon="angle-left" size="40px" rotate="90deg">
 ```
 
 ＜スクリーンショット＞
@@ -749,7 +745,7 @@ Furthermore, you can rotate the icon.
 Icon can have an animation effect. This is useful for displaying spinners.
 
 ```
-<ons-icon icon="angle-left" animation="yes">
+<ons-icon icon="angle-left" spin="yes">
 ```
 
 ＜スクリーンショット＞
