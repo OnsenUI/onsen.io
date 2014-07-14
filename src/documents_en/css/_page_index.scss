@@ -1,13 +1,7 @@
 body#home {
 
-//  border-top: 1px solid white;
-
   > #github-ribbon-container {
     display: none;
-  }
-
-  > header#header-container {
-    border-bottom: none;
   }
 
   > section#content-container {
@@ -23,11 +17,10 @@ body#home {
 
   div#keyvisual {
     width: 100%;
-    height: 586px;
-    background-color: #414950;
-    @include background-image(linear-gradient(top, #503533, #414950));
+    height: 744px;
+    background-color: #fff;
+    @include background-image(linear-gradient(top, #fff, #f3f5f6));
     position: relative;
-    color: white;
     padding: 0;
 
     > div.keyvisual-content > div.keyvisual-main {
@@ -36,20 +29,21 @@ body#home {
       width: 1100px;
 
       > h1 {
-        color: white;
-        font-size: 46px;
-        line-height: 48px;
-        letter-spacing: -1px;
+        font-size: 54px;
+        line-height: 60px;
+        letter-spacing: 1px;
         font-weight: 200;
         margin-bottom: 6px;
+        color: black;
       }
 
       > h2 {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 22px;
-        font-weight: 200;
+        font-size: 26px;
+        font-weight: 300;
         margin: 0 0 40px 0;
         padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+        color: #606978;
       }
 
       > a.getting-started,
@@ -59,12 +53,12 @@ body#home {
         display: inline-table;
         height: 54px;
         line-height: 54px;
-        width: 243px;
-        border: 2px solid white;
+        padding: 0 10px;
+        border: 2px solid #fa7845;
         @include border-radius(3px);
-        background-color: white;
+        background-color: #fa7845;
         font-size: 24px;
-        color: $onsen-red;
+        color: white;
         text-align: center;
         font-weight: 300;
         text-decoration: none;
@@ -73,14 +67,12 @@ body#home {
 
         &:hover {
           @include transition(all 0.1s ease);
-          background-color: rgba(255, 255, 255, 0.8);
-          border: 2px solid transparent;
+          opacity: 0.8;
         }
 
         &:active {
           @include transition(none);
-          background-color: white;
-          border: 2px solid white;
+          opacity: 1;
         }
 
         > img {
@@ -98,9 +90,9 @@ body#home {
         height: 54px;
         line-height: 54px;
         width: 213px;
-        border: 2px solid rgba(255, 255, 255, 0.7);
+        border: 2px solid #d3d6d9;
         @include border-radius(3px);
-        color: white;
+        color: #767c86;
         margin-left: 20px;
         font-size: 24px;
         text-align: center;
@@ -109,14 +101,12 @@ body#home {
 
         &:hover {
           @include transition(all 0.1s ease);
-          background-color: rgba(255, 255, 255, 0.2);
-          border: 2px solid white;
+          background-color: #d3d6d9;
         }
 
         &:active {
           @include transition(none);
           background-color: transparent;
-          border: 2px solid white;
         }
 
         > strong {
@@ -145,7 +135,7 @@ body#home {
       bottom: 18px;
       left: 0px;
       right: 0px;
-      font-size: 14px;
+      font-size: 18px;
 
       > img {
         vertical-align: top;
@@ -156,7 +146,7 @@ body#home {
         vertical-align: top;
 
         &:link, &:visited, &:active {
-          color: white;
+          color: #666;
         }
 
         &:hover {
@@ -174,124 +164,74 @@ body#home {
     > div.keyvisual-content {
       margin: 0 auto;
       width: 1100px;
-      height: 586px;
-      background-image: url(/images/index/keyvisual.png);
+      height: 711px;
       background-repeat: no-repeat;
-      background-position: 591px bottom;
+      background-image: url(/images/index/keyvisual.png);
+      background-position: 630px bottom;
     }
   }
 
-  div.supported-browsers,
   div.main-features,
   div.other-features {
     margin: 0 auto;
     width: 900px;
   }
 
-  section#content-container > div#content > div.supported-browsers {
-    height: 162px;
-    border-bottom: 1px solid #D3D4D8;
-    position: relative;
-    text-align: center;
-    vertical-align: middle;
-
-    > h2 {
-      padding: 0;
-      margin: 0;
+  div.taglines {
+    border-bottom: 1px solid #ddd;
+    padding: 40px;
+    li {
       font-size: 20px;
-      font-weight: 200;
-      line-height: 1;
-      position: absolute;
-      left: 110px;
-      top: 75px;
+      color: #767c86;
+      line-height: 1.8;
     }
-
-    > ul {
-      position: absolute;
-      left: 330px;
-      top: 0px;
-      height: 162px;
-
-      padding: 0;
-      margin: 0;
-      display: inline-block;
-      height: 162px;
-      line-height: 162px;
-
-      > li {
-        margin: 28px 0 0 0;
-        padding: 72px 0 0 0;
-        list-style: none;
-        display: inline-block;
-        font-weight: 300;
-        color: #666;
-        font-size: 14px;
-        text-align: center;
-        line-height: 1.4;
-        width: 118px;
-        vertical-align: top;
-        background-repeat: no-repeat;
-        background-position: center top;
-      }
-
-      > li.browser-android {
-        background-image: url(/images/index/browser-android.png);
-      }
-
-      > li.browser-ios {
-        background-image: url(/images/index/browser-ios.png);
-      }
-
-      > li.browser-chrome {
-        background-image: url(/images/index/browser-chrome.png);
-        background-position: center 6px;
-      }
-
-      > li.browser-safari {
-        background-image: url(/images/index/browser-safari.png);
-      }
-
-    }
-
   }
 
   section#content-container > div#content > div.main-features {
     > div.feature {
       border-bottom: 1px solid #D3D4D8;
-      padding: 90px 0;
+      padding: 80px 0;
       background-repeat: no-repeat;
 
       > h2 {
-        font-size: 32px;
+        font-size: 48px;
       }
 
       > p {
         font-size: 18px;
       }
 
-      &.made-for-app {
+      &.super-performance {
         padding-left: 50%;
         background-position: 50px center;
-        background-image: url(/images/index/feature-image_made-for-app.png);
+        background-image: url(/images/index/feature-super-performance.png);
       }
 
-      &.custom-elements-based {
-        padding-right: 50%;
-        padding: 160px 50% 160px 0;
-        background-position: 500px center;
-        background-image: url(/images/index/feature-image_custom-elements-based.png);
+      &.multi-screen {
+        padding-right: 450px;
+        background-position: right center;
+        background-image: url(/images/index/feature-multi-screen.png);
+
+        p {
+          margin-right: 50px;
+        }
       }
 
-      &.built-with {
+      &.cordova-friendly {
         padding-left: 50%;
         background-position: 25px center;
-        background-image: url(/images/index/feature-image_built-with.png);
+        background-image: url(/images/index/feature-phonegap-cordova-friendly.png);
       }
 
-      &.beautiful-and-smooth {
-        padding-right: 50%;
-        background-position: 500px center;
-        background-image: url(/images/index/feature-image_beautiful-smooth.png);
+      &.custom-elements {
+        text-align: center;
+        padding: 60px 0;
+      }
+
+      &.with-jquery-or-angular {
+        padding-left: 50%;
+        background-position: 50px center;
+        background-image: url(/images/index/feature-with-angular-or-jquery.png);
       }
 
 
@@ -304,7 +244,9 @@ body#home {
     font-size: 0px;
 
     > h2 {
-      margin-bottom: 32px;
+      margin-bottom: 52px;
+      font-size: 48px;
+      text-align: center;
     }
 
     > div.sub-feature {
@@ -339,15 +281,19 @@ body#home {
       }
 
       > h3 {
-        font-size: 18px;
-        margin: 0;
+        font-size: 24px;
+        line-height: 1.2;
+        margin: 0 0 12px 0;
         padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+        font-weight: 200;
       }
 
       > p {
-        font-size: 14px;
+        font-size: 16px;
         margin: 0;
         padding: 0;
+        line-height: 1.6;
       }
     }
   }

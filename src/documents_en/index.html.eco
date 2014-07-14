@@ -9,18 +9,8 @@ page: 'home'
 			<h1>The Answer to<br>PhoneGap UI Development</h1>
 			<h2>A Custom Elements-Based HTML5 UI Framework</h2>
 
-			<a class="getting-started" href="/guide/getting_started.html">
-				Getting Started
-				<img src="/images/index/right-arrow.png" style="">
-			</a><!--
+			<a class="getting-started" href="/guide/getting_started.html">Getting Started</a><!--
 			--><a class="download" href="/OnsenUI/project_templates/onsen_ui.zip">Download v<strong>1.0.4</strong></a>
-			<span class="license">Apache License 2.0</span>
-			
-			<ul style="width: 476px">
-			  <li>JavaScript and CSS framework for HTML5, especially for PhoneGap &amp; Cordova apps.</li>
-			  <li>A lot of Web Components based UI components.</li>
-			  <li>Supports responsive layout, and available for smartphones and tablets.</li>
-			</ul>
 			
 		</div>
 
@@ -39,20 +29,17 @@ page: 'home'
 	</div>
 </div>
 
-<div class="supported-browsers">
-	<h2>Supported Browsers</h2>
-
-	<ul>
-		<li class="browser-android">Android 2.3<br>and up</li>
-		<li class="browser-ios">iOS 6<br>and up</li>
-		<li class="browser-chrome">Chrome</li>
-		<li class="browser-safari">Safari</li>
-	</ul>
+<div class="taglines">
+  <ul style="width: 800px; margin: 0 auto;">
+    <li>JavaScript and CSS framework for HTML5, especially for PhoneGap &amp; Cordova apps.</li>
+    <li>A lot of Web Components based UI components.</li>
+    <li>Supports responsive layout, and available for smartphones and tablets.</li>
+  </ul>
 </div>
 
 <div class="main-features">
 
-	<div class="feature made-for-app">
+	<div class="feature super-performance">
 		<h2>Super performance</h2>
 
 		<p>
@@ -60,8 +47,8 @@ page: 'home'
 		</p>
 	</div>
 
-	<div class="feature custom-elements-based">
-		<h2>Multi-screen support with wider device support range, including tablets and Android 2.3</h2>
+	<div class="feature multi-screen">
+		<h2>Multi-screen Support</h2>
 
 		<p>
 			Onsen UI is responsive. It adjusts the view based on the screen sizes. For example, use ons-split-view tag to have two-column view for tablets and one-column view for smartphones.
@@ -70,23 +57,27 @@ Onsen UI also have wider support range for devices. It is fully tested and works
 		</p>
 	</div>
 
-	<div class="feature built-with">
-		<h2>Develop native-like PhoneGap / Cordova apps and mobile websites</h2>
+	<div class="feature cordova-friendly">
+		<h2>PhoneGap / Cordova Friendly</h2>
 
 		<p>
 			Onsen UI is a perfect solution for developing hybrid apps. That's because our priority is performance and ease of use. Another option is to deploy your apps to the server and make it as a tool to build a performance website. 
 		</p>
 	</div>
 
-	<div class="feature beautiful-and-smooth">
+	<div class="feature custom-elements">
 		<h2>Simple to use</h2>
 
 		<p>
 			Onsen UI is inspired by Web Components. All the UI components are tags. So, if you want to place a button in a page, you'll add an <ons-button>. It's just that easy.
 		</p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <img src="/images/index/feature-custom-elements.png" width="766" height="381">
+    </p>
 	</div>
 
-	<div class="feature beautiful-and-smooth">
+	<div class="feature with-jquery-or-angular">
 		<h2>Works well with jQuery and AngularJS</h2>
 
 		<p>
@@ -94,14 +85,63 @@ Onsen UI also have wider support range for devices. It is fully tested and works
 		</p>
 	</div>
 
+</div>
 
+<div class="other-features">
+  <h2>Other Features</h2>
+
+  <div class="sub-feature free-and-opensource">
+    <h3>Free and Open Source</h3>
+
+    <p>
+      Onsen UI is released under the Apache License and development is housed on
+      <a href="http://github.com/OnsenUI/OnsenUI">Github</a>. It is free and open for anyone to use.
+    </p>
+  </div>
+
+  <div class="sub-feature font-awesome">
+    <h3>Bundled with Font Awesome</h3>
+
+    <p>
+      <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a> is bundled with Onsen UI. This makes it easy to develop and display the exact icons you need.
+    </p>
+  </div>
+
+  <div class="sub-feature selectable-theme">
+    <h3>Builtin Theme Roller</h3>
+
+    <p>
+      ???
+    </p>
+  </div>
+
+  <div class="sub-feature customizable">
+    <h3>Customizable</h3>
+
+    <p>
+      By relying on HTML and CSS, Onsen UI is highly customizable to
+      suit the many needs that come with development and design.
+    </p>
+  </div>
+
+  <div class="sub-feature screen-transition">
+    <h3>Screen Transition</h3>
+
+    <p>App operations have a native-like user experience (UX) with smooth animations on cross platform PhoneGap/Cordova apps.</p>
+  </div>
+
+  <div class="sub-feature gui-tool">
+    <h3>GUI Tool Coming Soon</h3>
+
+    <p>
+      With drag &amp; drop support, our GUI tool will make all aspects of front-end 
+      development much easier.
+    </p>
+  </div>
 </div>
 
 <div class="getstarted">
-	<a class="" href="/getting_started/">
-		Get Started, It's Free!
-		<img src="/images/index/right-arrow.png">
-	</a>
+  <a class="" href="/getting_started/">Get Started, It's Free!</a>
 </div>
 
 <script>

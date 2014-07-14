@@ -1,8 +1,10 @@
 @charset "UTF-8";
 
 header.common {
-  border-bottom: 1px solid #e7e7e7;
-  height: 72px;
+  border-bottom: 1px solid #ddd;
+  height: 84px;
+  width: 1100px;
+  margin: 0 auto;
 
   > div {
     @include box-sizing(border-box);
@@ -23,14 +25,14 @@ header.common {
     position: absolute;
     top: 0;
     right: 0;
-    height: 72px;
-    line-height: 72px;
+    height: 84px;
+    line-height: 84px;
     
     li {
       color: #a6a6a6;
       display: inline-block;
-      font-size: 16px;
-      height: 72px;
+      font-size: 20px;
+      height: 84px;
       margin: 0 4px;
       padding: 0 15px;
       &.current {

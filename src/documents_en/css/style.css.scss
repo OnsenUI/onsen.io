@@ -27,7 +27,7 @@ time, mark, audio, video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-weight: 200;
+  font-weight: 300;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -80,7 +80,6 @@ html {
 }
 
 body {
-  border-top: 1px solid $onsen-red;
   min-width: $width;
   text-align: center;
   -webkit-text-size-adjust: 100%;
@@ -90,7 +89,8 @@ body {
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-weight: 200;
+  font-weight: 300;
+  font-family: "ff-enzo-web", "Helvetica Neue", Helvetica, sans-serif;
 }
 table{border-collapse:collapse;border-spacing:0}
 textarea,input{margin:0;padding:0}
