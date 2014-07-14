@@ -1,42 +1,39 @@
 <!-- Define `renderMenu` partial -->
 <% renderMenu = (items) => %>
-<ul class="nav">
-    <% for item in items: %>
-        <!-- Highlight menu item if its `item.state` is not false -->
-        <li<% if item.state: %> class="selected"<% end %>>
-            <!-- Remove link if we’re currently viewing this document -->
-            <% if item.state != 'current': %>
-                <a href="<%= item.url %>"><%= item.title %></a>                
-            <% else: %>
-                <strong><%= item.title %></strong>
-                <!-- Table of content inside this doc -->
-                <% if @document.toc: %>
+
+<% for item in items: %>
+    <!-- Remove link if we’re currently viewing this document -->
+    <% if item.state != 'current': %>
+        <!-- <a href="<%= item.url %>"><%= item.title %></a>                 -->
+    <% else: %>
+        <%= item.title %>
+        <!-- Table of content inside this doc -->
+        <% if @document.toc: %>
+            <ul class="toc">
+                <% for toc in @document.toc: %>
+                <li><a href="<%= toc.href %>"><%= toc.name %></a>
+                    <% if toc.sub: %>
                     <ul>
-                        <% for toc in @document.toc: %>
-                        <li><a href="<%= toc.href %>"><%= toc.name %></a>
-                            <% if toc.sub: %>
-                            <ul>
-                                <% for sub in toc.sub: %>
-                                <li><a href="<%= sub.href %>"><%= sub.name %></a></li>
-                                <% end %>
-                            </ul>
-                            <% end %>
-                        </li>
+                        <% for sub in toc.sub: %>
+                        <li><a href="<%= sub.href %>"><%= sub.name %></a></li>
                         <% end %>
                     </ul>
+                    <% end %>
+                </li>
                 <% end %>
+            </ul>
+        <% end %>
 
-                <% if !@document.toc and @document.autotoc and @document.tableOfContents: %>
-                    <%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
-                <% end %>
-            <% end %>
-            <!-- Render submenu if item has children -->
-            <% if item.children: %>
-                <%- renderMenu(item.children) %>
-            <% end %>
-        </li>
+        <% if !@document.toc and @document.autotoc and @document.tableOfContents: %>
+            <%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
+        <% end %>
     <% end %>
-</ul>   
+    <!-- Render submenu if item has children -->
+    <% if item.children: %>
+        <%- renderMenu(item.children) %>
+    <% end %>
+<% end %>
+
 <% end %>
 <!-- Run `renderMenu` partial aginst passed `menuItems` meta-data  -->
 <%= renderMenu @menuItems %>

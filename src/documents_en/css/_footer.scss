@@ -15,21 +15,22 @@ footer#footer-container {
     min-width: $width;
     height: 66px;
     line-height: 66px;
-        text-align: center;
+    text-align: center;
 
     li {
       color: #a6a6a6;
       display: inline-block;
-      font-size: 16px;
+      font-size: 20px;
       margin: 0 19px;
 
       // for social button
       > iframe, > div > iframe, > div.fb-share-button > span {
         vertical-align: middle !important;
       }
+
       .active {
         border-bottom: 1px solid #000;
-        color: #ff1a33;
+        color: $onsen-red;
       }
       a {
         @include all-link-state(#666, all-none);

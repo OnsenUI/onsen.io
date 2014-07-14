@@ -73,8 +73,7 @@ p {
 
 html {
   //font: 13px/1.4 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-  // ここで指定しているフォントサイズに応じて、全ての要素のフォントサイズが変わります
-  font-size: 16px;;
+  font-size: 18px;
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.4;
 }
@@ -86,6 +85,7 @@ body {
   &:after {content: ""; clear: both; display: block;}
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: #666;
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -103,7 +103,7 @@ img, iframe, object { max-width : 100%; }
 .lt-ie9 img, .lt-ie9 object { width:auto; } 
 
 a {
-  @include all-link-state(#FF1A33);
+  @include all-link-state($onsen-red);
   img {
     @include transition(opacity 80ms);
     &:hover {
@@ -143,7 +143,7 @@ hr {
 }
 
 .btn-big {
-  font-size: (30px/$basefont)+rem;
+  font-size: 30px;
   font-weight: 700;
   padding: 18px 40px;
 }
@@ -244,4 +244,3 @@ div#github-ribbon-container {
 @import 'page_index';
 @import 'page_getting_started';
 @import 'page_components';
-@import 'page_themes';

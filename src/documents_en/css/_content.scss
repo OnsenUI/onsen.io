@@ -7,42 +7,58 @@ section#content-container {
   > aside#content-info, div.sticky-wrapper > aside#content-info {
     margin: 58px 0 100px;
     overflow: hidden;
-    float: right;
+    float: left;
     width: $aside-width;
-    border: 1px solid #ddd;
-    padding: 14px 18px 4px 18px;
+    padding: 0px 18px 4px 0px;
     @include box-sizing(border-box);
+    font-weight: 400;
+    font-size: 16px;
 
-    > ul {
+    ul.toc {
       text-align: left;
 
       > li {
-        font-size: (16px/$basefont)+rem;
-        line-height: 1.2;
-        margin: 14px 0;
+        font-size: 16px;
+        line-height: 1.7;
+        margin: 14px 0 14px 0;
 
-        li {
-          line-height: 1.2;
-          margin: 14px 0;
-          margin-left: 18px;
-          font-size: (16px/$basefont)+rem;
+        ul li {
+          margin-left: 16px;
         }
       }
     }
 
+    > ul.toc > li > a {
+      font-weight: 400;
+    }
+
+    > ul.toc > li {
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+
     h2 {
       color: #333;
-      font-size: (18px/$basefont)+rem;
+      font-size: 48px;
       text-align: left;
       margin: 0 0 14px 0;
       padding: 0;
     }
+
+    a {
+      @include all-link-state(#666);
+      font-weight: 400;
+      &:hover {
+        color: $onsen-red;
+      }
+    }
   }
 
   > aside#content-info + div#content, div.sticky-wrapper + div#content {
-    width: ($width - $aside-width - 30px);
+    width: ($width - $aside-width)px;
     margin: 0;
-    padding-right: 30px;
+    padding-right: 0px;
+    padding-left: $aside-width;
   }
 
   > div#content {
@@ -64,29 +80,26 @@ section#content-container {
 
     color: #666;
     margin: 0 auto;
-    padding: 50px 0px 100px 0;
+    padding: 50px 0px 100px 0px;
     text-align: left;
     width: ($width - $aside-width);
+    font-weight: 400;
 
     h2, h3, h4, h5 {
       color: #333;
     }
 
     h2 {
-      font-size: (30px/$basefont)+rem;
+      font-size: 48px;
       margin: 70px 0 20px 0px;
       &:first-child {
         margin-top: 0;
       }
     }
 
-    hr + h2 {
-      margin-top: 36px;
-    }
-
     h3 {
-      font-size: (22px/$basefont)+rem;
-      margin: 36px 0 20px 0px;
+      font-size: 42px;
+      margin: 46px 0 20px 0px;
     }
 
     h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
@@ -94,25 +107,27 @@ section#content-container {
     }
 
     h4 {
-      font-size: (18px/$basefont)+rem;
-      margin: 28px 0 8px 0;
-      font-weight: bold;
+      font-size: 38px;
+      margin: 36px 0 8px 0;
     }
 
     h5, h6 {
-      font-size: (15px/$basefont)+rem;
-      margin: 28px 0 8px 0;
-      font-weight: bold;
+      font-size: 34px;
+      margin: 36px 0 8px 0;
+    }
+
+    h2, h3, h4, h5, h6 {
+      font-weight: 600;
     }
 
     ul > li {
       list-style-type: square;
-      margin-left: 2rem;
+      margin-left: 32px;
     }
 
     ol > li {
       list-style-type: decimal;
-      margin-left: 2rem;
+      margin-left: 32px;
     }
 
     li {
@@ -120,7 +135,7 @@ section#content-container {
     }
 
     p, pre, ul, ol {
-      margin: 1rem 0;
+      margin: 16px 0;
     }
 
     li > ul {
@@ -129,7 +144,7 @@ section#content-container {
 
     div.need-help {
       > h2 {
-        font-size: (24px/$basefont)+rem;
+        font-size: 36px;
       }
       > p {
         margin: 0;
@@ -138,8 +153,9 @@ section#content-container {
 
     code {
       font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
-      font-weight: bolder;
+      font-weight: 400;
       color: green;
+      font-size: 16px;
     }
 
     a > code {

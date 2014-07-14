@@ -32,14 +32,19 @@ header.common {
       color: #a6a6a6;
       display: inline-block;
       font-size: 20px;
-      height: 84px;
+      height: 85px;
       margin: 0 4px;
       padding: 0 15px;
+      -webkit-box-sizing: border-box;
+      -mz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      box-sizing: border-box;
       &.current {
-        border-bottom: 1px solid #f00;
-        color: #ff1a33;
+        border-bottom: 2px solid $onsen-red;
+
         a {
-          @include all-link-state(#ff1a33, all-none);
+          @include all-link-state($onsen-red, all-none);
         }
       }
       a {

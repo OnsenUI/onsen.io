@@ -29,16 +29,16 @@ body#components {
             margin: 8px 0 32px;
             
             &.directive-example {
-              font-size: (14px/$basefont)+rem;
+              font-size: 14px;
 
               > pre {
-                font-size: (14px/$basefont)+rem;
+                font-size: 14px;
                 border-radius: 0px;
                 margin-top: 4px;
               }
               > p {
-                font-size: (14px/$basefont)+rem;
-                margin: 1rem 0 4px 0;
+                font-size: 14px;
+                margin: 16px 0 4px 0;
               }
             }
           }
@@ -50,8 +50,8 @@ body#components {
             border-collapse: collapse;
             border-spacing: 0;
             box-sizing: border-box;
-            font-size: (14px/$basefont)+rem;
-            margin: 1rem 0;
+            font-size: 14px;
+            margin: 16px 0;
             > tbody {
               > tr {
                 border-left: 0px solid #ddd;
@@ -141,7 +141,7 @@ body#components {
             line-height: 2;
             color: #333;
             border-radius: 4px;
-            font-size: (14px/$basefont)+rem;
+            font-size: 14px;
             transition: background-color 100ms linear, color 100ms linear;
             vertical-align: middle;
 
@@ -159,66 +159,6 @@ body#components {
           }
         }
       }
-      ul.segment-control {
-        font-size: 0px;
-        display: inline-block;
-        padding: 0 0 0 1px;
-        margin: 0;
-
-        $segment-color: $onsen-red;
-        $segment-color-light: $onsen-red-light;
-
-        > li {
-          display: inline-block;
-          font-size: (15px/$basefont)+rem;
-          font-weight: 200;
-          min-width: 90px;
-          height: 32px;
-          border: 1px solid $segment-color;
-          padding: 0 8px;
-          margin: 0 0 0 -1px;
-          border-radius: 0px;
-          text-align: center;
-          background-color: white;
-          color: $segment-color;
-          line-height: 32px;
-          cursor: pointer;
-          -webkit-font-smoothing: antialiased;
-          transition:
-          all 200ms linear,
-          color 200ms linear,
-          font-weight 200ms linear,
-          border-color 200ms linear;
-          font-weight: 400;
-
-          &:first-child {
-            border-radius: 4px 0 0 4px;
-          }
-
-          &:last-child {
-            border-radius: 0 4px 4px 0;
-          }
-
-          &.current {
-            background-color: $segment-color;
-            color: white;
-            border-color: $segment-color;
-            font-weight: 400;
-            transition: none;
-            position: relative;
-            z-index: 1;
-
-            &:hover {
-              background-color: $segment-color;
-            }
-          }
-
-          &:hover {
-            background-color: $segment-color-light;
-            transition: none;
-          }
-        }
-      }
     }
 
     > aside.content-info {
@@ -231,8 +171,8 @@ body#components {
     border-bottom: 1px solid #EEE;
     color: $onsen-red;
     border-bottom: 2px solid $onsen-red;
-    font-size: (36px/$basefont)+rem;
-    font-weight: 200;
+    font-size: 36px;
+    font-weight: 600;
   }
 
   h2 {
