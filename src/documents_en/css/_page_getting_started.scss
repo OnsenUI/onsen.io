@@ -5,125 +5,125 @@ body#getting_started {
     font-weight: bold;
   }
 
-	#run {
-		b {
-			font-weight: 700;
-			margin-right: 15px;
-		}
-	}
+  #run {
+    b {
+      font-weight: 700;
+      margin-right: 15px;
+    }
+  }
 
   .template-download {
     float: right;
   }
 
-	.template-iframe {
-		width: 224px;
-		height: 400px;
-		border: 1px solid #ccc;
-		padding: 0;
-	}
-	.template-iframe iframe {
-	  width: 320px;
-	  height: 570px;
-	  position: absolute;
-		transform: scale(0.7);
-		-webkit-transform: scale(0.7);
-		-moz-transform: scale(0.7);
-		transform-origin: top left;
-		-webkit-transform-origin: top left;
-		-moz-transform-origin: top left;
-	}
-
-	.template-iframe-landscape {
-		width: 400px;
-		height: 224px;
-		border: 1px solid #ccc;
-		padding: 0;
-	}
-
-	.template-iframe-landscape iframe {
-	  width: 570px;
-	  height: 320px;
-	  position: absolute;
-		transform: scale(0.7);
-		-webkit-transform: scale(0.7);
-		-moz-transform: scale(0.7);
-		transform-origin: top left;
-		-webkit-transform-origin: top left;
-		-moz-transform-origin: top left;
+  .template-iframe {
+    width: 224px;
+    height: 400px;
+    border: 1px solid #ccc;
+    padding: 0;
+  }
+  .template-iframe iframe {
+    width: 320px;
+    height: 570px;
+    position: absolute;
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    transform-origin: top left;
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
   }
 
-	.templates-container {
-		position: relative;
-		overflow: auto;
-	}
+  .template-iframe-landscape {
+    width: 400px;
+    height: 224px;
+    border: 1px solid #ccc;
+    padding: 0;
+  }
 
-	.flex-item {
-		margin: 15px;
+  .template-iframe-landscape iframe {
+    width: 570px;
+    height: 320px;
+    position: absolute;
+    transform: scale(0.7);
+    -webkit-transform: scale(0.7);
+    -moz-transform: scale(0.7);
+    transform-origin: top left;
+    -webkit-transform-origin: top left;
+    -moz-transform-origin: top left;
+  }
+
+  .templates-container {
+    position: relative;
+    overflow: auto;
+  }
+
+  .flex-item {
+    margin: 15px;
     display: inline-block;
-	}
+  }
 
-	.handle {
-		position: absolute;
-		top: 45%;
-		padding: 5px;
-		border-radius: 4px;
-		background-color: rgba(0,0,0,0.5);
-	}
+  .handle {
+    position: absolute;
+    top: 45%;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgba(0,0,0,0.5);
+  }
 
-	.handle.left{
-		left: 10px;
-	}
+  .handle.left{
+    left: 10px;
+  }
 
-	.handle.right {					
-		right: 10px;
-	}
+  .handle.right {         
+    right: 10px;
+  }
 
-	.center {
-		align-self: center;
-	}
+  .center {
+    align-self: center;
+  }
 
-	.template-title {
-		text-align: left;
-		font-weight: bold !important;
-		color: #333 !important;
-		margin: 5px 0 15px 0;
-		font-size: 1rem !important;
-	}
-	
-	.download {
-	  float: right;
-	}
+  .template-title {
+    text-align: left;
+    font-weight: bold !important;
+    color: #333 !important;
+    margin: 5px 0 15px 0;
+    font-size: 1rem !important;
+  }
+  
+  .download {
+    float: right;
+  }
 
 
-	.btn-download {
-		@extend .btn-red;
-		padding-left: 10px;
-		padding-right: 10px;
-		text-align: left;
-		border-radius: 4px;
+  .btn-download {
+    @extend .btn-red;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: left;
+    border-radius: 4px;
 
-		margin: 0;
-		display: inline-block;
-		width: auto;
-		@include transition(all 0.5s ease);
+    margin: 0;
+    display: inline-block;
+    width: auto;
+    @include transition(all 0.5s ease);
 
-		&:hover {
-			@include transition(all 0.1s ease);
-		}
+    &:hover {
+      @include transition(all 0.1s ease);
+    }
 
-		&:active {
-			@include transition(none);
-		}
-	}
+    &:active {
+      @include transition(none);
+    }
+  }
 
-	.blue-link {
-		color: #4F82FF;
-	}
+  .blue-link {
+    color: #4F82FF;
+  }
 
-	.blue-link:visited {
-		color: #2251C3;
-	}
+  .blue-link:visited {
+    color: #2251C3;
+  }
 
   .h3-wrapper {
     margin-left: 30px;

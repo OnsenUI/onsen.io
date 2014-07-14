@@ -9,22 +9,22 @@ $onsen-red-light: #fff5f7;
 $prefixes: -webkit-, -moz-, -ms-, -o-, '';
 
 @mixin all-link-state($color,$underline: none) {
-	@if $underline == all-none {
-		&:link,&:visited,&:hover,&:active { color: $color; text-decoration: none; }
-	}
-	@else if $underline == none {
-		&:link,&:visited { color: $color; text-decoration: none; }
-		&:hover { color: $color; text-decoration: underline; }
-		&:active { color: $color; text-decoration: none; }
-	}
-	@else if $underline == all-underline {
-		&:link,&:visited,&:hover,&:active {color: $color; text-decoration: underline;}
-	}
-	@else {
-		&:link,&:visited {color: $color; text-decoration: underline;}
-		&:hover {color: $color; text-decoration: none;}
-		&:active {color: $color; text-decoration: underline;}	
-	}
+  @if $underline == all-none {
+    &:link,&:visited,&:hover,&:active { color: $color; text-decoration: none; }
+  }
+  @else if $underline == none {
+    &:link,&:visited { color: $color; text-decoration: none; }
+    &:hover { color: $color; text-decoration: underline; }
+    &:active { color: $color; text-decoration: none; }
+  }
+  @else if $underline == all-underline {
+    &:link,&:visited,&:hover,&:active {color: $color; text-decoration: underline;}
+  }
+  @else {
+    &:link,&:visited {color: $color; text-decoration: underline;}
+    &:hover {color: $color; text-decoration: none;}
+    &:active {color: $color; text-decoration: underline;} 
+  }
 }
 
 @mixin link-underline($type) {
