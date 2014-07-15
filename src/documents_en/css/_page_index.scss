@@ -25,22 +25,22 @@ body#home {
 
     > div.keyvisual-content > div.keyvisual-main {
       margin: 0 auto;
-      padding: 148px 0 0 0;
+      padding: 180px 0 0 0;
       width: 1100px;
 
       > h1 {
         font-size: 54px;
         line-height: 60px;
-        letter-spacing: 1px;
+        letter-spacing: 0px;
         font-weight: 200;
         margin-bottom: 6px;
-        color: black;
+        color: #252525;
       }
 
       > h2 {
         font-size: 26px;
         font-weight: 300;
-        margin: 0 0 40px 0;
+        margin: 0 0 100px 0;
         padding: 0;
         font-family: 'Helvetica Neue', Helvetica, sans-serif;
         color: #606978;
@@ -132,7 +132,7 @@ body#home {
       margin: 0 auto;
       width: 1100px;
       position: absolute;
-      bottom: 18px;
+      bottom: 60px;
       left: 0px;
       right: 0px;
       font-size: 18px;
@@ -195,6 +195,8 @@ body#home {
 
       > h2 {
         font-size: 48px;
+        line-height: 1.2;
+        font-weight: 200;
       }
 
       > p {
@@ -230,7 +232,7 @@ body#home {
 
       &.with-jquery-or-angular {
         padding-left: 50%;
-        background-position: 50px center;
+        background-position: 10px center;
         background-image: url(/images/index/feature-with-angular-or-jquery.png);
       }
 
@@ -246,6 +248,7 @@ body#home {
     > h2 {
       margin-bottom: 52px;
       font-size: 48px;
+      font-weight: 200;
       text-align: center;
     }
 
@@ -300,29 +303,23 @@ body#home {
 
   div.getstarted {
     text-align: center;
+    border-top: 1px solid #ddd;
+    padding: 100px 0 0 0;
 
-    > a,
-    > a:active,
-    > a:visited {
-      @include box-sizing(border-box);
-      display: inline-table;
-      height: 63px;
-      line-height: 63px;
-      width: 312px;
-      border: 2px solid $onsen-red;
-      @include border-radius(3px);
-      background-color: white;
-      font-size: 24px;
-      color: $onsen-red;
-      text-align: center;
-      font-weight: 200;
-      text-decoration: none;
-
-      @include transition(all 0.4s ease);
+    > a#getstarted-button {
+      &:link,
+      &:active,
+      &:visited {
+        color: $onsen-red;
+        font-size: 36px;
+        text-align: center;
+        font-weight: 200;
+        text-decoration: underline;
+        font-family: "ff-enzo-web", "Helvetica Neue", Helvetica, sans-serif;
+      }
 
       &:hover {
-        @include transition(all 0.1s ease);
-        background-color: lighten($onsen-red, 45%);
+        text-decoration: none;
       }
 
       > img {

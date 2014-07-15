@@ -4,15 +4,20 @@ section#content-container {
   position: relative;
   text-align: left;
 
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   > aside#content-info, div.sticky-wrapper > aside#content-info {
-    margin: 58px 0 100px;
-    overflow: hidden;
+    margin: 0px 0 100px;
+    overflow: scroll;
     float: left;
     width: $aside-width;
-    padding: 0px 18px 4px 0px;
+    padding: 58px 40px 4px 0px;
     @include box-sizing(border-box);
     font-weight: 400;
     font-size: 16px;
+    color: #767c86;
 
     ul.toc {
       text-align: left;
@@ -46,7 +51,7 @@ section#content-container {
     }
 
     a {
-      @include all-link-state(#666);
+      @include all-link-state(#767c86);
       font-weight: 400;
       &:hover {
         color: $onsen-red;
@@ -107,17 +112,17 @@ section#content-container {
     }
 
     h4 {
-      font-size: 38px;
+      font-size: 32px;
       margin: 36px 0 8px 0;
     }
 
     h5, h6 {
-      font-size: 34px;
+      font-size: 32px;
       margin: 36px 0 8px 0;
     }
 
     h2, h3, h4, h5, h6 {
-      font-weight: 600;
+      font-weight: 200;
     }
 
     ul > li {
@@ -155,12 +160,16 @@ section#content-container {
       font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
       font-weight: 400;
       color: green;
+    }
+
+    pre code {
       font-size: 16px;
     }
 
-    a > code {
-      color: red;
-    }
-
   }
+
+  a {
+    @include all-link-state(#767c86);
+  }
+
 }

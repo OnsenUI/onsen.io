@@ -48,10 +48,8 @@ header.common {
         }
       }
       a {
-        @include all-link-state(#666, all-none);
-        transition: color 200ms linear;
+        @include all-link-state(#666, none);
         &:hover {
-          transition: color 50ms linear;
           color: $onsen-red;
         }
       }

@@ -77,7 +77,7 @@
 	$(function() {
 		$('aside#content-info').sticky({
 			topSpacing : 0, 
-			bottomSpacing : $('footer#footer-container').height()
+			bottomSpacing : $('footer#footer-container').height() + 60 
 		});
 	});
 	</script>
