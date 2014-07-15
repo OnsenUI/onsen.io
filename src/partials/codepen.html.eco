@@ -1,5 +1,10 @@
-<div style="width: 320px; height: 480px;">
+<div class="codepen-wrapper">
+  <div style="height: 480px;" class="codepen-content codepen-content-<%=@id%>">
+    <p data-height="480" data-theme-id="7186" data-slug-hash="<%=@id%>" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/<%=@id%>/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  </div>
 
-  <p data-height="480" data-theme-id="7186" data-slug-hash="yrhtv" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/yrhtv/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-
+  <div class="resize-btn" data-slug-hash="<%=@id%>">
+    <i class="fa fa-arrows-h fa-lg"></i>
+    Expand View
+  </div>
 </div>

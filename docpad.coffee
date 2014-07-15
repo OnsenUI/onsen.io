@@ -19,6 +19,11 @@ docpadConfig = {
 
 	# =================================
 	# Plugins configulation
+  pluginsPaths: [
+    "docpad_plugins",
+    "node_modules"
+  ]
+
 	plugins:
 
 		tableofcontents:
