@@ -51,7 +51,6 @@ docpadConfig = {
 			displayName: 'Onsen UI'
 			codeName: 'ons'
 			directives: [
-        'ons-screen',
         'ons-page',
         'ons-navigator',
         'ons-toolbar',

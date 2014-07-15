@@ -6,187 +6,81 @@ body#components {
     @include box-sizing(border-box);
   }
 
-  section#content-container {
-
-    > div#content {
-      margin: 20px 0 50px 0;
-      padding: 0;
-      width: auto;
-
-      div.right-col {
-        width: 500px;
-        margin-left: 190px;
-
-        .directive-container {
-          min-height: 1000px;
-          padding-top: 40px;
-          padding-bottom: 40px;
-          &:first-child {
-            padding-top: 40px;
-          }
-
-          > div > section {
-            margin: 8px 0 32px;
-            
-            &.directive-example {
-              font-size: 14px;
-
-              > pre {
-                font-size: 14px;
-                border-radius: 0px;
-                margin-top: 4px;
-              }
-              > p {
-                font-size: 14px;
-                margin: 16px 0 4px 0;
-              }
-            }
-          }
 
 
-          table {
-            width: 100%;
-            max-width: 100%;
-            border-collapse: collapse;
-            border-spacing: 0;
-            box-sizing: border-box;
-            font-size: 14px;
-            margin: 16px 0;
-            > tbody {
-              > tr {
-                border-left: 0px solid #ddd;
-                border-right: 0px solid #ddd;
-                border-top: 1px solid #ddd;
-                &:last-child {
-                  border-bottom: 1px solid #ddd;
-                }
-                &:first-child {
-                  border-top: 0px solid #ddd;
-                }
-                > th {
-                  padding: 8px;
-                }
-                > td {
-                  padding: 8px;
-                  border-top-width: 0px;
-
-                  &.attribute-name, > code {
-                    margin: 8px 0;
-                    white-space: nowrap;
-                    font-family: 'Menlo Regular', 'Menlo', 'Consolas', monospace;
-                    color: #10108F;
-                    font-size: 14px;
-                  }
-
-                  &.attribute-name {
-                    color: #5E299A;
-                  }
-                }
-              }
-            }
-            > thead {
-              background-color: #fff;
-              color: #333;
-              border-bottom: 2px solid #ddd;
-
-              > tr {
-                border-width: 0px;
-
-                > th {
-                  padding: 4px 8px;
-                  border-width: 0px;
-                  font-size: 18px;
-                }
-              }
-            }
-          }
-
+  table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin: 16px 0;
+    > tbody {
+      > tr {
+        border-left: 0px solid #ddd;
+        border-right: 0px solid #ddd;
+        border-top: 1px solid #ddd;
+        &:last-child {
+          border-bottom: 1px solid #ddd;
         }
-
-        div.demo {
-          background-image: url('/images/iPhone5CFrame.png');
-          background-position: 0px 0px;
-          background-repeat: no-repeat;
-          height: 1000px;
-          width: 400px;
-          margin-left: 520px;
-          position: relative;
-
-          iframe {
-            max-width: none;
-            &.simulater-iframe {
-              border-color: black; 
-              background-color: #f9f9f9;
-            }
-          }
+        &:first-child {
+          border-top: 0px solid #ddd;
         }
+        > th {
+          padding: 8px;
+        }
+        > td {
+          padding: 8px;
+          border-top-width: 0px;
 
-      }
-
-      div.left-col {
-        float: left;
-        width: 190px;
-
-        .left-menu {
-          padding: 50px 0 0 0;
-          margin: 0;
-          overflow-y: auto;
-          overflow-x: hidden;
-          background-color: #fff;
-          width: 170px;
-
-          a.directive-name {
-            display: block;
-            padding-left: 8px;
-            line-height: 2;
-            color: #333;
-            border-radius: 4px;
+          &.attribute-name, > code {
+            margin: 8px 0;
+            white-space: nowrap;
+            font-family: 'Menlo Regular', 'Menlo', 'Consolas', monospace;
+            color: #10108F;
             font-size: 14px;
-            transition: background-color 100ms linear, color 100ms linear;
-            vertical-align: middle;
+          }
 
-            &:hover {
-              text-decoration: underline;
-            }
-
-            &.selected, &.selected:visited, &.selected:link {
-              color: #fff !important;
-              background-color: $onsen-red;
-              font-weight: 400;
-              text-decoration: underline;
-              transition: none;
-            }
+          &.attribute-name {
+            color: #5E299A;
           }
         }
       }
     }
+    > thead {
+      background-color: #fff;
+      color: #333;
+      border-bottom: 2px solid #ddd;
 
-    > aside.content-info {
-      display: none;
+      > tr {
+        border-width: 0px;
+
+        > th {
+          padding: 4px 8px;
+          border-width: 0px;
+          font-size: 18px;
+        }
+      }
     }
   }
 
-  h1 {
-    margin: 0 0 20px;
-    border-bottom: 1px solid #EEE;
-    color: $onsen-red;
-    border-bottom: 2px solid $onsen-red;
-    font-size: 36px;
-    font-weight: 600;
-  }
+  div.demo {
+    background-image: url('/images/iPhone5CFrame.png');
+    background-position: 0px 0px;
+    background-repeat: no-repeat;
+    height: 1000px;
+    width: 400px;
+    margin-left: 520px;
+    position: relative;
 
-  h2 {
-    margin-top: 35px;
-    margin-bottom: 15px;
-  }
-
-  h3 {
-    margin-top: 35px;
-    margin-bottom: 15px;
-  }
-
-  h4 {
-    margin-bottom: 0px;
+    iframe {
+      max-width: none;
+      &.simulater-iframe {
+        border-color: black;
+        background-color: #f9f9f9;
+      }
+    }
   }
 
   .fit-iphone-frame {
