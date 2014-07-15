@@ -1,0 +1,53 @@
+{
+  "name": "docpad-plugin-tableofcontents",
+  "version": "2.0.1",
+  "description": "DocPad plugin to automatically generate table of contents.",
+  "homepage": "https://github.com/takitapart/docpad-plugin-tableofcontents",
+  "keywords": [
+    "docpad",
+    "docpad-plugin"
+  ],
+  "author": {
+    "name": "Bob VanderClay",
+    "email": "bob@vanderclay.net",
+    "url": "https://github.com/takitapart"
+  },
+  "maintainers": [
+    {
+      "name": "Bob VanderClay",
+      "email": "bob@vanderclay.net",
+      "url": "https://github.com/takitapart"
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Bob VanderClay",
+      "email": "bob@vanderclay.net",
+      "url": "https://github.com/takitapart"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/takitapart/docpad-plugin-tableofcontents/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/takitapart/docpad-plugin-tableofcontents.git"
+  },
+  "engines": {
+    "node": ">=0.6.0",
+    "docpad": "6.x"
+  },
+  "dependencies": {
+    "jsdom": "~0.2.0"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.4.0"
+  },
+  "main": "./out/tableofcontents.plugin.js",
+  "readme": "# Table of Contents Plugin for DocPad\nA [DocPad](https://docpad.org) plugin to generate tables of content from document header data\n\nNote:\n\nI'm very new to DocPad, CoffeeScript, and Node in general, so please consider this plugin very beta.\n\nYour questions, feedback, and (pull) requests are greatly appreciated.\n\n## Installation\n\n```\nnpm install --save docpad-plugin-tableofcontents\n```\n\n## Configuration\n\n### documentExtensions\n\nDefault: `[\"html\"]`\n\nSets document types to parse. Only html is supported currently. \n\n### requireMetadata\n\nDefault: `true`\n\nIf **true**, only documents with the specified metadata parameter set as true will generate table of contents data.\n\n### requiredMetadataField\n\nDefault: `'toc'`\n\nIf `requireMetadata` is set, this is the field that must be set true in the document metadata.\n\n### addHeaderIds\n\nDefault: `true`\n\nSo that the table of contents may be generated with links to page sections, header ids should set. The plugin can automatically generate these ids, if one is not already present. It will not overwrite any id present.\n\n### headerIdPrefix\n\nDefault: ``\n\nValue will be added as a prefix to the automatically generated header ids.\n\n### headerSelectors\n\nDefault: `'h2,h3,h4,h5,h6'`\n\nA list of header selectors to search. By default, it is assumed H1 will contain the page title, and won't need to be included in the table of contents. \n\nThis value is passed directly to the [Document.querySelectorAll](https://developer.mozilla.org/en-US/docs/DOM/Document.querySelectorAll) DOM function, and should contain appropriately valid selectors.\n\n### rootHeaderLevel\n\nDefault: `2`\n\nInteger containing header level we begin with. \n\nDepreciated, will be eventually determined from `headerSelectors`.\n\n\n## Usage\n\nThe plugin searches the document for the specified headers, returning an array of `TableofcontentItem` objects. This object has the following properties:\n\n- `text` Header text.\n- `id` id of header, use to create links to page sections.\n- `children` array of `TableofcontentItem` objects, with the next level of headers. \n\nSimilar to [docpad-plugin-menu](https://github.com/sergeche/docpad-plugin-menu), using a partial as a template for output is the best method.\n\nCreate a `toc.html.eco` [partial](https://github.com/docpad/docpad-plugin-partials):\n\n```\n<% renderToc = (items) => %>\n<ol class=\"toc\">\n    <% for item in items: %>\n        <li><a href=\"#<%= item.id %>\"><%= item.text %></a>\n            <% if item.children: %>\n                <%- renderToc(item.children) %>\n            <% end %>\n        </li>\n    <% end %>\n</ol>\n<% end %>\n<%= renderToc @tocItems %>\n```\n\nInclude the partial in your template.\n\n```\n<div class=\"sidebar\">\n    <h3>Contents</h3>\n    <%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>\n</div>\n```\n\n\n## Limitations, Known Bugs\n\n- This plugin only works with html. I would like to eventually add parsing of additional document types.\n- This plugin runs each time an html document is rendered. This may happen several times, as partials and layouts are applied, and depending on your `headerSelectors`, the table of contents may be updated. I use `tableOfContents` in a partial, so updates on later renders do not affect me. This may be an issue or feature depending on how you use the plugin. I'd love some feedback or help with this.\n- Need to enforce uniqueness in header ids. \n- Selected elements are not filtered / validated / checked.\n- Determine `rootHeaderLevel` from `headerSelectors`.\n- Testing.\n- Better error handing and debug logs.\n\n## History\n\nPlease review the `History.md` file.\n\n\n## License\n\nMy work is built on the efforts of others, I hope mine will contribute to yours. Enjoy!\n",
+  "readmeFilename": "README.md",
+  "_id": "docpad-plugin-tableofcontents@2.0.1",
+  "_shasum": "8947af3d62832a084744888e3db1f1ace866507a",
+  "_from": "docpad-plugin-tableofcontents@~2.0.1",
+  "_resolved": "https://registry.npmjs.org/docpad-plugin-tableofcontents/-/docpad-plugin-tableofcontents-2.0.1.tgz"
+}

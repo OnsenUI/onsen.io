@@ -6,6 +6,15 @@ needHelp: true
 autotoc: true
 ---
 
+<script>
+$(function() {
+  $(".resize-btn").on("click", function(elm) {
+    var hash = $(elm.target).data("slug-hash");
+    $(".codepen-content-" + hash).toggleClass("expanded");
+  });
+});
+</script>
+
 ## Onsen UI Guide
 
 ### Loading Onsen UI in Your Project
@@ -212,7 +221,7 @@ A toolbar is defined as `<ons-toolbar>` tag. Here is the typical example of a to
 </ons-toolbar>
 ```
 
-<上のスクリーンショット>
+<%- @partial('codepen', { id: "aHmGL" } ) %>
 
 The toolbar is divided into 3 sections (left, center, and right), and those can be specified from class names as `left`, `center`, and `right`. You can use `<ons-icon>` to display an icon, `<ons-toolbar-button>` or `<ons-back-button>` to place an button, or insert any HTML content.
 
@@ -329,14 +338,13 @@ Sliding menu consists of two-pages, which are referred as above page and behind 
   </ons-list>
 </script>
 ```
+<%- @partial('codepen', { id: "IDvFJ" } ) %>
 
 #### Opening / closing menu
 
 `<ons-sliding-menu>` provides following APIs to handle menu actions: `openMenu`, `closeMenu`, and `toggleMenu`.
 
 Here is the example adding a toolbar and a button in `above-page`, and control the menu from JavaScript.
-
-＜例＞
 
 #### Setting above and behind page by JavaScript
 
@@ -408,11 +416,13 @@ To place a tab bar into your app, place a `<ons-tabbar>` element. A `<ons-tabbar
 </ons-tabbar>
 ```
 
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "pGuDL" } ) %>
 
 #### Customizing tab bar
 
 Tab bar item can have an `icon` attribute and a `label` attribute. For the icon attribute, please specify the same icon name used in `<ons-icon>` element.
+
+<%- @partial('codepen', { id: "kxgys" } ) %>
 
 #### Tab bar events
 
@@ -433,22 +443,19 @@ To create a list, insert a `<ons-list>` tag and `<ons-list-item>` tags under the
 
 Here is the basic `<ons-list>` example with scrollable content.
 
-＜コード＞
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "yxcCt" } ) %>
 
 #### List with right arrow icon
 
 This list is usually used with `<ons-navigator>`.
 
-＜コード＞
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "nIEvm" } ) %>
 
 #### List with forms
 
 List is also frequently used in the setting page. Here is the example list with some form elements.
 
-＜コード＞
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "ohqDk" } ) %>
 
 ### Using Form Components
 
@@ -458,12 +465,9 @@ Onsen UI provides various components for building forms.
 
 `<ons-button>` renders a button with different face types. You can change the appearance by using `type`, `should-spin`, `animation` and `disabled` attributes.
 
-＜コード（type, should-spin, animation, disabledを変えてみたパターン）＞
-＜スクリーンショット＞
-
 To detect a tap event, use `onclick` or `ng-click` attribute.
 
-＜コード（ng-clickを使った場合）＞
+<%- @partial('codepen', { id: "hLayx" } ) %>
 
 #### Switch
 
@@ -494,8 +498,6 @@ Text input and textarea do not have their own custom elements. However, you can 
   <textarea class="textarea" id="my-textarea"></textarea>
   ```
 
-＜スクリーンショット＞
-
 For both cases, you can use `getElementById` or jQuery's selector to obtain the component value.
 
 ```
@@ -511,7 +513,7 @@ Similar to text input, you can display a search input by setting input type as `
 <input type="search" class="search-input">
 ```
 
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "qFbGp" } ) %>
 
 #### Check box and radio button
 
@@ -532,7 +534,6 @@ Check box and radio button are provided as CSS components. Therefore, use the fo
 </label>
 ```
 
-＜スクリーンショット＞
 
 ### Layouting
 
@@ -550,160 +551,11 @@ By default, all `<ons-col>` inside a `<ons-row>` will have the same width. You c
 
 You can see the following example to understand how `<ons-row>` and `<ons-col>` can provide flexible component placement.
 
-```
-<style type="text/css" media="screen">
-  .col {
-    border: 1px solid #ccc;
-    background: #fff;
-    overflow: hidden;
-    padding: 4px;
-    color: #999;
-  }
-</style>
-<ons-page>
-  <h3>Equally spaced</h3>
-  <ons-row>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-  </ons-row>
-  <p></p>
-  <ons-row>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-  </ons-row>
-  <p></p>
-  <ons-row>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-  </ons-row>
+<%- @partial('codepen', { id: "GgujC" } ) %>
+<%- @partial('codepen', { id: "imBju" } ) %>
+<%- @partial('codepen', { id: "hfIBy" } ) %>
+<%- @partial('codepen', { id: "tyLep" } ) %>
 
-  <h3>Full height</h3>
-  <ons-row>
-    <ons-col>
-      <div class="Demo">
-        This column's height will grow to the same height as the tallest column.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis velit non gravida venenatis. Praesent consequat lectus purus, ut scelerisque velit condimentum eu.
-      </div>
-    </ons-col>
-  </ons-row>
-
-  <h3>Individual Sizing</h3>
-  <ons-row>
-    <ons-col size="50">Col size="50"</ons-col>
-    <ons-col>Col</ons-col>
-    <ons-col>Col</ons-col>
-  </ons-row>
-  <p></p>
-  <ons-row>
-    <ons-col>
-      <div class="Demo">Col</div>
-    </ons-col>
-    <ons-col size="33">
-      <div class="Demo">Col size="33"</div>
-    </ons-col>
-  </ons-row>
-  <p></p>
-  <ons-row>
-    <ons-col size="25">
-      <div class="Demo">Col size="25"</div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">Col</div>
-    </ons-col>
-    <ons-col size="33">
-      <div class="Demo">Col size="33</div>
-    </ons-col>
-  </ons-row>
-
-  <h3>Top-aligned Grid Cells</h3>
-  <ons-row align="top">
-    <ons-col>
-      <div class="Demo">
-        This cell should be top-aligned.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        This cell should be top-aligned.
-      </div>
-    </ons-col>
-  </ons-row>
-
-  <h3>Bottom-aligned Grid Cells</h3>
-  <ons-row align="bottom">
-    <ons-col>
-      <div class="Demo">
-        This cell should be bottom-aligned.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        This cell should be bottom-aligned.
-      </div>
-    </ons-col>
-  </ons-row>
-
-  <h3>Vertically Centered Grid Cells</h3>
-  <ons-row align="center">
-    <ons-col>
-      <div class="Demo">
-        This cell should be vertically-centered with the cell to its right.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.</div>
-    </ons-col>
-  </ons-row>
-
-  <h3>Mixed Vertical Alignment</h3>
-  <ons-row>
-    <ons-col align="top">
-      <div class="Demo">
-        This cell should be top aligned.
-      </div>
-    </ons-col>
-    <ons-col>
-      <div class="Demo">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua.
-      </div>
-    </ons-col>
-    <ons-col align="center">
-      <div class="Demo">
-        This cell should be center-aligned.
-      </div>
-    </ons-col>
-    <ons-col align="bottom">
-      <div class="Demo">
-        This cell should be bottom-aligned.
-      </div>
-    </ons-col>
-  </ons-row>
-</ons-page>
-```
-
-＜スクリーンショット＞
 
 ### Using Icons
 
@@ -720,15 +572,11 @@ Here are some examples.
 <ons-icon icon="angle-left">
 ```
 
-＜スクリーンショット＞
-
 Also, you can specify the icon size to display by using size attribute.
 
 ```
 <ons-icon icon="angle-left" size="40px">
 ```
-
-＜スクリーンショット＞
 
 Furthermore, you can rotate the icon.
 
@@ -736,7 +584,7 @@ Furthermore, you can rotate the icon.
 <ons-icon icon="angle-left" size="40px" rotate="90deg">
 ```
 
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "xAhvg" } ) %>
 
 #### Icon animations
 
@@ -745,8 +593,6 @@ Icon can have an animation effect. This is useful for displaying spinners.
 ```
 <ons-icon icon="angle-left" spin="yes">
 ```
-
-＜スクリーンショット＞
 
 ### Multi-screen support
 
@@ -770,7 +616,7 @@ For example, the following media queries is an example to separate various scree
 </style>
 ```
 
-＜スクリーンショット＞
+<%- @partial('codepen', { id: "lGbrB" } ) %>
 
 #### Using `<ons-split-view>` component
 
@@ -784,8 +630,6 @@ For example, the following media queries is an example to separate various scree
 ##### Specify when to collapse
 
 `<ons-split-view>` has `collapse` attribute to specify when to collapse. The possible values are `portrait`, `landscape`, or `width ##px` (i.e. `width 300px`). For example, if set as `portrait` and the device is in portrait orientation, the secondary page is hidden.
-
-＜スクリーンショット＞
 
 ### Utility APIs
 
@@ -968,12 +812,6 @@ Then, write the appropriate style code under the style tag or in the css file.
 }
 </style>
 ```
-
-＜スクリーンショット＞
-
-If the component has inner element, `--inner` class will be appended to that element.
-
-＜何かいいサンプルがないか？＞
 
 #### Customizing underlying HTML
 

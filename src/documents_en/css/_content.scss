@@ -172,4 +172,30 @@ section#content-container {
     @include all-link-state(#767c86);
   }
 
+  .codepen-wrapper {
+
+    > .resize-btn {
+      margin-top: 5px;
+
+      > i {
+        width: 26px;
+        height: 26px;
+        background: rgba(0,0,0, 0.2);
+        border-radius: 50%;
+        padding: 5px;
+        color: #157DFB;
+        text-align: center;
+      }
+    }
+
+    .codepen-content {
+      width: 320px;
+    }
+
+    .codepen-content.expanded {
+      width: 100%;
+    }
+
+    margin-bottom: 10px;
+  }
 }
