@@ -22,6 +22,7 @@ body#getting_started {
     border: 1px solid #ccc;
     padding: 0;
   }
+
   .template-iframe iframe {
     width: 320px;
     height: 570px;
@@ -85,10 +86,10 @@ body#getting_started {
 
   .template-title {
     text-align: left;
-    font-weight: bold !important;
+    font-weight: 400 !important;
     color: #333 !important;
     margin: 5px 0 15px 0;
-    font-size: 1rem !important;
+    font-size: 18px !important;
   }
   
   .download {
@@ -100,7 +101,7 @@ body#getting_started {
     margin: 0;
     display: inline-block;
     width: auto;
-    margin-top: 6px;
+    margin-top: 4px;
     &:link, &:visited {
       text-decoration: underline;
     }
