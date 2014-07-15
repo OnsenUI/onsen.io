@@ -6,9 +6,9 @@ needHelp: true
 autotoc: true
 ---
 
-<h2>Getting Started to Onsen UI</h2>
+<h2>Getting Started with Onsen UI</h2>
 
-<p>Onsen UI helps you develop both hybrid apps and web apps. If developing for hybrid apps, you can use with <a href="http://cordova.apache.org" target="_blank">Cordova</a> or <a href="http://phonegap.com" target="_blank">PhoneGap</a> command line, or with <a href="http://monaca.mobi/">Monaca IDE</a> - a cloud-based IDE for Cordova.</p>
+<p>Onsen UI helps you develop both hybrid and web apps. If developing hybrid apps, you can use it with the <a href="http://cordova.apache.org" target="_blank">Cordova</a> / <a href="http://phonegap.com" target="_blank">PhoneGap</a> command line, or with <a href="http://monaca.mobi/">Monaca IDE</a> - cloud-based IDE for Cordova.</a>
 
 <h3>Onsen UI with the Command Line</h3>
 
@@ -62,7 +62,7 @@ autotoc: true
 
   <h4>3. Add platform</h4>
 
-  <p>You need to add platform SDK to the project to run on the simulator or device.</p>
+  <p>You need to add the platform SDK to the project to run on the simulator or device.</p>
 
   <pre>
   $ cd /path/to/the/project
@@ -71,19 +71,19 @@ autotoc: true
 
   <h4>4. Run on the simulator</p>
 
-  <p>Following command will run the application in the simulator.</p>
+  <p>The following command will run the application in the simulator.</p>
 
   <pre>
   $ cordova simulate
   </pre>
 
-  <p>If the command fails, you are missing something. If you want a quicker solution, try Monaca with the following instruction.</p>
+  <p>If the command fails, you are missing something. If you want a quicker solution, try Monaca with the following instructions.</p>
 </div>
 
 <h3>Using Onsen UI with Monaca</h3>
 
 <div class="h3-wrapper">
-  <p>The benefit of using Monaca with Onsen UI is that you don't need to setup any environment locally, but still can develop for iOS and Android.</p>
+  <p>The benefit of using Monaca with Onsen UI is development in the cloud. You don’t need to setup a local environment to develop for iOS and Android.</p>
 
   <h4>1. Sign up to Monaca</h4>
 
@@ -101,9 +101,9 @@ autotoc: true
 
   <p>After creating the project, open the IDE.</p>
 
-  <h4>3. Install debugger and run the project</h4>
+  <h4>3. Install debugger and run project</h4>
 
-  <p>You can now run the project on the device. Just install Monaca Debugger and it will download the project and start right away.</p>
+  <p>You can now run your project on your device. Just install Monaca Debugger and it will download the project and start right away.</p>
 
   <p>
     <img src="/images/docs/debugger_qr.png">
@@ -111,17 +111,17 @@ autotoc: true
     <a href="http://itunes.apple.com/app/monaca/id550941371" target="_blank"><img src="/images/docs/app_store_logo.png"></a>
   </p>
 
-  <h4>4. Build into Android or iOS native apps</h4>
+  <h4>4. Build for Android and iOS</h4>
 
   <p><img src="/images/docs/monaca_ide.png" width="600"></p>
 
-  <p>Monaca supports Onsen UI app to be published for iOS, Android, and Chrome Apps. You can easily submit your app to App Store and Google Play.</p>
+  <p>Publish your Onsen UI-built app with Monaca for iOS, Android, and Chrome Apps. Easily submit your app to the App Store and Google Play.</p>
 </div>
 
-<h3>Using Onsen UI for Web sites</h3>
+<h3>Using Onsen UI for Websites</h3>
 
 <div class="h3-wrapper">
-  <p>You can use Onsen UI <a href="http://bower.io">Bower</a> module for quicker setup.</p>
+  <p>You can use Onsen UI <a href="http://bower.io">Bower</a> module for a quicker setup.</p>
 
   <pre>
   $ sudo npm install -g bower
