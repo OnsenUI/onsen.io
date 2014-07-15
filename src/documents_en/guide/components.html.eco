@@ -2,36 +2,18 @@
 layout: 'docpad_en'
 title: 'Components'
 page: 'components'
+autotoc: true
 ---
 
-<div class="row">
-  <div class="left-col">
-    <section id="sidemenu" class="left-menu toc">
-      <% for directive in @framework.directives: %>
-      <a class="directive-name<% if directive is @framework.directives[0]: %> selected<% end %>" 
-        is-parent="true" href="#<%= directive %>">
-        <%= directive %>
-      </a> 
-      <% end %>
-    </section>
-  </div>
-  <div class="right-col">
-    <% for directive in @framework.directives: %>
-      <a name="<%= directive %>"></a>
-      <%- @partial("framework/en/api/directives/directive/" + directive + ".html") %>
-    <% end %>        
-    
-  </div>
-</div>
-<div style="clear:both"></div>
+<h2>Components</h2>
 
-<script src="<%= @rootUrl %>scripts/theme_switcher.js"></script>
+<% for directive in @framework.directives: %>
+  <h3><%= directive %></h3>
+  <div class="h3-wrapper">
+    <%- @partial("framework/en/api/directives/directive/" + directive + ".html") %>
+  </div>
+<% end %>
+
 <script src="<%= @rootUrl %>scripts/navigation_highlighter.js"></script>
 <script src="<%= @rootUrl %>vendor/highlight.min.js"></script>
-<script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
-<script>
-$(function() {
-    $('.left-menu').sticky({topSpacing : 0, bottomSpacing : 300, parent : $('div.content')[0]});
-});
-
-</script>
+<script async src="//codepen.io/assets/embed/ei.js"></script>
