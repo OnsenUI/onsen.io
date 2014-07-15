@@ -63,18 +63,14 @@ autotoc: true
 
   <p>You need to add the platform SDK to the project to run on the simulator or device.</p>
 
-  <pre>
-  $ cd /path/to/the/project
-  $ cordova platform add ios (or android)
-  </pre>
+  <pre>$ cd /path/to/the/project
+$ cordova platform add ios (or android)</pre>
 
   <h4>4. Run on the simulator</p>
 
   <p>The following command will run the application in the simulator.</p>
 
-  <pre>
-  $ cordova simulate
-  </pre>
+  <pre>$ cordova simulate</pre>
 
   <p>If the command fails, you are missing something. If you want a quicker solution, try Monaca with the following instructions.</p>
 </div>
@@ -122,8 +118,7 @@ autotoc: true
 <div class="h3-wrapper">
   <p>You can use Onsen UI <a href="http://bower.io">Bower</a> module for a quicker setup.</p>
 
-  <pre>
-  $ sudo npm install -g bower
-  $ bower install onsenui
-  </pre>
+  <pre>$ sudo npm install -g bower
+$ bower install onsenui</pre>
+
 </div>
