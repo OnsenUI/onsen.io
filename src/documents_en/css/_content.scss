@@ -18,6 +18,15 @@ section#content-container {
     font-weight: 400;
     font-size: 16px;
     color: #767c86;
+ 
+    .doc-title {
+      font-weight: bold;
+      color: #ff2828
+    }
+
+    div.first-toc > ul.toc > li > a {
+      font-weight: 500;
+    }
 
     ul.toc {
       text-align: left;
