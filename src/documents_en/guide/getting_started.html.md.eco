@@ -25,56 +25,52 @@ autotoc: true
 
   <p>Download a starter kit from the following templates.</p>
 
-  <div class="templates-container">
-    <div class="flex-item">
-      <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a></div>
-      <div class="template-title">Master-Detail</div>
-      <div class="template-iframe">
-        <iframe src="/OnsenUI/project_templates/master_detail/app/" width="320" height="570"></iframe>
-      </div>
-    </div>
-
-    <div class="flex-item">
-      <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a></div>
-      <div class="template-title">Sliding menu</div>
-      <div class="template-iframe">
-        <iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="320" height="570"></iframe>
-      </div>
-    </div>
-
-    <div class="flex-item">
-      <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a></div>
-      <div class="template-title">Tab bar</div>
-      <div class="template-iframe">
-        <iframe src="/OnsenUI/project_templates/tab_bar/app/" width="320" height="570"></iframe>
-      </div>
-    </div>
-
-    <div class="flex-item center">
-      <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a></div>
-      <div class="template-title">Split view</div>
-      <div class="template-iframe-landscape">
-        <iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="570" height="320"></iframe>
-      </div>
-    </div>
+<div class="templates-container">
+<div class="flex-item">
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/master_detail.zip">Download</a></div>
+  <div class="template-title">Master-Detail</div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/master_detail/app/" width="320" height="570"></iframe>
   </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/sliding_menu_navigator.zip">Download</a></div>
+  <div class="template-title">Sliding menu</div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/sliding_menu_navigator/app/" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/tab_bar.zip">Download</a></div>
+  <div class="template-title">Tab bar</div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/tab_bar/app/" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item center">
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/split_view_navigator.zip">Download</a></div>
+  <div class="template-title">Split view</div>
+  <div class="template-iframe-landscape">
+    <iframe src="/OnsenUI/project_templates/split_view_navigator/app/" width="570" height="320"></iframe>
+  </div>
+</div>
+</div>
 
   <h4>3. Add platform</h4>
 
   <p>You need to add the platform SDK to the project to run on the simulator or device.</p>
 
-  <pre>
-  $ cd /path/to/the/project
-  $ cordova platform add ios (or android)
-  </pre>
+  <pre>$ cd /path/to/the/project
+$ cordova platform add ios (or android)</pre>
 
   <h4>4. Run on the simulator</p>
 
   <p>The following command will run the application in the simulator.</p>
 
-  <pre>
-  $ cordova simulate
-  </pre>
+  <pre>$ cordova simulate</pre>
 
   <p>If the command fails, you are missing something. If you want a quicker solution, try Monaca with the following instructions.</p>
 </div>
@@ -122,8 +118,7 @@ autotoc: true
 <div class="h3-wrapper">
   <p>You can use Onsen UI <a href="http://bower.io">Bower</a> module for a quicker setup.</p>
 
-  <pre>
-  $ sudo npm install -g bower
-  $ bower install onsenui
-  </pre>
+  <pre>$ sudo npm install -g bower
+$ bower install onsenui</pre>
+
 </div>
