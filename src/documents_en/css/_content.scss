@@ -103,7 +103,7 @@ section#content-container {
     }
 
     h3 {
-      font-size: 42px;
+      font-size: 32px;
       margin: 46px 0 20px 0px;
     }
 
@@ -112,17 +112,26 @@ section#content-container {
     }
 
     h4 {
-      font-size: 32px;
+      font-size: 30px;
       margin: 36px 0 8px 0;
     }
 
-    h5, h6 {
-      font-size: 32px;
+    h5 {
+      font-size: 28px;
       margin: 36px 0 8px 0;
     }
 
-    h2, h3, h4, h5, h6 {
+    h6 {
+      font-size: 26px;
+      margin: 36px 0 8px 0;
+    }
+
+    h2 {
       font-weight: 200;
+    }
+
+    h3, h4, h5, h6 {
+      font-weight: 600;
     }
 
     ul > li {
