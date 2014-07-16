@@ -97,7 +97,8 @@ section#content-container {
     h2 {
       font-size: 48px;
       margin: 70px 0 20px 0px;
-      &:first-child {
+      &:first-child,
+      &:first-of-type {
         margin-top: 0;
       }
     }
