@@ -555,7 +555,7 @@ The layout can be performed by combining [`<ons-row>`](components.html#ons-row) 
 
 By default, all [`<ons-col>`](components.html#ons-col) inside a [`<ons-row>`](components.html#ons-row) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
 
-[`<ons-row>`](components.html#ons-row) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes.
+[`<ons-row>`](components.html#ons-row) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
 
 #### Layout example
 
@@ -877,13 +877,7 @@ The JavaScript code for each component is located in the `directives` directory.
 
 #### Building Onsen UI
 
-If you need to build Onsen UI manually, there is a gulp task for that purpose.
-
-```
-$ gulp build
-```
-
-This will build Onsen UI and generate distributable files.
+If you need to build Onsen UI manually, there is a `gulp` task for that purpose. Please follow the instruction from the [project Website](https://github.com/OnsenUI/OnsenUI).
 
 <script async src="//codepen.io/assets/embed/ei.js"></script>
 
