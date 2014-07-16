@@ -45,17 +45,19 @@ footer#footer-container {
     margin: 0 auto;
     width: $width;
 
-    .social {
+    .social-and-newsletter {
       margin-bottom: 44px;
 
       .socialicn {
         background: none no-repeat 0 0;
         display: inline-block;
-        margin: 0 24px;
+        margin: 0 28px 0 0;
         width: 56px;
-        height: 56px;
+        height: 70px;
         background-repeat: no-repeat;
         background-position: center center;
+        line-height: 70px;
+        vertical-align: top;
 
         &:hover {
           opacity: 0.8;
@@ -73,21 +75,76 @@ footer#footer-container {
       }
     }
 
+    .footer-newsletter {
+      text-align: left;
+      display: inline-block;
+      width: 340px;
+      border-left: 1px solid #ddd;
+      height: 70px;
+      padding-left: 30px;
+
+      > form {
+        display: inline-block;
+      }
+
+      input[type=text] {
+        font-size: 18px;
+        background-color: white;
+        color: #333;
+        font-weight: 400;
+        width: 200px;
+        line-height: 36px;
+        border: none;
+        border-radius: 2px;
+        padding: 0 8px;
+        border: 1px solid #ddd;
+      }
+
+      input[type=submit] {
+        font-size: 18px;
+        background-color: white;
+        background-color: #767c86;
+        color: white;
+        font-weight: 400;
+        line-height: 36px;
+        border-radius: 2px;
+        border: none;
+        padding: 0 8px;
+        font-weight: 400;
+        &:hover {
+          background-color: #454b55;
+        }
+      }
+
+      div.footer-newsletter-thankyou {
+        color: #666;
+        font-size: 18px;
+        line-height: 40px;
+        font-weight: 400;
+        display: none;
+      }
+
+      div.footer-newsletter-title {
+        font-size: 16px;
+        font-weight: 500;
+        color: #767c86;
+      }
+    }
+
+
     .copyright {
       position: absolute;
-      top: 192px; 
+      top: 222px; 
       left: 100px;
     }
 
     .helpmenu {
       position: absolute;
-      top: 192px;
+      top: 222px;
       right: 100px;
       a {
         @include all-link-state(#999);
-        transition: color 200ms linear;
         &:hover {
-          transition: color 50ms linear;
           color: $onsen-red;
         }
       }

@@ -88,6 +88,20 @@ body {
   color: #666;
 }
 
+input {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+input:focus, input:active {
+  outline: none;
+}
+
+input[type=submit] {
+  cursor: pointer;
+}
+
 h1,h2,h3,h4,h5,h6 {
   font-weight: 300;
   font-family: "ff-enzo-web", "Helvetica Neue", Helvetica, sans-serif;
