@@ -7,6 +7,13 @@ body#components {
   }
 
 
+  h3 {
+    border-bottom: 1px solid #ddd;
+  }
+
+  h4 {
+    font-size: 26px !important;
+  }
 
   table {
     width: 100%;
@@ -14,7 +21,7 @@ body#components {
     border-collapse: collapse;
     border-spacing: 0;
     box-sizing: border-box;
-    font-size: 14px;
+    font-size: 16px;
     margin: 16px 0;
     > tbody {
       > tr {
@@ -23,9 +30,6 @@ body#components {
         border-top: 1px solid #ddd;
         &:last-child {
           border-bottom: 1px solid #ddd;
-        }
-        &:first-child {
-          border-top: 0px solid #ddd;
         }
         > th {
           padding: 8px;
@@ -39,7 +43,7 @@ body#components {
             white-space: nowrap;
             font-family: 'Menlo Regular', 'Menlo', 'Consolas', monospace;
             color: #10108F;
-            font-size: 14px;
+            font-size: 16px;
           }
 
           &.attribute-name {
@@ -59,40 +63,10 @@ body#components {
         > th {
           padding: 4px 8px;
           border-width: 0px;
-          font-size: 18px;
+          font-size: 20px;
         }
       }
     }
-  }
-
-  div.demo {
-    background-image: url('/images/iPhone5CFrame.png');
-    background-position: 0px 0px;
-    background-repeat: no-repeat;
-    height: 1000px;
-    width: 400px;
-    margin-left: 520px;
-    position: relative;
-
-    iframe {
-      max-width: none;
-      &.simulater-iframe {
-        border-color: black;
-        background-color: #f9f9f9;
-      }
-    }
-  }
-
-  .fit-iphone-frame {
-    top: 119px;
-    left: 34px;
-    position: absolute;
-  }
-
-  .anchor {
-    display: block;
-    height: 0px;   
-    visibility: hidden;
   }
 
 }

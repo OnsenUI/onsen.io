@@ -9,15 +9,17 @@ section#content-container {
   }
 
   > aside#content-info, div.sticky-wrapper > aside#content-info {
-    margin: 0px 0 100px;
+    margin: 58px 0 100px 0;
     overflow: scroll;
     float: left;
-    width: $aside-width;
-    padding: 58px 40px 4px 0px;
+    width: $aside-width - 30px;
+    padding: 0px 10px 4px 0px;
+    margin-right: 30px;
     @include box-sizing(border-box);
     font-weight: 400;
     font-size: 16px;
     color: #767c86;
+    border-right: 1px solid #ddd;
  
     .doc-title {
       font-weight: bold;
@@ -25,11 +27,12 @@ section#content-container {
     }
 
     div.first-toc > ul.toc > li a {
-      font-weight: 500;
+      font-weight: 400;
     }
 
     div.first-toc > ul.toc > li a.selected {
-      background-color: #ffeeee;
+      color: $onsen-red;
+      text-decoration: underline;
     }
 
     ul.toc {
@@ -144,7 +147,7 @@ section#content-container {
       font-weight: 200;
     }
 
-    h3, h4, h5, h6 {
+    h2, h3, h4, h5, h6 {
       font-weight: 600;
     }
 
@@ -188,11 +191,16 @@ section#content-container {
     pre, pre code {
       font-size: 16px;
     }
-
   }
 
   a {
-    @include all-link-state(#767c86);
+    @include all-link-state(#5986a3);
+    &:link, &:visited {
+      text-decoration: underline;
+    }
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   .codepen-wrapper {
