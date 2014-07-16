@@ -4,29 +4,37 @@ page: 'home'
 ---
 
 <div id="keyvisual">
-	<div class="keyvisual-content">
-		<div class="keyvisual-main">
-			<h1>The Answer to<br>PhoneGap UI Development</h1>
-			<h2>A Custom Elements-Based HTML5 UI Framework</h2>
+  <div class="keyvisual-content">
+    <div class="keyvisual-main">
+      <h1>The Answer to<br>PhoneGap UI Development</h1>
+      <h2>A Custom Elements-Based HTML5 UI Framework</h2>
 
-			<a class="getting-started" href="/guide/getting_started.html">Getting Started</a><!--
-			--><a class="download" href="/OnsenUI/project_templates/onsen_ui.zip">Download v<strong>1.1.0</strong></a>
-			
-		</div>
+      <a class="getting-started" href="/guide/getting_started.html">Getting Started</a><!--
+      --><a class="download" href="/OnsenUI/project_templates/onsen_ui.zip">Download v<strong>1.1.0</strong></a>
 
-		<div class="social">
+    </div>
 
-			<img src="/images/index/github-icon-mini.png" class="github-icon-mini">
-			<a class="github-star" href="https://github.com/OnsenUI/OnsenUI/stargazers">
-				<strong></strong> Stars
-			</a>
+    <div class="social">
 
-			<img src="/images/index/twitter-icon-mini.png" class="twitter-icon-mini">
-			<a class="twitter-follower" href="https://twitter.com/Onsen_UI">
-				<strong></strong> Followers
-			</a>
-		</div>
-	</div>
+      <img src="/images/index/github-icon-mini.png" class="github-icon-mini">
+      <a class="github-star" href="https://github.com/OnsenUI/OnsenUI/stargazers">
+        <strong></strong> Stars
+      </a>
+
+      <img src="/images/index/twitter-icon-mini.png" class="twitter-icon-mini">
+      <a class="twitter-follower" href="https://twitter.com/Onsen_UI">
+        <strong></strong> Followers
+      </a>
+    </div>
+
+    <div class="newsletter">
+      <form>
+        <input type="text" placeholder="Enter email to subscribe newsletter" name="email">
+        <input type="submit" value="Send">
+      </form>
+      <div class="newsletter-thankyou">Thank you!</div>
+    </div>
+  </div>
 </div>
 
 <div class="taglines">
@@ -142,28 +150,49 @@ page: 'home'
 </div>
 
 <script>
-$(function() {
-	$.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
-		if(data && data.data.watchers) {
-			$('div.social a.github-star strong').text(data.data.watchers);
-		}
-	}).error(function() {
-		$('div.social img.github-icon-mini').remove();
-		$('div.social a.github-star').remove();
-	});
+  $(function() {
+    $.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
+      if(data && data.data.watchers) {
+        $('div.social a.github-star strong').text(data.data.watchers);
+      }
+      }).error(function() {
+      $('div.social img.github-icon-mini').remove();
+      $('div.social a.github-star').remove();
+    });
 
-	$.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
-		if(data && data.followers_count) {
-			$('div.social > a.twitter-follower > strong').text(data.followers_count);
-		}
-	}).error(function() {
-		$('div.social  img.twitter-icon-mini').remove();
-		$('div.social  a.twitter-follower').remove();
-	});
+    $.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
+      if(data && data.followers_count) {
+        $('div.social > a.twitter-follower > strong').text(data.followers_count);
+      }
+      }).error(function() {
+      $('div.social  img.twitter-icon-mini').remove();
+      $('div.social  a.twitter-follower').remove();
+    });
 
-	// event tracking
-	$('#keyvisual .download').click(function() {
-		ga('send', 'event', 'website', 'download');
-	});
-});
+    // event tracking
+    $('#keyvisual .download').click(function() {
+      ga('send', 'event', 'website', 'download');
+    });
+  });
+</script>
+
+<script>
+  $(function() {
+    $('.newsletter form').submit(function() {
+      var email = $('input[name=email]', this).val();
+
+      $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
+        .success(function(data) {
+          var ret = JSON.parse(data);
+          console.log(ret);
+          if (ret.status !== undefined && ret.status === "success") {
+            $('.newsletter form').hide();
+            $('.newsletter-thankyou').show();
+          } else {
+            alert('Something wrong with the request. Sorry.');
+          }
+        });
+      return false;
+    });
+  });
 </script>
