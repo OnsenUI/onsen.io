@@ -24,8 +24,12 @@ section#content-container {
       color: #ff2828
     }
 
-    div.first-toc > ul.toc > li > a {
+    div.first-toc > ul.toc > li a {
       font-weight: 500;
+    }
+
+    div.first-toc > ul.toc > li a.selected {
+      background-color: #ffeeee;
     }
 
     ul.toc {

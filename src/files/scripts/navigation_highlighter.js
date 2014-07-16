@@ -1,6 +1,6 @@
 
 (function() {
-	var links = $('.directive-name');
+	var links = $('#content-info a');
 	var sections = [];
 	var iframes = [];
 	var linkMap = {};
@@ -13,57 +13,31 @@
 	setTimeout(update, 1000);
 	scrollWrapper.addEventListener('scroll', update, true);
 
-
-	function loadDemo(iframe) {
-		var $iframe = $(iframe);
-		var scrollY = window.scrollY;
-
-		if ($iframe.attr('src') !== $iframe.data('src')) {
-			setTimeout(function() {
-				if (window.scrollY === scrollY) {
-					$iframe.attr('src', $iframe.data('src'));
-				}
-			}, 300);
-		}
-	}
-
 	function update() {
-		var scrolled = window.scrollY + ($(window).height() / 2);
+		var scrolled = window.scrollY + ($(window).height() / 5);
 
 		for (var i = sections.length - 1; i >= 0; i--) {
 			var section = sections[i];
 			var position = section.offset().top;
 			
 			if (scrolled > position) {
-				iframes[i] && loadDemo(iframes[i]);
-
-				var id = '#' + section.attr('id');
-				links.removeClass('selected');
-				linkMap[id].link.addClass('selected');
-				linkMap[id].parent.addClass('selected');
-				break;
+        var id = "#" + section.attr("id");
+        links.removeClass("selected");
+        linkMap[id].link.addClass("selected");
+        return;
 			}
 		};
 	}
 
 	function prepare() {
-		var directiveContainers = $('div.directive-container');
-
 		for (var i = 0; i < links.length; i++) {
 			var link = $(links[i]);
 			var id = link.attr('href');
-			var isParent = link.attr('is-parent') === "true" || false;
-			if (isParent) {
-				currentParent = link;
-			}
-			var section = $(id);
-			sections.push(section);
-			iframes[i] = $(directiveContainers[i]).find('iframe')[0];
-			linkMap[id] = {};
+      var section = $(id);
+      sections.push(section);
+      linkMap[id] = {};
 			linkMap[id].link = link;
-			linkMap[id].parent = currentParent;
 		}
 	}
-
 
 })();
