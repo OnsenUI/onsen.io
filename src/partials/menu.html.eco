@@ -1,13 +1,9 @@
-<!-- Define `renderMenu` partial -->
 <% renderMenu = (items) => %>
 
 <% for item in items: %>
-    <!-- Remove link if we’re currently viewing this document -->
     <% if item.state != 'current': %>
-        <!-- <a href="<%= item.url %>"><%= item.title %></a>                 -->
     <% else: %>
-        <%= item.title %>
-        <!-- Table of content inside this doc -->
+        <div class="doc-title"><%= item.title %></div>
         <% if @document.toc: %>
             <ul class="toc">
                 <% for toc in @document.toc: %>
@@ -28,12 +24,10 @@
             <%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
         <% end %>
     <% end %>
-    <!-- Render submenu if item has children -->
     <% if item.children: %>
         <%- renderMenu(item.children) %>
     <% end %>
 <% end %>
 
 <% end %>
-<!-- Run `renderMenu` partial aginst passed `menuItems` meta-data  -->
 <%= renderMenu @menuItems %>

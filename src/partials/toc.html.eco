@@ -1,7 +1,7 @@
 <% renderToc = (items) => %>
 
 <% if items.length == 1 and items[0].children: %>
-    <%- renderToc(items[0].children) %>
+    <div class="first-toc"><%- renderToc(items[0].children) %></div>
 <% else: %>
   <% if items.length: %>
   <ul class="toc">
