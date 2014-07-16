@@ -69,10 +69,10 @@ section#content-container {
   }
 
   > aside#content-info + div#content, div.sticky-wrapper + div#content {
-    width: ($width - $aside-width)px;
+    width: ($width - $aside-width);
     margin: 0;
     padding-right: 0px;
-    padding-left: $aside-width;
+    margin-left: $aside-width;
   }
 
   > div#content {

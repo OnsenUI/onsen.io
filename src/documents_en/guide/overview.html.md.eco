@@ -6,15 +6,6 @@ needHelp: true
 autotoc: true
 ---
 
-<script>
-$(function() {
-  $(".resize-btn").on("click", function(elm) {
-    var hash = $(elm.target).data("slug-hash");
-    $(".codepen-content-" + hash).toggleClass("expanded");
-  });
-});
-</script>
-
 ## Onsen UI Guide
 
 ### Loading Onsen UI in Your Project
@@ -627,6 +618,8 @@ For example, the following media queries is an example to separate various scree
 - `main-page`: Specify a page to display on the main section.
 - `secondary-page`: Specify a page to display on the side section.
 
+<%- @partial('codepen', { id: "nKqfv" } ) %>
+
 ##### Specify when to collapse
 
 `<ons-split-view>` has `collapse` attribute to specify when to collapse. The possible values are `portrait`, `landscape`, or `width ##px` (i.e. `width 300px`). For example, if set as `portrait` and the device is in portrait orientation, the secondary page is hidden.
@@ -844,3 +837,11 @@ This will build Onsen UI and generate distributable files.
 
 <script async src="//codepen.io/assets/embed/ei.js"></script>
 
+<script>
+$(function() {
+  $(".resize-btn").on("click", function(elm) {
+    var hash = $(elm.target).data("slug-hash");
+    $(".codepen-content-" + hash).toggleClass("expanded");
+  });
+});
+</script>
