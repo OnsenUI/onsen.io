@@ -1,9 +1,8 @@
-@charset "UTF-8";
-
-header.common {
+header#header-container {
   border-bottom: 1px solid #ddd;
   height: 84px;
   width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
 
   > div {
@@ -53,6 +52,29 @@ header.common {
           color: $onsen-red;
         }
       }
+    }
+  }
+}
+
+
+@media screen and (max-width: 1100px) {
+  header#header-container {
+    border-bottom: 0px solid #fff;
+
+    > div:first-child {
+      margin-left: 20px;
+    }
+
+    > div > .gnav {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  header#header-container {
+    > div > .gnav {
+      display: none;
     }
   }
 }

@@ -79,8 +79,8 @@ html {
 }
 
 body {
-  min-width: $width;
-  text-align: center;
+  max-width: 100%;
+  text-align: left;
   -webkit-text-size-adjust: 100%;
   &:after {content: ""; clear: both; display: block;}
   -webkit-font-smoothing: antialiased;
@@ -106,15 +106,43 @@ h1,h2,h3,h4,h5,h6 {
   font-weight: 300;
   font-family: "ff-enzo-web", "Helvetica Neue", Helvetica, sans-serif;
 }
-table{border-collapse:collapse;border-spacing:0}
-textarea,input{margin:0;padding:0}
-caption,th{text-align:left}
-td,th{vertical-align: top}
-fieldset,img,abbr{ border:none;}
-li{ list-style-type:none; }
-em { font-style: italic; }
-img, iframe, object { max-width : 100%; } 
-.lt-ie9 img, .lt-ie9 object { width:auto; } 
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+textarea, input{
+  margin: 0;
+  padding: 0;
+}
+
+caption, th{
+  text-align:left;
+}
+
+td, th {
+  vertical-align: top;
+}
+
+fieldset, img, abbr{
+  border:none;
+}
+
+li {
+  list-style-type: none;
+}
+
+em {
+  font-style: italic;
+}
+
+img, iframe, object {
+  max-width: 100%;
+}
+.lt-ie9 img, .lt-ie9 object {
+  width: auto;
+}
 
 a {
   @include all-link-state($onsen-red);
@@ -250,6 +278,11 @@ div#github-ribbon-container {
   }
 }
 
+@media screen and (max-width: 1100px) {
+  body {
+    overflow-x: hidden;
+  }
+}
 
 @import 'header';
 @import 'footer';
@@ -258,3 +291,4 @@ div#github-ribbon-container {
 @import 'page_index';
 @import 'page_getting_started';
 @import 'page_components';
+

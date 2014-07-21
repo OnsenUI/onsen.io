@@ -14,6 +14,8 @@
 	<meta name="description" content="<%= @getPreparedDescription() %>" />
 	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<!-- DocPad Meta -->
 	<%- @getBlock('meta').toHTML() %>
 

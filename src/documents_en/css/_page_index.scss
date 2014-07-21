@@ -11,6 +11,8 @@ body#home {
     > div#content {
       margin-left: 0;
       padding-top: 0;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
       width: 100%;
     }
   }
@@ -27,6 +29,7 @@ body#home {
       margin: 0 auto;
       padding: 180px 0 0 0;
       width: 1100px;
+      max-width: 100%;
 
       > h1 {
         font-size: 54px;
@@ -121,6 +124,7 @@ body#home {
 
       margin: 0 auto;
       width: 1100px;
+      max-width: 100%;
       position: absolute;
       bottom: 40px;
       left: 0px;
@@ -131,6 +135,8 @@ body#home {
         padding: 3px;
         border-radius: 2px;
         display: inline-block;
+        max-width: 100%;
+        width: auto;
       }
 
       input[type=text] {
@@ -218,11 +224,17 @@ body#home {
   div.other-features {
     margin: 0 auto;
     width: 900px;
+    max-width: 100%;
   }
 
   div.taglines {
     border-bottom: 1px solid #ddd;
     padding: 40px;
+    ul {
+      width: 800px;
+      margin: 0 auto !important;
+      padding: 0;
+    }
     li {
       font-size: 20px;
       color: #767c86;
@@ -299,6 +311,7 @@ body#home {
       display: inline-block;
       @include box-sizing(border-box);
       width: 450px;
+      max-width: 100%;
       padding: 0 12px 32px 86px;
       margin: 0;
       min-height: 130px;
@@ -372,5 +385,95 @@ body#home {
     }
   }
 
+}
 
+@media screen and (max-width: 1100px) {
+  body#home {
+    div#keyvisual {
+      height: auto;
+      
+      > div.keyvisual-content > div.keyvisual-main {
+        padding: 0;
+        > h1 {
+          text-align: center;
+          font-size: 36px;
+          line-height: 40px;
+        }
+        > h2 {
+          font-size: 20px;
+          padding-bottom: 0px;
+          margin-bottom: 40px;
+          text-align: center;
+        }
+        > a.getting-started,
+        > a.getting-started:active {
+          width: 90%;
+          max-width: 300px;
+          display: block;
+          margin: 0 auto 12px auto;
+        }
+        > a.download,
+        > a.download:active {
+          display: none;
+        }
+      }
+      > div.keyvisual-content {
+        > div.social {
+          width: 100%;
+          position: static;
+          text-align: center;
+          margin: 40px 0 10px 0;
+        }
+        > div.newsletter {
+          width: 100%;
+          position: static;
+          text-align: center;
+          margin: 0 0 12px 0;
+        }
+      }
+      > div.keyvisual-content {
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        background-image: none;
+      }
+    }
+
+    div.taglines {
+      ul {
+        width: auto;
+        margin: 0 auto;
+      }
+    }
+
+    section#content-container > div#content > div.main-features {
+      > div.feature {
+        > h2 {
+          font-size: 36px;
+          text-align: center;
+        }
+        padding: 32px 10px 32px 10px !important;
+        background-image: none !important;
+      }
+    } 
+
+    div#keyvisual > div.keyvisual-content > div.newsletter {
+      input[type=text] {
+        width: 200px;
+      }
+    }
+
+    div.other-features {
+      padding-top: 32px !important;
+      padding-bottom: 32px !important;
+
+      text-align: center;
+      > h2 {
+        font-size: 36px !important;
+      }
+      > .sub-feature {
+        text-align: left;
+      }
+    }
+  }
 }
