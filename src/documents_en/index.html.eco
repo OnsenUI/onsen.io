@@ -155,7 +155,7 @@ page: 'home'
       if(data && data.data.watchers) {
         $('div.social a.github-star strong').text(data.data.watchers);
       }
-      }).error(function() {
+    }).error(function() {
       $('div.social img.github-icon-mini').remove();
       $('div.social a.github-star').remove();
     });
@@ -164,7 +164,7 @@ page: 'home'
       if(data && data.followers_count) {
         $('div.social > a.twitter-follower > strong').text(data.followers_count);
       }
-      }).error(function() {
+    }).error(function() {
       $('div.social  img.twitter-icon-mini').remove();
       $('div.social  a.twitter-follower').remove();
     });
