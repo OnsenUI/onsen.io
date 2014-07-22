@@ -34,7 +34,14 @@
 	<!-- For third-generation iPad with high-resolution Retina display: -->
 	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
 
+	<!-- Alternate language -->
+	<% if @fileExist(@getAlternateLangFilePath(@document)): %>
+		<link rel="alternate" href="<%= @getAlternateSiteURL() %><%= @document.url %>" hreflang="<%= @getAlternateLang() %>" />
+	<% end %>
+
 	<script src="/vendor/jquery.js"></script>
+	<script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 
 <body id="<%- @document.page %>">
@@ -45,29 +52,10 @@
 	<%- @partial('header.html.eco') %>
 
 	<section id="content-container" class="clearfix">
+
 		<% if @document.toc or @document.autotoc: %>
-		<aside id="content-info">
-
-			<h2><%= @document.title %></h2>
-			<% if @document.toc: %>
-				<ul>
-					<% for toc in @document.toc: %>
-					<li><a href="<%= toc.href %>"><%= toc.name %></a>
-						<% if toc.sub: %>
-						<ul>
-							<% for sub in toc.sub: %>
-							<li><a href="<%= sub.href %>"><%= sub.name %></a></li>
-							<% end %>
-						</ul>
-						<% end %>
-					</li>
-					<% end %>
-				</ul>
-			<% end %>
-
-			<% if !@document.toc and @document.autotoc and @document.tableOfContents: %>
-				<%- @partial('toc.html.eco', {tocItems: @document.tableOfContents}) %>
-			<% end %>
+		<aside id="content-info">			
+			<%- @partial('menu.html.eco', {menuItems: @generateMenu(@document.url, "guidePages")}) %>
 		</aside>
 		<% end %>
 
@@ -89,11 +77,11 @@
 	$(function() {
 		$('aside#content-info').sticky({
 			topSpacing : 0, 
-			bottomSpacing : $('footer#footer-container').height()
+			bottomSpacing : $('footer#footer-container').height() + 60 
 		});
 	});
 	</script>
-
+  <script src="/scripts/navigation_highlighter.js"></script>
 
 </body>
 </html>

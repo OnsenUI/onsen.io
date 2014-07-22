@@ -1,0 +1,123 @@
+header#header-container {
+  border-bottom: 1px solid #ddd;
+  height: 84px;
+  width: 1100px;
+  max-width: 100%;
+  margin: 0 auto;
+
+  .gnav-icon {
+    display: none;
+  }
+
+  > div {
+    @include box-sizing(border-box);
+    margin: 0 auto;
+    padding-top: 11px;
+    position: relative;
+    text-align: left;
+    width: $width;
+    max-width: 100%;
+  }
+
+  .logo {
+    position: absolute;
+    top: 19px;
+    left: 0;
+  }
+
+  .gnav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 84px;
+    line-height: 84px;
+    
+    li {
+      color: #a6a6a6;
+      display: inline-block;
+      font-size: 20px;
+      height: 85px;
+      margin: 0 4px;
+      padding: 0 15px;
+      -webkit-box-sizing: border-box;
+      -mz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      -o-box-sizing: border-box;
+      box-sizing: border-box;
+      a {
+        @include all-link-state(#666, none);
+        &:hover {
+          color: $onsen-red;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  header#header-container {
+    .gnav li {
+      &.current {
+        border-bottom: 2px solid $onsen-red;
+
+        a {
+          @include all-link-state($onsen-red, all-none);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  header#header-container {
+    border-bottom: 0px solid #fff;
+
+    > div:first-child {
+      padding-left: 20px;
+    }
+
+    .logo {
+      margin-left: 20px;
+    }
+
+    > div > .gnav {
+      display: none;
+    }
+  }
+
+  header#header-container {
+    height: auto;
+    min-height: 88px;
+    .gnav-icon {
+      display: block !important;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      img {
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+        cursor: pointer;
+      }
+    }
+    > div > .gnav {
+      position: static;
+      height: auto;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      margin-top: 60px;
+      margin-left: -20px;
+      margin: 66px 0 12px -20px;
+      padding: 12px 0;
+      > li {
+        display: block;
+        width: 100%;
+        line-height: 48px;
+        height: 48px;
+        padding: 0 12px 0 12px;
+      }
+    }
+  }
+}

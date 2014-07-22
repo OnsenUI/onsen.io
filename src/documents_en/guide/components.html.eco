@@ -1,0 +1,18 @@
+---
+layout: 'docpad_en'
+title: 'Components'
+page: 'components'
+autotoc: true
+---
+
+<h2>Components</h2>
+
+<% for directive in @framework.directives: %>
+  <h3><%= directive %></h3>
+  <div class="h3-wrapper">
+    <%- @partial("framework/en/api/directives/directive/" + directive + ".html") %>
+  </div>
+<% end %>
+
+<script src="<%= @rootUrl %>vendor/highlight.min.js"></script>
+<script async src="//codepen.io/assets/embed/ei.js"></script>

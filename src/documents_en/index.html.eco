@@ -1,0 +1,198 @@
+---
+layout: 'default_en'
+page: 'home'
+---
+
+<div id="keyvisual">
+  <div class="keyvisual-content">
+    <div class="keyvisual-main">
+      <h1>The Answer to<br>PhoneGap UI Development</h1>
+      <h2>A Custom Elements-Based HTML5 UI Framework</h2>
+
+      <a class="getting-started" href="/guide/getting_started.html">Getting Started</a><!--
+      --><a class="download" href="/OnsenUI/project_templates/onsen_ui.zip">Download v<strong>1.1.0</strong></a>
+
+    </div>
+
+    <div class="social">
+
+      <img src="/images/index/github-icon-mini.png" class="github-icon-mini">
+      <a class="github-star" href="https://github.com/OnsenUI/OnsenUI/stargazers">
+        <strong></strong> Stars
+      </a>
+
+      <img src="/images/index/twitter-icon-mini.png" class="twitter-icon-mini">
+      <a class="twitter-follower" href="https://twitter.com/Onsen_UI">
+        <strong></strong> Followers
+      </a>
+    </div>
+
+    <div class="newsletter">
+      <form>
+        <input type="text" placeholder="Enter email for Onsen UI updates" name="email">
+        <input type="submit" value="Send">
+      </form>
+      <div class="newsletter-thankyou">Thank you!</div>
+    </div>
+  </div>
+</div>
+
+<div class="taglines">
+  <ul>
+    <li>Javascript and CSS frameworks for HTML5, PhoneGap &amp; Cordova apps</li>
+    <li>Large selection of Web-based UI components</li>
+    <li>Responsive layout support for smartphones and tablets</li>
+  </ul>
+</div>
+
+<div class="main-features">
+
+	<div class="feature super-performance">
+		<h2>Super Performance</h2>
+
+		<p>
+			Onsen UI is designed and implemented to deliver unprecedented user experience for your apps.<br>
+      Frustrated with the lack of native-like performance? Try Onsen UI and you’ll feel the difference right away.
+		</p>
+	</div>
+
+	<div class="feature multi-screen">
+		<h2>Multi-screen Support</h2>
+
+		<p>
+			Onsen UI is responsive. View adjusts based on screen size, and its as easy as using the &lt;ons-split-view&gt; tag to have a two-column view for tablets and one-column view for smartphones. Onsen UI supports a wide range of devices and platforms. It is fully tested and works well with Android 2.3 and up, iOS 6 and up, Firefox OS, Chrome, and Safari.</p>
+	</div>
+
+	<div class="feature cordova-friendly">
+		<h2>PhoneGap / Cordova Friendly</h2>
+
+		<p>
+			Onsen UI is a perfect solution for developing hybrid apps. That's because our priority is performance and ease of use. Onsen UI is fully open source, and never locks you in. It also provides the option of deploying your apps to the server to use as a tool to build a performance website.
+		</p>
+	</div>
+
+	<div class="feature custom-elements">
+		<h2>Simple to Use</h2>
+
+		<p>
+			Onsen UI is inspired by Web Components. All UI components are tags making it as easy as adding a period.
+		</p>
+
+    <p style="text-align: center; margin-top: 20px;">
+      <img src="/images/index/feature-custom-elements.png">
+    </p>
+	</div>
+
+	<div class="feature with-jquery-or-angular">
+		<h2>Works with jQuery and AngularJS</h2>
+
+		<p>
+      Utilize the power of AngularJS framework with Onsen UI. jQuery users can also take advantage of Onsen UI’s great UI library.
+		</p>
+	</div>
+
+</div>
+
+<div class="other-features">
+  <h2>Other Features</h2>
+
+  <div class="sub-feature free-and-opensource">
+    <h3>Free and Open Source</h3>
+
+    <p>
+      Onsen UI is released under the Apache License and development is housed on
+      <a href="http://github.com/OnsenUI/OnsenUI" target="_blank">Github</a>. It is free and open for anyone to use.
+    </p>
+  </div>
+
+  <div class="sub-feature font-awesome">
+    <h3>Bundled with Font Awesome</h3>
+
+    <p>
+      <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a> is bundled with Onsen UI making it easy to develop and display the exact icons you need.
+    </p>
+  </div>
+
+  <div class="sub-feature selectable-theme">
+    <h3>Built-in Theme Roller</h3>
+
+    <p>
+      Try out <a href="http://components.onsenui.io/" target="_blank">Onsen CSS Components</a>, the Onsen UI way to pick components and customize them.
+    </p>
+  </div>
+
+  <div class="sub-feature customizable">
+    <h3>Customizable</h3>
+
+    <p>
+      Relying on HTML and CSS, Onsen UI is highly customizable to suit the many needs that come with development and design.
+    </p>
+  </div>
+
+  <div class="sub-feature screen-transition">
+    <h3>Screen Transition</h3>
+
+    <p>App operations have a native-like user experience (UX) with smooth animations on cross platform PhoneGap/Cordova apps.</p>
+  </div>
+
+  <div class="sub-feature gui-tool">
+    <h3>GUI Tool Coming Soon</h3>
+
+    <p>
+      With drag &amp; drop support, our GUI tool will make all aspects of front-end 
+      development much easier.
+    </p>
+  </div>
+</div>
+
+<div class="getstarted">
+  <a id="getstarted-button" href="/getting_started/">Get Started, It's Free!</a> <img src="/images/index/right-arrow.png" alt="">
+</div>
+
+<script>
+  $(function() {
+    $.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
+      if(data && data.data.watchers) {
+        $('div.social a.github-star strong').text(data.data.watchers);
+      }
+    }).error(function() {
+      $('div.social img.github-icon-mini').remove();
+      $('div.social a.github-star').remove();
+    });
+
+    $.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
+      if(data && data.followers_count) {
+        $('div.social > a.twitter-follower > strong').text(data.followers_count);
+      }
+    }).error(function() {
+      $('div.social  img.twitter-icon-mini').remove();
+      $('div.social  a.twitter-follower').remove();
+    });
+
+    // event tracking
+    $('#keyvisual .download').click(function() {
+      ga('send', 'event', 'website', 'download');
+    });
+  });
+</script>
+
+<script>
+  $(function() {
+    $('.newsletter form').submit(function() {
+      var email = $('input[name=email]', this).val();
+
+      $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
+        .success(function(data) {
+          var ret = JSON.parse(data);
+          console.log(ret);
+          if (ret.status !== undefined && ret.status === "success") {
+            $('.newsletter form').hide();
+            $('.newsletter-thankyou').show();
+          } else {
+            alert('Something wrong with the request. Sorry.');
+          }
+        });
+      return false;
+    });
+  });
+</script>

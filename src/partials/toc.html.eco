@@ -1,12 +1,20 @@
 <% renderToc = (items) => %>
-<ul>
+
+<% if items.length == 1 and items[0].children: %>
+    <div class="first-toc"><%- renderToc(items[0].children) %></div>
+<% else: %>
+  <% if items.length: %>
+  <ul class="toc">
     <% for item in items: %>
-        <li><a href="#<%= item.id %>"><%= item.text %></a>
+        <li><a href="#<%= item.id %>"><%- item.text %></a>
             <% if item.children: %>
                 <%- renderToc(item.children) %>
             <% end %>
         </li>
     <% end %>
-</ul>
+  </ul>
+  <% end %>
+<% end %>
+
 <% end %>
 <%= renderToc @tocItems %>

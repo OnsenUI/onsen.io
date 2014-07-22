@@ -1,0 +1,490 @@
+body#home {
+
+  > #github-ribbon-container {
+    display: none;
+  }
+
+  > section#content-container {
+    margin-left: 0;
+    padding-top: 0;
+    width: 100%;
+    > div#content {
+      margin-left: 0;
+      padding-top: 0;
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+      width: 100%;
+    }
+  }
+
+  div#keyvisual {
+    width: 100%;
+    height: 744px;
+    background-color: #fff;
+    @include background-image(linear-gradient(top, #fff, #f3f5f6));
+    position: relative;
+    padding: 0;
+
+    > div.keyvisual-content > div.keyvisual-main {
+      margin: 0 auto;
+      padding: 180px 0 0 0;
+      width: 1100px;
+      max-width: 100%;
+
+      > h1 {
+        font-size: 54px;
+        line-height: 60px;
+        letter-spacing: 0px;
+        font-weight: 200;
+        margin-bottom: 6px;
+        color: #252525;
+      }
+
+      > h2 {
+        font-size: 26px;
+        font-weight: 300;
+        margin: 0 0 100px 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+        color: #606978;
+      }
+
+      > a.getting-started,
+      > a.getting-started:active,
+      > a.getting-started:visited {
+        @include box-sizing(border-box);
+        display: inline-table;
+        height: 54px;
+        line-height: 54px;
+        padding: 0 10px;
+        border: 2px solid #fa7845;
+        @include border-radius(3px);
+        background-color: #fa7845;
+        font-size: 24px;
+        color: white;
+        text-align: center;
+        font-weight: 300;
+        text-decoration: none;
+
+        @include transition(all 0.5s ease);
+
+        &:hover {
+          @include transition(all 0.1s ease);
+          opacity: 0.8;
+        }
+
+        &:active {
+          @include transition(none);
+          opacity: 1;
+        }
+
+        > img {
+          margin-bottom: 5px;
+          vertical-align: middle;
+        }
+
+      }
+
+      > a.download,
+      > a.download:active,
+      > a.download:visited {
+        @include box-sizing(border-box);
+        display: inline-table;
+        height: 54px;
+        line-height: 54px;
+        width: 213px;
+        border: 2px solid #d3d6d9;
+        @include border-radius(3px);
+        color: #767c86;
+        margin-left: 20px;
+        font-size: 24px;
+        text-align: center;
+        text-decoration: none;
+        @include transition(all 0.5s ease);
+
+        &:hover {
+          @include transition(all 0.1s ease);
+          background-color: #d3d6d9;
+        }
+
+        &:active {
+          @include transition(none);
+          background-color: transparent;
+        }
+
+        > strong {
+          font-weight: 500;
+          letter-spacing: -2px;
+        }
+      }
+    }
+
+    > div.keyvisual-content > div.newsletter {
+      display: inline-block;
+
+      margin: 0 auto;
+      width: 1100px;
+      max-width: 100%;
+      position: absolute;
+      bottom: 40px;
+      left: 0px;
+      right: 0px;
+
+      form {
+        background-color: #d3d9dc;
+        padding: 3px;
+        border-radius: 2px;
+        display: inline-block;
+        max-width: 100%;
+        width: auto;
+      }
+
+      input[type=text] {
+        font-size: 18px;
+        background-color: white;
+        color: #333;
+        font-weight: 400;
+        width: 325px;
+        padding: 11px 8px 9px 8px;
+        line-height: 1;
+        height: 36px;
+        border: none;
+        border-radius: 2px;
+        @include box-sizing(border-box);
+      }
+
+      input[type=submit] {
+        font-size: 18px;
+        background-color: white;
+        background-color: #767c86;
+        color: white;
+        font-weight: 400;
+        line-height: 36px;
+        border-radius: 2px;
+        border: none;
+        padding: 0 8px;
+        font-weight: 400;
+        &:hover {
+          background-color: #454b55;
+        }
+      }
+
+      div.newsletter-thankyou {
+        display: none;
+        font-size: 18px;
+        color: #666;
+        line-height: 40px;
+        font-weight: 500;
+      }
+    }
+
+    > div.keyvisual-content > div.social {
+      margin: 0 auto;
+      width: 1100px;
+      position: absolute;
+      bottom: 100px;
+      left: 0px;
+      right: 0px;
+      font-size: 18px;
+
+      > img {
+        vertical-align: top;
+      }
+
+      > a {
+        margin-right: 20px;
+        vertical-align: top;
+
+        &:link, &:visited, &:active {
+          color: #666;
+          text-decoration: none;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+
+        > strong {
+          font-weight: 600;
+        }
+
+      }
+
+    }
+
+    > div.keyvisual-content {
+      margin: 0 auto;
+      width: 1100px;
+      height: 711px;
+      background-repeat: no-repeat;
+      background-image: url(/images/index/keyvisual.png);
+      background-position: 630px bottom;
+    }
+  }
+
+  div.main-features,
+  div.other-features {
+    margin: 0 auto;
+    width: 900px;
+    max-width: 100%;
+  }
+
+  div.taglines {
+    border-bottom: 1px solid #ddd;
+    padding: 40px;
+    ul {
+      width: 800px;
+      margin: 0 auto !important;
+      padding: 0;
+    }
+    li {
+      font-size: 20px;
+      color: #767c86;
+      line-height: 1.8;
+    }
+  }
+
+  section#content-container > div#content > div.main-features {
+    > div.feature {
+      border-bottom: 1px solid #D3D4D8;
+      padding: 80px 0;
+      background-repeat: no-repeat;
+
+      > h2 {
+        font-size: 48px;
+        line-height: 1.2;
+        font-weight: 200;
+      }
+
+      > p {
+        font-size: 18px;
+      }
+
+      &.super-performance {
+        padding-left: 50%;
+        background-position: 50px center;
+        background-image: url(/images/index/feature-super-performance.png);
+      }
+
+      &.multi-screen {
+        padding-right: 450px;
+        background-position: right center;
+        background-image: url(/images/index/feature-multi-screen.png);
+
+        p {
+          margin-right: 50px;
+        }
+      }
+
+      &.cordova-friendly {
+        padding-left: 50%;
+        background-position: 25px center;
+        background-image: url(/images/index/feature-phonegap-cordova-friendly.png);
+      }
+
+      &.custom-elements {
+        text-align: center;
+        padding: 60px 0;
+      }
+
+      &.with-jquery-or-angular {
+        padding-left: 50%;
+        background-position: 10px center;
+        background-image: url(/images/index/feature-with-angular-or-jquery.png);
+      }
+
+
+    }
+
+  }
+
+  section#content-container > div#content > div.other-features {
+    padding: 70px 0 90px 0;
+    font-size: 0px;
+
+    > h2 {
+      margin-bottom: 52px;
+      font-size: 48px;
+      font-weight: 200;
+      text-align: center;
+    }
+
+    > div.sub-feature {
+      display: inline-block;
+      @include box-sizing(border-box);
+      width: 450px;
+      max-width: 100%;
+      padding: 0 12px 32px 86px;
+      margin: 0;
+      min-height: 130px;
+      vertical-align: top;
+      background-position: left top;
+      background-repeat: no-repeat;
+      vertical-align: top;
+
+      &.free-and-opensource {
+        background-image: url(/images/index/sub-feature-image_free.png);
+      }
+      &.font-awesome {
+        background-image: url(/images/index/sub-feature-image_font-awesome.png);
+      }
+      &.selectable-theme {
+        background-image: url(/images/index/sub-feature-image_selectable-theme.png);
+      }
+      &.customizable {
+        background-image: url(/images/index/sub-feature-image_customizable.png);
+      }
+      &.screen-transition {
+        background-image: url(/images/index/sub-feature-image_screen-transition.png);
+      }
+      &.gui-tool {
+        background-image: url(/images/index/sub-feature-image_gui-tool.png);
+      }
+
+      > h3 {
+        font-size: 24px;
+        line-height: 1.2;
+        margin: 0 0 12px 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
+        font-weight: 300;
+      }
+
+      > p {
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+      }
+    }
+  }
+
+  div.getstarted {
+    text-align: center;
+    border-top: 1px solid #ddd;
+    padding: 100px 0 0 0;
+
+    > a#getstarted-button {
+      &:link,
+      &:active,
+      &:visited {
+        color: $onsen-red;
+        font-size: 36px;
+        text-align: center;
+        font-weight: 200;
+        text-decoration: underline;
+        font-family: "ff-enzo-web", "Helvetica Neue", Helvetica, sans-serif;
+      }
+
+      &:hover {
+        text-decoration: none;
+      }
+
+      > img {
+        margin-bottom: 5px;
+        vertical-align: middle;
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 1100px) {
+  body#home {
+    div#keyvisual {
+      height: auto;
+      
+      > div.keyvisual-content > div.keyvisual-main {
+        padding: 0;
+        > h1 {
+          text-align: center;
+          font-size: 36px;
+          line-height: 40px;
+        }
+        > h2 {
+          font-size: 20px;
+          padding-bottom: 0px;
+          margin-bottom: 40px;
+          text-align: center;
+        }
+        > a.getting-started,
+        > a.getting-started:active {
+          width: 90%;
+          max-width: 300px;
+          display: block;
+          margin: 0 auto 12px auto;
+        }
+        > a.download,
+        > a.download:active {
+          display: none;
+        }
+      }
+      > div.keyvisual-content {
+        > div.social {
+          width: 100%;
+          position: static;
+          text-align: center;
+          margin: 40px 0 10px 0;
+        }
+        > div.newsletter {
+          width: 100%;
+          position: static;
+          text-align: center;
+          margin: 0 0 12px 0;
+        }
+      }
+      > div.keyvisual-content {
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        background-image: none;
+      }
+    }
+
+    div.taglines {
+      ul {
+        width: auto;
+        margin: 0 auto;
+      }
+    }
+
+    section#content-container > div#content > div.main-features {
+      > div.feature {
+        > h2 {
+          font-size: 36px;
+          text-align: center;
+        }
+        padding: 32px 10px 32px 10px !important;
+        background-image: none !important;
+      }
+    } 
+
+    div#keyvisual > div.keyvisual-content > div.newsletter {
+      input[type=text] {
+        width: 220px;
+      }
+    }
+
+    div.other-features {
+      padding-top: 32px !important;
+      padding-bottom: 32px !important;
+
+      text-align: center;
+      > h2 {
+        font-size: 36px !important;
+      }
+      > .sub-feature {
+        text-align: left;
+      }
+    }
+
+    div.getstarted {
+      > a#getstarted-button {
+        font-size: 36px !important;
+      }
+      > img {
+        display: none !important;
+      }
+    }
+  }
+}
