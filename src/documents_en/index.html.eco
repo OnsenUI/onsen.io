@@ -10,7 +10,7 @@ page: 'home'
       <h2>A Custom Elements-Based HTML5 UI Framework</h2>
 
       <a class="getting-started" href="/guide/getting_started.html">Getting Started</a><!--
-      --><a class="download" href="/OnsenUI/project_templates/onsen_ui.zip">Download v<strong>1.1.0</strong></a>
+      --><a class="download" href="/OnsenUI/project_templates/onsen_master_detail.zip">Download v<strong>1.1.0</strong></a>
 
     </div>
 
@@ -180,6 +180,7 @@ page: 'home'
   $(function() {
     $('.newsletter form').submit(function() {
       var email = $('input[name=email]', this).val();
+      ga('send', 'event', 'website', 'email');
 
       $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
         .success(function(data) {
