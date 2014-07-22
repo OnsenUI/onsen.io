@@ -662,6 +662,20 @@ ons.ready(function() {
 
 `ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
 
+#### `ons.compile` function
+
+`ons.compile()` function is used to compile the DOM elements that have Onsen UI components. Typical usage of the function is to manually add a snippet of HTML and render it.
+
+Note that `ons.compile()` must specify a `HTMLElement` object to its argument. Also, the element must be appended to the DOM tree before calling `ons.compile()`. Please see the example below.
+
+```
+ons.ready(function() {
+  var elm = $("<ons-button>New Button</ons-button>");
+  elm.appendTo($("body")); // Insert to the DOM first
+  ons.compile(elm[0]); // The argument must be a HTMLElement object
+});
+```
+
 #### Platform detection
 
 [`<ons-if-platform>`](components.html#ons-if-platform) attribute is useful when only displaying contents under a specific platform. This attribute can be set within any tags.
