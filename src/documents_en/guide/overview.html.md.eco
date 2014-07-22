@@ -714,24 +714,24 @@ Or, AngularJS way like the following code.
 
 ### Dealing with DOM APIs
 
-Even though the Onsen UI components are custom elements based, you can query the component using the traditional method.
-
-However, the following components are expanded to a normal divs and spans, so you need to query by using class names.
-
-- ons-button
-- ons-icon
-- ons-tabbar-item
+Even though the Onsen UI components are custom elements based, you can query the component using the familiar DOM APIs.
 
 ```
 <ons-navigator class="myNavigator"></ons-navigator>
-<ons-button class="myButton"></ons-button>
+<ons-button id="my-ons-button"</ons-button>
 <ons-list>
   <ons-list-item class="item1"></ons-list-item>
 </ons-list>
 <script>
+  // Using DOM API
+  document.getElementById("my-ons-button");
+
+  // Using jQuery
   $("ons-navigator.myNavigator");
   $("ons-list-item.item1");
-  $(".myButton"); // $("ons-button.myButton") will not work
+  $("ons-button").onclick(function() {
+    alert("Button is clicked!");
+  });
 </script>
 ```
 
