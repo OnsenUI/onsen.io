@@ -5,6 +5,10 @@ header#header-container {
   max-width: 100%;
   margin: 0 auto;
 
+  .gnav-icon {
+    display: none;
+  }
+
   > div {
     @include box-sizing(border-box);
     margin: 0 auto;
@@ -12,6 +16,7 @@ header#header-container {
     position: relative;
     text-align: left;
     width: $width;
+    max-width: 100%;
   }
 
   .logo {
@@ -39,13 +44,6 @@ header#header-container {
       -ms-box-sizing: border-box;
       -o-box-sizing: border-box;
       box-sizing: border-box;
-      &.current {
-        border-bottom: 2px solid $onsen-red;
-
-        a {
-          @include all-link-state($onsen-red, all-none);
-        }
-      }
       a {
         @include all-link-state(#666, none);
         &:hover {
@@ -56,12 +54,29 @@ header#header-container {
   }
 }
 
+@media screen and (min-width: 1100px) {
+  header#header-container {
+    .gnav li {
+      &.current {
+        border-bottom: 2px solid $onsen-red;
+
+        a {
+          @include all-link-state($onsen-red, all-none);
+        }
+      }
+    }
+  }
+}
 
 @media screen and (max-width: 1100px) {
   header#header-container {
     border-bottom: 0px solid #fff;
 
     > div:first-child {
+      padding-left: 20px;
+    }
+
+    .logo {
       margin-left: 20px;
     }
 
@@ -69,12 +84,40 @@ header#header-container {
       display: none;
     }
   }
-}
 
-@media screen and (max-width: 600px) {
   header#header-container {
+    height: auto;
+    min-height: 88px;
+    .gnav-icon {
+      display: block !important;
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      img {
+        width: 32px;
+        height: 32px;
+        opacity: 0.3;
+        cursor: pointer;
+      }
+    }
     > div > .gnav {
+      position: static;
+      height: auto;
       display: none;
+      background-color: rgba(0, 0, 0, 0.02);
+      border-bottom: 1px solid #ddd;
+      border-top: 1px solid #ddd;
+      margin-top: 60px;
+      margin-left: -20px;
+      margin: 66px 0 12px -20px;
+      padding: 12px 0;
+      > li {
+        display: block;
+        width: 100%;
+        line-height: 48px;
+        height: 48px;
+        padding: 0 12px 0 12px;
+      }
     }
   }
 }

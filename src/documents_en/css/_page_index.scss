@@ -475,5 +475,14 @@ body#home {
         text-align: left;
       }
     }
+
+    div.getstarted {
+      > a#getstarted-button {
+        font-size: 36px !important;
+      }
+      > img {
+        display: none !important;
+      }
+    }
   }
 }
