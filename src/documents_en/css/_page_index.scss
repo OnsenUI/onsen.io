@@ -217,11 +217,11 @@ body#home {
       height: 711px;
       background-repeat: no-repeat;
       background-image: url(/images/index/keyvisual.png);
-      background-position: right bottom;
+      background-position: right top;
       position: absolute;
       left: 50%;
       top: 50%;
-      margin-top: -420px;
+      margin-top: -400px;
       margin-left: -600px;
     }
   }
@@ -442,6 +442,9 @@ body#home {
         width: 100%;
         height: auto;
         background-image: none;
+        position: relative;
+        left: 0;
+        top: 0;
       }
     }
 
