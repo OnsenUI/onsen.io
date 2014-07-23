@@ -17,6 +17,7 @@ body#getting_started {
   }
 
   .template-iframe {
+    clear: both;
     width: 224px;
     height: 400px;
     border: 1px solid #ccc;
@@ -36,6 +37,7 @@ body#getting_started {
   }
 
   .template-iframe-landscape {
+    clear: both;
     width: 400px;
     height: 224px;
     border: 1px solid #ccc;
@@ -62,6 +64,7 @@ body#getting_started {
   .flex-item {
     margin: 15px;
     display: inline-block;
+    clear: both;
   }
 
   .handle {
@@ -90,6 +93,11 @@ body#getting_started {
     color: #333 !important;
     margin: 5px 0 15px 0;
     font-size: 18px !important;
+    float: left;
+  }
+
+  .template-link {
+    display: none;
   }
   
   .download {
@@ -114,3 +122,17 @@ body#getting_started {
   }
 }
 
+@media screen and (max-width: 1100px) {
+  body#getting_started {
+    .template-iframe, .template-iframe-landscape {
+      display: none;
+    }
+    .template-download {
+      display: none;
+    }
+    .template-link {
+      display: block;
+    }
+
+  }
+}
