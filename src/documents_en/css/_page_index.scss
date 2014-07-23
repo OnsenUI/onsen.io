@@ -25,9 +25,22 @@ body#home {
     position: relative;
     padding: 0;
 
+    > div.keyvisual-content {
+      width: 1200px;
+      height: 771px;
+      background-repeat: no-repeat;
+      background-image: url(/images/index/keyvisual.png);
+      background-position: right top;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-top: -400px;
+      margin-left: -600px;
+    }
+
     > div.keyvisual-content > div.keyvisual-main {
       margin: 0 auto;
-      padding: 240px 0 0 0;
+      padding: 200px 0 0 0;
       width: 1100px;
       max-width: 100%;
 
@@ -212,18 +225,6 @@ body#home {
 
     }
 
-    > div.keyvisual-content {
-      width: 1200px;
-      height: 711px;
-      background-repeat: no-repeat;
-      background-image: url(/images/index/keyvisual.png);
-      background-position: right top;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-top: -400px;
-      margin-left: -600px;
-    }
   }
 
   div.main-features,
