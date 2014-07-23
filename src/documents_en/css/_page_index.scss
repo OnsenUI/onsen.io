@@ -61,6 +61,10 @@ body#home {
         font-family: 'Helvetica Neue', Helvetica, sans-serif;
         color: #606978;
       }
+      
+      > .keyvisual-small {
+        display: none;
+      }
 
       > a.getting-started,
       > a.getting-started:active,
@@ -401,16 +405,16 @@ body#home {
       
       > div.keyvisual-content > div.keyvisual-main {
         padding: 0;
+        
         > h1 {
-          text-align: center;
-          font-size: 36px;
-          line-height: 40px;
+          display: none;
         }
         > h2 {
-          font-size: 20px;
-          padding-bottom: 0px;
-          margin-bottom: 40px;
-          text-align: center;
+          display: none;
+        }
+        > .keyvisual-small {
+          display: block;
+          margin: 0 auto;
         }
         > a.getting-started,
         > a.getting-started:active {
