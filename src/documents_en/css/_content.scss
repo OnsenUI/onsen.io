@@ -228,6 +228,15 @@ section#content-container {
     }
   }
 
+  .resize-btn {
+    color: #5986a3;
+    text-decoration: underline;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
   .codepen-wrapper {
 
     > .resize-btn {
