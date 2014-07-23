@@ -263,6 +263,10 @@ section#content-container {
 
     margin-bottom: 10px;
   }
+
+  .codepen-open-link-wrapper {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 1100px) {
@@ -292,6 +296,14 @@ section#content-container {
 
       h5, h6 {
         font-size: 18px;
+      }
+
+      .codepen-wrapper {
+        display: none;
+      }
+
+      .codepen-open-link-wrapper {
+        display: block;
       }
     }
 
