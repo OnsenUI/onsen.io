@@ -37,10 +37,10 @@ As an example, the classes for "Button" are named as shown below:
 </p>
 
 <ul>
-	<li>topcoat-button (standard size button) </li>
-	<li>topcoat-button--large (large size button) </li>
-	<li>topcoat-button--large--cta (large size CTA button)</li>
-	<li>topcoat-button-hover (standard size button in action status) </li>
+  <li>topcoat-button (standard size button) </li>
+  <li>topcoat-button--large (large size button) </li>
+  <li>topcoat-button--large--cta (large size CTA button)</li>
+  <li>topcoat-button-hover (standard size button in action status) </li>
 </ul>
 
 <p>
@@ -170,22 +170,22 @@ When you are ready to begin editing, go to the framework/template directory, ope
 <p>Before editing:</p>
 
 <pre><code>&lt;label class="topcoat-radio-button"&gt;
-	{{leftLabel}}
-	&lt;input type="radio" name="{{name}}" ng-model="ngModel" value="{{value}}"&gt;
-	&lt;div class="topcoat-radio-button__checkmark"&gt;&lt;/div&gt;
-	{{rightLabel}}
+  {{leftLabel}}
+  &lt;input type="radio" name="{{name}}" ng-model="ngModel" value="{{value}}"&gt;
+  &lt;div class="topcoat-radio-button__checkmark"&gt;&lt;/div&gt;
+  {{rightLabel}}
 &lt;/label&gt;
 </code></pre>
 
 <p>After editing:</p>
 
 <pre><code>&lt;label class="topcoat-radio-button"&gt;
-	&lt;div class=”style”&gt;
-		{{leftLabel}}
+  &lt;div class=”style”&gt;
+    {{leftLabel}}
 &lt;/div&gt;
-	&lt;input type="radio" name="{{name}}" ng-model="ngModel" value="{{value}}"&gt;
-	&lt;div class="topcoat-radio-button__checkmark"&gt;&lt;/div&gt;
-	{{rightLabel}}
+  &lt;input type="radio" name="{{name}}" ng-model="ngModel" value="{{value}}"&gt;
+  &lt;div class="topcoat-radio-button__checkmark"&gt;&lt;/div&gt;
+  {{rightLabel}}
 &lt;/label&gt;
 </code></pre>
 

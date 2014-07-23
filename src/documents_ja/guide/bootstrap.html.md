@@ -14,31 +14,31 @@ Onsen UI is a UI framework for mobile HTML5. This page will describe the initial
 
 For the [Minimum Project](/OnsenUI/project_templates/onsen_ui.zip) of Onsen UI, insert the below code in index.html to serve as the entry point for your app.
 
-	<!doctype html>
-	<html lang="en" ng-app="myApp">
-	<head>
-	  <meta charset="utf-8">
-	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	  <title>My App</title>  
-	  <link rel="stylesheet" href="styles/app.css"/>
-	  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-	  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
+  <!doctype html>
+  <html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>My App</title>  
+    <link rel="stylesheet" href="styles/app.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+    <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
 
-	  <script src="lib/onsen/js/angular/angular.js"></script>    
-	  <script src="lib/onsen/js/onsenui.js"></script>    
-	  <script src="js/app.js"></script> 
-	  <script>
-	    angular.module('myApp', ['onsen.directives']);
-	  </script>
-	  
-	</head>
+    <script src="lib/onsen/js/angular/angular.js"></script>    
+    <script src="lib/onsen/js/onsenui.js"></script>    
+    <script src="js/app.js"></script> 
+    <script>
+      angular.module('myApp', ['onsen.directives']);
+    </script>
+    
+  </head>
 
-	<body>    
-	  
-	  <ons-screen page="home_navigator.html"></ons-screen>
-	 
-	</body>
-	</html>
+  <body>    
+    
+    <ons-screen page="home_navigator.html"></ons-screen>
+   
+  </body>
+  </html>
 
 This HTML processes the following:
 
@@ -50,34 +50,34 @@ This HTML processes the following:
 
 Load the application-specific CSS file and the Onsen UI CSS file with the CSS.
 
-	  <link rel="stylesheet" href="styles/app.css"/>
-	  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
-	  <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
+    <link rel="stylesheet" href="styles/app.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css">  
+    <link rel="stylesheet" href="lib/onsen/css/topcoat-mobile-onsen-ios7.css">
 
 topcoat-mobile-onsen-ios7.css is an Onsen UI theme. You can change the theme by replacing topcot-mobile-onsen-ios7.css with another file when loading the CSS file. Please refer to the [Themes](/themes/) page for details.
 
 Load the Onsen UI and AngularJS JavaScript files with the JavaScript file.
 
-	  <script src="lib/onsen/js/angular/angular.js"></script>    
-	  <script src="lib/onsen/js/onsenui.js"></script>    
+    <script src="lib/onsen/js/angular/angular.js"></script>    
+    <script src="lib/onsen/js/onsenui.js"></script>    
 
 ### Initializing Modules
 
 Set myApp value to <a href="http://docs.angularjs.org/api/ng/directive/ngApp">ng-app</a> attribute in the html element to initialize AngularJS. Specify the ng-app attribute to boot the loaded AngularJS.
 
-	<html lang="en" ng-app="myApp">
+  <html lang="en" ng-app="myApp">
 
 Next, declare that myApp module uses the onsen.directives module from Onsen UI. This declaration will load custom elements like ons-screen and the ons-navigator-toolbar.
 
-	  <script>
-	    angular.module('myApp', ['onsen.directives']);
-	  </script>
+    <script>
+      angular.module('myApp', ['onsen.directives']);
+    </script>
 
 ### Declaring an ons-screen Element
 
 The final step is to declare an ons-screen element after the body element. Set the first screen to the page attribute.
 
-	  <ons-screen page="home_navigator.html"></ons-screen>
+    <ons-screen page="home_navigator.html"></ons-screen>
 
 ### Related Resources
 

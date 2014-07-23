@@ -258,9 +258,9 @@ Here are several examples when using `<ons-toolbar>`.
 
   ```
   <ons-toolbar>
-	  <div class="left"><ons-back-button>Back</ons-back-button></div>
-	  <div class="center">Search</div>
-	  <div class="right"><input type="search" class="search-input" placeholder="Keyword"></input></div>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">Search</div>
+    <div class="right"><input type="search" class="search-input" placeholder="Keyword"></input></div>
   </ons-toolbar>
   ```
 
@@ -334,10 +334,10 @@ A behind page may contain any content in HTML, and typically a menu with links t
 
 ```
 <ons-sliding-menu
-	above-page="page1.html"
-	behind-page="menu.html"
-	side="left"
-	var="menu">
+  above-page="page1.html"
+  behind-page="menu.html"
+  side="left"
+  var="menu">
 </ons-sliding-menu>
 
 <script type="text/ons-template" id="page1.html">
