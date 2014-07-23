@@ -40,6 +40,7 @@
 	<% end %>
 
 	<script src="/vendor/jquery.js"></script>
+	<script src="/vendor/jquery.lazyloadxt.min.js"></script>
 	<script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
@@ -74,6 +75,19 @@
 
 	<script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
 	<script>
+
+  $.extend($.lazyLoadXT, {
+    autoInit: false,
+    edgeY: 0,
+    srcAttr: 'data-src',
+    throttle: 1000
+  });
+  $(function() {
+    setTimeout(function() {
+      $('iframe').lazyLoadXT();
+    }, 2000);
+  });
+
 	$(function() {
 		$('aside#content-info').sticky({
 			topSpacing : 0, 

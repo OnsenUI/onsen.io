@@ -893,7 +893,7 @@ The JavaScript code for each component is located in the `directives` directory.
 
 If you need to build Onsen UI manually, there is a `gulp` task for that purpose. Please follow the instruction from the [project Website](https://github.com/OnsenUI/OnsenUI).
 
-<script async src="//codepen.io/assets/embed/ei.js"></script>
+<script src="<%= @rootUrl %>scripts/codepen.js"></script>
 
 <script>
 $(function() {

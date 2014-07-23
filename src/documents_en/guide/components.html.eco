@@ -15,4 +15,4 @@ autotoc: true
 <% end %>
 
 <script src="<%= @rootUrl %>vendor/highlight.min.js"></script>
-<script async src="//codepen.io/assets/embed/ei.js"></script>
+<script src="<%= @rootUrl %>scripts/codepen.js"></script>
