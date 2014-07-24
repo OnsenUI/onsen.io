@@ -3,7 +3,7 @@
 <% for item in items: %>
     <% if item.state != 'current': %>
     <% else: %>
-        <div class="doc-title"><%= item.title %></div>
+        <div class="toc-title">Table Of Contents</div>
         <% if @document.toc: %>
             <ul class="toc">
                 <% for toc in @document.toc: %>

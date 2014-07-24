@@ -29,31 +29,31 @@ section#content-container {
   }
 
   > aside#content-info, div.sticky-wrapper > aside#content-info {
-    margin: 0 0 0 0;
+    margin: 0;
     overflow: scroll;
     float: left;
     width: $aside-width - 30px;
-    padding: 24px 10px 10px 0px;
+    padding: 20px 10px 10px 0px;
     margin-right: 30px;
     @include box-sizing(border-box);
     font-weight: 400;
     color: #666;
     border-right: 1px solid #ddd;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.4;
  
-    .doc-title {
+    .toc-title {
       font-weight: 400;
+      font-size: 18px;
       margin-left: 11px;
+      margin-bottom: 16px;
+      color: #333;
     }
 
-    ul.toc > li.selected {
-      border-left: 4px solid #666;
-      -webkit-transition: border-color 0.2s linear;
-      -o-transition: border-color 0.2s linear;
-      -moz-transition: border-color 0.2s linear;
-      -ms-transition: border-color 0.2s linear;
-      transition: border-color 0.2s linear;
+    ul.toc a.selected {
+      @include transition(border-color 0.2s linear);
+      color: $onsen-red;
+      border-color: $onsen-red;
     }
 
     ul.toc {
@@ -62,12 +62,11 @@ section#content-container {
       text-align: left;
 
       > li {
-        border-left: 4px solid transparent;
         margin: 8px 0;
-        padding: 2px 0 2px 7px;
+        padding: 0;
 
         ul li {
-          margin-left: 10px;
+          margin-left: 14px;
         }
       }
     }
@@ -75,6 +74,9 @@ section#content-container {
     a {
       @include all-link-state(#666);
       font-weight: 400;
+      border-left: 2px solid transparent;
+      display: inline-block;
+      padding: 2px 0 2px 7px;
       code {
         font-weight: 400;
       }

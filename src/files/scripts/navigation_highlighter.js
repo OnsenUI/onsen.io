@@ -14,7 +14,7 @@
   scrollWrapper.addEventListener('scroll', update, true);
 
   function update() {
-    var scrolled = window.scrollY + ($(window).height() / 5);
+    var scrolled = window.scrollY + 100;
 
     for (var i = sections.length - 1; i >= 0; i--) {
       var section = sections[i];
@@ -22,8 +22,8 @@
       
       if (scrolled > position) {
         var id = '#' + section.attr('id');
-        links.parent().removeClass('selected');
-        linkMap[id].link.parent().addClass('selected');
+        links.removeClass('selected');
+        linkMap[id].link.addClass('selected');
         return;
       }
     };
