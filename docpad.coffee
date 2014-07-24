@@ -144,7 +144,7 @@ docpadConfig = {
 		getAlternateSiteURL: ->
 			lang = docpad.config.env
 			url = 'http://onsenui.io'
-			url = 'http://jp.onsenui.io' if lang == 'en'
+			url = 'http://ja.onsenui.io' if lang == 'en'
 			return url
 
 		getAlternateLang: ->
@@ -176,7 +176,7 @@ docpadConfig = {
 			# Get current language from DocPad environment
 			lang = @docpad.config.env
 			# Load translated strings for current language
-			@docpad.getConfig().templateData.site = (YAML.load "src/lang/#{lang}.yml")
+			@docpad.getConfig().templateData.site = (YAML.load "src/documents_#{lang}/config.yml")
 			# Configure Moment.js
 			# moment.lang(lang)
 			# Configure Richtypo.js
