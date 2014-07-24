@@ -1,9 +1,0 @@
----
-layout: 'themes'
-title: 'Onsen Blue Theme'
-page: 'themes'
----
-
-<% theme = 'topcoat-mobile-onsen-blue' %>
-<% themeNames = ['topcoat-mobile-onsen-ios7', 'topcoat-mobile-onsen-android4_4', 'topcoat-mobile-onsen-blue'] %>
-<%- @partial('theme.html.eco', {theme : theme, themeNames : themeNames}) %>

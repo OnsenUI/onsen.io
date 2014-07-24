@@ -1,0 +1,128 @@
+---
+layout: 'docpad_en'
+title: 'Getting Startedガイド'
+page: 'getting_started'
+needHelp: true
+autotoc: true
+---
+<h2>Getting Startedガイド</h2>
+
+<p>Onsen UIを使うと、ハイブリッドアプリやWebアプリのUIを簡単に実装することができます。ハイブリッドアプリを開発する場合は、<a href="http://monaca.mobi">Monaca</a>や<a href="http://cordova.apache.org" target="_blank">Cordova</a>、<a href="http://phonegap.com" target="_blank">PhoneGap</a>といったツールを使うことを推奨しています。</a>
+
+<h3>コマンドラインでOnsen UIを使う</h3>
+
+<div class="h3-wrapper">
+
+  <p>コマンドラインから利用する場合は、<code>cordova</code>ツールを使うことが推奨されます。そのためには、<a href="http://nodejs.org">node.js</a>と<code>npm</code>をあらかじめインストールしておく必要があります。
+
+  <h4>1. Cordovaパッケージをインストールする</h4>
+
+  <pre>$ sudo npm install -g cordova</pre>
+
+  <p>Cordovaツールの使い方については、<a href="https://cordova.apache.org/docs/en/edge/index.html">Cordovaドキュメント</a>を参照してください。
+
+  <h4>2. テンプレートを選択する</h4>
+
+  <p>下記のスタートキットをダウンロードしてください。</p>
+
+<div class="templates-container">
+<div class="flex-item">
+  <div class="template-title">Master-Detail</div>
+  <a href="/OnsenUI/project_templates/master_detail/www/" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_master_detail.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_master_detail.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/master_detail/www/" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-title">Sliding menu</div>
+  <a href="/OnsenUI/project_templates/sliding_menu/www/" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_sliding_menu.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_sliding_menu.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/sliding_menu/www/" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-title">Tab bar</div>
+  <a href="/OnsenUI/project_templates/tab_bar/www/" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_tab_bar.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_tab_bar.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/tab_bar/www/" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item center">
+  <div class="template-title">Split view</div>
+  <a href="/OnsenUI/project_templates/split_view/www/" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_split_view.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_split_view.zip')">Download</a></div>
+  <div class="template-iframe-landscape">
+    <iframe src="/OnsenUI/project_templates/split_view/www/" width="570" height="320"></iframe>
+  </div>
+</div>
+</div>
+
+  <h4>3. プラットフォームを追加する</h4>
+
+  <p>シミュレータや実機上で動作させるために、プロジェクトにプラットフォームSDKを追加してください。</p>
+
+  <pre>$ cd /path/to/the/project
+$ cordova platform add ios (もしくはandroid)</pre>
+
+  <h4>4. シミュレータで実行する</p>
+
+  <p>下記のコマンドでシミュレータ上でアプリを実行できます。</p>
+
+  <pre>$ cordova emulate</pre>
+
+  <p>コマンド実行が失敗する場合は、上記の手順が失敗している可能性があります。下記のMonacaを使った方法をぜひお試しください。</p>
+</div>
+
+<h3>MonacaでOnsen UIを使う</h3>
+
+<div class="h3-wrapper">
+  <p>MonacaでOnsen UIを使うメリットは、クラウド開発が可能になることです。Monacaを使うと、iOSやAndroidアプリ開発を行うために、ローカル環境をセットアップする必要がありません。</p>
+
+  <h4>1. Monacaの会員登録をする</h4>
+
+  <p>
+  <img src="/images/docs/monaca_logo.png">
+  <br>
+  <a href="http://monaca.mobi" target="_blank">http://monaca.mobi</a>
+  &nbsp;&nbsp;&nbsp;
+  <a class="btn-download" href="http://monaca.mobi" target="_blank">無料サインアップ</a>
+  </p>
+
+  <h4>2. Onsen UIを使ったテンプレートを選択する</h4>
+
+  <p><img src="/images/docs/monaca_dashboard.png" width="600"></p>
+
+  <p>IDEを起動する</p>
+
+  <h4>3. デバッガーをインストールし、プロジェクトを実行する</h4>
+
+  <p>実機上ですぐにアプリを実行できます。Monacaデバッガーをインストールするだけで、プロジェクトをダウンロードして起動します。</p>
+
+  <p>
+    <img src="/images/docs/debugger_qr.png">
+    <a href="https://play.google.com/store/apps/details?id=mobi.monaca.debugger" target="_blank"><img src="/images/docs/google_play_logo.png"></a>
+    <a href="http://itunes.apple.com/app/monaca/id550941371" target="_blank"><img src="/images/docs/app_store_logo.png"></a>
+  </p>
+
+  <h4>4. AndroidとiOS向けのビルドを行う</h4>
+
+  <p><img src="/images/docs/monaca_ide.png" width="600"></p>
+
+  <p>iOS、Android、Chrome Apps向けにビルドを行うことが出来ます。アプリをApp StoreやGoogle Playストアに掲載するのも簡単です。</p>
+</div>
+
+<h3>Onsen UIをWebサイトで使う</h3>
+
+<div class="h3-wrapper">
+  <p>Onsen UIの<a href="http://bower.io">Bower</a>モジュールを使うと、簡単にプロジェクトに組み込めます。</p>
+
+  <pre>$ sudo npm install -g bower
+$ bower install onsenui</pre>
+
+</div>
