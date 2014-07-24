@@ -37,60 +37,46 @@ section#content-container {
     margin-right: 30px;
     @include box-sizing(border-box);
     font-weight: 400;
-    font-size: 16px;
-    color: #767c86;
+    color: #666;
     border-right: 1px solid #ddd;
+    font-size: 14px;
+    line-height: 1.4;
  
     .doc-title {
-      font-weight: bold;
-      color: #ff2828
-    }
-
-    div.first-toc > ul.toc > li a {
       font-weight: 400;
+      margin-left: 11px;
     }
 
-    div.first-toc > ul.toc > li a.selected {
-      color: $onsen-red;
-      text-decoration: underline;
+    ul.toc > li.selected {
+      border-left: 4px solid #666;
+      -webkit-transition: border-color 0.2s linear;
+      -o-transition: border-color 0.2s linear;
+      -moz-transition: border-color 0.2s linear;
+      -ms-transition: border-color 0.2s linear;
+      transition: border-color 0.2s linear;
     }
 
     ul.toc {
+      margin: 0;
+      padding: 0;
       text-align: left;
 
       > li {
-        font-size: 16px;
-        line-height: 1.7;
-        margin: 14px 0 14px 0;
+        border-left: 4px solid transparent;
+        margin: 8px 0;
+        padding: 2px 0 2px 7px;
 
         ul li {
-          margin-left: 16px;
+          margin-left: 10px;
         }
       }
     }
 
-    > ul.toc > li > a {
-      font-weight: 400;
-    }
-
-    > ul.toc > li {
-      margin-bottom: 20px;
-      margin-top: 20px;
-    }
-
-    h2 {
-      color: #333;
-      font-size: 48px;
-      text-align: left;
-      margin: 0 0 14px 0;
-      padding: 0;
-    }
-
     a {
-      @include all-link-state(#767c86);
+      @include all-link-state(#666);
       font-weight: 400;
-      &:hover {
-        color: $onsen-red;
+      code {
+        font-weight: 400;
       }
     }
   }
@@ -136,7 +122,7 @@ section#content-container {
     }
 
     h2 {
-      font-size: 48px;
+      font-size: 42px;
       margin: 70px 0 20px 0px;
       &:first-child,
       &:first-of-type {
@@ -147,6 +133,7 @@ section#content-container {
     h3 {
       font-size: 36px;
       margin: 46px 0 20px 0px;
+      border-bottom: 1px solid #ddd;
     }
 
     h2 + h3, h3 + h4, h4 + h5, h5 + h6 {

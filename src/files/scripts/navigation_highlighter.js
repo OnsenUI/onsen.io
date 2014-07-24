@@ -22,8 +22,8 @@
       
       if (scrolled > position) {
         var id = "#" + section.attr("id");
-        links.removeClass("selected");
-        linkMap[id].link.addClass("selected");
+        links.parent().removeClass("selected");
+        linkMap[id].link.parent().addClass("selected");
         return;
       }
     };
