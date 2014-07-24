@@ -4,78 +4,78 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<!-- Standard Meta -->
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<!-- Site Properities -->
-	<title><%= @getPreparedTitle() %></title>
-	<meta name="description" content="<%= @getPreparedDescription() %>" />
-	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
+  <!-- Site Properities -->
+  <title><%= @getPreparedTitle() %></title>
+  <meta name="description" content="<%= @getPreparedDescription() %>" />
+  <meta name="keywords" content="<%= @getPreparedKeywords() %>" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- DocPad Meta -->
-	<%- @getBlock('meta').toHTML() %>
+  <!-- DocPad Meta -->
+  <%- @getBlock('meta').toHTML() %>
 
-	<!-- DocPad Styles + Our Own -->	
-	<link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
-	<link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
-	<link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
+  <!-- DocPad Styles + Our Own -->  
+  <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
 
-	<!-- Icons -->
-	<!-- Favicon -->
-	<link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
-	<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
-	<link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
-	<!-- For first- and second-generation iPad: -->
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
-	<!-- For iPhone with high-resolution Retina display: -->
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
-	<!-- For third-generation iPad with high-resolution Retina display: -->
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+  <!-- Icons -->
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
+  <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+  <link rel="apple-touch-icon-precomposed" href="icons/apple-touch-icon-57x57-precomposed.png" />
+  <!-- For first- and second-generation iPad: -->
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="icons/apple-touch-icon-72x72-precomposed.png" />
+  <!-- For iPhone with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
+  <!-- For third-generation iPad with high-resolution Retina display: -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
 
-	<!-- Alternate language -->
-	<% if @fileExist(@getAlternateLangFilePath(@document)): %>
-		<link rel="alternate" href="<%= @getAlternateSiteURL() %><%= @document.url %>" hreflang="<%= @getAlternateLang() %>" />
-	<% end %>
+  <!-- Alternate language -->
+  <% if @fileExist(@getAlternateLangFilePath(@document)): %>
+    <link rel="alternate" href="<%= @getAlternateSiteURL() %><%= @document.url %>" hreflang="<%= @getAlternateLang() %>" />
+  <% end %>
 
-	<script src="/vendor/jquery.js"></script>
-	<script src="/vendor/jquery.lazyloadxt.min.js"></script>
-	<script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script src="/vendor/jquery.js"></script>
+  <script src="/vendor/jquery.lazyloadxt.min.js"></script>
+  <script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 
 <body id="<%- @document.page %>">
-	<!--[if lt IE 7]>
-			<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-	<![endif]-->
+  <!--[if lt IE 7]>
+      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+  <![endif]-->
 
-	<%- @partial('header.html.eco') %>
+  <%- @partial('header.html.eco') %>
 
-	<section id="content-container" class="clearfix">
+  <section id="content-container" class="clearfix">
 
-		<% if @document.toc or @document.autotoc: %>
-		<aside id="content-info">			
-			<%- @partial('menu.html.eco', {menuItems: @generateMenu(@document.url, "guidePages")}) %>
-		</aside>
-		<% end %>
+    <% if @document.toc or @document.autotoc: %>
+    <aside id="content-info">     
+      <%- @partial('menu.html.eco', {menuItems: @generateMenu(@document.url, "guidePages")}) %>
+    </aside>
+    <% end %>
 
-		<div id="content">
-			<%- @content %>
+    <div id="content">
+      <%- @content %>
 
-			<% if @document.needHelp: %>
-				<hr>
+      <% if @document.needHelp: %>
+        <hr>
 
-				<%- @partial('need_help') %>
-			<% end %>
-		</div>
-	</section>
+        <%- @partial('need_help') %>
+      <% end %>
+    </div>
+  </section>
 
-	<%- @partial('footer.html') %>
+  <%- @partial('footer.html') %>
 
-	<script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
-	<script>
+  <script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
+  <script>
 
   $.extend($.lazyLoadXT, {
     autoInit: false,
@@ -89,13 +89,13 @@
     }, 2000);
   });
 
-	$(function() {
-		$('aside#content-info').sticky({
-			topSpacing : 0, 
-			bottomSpacing : $('footer#footer-container').height() + 60 
-		});
-	});
-	</script>
+  $(function() {
+    $('aside#content-info').sticky({
+      topSpacing : 0, 
+      bottomSpacing : $('footer#footer-container').height() + 60 
+    });
+  });
+  </script>
   <script src="/scripts/navigation_highlighter.js"></script>
 
 </body>
