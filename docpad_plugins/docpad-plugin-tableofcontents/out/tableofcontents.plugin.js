@@ -78,11 +78,12 @@ module.exports = function(BasePlugin) {
         header = headers.item(key);
         level = parseInt(header.tagName.charAt(1), 10);
         if (config.addHeaderIds) {
-          headerText = header.innerHTML.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
-          //header.id = config.headerIdPrefix + headerText.replace(/^-/g, "").replace(/-+/g, "-").replace(/\s/g, "").replace(/[&;:\/]/g, "");
-          var hash = crypto.createHash("sha1");
-          hash.update(headerText, "utf8");
-          header.id = hash.digest("hex").substr(0, 5);
+          if (header.id.length < 6) {
+            headerText = header.innerHTML.replace(/<("[^"]*"|'[^']*'|[^'">])*>/g,'');
+            var hash = crypto.createHash("sha1");
+            hash.update(headerText, "utf8");
+            header.id = hash.digest("hex").substr(0, 5);
+          }
         }
         if (level > currentLevel) {
           while (level > (currentLevel + 1)) {

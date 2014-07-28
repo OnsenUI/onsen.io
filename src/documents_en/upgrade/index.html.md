@@ -1,5 +1,5 @@
 ---
-layout: 'docpad_en'
+layout: 'default'
 title: 'Upgrade Guide'
 page: 'upgrade'
 ---
