@@ -44,6 +44,17 @@
   <script src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <% if (@site.lang == "ja"): %>
+    <style>
+      html, h1, h2, h3, h4, h5, h6 {
+        font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+      }
+      body#home div.getstarted>a#getstarted-button:link, body#home div.getstarted>a#getstarted-button:active, body#home div.getstarted>a#getstarted-button:visited {
+        font-family: 'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic ProN W3','Hiragino Kaku Gothic ProN','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif;
+      }
+    </style>
+  <% end %>
 </head>
 
 <body id="<%- @document.page %>">
