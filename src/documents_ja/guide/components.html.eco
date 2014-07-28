@@ -8,7 +8,7 @@ autotoc: true
 <h2>コンポーネント一覧</h2>
 
 <% for directive in @framework.directives: %>
-  <h3><%= directive %></h3>
+  <h3 id="<%= directive %>"><%= directive %></h3>
   <div class="h3-wrapper">
     <%- @partial("framework/ja/api/directives/directive/" + directive + ".html") %>
   </div>
