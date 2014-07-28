@@ -18,6 +18,9 @@
 
     for (var i = sections.length - 1; i >= 0; i--) {
       var section = sections[i];
+      if (typeof section.offset() == "undefined") {
+
+      }
       var position = section.offset().top;
       
       if (scrolled > position) {
@@ -34,9 +37,11 @@
       var link = $(links[i]);
       var id = link.attr('href');
       var section = $(id);
-      sections.push(section);
-      linkMap[id] = {};
-      linkMap[id].link = link;
+      if (section) {
+        sections.push(section);
+        linkMap[id] = {};
+        linkMap[id].link = link;
+      }
     }
   }
 

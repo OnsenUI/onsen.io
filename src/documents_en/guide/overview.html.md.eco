@@ -145,7 +145,7 @@ myNavigator.popPage();
 
 #### Transition animation
 
-`popPage()` method can specify the following animation patterns: `slide`, `lift`, `fade` and `none`.
+`pushPage()` and `popPage()` method can specify the following animation patterns: `slide`, `lift`, `fade` and `none`.
 
 1. Slide animation (default)
 
@@ -308,7 +308,7 @@ ons.ready(function() {
 
 ##### `prepush` and `prepop` event
 
-These events are fired before pushPage and popPage. `event` object has the following parameters.
+These events are fired before the pushPage and popPage. `event` object has the following parameters.
 
 - `currentPage`: Page object. See [Managing Page Stacks](#managing-page-stacks) for details.
 - `cancel()`: Call to cancel transition.
@@ -316,7 +316,7 @@ These events are fired before pushPage and popPage. `event` object has the follo
 
 ##### `postpush` and `postpop` event
 
-These events are fired before the pushPage and popPage. `event` object has the following parameters.
+These events are fired after the pushPage and popPage. `event` object has the following parameters.
 
 - `leavePage`: Page object of the current page.
 - `enterPage`: Page object of the new page.
@@ -421,7 +421,7 @@ A tab bar is composed from a [`<ons-tabbar>`](components.html#ons-tabbar) compon
 
 To place a tab bar into your app, place a [`<ons-tabbar>`](components.html#ons-tabbar) element. A [`<ons-tabbar>`](components.html#ons-tabbar) element only accepts [`<ons-tabbar-item>`](components.html#ons-tabbar-item) under the element.
 
-Tab bar items can have an `icon` attribute and a `label` attribute. For the icon attribute, please specify the same icon name used in [`<ons-icon>`](components.html#ons-icon) element.
+Tab bar items can have an `icon` attribute and a `label` attribute. For the `icon` attribute, please specify the same icon name used in [`<ons-icon>`](components.html#ons-icon) element.
 
 ```
 <ons-tabbar>
@@ -569,7 +569,7 @@ Onsen UI provides more than 400 icons provided by [Font Awesome](http://fontawes
 
 #### `<ons-icon>` overview
 
-When displaying an icon, a [`<ons-icon>`](components.html#ons-icon) component can be used. You can specify which icon to display by specifying to the icon attribute. Please remove the trailing `"fa-"` from the Font Awesome website.
+When displaying an icon, a [`<ons-icon>`](components.html#ons-icon) component can be used. You can specify which icon to display by specifying to the `icon` attribute. Please remove the trailing `"fa-"` from the Font Awesome website.
 
 Here are some examples.
 

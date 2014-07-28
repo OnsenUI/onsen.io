@@ -16,7 +16,7 @@ Onsen UIはAngularJSを用いてHTML5のCustom Elements対応を行っていま�
 
 #### jQueryからOnsen UIを扱う
 
-Onsen UI provides a way to use without understanding AngularJS. For instance, the example below describes a sample app that is using Onsen UI and jQuery:
+Onsen UIはAngularJS以外から使うことが可能です。下記のサンプルは、Onsen UIを通常のJavaScriptのような記述で利用しています。
 
 ```
 <!doctype html>
@@ -44,15 +44,15 @@ Onsen UI provides a way to use without understanding AngularJS. For instance, th
 </body>
 ```
 
-As you see in the code, it has two tricks. One is `var` attribute, the other is `ons.compile` function.
+このコードでは、2つの特長があります。1つはOnsen UIコンポーネントに付与された`var`属性、そして`ons.compile`関数です。
 
-When you specify `var` attribute when defining a component, the object is also defined in a `window` object. For details, please see [access to the component object from your code](#from-code).
+コンポーネントを定義する時に`var`属性を指定すると、そのコンポーネントのオブジェクトは`window`オブジェクトのプロパティとして定義されます。詳細については[コードからコンポーネントオブジェクトにアクセスする](#from-code)を参照してください。
 
-`ons.compile` function converts your custom elements based HTML to a normal DOM structure. Most browsers does not (yet) support custom elements by default, you need to call the function every time to make the magic happen.
+`ons.compile`関数を使うと、Onsen UIコンポーネントが定義されたHTMLコードを通常のDOM構造に変換します。（現状では）ほとんどのブラウザーはCustom Elementsをサポートしていないため、この関数を使ってOnsen UIコンポーネントをブラウザーに対応させることが必要です。
 
-#### Using Onsen UI with AngularJS
+#### AngularJSからOnsen UIを使う
 
-Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which should be very familiar to the AngularJS users.
+Onsen UIはAngularJSの上に作られています。そのため、AngularJSのユーザーであれば、下記のようにしてOnsen UIを使うことができます。
 
 ```
 <!doctype html>
@@ -83,58 +83,58 @@ Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which
 </html>
 ```
 
-### Managing Multiple Pages
+### 複数のページを管理する
 
-It is important to consider UI patterns before start implementation. Onsen UI supports 4 commonly used UI patterns. And remember, you can combine two or more patterns in your app. For example, a sliding menu app can also have page navigations.
+アプリ開発に着手する前に、UIパターンを検討することが重要となります。Onsen UIはよく使われる4種類の画面パターンに対応しています。もちろん、スライディングメニュー方式のアプリにページナビゲーションを組み込むなど、複数の画面パターンを組み合わせることも一般的です。
 
-#### Navigation pattern
+#### ナビゲーション型
 
-This is the most common pattern if you want to have a parent-child relationship between pages. You can link to a child page from a button or a list item. In Onsen UI, you can follow navigation pattern by using [`<ons-navigator>`](components.html#ons-navigator) and [`<ons-toolbar>`](components.html#ons-toolbar).
+ページが親子関係を持つ場合に一般的に用いられるパターンです。子ページへは、ボタンのタップや、リスト要素の選択などからリンクされます。ナビゲーションパターンを実装するためには、[`<ons-navigator>`](components.html#ons-navigator)と[`<ons-toolbar>`](components.html#ons-toolbar)を組み合わせます。
 
-#### Sliding menu pattern
+#### スライディングメニュー型
 
-Also referred to as a Menu pattern, it is useful if the app needs many pages in the same level. In Onsen UI, [`<ons-sliding-menu>`](components.html#ons-sliding-menu) component supports this pattern. It also has swipe support when displaying or hiding sliding menu.
+メニュー型とも呼ばれ、同じ階層に複数のページを配置するような場合に最適です。Onsen UIでは、[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントで実装します。スワイプ操作でメニューの表示/非表示を制御することもできます。
 
-#### Tab bar pattern
+#### タブバー型
 
-More commonly seen in iPhone and iPad apps, tab bar is displayed in the bottom of the page. Usually the tab bar items have an icon and a text. This pattern is frequently used when you want to provide several features in the app. Onsen UI way to display a tab bar is to use [`<ons-tabbar>`](components.html#ons-tabbar) component.
+iPhoneやiPadアプリでよく見られ、ページの下部にタブバーを配置したパターンになります。通常、タブバーにはいくつかの項目（アイテム）が並び、アイコンとテキストで表現されます。複数の機能を提供したいような場合に用いられます。Onsen UIでタブバーを実装するには、[`<ons-tabbar>`](components.html#ons-tabbar)コンポーネントを使用します。
 
-#### Split view pattern
+#### スプリットビュー型
 
-This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate information. [`<ons-split-view>`](components.html#ons-split-view) component allows you to have this pattern. It also has capability to transform to a sliding menu pattern on smaller devices or displayed vertically.
+タブレットのような大きな画面を持つデバイスや、画面を横向きにしたときに用いられます。スプリットビュー型では、画面を左と右に分割し、別々の情報を表示できます。[`<ons-split-view>`](components.html#ons-split-view)コンポーネントを用います。小さな画面を持つデバイスや、縦向きにした場合に、自動的にスライディングメニュー型に切り替える機能も有しています。
 
-### Page Navigation
+### ページナビゲーション
 
-In Onsen UI, a page navigation is done by the [`<ons-navigator>`](components.html#ons-navigator). Ons-navigator is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](components.html#ons-toolbar) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
+Onsen UIでは、[`<ons-navigator>`](components.html#ons-navigator)コンポーネントでページナビゲーションを実装します。`ons-navigator`は画面要素を持たない、ナビゲーションコントローラーです。そのため、一般的にはページ内にツールバーを表示するために[`<ons-toolbar>`](components.html#ons-toolbar)を組み合わせます。ナビゲーターは画面遷移をする際に自動的にアニメーションを適用し、親子関係を持つページを作成するために利用できます。
 
-#### `<ons-navigator>` overview
+#### `<ons-navigator>`の概要
 
-[`<ons-navigator>`](components.html#ons-navigator) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](components.html#ons-page) elements; therefore only [`<ons-page>`](components.html#ons-page) components can be placed directly under a [`<ons-navigator>`](components.html#ons-navigator) element.
+[`<ons-navigator>`](components.html#ons-navigator)コンポーネントは、ページスタックの管理機能と、画面遷移時のアニメーション効果を提供します。ページスタックに新しいページが追加されると、自動的にアニメーションが行われ、ページが表示されます。スタック内のすべてのページは[`<ons-page>`](components.html#ons-page)要素で表されます。そのため、[`<ons-navigator>`](components.html#ons-navigator)コンポーネントの直下には[`<ons-page>`](components.html#ons-page)コンポーネントのみ配置できます。
 
-A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](components.html#ons-toolbar) element is commonly placed under [`<ons-page>`](components.html#ons-page) element to provide a back button support and the page title.
+通常は、ページ上部にツールバーを設置します。そのため、[`<ons-page>`](components.html#ons-page)の下には[`<ons-toolbar>`](components.html#ons-toolbar)コンポーネントを配置するのが一般的です。ツールバーには、戻るボタンを設置したり、ページタイトルを描画したりします。
 
 <%- @partial('codepen', { id: "yrhtv" } ) %>
 
-#### Display a new page
+#### 新しいページを表示
 
-To add a new page to the stack, use `pushPage()` method in the navigator object. You can use `var` attribute of `<ons-navigator>` to refer the navigator object from JavaScript code.
+スタックに新しいページを追加するには、ナビゲーターオブジェクトの`pushPage()`メソッドを使用します。このメソッドを呼び出すために、`<ons-navigator>`の`var`属性を使用し、ナビゲーターオブジェクトをJavaScriptから呼び出せるように指定します。
 
 ```
 <ons-navigator var="myNavigator"></ons-navigator>
 <script>
 var options = {
-  animation: 'slide', // What animation to use
-  onTransitionEnd: function() {} // Called when finishing transition animation
+  animation: 'slide', // アニメーションの種類
+  onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
 };
 myNavigator.pushPage("page2.html", options);
 </script>      
 ```
 
-As seen in the code, the configuration options can be set in the second parameter of `pushPage()` method.
+上記のコードのように、遷移時のオプションを`pushPage()`メソッドに渡すことができます。
 
-#### Returning from a page
+#### 一つ前のページに戻る
 
-Similarly, use `popPage()` method to remove the current foreground page from the stack.
+`popPage()`メソッドを呼ぶと、ページスタックから最前面のページが削除され、一つ前のページに戻ります。
 
 ```
 <ons-navigator var="myNavigator"></ons-navigator>
@@ -143,31 +143,31 @@ myNavigator.popPage();
 </script>
 ```
 
-#### Transition animation
+#### 遷移アニメーションの指定
 
-`popPage()` method can specify the following animation patterns: `slide`, `lift`, `fade` and `none`.
+`pushPage()`と`popPage()`メソッドでは、下記のアニメーションを選択できます: `slide`、`lift`、`fade`、`none`。
 
-1. Slide animation (default)
+1. スライド（タイプ: `slide`、デフォルト）
 
-  The animation effect differs between iOS and Android to correspond to the native transition.
+  アニメーションの表現は、ネイティブ遷移と合わせるためにiOSとAndroidで異なるものとなります。
 
   ```
   navigator.pushPage("page2.html", { animation: "slide" }):
   ```
 
-2. Lift animation
+2. リフトアップ / リフトダウン（タイプ: `lift`）
 
   ```
   navigator.pushPage("page2.html", { animation: "lift" }):
   ```
 
-3. Fade-in & fade-out animation
+3. フェードイン / フェードアウト（タイプ: `fade`）
 
   ```
   navigator.pushPage("page2.html", { animation: "fade" }):
   ```
 
-4. No animation
+4. アニメーションなし（タイプ: `none`）
 
   ```
   navigator.pushPage("page2.html", { animation: "none" }):
@@ -175,61 +175,61 @@ myNavigator.popPage();
 
 <%- @partial('codepen', { id: "FLsIE" } ) %>
 
-Furthermore, you can customize the transition animation by specifying a new `NavigatorTransitionAnimator` object to the `animation` parameter.
+さらに、遷移アニメーションはカスタマイズできます。その場合は`NavigatorTransitionAnimator`オブジェクトを作成し、`animation`パラメータに指定してください。
 
 ```
 pushPage('page2.html', {animation: new MyCustomAnimator})
 ```
 
-For more details, please see `NavigatorTransitionAnimator` source code located under `framework/view`.
+詳細については、`framework/view`ディレクトリ内にある`NavigatorTransitionAnimator`を参照してください。
 
-#### Managing page stacks
+#### ページスタックの管理
 
-Navigator has several other APIs to manage page stacks. It is useful to have a fine-grain control.
+ナビゲーターにはページスタックを管理するためのAPIが提供されます。これらのAPIを使うことで、より細かい挙動をカスタマイズできます。
 
 ##### navigator.getCurrentPage()
 
-Get a `page` object of the current page. A `page` object has following properties and functions.
+現在のページの`page`オブジェクトを取得します。`page`オブジェクトは、下記のプロパティと関数を有しています。
 
-- `destroy()` method
+- `destroy()`メソッド
 
-  When it is called, the page is removed from the page stack.
+  このメソッドを呼び出すと、ページスタックからページが削除されます。
 
-- `options` object
+- `options`オブジェクト
 
-  An object that hold page configurations. See `pushPage()` method description for details.
+  ページの設定パラメータを保有するオブジェクトです。詳細については`pushPage()`メソッドの説明を参照してください。
 
 ```
 myNavigator.pushPage("page2.html", { param1: "value1", param2: "value2" });
 var page = myNavigator.getCurrentPage();
-console.log(page.options.param1); // Will return "value1"
+console.log(page.options.param1); // "value1"が戻ります
 ```
 
 ##### navigator.getPages()
 
-Returns an array of `page` objects from the navigator. See `navigator.getCurrentPage()` method for the details how to use `page` object.
+ナビゲーターが保有する`page`オブジェクトの一覧を返します。`page`オブジェクトの使い方については、`navigator.getCurrentPage()`メソッドの説明を参照してください。
 
 ```
-// Remove the 2nd topmost page from the page stack
+// ページスタックの上から2番目のページを削除する例
 var pages = navigator.getPages();
 pages[1].destroy();
-// Now a popPage() will display the 3rd page
+// popPage()を行うと3番目のページに戻ります
 ```
 
 ##### navigator.resetToPage(page, options)
 
-Clears page stack and add the specified page to the new stack. The `options` parameter corresponds to the `navigator.pushPage` API.
+ページスタックをクリアし、指定した新しいページをスタックに追加します。`options`パラメータは`navigator.pushPage` APIと同様です。
 
-#### Adding a toolbar
+#### ツールバーの追加
 
-A toolbar is defined as `<ons-toolbar>` component. Here is the typical example of a toolbar.
+ツールバーは`<ons-toolbar>`コンポーネントとして定義されます。下記にツールバーの例を掲載します。
 
 ```
 <ons-toolbar>
   <div class="left">
-    <ons-back-button>Back</ons-back-button>
+    <ons-back-button>戻る</ons-back-button>
   </div>
-  <div class="center">Title</div>
+  <div class="center">タイトル</div>
   <div class="right">
     <ons-toolbar-button>
       <ons-icon icon="bars">
@@ -240,97 +240,97 @@ A toolbar is defined as `<ons-toolbar>` component. Here is the typical example o
 
 <%- @partial('codepen', { id: "aHmGL" } ) %>
 
-The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](components.html#ons-icon) to display an icon, [`<ons-toolbar-button>`](components.html#ons-toolbar-button) or [`<ons-back-button>`](components.html#ons-back-button) to place an button, or insert any HTML content.
+ツールバーは左、中央、右の3つに分けられ、それぞれに対応したクラス名（`left`、`center`、`right`）として指定できます。[`<ons-icon>`](components.html#ons-icon)でアイコンを表示したり、[`<ons-toolbar-button>`](components.html#ons-toolbar-button)や[`<ons-back-button>`](components.html#ons-back-button)コンポーネントでボタンを配置できます。HTMLを直接記述することもできます。
 
-Here are several examples when using `<ons-toolbar>`.
+`<ons-toolbar>`コンポーネントを用いた例を紹介します。
 
-1. Example with a button and an icon
+1. ボタンとアイコンを用いた例
 
   ```
   <ons-toolbar>
-    <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
-    <div class="center">Button and Icon</div>
+    <div class="left"><ons-toolbar-button>左ボタン</ons-toolbar-button></div>
+    <div class="center">ボタンとアイコン</div>
     <div class="right"><ons-toolbar-button><ons-icon icon="bars"></ons-icon></ons-toolbar-button></div>
   </ons-toolbar>
   ```
 
-2. Example with a search box
+2. 検索ボックスを用いた例
 
   ```
   <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">Search</div>
-    <div class="right"><input type="search" class="search-input" placeholder="Keyword"></input></div>
+    <div class="left"><ons-back-button>戻る</ons-back-button></div>
+    <div class="center">検索</div>
+    <div class="right"><input type="search" class="search-input" placeholder="キーワード"></input></div>
   </ons-toolbar>
   ```
 
-3. Example with custom image
+3. カスタムなイメージを表示する例
 
   ```
   <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="left"><ons-back-button>戻る</ons-back-button></div>
     <div class="center"><img src="custom_title.png"></div>
     <div class="right"><ons-search-input></ons-search-input></div>
   </ons-toolbar>
   ```
 
-#### Android back button
+#### Androidの戻るボタンへの対応
 
-Onsen UI supports Android back button. So, if the app is running on an Android device and using Cordova, pressing the back button will trigger a navigator's `popPage()` method.
+Onsen UIではAndroidの戻るボタンにも対応します。アプリがAndroidデバイス上で実行されていて、Cordovaが用いられている場合は、戻るボタンをタップするとナビゲーターの`popPage()`メソッドが呼ばれます。
 
-If you additionally want to only show a back button from iOS devices, [`<ons-if-platform>`](components.html#ons-if-platform) is the way.
+また、iOS端末に限ってツールバーに戻るボタンを表示したい場合は、[`<ons-if-platform>`](components.html#ons-if-platform)を使用すると良いでしょう。
 
 ```
 <ons-toolbar>
-  <div class="left"><ons-back-button ons-if-platform="ios">Back</ons-back-button></div>
-  <div class="center">Page Title</div>
+  <div class="left"><ons-back-button ons-if-platform="ios">戻る</ons-back-button></div>
+  <div class="center">ページタイトル</div>
 </ons-toolbar>
 ```
 
-#### Navigation events
+#### ナビゲーターのイベント
 
-[`<ons-navigator>`](components.html#ons-navigator) has several events that can be hooked to do the specific jobs. For instance, you can cancel the page transition under some conditions.
+[`<ons-navigator>`](components.html#ons-navigator)には、特定の操作の際にイベントを発行する仕組みが備わっています。それを用いると、たとえば特定の条件においてはページ遷移をキャンセルするといった処理を記述することができます。
 
-There are several events defined in the navigator: `prepush`, `postpush`, `prepop`, `postpop`. They are called before or after the `pushPage` or `popPage` action.
+`prepush`、`postpush`、`prepop`、`postpop`の4つのイベントがナビゲーターに定義されています。これらは`pushPage`もしくは`popPage`の前あるいは後に発火され、コールバック関数が呼び出されます。
 
-The callback function will get an `event` object. The `event` object has several properties and methods for manipulation. For example, the following code cancels the `pushPage` behavior.
+コールバック関数は、`event`オブジェクトを受け取ります。`event`オブジェクトでは、下記に説明するいくつかのプロパティとメソッドが提供されます。たとえば、下記のコードは`pushPage`の実行をキャンセルすることができます。
 
 ```
 ons.ready(function() {
   myNavigator.on('prepush', function(event) {
-    var page = event.currentPage; // Get current page object
+    var page = event.currentPage; // 現在のページオブジェクトを取得する
     if (needsCancel) {
-      event.cancel(); // Cancel operation
+      event.cancel(); // 画面遷移をキャンセルする
     }
   });
 });
 ```
 
-##### `prepush` and `prepop` event
+##### `prepush`と`prepop`イベント
 
-These events are fired before pushPage and popPage. `event` object has the following parameters.
+これらのイベントは、pushPageとpopPageの前に発火します。`event`オブジェクトには、下記のパラメータが備わっています。
 
-- `currentPage`: Page object. See [Managing Page Stacks](#managing-page-stacks) for details.
-- `cancel()`: Call to cancel transition.
-- `navigator`: The `<ons-navigator>` object.
+- `currentPage`: 現在の`page`オブジェクト。詳細は、[ページスタックを管理する](#managing-page-stacks)を参照してください
+- `cancel()`: 画面遷移をキャンセルする
+- `navigator`: 保有する`<ons-navigator>`オブジェクト
 
-##### `postpush` and `postpop` event
+##### `postpush`と`postpop`イベント
 
-These events are fired before the pushPage and popPage. `event` object has the following parameters.
+これらのイベントは、pushPageとpopPageが実行された後に発火します。`event`オブジェクトには、下記のパラメータが備わっています。
 
-- `leavePage`: Page object of the current page.
-- `enterPage`: Page object of the new page.
-- `navigator`: `<ons-navigator>` object.
+- `leavePage`: 現在のページの`page`オブジェクト
+- `enterPage`: 新しいページの`page`オブジェクト
+- `navigator`: 保有する`<ons-navigator>`オブジェクト
 
-### Using Sliding Menu
+### スライディングメニュー
 
-Sliding menu consists of two pages, which are referred to as above page and behind page. The behind page is also called as a menu page, which is hidden and shown from the edge. A behind page can be displayed when tapping a button, or swiping from the edge of the screen.
+スライディングメニューは2つのページで構成され、それぞれ`above-page`と`behind-page`という形で指定されます。`behind-page`はメニューページとも呼ばれ、通常は隠れており画面端から出現します。ボタンをタップしたり、画面端からスワイプすることで表示することができます。
 
-A behind page may contain any content in HTML, and typically a menu with links to the different pages. A above page will display the main content. You can also place a [`<ons-navigator>`](components.html#ons-navigator) in the above page to allow navigation to even more pages.
+`behind-page`には、任意のHTMLコンテンツを含むことができます。通常は、別のページへのリンクとなるメニュー画面が一般的です。`above-page`にはメインコンテンツが表示されます。[`<ons-navigator>`](components.html#ons-navigator)と組み合わせることで、さらに深い階層のページを持つことも可能です。
 
-#### `<Ons-sliding-menu>` Overview
+#### `<Ons-sliding-menu>`の概要
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu) component has an `above-page` and a `behind-page`. Those pages should be specified as attributes. It also has `side` attribute to specify which side the behind page should be appeared.
+[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントでは`above-page`と`behind-page`を属性として指定します。また、`side`属性を用いると、`behind-page`を画面のどちら側に設置するかを指定できます。
 
 ```
 <ons-sliding-menu
@@ -379,49 +379,49 @@ A behind page may contain any content in HTML, and typically a menu with links t
 ```
 <%- @partial('codepen', { id: "IDvFJ" } ) %>
 
-#### Opening / closing menu
+#### メニューの表示 / 非表示
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu) provides following methods to handle menu actions: `openMenu()`, `closeMenu()`, and `toggleMenu()`.
+[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントでは、メニュー開閉のために下記のメソッドを用意しています。それらは`openMenu()`、`closeMenu()`そして`toggleMenu()`です。
 
-#### Setting above and behind page by JavaScript
+#### JavaScriptからページを指定する
 
-To change the above and behind page manually, use `setAbovePage()` and `setBehindPage()` methods. These methods can specify parameters in the second argument.
+プログラムからページを指定する場合は、`setAbovePage()`と`setBehindPage()`メソッドを使用します。これらのメソッドでは、2番目の引数にパラメータを指定できます。
 
-  - `closeMenu`: Set `true` to close the page after execution.
-  - `callback`: Specify a callback function after the animation is finished.
+  - `closeMenu`: 実行後にメニューを閉じる場合は`true`を指定します。
+  - `callback`: アニメーションが完了したときにコールバック関数を実行します。
 
-#### Swipe support
+#### スワイプの対応
 
-If you set `swipable` attribute in [`<ons-sliding-menu>`](components.html#ons-sliding-menu), it detects swipe actions and opens/closes the menu. Please be aware that you also need to specify `swipe-target-width` and `max-slide-distance` to enable swipe support.
+[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントに`swipable`属性を指定すると、スワイプ操作でメニューを開いたり閉じたりする機能が追加されます。また、この機能を使う場合は、`swipe-target-width`と`max-slide-distance`もあわせて指定する必要があることに注意が必要です。
 
-#### Animation type
+#### アニメーションの種類
 
-You can specify the animation effect in `type` attribute. The available values are `reveal`(default), `push` and `overlay`.
+`type`属性でアニメーションの種類を指定できます。現在は、`reveal`（デフォルト）、`push`、そして`overlay`に対応しています。
 
-#### Sliding menu events
+#### スライディングメニューのイベント
 
-There are 4 events where you can attach to the sliding menu object: `preopen`, `postopen`, `preclose`, `postclose`.
+スライディングメニューには、`preopen`、`postopen`、`preclose`、`postclose`の4種類のイベントに対応します。
 
 ```
 <script>
 ons.ready(function() {
   mySlidingMenu.on('preopen', function() {
-    console.log("Menu page is going to open");
+    console.log("メニューページを開きます");
   });
 });
 </script>
 <ons-sliding-menu var="mySlidingMenu">
 ```
 
-### Using Tab Bar
+### タブバーを使う
 
-A tab bar is composed from a [`<ons-tabbar>`](components.html#ons-tabbar) component and [`<ons-tabbar-item>`](components.html#ons-tabbar-item) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
+タブバーは[`<ons-tabbar>`](components.html#ons-tabbar)と[`<ons-tabbar-item>`](components.html#ons-tabbar-item)コンポーネントを組み合わせて表現します。通常、タブバーは3から5つ程度のアイテムを保有しており、アイコンやラベルで表現できます。各タブバーのアイテムをタップすると、別のページに切り替わります。
 
-#### `<ons-tabbar>` overview
+#### `<ons-tabbar>`の概要
 
-To place a tab bar into your app, place a [`<ons-tabbar>`](components.html#ons-tabbar) element. A [`<ons-tabbar>`](components.html#ons-tabbar) element only accepts [`<ons-tabbar-item>`](components.html#ons-tabbar-item) under the element.
+タブバーを設置するには、[`<ons-tabbar>`](components.html#ons-tabbar)コンポーネントを使用します。[`<ons-tabbar>`](components.html#ons-tabbar)要素の下には、[`<ons-tabbar-item>`](components.html#ons-tabbar-item)のみを配置できます。
 
-Tab bar items can have an `icon` attribute and a `label` attribute. For the icon attribute, please specify the same icon name used in [`<ons-icon>`](components.html#ons-icon) element.
+タブバーアイテムでは`icon`属性と`label`属性が指定できます。アイコンを表示する場合は、[`<ons-icon>`](components.html#ons-icon)と同様にアイコン名を指定します。
 
 ```
 <ons-tabbar>
@@ -435,56 +435,54 @@ Tab bar items can have an `icon` attribute and a `label` attribute. For the icon
 
 <%- @partial('codepen', { id: "pGuDL" } ) %>
 
-#### Tab bar events
+#### タブバーのイベント
 
-[`<ons-tabbar>`](components.html#ons-tabbar) has `prechange` and `postchange` events that are fired before or after the page switch. The event will get the following parameters.
+[`<ons-tabbar>`](components.html#ons-tabbar)は`prechange`と`postchange`イベントを持ちます。これらのイベントは、ページが切り替わる前もしくは後に実行されます。イベントで使用できるパラメータは下記の通りです。
 
-- `index`: Next page index.
-- `tabItem`: Object containing the next page.
+- `index`: 次ページのインデックス番号
+- `tabItem`: ページを保有するオブジェクト
 
-### Using List
+### リストを使う
 
-List is a very popular pattern to display a set of information in scrollable view. Onsen UI supports scrollable list by using [`<ons-list>`](components.html#ons-list) and [`<ons-list-item>`](components.html#ons-list-item) tags.
+リストは多用されるUIパターンで、ビューに複数のコレクションを表示するときに使用します。Onsen UIでは、[`<ons-list>`](components.html#ons-list)と[`<ons-list-item>`](components.html#ons-list-item)コンポーネントを用いて表現します。
 
-#### `<ons-list>` overview
+#### `<ons-list>`の概要
 
-To create a list, place a [`<ons-list>`](components.html#ons-list) tag and [`<ons-list-item>`](components.html#ons-list-item) tags.
+リストを作成するには、[`<ons-list>`](components.html#ons-list)と[`<ons-list-item>`](components.html#ons-list-item)コンポーネントを使用します。また、[`<ons-list-header>`](components.html#ons-list-header)を用いると、リスト要素のヘッダーを表現できます。
 
-Also, [`<ons-list-header>`](components.html#ons-list-header) can be used to represent a grouped list items.
+#### 基本的なリスト
 
-#### Basic list
-
-Here is the basic [`<ons-list>`](components.html#ons-list) example with scrollable content.
+下記に、[`<ons-list>`](components.html#ons-list)の例を掲載します。
 
 <%- @partial('codepen', { id: "yxcCt" } ) %>
 
-#### List with right arrow icon
+#### 右矢印付きのリスト
 
-This type of list is usually used with [`<ons-navigator>`](components.html#ons-navigator) to provide screen transitions.
+[`<ons-navigator>`](components.html#ons-navigator)と共に使用し、画面遷移を行う場合に使用します。
 
 <%- @partial('codepen', { id: "nIEvm" } ) %>
 
-#### List with forms
+#### フォームと共に使用する
 
-List is also frequently used in the setting page. Here is the example list with some form elements.
+リストは設定ページ等でも良く用いられます。下記に、フォームの要素と組み合わせた例を掲載します。
 
 <%- @partial('codepen', { id: "ohqDk" } ) %>
 
-### Using Form Components
+### フォームを使う
 
-Onsen UI provides various components for building forms.
+Onsen UIでは、フォームを構築するための様々なコンポーネントを用意しています。
 
-#### Button
+#### ボタン
 
-[`<ons-button>`](components.html#ons-button) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.
+[`<ons-button>`](components.html#ons-button)を用いて、さまざまな種類のボタンを表現できます。外見や挙動の変更には、`modifier`、`should-spin`、`animation`そして`disabled`属性で指定します。特に`modifier`属性を使用すると、あらかじめ定義されたいくつかの外見に合わせて見た目を変更できます。
 
-To detect a tap event, you can use either `onclick` or `ng-click` attribute.
+タップされた場合の処理を記述するには、`onclick`もしくは`ng-click`属性を使用します。
 
 <%- @partial('codepen', { id: "hLayx" } ) %>
 
-#### Switch
+#### スイッチ
 
-[`<ons-switch>`](components.html#ons-switch) is the element to display a switch. A switch has an off and on state, and the state can be accessed by the component's `isChecked()` method.
+スイッチを表示するには、[`<ons-switch>`](components.html#ons-switch)を使用します。スイッチにはONとOFFの状態があり、その状態は`isChecked()`メソッドで取得できます。
 
 ```
 <script>
@@ -495,29 +493,29 @@ function changed() {
 <ons-switch var="mySwitch" onchange="changed()"></ons-switch>
 ```
 
-#### Text input
+#### テキスト入力
 
-Text input and textarea do not have their own custom elements. However, you can specify a predefined class to display in Onsen UI styles.
+テキスト入力のためのコンポーネントはカスタムエレメント形式ではなく、あらかじめ定義されたクラス名を指定することでOnsen UIの外見に合わせることができます。
 
-- Text input
+- テキスト入力
 
   ```
   <input class="text-input" id="my-input">
   ```
 
-- Text area
+- テキストエリア
 
   ```
   <textarea class="textarea" id="my-textarea"></textarea>
   ```
 
-- Search input
+- 検索ボックス
 
   ```
   <input type="search" class="search-input">
   ```
 
-In all cases, you can use `document.getElementById()` call or jQuery selector to obtain the component value.
+どの場合においても、`document.getElementById()`やjQueryのセレクターを用いて、その値を取得できます。
 
 ```
 alert(document.getElementById("my-input").value);
@@ -526,9 +524,9 @@ alert($("#my-input").val());
 
 <%- @partial('codepen', { id: "qFbGp" } ) %>
 
-#### Check box and radio button
+#### チェックボックスとラジオボタン
 
-Check box and radio button are provided as CSS components. Therefore, use the following HTML snippet to display each component.
+チェックボックスとラジオボタンはCSSコンポーネントとして提供されます。下記のようにして、それぞれのコンポーネントを表示できます。
 
 ```
 <label class="checkbox">
@@ -545,33 +543,33 @@ Check box and radio button are provided as CSS components. Therefore, use the fo
 </label>
 ```
 
-### Layouting
+### レイアウト調整
 
-Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
+Onsen UIのグリッドシステムを使うと、手軽にコンポーネントを画面上に配置できます。グリッドシステムは、表計算ソフトのように、画面を行と列に分割します。各グリッドの幅と高さは調整することができ、複数のグリッドを1つに結合することもできます。
 
-#### `<ons-row>` and `<ons-col>` overview
+#### `<ons-row>`と`<ons-col>`の概要
 
-The layout can be performed by combining [`<ons-row>`](components.html#ons-row) and [`<ons-col>`](components.html#ons-col) components. The width and height can be adjusted in a flexible way.
+レイアウトの調整は、[`<ons-row>`](components.html#ons-row)と[`<ons-col>`](components.html#ons-col)コンポーネントを使用します。横幅と高さは柔軟に調整できます。
 
-By default, all [`<ons-col>`](components.html#ons-col) inside a [`<ons-row>`](components.html#ons-row) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
+デフォルトでは、[`<ons-row>`](components.html#ons-row)コンポーネント内にあるすべての[`<ons-col>`](components.html#ons-col)コンポーネントは、同じ幅で表現されます。`<ons-col>`要素に対しては、個別に横幅を指定することができます。
 
-[`<ons-row>`](components.html#ons-row) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
+[`<ons-row>`](components.html#ons-row)には`align`属性を、`<ons-col>`には`align`、`size`、`offset`属性を指定できます。`size`属性については、`px`もしくは`%`で指定できます。
 
-#### Layout example
+#### レイアウトの例
 
-You can see the following example to understand how [`<ons-row>`](components.html#ons-row) and [`<ons-col>`](components.html#ons-col) can provide flexible component placement.
+下記の例では、[`<ons-row>`](components.html#ons-row)と[`<ons-col>`](components.html#ons-col)を用いて様々なレイアウトを表現しています。
 
 <%- @partial('codepen', { id: "GgujC" } ) %>
 
-### Using Icons
+### アイコンを使う
 
-Onsen UI provides more than 400 icons provided by [Font Awesome](http://fontawesome.github.io/). The list of available icons can be found on the [Font Awesome Website]([http://fortawesome.github.io/Font-Awesome/icons/]).
+Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の持つ400以上のアイコンを使用できます。すべてのアイコンを確認するには、[Font AwesomeのWebサイト]([http://fortawesome.github.io/Font-Awesome/icons/])を参照してください。
 
-#### `<ons-icon>` overview
+#### `<ons-icon>`の概要
 
-When displaying an icon, a [`<ons-icon>`](components.html#ons-icon) component can be used. You can specify which icon to display by specifying to the icon attribute. Please remove the trailing `"fa-"` from the Font Awesome website.
+アイコンを表示するには[`<ons-icon>`](components.html#ons-icon)コンポーネントを使用します。`icon`属性にアイコン名を指定します。アイコン名は、Font AwesomeのWebサイトにあるアイコン名から先頭の`"fa-"`を取り除いたものを使用します。
 
-Here are some examples.
+下記にいくつかの例を紹介します。
 
 ```
 <ons-icon icon="angle-left"></ons-icon>
@@ -580,19 +578,19 @@ Here are some examples.
 <ons-icon icon="angle-left" spin="true"></ons-icon>
 ```
 
-Also, you can specify the icon size to display by using size attribute.
+アイコンの大きさは`size`属性で指定できます。
 
 ```
 <ons-icon icon="angle-left" size="40px">
 ```
 
-Furthermore, you can rotate the icon.
+アイコンを回転させることもできます。
 
 ```
 <ons-icon icon="angle-left" size="40px" rotate="90deg">
 ```
 
-Icon can have an animation effect. This is useful for displaying spinners.
+アイコンにアニメーションを適用することも可能です。スピナー画像等の表示に有効です。
 
 ```
 <ons-icon icon="angle-left" spin="yes">
@@ -600,111 +598,112 @@ Icon can have an animation effect. This is useful for displaying spinners.
 
 <%- @partial('codepen', { id: "xAhvg" } ) %>
 
-### Multi-screen support
+### マルチスクリーンへの対応
 
-Onsen UI supports the responsive design, where you can apply different CSS styles for different screen sizes. To do so, you will use the CSS Media Query and separate CSS definitions based on your preference.
+Onsen UIはレスポンシブデザインに対応しているため、スクリーンサイズに応じてCSSスタイルの適用を切り替えることができます。ここではCSSメディアクエリーを用いる方法について紹介します。
 
-Furthermore, Onsen UI supports a Split View user interface, where you can have two columns in a larger or horizontal screen, and one column for a smaller screen. It provides an easy way for the developer to both support smartphones and tablets without defining particular CSS styles.
+また、Onsen UIではスプリットビューというコンポーネントも提供します。このコンポーネントを用いると、横向きや大画面のデバイスでは2カラムのレイアウトを、それ以外の場合は1カラムのレイアウトに自動的に切り替えます。CSSスタイルを定義することなく、スマートフォンとタブレットの両方に対応したアプリを簡単に開発できます。
 
-#### Using CSS Media Query
+#### CSSメディアクエリーの概要
 
-CSS Media Query can be used to separate CSS definition based on screen resolution, screen size, and/or aspect ratio.
+CSSメディアクエリーを用いることで、画面サイズやアスペクト比、解像度などに応じてCSS定義を切り替えることができます。
 
-For example, the following media queries is an example to separate various screen sizes.
+下記のCSSメディアクエリーは画面サイズに応じてCSSの定義を切り替える例となります。
 
 ```
 <style>
-@media (min-width:320px) { /* smartphones, iPhone, portrait 480x320 phones */ }
-@media (min-width:641px) { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
-@media (min-width:961px) { /* tablet, landscape iPad, lo-res laptops ands desktops */ }
-@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
-@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+@media (min-width:320px) { /* スマートフォン、iPhoneなど */ }
+@media (min-width:641px) { /* iPad縦、大きな画面を持つスマートフォンなど */ }
+@media (min-width:961px) { /* タブレットやiPad横向きなど */ }
+@media (min-width:1025px) { /* より大きな画面サイズ */ }
+@media (min-width:1281px) { /* デスクトップや高解像度のデバイス */ }
 </style>
 ```
 
 <%- @partial('codepen', { id: "lGbrB" } ) %>
 
-#### Using `<ons-split-view>` component
+#### `<ons-split-view>`コンポーネントを使う
 
-[`<ons-split-view>`](components.html#ons-split-view) component is used to provide an interface that separates the screen into two parts.
-Also, it has an option to hide the secondary page when the screen size is smaller. This is very useful when you want to support smartphones and tablets together.
+[`<ons-split-view>`](components.html#ons-split-view)コンポーネントを用いると、画面を2分割して別々のページを表示することができます。
 
-[`<ons-split-view>`](components.html#ons-split-view) component has the following attributes:
+また、画面サイズが小さい時にはサイドページを非表示にすることができます。そうすることで、スマートフォンとタブレットの両方の端末に簡単に対応できます。
 
-- `main-page`: Specify a page to display on the main section.
-- `secondary-page`: Specify a page to display on the side section.
+[`<ons-split-view>`](components.html#ons-split-view)コンポーネントでは下記の属性が提供されます。
+
+- `main-page`: メイン側に表示するページを指定できます
+- `secondary-page`: サイド側に表示するページを指定できます
 
 <%- @partial('codepen', { id: "nKqfv" } ) %>
 
-##### Specify when to collapse
+##### サイドページの非表示設定
 
-[`<ons-split-view>`](components.html#ons-split-view) has `collapse` attribute to specify when to collapse. The possible values are `portrait`, `landscape`, or `width ##px` (i.e. `width 300px`). For example, if set as `portrait` and the device is in portrait orientation, the secondary page is hidden.
+[`<ons-split-view>`](components.html#ons-split-view)の`collapse`属性を用いて、サイドページを非表示にする条件を指定できます。この属性が取り得る値として、`portrait`、`landscape`もしくは`width ##px`（例`width 300px`）などの指定方法があります。たとえば、`portrait`が指定されていて、かつ、端末が縦向きの画面になっていた場合は、サイドページは非表示になります。
 
-### Utility APIs
+### ユーティリティAPI
 
-Onsen UI also provides several general purpose APIs to help make developing your app easier.
+ほかにも、Onsen UIを用いた開発をしやすくするためのユーティリティAPIも提供しています。
 
-#### `ons.ready` function
+#### `ons.ready`関数
 
-`ons.ready()` function is called when Onsen UI initialization is done. If the app is running under Cordova or PhoneGap, it will also wait for its initialization (`ondeviceready` event).
+`ons.ready()`関数は、Onsen UIの初期化が完了したときに呼ばれます。CordovaやPhoneGapが使われている場合は、デバイスの初期化（`ondeviceready`イベント）の後に実行されます。
 
-This event is very useful to hide the splash screen to avoid a black screen during the page load. For example, the following code will hide the splash screen once Onsen UI is loaded completely.
+この関数を用いると、ページ読み込み中のブランクスクリーンを表示せずに、スプラッシュ画面を動的に非表示にすることができます。たとえば、下記の例はOnsen UIの読み込みが完了するまで、スプラッシュスクリーンを表示したままにするコードとなります。
 
 ```
 ons.ready(function() {
-  // Hide Cordova splash screen when Onsen UI is loaded completely
-  // API reference: https://github.com/apache/cordova-plugin-splashscreen/blob/master/doc/index.md
+  // Onsen UIが読み込み終わるまでスプラッシュ画像を表示したままにする
+  // APIリファレンス: https://github.com/apache/cordova-plugin-splashscreen/blob/master/doc/index.md
   navigator.splashscreen.hide()
 });
 ```
 
-#### `ons.bootstrap` function
+#### `ons.bootstrap`関数
 
-`ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
+`ons.bootstrap()`関数を用いると、1行でOnsen UIの読み込みを行います。この関数は、AngularJSにOnsen UIのモジュールを追加し、どのスコープからでもOnsen UIを呼び出せるようにします。`onsenui.js`の読み込みが完了した後に呼び出してください。
 
-#### `ons.compile` function
+#### `ons.compile`関数
 
-`ons.compile()` function is used to compile the DOM elements that have Onsen UI components. Typical usage of the function is to manually add a snippet of HTML and render it.
+`ons.compile()`関数は、Onsen UIコンポーネントが含まれているDOM要素をコンパイルするために使用します。JavaScriptでHTMLを組み立て、描画するときに使用します。
 
-Note that `ons.compile()` must specify a `HTMLElement` object to its argument. Also, the element must be appended to the DOM tree before calling `ons.compile()`. Please see the example below.
+なお、`ons.compile()`関数の引数には、`HTMLElement`オブジェクトを指定する必要があります。また、指定する要素は、`ons.compile()`関数を呼び出す前にDOMツリー上に配置されていいなければなりません。下記の例を参照してください。
 
 ```
 ons.ready(function() {
-  var elm = $("<ons-button>New Button</ons-button>");
-  elm.appendTo($("body")); // Insert to the DOM first
-  ons.compile(elm[0]); // The argument must be a HTMLElement object
+  var elm = $("<ons-button>新規ボタン</ons-button>");
+  elm.appendTo($("body")); // DOMツリーに追加する
+  ons.compile(elm[0]); // 引数はHTMLElementオブジェクトとして指定する
 });
 ```
 
-#### Platform detection
+#### プラットフォームの判定
 
-[`<ons-if-platform>`](components.html#ons-if-platform) attribute is useful when only displaying contents under a specific platform. This attribute can be set within any tags.
-
-```
-<div ons-if-platform="ios">Content for only iPhone and iPad users</div>
-```
-
-#### Landscape / portrait detection
-
-Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](components.html#ons-if-orientation) attribute can be used to switch content between portrait and landscape.
+[`<ons-if-platform>`](components.html#ons-if-platform)属性を使うと、特定のプレットフォームに応じたコンテンツのだし分けを記述できます。この属性は、どのタグにも指定できます。
 
 ```
-<div ons-if-orientation="portrait">Content only shown for portrait</div>
+<div ons-if-platform="ios">iPhoneとiPadユーザーだけのコンテンツ</div>
 ```
 
-### Calling Component APIs from JavaScript
+#### 画面向きの判定
 
-Some components have JavaScript functions to provide features that needs to be called after launching the program. For instance, `ons-navigator` has `pushPage()` and `popPage()` methods to display or hide a new page.
+`ons-if-platform`属性と同様、[`<ons-if-orientation>`](components.html#ons-if-orientation)属性を用いると、画面の向きに応じて画面表示を切り替えられます。
 
-In order to call those APIs, you need to assign a variable to the component by using `var` attribute. For instance, you can assign a variable called `"myNavigator"` by the following code.
+```
+<div ons-if-orientation="portrait">縦向きの時だけ表示するコンテンツ</div>
+```
+
+### JavaScriptからコンポーネントのAPIを呼び出す
+
+コンポーネントのなかには、JavaScript関数を備えているものがあります。たとえば、`ons-navigator`は`pushPage()`と`popPage()`メソッドが用意されており、それぞれページを追加したり削除したりする目的で使用します。
+
+こういったAPIを呼び出す場合は、`var`属性でコンポーネントに変数を割り当てます。たとえば、下記のコードはナビゲーターに`"myNavigator"`という変数を割りあてています。
 
 ```
 <ons-navigator var="myNavigator">
 ```
 
-Now, `myNavigator` has become a variable that can be accessed from anywhere in your code. More precisely, `myNavigator` has defined as a `window` property, and also in the AngularJS global scope.
+これで、`myNavigator`変数はJavaScriptコードのどこからでもアクセスできるようになりました。より正確には、`myNavigator`は`window`オブジェクトのプロパティとして、そして、AngularJSのグローバルスコープとして定義されています。
 
-Therefore, if you are using a plain JavaScript or jQuery, you can refer the variable like the code below.
+そのため、JavaScriptを直接用いたり、jQueryを使って変数を呼び出す場合は、下記のコードで動作します。
 
 ```
 <script>
@@ -712,7 +711,7 @@ Therefore, if you are using a plain JavaScript or jQuery, you can refer the vari
 </script>
 ```
 
-Or, AngularJS way like the following code.
+AngularJSを用いる場合は、下記のようにして実行できます。
 
 ```
 <script>
@@ -725,10 +724,9 @@ Or, AngularJS way like the following code.
 </script>
 ```
 
+### DOM APIの利用
 
-### Dealing with DOM APIs
-
-Even though the Onsen UI components are custom elements based, you can query the component using the familiar DOM APIs.
+Onsen UIのコンポーネントはCustom Elements形式ではありますが、DOM APIを使って呼び出すこともできます。
 
 ```
 <ons-navigator class="myNavigator"></ons-navigator>
@@ -737,33 +735,33 @@ Even though the Onsen UI components are custom elements based, you can query the
   <ons-list-item class="item1"></ons-list-item>
 </ons-list>
 <script>
-  // Using DOM API
+  // DOM APIの利用例
   document.getElementById("my-ons-button");
 
-  // Using jQuery
+  // jQueryの利用例
   $("ons-navigator.myNavigator");
   $("ons-list-item.item1");
   $("ons-button").onclick(function() {
-    alert("Button is clicked!");
+    alert("Buttonがクリックされました!");
   });
 </script>
 ```
 
-### Event Handling
+### イベントの利用
 
-Some components supports events. By using those events, you can hook your code to a specific action in the component and customize the behavior.
+コンポーネントのなかには、イベントに対応したものがあります。イベントを使うと、コンポーネントの挙動を上書きし、挙動をカスタマイズすることができます。
 
-To add a handler to a event, use `on()`, `off()` and `once()` method of the target component. Therefore, you need to define a variable of the component, as described in the previous section.
+イベントにハンドラーを追加するには、コンポーネントの`on()`、`off()`および`once()`メソッドを使用します。そのために前述の通り、コンポーネントに変数を割り当てる必要があります。
 
 ```
 <script>
 myNavigator.on("prepush", function() {
-  // Add a handler for prepush event
+  // prepushイベントのハンドラーを記述する
 });
 </script>
 
 <script>
-// on and off usage
+// on()とoff()メソッドの使用例
 var callback = function(event) {
 }
 myNavigator.on("prepush", callback);
@@ -772,46 +770,46 @@ myNavigator.off("prepush", callback);
 </script>
 ```
 
-#### Tap & click event
+#### タップとクリックのイベント
 
-The most frequently used action is a tap on the element, the event can be triggered by `onclick` handler.
-
-```
-<ons-button onclick="alert('You tapped me!')">Click Me</ons-button>
-```
-
-Also, if you are familiar with AngularJS events, you can also get the same event by `ng-click` handler.
+コンポーネントに対するアクションとして、最も使われるのはタップの検出です。タップやクリックの検出には、`onclick`ハンドラーを使用します。
 
 ```
-<ons-button ng-click="alert('You tapped me!')">Click Me</ons-button>
+<ons-button onclick="alert('タップされました')">ここをタップ</ons-button>
 ```
 
-In both cases, thanks to the fastclick library, there is no 300ms delay when detecting the event. This means the app responds much quicker to the user interactions.
+AngularJSのイベント処理に精通している方は、`ng-click`ハンドラーも使用できます。
 
-#### Page init event
+```
+<ons-button ng-click="alert('タップされました')">ここをタップ</ons-button>
+```
 
-`pageinit` event is called after [`<ons-page>`](components.html#ons-page) is initialized. Use this event to alter the behavior on each pages.
+どちらの場合でも、fastclickライブラリーを用いることで、イベントの検出に300msの遅延は発生しません。そのため、すばやくユーザーの挙動に反応します。
+
+#### ページ初期化のイベント
+
+[`<ons-page>`](components.html#ons-page)の初期化が完了すると、`pageinit`イベントが発生します。このイベントを用いて、各ページの挙動を変更してください。
 
 ```
 <script>
 $(document.body).on('pageinit', '#my-page', function() {
-  $('.my-content', this).text("I am fine!");
+  $('.my-content', this).text("私は元気です。");
 })
 </script>
 
 <ons-page id="my-page">
-  <div>Hello, how are you?</div>
-  <div class="my-content">Change me</div>
+  <div>ようこそ。元気ですか？</div>
+  <div class="my-content">ここが変更されます</div>
 </ons-page>
 ```
 
-#### Component events
+#### コンポーネントのイベント
 
-[`<ons-navigator>`](components.html#ons-navigator), [`<ons-sliding-menu>`](components.html#ons-sliding-menu) and [`<ons-tabbar>`](components.html#ons-tabbar) provides events to control the behavior before and after the user interaction. For more details, please see the document for each component.
+[`<ons-navigator>`](components.html#ons-navigator)、[`<ons-sliding-menu>`](components.html#ons-sliding-menu)、[`<ons-tabbar>`](components.html#ons-tabbar)の3コンポーネントはユーザー処理の前後にイベントを提供します。詳細については、各コンポーネントのドキュメントを参照してください。
 
-### Defining Multiple Pages in Single HTML
+### 複数のページを1つのHTMLに記述する
 
-Some components require you to specify another HTML page. For instance, a `<ons-sliding-menu>` needs to specify a start up page in following format.
+いくつかのコンポーネントは、別のHTMLページを指定する必要があります。たとえば、`<ons-sliding-menu>`コンポーネントは、下記のように別途定義されたページを指定します。
 
 ```
 <ons-sliding-menu
@@ -820,47 +818,47 @@ Some components require you to specify another HTML page. For instance, a `<ons-
 </ons-sliding-menu>
 ```
 
-Instead of creating a menu.html and content.html separately, you can also define the page content in the same page. This can be done by creating a `script` tag and set type as `"text/ons-template"`.
+この場合、menu.htmlとcontent.htmlを別途作成するのではなく、同じHTML内にコンテンツを記述することができます。そのためには、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定します。
 
 ```
 <script type="text/ons-template" id="main.html">
-  <!-- Here, we define the HTML content for main.html -->
+  <!-- main.htmlのHTMLコンテンツを定義します -->
   <div>
-    Hello, this is the content of main.html
+    これはmain.htmlのコンテンツです
   </div>
 </script>
 
 <script type="text/ons-template" id="content.html">
-  <!-- Here, we define the HTML content for content.html -->
+  <!-- content.htmlのHTMLコンテンツを定義します -->
   <div>
-    Hello, this is the content of content.html
+    これはcontent.htmlのコンテンツです
   </div>
 </script>
 ```
 
-This is a micro-templating technique, and is very useful when you want to maintain smaller amount of files.
+これはマイクロテンプレーティングとも言われ、ページ数を減らすことに貢献できます。
 
-### Customize Onsen UI components
+### Onsen UIコンポーネントのカスタマイズ
 
-You can customize Onsen UI components based on what you want to achieve. You can either customize its look & feel, or go more deeper into the component and modify its underlying JavaScript or HTML code.
+Onsen UIコンポーネントには、いくつかのカスタマイズ方法が用意されています。たとえば、ルック＆フィールの変更や、コンポーネントのCSSの直接記述、そしてJavaScriptやHTMLコードの変更などです。
 
-#### Customizing its look and feel
+#### ルック＆フィールのカスタマイズ
 
-Onsen UI styles are defined in a CSS file called `onsenui.css` and `onsen-css-components.css`. These files have all the definitions. All components are fully customizable by editing the file.
+Onsen UIのスタイルは`onsenui.css`と`onsen-css-components.css`という2つのファイルで定義されています。これらのファイルには、コンポーネントのすべての定義が記述されており、ファイルを直接変更することができます。
 
-Or, you can also use [Onsen CSS Components](http://components.onsenui.io/) to customize pre-defined colors. After the customization, you can download and replace to the existing `onsenui-css-components.css` to reflect the changes.
+もしくは、[Onsen UIテーマローラー](http://components.onsenui.io/)を用いると、自由にカラースキームを変更できます。カスタマイズが完了したら、`onsenui-css-components.css`を上書きするだけで変更点を反映できます。
 
-#### Overriding CSS styles
+#### CSSスタイルのオーバーライド
 
-There are some situations where you want to apply a different style to a specific component. In such case, you can use modifier attribute to override its style definition.
+コンポーネントに対して、標準とは別のスタイルを割り当てたい場合があります。こういう場合には、`modifier`属性を用いることで、スタイル定義をオーバーライドすることができます。
 
-For example, if you want to apply a thick border only to a specific button, you can define like the one below.
+たとえば、特定のボタンに対して太い枠をつけたい場合は、下記のようにして`modifier`属性を定義します。
 
 ```
 <ons-button modifier="thick">Thick Button</ons-button>
 ```
 
-Then, write the appropriate style code under the style tag or in the css file.
+次に`style`タグなどで、下記のように個別にスタイルを定義します。
 
 ```
 <style>
@@ -870,11 +868,11 @@ Then, write the appropriate style code under the style tag or in the css file.
 </style>
 ```
 
-#### Customizing underlying HTML
+#### HTMLのカスタマイズ
 
-If you need to customize the underlying HTML code, you need to understand about AngularJS directive. AngularJS directive is a way to combine HTML code and JavaScript into a HTML tag.
+コンポーネントが持つHTMLをカスタマイズする場合は、AngularJSについて理解する必要があります。AngularJSでは、ディレクティブという機能を用いて、HTMLとJavaScriptを組み合わせて1つのタグを形成します。
 
-HTML code for each components are located under the framework's `templates` directory. For instance, the HTML code for `<ons-button>` is found in `framework/templates/button.tpl`.
+各コンポーネントのHTMLコードは、フレームワークの`templates`ディレクトリ以下に配置されます。たとえば、`<ons-button>`のHTMLコードは`framework/templates/button.tpl`にあります。
 
 ```
 <button class="{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}">
@@ -883,15 +881,15 @@ HTML code for each components are located under the framework's `templates` dire
 </button>
 ```
 
-After modifying the template files, you need to build Onsen UI because all the template files are cached and stored in `framework/directives/templates.js` file. See [Building Onsen UI]() section for more details.
+テンプレートファイルを変更したら、Onsen UIをビルドし直す必要があります。なぜなら、すべてのテンプレートはキャッシュされ、`framework/directives/templates.js`ファイルに格納されているためです。詳しくは、[Onsen UIのビルド]()を参照してください。
 
-#### Customizing JavaScript code
+#### JavaScriptコードのカスタマイズ
 
-The JavaScript code for each component is located in the `directives` directory.
+各コンポーネントのJavaScriptコードは、`directives`ディレクトリに配置されます。
 
-#### Building Onsen UI
+#### Onsen UIのビルド
 
-If you need to build Onsen UI manually, there is a `gulp` task for that purpose. Please follow the instruction from the [project Website](https://github.com/OnsenUI/OnsenUI).
+Onsen UIでは、ビルドシステムとして`gulp`を使用しています。ビルド方法の詳細については、[プロジェクトのWebサイト](https://github.com/OnsenUI/OnsenUI)を参照してください。
 
 <script src="<%= @rootUrl %>scripts/codepen.js"></script>
 
@@ -904,3 +902,4 @@ $(function() {
   });
 });
 </script>
+
