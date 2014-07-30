@@ -216,6 +216,12 @@ pages[1].destroy();
 // Now a popPage() will display the 3rd page
 ```
 
+<h5 id="navigatorInsertPage">navigator.insertPage(index, page, options)</h5>
+
+Adds a page into any level in the stack by specifying the `index` parameter. If specified as `0`, it will add the page to the bottom of the page stack. If specified a negative value, it will be counted from the top level. Therefore, specifying `-1` will result in adding the page to the 2nd level from the top. The `page` and `options` parameters works the same as `pushPage()` API.
+
+<%- @partial('codepen', { id: "fhdjg" } ) %>
+
 <h5 id="navigatorresetToPagepageoptions">navigator.resetToPage(page, options)</h5>
 
 Clears page stack and add the specified page to the new stack. The `options` parameter corresponds to the `navigator.pushPage` API.
