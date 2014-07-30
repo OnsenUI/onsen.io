@@ -468,6 +468,14 @@ ons.ready(function() {
 
 <%- @partial('codepen', { id: "ohqDk" } ) %>
 
+<h3 id="UsingModal">モーダルを使う</h3>
+
+[`<ons-modal>`](components.html#ons-modal)コンポーネントを使うと、モーダル画面が表示されている間は外の入力操作を禁止することができます。プログレスバーを表示したり、ユーザーの選択を確実に行う場合などに使用されます。
+
+[`<ons-modal>`](components.html#ons-modal)コンポーネント内には自由にHTMLを記述できます。その内容は、`toggle()`や`show()`メソッドを呼び出すことで表示されます。
+
+<%- @partial('codepen', { id: "devIg" } ) %>
+
 <h3 id="UsingFormComponents">フォームを使う</h3>
 
 Onsen UIでは、フォームを構築するための様々なコンポーネントを用意しています。

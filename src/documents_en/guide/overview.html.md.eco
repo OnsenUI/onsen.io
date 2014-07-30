@@ -470,6 +470,14 @@ List is also frequently used in the setting page. Here is the example list with 
 
 <%- @partial('codepen', { id: "ohqDk" } ) %>
 
+<h3 id="UsingModal">Using Modal</h3>
+
+[`<ons-modal>`](components.html#ons-modal) is useful when showing a dialog that needs to forbid any user interaction while the modal is shown. Typically a modal is used to display progress indicators or to request a user action explicitly.
+
+[`<ons-modal>`](components.html#ons-modal) component can have any HTML content inside the tag. The content will be shown with a black mask when `toggle()` or `show()` method is called.
+
+<%- @partial('codepen', { id: "devIg" } ) %>
+
 <h3 id="UsingFormComponents">Using Form Components</h3>
 
 Onsen UI provides various components for building forms.
