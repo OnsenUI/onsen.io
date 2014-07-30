@@ -216,6 +216,12 @@ pages[1].destroy();
 // Now a popPage() will display the 3rd page
 ```
 
+<h5 id="navigatorInsertPage">navigator.insertPage(index, page, options)</h5>
+
+Adds a page into any level in the stack by specifying the `index` parameter. If specified as `0`, it will add the page to the bottom of the page stack. If specified a negative value, it will be counted from the top level. Therefore, specifying `-1` will result in adding the page to the 2nd level from the top. The `page` and `options` parameters works the same as `pushPage()` API.
+
+<%- @partial('codepen', { id: "fhdjg" } ) %>
+
 <h5 id="navigatorresetToPagepageoptions">navigator.resetToPage(page, options)</h5>
 
 Clears page stack and add the specified page to the new stack. The `options` parameter corresponds to the `navigator.pushPage` API.
@@ -469,6 +475,14 @@ This type of list is usually used with [`<ons-navigator>`](components.html#ons-n
 List is also frequently used in the setting page. Here is the example list with some form elements.
 
 <%- @partial('codepen', { id: "ohqDk" } ) %>
+
+<h3 id="UsingModal">Using Modal</h3>
+
+[`<ons-modal>`](components.html#ons-modal) is useful when showing a dialog that needs to forbid any user interaction while the modal is shown. Typically a modal is used to display progress indicators or to request a user action explicitly.
+
+[`<ons-modal>`](components.html#ons-modal) component can have any HTML content inside the tag. The content will be shown with a black mask when `toggle()` or `show()` method is called.
+
+<%- @partial('codepen', { id: "devIg" } ) %>
 
 <h3 id="UsingFormComponents">Using Form Components</h3>
 

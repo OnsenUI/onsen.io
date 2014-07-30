@@ -60,6 +60,7 @@ docpadConfig = {
         'ons-list',
         'ons-list-header',
         'ons-list-item',
+        'ons-modal',
         'ons-button',
         'ons-back-button',
         'ons-switch',

@@ -216,6 +216,12 @@ pages[1].destroy();
 // popPage()を行うと3番目のページに戻ります
 ```
 
+<h5 id="navigatorInsertPage">navigator.insertPage(index, page, options)</h5>
+
+ページスタックの`index`パラメータで指定した場所にページを追加します。`0`を指定すると、ページスタックの最後（最下層）にページを追加します。また、マイナス値を指定すると、上からの順番で計算されます。たとえば、`-1`を指定すると上から2番目にページが追加されます。`page`と`options`パラメータは、`pushPage()`メソッドと同様に指定します。
+
+<%- @partial('codepen', { id: "fhdjg" } ) %>
+
 <h5 id="navigatorresetToPagepageoptions">navigator.resetToPage(page, options)</h5>
 
 ページスタックをクリアし、指定した新しいページをスタックに追加します。`options`パラメータは`navigator.pushPage` APIと同様です。
@@ -467,6 +473,14 @@ ons.ready(function() {
 リストは設定ページ等でも良く用いられます。下記に、フォームの要素と組み合わせた例を掲載します。
 
 <%- @partial('codepen', { id: "ohqDk" } ) %>
+
+<h3 id="UsingModal">モーダルを使う</h3>
+
+[`<ons-modal>`](components.html#ons-modal)コンポーネントを使うと、モーダル画面が表示されている間は外の入力操作を禁止することができます。プログレスバーを表示したり、ユーザーの選択を確実に行う場合などに使用されます。
+
+[`<ons-modal>`](components.html#ons-modal)コンポーネント内には自由にHTMLを記述できます。その内容は、`toggle()`や`show()`メソッドを呼び出すことで表示されます。
+
+<%- @partial('codepen', { id: "devIg" } ) %>
 
 <h3 id="UsingFormComponents">フォームを使う</h3>
 
