@@ -129,3 +129,67 @@ header#header-container {
     }
   }
 }
+
+.language-dialog {
+  position: fixed;
+  width: 500px;
+  top: 150px;
+  left: 50%;
+  @include transform(translate(-50%, 0));
+  @include box-sizing(border-box);
+  max-width: 95%;
+  padding: 32px;
+  background-color: #313e50;
+  z-index: 91;
+}
+
+.language-dialog-mask {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  opacity: 0.15;
+  background-color: #2a3e54;
+  z-index: 90;
+}
+
+.language-dialog-header {
+  font-size: 24px;
+  color: white;
+}
+
+.language-dialog-footer {
+  margin-top: 52px;
+  text-align: center;
+}
+
+.language-dialog-button {
+  font-size: 20px;
+  display: inline-block;
+  color: white;
+  background-color: #6c7480;
+  border: none;
+  border-radius: 2px;
+  padding: 0 18px;
+  height: 48px;
+  line-height: 48px;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:active, &:visited, &:hover {
+    text-decoration: none;
+    color: white;
+  }
+  &:active {
+    outline: none;
+    opacity: 0.8;
+  }
+  &:hover {
+    opacity: 0.8;
+  }
+}

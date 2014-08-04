@@ -1,9 +1,9 @@
 <header id="header-container" class="common">
-	<div>				
-		<a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
+  <div>       
+    <a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
     <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg"></a></div>
-		<ul class="gnav">
-		  <% if @lang == "en": %>
+    <ul class="gnav">
+      <% if @lang == "en": %>
         <li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">Getting Started</a></li>
         <li class="<%- if @document.page is 'components' then 'current' %>"><a href="/guide/components.html">Components</a></li>
         <li class="<%- if @document.page is 'guide' then 'current' %>"><a href="/guide/overview.html">Guide</a></li>
@@ -18,17 +18,28 @@
         <li class="<%- if @document.page is 'themes' then 'current' %>"><a href="http://components.onsenui.io/">テーマローラー</a></li>
         <li><a href="http://onsenui.io/">English</a></li>
       <% end %>
-		</ul>
-	</div>
+    </ul>
+  </div>
+
 </header>
 
 <script>
   $(function() {
+    // for mobile website menu
     var header = $('header#header-container')[0];
     $('.gnav-icon', header).click(function() {
       $('ul.gnav', header).toggle();
     });
+
+    // for language switch dialog
+    $('.language-dialog-button.close').click(function() {
+      $('.language-dialog-mask').hide();
+      $('.language-dialog').hide();
+
+      return false;
+    });
   });
+
   var trackOutboundLink = function(url) {
     ga('send', 'event', 'outbound', 'click', url, {'hitCallback':
       function () {
@@ -36,4 +47,28 @@
       }
     });
   }
+
 </script>
+
+<div class="language-dialog-mask"></div>
+<% if @lang == 'en': %>
+<div class="language-dialog">
+  <h1 class="language-dialog-header">You are looing at English website.</h1>
+
+  <div class="language-dialog-footer">
+    <a class="language-dialog-button close">Close</a>
+    <a class="language-dialog-button" href="//ja.onsenui.io/">日本語版へ</a>
+  </div>
+</div>
+<% else: %>
+<div class="language-dialog">
+  <h1 class="language-dialog-header">You are looing at Japanese website.</h1>
+
+  <div class="language-dialog-footer">
+    <a class="language-dialog-button close">閉じる</a>
+    <a class="language-dialog-button" href="//onsenui.io/">Go to English site</a>
+  </div>
+</div>
+<% end %>
+
+
