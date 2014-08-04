@@ -24,7 +24,7 @@
 
     <li>
       <!-- twitter button -->
-      <a href="https://twitter.com/share" data-text="Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End." class="twitter-share-button" data-url="http://onsenui.io/" data-via="Onsen_UI" data-related="Onsen_UI">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <a href="https://twitter.com/share" data-text="<%- @site.twitter %>" class="twitter-share-button" data-url="http://onsenui.io/" data-via="Onsen_UI" data-related="Onsen_UI">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
       <!-- google plus button -->
       <div class="g-plusone" data-size="medium" data-action="share"></div>
