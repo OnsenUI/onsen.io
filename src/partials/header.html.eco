@@ -38,6 +38,14 @@
 
       return false;
     });
+    
+    <% if @lang == 'en': %>
+      if (browserLanguage() == "ja") {
+        $('.language-dialog-mask').show();
+        $('.language-dialog').show();
+      }
+    <% end %>
+    
   });
 
   var trackOutboundLink = function(url) {
@@ -48,27 +56,25 @@
     });
   }
 
+  function browserLanguage() {
+    try {
+      return (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2)
+    }
+    catch(e) {
+      return undefined;
+    }
+  }
+
 </script>
 
-<div class="language-dialog-mask"></div>
 <% if @lang == 'en': %>
-<div class="language-dialog">
-  <h1 class="language-dialog-header">You are looing at English website.</h1>
-
-  <div class="language-dialog-footer">
-    <a class="language-dialog-button close">Close</a>
-    <a class="language-dialog-button" href="//ja.onsenui.io/">日本語版へ</a>
+  <div class="language-dialog-mask" style="display: none"></div>
+  <div class="language-dialog" style="display: none">
+    <h1 class="language-dialog-header">You are looking at the English Website.</h1>
+    <div class="language-dialog-footer">
+      <a class="language-dialog-button close">Continue</a>
+      <a class="language-dialog-button" href="//ja.onsenui.io/">日本語版を表示</a>
+    </div>
   </div>
-</div>
-<% else: %>
-<div class="language-dialog">
-  <h1 class="language-dialog-header">You are looing at Japanese website.</h1>
-
-  <div class="language-dialog-footer">
-    <a class="language-dialog-button close">閉じる</a>
-    <a class="language-dialog-button" href="//onsenui.io/">Go to English site</a>
-  </div>
-</div>
 <% end %>
-
 
