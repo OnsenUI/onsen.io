@@ -451,7 +451,7 @@ Tab bar have some JavaScript APIs for fine-grain control over the page managemen
 
 `setActiveTab(index, options)` method can be used to display a specific tab page. The `index` parameter is used to specify the tab page index, which starts from `0`. For the `options` parameter, following properties can be specified.
 
-- `keepPage`: If set to `true`, it will not refresh content and display a new page (default: `true`).
+- `keepPage`: If set to `true`, it will not refresh content and display a new page (default: `false`).
 - `animation`: The transition animation to the page. Currently `none` and `fade` is supported. (default: `none`)
 
 <h5 id="Getcurrentactivetab">Get current active tab</h5>
@@ -478,7 +478,7 @@ Please note that `prechange` and `postchange` event will not occur in this case.
 When you want to cancel the event, you can use the `cancel()` method on the `prechange` event object.
 
 ```
-tabbar.on('prechnage', function(event) {
+tabbar.on('prechange', function(event) {
   event.cancel();
 });
 ```
@@ -788,7 +788,7 @@ To detect a finger gesture, you must wrap the target DOM element using [`<ons-ge
   $(document).on('swipeleft', '#detect-area', function() {
     console.log("Swipe left is detected.");
   })
-</script
+</script>
 ```
 
 Or, use `ng-gestureeventname` if you prefer an AngularJS way.
@@ -920,11 +920,11 @@ In order to use component APIs, it should be referred from the JavaScript code. 
 
 In order to call those APIs, you need to assign a variable to the component by using `var` attribute. For instance, you can assign a variable called `"myNavigator"` by the following code.
 
-Now, `myNavigator` has become a global accessible variable. It is defined as a `window` property, and also in the AngularJS global scope.
-
 ```
 <ons-navigator var="myNavigator">
 ```
+
+Now, `myNavigator` has become a global accessible variable. It is defined as a `window` property, and also in the AngularJS global scope.
 
 To use the defined variable, you can refer the variable like the code below.
 
@@ -949,7 +949,7 @@ Or, the AngularJS way.
 
 <h4 id="UsingVarAttributeToSpecifyAComponent">Querying a component from the DOM tree</h4>
 
-`ons.findComponent()` and `ons.findParentComponentUntil()` functions ise useful when specifying a component without assigning a variable.
+`ons.findComponent()` and `ons.findParentComponentUntil()` functions are useful when specifying a component without assigning a variable.
 
 <h5>ons.findComponent(selector, dom)</h5>
 
@@ -1061,7 +1061,7 @@ Some components require you to specify another HTML page. For instance, a `<ons-
 </ons-sliding-menu>
 ```
 
-Instead of creating a menu.html and content.html separately, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](components.html#ons-template) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
+Instead of creating menu.html and content.html in separate files, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](components.html#ons-template) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
 
 <h4 id="OnsTemplateTag">Use `<ons-template>` tag to define a template</h4>
 

@@ -238,7 +238,7 @@ pages[1].destroy();
   <div class="center">タイトル</div>
   <div class="right">
     <ons-toolbar-button>
-      <ons-icon icon="bars">
+      <ons-icon icon="fa-bars">
     </ons-toolbar-button>
   </div>
  </ons-toolbar>
@@ -256,7 +256,7 @@ pages[1].destroy();
   <ons-toolbar>
     <div class="left"><ons-toolbar-button>左ボタン</ons-toolbar-button></div>
     <div class="center">ボタンとアイコン</div>
-    <div class="right"><ons-toolbar-button><ons-icon icon="bars"></ons-icon></ons-toolbar-button></div>
+    <div class="right"><ons-toolbar-button><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button></div>
   </ons-toolbar>
   ```
 
@@ -292,6 +292,8 @@ Onsen UIではAndroidの戻るボタンにも対応します。アプリがAndro
   <div class="center">ページタイトル</div>
 </ons-toolbar>
 ```
+
+戻るボタンの対応についてより詳細にカスタマイズしたい場合は、[戻るボタンへの対応](#HandlingBackButton)を参照してください。
 
 <h4 id="Navigationevents">ナビゲーターのイベント</h4>
 
@@ -350,7 +352,7 @@ ons.ready(function() {
   <ons-page>
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+        <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>
       </div>
       <div class="center">Page 1</div>
     </ons-toolbar>
@@ -363,7 +365,7 @@ ons.ready(function() {
   <ons-page>
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button onclick="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+        <ons-toolbar-button onclick="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>
       </div>
       <div class="center">Page 2</div>
     </ons-toolbar>
@@ -431,15 +433,40 @@ ons.ready(function() {
 
 ```
 <ons-tabbar>
-  <ons-tabbar-item page="page1.html" label="Page 1" icon="square" active="true"></ons-tabbar-item>
-  <ons-tabbar-item page="page2.html" label="Page 2" icon="square"></ons-tabbar-item>
-  <ons-tabbar-item page="page3.html" label="Page 3" icon="square"></ons-tabbar-item>
-  <ons-tabbar-item page="page4.html" label="Page 4" icon="square"></ons-tabbar-item>
-  <ons-tabbar-item page="page5.html" label="Page 5" icon="square"></ons-tabbar-item>
+  <ons-tabbar-item page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tabbar-item>
+  <ons-tabbar-item page="page2.html" label="Page 2" icon="fa-square"></ons-tabbar-item>
+  <ons-tabbar-item page="page3.html" label="Page 3" icon="fa-square"></ons-tabbar-item>
+  <ons-tabbar-item page="page4.html" label="Page 4" icon="fa-square"></ons-tabbar-item>
+  <ons-tabbar-item page="page5.html" label="Page 5" icon="fa-square"></ons-tabbar-item>
 </ons-tabbar>
 ```
 
 <%- @partial('codepen', { id: "pGuDL" } ) %>
+
+<h4 id="Tabbarmethods">タブバーアイテムの管理</h4>
+
+タブバーには、ページ管理をより詳細に行うためのJavaScript　APIが用意されています。これらのAPIを呼び出すには、[JavaScriptからコンポーネントのAPIを呼び出す](overview.html#CallingComponentAPIsfromJavaScript)を参考に`var`属性を使用する必要があります。
+
+<h5 id="Settingactivetab">アクティブなタブを設定する</h5>
+
+`setActiveTab(index, options)`メソッドを使うと、指定したページを表示できます。`index`パラメータにはタブページのインデックスを指定し、一番左は`0`になります。また、`options`には、下記のプロパティを指定して挙動を変更できます。
+
+- `keepPage`: `true`を指定すると、新しいページを表示せずに、タブのインデックスだけ変更します。デフォルトは`false`です。
+- `animation`: ページへの遷移アニメーションを指定します。現在は、`none`と`fade`を指定できます。デフォルトは`none`です。
+
+<h5 id="Getcurrentactivetab">現在のアクティブなタブを取得する</h5>
+
+`getActiveTabIndex()`メソッドは、アクティブタブのインデックス番号を取得します。アクティブタブがない場合は、`-1`を返します。
+
+<h5 id="Loadpagewithoutchangingtheactivetab">アクティブなタブを変更しないでページを表示する</h5>
+
+インデックスを変更せずにページの読み込みを行う場合は、`loadPage()`メソッドを使用します。
+
+```
+tabbar.loadPage('newpage.html');
+```
+
+ただし、この場合は`prechange`および`postchange`イベントは発生しないので注意してください。
 
 <h4 id="Tabbarevents">タブバーのイベント</h4>
 
@@ -447,6 +474,14 @@ ons.ready(function() {
 
 - `index`: 次ページのインデックス番号
 - `tabItem`: ページを保有するオブジェクト
+
+イベントをキャンセルする場合は、`prechange`イベントオブジェクトの`cancel()`メソッドを呼び出します。
+
+```
+tabbar.on('prechange', function(event) {
+  event.cancel();
+});
+```
 
 <h3 id="UsingList">リストを使う</h3>
 
@@ -577,37 +612,45 @@ Onsen UIのグリッドシステムを使うと、手軽にコンポーネント
 
 <h3 id="UsingIcons">アイコンを使う</h3>
 
-Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の持つ400以上のアイコンを使用できます。すべてのアイコンを確認するには、[Font AwesomeのWebサイト]([http://fortawesome.github.io/Font-Awesome/icons/])を参照してください。
+Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の400以上のアイコン、そして[Ionicons](http://ionicons.com/)の500以上のアイコンを使うことができます。
 
 <h4 id="onsiconoverview">`<ons-icon>`の概要</h4>
 
-アイコンを表示するには[`<ons-icon>`](components.html#ons-icon)コンポーネントを使用します。`icon`属性にアイコン名を指定します。アイコン名は、Font AwesomeのWebサイトにあるアイコン名から先頭の`"fa-"`を取り除いたものを使用します。
+アイコンを表示するには、[`<ons-icon>`](components.html#ons-icon)コンポーネントを使用します。表示するアイコンは、`icon`属性で指定します。
+
+<h5>Font Awesomeアイコンを使用する</h5>
+
+`icon`属性の値が`fa-`で始まっている場合は、Font Awesomeのアイコンセットが使用されます。利用可能なアイコンの一覧は、[Font AwesomeのWebサイト]([http://fortawesome.github.io/Font-Awesome/icons/])にて確認できます。また、`icon`属性に接頭辞が付与されていない場合にも、Font Awesomeのアイコンセットが使用されます。
+
+<h5>Ioniconsアイコンを使用する</h5>
+
+`icon`の値が`ion-`で始まっている場合は、Ioniconsアイコンセットが使用されます。利用可能なアイコンの一覧は、[IoniconsのWebサイト](http://ionicons.com/)を参照してください。
 
 下記にいくつかの例を紹介します。
 
 ```
-<ons-icon icon="angle-left"></ons-icon>
-<ons-icon icon="angle-left" size="40px"></ons-icon>
-<ons-icon icon="angle-left" size="40px" rotate="90"></ons-icon>
-<ons-icon icon="angle-left" spin="true"></ons-icon>
+<ons-icon icon="fa-angle-left"></ons-icon>
+<ons-icon icon="fa-angle-left" size="40px"></ons-icon>
+<ons-icon icon="fa-angle-left" size="40px" rotate="90"></ons-icon>
+<ons-icon icon="fa-angle-left" spin="true"></ons-icon>
 ```
 
 アイコンの大きさは`size`属性で指定できます。
 
 ```
-<ons-icon icon="angle-left" size="40px">
+<ons-icon icon="fa-angle-left" size="40px">
 ```
 
 アイコンを回転させることもできます。
 
 ```
-<ons-icon icon="angle-left" size="40px" rotate="90deg">
+<ons-icon icon="fa-angle-left" size="40px" rotate="90deg">
 ```
 
 アイコンにアニメーションを適用することも可能です。スピナー画像等の表示に有効です。
 
 ```
-<ons-icon icon="angle-left" spin="yes">
+<ons-icon icon="fa-angle-left" spin="yes">
 ```
 
 <%- @partial('codepen', { id: "xAhvg" } ) %>
@@ -675,6 +718,29 @@ ons.ready(function() {
 
 `ons.bootstrap()`関数を用いると、1行でOnsen UIの読み込みを行います。この関数は、AngularJSにOnsen UIのモジュールを追加し、どのスコープからでもOnsen UIを呼び出せるようにします。`onsenui.js`の読み込みが完了した後に呼び出してください。
 
+たとえば、下記のコードはOnsen UIと共に`ngAnimate`モジュールを読み込みます。引数には、読み込みたいモジュールの一覧を指定できます。
+
+```
+<script>
+  ons.bootstrap(['ngAnimate']); // ngAnimateのモジュールをロードする
+</script>
+```
+
+また、Onsen UIをAngularJS方式で読み込むには、下記のコードを使用してください。
+
+```
+<script>
+  // 'ng-app'は'my-app'として定義されていることを想定
+  var module = angular.module('my-app', ['onsen']);
+  module.controller('AppController', function($scope) { });
+  module.controller('PageController', function($scope) {
+    ons.ready(function() {
+      // ここに初期化コードを記述します
+    });
+  });
+</script>
+```
+
 <h4 id="onscompilefunction">`ons.compile`関数</h4>
 
 `ons.compile()`関数は、Onsen UIコンポーネントが含まれているDOM要素をコンパイルするために使用します。JavaScriptでHTMLを組み立て、描画するときに使用します。
@@ -705,11 +771,150 @@ ons.ready(function() {
 <div ons-if-orientation="portrait">縦向きの時だけ表示するコンテンツ</div>
 ```
 
+<h3 id="DetectingFingerGestures">ジェスチャーの対応</h3>
+
+ジェスチャーを検知して特定の処理を行わせることができます。Onsen UIでは、ジェスチャーの認識に[Hammer.js](http://hammerjs.github.io/)を使用しています。
+
+ジェスチャーを検知するには、対象となるDOM要素を[`<ons-gesture-detector>`](components.html#ons-gesture-detector)コンポーネントで囲みます。たとえば、下記は特定の場所に対して左スワイプの検知を有効にした例となります。
+
+```
+<ons-gesture-detector>
+  <div id="detect-area" style="width: 100px; height: 100px;">
+    ここをスワイプ
+  </div>
+</ons-gesture-detector>
+<script>
+  $(document).on('swipeleft', '#detect-area', function() {
+    console.log("左スワイプが検知されました");
+  })
+</script>
+```
+
+AngularJS方式で記述する場合は、`ng-ジェスチャーイベント名`属性を使用します。
+
+```
+<ons-gesture-detector ng-swipeleft="doSomething()">
+  <div id="detect-area" style="width: 100px; height: 100px;">
+    ここをスワイプ
+  </div>
+</ons-gesture-detector>
+```
+
+<h4 id="SupportedGestures">対応するジェスチャー</h4>
+
+下記のジェスチャーに対応しています。
+
+  - ドラッグ操作: `drag`, `dragleft`, `dragright`, `dragup`, `dragdown`
+  - ホールド操作: `hold`, `release`
+  - スワイプ操作: `swipe`, `swipeleft`, `swiperight`, `swipeup`, `swipedown`
+  - タップ操作: `tap`, `doubletap`
+  - ピンチ操作: `pinch`, `pinchin`, `pinchout`
+  - その他: `touch`, `transform`, `rotate`
+
+<h3 id="HandlingBackButton">戻るボタンの対応</h3>
+
+Androidはハードウェアの戻るボタンが備わっています。Onsen UIでは、戻るボタンがクリックされたときの挙動をカスタマイズすることができます。
+
+端末の戻るボタンに対応するためには、[`<ons-page>`](components.html#ons-page)コンポーネントの`on-device-backbutton`もしくは`ng-device-backbutton`属性を使用します。下記は、`ons-page`の属性に戻るボタンのハンドラーを定義した例となります。
+```
+<ons-page on-device-backbutton="doSomething()">
+  ページのコンテンツ
+</ons-page>
+```
+
+AngularJS形式で記述すると、下記のようになります。
+
+```
+<ons-page ng-device-backbutton="doSomething()">
+  ページのコンテンツ
+</ons-page>
+```
+
+もしくは、`ons-page`のAPIを用いて、下記のように戻るボタンのハンドラーを定義することもできます。
+
+```
+<ons-page var="myPage">...</ons-page>
+<script>
+  ons.ready(function() {
+    myPage.setDeviceBackButtonHandler(function() {
+      // ここに処理の内容を記述する
+    });
+
+    // 戻るボタンのハンドラーを取得して無効化する
+    var handler = myPage.getDeviceBackButtonHandler();
+    handler.disable();
+  });
+</script>
+```
+
+<h4 id="Overridingdefaultcomponenthandler">デフォルトのコンポーネントハンドラーを上書きする</h4>
+
+`ons-page`コンポーネントだけでなく、`ons-navigator`と`ons-sliding-menu`コンポーネントについは、デフォルトで戻るボタンのハンドラーが定義されています。たとえば、`ons-navigator`では、戻るボタンが押された場合は、`popPage()`を実行します。この仕組みを無効にしたり、挙動を変更したい場合は、`getDeviceBackButtonHandler()` APIを使用します。
+
+```
+// ナビゲーターの戻るボタンを無効化する
+navigator.getDeviceBackButtonHandler().disable();
+
+// もしくは、挙動を変更する
+navigator.getDeviceBackButtonHandler().setListener(function(event) {});
+
+// もしくは、再度有効にする
+navigator.getDeviceBackButtonHandler().enable();
+```
+
+この通り、`getDeviceBackButtonHandler()` APIが戻すオブジェクトは、`disable()`、`enable()`、`isEnabled()`そして`setListener(fn)`メソッドを有しています。
+
+親のイベントハンドラーに処理を委譲する場合は、`callParentHandler()`メソッドを呼び出します。もしコンポーネントのハンドラーが定義されていなかったり、無効化されている場合は、親のイベントハンドラーが自動的に呼び出されます。
+
+```
+myPage.getDeviceBackButtonHandler().setListener(function(event) {
+  // 親のイベントハンドラーを呼び出す
+  event.callParentHandler();
+});
+```
+
+<h4 id="Overridingthedefaultapphandler">デフォルトのアプリハンドラーを上書きする</h4>
+
+Onsen UIアプリでは、デフォルトで戻るボタンが押されると、アプリを閉じる挙動を行います。これは、ほかのAndroidアプリと同じ挙動になります。
+
+デフォルトの挙動を変更するには、`ons.setDefaultDeviceBackButtonListener`関数を呼び出します。下記のコードは、アプリを閉じる前に確認を行う例となります。
+
+```
+ons.setDefaultDeviceBackButtonListener(function() {
+  if (navigator.notification.confirm("本当に閉じてもいいですか？", 
+    function(index) {
+      if (index == 1) { // OKボタンが押された
+        navigator.app.exitApp(); // アプリを閉じる
+      }
+    }
+  ));
+});
+```
+
+<h4 id="Disablingbackbuttonhandler">戻るボタンの処理を無効化する</h4>
+
+Onsen UIの戻るボタンの処理を完全に無効化するには、`ons.disableDeviceBackButtonHandler()`関数を呼び出します。これは、CordovaやPhoneGapのイベントを直接扱いたい場合に便利です。
+
+```
+ons.ready(function() {
+  ons.disableDeviceBackButtonHandler();
+
+  // Cordovaのハンドラーを使用する
+  window.document.addEventListener('backbutton', function() {
+    // 戻るボタンが押された時の処理
+  }, false);
+});
+```
+
 <h3 id="CallingComponentAPIsfromJavaScript">JavaScriptからコンポーネントのAPIを呼び出す</h3>
 
 コンポーネントのなかには、JavaScript関数を備えているものがあります。たとえば、`ons-navigator`は`pushPage()`と`popPage()`メソッドが用意されており、それぞれページを追加したり削除したりする目的で使用します。
 
-こういったAPIを呼び出す場合は、`var`属性でコンポーネントに変数を割り当てます。たとえば、下記のコードはナビゲーターに`"myNavigator"`という変数を割りあてています。
+コンポーネントのAPIを呼び出す場合は、JavaScriptコードからコンポーネントを参照します。そのために、コンポーネントの`var`属性を指定するか、`ons.findComponent()`あるいは`ons.findParentComponentUntil()`関数を使用します。
+
+<h4 id="UsingVarAttributeToSpecifyAComponent">`var`属性でコンポーネントを指定する</h4>
+
+APIを呼び出すには、`var`属性でコンポーネントを変数に割り当てます。たとえば、下記の例では`"myNavigator"`という名前の変数でコンポーネントを参照できます。
 
 ```
 <ons-navigator var="myNavigator">
@@ -736,6 +941,26 @@ AngularJSを用いる場合は、下記のようにして実行できます。
     });
   });
 </script>
+```
+
+<h4 id="UsingVarAttributeToSpecifyAComponent">DOMツリーからコンポーネントを検索する</h4>
+
+`ons.findComponent()`および`ons.findParentComponentUntil()`関数を使うと、変数を割り当てずにコンポーネントを参照することができます。
+
+<h5>ons.findComponent(selector, dom)</h5>
+
+`ons.findComponent()`関数は、渡されたDOM内にあるコンポーネントを検索します。たとえば、`id`が`my-switch`の`ons-switch`コンポーネントを検索したい場合は、下記のコードを記述します。
+
+```
+var mySwitch = ons.findComponent('ons-switch#my-switch', document.body);
+```
+
+<h5>ons.findParentComponentUntil(componentName, element)</h5>
+
+`ons.findParentComponentUntil()`関数は、親DOMノードを探索してコンポーネントを検索します。たとえば、下記の例では、指定したボタンの要素を持つナビゲーターを検索しています。
+
+```
+var currentNavigator = ons.findParentComponentUntil('ons-navigator', buttonDom);
 ```
 
 <h3 id="DealingwithDOMAPIs">DOM APIの利用</h3>
@@ -832,7 +1057,24 @@ $(document.body).on('pageinit', '#my-page', function() {
 </ons-sliding-menu>
 ```
 
-この場合、menu.htmlとcontent.htmlを別途作成するのではなく、同じHTML内にコンテンツを記述することができます。そのためには、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定します。
+menu.htmlとcontent.htmlを別ファイルとして作成することなく、同じページでコンテンツを定義することができます。そのためには、[`<ons-template>`](components.html#ons-template)タグを使用するか、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定します。これはマイクロテンプレーティングとも言われ、ページファイルの数を減らすことができます。
+
+<h4 id="OnsTemplateTag">`<ons-template>`タグを用いてテンプレートを定義する</h4>
+
+[`<ons-template>`](components.html#ons-template)タグはテンプレートを表します。たとえば、`main.html`という名前を持つHTMLコンテンツを定義するには、下記のように記述します。
+
+```
+<ons-template id="main.html">
+  <!-- main.htmlのコードを記述します -->
+  <div>
+    これはmain.htmlのコンテンツです
+  </div>
+</ons-template>
+```
+
+<h4 id="OnsTemplateScript">`<script>`タグを用いてテンプレートを定義する</h4>
+
+もう一つの方法として、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定することができます。
 
 ```
 <script type="text/ons-template" id="main.html">
@@ -841,16 +1083,11 @@ $(document.body).on('pageinit', '#my-page', function() {
     これはmain.htmlのコンテンツです
   </div>
 </script>
-
-<script type="text/ons-template" id="content.html">
-  <!-- content.htmlのHTMLコンテンツを定義します -->
-  <div>
-    これはcontent.htmlのコンテンツです
-  </div>
-</script>
 ```
 
-これはマイクロテンプレーティングとも言われ、ページ数を減らすことに貢献できます。
+<h4 id="AngularJSTemplateCache">AngularJSの`$templateCache`を使用する</h4>
+
+上記で定義したテンプレートは、AngularJSのテンプレートキャッシュとしても使用でき、`$templateCache`サービスから呼び出せます。詳細は、[AngularJSのドキュメント](https://docs.angularjs.org/api/ng/service/$templateCache)を参照してください。
 
 <h3 id="CustomizeOnsenUIcomponents">Onsen UIコンポーネントのカスタマイズ</h3>
 
