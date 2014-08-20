@@ -238,7 +238,7 @@ A toolbar is defined as `<ons-toolbar>` component. Here is the typical example o
   <div class="center">Title</div>
   <div class="right">
     <ons-toolbar-button>
-      <ons-icon icon="bars">
+      <ons-icon icon="fa-bars">
     </ons-toolbar-button>
   </div>
  </ons-toolbar>
@@ -256,7 +256,7 @@ Here are several examples when using `<ons-toolbar>`.
   <ons-toolbar>
     <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
     <div class="center">Button and Icon</div>
-    <div class="right"><ons-toolbar-button><ons-icon icon="bars"></ons-icon></ons-toolbar-button></div>
+    <div class="right"><ons-toolbar-button><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button></div>
   </ons-toolbar>
   ```
 
@@ -292,6 +292,8 @@ If you additionally want to only show a back button from iOS devices, [`<ons-if-
   <div class="center">Page Title</div>
 </ons-toolbar>
 ```
+
+For more details about the device back button support, please take a look at the [Handling Back Button](#HandlingBackButton) section.
 
 <h4 id="Navigationevents">Navigation events</h4>
 
@@ -350,7 +352,7 @@ A behind page may contain any content in HTML, and typically a menu with links t
   <ons-page>
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+        <ons-toolbar-button ng-click="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>
       </div>
       <div class="center">Page 1</div>
     </ons-toolbar>
@@ -363,7 +365,7 @@ A behind page may contain any content in HTML, and typically a menu with links t
   <ons-page>
     <ons-toolbar>
       <div class="left">
-        <ons-toolbar-button onclick="menu.toggleMenu()"><ons-icon icon="bars"></ons-icon></ons-toolbar-button>
+        <ons-toolbar-button onclick="menu.toggleMenu()"><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button>
       </div>
       <div class="center">Page 2</div>
     </ons-toolbar>
@@ -441,12 +443,45 @@ Tab bar items can have an `icon` attribute and a `label` attribute. For the `ico
 
 <%- @partial('codepen', { id: "pGuDL" } ) %>
 
+<h4 id="Tabbarmethods">Managing tab items</h4>
+
+Tab bar have some JavaScript APIs for fine-grain control over the page management. To call them, you should use a `var` attribute as described in the [Calling Component APIs from JavaScript](overview.html#CallingComponentAPIsfromJavaScript) section.
+
+<h5 id="Settingactivetab">Setting active tab</h5>
+
+`setActiveTab(index, options)` method can be used to display a specific tab page. The `index` parameter is used to specify the tab page index, which starts from `0`. For the `options` parameter, following properties can be specified.
+
+- `keepPage`: If set to `true`, it will not refresh content and display a new page (default: `true`).
+- `animation`: The transition animation to the page. Currently `none` and `fade` is supported. (default: `none`)
+
+<h5 id="Getcurrentactivetab">Get current active tab</h5>
+
+`getActiveTabIndex()` method returns the index of the active tab in the number. If there is no active tab, it returns `-1`.
+
+<h5 id="Loadpagewithoutchangingtheactivetab">Load page without changing the active tab</h5>
+
+If you want to only load a page but not to change the active tab index, the `loadPage()` method can be used.
+
+```
+tabbar.loadPage('newpage.html');
+```
+
+Please note that `prechange` and `postchange` event will not occur in this case.
+
 <h4 id="Tabbarevents">Tab bar events</h4>
 
 [`<ons-tabbar>`](components.html#ons-tabbar) has `prechange` and `postchange` events that are fired before or after the page switch. The event will get the following parameters.
 
 - `index`: Next page index.
 - `tabItem`: Object containing the next page.
+
+When you want to cancel the event, you can use the `cancel()` method on the `prechange` event object.
+
+```
+tabbar.on('prechnage', function(event) {
+  event.cancel();
+});
+```
 
 <h3 id="UsingList">Using List</h3>
 
@@ -579,37 +614,45 @@ You can see the following example to understand how [`<ons-row>`](components.htm
 
 <h3 id="UsingIcons">Using Icons</h3>
 
-Onsen UI provides more than 400 icons provided by [Font Awesome](http://fontawesome.github.io/). The list of available icons can be found on the [Font Awesome Website]([http://fortawesome.github.io/Font-Awesome/icons/]).
+Onsen UI provides over 400 icons provided by [Font Awesome](http://fontawesome.github.io/) and over 500 icons by [Ionicons](http://ionicons.com/).
 
 <h4 id="onsiconoverview">`<ons-icon>` overview</h4>
 
-When displaying an icon, a [`<ons-icon>`](components.html#ons-icon) component can be used. You can specify which icon to display by specifying to the `icon` attribute. Please remove the trailing `"fa-"` from the Font Awesome website.
+When displaying an icon, a [`<ons-icon>`](components.html#ons-icon) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
+
+<h5>Using Font Awesome</h5>
+
+If the value of `icon` attribute starts with `fa-`, appropriate Font Awesome icon is used. The list of available icons can be found on the [Font Awesome Website]([http://fortawesome.github.io/Font-Awesome/icons/]). If `icon` attribute has no prefix, Font Awesome collection will be used.
+
+<h5>Using Ionicons</h5>
+
+If the value of `icon` attribute starts with `ion-`, appropriate Ionicons icon is used. The list of available icons can be found on the [Ionicons Website](http://ionicons.com/).
 
 Here are some examples.
 
 ```
-<ons-icon icon="angle-left"></ons-icon>
-<ons-icon icon="angle-left" size="40px"></ons-icon>
-<ons-icon icon="angle-left" size="40px" rotate="90"></ons-icon>
-<ons-icon icon="angle-left" spin="true"></ons-icon>
+<ons-icon icon="fa-angle-left"></ons-icon>
+<ons-icon icon="fa-angle-left" size="40px"></ons-icon>
+<ons-icon icon="fa-angle-left" size="40px" rotate="90"></ons-icon>
+<ons-icon icon="fa-angle-left" spin="true"></ons-icon>
 ```
 
 Also, you can specify the icon size to display by using size attribute.
 
 ```
-<ons-icon icon="angle-left" size="40px">
+<ons-icon icon="fa-angle-left" size="40px">
 ```
 
 Furthermore, you can rotate the icon.
 
 ```
-<ons-icon icon="angle-left" size="40px" rotate="90deg">
+<ons-icon icon="fa-angle-left" size="40px" rotate="90deg">
 ```
 
 Icon can have an animation effect. This is useful for displaying spinners.
 
 ```
-<ons-icon icon="angle-left" spin="yes">
+<ons-icon icon="fa-angle-left" spin="yes">
 ```
 
 <%- @partial('codepen', { id: "xAhvg" } ) %>
@@ -676,6 +719,29 @@ ons.ready(function() {
 
 `ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
 
+For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter.
+
+```
+<script>
+  ons.bootstrap(['ngAnimate']); // Optionally loading ngAnimate module
+</script>
+```
+
+If you want to load Onsen UI in AngularJS way, following code can be used.
+
+```
+<script>
+  // Assume 'ng-app' is defined as 'my-app'
+  var module = angular.module('my-app', ['onsen']);
+  module.controller('AppController', function($scope) { });
+  module.controller('PageController', function($scope) {
+    ons.ready(function() {
+      // Init code here
+    });
+  });
+</script>
+```
+
 <h4 id="onscompilefunction">`ons.compile` function</h4>
 
 `ons.compile()` function is used to compile the DOM elements that have Onsen UI components. Typical usage of the function is to manually add a snippet of HTML and render it.
@@ -706,19 +772,161 @@ Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](components.html
 <div ons-if-orientation="portrait">Content only shown for portrait</div>
 ```
 
+<h3 id="DetectingFingerGestures">Detecting Finger Gestures</h3>
+
+It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. 
+
+To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](components.html#ons-gesture-detector) component. For instance, following code does a swipe-left detection to the specific element.
+
+```
+<ons-gesture-detector>
+  <div id="detect-area" style="width: 100px; height: 100px;">
+    Swipe Here
+  </div>
+</ons-gesture-detector>
+<script>
+  $(document).on('swipeleft', '#detect-area', function() {
+    console.log("Swipe left is detected.");
+  })
+</script
+```
+
+Or, use `ng-gestureeventname` if you prefer an AngularJS way.
+
+```
+<ons-gesture-detector ng-swipeleft="doSomething()">
+  <div id="detect-area" style="width: 100px; height: 100px;">
+    Swipe Here
+  </div>
+</ons-gesture-detector>
+```
+
+<h4 id="SupportedGestures">Supported gestures</h4>
+
+Following gestures are supported.
+
+  - Drag gestures: `drag`, `dragleft`, `dragright`, `dragup`, `dragdown`
+  - Hold gestures: `hold`, `release`
+  - Swipe gestures: `swipe`, `swipeleft`, `swiperight`, `swipeup`, `swipedown`
+  - Tap gestures: `tap`, `doubletap`
+  - Pinch gestures: `pinch`, `pinchin`, `pinchout`
+  - Other gestures: `touch`, `transform`, `rotate`
+
+<h3 id="HandlingBackButton">Handling Back Button</h3>
+
+Android has a hardware back button. Onsen UI provides a way to customize the back button behavior by providing several hook points to its application.
+
+To support device back button, you can use either `on-device-backbutton` or `ng-device-backbutton` attribute of the [`<ons-page>`](components.html#ons-page) component.
+
+Here is the way to define a back button handler by `ons-page` attribute.
+
+```
+<ons-page on-device-backbutton="doSomething()">
+  Some page content
+</ons-page>
+```
+
+Or the AngularJS way,
+
+```
+<ons-page ng-device-backbutton="doSomething()">
+  Some page content
+</ons-page>
+```
+
+Also, you can use following `ons-page` APIs to set the device back button handler.
+
+```
+<ons-page var="myPage">...</ons-page>
+<script>
+  ons.ready(function() {
+    myPage.setDeviceBackButtonHandler(function() {
+      // Write your handler here
+    });
+
+    // Get the back button handler and disable it
+    var handler = myPage.getDeviceBackButtonHandler();
+    handler.disable();
+  });
+</script>
+```
+
+<h4 id="Overridingdefaultcomponenthandler">Overriding default component handler</h4>
+
+Not only a `ons-page` component, a `ons-navigator` and a `ons-sliding-menu` component also implement the default back button handlers. For instance, the `ons-navigator` handler triggers a `popPage()` when the back button is pressed. If you want to disable it, or change to the other behavior, you can use `getDeviceBackButtonHandler()` API.
+
+```
+// To disable a navigator back button handler
+navigator.getDeviceBackButtonHandler().disable();
+
+// Or to change the behavior
+navigator.getDeviceBackButtonHandler().setListener(function(event) {});
+
+// Or to enable it again
+navigator.getDeviceBackButtonHandler().enable();
+```
+
+As you see in the code, `getDeviceBackButtonHandler()` API returns an object that has `disable()`, `enable()`, `isEnabled()` and `setListener(fn)` methods.
+
+If you want to call a parent event handler, `callParentHandler()` method will do the delegation. If the component's handler is undefined or set to be disabled, the parent event handler will be called automatically.
+
+```
+myPage.getDeviceBackButtonHandler().setListener(function(event) {
+  // Call parent handler
+  event.callParentHandler();
+});
+```
+
+<h4 id="Overridingthedefaultapphandler">Overriding the default app handler</h4>
+
+The default back button behavior of an Onsen UI app is to close the application. This is the same behavior as other Android applications.
+
+To override the behavior, you can use `ons.setDefaultDeviceBackButtonListener` function. The following code confirms before closing the app (works for Cordova / PhoneGap only).
+
+```
+ons.setDefaultDeviceBackButtonListener(function() {
+  if (navigator.notification.confirm("Are you sure to close the app?", 
+    function(index) {
+      if (index == 1) { // OK button
+        navigator.app.exitApp(); // Close the app
+      }
+    }
+  ));
+});
+```
+
+<h4 id="Disablingbackbuttonhandler">Disabling back button handler</h4>
+
+If you want to disable Onsen UI back button handlers completely, use `ons.disableDeviceBackButtonHandler()` function. It is useful when you want to use Cordova / PhoneGap back button handler directly.
+
+```
+ons.ready(function() {
+  ons.disableDeviceBackButtonHandler();
+
+  // Use Cordova handler
+  window.document.addEventListener('backbutton', function() {
+    // Handle backbutton event
+  }, false);
+});
+```
+
 <h3 id="CallingComponentAPIsfromJavaScript">Calling Component APIs from JavaScript</h3>
 
 Some components have JavaScript functions to provide features that needs to be called after launching the program. For instance, `ons-navigator` has `pushPage()` and `popPage()` methods to display or hide a new page.
 
+In order to use component APIs, it should be referred from the JavaScript code. For that purpose, you could use the `var` attribute on the component, or use either `ons.findComponent()` or `ons.findParentComponentUntil()` function.
+
+<h4 id="UsingVarAttributeToSpecifyAComponent">Using `var` attribute to specify a component</h4>
+
 In order to call those APIs, you need to assign a variable to the component by using `var` attribute. For instance, you can assign a variable called `"myNavigator"` by the following code.
+
+Now, `myNavigator` has become a global accessible variable. It is defined as a `window` property, and also in the AngularJS global scope.
 
 ```
 <ons-navigator var="myNavigator">
 ```
 
-Now, `myNavigator` has become a variable that can be accessed from anywhere in your code. More precisely, `myNavigator` has defined as a `window` property, and also in the AngularJS global scope.
-
-Therefore, if you are using a plain JavaScript or jQuery, you can refer the variable like the code below.
+To use the defined variable, you can refer the variable like the code below.
 
 ```
 <script>
@@ -726,7 +934,7 @@ Therefore, if you are using a plain JavaScript or jQuery, you can refer the vari
 </script>
 ```
 
-Or, AngularJS way like the following code.
+Or, the AngularJS way.
 
 ```
 <script>
@@ -737,6 +945,26 @@ Or, AngularJS way like the following code.
     });
   });
 </script>
+```
+
+<h4 id="UsingVarAttributeToSpecifyAComponent">Querying a component from the DOM tree</h4>
+
+`ons.findComponent()` and `ons.findParentComponentUntil()` functions ise useful when specifying a component without assigning a variable.
+
+<h5>ons.findComponent(selector, dom)</h5>
+
+`ons.findComponent()` function queries the specified component in the given DOM. For instance, if you want to find a `ons-switch` component which `id` is `my-switch`, you can query the component by the following code.
+
+```
+var mySwitch = ons.findComponent('ons-switch#my-switch', document.body);
+```
+
+<h5>ons.findParentComponentUntil(componentName, element)</h5>
+
+`ons.findParentComponentUntil()` function tries to find a component by digging into the parent DOM nodes. For instance, following code finds the parent navigator for a button element.
+
+```
+var currentNavigator = ons.findParentComponentUntil('ons-navigator', buttonDom);
 ```
 
 <h3 id="DealingwithDOMAPIs">Dealing with DOM APIs</h3>
@@ -833,7 +1061,24 @@ Some components require you to specify another HTML page. For instance, a `<ons-
 </ons-sliding-menu>
 ```
 
-Instead of creating a menu.html and content.html separately, you can also define the page content in the same page. This can be done by creating a `script` tag and set type as `"text/ons-template"`.
+Instead of creating a menu.html and content.html separately, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](components.html#ons-template) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
+
+<h4 id="OnsTemplateTag">Use `<ons-template>` tag to define a template</h4>
+
+An [`<ons-template>`](components.html#ons-template) tag represents a template snippet. For example, following code defines a template called `main.html`.
+
+```
+<ons-template id="main.html">
+  <!-- Here, we define the HTML content for main.html -->
+  <div>
+    Hello, this is the content of main.html
+  </div>
+</ons-template>
+```
+
+<h4 id="OnsTemplateScript">Use `<script>` tag to define a template</h4>
+
+Alternatively, a `<script>` tag can also be used to define a template. In this case, you need to set the `type` to `text/ons-template`.
 
 ```
 <script type="text/ons-template" id="main.html">
@@ -842,16 +1087,11 @@ Instead of creating a menu.html and content.html separately, you can also define
     Hello, this is the content of main.html
   </div>
 </script>
-
-<script type="text/ons-template" id="content.html">
-  <!-- Here, we define the HTML content for content.html -->
-  <div>
-    Hello, this is the content of content.html
-  </div>
-</script>
 ```
 
-This is a micro-templating technique, and is very useful when you want to maintain smaller amount of files.
+<h4 id="AngularJSTemplateCache">Using `$templateCache` from AngularJS</h4>
+
+The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
 
 <h3 id="CustomizeOnsenUIcomponents">Customize Onsen UI components</h3>
 

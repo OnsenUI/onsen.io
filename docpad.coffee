@@ -64,11 +64,13 @@ docpadConfig = {
         'ons-button',
         'ons-back-button',
         'ons-switch',
-        'ons-if-orientation',
-        'ons-if-platform',
         'ons-icon',
         'ons-row',
-        'ons-col'
+        'ons-col',
+        'ons-template',
+        'ons-gesture-detector',
+        'ons-if-orientation',
+        'ons-if-platform'
       ]
 
     # Specify some site properties
