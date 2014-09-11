@@ -53,7 +53,7 @@ docpadConfig = {
         'ons-bottom-toolbar',
         'ons-toolbar-button',
         'ons-tabbar',
-        'ons-tabbar-item',
+        'ons-tab',
         'ons-sliding-menu',
         'ons-split-view',
         'ons-scroller',
