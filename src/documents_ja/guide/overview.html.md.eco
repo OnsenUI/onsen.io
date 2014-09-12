@@ -8,6 +8,8 @@ autotoc: true
 
 ## Onsen UIガイド
 
+このドキュメントは最新版のOnsen UIを対象に記述しています。Onsen UIのバージョンによる違いについては、[Change Log](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md)を参照してください。
+
 <h3 id="LoadingOnsenUIinYourProject">Onsen UIをプロジェクトに組み込む</h3>
 
 ヒント: Onsen UIの組み込み方法については、[Getting Startedガイド](/guide/getting_started.html)も参考にしてください。
@@ -314,7 +316,7 @@ ons.ready(function() {
 });
 ```
 
-<h5 id="prepushandprepopevent">``prepush`と`prepop`イベント</h5>
+<h5 id="prepushandprepopevent">`prepush`と`prepop`イベント</h5>
 
 これらのイベントは、pushPageとpopPageの前に発火します。`event`オブジェクトには、下記のパラメータが備わっています。
 
@@ -423,25 +425,98 @@ ons.ready(function() {
 
 <h3 id="UsingTabBar">タブバーを使う</h3>
 
-タブバーは[`<ons-tabbar>`](components.html#ons-tabbar)と[`<ons-tabbar-item>`](components.html#ons-tabbar-item)コンポーネントを組み合わせて表現します。通常、タブバーは3から5つ程度のアイテムを保有しており、アイコンやラベルで表現できます。各タブバーのアイテムをタップすると、別のページに切り替わります。
+タブバーは[`<ons-tabbar>`](components.html#ons-tabbar)と[`<ons-tab>`](components.html#ons-tab)コンポーネントを組み合わせて表現します。通常、タブバーは3から5つ程度のアイテムを保有しており、アイコンやラベルで表現できます。各タブバーのアイテムをタップすると、別のページに切り替わります。
 
 <h4 id="onstabbaroverview">`<ons-tabbar>`の概要</h4>
 
-タブバーを設置するには、[`<ons-tabbar>`](components.html#ons-tabbar)コンポーネントを使用します。[`<ons-tabbar>`](components.html#ons-tabbar)要素の下には、[`<ons-tabbar-item>`](components.html#ons-tabbar-item)のみを配置できます。
+タブバーを設置するには、[`<ons-tabbar>`](components.html#ons-tabbar)コンポーネントを使用します。[`<ons-tabbar>`](components.html#ons-tabbar)要素の下には、[`<ons-tab>`](components.html#ons-tab)のみを配置できます。
 
 タブバーアイテムでは`icon`属性と`label`属性が指定できます。アイコンを表示する場合は、[`<ons-icon>`](components.html#ons-icon)と同様にアイコン名を指定します。
 
 ```
 <ons-tabbar>
-  <ons-tabbar-item page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tabbar-item>
-  <ons-tabbar-item page="page2.html" label="Page 2" icon="fa-square"></ons-tabbar-item>
-  <ons-tabbar-item page="page3.html" label="Page 3" icon="fa-square"></ons-tabbar-item>
-  <ons-tabbar-item page="page4.html" label="Page 4" icon="fa-square"></ons-tabbar-item>
-  <ons-tabbar-item page="page5.html" label="Page 5" icon="fa-square"></ons-tabbar-item>
+  <ons-tab page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tab>
+  <ons-tab page="page2.html" label="Page 2" icon="fa-square"></ons-tab>
+  <ons-tab page="page3.html" label="Page 3" icon="fa-square"></ons-tab>
+  <ons-tab page="page4.html" label="Page 4" icon="fa-square"></ons-tab>
+  <ons-tab page="page5.html" label="Page 5" icon="fa-square"></ons-tab>
 </ons-tabbar>
 ```
 
 <%- @partial('codepen', { id: "pGuDL" } ) %>
+
+<h4 id="Tabbarcustomize">タブバーを上部に配置する</h4>
+
+デフォルトでは、タブバーは画面下部に配置されます。Android端末のように上部にタブバーを設置するには、`position`属性に`top`を指定します。ただし、この属性は初期化時に指定された場合にのみ適用されます。
+
+```
+<ons-tabbar position="top">
+  <ons-tab page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tab>
+  <ons-tab page="page2.html" label="Page 2" icon="fa-square"></ons-tab>
+  <ons-tab page="page3.html" label="Page 3" icon="fa-square"></ons-tab>
+</ons-tabbar>
+```
+
+ツールバーが配置されているページにタブバーを設置すると、ツールバーの下部に配置されます。
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Page Title</div>
+  </ons-toolbar>
+  <ons-tabbar position="top">
+    <ons-tab page="page1.html" icon="fa-square"></ons-tab>
+    <ons-tab page="page2.html" icon="fa-square"></ons-tab>
+    <ons-tab page="page3.html" icon="fa-square"></ons-tab>
+  </ons-tabbar>
+</ons-page>
+```
+
+<%- @partial('codepen', { id: "CfnrG" } ) %>
+
+<h4 id="Tabbarcustomize">タブのカスタマイズ</h4>
+
+タブの見た目をカスタマイズするためには、[`<ons-tab>`](components.html#ons-tab)の属性を使用します。
+
+<h5 id="Tabbarlabelandicon">ラベルとアイコンを表示する</h5>
+
+タブにラベルとアイコンを表示するには、`label`属性と`icon`属性を指定します。
+
+```
+<ons-tab label="Label" icon="fa-square"></ons-tab>
+```
+
+<h5 id="Tabbarcontents">任意のコンテンツを表示する</h5>
+
+[`<ons-tab>`](components.html#ons-tab)内に任意のHTMLを記述することもできます。
+
+```
+<ons-tabbar>
+  <ons-tab page="home.html">
+    <p>Home</p>
+  </ons-tab>
+  <ons-tab page="friends.html">
+    <p>Friends</p>
+  </ons-tab>
+</ons-tabbar>
+```
+
+ただし、`label`や`icon`属性がすでに指定されている場合は、子要素は適用されないので注意してください。
+
+<h5 id="Tabbaractiveinactive">アクティブと非アクティブ時のコンテンツを切り替える</h5>
+
+タブがアクティブの時と非アクティブの時でコンテンツを切り替えることができます。そのためには、`ons-tab`内に`ons-tab-active`と`ons-tab-inactive`属性を持つ要素を定義してください。
+
+```
+<ons-tab page="page.html">
+  <div ons-tab-active>
+    <!-- active時のみ表示されるコンテンツ -->
+  </div>
+  <div ons-tab-inactive>
+    <!-- inactive時のみ表示されるコンテンツ -->
+  </div>
+</ons-tab>
+```
 
 <h4 id="Tabbarmethods">タブバーアイテムの管理</h4>
 
@@ -752,6 +827,22 @@ ons.ready(function() {
   var elm = $("<ons-button>新規ボタン</ons-button>");
   elm.appendTo($("body")); // DOMツリーに追加する
   ons.compile(elm[0]); // 引数はHTMLElementオブジェクトとして指定する
+});
+```
+
+<h4 id="disableautostatusbarfill">`ons.disableAutoStatusBarFill`関数</h4>
+
+iOS 7以降では、ステータスバーをWebViewの上に重ねることができます。Onsen UIでは、自動的にその余白を作り、アプリの表示領域の最適化を行います。ただし、Cordovaの[StatusBarプラグイン](https://github.com/apache/cordova-plugin-statusbar)を用いる場合などにおいては、ユーザーがステータスバーの配置を制御することができるため、必ずしもこの余白が必要ではありません。
+
+Onsen UIでは余白の制御を行うために、`ons.enableAutoStatusBarFill`関数および`ons.disableAutoStatusBarFill`関数を提供しています。デフォルトでは、余白制御が有効になっています。
+
+```
+ons.ready(function() {
+  // 余白制御を無効にする
+  ons.disableAutoStatusBarFill();
+
+  // 余白制御を有効にする
+  ons.enableAutoStatusBarFill();
 });
 ```
 

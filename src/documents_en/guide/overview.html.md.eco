@@ -8,6 +8,8 @@ autotoc: true
 
 ## Onsen UI Guide
 
+This document is based on the latest version of Onsen UI. To see the diffrence between the versions, please refer to the [Change Log](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+
 <h3 id="LoadingOnsenUIinYourProject">Loading Onsen UI in Your Project</h3>
 
 Note: For faster instructions to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
@@ -423,25 +425,99 @@ ons.ready(function() {
 
 <h3 id="UsingTabBar">Using Tab Bar</h3>
 
-A tab bar is composed from a [`<ons-tabbar>`](components.html#ons-tabbar) component and [`<ons-tabbar-item>`](components.html#ons-tabbar-item) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
+A tab bar is composed from a [`<ons-tabbar>`](components.html#ons-tabbar) component and [`<ons-tab>`](components.html#ons-tab) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
 
 <h4 id="onstabbaroverview">`<ons-tabbar>` overview</h4>
 
-To place a tab bar into your app, place a [`<ons-tabbar>`](components.html#ons-tabbar) element. A [`<ons-tabbar>`](components.html#ons-tabbar) element only accepts [`<ons-tabbar-item>`](components.html#ons-tabbar-item) under the element.
+To place a tab bar into your app, place a [`<ons-tabbar>`](components.html#ons-tabbar) element. A [`<ons-tabbar>`](components.html#ons-tabbar) element only accepts [`<ons-tab>`](components.html#ons-tab) under the element.
 
 Tab bar items can have an `icon` attribute and a `label` attribute. For the `icon` attribute, please specify the same icon name used in [`<ons-icon>`](components.html#ons-icon) element.
 
 ```
 <ons-tabbar>
-  <ons-tabbar-item page="page1.html" label="Page 1" icon="square" active="true"></ons-tabbar-item>
-  <ons-tabbar-item page="page2.html" label="Page 2" icon="square"></ons-tabbar-item>
-  <ons-tabbar-item page="page3.html" label="Page 3" icon="square"></ons-tabbar-item>
-  <ons-tabbar-item page="page4.html" label="Page 4" icon="square"></ons-tabbar-item>
-  <ons-tabbar-item page="page5.html" label="Page 5" icon="square"></ons-tabbar-item>
+  <ons-tab page="page1.html" label="Page 1" icon="square" active="true"></ons-tab>
+  <ons-tab page="page2.html" label="Page 2" icon="square"></ons-tab>
+  <ons-tab page="page3.html" label="Page 3" icon="square"></ons-tab>
+  <ons-tab page="page4.html" label="Page 4" icon="square"></ons-tab>
+  <ons-tab page="page5.html" label="Page 5" icon="square"></ons-tab>
 </ons-tabbar>
 ```
 
 <%- @partial('codepen', { id: "pGuDL" } ) %>
+
+
+<h4 id="Tabbarcustomize">Placing tab bar on the top</h4>
+
+Tab bar is placed on the bottom of the screen by default. For typical Android applications, a tab bar is commonly placed on the top. To position the tab bar, the `position` attribute is used. Please note that this attribute is only valid when initializing the component, and will be ignored when setting the value during runtime.
+
+```
+<ons-tabbar position="top">
+  <ons-tab page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tab>
+  <ons-tab page="page2.html" label="Page 2" icon="fa-square"></ons-tab>
+  <ons-tab page="page3.html" label="Page 3" icon="fa-square"></ons-tab>
+</ons-tabbar>
+```
+
+If the page already contains a toolbar, the tab bar will be placed below the toolbar.
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Page Title</div>
+  </ons-toolbar>
+  <ons-tabbar position="top">
+    <ons-tab page="page1.html" icon="fa-square"></ons-tab>
+    <ons-tab page="page2.html" icon="fa-square"></ons-tab>
+    <ons-tab page="page3.html" icon="fa-square"></ons-tab>
+  </ons-tabbar>
+</ons-page>
+```
+
+<%- @partial('codepen', { id: "CfnrG" } ) %>
+
+<h4 id="Tabbarcustomize">Customizing tab bar</h4>
+
+You can customize the design of the tabs by using [`<ons-tab>`](components.html#ons-tab) attributes.
+
+<h5 id="Tabbarlabelandicon">Tab with label and icon</h5>
+
+To display a label and icon on the tab, `label` and `icon` attributes are used.
+
+```
+<ons-tab label="Label" icon="fa-square"></ons-tab>
+```
+
+<h5 id="Tabbarcontents">Tab with custom content</h5>
+
+You can contain HTML elements inside the [`<ons-tab>`](components.html#ons-tab) element.
+
+```
+<ons-tabbar>
+  <ons-tab page="home.html">
+    <p>Home</p>
+  </ons-tab>
+  <ons-tab page="friends.html">
+    <p>Friends</p>
+  </ons-tab>
+</ons-tabbar>
+```
+
+However, the child elements are ignored when `label` or `icon` attribute is specified.
+
+<h5 id="Tabbaractiveinactive">Tab with state</h5>
+
+A tab can change its content by its active state. To do so, define the underlying element with `ons-tab-active` and `ons-tab-inactive` attribute.
+
+```
+<ons-tab page="page.html">
+  <div ons-tab-active>
+    <!-- This content will be displayed when the tab is active -->
+  </div>
+  <div ons-tab-inactive>
+    <!-- This content will be displayed when the tab is inactive -->
+  </div>
+</ons-tab>
+```
 
 <h4 id="Tabbarmethods">Managing tab items</h4>
 
@@ -753,6 +829,22 @@ ons.ready(function() {
   var elm = $("<ons-button>New Button</ons-button>");
   elm.appendTo($("body")); // Insert to the DOM first
   ons.compile(elm[0]); // The argument must be a HTMLElement object
+});
+```
+
+<h4 id="disableautostatusbarfill">`ons.disableAutoStatusBarFill` function</h4>
+
+As of iOS 7, a status bar can be rendered above a WebView. Onsen UI automatically detects and adds the necessary margin on the top. However in some occations, it is necessary to disable this feature, when using Cordova [StatusBar plugin](https://github.com/apache/cordova-plugin-statusbar) for instance.
+
+To manage the top margin for iOS devices, Onsen UI provides `ons.enableAutoStatusBarFill` function and `ons.disableAutoStatusBarFill` function. This feature is enabled by default.
+
+```
+ons.ready(function() {
+  // Disable auto margin for the iOS status bar
+  ons.disableAutoStatusBarFill();
+
+  // Enable auto margin for the iOS status bar
+  ons.enableAutoStatusBarFill();
 });
 ```
 
