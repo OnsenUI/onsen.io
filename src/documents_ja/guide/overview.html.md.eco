@@ -834,16 +834,20 @@ ons.ready(function() {
 
 iOS 7以降では、ステータスバーをWebViewの上に重ねることができます。Onsen UIでは、自動的にその余白を作り、アプリの表示領域の最適化を行います。ただし、Cordovaの[StatusBarプラグイン](https://github.com/apache/cordova-plugin-statusbar)を用いる場合などにおいては、ユーザーがステータスバーの配置を制御することができるため、必ずしもこの余白が必要ではありません。
 
-Onsen UIでは余白の制御を行うために、`ons.enableAutoStatusBarFill`関数および`ons.disableAutoStatusBarFill`関数を提供しています。デフォルトでは、余白制御が有効になっています。
+Onsen UIでは余白の制御を行うために、`ons.enableAutoStatusBarFill`関数および`ons.disableAutoStatusBarFill`関数を提供しています。デフォルトでは、余白制御が有効になっています。変更する場合は、Onsen UIの初期化が完了する前（`ons.ready()`イベントが呼ばれる前）に関数を呼び出してください。
 
 ```
-ons.ready(function() {
-  // 余白制御を無効にする
-  ons.disableAutoStatusBarFill();
+/**
+ * Onsen UI初期化中にコールする必要があります
+ */
 
-  // 余白制御を有効にする
-  ons.enableAutoStatusBarFill();
-});
+// 余白制御を無効にする
+ons.disableAutoStatusBarFill();
+
+// 余白制御を有効にする
+ons.enableAutoStatusBarFill();
+
+ons.ready(function() { });
 ```
 
 <h4 id="Platformdetection">プラットフォームの判定</h4>
