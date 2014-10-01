@@ -1,9 +1,5 @@
 body#home {
 
-  > #github-ribbon-container {
-    display: none;
-  }
-
   > section#content-container {
     margin-left: 0;
     padding-top: 0;
@@ -398,6 +394,85 @@ body#home {
     }
   }
 
+  .github-widget {
+    margin: 100px auto 0;
+    width: 730px;
+    max-width: 90%;
+    border: 1px solid #ddd;
+  }
+
+  .github-widget-header {
+    min-height: 52px;
+    line-height: 52px;
+    background-color: #f9f9f9;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 0 10px;
+    vertical-align: middle;
+  }
+
+  .github-widget-project-name,
+  .github-widget-project-name:link,
+  .github-widget-project-name:visited {
+    color: #666;
+    font-weight: 600;
+  }
+  
+  .github-widget-project-name:link {
+    text-decoration: none;
+  }
+  .github-widget-project-name:hover {
+    text-decoration: underline;
+  }
+
+  .github-widget-header-info {
+    font-size: 16px;
+    float: right;
+  }
+
+  .github-widget-header-num,
+  .github-widget-header-num:link,
+  .github-widget-header-num:visited {
+    font-weight: 900;
+    font-family: 'Helvetica', Arial;
+    font-size: 18px;
+    text-decoration: none;
+    font-weight: 900;
+    color: #666;
+  }
+
+  .github-widget-header-num:hover {
+    text-decoration: underline;
+  }
+
+  .github-widget-header img {
+    line-height: 52px;
+    vertical-align: middle;
+  }
+
+  .github-widget-commit {
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    min-height: 56px;
+  }
+
+  .github-widget-commiter-image {
+    float: left;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .github-widget-commit-message {
+    margin-left: 64px;
+    font-weight: 500;
+  }
+
+  .github-widget-commit-info {
+    margin-top: 4px;
+    margin-left: 64px;
+    font-size: 16px;
+  }
+
 }
 
 @media screen and (max-width: 1100px) {
@@ -500,5 +575,9 @@ body#home {
         display: none !important;
       }
     }
+  }
+
+  .github-widget-header-info {
+    display: none;
   }
 }
