@@ -234,45 +234,9 @@ p.highlighted {
   position: relative;
 }
 
-div#github-ribbon-container {
-  position: absolute;
-  overflow: hidden;
-  display: none;
-  top: 1px;
-  right: 0px;
-  width: 180px;
-  height: 180px;
-
-  a#github-ribbon, a#github-ribbon:visited {
-    display: inline-block;
-    position: absolute;
-    top: -50px;
-    right: -140px;
-    height: 44px;
-    width: 300px;
-    border: 1px solid #ddd;
-    background-color: white;
-    color: #999;
-    line-height: 44px;
-    font-weight: 400;
-    font-size: 16px;
-    text-align: center;
-
-    @include transform(rotate(45deg));
-    @include transform-origin(left, top);
-    @include transition(color 200ms linear);
-
-    &:hover {
-      color: $onsen-red;
-      text-decoration: none;
-      @include transition(none);
-    }
-  }
-}
-
-@media screen and (min-width: 1400px) {
-  div#github-ribbon-container {
-    display: block;
+@media screen and (max-width: 1400px) {
+  #github-ribbon {
+    display: none;
   }
 }
 
