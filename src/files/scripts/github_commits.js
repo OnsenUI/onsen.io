@@ -45,7 +45,7 @@ $(function() {
     success: function(res) {
       $.each(res.data.slice(0, 4), function(k, commit) {
         var $copy = $model.clone(),
-            avatar_url, author_url;
+            avatar_url;
 
         $copy.find(".github-widget-commit-message").text(commit.commit.message);
         $copy.find(".github-widget-commit-author").text(commit.commit.author.name);
@@ -56,14 +56,12 @@ $(function() {
 
         if(commit.author) {
           avatar_url = commit.author.avatar_url;
-          author_url = commit.author.url;
         } else {
           avatar_url = "https://avatars.githubusercontent.com/u/0?v=2"; 
-          author_url = "#";
         }
 
         $copy.find(".github-widget-commiter-image").attr("src", avatar_url)
-          .parent().attr("href", author_url);
+          .parent().attr("href", commit.html_url);
 
         $copy.appendTo($(".github-widget")).show();
       });

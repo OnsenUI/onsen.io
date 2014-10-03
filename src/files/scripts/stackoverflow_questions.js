@@ -2,6 +2,8 @@ $(function() {
   var $model = $(".forum-item").first().hide();
 
   var timeSince = function(date) {
+    console.log(date);
+
     var seconds = Math.floor((new Date() - date) / 1000);
     var interval = Math.floor(seconds / 31536000);
 
@@ -40,7 +42,7 @@ $(function() {
   }
 
   $.ajax({
-    url: "https://api.stackexchange.com/2.2/questions?page=1&pagesize=2&order=desc&sort=creation&tagged=onsen-ui&site=stackoverflow&filter=!9YdnSJBlX",
+    url: "https://api.stackexchange.com/2.2/questions?page=1&pagesize=4&order=desc&sort=creation&tagged=onsen-ui&site=stackoverflow&filter=!9YdnSJBlX",
     dataType: "jsonp",
     success: function(res) {
       $.each(res.items.reverse(), function(index, item) {
