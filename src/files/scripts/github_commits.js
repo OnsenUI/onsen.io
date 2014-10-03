@@ -1,36 +1,35 @@
-function timeSince(date) {
-  var seconds = Math.floor((new Date() - date) / 1000);
-  var interval = Math.floor(seconds / 31536000);
-
-  if (interval > 1) {
-    return interval + " years";
-  }
-  interval = Math.floor(seconds / 2592000);
-  if (interval > 1) {
-    return interval + " months";
-  }
-  interval = Math.floor(seconds / 86400);
-  if (interval > 1) {
-    return interval + " days";
-  }
-  interval = Math.floor(seconds / 3600);
-  if (interval > 1) {
-    return interval + " hours";
-  }
-  interval = Math.floor(seconds / 60);
-  if (interval > 1) {
-    return interval + " minutes";
-  }
-  return Math.floor(seconds) + " seconds";
-}
-
-
 $(function() {
   var $model = $(".github-widget-commit").hide(),
     base_url = "https://api.github.com/repos/OnsenUI/OnsenUI";
 
+  var timeSince = function(date) {
+    var seconds = Math.floor((new Date() - date) / 1000);
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+      return interval + " years";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+      return interval + " months";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+      return interval + " days";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+      return interval + " hours";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+      return interval + " minutes";
+    }
+    return Math.floor(seconds) + " seconds";
+  }
+
   $.ajax({
-    url: base_url + "/commits",
+    url: base_url,
     dataType: "jsonp",
     success: function(res) {
       var $num = $(".github-widget-header-num");
@@ -45,16 +44,28 @@ $(function() {
     dataType: "jsonp",
     success: function(res) {
       $.each(res.data.slice(0, 4), function(k, commit) {
-        var $copy = $model.clone();
+        var $copy = $model.clone(),
+            avatar_url, author_url;
 
         $copy.find(".github-widget-commit-message").text(commit.commit.message);
         $copy.find(".github-widget-commit-author").text(commit.commit.author.name);
 
         $copy.find(".github-widget-commit-info a")
-        .text(timeSince(new Date(commit.commit.author.date)) + " ago")
-        .attr("href", commit.html_url);
+          .text(timeSince(new Date(commit.commit.author.date)) + " ago")
+          .attr("href", commit.html_url);
 
-      $copy.appendTo($(".github-widget")).show();
+        if(commit.author) {
+          avatar_url = commit.author.avatar_url;
+          author_url = commit.author.url;
+        } else {
+          avatar_url = "https://avatars.githubusercontent.com/u/0?v=2"; 
+          author_url = "#";
+        }
+
+        $copy.find(".github-widget-commiter-image").attr("src", avatar_url)
+          .parent().attr("href", author_url);
+
+        $copy.appendTo($(".github-widget")).show();
       });
     }
   });    
