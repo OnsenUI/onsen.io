@@ -10,27 +10,27 @@
       <li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">Getting Started</a></li>
       <li class="<%- if @document.page is 'components' then 'current' %>"><a href="/guide/components.html">Components</a></li>
       <li class="<%- if @document.page is 'guide' then 'current' %>"><a href="/guide/overview.html">Guide</a></li>
-      <li class="<%- if @document.page is 'themes' then 'current' %>"><a href="http://components.onsenui.io/">Themes</a></li>
+      <li class="<%- if @document.page is 'themes' then 'current' %>"><a href="http://components.onsen.io/">Themes</a></li>
       <li class="<%- if @document.page is 'forum' then 'current' %>"><a href="/forum.html">Forum</a></li>
-      <li><a href="http://onsenui.io/blog/">Blog</a></li>
-      <li><a href="http://ja.onsenui.io/">日本語</a></li>
+      <li><a href="http://onsen.io/blog/">Blog</a></li>
+      <li><a href="http://ja.onsen.io/">日本語</a></li>
     <% else: %>
       <li class="<%- if @document.page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">はじめに</a></li>
       <li class="<%- if @document.page is 'components' then 'current' %>"><a href="/guide/components.html">コンポーネント一覧</a></li>
       <li class="<%- if @document.page is 'guide' then 'current' %>"><a href="/guide/overview.html">マニュアル</a></li>
-      <li class="<%- if @document.page is 'themes' then 'current' %>"><a href="http://components.onsenui.io/">テーマローラー</a></li>
-      <li><a href="http://onsenui.io/">English</a></li>
+      <li class="<%- if @document.page is 'themes' then 'current' %>"><a href="http://components.onsen.io/">テーマローラー</a></li>
+      <li><a href="http://onsen.io/">English</a></li>
     <% end %>
 
     <li>
       <!-- twitter button -->
-      <a href="https://twitter.com/share" data-text="<%- @site.twitter %>" class="twitter-share-button" data-url="http://onsenui.io/" data-via="Onsen_UI" data-related="Onsen_UI">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+      <a href="https://twitter.com/share" data-text="<%- @site.twitter %>" class="twitter-share-button" data-url="http://onsen.io/" data-via="Onsen_UI" data-related="Onsen_UI">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 
       <!-- google plus button -->
       <div class="g-plusone" data-size="medium" data-action="share"></div>
 
       <!-- facebook share button -->
-      <div class="fb-share-button" data-href="http://onsenui.io" data-type="button"></div>
+      <div class="fb-share-button" data-href="http://onsen.io" data-type="button"></div>
     </li>
   </ul>
 
@@ -60,7 +60,7 @@
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-526750-29', 'onsenui.io');
+ga('create', 'UA-526750-29', 'onsen.io');
 ga('send', 'pageview');
 
 </script>

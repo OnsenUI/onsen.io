@@ -142,8 +142,8 @@ docpadConfig = {
 
     getAlternateSiteURL: ->
       lang = docpad.config.env
-      url = 'http://onsenui.io'
-      url = 'http://ja.onsenui.io' if lang == 'en'
+      url = 'http://onsen.io'
+      url = 'http://ja.onsen.io' if lang == 'en'
       return url
 
     getAlternateLang: ->
