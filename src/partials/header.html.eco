@@ -52,7 +52,9 @@
     });
    
     (function($el) {
-      $el.attr('href', $el.attr('href').replace(/\/$/, "") + window.location.pathname);
+      if($el.length) {
+        $el.attr('href', $el.attr('href').replace(/\/$/, "") + window.location.pathname);
+      }
     })($('.language-dialog-button.japanese-version'));    
  
     <% if @lang == 'en': %>

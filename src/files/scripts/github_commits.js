@@ -36,6 +36,12 @@ $(function() {
   
       $num.first().text(res.data.stargazers_count);
       $num.last().text(res.data.forks_count);
+      
+      $('div.social a.github-star strong').text(res.data.stargazers_count);
+    },
+    error: function() {
+      $('div.social img.github-icon-mini').remove();
+      $('div.social a.github-star').remove();
     }
   });
   

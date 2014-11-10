@@ -153,7 +153,7 @@ title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
 
   <div class="github-widget-header">
     <div class="github-widget-header-info">
-      <img src="/images/index/github-widget-star.png"> <a href="https://api.github.com/repos/OnsenUI/OnsenUI/stargazers" target="_blank" class="github-widget-header-num"></a> stars
+      <img src="/images/index/github-widget-star.png"> <a href="https://github.com/OnsenUI/OnsenUI/stargazers" target="_blank" class="github-widget-header-num"></a> stars
       &nbsp;&nbsp; <img src="/images/index/github-widget-fork.png"> <a href="https://github.com/OnsenUI/OnsenUI/network" target="_blank" class="github-widget-header-num"></a> forks
     </div>
 
@@ -174,15 +174,6 @@ title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
 
 <script>
   $(function() {
-    $.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI?callback=?').success(function(data) {
-      if(data && data.data.watchers) {
-        $('div.social a.github-star strong').text(data.data.watchers);
-      }
-    }).error(function() {
-      $('div.social img.github-icon-mini').remove();
-      $('div.social a.github-star').remove();
-    });
-
     $.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
       if(data && data.followers_count) {
         $('div.social > a.twitter-follower > strong').text(data.followers_count);
