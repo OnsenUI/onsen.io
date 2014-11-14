@@ -1,13 +1,76 @@
-<a href="http://monaca.mobi">
-  <div id="header-monaca">
-    <div id="header-monaca-inner">
-      <img src="/images/header/monaca_logo.png">
-      <span>
-        Faster. Easier. PhoneGap/Cordova development environment.
-      </span>
-    </div>
+<div id="header-monaca">
+  <div id="header-monaca-inner">
+    <a href="http://monaca.io"><img src="/images/header/monaca_logo.png"></a>
+    
+<% if @lang == 'en': %>
+    <ul id="header-monaca-navi">
+      <li><a href="#">Products</a>
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://en.monaca.io/cloud.html">Monaca Cloud</a></li>
+          <li><a href="http://en.monaca.io/enterprise.html">Monaca Enterprise</a></li>
+          <li><a href="http://en.monaca.io/debugger.html">Monaca Debugger</a></li>
+          <li><a href="http://en.monaca.io/localkit.html">Monaca Localkit</a></li>
+          <li><a href="http://monaca.mobi/en/academic/">Monaca Academic Plan</a></li>
+          <li><a href="http://en.monaca.io/kidozen.html">KidoZen</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="http://monaca.mobi/en/support/index">Support</a>
+        <!--
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://en.monaca.io/support.html">Support Plan</a></li>
+          <li><a href="http://monaca.mobi/en/training/index">Training</a></li>
+          <li><a href="http://monaca.mobi/en/support/index">Support Index</a></li>
+        </ul>
+        -->
+      </li>
+      <li>
+        <a href="http://monaca.mobi/en/showcase">Showcase</a>
+        <!--
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://monaca.mobi/en/showcase">Showcase</a></li>
+        </ul>
+        -->
+      </li>
+    </ul>
+<% else: %>
+    <ul id="header-monaca-navi">
+      <li><a href="#">製品</a>
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://ja.monaca.io/cloud.html">Monacaクラウド</a></li>
+          <li><a href="http://ja.monaca.io/enterprise.html">Monacaエンタープライズ</a></li>
+          <li><a href="http://ja.monaca.io/debugger.html">Monacaデバッガー</a></li>
+          <li><a href="http://ja.monaca.io/localkit.html">Monaca Localkit</a></li>
+          <li><a href="http://monaca.mobi/ja/academic/">Monacaアカデミックプラン</a></li>
+          <li><a href="http://ja.monaca.io/kidozen.html">KidoZen</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">パートナー</a>
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://monaca.mobi/ja/partner">開発パートナー制度</a></li>
+          <li><a href="http://monaca.mobi/ja/partner/index">開発パートナー企業紹介</a></li>
+          <li><a href="http://monaca.mobi/ja/productPartner">プロダクトパートナー</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">サポート・サービス</a>
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://ja.monaca.io/support.html">サポート・サービス概要</a></li>
+          <li><a href="http://monaca.mobi/ja/training/index">トレーニング</a></li>
+          <li><a href="http://monaca.mobi/ja/support/index">サポート受付</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">活用事例</a>
+        <ul class="header-monaca-navi-sub-menu">
+          <li><a href="http://monaca.mobi/ja/showcase">アプリ事例</a></li>
+        </ul>
+      </li>
+    </ul>
+<% end %>
   </div>
-</a>
+</div>
 
 <header id="header-container" class="common">
   <div>       
