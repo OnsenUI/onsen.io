@@ -60,6 +60,11 @@ docpadConfig = {
         'ons-list',
         'ons-list-header',
         'ons-list-item',
+        'ons-alert-dialog',
+        'ons-dialog',
+        'ons-carousel',
+        'ons-carousel-item',
+        'ons-popover',
         'ons-modal',
         'ons-button',
         'ons-back-button',
@@ -68,7 +73,9 @@ docpadConfig = {
         'ons-row',
         'ons-col',
         'ons-template',
+        'ons-loading-placeholder',
         'ons-gesture-detector',
+        'ons-keyboard-active',
         'ons-if-orientation',
         'ons-if-platform'
       ]
