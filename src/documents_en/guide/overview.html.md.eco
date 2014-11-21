@@ -16,9 +16,41 @@ Note: For faster instructions to use Onsen UI in your project, please refer to [
 
 Even though Onsen UI uses AngularJS to provide custom elements, it is *not required* to understand AngularJS. Onsen UI can be used with any JS frameworks including jQuery or Backbone.js, or with AngularJS to have a tighter integration.
 
-<h4 id="UsingOnsenUIwithjQueryorwithanyJSframeworks">Using Onsen UI with jQuery, or with any JS frameworks</h4>
+<h4 id="UsingOnsenUIwithAngularJS">Onsen UI with AngularJS</h4>
 
-Onsen UI provides a way to use without understanding AngularJS. For instance, the example below describes a sample app that is using Onsen UI and jQuery:
+Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which should be very familiar to the AngularJS users.
+
+```
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      var module = ons.bootstrap('my-app', ['onsen']);
+      module.controller('AppController', function($scope) { });
+      module.controller('PageController', function($scope) {
+        ons.ready(function() {
+          // Init code here
+        });
+      });
+    </script>
+  </head>
+  <body ng-controller="AppController">
+    <ons-navigator var="navigator">
+      <ons-page ng-controller="PageController">
+        <!-- Page content -->
+      </ons-page>
+    </ons-navigator>
+  </body>
+</html>
+```
+<h4 id="UsingOnsenUIwithjQueryorwithanyJSframeworks">Onsen UI with plain JavaScript</h4>
+
+Onsen UI provides a way to use without deeper understanding of AngularJS. For instance, the example below describes a sample app that is using Onsen UI and jQuery:
 
 ```
 <!doctype html>
@@ -46,44 +78,9 @@ Onsen UI provides a way to use without understanding AngularJS. For instance, th
 </body>
 ```
 
-As you see in the code, it has two tricks. One is `var` attribute, the other is `ons.compile` function.
-
 When you specify `var` attribute when defining a component, the object is also defined in a `window` object. For details, please see [access to the component object from your code](#from-code).
 
 `ons.compile` function converts your custom elements based HTML to a normal DOM structure. Most browsers does not (yet) support custom elements by default, you need to call the function every time to make the magic happen.
-
-<h4 id="UsingOnsenUIwithAngularJS">Using Onsen UI with AngularJS</h4>
-
-Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which should be very familiar to the AngularJS users.
-
-```
-<!doctype html>
-<html lang="en" ng-app="my-app">
-  <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
-    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
-    <script src="lib/onsen/js/angular/angular.js"></script>
-    <script src="lib/onsen/js/onsenui.js"></script>
-    <script>
-      var module = angular.module('my-app', ['onsen']);
-      module.controller('AppController', function($scope) { });
-      module.controller('PageController', function($scope) {
-        ons.ready(function() {
-          // Init code here
-        });
-      });
-    </script>
-  </head>
-  <body ng-controller="AppController">
-    <ons-navigator var="navigator">
-      <ons-page ng-controller="PageController">
-        <!-- Page content -->
-      </ons-page>
-    </ons-navigator>
-  </body>
-</html>
-```
 
 <h3 id="ManagingMultiplePages">Managing Multiple Pages</h3>
 
@@ -294,7 +291,7 @@ If you want to place a toolbar outsite the navigation header, you can create an 
    <div class="left">Label</div>
 </ons-toolbar>
 <ons-bottom-toolbar inline>
-   <div class="center">Bottom Inline 	Toolbar</div>
+   <div class="center">Bottom Inline   Toolbar</div>
    <div class="left">Label</div>
 </ons-bottom-toolbar> 
 ```
@@ -365,13 +362,13 @@ The menu page and main page can be specified under `<ons-sliding-menu>` tag by s
 <ons-sliding-menu>
   <div class="menu">
     <ons-page>
-	  Menu page contents
-	</ons-page>
+    Menu page contents
+  </ons-page>
   </div>
   <div class="main">
     <ons-page>
-	  Main page contents
-	</ons-page>
+    Main page contents
+  </ons-page>
   </div>
 </ons-sliding-menu>
 ```
@@ -641,45 +638,45 @@ To show an alert dialog, the quicker way is to use the following functions to di
 
 - Alert dialog
 
-	`ons.notification.alert()` function shows an alert with a button and a text message. The message can be written in HTML format.
+  `ons.notification.alert()` function shows an alert with a button and a text message. The message can be written in HTML format.
 
-	```
-	ons.dialog.alert({
-  		message: 'Message',
-		// or messageHTML: '<div>Message in HTML</div>',
-  		title: 'Dialog Title',
-  		buttonLabel: 'OK',
-		animation: 'default', // or 'none'
-		// modifier: 'optional-modifier'
-  		callback: function() {
-			// Alert button is closed.
-		}
-	});
-	```
+  ```
+  ons.dialog.alert({
+    message: 'Message',
+    // or messageHTML: '<div>Message in HTML</div>',
+    title: 'Dialog Title',
+    buttonLabel: 'OK',
+    animation: 'default', // or 'none'
+    // modifier: 'optional-modifier'
+    callback: function() {
+      // Alert button is closed!
+    }
+  });
+  ```
 
 - Confirm dialog
 
-	`ons.notification.confirm()` function is similar to the alert dialog, but can have multiple buttons.
+  `ons.notification.confirm()` function is similar to the alert dialog, but can have multiple buttons.
 
-	```
-	ons.dialog.confirm({
-  		message: 'Do you want to close the dialog?',
-		// or messageHTML: '<div>Message in HTML</div>',
-  		title: 'Dialog Title',
-  		buttonLabels: ['Yes', 'No'],
-		animation: 'default', // or 'none'
-		primaryButtonIndex: 1,
-		cancelable: true,
-  		callback: function(index) {
-			// -1: Cancel
-            // 0-: Button index from the left
-		}
-	});
-	```
+  ```
+  ons.dialog.confirm({
+    message: 'Do you want to close the dialog?',
+    // or messageHTML: '<div>Message in HTML</div>',
+    title: 'Dialog Title',
+    buttonLabels: ['Yes', 'No'],
+    animation: 'default', // or 'none'
+    primaryButtonIndex: 1,
+    cancelable: true,
+    callback: function(index) {
+      // -1: Cancel
+      // 0-: Button index from the left
+    }
+  });
+  ```
 
 - Prompt dialog
 
-	`ons.notification.prompt()` function shows a prompt dialog that contains with a text input box.
+  `ons.notification.prompt()` function shows a prompt dialog that contains with a text input box.
 
 <h4 id="ShowingAlertDialog">Showing a custom alert dialog</h4>
 
@@ -859,11 +856,11 @@ Other than the options above, following attributes can be specified to customize
 
 - `auto-scroll` attribute
 
-	When it is set, the carousel item will automatically scrolled to fit into the container.
+  When it is set, the carousel item will automatically scrolled to fit into the container.
 
 - `swipable` and `draggable` attribute
 
-	Use this attribute to make your carousel swipable or draggable.
+  Use this attribute to make your carousel swipable or draggable.
 
 <h4 id="CarouselJavaScript">Controlling carousel by JavaScript</h4>
 
@@ -875,15 +872,15 @@ Following methods are provided to navigate items in the carousel.
 
 - `next(options)`, `prev(options)`
 
-	Scroll to the next (or previous) item. Otherwise, it will scroll to the first (or last) item.
+  Scroll to the next (or previous) item. Otherwise, it will scroll to the first (or last) item.
 
 - `first(options)`, `last(options)`
 
-	Scroll to the first or last item.
+  Scroll to the first or last item.
 
 - `setActiveCarouselItemIndex(index, options)`
 
-	Show the item specified by the `index`. The current active index can be obtained by calling `getActiveCarouselItemIndex()` function.
+  Show the item specified by the `index`. The current active index can be obtained by calling `getActiveCarouselItemIndex()` function.
 
 All scroll methods can specify `options`, which can contain `animation` and `callback` parameters.
 
@@ -906,17 +903,17 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
 - `postchange`
 
-	Fired before when the active item is going to change. The event will be supplied with an object that contains `carousel` and `isInteractive` property.
+  Fired before when the active item is going to change. The event will be supplied with an object that contains `carousel` and `isInteractive` property.
 
-	- `carousel`: Contains the carousel object.
-	- `activeIndex`: The index of the current active item.
-	- `lastActiveIndex`: The index of the previous active item.
+  - `carousel`: Contains the carousel object.
+  - `activeIndex`: The index of the current active item.
+  - `lastActiveIndex`: The index of the previous active item.
 
-	This event will not fired when the carousel is not initialized with `auto-scroll` enabled, or the carousel item has different size than the container.
+  This event will not fired when the carousel is not initialized with `auto-scroll` enabled, or the carousel item has different size than the container.
 
 - `refresh`
 
-	Fired when the carousel layout has changed, or `refresh()` method is called.
+  Fired when the carousel layout has changed, or `refresh()` method is called.
 
 <h3 id="UsingModal">Using Modal</h3>
 
@@ -939,8 +936,8 @@ Here is the quick example of how a popover is defined and created.
 ```
 <ons-template id="popover.html">
   <ons-popover 
-	style="height: 200px; width: 200px" 
-	animation="fade">
+  style="height: 200px; width: 200px" 
+  animation="fade">
       <ons-page>
         ...
       </ons-page>
@@ -950,9 +947,9 @@ Here is the quick example of how a popover is defined and created.
 ons.ready(function() {
   var targetElement = document.getElementById("myButton"); 
   var popover = ons.createPopover('popover.html')
-	.then(function(popover) {
-	    popover.show(targetElement);
-  	});
+  .then(function(popover) {
+      popover.show(targetElement);
+    });
 });
 </script>
 ```
@@ -989,21 +986,21 @@ The design can be switched using `modifier` attribute, which can be selected fro
 
 - `preshow`, `prehide`
 
-	Fired before showing or hiding the popover. The callback function provides an event object with following properties.
+  Fired before showing or hiding the popover. The callback function provides an event object with following properties.
 
-	- `popover`: Contains the popover object.
-	- `cancel`: Method to cancel the operation.
+  - `popover`: Contains the popover object.
+  - `cancel`: Method to cancel the operation.
 
-	If you want to cancel opening the popoever, you could write a program like the one below.
+  If you want to cancel opening the popoever, you could write a program like the one below.
 
-	```
-	myPopover.on("preshow", function(e) {
-		e.cancel();
-	});
-	```
+  ```
+  myPopover.on("preshow", function(e) {
+    e.cancel();
+  });
+  ```
 - `postshow`, `posthide`
 
-	Fired after showing or hiding the popover. The callback function provides an event object, which has `popover` property contains popover object.
+  Fired after showing or hiding the popover. The callback function provides an event object, which has `popover` property contains popover object.
 
 <h3 id="UsingFormComponents">Using Form Components</h3>
 
@@ -1310,11 +1307,7 @@ In addition to it, `ons.platform` object provides following methods to detect th
 -  `ons.platform.isSafari()`: Returns `true` if the app is running under Apple Safari browser.
 -  `ons.platform.isChrome()`: Returns `true` if the app is running under Google Chrome browser.
 -  `ons.platform.isIE()`: Returns `true` if the app is running under Internet Explorer browser.
--  `ons.platform.isIOS7
--  
--  ()`: Returns `true` if the running iOS is version 7.0 or 
--  
--  .
+-  `ons.platform.isIOS7()`: Returns `true` if the running iOS is version 7.0 or later.
 
 <h4 id="Landscapeportraitdetection">Landscape / portrait detection</h4>
 
