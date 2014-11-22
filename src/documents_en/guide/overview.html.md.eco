@@ -643,7 +643,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
   `ons.notification.alert()` function shows an alert with a button and a text message. The message can be written in HTML format.
 
   ```
-  ons.dialog.alert({
+  ons.notification.alert({
     message: 'Message',
     // or messageHTML: '<div>Message in HTML</div>',
     title: 'Dialog Title',
@@ -661,7 +661,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
   `ons.notification.confirm()` function is similar to the alert dialog, but can have multiple buttons.
 
   ```
-  ons.dialog.confirm({
+  ons.notification.confirm({
     message: 'Do you want to close the dialog?',
     // or messageHTML: '<div>Message in HTML</div>',
     title: 'Dialog Title',
@@ -1626,14 +1626,16 @@ In both cases, thanks to the fastclick library, there is no 300ms delay when det
 
 ```
 <script>
-$(document.body).on('pageinit', '#my-page', function() {
-  $('.my-content', this).text("I am fine!");
-})
+document.addEventListener("pageinit", function(e) {
+  if (e.target.id == "my-page") {
+    document.getElementById("my-content").innerHTML = "I am fine!";
+  }
+}, false);
 </script>
 
 <ons-page id="my-page">
   <div>Hello, how are you?</div>
-  <div class="my-content">Change me</div>
+  <div id="my-content">This content will be replaced.</div>
 </ons-page>
 ```
 

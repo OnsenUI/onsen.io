@@ -643,7 +643,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
   `ons.notification.alert()`関数を呼び出すと、ボタンとテキストメッセージが含まれたダイアログを表示できます。メッセージはHTMLで記述することもできます。
 
   ```
-  ons.dialog.alert({
+  ons.notification.alert({
     message: 'メッセージ',
     // もしくはmessageHTML: '<div>HTML形式のメッセージ</div>',
     title: 'ダイアログのタイトル',
@@ -661,7 +661,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
   `ons.notification.confirm()`関数はアラートダイアログと似ていますが、複数のボタンを配置できます。
 
   ```
-  ons.dialog.confirm({
+  ons.notification.confirm({
     message: 'このダイアログを閉じてもいいですか？',
     // もしくは messageHTML: '<div>HTML形式のメッセージ</div>',
     title: 'ダイアログのタイトル',
@@ -1624,14 +1624,16 @@ AngularJSのイベント処理に精通している方は、`ng-click`ハンド�
 
 ```
 <script>
-$(document.body).on('pageinit', '#my-page', function() {
-  $('.my-content', this).text("私は元気です。");
-})
+document.addEventListener("pageinit", function(e) {
+  if (e.target.id == "my-page") {
+    document.getElementById("my-content").innerHTML = "私は元気です。";
+  }
+}, false);
 </script>
 
 <ons-page id="my-page">
   <div>ようこそ。元気ですか？</div>
-  <div class="my-content">ここが変更されます</div>
+  <div id="my-content">ここが変更されます</div>
 </ons-page>
 ```
 
