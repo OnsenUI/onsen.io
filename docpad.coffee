@@ -63,7 +63,6 @@ docpadConfig = {
         'ons-alert-dialog',
         'ons-dialog',
         'ons-carousel',
-        'ons-carousel-item',
         'ons-popover',
         'ons-modal',
         'ons-button',

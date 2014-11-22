@@ -247,7 +247,7 @@ A toolbar is defined as a [`<ons-toolbar>`](components.html#ons-toolbar) compone
 
 The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](components.html#ons-icon) to display an icon, [`<ons-toolbar-button>`](components.html#ons-toolbar-button) or [`<ons-back-button>`](components.html#ons-back-button) to place an button, or insert any HTML content.
 
-The appearance of the toolbar can be specified using `modifier` attribute, with either `android` or `ios` value can be set. By default, Onsen UI will apply the appropriate style depending on the platform it run. If you specify `fixed-style`,   
+The appearance of the toolbar can be specified using `modifier` attribute, with either `android` or `ios` value can be set. By default, Onsen UI will apply the appropriate style depending on the platform it run. If you specify `fixed-style`, the toolbar style will be fixed regardless of the platform you apply to the toolbar.
 
 Here are several examples when using `<ons-toolbar>`.
 
@@ -291,7 +291,7 @@ If you want to place a toolbar outsite the navigation header, you can create an 
    <div class="left">Label</div>
 </ons-toolbar>
 <ons-bottom-toolbar inline>
-   <div class="center">Bottom Inline   Toolbar</div>
+   <div class="center">Bottom Inline Toolbar</div>
    <div class="left">Label</div>
 </ons-bottom-toolbar> 
 ```
@@ -348,7 +348,7 @@ These events are fired after the pushPage and popPage. `event` object has the fo
 
 <h3 id="UsingSlidingMenu">Using Sliding Menu</h3>
 
-Sliding menu consists of two pages, which are referred to as main page and menu page. The menu page is hidden and shown from the edge. It can be displayed when tapping a button, or swiping from the edge of the screen.
+Sliding menu consists of two pages, which are referred to as main page and menu page. The menu page is also called as a side page, which is usually hidden and shown from the edge. It can be displayed when tapping a button, or swiping from the edge of the screen.
 
 You can also place a [`<ons-navigator>`](components.html#ons-navigator) in the main page to provide a navigation to even more pages.
 
@@ -682,7 +682,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
 
 <h4 id="ShowingAlertDialog">Showing a custom alert dialog</h4>
 
-You can use [`<ons-alert-dialog>`](components.html#ons-alert-dialog) component to display alert dialog with the custom content. Here is the sample alert dialog that has two buttons.
+You can use [`<ons-alert-dialog>`](components.html#ons-alert-dialog) component to display alert dialog with the custom content. Here is the sample alert dialog that has a customized style.
 
 ```
 <ons-template id="alert-dialog.html">
@@ -747,7 +747,7 @@ ons.ready(function() {
 
 - `isShown()`
 
-  Returns true if the dialog is shown.  
+  Returns `true` if the dialog is shown.  
 
 - `destroy()`
 
@@ -768,7 +768,9 @@ ons.ready(function() {
 
 <h4 id="DialogEvents">Handling dialog events</h4>
 
-When using custom alert dialog, you can get the events when showing or hiding the dialog. The event can be specified in the `callback` parameter when calling the `show()` or `hide()` method.[`<ons-dialog>`](components.html#ons-dialog) and  [`<ons-alert-dialog>`](components.html#ons-alert-dialog) provides following events.
+When using custom dialog, you can specify a callback function when dialog is opened or closed. The callback can be set as the `callback` parameter when calling the `show()` or `hide()` method.
+
+Also, [`<ons-dialog>`](components.html#ons-dialog) and [`<ons-alert-dialog>`](components.html#ons-alert-dialog) provides following events.
 
 - preshow, prehide
 
@@ -777,13 +779,13 @@ When using custom alert dialog, you can get the events when showing or hiding th
   ```
   myDialog.on("preshow", function(e) {
     // e.dialog is a DialogView object
-    e.cancel = true;
+    e.cancel();
   });
   ``` 
 
 - postshow, posthide
 
-  Fired after showing or hiding the dialog. The callback function will get a `alertDialog` property, which is the `DialogView` object.
+  Fired after showing or hiding the dialog. The callback function will get a `dialog` (or `alertDialog`) property, which is the `DialogView` object.
 
 <h3 id="UsingCarousel">Using Carousel</h3>
 
@@ -915,7 +917,7 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
 - `postchange`
 
-  Fired before when the active item is going to change. The event will be supplied with an object that contains `carousel` and `isInteractive` property.
+  Fired when the active item is changed. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` property.
 
   - `carousel`: Contains the carousel object.
   - `activeIndex`: The index of the current active item.
@@ -943,7 +945,7 @@ A popover provides an in-page container that is used to provide additional inter
 
 <h4 id="ShowingPopover">Showing popover</h4>
 
-To show a popover, you need to define a popover as a HTML context using [`<ons-popover>`](components.html#ons-popover) tag, and open the popover by `ons.createPopover()` method.
+To show a popover, you need to define a popover as a HTML context using [`<ons-popover>`](components.html#ons-popover) tag, and open the popover by `ons.createPopover()` function.
 
 Here is the quick example of how a popover is defined and created.
 
@@ -953,7 +955,7 @@ Here is the quick example of how a popover is defined and created.
   style="height: 200px; width: 200px" 
   animation="fade">
       <ons-page>
-        ...
+        Popover content.
       </ons-page>
   </ons-popover>
 </ons-template>
@@ -968,11 +970,11 @@ ons.ready(function() {
 </script>
 ```
 
-When the `ons.createPopover()` method is called, it will return a Promise object that returns PopoverView object which has following methods.
+When the `ons.createPopover()` function is called, it will return a `Promise` object. The object returns the `PopoverView` object which has following methods.
 
 - `show(target[, options])`
 
-  Displays the popover component at the specified `target`. The `target` can be a `DomElement` or a `$event`. 
+  Displays the popover component at the specified `target`. The `target` can be a `DomElement`, a query selector or a AngularJS `$event`. 
 
   You can specify following parameters in the `options`.
 
@@ -988,7 +990,7 @@ When the `ons.createPopover()` method is called, it will return a Promise object
 
 <h5 id="PopoverAppearance">Changing appearance</h5>
 
-The design can be switched using `modifier` attribute, which can be selected from `android`, `ios` and `simple`. You can apply your own CSS styles by specifying a unique name (i.e. `mystyle`) to the `modifier` attribute.
+The design can be switched using `modifier` attribute, which can be selected from `android` and `ios`. You can apply your own CSS styles by specifying a unique name (i.e. `mystyle`) to the `modifier` attribute.
 
 <%- @partial('codepen', { id: "emmKBr" } ) %>
 
@@ -1007,7 +1009,7 @@ The design can be switched using `modifier` attribute, which can be selected fro
   - `popover`: Contains the popover object.
   - `cancel`: Method to cancel the operation.
 
-  If you want to cancel opening the popoever, you could write a program like the one below.
+  If you want to cancel opening the popover, you could write a program like the one below.
 
   ```
   myPopover.on("preshow", function(e) {
