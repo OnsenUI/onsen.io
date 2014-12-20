@@ -211,8 +211,8 @@ Returns an array of `page` objects from the navigator. See `navigator.getCurrent
 ```
 // Remove the 2nd topmost page from the page stack
 var pages = navigator.getPages();
-pages[1].destroy();
-// Now a popPage() will display the 3rd page
+pages[pages.length - 2].destroy();
+// Now a popPage() will display pages[pages.length - 3]
 ```
 
 <h5 id="navigatorInsertPage">navigator.insertPage(index, page, options)</h5>

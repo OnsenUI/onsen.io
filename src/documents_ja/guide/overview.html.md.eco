@@ -214,8 +214,8 @@ console.log(page.options.param1); // "value1"が戻ります
 ```
 // ページスタックの上から2番目のページを削除する例
 var pages = navigator.getPages();
-pages[1].destroy();
-// popPage()を行うと3番目のページに戻ります
+pages[pages.length - 2].destroy();
+// popPage()を行うとpages[pages.length - 3]のページに戻ります
 ```
 
 <h5 id="navigatorInsertPage">navigator.insertPage(index, page, options)</h5>
