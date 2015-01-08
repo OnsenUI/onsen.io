@@ -1,64 +1,25 @@
 {
-  "name": "html5-boilerplate-frontend.docpad",
-  "version": "0.1.0",
-  "private": true,
-  "description": "HTML5 Boilerplate skeleton for DocPad. Bare essentials for building a modern website with best practices. Adds frontend plugins asset compilation.",
-  "homepage": "https://github.com/lukekarrys/html5-boilerplate.docpad",
-  "keywords": [
-    "docpad-skeleton",
-    "docpad",
-    "website",
-    "skeleton",
-    "html5 boilerplate",
-    "h5bp",
-    "grunt"
-  ],
-  "author": "Bevry Pty Ltd <us@bevry.me> (http://bevry.me)",
-  "maintainers": [
-    "Luke Karrys (http://lukekarrys.com)"
-  ],
-  "contributors": [
-    "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-    "Luke Karrys (http://lukekarrys.com)"
-  ],
-  "bugs": {
-    "url": "https://github.com/lukekarrys/html5-boilerplate.docpad/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "http://github.com/lukekarrys/html5-boilerplate.docpad.git"
-  },
-  "engines": {
-    "node": "0.8.x",
-    "npm": "1.1.x"
-  },
-  "dependencies": {
-    "docpad": "~6.63.0",
-    "docpad-plugin-eco": "~2.0.3",
-    "docpad-plugin-marked": "~2.2.0",
-    "docpad-plugin-partials": "~2.8.1",
-    "grunt": "~0.4.2",
-    "grunt-css": "~0.3.2",
-    "bal-util": "~1.15.3",
-    "underscore": "~1.4.3",
-    "docpad-plugin-sass": "~2.7.1",
-    "node-static": "~0.7.3",
-    "jsdom": "~0.2.0"
-  },
+  "name": "onsen.io",
+  "version": "0.0.0",
+  "description": "",
+  "author": "",
+  "license": "",
   "devDependencies": {
-    "docpad-plugin-livereload": "~2.5.6",
-    "grunt": "~0.4.2",
-    "grunt-contrib-watch": "~0.4.2",
-    "grunt-contrib-compass": "~0.7.0",
-    "docpad-plugin-marked": "~2.2.0",
-    "docpad-plugin-partials": "~2.8.1",
-    "docpad-plugin-eco": "~2.0.3",
-    "docpad": "~6.63.0",
-    "grunt-topdoc": "~0.3.0",
-    "yamljs": "~0.1.5"
-  },
-  "main": "node_modules/docpad/bin/docpad-server",
-  "scripts": {
-    "start": "node_modules/docpad/bin/docpad-server"
+    "gulp": "^3.8.10",
+    "gulp-load-plugins": "^0.8.0",
+    "browser-sync": "^1.8.3",
+    "metalsmith": "^1.0.1",
+    "metalsmith-templates": "^0.6.0",
+    "metalsmith-markdown": "^0.2.1",
+    "eco": "^1.1.0-rc-3",
+    "metalsmith-layouts": "^1.0.0",
+    "metalsmith-data-markdown": "0.0.3",
+    "metalsmith-ignore": "^0.1.2",
+    "jsdom": "^2.0.0",
+    "async": "^0.9.0",
+    "marked": "^0.3.2",
+    "metalsmith-assets": "^0.1.0",
+    "gulp-compass": "^2.0.3",
+    "extend": "^2.0.0"
   }
 }

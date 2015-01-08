@@ -1,12 +1,12 @@
 ---
-layout: 'default'
 page: 'guide'
 title: 'Onsen UIガイド'
 needHelp: true
 autotoc: true
 ---
 
-## Onsen UIガイド
+<%- @markdown => %>
+<h2>Onsen UIガイド</h2>
 
 このドキュメントは最新版のOnsen UIを対象に記述しています。Onsen UIのバージョンによる違いについては、[Change Log](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md)を参照してください。
 
@@ -115,7 +115,7 @@ Onsen UIでは、[`<ons-navigator>`](components.html#ons-navigator)コンポー�
 
 通常は、ページ上部にツールバーを設置します。そのため、[`<ons-page>`](components.html#ons-page)の下には[`<ons-toolbar>`](components.html#ons-toolbar)コンポーネントを配置するのが一般的です。ツールバーには、戻るボタンを設置したり、ページタイトルを描画したりします。
 
-<%- @partial('codepen', { id: "yrhtv" } ) %>
+<%- @partial('codepen.html.eco', {id: "yrhtv"}) %>
 
 <h4 id="Displayanewpage">新しいページを表示</h4>
 
@@ -175,7 +175,7 @@ myNavigator.popPage();
   navigator.pushPage("page2.html", { animation: "none" }):
   ```
 
-<%- @partial('codepen', { id: "FLsIE" } ) %>
+<%- @partial('codepen.html.eco', { id: "FLsIE" } ) %>
 
 さらに、遷移アニメーションはカスタマイズできます。その場合は`NavigatorTransitionAnimator`オブジェクトを作成し、`animation`パラメータに指定してください。
 
@@ -222,7 +222,7 @@ pages[pages.length - 2].destroy();
 
 ページスタックの`index`パラメータで指定した場所にページを追加します。`0`を指定すると、ページスタックの最後（最下層）にページを追加します。また、マイナス値を指定すると、上からの順番で計算されます。たとえば、`-1`を指定すると上から2番目にページが追加されます。`page`と`options`パラメータは、`pushPage()`メソッドと同様に指定します。
 
-<%- @partial('codepen', { id: "fhdjg" } ) %>
+<%- @partial('codepen.html.eco', { id: "fhdjg" } ) %>
 
 <h5 id="navigatorresetToPagepageoptions">navigator.resetToPage(page, options)</h5>
 
@@ -246,7 +246,7 @@ pages[pages.length - 2].destroy();
  </ons-toolbar>
 ```
 
-<%- @partial('codepen', { id: "aHmGL" } ) %>
+<%- @partial('codepen.html.eco', { id: "aHmGL" } ) %>
 
 ツールバーは左、中央、右の3つに分けられ、それぞれに対応したクラス名（`left`、`center`、`right`）として指定できます。[`<ons-icon>`](components.html#ons-icon)でアイコンを表示したり、[`<ons-toolbar-button>`](components.html#ons-toolbar-button)や[`<ons-back-button>`](components.html#ons-back-button)コンポーネントでボタンを配置できます。HTMLを直接記述することもできます。
 
@@ -423,7 +423,7 @@ ons.ready(function() {
   </ons-list>
 </script>
 ```
-<%- @partial('codepen', { id: "IDvFJ" } ) %>
+<%- @partial('codepen.html.eco', { id: "IDvFJ" } ) %>
 
 <h4 id="Openingclosingmenu">メニューの表示 / 非表示</h4>
 
@@ -489,7 +489,7 @@ ons.ready(function() {
 </ons-tabbar>
 ```
 
-<%- @partial('codepen', { id: "pGuDL" } ) %>
+<%- @partial('codepen.html.eco', { id: "pGuDL" } ) %>
 
 <h4 id="Tabbarcustomize">タブバーを上部に配置する</h4>
 
@@ -518,7 +518,7 @@ ons.ready(function() {
 </ons-page>
 ```
 
-<%- @partial('codepen', { id: "CfnrG" } ) %>
+<%- @partial('codepen.html.eco', { id: "CfnrG" } ) %>
 
 <h4 id="Tabbarcustomize">タブのカスタマイズ</h4>
 
@@ -616,7 +616,7 @@ tabbar.on('prechange', function(event) {
 
 下記に、[`<ons-list>`](components.html#ons-list)の例を掲載します。
 
-<%- @partial('codepen', { id: "yxcCt" } ) %>
+<%- @partial('codepen.html.eco', { id: "yxcCt" } ) %>
 
 <h4 id="Listwithrightarrowicon">右矢印付きのリスト</h4>
 
@@ -1768,6 +1768,8 @@ Onsen UIのスタイルは`onsenui.css`と`onsen-css-components.css`という2�
 <h4 id="BuildingOnsenUI">Onsen UIのビルド</h4>
 
 Onsen UIでは、ビルドシステムとして`gulp`を使用しています。ビルド方法の詳細については、[プロジェクトのWebサイト](https://github.com/OnsenUI/OnsenUI)を参照してください。
+
+<% end %>
 
 <script src="<%= @rootUrl %>scripts/codepen.js"></script>
 
