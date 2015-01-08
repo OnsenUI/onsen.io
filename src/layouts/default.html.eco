@@ -15,7 +15,6 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- DocPad Styles + Our Own -->  
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
   <link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
@@ -31,6 +30,9 @@
   <link rel="apple-touch-icon-precomposed" sizes="114x114" href="icons/apple-touch-icon-114x114-precomposed.png" />
   <!-- For third-generation iPad with high-resolution Retina display: -->
   <link rel="apple-touch-icon-precomposed" sizes="144x144" href="icons/apple-touch-icon-144x144-precomposed.png" />
+
+  <!-- Alternate language -->
+  <link rel="alternate" href="<%= @getAlternateSiteURL() %>" hreflang="<%= @getAlternateLang() %>" />
 
   <script src="/vendor/jquery.js"></script>
   <script src="/vendor/jquery.lazyloadxt.min.js"></script>

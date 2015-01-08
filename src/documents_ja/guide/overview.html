@@ -622,19 +622,19 @@ tabbar.on('prechange', function(event) {
 
 [`<ons-navigator>`](components.html#ons-navigator)と共に使用し、画面遷移を行う場合に使用します。
 
-<%- @partial('codepen', { id: "nIEvm" } ) %>
+<%- @partial('codepen.html.eco', { id: "nIEvm" } ) %>
 
 <h4 id="Listwithforms">フォームと共に使用する</h4>
 
 リストは設定ページ等でも良く用いられます。下記に、フォームの要素と組み合わせた例を掲載します。
 
-<%- @partial('codepen', { id: "ohqDk" } ) %>
+<%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
 
 <h3 id="UsingAlert">アラートダイアログを使う</h3>
 
 Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に表示することができます。また、[`<ons-alert-dialog>`](components.html#ons-alert-dialog)コンポーネントを用いてカスタムなアラートダイアログを用事することもできます。
 
-<%- @partial('codepen', { id: "Qwwxyp" } ) %>
+<%- @partial('codepen.html.eco', { id: "Qwwxyp" } ) %>
 
 アラートダイアログを簡単に表示するために、下記の関数を用意しています。
 
@@ -706,7 +706,7 @@ ons.ready(function() {
 </script>
 ```
 
-<%- @partial('codepen', { id: "jEEKbm" } ) %>
+<%- @partial('codepen.html.eco', { id: "jEEKbm" } ) %>
 
 上記の例のように、カスタムなアラートダイアログを表示する場合は、`ons.createAlertDialog()`関数を使用し、その関数の引数にテンプレートを指定します。テンプレートには[`<ons-alert-dialog>`](components.html#ons-alert-dialog)タグが含まれている必要があります。
 
@@ -735,7 +735,7 @@ ons.ready(function() {
 </script>
 ``` 
 
-<%- @partial('codepen', { id: "zxxaGa" } ) %>
+<%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
 <h4 id="UsingDialogViewObject">`DialogView`オブジェクトを使う</h4>
 
@@ -808,7 +808,7 @@ ons.ready(function() {
 </ons-carousel>
 ```
 
-<%- @partial('codepen', { id: "xbbzOQ" } ) %>
+<%- @partial('codepen.html.eco', { id: "xbbzOQ" } ) %>
 
 <h4 id="ShowingCarouselInAPage">ページ内にカルーセルを表示する</h4> 
 
@@ -848,7 +848,7 @@ ons.ready(function() {
 </ons-carousel>
 ```
 
-<%- @partial('codepen', { id: "emmKpV" } ) %>
+<%- @partial('codepen.html.eco', { id: "emmKpV" } ) %>
 
 <h5 id="CarouselDirection">スクロール方向を変更する</h5>
 
@@ -862,7 +862,7 @@ ons.ready(function() {
 
 `item-width`もしくは`item-height`属性を指定すると、複数のカルーセルアイテムが表示された状態となります。`item-width`属性は`direction`属性が`horizontal`の場合、`item-height`は`vertical`が指定された場合に適用されます。デフォルトでは`100%`と解釈されるため、カルーセル内には1つのアイテムだけが表示されます
 
-<%- @partial('codepen', { id: "EaaRjp" } ) %>
+<%- @partial('codepen.html.eco', { id: "EaaRjp" } ) %>
 
 <h5 id="OtherCarouselOptions">他のオプション</h5>
 
@@ -935,14 +935,14 @@ myCarousel.next({
 
 [`<ons-modal>`](components.html#ons-modal)コンポーネント内には自由にHTMLを記述できます。その内容は、`toggle()`や`show()`メソッドを呼び出すことで表示されます。
 
-<%- @partial('codepen', { id: "devIg" } ) %>
+<%- @partial('codepen.html.eco', { id: "devIg" } ) %>
 
 
 <h3 id="UsingPopover">ポップオーバーを使う</h3>
 
 ポップオーバーは、画面上にポップアップされて表示されるコンポーネントです。[`<ons-popover>`](components.html#ons-popover)コンポーネントを用いてポップオーバーを表示できます。
 
-<%- @partial('codepen', { id: "ZYYRKo" } ) %>
+<%- @partial('codepen.html.eco', { id: "ZYYRKo" } ) %>
 
 <h4 id="ShowingPopover">ポップオーバーを表示する</h4>
 
@@ -993,7 +993,7 @@ ons.ready(function() {
 
 `modifier`を用いると、ポップオーバーのデザインを変更できます。ポップオーバーでは、標準で`android`および`ios`に対応しています。独自のCSSスタイルを適用したい場合は、`modifier`属性に任意の名前を指定します。
 
-<%- @partial('codepen', { id: "emmKBr" } ) %>
+<%- @partial('codepen.html.eco', { id: "emmKBr" } ) %>
 
 <h5 id="PopoverDirections">開く方向を指定する</h5>
 
@@ -1031,7 +1031,7 @@ Onsen UIでは、フォームを構築するための様々なコンポーネン
 
 タップされた場合の処理を記述するには、`onclick`もしくは`ng-click`属性を使用します。
 
-<%- @partial('codepen', { id: "hLayx" } ) %>
+<%- @partial('codepen.html.eco', { id: "hLayx" } ) %>
 
 <h4 id="Switch">スイッチ</h4>
 
@@ -1075,7 +1075,7 @@ alert(document.getElementById("my-input").value);
 alert($("#my-input").val());
 ```
 
-<%- @partial('codepen', { id: "qFbGp" } ) %>
+<%- @partial('codepen.html.eco', { id: "qFbGp" } ) %>
 
 <h4 id="Checkboxandradiobutton">チェックボックスとラジオボタン</h4>
 
@@ -1112,7 +1112,7 @@ Onsen UIのグリッドシステムを使うと、手軽にコンポーネント
 
 下記の例では、[`<ons-row>`](components.html#ons-row)と[`<ons-col>`](components.html#ons-col)を用いて様々なレイアウトを表現しています。
 
-<%- @partial('codepen', { id: "GgujC" } ) %>
+<%- @partial('codepen.html.eco', { id: "GgujC" } ) %>
 
 <h3 id="UsingIcons">アイコンを使う</h3>
 
@@ -1157,7 +1157,7 @@ Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の400以上のアイ
 <ons-icon icon="fa-angle-left" spin="yes">
 ```
 
-<%- @partial('codepen', { id: "xAhvg" } ) %>
+<%- @partial('codepen.html.eco', { id: "xAhvg" } ) %>
 
 <h3 id="Multiscreensupport">マルチスクリーンへの対応</h3>
 
@@ -1181,7 +1181,7 @@ CSSメディアクエリーを用いることで、画面サイズやアスペ�
 </style>
 ```
 
-<%- @partial('codepen', { id: "lGbrB" } ) %>
+<%- @partial('codepen.html.eco', { id: "lGbrB" } ) %>
 
 <h4 id="Usingonssplitviewcomponent">`<ons-split-view>`コンポーネントを使う</h4>
 
@@ -1194,7 +1194,7 @@ CSSメディアクエリーを用いることで、画面サイズやアスペ�
 - `main-page`: メイン側に表示するページを指定できます
 - `secondary-page`: サイド側に表示するページを指定できます
 
-<%- @partial('codepen', { id: "nKqfv" } ) %>
+<%- @partial('codepen.html.eco', { id: "nKqfv" } ) %>
 
 <h4 id="Specifywhentocollapse">サイドページの非表示設定</h4>
 

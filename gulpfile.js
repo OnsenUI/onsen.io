@@ -14,7 +14,9 @@ gulp.task('generate-ja', ['sass'], function(done) {
   var assets = require('metalsmith-assets');
 
   metalsmith(__dirname)
+    .clean(false)
     .source('./src/documents_ja')
+    .metadata(require('./config.js'))
     .use(ignore('*.eco'))
     .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
@@ -51,6 +53,7 @@ gulp.task('serve-ja', ['generate-ja'], function() {
       baseDir: 'gen_ja',
       index: 'index.html'
     },
+    notify: false,
     open: false
   });
 

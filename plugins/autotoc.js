@@ -40,6 +40,50 @@ TocItem.prototype = {
 };
 
 module.exports = function() {
+  function generateId(header) {
+    if (!header.id) {
+      return new Buffer(header.innerHTML, 'utf-8')
+        .toString('base64').substr(0, 10);
+    } else {
+      return header.id;
+    }
+  }
+
+  function buildTocItems(headers) {
+    var root = new TocItem();
+    var toc = root;
+    var lastLevel = 2;
+
+    headers.forEach(function(header) {
+      var id = header.id;
+      var text = header.innerHTML;
+      var level = parseInt(header.tagName.match(/^h([123456])$/i)[1], 10);
+
+      while (level != 1 + lastLevel) {
+        if (level < 1 + lastLevel) {
+          toc = toc.parent;
+          lastLevel--;
+        } else if (level > 1 + lastLevel) {
+          var emptyToc = new TocItem();
+          toc.add(emptyToc);
+          toc = emptyToc;
+          lastLevel++;
+        }
+      }
+
+      var newToc = new TocItem({
+        text: header.innerHTML,
+        id: header.id
+      });
+
+      toc.add(newToc);
+      toc = newToc;
+      lastLevel = level;
+    });
+
+    return root.children;
+  }
+
   return function(files, metalsmith, done) {
     var fileList = Object.keys(files).map(function(path) {
       return files[path]
@@ -58,41 +102,15 @@ module.exports = function() {
               throw error;
             }
 
-            var headers = window.document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-            headers = Array.prototype.slice.call(headers);
-
-            var root = new TocItem();
-            var toc = root;
-            var lastLevel = 0;
-
-            headers.forEach(function(header) {
-              var id = header.id;
-              var text = header.innerHTML;
-              var level = parseInt(header.tagName.match(/^h([123456])$/i)[1], 10);
-
-              while (level != 1 + lastLevel) {
-                if (level < 1 + lastLevel) {
-                  toc = toc.parent;
-                  lastLevel--;
-                } else if (level > 1 + lastLevel) {
-                  var emptyToc = new TocItem();
-                  toc.add(emptyToc);
-                  toc = emptyToc;
-                  lastLevel++;
-                }
-              }
-
-              var newToc = new TocItem({
-                text: header.innerHTML,
-                id: header.id
-              });
-
-              toc.add(newToc);
-              toc = newToc;
-              lastLevel = level;
+            var headers = Array.prototype.slice.call(
+              window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
+            ).map(function(header) {
+              header.id = generateId(header);
+              return header;
             });
 
-            file.toc = root.children;
+            file.contents = new Buffer(window.document.body.innerHTML);
+            file.toc = buildTocItems(headers);
             done();
           }
         });

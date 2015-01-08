@@ -15,15 +15,9 @@ marked.setOptions({
 
 module.exports = function() {
   return function(files, metalsmith, done) {
-    metalsmith.metadata({
-      rootUrl: '/',
-      lang: 'ja',
-      site: {
-        twitter: 'hoge'
-      },
-      framework: {directives: []},
-
+    var helpers = {
       partial: function(name, params) {
+        console.log(Object.keys(this));
         try {
           var path = metalsmith.path('src/partials', name);
           var partialContents = require('fs').readFileSync(path);
@@ -48,22 +42,32 @@ module.exports = function() {
       },
 
       getPreparedDescription: function() {
-        return '???';
+        return this.description || this.site.description;
       },
 
       getPreparedKeywords: function() {
-        return '???';
+        return (this.site.keywords || []).join(', ');
       },
 
-      getBlock: function() {
-        return {
-          toHTML: function() { 
-            return '???';
-          }
-        };
-      }
+      fileExist: function(path) {
+        return fs.existsSync(path);
+      },
 
-    });
+      hasAlternateLangPage: function() {
+        var path = this.filename;
+        var alternateLang = this.lang === 'en' ? 'ja' : 'en';
+        return false;
+      },
+
+      getAlternateSiteURL: function() {
+        return this.lang === 'en' ? 'http://onsen.io' : 'http://ja.onsen.io';
+      },
+
+      getAlternateLang: function() {
+        return this.lang === 'en' ? 'ja' : 'en';
+      }
+    };
+    extend(metalsmith.metadata(), helpers);
     done();
   };
 };
