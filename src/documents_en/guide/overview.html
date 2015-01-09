@@ -1,10 +1,11 @@
 ---
-layout: 'default'
 page: 'guide'
 title: 'Onsen UI Guide'
 needHelp: true
 autotoc: true
 ---
+
+<%- @markdown => %>
 
 ## Onsen UI Guide
 
@@ -112,7 +113,7 @@ In Onsen UI, a page navigation is done by the [`<ons-navigator>`](components.htm
 
 A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](components.html#ons-toolbar) component is commonly placed under [`<ons-page>`](components.html#ons-page) element to provide a back button support and the page title.
 
-<%- @partial('codepen', { id: "yrhtv" } ) %>
+<%- @partial('codepen.html.eco', { id: "yrhtv" } ) %>
 
 <h4 id="Displayanewpage">Display a new page</h4>
 
@@ -172,7 +173,7 @@ myNavigator.popPage();
   navigator.pushPage("page2.html", { animation: "none" }):
   ```
 
-<%- @partial('codepen', { id: "FLsIE" } ) %>
+<%- @partial('codepen.html.eco', { id: "FLsIE" } ) %>
 
 Furthermore, you can customize the transition animation by specifying a new `NavigatorTransitionAnimator` object to the `animation` parameter.
 
@@ -219,7 +220,7 @@ pages[pages.length - 2].destroy();
 
 Adds a page into any level in the stack by specifying the `index` parameter. If specified as `0`, it will add the page to the bottom of the page stack. If specified a negative value, it will be counted from the top level. Therefore, specifying `-1` will result in adding the page to the 2nd level from the top. The `page` and `options` parameters works the same as `pushPage()` API.
 
-<%- @partial('codepen', { id: "fhdjg" } ) %>
+<%- @partial('codepen.html.eco', { id: "fhdjg" } ) %>
 
 <h5 id="navigatorresetToPagepageoptions">navigator.resetToPage(page, options)</h5>
 
@@ -243,7 +244,7 @@ A toolbar is defined as a [`<ons-toolbar>`](components.html#ons-toolbar) compone
  </ons-toolbar>
 ```
 
-<%- @partial('codepen', { id: "aHmGL" } ) %>
+<%- @partial('codepen.html.eco', { id: "aHmGL" } ) %>
 
 The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](components.html#ons-icon) to display an icon, [`<ons-toolbar-button>`](components.html#ons-toolbar-button) or [`<ons-back-button>`](components.html#ons-back-button) to place an button, or insert any HTML content.
 
@@ -420,7 +421,7 @@ Or, you can separate the pages in another template like the example below.
   </ons-list>
 </script>
 ```
-<%- @partial('codepen', { id: "IDvFJ" } ) %>
+<%- @partial('codepen.html.eco', { id: "IDvFJ" } ) %>
 
 <h4 id="Openingclosingmenu">Opening / closing menu</h4>
 
@@ -486,7 +487,7 @@ Tab bar items can have an `icon` attribute and a `label` attribute. For the `ico
 </ons-tabbar>
 ```
 
-<%- @partial('codepen', { id: "pGuDL" } ) %>
+<%- @partial('codepen.html.eco', { id: "pGuDL" } ) %>
 
 
 <h4 id="Tabbarcustomize">Placing tab bar on the top</h4>
@@ -516,7 +517,7 @@ If the page already contains a toolbar, the tab bar will be placed below the too
 </ons-page>
 ```
 
-<%- @partial('codepen', { id: "CfnrG" } ) %>
+<%- @partial('codepen.html.eco', { id: "CfnrG" } ) %>
 
 <h4 id="Tabbarcustomize">Customizing tab bar</h4>
 
@@ -616,25 +617,25 @@ Also, [`<ons-list-header>`](components.html#ons-list-header) can be used to repr
 
 Here is the basic [`<ons-list>`](components.html#ons-list) example with scrollable content.
 
-<%- @partial('codepen', { id: "yxcCt" } ) %>
+<%- @partial('codepen.html.eco', { id: "yxcCt" } ) %>
 
 <h4 id="Listwithrightarrowicon">List with right arrow icon</h4>
 
 This type of list is usually used with [`<ons-navigator>`](components.html#ons-navigator) to provide screen transitions.
 
-<%- @partial('codepen', { id: "nIEvm" } ) %>
+<%- @partial('codepen.html.eco', { id: "nIEvm" } ) %>
 
 <h4 id="Listwithforms">List with forms</h4>
 
 List is also frequently used in the setting page. Here is the example list with some form elements.
 
-<%- @partial('codepen', { id: "ohqDk" } ) %>
+<%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
 
 <h3 id="UsingAlert">Using Alert Dialog</h3>
 
 Onsen UI provides three common alert dialogs with predefined style, or a custom designed dialog using [`<ons-alert-dialog>`](components.html#ons-alert-dialog) component.
 
-<%- @partial('codepen', { id: "Qwwxyp" } ) %>
+<%- @partial('codepen.html.eco', { id: "Qwwxyp" } ) %>
 
 To show an alert dialog, the quicker way is to use the following functions to display in the predefined style.
 
@@ -706,7 +707,7 @@ ons.ready(function() {
 </script>
 ```
 
-<%- @partial('codepen', { id: "jEEKbm" } ) %>
+<%- @partial('codepen.html.eco', { id: "jEEKbm" } ) %>
 
 As you seen in the example, you should define an own template which will be specified in `ons.createAlertDialog()` function. The template must contain an [`<ons-alert-dialog>`](components.html#ons-alert-dialog) tag.
 
@@ -735,7 +736,7 @@ ons.ready(function() {
 </script>
 ``` 
 
-<%- @partial('codepen', { id: "zxxaGa" } ) %>
+<%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
 <h4 id="UsingDialogViewObject">Using `DialogView` object</h4>
 
@@ -808,7 +809,7 @@ A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<o
 </ons-carousel>
 ```
 
-<%- @partial('codepen', { id: "xbbzOQ" } ) %>
+<%- @partial('codepen.html.eco', { id: "xbbzOQ" } ) %>
 
 <h4 id="ShowingCarouselInAPage">Showing carousel in a page</h4> 
 
@@ -848,7 +849,7 @@ To display an indicator on the [`<ons-carousel>`](components.html#ons-carousel),
 </ons-carousel>
 ```
 
-<%- @partial('codepen', { id: "emmKpV" } ) %>
+<%- @partial('codepen.html.eco', { id: "emmKpV" } ) %>
 
 <h5 id="CarouselDirection">Specifying carousel scroll direction</h5>
 
@@ -862,7 +863,7 @@ The carousel can have an overscroll animation, which bumps when there are no mor
 
 When `item-width` or `item-height` attribute is specified, two or more items can be shown at the same time. `item-width` is available only when the `direction` attribute is set to `horizontal`, and `item-height` when set to `vertical` accordingly. By default, it is set to `100%`, so only one item is shown in the container.
 
-<%- @partial('codepen', { id: "EaaRjp" } ) %>
+<%- @partial('codepen.html.eco', { id: "EaaRjp" } ) %>
 
 <h5 id="OtherCarouselOptions">Other carousel options</h5>
 
@@ -935,13 +936,13 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
 [`<ons-modal>`](components.html#ons-modal) component can have any HTML content inside the tag. The content will be shown with a black mask when `toggle()` or `show()` method is called.
 
-<%- @partial('codepen', { id: "devIg" } ) %>
+<%- @partial('codepen.html.eco', { id: "devIg" } ) %>
 
 <h3 id="UsingPopover">Using Popover</h3>
 
 A popover provides an in-page container that is used to provide additional interactions or information for a specific component. Onsen UI provides [`<ons-popover>`](components.html#ons-popover) component to show a popover.
 
-<%- @partial('codepen', { id: "ZYYRKo" } ) %>
+<%- @partial('codepen.html.eco', { id: "ZYYRKo" } ) %>
 
 <h4 id="ShowingPopover">Showing popover</h4>
 
@@ -992,7 +993,7 @@ When the `ons.createPopover()` function is called, it will return a `Promise` ob
 
 The design can be switched using `modifier` attribute, which can be selected from `android` and `ios`. You can apply your own CSS styles by specifying a unique name (i.e. `mystyle`) to the `modifier` attribute.
 
-<%- @partial('codepen', { id: "emmKBr" } ) %>
+<%- @partial('codepen.html.eco', { id: "emmKBr" } ) %>
 
 <h5 id="PopoverDirections">Opening directions</h5>
 
@@ -1030,7 +1031,7 @@ Onsen UI provides various components for building forms.
 
 To detect a tap event, you can use either `onclick` or `ng-click` attribute.
 
-<%- @partial('codepen', { id: "hLayx" } ) %>
+<%- @partial('codepen.html.eco', { id: "hLayx" } ) %>
 
 <h4 id="Switch">Switch</h4>
 
@@ -1074,7 +1075,7 @@ alert(document.getElementById("my-input").value);
 alert($("#my-input").val());
 ```
 
-<%- @partial('codepen', { id: "qFbGp" } ) %>
+<%- @partial('codepen.html.eco', { id: "qFbGp" } ) %>
 
 <h4 id="Checkboxandradiobutton">Check box and radio button</h4>
 
@@ -1111,7 +1112,7 @@ By default, all [`<ons-col>`](components.html#ons-col) inside a [`<ons-row>`](co
 
 You can see the following example to understand how [`<ons-row>`](components.html#ons-row) and [`<ons-col>`](components.html#ons-col) can provide flexible component placement.
 
-<%- @partial('codepen', { id: "GgujC" } ) %>
+<%- @partial('codepen.html.eco', { id: "GgujC" } ) %>
 
 <h3 id="UsingIcons">Using Icons</h3>
 
@@ -1156,7 +1157,7 @@ Icon can have an animation effect. This is useful for displaying spinners.
 <ons-icon icon="fa-angle-left" spin="yes">
 ```
 
-<%- @partial('codepen', { id: "xAhvg" } ) %>
+<%- @partial('codepen.html.eco', { id: "xAhvg" } ) %>
 
 <h3 id="Multiscreensupport">Multi-screen support</h3>
 
@@ -1180,7 +1181,7 @@ For example, the following media queries is an example to separate various scree
 </style>
 ```
 
-<%- @partial('codepen', { id: "lGbrB" } ) %>
+<%- @partial('codepen.html.eco', { id: "lGbrB" } ) %>
 
 <h4 id="Usingonssplitviewcomponent">Using `<ons-split-view>` component</h4>
 
@@ -1192,7 +1193,7 @@ Also, it has an option to hide the secondary page when the screen size is smalle
 - `main-page`: Specify a page to display on the main section.
 - `secondary-page`: Specify a page to display on the side section.
 
-<%- @partial('codepen', { id: "nKqfv" } ) %>
+<%- @partial('codepen.html.eco', { id: "nKqfv" } ) %>
 
 <h4 id="Specifywhentocollapse">Specify when to collapse</h4>
 
@@ -1770,6 +1771,8 @@ The JavaScript code for each component is located in the `directives` directory.
 <h4 id="BuildingOnsenUI">Building Onsen UI</h4>
 
 If you need to build Onsen UI manually, there is a `gulp` task for that purpose. Please follow the instruction from the [project Website](https://github.com/OnsenUI/OnsenUI).
+
+<% end %>
 
 <script src="<%= @rootUrl %>scripts/codepen.js"></script>
 

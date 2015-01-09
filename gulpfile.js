@@ -1,11 +1,13 @@
 var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
+var argv = require('yargs').argv;
+var gutil = require('gulp-util');
 
 //////////////////////////////
-// generate-ja
+// generate
 //////////////////////////////
-gulp.task('generate-ja', ['sass'], function(done) {
+gulp.task('generate', ['sass'], function(done) {
 
   var metalsmith = require('metalsmith');
   var templates = require('metalsmith-templates');
@@ -15,23 +17,26 @@ gulp.task('generate-ja', ['sass'], function(done) {
 
   metalsmith(__dirname)
     .clean(false)
-    .source('./src/documents_ja')
-    .metadata(require('./config.js'))
+    .source('./src/documents_' + lang)
+    .metadata(require('./config.js')(lang))
     .use(ignore('*.eco'))
     .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
     .use(require('./plugins/autotoc')())
     .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
     .use(assets({source: './src/files'}))
-    .destination('./gen_ja')
+    .destination('./out_' + lang)
     .build(function(error) {
       if (error) {
-        console.log(error);
-        throw error;
+        gutil.log('ERROR: ' + error);
+        if (error.stack) {
+          gutil.log(error.stack);
+        }
       }
 
       browserSync.reload();
       done();
+      gutil.log('Generated into \'./out_' + lang + '\'');
     });
 });
 
@@ -45,12 +50,12 @@ gulp.task('sass', function() {
 });
 
 //////////////////////////////
-// serve-ja
+// serve
 //////////////////////////////
-gulp.task('serve-ja', ['generate-ja'], function() {
+gulp.task('serve', ['generate'], function() {
   browserSync({
     server: {
-      baseDir: 'gen_ja',
+      baseDir: 'out_' + lang,
       index: 'index.html'
     },
     notify: false,
@@ -58,11 +63,14 @@ gulp.task('serve-ja', ['generate-ja'], function() {
   });
 
   gulp.watch([
-    'src/documents_ja/**/*',
+    'src/documents_' + lang + '/**/*',
     'src/layouts/*',
     'src/partials/*',
     'src/sass/*'
-  ], ['generate-ja']);
+  ], ['generate']);
 });
 
+var lang = argv.lang === 'en' ? 'en' : 'ja';
 
+gutil.log('Language: --lang=' + lang);
+gutil.log('Documents: \'./src/documents_' + lang + '\'');
