@@ -36,11 +36,15 @@
     for (var i = 0; i < links.length; i++) {
       var link = $(links[i]);
       var id = link.attr('href');
-      var section = $(id);
-      if (section) {
-        sections.push(section);
-        linkMap[id] = {};
-        linkMap[id].link = link;
+      try {
+        var section = $(id);
+        if (section) {
+          sections.push(section);
+          linkMap[id] = {};
+          linkMap[id].link = link;
+        }
+      } catch (e) {
+        // ignore
       }
     }
   }

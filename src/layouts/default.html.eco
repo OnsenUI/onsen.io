@@ -8,6 +8,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
+
   <!-- Site Properities -->
   <title><%= @getPreparedTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
@@ -64,16 +65,29 @@
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
  reveal <![endif]-->
 
- <a id="github-ribbon" href="https://github.com/OnsenUI/OnsenUI"><img style="position: absolute; top: 0; right: 0; border: 0; z-index: 2;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+ <a id="github-ribbon" href="https://github.com/OnsenUI/OnsenUI"><img style="position: absolute; top: 48px; right: 0; border: 0; z-index: 2;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
   <%- @partial('header.html.eco') %>
 
   <section id="content-container" class="clearfix">
     <% if @toc: %>
-      <aside id="content-info">
-        <div class="toc-title">Table Of Contents</div>
-        <%- @partial('toc.html.eco', {tocItems: @toc}) %>
-      </aside>
+    <aside id="content-info">
+      <div class="toc-title">Table Of Contents</div>
+      <%- @partial('toc.html.eco', {tocItems: @toc}) %>
+    </aside>
+    <% else if @components and @reference: %>
+    <aside id="content-info">
+      <div class="toc-title">Components</div>
+      <ul class="toc">
+        <% for component in @components: %>
+        <% if @name == component.name: %>
+          <li><a href="/components/<%= component.name %>.html" class="selected"><%- component.name %></a></li>
+        <% else: %>
+          <li><a href="/components/<%= component.name %>.html"><%- component.name %></a></li>
+        <% end %>
+        <% end %>
+      </ul>
+    </aside>
     <% end %>
 
     <div id="content">
@@ -105,10 +119,12 @@
   });
 
   $(function() {
-    $('aside#content-info').sticky({
-      topSpacing : 0, 
-      bottomSpacing : $('footer#footer-container').height() + 60 
-    });
+    if ($('aside#content-info').height() < $('#content').height()) {
+      $('aside#content-info').sticky({
+        topSpacing : 0, 
+        bottomSpacing : $('footer#footer-container').height() + 60 
+      });
+    }
   });
   </script>
   <script src="/scripts/navigation_highlighter.js"></script>

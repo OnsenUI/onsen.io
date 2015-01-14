@@ -3,23 +3,39 @@ var $ = require('gulp-load-plugins')();
 var browserSync = require('browser-sync');
 var argv = require('yargs').argv;
 var gutil = require('gulp-util');
+var del = require('del');
+var runSequence = require('run-sequence');
+
+//--
+
+var lang = argv.lang === 'en' ? 'en' : 'ja';
 
 //////////////////////////////
 // generate
 //////////////////////////////
-gulp.task('generate', ['sass'], function(done) {
+gulp.task('generate', ['less', 'metalsmith']);
+
+//////////////////////////////
+// metalsmith
+//////////////////////////////
+gulp.task('metalsmith', ['components'], function(done) {
 
   var metalsmith = require('metalsmith');
   var templates = require('metalsmith-templates');
   var ignore = require('metalsmith-ignore');
   var layouts = require('metalsmith-layouts');
   var assets = require('metalsmith-assets');
+  var collections = require('metalsmith-collections');
 
   metalsmith(__dirname)
     .clean(false)
     .source('./src/documents_' + lang)
     .metadata(require('./config.js')(lang))
-    .use(ignore('*.eco'))
+    .use(collections({
+      components: {
+        sortBy: 'name'
+      }
+    }))
     .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
     .use(require('./plugins/autotoc')())
@@ -40,13 +56,37 @@ gulp.task('generate', ['sass'], function(done) {
     });
 });
 
-gulp.task('sass', function() {
-  return gulp.src('src/sass/style.scss')
-    .pipe($.compass({
-      css: 'src/files/css',
-      sass: 'src/sass'
+//////////////////////////////
+// less
+//////////////////////////////
+gulp.task('less', function() {
+  return gulp.src('src/less/style.less')
+    .pipe($.plumber())
+    .pipe($.less())
+    .pipe($.autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
     }))
-    .pipe(gulp.dest('src/files/css/'));
+    .pipe(gulp.dest('./out_' + lang + '/css/'));
+});
+
+//////////////////////////////
+// components
+//////////////////////////////
+gulp.task('components', function() {
+  return gulp.src('OnsenUI/build/docs/' + lang + '/api/directives/directive/*.html')
+    .pipe(gulp.dest('src/documents_' + lang + '/components/'));
+});
+
+//////////////////////////////
+// clean
+//////////////////////////////
+gulp.task('clean', function(done) {
+  del([
+    'out_' + lang + '/*',
+    '!out_' + lang + '/OnsenUI',
+    'src/documents_' + lang + '/components/*.html'
+  ], done);
 });
 
 //////////////////////////////
@@ -62,15 +102,30 @@ gulp.task('serve', ['generate'], function() {
     open: false
   });
 
+  var options = {
+    debounceDelay: 400
+  };
+
   gulp.watch([
     'src/documents_' + lang + '/**/*',
     'src/layouts/*',
     'src/partials/*',
-    'src/sass/*'
-  ], ['generate']);
+    'src/files/**/*',
+  ], options, function() {
+    runSequence('metalsmith', function() {
+      browserSync.reload();
+    });
+  });
+
+  gulp.watch([
+    'src/less/*'
+  ], options, function() {
+    runSequence('less', function() {
+      browserSync.reload();
+    });
+  });
 });
 
-var lang = argv.lang === 'en' ? 'en' : 'ja';
-
 gutil.log('Language: --lang=' + lang);
-gutil.log('Documents: \'./src/documents_' + lang + '\'');
+gutil.log('Source: \'./src/documents_' + lang + '\'');
+gutil.log('Destination: \'./out_' + lang + '\'');

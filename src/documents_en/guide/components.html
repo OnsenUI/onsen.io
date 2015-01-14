@@ -1,18 +1,16 @@
 ---
 title: 'Components'
 page: 'components'
-autotoc: true
-autotocSelector: 'h3'
+reference: true
 ---
 
 <h2>Components</h2>
 
-<% for directive in @framework.directives: %>
-  <h3 id="<%= directive %>"><%= directive %></h3>
-  <div class="h3-wrapper">
-    <%- @partial("framework/en/api/directives/directive/" + directive + ".html") %>
-  </div>
+<ul>
+<% for component in @components: %>
+  <li><a href="/components/<%= component.title %>.html"><%= component.title %></a></li>
 <% end %>
+</ul>
 
 <script src="<%= @rootUrl %>vendor/highlight.min.js"></script>
 <script src="<%= @rootUrl %>scripts/codepen.js"></script>

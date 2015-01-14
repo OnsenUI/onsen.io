@@ -29,12 +29,12 @@ footer#footer-container {
 
       .active {
         border-bottom: 1px solid #000;
-        color: $onsen-red;
+        color: @onsen-red;
       }
       a {
-        @include all-link-state(#666, none);
+        .all-link-state(#666, none);
         &:hover {
-          color: $onsen-red;
+          color: @onsen-red;
         }
       }
     }
@@ -142,9 +142,9 @@ footer#footer-container {
       top: 222px;
       right: 100px;
       a {
-        @include all-link-state(#999);
+        .all-link-state(#999);
         &:hover {
-          color: $onsen-red;
+          color: @onsen-red;
         }
       }
     }

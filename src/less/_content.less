@@ -1,6 +1,6 @@
 section#content-container {
   margin: 0 auto;
-  width: $width;
+  width: @width;
   max-width: 100%;
   position: relative;
   text-align: left;
@@ -32,10 +32,10 @@ section#content-container {
     margin: 0;
     overflow: scroll;
     float: left;
-    width: $aside-width - 30px;
+    width: @aside-width - 30px;
     padding: 20px 10px 10px 0px;
     margin-right: 30px;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     font-weight: 400;
     color: #666;
     border-right: 1px solid #ddd;
@@ -51,9 +51,9 @@ section#content-container {
     }
 
     ul.toc a.selected {
-      @include transition(border-color 0.2s linear);
-      color: $onsen-red;
-      border-color: $onsen-red;
+      transition: border-color 0.2s linear;
+      color: @onsen-red;
+      border-color: @onsen-red;
     }
 
     ul.toc {
@@ -62,7 +62,7 @@ section#content-container {
       text-align: left;
 
       > li {
-        margin: 8px 0;
+        margin: 3px 0;
         padding: 0;
 
         ul li {
@@ -72,7 +72,7 @@ section#content-container {
     }
 
     a {
-      @include all-link-state(#666);
+      .all-link-state(#666);
       font-weight: 400;
       border-left: 2px solid transparent;
       display: inline-block;
@@ -84,17 +84,17 @@ section#content-container {
   }
 
   > aside#content-info + div#content, div.sticky-wrapper + div#content {
-    width: ($width - $aside-width);
+    width: (@width - @aside-width);
     max-width: 100%;
     margin: 0;
     padding-right: 0px;
-    margin-left: $aside-width;
+    margin-left: @aside-width;
     padding: 0px 0px 100px 0px;
   }
 
   > div#content {
 
-    @include box-sizing(border-box);
+    box-sizing: border-box;
 
     ::-webkit-scrollbar {
       width: 4px;
@@ -115,7 +115,7 @@ section#content-container {
     margin: 0 auto;
     padding: 0px 0px 100px 0px;
     text-align: left;
-    width: ($width - $aside-width);
+    width: (@width - @aside-width);
     max-width: 100%;
     font-weight: 400;
 
@@ -208,7 +208,7 @@ section#content-container {
   }
 
   a {
-    @include all-link-state(#5986a3);
+    .all-link-state(#5986a3);
     &:link, &:visited {
       text-decoration: underline;
     }

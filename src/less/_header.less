@@ -10,7 +10,7 @@ header#header-container {
   }
 
   > div {
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     margin: 0 auto;
     padding-top: 11px;
     position: relative;
@@ -45,9 +45,9 @@ header#header-container {
       -o-box-sizing: border-box;
       box-sizing: border-box;
       a {
-        @include all-link-state(#666, none);
+        .all-link-state(#666, none);
         &:hover {
-          color: $onsen-red;
+          color: @onsen-red;
         }
       }
     }
@@ -58,10 +58,10 @@ header#header-container {
   header#header-container {
     .gnav li {
       &.current {
-        border-bottom: 2px solid $onsen-red;
+        border-bottom: 2px solid @onsen-red;
 
         a {
-          @include all-link-state($onsen-red, all-none);
+          .all-link-state(@onsen-red, all-none);
         }
       }
     }
@@ -136,8 +136,8 @@ header#header-container {
   width: 500px;
   top: 150px;
   left: 50%;
-  @include transform(translate(-50%, 0));
-  @include box-sizing(border-box);
+  transform: translate(-50%, 0);
+  box-sizing: border-box;
   max-width: 95%;
   padding: 32px;
   background-color: #313e50;
@@ -288,7 +288,7 @@ ul.header-monaca-navi-sub-menu {
     height: 38px;
     width: 100%;
     font-size: 15px !important;
-    @include box-sizing(border-box);
+    box-sizing: border-box;
     display: block !important;
   }
 

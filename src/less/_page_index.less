@@ -17,9 +17,10 @@ body#home {
     width: 100%;
     height: 660px;
     background-color: #fff;
-    @include background-image(linear-gradient(top, #fff, #f3f5f6));
+    background: linear-gradient(to bottom, #fff, #f3f5f6);
     position: relative;
     padding: 0;
+
 
     > div.keyvisual-content {
       width: 1200px;
@@ -65,13 +66,13 @@ body#home {
       > a.getting-started,
       > a.getting-started:active,
       > a.getting-started:visited {
-        @include box-sizing(border-box);
+        box-sizing: border-box;
         display: inline-table;
         height: 54px;
         line-height: 54px;
         padding: 0 10px;
         border: 2px solid #fa7845;
-        @include border-radius(3px);
+        border-radius: 3px;
         background-color: #fa7845;
         font-size: 24px;
         color: white;
@@ -79,15 +80,15 @@ body#home {
         font-weight: 300;
         text-decoration: none;
 
-        @include transition(all 0.5s ease);
+        transition: all 0.5s ease;
 
         &:hover {
-          @include transition(all 0.1s ease);
+          transition: all 0.1s ease;
           opacity: 0.8;
         }
 
         &:active {
-          @include transition(none);
+          transition: none;
           opacity: 1;
         }
 
@@ -101,28 +102,28 @@ body#home {
       > a.download,
       > a.download:active,
       > a.download:visited {
-        @include box-sizing(border-box);
+        box-sizing: border-box;
         display: inline-table;
         height: 54px;
         line-height: 54px;
         width: auto;
         border: 2px solid #d3d6d9;
-        @include border-radius(3px);
+        border-radius: 3px;
         color: #767c86;
         margin-left: 20px;
         font-size: 24px;
         text-align: center;
         text-decoration: none;
         padding: 0 12px;
-        @include transition(all 0.5s ease);
+        transition: all 0.5s ease;
 
         &:hover {
-          @include transition(all 0.1s ease);
+          transition: all 0.1s ease;
           background-color: #d3d6d9;
         }
 
         &:active {
-          @include transition(none);
+          transition: none;
           background-color: transparent;
         }
 
@@ -164,7 +165,7 @@ body#home {
         height: 36px;
         border: none;
         border-radius: 2px;
-        @include box-sizing(border-box);
+        box-sizing: border-box;
       }
 
       input[type=submit] {
@@ -317,7 +318,7 @@ body#home {
 
     > div.sub-feature {
       display: inline-block;
-      @include box-sizing(border-box);
+      box-sizing: border-box;
       width: 450px;
       max-width: 100%;
       padding: 0 12px 32px 86px;
@@ -375,7 +376,7 @@ body#home {
       &:link,
       &:active,
       &:visited {
-        color: $onsen-red;
+        color: @onsen-red;
         font-size: 36px;
         text-align: center;
         font-weight: 200;
