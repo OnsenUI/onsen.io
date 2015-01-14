@@ -1,6 +1,7 @@
 
 var jsdom = require('jsdom');
 var async = require('async');
+var slug = require('slug');
 
 var TocItem = function() {
   TocItem.prototype.init.apply(this, arguments);
@@ -42,8 +43,7 @@ TocItem.prototype = {
 module.exports = function() {
   function generateId(header) {
     if (!header.id) {
-      return new Buffer(header.innerHTML, 'utf-8')
-        .toString('base64').substr(0, 10);
+      return slug(header.innerHTML);
     } else {
       return header.id;
     }
