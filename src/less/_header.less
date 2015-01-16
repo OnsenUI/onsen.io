@@ -4,6 +4,7 @@ header#header-container {
   width: 1100px;
   max-width: 100%;
   margin: 0 auto;
+  display: none;
 
   .gnav-icon {
     display: none;
@@ -32,37 +33,36 @@ header#header-container {
     height: 84px;
     line-height: 84px;
     
-    li {
-      color: #a6a6a6;
-      display: inline-block;
-      font-size: 14px;
-      height: 85px;
-      margin: 0 4px;
-      padding: 0 12px;
-      -webkit-box-sizing: border-box;
-      -mz-box-sizing: border-box;
-      -ms-box-sizing: border-box;
-      -o-box-sizing: border-box;
-      box-sizing: border-box;
-      a {
-        .all-link-state(#666, none);
-        &:hover {
-          color: @onsen-red;
-        }
+  }
+
+  .gnav li {
+    color: #a6a6a6;
+    display: inline-block;
+    font-size: 14px;
+    height: 85px;
+    margin: 0 4px;
+    padding: 0 12px;
+    -webkit-box-sizing: border-box;
+    -mz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    a {
+      .all-link-state(#666, none);
+      &:hover {
+        color: @onsen-red;
       }
     }
   }
 }
 
 @media screen and (min-width: 1100px) {
-  header#header-container {
-    .gnav li {
-      &.current {
-        border-bottom: 2px solid @onsen-red;
+  header#header-container .gnav li {
+    &.current {
+      border-bottom: 2px solid @onsen-red;
 
-        a {
-          .all-link-state(@onsen-red, all-none);
-        }
+      a {
+        .all-link-state(@onsen-red, all-none);
       }
     }
   }

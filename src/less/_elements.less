@@ -1,0 +1,89 @@
+
+html {
+  font-size: 14px;
+  font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+body {
+  max-width: 100%;
+  text-align: left;
+  -webkit-text-size-adjust: 100%;
+  &:after {content: ""; clear: both; display: block;}
+  color: #555;
+}
+
+input {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: sans-serif;
+}
+
+input:focus, input:active {
+  outline: none;
+}
+
+input[type=submit] {
+  cursor: pointer;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: sans-serif;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+textarea, input {
+  margin: 0;
+  padding: 0;
+}
+
+caption, th {
+  text-align:left;
+}
+
+td, th {
+  vertical-align: top;
+}
+
+fieldset, img, abbr{
+  border:none;
+}
+
+em {
+  font-style: italic;
+}
+
+img, iframe, object {
+  max-width: 100%;
+}
+
+a {
+  .all-link-state(@onsen-red);
+  img {
+    transition: opacity 80ms linear;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+hr {
+  color: transparent;
+  border-width: 0px;
+  height: 1px;
+  background-color: #E7E7E7;
+  margin: 32px 0;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.lt-ie9 img, .lt-ie9 object {
+  width: auto;
+}
+
