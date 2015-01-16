@@ -74,7 +74,7 @@ gulp.task('less', function() {
 // components
 //////////////////////////////
 gulp.task('components', function() {
-  return gulp.src('OnsenUI/build/docs/' + lang + '/api/directives/directive/*.html')
+  return gulp.src('OnsenUI/build/docs/' + lang + '/partials/directive/*.html')
     .pipe(gulp.dest('src/documents_' + lang + '/components/'));
 });
 
