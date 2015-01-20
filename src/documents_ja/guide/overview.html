@@ -355,7 +355,7 @@ ons.ready(function() {
 
 `menu-page`には、任意のHTMLコンテンツを含むことができます。通常は、別のページへのリンクとなるメニュー画面が一般的です。`main-page`にはメインコンテンツが表示されます。[`<ons-navigator>`](components.html#ons-navigator)と組み合わせることで、さらに深い階層のページを持つことも可能です。
 
-<h4 id="onsslidingmenuoverview">`<Ons-sliding-menu>`の概要</h4>
+<h4 id="onsslidingmenuoverview">`<ons-sliding-menu>`の概要</h4>
 
 [`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントでは`main-page`と`menu-page`を属性として指定します。また、`side`属性を用いると、`menu-page`を画面のどちら側に設置するかを指定できます。
 
@@ -798,7 +798,7 @@ ons.ready(function() {
 全画面のカルーセルを表示するには、[`<ons-carousel>`](components.html#ons-carousel)コンポーネントに`fullscreen`属性を指定します。
 
 ```
-<ons-carousel fullscreen>
+<ons-carousel fullscreen swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      カルーセルアイテム１
   </ons-carousel-item>
@@ -815,7 +815,7 @@ ons.ready(function() {
 カルーセルを他のコンポーネントの内部に表示する場合は、CSSを用いてその高さと幅を指定します。幅が指定されていない場合は、`100%`を指定したものとして扱われます。
 
 ```
-<ons-carousel style="height: 200px; width: 50%">
+<ons-carousel style="height: 200px; width: 50%" swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      カルーセルアイテム１
   </ons-carousel-item>
@@ -838,7 +838,7 @@ ons.ready(function() {
 `initial-index`属性を使うと、最初に表示されるアイテムを番号で指定できます。インデックス番号は`0`から開始します。
 
 ```
-<ons-carousel style="height: 100px; width: 100px" initial-index="1">
+<ons-carousel style="height: 100px; width: 100px" initial-index="1" swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      カルーセル要素１
   </ons-carousel-item>
@@ -1772,14 +1772,3 @@ Onsen UIでは、ビルドシステムとして`gulp`を使用しています。
 <% end %>
 
 <script src="<%= @rootUrl %>scripts/codepen.js"></script>
-
-<script>
-$(function() {
-  $(".resize-btn").on("click", function(elm) {
-    var hash = $(elm.target).data("slug-hash");
-    $(".codepen-content-" + hash).toggleClass("expanded");
-    return false;
-  });
-});
-</script>
-

@@ -2,9 +2,7 @@
 (function() {
   var links = $('#content-info a');
   var sections = [];
-  var iframes = [];
   var linkMap = {};
-  var currentParent;
 
   var scrollWrapper = document;
   var offset = 200;
@@ -14,19 +12,21 @@
   scrollWrapper.addEventListener('scroll', update, true);
 
   function update() {
-    var scrolled = window.scrollY + 100;
+    var scrolled = window.scrollY + 50;
 
     for (var i = sections.length - 1; i >= 0; i--) {
       var section = sections[i];
-      if (typeof section.offset() == "undefined") {
+      if (typeof section.offset() == 'undefined') {
 
       }
       var position = section.offset().top;
       
       if (scrolled > position) {
         var id = '#' + section.attr('id');
-        links.removeClass('selected');
-        linkMap[id].link.addClass('selected');
+        links.removeClass('current');
+        $('.toc-1-item').removeClass('toc-item-open');
+        linkMap[id].link.addClass('current');
+        $(linkMap[id].link.parents('.toc-1-item')[0]).addClass('toc-item-open');
         return;
       }
     };

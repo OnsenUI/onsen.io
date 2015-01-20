@@ -43,7 +43,7 @@ TocItem.prototype = {
 module.exports = function() {
   function generateId(header) {
     if (!header.id) {
-      return slug(header.innerHTML);
+      return slug(header.textContent);
     } else {
       return header.id;
     }
@@ -72,7 +72,7 @@ module.exports = function() {
       }
 
       var newToc = new TocItem({
-        text: header.innerHTML,
+        text: header.textContent,
         id: header.id
       });
 

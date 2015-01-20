@@ -1,0 +1,46 @@
+
+var async = require('async');
+var globby = require('globby');
+var minimatch = require('minimatch');
+var fs = require('fs');
+var nodePath = require('path');
+
+module.exports = function(lang) {
+  var baseDir = __dirname + '/../OnsenUI/build/docs/' + lang + '/partials/';
+
+  return function(files, metalsmith, done) {
+
+    // OnsenUI/build/docs/{lang}/partials/directive/*.html
+    // OnsenUI/build/docs/{lang}/partials/object/*.html
+    globby([
+      baseDir + 'directive/*.html',
+      baseDir + 'object/*.html'
+    ], function(error, paths) {
+
+      if (error) {
+        done(error);
+        return;
+      }
+
+      async.each(paths, function(path, done) {
+
+        metalsmith.readFile(path, function(error, file) {
+          if (error) {
+            throw error;
+          }
+
+          if (minimatch(path, '**/directive/*.html')) {
+            path = 'components/' + nodePath.basename(path);
+          } else if (minimatch(path, '**/object/*.html')) {
+            path = 'components/' + nodePath.basename(path);
+          } else {
+            console.log(path);
+          }
+
+          files[path] = file;
+          done();
+        });
+      }, done);
+    });
+  }
+};

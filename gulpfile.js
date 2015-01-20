@@ -18,7 +18,7 @@ gulp.task('generate', ['less', 'metalsmith']);
 //////////////////////////////
 // metalsmith
 //////////////////////////////
-gulp.task('metalsmith', ['components'], function(done) {
+gulp.task('metalsmith', [], function(done) {
 
   var metalsmith = require('metalsmith');
   var templates = require('metalsmith-templates');
@@ -31,9 +31,13 @@ gulp.task('metalsmith', ['components'], function(done) {
     .clean(false)
     .source('./src/documents_' + lang)
     .metadata(require('./config.js')(lang))
+    .use(require('./plugins/import-api-docs')(lang))
     .use(collections({
       components: {
         sortBy: 'name'
+      },
+      objects: {
+        soryBy: 'name'
       }
     }))
     .use(require('./plugins/helpers')())
@@ -71,14 +75,6 @@ gulp.task('less', function() {
 });
 
 //////////////////////////////
-// components
-//////////////////////////////
-gulp.task('components', function() {
-  return gulp.src('OnsenUI/build/docs/' + lang + '/partials/directive/*.html')
-    .pipe(gulp.dest('src/documents_' + lang + '/components/'));
-});
-
-//////////////////////////////
 // clean
 //////////////////////////////
 gulp.task('clean', function(done) {
@@ -99,7 +95,8 @@ gulp.task('serve', ['generate'], function() {
       index: 'index.html'
     },
     notify: false,
-    open: false
+    open: false,
+    injectChanges: true
   });
 
   var options = {
@@ -108,6 +105,7 @@ gulp.task('serve', ['generate'], function() {
 
   gulp.watch([
     'src/documents_' + lang + '/**/*',
+    'OnsenUI/build/docs/' + lang + '/partials/*/*.html',
     'src/layouts/*',
     'src/partials/*',
     'src/files/**/*',

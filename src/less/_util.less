@@ -1,32 +1,42 @@
 
-@width: 1100px;
-@aside-width: 300px;
+@width: 1200px;
+@aside-width: 350px;
 @onsen-red: #ff2828;
-@onsen-red-light: #ff3f2b;
+@onsen-red: #4183C4;
 
 .all-link-state(@color, @underline: none) {
   & when (@underline = all-none) {
-    &:link, &:visited, &:hover, &:active {
+    &, &:link, &:visited, &:hover, &:active {
       color: @color;
       text-decoration: none;
+      cursor: pointer;
     }
   }
 
   & when (@underline = none) {
-    &:link, &:visited {
+    &, &:link, &:visited {
+      cursor: pointer;
       color: @color;
       text-decoration: none;
     }
 
     &:hover {
+      cursor: pointer;
       color: @color;
       text-decoration: underline;
     }
 
     &:active {
+      cursor: pointer;
       color: @color;
       text-decoration: none;
     }
   }
+}
+
+.clearfix:after {
+  content: "";
+  clear: both;
+  display: block;
 }
 

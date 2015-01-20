@@ -1,0 +1,120 @@
+
+body#reference-detail {
+  .reference-quick-navi {
+    width: 150px;
+    margin: 0;
+    border: 1px solid #eee;
+    padding: 4px 12px;
+    li {
+      margin: 0;
+      list-style-type: none;
+    }
+  }
+
+  .reference-loop-anchor {
+    visibility: hidden;
+    &:link, &:visited, &:hover {
+      color: #999;
+    }
+  }
+
+  .reference-github-links {
+    margin-top: -48px;
+    display: block;
+    text-align: right;
+    color: #999;
+  }
+
+  table {
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+    margin: 16px 0;
+  }
+
+  tr {
+    border-left: 1px solid #ddd;
+    border-right: 0px solid #ddd;
+    border-top: 1px solid #ddd;
+    &:last-child {
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+  th {
+    border-width: 0px;
+    padding: 8px;
+    border-right: 1px solid #ddd;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #999;
+  }
+
+  td {
+    padding: 8px;
+    border-top-width: 0px;
+    border-right: 1px solid #ddd;
+
+    code {
+      margin: 8px 0;
+      white-space: nowrap;
+      font-family: 'Menlo Regular', 'Menlo', 'Consolas', monospace;
+      color: #10108F;
+    }
+
+  }
+
+  td.attribute-name {
+    color: #5E299A;
+    font-size: 15px;
+    font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+  }
+
+  thead {
+    background-color: #f9f9f9;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+  }
+
+  h3, h4, h5 {
+    &:hover .reference-loop-anchor {
+      visibility: visible;
+    }
+  }
+
+  .method-detail, .event-detail {
+    margin: 0px 0 36px 4px;
+    padding: 0 0 0 14px;
+    border-left: 2px solid #ddd;
+
+    h4 {
+      font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+      font-weight: normal;
+      font-size: 24px;
+    }
+  }
+
+  .method-detail {
+    border-color: #585AD4;
+    h4 {
+      color: #585AD4;
+    }
+  }
+
+  .event-detail {
+    border-color: #ff5722;
+    h4 {
+      color: #ff5722;
+    }
+  }
+
+  .value-type {
+    color: #999;
+    font-size: 90%;
+    font-weight: 200;
+  }
+
+}

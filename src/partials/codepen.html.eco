@@ -1,10 +1,16 @@
 <div class="codepen-wrapper">
-  <div style="height: 480px;" class="codepen-content codepen-content-<%=@id%>">
-    <p data-height="480" data-theme-id="7186" data-slug-hash="<%=@id%>" data-default-tab="result" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/<%=@id%>/'>ons-screen.presentPage, dismissPage</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+  <div class="codepen-menu">
+    <a href="#">Open</a>
+    <a href="#">Edit on Codepen</a>
   </div>
-
-  <div><a class="resize-btn" data-slug-hash="<%=@id%>">Expand View</a></div>
-
+  <div class="codepen-header-text">Live Example</div>
+  <div class="codepen-content codepen-content-unloaded codepen-content-<%= @id %>">
+    <span data-height="480" data-theme-id="11531" data-slug-hash="<%= @id %>" data-default-tab="result" class='codepen-unloaded'></span>
+    <div class="codepen-loader">
+      <a class="codepen-load-button" data-id="<%= @id %>">RUN</a>
+      <p>Click to Load this example.</p>
+    </div>
+  </div>
+  <div class="codepen-resize"><a class="codepen-resize-button" data-slug-hash="<%= @id %>">Expand View</a></div>
 </div>
-
-<div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/live/<%=@id%>/" target="_blank"><i class="fa fa-external-link"></i>Open an Example in New Window</a></div>
+<div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/live/<%= @id %>/" target="_blank"><i class="fa fa-external-link"></i>Open an Example in New Window</a></div>

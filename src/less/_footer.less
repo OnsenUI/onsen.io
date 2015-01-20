@@ -9,6 +9,7 @@ footer#footer-container {
   border-top: 1px solid #ddd;
 
   .gnav {
+    margin: 0;
     margin-bottom: 40px;
     width: 100%;
     max-width: 100%;
@@ -32,9 +33,10 @@ footer#footer-container {
         color: @onsen-red;
       }
       a {
-        .all-link-state(#666, none);
+        .all-link-state(#666, all-none);
         &:hover {
           color: @onsen-red;
+          border-bottom: 2px solid @onsen-red;
         }
       }
     }

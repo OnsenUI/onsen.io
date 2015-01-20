@@ -3,50 +3,7 @@
 @import '_util.less';
 @import '_reset.less';
 @import '_elements.less';
-
-.btn,
-.btn-default {
-  background-repeat: no-repeat;
-  background-position: left center;
-  border-radius: 6px;
-  box-sizing: border-box;
-  display: inline-block;
-  padding: 5px 10px;
-  text-align: center;
-
-  &:link, &:visited, &:hover, &:active, &:focus {
-    text-decoration: none;
-  }
-  &:hover {
-    opacity: 0.7;
-  }
-}
-
-.btn-red {
-  &:extend(.btn-default);
-  .all-link-state(white, all-none);
-  background-color: @onsen-red;
-  color: white;
-}
-
-.btn-big {
-  font-size: 30px;
-  font-weight: 700;
-  padding: 18px 40px;
-}
-
-.btn-start {
-  background-image: url(/images/common/ico_getstarted.png);
-  background-position: 40px center;
-  padding-left: 100px;
-  text-align: left;
-}
-
-.clearfix:after {
-  content: "";
-  clear: both;
-  display: block;
-}
+@import '_buttons.less';
 
 @media screen and (max-width: 1400px) {
   #github-ribbon {
@@ -54,15 +11,16 @@
   }
 }
 
-@media screen and (max-width: 1100px) {
+#github-ribbon {
+  display: none;
 }
 
 @import '_header';
+@import '_monaca_header';
 @import '_footer';
 @import '_content';
-
 @import '_page_index';
 @import '_page_getting_started';
-@import '_page_components';
+@import '_page_reference';
 @import '_page_forum';
 

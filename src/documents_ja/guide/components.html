@@ -6,11 +6,3 @@ reference: true
 
 <h2>コンポーネント一覧</h2>
 
-<ul>
-<% for component in @components: %>
-  <li><a href="/components/<%= component.title %>.html"><%= component.title %></a></li>
-<% end %>
-</ul>
-
-<script src="<%= @rootUrl %>vendor/highlight.min.js"></script>
-<script src="<%= @rootUrl %>scripts/codepen.js"></script>

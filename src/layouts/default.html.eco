@@ -70,20 +70,43 @@
   <%- @partial('header.html.eco') %>
 
   <section id="content-container" class="clearfix">
+
     <% if @toc: %>
+
     <aside id="content-info">
       <div class="toc-title">Table Of Contents</div>
       <%- @partial('toc.html.eco', {tocItems: @toc}) %>
     </aside>
-    <% else if @components and @reference: %>
+
+    <% else if @reference: %>
     <aside id="content-info">
+      <div class="toc-title">Global Objects</div>
+      <ul class="toc toc-1">
+        <% for object in @objects: %>
+        <% if @name == object.name: %>
+          <li class="toc-item toc-1-item">
+            <a href="/components/<%= object.name %>.html" class="toc-link toc-1-link current">
+              <%- object.name %></a>
+          </li>
+        <% else: %>
+          <li class="toc-item toc-1-item">
+            <a href="/components/<%= object.name %>.html" class="toc-link toc-1-link">
+              <%- object.name %></a>
+          </li>
+        <% end %>
+        <% end %>
+      </ul>
+      <br>
+
       <div class="toc-title">Components</div>
       <ul class="toc">
         <% for component in @components: %>
         <% if @name == component.name: %>
-          <li><a href="/components/<%= component.name %>.html" class="selected"><%- component.name %></a></li>
+          <li class="toc-item toc-1-item">
+            <a href="/components/<%= component.name %>.html" class="toc-link toc-1-link current"><%- component.name %></a></li>
         <% else: %>
-          <li><a href="/components/<%= component.name %>.html"><%- component.name %></a></li>
+          <li class="toc-item toc-1-item">
+            <a href="/components/<%= component.name %>.html" class="toc-link toc-1-link"><%- component.name %></a></li>
         <% end %>
         <% end %>
       </ul>
@@ -105,19 +128,21 @@
 
   <script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
   <script>
-
-  $.extend($.lazyLoadXT, {
-    autoInit: false,
-    edgeY: 0,
-    srcAttr: 'data-src',
-    throttle: 1000
-  });
+  // iframe lazy loader
   $(function() {
+    $.extend($.lazyLoadXT, {
+      autoInit: false,
+      edgeY: 0,
+      srcAttr: 'data-src',
+      throttle: 1000
+    });
+
     setTimeout(function() {
       $('iframe').lazyLoadXT();
     }, 2000);
   });
 
+  // sticky menu
   $(function() {
     if ($('aside#content-info').height() < $('#content').height()) {
       $('aside#content-info').sticky({

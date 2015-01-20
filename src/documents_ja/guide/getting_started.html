@@ -9,19 +9,19 @@ autotoc: true
 
 <p>Onsen UIを使うと、ハイブリッドアプリやWebアプリのUIを簡単に実装することができます。ハイブリッドアプリを開発する場合は、<a href="http://monaca.mobi">Monaca</a>や<a href="http://cordova.apache.org" target="_blank">Cordova</a>、<a href="http://phonegap.com" target="_blank">PhoneGap</a>といったツールを使うことを推奨しています。</a>
 
-<h3>コマンドラインでOnsen UIを使う</h3>
+<h3 id="1-Onsen-UI">コマンドラインでOnsen UIを使う</h3>
 
 <div class="h3-wrapper">
 
   <p>コマンドラインから利用する場合は、<code>cordova</code>ツールを使うことが推奨されます。そのためには、<a href="http://nodejs.org">node.js</a>と<code>npm</code>をあらかじめインストールしておく必要があります。
 
-  <h4>1. Cordovaパッケージをインストールする</h4>
+  <h4 id="1-1">1. Cordovaパッケージをインストールする</h4>
 
   <pre>$ sudo npm install -g cordova</pre>
 
   <p>Cordovaツールの使い方については、<a href="https://cordova.apache.org/docs/en/edge/index.html">Cordovaドキュメント</a>を参照してください。
 
-  <h4>2. テンプレートを選択する</h4>
+  <h4 id="1-2">2. テンプレートを選択する</h4>
 
   <p>下記のスタートキットをダウンロードしてください。</p>
 
@@ -63,14 +63,14 @@ autotoc: true
 </div>
 </div>
 
-  <h4>3. プラットフォームを追加する</h4>
+  <h4 id="1-3">3. プラットフォームを追加する</h4>
 
   <p>シミュレータや実機上で動作させるために、プロジェクトにプラットフォームSDKを追加してください。</p>
 
   <pre>$ cd /path/to/the/project
 $ cordova platform add ios (もしくはandroid)</pre>
 
-  <h4>4. シミュレータで実行する</h4>
+  <h4 id="1-4">4. シミュレータで実行する</h4>
 
   <p>下記のコマンドでシミュレータ上でアプリを実行できます。</p>
 
@@ -79,12 +79,12 @@ $ cordova platform add ios (もしくはandroid)</pre>
   <p>コマンド実行が失敗する場合は、上記の手順が失敗している可能性があります。下記のMonacaを使った方法をぜひお試しください。</p>
 </div>
 
-<h3>MonacaでOnsen UIを使う</h3>
+<h3 id="2-Monaca-Onsen-UI">MonacaでOnsen UIを使う</h3>
 
 <div class="h3-wrapper">
   <p>MonacaでOnsen UIを使うメリットは、クラウド開発が可能になることです。Monacaを使うと、iOSやAndroidアプリ開発を行うために、ローカル環境をセットアップする必要がありません。</p>
 
-  <h4>1. Monacaの会員登録をする</h4>
+  <h4 id="2-1-Monaca">1. Monacaの会員登録をする</h4>
 
   <p>
   <img src="/images/docs/monaca_logo.png">
@@ -94,7 +94,7 @@ $ cordova platform add ios (もしくはandroid)</pre>
   <a class="btn-download" href="http://monaca.mobi" target="_blank">無料サインアップ</a>
   </p>
 
-  <h4>2. Onsen UIを使ったテンプレートを選択する</h4>
+  <h4 id="2-2-Onsen-UI">2. Onsen UIを使ったテンプレートを選択する</h4>
 
   <p><img src="/images/docs/monaca_dashboard.png" width="600"></p>
 
@@ -110,14 +110,14 @@ $ cordova platform add ios (もしくはandroid)</pre>
     <a href="http://itunes.apple.com/app/monaca/id550941371" target="_blank"><img src="/images/docs/app_store_logo.png"></a>
   </p>
 
-  <h4>4. AndroidとiOS向けのビルドを行う</h4>
+  <h4 id="2-2-Android-iOS">4. AndroidとiOS向けのビルドを行う</h4>
 
   <p><img src="/images/docs/monaca_ide.png" width="600"></p>
 
   <p>iOS、Android、Chrome Apps向けにビルドを行うことが出来ます。アプリをApp StoreやGoogle Playストアに掲載するのも簡単です。</p>
 </div>
 
-<h3>Onsen UIをWebサイトで使う</h3>
+<h3 id="3-Onsen-UI">Onsen UIをWebサイトで使う</h3>
 
 <div class="h3-wrapper">
   <p>Onsen UIの<a href="http://bower.io">Bower</a>モジュールを使うと、簡単にプロジェクトに組み込めます。</p>

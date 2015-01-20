@@ -29,6 +29,12 @@ input[type=submit] {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: sans-serif;
+  font-weight: normal;
+  color: #222;
+}
+
+h4, h5, h6 {
+  font-weight: bold;
 }
 
 table {
@@ -83,7 +89,109 @@ strong {
   font-weight: bold;
 }
 
+h2, h3, h4, h5, h6 {
+  color: #222;
+}
+
+h2 {
+  font-size: 30px;
+  margin: 70px 0 30px 0px;
+  letter-spacing: 0.02em;
+
+  &:first-child,
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+h3 {
+  font-size: 26px;
+  margin: 46px 0 26px 0px;
+  padding: 0 0 4px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+h4 {
+  font-size: 20px;
+  margin: 46px 0 12px 0;
+}
+
+h5 {
+  font-size: 16px;
+  margin: 36px 0 8px 0;
+}
+
+h6 {
+  font-size: 16px;
+  margin: 36px 0 8px 0;
+}
+
+h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
+  margin-top: 0px;
+}
+
+ul {
+  list-style-type: square;
+}
+
+li {
+  margin-left: 32px;
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+li {
+  margin-left: 32px;
+}
+
+li {
+  line-height: 1.8;
+}
+
+p, pre, ul, ol {
+  margin: 16px 0;
+}
+
+code {
+  font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+  border: 1px solid #eee;
+  background-color: #f9f9f9;
+  padding: 0.3% 0.6%;
+  font-weight: normal;
+}
+
+pre code {
+  font-style: normal;
+  border: none;
+  background-color: transparent;
+}
+
+pre {
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
 .lt-ie9 img, .lt-ie9 object {
   width: auto;
 }
 
+@media screen and (max-width: 1100px) {
+  h2 {
+    font-size: 32px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 22px;
+  }
+
+  h5, h6 {
+    font-size: 18px;
+  }
+}

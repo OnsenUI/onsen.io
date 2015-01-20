@@ -799,7 +799,7 @@ Carousel provides a container to display multiple items in the element. It can b
 A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<ons-carousel>`](components.html#ons-carousel) component.
 
 ```
-<ons-carousel fullscreen>
+<ons-carousel fullscreen swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      Carousel Item 1
   </ons-carousel-item>
@@ -816,7 +816,7 @@ A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<o
 When you want to show a carousel within another component, you should specify its height and width by the CSS style. If the width is not specified, it will interpreted as `100%`.
 
 ```
-<ons-carousel style="height: 200px; width: 50%">
+<ons-carousel style="height: 200px; width: 50%" swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      Carousel Item 1
   </ons-carousel-item>
@@ -839,7 +839,7 @@ To display an indicator on the [`<ons-carousel>`](components.html#ons-carousel),
 `initial-index` attribute will specify which item to show at the initial view. Note the index number starts from `0`. 
 
 ```
-<ons-carousel style="height: 100px; width: 100px" initial-index="1">
+<ons-carousel style="height: 100px; width: 100px" initial-index="1" swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      Carousel Item 1
   </ons-carousel-item>
