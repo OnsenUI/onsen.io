@@ -4,6 +4,14 @@
 @onsen-red: #ff2828;
 @onsen-red: #4183C4;
 
+.lang-en(@rules) {
+  .lang-en & { @rules(); }
+}
+
+.lang-ja(@rules) {
+  .lang-ja & { @rules(); }
+}
+
 .all-link-state(@color, @underline: none) {
   & when (@underline = all-none) {
     &, &:link, &:visited, &:hover, &:active {

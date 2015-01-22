@@ -5,7 +5,7 @@ body {
   -webkit-text-size-adjust: 100%;
   color: #555;
   font-size: 14px;
-  font-family: "pragmatica-web", sans-serif;
+  font-family: 'pragmatica-web', sans-serif;
   line-height: 1.4;
 
   &:after {
@@ -13,29 +13,24 @@ body {
     clear: both;
     display: block;
   }
-
-  &.lang-ja {
-    font-family:
-      'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
-      'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo,
-      'ＭＳ Ｐゴシック', sans-serif !important;
-
-    &#home a#getstarted-button:link,
-    &#home a#getstarted-button:active,
-    &#home a#getstarted-button:visited {
-      font-family: 
-        'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
-        'Hiragino Kaku Gothic ProN', 'メイリオ',
-        Meiryo, 'ＭＳ Ｐゴシック', sans-serif !important;
-    }
-  }
 }
 
+.lang-en({
+  font-family: 
+    'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+    'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+});
+
+.lang-ja({
+  font-family: 'pragmatica-web', sans-serif;
+});
 
 input {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: sans-serif;
+  font-family: 
+    'pragmatica-web', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+    'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
 }
 
 input:focus, input:active {
@@ -48,15 +43,51 @@ input[type=submit] {
 
 h1, h2, h3, h4, h5, h6 {
   color: #333;
-  font-family: "Helvetica", sans-serif;
+  font-family: 
+    'Helvetica Neue', 'pragmatica-web', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+    'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
 }
 
-h1, h2, h3 {
+h2 {
+  font-size: 30px;
+  margin: 70px 0 30px 0px;
+  letter-spacing: 0.02em;
+  font-weight: normal;
+
+  &:first-child,
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+h3 {
+  font-size: 26px;
+  margin: 46px 0 26px 0px;
+  padding: 0 0 4px 0;
+  border-bottom: 1px solid #ddd;
   font-weight: normal;
 }
 
-h4, h5, h6 {
+h4 {
+  font-size: 18px;
+  margin: 46px 0 12px 0;
   font-weight: bold;
+}
+
+h5 {
+  font-size: 16px;
+  margin: 36px 0 8px 0;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 16px;
+  margin: 36px 0 8px 0;
+  font-weight: bold;
+}
+
+h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
+  margin-top: 0px;
 }
 
 table {
@@ -111,43 +142,6 @@ strong {
   font-weight: bold;
 }
 
-h2 {
-  font-size: 30px;
-  margin: 70px 0 30px 0px;
-  letter-spacing: 0.02em;
-
-  &:first-child,
-  &:first-of-type {
-    margin-top: 0;
-  }
-}
-
-h3 {
-  font-size: 26px;
-  margin: 46px 0 26px 0px;
-  padding: 0 0 4px 0;
-  border-bottom: 1px solid #ddd;
-}
-
-h4 {
-  font-size: 18px;
-  margin: 46px 0 12px 0;
-}
-
-h5 {
-  font-size: 16px;
-  margin: 36px 0 8px 0;
-}
-
-h6 {
-  font-size: 16px;
-  margin: 36px 0 8px 0;
-}
-
-h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
-  margin-top: 0px;
-}
-
 ul {
   list-style-type: square;
 }
@@ -193,22 +187,4 @@ pre {
 
 .lt-ie9 img, .lt-ie9 object {
   width: auto;
-}
-
-@media screen and (max-width: 1100px) {
-  h2 {
-    font-size: 32px;
-  }
-
-  h3 {
-    font-size: 30px;
-  }
-
-  h4 {
-    font-size: 22px;
-  }
-
-  h5, h6 {
-    font-size: 18px;
-  }
 }

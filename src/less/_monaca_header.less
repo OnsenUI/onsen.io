@@ -1,6 +1,6 @@
 
 div#header-monaca {
-  background-color: rgba(28, 28, 28, 0.9);
+  background-color: rgba(28, 28, 28, 1);
   height: 48px;
 }
 
@@ -8,16 +8,17 @@ div#header-monaca-inner {
   width: @width;
   margin: 0px auto;
   position: relative;
-  opacity: 0.4;
+  opacity: 0.3;
+  transition: opacity 0.1s linear;
 
   &:hover {
     opacity: 1;
+    transition: opacity 0.1s linear;
   }
 
   img {
     margin-top: 12px;
     margin-left: 10px;
-    float: left;
   }
 
   a, a:link, a:visited, a:hover {
@@ -35,22 +36,11 @@ div#header-monaca-inner {
 
 }
 
-@media screen and (max-width: @width) {
-  ul#header-monaca-navi {
-    display: none;
-  }
-  div#header-monaca-inner {
-    img {
-      margin-left: 14px;
-    }
-  }
-}
-
 ul#header-monaca-navi {
   position: absolute;
   top: 0px;
   right: 0px;
-  width: 800px;
+  width: auto;
   padding: 0;
   margin: 0;
   font-size: 0px;
@@ -117,7 +107,17 @@ ul#header-monaca-navi > li:last-child ul.header-monaca-navi-sub-menu {
   right: 0px;
   left: auto;
 }
-  
+
+@media screen and (max-width: @width) {
+  ul#header-monaca-navi {
+    display: none;
+  }
+  div#header-monaca-inner {
+    img {
+      margin-left: 14px;
+    }
+  }
+}
 
 @media only screen 
 and (min-width : 320px) 

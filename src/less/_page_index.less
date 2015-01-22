@@ -1,5 +1,21 @@
 body#home {
 
+  a#getstarted-button:link,
+  a#getstarted-button:active,
+  a#getstarted-button:visited {
+    .lang-ja({
+      font-family: 
+        'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+        'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+    });
+  }
+
+  h1, h2, h3, h4, h5 {
+    .lang-en({
+      font-family: 'ff-enzo-web', 'Helvetica Neue', Helvetica, sans-serif;
+    });
+  }
+
   > section#content-container {
     margin-left: 0;
     padding-top: 0;
@@ -55,8 +71,10 @@ body#home {
         font-weight: 200;
         margin: 10px 0 40px 0;
         padding: 0;
-        font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, sans-serif;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
         color: #606978;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       
       > .keyvisual-small {
@@ -74,11 +92,15 @@ body#home {
         border: 2px solid #fa7845;
         border-radius: 3px;
         background-color: #fa7845;
-        font-size: 20px;
         color: white;
         text-align: center;
         font-weight: 300;
         text-decoration: none;
+
+        font-size: 24px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
 
         transition: all 0.5s ease;
 
@@ -111,11 +133,15 @@ body#home {
         border-radius: 3px;
         color: #767c86;
         margin-left: 20px;
-        font-size: 20px;
         text-align: center;
         text-decoration: none;
         padding: 0 12px;
         transition: all 0.5s ease;
+
+        font-size: 24px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: 'Helvetica Neue', Helvetica, sans-serif;
 
         &:hover {
           transition: all 0.1s ease;

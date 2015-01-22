@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
 <head>
   <!-- Standard Meta -->
   <meta charset="utf-8" />
@@ -43,13 +40,9 @@
   <script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-  <% if @lang == "ja": %>
-  <style>
-  </style>
-  <% end %>
 </head>
 
-<body id="<%- @page %>" class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
+<body id="<%- @page %>">
   <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
  reveal <![endif]-->
