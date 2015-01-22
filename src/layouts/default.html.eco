@@ -134,7 +134,10 @@
     });
 
     setTimeout(function() {
-      $('iframe').lazyLoadXT();
+      var iframe = $('iframe');
+      if (iframe.length > 0) {
+        iframe.lazyLoadXT();
+      }
     }, 2000);
   });
 
