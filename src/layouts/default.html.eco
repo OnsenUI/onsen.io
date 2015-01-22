@@ -18,7 +18,7 @@
 
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
   <link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
-  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
+  <link href='http://fonts.googleapis.com/css?family=Open Sans:400,500,600' rel='stylesheet' type='text/css'>
 
   <!-- Icons -->
   <!-- Favicon -->
@@ -42,25 +42,13 @@
   <script type="text/javascript" src="//use.typekit.net/rrt2vbp.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
-  <% if (@lang == "ja"): %>
+  <% if @lang == "ja": %>
   <style>
-    html, h1, h2, h3, h4, h5, h6 {
-      font-family:
-        'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
-        'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo,
-        'ＭＳ Ｐゴシック', sans-serif;
-    }
-    body#home div.getstarted>a#getstarted-button:link, body#home div.getstarted>a#getstarted-button:active, body#home div.getstarted>a#getstarted-button:visited {
-      font-family: 
-        'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
-        'Hiragino Kaku Gothic ProN', 'メイリオ',
-        Meiryo,'ＭＳ Ｐゴシック',sans-serif;
-    }
   </style>
   <% end %>
 </head>
 
-<body id="<%- @page %>">
+<body id="<%- @page %>" class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
   <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
  reveal <![endif]-->
@@ -80,20 +68,27 @@
 
     <% else if @reference: %>
     <aside id="content-info">
+
+      <div class="toc-title">Overview</div>
+      <ul class="toc toc-1">
+        <% for overview in @overviews: %>
+        <li class="toc-item toc-1-item">
+          <a href="/components/<%= overview.name %>.html" class="toc-link toc-1-link<% if @name == overview.name: %> current<% end %>">
+            <%- overview.name %>
+          </a>
+        </li>
+        <% end %>
+      </ul>
+      <br>
+
       <div class="toc-title">Global Objects</div>
       <ul class="toc toc-1">
         <% for object in @objects: %>
-        <% if @name == object.name: %>
-          <li class="toc-item toc-1-item">
-            <a href="/components/<%= object.name %>.html" class="toc-link toc-1-link current">
-              <%- object.name %></a>
-          </li>
-        <% else: %>
-          <li class="toc-item toc-1-item">
-            <a href="/components/<%= object.name %>.html" class="toc-link toc-1-link">
-              <%- object.name %></a>
-          </li>
-        <% end %>
+        <li class="toc-item toc-1-item">
+          <a href="/components/<%= object.name %>.html" class="toc-link toc-1-link<% if @name == object.name: %> current <% end %>">
+            <%- object.name %>
+          </a>
+        </li>
         <% end %>
       </ul>
       <br>
@@ -101,15 +96,14 @@
       <div class="toc-title">Components</div>
       <ul class="toc">
         <% for component in @components: %>
-        <% if @name == component.name: %>
-          <li class="toc-item toc-1-item">
-            <a href="/components/<%= component.name %>.html" class="toc-link toc-1-link current"><%- component.name %></a></li>
-        <% else: %>
-          <li class="toc-item toc-1-item">
-            <a href="/components/<%= component.name %>.html" class="toc-link toc-1-link"><%- component.name %></a></li>
-        <% end %>
+        <li class="toc-item toc-1-item">
+          <a href="/components/<%= component.name %>.html" class="toc-link toc-1-link<% if @name == component.name: %> current<% end %>">
+            <%- component.name %>
+          </a>
+        </li>
         <% end %>
       </ul>
+
     </aside>
     <% end %>
 
@@ -153,5 +147,6 @@
   });
   </script>
   <script src="/scripts/navigation_highlighter.js"></script>
+  <script src="/vendor/highlight.min.js"></script>
 </body>
 </html>

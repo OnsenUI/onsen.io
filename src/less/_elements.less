@@ -1,17 +1,36 @@
 
-html {
-  font-size: 14px;
-  font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, sans-serif;
-  line-height: 1.4;
-}
-
 body {
   max-width: 100%;
   text-align: left;
   -webkit-text-size-adjust: 100%;
-  &:after {content: ""; clear: both; display: block;}
   color: #555;
+  font-size: 14px;
+  font-family: "pragmatica-web", sans-serif;
+  line-height: 1.4;
+
+  &:after {
+    content: "";
+    clear: both;
+    display: block;
+  }
+
+  &.lang-ja {
+    font-family:
+      'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+      'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo,
+      'ＭＳ Ｐゴシック', sans-serif !important;
+
+    &#home a#getstarted-button:link,
+    &#home a#getstarted-button:active,
+    &#home a#getstarted-button:visited {
+      font-family: 
+        'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+        'Hiragino Kaku Gothic ProN', 'メイリオ',
+        Meiryo, 'ＭＳ Ｐゴシック', sans-serif !important;
+    }
+  }
 }
+
 
 input {
   -webkit-font-smoothing: antialiased;
@@ -28,9 +47,12 @@ input[type=submit] {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: sans-serif;
+  color: #333;
+  font-family: "Helvetica", sans-serif;
+}
+
+h1, h2, h3 {
   font-weight: normal;
-  color: #222;
 }
 
 h4, h5, h6 {
@@ -89,10 +111,6 @@ strong {
   font-weight: bold;
 }
 
-h2, h3, h4, h5, h6 {
-  color: #222;
-}
-
 h2 {
   font-size: 30px;
   margin: 70px 0 30px 0px;
@@ -112,7 +130,7 @@ h3 {
 }
 
 h4 {
-  font-size: 20px;
+  font-size: 18px;
   margin: 46px 0 12px 0;
 }
 
@@ -169,7 +187,6 @@ pre code {
 }
 
 pre {
-  font-size: 14px;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
 }

@@ -6,15 +6,17 @@ var fs = require('fs');
 var nodePath = require('path');
 
 module.exports = function(lang) {
-  var baseDir = __dirname + '/../OnsenUI/build/docs/' + lang + '/partials/';
+  var baseDir = __dirname + '/../OnsenUI/build/docs/' + lang + '/';
 
   return function(files, metalsmith, done) {
 
     // OnsenUI/build/docs/{lang}/partials/directive/*.html
     // OnsenUI/build/docs/{lang}/partials/object/*.html
+    // OnsenUI/build/docs/{lang}/overview/*.html
     globby([
-      baseDir + 'directive/*.html',
-      baseDir + 'object/*.html'
+      baseDir + 'partials/directive/*.html',
+      baseDir + 'partials/object/*.html',
+      baseDir + 'overview/*.html'
     ], function(error, paths) {
 
       if (error) {
@@ -32,6 +34,8 @@ module.exports = function(lang) {
           if (minimatch(path, '**/directive/*.html')) {
             path = 'components/' + nodePath.basename(path);
           } else if (minimatch(path, '**/object/*.html')) {
+            path = 'components/' + nodePath.basename(path);
+          } else if (minimatch(path, '**/overview/*.html')) {
             path = 'components/' + nodePath.basename(path);
           } else {
             console.log(path);

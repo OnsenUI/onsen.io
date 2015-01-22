@@ -38,6 +38,9 @@ gulp.task('metalsmith', [], function(done) {
       },
       objects: {
         soryBy: 'name'
+      },
+      overviews: {
+        soryBy: 'name'
       }
     }))
     .use(require('./plugins/helpers')())
