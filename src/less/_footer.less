@@ -33,7 +33,10 @@ footer#footer-container {
         color: @onsen-red;
       }
       a {
-        .all-link-state(#666, all-none);
+        &, &:link, &:hover, &:visited, &:active {
+          color: #666;
+          text-decoration: none;
+        }
         &:hover {
           color: @onsen-red;
           border-bottom: 2px solid @onsen-red;
@@ -138,6 +141,7 @@ footer#footer-container {
       position: absolute;
       top: 222px;
       left: 100px;
+      color: #999;
     }
 
     .helpmenu {
@@ -145,7 +149,9 @@ footer#footer-container {
       top: 222px;
       right: 100px;
       a {
-        .all-link-state(#999);
+        &, &:link, &:hover, &:visited, &:active {
+          color: #999;
+        }
         &:hover {
           color: @onsen-red;
         }

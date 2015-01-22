@@ -46,7 +46,10 @@ header#header-container {
     -o-box-sizing: border-box;
     box-sizing: border-box;
     a {
-      .all-link-state(#666, all-none);
+      &:link, &:hover, &:visited {
+        color: #666;
+        text-decoration: none;
+      }
       height: 85px;
       line-height: 85px;
       &:hover {
@@ -61,7 +64,10 @@ header#header-container {
   header#header-container .gnav li {
     &.current {
       a {
-        .all-link-state(@onsen-red, all-none);
+        &:link, &:hover, &:visited {
+          color: @onsen-red;
+          text-decoration: none;
+        }
         border-bottom: 2px solid @onsen-red;
       }
     }

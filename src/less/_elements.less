@@ -3,7 +3,7 @@ body {
   max-width: 100%;
   text-align: left;
   -webkit-text-size-adjust: 100%;
-  color: #555;
+  color: #666;
   font-size: 14px;
   font-family: 'pragmatica-web', sans-serif;
   line-height: 1.4;
@@ -42,10 +42,7 @@ input[type=submit] {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #333;
-  font-family: 
-    'Helvetica Neue', 'pragmatica-web', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
-    'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+  color: #222;
 }
 
 h2 {
@@ -69,21 +66,33 @@ h3 {
 }
 
 h4 {
-  font-size: 18px;
+  font-size: 16px;
   margin: 46px 0 12px 0;
   font-weight: bold;
+  .lang-en({
+    font-size: 22px;
+    font-weight: normal;
+  });
 }
 
 h5 {
-  font-size: 16px;
+  font-size: 15px;
   margin: 36px 0 8px 0;
   font-weight: bold;
+  .lang-en({
+    font-size: 20px;
+    font-weight: normal;
+  });
 }
 
 h6 {
-  font-size: 16px;
+  font-size: 14px;
   margin: 36px 0 8px 0;
   font-weight: bold;
+  .lang-en({
+    font-size: 20px;
+    font-weight: normal;
+  });
 }
 
 h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
@@ -121,7 +130,21 @@ img, iframe, object {
 }
 
 a {
-  .all-link-state(@onsen-red);
+
+  &, &:link, &:hover, &:visited, &:active {
+    color: @onsen-red;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+
+  code {
+    color: @onsen-red;
+  }
+
+  &:hover {
+    text-decoration: none;
+  }
+
   img {
     transition: opacity 80ms linear;
     &:hover {
@@ -156,10 +179,7 @@ ol {
 
 li {
   margin-left: 32px;
-}
-
-li {
-  line-height: 1.8;
+  line-height: 1.7;
 }
 
 p, pre, ul, ol {
@@ -168,9 +188,10 @@ p, pre, ul, ol {
 
 code {
   font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
   background-color: #f9f9f9;
-  padding: 0.3% 0.6%;
+  padding: 1px 2px;
+  color: #555;
   font-weight: normal;
 }
 

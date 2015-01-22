@@ -19,9 +19,13 @@
 
 .btn-red {
   &:extend(.btn-default);
-  .all-link-state(white, all-none);
   background-color: @onsen-red;
   color: white;
+
+  &:link, &:visited, &:hover, &:active, &:focus {
+    color: white;
+    text-decoration: none;
+  }
 }
 
 .btn-big {

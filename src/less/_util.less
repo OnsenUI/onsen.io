@@ -12,36 +12,6 @@
   .lang-ja & { @rules(); }
 }
 
-.all-link-state(@color, @underline: none) {
-  & when (@underline = all-none) {
-    &, &:link, &:visited, &:hover, &:active {
-      color: @color;
-      text-decoration: none;
-      cursor: pointer;
-    }
-  }
-
-  & when (@underline = none) {
-    &, &:link, &:visited {
-      cursor: pointer;
-      color: @color;
-      text-decoration: none;
-    }
-
-    &:hover {
-      cursor: pointer;
-      color: @color;
-      text-decoration: underline;
-    }
-
-    &:active {
-      cursor: pointer;
-      color: @color;
-      text-decoration: none;
-    }
-  }
-}
-
 .clearfix:after {
   content: "";
   clear: both;
