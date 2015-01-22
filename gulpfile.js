@@ -39,7 +39,7 @@ gulp.task('metalsmith', [], function(done) {
       objects: {
         soryBy: 'name'
       },
-      overviews: {
+      guides: {
         soryBy: 'name'
       }
     }))
@@ -84,7 +84,7 @@ gulp.task('clean', function(done) {
   del([
     'out_' + lang + '/*',
     '!out_' + lang + '/OnsenUI',
-    'src/documents_' + lang + '/components/*.html'
+    'src/documents_' + lang + '/reference/*.html'
   ], done);
 });
 

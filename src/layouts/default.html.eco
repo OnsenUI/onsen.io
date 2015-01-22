@@ -69,12 +69,12 @@
     <% else if @reference: %>
     <aside id="content-info">
 
-      <div class="toc-title">Overview</div>
+      <div class="toc-title">Guides</div>
       <ul class="toc toc-1">
-        <% for overview in @overviews: %>
+        <% for guide in @guides: %>
         <li class="toc-item toc-1-item">
-          <a href="/components/<%= overview.name %>.html" class="toc-link toc-1-link<% if @name == overview.name: %> current<% end %>">
-            <%- overview.name %>
+          <a href="/reference/<%= guide.name %>.html" class="toc-link toc-1-link<% if @name == guide.name: %> current<% end %>">
+            <%- guide.name %>
           </a>
         </li>
         <% end %>
@@ -85,7 +85,7 @@
       <ul class="toc toc-1">
         <% for object in @objects: %>
         <li class="toc-item toc-1-item">
-          <a href="/components/<%= object.name %>.html" class="toc-link toc-1-link<% if @name == object.name: %> current <% end %>">
+          <a href="/reference/<%= object.name %>.html" class="toc-link toc-1-link<% if @name == object.name: %> current <% end %>">
             <%- object.name %>
           </a>
         </li>
@@ -97,7 +97,7 @@
       <ul class="toc">
         <% for component in @components: %>
         <li class="toc-item toc-1-item">
-          <a href="/components/<%= component.name %>.html" class="toc-link toc-1-link<% if @name == component.name: %> current<% end %>">
+          <a href="/reference/<%= component.name %>.html" class="toc-link toc-1-link<% if @name == component.name: %> current<% end %>">
             <%- component.name %>
           </a>
         </li>
@@ -122,6 +122,7 @@
 
   <script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
   <script>
+
   // iframe lazy loader
   $(function() {
     $.extend($.lazyLoadXT, {

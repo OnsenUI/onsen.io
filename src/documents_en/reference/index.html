@@ -1,0 +1,29 @@
+---
+title: 'Reference'
+page: 'reference-index'
+reference: true
+---
+
+<h2>Reference</h2>
+
+<h3>Guides</h3>
+<ul>
+<% for guide in @guides: %>
+  <li><a href="./<%= guide.name %>.html"><%= guide.title %></a></li>
+<% end %>
+</ul>
+
+<h3>Global Objects</h3>
+<ul>
+<% for object in @objects: %>
+  <li><a href="./<%= object.title %>.html"><%= object.title %></a></li>
+<% end %>
+</ul>
+
+
+<h3>Components</h3>
+<ul>
+<% for component in @components: %>
+  <li><a href="./<%= component.title %>.html"><%= component.title %></a></li>
+<% end %>
+</ul>

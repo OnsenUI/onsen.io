@@ -32,11 +32,11 @@ module.exports = function(lang) {
           }
 
           if (minimatch(path, '**/directive/*.html')) {
-            path = 'components/' + nodePath.basename(path);
+            path = 'reference/' + nodePath.basename(path);
           } else if (minimatch(path, '**/object/*.html')) {
-            path = 'components/' + nodePath.basename(path);
+            path = 'reference/' + nodePath.basename(path);
           } else if (minimatch(path, '**/overview/*.html')) {
-            path = 'components/' + nodePath.basename(path);
+            path = 'reference/' + nodePath.basename(path);
           } else {
             console.log(path);
           }

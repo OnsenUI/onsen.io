@@ -7,21 +7,21 @@
   <ul class="gnav">
 
     <% if @lang == "en": %>
-      <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">Getting Started</a></li>
-      <li class="<%- if @page is 'components' then 'current' %>"><a href="/guide/components.html">Components</a></li>
-      <li class="<%- if @page is 'guide' then 'current' %>"><a href="/guide/overview.html">Guide</a></li>
-      <li><a href="http://components.onsen.io/patterns">Patterns</a></li>
-      <li><a href="http://components.onsen.io/">Themes</a></li>
-      <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">Forum</a></li>
-      <li><a href="http://onsen.io/blog/">Blog</a></li>
+      <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
+      <li class="<%- if @page is 'reference-index' then 'current' %>"><a href="/reference/">REFERENCE</a></li>
+      <li class="<%- if @page is 'guide' then 'current' %>"><a href="/guide/overview.html">GUIDE</a></li>
+      <li><a href="http://components.onsen.io/patterns">PATTERNS</a></li>
+      <li><a href="http://components.onsen.io/">THEMES</a></li>
+      <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
+      <li><a href="http://onsen.io/blog/">BLOG</a></li>
       <li><a href="http://ja.onsen.io/">日本語</a></li>
     <% else: %>
       <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">はじめに</a></li>
-      <li class="<%- if @page is 'components' then 'current' %>"><a href="/guide/components.html">コンポーネント一覧</a></li>
+      <li class="<%- if @page is 'reference-index' then 'current' %>"><a href="/reference/">リファレンス</a></li>
       <li class="<%- if @page is 'guide' then 'current' %>"><a href="/guide/overview.html">マニュアル</a></li>
       <li><a href="http://components.onsen.io/patterns">パターン</a></li>
       <li><a href="http://components.onsen.io/">テーマローラー</a></li>
-      <li><a href="http://onsen.io/">English</a></li>
+      <li><a href="http://onsen.io/">ENGLISH</a></li>
     <% end %>
 
     <li>
