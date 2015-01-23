@@ -1,9 +1,8 @@
 #header-container {
   height: 84px;
-  width: @width;
   max-width: 100%;
   margin: 0 auto;
-  border-bottom: 1px solid #eee;
+  width: 100%;
 
   .gnav-icon {
     display: none;
@@ -15,14 +14,17 @@
     padding-top: 11px;
     position: relative;
     text-align: left;
-    width: $width;
+    width: @width;
+    min-height: 84px;
     max-width: 100%;
+    border-bottom: 1px solid #ddd;
   }
 
   .logo {
     position: absolute;
-    top: 19px;
+    top: 26px;
     left: 14px;
+    height: 32px;
   }
 
   .gnav {
@@ -37,7 +39,7 @@
   .gnav li {
     color: #a6a6a6;
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
     margin: 0 4px;
     padding: 0 10px;
     -webkit-box-sizing: border-box;
@@ -48,7 +50,7 @@
 
     a {
       &:link, &:hover, &:visited {
-        color: #666;
+        color: #777;
         text-decoration: none;
       }
       height: 85px;
@@ -66,10 +68,11 @@
     &.current {
       a {
         &:link, &:hover, &:visited {
-          color: @link-color;
+          color: #333; //@link-color;
           text-decoration: none;
         }
-        border-bottom: 2px solid @link-color;
+        border-bottom: 2px solid #ddd; // @link-color;
+        font-weight: bold;
       }
     }
 
@@ -116,6 +119,9 @@
         opacity: 0.3;
         cursor: pointer;
       }
+    }
+    > div {
+      border-bottom: none;
     }
     > div > .gnav {
       position: static;
