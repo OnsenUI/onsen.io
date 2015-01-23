@@ -18,7 +18,7 @@ gulp.task('generate', ['less', 'metalsmith']);
 //////////////////////////////
 // metalsmith
 //////////////////////////////
-gulp.task('metalsmith', [], function(done) {
+gulp.task('metalsmith', function(done) {
 
   var metalsmith = require('metalsmith');
   var templates = require('metalsmith-templates');

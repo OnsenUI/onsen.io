@@ -1,4 +1,4 @@
-body#home {
+#home {
 
   a#getstarted-button:link,
   a#getstarted-button:active,
@@ -16,158 +16,97 @@ body#home {
     });
   }
 
-  > section#content-container {
+  #header-container {
+  }
+
+  #content-container {
     margin-left: 0;
     padding-top: 0;
     width: 100%;
-
-    > div#content {
-      margin-left: 0;
-      padding-top: 0;
-      padding-left: 0px !important;
-      padding-right: 0px !important;
-      width: 100%;
-    }
   }
 
-  div#keyvisual {
+  #content {
+    margin-left: 0;
+    padding-top: 0;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
     width: 100%;
-    height: 660px;
+  }
+
+  .keyvisual-content {
+    width: 1200px;
+    height: 445px;
+    background-repeat: no-repeat;
+    background-image: url(/images/index/keyvisual.png);
+    background-position: 650px 0px;
+    background-size: 40% auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -220px;
+    margin-left: -600px;
+  }
+
+  #keyvisual {
+    width: 100%;
+    height: 450px;
     background-color: #fff;
     background: linear-gradient(to bottom, #fff, #f3f5f6);
     position: relative;
     padding: 0;
 
-    > div.keyvisual-content {
-      width: 1200px;
-      height: 660px;
-      background-repeat: no-repeat;
-      background-image: url(/images/index/keyvisual.png);
-      background-position: right 20px;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      margin-top: -330px;
-      margin-left: -600px;
-    }
-
-    > div.keyvisual-content > div.keyvisual-main {
+    .keyvisual-main {
       margin: 0 auto;
-      padding: 160px 0 0 0;
+      padding: 60px 0 0 0;
       width: 1100px;
       max-width: 100%;
-
-      > h1 {
-        font-size: 54px;
-        line-height: 60px;
-        letter-spacing: 0px;
-        font-weight: 200;
-        margin-bottom: 6px;
-        color: #252525;
-      }
-
-      > h2 {
-        font-size: 26px;
-        font-weight: 200;
-        margin: 10px 0 40px 0;
-        padding: 0;
-        font-family: 'Helvetica Neue', Helvetica, sans-serif;
-        color: #606978;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      
-      > .keyvisual-small {
-        display: none;
-      }
-
-      > a.getting-started,
-      > a.getting-started:active,
-      > a.getting-started:visited {
-        box-sizing: border-box;
-        display: inline-table;
-        height: 54px;
-        line-height: 54px;
-        padding: 0 10px;
-        border: 2px solid #fa7845;
-        border-radius: 3px;
-        background-color: #fa7845;
-        color: white;
-        text-align: center;
-        font-weight: 300;
-        text-decoration: none;
-
-        font-size: 24px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        font-family: 'Helvetica Neue', Helvetica, sans-serif;
-
-        transition: all 0.5s ease;
-
-        &:hover {
-          transition: all 0.1s ease;
-          opacity: 0.8;
-        }
-
-        &:active {
-          transition: none;
-          opacity: 1;
-        }
-
-        > img {
-          margin-bottom: 5px;
-          vertical-align: middle;
-        }
-
-      }
-
-      > a.download,
-      > a.download:active,
-      > a.download:visited {
-        box-sizing: border-box;
-        display: inline-table;
-        height: 54px;
-        line-height: 54px;
-        width: auto;
-        border: 2px solid #d3d6d9;
-        border-radius: 3px;
-        color: #767c86;
-        margin-left: 20px;
-        text-align: center;
-        text-decoration: none;
-        padding: 0 12px;
-        transition: all 0.5s ease;
-
-        font-size: 24px;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        font-family: 'Helvetica Neue', Helvetica, sans-serif;
-
-        &:hover {
-          transition: all 0.1s ease;
-          background-color: #d3d6d9;
-        }
-
-        &:active {
-          transition: none;
-          background-color: transparent;
-        }
-
-        > strong {
-          font-weight: 500;
-          letter-spacing: -2px;
-        }
-      }
     }
 
-    > div.keyvisual-content > div.newsletter {
+    h1 {
+      font-size: 43px;
+      line-height: 48px;
+      letter-spacing: 0px;
+      font-weight: 200;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 22px;
+      font-weight: 200;
+      margin: 10px 0 24px 0;
+      padding: 0;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      color: #606978;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .keyvisual-small {
+      display: none;
+    }
+
+    a.getting-started {
+      .large-button();
+      transition: all 0.1s ease;
+    }
+
+    a.download {
+      .large-button();
+      transition: all 0.1s ease;
+      background-color: #ddd;
+      margin-left: 6px;
+      color: #666;
+    }
+
+    .newsletter {
       display: inline-block;
 
       margin: 0 auto;
       width: 1100px;
       max-width: 100%;
       position: absolute;
-      bottom: 40px;
+      bottom: 20px;
       left: 0px;
       right: 0px;
 
@@ -181,58 +120,48 @@ body#home {
       }
 
       input[type=text] {
-        font-size: 16px;
+        font-size: 15px;
         background-color: white;
         color: #333;
-        font-weight: 400;
         width: 325px;
-        padding: 11px 8px 9px 8px;
+        padding: 10px 8px 9px 8px;
         line-height: 36px;
         height: 36px;
         border: none;
+        margin: 0;
         border-radius: 2px;
         box-sizing: border-box;
       }
 
       input[type=submit] {
-        font-size: 16px;
-        background-color: white;
-        background-color: #767c86;
-        color: white;
-        font-weight: 400;
-        line-height: 36px;
-        border-radius: 2px;
-        border: none;
-        padding: 0 8px;
-        font-weight: 400;
-        &:hover {
-          background-color: #454b55;
-        }
+        .button();
       }
 
-      div.newsletter-thankyou {
-        display: none;
-        font-size: 16px;
-        color: #666;
-        line-height: 40px;
-        font-weight: 500;
-      }
     }
 
-    > div.keyvisual-content > div.social {
+    div.newsletter-thankyou {
+      display: none;
+      font-size: 15px;
+      color: #666;
+      line-height: 38px;
+      font-weight: 500;
+    }
+
+    div.social {
       margin: 0 auto;
       width: 1100px;
       position: absolute;
-      bottom: 100px;
+      bottom: 74px;
       left: 0px;
       right: 0px;
-      font-size: 18px;
+      font-size: 16px;
+      display: none;
 
-      > img {
+      img {
         vertical-align: top;
       }
 
-      > a {
+      a {
         margin-right: 20px;
         vertical-align: top;
 
@@ -245,7 +174,7 @@ body#home {
           text-decoration: underline;
         }
 
-        > strong {
+        strong {
           font-weight: 600;
         }
 
@@ -284,9 +213,10 @@ body#home {
       background-repeat: no-repeat;
 
       > h2 {
-        font-size: 48px;
+        font-size: 36px;
         line-height: 1.2;
         font-weight: 200;
+        color: #345;
       }
 
       > p {
@@ -331,13 +261,13 @@ body#home {
 
   }
 
-  section#content-container > div#content > div.other-features {
+  div.other-features {
     padding: 70px 0 90px 0;
     font-size: 0px;
 
     > h2 {
       margin-bottom: 52px;
-      font-size: 48px;
+      font-size: 40px;
       font-weight: 200;
       text-align: center;
     }
@@ -375,13 +305,14 @@ body#home {
       }
 
       > h3 {
-        font-size: 20px;
+        font-size: 18px;
         line-height: 1.2;
-        margin: 0 0 12px 0;
+        margin: 0 0 8px 0;
         padding: 0;
-        font-family: 'pragmatica-web', 'Helvetica Neue', Helvetica, sans-serif;
-        font-weight: 300;
+        font-family: 'pragmatica-web', sans-serif;
+        font-weight: 200;
         border: none;
+        color: #444;
       }
 
       > p {
@@ -398,26 +329,8 @@ body#home {
     border-top: 1px solid #ddd;
     padding: 100px 0 0 0;
 
-    > a#getstarted-button {
-      &:link,
-      &:active,
-      &:visited {
-        color: @onsen-red;
-        font-size: 36px;
-        text-align: center;
-        font-weight: 200;
-        text-decoration: underline;
-        font-family: "ff-enzo-web", "Helvetica Neue", Helvetica, sans-serif;
-      }
-
-      &:hover {
-        text-decoration: none;
-      }
-
-      > img {
-        margin-bottom: 5px;
-        vertical-align: middle;
-      }
+    > a.getstarted-button {
+      .large-button();
     }
   }
 
@@ -596,7 +509,7 @@ body#home {
     }
 
     div.getstarted {
-      > a#getstarted-button {
+      a#getstarted-button {
         font-size: 36px !important;
       }
       > img {

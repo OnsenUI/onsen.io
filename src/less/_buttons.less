@@ -1,42 +1,36 @@
 
-.btn,
-.btn-default {
-  background-repeat: no-repeat;
-  background-position: left center;
-  border-radius: 6px;
+.button {
   box-sizing: border-box;
+  font-size: 15px;
+  color: white;
+  background-color: #767C86;
+  line-height: 36px;
+  border-radius: 2px;
+  border: none;
+  padding: 0px 12px;
   display: inline-block;
-  padding: 5px 10px;
   text-align: center;
 
-  &:link, &:visited, &:hover, &:active, &:focus {
-    text-decoration: none;
-  }
   &:hover {
     opacity: 0.7;
   }
-}
-
-.btn-red {
-  &:extend(.btn-default);
-  background-color: @onsen-red;
-  color: white;
-
   &:link, &:visited, &:hover, &:active, &:focus {
-    color: white;
     text-decoration: none;
+  }
+  &:active {
+    opacity: 1;
+    transition: all 0s linear;
   }
 }
 
-.btn-big {
-  font-size: 30px;
-  font-weight: 700;
-  padding: 18px 40px;
-}
-
-.btn-start {
-  background-image: url(/images/common/ico_getstarted.png);
-  background-position: 40px center;
-  padding-left: 100px;
-  text-align: left;
+.large-button {
+  .button();
+  line-height: 43px;
+  height: 43px;
+  font-size: 18px;
+  padding: 0px 16px;
+  border-radius: 2px;
+  background-color: #FA7845;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

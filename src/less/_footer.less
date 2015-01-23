@@ -30,7 +30,7 @@ footer#footer-container {
 
       .active {
         border-bottom: 1px solid #000;
-        color: @onsen-red;
+        color: @link-color;
       }
       a {
         &, &:link, &:hover, &:visited, &:active {
@@ -38,8 +38,8 @@ footer#footer-container {
           text-decoration: none;
         }
         &:hover {
-          color: @onsen-red;
-          border-bottom: 2px solid @onsen-red;
+          color: @link-color;
+          border-bottom: 2px solid @link-color;
         }
       }
     }
@@ -93,37 +93,26 @@ footer#footer-container {
       }
 
       input[type=text] {
-        font-size: 18px;
+        font-size: 15px;
         background-color: white;
         color: #333;
-        font-weight: 400;
         width: 200px;
         line-height: 36px;
+        height: 36px;
         border: none;
         border-radius: 2px;
         padding: 0 8px;
         border: 1px solid #ddd;
+        box-sizing: border-box;
       }
 
       input[type=submit] {
-        font-size: 18px;
-        background-color: white;
-        background-color: #767c86;
-        color: white;
-        font-weight: 400;
-        line-height: 36px;
-        border-radius: 2px;
-        border: none;
-        padding: 0 8px;
-        font-weight: 400;
-        &:hover {
-          background-color: #454b55;
-        }
+        .button();
       }
 
       div.footer-newsletter-thankyou {
         color: #666;
-        font-size: 18px;
+        font-size: 15px;
         line-height: 40px;
         font-weight: 400;
         display: none;
@@ -132,7 +121,7 @@ footer#footer-container {
       div.footer-newsletter-title {
         font-size: 16px;
         font-weight: 500;
-        color: #767c86;
+        color: #333;
         margin: 8px 0 4px 0;
       }
     }
