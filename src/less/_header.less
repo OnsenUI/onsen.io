@@ -1,5 +1,7 @@
-#header-container {
-  height: 84px;
+@header-height: 74px;
+
+.header {
+  height: @header-height;
   max-width: 100%;
   margin: 0 auto;
   width: 100%;
@@ -8,35 +10,39 @@
     display: none;
   }
 
-  > div {
+  .header-inner {
     box-sizing: border-box;
     margin: 0 auto;
     padding-top: 11px;
     position: relative;
     text-align: left;
     width: @width;
-    min-height: 84px;
+    min-height: @header-height;
     max-width: 100%;
     border-bottom: 1px solid #ddd;
   }
 
-  .logo {
+  .header-logo {
+
+  }
+
+  .header-logo-image {
     position: absolute;
-    top: 26px;
+    top: 20px;
     left: 14px;
     height: 32px;
   }
 
-  .gnav {
+  .header-navi {
     position: absolute;
     top: 0;
     right: 0;
-    height: 84px;
-    line-height: 84px;
+    height: @header-height;
+    line-height: @header-height;
     margin: 0;
   }
 
-  .gnav li {
+  .header-navi li {
     color: #a6a6a6;
     display: inline-block;
     font-size: 15px;
@@ -53,8 +59,8 @@
         color: #777;
         text-decoration: none;
       }
-      height: 85px;
-      line-height: 85px;
+      height: @header-height;
+      line-height: @header-height;
       &:hover {
         color: @link-color;
         border-bottom: 2px solid @link-color;
@@ -64,23 +70,20 @@
 }
 
 @media screen and (min-width: 1100px) {
-  header#header-container .gnav li {
-    &.current {
-      a {
-        &:link, &:hover, &:visited {
-          color: #333; //@link-color;
-          text-decoration: none;
-        }
-        border-bottom: 2px solid #ddd; // @link-color;
-        font-weight: bold;
+  .header-navi li.current {
+    a {
+      &:link, &:hover, &:visited {
+        color: #333; //@link-color;
+        text-decoration: none;
       }
+      border-bottom: 2px solid #ddd; // @link-color;
+      font-weight: bold;
     }
-
   }
 }
 
 @media screen and (min-width: 1100px) {
-  header#header-container {
+  .header {
     .gnav-icon {
       display: none !important;
     }
@@ -89,25 +92,24 @@
 
 @media screen and (max-width: 1100px) {
 
-  header#header-container {
-    border-bottom: 0px solid #fff;
+  .header {
 
     > div:first-child {
       padding-left: 20px;
     }
 
-    .logo {
+    .header-logo-img {
       margin-left: 20px;
     }
 
-    > div > .gnav {
+    .header-navi {
       display: none;
     }
   }
 
-  header#header-container {
+  .header {
     height: auto;
-    min-height: 88px;
+    min-height: @header-height;
     .gnav-icon {
       display: block !important;
       position: absolute;
@@ -120,10 +122,12 @@
         cursor: pointer;
       }
     }
-    > div {
+
+    .header-inner {
       border-bottom: none;
     }
-    > div > .gnav {
+
+    .header-navi {
       position: static;
       height: auto;
       display: none;
@@ -134,7 +138,7 @@
       margin-left: -20px;
       margin: 66px 0 12px -20px;
       padding: 0 0 36px 0;
-      > li {
+      li {
         display: block;
         width: 100%;
         line-height: 48px;

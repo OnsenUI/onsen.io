@@ -71,11 +71,11 @@
   </div>
 </div>
 
-<header id="header-container" class="common">
-  <div>       
-    <a href="/"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="logo"></a>
+<header class="header">
+  <div class="header-inner">       
+    <a href="/" class="header-logo"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="header-logo-image"></a>
     <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg"></a></div>
-    <ul class="gnav">
+    <ul class="header-navi">
       <% if @lang == "en": %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
         <li class="<%- if @page is 'reference-index' then 'current' %>"><a href="/reference/">REFERENCE</a></li>
@@ -101,9 +101,9 @@
 <script>
   $(function() {
     // for mobile website menu
-    var header = $('header#header-container')[0];
+    var header = $('.header')[0];
     $('.gnav-icon', header).click(function() {
-      $('ul.gnav', header).toggle();
+      $('.header-navi', header).toggle();
     });
 
     // for language switch dialog
