@@ -33,17 +33,17 @@
 
   <%- @partial('header.html.eco') %>
 
-  <section id="content-container" class="clearfix">
+  <section class="content-container clearfix">
 
     <% if @toc: %>
 
-    <aside id="content-info">
+    <aside class="content-info">
       <div class="toc-title">Table Of Contents</div>
       <%- @partial('toc.html.eco', {tocItems: @toc}) %>
     </aside>
 
     <% else if @reference: %>
-    <aside id="content-info">
+    <aside class="content-info">
 
       <div class="toc-title">Guides</div>
       <ul class="toc toc-1">
@@ -83,7 +83,7 @@
     </aside>
     <% end %>
 
-    <div id="content">
+    <div class="content">
       <%- @contents %>
 
       <% if @needHelp: %>
@@ -118,13 +118,14 @@
 
   // sticky menu
   $(function() {
-    if ($('aside#content-info').height() < $('#content').height()) {
-      $('aside#content-info').sticky({
+    if ($('.content-info').height() < $('.content').height()) {
+      $('.content-info').sticky({
         topSpacing : 0, 
-        bottomSpacing : $('footer#footer-container').height() + 60 
+        bottomSpacing : $('.footer-container').height() + 60 
       });
     }
   });
+
   </script>
   <script src="/scripts/navigation_highlighter.js"></script>
   <script src="/vendor/highlight.min.js"></script>

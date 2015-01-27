@@ -3,9 +3,8 @@ body {
   max-width: 100%;
   text-align: left;
   -webkit-text-size-adjust: 100%;
-  color: #666;
+  color: @text-color;
   font-size: 14px;
-  font-family: 'pragmatica-web', sans-serif;
   line-height: 1.4;
 
   &:after {
@@ -13,24 +12,32 @@ body {
     clear: both;
     display: block;
   }
+
+  .lang-en & {
+    font-size: 16px;
+  }
 }
 
-.lang-ja({
+.lang-ja {
   font-family: 
     'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
     'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
-});
+}
 
-.lang-en({
-  font-family: 'pragmatica-web', sans-serif;
-});
+.lang-en {
+  font-family: @en-font-family;
+  font-weight: normal;
+}
 
 input {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 
-    'pragmatica-web', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
+    'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
     'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+  .lang-en & {
+    font-family: @en-font-family;
+  }
 }
 
 input:focus, input:active {
@@ -42,14 +49,35 @@ input[type=submit] {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #222;
+  color: @header-text-color;
+  .lang-en & {
+    font-family:  @en-font-family;
+    font-weight: normal;
+  }
+}
+
+h1 {
+  font-size: 36px;
+  margin: 70px 0 30px 0px;
+  letter-spacing: 0.02em;
+
+  &:first-child,
+  &:first-of-type {
+    margin-top: 0;
+  }
 }
 
 h2 {
   font-size: 30px;
   margin: 70px 0 30px 0px;
-  letter-spacing: 0.02em;
-  font-weight: normal;
+  font-weight: bold;
+  //color: @link-color;
+
+  .lang-en & {
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: -0.02em;
+  }
 
   &:first-child,
   &:first-of-type {
@@ -63,36 +91,41 @@ h3 {
   padding: 0 0 4px 0;
   border-bottom: 1px solid #ddd;
   font-weight: normal;
+
+  .lang-en & {
+    font-size: 28px;
+  }
 }
 
 h4 {
   font-size: 16px;
   margin: 46px 0 12px 0;
   font-weight: bold;
-  .lang-en({
-    font-size: 22px;
-    font-weight: normal;
-  });
+
+  .lang-en & {
+    font-size: 26px;
+  }
 }
 
 h5 {
   font-size: 15px;
   margin: 36px 0 8px 0;
   font-weight: bold;
-  .lang-en({
-    font-size: 20px;
-    font-weight: normal;
-  });
+
+  .lang-en & {
+    font-size: 24px;
+  }
 }
 
 h6 {
   font-size: 14px;
   margin: 36px 0 8px 0;
   font-weight: bold;
-  .lang-en({
+
+  .lang-en {
     font-size: 20px;
-    font-weight: normal;
-  });
+    font-weight: bold;
+  }
 }
 
 h2 + h3, h3 + h4, h4 + h5, h5 + h6 {
@@ -191,7 +224,6 @@ code {
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   padding: 1px 2px;
-  color: #555;
   font-weight: normal;
 }
 

@@ -1,43 +1,51 @@
 #home {
 
-  a#getstarted-button:link,
-  a#getstarted-button:active,
-  a#getstarted-button:visited {
-    .lang-ja({
+  .header {
+  }
+
+  .header-inner {
+    border-bottom: none;
+  }
+
+  .getstarted-button:link,
+  .getstarted-button:active,
+  .getstarted-button:visited {
+    .lang-ja & {
       font-family: 
         'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
         'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
-    });
+    }
   }
 
-  h1, h2, h3, h4, h5 {
-    .lang-en({
-      font-family: 'ff-enzo-web', 'Helvetica Neue', Helvetica, sans-serif;
-    });
+  h1 {
+    .lang-en & {
+      font-family: 'ff-enzo-web', Arial, sans-serif;
+    }
   }
 
-  #header-container {
-  }
-
-  #content-container {
+  .content-container {
     margin-left: 0;
     padding-top: 0;
     width: 100%;
   }
 
-  #content {
+  .content {
     margin-left: 0;
     padding-top: 0;
     padding-left: 0px !important;
     padding-right: 0px !important;
     width: 100%;
+    max-width: 100%;
   }
 
   .keyvisual-content {
     width: @width;
+    max-width: 100%;
+    margin: 0 auto;
+    /*
     height: 550px;
     background-repeat: no-repeat;
-    background-image: url(/images/index/keyvisual.png);
+    //background-image: url(/images/index/keyvisual.png);
     background-position: 560px 20px;
     background-size: 45% auto;
     position: absolute;
@@ -45,42 +53,43 @@
     top: 50%;
     margin-top: -275px;
     margin-left: -(@width / 2);
+    */
+  }
+
+  .keyvisual-main {
+    margin: 0 auto;
+    padding: 110px 0 0 0;
+    width: @width;
+    max-width: 90%;
   }
 
   #keyvisual {
     width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
     height: 550px;
-    background-color: #fff;
-    background: linear-gradient(to bottom, #fff, #f3f5f6);
+    background-color: #f6f6f6;
     position: relative;
     padding: 0;
-    border-bottom: 1px solid #ddd;
-
-    .keyvisual-main {
-      margin: 0 auto;
-      padding: 120px 0 0 0;
-      width: @width;
-      max-width: 100%;
-    }
+    border-top: 1px solid #ddd;
+    text-align: center;
 
     h1 {
-      font-size: 48px;
-      line-height: 52px;
-      letter-spacing: 0px;
+      font-size: 52px;
+      line-height: 1.06;
       font-weight: 200;
-      margin-bottom: 6px;
-      color: #333;
+      letter-spacing: -1px;
+      margin: 0 0 6px 0;
+      color: #222;
     }
 
     h2 {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 200;
-      margin: 10px 0 24px 0;
+      font-family: @en-font-family;
+      margin: 10px 0 84px 0;
       padding: 0;
-      font-family: 'Helvetica Neue', Helvetica, sans-serif;
-      color: #606978;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+      color: #666;
     }
     
     .keyvisual-small {
@@ -90,65 +99,20 @@
     a.getting-started {
       .large-button();
       transition: all 0.1s ease;
+      background-color: @onsen-color;
     }
 
     a.download {
       .large-button();
       transition: all 0.1s ease;
-      background-color: #ddd;
-      margin-left: 6px;
-      color: #666;
+      margin-left: 9px;
+      color: white;
+      background-color: #515C70;
     }
 
-    .newsletter {
-      display: inline-block;
-
-      margin: 0 auto;
-      width: 1100px;
-      max-width: 100%;
-      position: absolute;
-      bottom: 20px;
-      left: 0px;
-      right: 0px;
-
-      form {
-        background-color: #d3d9dc;
-        padding: 3px;
-        border-radius: 2px;
-        display: inline-block;
-        max-width: 100%;
-        width: auto;
-      }
-
-      input[type=text] {
-        font-size: 15px;
-        background-color: white;
-        color: #333;
-        width: 325px;
-        padding: 10px 8px 9px 8px;
-        line-height: 36px;
-        height: 36px;
-        border: none;
-        margin: 0;
-        border-radius: 2px;
-        box-sizing: border-box;
-      }
-
-      input[type=submit] {
-        .button();
-      }
-
-    }
-
-    div.newsletter-thankyou {
-      display: none;
-      font-size: 15px;
-      color: #666;
-      line-height: 38px;
-      font-weight: 500;
-    }
 
     div.social {
+      display: none;
       margin: 0 auto;
       width: 1100px;
       position: absolute;
@@ -175,7 +139,7 @@
         }
 
         strong {
-          font-weight: 600;
+          font-weight: bold;
         }
 
       }
@@ -184,96 +148,160 @@
 
   }
 
-  div.main-features,
-  div.other-features {
+  .newsletter {
+    width: 100%;
+    background-color: white;
+    height: 60px;
+    margin-top: -60px;
+    position: relative;
+    z-index: 60;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    text-align: center;
+
+    &-inner {
+      margin: 0 auto;
+      width: 1100px;
+      max-width: 100%;
+      box-sizing: border-box;
+      padding: 12px 0 0 0;
+
+      form {
+        border-radius: 1px;
+        display: inline-block;
+        max-width: 100%;
+        width: auto;
+      }
+
+      input[type=text] {
+        font-size: 15px;
+        background-color: white;
+        width: 325px;
+        padding: 10px 8px 9px 8px;
+        line-height: 34px;
+        height: 36px;
+        border: 1px solid #ccc;
+        margin: 0;
+        border-radius: 2px;
+        box-sizing: border-box;
+      }
+
+      input[type=submit] {
+        .button();
+      }
+    }
+
+    &-thankyou {
+      display: none;
+      font-size: 15px;
+      line-height: 38px;
+      font-weight: 500;
+    }
+  }
+
+
+  .main-features,
+  .other-features {
     margin: 0 auto;
     width: 900px;
-    max-width: 100%;
+    max-width: 90%;
   }
 
-  div.taglines {
-    border-bottom: 1px solid #ddd;
-    padding: 40px;
+  .taglines {
+    border-bottom: 1px solid #eee;
+    margin: 0 auto;
+    padding: 40px 0 40px 0;
+
     ul {
       width: 800px;
-      margin: 0 auto !important;
+      max-width: 90%;
+      margin: 0 auto;
       padding: 0;
     }
+
     li {
-      font-size: 16px;
-      color: #999;
+      font-size: 18px;
+      font-weight: 200;
       line-height: 1.8;
+
+      .lang-en & {
+        font-size: 20px;
+        font-family: @en-font-family;
+      }
     }
   }
 
-  section#content-container > div#content > div.main-features {
-    > div.feature {
-      border-bottom: 1px solid #D3D4D8;
-      padding: 80px 0;
-      background-repeat: no-repeat;
+  .feature {
+    border-bottom: 1px solid #D3D4D8;
+    padding: 80px 0;
+    background-repeat: no-repeat;
 
-      > h2 {
-        font-size: 36px;
-        line-height: 1.2;
-        font-weight: 200;
-        color: #345;
-      }
-
-      > p {
-        font-size: 14px;
-        color: #999;
-      }
-
-      &.super-performance {
-        padding-left: 50%;
-        background-position: 50px center;
-        background-image: url(/images/index/feature-super-performance.png);
-      }
-
-      &.multi-screen {
-        padding-right: 450px;
-        background-position: right center;
-        background-image: url(/images/index/feature-multi-screen.png);
-
-        p {
-          margin-right: 50px;
-        }
-      }
-
-      &.cordova-friendly {
-        padding-left: 50%;
-        background-position: 25px center;
-        background-image: url(/images/index/feature-phonegap-cordova-friendly.png);
-      }
-
-      &.custom-elements {
-        text-align: center;
-        padding: 60px 0;
-      }
-
-      &.with-jquery-or-angular {
-        padding-left: 50%;
-        background-position: 10px center;
-        background-image: url(/images/index/feature-with-angular-or-jquery.png);
-      }
-
-
+    h2 {
+      font-size: 36px;
+      line-height: 1.2;
+      color: #345;
+      font-weight: 300;
     }
+
+    > p {
+      font-size: 16px;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      .lang-en & {
+        font-size: 18px;
+      }
+    }
+
+    &.super-performance {
+      padding-left: 50%;
+      background-position: 50px center;
+      background-image: url(/images/index/feature-super-performance.png);
+    }
+
+    &.multi-screen {
+      padding-right: 450px;
+      background-position: right center;
+      background-image: url(/images/index/feature-multi-screen.png);
+
+      p {
+        margin-right: 50px;
+      }
+    }
+
+    &.cordova-friendly {
+      padding-left: 50%;
+      background-position: 25px center;
+      background-image: url(/images/index/feature-phonegap-cordova-friendly.png);
+    }
+
+    &.custom-elements {
+      text-align: center;
+      padding: 60px 0;
+    }
+
+    &.with-jquery-or-angular {
+      padding-left: 50%;
+      background-position: 10px center;
+      background-image: url(/images/index/feature-with-angular-or-jquery.png);
+    }
+
 
   }
 
-  div.other-features {
+  .other-features {
     padding: 70px 0 90px 0;
     font-size: 0px;
 
-    > h2 {
+    h2 {
       margin-bottom: 52px;
       font-size: 40px;
-      font-weight: 200;
       text-align: center;
+      color: #345;
     }
 
-    > div.sub-feature {
+    .sub-feature {
       display: inline-block;
       box-sizing: border-box;
       width: 450px;
@@ -286,53 +314,63 @@
       background-repeat: no-repeat;
       vertical-align: top;
 
-      &.free-and-opensource {
-        background-image: url(/images/index/sub-feature-image_free.png);
-      }
-      &.font-awesome {
-        background-image: url(/images/index/sub-feature-image_font-awesome.png);
-      }
-      &.selectable-theme {
-        background-image: url(/images/index/sub-feature-image_selectable-theme.png);
-      }
-      &.customizable {
-        background-image: url(/images/index/sub-feature-image_customizable.png);
-      }
-      &.screen-transition {
-        background-image: url(/images/index/sub-feature-image_screen-transition.png);
-      }
-      &.gui-tool {
-        background-image: url(/images/index/sub-feature-image_gui-tool.png);
-      }
-
-      > h3 {
+      h3 {
         font-size: 18px;
         line-height: 1.2;
         margin: 0 0 8px 0;
         padding: 0;
-        font-family: 'pragmatica-web', sans-serif;
-        font-weight: 200;
         border: none;
-        color: #444;
+        color: @header-text-color;
+
+        .lang-en & {
+          font-family: @en-font-family;
+          font-weight: 200;
+        }
       }
 
-      > p {
-        font-size: 13px;
-        color: #999;
+      p {
+        font-size: 14px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
         margin: 0;
         padding: 0;
         line-height: 1.6;
+
+        .lang-en & {
+          font-size: 16px;
+        }
       }
     }
+
+    .free-and-opensource {
+      background-image: url(/images/index/sub-feature-image_free.png);
+    }
+    .font-awesome {
+      background-image: url(/images/index/sub-feature-image_font-awesome.png);
+    }
+    .selectable-theme {
+      background-image: url(/images/index/sub-feature-image_selectable-theme.png);
+    }
+    .customizable {
+      background-image: url(/images/index/sub-feature-image_customizable.png);
+    }
+    .screen-transition {
+      background-image: url(/images/index/sub-feature-image_screen-transition.png);
+    }
+    .gui-tool {
+      background-image: url(/images/index/sub-feature-image_gui-tool.png);
+    }
+
   }
 
-  div.getstarted {
+  .getstarted {
     text-align: center;
     border-top: 1px solid #ddd;
     padding: 100px 0 0 0;
 
-    > a.getstarted-button {
+    .getstarted-button {
       .large-button();
+      background-color: @onsen-color;
     }
   }
 
@@ -375,8 +413,8 @@
   .github-widget-header-num,
   .github-widget-header-num:link,
   .github-widget-header-num:visited {
-    font-weight: 900;
-    font-family: 'Helvetica', Arial;
+    font-weight: 600;
+    font-family: @en-font-family;
     font-size: 18px;
     text-decoration: none;
     font-weight: 900;
@@ -419,50 +457,50 @@
 }
 
 @media screen and (max-width: 1100px) {
-  body#home {
-    div#keyvisual {
+  #home {
+    .keyvisual {
       height: auto;
       
-      > div.keyvisual-content > div.keyvisual-main {
+      .keyvisual-main {
         padding: 0;
         
-        > h1 {
+        h1 {
           display: none;
         }
-        > h2 {
+        h2 {
           display: none;
         }
-        > .keyvisual-small {
+        .keyvisual-small {
           display: block;
           margin: 0 auto;
         }
-        > a.getting-started,
-        > a.getting-started:active {
+        a.getting-started,
+        a.getting-started:active {
           width: 90%;
           max-width: 300px;
           display: block;
           margin: 0 auto 12px auto;
         }
-        > a.download,
-        > a.download:active {
+        a.download,
+        a.download:active {
           display: none;
         }
       }
-      > div.keyvisual-content {
-        > div.social {
+      .keyvisual-content {
+        .social {
           width: 100%;
           position: static;
           text-align: center;
           margin: 40px 0 10px 0;
         }
-        > div.newsletter {
-          width: 100%;
-          position: static;
-          text-align: center;
-          margin: 0 0 12px 0;
-        }
       }
-      > div.keyvisual-content {
+      .newsletter {
+        width: 100%;
+        position: static;
+        text-align: center;
+        margin: 0 0 12px 0;
+      }
+      .keyvisual-content {
         margin: 0 auto;
         width: 100%;
         height: auto;
@@ -473,49 +511,47 @@
       }
     }
 
-    div.taglines {
+    .taglines {
       ul {
         width: auto;
         margin: 0 auto;
       }
     }
 
-    section#content-container > div#content > div.main-features {
-      > div.feature {
-        > h2 {
+    .main-features {
+      .feature {
+        h2 {
           font-size: 36px;
           text-align: center;
         }
-        padding: 32px 10px 32px 10px !important;
-        background-image: none !important;
+        padding: 32px 10px 32px 10px;
+        background-image: none;
       }
     } 
 
-    div#keyvisual > div.keyvisual-content > div.newsletter {
+    .newsletter {
       input[type=text] {
         width: 220px;
       }
     }
 
-    div.other-features {
-      padding-top: 32px !important;
-      padding-bottom: 32px !important;
+    .other-features {
+      padding-top: 32px;
+      padding-bottom: 32px;
 
       text-align: center;
-      > h2 {
-        font-size: 36px !important;
+      h2 {
+        font-size: 36px;
       }
-      > .sub-feature {
+
+      .sub-feature {
         text-align: left;
       }
     }
 
-    div.getstarted {
-      a#getstarted-button {
-        font-size: 36px !important;
-      }
-      > img {
-        display: none !important;
+    .getstarted {
+      .getstarted-button {
+        font-size: 36px;
       }
     }
   }

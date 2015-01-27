@@ -1,6 +1,6 @@
 
 (function() {
-  var links = $('#content-info a');
+  var links = $('.content-info a');
   var sections = [];
   var linkMap = {};
   var toc1Items = $('.toc-1-item');
@@ -16,7 +16,6 @@
 
   var queued = false;
   function queueUpdate() {
-    console.log("a");
     if (!queued) {
       queued = true;
       setTimeout(function() {
@@ -27,7 +26,6 @@
   }
 
   function update() {
-    console.log("b");
     var scrolled = window.scrollY + 50;
 
     for (var i = sections.length - 1; i >= 0; i--) {

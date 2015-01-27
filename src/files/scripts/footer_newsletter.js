@@ -7,7 +7,7 @@ $(function() {
       .success(function(data) {
         var ret = JSON.parse(data);
 
-        if (ret.status !== undefined && ret.status === "success") {
+        if (ret.status !== undefined && ret.status === 'success') {
           $('.footer-newsletter form').hide();
           $('.footer-newsletter-thankyou').show();
         } else {

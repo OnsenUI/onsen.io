@@ -1,0 +1,95 @@
+
+.article-title-base() {
+  text-align: center;
+  .lang-en & {
+    font-family: @en-font-family;
+    font-weight: 600;
+  }
+
+  a, a:link, a:visited, a:hover {
+    color: @header-text-color;
+    text-decoration: none;
+
+    .lang-en & {
+      font-family: @en-font-family;
+      font-weight: 600;
+    }
+  }
+}
+
+.article-date-base() {
+  text-align: center;
+  font-size: 19px;
+  font-weight: 200;
+  color: #bbb;
+}
+
+#blog {
+  .content {
+    width: 700px;
+  }
+  
+  .article-overview {
+
+    margin-bottom: 100px;
+
+    &-title {
+      .article-title-base();
+
+      a:hover {
+        color: @link-color;
+        text-decoration: none;
+      }
+    }
+
+    &-date {
+      .article-date-base();
+    }
+
+    &-more {
+      text-align: center;
+      font-size: 16px;
+    }
+
+  }
+
+  .article {
+
+    &-title {
+      .article-title-base();
+    }
+
+    &-date {
+      .article-date-base();
+    }
+
+    &-footer {
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      padding-left: 10px;
+    }
+
+    &-author-label {
+      margin-top: 20px;
+      font-size: 14px;
+      color: @light-text-color;
+    }
+
+    &-author-name {
+      font-size: 18px;
+    }
+
+    &-avator {
+      float: left;
+      margin-right: 14px;
+      margin-top: 10px;
+    }
+
+    &-avator-image {
+      border-radius: 80px;
+      border: 1px solid #ccc;
+    }
+
+  }
+}

@@ -1,4 +1,4 @@
-#content-container {
+.content-container {
   margin: 0 auto;
   width: @width;
   max-width: 100%;
@@ -32,7 +32,7 @@
 
 }
 
-aside#content-info {
+.content-info {
   margin: 0;
   overflow: scroll;
   float: left;
@@ -40,7 +40,7 @@ aside#content-info {
   padding: 10px 10px 10px 0px;
   margin-right: 30px;
   box-sizing: border-box;
-  color: #494949;
+  color: @light-text-color;
   line-height: 1.4;
 }
 
@@ -49,8 +49,14 @@ aside#content-info {
   font-size: 17px;
   margin-left: 11px;
   margin-bottom: 20px;
-  color: #333;
-  letter-spacing: 0.02em;
+  color: @header-text-color;
+  letter-spacing: 0.01em;
+
+  .lang-en & {
+    font-size: 18px;
+    font-family: @en-font-family;
+    font-weight: bold;
+  }
 }
 
 .toc {
@@ -75,7 +81,6 @@ aside#content-info {
 }
 
 .toc-item-open a {
-  font-weight: bold;
 
   &:link, &:hover, &:visited {
     color: #222;
@@ -128,22 +133,26 @@ aside#content-info {
   }
 }
 
-aside#content-info + div#content, div.sticky-wrapper + div#content {
+.content-info + .content, .sticky-wrapper + .content {
   width: (@width - @aside-width);
   max-width: 100%;
   margin: 0;
   padding-right: 0px;
   margin-left: @aside-width;
   padding: 0px 0px 100px 0px;
+
+  > h2:first-child {
+    text-align: left;
+  }
 }
 
-div#content {
+.content {
   box-sizing: border-box;
   margin: 0 auto;
   padding: 0px 0px 100px 0px;
   text-align: left;
   width: (@width - @aside-width);
-  max-width: 100%;
+  max-width: 90%;
 
   ::-webkit-scrollbar {
     width: 4px;
@@ -160,11 +169,15 @@ div#content {
     background-color: #999;
   }
 
+  > h2:first-child {
+    text-align: center;
+  }
+
 }
 
 
 div.need-help {
-  > p {
+  p {
     margin: 0;
   }
 }
@@ -196,6 +209,7 @@ div.need-help {
   height: 480px;
   background-color: white;
 }
+
 .codepen-content-unloaded {
   background-color: #f9f9f9;
   border: 1px solid #ddd;
@@ -236,7 +250,7 @@ div.need-help {
   line-height: 40px;
   font-size: 60px;
   display: inline-block;
-  font-weight: 800;
+  font-weight: bold;
 
   &, &:hover, &:visited {
     color: #666;
@@ -253,12 +267,12 @@ div.need-help {
 
 
 @media screen and (max-width: 1100px) {
-  aside#content-info, div.sticky-wrapper > aside#content-info {
+  .content-info, .sticky-wrapper > .content-info {
     display: none;
   }
 
-  aside#content-info + div#content,
-  div.sticky-wrapper + div#content {
+  .content-info + .content,
+  .sticky-wrapper + .content {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 0px;

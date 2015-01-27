@@ -78,19 +78,13 @@
     <ul class="header-navi">
       <% if @lang == "en": %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'reference-index' then 'current' %>"><a href="/reference/">REFERENCE</a></li>
-        <li class="<%- if @page is 'guide' then 'current' %>"><a href="/guide/overview.html">GUIDE</a></li>
-        <li><a href="http://components.onsen.io/patterns">PATTERNS</a></li>
-        <li><a href="http://components.onsen.io/">THEMES</a></li>
+        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">DOCS</a></li>
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
-        <li><a href="http://onsen.io/blog/">BLOG</a></li>
-        <li><a href="http://ja.onsen.io/">JAPANESE</a></li>
+        <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
       <% else: %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">はじめに</a></li>
-        <li class="<%- if @page is 'reference-index' then 'current' %>"><a href="/reference/">リファレンス</a></li>
-        <li class="<%- if @page is 'guide' then 'current' %>"><a href="/guide/overview.html">マニュアル</a></li>
-        <li><a href="http://components.onsen.io/patterns">パターン</a></li>
-        <li><a href="http://components.onsen.io/">テーマローラー</a></li>
+        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
+        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">ドキュメント</a></li>
+        <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">フォーラム</a></li>
         <li><a href="http://onsen.io/">ENGLISH</a></li>
       <% end %>
     </ul>
