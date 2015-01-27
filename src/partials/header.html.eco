@@ -177,6 +177,34 @@
     }
     return "";
   }
+
+  $(function() {
+    var header = $('.header');
+    var queued = false;
+
+    function adjust() {
+      var scrollTop = $(document).scrollTop();
+      if (scrollTop > 50) {
+        header.addClass('fixed-header');
+      } else {
+        header.removeClass('fixed-header');
+      }
+    };
+
+    function update() {
+      if (!queued) {
+        queued = true;
+        setTimeout(function() {
+          adjust();
+          queued = false;
+        }, 80);
+      }
+    }
+
+    $(document).on('scroll', update);
+    adjust();
+  });
+
 </script>
 
 <% if @lang == 'en': %>

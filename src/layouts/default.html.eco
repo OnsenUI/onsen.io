@@ -96,7 +96,7 @@
 
   <%- @partial('footer.html.eco') %>
 
-  <script src="<%= @rootUrl %>vendor/jquery.sticky.js"></script>
+  <script src="<%= @rootUrl %>scripts/sticky.js"></script>
   <script>
 
   // iframe lazy loader
@@ -108,20 +108,18 @@
       throttle: 1000
     });
 
-    setTimeout(function() {
-      var iframe = $('iframe');
-      if (iframe.length > 0) {
-        iframe.lazyLoadXT();
-      }
-    }, 2000);
+    var iframe = $('iframe');
+    if (iframe.length > 0) {
+      iframe.lazyLoadXT();
+    }
   });
 
   // sticky menu
   $(function() {
     if ($('.content-info').height() < $('.content').height()) {
       $('.content-info').sticky({
-        topSpacing : 0, 
-        bottomSpacing : $('.footer-container').height() + 60 
+        topSpacing : 80, 
+        bottomSpacing : $('.footer-container').height() + 60
       });
     }
   });

@@ -5,7 +5,7 @@
   }
 
   .forum-item {
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ddd;
     padding-top: 16px;
     margin-bottom: 18px;
   }
@@ -17,22 +17,27 @@
     margin-right: 10px;
     background-color: #d9dfe2;
     text-align: center;
-    color: #333;
-    font-family: 'Helvetica';
-    border-radius: 2px;
+    color: #234;
+    border-radius: 0px;
   }
 
   .forum-item-answers-num {
     font-size: 30px;
-    font-weight: 900;
+    font-weight: bold;
     line-height: 1;
     padding-top: 8px;
+
+    .lang-en & {
+      font-size: 36px;
+      padding-top: 4px;
+    }
   }
 
   .forum-item-answers-unit {
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1;
     font-weight: 500;
+    opacity: 0.8;
   }
 
   .forum-item-answers-zero {
@@ -47,6 +52,10 @@
     color: #333;
     font-weight: 500;
     display: block;
+
+    .lang-en & {
+      font-size: 17px;
+    }
   }
 
   .forum-item-title:link,
@@ -63,21 +72,31 @@
   
   .forum-item-description {
     font-size: 13px;
-    margin: 12px 0px 4px 80px;
+    margin: 6px 0px 4px 80px;
+    color: @light-text-color;
+
+    .lang-en & {
+      font-size: 15px;
+    }
   }
 
   .forum-item-footer {
-    margin-top: 4px;
+    margin-top: 6px;
     text-align: right;
     font-size: 13px;
     line-height: 24px;
     vertical-align: middle;
-    color: #333;
+
+    .lang-en & {
+      font-size: 15px;
+    }
   }
 
   .forum-item-footer > img {
     line-height: 24px;
     vertical-align: middle;
+    border-radius: 2px;
+    margin-right: 4px;
   }
 
   .forum-widget-footer {

@@ -19,6 +19,7 @@
   }
   &:link, &:visited, &:hover, &:active, &:focus {
     text-decoration: none;
+    color: white;
   }
   &:active {
     opacity: 1;
@@ -29,7 +30,18 @@
     font-family: @en-font-family;
     font-size: 17px;
     font-weight: 200;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+}
+
+.highlight-button {
+  .button();
+}
+
+.onsen-button {
+  .button();
+  background-color: @onsen-color;
 }
 
 .large-button {
@@ -41,6 +53,13 @@
   padding: 0px 30px;
   border-radius: 0px;
   box-shadow: 0px px 4px rgba(0, 0, 0, 0.2);
+
+  .lang-ja & {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 200;
+    font-size: 20px;
+  }
 
   .lang-en & {
     font-family: @en-font-family;

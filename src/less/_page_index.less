@@ -42,23 +42,11 @@
     width: @width;
     max-width: 100%;
     margin: 0 auto;
-    /*
-    height: 550px;
-    background-repeat: no-repeat;
-    //background-image: url(/images/index/keyvisual.png);
-    background-position: 560px 20px;
-    background-size: 45% auto;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin-top: -275px;
-    margin-left: -(@width / 2);
-    */
   }
 
   .keyvisual-main {
     margin: 0 auto;
-    padding: 110px 0 0 0;
+    padding: 0;
     width: @width;
     max-width: 90%;
   }
@@ -67,10 +55,9 @@
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    height: 550px;
     background-color: #f6f6f6;
     position: relative;
-    padding: 0;
+    padding: 80px 0 80px 0;
     border-top: 1px solid #ddd;
     text-align: center;
 
@@ -86,8 +73,8 @@
     h2 {
       font-size: 26px;
       font-weight: 200;
-      font-family: @en-font-family;
-      margin: 10px 0 84px 0;
+      font-family: 'Helvetica Neue', @en-font-family;
+      margin: 10px 0 54px 0;
       padding: 0;
       color: #666;
     }
@@ -96,13 +83,13 @@
       display: none;
     }
 
-    a.getting-started {
+    .getting-started {
       .large-button();
       transition: all 0.1s ease;
       background-color: @onsen-color;
     }
 
-    a.download {
+    .download {
       .large-button();
       transition: all 0.1s ease;
       margin-left: 9px;
@@ -111,7 +98,7 @@
     }
 
 
-    div.social {
+    .social {
       display: none;
       margin: 0 auto;
       width: 1100px;
@@ -152,9 +139,8 @@
     width: 100%;
     background-color: white;
     height: 60px;
-    margin-top: -60px;
     position: relative;
-    z-index: 60;
+    z-index: 1;
     border-bottom: 1px solid #eee;
     border-top: 1px solid #eee;
     text-align: center;

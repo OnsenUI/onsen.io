@@ -8,13 +8,14 @@
   .lang-en({
     font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
   });
+  margin-bottom: @header-height;
 }
 
 #header-monaca-inner {
   width: @width;
   margin: 0px auto;
   position: relative;
-  z-index: 5;
+  z-index: 500;
   opacity: 0.4;
   transition: opacity 0.1s linear;
 
@@ -52,7 +53,6 @@
 
 #header-monaca-navi {
   position: absolute;
-  z-index: 5;
   top: 0px;
   right: 0px;
   width: auto;
@@ -87,7 +87,6 @@
 .header-monaca-navi-sub-menu {
   display: none;
   position: absolute;
-  z-index: 5;
   top: 44px;
   left: 0px;
   padding: 10px 0 10px 0;
