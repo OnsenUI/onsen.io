@@ -3,6 +3,8 @@ var marked = require('marked');
 var eco = require('eco');
 var extend = require('extend');
 var fs = require('fs');
+var moment = require('moment');
+var htmlstrip = require('htmlstrip-native').html_strip;
 
 marked.setOptions({
   gfm: true,
@@ -31,6 +33,30 @@ module.exports = function() {
         } catch (e) {
           return e.toString();
         }
+      },
+
+      dump: function(param) {
+        return JSON.stringify(param, null, '  ');
+      },
+
+      dumpKeys: function(param) {
+        return JSON.stringify(Object.keys(param), null, '  ');
+      },
+
+      renderBlogDate: function(date) {
+        var date = moment(date);
+        var result = date.format('dddd, MMMM Do, YYYY').toUpperCase();
+        return result;
+      },
+
+      getAbstractText: function(contents) {
+        var options = {
+          include_script: false,
+          include_style: false,
+          compact_whitespace: false,
+          include_attributes: false
+        };
+        return htmlstrip(contents.toString('utf8'), options).slice(0, 400) + '...';
       },
 
       markdown: function(capture) {

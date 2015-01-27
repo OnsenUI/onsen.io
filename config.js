@@ -1,6 +1,27 @@
 
+var md5 = require('MD5');
+
 module.exports = function(language) {
+  var authors = {
+    andreas: {
+      name: 'Andreas Argelius',
+      email: 'andreas@asial.co.jp',
+      url: 'http://argeli.us'
+    },
+    anatoo: {
+      name: 'Mitsunori Kubota',
+      email: 'anatoo.jp@gmail.com',
+      url: 'http://anatoo.jp'
+    }
+  };
+
+  for (author in authors) {
+    authors[author].gravator = md5(authors[author].email.toLowerCase());
+  }
+
   var env = {
+    authors: authors,
+
     en: {
       url: 'http://onsen.io',
       title: 'The Answer to PhoneGap UI Development | Onsen UI',

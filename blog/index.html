@@ -1,0 +1,30 @@
+---
+title: Onsen UI Blog
+page: blog
+paginate: articles
+---
+
+<% for article in @articles.slice(@pagination.start, @pagination.end + 1): %>
+<section class="article-overview">
+
+  <h2 class="article-overview-title"><a href="<%- @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
+  <div class="article-overview-date"><%- @renderBlogDate article.date %></div>
+
+  <p><%- @getAbstractText(article.contents) %></p>
+
+  <div class="article-overview-more"><a href="<%- @rootUrl %>blog/<%- article.id %>/">READ THIS ARTICLE</a></div>
+
+</section>
+<% end %>
+
+<% if @pagination: %>
+<nav class="blog-pagination" style="text-align: center">
+  <% if @pagination.prev: %>
+  <a class="button" href="<%= @getPath(@pagination.prev) %>">&lt; PREV</a>
+  <% end %>
+
+  <% if @pagination.num < @pagination.total and @pagination.next: %>
+  <a class="button" href="<%= @getPath(@pagination.next) %>">NEXT &gt;</a>
+  <% end %>
+</nav>
+<% end %>
