@@ -22,16 +22,15 @@
       etse = elementTop - sticked.topSpacing - extra;
 
     if (scrollTop <= etse) {
-      if (sticked.currentTop !== null) {
-        sticked.currentTop = null;
-        sticked.stickyElement
-          .css('position', '')
-          .css('top', '')
-          .parent()
-          .removeClass(sticked.className);
+      // not fixed
+      sticked.currentTop = null;
+      sticked.stickyElement
+        .css('position', '')
+        .css('top', '')
+        .parent()
+        .removeClass(sticked.className);
 
-        sticked.stickyElement.css('max-height', windowHeight - s.stickyElement.offset().top);
-      }
+      sticked.stickyElement.css('max-height', windowHeight - sticked.stickyElement.offset().top);
     } else {
       var newTop = documentHeight - sticked.stickyElement.outerHeight() - sticked.topSpacing - sticked.bottomSpacing - scrollTop - extra;
 
@@ -83,13 +82,8 @@
     }
   };
 
-  $(window).scroll(update).resize(update);
-
   $.fn.sticky = function(method) {
+    $(window).scroll(update).resize(update);
     return methods.init.apply(this, arguments);
   };
-
-  $(function() {
-    setTimeout(update, 0);
-  });
 })(jQuery);

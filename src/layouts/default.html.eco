@@ -116,9 +116,9 @@
 
   // sticky menu
   $(function() {
-    if ($('.content-info').height() < $('.content').height()) {
+    if ($('.content-info').length > 0 && $('.content-info').height() < $('.content').height()) {
       $('.content-info').sticky({
-        topSpacing : 80, 
+        topSpacing : 0, 
         bottomSpacing : $('.footer-container').height() + 60
       });
     }
