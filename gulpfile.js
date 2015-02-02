@@ -17,6 +17,7 @@ var branch = require('metalsmith-branch');
 var permalinks = require('metalsmith-permalinks');
 var metalsmithDebug = require('metalsmith-debug');
 var paginate = require('metalsmith-paginate');
+var feed = require('metalsmith-feed');
 
 //--
 
@@ -94,7 +95,22 @@ gulp.task('blog', function(done) {
       .use(templates({inPlace: true, engine: 'eco'}))
     )
     .use(metalsmithDebug())
-    .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'blog.html.eco'}))
+    .use(feed({
+      collection: 'articles',
+      limit: 10,
+      destination: 'rss.xml',
+      feedOptions: {
+        title: 'Onsen UI Blog',
+        url: 'http://onsen.io/blog'
+      }
+    }))
+    .use(branch('!rss.xml')
+      .use(layouts({
+        engine: 'eco',
+        directory: './src/layouts/',
+        default: 'blog.html.eco'
+      }))
+    )
     .build(function(error) {
       if (error) {
         console.log(error);
