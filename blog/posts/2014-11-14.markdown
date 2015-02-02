@@ -1,0 +1,69 @@
+---
+author: andreas
+date: 2014-11-14
+id: onsen-ui-v1-2-0-has-arrived-introducing-new-features
+title: "Onsen UI v1.2.0 has arrived! Introducing new features."
+---
+![Onsen UI v1.2.0](/blog/content/images/2014/Nov/eyecatch.png)
+
+Version 1.2.0 of [Onsen UI](http://onsen.io/), a framework for creating hybrid HTML5 apps with [Cordova](http://cordova.apache.org) and [PhoneGap](http://phonegap.com), has been released. In this release new UI components like alert dialog `<ons-alert-dialog>`, dialog `<ons-dialog>`, popover `<ons-popover>` and carousel `<ons-carousel>` are included.
+
+In this article new features and changes are introduced.
+
+### Alert dialog `<ons-alert-dialog>`
+
+![Onsen UI alert dialog](/blog/content/images/2014/Nov/alert_dialog.png)
+
+In order to display an alert dialog the `<ons-alert-dialog>` component has been added. It can be used to ask the user for confirmation and HTML can be added freely inside the alert dialog. Also, to replace the built-in JavaScript functions `window.alert()`, `window.confirm()` and `window.prompt()` the following methods have been introduced:
+
+* `ons.notification.alert()`
+* `ons.notification.confirm()`
+* `ons.notification.prompt()`
+
+### Dialog `<ons-dialog>`
+
+![Onsen UI dialog](/blog/content/images/2014/Nov/ons_dialog.png)
+
+In addition to the alert dialog we have created a regular dialog component. Inside the dialog components like `<ons-navigator>` and `<ons-page>` can be displayed. Modal dialogs often seen in tablet apps can be created easily.
+
+### Popover `<ons-popover>`
+
+![Onsen UI popover](/blog/content/images/2014/Nov/popover.gif)
+
+To display a popover next to a specific element the `<ons-popover>` component has been added. A popover can show details about an element and is also often used to display options or an action menu.
+
+### Carousel `<ons-carousel>`
+
+![Horizontal carousel](/blog/content/images/2014/Nov/carousel_1.gif)
+![Vertical carousel](/blog/content/images/2014/Nov/carousel_2.gif)
+![Small carousel](/blog/content/images/2014/Nov/carousel_3.gif)
+
+The much anticipated `<ons-carousel>` component is now available. The carousel can be set to cover the whole screen or just a part of it. Also, it can be configured to scroll both vertically and horizontally.
+
+### Command line interface
+
+![Monaca command line client](/blog/content/images/2014/Nov/monaca_cli.gif)
+
+Slightly unrelated, but in conjunction with the v1.2.0 release, the command line tool **monaca command** was released. Using this tool a Cordova project using one of several Onsen UI templates can be created easily from the command-line.
+
+Please install it with [npm](https://www.npmjs.org/) and try it out:
+
+```
+npm install -g monaca
+```
+
+### Other changes
+
+* The default CSS color scheme has been changed.
+* The `ons-screen`component and other deprecated methods and properties have been removed.
+* Components to detect software keyboard changes has been added in `ons-keyboard-active` and `ons-keyboard-inactive`.
+* The included version [AngularJS](https://angularjs.org/) has been updated to v1.3.0.
+* Several bug fixes.
+
+Please refer to the [CHANGELOG](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md) for a detailed look at all the additions and changes.
+
+### Finally
+
+Even after this release Onsen UI development will continue and many interesting features are in the pipeline. Developers using Cordova and PhoneGap to develop HTML5 hybrid apps, please try out Onsen UI and see what you think. On the [official Onsen UI site](http://onsen.io/) documentation and sample code is available.
+
+Please report bugs on our [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). Also please tell us if you have any ideas for new features.

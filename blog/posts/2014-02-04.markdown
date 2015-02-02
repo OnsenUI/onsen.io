@@ -1,0 +1,423 @@
+---
+author: andreas
+date: 2014-02-04
+id: introducing-onsen-ui-1-0
+title: "Introducing Onsen UI 1.0"
+---
+Today we are really excited to introduce the new version of Onsen UI. This release brings new themes and animation, new components, swipe support, grid system, bug fixes and other enhancements.
+
+## New themes
+
+We have two new themes namely **iOS 7** and **Android** theme. Check below to see how they look like.
+
+<link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<style type="text/css">
+	iframe {
+		border: none;
+		box-shadow: 0px 0px 5px #ccc;
+		overflow: hidden;
+	}
+
+  #split-view-demo {
+    transition-duration: 400ms;
+    animation-timing-function: cubic-bezier(.1, .7, .1, 1);
+  }
+
+  .resize-btn {
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    top: 48%;
+    right: 0;
+    background: rgba(0,0,0, 0.2);
+    border-radius: 50%;
+    padding: 5px;
+    color: #157DFB;
+  }
+
+  .resize-btn:hover {
+    background: rgba(0,0,0, 0.3);
+  }
+
+  .resize-btn:active {
+    background: rgba(0,0,0, 0.4);
+  }
+
+	/**
+ * Grid
+ * --------------------------------------------------
+ * Using flexbox for the grid, inspired by Philip Walton:
+ * http://philipwalton.github.io/solved-by-flexbox/demos/grids/
+ * By default each .col within a .row will evenly take up
+ * available width, and the height of each .col with take
+ * up the height of the tallest .col in the same .row.
+ */
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  /*padding: 5px;*/
+  flex-wrap: wrap;
+  width: 100%; }
+
+.row + .row {
+  margin-top: -5px;
+  padding-top: 0; }
+
+.col {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -moz-box-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: block;
+  padding: 5px;
+  width: 100%; }
+
+/* Vertically Align Columns */
+/* .row-* vertically aligns every .col in the .row */
+.row-top {
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  align-items: flex-start; }
+
+.row-bottom {
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  align-items: flex-end; }
+
+.row-center {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center; }
+
+/* .col-* vertically aligns an individual .col */
+.col-top {
+  -webkit-align-self: flex-start;
+  -moz-align-self: flex-start;
+  -ms-flex-item-align: start;
+  align-self: flex-start; }
+
+.col-bottom {
+  -webkit-align-self: flex-end;
+  -moz-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end; }
+
+.col-center {
+  -webkit-align-self: center;
+  -moz-align-self: center;
+  -ms-flex-item-align: center;
+  align-self: center; }
+
+/* Column Offsets */
+.col-offset-10 {
+  margin-left: 10%; }
+
+.col-offset-20 {
+  margin-left: 20%; }
+
+.col-offset-25 {
+  margin-left: 25%; }
+
+.col-offset-33, .col-offset-34 {
+  margin-left: 33.3333%; }
+
+.col-offset-50 {
+  margin-left: 50%; }
+
+.col-offset-66, .col-offset-67 {
+  margin-left: 66.6666%; }
+
+.col-offset-75 {
+  margin-left: 75%; }
+
+.col-offset-80 {
+  margin-left: 80%; }
+
+.col-offset-90 {
+  margin-left: 90%; }
+
+/* Explicit Column Percent Sizes */
+/* By default each grid column will evenly distribute */
+/* across the grid. However, you can specify individual */
+/* columns to take up a certain size of the available area */
+.col-10 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 10%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 10%;
+  -ms-flex: 0 0 10%;
+  flex: 0 0 10%;
+  max-width: 10%; }
+
+.col-20 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 20%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 20%;
+  -ms-flex: 0 0 20%;
+  flex: 0 0 20%;
+  max-width: 20%; }
+
+.col-25 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 25%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 25%;
+  -ms-flex: 0 0 25%;
+  flex: 0 0 25%;
+  max-width: 25%; }
+
+.col-33, .col-34 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 33.3333%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 33.3333%;
+  -ms-flex: 0 0 33.3333%;
+  flex: 0 0 33.3333%;
+  max-width: 33.3333%; }
+
+.col-50 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 50%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 50%;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%; }
+
+.col-66, .col-67 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 66.6666%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 66.6666%;
+  -ms-flex: 0 0 66.6666%;
+  flex: 0 0 66.6666%;
+  max-width: 66.6666%; }
+
+.col-75 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 75%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 75%;
+  -ms-flex: 0 0 75%;
+  flex: 0 0 75%;
+  max-width: 75%; }
+
+.col-80 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 80%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 80%;
+  -ms-flex: 0 0 80%;
+  flex: 0 0 80%;
+  max-width: 80%; }
+
+.col-90 {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 90%;
+  -moz-box-flex: 0;
+  -moz-flex: 0 0 90%;
+  -ms-flex: 0 0 90%;
+  flex: 0 0 90%;
+  max-width: 90%; }
+
+
+.row--fit>.col {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    -moz-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+.row--100>.col {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 100%;
+    -moz-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+}
+</style>
+
+### iOS 7 Theme
+
+
+<iframe src="http://onsenui.github.io/theme-demo/ios.html" width="300" height="565"></iframe>
+
+
+<iframe src="http://onsenui.github.io/theme-demo/ios2.html" width="300" height="566"></iframe>	
+
+### Android Theme
+
+<iframe src="http://onsenui.github.io/theme-demo/android.html" width="300" height="565"></iframe>
+	
+<iframe src="http://onsenui.github.io/theme-demo/android2.html" width="300" height="559"></iframe>	
+
+
+## New Components
+
+### ons-split-view
+
+Split View devides the screen into left and right sections. This is useful for application that target large-screen devices.
+
+The [Split View](http://onsenui.io/docs/#split-view) can also be configured to be responsive to screen orientation or width. For example, it can be set to auto collapse into [Sliding Menu](http://onsenui.io/docs/#sliding-menu) when  in landscape, and expands into Split View when in landscape orientation. 
+
+Click on the resize button on the right side of the Split View below to see the effect.
+When collapsed into Sliding Menu, swiping right/left will open/close the menu.
+
+<div style="width: 100%; height: 401px; position: relative;">
+	<iframe id="split-view-demo" src="http://onsenui.github.io/demo/screen_split_view_navigator_demo.html" height="400" style="position: absolute; width: 90%; top: 0; bottom: 0;"></iframe>	
+  <div id="resize-btn" class="resize-btn">    
+    <i class="fa fa-arrows-h fa-lg"></i>
+  </div>
+</div>
+
+<script>
+
+(function(){
+  var expanded = true;
+  var splitViewIFrame = document.getElementById('split-view-demo');
+  var resizeButton = document.getElementById('resize-btn');
+  resizeButton.addEventListener('click', function(){
+    if(expanded){
+      splitViewIFrame.style.width = '250px';
+    }else{
+      splitViewIFrame.style.width = '90%';
+    }
+    expanded = !expanded;
+  });
+})();
+
+</script>
+
+
+
+### ons-radio-button
+
+Please click [here](http://onsenui.io/docs/#radio-button) for documentation.
+
+<iframe src="http://onsenui.github.io/demo/radio_button_demo.html"></iframe>
+
+
+### ons-checkbox
+
+Please click [here](http://onsenui.io/docs/#checkbox) for documentation.
+
+<iframe src="http://onsenui.github.io/demo/checkbox_demo.html"></iframe>
+
+
+### ons-icon
+
+Onsen UI uses [Font Awesome](http://fontawesome.io/) for the icons. ons-icon is short-hand element for using Font Awesome.
+
+*Example*
+  
+    <ons-icon
+      icon="camera"
+      size="2x"
+    </ons-icon>
+
+<div>
+  <i class="fa fa-camera fa-2x"></i>
+</div>
+
+Please click [here](http://onsenui.io/docs/#icon) for documentation, and [here](http://fontawesome.io/icons/) for all the icons from Font Awesome.
+
+
+### ons-if-orientation
+
+You can now easily show different content on different screen orientatio by using this element.
+
+*Example*
+
+    <ons-page class="center">    
+      <div ons-if-orientation="portrait">
+          <h1>Portrait content here!</h1>
+      </div>
+
+      <div ons-if-orientation="landscape">
+          <h1>Landscape content here!</h1>
+      </div>
+    </ons-page>
+
+<iframe width="250" height="450" src="http://onsenui.github.io/demo/if_orientation_demo.html"></iframe>
+
+<iframe width="450" height="250" src="http://onsenui.github.io/demo/if_orientation_demo.html"></iframe>
+
+### ons-if-platform
+
+You can also show different content on different platform.
+
+*Example*
+
+    <div ons-if-platform="Android">
+      <h1>Show me only if run in Android.</h1>
+    </div>
+
+    <div ons-if-platform="iOS">
+      <h1>Show me only if run in iOS.</h1>
+    </div>
+
+    <div ons-if-platform="BlackBerry">
+      <h1>Show me only if run in BlackBerry.</h1>
+    </div>
+
+    <div ons-if-platform="chrome">
+      <h1>Show me only if run in Chrome.</h1>
+    </div>
+
+    <div ons-if-platform="safari">
+      <h1>Show me only if run in Safari.</h1>
+    </div>
+
+    <div ons-if-platform="firefox">
+      <h1>Show me only if run in Firefox.</h1>
+    </div>
+
+    <div ons-if-platform="Opera">
+      <h1>Show me only if run in Opera.</h1>
+    </div>
+
+<iframe width="250" height="450" src="http://onsenui.github.io/demo/if_platform_demo.html"></iframe>
+
+
+### Swipe
+
+Swipe is important for mobile interaction. It just feels natural. We have added swipe interaction with Sliding Menu and Split View.
+
+Play with the demo below!
+
+<iframe style="float: left; margin-right: 20px;" width="250" height="450" src="http://onsenui.github.io/demo/sliding_menu_demo.html"></iframe>
+<img src="http://onsenui.github.io/demo/images/QR_links/qr_slidng_menu_demo.png" alt="">
+Try it on your phone!
+<div style="clear: both;"></div>
+
+
+### Grid System
+
+You can now easily layout application UI using ons-row and ons-col. By default all the columns in a row are equally sized to fit the row. You are not limitted to fixed columns, put any columns in a row. You can even align the columns vertically and offset columns.
+
+<iframe width="250" height="450" src="http://onsenui.github.io/demo/grid_demo.html"></iframe>
+
+Please check the [docs](http://localhost:9778/docs/#row) for more information.
+
+## Upgrade Guide
+
+To upgrade from older version please visit this link:
+[https://github.com/OnsenUI/OnsenUI/wiki/Upgrade-Guide](https://github.com/OnsenUI/OnsenUI/wiki/Upgrade-Guide)
+
+## Conclusion
+
+That is Onsen UI 1.0. We hope it help you create awesome apps and hope you enjoy using it.

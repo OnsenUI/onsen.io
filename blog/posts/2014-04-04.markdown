@@ -1,0 +1,142 @@
+---
+author: andreas
+date: 2014-04-04
+id: onsen-ui-1-0-4-released
+title: "Onsen UI 1.0.4 Released with Tabbar and Navigator Enhancements"
+---
+Hope you are having a good day! Today, we released a new version of Onsen UI with a few new enhancements and bug fixes.
+
+### Tabbar Improvements
+
+#### New event for a changed tab item
+
+Now you can get notified when active tab is changed. To do so, specify a function to `on-active-tab-changed` attribute.
+
+	<ons-tabbar 
+    	on-active-tab-changed="onTabChanged($index, $tabItem)">
+    </ons-tabbar>
+        
+And write the callback in the controller.
+
+	$scope.onTabChanged = function($index, $tabItem){
+    	console.log('tab changed to', $index);
+    }
+    
+As illustrated on the code above, we can get the `$index` and the `$tabItem` of the new tab.
+
+
+#### Activate a tab from the code
+
+Before 1.0.4, tab can be activated only by tapping the tab. Now you can activate the tab from your controller using `setActiveTab(INDEX)`.
+
+Calling from the controller:
+	
+	$scope.ons.tabbar.setActiveTab(0); // Show first tab
+
+Or, calling from `ng-click` or similar directives:
+
+	<ons-button ng-click="ons.tabbar.setActiveTab(1)">
+        Show second tab
+    </ons-button>
+    
+
+#### CSS class for active tab item
+
+When a tab is activated, an `active` class is added to the `topcoat-tab-bar__item` element.This make it easy to customize tabbar appearance.
+
+For example:
+
+	<ons-tabbar>
+      <ons-tabbar-item 
+        icon="home-icon"
+        label="Home"
+        page="page1.html"
+        active="true"></ons-tabbar-item> 
+      <ons-tabbar-item 
+        icon="comment"
+        label="Comments"      
+        page="page2.html"></ons-tabbar-item> 
+    </ons-tabbar>
+    
+    
+CSS definition:
+
+    .home-icon {    
+        background-image: url(icon.png);
+        background-size: 100%;
+        width: 30px;
+        height: 30px;
+        margin: 0 auto !important;
+    }
+    
+    .active .home-icon { /* When active state */
+        border: 1px solid red;
+    }
+    
+### Navigator Improvements
+
+#### Pass and retrieve parameters between pages
+
+You can now add parametters into navigator push page's options and retrieve them back via `getCurrentPage()` method.
+
+	// Pass parameters to another page
+	ons.navigator.pushPage("path/to/page.html", {foo: "bar"})
+    
+    // Retrieve parameters from the other page
+	ons.navigator.getCurrentPage().options.foo //  "bar"
+    
+    // Retrieve the current page
+	ons.navigator.getCurrentPage().options.page //  "path/to/page.html"
+    
+    // Retrieve the entire stack
+	ons.navigator.getPages() //  [pageObj1, pageObj2, ... , pageObjN]
+
+An example to change the behavior of the back button:
+
+	 document.addEventListener("backbutton", function (e) {
+            if ($rootScope.ons.navigator.getPages().length > 1) {
+                e.preventDefault();
+                $rootScope.ons.navigator.popPage();
+            } else {
+                navigator.app.exitApp();
+            }
+	}, false);
+    
+    
+### Ons-text-input with type
+
+Now you can use `type` attribute to change the keyboard layout.
+
+	<ons-text-input type="number"/>
+    <ons-text-input type="password"/>
+    <ons-text-input type="email"/>
+    <ons-text-input type="tel"/> // Telephone
+    <ons-text-input type="date"/>
+        
+## Bug Fixes
+
+Also, 1.0.4 includes the following bug fixes.
+
+* Maximum call stack size exceeded on function checkiOS7 in ons-navigator.
+
+* In Android 4.2.2, a call to toggleMenu opens and closes the menu.
+
+* iOS viewport and keyboard.
+
+* presentPage() in android 2.3.6 results in empty page.
+
+* Text of left button not truncated in 1.0.3.
+
+* Navigator hide-toolbar is not working.
+
+* Switch bug on iPad iOS 6.
+
+For more information on this release, please see [1.0.4 milestone](https://github.com/OnsenUI/OnsenUI/issues?milestone=6&page=1&state=closed) page on our GitHub repo.
+
+## Conclusion
+
+Thank you for your support and bug reports. Please keep reporting [issues](https://github.com/OnsenUI/OnsenUI/issues?page=1&state=open) and we will try to get to you as soon as possible.
+
+Last but not least, special thanks to the contributors for their excellent codes.
+
+Happy Coding!

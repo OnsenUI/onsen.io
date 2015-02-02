@@ -37,7 +37,7 @@ gulp.task('blog', function(done) {
 
   metalsmith(__dirname)
     .clean(false)
-    .source('./blog/')
+    .source('./blog/posts/')
     .destination('./out_en/blog/')
     .metadata(require('./config.js')('en'))
     .use(require('./plugins/helpers')())
@@ -60,7 +60,7 @@ gulp.task('blog', function(done) {
         smartypants: true
       }))
       .use(permalinks({
-        pattern: ':id'
+        pattern: 'posts/:id'
       }))
       .use(function(files, metalsmith, done) {
         var authors = metalsmith.metadata().env.authors;
@@ -77,7 +77,7 @@ gulp.task('blog', function(done) {
     .use(branch('*.html')
       // index page
       .use(paginate({
-        perPage: 1,
+        perPage: 3,
         path: 'blog'
       }))
       .use(function(files, metalsmith, done) {
@@ -111,6 +111,7 @@ gulp.task('blog', function(done) {
         default: 'blog.html.eco'
       }))
     )
+    .use(assets({source: './blog/assets'}))
     .build(function(error) {
       if (error) {
         console.log(error);

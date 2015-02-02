@@ -1,0 +1,43 @@
+---
+author: andreas
+date: 2014-02-14
+id: customizing-onsen-ui-navigator-toolbars-icon
+title: "Customizing Onsen UI Navigator Toolbar's Icon"
+---
+Onsen UI supports font-awesome which has 369 icons! That's alot but no matter how many icons provided, there is no gurantee that it will support your app icon's need.
+
+What you need to do is specify the **css class name** in left-button-icon/right-button-icon.
+
+	<ons-navigator right-button-icon="my-icon">
+    
+    
+Then in your css file. Specify the properties of your css class name as shown below.
+
+**css**
+
+	.my-icon {
+      background-image: url(heart.png);
+      width: 35px;
+      height: 70%;
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin-top: 6px;   
+    }
+    
+    .my-icon:active {
+      background-image: url(heart_active.png);
+    }
+    
+<style type="text/css">
+	iframe {
+		border: none;
+		box-shadow: 0px 0px 5px #ccc;
+		overflow: hidden;
+	}
+</style>
+
+<iframe src="http://onsenui.github.io/blog_demo/2014_02_14_toolbar_icon/app/" width="300" height="565"></iframe>
+
+Use css pseudo class as you normally do in css. In the above case, I use **:active** pseudo class.
+
+That's it! Happy coding!

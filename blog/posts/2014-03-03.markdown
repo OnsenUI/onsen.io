@@ -1,0 +1,191 @@
+---
+author: andreas
+date: 2014-03-03
+id: onsen-ui-tutorial-angularjs-essentials-for-using-onsen-ui-part-1
+title: "Onsen UI-Tutorial: AngularJS Essentials for Using Onsen UI Part 1"
+---
+##AngularJS Essentials for Using Onsen UI
+
+###Part 1: Basics
+
+Since the official release of Onsen UI 1.0, we have been receiving more inquiries relating to [AngularJS](http://angularjs.org/). Onsen UI is a front-end UI framework built on and optimized for AngularJS and Topcoat, which were developed by Google and Adobe respectively.
+
+
+This means that Onsen UI requires basic knowledge of AngularJS. Therefore, we are going to learn today the helpful basics of AngularJS to use Onsen UI.
+
+
+AngularJS is the JavaScript MVVM framework developed by Google (also referred as MVC or MVW). You can download it from [here](http://angularjs.org/).
+
+You can start using by loading it with a script tag as below; No additional setup is required.
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min.js"></script>
+
+Loading AngularJS into a web page by itself does not bootstrap AngularJS. You will need to insert **"ng-app"** to bootstrap AngularJS within the tag as shown in the example below:
+
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.11/angular.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+        <script>
+        
+          //Difine angular module.
+          var Onsen = angular.module('Onsen',[]);
+        
+          Onsen.controller('MorningCtrl', function($scope){
+            $scope.greeting = "Good Morning!";
+          });
+        
+          Onsen.controller('DayCtrl', function($scope){
+            $scope.greeting = "Good Day!";
+          });      
+     
+          Onsen.controller('NightCtrl', function($scope){
+            $scope.greeting = "Good Night!";
+          });
+          
+        </script>
+      </head>
+      <body ng-app="Onsen">
+      
+        <div ng-controller="MorningCtrl">
+          <h2>{{greeting}}</h2>
+        </div>
+        
+        <div ng-controller="DayCtrl">
+          <h2>{{greeting}}</h2>
+        </div>
+        
+        <div ng-controller="NightCtrl">
+          <h2>{{greeting}}</h2>
+        </div>    
+        
+      </body>
+     
+    </html>
+
+Please remember that AngularJS will bootstrap within the tag where ng-app is inserted.
+
+	<body ng-app="Onsen">
+    
+In this case, ng-app="Onsen" applies the Onsen module that is declared in the script tag to inside the body tag. The declaration is as below:
+
+	var Onsen = angular.module('Onsen',[]);
+
+The "Onsen module" is my own module, defined and named by me.
+
+[Modules](http://docs.angularjs.org/guide/module) are special objects in AngularJS. AngularJS can create useful components like ["Controllers"](http://docs.angularjs.org/guide/controller), ["Directives"](http://docs.angularjs.org/guide/directive), and ["Services"](http://docs.angularjs.org/guide/dev_guide.services.creating_services) within these modules.
+
+
+As a quick introduction to these components, "Controllers" are what’s known as controllers in MVC, used to notify about any changes to the model within the view. "Directives" are used to create custom HTML components. "Services" are used to share variables and functions with Controllers or Directives.
+
+Let's get back to the example and see what's inside the body tag of the HTML.
+
+	<div ng-controller="MorningCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+    <div ng-controller="DayCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+    <div ng-controller="NightCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+Ng-controller attributes are written within three div tags. Then, within each, there is **{{greeting}}** which is an AngularJS expression.
+
+	<div ng-controller="MorningCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+The above code applies the "MorningCtrl" controller to the div tag. Also, **{{}}** is associated with the Controller's model (data).
+
+Let's look at the corresponding script tag:
+
+	//Define MorningCtrl
+      Onsen.controller('MorningCtrl', function($scope){
+          $scope.greeting = "Good Morning!";
+      });
+      
+The controller() function of the module creates the MorningCtrl controller. Next, the **$scope** value is passed as the parameter.
+
+This $scope is used to reference what’s known as a model in MVC. By attaching functions or variables to $scope objects, they can be referenced from the above-mentioned **"{{}}"** AngularJS expression or many other AngularJS syntaxes.
+
+
+This means that "M" (the model) within the MorningCtrl "C" (the controller) that is:
+
+
+	$scope.greeting = "Good Morning!";
+
+
+Can be referenced from:
+
+
+	<h2>{{greeting}}</h2>
+
+
+That is "V" (the view). As a result, the "Good Morning!" text will be displayed in {{greeting}}.
+
+When any data ($scope.greeting in this example) changes within the scopes of a controller (MorningCtrl in this example), AngularJS will immediately detect the change and reflect it within the view ({{greeting}} in this example). This will free developers from the tedious coding needed to reflect data changes within the view. AngularJS can automatically take care of those tasks for you.
+
+
+In AngularJS, each Controller has a different $scope. The $scope of these three "MorningCtrl", "DayCtrl" and "NightCtrl" controllers are different objects. In the above example, three different values of "Good Morning", "Good Day!" and "Good Night!" are passed to the $scope.greeting of each controller, and this is why different values are displayed in {{greeting}} as shown below:
+
+	<div ng-controller="MorningCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+    <div ng-controller="DayCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+    
+    <div ng-controller="NightCtrl">
+      <h2>{{greeting}}</h2>
+    </div>
+
+
+AngularJS has a single ["$rootScope"](http://docs.angularjs.org/api/ng/service/$rootScope) root scope, which can be described as the sole parent of all other “$scope” scopes. Each scope ($scope) is a descendant of this $rootScope.
+
+The next code is a simple example of how C (the controller) will notify and reflect the change to M (the model) within V (the view) in AngularJS.
+
+	<!DOCTYPE HTML>
+    <html>
+        <head>
+      <meta charset="utf-8">
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+      <script>
+ 
+    var myApp = angular.module('myApp',[]);
+ 
+    myApp.controller('HelloCtrl', function($scope){
+      $scope.name = "Onsen UI!";
+    });
+ 
+    </script>
+    </head>
+    <body ng-app="myApp">
+    <div ng-controller="HelloCtrl">
+    <input type="text" ng-model="name">
+    <p>Hello {{name}}</p>
+    </div>
+    </body>
+    </html>
+
+The text shown below is the result of the above code. You can enter any text here.
+
+<iframe src="http://s3.asial.co.jp/~ataru/blog20140209/bind.html" width="400px" height="200px"></iframe>
+
+	<p>Hello {{name}}</p>
+    
+Then, you should be able to see the {{name}} after "Hello" is updated to the text you entered.
+
+[The ngModel directive](http://docs.angularjs.org/api/ng/directive/ngModel) specifies the model by writing ng-model="name” as below: This “name” is data-bound to $scope.name within HelloCtrl. 
+
+	<input type="text" ng-model="name">
+
+With this data-binding, AngularJS will detect any changes in the $scope.name value, and automatically reflect the updated data to the above-mentioned {{name}}.
+
+In AngularJS, controllers can detect any changes to the model and automatically notify the view.
+
+In the next part, we will learn how to register click events with AngularJS, and how to use AngularJS with jQuery.

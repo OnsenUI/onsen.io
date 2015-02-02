@@ -1,0 +1,271 @@
+---
+author: andreas
+date: 2014-03-28
+id: lets-make-an-angularjs-custom-directive
+title: "Let's Make an AngularJS Custom Directive"
+---
+Hello, this is Ohto from the Onsen UI Team.
+
+Today, we are going to create an AngularJS custom directive. This is a simple directive that wraps ngInclude. If you are looking for the basics about AngularJS, [this blog post](http://blog.onsenui.io/onsen-ui-tutorial-angularjs-essentials-for-using-onsen-ui-part-1/) would be more helpful for you.　
+
+<iframe style="background-image: url('http://s3.asial.co.jp/~ataru/my_image/nexus5.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://s3.asial.co.jp/~ataru/blog20140316/index.html"  width="359" height="640" scrolling="no"></iframe>
+
+
+If you are using [Monaca](http://monaca.mobi/en/), download [this folder](http://s3.asial.co.jp/~ataru/blog20140316/project.zip) to import your project. Please [click here](http://docs.monaca.mobi/en/manual/application/import_export_project/) to see how to import a project.
+
+index.html
+
+	<!DOCTYPE HTML>
+	<html ng-app="myApp">
+		<head>
+    		<meta charset="utf-8">
+    		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    		<script src="lib/angular.js"></script>   
+    		<script src="lib/angular-animate.js"></script>    
+    		<link rel="stylesheet" href="css/topcoat-mobile-onsen-ios7.min.css">
+    		<link rel="stylesheet" href="css/normalize.css">
+    		<link rel="stylesheet" href="css/style.css">
+    		<script src="js/app.js"></script>
+  		</head>
+  		<body ng-app="memoApp" ng-controller="pageCtrl">
+    		<ons-include page='templates/page1.html'></ons-include>
+  		</body>
+	</html>
+
+js/app.js
+
+    var myApp = angular.module('myApp', ['ngAnimate']);
+    
+    //Register Services to myApp Module.
+    myApp.factory('MemoService', function() {
+    
+    	return {
+    
+    		templates  : {
+    			"page1" : "templates/page1.html",
+    			"page2" : "templates/page2.html"
+    		},    
+    
+    		animationClasses : {
+    			"slide_left" : "slide-left",
+    			"slide_right" : "slide-right",
+    			"fade" : "fade",
+    			"move_left" : "move-left",
+    			"move_right" : "move-right"
+    		}
+    	};
+    });
+    
+    myApp.controller('pageCtrl', function($scope, MemoService, $timeout) {
+    
+    	$scope.onsIncludeCurrentPage = MemoService.templates.list;
+    	$scope.onsIncludeAnimation = '';
+    
+    	$scope.changePage = function(animation, page){
+    		$scope.onsIncludeAnimation = animation;
+    		$timeout(function(){
+    			$scope.onsIncludeCurrentPage = page;
+    		},'250');
+    	};
+    
+    	$scope.changeTemplate1 = function(){
+    		$scope.changePage(
+    			MemoService.animationClasses.move_left,
+    			MemoService.templates.page2
+    		);
+    	};
+    	$scope.changeTemplate2 = function(){
+    		$scope.changePage(
+    			MemoService.animationClasses.move_right,
+    			MemoService.templates.page1
+    		);
+    	};
+    });
+    
+    myApp.directive('onsInclude', function($compile) {
+    	return {
+    		replace : true,
+    		scope : false,
+    		restrict : 'EA',
+    		link : function($scope, $element, $attrs) {
+    
+    			$scope.onsIncludeCurrentPage = $attrs.page  || $scope.onsIncludeCurrentPage;
+    
+    			var DOM = angular.element(
+    				"<div class='ons_include_container'> \n" +
+    				"<div ng-class='onsIncludeAnimation' class='ons_include' ng-include='onsIncludeCurrentPage'> \n" +
+    				"</div> \n" +
+   					 "</div>");
+    			var $e =$compile(DOM)($scope);
+    			$element.replaceWith($e);
+    		}
+    	};
+    });
+    
+    myApp.directive('onsTouchstart', function() {
+    	return function(scope, element, attrs) {
+    		element.bind('touchstart', function() {
+    			scope.$apply(attrs['onsTouchstart']);
+    		});
+    	};
+    });
+
+I will explain only the part of app.js which defines the directive.
+The following part defines the custom directive, ons-include, that is used in index.html.
+
+    myApp.directive('onsInclude', function($compile) {
+          return {
+            replace : true,
+            scope : false,
+            restrict: 'EA',
+            link: function($scope, $element, $attrs) {
+          
+              $scope.onsIncludeCurrentPage = $attrs.page  || $scope.onsIncludeCurrentPage;
+                
+              var DOM = angular.element(
+                "<div class='ons_include_container'> \n" +
+                    "<div ng-class='onsIncludeAnimation' class='ons_include' ng-include='onsIncludeCurrentPage'> \n" +
+                    "</div> \n" +
+                "</div>");
+              var $e =$compile(DOM)($scope);
+              $element.replaceWith($e);
+            }
+       }    
+      });
+      
+The directive is dependent on [the $compile service](http://docs.angularjs.org/api/ng/service/$compile).
+
+	myApp.directive('onsInclude', function($compile)
+
+
+Setting “replace : true” determines whether the current element is replaced by the directive. [This thread](http://stackoverflow.com/questions/15285635/how-to-use-replace-of-directive-definition) elaborates on the details and provides examples for better understanding.
+
+Setting “scope : false” has this directive share its scope with the parent scope. [This plunker](http://plnkr.co/edit/UUBxb2fjiqXNfWyt16mG?p=preview) explains when the scope is false. Incidentally, setting no value in the scope will return a false value.
+
+I am not going to cover the details today, but you can also generate child scopes that inherit their parent’s scope or isolate scopes. Creating these will allow you to control access from the outside to directive-provided method and variables.
+
+Setting “restrict: 'EA'” allows the setting of a directive inside an HTML tag either as E (element) or A (attribute).
+
+In index.html, ons-include is set as E (element).
+
+	<ons-include page='templates/page1.html'></ons-include>
+
+However, you can also set ons-include as A (attribute). The below code also works.
+
+	<div ons-include page='templates/page1.html'></div>
+    
+Setting a link option defines a function that will run when this directive is compiled, or an API that will be exposed. This directive's scope is stored in $scope, and as is DOM in $element and attribute in $attrs.
+
+	link: function($scope, $element, $attrs) {
+      
+        ....
+ 
+    });
+
+For cases where the page value has been already set as this directive's attribute, enter that page value in $scope.onsIncludeCurrentPage. If the page value is not set, enter $scope.onsIncludeCurrentPage as defined in the parent scope. I will not explain about how to work around errors due to not having $scope.onsIncludeCurrentPage in this entry. Next, generate a DOM that includes ngInclude and pass $scope.onsIncludeCurrentPage to that ngInclude. Pass onsIncludeAnimation the CSS class (as defined in the parent scope), which will serve as the page transition animation. Lastly, replace it with the generated ngInclude DOM.
+
+    		$scope.onsIncludeCurrentPage = $attrs.page  || $scope.onsIncludeCurrentPage;
+    
+    		var DOM = angular.element(
+    			"<div class='ons_include_container'> \n" +
+    			"<div ng-class='onsIncludeAnimation' class='ons_include' ng-include='onsIncludeCurrentPage'> \n" +
+    			"</div> \n" +
+    			"</div>");
+    		var $e =$compile(DOM)($scope);
+    		$element.replaceWith($e);
+    	}
+    }
+    
+As a result, the below:
+
+	<ons-include page='templates/page1.html'></ons-include>
+    
+Will be compiled as follows:
+
+	<div class='ons_include_container'>
+        <div ng-class='onsIncludeAnimation' class='ons_include' ng-include='onsIncludeCurrentPage'>
+        </div>
+    </div>
+
+The CSS class for the animation specified in the parent scope is included in onsIncludeAnimation. Also, the page specified in either "ons-include" or the parent scope is included in ng-include.
+
+With the above code, you can create a directive simply to wrap ngInclude, gather data from the service, pass data from the controller to the directive, and modify the view. On the other hand, you can delegate to the directives for additional data and APIs from other controllers and services, by writing the below code:
+
+    var myApp = angular.module('myApp', ['ngAnimate']);
+    
+    //Register Services to myApp Module.
+    myApp.factory('TemplateManagerService', function() {
+  
+    	return {
+    		templates  : {
+    			"page1" : "templates/page1.html",
+    			"page2" : "templates/page2.html"
+    		}
+    	};
+    });
+    
+    
+    myApp.controller('pageCtrl', function($scope, TemplateManagerService, $timeout) {
+    
+    	$scope.onsIncludeCurrentPage = TemplateManagerService.templates.list;
+    	$scope.onsIncludeAnimation = '';
+    
+    	$scope.changeTemplate1 = function() {
+    		$scope.onsIncludeChangeTemplate(
+    			$scope.onsIncludeAnimationClasses.move_left,
+    			TemplateManagerService.templates.page2
+    		);
+    	};
+    	$scope.changeTemplate2 = function() {
+    		$scope.onsIncludeChangeTemplate(
+    			$scope.onsIncludeAnimationClasses.move_right,
+    			TemplateManagerService.templates.page1
+    		);
+    	};
+    });
+    
+    
+    myApp.directive('onsInclude', function($compile, $timeout) {
+    	return {
+    		replace : true,
+    		scope : false,
+    		restrict: 'EA',
+    		link: function($scope, $element, $attrs) {
+    
+    			$scope.onsIncludeAnimationClasses = {
+    				"slide_left" : "slide-left",
+    				"slide_right" : "slide-right",
+    				"fade" : "fade",
+    				"move_left" : "move-left",
+    				"move_right" : "move-right"
+    			};
+    
+    			$scope.onsIncludeCurrentPage = $attrs.page  || $scope.onsIncludeCurrentPage;
+    			$scope.onsIncludeAnimation = '';      
+    
+    			var DOM = angular.element(
+    				"<div class='ons_include_container'> \n" +
+    				"<div ng-class='onsIncludeAnimation' class='ons_include' ng-include='onsIncludeCurrentPage'> \n" +
+    				"</div> \n" +
+    				"</div>");
+    			var $e =$compile(DOM)($scope);
+    			$element.replaceWith($e);
+    
+    
+    			$scope.onsIncludeChangeTemplate = function(animation, page) {
+    				$scope.onsIncludeAnimation = animation;
+    				$timeout(function(){
+    					$scope.onsIncludeCurrentPage = page;
+    				},'250');
+    			};
+    		}
+    	};
+    });
+
+Now, it's not the controller but the ons-include directive that provides the page transition API, and also controls the CSS for animation, taking on more roles and responsibilities. On the other hand, the service simply has HTML page information defined by the app developer. The controller’s focus is only on its role of accessing the directive-provided API and notifying of data changes within the view.
+
+This is how you can create your own custom HTML elements by using directives. Onsen UI also consists of various custom AngularJS directives. With the release of the latest version 1.0.3, Onsen UI offers an even more sophisticated design and improved usability.
+
+Try the latest features of Onsen UI, and send us your feedback! We will incorporate your feedback to help improve the framework, and to create a more awesome UI in more intuitive environment.
+
+That's all for today. Thanks for reading!

@@ -7,12 +7,12 @@ paginate: articles
 <% for article in @articles.slice(@pagination.start, @pagination.end + 1): %>
 <section class="article-overview">
 
-  <h2 class="article-overview-title"><a href="<%- @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
+  <h2 class="article-overview-title"><a href="<%- @rootUrl %>blog/posts/<%- article.id %>/"><%= article.title %></a></h2>
   <div class="article-overview-date"><%- @renderBlogDate article.date %></div>
 
   <p><%- @getAbstractText(article.contents) %></p>
 
-  <div class="article-overview-more"><a href="<%- @rootUrl %>blog/<%- article.id %>/">READ THIS ARTICLE</a></div>
+  <div class="article-overview-more"><a href="<%- @rootUrl %>blog/posts/<%- article.id %>/">READ THIS ARTICLE</a></div>
 
 </section>
 <% end %>

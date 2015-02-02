@@ -1,0 +1,114 @@
+---
+author: andreas
+date: 2014-07-22
+id: onsen-ui-1-1-now-supports-jquery
+title: "Major New Release: Onsen UI 1.1 Reduces AngularJS Complexity, Supports jQuery"
+---
+![Onsen UI 1.1.0 Release](/blog/content/images/2014/Jul/blog_img03-1.png)
+
+Onsen UI 1.1 is a major new release of our popular custom elements-based HTML5 UI framework. Want to build mobile UIs? It’s even easier than before! Onsen UI 1.1 has arrived with some of the coolest features to date - including the ability to now use jQuery.
+
+First, we’ve added an interface for non-AngularJS applications. This means web developers and designers without **ANY** AngularJS knowledge can now easily create beautiful hybrid mobile apps by using a window object version of Onsen UI. You jQuery users now have a very high performance alternative to jQuery Mobile. Have a deep understanding of AngularJS and love working with it? Don’t worry. Onsen UI is still an AngularJS-based product, so you AngularJS hackers can continue to work with it as you normally do!
+
+Second, the screen transitions and page navigations are rewritten from scratch to increase performance and allow more fine-grain control. Event handlings, custom animations, and design customizations are very easy. 
+
+Third… well, read on for more details and links around Onsen UI 1.1 new features!
+
+### New Features
+
+Onsen UI 1.1 introduces a large array of new features, big and small. Before we review the best new features, we want to let you know that since there are so many changes and details to share, they won’t all fit into this one blog post! If you would like a more in-depth look, check out our [Onsen UI Guide](/guide/overview.html) that covers absolutely everything about Onsen UI 1.1. 
+
+[![New document](/blog/content/images/2014/Jul/newdoc-1.png)](/guide/overview.html)
+
+### jQuery Support
+
+Onsen UI elements now has a `var` attribute so that you can refer to the components from anywhere in your code. You'll see that **NO** AngularJS code is used in the following example. It's as easy as it looks.
+
+```
+<!doctype html>
+<link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+<link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+<script src="lib/onsen/js/angular/angular.js"></script>
+<script src="lib/onsen/js/onsenui.js"></script>
+<script>
+  ons.bootstrap();
+  ons.ready(function() {
+    // Add another Onsen UI element
+    var content = document.getElementById("#my-content");
+    content.innerHTML="<ons-button>Another Button</ons-button>";
+    ons.compile(content);
+  });
+</script>
+<body>
+  <ons-navigator title="Navigator" var="myNavigator">
+    <ons-page>
+      <ons-button onclick="myNavigator.pushPage('page2.html')">Next Page</ons-button>
+      <div id="my-content"></div>
+    </ons-page>
+  </ons-navigator>
+</body>
+```
+
+### Integrated CSS Components Theme Roller
+
+Onsen CSS Components is an extremely useful theme roller for Onsen UI. Visit [Themes](http://components.onsenui.io/), pick and choose UI components and patterns, and then you are able to download CSS code that can be easily plugged in to your Onsen UI app.
+
+[![](/blog/content/images/2014/Jul/themeroller.png)](http://components.onsenui.io/)
+
+### New Animations Much Smoother
+
+Onsen UI animation effects are now much smoother and faster. You can also customize animation for screen transitions and sliding menu popups. Thanks to this pluggable animation engine, several new animation effects are introduced to [a navigator](/guide/overview.html#transition-animation) and a [sliding menu](/guide/overview.html#animation-type).
+
+### New Navigator with Event Handling
+
+Onsen UI navigator is completely rewritten from scratch, and includes many enhancements compared to the traditional `<ons-navigator>`. Now navigators are separated from the toolbar, and provide additional page transition effects. You can see the new navigator in the Page Navigation section of our [Onsen UI Guide](/guide/overview.html#page-navigation).
+
+<iframe id="result-iframe" sandbox="allow-scripts allow-pointer-lock allow-same-origin allow-popups allow-forms" src="http://s.codepen.io/onsen/fullembedgrid/FLsIE?type=embed&amp;animations=run&amp;forceRefresh=1406031576356" allowtransparency="true" frameborder="0" scrolling="yes" style="height: 446px; border: 1px solid #ccc; margin-bottom: 1em"></iframe>
+
+### New `ons.` functions
+
+Several `ons.` functions are introduced and defined at the global level. They hide the underlying complexity and provide a familiar interface for JavaScript coders.
+
+- `ons.bootstrap()` - Handy way to initialize and activate AngularJS and Onsen UI modules.
+- `ons.ready(func)` - Specifies a callback function after Onsen UI initialization.
+- `ons.compile(HTMLElement)` - Compiles HTML elements with Onsen UI components to the standard DOM tree.
+
+For more details, please take a look at [Utility APIs](/guide/overview.html#utility-apis) section of our Onsen UI Guide. 
+
+### `var` and `modifier` Attributes
+
+As seen in the former example, the `var` attribute is used to access the component object from your code. For example, you can call a `pushPage()` API with the following example:
+
+```
+<ons-navigator var="myNavigator">
+<script>
+	myNavigator.pushPage("page2.html");
+</script>
+```
+
+The `modifier` attribute can be used to change the appearance of the component. For details, take a look at [Overriding CSS Styles](/guide/overview.html#overriding-css-styles).
+
+### Micro-templating Support
+
+Multiple pages can be defined in a single HTML file with special `<script type="text/ons-template">` tag. See [Defining Multiple Pages in Single HTML](http://onsenui.io/guide/overview.html#defining-multiple-pages-in-single-html).
+
+### Other Enhancements and Changes
+
+For existing Onsen UI users: due to the significant changes to the framework, it is likely that you will need to change your code. Here are several things to know.
+
+- Sliding menus can now have sub pages on the right.
+- Some elements are removed: `<ons-text>`, `<ons-textarea>`, `<ons-radio>`.
+- `<ons-page>` is now scrollable. Therefore `<ons-scrollable>` is removed.
+- `<ons-list>` is not rendered in full-screen mode.
+
+It is recommended to check out the [Onsen UI Guide](/guide/overview.html) again to fully understand the enhancements and changes.
+
+### Help Us "Starred!"
+
+If you're interested in Onsen UI, please give us [a star in GitHub](http://github.com/OnsenUI/OnsenUI) and share our project!
+
+[![](/blog/content/images/2014/Jul/githubstar.png)](http://github.com/OnsenUI/OnsenUI)
+
+### Conclutions
+
+Phew! That covers a lot of new features. We’re very excited about Onsen UI 1.1, and we hope these details help you get up and running fast. We believe this new version will make a big difference in developing mobile UIs. As you get up and running, we’d love to hear any feedback, positive, negative or otherwise. Feel free to contact us through [@monaca\_io](https://twitter.com/monaca_io) and / or [@Onsen_UI](https://twitter.com/Onsen_UI) or [GitHub Issues](https://github.com/OnsenUI/OnsenUI/issues) if you have any problems. We also make sure to address any issues or questions posted to [Stack Overflow tag: onsen-ui](http://stackoverflow.com/questions/tagged/onsen-ui) as well, so please don’t hesitate to ask. We are always happy to help out! Good luck coding!
