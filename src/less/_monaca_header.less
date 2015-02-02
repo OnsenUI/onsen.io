@@ -4,11 +4,12 @@
   height: 44px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: 200;
-  .lang-en({
-    font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
-  });
+  font-weight: 600;
   margin-bottom: @header-height;
+
+  .lang-en & {
+    font-family: @en-font-family;
+  }
 }
 
 
@@ -38,9 +39,11 @@
     color: white;
     text-decoration: none;
     font-size: 14px;
-    .lang-en({
-      font-size: 15px;
-    })
+
+    .lang-en & {
+      font-size: 16px;
+      font-weight: 400;
+    }
   }
 
   a:hover {
@@ -108,11 +111,13 @@
     height: 38px;
     width: 100%;
     font-size: 14px;
-    .lang-en({
-      font-size: 15px;
-    });
     box-sizing: border-box;
     display: block !important;
+
+    .lang-en & {
+      font-size: 16px;
+      font-weight: 400;
+    }
   }
 
   a:hover {
