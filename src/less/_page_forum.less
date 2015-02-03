@@ -15,17 +15,19 @@
     width: 59px;
     height: 55px;
     margin-right: 10px;
-    background-color: #d9dfe2;
+    background-color: #f0f0f0;
     text-align: center;
     color: #234;
     border-radius: 0px;
+    border: 1px solid #ddd;
   }
 
   .forum-item-answers-num {
     font-size: 30px;
-    font-weight: bold;
+    font-weight: normal;
     line-height: 1;
     padding-top: 8px;
+    font-family: 'ff-enzo-web', Helvetica, sans-serif;
 
     .lang-en & {
       font-size: 36px;
@@ -40,21 +42,15 @@
     opacity: 0.8;
   }
 
-  .forum-item-answers-zero {
-    background-color: #767c86;
-    color: white;
-  }
-
   .forum-item-title,
   .forum-item-title:link {
-    font-size: 15px;
+    font-size: 16px;
     margin-left: 80px;
-    color: #333;
-    font-weight: 500;
+    font-weight: normal;
     display: block;
 
     .lang-en & {
-      font-size: 17px;
+      font-size: 18px;
     }
   }
 
@@ -62,7 +58,7 @@
   .forum-item-title:visited,
   .forum-item-title:active {
     text-decoration: none;
-    color: #333;
+    color: #555;
   }
 
   .forum-item-title:hover {
@@ -74,6 +70,7 @@
     font-size: 13px;
     margin: 6px 0px 4px 80px;
     color: @light-text-color;
+    line-height: 1.7;
 
     .lang-en & {
       font-size: 15px;
