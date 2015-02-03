@@ -17,17 +17,6 @@
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">フォーラム</a></li>
         <li><a href="http://onsen.io/">ENGLISH</a></li>
     <% end %>
-
-    <li>
-      <!-- twitter button -->
-      <a href="https://twitter.com/share" data-text="<%- @site.twitter %>" class="twitter-share-button" data-url="http://onsen.io/" data-via="Onsen_UI" data-related="Onsen_UI">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
-      <!-- google plus button -->
-      <div class="g-plusone" data-size="medium" data-action="share"></div>
-
-      <!-- facebook share button -->
-      <div class="fb-share-button" data-href="http://onsen.io" data-type="button"></div>
-    </li>
   </ul>
 
   <div class="footer-cont">
