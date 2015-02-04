@@ -1,0 +1,42 @@
+#pattern {
+  
+}
+
+.pattern-overview {
+  width: 320px;
+  float: left;
+  margin: 20px 54px 64px 0;
+  box-sizing: border-box;
+
+  &-detail {
+    .button();
+
+    float: right;
+  }
+
+  &-title {
+    border-bottom: 0px solid white;
+    font-size: 24px;
+    margin: 2px 0 14px 0;
+
+    .lang-en & {
+      font-size: 24px;
+    }
+
+    a {
+      &:link,  &:visited, &:hover {
+        color: @header-text-color;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: @link-color;
+      }
+    }
+  }
+
+  &-example {
+    clear: both;
+    margin-bottom: 10px;
+  }
+}

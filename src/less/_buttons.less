@@ -4,26 +4,28 @@
   font-size: 15px;
   color: white;
   background-color: #515C70;
+  background-color: @link-color;
   line-height: 36px;
   border-radius: 2px;
   border: none;
   padding: 0px 12px;
   display: inline-block;
   text-align: center;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 0px;
+  transition: all 0.2s linear;
 
   &:hover {
-    opacity: 0.7;
-    box-shadow: none;
+    opacity: 1;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
   }
   &:link, &:visited, &:hover, &:active, &:focus {
     text-decoration: none;
     color: white;
   }
   &:active {
-    opacity: 1;
+    opacity: 0.7;
     transition: all 0s linear;
+    box-shadow: none;
   }
 
   .lang-en & {
@@ -53,7 +55,6 @@
   font-size: 24px;
   padding: 0px 30px;
   border-radius: 0px;
-  box-shadow: 0px px 4px rgba(0, 0, 0, 0.2);
 
   .lang-ja & {
     -webkit-font-smoothing: antialiased;

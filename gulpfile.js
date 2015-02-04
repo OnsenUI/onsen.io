@@ -131,6 +131,7 @@ gulp.task('metalsmith', function(done) {
     .source('./src/documents_' + lang)
     .metadata(require('./config.js')(lang))
     .use(require('./plugins/import-api-docs')(lang))
+    .use(require('./plugins/patterns-collection')(lang))
     .use(collections({
       components: {
         sortBy: 'name'

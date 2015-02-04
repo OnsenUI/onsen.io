@@ -1,0 +1,24 @@
+---
+page: 'pattern'
+title: 'Pattern'
+needHelp: true
+reference: true
+patternName: 'compose.html'
+html: ''
+css: ''
+docCategory: 'patterns'
+---
+
+<div><a href="/docs.html">Docs</a> &gt; <a href="/patterns.html">Page Patterns</a> &gt; <a href=""><%= @patternName %></a></div>
+
+<h2>Pattern: <%= @patternName %></h2>
+
+<iframe src="/patterns/<%= @patternName %>" width="320" height="520" style="border: 1px solid #ddd"></iframe>
+
+<h3 id="html">HTML</h3>
+
+<pre><code class="html"><%= @html %></code></pre>
+
+<h3 id="css">CSS</h3>
+
+<pre><code class="css"><%= @css %></code></pre>

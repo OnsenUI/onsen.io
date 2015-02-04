@@ -57,12 +57,27 @@
     font-family: @en-font-family;
     font-weight: bold;
   }
+
+  a, a:link, a:visited {
+    color: @header-text-color;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    color: @link-color;
+    text-decoration: underline;
+  }
 }
 
 .toc {
   margin: 0;
   padding: 0;
   text-align: left;
+}
+
+.toc-title + .toc {
+  margin-bottom: 24px;
 }
 
 .toc-2 {

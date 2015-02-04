@@ -1,0 +1,22 @@
+---
+page: 'pattern'
+title: 'Page Patterns'
+needHelp: true
+reference: true
+docCategory: 'patterns'
+---
+
+<div><a href="/docs.html">Docs</a> &gt; <a href="/patterns.html">Page Patterns</a></div>
+<h2>Page Patterns</h2>
+
+<% for path in @patterns: %>
+<div class="pattern-overview">
+
+  <a href="/pattern-<%= path %>" target="_blank" class="pattern-overview-detail">Detail</a>
+  <h3 class="pattern-overview-title"><a href="/pattern-<%= path %>.html"><%= path %></a></h3>
+
+  <iframe class="pattern-overview-example" data-src="/patterns/<%= path %>" width="320" height="520" style="border: 1px solid #ddd"></iframe>
+</div>
+<% end %>
+
+<div class="clearfix"></div>

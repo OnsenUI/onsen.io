@@ -19,7 +19,7 @@
 
   h1 {
     .lang-en & {
-      font-family: 'ff-enzo-web', Arial, sans-serif;
+      font-family: @en-header-font-family;
     }
   }
 
@@ -65,9 +65,9 @@
       font-size: 52px;
       line-height: 1.06;
       font-weight: 200;
-      letter-spacing: -1px;
+      letter-spacing: 0px;
       margin: 0 0 6px 0;
-      color: #222;
+      color: #333;
     }
 
     h2 {
@@ -76,7 +76,9 @@
       font-family: 'Helvetica Neue', @en-font-family;
       margin: 10px 0 54px 0;
       padding: 0;
-      color: #666;
+      color: #aaa;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
     
     .keyvisual-small {

@@ -1,7 +1,65 @@
 ---
 page: 'docs'
 title: 'Docs'
+needHelp: true
+reference: true
 ---
 
 <h2>Docs</h2>
+
+<h3>Overview</h3>
+
+<ul>
+  <li><a href="/download.html">Download</a></li>
+  <li><a href="/guide/getting_started.html">Getting Started</a></li>
+  <li><a href="/guide/overview.html">Onsen UI User Manual</a></li>
+</ul>
+
+<h3>Reference</h3>
+
+<ul>
+  <li><a href="/patterns.html">Page Patterns</a></li>
+  <li><a href="/reference/css.html">CSS Framework</a></li>
+  <li><a href="/reference/objects.html">Global Objects</a></li>
+  <li><a href="/reference/components.html">Components</a></li>
+  <li><a href="/reference/guides.html">Guides</a></li>
+</ul>
+
+<h4>Guides</h4>
+
+<ul>
+  <% for guide in @guides: %>
+  <li>
+    <a href="/reference/<%= guide.name %>.html"><%- guide.name %></a>
+  </li>
+  <% end %>
+</ul>
+
+<h4>Global Objects</h4>
+
+<ul>
+  <% for object in @objects: %>
+  <li>
+    <a href="/reference/<%= object.name %>.html"><%- object.name %></a>
+  </li>
+  <% end %>
+</ul>
+
+<h4>Components</h4>
+
+<ul>
+  <% for component in @components: %>
+  <li>
+    <a href="/reference/<%= component.name %>.html"><%- component.name %></a>
+  </li>
+  <% end %>
+</ul>
+
+
+<h3>Other Resources</h3>
+
+<ul>
+  <li><a href="http://components.onsen.io/" target="_blank">Onsen Theme Roller</a></li>
+  <li><a href="http://codepen.io/onsen/public-list/" target="_blank">Onsen UI & Monaca codepen</a></li>
+</ul>
 
