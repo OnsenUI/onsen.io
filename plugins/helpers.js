@@ -5,6 +5,7 @@ var extend = require('extend');
 var fs = require('fs');
 var moment = require('moment');
 var htmlstrip = require('htmlstrip-native').html_strip;
+var slug = require('slug');
 
 marked.setOptions({
   gfm: true,
@@ -33,6 +34,10 @@ module.exports = function() {
         } catch (e) {
           return e.toString();
         }
+      },
+
+      slug: function(name) {
+        return slug(name);
       },
 
       dump: function(param) {

@@ -51,6 +51,7 @@
   margin-bottom: 20px;
   color: @header-text-color;
   letter-spacing: 0.01em;
+  user-select: none;
 
   .lang-en & {
     font-size: 18px;
@@ -68,6 +69,12 @@
     color: @link-color;
     text-decoration: underline;
   }
+}
+
+.toc-title-active {
+  border-left: 4px solid @link-color;
+  padding-left: 6px;
+  margin-left: 1px;
 }
 
 .toc {

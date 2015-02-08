@@ -10,10 +10,17 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <% if @docCategory == 'css': %>
+  <link rel="stylesheet" href="<%= @rootUrl %>reference/onsen-css-components.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/font_awesome/css/font-awesome.min.css">
+  <% end %>
+
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
   <link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
   <link href='http://fonts.googleapis.com/css?family=Open Sans:400,500,600' rel='stylesheet' type='text/css'>
+
 
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
@@ -46,7 +53,7 @@
     <% else if @reference: %>
     <aside class="content-info">
 
-      <div class="toc-title"><a class="toggle-toc">Guides</a></div>
+      <div class="toc-title<% if @docCategory == 'guides': %> toc-title-active<% end %>"><a class="toggle-toc">Guides</a></div>
       <ul class="toc toc-1" <% if @docCategory != 'guides': %>style="display: none"<% end %>>
         <% for guide in @guides: %>
         <li class="toc-item toc-1-item">
@@ -57,9 +64,18 @@
         <% end %>
       </ul>
 
-      <div class="toc-title"><a href="/reference/css.html">CSS</a></div>
+      <div class="toc-title<% if @docCategory == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/css.html">CSS</a></div>
+      <ul class="toc toc-1" <% if @docCategory != 'css': %>style="display: none"<% end %>>
+        <% for doc in @cssDocs: %>
+        <li class="toc-item toc-1-item">
+          <a href="/reference/css.html#<%= @slug(doc.yaml.name) %>" class="toc-link toc-1-link">
+            <%- doc.yaml.name %>
+          </a>
+        </li>
+        <% end %>
+      </ul>
 
-      <div class="toc-title"><a class="toggle-toc">JavaScript</a></div>
+      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc">JavaScript</a></div>
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
         <% for object in @objects: %>
         <li class="toc-item toc-1-item">
@@ -77,7 +93,7 @@
         <% end %>
       </ul>
 
-      <div class="toc-title"><a href="/patterns.html" class="toggle-toc">Page Patterns</a></div>
+      <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html" class="toggle-toc">Page Patterns</a></div>
       <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
         <% for pattern in @patterns: %>
         <li class="toc-item toc-1-item">
@@ -120,6 +136,7 @@
     }
   });
 
+  // toggle menu
   $(function() {
     $('.toggle-toc').click(function(event) {
       var toggleTarget = $(event.target).parent().next();
@@ -128,7 +145,13 @@
           $(this).hide();
         }
       });
+
       toggleTarget.toggle();
+      $('.toc-title').removeClass('toc-title-active');
+
+      if (toggleTarget.css('display') !== 'none') {
+        $(this).parent().addClass('toc-title-active');
+      }
 
       event.preventDefault();
       return false;
@@ -137,12 +160,10 @@
 
   // sticky menu
   $(function() {
-    if ($('.content-info-page').length > 0 && $('.content-info').height() < $('.content').height()) {
-      $('.content-info').sticky({
-        topSpacing : 0, 
-        bottomSpacing : $('.footer-container').height() + 60
-      });
-    }
+    $('.content-info').sticky({
+      topSpacing : 0, 
+      bottomSpacing : $('.footer-container').height() + 60
+    });
   });
 
   </script>

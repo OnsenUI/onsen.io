@@ -132,6 +132,7 @@ gulp.task('metalsmith', function(done) {
     .metadata(require('./config.js')(lang))
     .use(require('./plugins/import-api-docs')(lang))
     .use(require('./plugins/patterns-collection')(lang))
+    .use(require('./plugins/import-topdoc')(lang))
     .use(collections({
       components: {
         sortBy: 'name'
@@ -148,6 +149,7 @@ gulp.task('metalsmith', function(done) {
     .use(require('./plugins/autotoc')())
     .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
     .use(assets({source: './src/files'}))
+    .use(require('./plugins/css-transform')(lang))
     .destination('./out_' + lang)
     .build(function(error) {
       if (error) {
