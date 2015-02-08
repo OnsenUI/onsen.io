@@ -18,13 +18,16 @@ paginate: articles
 <% end %>
 
 <% if @pagination: %>
-<nav class="blog-pagination" style="text-align: center">
+<nav class="blog-pagination">
+
   <% if @pagination.prev: %>
-  <a class="button" href="<%= @getPath(@pagination.prev) %>">&lt; NEWER</a>
+  <a class="button blog-pagination-newer" href="<%= @getPath(@pagination.prev) %>">&lt; NEWER</a>
   <% end %>
 
   <% if @pagination.num < @pagination.total and @pagination.next: %>
-  <a class="button" href="<%= @getPath(@pagination.next) %>">OLDER &gt;</a>
+  <a class="button blog-pagination-older" href="<%= @getPath(@pagination.next) %>">OLDER &gt;</a>
   <% end %>
+
+  <p class="blog-pagination-position">PAGE <%= @pagination.num %> OF <%= @pagination.total %></p>
 </nav>
 <% end %>

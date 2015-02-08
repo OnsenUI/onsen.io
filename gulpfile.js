@@ -77,7 +77,7 @@ gulp.task('blog', function(done) {
     .use(branch('*.html')
       // index page
       .use(paginate({
-        perPage: 3,
+        perPage: 10,
         path: 'blog'
       }))
       .use(function(files, metalsmith, done) {
@@ -218,7 +218,7 @@ gulp.task('serve', ['generate', 'blog'], function() {
     'src/partials/*',
     'src/files/**/*',
   ], options, function() {
-    runSequence('metalsmith', function() {
+    runSequence(['metalsmith', 'blog'], function() {
       browserSync.reload();
     });
   });
@@ -234,6 +234,8 @@ gulp.task('serve', ['generate', 'blog'], function() {
   if (lang === 'en') {
     gulp.watch([
       'blog/*',
+      'blog/posts/*',
+      'blog/content/**/*',
       'src/layouts/blog.html.eco'
     ], options, function() {
       runSequence('blog', function() {
