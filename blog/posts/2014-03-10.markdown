@@ -1,5 +1,5 @@
 ---
-author: andreas
+author: onsen
 date: 2014-03-10
 id: onsen-ui-1-0-1-released
 title: "Onsen UI 1.0.1 Released"
@@ -7,18 +7,18 @@ title: "Onsen UI 1.0.1 Released"
 Today we released Onsen UI 1.0.1 which comes with improved themes, new features and a lots of bug fixes.
 
 
-## Improved Themes
+### Improved Themes
 
 Onsen UI themes look a lot more beautiful with this release.
 Checkout the [themes](http://onsenui.io/themes/) page to see how they look like.
 We also include the code snippets of each component for easy customization.
 
 
-## New Features
+### New Features
 
 Thanks to your support and comments, we have added highly requested features listed below:
 
-### Transclude support
+#### Transclude support
 
 screen and navigator now support transclusion. This mean now you can put root page connent right inside.
 
@@ -40,7 +40,7 @@ or
         </ons-navigator>
     </ons-screen>
 
-### Tabbar Item
+#### Tabbar Item
 
 When you use image (instead of font icons like font-awesome) as tabbar's icon, the color will not change when the tabbar is not active. You can now specify the icon when a tabbar is active via **active-icon** attribute.
 
@@ -91,9 +91,9 @@ When you use image (instead of font icons like font-awesome) as tabbar's icon, t
 
 
 
-### Sliding Menu
+#### Sliding Menu
 
-#### Enable/Disable Swipe
+##### Enable/Disable Swipe
 
 You can now enable/disable swipe interaction via **swipable** attribute
 
@@ -103,7 +103,7 @@ You can now enable/disable swipe interaction via **swipable** attribute
 	</ons-sliding-menu>
 
 
-#### Specify swipe area
+##### Specify swipe area
 
 Swipe area can also be specified via **swipe-target-width**. This is useful for application that also have swipe interaction and you don't want to have sliding-menu conflict with the application's swipe.
 
@@ -114,7 +114,7 @@ Swipe area can also be specified via **swipe-target-width**. This is useful for 
 <iframe src="http://onsenui.github.io/demo/sliding_menu_swipe_target_width_demo.html" width="320" height="570"></iframe>
 
 
-#### Max Slide Distance
+##### Max Slide Distance
 
 You can now specify how far the page slides via **max-slide-distance**
 
@@ -124,7 +124,7 @@ You can now specify how far the page slides via **max-slide-distance**
 
 <iframe src="http://onsenui.github.io/demo/sliding_menu_max_slide_distance_demo.html" width="320" height="570"></iframe>
 
-#### Onsen Component Query
+##### Onsen Component Query
 
 It is now possible to query Onsen Element or any isolated scope element using **ons.$get('#element-id')**. This is useful if you have two or more elements of the same type.
 
@@ -155,19 +155,19 @@ The $event object will help the framework find the nearest component.
 <iframe src="http://onsenui.github.io/demo/ons_get_demo.html" width="600" height="350"></iframe>
 
 
-## Bug Fixes
+### Bug Fixes
 
-### Fast Click
+#### Fast Click
 
 We used ngTouch in 1.0.0 to fix the 300ms delay. It proved to be buggy, so we bring Fastclick.js back.
 
 
-### Page Directives' scopes fix
+#### Page Directives' scopes fix
 
 The controller's scope outside screen, navigator, sliding-menu, split-view and scroller was not reflected inside those components' content. It is now much easy to work with scopes.
 
 
-### Other minor fixes
+#### Other minor fixes
 
 Here are the complete changes log:
 

@@ -1,5 +1,5 @@
 ---
-author: andreas
+author: anatoo
 date: 2014-03-27
 id: cutomize-onsenui-theme
 title: "Customizing Onsen UI Themes: Beginner's Guide"
@@ -8,8 +8,7 @@ Onsen UI comes with several <a href="http://onsenui.io/themes/">themes</a> to ad
 We are going to learn how to customize Onsen UI themes in this blog entry.
 
 
-Installing and Building a Theme
-----
+### Installing and Building a Theme
 
 Onsen UI themes are stored within the <a href="https://github.com/OnsenUI/OnsenUI">Onsen UI repository</a>. First, clone the Onsen UI repository in a terminal window.
 
@@ -30,8 +29,7 @@ Execute the grunt serve task within the themes directory. Then, the development 
 Now, open http://0.0.0.0:9999/themes/testcases/ from the browser. You will be able to see the theme's test cases created by topdoc.
 
 
-Directory Structure
-----
+### Directory Structure
 
 The following is the directory structure under the theme directory:
 
@@ -58,8 +56,7 @@ There are two import directories here: the css directory and the theme-module di
 You can customize a theme by editing the stylus file within theme-modules.
 
 
-Customizing a Theme
-----
+### Customizing a Theme
 
 The Onsen UI's theme CSS is written in <a href="http://learnboost.github.io/stylus/">stylus</a>, a CSS meta-language.
 
@@ -78,7 +75,6 @@ Once the change has been made to the stylus file, the theme will be automaticall
 You can change other parts of the theme with these same steps. The compiled theme's CSS file is generated within the themes/css directory.
 
 
-Closing Notes
-----
+### Closing Notes
 
 Not only does Onsen UI offer various themes to choose from, but also the freedom to expand or customize them to create a specific and original look for your app. I hope you enjoyed learning how to customize Onsen UI themes. Thanks for reading!

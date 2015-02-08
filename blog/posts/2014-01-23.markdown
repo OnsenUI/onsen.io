@@ -1,15 +1,15 @@
 ---
-author: andreas
+author: onsen
 date: 2014-01-23
 id: onsen-ui-and-phonegapcordova-on-ios-7
 title: "Onsen UI and PhoneGap/Cordova on iOS 7"
 ---
+
 iOS 7 comes with new UI design that the application now run in full screen with the status bar overlay the application.
 
 If you run current Onsen UI version (0.6), you will see something like this:
 
 ![](/content/images/2014/Jan/1_PNG.png)
-
 
 Solution
 ------------
@@ -20,31 +20,35 @@ Below is the code to solve this problem.
 
 **index.html**
 
-    <script>
-        angular.module('myApp', ['onsen.directives']);   
+```
+<script>
+angular.module('myApp', ['onsen.directives']);   
 
-        document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("deviceready", onDeviceReady, false);
 
-        function onDeviceReady() {        
-               yepnope({
-                  test : window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0,
-                  yep  : 'css/ios7.css',         
-                });
-        }
-    </script>  
+function onDeviceReady() {        
+  yepnope({
+    test : window.device.platform === 'iOS' && parseFloat(window.device.version) === 7.0,
+    yep  : 'css/ios7.css',         
+  });
+}
+</script>  
+```
     
 
 **css/ios7.css**
 
-	.topcoat-navigation-bar {
-	    height: 60px;   
-	    padding-top: 20px;
-	}
-    
+```
+.topcoat-navigation-bar {
+    height: 60px;   
+    padding-top: 20px;
+}
+```    
 
 Result
 ------
 
 Below is what it look like after applying the code.
+
 
 ![](/content/images/2014/Jan/2_PNG.png)

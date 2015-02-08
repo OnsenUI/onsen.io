@@ -104,6 +104,7 @@ module.exports = function() {
         return this.lang === 'en' ? 'ja' : 'en';
       }
     };
+
     extend(metalsmith.metadata(), helpers);
     done();
   };

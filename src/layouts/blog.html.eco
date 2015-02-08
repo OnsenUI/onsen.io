@@ -38,11 +38,21 @@
           <%- @contents %>
         </div>
         <div class="article-footer">
+          <% if @author.gravator: %>
           <div class="article-avator">
             <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=80" alt="" class="article-avator-image">
           </div>
+          <% else if @author.image: %>
+          <div class="article-avator">
+            <img src="<%= @author.image %>" alt="" class="article-avator-image">
+          </div>
+          <% end %>
           <div class="article-author-label">AUTHOR</div>
+          <% if @author.url: %>
           <div class="article-author-name"><a href="<%- @author.url %>" target="_blank"><%- @author.name %></a></div>
+          <% else: %>
+          <div class="article-author-name"><%- @author.name %></div>
+          <% end %>
         </div>
 
         <div class="article-comments">

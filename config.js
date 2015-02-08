@@ -12,11 +12,28 @@ module.exports = function(language) {
       name: 'Mitsunori Kubota',
       email: 'anatoo.jp@gmail.com',
       url: 'http://anatoo.jp'
+    },
+    masa: {
+      name: 'Masa',
+      email: 'massie@asial.co.jp',
+      url: 'http://www.asial.co.jp/en/',
+      gravator: '0b0ed6f4c5962b764d9bdb0ade4aa7ae'
+    },
+    kruy: {
+      name: 'Kruy Vanna',
+      email: 'kruy@asial.co.jp'
+    },
+    onsen: {
+      name: 'Onsen UI Team',
+      url: 'http://onsen.io',
+      image: '/blog/content/images/2014/Mar/blog_author-1.png'
     }
   };
 
   for (author in authors) {
-    authors[author].gravator = md5(authors[author].email.toLowerCase());
+    if (authors[author].email && !authors[author].gravator) {
+      authors[author].gravator = md5(authors[author].email.toLowerCase());
+    }
   }
 
   var env = {
@@ -48,7 +65,6 @@ module.exports = function(language) {
     framework: {
       displayName: 'Onsen UI',
       codeName: 'ons'
-    },
-
+    }
   };
 };

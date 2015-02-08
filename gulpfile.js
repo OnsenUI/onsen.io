@@ -60,7 +60,7 @@ gulp.task('blog', function(done) {
         smartypants: true
       }))
       .use(permalinks({
-        pattern: 'posts/:id'
+        pattern: ':id'
       }))
       .use(function(files, metalsmith, done) {
         var authors = metalsmith.metadata().env.authors;
@@ -111,7 +111,10 @@ gulp.task('blog', function(done) {
         default: 'blog.html.eco'
       }))
     )
-    .use(assets({source: './blog/assets'}))
+    .use(assets({
+      source: './blog/content',
+      destination: './content'
+    }))
     .build(function(error) {
       if (error) {
         console.log(error);
