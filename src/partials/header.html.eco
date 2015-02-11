@@ -15,21 +15,9 @@
       </li>
       <li>
         <a href="http://monaca.mobi/en/support/index">Support</a>
-        <!--
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="http://en.monaca.io/support.html">Support Plan</a></li>
-          <li><a href="http://monaca.mobi/en/training/index">Training</a></li>
-          <li><a href="http://monaca.mobi/en/support/index">Support Index</a></li>
-        </ul>
-        -->
       </li>
       <li>
         <a href="http://monaca.mobi/en/showcase">Showcase</a>
-        <!--
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="http://monaca.mobi/en/showcase">Showcase</a></li>
-        </ul>
-        -->
       </li>
     </ul>
 <% else: %>
@@ -78,13 +66,15 @@
     <ul class="header-navi">
       <% if @lang == "en": %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">DOCS</a></li>
+        <li class="<%- if @page is 'docs' then 'current' %>"><a href="/docs.html">DOCS</a></li>
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
         <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
+        <li><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB</a></li>
       <% else: %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
         <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">ドキュメント</a></li>
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">フォーラム</a></li>
+        <li><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB</a></li>
         <li><a href="http://onsen.io/">ENGLISH</a></li>
       <% end %>
     </ul>

@@ -3,7 +3,7 @@ page: 'home'
 title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
 ---
 
-<div id="keyvisual">
+<div class="keyvisual">
   <div class="keyvisual-content">
     <div class="keyvisual-main">
       <h1>The Answer to<br>PhoneGap UI Development</h1>
@@ -31,15 +31,6 @@ title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
   </div>
 </div>
 
-<div class="newsletter">
-  <div class="newsletter-inner">
-    <form>
-      <input type="text" placeholder="Enter email for Onsen UI updates" name="email">
-      <input type="submit" value="Send">
-    </form>
-    <div class="newsletter-thankyou">Thank you!</div>
-  </div>
-</div>
 
 <div class="taglines">
   <ul>
@@ -47,6 +38,16 @@ title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
     <li>Large selection of Web-based UI components</li>
     <li>Responsive layout support for smartphones and tablets</li>
   </ul>
+
+  <div class="newsletter">
+    <div class="newsletter-inner">
+      <form>
+        <input type="text" placeholder="Enter email for Onsen UI updates" name="email">
+        <input type="submit" value="Send">
+      </form>
+      <div class="newsletter-thankyou">Thank you!</div>
+    </div>
+  </div>
 </div>
 
 <div class="main-features">
@@ -186,7 +187,7 @@ title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
     });
 
     // event tracking
-    $('#keyvisual .download').click(function() {
+    $('.keyvisual .download').click(function() {
       ga('send', 'event', 'website', 'download');
     });
   });
@@ -201,8 +202,8 @@ title: 'Onsen UI - A Custom Elements-Based HTML5 UI Framework'
       $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
         .success(function(data) {
           var ret = JSON.parse(data);
-          console.log(ret);
-          if (ret.status !== undefined && ret.status === "success") {
+
+          if (ret.status === 'success') {
             $('.newsletter form').hide();
             $('.newsletter-thankyou').show();
           } else {

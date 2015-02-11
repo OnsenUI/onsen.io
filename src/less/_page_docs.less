@@ -1,0 +1,50 @@
+
+#docs {
+  .docs-table {
+    text-align: center;
+  }
+
+  .docs-section {
+    width: 260px;
+    max-width: 90%;
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    height: 200px;
+    box-sizing: border-box;
+    padding: 50px 0 0 0;
+    font-size: 0px;
+
+    &-icon {
+    }
+
+    &-icon-wrapper {
+      height: 44px;
+    }
+
+    &-title {
+      display: block;
+      color: #444;
+      font-size: 18px;
+      font-weight: normal;
+
+      &:link, &:hover, &:visited, &:active {
+        color: #444;
+        text-decoration: none;
+      }
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    &-desc {
+      display: block;
+      font-size: 14px;
+      color: @light-text-color;
+      margin-top: 8px;
+      line-height: 1.4;
+    }
+
+  }
+}

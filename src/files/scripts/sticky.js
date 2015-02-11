@@ -1,89 +1,31 @@
-// NOTE: This plugin is cutsomized for Onsen UI Website.
-// Original Code: http://labs.anthonygarand.com/sticky
-(function($) {
-  var defaults = {
-    topSpacing: 0,
-    bottomSpacing: 0,
-    className: 'is-sticky',
-    wrapperClassName: 'sticky-wrapper',
-  };
+$(function() {
+  var sticked = $('.content-info');
+  var elementTop = sticked.offset().top;
+  var footerHeight = $('.footer-container').height();
 
-  var sticked;
-  var $window = $(window);
-  var $document = $(document);
-
+  $(window).scroll(update);
+  
   function update() {
-    var scrollTop = $window.scrollTop(),
-      windowHeight = $window.height(),
-      documentHeight = $document.height(),
-      dwh = documentHeight - windowHeight,
-      extra = scrollTop > dwh ? dwh - scrollTop : 0
-      elementTop = sticked.stickyWrapper.offset().top,
-      etse = elementTop - sticked.topSpacing - extra;
+    var scrollTop = $(window).scrollTop(),
+      windowHeight = $(window).height(),
+      documentHeight = $(window.document).height();
 
-    if (scrollTop <= etse) {
-      // not fixed
-      sticked.currentTop = null;
-      sticked.stickyElement
-        .css('position', '')
-        .css('top', '')
-        .parent()
-        .removeClass(sticked.className);
-
-      sticked.stickyElement.css('max-height', windowHeight - sticked.stickyElement.offset().top);
-    } else {
-      var newTop = documentHeight - sticked.stickyElement.outerHeight() - sticked.topSpacing - sticked.bottomSpacing - scrollTop - extra;
-
-      if (newTop < 0) {
-        newTop = newTop + sticked.topSpacing;
+    if (scrollTop > elementTop) {
+      if (scrollTop > documentHeight - windowHeight - footerHeight) {
+        sticked.removeClass('content-info-fixed');
+        sticked.addClass('content-info-bottom');
+        sticked.css({
+          top: (documentHeight - windowHeight - footerHeight) + 'px'
+        });
       } else {
-        newTop = sticked.topSpacing;
-      }
-
-      if (sticked.currentTop != newTop) {
-        sticked.stickyElement
-          .css('position', 'fixed')
-          .css('top', newTop)
-          .css('bottom', '0px');
-
-        sticked.stickyElement.parent().addClass(sticked.className);
-        sticked.currentTop = newTop;
-      }
-
-      sticked.stickyElement.css('max-height', windowHeight);
+        sticked.removeClass('content-info-bottom');
+        sticked.addClass('content-info-fixed');
+        sticked.attr('style', '');
+      } 
+    } else {
+      sticked.removeClass('content-info-bottom content-info-fixed');
+      sticked.attr('style', '');
     }
-  };
+  }
+});
 
-  var methods = {
-    init: function(options) {
-      options = $.extend(defaults, options);
-
-      var stickyElement = $(this);
-      var wrapper = $('<div></div>')
-        .css({width : stickyElement.outerWidth() + "px"})
-        .addClass(options.wrapperClassName);
-
-      stickyElement.wrapAll(wrapper);
-
-      var stickyWrapper = stickyElement.parent();
-
-      stickyElement.css('max-height', $window.height() - stickyElement.offset().top);
-
-      sticked = {
-        topSpacing: options.topSpacing,
-        bottomSpacing: options.bottomSpacing,
-        stickyElement: stickyElement,
-        currentTop: null,
-        stickyWrapper: stickyWrapper,
-        className: options.className
-      };
-
-      return this;
-    }
-  };
-
-  $.fn.sticky = function(method) {
-    $(window).scroll(update).resize(update);
-    return methods.init.apply(this, arguments);
-  };
-})(jQuery);

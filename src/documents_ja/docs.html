@@ -5,61 +5,65 @@ needHelp: true
 reference: true
 ---
 
-<h2>Docs</h2>
+<h2>Onsen UI Docs</h2>
 
-<h3>Overview</h3>
+<h3>Contents</h3>
+
+<div class="docs-table clearfix">
+  <div class="docs-section">
+    <div class="docs-section-icon-wrapper">
+      <a href="/guide/getting_started.html"><img class="docs-section-icon" src="/images/common/docs-getting-started-icon.png" alt=""></a>
+    </div>
+    <a class="docs-section-title" href="/guide/getting_started.html">Getting Started</a>
+    <p class="docs-section-desc">Onsen UIを使ってみよう</p>
+  </div>
+
+  <div class="docs-section">
+    <div class="docs-section-icon-wrapper">
+      <a href="/guide/overview.html"><img class="docs-section-icon" src="/images/common/docs-guide-icon.png" alt=""></a>
+    </div>
+    <a class="docs-section-title" href="/guide/overview.html">Onsen UI Guide</a>
+    <p class="docs-section-desc">Onsen UIの詳細な利用ガイド</p>
+  </div>
+
+  <div class="docs-section">
+    <div class="docs-section-icon-wrapper">
+      <a href="/reference/css.html"><img class="docs-section-icon" src="/images/common/docs-css-components-icon.png" alt=""></a>
+    </div>
+    <a class="docs-section-title" href="/reference/css.html">CSS Components</a>
+    <p class="docs-section-desc">Onsen UIのCSS<br>Componentsについて</p>
+  </div> <br>
+
+  <div class="docs-section">
+    <div class="docs-section-icon-wrapper">
+      <a href="/reference/javascript.html"><img class="docs-section-icon" src="/images/common/docs-js-icon.png" alt=""></a>
+    </div>
+    <a class="docs-section-title" href="/reference/javascript.html">JavaScript</a>
+    <p class="docs-section-desc">Onsen UIのJavaScript<br>フレームワークについて</p>
+  </div>
+
+  <div class="docs-section">
+    <div class="docs-section-icon-wrapper">
+      <a href="/patterns.html"><img class="docs-section-icon" src="/images/common/docs-patterns-icon.png" alt=""></a>
+    </div>
+    <a class="docs-section-title" href="/patterns.html">Page Patterns</a>
+    <p class="docs-section-desc">Onsen UIを使った<br>画面パターン集</p>
+  </div>
+
+  <div class="docs-section">
+    <div class="docs-section-icon-wrapper">
+      <img class="docs-section-icon" src="/images/common/docs-theme-roller-icon.png" alt="">
+    </div>
+    <a class="docs-section-title" href="http://components.onsen.io" target="_blank">Onsen Theme Roller <img src="/images/common/jump.png"></a>
+    <p class="docs-section-desc">Onsen UIのテーマをカスタマイズ<br>できるオンラインツール<br>.</p>
+  </div> <br>
+
+</div>
+
+<h3>その他のリソース</h3>
 
 <ul>
-  <li><a href="/download.html">Download</a></li>
-  <li><a href="/guide/getting_started.html">Getting Started</a></li>
-  <li><a href="/guide/overview.html">Onsen UI User Manual</a></li>
-</ul>
-
-<h3>Reference</h3>
-
-<ul>
-  <li><a href="/patterns.html">Page Patterns</a></li>
-  <li><a href="/reference/css.html">CSS Framework</a></li>
-  <li><a href="/reference/objects.html">Global Objects</a></li>
-  <li><a href="/reference/components.html">Components</a></li>
-  <li><a href="/reference/guides.html">Guides</a></li>
-</ul>
-
-<h4>Guides</h4>
-
-<ul>
-  <% for guide in @guides: %>
-  <li>
-    <a href="/reference/<%= guide.name %>.html"><%- guide.name %></a>
-  </li>
-  <% end %>
-</ul>
-
-<h4>Global Objects</h4>
-
-<ul>
-  <% for object in @objects: %>
-  <li>
-    <a href="/reference/<%= object.name %>.html"><%- object.name %></a>
-  </li>
-  <% end %>
-</ul>
-
-<h4>Components</h4>
-
-<ul>
-  <% for component in @components: %>
-  <li>
-    <a href="/reference/<%= component.name %>.html"><%- component.name %></a>
-  </li>
-  <% end %>
-</ul>
-
-
-<h3>Other Resources</h3>
-
-<ul>
-  <li><a href="http://components.onsen.io/" target="_blank">Onsen Theme Roller</a></li>
+  <li><a href="http://docs.angularjs.org" target="_blank">AngularJS Docs</a></li>
   <li><a href="http://codepen.io/onsen/public-list/" target="_blank">Onsen UI & Monaca codepen</a></li>
 </ul>
 

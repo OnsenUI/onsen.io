@@ -1,10 +1,56 @@
+.newsletter {
+  width: 100%;
+  text-align: center;
+  margin-top: 14px;
+
+  &-inner {
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 12px 0 0 0;
+
+    form {
+      border-radius: 1px;
+      display: inline-block;
+      max-width: 100%;
+      width: auto;
+    }
+
+    input[type=text] {
+      font-size: 15px;
+      background-color: white;
+      width: 325px;
+      padding: 10px 8px 9px 8px;
+      line-height: 34px;
+      height: 36px;
+      border: 1px solid #ccc;
+      margin: 0;
+      border-radius: 2px;
+      box-sizing: border-box;
+    }
+
+    input[type=submit] {
+      .site-button();
+    }
+  }
+
+  &-thankyou {
+    display: none;
+    font-size: 15px;
+    line-height: 38px;
+    font-weight: 500;
+  }
+}
+
+.newsletter-footer {
+  margin-top: 0px;
+  margin-bottom: 28px;
+}
+
 .content-container {
   margin: 0 auto;
   width: @width;
   max-width: 100%;
-  position: relative;
   text-align: left;
-  padding-top: 50px;
 
   ::-webkit-scrollbar {
     width: 11px;
@@ -29,34 +75,49 @@
     opacity: 0;
     display: none;
   }
-
 }
 
 .content-info {
+  position: absolute;
+  width: @aside-width;
   margin: 0;
   overflow: scroll;
-  float: left;
-  width: @aside-width - 20px;
-  padding: 10px 10px 10px 0px;
-  margin-right: 20px;
-  box-sizing: border-box;
   color: @light-text-color;
   line-height: 1.4;
+  box-sizing: border-box;
+  padding: 40px 0px 0px 0px;
+
+  &-fixed {
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    height: 100%;
+  }
+
+  &-bottom {
+    position: absolute;
+    bottom: 0px;
+    height: 100%;
+  }
 }
 
 .toc-title {
-  font-weight: bold;
-  font-size: 17px;
-  margin-left: 11px;
+  font-weight: normal;
+  font-size: 16px;
+  padding-left: 14px;
   margin-bottom: 20px;
   color: @header-text-color;
   letter-spacing: 0.01em;
   user-select: none;
+  background-image: url(../images/common/triangle.png);
+  background-position: left center;
+  background-repeat: no-repeat;
+
 
   .lang-en & {
     font-size: 18px;
     font-family: @en-font-family;
-    font-weight: bold;
+    font-weight: normal;
   }
 
   a, a:link, a:visited {
@@ -72,15 +133,23 @@
 }
 
 .toc-title-active {
-  border-left: 4px solid @link-color;
-  padding-left: 6px;
-  margin-left: 1px;
+  background-image: url(../images/common/triangle-open.png);
+}
+
+.toc-title-no-toggle {
+  background-image: none;
 }
 
 .toc {
   margin: 0;
   padding: 0;
   text-align: left;
+  font-size: 14px;
+  line-height: 1.7;
+
+  .lang-en & {
+    font-size: 15px;
+  }
 }
 
 .toc-title + .toc {
@@ -128,12 +197,10 @@
 .toc-link {
   line-height: 1.3;
   display: inline-block;
-  padding: 3px 0 2px 7px;
-  border-left: 4px solid transparent;
-  transition: all 0.2s linear;
+  padding: 3px 0 2px 12px;
 
   &:link, &:hover, &:visited {
-    color: #777;
+    color: #666;
     text-decoration: none;
   }
 
@@ -142,11 +209,10 @@
   }
 
   &.current {
-    border-left: 4px solid @link-color;
-
     &:link, &:hover, &:visited {
       color: @link-color;
-      text-decoration: none;
+      text-decoration: underline;
+      font-weight: bold;
     }
 
     &:hover {
@@ -159,9 +225,10 @@
   width: (@width - @aside-width);
   max-width: 100%;
   margin: 0;
-  padding-right: 0px;
+  padding: 30px 0 100px 30px;
+  box-sizing: border-box;
+  border-left: 1px solid #ddd;
   margin-left: @aside-width;
-  padding: 0px 0px 100px 0px;
 
   > h2:first-child {
     text-align: left;
@@ -171,7 +238,7 @@
 .content {
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 0px 0px 100px 0px;
+  padding: 20px 0px 100px 0px;
   text-align: left;
   width: (@width - @aside-width);
   max-width: 90%;

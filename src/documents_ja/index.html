@@ -3,7 +3,7 @@ page: 'home'
 title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
 ---
 
-<div id="keyvisual">
+<div class="keyvisual">
   <div class="keyvisual-content">
     <div class="keyvisual-main">
       <h1><img src="/images/index/keyvisual-header-text-ja.png" alt="HTML5モバイルアプリをもっと速く、もっと美しく" height="90"></h1>
@@ -29,16 +29,6 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
   </div>
 </div>
 
-<div class="newsletter">
-  <div class="newsletter-inner">
-    <form>
-      <input type="text" placeholder="Onsen UIニュースを購読する" name="email">
-      <input type="submit" value="Send">
-    </form>
-    <div class="newsletter-thankyou">ありがとうございました!</div>
-  </div>
-</div>
-
 <div class="taglines">
   <ul>
     <li>PhoneGap / Cordovaアプリに最適なJavaScript、CSSフレームワーク</li>
@@ -46,6 +36,16 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
     <li>豊富なUIコンポーネントが提供</li>
     <li>スマホもタブレットも！レスポンシブデザインで同時対応</li>
   </ul>
+
+  <div class="newsletter">
+    <div class="newsletter-inner">
+      <form>
+        <input type="text" placeholder="Onsen UIニュースを購読する" name="email">
+        <input type="submit" value="Send">
+      </form>
+      <div class="newsletter-thankyou">ありがとうございました!</div>
+    </div>
+  </div>
 </div>
 
 <div class="main-features">
@@ -194,7 +194,7 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
     });
 
     // event tracking
-    $('#keyvisual .download').click(function() {
+    $('.keyvisual .download').click(function() {
       ga('send', 'event', 'website', 'download');
     });
   });
@@ -209,8 +209,8 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
       $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
         .success(function(data) {
           var ret = JSON.parse(data);
-          console.log(ret);
-          if (ret.status !== undefined && ret.status === "success") {
+
+          if (ret.status === 'success') {
             $('.newsletter form').hide();
             $('.newsletter-thankyou').show();
           } else {

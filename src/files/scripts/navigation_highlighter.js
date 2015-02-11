@@ -32,8 +32,9 @@
       var section = sections[i];
       if (typeof section.offset() == 'undefined') {
 
+      } else {
+        var position = section.offset().top;
       }
-      var position = section.offset().top;
       
       if (scrolled > position) {
         var id = '#' + section.attr('id');

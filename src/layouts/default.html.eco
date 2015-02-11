@@ -21,7 +21,6 @@
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
   <link href='http://fonts.googleapis.com/css?family=Open Sans:400,500,600' rel='stylesheet' type='text/css'>
 
-
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
   <% if @hasAlternateLangPage(): %>
@@ -46,7 +45,7 @@
     <% if @toc: %>
 
     <aside class="content-info content-info-page">
-      <div class="toc-title">Table Of Contents</div>
+      <div class="toc-title toc-title-no-toggle">Table Of Contents</div>
       <%- @partial('toc.html.eco', {tocItems: @toc}) %>
     </aside>
 
@@ -54,6 +53,7 @@
     <aside class="content-info">
 
       <div class="toc-title<% if @docCategory == 'guides': %> toc-title-active<% end %>"><a class="toggle-toc">Guides</a></div>
+
       <ul class="toc toc-1" <% if @docCategory != 'guides': %>style="display: none"<% end %>>
         <% for guide in @guides: %>
         <li class="toc-item toc-1-item">
@@ -65,6 +65,7 @@
       </ul>
 
       <div class="toc-title<% if @docCategory == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/css.html">CSS</a></div>
+
       <ul class="toc toc-1" <% if @docCategory != 'css': %>style="display: none"<% end %>>
         <% for doc in @cssDocs: %>
         <li class="toc-item toc-1-item">
@@ -76,6 +77,7 @@
       </ul>
 
       <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc">JavaScript</a></div>
+
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
         <% for object in @objects: %>
         <li class="toc-item toc-1-item">
@@ -94,6 +96,7 @@
       </ul>
 
       <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html" class="toggle-toc">Page Patterns</a></div>
+
       <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
         <% for pattern in @patterns: %>
         <li class="toc-item toc-1-item">
@@ -160,14 +163,20 @@
 
   // sticky menu
   $(function() {
+    /*
     $('.content-info').sticky({
       topSpacing : 0, 
-      bottomSpacing : $('.footer-container').height() + 60
+      bottomSpacing : 0 //$('.footer-container').height() + 60
     });
-  });
+    */
 
+
+  });
   </script>
+
+  <script src="/scripts/sticky.js"></script>
   <script src="/scripts/navigation_highlighter.js"></script>
   <script src="/vendor/highlight.min.js"></script>
+
 </body>
 </html>

@@ -9,6 +9,8 @@
   right: 0px;
   top: 44px;
   z-index: 20;
+  border-bottom: 1px solid #ddd;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.07);
 
   .gnav-icon {
     display: none;
@@ -24,7 +26,6 @@
   width: @width;
   min-height: @header-height;
   max-width: 100%;
-  border-bottom: 1px solid #ddd;
 }
 
 .header-logo {
@@ -51,7 +52,7 @@
   display: inline-block;
   font-size: 15px;
   margin: 0 4px;
-  padding: 0 10px;
+  padding: 0 4px;
   -webkit-box-sizing: border-box;
   -mz-box-sizing: border-box;
   -ms-box-sizing: border-box;
@@ -65,6 +66,11 @@
   a {
     height: @header-height;
     line-height: @header-height;
+    display: inline-block;
+    box-sizing: border-box;
+    border-bottom: 4px solid transparent;
+    transition: border-color 0.2s linear;
+    padding: 0 4px;
 
     &:link, &:hover, &:visited {
       color: #222;
@@ -72,8 +78,7 @@
     }
 
     &:hover {
-      color: @link-color;
-      border-bottom: 2px solid @link-color;
+      border-bottom: 4px solid @onsen-navy;
     }
   }
 }
@@ -111,8 +116,9 @@
 @media screen and (min-width: @width) {
   .header-navi li.current {
     a {
-      border-bottom: 2px solid #ddd;
+      border-bottom: 4px solid @onsen-navy;
       font-weight: bold;
+
       &:link, &:hover, &:visited {
         color: #333;
         text-decoration: none;
@@ -123,6 +129,7 @@
 
 @media screen and (min-width: @width) {
   .header {
+
     .gnav-icon {
       display: none !important;
     }
@@ -132,6 +139,9 @@
 @media screen and (max-width: @width) {
 
   .header {
+    border-bottom: none;
+    box-shadow: none;
+
     position: static;
 
     > div:first-child {

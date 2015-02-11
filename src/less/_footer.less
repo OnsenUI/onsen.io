@@ -6,6 +6,7 @@
   position: relative;
   text-align: center;
   max-width: 100%;
+  border-top: 1px solid #ddd;
   background-color: #f9f9f9;
 }
 
@@ -87,52 +88,6 @@
     }
   }
 
-  .footer-newsletter {
-    text-align: left;
-    display: inline-block;
-    width: 340px;
-    border-left: 1px solid #ddd;
-    height: 70px;
-    padding-left: 30px;
-
-    form {
-      display: inline-block;
-    }
-
-    input[type=text] {
-      font-size: 15px;
-      background-color: white;
-      color: #333;
-      width: 200px;
-      line-height: 36px;
-      height: 36px;
-      border: none;
-      border-radius: 2px;
-      padding: 0 8px;
-      border: 1px solid #ddd;
-      box-sizing: border-box;
-    }
-
-    input[type=submit] {
-      .site-button();
-    }
-
-    .footer-newsletter-thankyou {
-      color: #666;
-      font-size: 15px;
-      line-height: 40px;
-      font-weight: 400;
-      display: none;
-    }
-
-    .footer-newsletter-title {
-      font-size: 16px;
-      font-weight: 500;
-      color: #333;
-      margin: 8px 0 4px 0;
-    }
-  }
-
   .copyright {
     padding: 0 40px;
     font-size: 14px;
@@ -154,10 +109,11 @@
     display: none;
   }
 
+  .newsletter-footer {
+    display: none;
+  }
+
   .footer-cont {
-    .social-and-newsletter {
-      display: none;
-    }
 
     .copyright {
       position: static;

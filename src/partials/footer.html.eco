@@ -11,6 +11,7 @@
         <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">DOCS</a></li>
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
         <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
+        <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
       <% else: %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">導入</a></li>
         <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">ドキュメント</a></li>
@@ -20,17 +21,14 @@
   </ul>
 
   <div class="footer-cont">
-    <div class="social-and-newsletter">
-      <a href="https://twitter.com/Onsen_UI" target="_blank"><span class="socialicn twitter">&nbsp;</span></a>
-      <a href="https://github.com/OnsenUI/OnsenUI" target="_blank"><span class="socialicn github">&nbsp;</span></a>
 
-      <div class="footer-newsletter">
-        <div class="footer-newsletter-title">Onsen UI Newsletter</div>
+    <div class="newsletter newsletter-footer">
+      <div class="newsletter-inner">
         <form>
-          <input type="text" name="email" placeholder="your@email.address">
-          <input type="submit" value="Subscribe">
+          <input type="text" placeholder="Enter email for Onsen UI updates" name="email">
+          <input type="submit" value="Send">
         </form>
-        <div class="footer-newsletter-thankyou">Thank you!</div>
+        <div class="newsletter-thankyou">Thank you!</div>
       </div>
     </div>
 
