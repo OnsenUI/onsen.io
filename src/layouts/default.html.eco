@@ -79,19 +79,37 @@
       <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc">JavaScript</a></div>
 
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
+        <% for category, docs of @componentCategoryDict: %>
+        <li class="toc-item toc-1-item">
+          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- category %></a>
+          <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
+          <% for doc in docs: %>
+            <li class="toc-item toc-2-item">
+              <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>">&lt;<%- doc.name %>&gt;
+              </a>
+            </li>
+          <% end %>
+          </ul>
+        </li>
+        <% end %>
+
         <% for object in @objects: %>
+        <!--
         <li class="toc-item toc-1-item">
           <a href="/reference/<%= object.name %>.html" class="toc-link toc-1-link<% if @name == object.name: %> current <% end %>">
             <%- object.name %>
           </a>
         </li>
+        -->
         <% end %>
         <% for component in @components: %>
+        <!--
         <li class="toc-item toc-1-item">
           <a href="/reference/<%= component.name %>.html" class="toc-link toc-1-link<% if @name == component.name: %> current<% end %>">
             <%- component.name %>
           </a>
         </li>
+        -->
         <% end %>
       </ul>
 

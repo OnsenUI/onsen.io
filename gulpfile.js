@@ -147,6 +147,23 @@ gulp.task('metalsmith', function(done) {
         soryBy: 'name'
       }
     }))
+    .use(function(files, metalsmith, done) {
+      var dict = {};
+      for (var path in files) {
+        var file = files[path];
+        if (file.componentCategory) {
+          file.componentCategory.split(/, */).forEach(function(category) {
+            if (!dict[category]) {
+              dict[category] = [];
+            }
+            dict[category].push(file);
+          });
+        }
+      }
+      metalsmith.metadata().componentCategoryDict = dict;
+
+      done();
+    })
     .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
     .use(require('./plugins/autotoc')())
