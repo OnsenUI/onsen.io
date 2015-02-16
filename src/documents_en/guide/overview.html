@@ -1021,6 +1021,52 @@ The design can be switched using `modifier` attribute, which can be selected fro
 
   Fired after showing or hiding the popover. The callback function provides an event object, which has `popover` property contains popover object.
 
+<h3 id="UsingPullHook">Using Pull Hook</h3>
+
+The Pull Hook component adds "pull-to-refresh" to an [`<ons-page>`](components.html#ons-page) element. Onsen UI supports the Pull Hook function by using the [`<ons-pull-hook>`](components.html#ons-pull-hook) tag. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
+
+<%- @partial('codepen.html.eco', { id: "jEZrdr" } ) %>
+
+<h4 id="ShowingPullHook">Showing Pull Hook</h4>
+
+To show a Pull Hook element, you need to define it as a HTML context using [`<ons-pull-hook>`](components.html#ons-pull-hook) tag.
+
+```
+<ons-pull-hook ng-action="load($done)" var="loader">
+  <span ng-switch="loader.getCurrentState()">
+    <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
+    <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
+    <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading data...</span>
+  </span>
+</ons-pull-hook>
+```
+
+The Pull Hook element contains two attributes: `ng-action="load($done)"`, which is the action associated with pulling down the element, and `var="loader"`. This variable is used to check to `<ons-pull-hook>` status, via `ng-switch="loader.getCurrentState()"`.
+
+There are three potential states, each one associated with a customizable graphical representation:
+
+* `initial`: default state before any user interaction, the element remains in this status until it's totally dragged down, going beyond its height limit.
+
+* `preaction`: is the state that follows the `initial` one and persists until the element is not totally dragged down, going beyond its height limit (different from the previous one) or it's released.
+
+* `action`: it's the final, the one in which the behavior of the `<ons-pull-hook>` element is executed.
+
+<h4 id="PullHookActions">Pull Hook actions</h4>
+
+[`<ons-pull-hook>`](components.html#ons-pull-hook) component is associated with two kind of actions:
+
+* `ng-action`: used to specify custom behavior when the page is pulled down. A `$done` function is available to tell the component that the action is completed.
+
+* `on-action`: same as `ng-action` but can be used without AngularJS. A function called `done` is available to call when action is complete.
+
+<h4 id="PullHookHeightParamenters">Pull Hook height parameters</h4>
+
+[`<ons-pull-hook>`](components.html#ons-pull-hook) component's height attributes are very important, since they define whenever a status change should occur. The two attributes are:
+
+* `height`: specifies the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".
+
+* 'threshold-height': specifies the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.
+
 <h3 id="UsingFormComponents">Using Form Components</h3>
 
 Onsen UI provides various components for building forms.
