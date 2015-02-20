@@ -6,11 +6,11 @@ The site for Onsen UI.
 Build
 ----
 
-    $ gulp generate --env en
-    $ gulp generate --env ja
+    $ gulp generate --lang en
+    $ gulp generate --lang ja
 
 Edit
 ----
 
-    $ gulp serve --env en
+    $ gulp serve --lang en
 
