@@ -157,8 +157,8 @@
 }
 
 .toc-2 {
-  margin-bottom: 8px;
-  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-top: 4px;
   display: none;
 }
 
@@ -242,6 +242,7 @@
   text-align: left;
   width: (@width - @aside-width);
   max-width: 90%;
+  position: relative;
 
   ::-webkit-scrollbar {
     width: 4px;
@@ -355,7 +356,7 @@ div.need-help {
 }
 
 
-@media screen and (max-width: 1100px) {
+.tablet-query({
   .content-info, .sticky-wrapper > .content-info {
     display: none;
   }
@@ -376,5 +377,4 @@ div.need-help {
   .codepen-open-link-wrapper {
     display: block;
   }
-
-}
+});

@@ -2,7 +2,7 @@
   <div id="header-monaca-inner">
     <a href="http://monaca.io"><img src="/images/header/monaca_logo.png"></a>
     
-<% if @lang == 'en': %>
+    <% if @lang == 'en': %>
     <ul id="header-monaca-navi">
       <li><a href="#">Products</a>
         <ul class="header-monaca-navi-sub-menu">
@@ -20,7 +20,7 @@
         <a href="http://monaca.mobi/en/showcase">Showcase</a>
       </li>
     </ul>
-<% else: %>
+    <% else: %>
     <ul id="header-monaca-navi">
       <li><a href="#">製品</a>
         <ul class="header-monaca-navi-sub-menu">
@@ -55,7 +55,8 @@
         </ul>
       </li>
     </ul>
-<% end %>
+    <% end %>
+
   </div>
 </div>
 

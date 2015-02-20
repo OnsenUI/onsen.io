@@ -1,15 +1,24 @@
 
-.lang-en(@rules) {
-  .lang-en & { @rules(); }
-}
-
-.lang-ja(@rules) {
-  .lang-ja & { @rules(); }
-}
-
 .clearfix:after {
   content: "";
   clear: both;
   display: block;
 }
 
+.desktop-query(@rules) {
+  @media (min-width: @width) {
+    & { @rules(); }
+  }
+}
+
+.tablet-query(@rules) {
+  @media (max-width: @width) {
+    & { @rules(); }
+  }
+}
+
+.mobile-query(@rules) {
+  @media (max-width: @mobile-width) {
+    & { @rules(); }
+  }
+}

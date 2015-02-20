@@ -135,7 +135,6 @@ gulp.task('metalsmith', function(done) {
     .metadata(require('./config.js')(lang))
     .use(require('./plugins/import-api-docs')(lang))
     .use(require('./plugins/patterns-collection')(lang))
-    .use(require('./plugins/import-topdoc')(lang))
     .use(collections({
       components: {
         sortBy: 'name'
@@ -167,6 +166,13 @@ gulp.task('metalsmith', function(done) {
     .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
     .use(require('./plugins/autotoc')())
+    .use(function(files, metalsmith, done) {
+      var cssFile = files['reference/css.html'];
+      var cssToc = cssFile.toc;
+      delete cssFile.toc;
+      metalsmith.metadata().cssToc = cssToc;
+      done();
+    })
     .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
     .use(assets({source: './src/files'}))
     .use(require('./plugins/css-transform')(lang))
@@ -180,8 +186,8 @@ gulp.task('metalsmith', function(done) {
       }
 
       browserSync.reload();
-      done();
       gutil.log('Generated into \'./out_' + lang + '\'');
+      done();
     });
 });
 
@@ -206,7 +212,6 @@ gulp.task('clean', function(done) {
   del([
     'out_' + lang + '/*',
     '!out_' + lang + '/OnsenUI',
-    'src/documents_' + lang + '/reference/*.html'
   ], done);
 });
 

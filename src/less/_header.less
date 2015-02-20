@@ -83,7 +83,7 @@
   }
 }
 
-@media screen and (min-width: @width) {
+.tablet-query({
   .fixed-header {
     position: fixed;
     top: 0px;
@@ -111,9 +111,9 @@
   .fixed-header .header-inner {
     border-width: 0px;
   }
-}
+});
 
-@media screen and (min-width: @width) {
+.desktop-query({
   .header-navi li.current {
     a {
       border-bottom: 4px solid @onsen-navy;
@@ -125,18 +125,15 @@
       }
     }
   }
-}
 
-@media screen and (min-width: @width) {
   .header {
-
     .gnav-icon {
       display: none !important;
     }
   }
-}
+});
 
-@media screen and (max-width: @width) {
+.tablet-query({
 
   .header {
     border-bottom: none;
@@ -198,7 +195,7 @@
       padding: 0 12px 0 12px;
     }
   }
-}
+});
 
 .language-dialog {
   position: fixed;

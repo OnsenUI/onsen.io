@@ -1,4 +1,6 @@
-<% renderToc = (items, level) => %>
+<% renderToc = (items, level, base) => %>
+
+<% base = base or '' %>
 
 <% if items.length == 1 and items[0].children.length > 0: %>
   <div class="first-toc"><%- renderToc items[0].children, level + 1 %></div>
@@ -6,7 +8,7 @@
   <% if items.length: %>
   <ul class="toc toc-<%= level %>">
     <% for item in items: %>
-      <li class="toc-<%= level %>-item toc-item"><a href="#<%= item.id %>" class="toc-<%= level %>-link toc-link"><%= item.text %></a>
+      <li class="toc-<%= level %>-item toc-item"><a href="<%= base %>#<%= item.id %>" class="toc-<%= level %>-link toc-link"><%= item.text %></a>
         <% if item.children: %>
         <%- renderToc item.children, level + 1 %>
         <% end %>
@@ -17,4 +19,4 @@
 <% end %>
 
 <% end %>
-<%= renderToc @tocItems, 1 %>
+<%= renderToc @tocItems, 1, @base %>
