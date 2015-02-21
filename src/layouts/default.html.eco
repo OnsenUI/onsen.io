@@ -77,7 +77,7 @@
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
         <% for category, docs of @componentCategoryDict: %>
         <li class="toc-item toc-1-item">
-          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- category %></a>
+          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
           <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
           <% for doc in docs: %>
             <li class="toc-item toc-2-item">

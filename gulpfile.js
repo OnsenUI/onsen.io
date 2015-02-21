@@ -5,6 +5,7 @@ var argv = require('yargs').argv;
 var gutil = require('gulp-util');
 var del = require('del');
 var runSequence = require('run-sequence');
+var sortObject = require('sort-object');
 
 var metalsmith = require('metalsmith');
 var templates = require('metalsmith-templates');
@@ -18,6 +19,7 @@ var permalinks = require('metalsmith-permalinks');
 var metalsmithDebug = require('metalsmith-debug');
 var paginate = require('metalsmith-paginate');
 var feed = require('metalsmith-feed');
+
 
 //--
 
@@ -159,7 +161,7 @@ gulp.task('metalsmith', function(done) {
           });
         }
       }
-      metalsmith.metadata().componentCategoryDict = dict;
+      metalsmith.metadata().componentCategoryDict = sortObject(dict);
 
       done();
     })

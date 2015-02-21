@@ -50,6 +50,15 @@ module.exports = function() {
         return JSON.stringify(Object.keys(param), null, '  ');
       },
 
+      titlize: function(str) {
+        str = '' + str;
+        if (str.length <= 1) {
+          return str.toUpperCase();
+        }
+
+        return str.substr(0, 1).toUpperCase() + str.substr(1, str.length);
+      },
+
       renderBlogDate: function(date) {
         var date = moment(date);
         var result = date.format('dddd, MMMM Do, YYYY').toUpperCase();
