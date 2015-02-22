@@ -357,41 +357,37 @@ div.need-help {
 }
 
 .js-index {
+
   &-inner {
-    -webkit-column-count: 4;
-    -webkit-column-gap: 0px;
-    -webkit-column-fill: auto;
-    -moz-column-count: 4;
-    -moz-column-gap: 0px;
-    -moz-column-fill: auto;
-    column-count: 4;
     column-gap: 0px;
     column-fill: auto;
 
+    .desktop-query({
+      column-count: 4;
+    });
+
     .tablet-query({
-      -webkit-column-count: 3;
-      -moz-column-count: 3;
-      column-count: 3;
+      column-count: 2;
     });
 
     .mobile-query({
-      -webkit-column-count: auto;
-      -moz-column-count: auto;
       column-count: auto;
     });
   }
 
   &-category {
-    display: inline-block;
+    column-break-inside: avoid;
+
+    /* We have autoprefixer, but this is needed. */
     -webkit-column-break-inside: avoid;
     -moz-column-break-inside: avoid;
-    column-break-inside: avoid;
+
     width: 200px;
     box-sizing: border-box;
     padding-left: 6px;
 
     .desktop-query({
-      border-right: 1px solid #eee;
+      display: inline-block;
     });
   }
 
