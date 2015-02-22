@@ -137,6 +137,7 @@
 
 .toc-title-no-toggle {
   background-image: none;
+  margin-left: -1px;
 }
 
 .toc {
@@ -353,6 +354,98 @@ div.need-help {
   &:active {
     opacity: 0.4;
   }
+}
+
+.js-index {
+  &-inner {
+    -webkit-column-count: 4;
+    -webkit-column-gap: 0px;
+    -webkit-column-fill: auto;
+    -moz-column-count: 4;
+    -moz-column-gap: 0px;
+    -moz-column-fill: auto;
+    column-count: 4;
+    column-gap: 0px;
+    column-fill: auto;
+
+    .tablet-query({
+      -webkit-column-count: 3;
+      -moz-column-count: 3;
+      column-count: 3;
+    });
+
+    .mobile-query({
+      -webkit-column-count: auto;
+      -moz-column-count: auto;
+      column-count: auto;
+    });
+  }
+
+  &-category {
+    display: inline-block;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    column-break-inside: avoid;
+    width: 200px;
+    box-sizing: border-box;
+    padding-left: 6px;
+
+    .desktop-query({
+      border-right: 1px solid #eee;
+    });
+  }
+
+  &-header {
+    margin: 0 0 6px 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+
+    .lang-en & {
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+
+  &-list {
+    margin: 0;
+    padding: 0 0 18px 0;
+  }
+
+  &-list-item {
+    margin: 0 0 0 0;
+    padding: 0 0 0 22px;
+    list-style: none;
+    background-position: left center;
+    background-repeat: no-repeat;
+
+    &-object {
+      background-image: url(/images/common/object-icon.png);
+      background-position: 1px center;
+    }
+
+    &-element {
+      background-image: url(/images/common/element-icon.png);
+    }
+  }
+
+  &-link {
+
+    font-size: 14px;
+
+    &:link, &:visited, &:active {
+      color: @light-text-color;
+      text-decoration: none;
+    }
+
+    &:hover {
+      color: @light-text-color;
+      text-decoration: underline;
+    }
+
+  }
+
+
 }
 
 
