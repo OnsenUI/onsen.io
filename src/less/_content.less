@@ -401,11 +401,20 @@ div.need-help {
       font-size: 18px;
       font-weight: bold;
     }
+
+    .lang-ja & {
+      font-size: 14px;
+      font-weight: bold;
+    }
   }
 
   &-list {
     margin: 0;
     padding: 0 0 18px 0;
+
+    .lang-ja & {
+      padding: 0 0 22px 0;
+    }
   }
 
   &-list-item {
@@ -414,6 +423,10 @@ div.need-help {
     list-style: none;
     background-position: left center;
     background-repeat: no-repeat;
+
+    .lang-ja & {
+      line-height: 1.9;
+    }
 
     &-object {
       background-image: url(/images/common/object-icon.png);
@@ -437,6 +450,10 @@ div.need-help {
     &:hover {
       color: @light-text-color;
       text-decoration: underline;
+    }
+
+    .lang-ja & {
+      font-size: 13px;
     }
 
   }
