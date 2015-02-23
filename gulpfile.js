@@ -19,7 +19,7 @@ var permalinks = require('metalsmith-permalinks');
 var metalsmithDebug = require('metalsmith-debug');
 var paginate = require('metalsmith-paginate');
 var feed = require('metalsmith-feed');
-
+var redirect = require('metalsmith-redirect');
 
 //--
 
@@ -178,6 +178,9 @@ gulp.task('metalsmith', function(done) {
     .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
     .use(assets({source: './src/files'}))
     .use(require('./plugins/css-transform')(lang))
+    .use(redirect({
+      '/components.html' : '/reference/javascript.html'
+    }))
     .destination('./out_' + lang)
     .build(function(error) {
       if (error) {
