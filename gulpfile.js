@@ -20,6 +20,7 @@ var metalsmithDebug = require('metalsmith-debug');
 var paginate = require('metalsmith-paginate');
 var feed = require('metalsmith-feed');
 var redirect = require('metalsmith-redirect');
+var draft = require('metalsmith-drafts');
 
 //--
 
@@ -42,6 +43,7 @@ gulp.task('blog', function(done) {
     .source('./blog/posts/')
     .destination('./out_en/blog/')
     .metadata(require('./config.js')('en'))
+    .use(draft())
     .use(require('./plugins/helpers')())
     .use(collections({
       articles: {
@@ -144,6 +146,7 @@ gulp.task('metalsmith', function(done) {
     .clean(false)
     .source('./src/documents_' + lang)
     .metadata(require('./config.js')(lang))
+    .use(draft())
     .use(require('./plugins/import-api-docs')(lang))
     .use(require('./plugins/patterns-collection')(lang))
     .use(collections({
