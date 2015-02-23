@@ -91,29 +91,29 @@ Onsen UIはAngularJS以外から使うことが可能です。下記のサンプ
 
 <h4 id="Navigationpattern">ナビゲーション型</h4>
 
-ページが親子関係を持つ場合に一般的に用いられるパターンです。子ページへは、ボタンのタップや、リスト要素の選択などからリンクされます。ナビゲーションパターンを実装するためには、[`<ons-navigator>`](components.html#ons-navigator)と[`<ons-toolbar>`](components.html#ons-toolbar)を組み合わせます。
+ページが親子関係を持つ場合に一般的に用いられるパターンです。子ページへは、ボタンのタップや、リスト要素の選択などからリンクされます。ナビゲーションパターンを実装するためには、[`<ons-navigator>`](/reference/ons-navigator.html)と[`<ons-toolbar>`](/reference/ons-toolbar.html)を組み合わせます。
 
 <h4 id="Slidingmenupattern">スライディングメニュー型</h4>
 
-メニュー型とも呼ばれ、同じ階層に複数のページを配置するような場合に最適です。Onsen UIでは、[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントで実装します。スワイプ操作でメニューの表示/非表示を制御することもできます。
+メニュー型とも呼ばれ、同じ階層に複数のページを配置するような場合に最適です。Onsen UIでは、[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html)コンポーネントで実装します。スワイプ操作でメニューの表示/非表示を制御することもできます。
 
 <h4 id="Tabbarpattern">タブバー型</h4>
 
-iPhoneやiPadアプリでよく見られ、ページの下部にタブバーを配置したパターンになります。通常、タブバーにはいくつかの項目（アイテム）が並び、アイコンとテキストで表現されます。複数の機能を提供したいような場合に用いられます。Onsen UIでタブバーを実装するには、[`<ons-tabbar>`](components.html#ons-tabbar)コンポーネントを使用します。
+iPhoneやiPadアプリでよく見られ、ページの下部にタブバーを配置したパターンになります。通常、タブバーにはいくつかの項目（アイテム）が並び、アイコンとテキストで表現されます。複数の機能を提供したいような場合に用いられます。Onsen UIでタブバーを実装するには、[`<ons-tabbar>`](/reference/ons-tabbar.html)コンポーネントを使用します。
 
 <h4 id="Splitviewpattern">スプリットビュー型</h4>
 
-タブレットのような大きな画面を持つデバイスや、画面を横向きにしたときに用いられます。スプリットビュー型では、画面を左と右に分割し、別々の情報を表示できます。[`<ons-split-view>`](components.html#ons-split-view)コンポーネントを用います。小さな画面を持つデバイスや、縦向きにした場合に、自動的にスライディングメニュー型に切り替える機能も有しています。
+タブレットのような大きな画面を持つデバイスや、画面を横向きにしたときに用いられます。スプリットビュー型では、画面を左と右に分割し、別々の情報を表示できます。[`<ons-split-view>`](/reference/ons-split-view.html)コンポーネントを用います。小さな画面を持つデバイスや、縦向きにした場合に、自動的にスライディングメニュー型に切り替える機能も有しています。
 
 <h3 id="PageNavigation">ページナビゲーション</h3>
 
-Onsen UIでは、[`<ons-navigator>`](components.html#ons-navigator)コンポーネントでページナビゲーションを実装します。`ons-navigator`は画面要素を持たない、ナビゲーションコントローラーです。そのため、一般的にはページ内にツールバーを表示するために[`<ons-toolbar>`](components.html#ons-toolbar)を組み合わせます。ナビゲーターは画面遷移をする際に自動的にアニメーションを適用し、親子関係を持つページを作成するために利用できます。
+Onsen UIでは、[`<ons-navigator>`](/reference/ons-navigator.html)コンポーネントでページナビゲーションを実装します。`ons-navigator`は画面要素を持たない、ナビゲーションコントローラーです。そのため、一般的にはページ内にツールバーを表示するために[`<ons-toolbar>`](/reference/ons-toolbar.html)を組み合わせます。ナビゲーターは画面遷移をする際に自動的にアニメーションを適用し、親子関係を持つページを作成するために利用できます。
 
 <h4 id="ons-navigatoroverview">`<ons-navigator>`の概要</h4>
 
-[`<ons-navigator>`](components.html#ons-navigator)コンポーネントは、ページスタックの管理機能と、画面遷移時のアニメーション効果を提供します。ページスタックに新しいページが追加されると、自動的にアニメーションが行われ、ページが表示されます。スタック内のすべてのページは[`<ons-page>`](components.html#ons-page)要素で表されます。そのため、[`<ons-navigator>`](components.html#ons-navigator)コンポーネントの直下には[`<ons-page>`](components.html#ons-page)コンポーネントのみ配置できます。
+[`<ons-navigator>`](/reference/ons-navigator.html)コンポーネントは、ページスタックの管理機能と、画面遷移時のアニメーション効果を提供します。ページスタックに新しいページが追加されると、自動的にアニメーションが行われ、ページが表示されます。スタック内のすべてのページは[`<ons-page>`](/reference/ons-page.html)要素で表されます。そのため、[`<ons-navigator>`](/reference/ons-navigator.html)コンポーネントの直下には[`<ons-page>`](/reference/ons-page.html)コンポーネントのみ配置できます。
 
-通常は、ページ上部にツールバーを設置します。そのため、[`<ons-page>`](components.html#ons-page)の下には[`<ons-toolbar>`](components.html#ons-toolbar)コンポーネントを配置するのが一般的です。ツールバーには、戻るボタンを設置したり、ページタイトルを描画したりします。
+通常は、ページ上部にツールバーを設置します。そのため、[`<ons-page>`](/reference/ons-page.html)の下には[`<ons-toolbar>`](/reference/ons-toolbar.html)コンポーネントを配置するのが一般的です。ツールバーには、戻るボタンを設置したり、ページタイトルを描画したりします。
 
 <%- @partial('codepen.html.eco', {id: "yrhtv"}) %>
 
@@ -248,7 +248,7 @@ pages[pages.length - 2].destroy();
 
 <%- @partial('codepen.html.eco', { id: "aHmGL" } ) %>
 
-ツールバーは左、中央、右の3つに分けられ、それぞれに対応したクラス名（`left`、`center`、`right`）として指定できます。[`<ons-icon>`](components.html#ons-icon)でアイコンを表示したり、[`<ons-toolbar-button>`](components.html#ons-toolbar-button)や[`<ons-back-button>`](components.html#ons-back-button)コンポーネントでボタンを配置できます。HTMLを直接記述することもできます。
+ツールバーは左、中央、右の3つに分けられ、それぞれに対応したクラス名（`left`、`center`、`right`）として指定できます。[`<ons-icon>`](/reference/ons-icon.html)でアイコンを表示したり、[`<ons-toolbar-button>`](/reference/ons-toolbar-button.html)や[`<ons-back-button>`](/reference/ons-back-button.html)コンポーネントでボタンを配置できます。HTMLを直接記述することもできます。
 
 ツールバーの表示スタイルは`modifier`属性で変更でき、`android`もしくは`ios`を指定できます。指定がない場合は、プラットフォームに適したデザインを自動的に適用します。`fixed-style`属性を指定すると、プラットフォームにかかわらずスタイルが固定となります。
 
@@ -286,7 +286,7 @@ pages[pages.length - 2].destroy();
 
 <h5 id="InlineToolbar">ツールバーのインライン表示</h5>
 
-ツールバーをヘッダー外に設置したい場合は、[`<ons-toolbar>`](components.html#ons-toolbar)や[`<ons-bottom-toolbar>`](components.html#ons-bottom-toolbar)に`inline`属性を指定します。
+ツールバーをヘッダー外に設置したい場合は、[`<ons-toolbar>`](/reference/ons-toolbar.html)や[`<ons-bottom-toolbar>`](/reference/ons-bottom-toolbar.html)に`inline`属性を指定します。
 
 ```
 <ons-toolbar inline>
@@ -303,7 +303,7 @@ pages[pages.length - 2].destroy();
 
 Onsen UIではAndroidの戻るボタンにも対応します。アプリがAndroidデバイス上で実行されていて、Cordovaが用いられている場合は、戻るボタンをタップするとナビゲーターの`popPage()`メソッドが呼ばれます。
 
-また、iOS端末に限ってツールバーに戻るボタンを表示したい場合は、[`<ons-if-platform>`](components.html#ons-if-platform)を使用すると良いでしょう。
+また、iOS端末に限ってツールバーに戻るボタンを表示したい場合は、[`<ons-if-platform>`](/reference/ons-if-platform.html)を使用すると良いでしょう。
 
 ```
 <ons-toolbar>
@@ -316,7 +316,7 @@ Onsen UIではAndroidの戻るボタンにも対応します。アプリがAndro
 
 <h4 id="Navigationevents">ナビゲーターのイベント</h4>
 
-[`<ons-navigator>`](components.html#ons-navigator)には、特定の操作の際にイベントを発行する仕組みが備わっています。それを用いると、たとえば特定の条件においてはページ遷移をキャンセルするといった処理を記述することができます。
+[`<ons-navigator>`](/reference/ons-navigator.html)には、特定の操作の際にイベントを発行する仕組みが備わっています。それを用いると、たとえば特定の条件においてはページ遷移をキャンセルするといった処理を記述することができます。
 
 `prepush`、`postpush`、`prepop`、`postpop`の4つのイベントがナビゲーターに定義されています。これらは`pushPage`もしくは`popPage`の前あるいは後に発火され、コールバック関数が呼び出されます。
 
@@ -353,11 +353,11 @@ ons.ready(function() {
 
 スライディングメニューは2つのページで構成され、それぞれ`main-page`と`menu-page`という形で指定されます。`menu-page`はサイドページとも呼ばれ、通常は隠れており画面端から出現します。ボタンをタップしたり、画面端からスワイプすることで表示することができます。
 
-`menu-page`には、任意のHTMLコンテンツを含むことができます。通常は、別のページへのリンクとなるメニュー画面が一般的です。`main-page`にはメインコンテンツが表示されます。[`<ons-navigator>`](components.html#ons-navigator)と組み合わせることで、さらに深い階層のページを持つことも可能です。
+`menu-page`には、任意のHTMLコンテンツを含むことができます。通常は、別のページへのリンクとなるメニュー画面が一般的です。`main-page`にはメインコンテンツが表示されます。[`<ons-navigator>`](/reference/ons-navigator.html)と組み合わせることで、さらに深い階層のページを持つことも可能です。
 
 <h4 id="onsslidingmenuoverview">`<ons-sliding-menu>`の概要</h4>
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントでは`main-page`と`menu-page`を属性として指定します。また、`side`属性を用いると、`menu-page`を画面のどちら側に設置するかを指定できます。
+[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html)コンポーネントでは`main-page`と`menu-page`を属性として指定します。また、`side`属性を用いると、`menu-page`を画面のどちら側に設置するかを指定できます。
 
 それぞれのページは、`<ons-sliding-menu>`タグの下に`menu`および`main`クラスを持った要素を作成することで指定できます。
 
@@ -427,7 +427,7 @@ ons.ready(function() {
 
 <h4 id="Openingclosingmenu">メニューの表示 / 非表示</h4>
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントでは、メニュー開閉のために下記のメソッドを用意しています。それらは`openMenu()`、`closeMenu()`そして`toggleMenu()`です。
+[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html)コンポーネントでは、メニュー開閉のために下記のメソッドを用意しています。それらは`openMenu()`、`closeMenu()`そして`toggleMenu()`です。
 
 アニメーション効果を無効にしたい場合は、`animation`パラメータに`none`を指定してください。
 
@@ -446,7 +446,7 @@ mySlidingMenu.openMenu({
 
 <h4 id="Swipesupport">スワイプとドラッグの対応</h4>
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu)コンポーネントに`swipable`属性を指定すると、スワイプ操作でメニューを開いたり閉じたりする機能が追加されます。また、この機能を使う場合は、`swipe-target-width`と`max-slide-distance`もあわせて指定する必要があることに注意が必要です。
+[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html)コンポーネントに`swipable`属性を指定すると、スワイプ操作でメニューを開いたり閉じたりする機能が追加されます。また、この機能を使う場合は、`swipe-target-width`と`max-slide-distance`もあわせて指定する必要があることに注意が必要です。
 
 コンポーネントに`draggable`属性を指定すると、メニューを開いたり閉じたりする操作を、ドラッグ操作で行うことができます。
 
@@ -471,13 +471,13 @@ ons.ready(function() {
 
 <h3 id="UsingTabBar">タブバーを使う</h3>
 
-タブバーは[`<ons-tabbar>`](components.html#ons-tabbar)と[`<ons-tab>`](components.html#ons-tab)コンポーネントを組み合わせて表現します。通常、タブバーは3から5つ程度のアイテムを保有しており、アイコンやラベルで表現できます。各タブバーのアイテムをタップすると、別のページに切り替わります。
+タブバーは[`<ons-tabbar>`](/reference/ons-tabbar.html)と[`<ons-tab>`](/reference/ons-tab.html)コンポーネントを組み合わせて表現します。通常、タブバーは3から5つ程度のアイテムを保有しており、アイコンやラベルで表現できます。各タブバーのアイテムをタップすると、別のページに切り替わります。
 
 <h4 id="onstabbaroverview">`<ons-tabbar>`の概要</h4>
 
-タブバーを設置するには、[`<ons-tabbar>`](components.html#ons-tabbar)コンポーネントを使用します。[`<ons-tabbar>`](components.html#ons-tabbar)要素の下には、[`<ons-tab>`](components.html#ons-tab)のみを配置できます。
+タブバーを設置するには、[`<ons-tabbar>`](/reference/ons-tabbar.html)コンポーネントを使用します。[`<ons-tabbar>`](/reference/ons-tabbar.html)要素の下には、[`<ons-tab>`](/reference/ons-tab.html)のみを配置できます。
 
-タブバーアイテムでは`icon`属性と`label`属性が指定できます。アイコンを表示する場合は、[`<ons-icon>`](components.html#ons-icon)と同様にアイコン名を指定します。
+タブバーアイテムでは`icon`属性と`label`属性が指定できます。アイコンを表示する場合は、[`<ons-icon>`](/reference/ons-icon.html)と同様にアイコン名を指定します。
 
 ```
 <ons-tabbar>
@@ -522,7 +522,7 @@ ons.ready(function() {
 
 <h4 id="Tabbarcustomize">タブのカスタマイズ</h4>
 
-タブの見た目をカスタマイズするためには、[`<ons-tab>`](components.html#ons-tab)の属性を使用します。
+タブの見た目をカスタマイズするためには、[`<ons-tab>`](/reference/ons-tab.html)の属性を使用します。
 
 <h5 id="Tabbarlabelandicon">ラベルとアイコンを表示する</h5>
 
@@ -534,7 +534,7 @@ ons.ready(function() {
 
 <h5 id="Tabbarcontents">任意のコンテンツを表示する</h5>
 
-[`<ons-tab>`](components.html#ons-tab)内に任意のHTMLを記述することもできます。
+[`<ons-tab>`](/reference/ons-tab.html)内に任意のHTMLを記述することもできます。
 
 ```
 <ons-tabbar>
@@ -591,7 +591,7 @@ tabbar.loadPage('newpage.html');
 
 <h4 id="Tabbarevents">タブバーのイベント</h4>
 
-[`<ons-tabbar>`](components.html#ons-tabbar)は`prechange`と`postchange`イベントを持ちます。これらのイベントは、ページが切り替わる前もしくは後に実行されます。イベントで使用できるパラメータは下記の通りです。
+[`<ons-tabbar>`](/reference/ons-tabbar.html)は`prechange`と`postchange`イベントを持ちます。これらのイベントは、ページが切り替わる前もしくは後に実行されます。イベントで使用できるパラメータは下記の通りです。
 
 - `index`: 次ページのインデックス番号
 - `tabItem`: ページを保有するオブジェクト
@@ -606,21 +606,21 @@ tabbar.on('prechange', function(event) {
 
 <h3 id="UsingList">リストを使う</h3>
 
-リストは多用されるUIパターンで、ビューに複数のコレクションを表示するときに使用します。Onsen UIでは、[`<ons-list>`](components.html#ons-list)と[`<ons-list-item>`](components.html#ons-list-item)コンポーネントを用いて表現します。
+リストは多用されるUIパターンで、ビューに複数のコレクションを表示するときに使用します。Onsen UIでは、[`<ons-list>`](/reference/ons-list.html)と[`<ons-list-item>`](/reference/ons-list-item.html)コンポーネントを用いて表現します。
 
 <h4 id="onslistoverview">`<ons-list>`の概要</h4>
 
-リストを作成するには、[`<ons-list>`](components.html#ons-list)と[`<ons-list-item>`](components.html#ons-list-item)コンポーネントを使用します。また、[`<ons-list-header>`](components.html#ons-list-header)を用いると、リスト要素のヘッダーを表現できます。
+リストを作成するには、[`<ons-list>`](/reference/ons-list.html)と[`<ons-list-item>`](/reference/ons-list-item.html)コンポーネントを使用します。また、[`<ons-list-header>`](/reference/ons-list-header.html)を用いると、リスト要素のヘッダーを表現できます。
 
 <h4 id="Basiclist">基本的なリスト</h4>
 
-下記に、[`<ons-list>`](components.html#ons-list)の例を掲載します。
+下記に、[`<ons-list>`](/reference/ons-list.html)の例を掲載します。
 
 <%- @partial('codepen.html.eco', { id: "yxcCt" } ) %>
 
 <h4 id="Listwithrightarrowicon">右矢印付きのリスト</h4>
 
-[`<ons-navigator>`](components.html#ons-navigator)と共に使用し、画面遷移を行う場合に使用します。
+[`<ons-navigator>`](/reference/ons-navigator.html)と共に使用し、画面遷移を行う場合に使用します。
 
 <%- @partial('codepen.html.eco', { id: "nIEvm" } ) %>
 
@@ -632,7 +632,7 @@ tabbar.on('prechange', function(event) {
 
 <h3 id="UsingAlert">アラートダイアログを使う</h3>
 
-Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に表示することができます。また、[`<ons-alert-dialog>`](components.html#ons-alert-dialog)コンポーネントを用いてカスタムなアラートダイアログを用事することもできます。
+Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に表示することができます。また、[`<ons-alert-dialog>`](/reference/ons-alert-dialog.html)コンポーネントを用いてカスタムなアラートダイアログを用事することもできます。
 
 <%- @partial('codepen.html.eco', { id: "Qwwxyp" } ) %>
 
@@ -682,7 +682,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
 
 <h4 id="ShowingAlertDialog">カスタムなアラートダイアログを表示する</h4>
 
-[`<ons-alert-dialog>`](components.html#ons-alert-dialog)コンポーネントを使うと、自由にデザインしたアラートダイアログを表示できます。下記の例は、スタイルを修正したダイアログの例です。
+[`<ons-alert-dialog>`](/reference/ons-alert-dialog.html)コンポーネントを使うと、自由にデザインしたアラートダイアログを表示できます。下記の例は、スタイルを修正したダイアログの例です。
 
 ```
 <ons-template id="alert-dialog.html">
@@ -708,17 +708,17 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "jEEKbm" } ) %>
 
-上記の例のように、カスタムなアラートダイアログを表示する場合は、`ons.createAlertDialog()`関数を使用し、その関数の引数にテンプレートを指定します。テンプレートには[`<ons-alert-dialog>`](components.html#ons-alert-dialog)タグが含まれている必要があります。
+上記の例のように、カスタムなアラートダイアログを表示する場合は、`ons.createAlertDialog()`関数を使用し、その関数の引数にテンプレートを指定します。テンプレートには[`<ons-alert-dialog>`](/reference/ons-alert-dialog.html)タグが含まれている必要があります。
 
 `ons.createDialog()`関数が呼ばれると、`Promise`オブジェクトを作成し`AlertDialogView`オブジェクトを返します。`AlertDialogView`オブジェクトの使い方については、 in `<ons-dialog>`コンポーネントの[`DialogView`オブジェクトを使う](#UsingDialogViewObject)を参照してください。
 
 <h3 id="UsingDialog">ダイアログを使う</h3>
 
-[`<ons-dialog>`](components.html#ons-dialog)コンポーネントを使うと、汎用的なダイアログを表示できます。
+[`<ons-dialog>`](/reference/ons-dialog.html)コンポーネントを使うと、汎用的なダイアログを表示できます。
 
 <h4 id="ShowingDialog">ダイアログを表示する</h4>
 
-ダイアログを表示するには、[`<ons-dialog>`](components.html#ons-dialog)タグを持つテンプレートを作成し、そのテンプレートを`ons.createDialog()`関数で指定します。この関数は戻り値として`Promise`オブジェクトを返し、そのコールバック関数を通じて`DialogView`オブジェクトを渡します。ダイアログを表示するには、この`DialogView`オブジェクトの`show()`メソッドを呼ぶ必要があります。
+ダイアログを表示するには、[`<ons-dialog>`](/reference/ons-dialog.html)タグを持つテンプレートを作成し、そのテンプレートを`ons.createDialog()`関数で指定します。この関数は戻り値として`Promise`オブジェクトを返し、そのコールバック関数を通じて`DialogView`オブジェクトを渡します。ダイアログを表示するには、この`DialogView`オブジェクトの`show()`メソッドを呼ぶ必要があります。
 
 ```
 <ons-template id="dialogcontent.html">
@@ -770,7 +770,7 @@ ons.ready(function() {
 
 ダイアログの表示や非表示の際に、コールバック関数を指定できます。具体的には`show()`や`hide()`メソッドを呼ぶ際に、`callback`パラメータで指定します。
 
-また、[`<ons-dialog>`](components.html#ons-dialog)および[`<ons-alert-dialog>`](components.html#ons-alert-dialog)コンポーネントでは、下記のイベントを受け取ることもできます。
+また、[`<ons-dialog>`](/reference/ons-dialog.html)および[`<ons-alert-dialog>`](/reference/ons-alert-dialog.html)コンポーネントでは、下記のイベントを受け取ることもできます。
 
 - preshow、prehide
 
@@ -791,11 +791,11 @@ ons.ready(function() {
 
 カルーセルを使うと、複数の要素を１つの要素の中に表示できます。カルーセルは全画面で表示したり、他の要素の中に組み込むことができます。
 
-それぞれのカルーセルアイテムは[`<ons-carousel-item>`](components.html#ons-carousel-item)コンポーネントで表現されます。[`<ons-carousel>`](components.html#ons-carousel)コンポーネントは、複数の`<ons-carousel-item>`コンポーネントを格納するコンテナの役割を持ちます。
+それぞれのカルーセルアイテムは[`<ons-carousel-item>`](/reference/ons-carousel-item.html)コンポーネントで表現されます。[`<ons-carousel>`](/reference/ons-carousel.html)コンポーネントは、複数の`<ons-carousel-item>`コンポーネントを格納するコンテナの役割を持ちます。
 
 <h4 id="ShowingFullScreenCarousel">全画面のカルーセルを表示する</h4> 
 
-全画面のカルーセルを表示するには、[`<ons-carousel>`](components.html#ons-carousel)コンポーネントに`fullscreen`属性を指定します。
+全画面のカルーセルを表示するには、[`<ons-carousel>`](/reference/ons-carousel.html)コンポーネントに`fullscreen`属性を指定します。
 
 ```
 <ons-carousel fullscreen swipeable overscrollable auto-scroll>
@@ -827,7 +827,7 @@ ons.ready(function() {
 
 <h4 id="CarouselIndicator">カルーセル上に別のコンテンツを表示する</h4>
 
-インディケーター付きのカルーセルを表示する場合など、[`<ons-carousel>`](components.html#ons-carousel)コンポーネント上に何かの内容を表示したい場合があります。`<ons-carousel-cover>`コンポーネントを用いると、カルーセル上に必ず表示されるコンテンツを設置できます。
+インディケーター付きのカルーセルを表示する場合など、[`<ons-carousel>`](/reference/ons-carousel.html)コンポーネント上に何かの内容を表示したい場合があります。`<ons-carousel-cover>`コンポーネントを用いると、カルーセル上に必ず表示されるコンテンツを設置できます。
 
 <h4 id="CustomizingCarousel">カルーセルのカスタマイズ</h4>
 
@@ -931,22 +931,22 @@ myCarousel.next({
 
 <h3 id="UsingModal">モーダルを使う</h3>
 
-[`<ons-modal>`](components.html#ons-modal)コンポーネントを使うと、モーダル画面が表示されている間は外の入力操作を禁止することができます。プログレスバーを表示したり、ユーザーの選択を確実に行う場合などに使用されます。
+[`<ons-modal>`](/reference/ons-modal.html)コンポーネントを使うと、モーダル画面が表示されている間は外の入力操作を禁止することができます。プログレスバーを表示したり、ユーザーの選択を確実に行う場合などに使用されます。
 
-[`<ons-modal>`](components.html#ons-modal)コンポーネント内には自由にHTMLを記述できます。その内容は、`toggle()`や`show()`メソッドを呼び出すことで表示されます。
+[`<ons-modal>`](/reference/ons-modal.html)コンポーネント内には自由にHTMLを記述できます。その内容は、`toggle()`や`show()`メソッドを呼び出すことで表示されます。
 
 <%- @partial('codepen.html.eco', { id: "devIg" } ) %>
 
 
 <h3 id="UsingPopover">ポップオーバーを使う</h3>
 
-ポップオーバーは、画面上にポップアップされて表示されるコンポーネントです。[`<ons-popover>`](components.html#ons-popover)コンポーネントを用いてポップオーバーを表示できます。
+ポップオーバーは、画面上にポップアップされて表示されるコンポーネントです。[`<ons-popover>`](/reference/ons-popover.html)コンポーネントを用いてポップオーバーを表示できます。
 
 <%- @partial('codepen.html.eco', { id: "ZYYRKo" } ) %>
 
 <h4 id="ShowingPopover">ポップオーバーを表示する</h4>
 
-ポップオーバーを表示するには、[`<ons-popover>`](components.html#ons-popover)タグを用いてHTMLを記述し、そのポップオーバーを`ons.createPopover()`関数を呼び出します。
+ポップオーバーを表示するには、[`<ons-popover>`](/reference/ons-popover.html)タグを用いてHTMLを記述し、そのポップオーバーを`ons.createPopover()`関数を呼び出します。
 
 ポップオーバーを表示する例は下記の通りです。
 
@@ -987,7 +987,7 @@ ons.ready(function() {
 
 <h4 id="CustomizingPopover">ポップオーバーのカスタマイズ</h4>
 
-[`<ons-popover>`](components.html#ons-popover)のカスタマイズには、下記の属性を使用できます。
+[`<ons-popover>`](/reference/ons-popover.html)のカスタマイズには、下記の属性を使用できます。
 
 <h5 id="PopoverAppearance">外見を変更する</h5>
 
@@ -1027,7 +1027,7 @@ Onsen UIでは、フォームを構築するための様々なコンポーネン
 
 <h4 id="Button">ボタン</h4>
 
-[`<ons-button>`](components.html#ons-button)を用いて、さまざまな種類のボタンを表現できます。外見や挙動の変更には、`modifier`、`should-spin`、`animation`そして`disabled`属性で指定します。特に`modifier`属性を使用すると、あらかじめ定義されたいくつかの外見に合わせて見た目を変更できます。
+[`<ons-button>`](/reference/ons-button.html)を用いて、さまざまな種類のボタンを表現できます。外見や挙動の変更には、`modifier`、`should-spin`、`animation`そして`disabled`属性で指定します。特に`modifier`属性を使用すると、あらかじめ定義されたいくつかの外見に合わせて見た目を変更できます。
 
 タップされた場合の処理を記述するには、`onclick`もしくは`ng-click`属性を使用します。
 
@@ -1035,7 +1035,7 @@ Onsen UIでは、フォームを構築するための様々なコンポーネン
 
 <h4 id="Switch">スイッチ</h4>
 
-スイッチを表示するには、[`<ons-switch>`](components.html#ons-switch)を使用します。スイッチにはONとOFFの状態があり、その状態は`isChecked()`メソッドで取得できます。
+スイッチを表示するには、[`<ons-switch>`](/reference/ons-switch.html)を使用します。スイッチにはONとOFFの状態があり、その状態は`isChecked()`メソッドで取得できます。
 
 ```
 <script>
@@ -1102,15 +1102,15 @@ Onsen UIのグリッドシステムを使うと、手軽にコンポーネント
 
 <h4 id="onsrowandonscoloverview">`<ons-row>`と`<ons-col>`の概要</h4>
 
-レイアウトの調整は、[`<ons-row>`](components.html#ons-row)と[`<ons-col>`](components.html#ons-col)コンポーネントを使用します。横幅と高さは柔軟に調整できます。
+レイアウトの調整は、[`<ons-row>`](/reference/ons-row.html)と[`<ons-col>`](/reference/ons-col.html)コンポーネントを使用します。横幅と高さは柔軟に調整できます。
 
-デフォルトでは、[`<ons-row>`](components.html#ons-row)コンポーネント内にあるすべての[`<ons-col>`](components.html#ons-col)コンポーネントは、同じ幅で表現されます。`<ons-col>`要素に対しては、個別に横幅を指定することができます。
+デフォルトでは、[`<ons-row>`](/reference/ons-row.html)コンポーネント内にあるすべての[`<ons-col>`](/reference/ons-col.html)コンポーネントは、同じ幅で表現されます。`<ons-col>`要素に対しては、個別に横幅を指定することができます。
 
-[`<ons-row>`](components.html#ons-row)には`align`属性を、`<ons-col>`には`align`、`size`、`offset`属性を指定できます。`size`属性については、`px`もしくは`%`で指定できます。
+[`<ons-row>`](/reference/ons-row.html)には`align`属性を、`<ons-col>`には`align`、`size`、`offset`属性を指定できます。`size`属性については、`px`もしくは`%`で指定できます。
 
 <h4 id="Layoutexample">レイアウトの例</h4>
 
-下記の例では、[`<ons-row>`](components.html#ons-row)と[`<ons-col>`](components.html#ons-col)を用いて様々なレイアウトを表現しています。
+下記の例では、[`<ons-row>`](/reference/ons-row.html)と[`<ons-col>`](/reference/ons-col.html)を用いて様々なレイアウトを表現しています。
 
 <%- @partial('codepen.html.eco', { id: "GgujC" } ) %>
 
@@ -1120,7 +1120,7 @@ Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の400以上のアイ
 
 <h4 id="onsiconoverview">`<ons-icon>`の概要</h4>
 
-アイコンを表示するには、[`<ons-icon>`](components.html#ons-icon)コンポーネントを使用します。表示するアイコンは、`icon`属性で指定します。
+アイコンを表示するには、[`<ons-icon>`](/reference/ons-icon.html)コンポーネントを使用します。表示するアイコンは、`icon`属性で指定します。
 
 <h5>Font Awesomeアイコンを使用する</h5>
 
@@ -1185,11 +1185,11 @@ CSSメディアクエリーを用いることで、画面サイズやアスペ�
 
 <h4 id="Usingonssplitviewcomponent">`<ons-split-view>`コンポーネントを使う</h4>
 
-[`<ons-split-view>`](components.html#ons-split-view)コンポーネントを用いると、画面を2分割して別々のページを表示することができます。
+[`<ons-split-view>`](/reference/ons-split-view.html)コンポーネントを用いると、画面を2分割して別々のページを表示することができます。
 
 また、画面サイズが小さい時にはサイドページを非表示にすることができます。そうすることで、スマートフォンとタブレットの両方の端末に簡単に対応できます。
 
-[`<ons-split-view>`](components.html#ons-split-view)コンポーネントでは下記の属性が提供されます。
+[`<ons-split-view>`](/reference/ons-split-view.html)コンポーネントでは下記の属性が提供されます。
 
 - `main-page`: メイン側に表示するページを指定できます
 - `secondary-page`: サイド側に表示するページを指定できます
@@ -1198,7 +1198,7 @@ CSSメディアクエリーを用いることで、画面サイズやアスペ�
 
 <h4 id="Specifywhentocollapse">サイドページの非表示設定</h4>
 
-[`<ons-split-view>`](components.html#ons-split-view)の`collapse`属性を用いて、サイドページを非表示にする条件を指定できます。この属性が取り得る値として、`portrait`、`landscape`もしくは`width ##px`（例`width 300px`）などの指定方法があります。たとえば、`portrait`が指定されていて、かつ、端末が縦向きの画面になっていた場合は、サイドページは非表示になります。
+[`<ons-split-view>`](/reference/ons-split-view.html)の`collapse`属性を用いて、サイドページを非表示にする条件を指定できます。この属性が取り得る値として、`portrait`、`landscape`もしくは`width ##px`（例`width 300px`）などの指定方法があります。たとえば、`portrait`が指定されていて、かつ、端末が縦向きの画面になっていた場合は、サイドページは非表示になります。
 
 <h3 id="LoadingPlaceholder">読み込み中画面を表示する</h3>
 
@@ -1306,9 +1306,9 @@ ons.ready(function() { });
 
 <h4 id="Platformdetection">プラットフォームの判定</h4>
 
-[`<ons-if-platform>`](components.html#ons-if-platform)属性を用いるか、`ons.platform`オブジェクトを用いて、特定のプレットフォームに応じたコンテンツのだし分けを記述できます。
+[`<ons-if-platform>`](/reference/ons-if-platform.html)属性を用いるか、`ons.platform`オブジェクトを用いて、特定のプレットフォームに応じたコンテンツのだし分けを記述できます。
 
-[`<ons-if-platform>`](components.html#ons-if-platform)属性を使うと、特定の要素に対してプラットフォーム別の出し分けを記述できます。
+[`<ons-if-platform>`](/reference/ons-if-platform.html)属性を使うと、特定の要素に対してプラットフォーム別の出し分けを記述できます。
 
 ```
 <div ons-if-platform="ios">iPhoneとiPadユーザーだけのコンテンツ</div>
@@ -1331,7 +1331,7 @@ ons.ready(function() { });
 
 <h4 id="Landscapeportraitdetection">画面向きの判定</h4>
 
-`ons-if-platform`属性と同様、[`<ons-if-orientation>`](components.html#ons-if-orientation)属性を用いると、画面の向きに応じて画面表示を切り替えられます。
+`ons-if-platform`属性と同様、[`<ons-if-orientation>`](/reference/ons-if-orientation.html)属性を用いると、画面の向きに応じて画面表示を切り替えられます。
 
 ```
 <div ons-if-orientation="portrait">縦向きの時だけ表示するコンテンツ</div>
@@ -1341,7 +1341,7 @@ ons.ready(function() { });
 
 ジェスチャーを検知して特定の処理を行わせることができます。Onsen UIでは、ジェスチャーの認識に[Hammer.js](http://hammerjs.github.io/)を使用しています。
 
-ジェスチャーを検知するには、対象となるDOM要素を[`<ons-gesture-detector>`](components.html#ons-gesture-detector)コンポーネントで囲みます。たとえば、下記は特定の場所に対して左スワイプの検知を有効にした例となります。
+ジェスチャーを検知するには、対象となるDOM要素を[`<ons-gesture-detector>`](/reference/ons-gesture-detector.html)コンポーネントで囲みます。たとえば、下記は特定の場所に対して左スワイプの検知を有効にした例となります。
 
 ```
 <ons-gesture-detector>
@@ -1381,7 +1381,7 @@ AngularJS方式で記述する場合は、`ng-ジェスチャーイベント名`
 
 ソフトウェアキーボードの状態に応じて、特定のコードを実行したり、見た目を切り替えたい場合があります。Onsen UIでは、[Cordova Keybord Plugin](https://github.com/apache/cordova-plugins/tree/master/keyboard)もしくは[Ionic Keyboard Plugin](https://github.com/driftyco/ionic-plugins-keyboard)を組み込んだ場合に、キーボードイベントを検知することができます。
 
-[`<ons-keyboard-active>`](components.html#ons-keyboard-active)もしくは[`<ons-keyboard-inactive>`](components.html#ons-keyboard-inactive)属性を用いると、キーボードの状態に応じてコンテンツのだし分けを行うことができます。
+[`<ons-keyboard-active>`](/reference/ons-keyboard-active.html)もしくは[`<ons-keyboard-inactive>`](/reference/ons-keyboard-inactive.html)属性を用いると、キーボードの状態に応じてコンテンツのだし分けを行うことができます。
 
 ```
 <div ons-keyboard-active>
@@ -1408,7 +1408,7 @@ ons.softwareKeyboard.on('hide', function() {
 
 Androidはハードウェアの戻るボタンが備わっています。Onsen UIでは、戻るボタンがクリックされたときの挙動をカスタマイズすることができます。
 
-端末の戻るボタンに対応するためには、[`<ons-page>`](components.html#ons-page)コンポーネントの`on-device-backbutton`もしくは`ng-device-backbutton`属性を使用します。下記は、`ons-page`の属性に戻るボタンのハンドラーを定義した例となります。
+端末の戻るボタンに対応するためには、[`<ons-page>`](/reference/ons-page.html)コンポーネントの`on-device-backbutton`もしくは`ng-device-backbutton`属性を使用します。下記は、`ons-page`の属性に戻るボタンのハンドラーを定義した例となります。
 ```
 <ons-page on-device-backbutton="doSomething()">
   ページのコンテンツ
@@ -1620,7 +1620,7 @@ AngularJSのイベント処理に精通している方は、`ng-click`ハンド�
 
 <h4 id="Pageinitevent">ページ初期化のイベント</h4>
 
-[`<ons-page>`](components.html#ons-page)の初期化が完了すると、`pageinit`イベントが発生します。このイベントを用いて、各ページの挙動を変更してください。
+[`<ons-page>`](/reference/ons-page.html)の初期化が完了すると、`pageinit`イベントが発生します。このイベントを用いて、各ページの挙動を変更してください。
 
 ```
 <script>
@@ -1650,7 +1650,7 @@ $(document).on('ons-navigator:init', '#my-navigator', function(event) {
 
 <h4 id="Componentevents">コンポーネントのイベント</h4>
 
-[`<ons-navigator>`](components.html#ons-navigator)、[`<ons-sliding-menu>`](components.html#ons-sliding-menu)、[`<ons-tabbar>`](components.html#ons-tabbar)の3コンポーネントはユーザー処理の前後にイベントを提供します。詳細については、各コンポーネントのドキュメントを参照してください。
+[`<ons-navigator>`](/reference/ons-navigator.html)、[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html)、[`<ons-tabbar>`](/reference/ons-tabbar.html)の3コンポーネントはユーザー処理の前後にイベントを提供します。詳細については、各コンポーネントのドキュメントを参照してください。
 
 <h3 id="DefiningMultiplePagesinSingleHTML">複数のページを1つのHTMLに記述する</h3>
 
@@ -1663,11 +1663,11 @@ $(document).on('ons-navigator:init', '#my-navigator', function(event) {
 </ons-sliding-menu>
 ```
 
-menu.htmlとcontent.htmlを別ファイルとして作成することなく、同じページでコンテンツを定義することができます。そのためには、[`<ons-template>`](components.html#ons-template)タグを使用するか、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定します。これはマイクロテンプレーティングとも言われ、ページファイルの数を減らすことができます。
+menu.htmlとcontent.htmlを別ファイルとして作成することなく、同じページでコンテンツを定義することができます。そのためには、[`<ons-template>`](/reference/ons-template.html)タグを使用するか、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定します。これはマイクロテンプレーティングとも言われ、ページファイルの数を減らすことができます。
 
 <h4 id="OnsTemplateTag">`<ons-template>`タグを用いてテンプレートを定義する</h4>
 
-[`<ons-template>`](components.html#ons-template)タグはテンプレートを表します。たとえば、`main.html`という名前を持つHTMLコンテンツを定義するには、下記のように記述します。
+[`<ons-template>`](/reference/ons-template.html)タグはテンプレートを表します。たとえば、`main.html`という名前を持つHTMLコンテンツを定義するには、下記のように記述します。
 
 ```
 <ons-template id="main.html">
