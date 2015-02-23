@@ -29,7 +29,7 @@ body {
   font-weight: normal;
 }
 
-input {
+input[type=text] {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: 
@@ -224,18 +224,28 @@ p, pre, ul, ol {
 }
 
 code {
-  font-family: Consolas, 'Courier New', Courier, Monaco, monospace;
+  font-family: Menlo, Consolas, Courier, Monaco, monospace;
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   padding: 1px 2px;
   font-weight: normal;
+  font-size: 14px;
+  .lang-en & {
+    font-size: 14px;
+  }
 }
 
 pre code {
   font-style: normal;
-  border: none;
   background-color: transparent;
-  font-size: 15px;
+  border: none;
+  font-size: 13px;
+  font-weight: 200;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  .lang-en & {
+    font-size: 13px;
+  }
 }
 
 pre {
@@ -246,3 +256,4 @@ pre {
 .lt-ie9 img, .lt-ie9 object {
   width: auto;
 }
+

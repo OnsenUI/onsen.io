@@ -10,14 +10,14 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <% if @docCategory == 'css': %>
+  <% if @page == 'css': %>
   <link rel="stylesheet" href="<%= @rootUrl %>reference/onsen-css-components.css">
   <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/font_awesome/css/font-awesome.min.css">
   <% end %>
 
-  <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
   <link rel="stylesheet" href="<%= @rootUrl %>css/highlight_xcode.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
   <link href='http://fonts.googleapis.com/css?family=Open Sans:400,500,600' rel='stylesheet' type='text/css'>
 
@@ -36,7 +36,6 @@
 </head>
 
 <body id="<%- @page %>">
- <a id="github-ribbon" href="https://github.com/OnsenUI/OnsenUI"><img style="position: absolute; top: 48px; right: 0; border: 0; z-index: 2;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
 
   <%- @partial('header.html.eco') %>
 
@@ -52,8 +51,8 @@
     <% else if @reference: %>
     <aside class="content-info">
 
+      <!--
       <div class="toc-title<% if @docCategory == 'guides': %> toc-title-active<% end %>"><a class="toggle-toc">Guides</a></div>
-
       <ul class="toc toc-1" <% if @docCategory != 'guides': %>style="display: none"<% end %>>
         <% for guide in @guides: %>
         <li class="toc-item toc-1-item">
@@ -63,17 +62,14 @@
         </li>
         <% end %>
       </ul>
+      -->
 
-      <div class="toc-title<% if @docCategory == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/css.html">CSS</a></div>
+      <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
 
-      <ul class="toc toc-1" <% if @docCategory != 'css': %>style="display: none"<% end %>>
-        <% for doc in @cssDocs: %>
-        <li class="toc-item toc-1-item">
-          <a href="/reference/css.html#<%= @slug(doc.yaml.name) %>" class="toc-link toc-1-link">
-            <%- doc.yaml.name %>
-          </a>
-        </li>
-        <% end %>
+      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/css.html">CSS</a></div>
+
+      <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
+        <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
       </ul>
 
       <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc">JavaScript</a></div>
@@ -81,35 +77,15 @@
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
         <% for category, docs of @componentCategoryDict: %>
         <li class="toc-item toc-1-item">
-          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- category %></a>
+          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
           <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
           <% for doc in docs: %>
             <li class="toc-item toc-2-item">
-              <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>">&lt;<%- doc.name %>&gt;
-              </a>
+              <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
             </li>
           <% end %>
           </ul>
         </li>
-        <% end %>
-
-        <% for object in @objects: %>
-        <!--
-        <li class="toc-item toc-1-item">
-          <a href="/reference/<%= object.name %>.html" class="toc-link toc-1-link<% if @name == object.name: %> current <% end %>">
-            <%- object.name %>
-          </a>
-        </li>
-        -->
-        <% end %>
-        <% for component in @components: %>
-        <!--
-        <li class="toc-item toc-1-item">
-          <a href="/reference/<%= component.name %>.html" class="toc-link toc-1-link<% if @name == component.name: %> current<% end %>">
-            <%- component.name %>
-          </a>
-        </li>
-        -->
         <% end %>
       </ul>
 
@@ -177,18 +153,6 @@
       event.preventDefault();
       return false;
     });
-  });
-
-  // sticky menu
-  $(function() {
-    /*
-    $('.content-info').sticky({
-      topSpacing : 0, 
-      bottomSpacing : 0 //$('.footer-container').height() + 60
-    });
-    */
-
-
   });
   </script>
 

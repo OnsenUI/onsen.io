@@ -1,0 +1,96 @@
+---
+author: andi
+date: 2015-02-16
+id: sneak-peeking-1-2-2-pull-hook
+title: "Sneak Peeking 1.2.2: Pull Hook (or Pull to Refresh)"
+---
+
+![Pull Hook intro](/blog/content/images/2015/Feb/Screen_Shot_2015_02_13_at_12_38_30_PM.png)
+
+As you know, we are entering the final stretch of the Onsen UI 1.2.2 release, that's why, after the introduction of the [Lazy Repeat feature](http://onsen.io/blog/onsenui-1-2-2-new-components-lazy-repeat/), we want to introduce another new feature of this release. The **Pull Hook** feature can be accessed using the `<ons-pull-hook>` tag.
+
+This feature is very convenient for fetching data from external sources (like a database, RSS feed or web API) into our application, when the user wants to check for updates.
+It is also a very convenient feature for the developer, since it allows to "hide" the fetching process of big amounts data with a nice graphical interface that gives to the user an impression of a shorter waiting time.
+
+We will discuss soon how to use this feature, for now take a look at the sample and try to use the **Pull Hook** feature.
+
+<iframe style="background-image: url('http://s3.asial.co.jp/~ataru/my_image/nexus5.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://andipavllo.github.io/OnsenUI-PullHook/www/index.html"  width="359" height="640" scrolling="no"></iframe>
+
+Let's take a look at the code, to understand how the feature is used.
+
+### How to use Pull Hook
+
+In this sample application, each time the user uses the `<ons-pull-hook>` element, the application gets information from a web API and puts it into an `<ons-list-item>`, contained in a `<ons-list>`.
+
+#### Controller
+
+The behavior of the `<ons-pull-hook>` element is defined inside this AngularJS controller:
+```
+angular.module('myApp', ['onsen'])
+      .controller('DemoController', function($scope, $timeout, $http) {
+        $scope.items = [];
+
+        $scope.load = function($done) {
+          $timeout(function() {
+            $http.jsonp('http://numbersapi.com/random/year?callback=JSON_CALLBACK')
+              .success(function(data) {
+                $scope.items.unshift({
+                  desc: data,
+                  rand: Math.random()
+                });
+              })
+              .error(function() {
+                $scope.items.unshift({
+                  desc: 'No data',
+                  rand: Math.random()
+                });
+              })
+              .finally(function() {
+                $done();
+              });
+          }, 1000);
+        };
+
+        $scope.reset = function(){
+          $scope.items.length = 0;
+        }
+
+      });
+```
+
+As you can see, we have a variable called `$scope.items`. This variable is the array that will contain the elements that we will display in the `<ons-list>`.
+We have also two functions: `$scope.load()` and `$scope.reset()`.
+
+`$scope.load()` is the function that implements the `<ons-pull-hook>` behavior and takes as input argument `$done`, a function that tells the `<ons-pull-hook>` when the loading is completed.
+
+With a `$http.jsonp` call we can get the data from a web API and store them inside the array `$scope.items`. It also generates a random value. This value will be used inside the HTML to retrieve a random image from another website.
+
+`$scope.reset()` is the function that implements the `<ons-toolbar-button>` behavior and it just empties the `$scope.items` variable.
+
+#### HTML
+This is the HTML markup associated with the `<ons-pull-hook>` element.
+
+```
+<ons-pull-hook ng-action="load($done)" var="loader">
+        <span ng-switch="loader.getCurrentState()">
+          <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
+          <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
+          <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading data...</span>
+        </span>
+      </ons-pull-hook>
+```
+
+It contains two attributes: `ng-action="load($done)"`, which is the action associated with pulling down the element, and `var="loader"`. This variable is used to check to `<ons-pull-hook>` status, via `ng-switch="loader.getCurrentState()"`.
+
+There are three potential states, each one associated with a customizable graphical representation:
+
+* `initial`: default state before any user interaction, the element remains in this status until it's totally dragged down, going beyond its height limit.
+* `preaction`: is the state that follows the `initial` one and persists until the element is not totally dragged down, going beyond its height limit (different from the previous one) or it's released.
+* `action`: it's the final, the one in which the behavior of the `<ons-pull-hook>` element is executed.
+
+Of course, with CSS3 animated transitions can also be used to make an even smoother user experience.
+
+### Conclusion
+As you can see, is extremely easy to use this new Onsen UI feature. We have offered only one of the possible implementations of it, but we are sure that you will be able to find innovative ways to use it! You can find the [full code in GitHub](https://github.com/andipavllo/OnsenUI-PullHook) and a working full browser sample at [this link](http://andipavllo.github.io/OnsenUI-PullHook/www/index.html).
+
+The Onsen UI 1.2.2 release is getting closer every day. Stay tuned for exciting updates!

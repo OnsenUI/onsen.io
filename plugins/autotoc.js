@@ -43,7 +43,7 @@ TocItem.prototype = {
 module.exports = function() {
   function generateId(header) {
     if (!header.id) {
-      return slug(header.textContent);
+      return slug(('' + header.textContent).toLowerCase());
     } else {
       return header.id;
     }

@@ -130,7 +130,7 @@ ul#header-monaca-navi > li:last-child ul.header-monaca-navi-sub-menu {
   left: auto;
 }
 
-@media screen and (max-width: @width) {
+.tablet-query({
   #header-monaca {
     margin-bottom: 0px;
   }
@@ -143,12 +143,10 @@ ul#header-monaca-navi > li:last-child ul.header-monaca-navi-sub-menu {
       margin-left: 14px;
     }
   }
-}
+});
 
-@media only screen 
-and (min-width : 320px) 
-and (max-width : 480px) {
-  div#header-monaca span {
+.mobile-query({
+  #header-monaca span {
     display: none; 
   }
-}
+});

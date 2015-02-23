@@ -2,7 +2,7 @@
   <div id="header-monaca-inner">
     <a href="http://monaca.io"><img src="/images/header/monaca_logo.png"></a>
     
-<% if @lang == 'en': %>
+    <% if @lang == 'en': %>
     <ul id="header-monaca-navi">
       <li><a href="#">Products</a>
         <ul class="header-monaca-navi-sub-menu">
@@ -20,7 +20,7 @@
         <a href="http://monaca.mobi/en/showcase">Showcase</a>
       </li>
     </ul>
-<% else: %>
+    <% else: %>
     <ul id="header-monaca-navi">
       <li><a href="#">製品</a>
         <ul class="header-monaca-navi-sub-menu">
@@ -55,7 +55,8 @@
         </ul>
       </li>
     </ul>
-<% end %>
+    <% end %>
+
   </div>
 </div>
 
@@ -65,17 +66,35 @@
     <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg"></a></div>
     <ul class="header-navi">
       <% if @lang == "en": %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs' then 'current' %>"><a href="/docs.html">DOCS</a></li>
-        <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
-        <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
-        <li><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB</a></li>
+        <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
+        <li class="header-navi-item <%- if @page is 'docs' or @reference then 'current' %>">
+          <a href="/docs.html">DOCS</a>
+          <ul class="header-navi-sub">
+            <li class="header-navi-sub-item"><a href="/guide/overview.html">Onsen UI Guide</a></li>
+            <li class="header-navi-sub-item"><a href="/reference/css.html">CSS</a></li>
+            <li class="header-navi-sub-item"><a href="/reference/javascript.html">JavaScript</a></li>
+            <li class="header-navi-sub-item"><a href="/patterns.html">Page Patterns</a></li>
+            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt=""></a></a></li>
+          </ul>
+        </li>
+        <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
+        <li class="header-navi-item <%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
+        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB</a></li>
       <% else: %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">ドキュメント</a></li>
-        <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">フォーラム</a></li>
-        <li><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB</a></li>
-        <li><a href="http://onsen.io/">ENGLISH</a></li>
+        <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
+        <li class="header-navi-item <%- if @page is 'docs' or @reference then 'current' %>">
+          <a href="/docs.html">DOCS</a>
+          <ul class="header-navi-sub">
+            <li class="header-navi-sub-item"><a href="/guide/overview.html">Onsen UI Guide</a></li>
+            <li class="header-navi-sub-item"><a href="/reference/css.html">CSS</a></li>
+            <li class="header-navi-sub-item"><a href="/reference/javascript.html">JavaScript</a></li>
+            <li class="header-navi-sub-item"><a href="/patterns.html">Page Patterns</a></li>
+            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt=""></a></a></li>
+          </ul>
+        </li>
+        <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
+        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB</a></li>
+        <li class="header-navi-item"><a href="http://onsen.io/">ENGLISH</a></li>
       <% end %>
     </ul>
   </div>

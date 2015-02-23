@@ -89,29 +89,29 @@ It is important to consider UI patterns before start implementation. Onsen UI su
 
 <h4 id="Navigationpattern">Navigation pattern</h4>
 
-This is the most common pattern if you want to have a parent-child relationship between pages. You can link to a child page from a button or a list item. In Onsen UI, you can follow navigation pattern by using [`<ons-navigator>`](components.html#ons-navigator) and [`<ons-toolbar>`](components.html#ons-toolbar).
+This is the most common pattern if you want to have a parent-child relationship between pages. You can link to a child page from a button or a list item. In Onsen UI, you can follow navigation pattern by using [`<ons-navigator>`](/reference/ons-navigator.html) and [`<ons-toolbar>`](/reference/ons-toolbar.html).
 
 <h4 id="Slidingmenupattern">Sliding menu pattern</h4>
 
-Also referred to as a Menu pattern, it is useful if the app needs many pages in the same level. In Onsen UI, [`<ons-sliding-menu>`](components.html#ons-sliding-menu) component supports this pattern. It also has swipe support when displaying or hiding sliding menu.
+Also referred to as a Menu pattern, it is useful if the app needs many pages in the same level. In Onsen UI, [`<ons-sliding-menu>`](/reference/ons-sliding-menu.html) component supports this pattern. It also has swipe support when displaying or hiding sliding menu.
 
 <h4 id="Tabbarpattern">Tab bar pattern</h4>
 
-More commonly seen in iPhone and iPad apps, tab bar is displayed in the bottom of the page. Usually the tab bar items have an icon and a text. This pattern is frequently used when you want to provide several features in the app. Onsen UI way to display a tab bar is to use [`<ons-tabbar>`](components.html#ons-tabbar) component.
+More commonly seen in iPhone and iPad apps, tab bar is displayed in the bottom of the page. Usually the tab bar items have an icon and a text. This pattern is frequently used when you want to provide several features in the app. Onsen UI way to display a tab bar is to use [`<ons-tabbar>`](/reference/ons-tabbar.html) component.
 
 <h4 id="Splitviewpattern">Split view pattern</h4>
 
-This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate information. [`<ons-split-view>`](components.html#ons-split-view) component allows you to have this pattern. It also has capability to transform to a sliding menu pattern on smaller devices or displayed vertically.
+This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate information. [`<ons-split-view>`](/reference/ons-split-view.html) component allows you to have this pattern. It also has capability to transform to a sliding menu pattern on smaller devices or displayed vertically.
 
 <h3 id="PageNavigation">Page Navigation</h3>
 
-In Onsen UI, a page navigation is done by the [`<ons-navigator>`](components.html#ons-navigator). Ons-navigator is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](components.html#ons-toolbar) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
+In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/reference/ons-navigator.html). Ons-navigator is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/reference/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
 
 <h4 id="ons-navigatoroverview">`<ons-navigator>` overview</h4>
 
-[`<ons-navigator>`](components.html#ons-navigator) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](components.html#ons-page) elements; therefore only [`<ons-page>`](components.html#ons-page) components can be placed directly under a [`<ons-navigator>`](components.html#ons-navigator) element.
+[`<ons-navigator>`](/reference/ons-navigator.html) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](/reference/ons-page.html) elements; therefore only [`<ons-page>`](/reference/ons-page.html) components can be placed directly under a [`<ons-navigator>`](/reference/ons-navigator.html) element.
 
-A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](components.html#ons-toolbar) component is commonly placed under [`<ons-page>`](components.html#ons-page) element to provide a back button support and the page title.
+A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](/reference/ons-toolbar.html) component is commonly placed under [`<ons-page>`](/reference/ons-page.html) element to provide a back button support and the page title.
 
 <%- @partial('codepen.html.eco', { id: "yrhtv" } ) %>
 
@@ -228,7 +228,7 @@ Clears page stack and add the specified page to the new stack. The `options` par
 
 <h4 id="Addingatoolbar">Adding a toolbar</h4>
 
-A toolbar is defined as a [`<ons-toolbar>`](components.html#ons-toolbar) component. Here is the typical example of a toolbar.
+A toolbar is defined as a [`<ons-toolbar>`](/reference/ons-toolbar.html) component. Here is the typical example of a toolbar.
 
 ```
 <ons-toolbar>
@@ -246,7 +246,7 @@ A toolbar is defined as a [`<ons-toolbar>`](components.html#ons-toolbar) compone
 
 <%- @partial('codepen.html.eco', { id: "aHmGL" } ) %>
 
-The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](components.html#ons-icon) to display an icon, [`<ons-toolbar-button>`](components.html#ons-toolbar-button) or [`<ons-back-button>`](components.html#ons-back-button) to place an button, or insert any HTML content.
+The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/reference/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/reference/ons-toolbar-button.html) or [`<ons-back-button>`](/reference/ons-back-button.html) to place an button, or insert any HTML content.
 
 The appearance of the toolbar can be specified using `modifier` attribute, with either `android` or `ios` value can be set. By default, Onsen UI will apply the appropriate style depending on the platform it run. If you specify `fixed-style`, the toolbar style will be fixed regardless of the platform you apply to the toolbar.
 
@@ -284,7 +284,7 @@ Here are several examples when using `<ons-toolbar>`.
 
 <h5 id="InlineToolbar">Inline toolbar</h5>
 
-If you want to place a toolbar outsite the navigation header, you can create an [`<ons-toolbar>`](components.html#ons-toolbar) or [`<ons-bottom-toolbar>`](components.html#ons-bottom-toolbar) with `inline` attribute.
+If you want to place a toolbar outsite the navigation header, you can create an [`<ons-toolbar>`](/reference/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/reference/ons-bottom-toolbar.html) with `inline` attribute.
 
 ```
 <ons-toolbar inline>
@@ -301,7 +301,7 @@ If you want to place a toolbar outsite the navigation header, you can create an 
 
 Onsen UI supports Android back button. So, if the app is running on an Android device and using Cordova, pressing the back button will trigger a navigator's `popPage()` method.
 
-If you additionally want to only show a back button from iOS devices, [`<ons-if-platform>`](components.html#ons-if-platform) is the way.
+If you additionally want to only show a back button from iOS devices, [`<ons-if-platform>`](/reference/ons-if-platform.html) is the way.
 
 ```
 <ons-toolbar>
@@ -314,7 +314,7 @@ For more details about the device back button support, please take a look at the
 
 <h4 id="Navigationevents">Navigation events</h4>
 
-[`<ons-navigator>`](components.html#ons-navigator) has several events that can be hooked to do the specific jobs. For instance, you can cancel the page transition under some conditions.
+[`<ons-navigator>`](/reference/ons-navigator.html) has several events that can be hooked to do the specific jobs. For instance, you can cancel the page transition under some conditions.
 
 There are several events defined in the navigator: `prepush`, `postpush`, `prepop`, `postpop`. They are called before or after the `pushPage` or `popPage` action.
 
@@ -351,11 +351,11 @@ These events are fired after the pushPage and popPage. `event` object has the fo
 
 Sliding menu consists of two pages, which are referred to as main page and menu page. The menu page is also called as a side page, which is usually hidden and shown from the edge. It can be displayed when tapping a button, or swiping from the edge of the screen.
 
-You can also place a [`<ons-navigator>`](components.html#ons-navigator) in the main page to provide a navigation to even more pages.
+You can also place a [`<ons-navigator>`](/reference/ons-navigator.html) in the main page to provide a navigation to even more pages.
 
 <h4 id="onsslidingmenuoverview">`<ons-sliding-menu>` overview</h4>
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu) component has an `main-page` and a `menu-page`. Those pages should be specified as attributes. It also has `side` attribute to specify which side the behind page should be appeared.
+[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html) component has an `main-page` and a `menu-page`. Those pages should be specified as attributes. It also has `side` attribute to specify which side the behind page should be appeared.
 
 The menu page and main page can be specified under `<ons-sliding-menu>` tag by specifying `menu` and `main` class respectively.
 
@@ -425,7 +425,7 @@ Or, you can separate the pages in another template like the example below.
 
 <h4 id="Openingclosingmenu">Opening / closing menu</h4>
 
-[`<ons-sliding-menu>`](components.html#ons-sliding-menu) provides following methods to handle menu actions: `openMenu()`, `closeMenu()`, and `toggleMenu()`.
+[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html) provides following methods to handle menu actions: `openMenu()`, `closeMenu()`, and `toggleMenu()`.
 
 When you want to omit the animation effect, you can specify `animation` parameter to `none`.
 
@@ -444,7 +444,7 @@ To change the main and menu page manually, use `setMainPage()` and `setMenuPage(
 
 <h4 id="Swipesupport">Swipe and drag support</h4>
 
-If you set `swipable` attribute in [`<ons-sliding-menu>`](components.html#ons-sliding-menu), it detects swipe actions and opens/closes the menu. Please be aware that you also need to specify `swipe-target-width` and `max-slide-distance` to enable swipe support.
+If you set `swipable` attribute in [`<ons-sliding-menu>`](/reference/ons-sliding-menu.html), it detects swipe actions and opens/closes the menu. Please be aware that you also need to specify `swipe-target-width` and `max-slide-distance` to enable swipe support.
 
 If you set `draggable` attribute, you can drag the menu page to do the open/close action.
 
@@ -469,13 +469,13 @@ ons.ready(function() {
 
 <h3 id="UsingTabBar">Using Tab Bar</h3>
 
-A tab bar is composed from a [`<ons-tabbar>`](components.html#ons-tabbar) component and [`<ons-tab>`](components.html#ons-tab) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
+A tab bar is composed from a [`<ons-tabbar>`](/reference/ons-tabbar.html) component and [`<ons-tab>`](/reference/ons-tab.html) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
 
 <h4 id="onstabbaroverview">`<ons-tabbar>` overview</h4>
 
-To place a tab bar into your app, place a [`<ons-tabbar>`](components.html#ons-tabbar) element. A [`<ons-tabbar>`](components.html#ons-tabbar) element only accepts [`<ons-tab>`](components.html#ons-tab) under the element.
+To place a tab bar into your app, place a [`<ons-tabbar>`](/reference/ons-tabbar.html) element. A [`<ons-tabbar>`](/reference/ons-tabbar.html) element only accepts [`<ons-tab>`](/reference/ons-tab.html) under the element.
 
-Tab bar items can have an `icon` attribute and a `label` attribute. For the `icon` attribute, please specify the same icon name used in [`<ons-icon>`](components.html#ons-icon) element.
+Tab bar items can have an `icon` attribute and a `label` attribute. For the `icon` attribute, please specify the same icon name used in [`<ons-icon>`](/reference/ons-icon.html) element.
 
 ```
 <ons-tabbar>
@@ -521,7 +521,7 @@ If the page already contains a toolbar, the tab bar will be placed below the too
 
 <h4 id="Tabbarcustomize">Customizing tab bar</h4>
 
-You can customize the design of the tabs by using [`<ons-tab>`](components.html#ons-tab) attributes.
+You can customize the design of the tabs by using [`<ons-tab>`](/reference/ons-tab.html) attributes.
 
 <h5 id="Tabbarlabelandicon">Tab with label and icon</h5>
 
@@ -533,7 +533,7 @@ To display a label and icon on the tab, `label` and `icon` attributes are used.
 
 <h5 id="Tabbarcontents">Tab with custom content</h5>
 
-You can contain HTML elements inside the [`<ons-tab>`](components.html#ons-tab) element.
+You can contain HTML elements inside the [`<ons-tab>`](/reference/ons-tab.html) element.
 
 ```
 <ons-tabbar>
@@ -590,7 +590,7 @@ Please note that `prechange` and `postchange` event will not occur in this case.
 
 <h4 id="Tabbarevents">Tab bar events</h4>
 
-[`<ons-tabbar>`](components.html#ons-tabbar) has `prechange` and `postchange` events that are fired before or after the page switch. The event will get the following parameters.
+[`<ons-tabbar>`](/reference/ons-tabbar.html) has `prechange` and `postchange` events that are fired before or after the page switch. The event will get the following parameters.
 
 - `index`: Next page index.
 - `tabItem`: Object containing the next page.
@@ -605,23 +605,23 @@ tabbar.on('prechange', function(event) {
 
 <h3 id="UsingList">Using List</h3>
 
-List is a very popular pattern to display a set of information in scrollable view. Onsen UI supports scrollable list by using [`<ons-list>`](components.html#ons-list) and [`<ons-list-item>`](components.html#ons-list-item) tags.
+List is a very popular pattern to display a set of information in scrollable view. Onsen UI supports scrollable list by using [`<ons-list>`](/reference/ons-list.html) and [`<ons-list-item>`](/reference/ons-list-item.html) tags.
 
 <h4 id="onslistoverview">`<ons-list>` overview</h4>
 
-To create a list, place a [`<ons-list>`](components.html#ons-list) tag and [`<ons-list-item>`](components.html#ons-list-item) tags.
+To create a list, place a [`<ons-list>`](/reference/ons-list.html) tag and [`<ons-list-item>`](/reference/ons-list-item.html) tags.
 
-Also, [`<ons-list-header>`](components.html#ons-list-header) can be used to represent a grouped list items.
+Also, [`<ons-list-header>`](/reference/ons-list-header.html) can be used to represent a grouped list items.
 
 <h4 id="Basiclist">Basic list</h4>
 
-Here is the basic [`<ons-list>`](components.html#ons-list) example with scrollable content.
+Here is the basic [`<ons-list>`](/reference/ons-list.html) example with scrollable content.
 
 <%- @partial('codepen.html.eco', { id: "yxcCt" } ) %>
 
 <h4 id="Listwithrightarrowicon">List with right arrow icon</h4>
 
-This type of list is usually used with [`<ons-navigator>`](components.html#ons-navigator) to provide screen transitions.
+This type of list is usually used with [`<ons-navigator>`](/reference/ons-navigator.html) to provide screen transitions.
 
 <%- @partial('codepen.html.eco', { id: "nIEvm" } ) %>
 
@@ -633,7 +633,7 @@ List is also frequently used in the setting page. Here is the example list with 
 
 <h3 id="UsingAlert">Using Alert Dialog</h3>
 
-Onsen UI provides three common alert dialogs with predefined style, or a custom designed dialog using [`<ons-alert-dialog>`](components.html#ons-alert-dialog) component.
+Onsen UI provides three common alert dialogs with predefined style, or a custom designed dialog using [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) component.
 
 <%- @partial('codepen.html.eco', { id: "Qwwxyp" } ) %>
 
@@ -683,7 +683,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
 
 <h4 id="ShowingAlertDialog">Showing a custom alert dialog</h4>
 
-You can use [`<ons-alert-dialog>`](components.html#ons-alert-dialog) component to display alert dialog with the custom content. Here is the sample alert dialog that has a customized style.
+You can use [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) component to display alert dialog with the custom content. Here is the sample alert dialog that has a customized style.
 
 ```
 <ons-template id="alert-dialog.html">
@@ -709,17 +709,17 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "jEEKbm" } ) %>
 
-As you seen in the example, you should define an own template which will be specified in `ons.createAlertDialog()` function. The template must contain an [`<ons-alert-dialog>`](components.html#ons-alert-dialog) tag.
+As you seen in the example, you should define an own template which will be specified in `ons.createAlertDialog()` function. The template must contain an [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) tag.
 
 When `ons.createDialog()` function is called, it will return a `Promise` and returns a `AlertDialogView` object. For more details about using a `AlertDialogView` object, please refer to [Using `DialogView` object](#UsingDialogViewObject) in `<ons-dialog>` description.
 
 <h3 id="UsingDialog">Using Dialog</h3>
 
-[`<ons-dialog>`](components.html#ons-dialog) is a general purpose component to show an dialog.
+[`<ons-dialog>`](/reference/ons-dialog.html) is a general purpose component to show an dialog.
 
 <h4 id="ShowingDialog">Showing dialog</h4>
 
-To show a dialog, create a template that contains an [`<ons-dialog>`](components.html#ons-dialog) tag, and specify the template at `ons.createDialog()` function. The function will return a `Promise` object, which returns success with a `DialogView` object when the dialog is created (now shown yet). You need to call `show()` method to actually show the dialog.
+To show a dialog, create a template that contains an [`<ons-dialog>`](/reference/ons-dialog.html) tag, and specify the template at `ons.createDialog()` function. The function will return a `Promise` object, which returns success with a `DialogView` object when the dialog is created (now shown yet). You need to call `show()` method to actually show the dialog.
 
 ```
 <ons-template id="dialogcontent.html">
@@ -771,7 +771,7 @@ ons.ready(function() {
 
 When using custom dialog, you can specify a callback function when dialog is opened or closed. The callback can be set as the `callback` parameter when calling the `show()` or `hide()` method.
 
-Also, [`<ons-dialog>`](components.html#ons-dialog) and [`<ons-alert-dialog>`](components.html#ons-alert-dialog) provides following events.
+Also, [`<ons-dialog>`](/reference/ons-dialog.html) and [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) provides following events.
 
 - preshow, prehide
 
@@ -792,11 +792,11 @@ Also, [`<ons-dialog>`](components.html#ons-dialog) and [`<ons-alert-dialog>`](co
 
 Carousel provides a container to display multiple items in the element. It can be used as a full screen component, or inside another element.
 
-[`<ons-carousel>`](components.html#ons-carousel) component is the container which can contain multiple [`<ons-carousel-item>`](components.html#ons-carousel-item) components. Each `<ons-carousel-item>` represents items in the carousel.
+[`<ons-carousel>`](/reference/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/reference/ons-carousel-item.html) components. Each `<ons-carousel-item>` represents items in the carousel.
 
 <h4 id="ShowingFullScreenCarousel">Showing full screen carousel</h4> 
 
-A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<ons-carousel>`](components.html#ons-carousel) component.
+A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<ons-carousel>`](/reference/ons-carousel.html) component.
 
 ```
 <ons-carousel fullscreen swipeable overscrollable auto-scroll>
@@ -828,7 +828,7 @@ When you want to show a carousel within another component, you should specify it
 
 <h4 id="CarouselIndicator">Showing content (indicator) on carousel</h4>
 
-To display an indicator on the [`<ons-carousel>`](components.html#ons-carousel), you can use `<ons-carousel-cover>` component to dispay a content on the carousel. It will always shown on top of the carousel container.
+To display an indicator on the [`<ons-carousel>`](/reference/ons-carousel.html), you can use `<ons-carousel-cover>` component to dispay a content on the carousel. It will always shown on top of the carousel container.
 
 <h4 id="CustomizingCarousel">Customizing carousel</h4>
 
@@ -932,21 +932,21 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
 <h3 id="UsingModal">Using Modal</h3>
 
-[`<ons-modal>`](components.html#ons-modal) is useful when showing a dialog that needs to forbid any user interaction while the modal is shown. Typically a modal is used to display progress indicators or to request a user action explicitly.
+[`<ons-modal>`](/reference/ons-modal.html) is useful when showing a dialog that needs to forbid any user interaction while the modal is shown. Typically a modal is used to display progress indicators or to request a user action explicitly.
 
-[`<ons-modal>`](components.html#ons-modal) component can have any HTML content inside the tag. The content will be shown with a black mask when `toggle()` or `show()` method is called.
+[`<ons-modal>`](/reference/ons-modal.html) component can have any HTML content inside the tag. The content will be shown with a black mask when `toggle()` or `show()` method is called.
 
 <%- @partial('codepen.html.eco', { id: "devIg" } ) %>
 
 <h3 id="UsingPopover">Using Popover</h3>
 
-A popover provides an in-page container that is used to provide additional interactions or information for a specific component. Onsen UI provides [`<ons-popover>`](components.html#ons-popover) component to show a popover.
+A popover provides an in-page container that is used to provide additional interactions or information for a specific component. Onsen UI provides [`<ons-popover>`](/reference/ons-popover.html) component to show a popover.
 
 <%- @partial('codepen.html.eco', { id: "ZYYRKo" } ) %>
 
 <h4 id="ShowingPopover">Showing popover</h4>
 
-To show a popover, you need to define a popover as a HTML context using [`<ons-popover>`](components.html#ons-popover) tag, and open the popover by `ons.createPopover()` function.
+To show a popover, you need to define a popover as a HTML context using [`<ons-popover>`](/reference/ons-popover.html) tag, and open the popover by `ons.createPopover()` function.
 
 Here is the quick example of how a popover is defined and created.
 
@@ -987,7 +987,7 @@ When the `ons.createPopover()` function is called, it will return a `Promise` ob
 
 <h4 id="CustomizingPopover">Customizing popover</h4>
 
-[`<ons-popover>`](components.html#ons-popover) has some properties to customize the behavior and the design.
+[`<ons-popover>`](/reference/ons-popover.html) has some properties to customize the behavior and the design.
 
 <h5 id="PopoverAppearance">Changing appearance</h5>
 
@@ -1073,7 +1073,7 @@ Onsen UI provides various components for building forms.
 
 <h4 id="Button">Button</h4>
 
-[`<ons-button>`](components.html#ons-button) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.
+[`<ons-button>`](/reference/ons-button.html) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.
 
 To detect a tap event, you can use either `onclick` or `ng-click` attribute.
 
@@ -1081,7 +1081,7 @@ To detect a tap event, you can use either `onclick` or `ng-click` attribute.
 
 <h4 id="Switch">Switch</h4>
 
-[`<ons-switch>`](components.html#ons-switch) is the element to display a switch. A switch has an off and on state, and the state can be accessed by the component's `isChecked()` method.
+[`<ons-switch>`](/reference/ons-switch.html) is the element to display a switch. A switch has an off and on state, and the state can be accessed by the component's `isChecked()` method.
 
 ```
 <script>
@@ -1148,15 +1148,15 @@ Onsen UI provides a grid system to place your elements in the screen. The grid s
 
 <h4 id="onsrowandonscoloverview">`<ons-row>` and `<ons-col>` overview</h4>
 
-The layout can be performed by combining [`<ons-row>`](components.html#ons-row) and [`<ons-col>`](components.html#ons-col) components. The width and height can be adjusted in a flexible way.
+The layout can be performed by combining [`<ons-row>`](/reference/ons-row.html) and [`<ons-col>`](/reference/ons-col.html) components. The width and height can be adjusted in a flexible way.
 
-By default, all [`<ons-col>`](components.html#ons-col) inside a [`<ons-row>`](components.html#ons-row) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
+By default, all [`<ons-col>`](/reference/ons-col.html) inside a [`<ons-row>`](/reference/ons-row.html) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
 
-[`<ons-row>`](components.html#ons-row) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
+[`<ons-row>`](/reference/ons-row.html) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
 
 <h4 id="Layoutexample">Layout example</h4>
 
-You can see the following example to understand how [`<ons-row>`](components.html#ons-row) and [`<ons-col>`](components.html#ons-col) can provide flexible component placement.
+You can see the following example to understand how [`<ons-row>`](/reference/ons-row.html) and [`<ons-col>`](/reference/ons-col.html) can provide flexible component placement.
 
 <%- @partial('codepen.html.eco', { id: "GgujC" } ) %>
 
@@ -1166,7 +1166,7 @@ Onsen UI provides over 400 icons provided by [Font Awesome](http://fontawesome.g
 
 <h4 id="onsiconoverview">`<ons-icon>` overview</h4>
 
-When displaying an icon, a [`<ons-icon>`](components.html#ons-icon) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
+When displaying an icon, a [`<ons-icon>`](/reference/ons-icon.html) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
 
 <h5>Using Font Awesome</h5>
 
@@ -1231,10 +1231,10 @@ For example, the following media queries is an example to separate various scree
 
 <h4 id="Usingonssplitviewcomponent">Using `<ons-split-view>` component</h4>
 
-[`<ons-split-view>`](components.html#ons-split-view) component is used to provide an interface that separates the screen into two parts.
+[`<ons-split-view>`](/reference/ons-split-view.html) component is used to provide an interface that separates the screen into two parts.
 Also, it has an option to hide the secondary page when the screen size is smaller. This is very useful when you want to support smartphones and tablets together.
 
-[`<ons-split-view>`](components.html#ons-split-view) component has the following attributes:
+[`<ons-split-view>`](/reference/ons-split-view.html) component has the following attributes:
 
 - `main-page`: Specify a page to display on the main section.
 - `secondary-page`: Specify a page to display on the side section.
@@ -1243,7 +1243,7 @@ Also, it has an option to hide the secondary page when the screen size is smalle
 
 <h4 id="Specifywhentocollapse">Specify when to collapse</h4>
 
-[`<ons-split-view>`](components.html#ons-split-view) has `collapse` attribute to specify when to collapse. The possible values are `portrait`, `landscape`, or `width ##px` (i.e. `width 300px`). For example, if set as `portrait` and the device is in portrait orientation, the secondary page is hidden.
+[`<ons-split-view>`](/reference/ons-split-view.html) has `collapse` attribute to specify when to collapse. The possible values are `portrait`, `landscape`, or `width ##px` (i.e. `width 300px`). For example, if set as `portrait` and the device is in portrait orientation, the secondary page is hidden.
 
 <h3 id="LoadingPlaceholder">Showing Loading Screen</h3>
 
@@ -1351,9 +1351,9 @@ ons.ready(function() { });
 
 <h4 id="Platformdetection">Platform detection</h4>
 
-You can use either [`<ons-if-platform>`](components.html#ons-if-platform) attribute or `ons.platform` object to detect the platform. 
+You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or `ons.platform` object to detect the platform. 
 
-[`<ons-if-platform>`](components.html#ons-if-platform) attribute is useful when only displaying contents under a specific platform.
+[`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under a specific platform.
 
 ```
 <div ons-if-platform="ios">Content for only iPhone and iPad users</div>
@@ -1376,7 +1376,7 @@ In addition to it, `ons.platform` object provides following methods to detect th
 
 <h4 id="Landscapeportraitdetection">Landscape / portrait detection</h4>
 
-Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](components.html#ons-if-orientation) attribute can be used to switch content between portrait and landscape.
+Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](/reference/ons-if-orientation.html) attribute can be used to switch content between portrait and landscape.
 
 ```
 <div ons-if-orientation="portrait">Content only shown for portrait</div>
@@ -1386,7 +1386,7 @@ Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](components.html
 
 It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. 
 
-To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](components.html#ons-gesture-detector) component. For instance, following code does a swipe-left detection to the specific element.
+To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/reference/ons-gesture-detector.html) component. For instance, following code does a swipe-left detection to the specific element.
 
 ```
 <ons-gesture-detector>
@@ -1427,7 +1427,7 @@ Following gestures are supported.
 
 Sometimes, you want to do a certain action, or change appearance based on the software keyboard status. Onsen UI provides a way to handle keyboard events when your app is plugged in with [Cordova Keybord Plugin](https://github.com/apache/cordova-plugins/tree/master/keyboard) or [Ionic Keyboard Plugin](https://github.com/driftyco/ionic-plugins-keyboard).
 
-If you use [`<ons-keyboard-active>`](components.html#ons-keyboard-active) or [`<ons-keyboard-inactive>`](components.html#ons-keyboard-inactive) attribute, you could configure the appearance based on the keyboard status.
+If you use [`<ons-keyboard-active>`](/reference/ons-keyboard-active.html) or [`<ons-keyboard-inactive>`](/reference/ons-keyboard-inactive.html) attribute, you could configure the appearance based on the keyboard status.
 
 ```
 <div ons-keyboard-active>
@@ -1454,7 +1454,7 @@ ons.softwareKeyboard.on('hide', function() {
 
 Android has a hardware back button. Onsen UI provides a way to customize the back button behavior by providing several hook points to its application.
 
-To support device back button, you can use either `on-device-backbutton` or `ng-device-backbutton` attribute of the [`<ons-page>`](components.html#ons-page) component.
+To support device back button, you can use either `on-device-backbutton` or `ng-device-backbutton` attribute of the [`<ons-page>`](/reference/ons-page.html) component.
 
 Here is the way to define a back button handler by `ons-page` attribute.
 
@@ -1669,7 +1669,7 @@ In both cases, thanks to the fastclick library, there is no 300ms delay when det
 
 <h4 id="Pageinitevent">Page init event</h4>
 
-`pageinit` event is called after [`<ons-page>`](components.html#ons-page) is initialized. Use this event to alter the behavior on each pages.
+`pageinit` event is called after [`<ons-page>`](/reference/ons-page.html) is initialized. Use this event to alter the behavior on each pages.
 
 ```
 <script>
@@ -1699,7 +1699,7 @@ $(document).on('ons-navigator:init', '#my-navigator', function(event) {
 
 <h4 id="Componentevents">Component events</h4>
 
-Most of the components (i.e. [`<ons-navigator>`](components.html#ons-navigator), [`<ons-sliding-menu>`](components.html#ons-sliding-menu) and [`<ons-tabbar>`](components.html#ons-tabbar)) provide events to control the behavior before and after the user interaction. For more details, please see the document for each component.
+Most of the components (i.e. [`<ons-navigator>`](/reference/ons-navigator.html), [`<ons-sliding-menu>`](/reference/ons-sliding-menu.html) and [`<ons-tabbar>`](/reference/ons-tabbar.html)) provide events to control the behavior before and after the user interaction. For more details, please see the document for each component.
 
 <h3 id="DefiningMultiplePagesinSingleHTML">Defining Multiple Pages in Single HTML</h3>
 
@@ -1712,11 +1712,11 @@ Some components require you to specify another HTML page. For instance, a `<ons-
 </ons-sliding-menu>
 ```
 
-Instead of creating menu.html and content.html in separate files, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](components.html#ons-template) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
+Instead of creating menu.html and content.html in separate files, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/reference/ons-template.html) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
 
 <h4 id="OnsTemplateTag">Use `<ons-template>` tag to define a template</h4>
 
-An [`<ons-template>`](components.html#ons-template) tag represents a template snippet. For example, following code defines a template called `main.html`.
+An [`<ons-template>`](/reference/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
 
 ```
 <ons-template id="main.html">
