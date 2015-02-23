@@ -19,6 +19,15 @@ module.exports = function(language) {
       url: 'http://www.asial.co.jp/en/',
       gravator: '0b0ed6f4c5962b764d9bdb0ade4aa7ae'
     },
+    fran: {
+      name: 'Fran Dios',
+      url: 'http://frandiox.com/en/',
+      image: '/blog/content/images/2015/Feb/yo2.jpg'
+    },
+    andi: {
+      name: 'Andi Pavllo',
+      image: '/blog/content/images/2015/Feb/1423814226357.jpg'
+    },
     kruy: {
       name: 'Kruy Vanna',
       email: 'kruy@asial.co.jp'
@@ -31,7 +40,7 @@ module.exports = function(language) {
   };
 
   for (author in authors) {
-    if (authors[author].email && !authors[author].gravator) {
+    if (authors[author].email && (!authors[author].gravator || !authors[author].image)) {
       authors[author].gravator = md5(authors[author].email.toLowerCase());
     }
   }

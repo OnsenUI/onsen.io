@@ -1,0 +1,32 @@
+---
+page: 'javascript'
+title: 'JavaScript'
+needHelp: true
+reference: true
+docCategory: js
+---
+
+<h2>JavaScript</h2>
+
+<h3>Contents</h3>
+
+<div class="js-index"><div class="js-index-inner">
+
+  <% for category, docs of @componentCategoryDict: %>
+  <div class="js-index-category">
+    <h4 class="js-index-header"><%- @titlize(category) %></h4>
+
+    <ul class="js-index-list">
+      <% for doc in docs: %>
+      <li class="js-index-list-item
+        js-index-list-item-<%- if doc.collection[0] == 'objects' then 'object' else 'element' %>">
+        <a href="/reference/<%= doc.name %>.html" class="js-index-link">
+          <%- doc.name %>
+        </a>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+</div></div>

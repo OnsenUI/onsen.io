@@ -113,7 +113,6 @@
   background-position: left center;
   background-repeat: no-repeat;
 
-
   .lang-en & {
     font-size: 18px;
     font-family: @en-font-family;
@@ -138,6 +137,7 @@
 
 .toc-title-no-toggle {
   background-image: none;
+  margin-left: -1px;
 }
 
 .toc {
@@ -157,8 +157,8 @@
 }
 
 .toc-2 {
-  margin-bottom: 8px;
-  margin-top: 8px;
+  margin-bottom: 4px;
+  margin-top: 4px;
   display: none;
 }
 
@@ -186,7 +186,7 @@
 .toc-1-item {
   margin-top: 4px;
   margin-bottom: 4px;
-  margin-left: 0;
+  margin-left: 2px;
 }
 
 .toc-2-item {
@@ -242,6 +242,8 @@
   text-align: left;
   width: (@width - @aside-width);
   max-width: 90%;
+  position: relative;
+  min-height: 800px;
 
   ::-webkit-scrollbar {
     width: 4px;
@@ -354,8 +356,113 @@ div.need-help {
   }
 }
 
+.js-index {
 
-@media screen and (max-width: 1100px) {
+  &-inner {
+    column-gap: 0px;
+    column-fill: auto;
+
+    .desktop-query({
+      column-count: 4;
+    });
+
+    .tablet-query({
+      column-count: 2;
+    });
+
+    .mobile-query({
+      column-count: auto;
+    });
+  }
+
+  &-category {
+    column-break-inside: avoid;
+
+    /* We have autoprefixer, but this is needed. */
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+
+    width: 200px;
+    box-sizing: border-box;
+    padding-left: 6px;
+
+    .desktop-query({
+      display: inline-block;
+    });
+  }
+
+  &-header {
+    margin: 0 0 6px 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: bold;
+
+    .lang-en & {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .lang-ja & {
+      font-size: 14px;
+      font-weight: bold;
+    }
+  }
+
+  &-list {
+    margin: 0;
+    padding: 0 0 18px 0;
+
+    .lang-ja & {
+      padding: 0 0 22px 0;
+    }
+  }
+
+  &-list-item {
+    margin: 0 0 0 0;
+    padding: 0 0 0 22px;
+    list-style: none;
+    background-position: left center;
+    background-repeat: no-repeat;
+
+    .lang-ja & {
+      line-height: 1.9;
+    }
+
+    &-object {
+      background-image: url(/images/common/object-icon.png);
+      background-position: 1px center;
+    }
+
+    &-element {
+      background-image: url(/images/common/element-icon.png);
+    }
+  }
+
+  &-link {
+
+    font-size: 14px;
+
+    &:link, &:visited, &:active {
+      color: @light-text-color;
+      text-decoration: none;
+    }
+
+    &:hover {
+      color: @light-text-color;
+      text-decoration: underline;
+    }
+
+    .lang-ja & {
+      font-size: 13px;
+    }
+
+  }
+
+
+}
+
+
+.tablet-query({
   .content-info, .sticky-wrapper > .content-info {
     display: none;
   }
@@ -376,5 +483,4 @@ div.need-help {
   .codepen-open-link-wrapper {
     display: block;
   }
-
-}
+});

@@ -1,24 +1,95 @@
-.ons-css {
-  position: static;
-  width: auto;
-  height: auto;
-  float: right;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  
-  &-inner {
-    position: relative !important;
-    width: 320px !important;
-    height: 220px !important;
-    text-align: center;
+
+#css {
+  .content {
+    .desktop-query({
+      width: 580px;
+    });
+    max-width: 100%;
+    min-height: 980px;
+  }
+
+  pre code {
+    font-size: 12px;
+  }
+
+  pre {
+    padding: 0 0 0 4px;
   }
 }
 
 .css-component {
-  clear: right;
 
-  &-markup {
-    width: 500px !important;
+  &-description {
+    
+  }
+
+  &-showcase {
+    position: fixed;
+    box-sizing: border-box;
+    width: 320px;
+    height: 568px;
+    top: 305px;
+    z-index: 2;
+    margin-left: 591px;
+
+    .tablet-query({
+      display: none;
+    });
+  }
+
+  &-showcase-inner {
+    width: 100%;
+    height: 100%;
+
+    .tablet-query({
+      display: none;
+    });
+  }
+
+  &-example {
+    width: 100%;
+    padding: 8px 0px;
+    box-sizing: border-box;
+    position: relative;
   }
 }
 
+
+.css-component-showcase-frame {
+  .tablet-query({
+    display: none;
+  });
+
+  & {
+    background-image: url(../images/common/device-frame.png);
+    background-repeat: no-repeat;
+    width: 378px;
+    min-height: 797px;
+    box-sizing: border-box;
+    padding: 116px 0px 0px 31px;
+    z-index: 20;
+    display: inline-block;
+  }
+
+  &-wrapper {
+    width: 378px;
+    position: fixed;
+    z-index: 0;
+    margin-left: 560px;
+    margin-top: -50px;
+  }
+
+  &-placeholder {
+    padding-top: 250px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #e6e6e6;
+    text-align: center;
+  }
+
+  &-inner {
+    width: 320px;
+    height: 568px;
+    background-color: white;
+  }
+}

@@ -5,6 +5,7 @@ var argv = require('yargs').argv;
 var gutil = require('gulp-util');
 var del = require('del');
 var runSequence = require('run-sequence');
+var sortObject = require('sort-object');
 
 var metalsmith = require('metalsmith');
 var templates = require('metalsmith-templates');
@@ -18,6 +19,8 @@ var permalinks = require('metalsmith-permalinks');
 var metalsmithDebug = require('metalsmith-debug');
 var paginate = require('metalsmith-paginate');
 var feed = require('metalsmith-feed');
+var redirect = require('metalsmith-redirect');
+var draft = require('metalsmith-drafts');
 
 //--
 
@@ -40,6 +43,7 @@ gulp.task('blog', function(done) {
     .source('./blog/posts/')
     .destination('./out_en/blog/')
     .metadata(require('./config.js')('en'))
+    .use(draft())
     .use(require('./plugins/helpers')())
     .use(collections({
       articles: {
@@ -66,9 +70,18 @@ gulp.task('blog', function(done) {
         var authors = metalsmith.metadata().env.authors;
         for (var path in files) {
           var doc = files[path];
+          var authorName = doc.author;
+
+          if (!doc.author) {
+            throw new Error('@author is undefined: ' + path);
+          }
 
           doc.isArticle = true;
           doc.author = authors[doc.author];
+
+          if (!doc.author) {
+            throw new Error('no such author: ' + authorName);
+          }
         }
 
         done();
@@ -133,9 +146,9 @@ gulp.task('metalsmith', function(done) {
     .clean(false)
     .source('./src/documents_' + lang)
     .metadata(require('./config.js')(lang))
+    .use(draft())
     .use(require('./plugins/import-api-docs')(lang))
     .use(require('./plugins/patterns-collection')(lang))
-    .use(require('./plugins/import-topdoc')(lang))
     .use(collections({
       components: {
         sortBy: 'name'
@@ -160,16 +173,26 @@ gulp.task('metalsmith', function(done) {
           });
         }
       }
-      metalsmith.metadata().componentCategoryDict = dict;
+      metalsmith.metadata().componentCategoryDict = sortObject(dict);
 
       done();
     })
     .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
     .use(require('./plugins/autotoc')())
+    .use(function(files, metalsmith, done) {
+      var cssFile = files['reference/css.html'];
+      var cssToc = cssFile.toc;
+      delete cssFile.toc;
+      metalsmith.metadata().cssToc = cssToc;
+      done();
+    })
     .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
     .use(assets({source: './src/files'}))
     .use(require('./plugins/css-transform')(lang))
+    .use(redirect({
+      '/components.html' : '/reference/javascript.html'
+    }))
     .destination('./out_' + lang)
     .build(function(error) {
       if (error) {
@@ -180,8 +203,8 @@ gulp.task('metalsmith', function(done) {
       }
 
       browserSync.reload();
-      done();
       gutil.log('Generated into \'./out_' + lang + '\'');
+      done();
     });
 });
 
@@ -206,7 +229,6 @@ gulp.task('clean', function(done) {
   del([
     'out_' + lang + '/*',
     '!out_' + lang + '/OnsenUI',
-    'src/documents_' + lang + '/reference/*.html'
   ], done);
 });
 
