@@ -24,7 +24,7 @@ module.exports = function(language) {
       url: 'http://frandiox.com/en/',
       image: '/blog/content/images/2015/Feb/yo2.jpg'
     },
-    andy: {
+    andi: {
       name: 'Andi Pavllo',
       image: '/blog/content/images/2015/Feb/1423814226357.jpg'
     },
@@ -40,7 +40,7 @@ module.exports = function(language) {
   };
 
   for (author in authors) {
-    if (authors[author].email && !authors[author].gravator && !authors[author].image) {
+    if (authors[author].email && (!authors[author].gravator || !authors[author].image)) {
       authors[author].gravator = md5(authors[author].email.toLowerCase());
     }
   }

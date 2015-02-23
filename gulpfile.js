@@ -68,9 +68,18 @@ gulp.task('blog', function(done) {
         var authors = metalsmith.metadata().env.authors;
         for (var path in files) {
           var doc = files[path];
+          var authorName = doc.author;
+
+          if (!doc.author) {
+            throw new Error('@author is undefined: ' + path);
+          }
 
           doc.isArticle = true;
           doc.author = authors[doc.author];
+
+          if (!doc.author) {
+            throw new Error('no such author: ' + authorName);
+          }
         }
 
         done();
