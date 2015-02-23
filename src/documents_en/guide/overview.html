@@ -633,13 +633,19 @@ List is also frequently used in the setting page. Here is the example list with 
 
 <h3 id="UsingLazyRepeat">Using Lazy Repeat</h3>
 
-Lazy Repeat (or Infinite Scroller) causes that only current visible items in a displayed list are loaded into the DOM; therefore, unloaded when they are not visible anymore. Lazy Repeat permits a list with millions of items to be rendered without a drop in performance.
+Lazy Repeat or Infinite Scroller (`ons-lazy-repeat`) causes that only current visible items in a displayed list are loaded into the DOM; therefore, unloaded when they are not visible anymore. Lazy Repeat permits a list with millions of items to be rendered without a drop in performance.
 
 <%- @partial('codepen.html.eco', { id: "rapEjW" } ) %>
 
-<h4 id="PreparingLazyRepeat">Preparing a `delegate` object for `ons-lazy-repeat`</h4>
+[Example with jQuery](http://codepen.io/frankdiox/pen/vEdKez) (similar to pure Javascript).
 
-Lazy Repeat relies on a `delegate` object that contains all the required information. This object must be located inside the corresponding AngularJS controller:
+<h4 id="PreparingLazyRepeat">Preparing a `delegate` object for Lazy Repeat</h4>
+
+Lazy Repeat relies on a `delegate` object that contains all the required information.
+
+<h5 id="DelegateAngularJS">`delegate` object in AngularJS</h5>
+
+The `delegate` object should be attached to the scope of the same controller as the item list, so it is accessible from the view later on:
 
 ```
 $scope.MyDelegate = {
@@ -667,9 +673,39 @@ The `index` parameter contains the order of the item inside the list. In detail:
 * `countItems` returns the total length of the list to display.
 * `destroyItemScope` is an optional method that will be triggered everytime an item is unloaded, so any related functionality may be handled.
 
-<h4 id="LazyRepeatInHTML">Adding `ons-lazy-repeat` to your tags</h4>
+<h5 id="DelegateJQuery">`delegate` object in jQuery (similar to pure Javascript)</h5>
 
-The attribute `ons-lazy-repeat` is added to a tag indicating the required `delegate` object:
+```
+var MyDelegate = {
+  createItemContent: function(index, oldContent) {
+    console.log("Created item #" + index);
+
+    var $element = $("<span>Item #"+(index+1)+"</span>");
+    return $element[0];
+  },
+  calculateItemHeight: function(index) {
+    return 40;
+  },
+  countItems: function() {
+    return 10000000;
+  },
+  destroyItemContent: function(index, element) {
+	console.log("Destroyed item " + index);
+  }
+}
+```
+
+The `index` parameter contains the order of the item inside the list. In detail:
+* `createItemContent` contains the information about the items themselves, which can be dynamically created or loaded from a preset array of items. It must return the actual item.
+* `calculateItemHeight` returns the height of an item. It could be different for every item.
+* `countItems` returns the total length of the list to display.
+* `destroyItemContent` is an optional method that will be triggered everytime an item is unloaded, so any related functionality may be handled.
+
+<h4 id="LazyRepeatInHTML">Adding Lazy Repeat to tags</h4>
+
+`onz-lazy-repeat` is just a general attribute, which means that, even though using it with `<ons-list-item>` is the most frequent way, it is not limited to this tag. It works well with any tag where item heights are calculable, such as `<div>` tags. When adding `ons-lazy-repeat` to a tag the `delegate` object must also be indicated: `ons-lazy-repeat="MyDelegate"`.
+
+For AngularJS, item properties can be accessed normally:
 
 ```
 <ons-list>
@@ -679,11 +715,20 @@ The attribute `ons-lazy-repeat` is added to a tag indicating the required `deleg
 </ons-list>
 ```
 
-`onz-lazy-repeat` is just a general attribute, which means that, even though using it with `<ons-list-item>` is the most frequent way, it is not limited to this tag. It works well with any tag where item heights are calculable, such as `<div>` tags.
+In jQuery or pure Javascript, the DOM modification is prepared in `createItemContent` method, so there is no need to specify anything else in the view:
+
+```
+<ons-list>
+  <ons-list-item ons-lazy-repeat="MyDelegate">
+  </ons-list-item>
+</ons-list>
+```
 
 <h4 id="LazyRepeatAsync">Another sample: asynchronous calls</h4>
 
 Lazy Repeat could be useful as well when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic.
+
+<h5 id="AsynchSampleAngularJS">In AngularJS</h5>
 
 ```
 configureItemScope: function(index, itemScope) {
@@ -712,6 +757,26 @@ configureItemScope: function(index, itemScope) {
 ```
 
 <%- @partial('codepen.html.eco', { id: "QwaPJa" } ) %>
+
+<h5 id="AsynchSampleJQuery">In jQuery</h5>
+
+```
+createItemContent: function(index, oldContent) {
+  if (oldContent) {
+    return oldContent;
+  }
+
+  var $element = $("<div><span style='opacity: 0.7;'><ons-icon icon='fa-spinner' spin='true'></ons-icon> Loading bacon...</span></div>");
+
+  $.getJSON('https://baconipsum.com/api/?type=meat-and-filler&sentences=1&callback=?', function(data) {
+    $element.text(data[0]);
+  });
+
+  return $element[0];
+}
+```
+
+<%- @partial('codepen.html.eco', { id: "XJZKOe" } ) %>
 
 
 <h3 id="UsingAlert">Using Alert Dialog</h3>
