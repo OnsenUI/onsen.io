@@ -15,7 +15,7 @@ This feature becomes quite handy for many use cases, such as navigating through 
 
 Let's see now an example application using `ons-lazy-repeat`. This app generates <big>10 million</big> (10,000,000) random items with images and text:
 
-<iframe style="background-image: url('http://s3.asial.co.jp/~ataru/my_image/nexus5.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frankdiox.github.io/OnsenUI-LazyRepeat/"  width="359" height="640" scrolling="no"></iframe>
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frankdiox.github.io/OnsenUI-LazyRepeat/"  width="359" height="640" scrolling="no"></iframe>
 
 ### How to use lazy-repeat
 We need a `delegate` object that will held all the required information for `ons-lazy-repeat`. Notice that most of the functions receive an `index` parameter that contains the order of the item in the list. Here is our `delegate` object:
