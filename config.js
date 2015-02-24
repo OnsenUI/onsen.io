@@ -73,7 +73,8 @@ module.exports = function(language) {
 
     framework: {
       displayName: 'Onsen UI',
-      codeName: 'ons'
+      codeName: 'ons',
+      version: require('./OnsenUI/package').version
     }
   };
 };
