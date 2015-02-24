@@ -611,7 +611,7 @@ List is a very popular pattern to display a set of data in a scrollable view. On
 
 To create a list, place a [`<ons-list>`](/reference/ons-list.html) tag and [`<ons-list-item>`](/reference/ons-list-item.html) tags.
 
-Also, [`<ons-list-header>`](/reference/ons-list-header.html) can be used to represent a grouped list items.
+Also, [`<ons-list-header>`](/reference/ons-list-header.html) can be used to represent grouped list items.
 
 <h4 id="Basiclist">Basic list</h4>
 
@@ -627,7 +627,7 @@ This type of list is usually used with [`<ons-navigator>`](/reference/ons-naviga
 
 <h4 id="Listwithforms">List with forms</h4>
 
-List is also frequently used in the setting page. Here is the example list with some form elements.
+Lists are frequently used in the configuration pages. Here is a sample list with some form elements.
 
 <%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
 
@@ -667,7 +667,7 @@ $scope.MyDelegate = {
 
 * `configureItemScope` contains the information about the items, which can be dynamically created or loaded from a array of items.
 * `calculateItemHeight` returns the height of an item. It could be different for every item.
-* `countItems` returns the total number of items in the list..
+* `countItems` returns the total number of items in the list.
 * `destroyItemScope` is an optional method that will be triggered everytime an item is unloaded. This can be used to destroy elements and remove event listeners in order to avoid memory leaks.
 
 <h5 id="DelegateJQuery">Delegate object using jQuery</h5>
@@ -722,15 +722,14 @@ In jQuery or pure Javascript, the content is generated in the `createItemContent
 
 <h4 id="LazyRepeatAsync">Another sample: asynchronous calls</h4>
 
-Lazy Repeat could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic.
+Lazy Repeat could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic. It is important to remember to cancel the requests if an item is destroyed before the request is finished.
 
 <h5 id="AsynchSampleAngularJS">In AngularJS</h5>
 
 ```
 configureItemScope: function(index, itemScope) {
   if (!itemScope.item) {
-    console.log("Created item #" + index);
-
+    itemScope.canceler = $q.defer();
     itemScope.item = {
       title: 'Item #' + (index + 1),
       label: '',
@@ -738,17 +737,20 @@ configureItemScope: function(index, itemScope) {
       rand: Math.random()
     };
 
-    $http.get('https://baconipsum.com/api/?type=meat-and-filler&sentences=1')
-        .success(function(data) {
+    $http.get('https://baconipsum.com/api/?type=meat-and-filler&sentences=1', {timeout: itemScope.canceler.promise})
+    .success(function(data) {
       itemScope.item.desc = data[0];
       itemScope.item.label = data[0].substr(0, data[0].indexOf(" ")) + 'bacon';
     })
-        .error(function() {
+    .error(function() {
       itemScope.item.desc = 'No bacon lorem ipsum';
       itemScope.item.label = 'No bacon';
     });
 
   }
+},
+destroyItemScope: function(index, itemScope) {
+  itemScope.canceler.resolve(); 
 }
 ```
 
@@ -764,11 +766,16 @@ createItemContent: function(index, oldContent) {
 
   var $element = $("<div><span style='opacity: 0.7;'><ons-icon icon='fa-spinner' spin='true'></ons-icon> Loading bacon...</span></div>");
 
-  $.getJSON('https://baconipsum.com/api/?type=meat-and-filler&sentences=1&callback=?', function(data) {
+  var request = $.getJSON('https://baconipsum.com/api/?type=meat-and-filler&sentences=1&callback=?', function(data) {
     $element.text(data[0]);
   });
 
+  $element.data('request', request);
   return $element[0];
+},
+destroyItemContent: function(index, element) {
+  var request = $element.data('request');
+  request.abort();
 }
 ```
 
@@ -784,7 +791,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
 
 - Alert dialog
 
-  `ons.notification.alert()` function shows an alert with a button and a text message. The message can be written in HTML format.
+  [`ons.notification.alert()`](/reference/ons.notification.html#method-alert) function shows an alert with a button and a text message. The message can be written in HTML format.
 
   ```
   ons.notification.alert({
@@ -802,7 +809,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
 
 - Confirm dialog
 
-  `ons.notification.confirm()` function is similar to the alert dialog, but can have multiple buttons.
+  [`ons.notification.confirm()`](/reference/ons.notification.html#method-confirm) function is similar to the alert dialog, but can have multiple buttons.
 
   ```
   ons.notification.confirm({
@@ -822,7 +829,7 @@ To show an alert dialog, the quicker way is to use the following functions to di
 
 - Prompt dialog
 
-  `ons.notification.prompt()` function shows a prompt dialog that contains with a text input box.
+  [`ons.notification.prompt()`](/reference/ons.notification.html#method-prompt) function shows a prompt dialog that contains with a text input box.
 
 <h4 id="ShowingAlertDialog">Showing a custom alert dialog</h4>
 
