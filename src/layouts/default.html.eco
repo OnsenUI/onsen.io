@@ -95,7 +95,7 @@
         <% for pattern in @patterns: %>
         <li class="toc-item toc-1-item">
           <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link">
-            <%= pattern %>
+            <%= @renderPatternName(pattern) %>
           </a>
         </li>
         <% end %>
