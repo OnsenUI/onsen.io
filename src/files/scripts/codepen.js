@@ -1,13 +1,12 @@
 $(function() {
-  $('.codepen-resize-button').click(function(event) {
+  $('.codepen-resize-label').click(function(event) {
     $(event.target).parents('.codepen-wrapper').toggleClass('expanded');
 
     return false;
   });
 
-  $('.codepen-load-button').click(function(event) {
+  $('.codepen-loader').click(function(event) {
     $(this)
-      .parent()
       .hide()
       .parents('.codepen-content')
       .removeClass('codepen-content-unloaded')
@@ -16,11 +15,7 @@ $(function() {
       .removeClass('codepen-unloaded');
 
     var dom = document.createElement('script');
-    $(dom)
-      .attr('src', '//assets.codepen.io/assets/embed/ei.js')
-      .on('load', function() {
-        
-      });
+    $(dom).attr('src', '//assets.codepen.io/assets/embed/ei.js');
 
     document.body.appendChild(dom);
     dom = null;

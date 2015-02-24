@@ -273,86 +273,68 @@ div.need-help {
   }
 }
 
-.codepen-wrapper {
-  margin: 28px 0 20px 0;
-  width: 320px;
-}
+.codepen {
 
-.codepen-wrapper.expanded {
-  width: 100%;
-}
+  &-wrapper {
+    margin: 28px 0 20px 0;
+    width: 320px;
+  }
 
-.codepen-resize-button {
-  margin-top: 5px;
+  &-wrapper.expanded {
+    width: 100%;
+  }
 
-  > i {
-    width: 26px;
-    height: 26px;
-    background: rgba(0,0,0, 0.2);
-    border-radius: 50%;
-    padding: 5px;
-    color: #157DFB;
+  &-content {
+    height: 480px;
+    background-color: #f9f9f9;
+  }
+
+  &-content-unloaded {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+  }
+
+  &-loader {
     text-align: center;
-  }
-}
+    padding-top: 200px;
+    cursor: pointer;
 
-.codepen-content {
-  height: 480px;
-  background-color: white;
-}
-
-.codepen-content-unloaded {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-}
-
-.codepen-header-text {
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  margin-top: 8px;
-  margin-bottom: 4px;
-}
-
-.codepen-menu {
-  float: right;
-}
-
-.codepen-open-link-wrapper {
-  display: none;
-}
-
-.codepen-resize {
-  margin: 0;
-}
-
-.codepen-loader {
-  text-align: center;
-  padding-top: 200px;
-  p {
-    font-size: 12px;
-    color: #999;
-  }
-}
-
-.codepen-load-button {
-  height: 40px;
-  width: 60px;
-  line-height: 40px;
-  font-size: 60px;
-  display: inline-block;
-  font-weight: bold;
-
-  &, &:hover, &:visited {
-    color: #666;
+    &:hover .codepen-run-label {
+      opacity: 1;
+    }
   }
 
-  &:hover {
+  &-header-text {
+    font-size: 14px;
+    font-weight: bold;
     color: #333;
+    margin-top: 8px;
+    margin-bottom: 4px;
   }
 
-  &:active {
-    opacity: 0.4;
+  &-open-link-wrapper {
+    display: none;
+  }
+
+  &-run-label {
+    opacity: 0;
+    font-size: 13px;
+    color: #ccc;
+    transition: opacity 0.1s linear;
+  }
+
+  &-resize {
+    margin: 0;
+  }
+
+  &-resize-label {
+    margin-top: 5px;
+    font-size: 13px;
+    user-select: none;
+
+    &, &:link, &:hover, &visited {
+      color: @light-text-color;
+    }
   }
 }
 
