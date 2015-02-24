@@ -298,6 +298,12 @@ div.need-help {
     text-align: center;
     padding-top: 200px;
     cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.1s linear;
+
+    &:hover {
+      opacity: 1;
+    }
 
     &:hover .codepen-run-label {
       opacity: 1;

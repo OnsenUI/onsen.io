@@ -14,11 +14,19 @@ $(function() {
       .addClass('codepen')
       .removeClass('codepen-unloaded');
 
-    var dom = document.createElement('script');
-    $(dom).attr('src', '//assets.codepen.io/assets/embed/ei.js');
 
-    document.body.appendChild(dom);
-    dom = null;
+    if (window.CodePenEmbed) {
+      CodePenEmbed.showCodePenEmbeds();
+    } else {
+      var dom = document.createElement('script');
+      $(dom)
+        .attr('src', '//assets.codepen.io/assets/embed/ei.js')
+        .on('load', function() {
+          CodePenEmbed.showCodePenEmbeds();
+        });
+      document.body.appendChild(dom);
+      dom = null;
+    }
 
     return false;
   });
