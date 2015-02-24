@@ -859,9 +859,9 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "jEEKbm" } ) %>
 
-As you seen in the example, you should define an own template which will be specified in `ons.createAlertDialog()` function. The template must contain an [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) tag.
+As you have seen in the example, you should define a template which will be specified in [`ons.createAlertDialog()`](/reference/ons.html#method-createAlertDialog) function. This template must contain an [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) tag.
 
-When `ons.createDialog()` function is called, it will return a `Promise` and returns a `AlertDialogView` object. For more details about using a `AlertDialogView` object, please refer to [Using `DialogView` object](#UsingDialogViewObject) in `<ons-dialog>` description.
+When the `ons.createAlertDialog()` function is called, it will return a `Promise` that resolves to a `AlertDialogView` object. For more details about using a `AlertDialogView` object, please refer to [Using `DialogView` object](#UsingDialogViewObject) in `<ons-dialog>` description.
 
 <h3 id="UsingDialog">Using Dialog</h3>
 
@@ -869,7 +869,7 @@ When `ons.createDialog()` function is called, it will return a `Promise` and ret
 
 <h4 id="ShowingDialog">Showing dialog</h4>
 
-To show a dialog, create a template that contains an [`<ons-dialog>`](/reference/ons-dialog.html) tag, and specify the template at `ons.createDialog()` function. The function will return a `Promise` object, which returns success with a `DialogView` object when the dialog is created (now shown yet). You need to call `show()` method to actually show the dialog.
+To show a dialog, create a template that contains an [`<ons-dialog>`](/reference/ons-dialog.html) tag, and use this template as the argument to [`ons.createDialog()`](/reference/ons.html#method-createDialog) function. The function will return a `Promise` object, which resolves to a `DialogView` object when the dialog is created. You need to call the [`show()`](/reference/ons-dialog.html#method-show) method to actually show the dialog.
 
 ```
 <ons-template id="dialogcontent.html">
@@ -888,7 +888,7 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
-<h4 id="UsingDialogViewObject">Using `DialogView` object</h4>
+<h4 id="UsingDialogViewObject">Using the `DialogView` object</h4>
 
 `DialogView` object is the main object that contains the dialog information. It has following methods to provide fine-grain control. 
 
@@ -1023,9 +1023,17 @@ Other than the options above, following attributes can be specified to customize
 
   When it is set, the carousel item will automatically scrolled to fit into the container.
 
-- `swipeable` and `draggable` attribute
+- `swipeable` attribute
 
   Use this attribute to make your carousel swipeable or draggable.
+
+- `auto-refresh` attribute
+
+  When this attribute is set the carousel will automatically be refreshed when the number of items change. Uses this when the carousel is used with `ng-repeat`.
+
+- `auto-scroll-ratio` attribute
+
+  A number between 0.0 and 1.0. It specifies how long distance the carousel must be dragged before it will auto-scroll to the next item on release. 
 
 <h4 id="CarouselJavaScript">Controlling carousel by JavaScript</h4>
 
@@ -1060,7 +1068,7 @@ myCarousel.next({
 
 <h5 id="AddingCarouselItems">Adding carousel items by JavaScript</h5>
 
-After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must call `refresh()` function to update the layout.
+After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must call `refresh()` function to update the layout. In case you are using the `auto-refresh` attribute this is not required.
 
 <h4 id="CarouselEvents">Using carousel events</h4>
 
@@ -1096,7 +1104,7 @@ A popover provides an in-page container that is used to provide additional inter
 
 <h4 id="ShowingPopover">Showing popover</h4>
 
-To show a popover, you need to define a popover as a HTML context using [`<ons-popover>`](/reference/ons-popover.html) tag, and open the popover by `ons.createPopover()` function.
+To show a popover, you need to define a popover as a HTML context using [`<ons-popover>`](/reference/ons-popover.html) tag, and open the popover by [`ons.createPopover()`](/reference/ons.html#method-createPopover) function function.
 
 Here is the quick example of how a popover is defined and created.
 
@@ -1112,16 +1120,16 @@ Here is the quick example of how a popover is defined and created.
 </ons-template>
 <script>
 ons.ready(function() {
-  var targetElement = document.getElementById("myButton"); 
-  var popover = ons.createPopover('popover.html')
+  var targetElement = document.getElementById('myButton'); 
+  ons.createPopover('popover.html')
   .then(function(popover) {
-      popover.show(targetElement);
-    });
+    popover.show(targetElement);
+  });
 });
 </script>
 ```
 
-When the `ons.createPopover()` function is called, it will return a `Promise` object. The object returns the `PopoverView` object which has following methods.
+When the `ons.createPopover()` function is called, it will return a `Promise` object. The object resolves to the `PopoverView` object which has following methods:
 
 - `show(target[, options])`
 
@@ -1163,7 +1171,7 @@ The design can be switched using `modifier` attribute, which can be selected fro
   If you want to cancel opening the popover, you could write a program like the one below.
 
   ```
-  myPopover.on("preshow", function(e) {
+  myPopover.on('preshow', function(e) {
     e.cancel();
   });
   ```
@@ -1231,7 +1239,7 @@ To detect a tap event, you can use either `onclick` or `ng-click` attribute.
 
 <h4 id="Switch">Switch</h4>
 
-[`<ons-switch>`](/reference/ons-switch.html) is the element to display a switch. A switch has an off and on state, and the state can be accessed by the component's `isChecked()` method.
+[`<ons-switch>`](/reference/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/reference/ons-switch.html#method-isChecked) method.
 
 ```
 <script>
@@ -1483,7 +1491,7 @@ ons.ready(function() {
 
 As of iOS 7, a status bar can be rendered above a WebView. Onsen UI automatically detects and adds the necessary margin on the top. However in some occations, it is necessary to disable this feature, when using Cordova [StatusBar plugin](https://github.com/apache/cordova-plugin-statusbar) for instance.
 
-To manage the top margin for iOS devices, Onsen UI provides `ons.enableAutoStatusBarFill` function and `ons.disableAutoStatusBarFill` function. This feature is enabled by default, and needs to call the function before Onsen UI initialization complete (before `ons.ready()` event).
+To manage the top margin for iOS devices, Onsen UI provides [`ons.enableAutoStatusBarFill()`](/reference/ons.html#method-enableAutoStatusBarFill) function and [`ons.disableAutoStatusBarFill()`](/reference/ons.html#method-disableAutoStatusBarFill) function. This feature is enabled by default, and needs to call the function before Onsen UI initialization complete (before `ons.ready()` event).
 
 ```
 /**
@@ -1501,7 +1509,7 @@ ons.ready(function() { });
 
 <h4 id="Platformdetection">Platform detection</h4>
 
-You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or `ons.platform` object to detect the platform. 
+You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or [`ons.platform`](/reference/ons.platform.html) object to detect the platform. 
 
 [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under a specific platform.
 
@@ -1514,15 +1522,15 @@ In addition to it, `ons.platform` object provides following methods to detect th
 - `ons.platform.isWebView()`: Returns `true` if the app is running on the WebView.
 - `ons.platform.isIOS()`: Returns `true` if the app is running under an iOS device.
 - `ons.platform.isAndroid()`: Returns `true` if the app is running under an Android device.
--  `ons.platform.isIPhone()`: Returns `true` if the app is running under an iPhone device.
--  `ons.platform.isIPad()`: Returns `true` if the app is running under an iPad device.
--  `ons.platform.isBlackBerry()`: Returns `true` if the app is running under a BlackBerry device.
--  `ons.platform.isOpera()`: Returns `true` if the app is running under an Opera browser.
--  `ons.platform.isFirefox()`: Returns `true` if the app is running under a Firefox browser.
--  `ons.platform.isSafari()`: Returns `true` if the app is running under Apple Safari browser.
--  `ons.platform.isChrome()`: Returns `true` if the app is running under Google Chrome browser.
--  `ons.platform.isIE()`: Returns `true` if the app is running under Internet Explorer browser.
--  `ons.platform.isIOS7()`: Returns `true` if the running iOS is version 7.0 or later.
+- `ons.platform.isIPhone()`: Returns `true` if the app is running under an iPhone device.
+- `ons.platform.isIPad()`: Returns `true` if the app is running under an iPad device.
+- `ons.platform.isBlackBerry()`: Returns `true` if the app is running under a BlackBerry device.
+- `ons.platform.isOpera()`: Returns `true` if the app is running under an Opera browser.
+- `ons.platform.isFirefox()`: Returns `true` if the app is running under a Firefox browser.
+- `ons.platform.isSafari()`: Returns `true` if the app is running under Apple Safari browser.
+- `ons.platform.isChrome()`: Returns `true` if the app is running under Google Chrome browser.
+- `ons.platform.isIE()`: Returns `true` if the app is running under Internet Explorer browser.
+- `ons.platform.isIOS7()`: Returns `true` if the running iOS is version 7.0 or later.
 
 <h4 id="Landscapeportraitdetection">Landscape / portrait detection</h4>
 
@@ -1536,7 +1544,7 @@ Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](/reference/ons-
 
 It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. 
 
-To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/reference/ons-gesture-detector.html) component. For instance, following code does a swipe-left detection to the specific element.
+To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/reference/ons-gesture-detector.html) component. For instance,  thefollowing code does a swipe-left detection for a specific element.
 
 ```
 <ons-gesture-detector>
@@ -1546,7 +1554,7 @@ To detect a finger gesture, you must wrap the target DOM element using [`<ons-ge
 </ons-gesture-detector>
 <script>
   $(document).on('swipeleft', '#detect-area', function() {
-    console.log("Swipe left is detected.");
+    console.log('Swipe left is detected.');
   })
 </script>
 ```
@@ -1675,7 +1683,7 @@ To override the behavior, you can use `ons.setDefaultDeviceBackButtonListener` f
 ons.setDefaultDeviceBackButtonListener(function() {
   if (navigator.notification.confirm("Are you sure to close the app?", 
     function(index) {
-      if (index == 1) { // OK button
+      if (index === 1) { // OK button
         navigator.app.exitApp(); // Close the app
       }
     }
