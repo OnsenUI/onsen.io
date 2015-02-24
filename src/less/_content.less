@@ -157,7 +157,7 @@
 }
 
 .toc-2 {
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   margin-top: 4px;
   display: none;
 }
@@ -171,18 +171,6 @@
   margin-left: 16px;
 }
 
-.toc-item-open a {
-
-  &:link, &:hover, &:visited {
-    color: #222;
-    text-decoration: none;
-  }
-
-  &:hover {
-    text-decoration: underline;
-  }
-}
-
 .toc-1-item {
   margin-top: 4px;
   margin-bottom: 4px;
@@ -190,8 +178,8 @@
 }
 
 .toc-2-item {
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 .toc-link {
@@ -201,6 +189,38 @@
 
   &:link, &:hover, &:visited {
     color: #666;
+    text-decoration: none;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.current {
+    &:link, &:hover, &:visited {
+      color: @link-color;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.toc-1-link {
+
+}
+
+.toc-2-link {
+  display: inline-block;
+  padding: 0px 0px 0px 12px;
+  font-size: 14px;
+  color: @light-text-color;
+
+  &:link, &:hover, &:visited {
+    color: @light-text-color;
     text-decoration: none;
   }
 
@@ -298,7 +318,7 @@ div.need-help {
     text-align: center;
     padding-top: 200px;
     cursor: pointer;
-    opacity: 0.9;
+    opacity: 0.8;
     transition: opacity 0.1s linear;
 
     &:hover {
