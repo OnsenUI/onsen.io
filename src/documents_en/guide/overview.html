@@ -9,7 +9,7 @@ autotoc: true
 
 ## Onsen UI Guide
 
-This document is based on the latest version of Onsen UI. To see the diffrence between the versions, please refer to the [Change Log](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+This document is based on the latest version of Onsen UI. To see the difference between the versions, please refer to the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
 
 <h3 id="LoadingOnsenUIinYourProject">Loading Onsen UI in Your Project</h3>
 
@@ -19,7 +19,7 @@ Even though Onsen UI uses AngularJS to provide custom elements, it is *not requi
 
 <h4 id="UsingOnsenUIwithAngularJS">Onsen UI with AngularJS</h4>
 
-Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which should be very familiar to the AngularJS users.
+An Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which should be very familiar to the AngularJS users.
 
 ```
 <!doctype html>
@@ -51,7 +51,7 @@ Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which
 ```
 <h4 id="UsingOnsenUIwithjQueryorwithanyJSframeworks">Onsen UI with plain JavaScript</h4>
 
-Onsen UI provides a way to use without deeper understanding of AngularJS. For instance, the example below describes a sample app that is using Onsen UI and jQuery:
+Onsen UI provides a way to use without deeper understanding of AngularJS. For instance, the example below describes a sample app that is using Onsen UI and pure JavaScript:
 
 ```
 <!doctype html>
@@ -101,11 +101,11 @@ More commonly seen in iPhone and iPad apps, tab bar is displayed in the bottom o
 
 <h4 id="Splitviewpattern">Split view pattern</h4>
 
-This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate information. [`<ons-split-view>`](/reference/ons-split-view.html) component allows you to have this pattern. It also has capability to transform to a sliding menu pattern on smaller devices or displayed vertically.
+This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate pages. [`<ons-split-view>`](/reference/ons-split-view.html) component allows you to use this pattern. It also has capability to transform to a sliding menu pattern on smaller devices or displayed vertically.
 
 <h3 id="PageNavigation">Page Navigation</h3>
 
-In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/reference/ons-navigator.html). Ons-navigator is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/reference/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
+In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/reference/ons-navigator.html). `<ons-navigator>` is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/reference/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
 
 <h4 id="ons-navigatoroverview">`<ons-navigator>` overview</h4>
 
@@ -181,7 +181,7 @@ Furthermore, you can customize the transition animation by specifying a new `Nav
 pushPage('page2.html', {animation: new MyCustomAnimator})
 ```
 
-For more details, please see `NavigatorTransitionAnimator` source code located under `framework/view`.
+For more details, please see `NavigatorTransitionAnimator` source code located under `framework/views`.
 
 <h4 id="Managingpagestacks">Managing page stacks</h4>
 
@@ -197,7 +197,7 @@ Get a `page` object of the current page. A `page` object has following propertie
 
 - `options` object
 
-  An object that hold page configurations. See `pushPage()` method description for details.
+  An object that hold page configurations. See [`pushPage()`](/reference/ons-navigator.html#method-pushPage) method description for details.
 
 ```
 myNavigator.pushPage("page2.html", { param1: "value1", param2: "value2" });
@@ -207,7 +207,7 @@ console.log(page.options.param1); // Will return "value1"
 
 <h5 id="navigatorgetPages">navigator.getPages()</h5>
 
-Returns an array of `page` objects from the navigator. See `navigator.getCurrentPage()` method for the details how to use `page` object.
+Returns an array of `page` objects from the navigator. See [`getCurrentPage()`](/reference/ons-navigator.html#method-getCurrentPage) method for the details how to use `page` object.
 
 ```
 // Remove the 2nd topmost page from the page stack
@@ -254,33 +254,33 @@ Here are several examples when using `<ons-toolbar>`.
 
 1. Example with a button and an icon
 
-  ```
-  <ons-toolbar>
-    <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
-    <div class="center">Button and Icon</div>
-    <div class="right"><ons-toolbar-button><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button></div>
-  </ons-toolbar>
-  ```
+```
+<ons-toolbar>
+  <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
+  <div class="center">Button and Icon</div>
+  <div class="right"><ons-toolbar-button><ons-icon icon="fa-bars"></ons-icon></ons-toolbar-button></div>
+</ons-toolbar>
+```
 
 2. Example with a search box
 
-  ```
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">Search</div>
-    <div class="right"><input type="search" class="search-input" placeholder="Keyword"></input></div>
-  </ons-toolbar>
-  ```
+```
+<ons-toolbar>
+  <div class="left"><ons-back-button>Back</ons-back-button></div>
+  <div class="center">Search</div>
+  <div class="right"><input type="search" class="search-input" placeholder="Keyword"></input></div>
+</ons-toolbar>
+```
 
 3. Example with custom image
 
-  ```
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center"><img src="custom_title.png"></div>
-    <div class="right"><ons-search-input></ons-search-input></div>
-  </ons-toolbar>
-  ```
+```
+<ons-toolbar>
+  <div class="left"><ons-back-button>Back</ons-back-button></div>
+  <div class="center"><img src="custom_title.png"></div>
+  <div class="right"><ons-search-input></ons-search-input></div>
+</ons-toolbar>
+```
 
 <h5 id="InlineToolbar">Inline toolbar</h5>
 
@@ -349,7 +349,7 @@ These events are fired after the pushPage and popPage. `event` object has the fo
 
 <h3 id="UsingSlidingMenu">Using Sliding Menu</h3>
 
-Sliding menu consists of two pages, which are referred to as main page and menu page. The menu page is also called as a side page, which is usually hidden and shown from the edge. It can be displayed when tapping a button, or swiping from the edge of the screen.
+Sliding menu consists of two pages, which are referred to as main page and menu page. The menu page is also called a side page, which is usually hidden and shown from the edge. It can be displayed when tapping a button, or swiping from the edge of the screen.
 
 You can also place a [`<ons-navigator>`](/reference/ons-navigator.html) in the main page to provide a navigation to even more pages.
 
@@ -425,7 +425,7 @@ Or, you can separate the pages in another template like the example below.
 
 <h4 id="Openingclosingmenu">Opening / closing menu</h4>
 
-[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html) provides following methods to handle menu actions: `openMenu()`, `closeMenu()`, and `toggleMenu()`.
+[`<ons-sliding-menu>`](/reference/ons-sliding-menu.html) provides the following methods to handle menu actions: [`openMenu()`](/reference/ons-sliding-menu.html#method-openMenu), [`closeMenu()`](/reference/ons-sliding-menu.html#method-closeMenu), and [`toggleMenu()`](/reference/ons-sliding-menu.html#method-toggleMenu).
 
 When you want to omit the animation effect, you can specify `animation` parameter to `none`.
 
@@ -435,16 +435,16 @@ mySlidingMenu.openMenu({
 });
 ```
 
-<h4 id="SettingaboveandbehindpagebyJavaScript">Setting menu and main page by JavaScript</h4>
+<h4 id="SettingaboveandbehindpagebyJavaScript">Setting menu and main page with JavaScript</h4>
 
-To change the main and menu page manually, use `setMainPage()` and `setMenuPage()` methods. These methods can specify parameters in the second argument.
+To change the main and menu page manually, use [`setMainPage()`](/reference/ons-sliding-menu.html#method-setMainPage) and [`setMenuPage()`](/reference/ons-sliding-menu.html#method-setMenuPage) methods. These methods can specify parameters in the second argument.
 
   - `closeMenu`: Set `true` to close the page after execution.
   - `callback`: Specify a callback function after the animation is finished.
 
 <h4 id="Swipesupport">Swipe and drag support</h4>
 
-If you set `swipable` attribute in [`<ons-sliding-menu>`](/reference/ons-sliding-menu.html), it detects swipe actions and opens/closes the menu. Please be aware that you also need to specify `swipe-target-width` and `max-slide-distance` to enable swipe support.
+If you set `swipeable` attribute in [`<ons-sliding-menu>`](/reference/ons-sliding-menu.html), it detects swipe actions and opens/closes the menu. Please be aware that you also need to specify `swipe-target-width` and `max-slide-distance` to enable swipe support.
 
 If you set `draggable` attribute, you can drag the menu page to do the open/close action.
 
@@ -469,7 +469,7 @@ ons.ready(function() {
 
 <h3 id="UsingTabBar">Using Tab Bar</h3>
 
-A tab bar is composed from a [`<ons-tabbar>`](/reference/ons-tabbar.html) component and [`<ons-tab>`](/reference/ons-tab.html) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
+A tab bar is composed of a [`<ons-tabbar>`](/reference/ons-tabbar.html) component and [`<ons-tab>`](/reference/ons-tab.html) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
 
 <h4 id="onstabbaroverview">`<ons-tabbar>` overview</h4>
 
@@ -569,18 +569,18 @@ Tab bar have some JavaScript APIs for fine-grain control over the page managemen
 
 <h5 id="Settingactivetab">Setting active tab</h5>
 
-`setActiveTab(index, options)` method can be used to display a specific tab page. The `index` parameter is used to specify the tab page index, which starts from `0`. For the `options` parameter, following properties can be specified.
+[`setActiveTab(index, options)`](/reference/ons-tabbar.html#method-setActiveTab) method can be used to display a specific tab page. The `index` parameter is used to specify the tab page index, which starts from `0`. For the `options` parameter, following properties can be specified.
 
 - `keepPage`: If set to `true`, it will not refresh content and display a new page (default: `false`).
 - `animation`: The transition animation to the page. Currently `none` and `fade` is supported. (default: `none`)
 
 <h5 id="Getcurrentactivetab">Get current active tab</h5>
 
-`getActiveTabIndex()` method returns the index of the active tab in the number. If there is no active tab, it returns `-1`.
+[`getActiveTabIndex()`](/reference/ons-tabbar.html#method-getActiveTabIndex) method returns the index of the active tab in the number. If there is no active tab, it returns `-1`.
 
 <h5 id="Loadpagewithoutchangingtheactivetab">Load page without changing the active tab</h5>
 
-If you want to only load a page but not to change the active tab index, the `loadPage()` method can be used.
+If you want to only load a page but not to change the active tab index, the [`loadPage()`](/reference/ons-tabbar.html#method-loadPage) method can be used.
 
 ```
 tabbar.loadPage('newpage.html');
@@ -605,7 +605,7 @@ tabbar.on('prechange', function(event) {
 
 <h3 id="UsingList">Using List</h3>
 
-List is a very popular pattern to display a set of information in scrollable view. Onsen UI supports scrollable list by using [`<ons-list>`](/reference/ons-list.html) and [`<ons-list-item>`](/reference/ons-list-item.html) tags.
+List is a very popular pattern to display a set of data in a scrollable view. Onsen UI supports scrollable lists by using [`<ons-list>`](/reference/ons-list.html) and [`<ons-list-item>`](/reference/ons-list-item.html) tags.
 
 <h4 id="onslistoverview">`<ons-list>` overview</h4>
 
@@ -630,6 +630,149 @@ This type of list is usually used with [`<ons-navigator>`](/reference/ons-naviga
 List is also frequently used in the setting page. Here is the example list with some form elements.
 
 <%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
+
+<h3 id="UsingLazyRepeat">Using Lazy Repeat</h3>
+
+With Lazy Repeat (`ons-lazy-repeat`) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. Lazy Repeat permits millions of elements to be rendered with close to no performance penalty.
+
+<%- @partial('codepen.html.eco', { id: "QwrGBm" } ) %>
+
+<h4 id="PreparingLazyRepeat">Preparing a "delegate" object for Lazy Repeat</h4>
+
+Lazy Repeat relies on a delegate object that contains all the required information about the list.
+
+<h5 id="DelegateAngularJS">Delegate object in AngularJS</h5>
+
+The `delegate` object should be attached to the scope of the same controller as the item list, so it is accessible from the view:
+
+```
+$scope.MyDelegate = {
+  configureItemScope: function(index, itemScope) {
+    console.log("Created item #" + index);
+    itemScope.item = {
+      name: 'Item #' + (index + 1)
+    };
+  },
+  calculateItemHeight: function(index) {
+    return 40;
+  },
+  countItems: function() {
+    return 10000000;
+  },
+  destroyItemScope: function(index, scope) {
+    console.log("Destroyed item #" + index);
+  }
+};
+```
+
+* `configureItemScope` contains the information about the items, which can be dynamically created or loaded from a array of items.
+* `calculateItemHeight` returns the height of an item. It could be different for every item.
+* `countItems` returns the total number of items in the list..
+* `destroyItemScope` is an optional method that will be triggered everytime an item is unloaded. This can be used to destroy elements and remove event listeners in order to avoid memory leaks.
+
+<h5 id="DelegateJQuery">Delegate object using jQuery</h5>
+
+```
+var MyDelegate = {
+  createItemContent: function(index, oldContent) {
+    console.log("Created item #" + index);
+
+    var $element = $("<span>Item #"+(index+1)+"</span>");
+    return $element[0];
+  },
+  calculateItemHeight: function(index) {
+    return 40;
+  },
+  countItems: function() {
+    return 10000000;
+  },
+  destroyItemContent: function(index, element) {
+	console.log("Destroyed item " + index);
+  }
+}
+```
+
+* `createItemContent` creates the content of every list item given its index. It should returns an HTML element.
+* `calculateItemHeight` returns the height of an item. It could be different for every item.
+* `countItems` returns the total number of items in the list.
+* `destroyItemContent` is an optional method that will be triggered everytime an item is unloaded. This can be used to destroy elements and remove event listeners in order to avoid memory leaks.
+
+<h4 id="LazyRepeatInHTML">Adding Lazy Repeat to tags</h4>
+
+`onz-lazy-repeat` is a general attribute. In these examples it's used with `ons-list-item` but it's not limited to this component. It works well with any tag where item heights are calculable, such as `<div>` tags. When adding `ons-lazy-repeat` to a tag the delegate object must also be specified: `ons-lazy-repeat="MyDelegate"`.
+
+For AngularJS, item properties can be accessed normally:
+
+```
+<ons-list>
+  <ons-list-item ons-lazy-repeat="MyDelegate">
+    {{ item.name }}
+  </ons-list-item>
+</ons-list>
+```
+
+In jQuery or pure Javascript, the content is generated in the `createItemContent` method, so there is no need to specify anything else in the view:
+
+```
+<ons-list>
+  <ons-list-item ons-lazy-repeat="MyDelegate">
+  </ons-list-item>
+</ons-list>
+```
+
+<h4 id="LazyRepeatAsync">Another sample: asynchronous calls</h4>
+
+Lazy Repeat could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic.
+
+<h5 id="AsynchSampleAngularJS">In AngularJS</h5>
+
+```
+configureItemScope: function(index, itemScope) {
+  if (!itemScope.item) {
+    console.log("Created item #" + index);
+
+    itemScope.item = {
+      title: 'Item #' + (index + 1),
+      label: '',
+      desc: '',
+      rand: Math.random()
+    };
+
+    $http.get('https://baconipsum.com/api/?type=meat-and-filler&sentences=1')
+        .success(function(data) {
+      itemScope.item.desc = data[0];
+      itemScope.item.label = data[0].substr(0, data[0].indexOf(" ")) + 'bacon';
+    })
+        .error(function() {
+      itemScope.item.desc = 'No bacon lorem ipsum';
+      itemScope.item.label = 'No bacon';
+    });
+
+  }
+}
+```
+
+<%- @partial('codepen.html.eco', { id: "gbzLQW" } ) %>
+
+<h5 id="AsynchSampleJQuery">In jQuery</h5>
+
+```
+createItemContent: function(index, oldContent) {
+  if (oldContent) {
+    return oldContent;
+  }
+
+  var $element = $("<div><span style='opacity: 0.7;'><ons-icon icon='fa-spinner' spin='true'></ons-icon> Loading bacon...</span></div>");
+
+  $.getJSON('https://baconipsum.com/api/?type=meat-and-filler&sentences=1&callback=?', function(data) {
+    $element.text(data[0]);
+  });
+
+  return $element[0];
+}
+```
+
+<%- @partial('codepen.html.eco', { id: "YPLpBW" } ) %>
 
 <h3 id="UsingAlert">Using Alert Dialog</h3>
 
@@ -873,9 +1016,9 @@ Other than the options above, following attributes can be specified to customize
 
   When it is set, the carousel item will automatically scrolled to fit into the container.
 
-- `swipable` and `draggable` attribute
+- `swipeable` and `draggable` attribute
 
-  Use this attribute to make your carousel swipable or draggable.
+  Use this attribute to make your carousel swipeable or draggable.
 
 <h4 id="CarouselJavaScript">Controlling carousel by JavaScript</h4>
 
@@ -1020,6 +1163,52 @@ The design can be switched using `modifier` attribute, which can be selected fro
 - `postshow`, `posthide`
 
   Fired after showing or hiding the popover. The callback function provides an event object, which has `popover` property contains popover object.
+
+<h3 id="UsingPullHook">Using Pull Hook</h3>
+
+The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/reference/ons-page.html) or an [`<ons-scroller>`](/reference/ons-scroller.html) element. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
+
+<%- @partial('codepen.html.eco', { id: "WbJogM" } ) %>
+
+<h4 id="ShowingPullHook">Displaying Pull Hook</h4>
+
+To display a Pull Hook component, the [`<ons-pull-hook>`](/reference/ons-pull-hook.html) tag is used.
+
+```
+<ons-pull-hook ng-action="load($done)" var="loader">
+  <span ng-switch="loader.getCurrentState()">
+    <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> Pull down to refresh</span>
+    <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> Release to refresh</span>
+    <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> Loading data...</span>
+  </span>
+</ons-pull-hook>
+```
+
+The Pull Hook behavior is defined by the `ng-action="load($done)"` attribute. This function will be executed when the page is pulled down and released.
+
+There are three potential states, each one associated with a customizable graphical representation:
+
+* `initial`: default state before any user interaction, the element remains in this status until it's totally dragged down, going beyond its height limit.
+
+* `preaction`: if the component is in this state it will execute its action if it's released. It's still possible to cancel the action by dragging the page up again.
+
+* `action`: the pull hook will be in this state while its action is running. After the `$done` function is called it will return to the `initial` state.
+
+<h4 id="PullHookActions">Pull Hook actions</h4>
+
+[`<ons-pull-hook>`](/reference/ons-pull-hook.html) component has two attributes to define what action it should perform:
+
+* `ng-action`: used to specify custom behavior when the page is pulled down. A `$done` function is available to tell the component that the action is completed.
+
+* `on-action`: same as `ng-action` but can be used without AngularJS. A function called `done` is available to call when the action is completed.
+
+<h4 id="PullHookHeightParamenters">Pull Hook height parameters</h4>
+
+[`<ons-pull-hook>`](/reference/ons-pull-hook.html) component's height attributes are very important, since they define when a state transition should occur. The two attributes are:
+
+* `height`: specifies the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".
+
+* `threshold-height`: specifies the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.
 
 <h3 id="UsingFormComponents">Using Form Components</h3>
 
