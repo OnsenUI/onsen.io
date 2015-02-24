@@ -8,6 +8,7 @@ paginate: articles
 <section class="article-overview">
 
   <h2 class="article-overview-title"><a href="<%- @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
+
   <div class="article-overview-date"><%- @renderBlogDate article.date %></div>
 
   <p><%= @getAbstractText(article.contents) %></p>
