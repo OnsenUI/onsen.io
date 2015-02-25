@@ -33,6 +33,24 @@ Edit & Serve
 $ gulp serve --lang en
 ```
 
+Deploying the Onsen UI Website to S3
+------------------------------------
+
+```bash
+$ gulp deploy --lang en
+```
+
+To deploy to S3 a aws_en.json file must be created with the following structure:
+
+```json
+{
+  "key": "AWS_KEY",
+  "secret": "AWS_SECRET",
+  "bucket": "AWS_BUCKET",
+  "region": "AWS_REGION"
+}
+```
+
 How to contribute
 -----------------
 
