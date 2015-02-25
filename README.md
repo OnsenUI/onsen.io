@@ -1,7 +1,7 @@
 onsen.io
 ====
 
-![Dependency Status](https://david-dm.org/OnsenUI/onsen.io.png)
+[![devDependency Status](https://david-dm.org/OnsenUI/onsen.io/dev-status.svg)](https://david-dm.org/OnsenUI/onsen.io#info=devDependencies)
 
 This repository contains the assets in Onsen UI Website, available on http://onsen.io.
 Please Visit [Onsen UI](https://github.com/OnsenUI/OnsenUI) if you need access to the framework itself.
