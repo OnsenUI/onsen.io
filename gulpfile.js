@@ -29,7 +29,7 @@ var lang = argv.lang === 'en' ? 'en' : 'ja';
 //////////////////////////////
 // generate
 //////////////////////////////
-gulp.task('generate', ['less', 'metalsmith']);
+gulp.task('generate', ['less', 'metalsmith', 'blog']);
 
 gulp.task('blog', function(done) {
 
@@ -130,7 +130,7 @@ gulp.task('blog', function(done) {
     }))
     .build(function(error) {
       if (error) {
-        console.log(error);
+        gutil.log('ERROR: ' + error);
       }
       done();
     });
@@ -235,7 +235,7 @@ gulp.task('clean', function(done) {
 //////////////////////////////
 // serve
 //////////////////////////////
-gulp.task('serve', ['generate', 'blog'], function() {
+gulp.task('serve', ['generate'], function() {
   browserSync({
     server: {
       baseDir: 'out_' + lang,
