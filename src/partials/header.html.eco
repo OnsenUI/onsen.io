@@ -7,9 +7,10 @@
       <li><a href="#">Products</a>
         <ul class="header-monaca-navi-sub-menu">
           <li><a href="http://monaca.io/cloud.html">Monaca Cloud</a></li>
-          <li><a href="http://monaca.io/enterprise.html">Monaca Enterprise</a></li>
+          <li><a href="https://monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
           <li><a href="http://monaca.io/debugger.html">Monaca Debugger</a></li>
           <li><a href="http://monaca.io/localkit.html">Monaca Localkit</a></li>
+          <li><a href="http://monaca.io/enterprise.html">Monaca Enterprise</a></li>
           <li><a href="http://www.kidozen.com">KidoZen</a></li>
         </ul>
       </li>
@@ -25,10 +26,11 @@
       <li><a href="#">製品</a>
         <ul class="header-monaca-navi-sub-menu">
           <li><a href="http://ja.monaca.io/cloud.html">Monacaクラウド</a></li>
-          <li><a href="http://ja.monaca.io/enterprise.html">Monacaエンタープライズ</a></li>
+          <li><a href="https://ja.monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
           <li><a href="http://ja.monaca.io/debugger.html">Monacaデバッガー</a></li>
           <li><a href="http://ja.monaca.io/localkit.html">Monaca Localkit</a></li>
           <li><a href="http://monaca.mobi/ja/academic/">Monacaアカデミックプラン</a></li>
+          <li><a href="http://ja.monaca.io/enterprise.html">Monacaエンタープライズ</a></li>
           <li><a href="http://ja.monaca.io/kidozen.html">KidoZen</a></li>
         </ul>
       </li>
@@ -119,23 +121,23 @@
     });
    
     (function($el) {
-      if($el.length) {
+      if ($el.length) {
         $el.attr('href', $el.attr('href').replace(/\/$/, "") + window.location.pathname);
       }
     })($('.language-dialog-button.japanese-version'));    
  
     <% if @lang == 'en': %>
-      if (browserLanguage() == "ja" && !getCookie('language_dialog_accepted')) {
-        $('.language-dialog-mask').show();
-        $('.language-dialog').show();
-      }
+    if (browserLanguage() == "ja" && !getCookie('language_dialog_accepted')) {
+      $('.language-dialog-mask').show();
+      $('.language-dialog').show();
+    }
     <% end %>
     
   });
 
   var trackOutboundLink = function(url) {
-    ga('send', 'event', 'outbound', 'click', url, {'hitCallback':
-      function () {
+    ga('send', 'event', 'outbound', 'click', url, {
+      'hitCallback': function() {
         document.location = url;
       }
     });
@@ -143,9 +145,8 @@
 
   function browserLanguage() {
     try {
-      return (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2)
-    }
-    catch(e) {
+      return (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2);
+    } catch(e) {
       return undefined;
     }
   }
@@ -161,76 +162,33 @@
     var extime = new Date().getTime();
     var cltime = new Date(extime + (60*60*24*1000*expiredays));
     var exdate = cltime.toUTCString();
-    var s="";
-    s += c_name +"="+ escape(value);
+    var s = "";
+    s += c_name + "=" + escape(value);
     s += "; path="+ path;
-    if(expiredays){
+    if (expiredays) {
       s += "; expires=" +exdate+"; ";
-    }else{
+    } else {
       s += "; ";
     }
     document.cookie=s;
   } 
  
-  function getCookie(c_name){
-    var st="";
-    var ed="";
-    if(document.cookie.length>0){
-      st=document.cookie.indexOf(c_name + "=");
-      if(st!=-1){
-        st=st+c_name.length+1;
-        ed=document.cookie.indexOf(";",st);
-        if(ed==-1) ed=document.cookie.length;
-        return unescape(document.cookie.substring(st,ed));
+  function getCookie(c_name) {
+    var st = "";
+    var ed = "";
+    if (document.cookie.length > 0) {
+      st = document.cookie.indexOf(c_name + "=");
+      if (st != -1) {
+        st = st + c_name.length + 1;
+        ed = document.cookie.indexOf(";", st);
+        if (ed == -1) {
+          ed = document.cookie.length;
+        }
+        return unescape(document.cookie.substring(st, ed));
       }
     }
     return "";
   }
-
-  $(function() {
-    var header = $('.header');
-    var queued = false;
-    var lastScrollTop = 0;
-    var adjustment = 10;
-
-    function adjust() {
-      /*
-      var scrollTop = $(document).scrollTop();
-
-      if (scrollTop > 50) {
-        header.addClass('fixed-header');
-      } else {
-        header.removeClass('fixed-header');
-      }
-
-      if (scrollTop > 100 && (scrollTop > lastScrollTop || lastScrollTop - scrollTop > 200)) {
-        header.addClass('fixed-header-inactive');
-      } else {
-        header.removeClass('fixed-header-inactive');
-      }
-
-      if (scrollTop < lastScrollTop && lastScrollTop - scrollTop < 200 ) {
-        header.addClass('fixed-header-active');
-      } else {
-        header.removeClass('fixed-header-active');
-      }
-
-      lastScrollTop = scrollTop;
-      */
-    };
-
-    function update() {
-      if (!queued) {
-        queued = true;
-        setTimeout(function() {
-          adjust();
-          queued = false;
-        }, 80);
-      }
-    }
-
-    $(document).on('scroll', update);
-  });
 
 </script>
 
