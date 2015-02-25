@@ -147,6 +147,7 @@ gulp.task('metalsmith', function(done) {
     .source('./src/documents_' + lang)
     .metadata(require('./config.js')(lang))
     .use(draft())
+    .use(require('./plugins/helpers')())
     .use(require('./plugins/import-api-docs')(lang))
     .use(require('./plugins/patterns-collection')(lang))
     .use(collections({
@@ -177,7 +178,6 @@ gulp.task('metalsmith', function(done) {
 
       done();
     })
-    .use(require('./plugins/helpers')())
     .use(templates({engine: 'eco', inPlace: true}))
     .use(require('./plugins/autotoc')())
     .use(function(files, metalsmith, done) {

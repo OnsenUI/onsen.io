@@ -12,7 +12,7 @@ docCategory: 'patterns'
 <div class="pattern-overview">
 
   <a href="/pattern-<%= path %>" target="_blank" class="pattern-overview-detail">Detail</a>
-  <h3 class="pattern-overview-title"><a href="/pattern-<%= path %>.html"><%= path %></a></h3>
+  <h3 class="pattern-overview-title"><a href="/pattern-<%= path %>.html"><%= @renderPatternName(path) %></a></h3>
 
   <iframe class="pattern-overview-example" data-src="/patterns/<%= path %>" width="320" height="520" style="border: 1px solid #ddd"></iframe>
 </div>

@@ -9,7 +9,7 @@ css: ''
 docCategory: 'patterns'
 ---
 
-<h2>Pattern: <%= @patternName %></h2>
+<h2>Pattern: <%= @renderPatternName(@patternName) %></h2>
 
 <iframe src="/patterns/<%= @patternName %>" width="320" height="520" style="border: 1px solid #ddd"></iframe>
 

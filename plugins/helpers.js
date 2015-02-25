@@ -19,6 +19,16 @@ marked.setOptions({
   smartypants: true
 });
 
+var renderPatternName = function(name) {
+  name = name.replace(/\.html$/, '');
+  name = name.replace(/_/g, ' ');
+  name = name.replace(/ (\w)/g, function(str, head) {
+    return ' ' + head.toUpperCase();
+  });
+  name = name.substr(0, 1).toUpperCase() + name.substr(1, name.length);
+  return name;
+};
+
 module.exports = function() {
   return function(files, metalsmith, done) {
 
@@ -37,6 +47,8 @@ module.exports = function() {
           return e.toString();
         }
       },
+
+      renderPatternName: renderPatternName,
 
       slug: function(name) {
         return slug(name);
@@ -177,3 +189,5 @@ module.exports = function() {
     done();
   };
 };
+
+module.exports.renderPatternName = renderPatternName;

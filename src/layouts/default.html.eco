@@ -66,13 +66,13 @@
 
       <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
 
-      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/css.html">CSS</a></div>
+      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/css.html">CSS</a></div>
 
       <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
         <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
       </ul>
 
-      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc">JavaScript</a></div>
+      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/javascript.html">JavaScript</a></div>
 
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
         <% for category, docs of @componentCategoryDict: %>
@@ -95,7 +95,7 @@
         <% for pattern in @patterns: %>
         <li class="toc-item toc-1-item">
           <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link">
-            <%= pattern %>
+            <%= @renderPatternName(pattern) %>
           </a>
         </li>
         <% end %>
