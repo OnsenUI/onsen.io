@@ -94,7 +94,7 @@
       <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
         <% for pattern in @patterns: %>
         <li class="toc-item toc-1-item">
-          <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link">
+          <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link<% if @patternName == pattern: %> current<% end %>">
             <%= @renderPatternName(pattern) %>
           </a>
         </li>
@@ -156,7 +156,6 @@
   });
   </script>
 
-  <script src="/scripts/sticky.js"></script>
   <script src="/scripts/navigation_highlighter.js"></script>
   <script src="/vendor/highlight.min.js"></script>
 
