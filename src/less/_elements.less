@@ -78,9 +78,17 @@ h2 {
   margin: 70px 0 30px 0px;
   font-weight: bold;
 
+  .mobile-query({
+    font-size: 24px;
+  });
+
   .lang-en & {
     font-size: 44px;
     font-family: @en-header-font-family;
+
+    .mobile-query({
+      font-size: 28px;
+    });
   }
 
   &:first-child,
@@ -96,9 +104,17 @@ h3 {
   border-bottom: 1px solid #ddd;
   font-weight: normal;
 
+  .mobile-query({
+    font-size: 20px;
+  });
+
   .lang-en & {
     font-size: 30px;
     font-weight: normal;
+
+    .mobile-query({
+      font-size: 24px;
+    });
   }
 }
 
@@ -110,6 +126,10 @@ h4 {
   .lang-en & {
     font-size: 28px;
     font-weight: normal;
+
+    .mobile-query({
+      font-size: 22px;
+    });
   }
 }
 
@@ -121,6 +141,10 @@ h5 {
   .lang-en & {
     font-size: 26px;
     font-weight: normal;
+
+    .mobile-query({
+      font-size: 20px;
+    });
   }
 }
 
@@ -132,6 +156,10 @@ h6 {
   .lang-en {
     font-size: 24px;
     font-weight: normal;
+
+    .mobile-query({
+      font-size: 18px;
+    });
   }
 }
 
@@ -232,29 +260,26 @@ code {
   background-color: #f9f9f9;
   padding: 1px 2px;
   font-weight: normal;
-  font-size: 14px;
-  .lang-en & {
-    font-size: 14px;
-  }
-}
-
-pre code {
-  font-style: normal;
-  background-color: transparent;
-  border: none;
-  font-size: 13px;
-  font-weight: 200;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  .lang-en & {
-    font-size: 13px;
-  }
+  font-size: 85%;
 }
 
 pre {
   border: 1px solid #ddd;
   background-color: #f9f9f9;
   padding-left: 4px;
+
+  > code {
+    font-style: normal;
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 200;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    .lang-en & {
+      font-size: 13px;
+    }
+  }
 }
 
 .lt-ie9 img, .lt-ie9 object {
