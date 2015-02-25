@@ -15,11 +15,11 @@ You can of course install the latest version using Bower as well:
 bower install onsenui
 ```
 
-We'll start by introducing two features that we've had a lot of requests for, namely _Pull to Refresh_ and _Infinite List_. Please try them out and tell us what you think. If you have any issues please report them on our [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). In addition, we've made some changes to the existing components that we also like to announce.
+We'll start by introducing two features that we've had a lot of requests for, namely _Pull to Refresh_ and _Infinite List_. Please try them out and tell us what you think. If you have any issues please report them on our [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). In addition, we've made some changes to the existing components that we are also excited to announce.
 
 ### Pull to Refresh `<ons-pull-hook>`
 
-In mobile apps a "feed" is a very popular way to show the latest events and news and to refresh the feed the user often just pulls down the list and releases. It's a very intuitive way to refresh the view and with the new version of Onsen UI we introduce the `<ons-pull-hook>` component. With it you can easily add pull-to-refresh functionality to any app. 
+In mobile apps a "feed" is a very popular way to show the latest events and news. To refresh the feed the user often just pulls down the list and releases. It's a very intuitive way to refresh the view and with the new version of Onsen UI we introduce the `<ons-pull-hook>` component. With it you can easily add pull-to-refresh functionality to any app. 
 
 The look and feel of the `<ons-pull-hook>` is very easy to customize using CSS. Please try it out below and read the [blog post](/blog/sneak-peeking-1-2-2-pull-hook/) about this feature.
 
@@ -44,9 +44,9 @@ More information about this component can be found in the [documentation](/refer
 
 ### Infinite List `<ons-lazy-repeat>`
 
-In mobile apps it is often necessary to render lists with a large number of items. To mention a couple of examples it could be a news feed or an image gallery. Most of the time only a handful of items would be visible on the screen simultaneously. Thus, it would be very inefficient to add the whole list to the DOM at the same time.
+In mobile apps it is often necessary to render lists with a large number of items. For example, it could be a news feed or an image gallery. Most of the time only a handful of items would be visible on the screen simultaneously. Thus, it would be very inefficient to add the whole list to the DOM at the same time.
 
-The `<ons-lazy-repeat>` component works in the background by automatically remove elements that are not visible and adding items that come into view to the DOM while the user is scrolling. This makes it possible to render a list of millions of items with close to no performance penalty.
+The `<ons-lazy-repeat>` component works in the background by automatically removing elements that are not visible and adding items that come into view to the DOM while the user is scrolling. This makes it possible to render a list of millions of items with close to no performance penalty.
 
 You can see it in action below:
 
@@ -72,7 +72,7 @@ A complete list of changes is available in the [Changelog](https://github.com/On
 
 We will continue trying to make Onsen UI the best framework possible. To do that we need your help! If you enjoy using Onsen UI please spread the word so we can grow the community!
 
-With this release we're getting very close to having implementing all the features we want to include in Onsen UI. We will focus our efforts on making the existing components better, more intuitive and improve stability. We're also interested in extending support to more devices like Windows Phones and also make it possible to integrate Onsen UI with the new Google Material Design spec.
+With this release we're getting very close to having implemented all the features we want to include in Onsen UI. We will focus our efforts on making the existing components better, more intuitive and improve stability. We're also interested in extending support to more devices like Windows Phones and also make it possible to integrate Onsen UI with the new Google Material Design spec.
 
 If you have a feature that you would like to see in an upcoming version of Onsen UI please feel free to tell us by opening an issue on our [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). You're also welcome to open a [pull request](https://github.com/OnsenUI/OnsenUI/pulls) to fix bugs, correct mistakes or even implement a new feature. We will happily accept contributions if we deem them good enough. 
 
