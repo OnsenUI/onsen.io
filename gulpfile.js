@@ -68,6 +68,7 @@ gulp.task('blog', function(done) {
       }))
       .use(function(files, metalsmith, done) {
         var authors = metalsmith.metadata().env.authors;
+
         for (var path in files) {
           var doc = files[path];
           var authorName = doc.author;
@@ -84,6 +85,12 @@ gulp.task('blog', function(done) {
           }
         }
 
+        done();
+      })
+      .use(function(files, metalsmith, done) {
+        for (var path in files) {
+          files[path].isBlogArticle = true;
+        }
         done();
       })
     )
