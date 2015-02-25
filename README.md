@@ -44,10 +44,10 @@ To deploy to S3 a aws_en.json file must be created with the following structure:
 
 ```json
 {
-  "key": "AWS_KEY",
-  "secret": "AWS_SECRET",
-  "bucket": "AWS_BUCKET",
-  "region": "AWS_REGION"
+  "key": "...",
+  "secret": "...",
+  "bucket": "...",
+  "region": "..."
 }
 ```
 
@@ -64,6 +64,6 @@ We will happily accept contributions to Onsen UI Website and the framework. It c
 Getting support
 ---------------
 
-If anything about Onsen UI is unclear, please ask a question on Stack Overflow, and tag it "onsen-ui". An Onsen UI support engineer will answer it.
+If anything about Onsen UI is unclear, please ask a question on [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui), and tag it "onsen-ui". An Onsen UI support engineer will answer it.
 
-If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account (@Onsen_UI).
+If you have any requests or comments regarding the development of Onsen UI, please feel free to direct them to the Twitter account ([@Onsen_UI](https://twitter.com/Onsen_UI)).
