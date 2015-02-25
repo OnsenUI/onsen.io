@@ -88,7 +88,6 @@
     line-height: @header-height;
     display: block;
     box-sizing: border-box;
-    //border-bottom: 4px solid transparent;
     transition: all 0.1s linear;
     padding: 0 16px;
     margin: 0;
@@ -100,7 +99,6 @@
 
     .desktop-query({
       &:hover {
-        //border-bottom: 4px solid @onsen-navy;
         background-color: #f3f3f3;
       }
     });
@@ -163,7 +161,6 @@
 .desktop-query({
   .header-navi-item.current {
     > a {
-      //border-bottom: 4px solid @onsen-navy;
       background-color: #f3f3f3;
       font-weight: bold;
 
@@ -266,11 +263,19 @@
   &-header {
     font-size: 24px;
     color: white;
+
+    .tablet-query({
+      font-size: 18px;
+    });
   }
 
   &-footer {
     margin-top: 52px;
     text-align: center;
+
+    .tablet-query({
+      margin-top: 22px;
+    });
   }
 
   &-button {
@@ -290,6 +295,13 @@
     cursor: pointer;
     text-decoration: none;
 
+    .tablet-query({
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 15px;
+    });
+
     &:active, &:visited, &:hover, &:link {
       text-decoration: none;
       color: white;
@@ -302,6 +314,5 @@
       opacity: 0.8;
     }
   }
-
 }
 
