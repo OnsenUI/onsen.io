@@ -6,6 +6,9 @@ var gutil = require('gulp-util');
 var del = require('del');
 var runSequence = require('run-sequence');
 var sortObject = require('sort-object');
+var fs = require('fs');
+var path = require('path');
+var merge = require('merge-stream');
 
 var metalsmith = require('metalsmith');
 var templates = require('metalsmith-templates');
@@ -25,6 +28,12 @@ var draft = require('metalsmith-drafts');
 //--
 
 var lang = argv.lang === 'en' ? 'en' : 'ja';
+
+var aws;
+try {
+  aws = JSON.parse(fs.readFileSync(path.join(__dirname, 'aws_' + lang + '.json')));
+} catch(e) {
+}
 
 //////////////////////////////
 // generate
@@ -283,6 +292,36 @@ gulp.task('serve', ['generate'], function() {
       });
     });
   }
+});
+
+//////////////////////////////
+// deploy
+//////////////////////////////
+gulp.task('deploy', ['clean', 'generate'], function() {
+  if (!aws) {
+    throw new Error('aws_' + lang + '.json missing! Please create it before trying to deploy!');
+  }
+
+  var dst = 'out_' + lang;
+  var publisher = $.awspublish.create(aws);
+
+  var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI']);
+
+  var templates = gulp.src('OnsenUI/project_templates/**')
+    .pipe($.rename(function(path) {
+      path.dirname = 'OnsenUI/project_templates/' + path.dirname;
+    }));
+
+  var build = gulp.src('OnsenUI/build/**')
+    .pipe($.rename(function(path) {
+      path.dirname = 'OnsenUI/build/' + path.dirname;
+    }));
+
+  return merge(site, templates, build)
+    .pipe(publisher.publish())
+    .pipe(publisher.sync())
+    .pipe($.awspublish.reporter());
+
 });
 
 gutil.log('Language: --lang=' + lang);
