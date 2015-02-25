@@ -1,4 +1,4 @@
-onsen.io Website
+onsen.io
 ====
 
 ![Dependency Status](https://david-dm.org/OnsenUI/onsen.io.png)
