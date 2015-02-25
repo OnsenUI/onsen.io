@@ -191,7 +191,8 @@ gulp.task('metalsmith', function(done) {
     .use(assets({source: './src/files'}))
     .use(require('./plugins/css-transform')(lang))
     .use(redirect({
-      '/components.html' : '/reference/javascript.html'
+      '/components.html' : '/reference/javascript.html',
+      '/guide/components.html' : '/reference/javascript.html'
     }))
     .destination('./out_' + lang)
     .build(function(error) {
