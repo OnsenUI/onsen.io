@@ -20,6 +20,7 @@
     <% end %>
   </ul>
 
+
   <div class="footer-cont">
 
     <div class="newsletter newsletter-footer">
@@ -29,6 +30,21 @@
           <input type="submit" value="Send">
         </form>
         <div class="newsletter-thankyou">Thank you!</div>
+      </div>
+    </div>
+
+    <div class="footer-cont-share">
+      <div class="footer-cont-share-twitter">
+        <iframe
+        src="//platform.twitter.com/widgets/follow_button.html?screen_name=Onsen_UI"
+        style="width: 300px; height: 20px;"
+        allowtransparency="true"
+        frameborder="0"
+        scrolling="no">
+        </iframe>
+      </div>
+      <div class="footer-cont-share-github">
+        <iframe src="https://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
       </div>
     </div>
 
