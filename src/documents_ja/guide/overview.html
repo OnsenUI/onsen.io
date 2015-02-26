@@ -21,7 +21,7 @@ Onsen UIはAngularJSを用いてHTML5のCustom Elements対応を行っていま�
 
 Onsen UIはAngularJSの上に作られています。そのため、AngularJSのユーザーであれば、下記のようにしてOnsen UIを使うことができます。
 
-```
+```html
 <!doctype html>
 <html lang="en" ng-app="my-app">
   <head>
@@ -54,7 +54,7 @@ Onsen UIはAngularJSの上に作られています。そのため、AngularJSの
 
 Onsen UIはAngularJS以外から使うことが可能です。下記のサンプルは、Onsen UIを通常のJavaScriptのような記述で利用しています。
 
-```
+```html
 <!doctype html>
 <meta charset="utf-8">
 <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
@@ -122,7 +122,7 @@ Onsen UIでは、[`<ons-navigator>`](/reference/ons-navigator.html)コンポー�
 
 スタックに新しいページを追加するには、ナビゲーターオブジェクトの`pushPage()`メソッドを使用します。このメソッドを呼び出すために、`<ons-navigator>`の`var`属性を使用し、ナビゲーターオブジェクトをJavaScriptから呼び出せるように指定します。
 
-```
+```html
 <ons-navigator var="myNavigator"></ons-navigator>
 <script>
 var options = {
@@ -139,7 +139,7 @@ myNavigator.pushPage("page2.html", options);
 
 `popPage()`メソッドを呼ぶと、ページスタックから最前面のページが削除され、一つ前のページに戻ります。
 
-```
+```html
 <ons-navigator var="myNavigator"></ons-navigator>
 <script>
 myNavigator.popPage();
@@ -154,25 +154,25 @@ myNavigator.popPage();
 
   アニメーションの表現は、ネイティブ遷移と合わせるためにiOSとAndroidで異なるものとなります。
 
-  ```
+  ```javascript
   navigator.pushPage("page2.html", { animation: "slide" }):
   ```
 
 2. リフトアップ / リフトダウン（タイプ: `lift`）
 
-  ```
+  ```javascript
   navigator.pushPage("page2.html", { animation: "lift" }):
   ```
 
 3. フェードイン / フェードアウト（タイプ: `fade`）
 
-  ```
+  ```javascript
   navigator.pushPage("page2.html", { animation: "fade" }):
   ```
 
 4. アニメーションなし（タイプ: `none`）
 
-  ```
+  ```javascript
   navigator.pushPage("page2.html", { animation: "none" }):
   ```
 
@@ -180,7 +180,7 @@ myNavigator.popPage();
 
 さらに、遷移アニメーションはカスタマイズできます。その場合は`NavigatorTransitionAnimator`オブジェクトを作成し、`animation`パラメータに指定してください。
 
-```
+```javascript
 pushPage('page2.html', {animation: new MyCustomAnimator})
 ```
 
@@ -202,7 +202,7 @@ pushPage('page2.html', {animation: new MyCustomAnimator})
 
   ページの設定パラメータを保有するオブジェクトです。詳細については`pushPage()`メソッドの説明を参照してください。
 
-```
+```javascript
 myNavigator.pushPage("page2.html", { param1: "value1", param2: "value2" });
 var page = myNavigator.getCurrentPage();
 console.log(page.options.param1); // "value1"が戻ります
@@ -212,7 +212,7 @@ console.log(page.options.param1); // "value1"が戻ります
 
 ナビゲーターが保有する`page`オブジェクトの一覧を返します。`page`オブジェクトの使い方については、`navigator.getCurrentPage()`メソッドの説明を参照してください。
 
-```
+```javascript
 // ページスタックの上から2番目のページを削除する例
 var pages = navigator.getPages();
 pages[pages.length - 2].destroy();
@@ -233,7 +233,7 @@ pages[pages.length - 2].destroy();
 
 ツールバーは`<ons-toolbar>`コンポーネントとして定義されます。下記にツールバーの例を掲載します。
 
-```
+```html
 <ons-toolbar>
   <div class="left">
     <ons-back-button>戻る</ons-back-button>
@@ -257,7 +257,7 @@ pages[pages.length - 2].destroy();
 
 1. ボタンとアイコンを用いた例
 
-  ```
+  ```html
   <ons-toolbar>
     <div class="left"><ons-toolbar-button>左ボタン</ons-toolbar-button></div>
     <div class="center">ボタンとアイコン</div>
@@ -267,7 +267,7 @@ pages[pages.length - 2].destroy();
 
 2. 検索ボックスを用いた例
 
-  ```
+  ```html
   <ons-toolbar>
     <div class="left"><ons-back-button>戻る</ons-back-button></div>
     <div class="center">検索</div>
@@ -277,7 +277,7 @@ pages[pages.length - 2].destroy();
 
 3. カスタムなイメージを表示する例
 
-  ```
+  ```html
   <ons-toolbar>
     <div class="left"><ons-back-button>戻る</ons-back-button></div>
     <div class="center"><img src="custom_title.png"></div>
@@ -289,7 +289,7 @@ pages[pages.length - 2].destroy();
 
 ツールバーをヘッダー外に設置したい場合は、[`<ons-toolbar>`](/reference/ons-toolbar.html)や[`<ons-bottom-toolbar>`](/reference/ons-bottom-toolbar.html)に`inline`属性を指定します。
 
-```
+```html
 <ons-toolbar inline>
    <div class="center">Top Inline Toolbar</div>
    <div class="left">Label</div>
@@ -306,7 +306,7 @@ Onsen UIではAndroidの戻るボタンにも対応します。アプリがAndro
 
 また、iOS端末に限ってツールバーに戻るボタンを表示したい場合は、[`<ons-if-platform>`](/reference/ons-if-platform.html)を使用すると良いでしょう。
 
-```
+```html
 <ons-toolbar>
   <div class="left"><ons-back-button ons-if-platform="ios">戻る</ons-back-button></div>
   <div class="center">ページタイトル</div>
@@ -323,7 +323,7 @@ Onsen UIではAndroidの戻るボタンにも対応します。アプリがAndro
 
 コールバック関数は、`event`オブジェクトを受け取ります。`event`オブジェクトでは、下記に説明するいくつかのプロパティとメソッドが提供されます。たとえば、下記のコードは`pushPage`の実行をキャンセルすることができます。
 
-```
+```javascript
 ons.ready(function() {
   myNavigator.on('prepush', function(event) {
     var page = event.currentPage; // 現在のページオブジェクトを取得する
@@ -362,7 +362,7 @@ ons.ready(function() {
 
 それぞれのページは、`<ons-sliding-menu>`タグの下に`menu`および`main`クラスを持った要素を作成することで指定できます。
 
-```
+```html
 <ons-sliding-menu>
   <div class="menu">
     <ons-page>
@@ -379,7 +379,7 @@ ons.ready(function() {
 
 もう一つの方法として、下記のようにテンプレートを指定することもできます。
 
-```
+```html
 <ons-sliding-menu
   main-page="page1.html"
   menu-page="menu.html"
@@ -432,7 +432,7 @@ ons.ready(function() {
 
 アニメーション効果を無効にしたい場合は、`animation`パラメータに`none`を指定してください。
 
-```
+```javascript
 mySlidingMenu.openMenu({
   animation: 'none'
 });
@@ -459,7 +459,7 @@ mySlidingMenu.openMenu({
 
 スライディングメニューには、`preopen`、`postopen`、`preclose`、`postclose`の4種類のイベントに対応します。
 
-```
+```html
 <script>
 ons.ready(function() {
   mySlidingMenu.on('preopen', function() {
@@ -480,7 +480,7 @@ ons.ready(function() {
 
 タブバーアイテムでは`icon`属性と`label`属性が指定できます。アイコンを表示する場合は、[`<ons-icon>`](/reference/ons-icon.html)と同様にアイコン名を指定します。
 
-```
+```html
 <ons-tabbar>
   <ons-tab page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tab>
   <ons-tab page="page2.html" label="Page 2" icon="fa-square"></ons-tab>
@@ -496,7 +496,7 @@ ons.ready(function() {
 
 デフォルトでは、タブバーは画面下部に配置されます。Android端末のように上部にタブバーを設置するには、`position`属性に`top`を指定します。ただし、この属性は初期化時に指定された場合にのみ適用されます。
 
-```
+```html
 <ons-tabbar position="top">
   <ons-tab page="page1.html" label="Page 1" icon="fa-square" active="true"></ons-tab>
   <ons-tab page="page2.html" label="Page 2" icon="fa-square"></ons-tab>
@@ -506,7 +506,7 @@ ons.ready(function() {
 
 ツールバーが配置されているページにタブバーを設置すると、ツールバーの下部に配置されます。
 
-```
+```html
 <ons-page>
   <ons-toolbar>
     <div class="center">Page Title</div>
@@ -529,7 +529,7 @@ ons.ready(function() {
 
 タブにラベルとアイコンを表示するには、`label`属性と`icon`属性を指定します。
 
-```
+```html
 <ons-tab label="Label" icon="fa-square"></ons-tab>
 ```
 
@@ -537,7 +537,7 @@ ons.ready(function() {
 
 [`<ons-tab>`](/reference/ons-tab.html)内に任意のHTMLを記述することもできます。
 
-```
+```html
 <ons-tabbar>
   <ons-tab page="home.html">
     <p>Home</p>
@@ -554,7 +554,7 @@ ons.ready(function() {
 
 タブがアクティブの時と非アクティブの時でコンテンツを切り替えることができます。そのためには、`ons-tab`内に`ons-tab-active`と`ons-tab-inactive`属性を持つ要素を定義してください。
 
-```
+```html
 <ons-tab page="page.html">
   <div ons-tab-active>
     <!-- active時のみ表示されるコンテンツ -->
@@ -584,7 +584,7 @@ ons.ready(function() {
 
 インデックスを変更せずにページの読み込みを行う場合は、`loadPage()`メソッドを使用します。
 
-```
+```javascript
 tabbar.loadPage('newpage.html');
 ```
 
@@ -599,7 +599,7 @@ tabbar.loadPage('newpage.html');
 
 イベントをキャンセルする場合は、`prechange`イベントオブジェクトの`cancel()`メソッドを呼び出します。
 
-```
+```javascript
 tabbar.on('prechange', function(event) {
   event.cancel();
 });
@@ -643,7 +643,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
 
   `ons.notification.alert()`関数を呼び出すと、ボタンとテキストメッセージが含まれたダイアログを表示できます。メッセージはHTMLで記述することもできます。
 
-  ```
+  ```javascript
   ons.notification.alert({
     message: 'メッセージ',
     // もしくはmessageHTML: '<div>HTML形式のメッセージ</div>',
@@ -661,7 +661,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
 
   `ons.notification.confirm()`関数はアラートダイアログと似ていますが、複数のボタンを配置できます。
 
-  ```
+  ```javascript
   ons.notification.confirm({
     message: 'このダイアログを閉じてもいいですか？',
     // もしくは messageHTML: '<div>HTML形式のメッセージ</div>',
@@ -685,7 +685,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
 
 [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html)コンポーネントを使うと、自由にデザインしたアラートダイアログを表示できます。下記の例は、スタイルを修正したダイアログの例です。
 
-```
+```html
 <ons-template id="alert-dialog.html">
 <ons-alert-dialog var="alertDialog">
   <div class="alert-dialog-title"><strong style="color: #ff3333">深刻な問題が発生しました</strong></div>
@@ -721,7 +721,7 @@ ons.ready(function() {
 
 ダイアログを表示するには、[`<ons-dialog>`](/reference/ons-dialog.html)タグを持つテンプレートを作成し、そのテンプレートを`ons.createDialog()`関数で指定します。この関数は戻り値として`Promise`オブジェクトを返し、そのコールバック関数を通じて`DialogView`オブジェクトを渡します。ダイアログを表示するには、この`DialogView`オブジェクトの`show()`メソッドを呼ぶ必要があります。
 
-```
+```html
 <ons-template id="dialogcontent.html">
   <ons-dialog>
     HTMLコードを記述します
@@ -777,7 +777,7 @@ ons.ready(function() {
 
   ダイアログを表示する前、もしくは非表示にする前に呼ばれます。コールバック関数には`dialog`プロパティ（もしくは`alertDialog`プロパティ）と、`cancel`関数が渡されます。`cancel`関数を実行すると、その操作をキャンセルすることができます。
 
-  ```
+  ```javascript
   myDialog.on("preshow", function(e) {
     // e.dialogにはDialogViewオブジェクトが格納される
     e.cancel());
@@ -798,7 +798,7 @@ ons.ready(function() {
 
 全画面のカルーセルを表示するには、[`<ons-carousel>`](/reference/ons-carousel.html)コンポーネントに`fullscreen`属性を指定します。
 
-```
+```html
 <ons-carousel fullscreen swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      カルーセルアイテム１
@@ -815,7 +815,7 @@ ons.ready(function() {
 
 カルーセルを他のコンポーネントの内部に表示する場合は、CSSを用いてその高さと幅を指定します。幅が指定されていない場合は、`100%`を指定したものとして扱われます。
 
-```
+```html
 <ons-carousel style="height: 200px; width: 50%" swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      カルーセルアイテム１
@@ -838,7 +838,7 @@ ons.ready(function() {
 
 `initial-index`属性を使うと、最初に表示されるアイテムを番号で指定できます。インデックス番号は`0`から開始します。
 
-```
+```html
 <ons-carousel style="height: 100px; width: 100px" initial-index="1" swipeable overscrollable auto-scroll>
   <ons-carousel-item>
      カルーセル要素１
@@ -899,7 +899,7 @@ ons.ready(function() {
 
 すべてのメソッドは`options`パラメータを指定できます。このパラメータでは、`animation`および`callback`プロパティを渡すことができます。
 
-```
+```html
 myCarousel.next({
   animation: "none",
   callback: function() {
@@ -951,7 +951,7 @@ myCarousel.next({
 
 ポップオーバーを表示する例は下記の通りです。
 
-```
+```html
 <ons-template id="popover.html">
   <ons-popover 
   style="height: 200px; width: 200px" 
@@ -1013,7 +1013,7 @@ ons.ready(function() {
 
   ポップオーバーの操作をキャンセルしたい場合は、下記のように記述します。
 
-  ```
+  ```javascript
   myPopover.on("preshow", function(e) {
     e.cancel();
   });
@@ -1038,7 +1038,7 @@ Onsen UIでは、フォームを構築するための様々なコンポーネン
 
 スイッチを表示するには、[`<ons-switch>`](/reference/ons-switch.html)を使用します。スイッチにはONとOFFの状態があり、その状態は`isChecked()`メソッドで取得できます。
 
-```
+```html
 <script>
 function changed() {
   alert(mySwitch.isChecked() ? 'ON' : 'OFF');
@@ -1053,25 +1053,25 @@ function changed() {
 
 - テキスト入力
 
-  ```
+  ```html
   <input class="text-input" id="my-input">
   ```
 
 - テキストエリア
 
-  ```
+  ```html
   <textarea class="textarea" id="my-textarea"></textarea>
   ```
 
 - 検索ボックス
 
-  ```
+  ```html
   <input type="search" class="search-input">
   ```
 
 どの場合においても、`document.getElementById()`やjQueryのセレクターを用いて、その値を取得できます。
 
-```
+```javascript
 alert(document.getElementById("my-input").value);
 alert($("#my-input").val());
 ```
@@ -1082,18 +1082,18 @@ alert($("#my-input").val());
 
 チェックボックスとラジオボタンはCSSコンポーネントとして提供されます。下記のようにして、それぞれのコンポーネントを表示できます。
 
-```
+```html
 <label class="checkbox">
   <input type="checkbox">
-  <div class="checkbox__checkmark></div>
+  <div class="checkbox__checkmark"></div>
   <span class="ons-checkbox-inner"></span>
 </label>
 ```
 
-```
+```html
 <label class="radio-button">
   <input type="radio">
-  <div class="radio-button__checkmark></div>
+  <div class="radio-button__checkmark"></div>
 </label>
 ```
 
@@ -1133,7 +1133,7 @@ Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の400以上のアイ
 
 下記にいくつかの例を紹介します。
 
-```
+```html
 <ons-icon icon="fa-angle-left"></ons-icon>
 <ons-icon icon="fa-angle-left" size="40px"></ons-icon>
 <ons-icon icon="fa-angle-left" size="40px" rotate="90"></ons-icon>
@@ -1142,19 +1142,19 @@ Onsen UIは、[Font Awesome](http://fontawesome.github.io/)の400以上のアイ
 
 アイコンの大きさは`size`属性で指定できます。
 
-```
+```html
 <ons-icon icon="fa-angle-left" size="40px">
 ```
 
 アイコンを回転させることもできます。
 
-```
+```html
 <ons-icon icon="fa-angle-left" size="40px" rotate="90deg">
 ```
 
 アイコンにアニメーションを適用することも可能です。スピナー画像等の表示に有効です。
 
-```
+```html
 <ons-icon icon="fa-angle-left" spin="yes">
 ```
 
@@ -1172,7 +1172,7 @@ CSSメディアクエリーを用いることで、画面サイズやアスペ�
 
 下記のCSSメディアクエリーは画面サイズに応じてCSSの定義を切り替える例となります。
 
-```
+```html
 <style>
 @media (min-width:320px) { /* スマートフォン、iPhoneなど */ }
 @media (min-width:641px) { /* iPad縦、大きな画面を持つスマートフォンなど */ }
@@ -1205,7 +1205,7 @@ CSSメディアクエリーを用いることで、画面サイズやアスペ�
 
 Onsen UIが必要なフレームワーク一式の読み込みを完了するまで、読み込み中画面を表示することができます。これはOnsen UIをWebアプリケーションで使用する場合に便利です。`ons-loading-placeholder`属性を持つ要素は、Onsen UIの読み込みが完了した時点で、`ons-loading-placeholder`要素が参照するテンプレートに置き換わります。
 
-```
+```html
 <body>
   <div ons-loading-placeholder="start.html">
      アプリケーションの読み込みを行っています...
@@ -1226,7 +1226,7 @@ Onsen UIが必要なフレームワーク一式の読み込みを完了するま
 
 この関数を用いると、ページ読み込み中のブランクスクリーンを表示せずに、スプラッシュ画面を動的に非表示にすることができます。たとえば、下記の例はOnsen UIの読み込みが完了するまで、スプラッシュスクリーンを表示したままにするコードとなります。
 
-```
+```javascript
 ons.ready(function() {
   // Onsen UIが読み込み終わるまでスプラッシュ画像を表示したままにする
   // APIリファレンス: https://github.com/apache/cordova-plugin-splashscreen/blob/master/doc/index.md
@@ -1240,7 +1240,7 @@ ons.ready(function() {
 
 たとえば、下記のコードはOnsen UIと共に`ngAnimate`モジュールを読み込みます。引数には、読み込みたいモジュールの一覧を指定できます。 `ons.bootstrap()`関数の引数では、読み込みたいAngularJSのモジュールを配列形式で指定できます。
 
-```
+```html
 <script>
   var module = ons.bootstrap(['ngAnimate']); // ngAnimateモジュールも読み込む
   module.controller("TopController", function($scope){ });
@@ -1249,7 +1249,7 @@ ons.ready(function() {
 
 `ons.bootstrap()`関数を使用する際は、モジュール名を指定することもできます。
 
-```
+```html
 <script>
   ons.bootstrap('myApp', ['ngAnimate']); // Optionally loading ngAnimate module
   angular.module('myApp').controller("TopController", function($scope){ });
@@ -1258,7 +1258,7 @@ ons.ready(function() {
 
 よりAngularJSに準拠した記述で表記する場合は、`onsen`モジュールを読み込みます。
 
-```
+```html
 <script>
   // 'ng-app'が'my-app'と定義されている場合の例
   var module = angular.module('my-app', ['onsen']);
@@ -1277,7 +1277,7 @@ ons.ready(function() {
 
 なお、`ons.compile()`関数の引数には、`HTMLElement`オブジェクトを指定する必要があります。また、指定する要素は、`ons.compile()`関数を呼び出す前にDOMツリー上に配置されていいなければなりません。下記の例を参照してください。
 
-```
+```javascript
 ons.ready(function() {
   var elm = $("<ons-button>新規ボタン</ons-button>");
   elm.appendTo($("body")); // DOMツリーに追加する
@@ -1291,7 +1291,7 @@ iOS 7以降では、ステータスバーをWebViewの上に重ねることが�
 
 Onsen UIでは余白の制御を行うために、`ons.enableAutoStatusBarFill`関数および`ons.disableAutoStatusBarFill`関数を提供しています。デフォルトでは、余白制御が有効になっています。変更する場合は、Onsen UIの初期化が完了する前（`ons.ready()`イベントが呼ばれる前）に関数を呼び出してください。
 
-```
+```javascript
 /**
  * Onsen UI初期化中にコールする必要があります
  */
@@ -1311,7 +1311,7 @@ ons.ready(function() { });
 
 [`<ons-if-platform>`](/reference/ons-if-platform.html)属性を使うと、特定の要素に対してプラットフォーム別の出し分けを記述できます。
 
-```
+```html
 <div ons-if-platform="ios">iPhoneとiPadユーザーだけのコンテンツ</div>
 ```
 
@@ -1334,7 +1334,7 @@ ons.ready(function() { });
 
 `ons-if-platform`属性と同様、[`<ons-if-orientation>`](/reference/ons-if-orientation.html)属性を用いると、画面の向きに応じて画面表示を切り替えられます。
 
-```
+```html
 <div ons-if-orientation="portrait">縦向きの時だけ表示するコンテンツ</div>
 ```
 
@@ -1344,7 +1344,7 @@ ons.ready(function() { });
 
 ジェスチャーを検知するには、対象となるDOM要素を[`<ons-gesture-detector>`](/reference/ons-gesture-detector.html)コンポーネントで囲みます。たとえば、下記は特定の場所に対して左スワイプの検知を有効にした例となります。
 
-```
+```html
 <ons-gesture-detector>
   <div id="detect-area" style="width: 100px; height: 100px;">
     ここをスワイプ
@@ -1359,7 +1359,7 @@ ons.ready(function() { });
 
 AngularJS方式で記述する場合は、`ng-ジェスチャーイベント名`属性を使用します。
 
-```
+```html
 <ons-gesture-detector ng-swipeleft="doSomething()">
   <div id="detect-area" style="width: 100px; height: 100px;">
     ここをスワイプ
@@ -1384,7 +1384,7 @@ AngularJS方式で記述する場合は、`ng-ジェスチャーイベント名`
 
 [`<ons-keyboard-active>`](/reference/ons-keyboard-active.html)もしくは[`<ons-keyboard-inactive>`](/reference/ons-keyboard-inactive.html)属性を用いると、キーボードの状態に応じてコンテンツのだし分けを行うことができます。
 
-```
+```html
 <div ons-keyboard-active>
   キーボードが表示されている時に表示されるコンテンツです。
 </div>
@@ -1395,7 +1395,7 @@ AngularJS方式で記述する場合は、`ng-ジェスチャーイベント名`
 
 JavaScriptでキーボードの状態を取得するには、`ons.softwareKeyboard`オブジェクトを使用できます。
 
-```
+```javascript
 // CordovaとIonic　Keyboard Pluginの両方に対応しています
 ons.softwareKeyboard.on('show', function() {
   //　キーボードが表示された場合の処理
@@ -1410,7 +1410,8 @@ ons.softwareKeyboard.on('hide', function() {
 Androidはハードウェアの戻るボタンが備わっています。Onsen UIでは、戻るボタンがクリックされたときの挙動をカスタマイズすることができます。
 
 端末の戻るボタンに対応するためには、[`<ons-page>`](/reference/ons-page.html)コンポーネントの`on-device-backbutton`もしくは`ng-device-backbutton`属性を使用します。下記は、`ons-page`の属性に戻るボタンのハンドラーを定義した例となります。
-```
+
+```html
 <ons-page on-device-backbutton="doSomething()">
   ページのコンテンツ
 </ons-page>
@@ -1418,7 +1419,7 @@ Androidはハードウェアの戻るボタンが備わっています。Onsen U
 
 AngularJS形式で記述すると、下記のようになります。
 
-```
+```html
 <ons-page ng-device-backbutton="doSomething()">
   ページのコンテンツ
 </ons-page>
@@ -1426,7 +1427,7 @@ AngularJS形式で記述すると、下記のようになります。
 
 もしくは、`ons-page`のAPIを用いて、下記のように戻るボタンのハンドラーを定義することもできます。
 
-```
+```html
 <ons-page var="myPage">...</ons-page>
 <script>
   ons.ready(function() {
@@ -1445,7 +1446,7 @@ AngularJS形式で記述すると、下記のようになります。
 
 `ons-page`コンポーネントだけでなく、`ons-navigator`と`ons-sliding-menu`コンポーネントについは、デフォルトで戻るボタンのハンドラーが定義されています。たとえば、`ons-navigator`では、戻るボタンが押された場合は、`popPage()`を実行します。この仕組みを無効にしたり、挙動を変更したい場合は、`getDeviceBackButtonHandler()` APIを使用します。
 
-```
+```javascript
 // ナビゲーターの戻るボタンを無効化する
 navigator.getDeviceBackButtonHandler().disable();
 
@@ -1460,7 +1461,7 @@ navigator.getDeviceBackButtonHandler().enable();
 
 親のイベントハンドラーに処理を委譲する場合は、`callParentHandler()`メソッドを呼び出します。もしコンポーネントのハンドラーが定義されていなかったり、無効化されている場合は、親のイベントハンドラーが自動的に呼び出されます。
 
-```
+```javascript
 myPage.getDeviceBackButtonHandler().setListener(function(event) {
   // 親のイベントハンドラーを呼び出す
   event.callParentHandler();
@@ -1473,7 +1474,7 @@ Onsen UIアプリでは、デフォルトで戻るボタンが押されると、
 
 デフォルトの挙動を変更するには、`ons.setDefaultDeviceBackButtonListener`関数を呼び出します。下記のコードは、アプリを閉じる前に確認を行う例となります。
 
-```
+```javascript
 ons.setDefaultDeviceBackButtonListener(function() {
   if (navigator.notification.confirm("本当に閉じてもいいですか？", 
     function(index) {
@@ -1489,7 +1490,7 @@ ons.setDefaultDeviceBackButtonListener(function() {
 
 Onsen UIの戻るボタンの処理を完全に無効化するには、`ons.disableDeviceBackButtonHandler()`関数を呼び出します。これは、CordovaやPhoneGapのイベントを直接扱いたい場合に便利です。
 
-```
+```javascript
 ons.ready(function() {
   ons.disableDeviceBackButtonHandler();
 
@@ -1510,7 +1511,7 @@ ons.ready(function() {
 
 APIを呼び出すには、`var`属性でコンポーネントを変数に割り当てます。たとえば、下記の例では`"myNavigator"`という名前の変数でコンポーネントを参照できます。
 
-```
+```html
 <ons-navigator var="myNavigator">
 ```
 
@@ -1518,7 +1519,7 @@ APIを呼び出すには、`var`属性でコンポーネントを変数に割り
 
 そのため、JavaScriptを直接用いたり、jQueryを使って変数を呼び出す場合は、下記のコードで動作します。
 
-```
+```html
 <script>
   myNavigator.pushPage('newpage.html');
 </script>
@@ -1526,7 +1527,7 @@ APIを呼び出すには、`var`属性でコンポーネントを変数に割り
 
 AngularJSを用いる場合は、下記のようにして実行できます。
 
-```
+```html
 <script>
   module.controller("PageController", function($scope) {
     ons.ready(function() {
@@ -1545,7 +1546,7 @@ AngularJSを用いる場合は、下記のようにして実行できます。
 
 `ons.findComponent()`関数は、渡されたDOM内にあるコンポーネントを検索します。たとえば、`id`が`my-switch`の`ons-switch`コンポーネントを検索したい場合は、下記のコードを記述します。
 
-```
+```javascript
 var mySwitch = ons.findComponent('ons-switch#my-switch', document.body);
 ```
 
@@ -1553,7 +1554,7 @@ var mySwitch = ons.findComponent('ons-switch#my-switch', document.body);
 
 `ons.findParentComponentUntil()`関数は、親DOMノードを探索してコンポーネントを検索します。たとえば、下記の例では、指定したボタンの要素を持つナビゲーターを検索しています。
 
-```
+```javascript
 var currentNavigator = ons.findParentComponentUntil('ons-navigator', buttonDom);
 ```
 
@@ -1561,7 +1562,7 @@ var currentNavigator = ons.findParentComponentUntil('ons-navigator', buttonDom);
 
 Onsen UIのコンポーネントはCustom Elements形式ではありますが、DOM APIを使って呼び出すこともできます。
 
-```
+```html
 <ons-navigator class="myNavigator"></ons-navigator>
 <ons-button id="my-ons-button"</ons-button>
 <ons-list>
@@ -1586,7 +1587,7 @@ Onsen UIのコンポーネントはCustom Elements形式ではありますが、
 
 イベントにハンドラーを追加するには、コンポーネントの`on()`、`off()`および`once()`メソッドを使用します。そのために前述の通り、コンポーネントに変数を割り当てる必要があります。
 
-```
+```html
 <script>
 myNavigator.on("prepush", function() {
   // prepushイベントのハンドラーを記述する
@@ -1607,13 +1608,13 @@ myNavigator.off("prepush", callback);
 
 コンポーネントに対するアクションとして、最も使われるのはタップの検出です。タップやクリックの検出には、`onclick`ハンドラーを使用します。
 
-```
+```html
 <ons-button onclick="alert('タップされました')">ここをタップ</ons-button>
 ```
 
 AngularJSのイベント処理に精通している方は、`ng-click`ハンドラーも使用できます。
 
-```
+```html
 <ons-button ng-click="alert('タップされました')">ここをタップ</ons-button>
 ```
 
@@ -1623,7 +1624,7 @@ AngularJSのイベント処理に精通している方は、`ng-click`ハンド�
 
 [`<ons-page>`](/reference/ons-page.html)の初期化が完了すると、`pageinit`イベントが発生します。このイベントを用いて、各ページの挙動を変更してください。
 
-```
+```html
 <script>
 document.addEventListener("pageinit", function(e) {
   if (e.target.id == "my-page") {
@@ -1642,7 +1643,7 @@ document.addEventListener("pageinit", function(e) {
 
 すべてのコンポーネントは、初期化時に`ons-component-name:init`イベントを発行します。このイベントを用いると、コンポーネントを初期化した直後に特定の処理を記述できます。初期化されたコンポーネントは、コールバック関数にて`component`プロパティとして取得できます。
 
-```
+```javascript
 $(document).on('ons-navigator:init', '#my-navigator', function(event) {
    var navigator = event.component;
    navigator.pushPage('login.html');
@@ -1657,7 +1658,7 @@ $(document).on('ons-navigator:init', '#my-navigator', function(event) {
 
 いくつかのコンポーネントは、別のHTMLページを指定する必要があります。たとえば、`<ons-sliding-menu>`コンポーネントは、下記のように別途定義されたページを指定します。
 
-```
+```html
 <ons-sliding-menu
   menu-page="menu.html"
   main-page="content.html">
@@ -1670,7 +1671,7 @@ menu.htmlとcontent.htmlを別ファイルとして作成することなく、�
 
 [`<ons-template>`](/reference/ons-template.html)タグはテンプレートを表します。たとえば、`main.html`という名前を持つHTMLコンテンツを定義するには、下記のように記述します。
 
-```
+```html
 <ons-template id="main.html">
   <!-- main.htmlのコードを記述します -->
   <div>
@@ -1683,7 +1684,7 @@ menu.htmlとcontent.htmlを別ファイルとして作成することなく、�
 
 もう一つの方法として、`script`タグを作成し、その`type`属性を`"text/ons-template"`と指定することができます。
 
-```
+```html
 <script type="text/ons-template" id="main.html">
   <!-- main.htmlのHTMLコンテンツを定義します -->
   <div>
@@ -1702,7 +1703,7 @@ Modifierを用いると、Onsen UIのコンポーネントの外見を簡単に�
 
 たとえば、下記のボタンはそれぞれ異なる外見となります。
 
-```
+```html
 <ons-button modifier="quiet">Quiet</ons-button>
 <ons-button modifier="light">Light</ons-button>
 <ons-button modifier="large">Large</ons-button>
@@ -1733,13 +1734,13 @@ Onsen UIのスタイルは`onsenui.css`と`onsen-css-components.css`という2�
 
 たとえば、特定のボタンに対して太い枠をつけたい場合は、下記のようにして`modifier`属性を定義します。
 
-```
+```html
 <ons-button modifier="thick">Thick Button</ons-button>
 ```
 
 次に`style`タグなどで、下記のように個別にスタイルを定義します。
 
-```
+```html
 <style>
 .button--thick {
   border: 10px;
@@ -1753,7 +1754,7 @@ Onsen UIのスタイルは`onsenui.css`と`onsen-css-components.css`という2�
 
 各コンポーネントのHTMLコードは、フレームワークの`templates`ディレクトリ以下に配置されます。たとえば、`<ons-button>`のHTMLコードは`framework/templates/button.tpl`にあります。
 
-```
+```html
 <button class="{{item.animation}} button--{{onsType}} effeckt-button button no-select {{modifierTemplater('button--*')}}">
   <span class="label ons-button-inner" ng-transclude></span>
   <span class="spinner button__spinner {{modifierTemplater('button--*__spinner')}}"></span>
