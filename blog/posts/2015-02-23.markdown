@@ -7,7 +7,7 @@ title: "Developing hybrid mobile applications with Onsen UI"
 
 Hybrid mobile applications have become trendy in the last years. Writing native applications could be hard for casual developers, those who don't know too much about programming and just want to make a simple app (or not so simple) as quickly as possible. It requires learning different programming languages (and different ways to interact with each device) for every platform where you want to deploy your application, although it certainly has some advantages: best possible performance, full access to the device hardware, etc.
 
-{<1>}![OnsenUI-HTML5-CSS3-JS](/blog/content/images/2015/Feb/logo_cuadrado.png)
+![OnsenUI-HTML5-CSS3-JS](/blog/content/images/2015/Feb/logo_cuadrado.png)
 
 On the other hand, hybrid applications relies in a set of technologies that won't change regardless the platform, the same as in web applications: **HTML, CSS and Javascript**. And since this set of technologies is so common on the Internet we will find unlimited resources and tutorials about how to implement this or that, anything we need. We could even use any common tool or framework for web development also for hybrid apps, such as jQuery or AngularJS, thus making the development process much simpler and faster. Although hybrid apps are usually not as efficient as native ones, the truth is that current smartphones are powerful enough to run most of the applications we could imagine without noticing any difference.
 
@@ -15,7 +15,7 @@ In this post we are going to develop an example hybrid application (Memo app) to
 
 ## Developing with Onsen UI and AngularJS
 
-{<2>}![OnsenUI_logo](/blog/content/images/2015/Feb/onsen_logo2.png)
+![OnsenUI_logo](/blog/content/images/2015/Feb/onsen_logo2.png)
 
 Onsen UI is a HTML5 framework to create modern and usable User Interfaces, so that we don't need to fight too much with the appearance of our application. It keeps the UI development simple while we can focus in the functionality of the application itself. Onsen UI is meant to be used along with [AngularJS](https://docs.angularjs.org/guide/introduction), but it is also possible to use [jQuery](https://jquery.com/) or any other framework. Here we will use AngularJS but will only describe the tricky parts in order to focus on Onsen UI.
 
