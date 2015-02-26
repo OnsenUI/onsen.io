@@ -126,7 +126,7 @@ var options = {
   onTransitionEnd: function() {} // Called when finishing transition animation
 };
 myNavigator.pushPage("page2.html", options);
-</script>      
+</script>
 ```
 
 As seen in the code, the configuration options can be set in the second parameter of `pushPage()` method.
@@ -293,7 +293,7 @@ If you want to place a toolbar outsite the navigation header, you can create an 
 <ons-bottom-toolbar inline>
    <div class="center">Bottom Inline Toolbar</div>
    <div class="left">Label</div>
-</ons-bottom-toolbar> 
+</ons-bottom-toolbar>
 ```
 
 <h4 id="Androidbackbutton">Android back button</h4>
@@ -844,7 +844,7 @@ You can use [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) component t
   <div class="alert-dialog-footer">
     <button class="alert-dialog-button" ng-click="alertDialog.hide(); alertDialog.show()">OK</button>
   </div>
-</ons-alert-dialog>      
+</ons-alert-dialog>
 </ons-template>
 
 <script>
@@ -883,13 +883,13 @@ ons.ready(function() {
   });
 });
 </script>
-``` 
+```
 
 <%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
 <h4 id="UsingDialogViewObject">Using the `DialogView` object</h4>
 
-`DialogView` object is the main object that contains the dialog information. It has following methods to provide fine-grain control. 
+`DialogView` object is the main object that contains the dialog information. It has following methods to provide fine-grain control.
 
 - `show(options)`, `hide(options)`
 
@@ -897,7 +897,7 @@ ons.ready(function() {
 
 - `isShown()`
 
-  Returns `true` if the dialog is shown.  
+  Returns `true` if the dialog is shown.
 
 - `destroy()`
 
@@ -931,7 +931,7 @@ Also, [`<ons-dialog>`](/reference/ons-dialog.html) and [`<ons-alert-dialog>`](/r
     // e.dialog is a DialogView object
     e.cancel();
   });
-  ``` 
+  ```
 
 - postshow, posthide
 
@@ -943,7 +943,7 @@ Carousel provides a container to display multiple items in the element. It can b
 
 [`<ons-carousel>`](/reference/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/reference/ons-carousel-item.html) components. Each `<ons-carousel-item>` represents items in the carousel.
 
-<h4 id="ShowingFullScreenCarousel">Showing full screen carousel</h4> 
+<h4 id="ShowingFullScreenCarousel">Showing full screen carousel</h4>
 
 A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<ons-carousel>`](/reference/ons-carousel.html) component.
 
@@ -960,7 +960,7 @@ A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<o
 
 <%- @partial('codepen.html.eco', { id: "xbbzOQ" } ) %>
 
-<h4 id="ShowingCarouselInAPage">Showing carousel in a page</h4> 
+<h4 id="ShowingCarouselInAPage">Showing carousel in a page</h4>
 
 When you want to show a carousel within another component, you should specify its height and width by the CSS style. If the width is not specified, it will interpreted as `100%`.
 
@@ -985,7 +985,7 @@ To display an indicator on the [`<ons-carousel>`](/reference/ons-carousel.html),
 
 <h5 id="InitialCarouselDisplay">Specifying initial carousel item</h5>
 
-`initial-index` attribute will specify which item to show at the initial view. Note the index number starts from `0`. 
+`initial-index` attribute will specify which item to show at the initial view. Note the index number starts from `0`.
 
 ```html
 <ons-carousel style="height: 100px; width: 100px" initial-index="1" swipeable overscrollable auto-scroll>
@@ -1032,7 +1032,7 @@ Other than the options above, following attributes can be specified to customize
 
 - `auto-scroll-ratio` attribute
 
-  A number between 0.0 and 1.0. It specifies how long distance the carousel must be dragged before it will auto-scroll to the next item on release. 
+  A number between 0.0 and 1.0. It specifies how long distance the carousel must be dragged before it will auto-scroll to the next item on release.
 
 <h4 id="CarouselJavaScript">Controlling carousel by JavaScript</h4>
 
@@ -1109,8 +1109,8 @@ Here is the quick example of how a popover is defined and created.
 
 ```html
 <ons-template id="popover.html">
-  <ons-popover 
-  style="height: 200px; width: 200px" 
+  <ons-popover
+  style="height: 200px; width: 200px"
   animation="fade">
       <ons-page>
         Popover content.
@@ -1119,7 +1119,7 @@ Here is the quick example of how a popover is defined and created.
 </ons-template>
 <script>
 ons.ready(function() {
-  var targetElement = document.getElementById('myButton'); 
+  var targetElement = document.getElementById('myButton');
   ons.createPopover('popover.html')
   .then(function(popover) {
     popover.show(targetElement);
@@ -1132,7 +1132,7 @@ When the `ons.createPopover()` function is called, it will return a `Promise` ob
 
 - `show(target[, options])`
 
-  Displays the popover component at the specified `target`. The `target` can be a `DomElement`, a query selector or a AngularJS `$event`. 
+  Displays the popover component at the specified `target`. The `target` can be a `DomElement`, a query selector or a AngularJS `$event`.
 
   You can specify following parameters in the `options`.
 
@@ -1140,7 +1140,7 @@ When the `ons.createPopover()` function is called, it will return a `Promise` ob
 
 - `hide()`
 
-  Hides the popover. Please use with `destroy()` to clean up the element to avoid memory leak. 
+  Hides the popover. Please use with `destroy()` to clean up the element to avoid memory leak.
 
 <h4 id="CustomizingPopover">Customizing popover</h4>
 
@@ -1287,7 +1287,7 @@ Check box and radio button are provided as CSS components. Therefore, use the fo
 ```html
 <label class="checkbox">
   <input type="checkbox">
-  <div class="checkbox__checkmark></div>
+  <div class="checkbox__checkmark"></div>
   <span class="ons-checkbox-inner"></span>
 </label>
 ```
@@ -1295,7 +1295,7 @@ Check box and radio button are provided as CSS components. Therefore, use the fo
 ```html
 <label class="radio-button">
   <input type="radio">
-  <div class="radio-button__checkmark></div>
+  <div class="radio-button__checkmark"></div>
 </label>
 ```
 
@@ -1508,7 +1508,7 @@ ons.ready(function() { });
 
 <h4 id="Platformdetection">Platform detection</h4>
 
-You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or [`ons.platform`](/reference/ons.platform.html) object to detect the platform. 
+You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or [`ons.platform`](/reference/ons.platform.html) object to detect the platform.
 
 [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under a specific platform.
 
@@ -1541,7 +1541,7 @@ Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](/reference/ons-
 
 <h3 id="DetectingFingerGestures">Detecting Finger Gestures</h3>
 
-It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. 
+It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection.
 
 To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/reference/ons-gesture-detector.html) component. For instance,  thefollowing code does a swipe-left detection for a specific element.
 
@@ -1592,7 +1592,7 @@ If you use [`<ons-keyboard-active>`](/reference/ons-keyboard-active.html) or [`<
 </div>
 <div ons-keyboard-inactive>
   This content will be hidden when the keyboard is active.
-</div> 
+</div>
 ```
 
 To catch keyboard events in JavaScript, you can use `ons.softwareKeyboard` API.
@@ -1680,7 +1680,7 @@ To override the behavior, you can use `ons.setDefaultDeviceBackButtonListener` f
 
 ```javascript
 ons.setDefaultDeviceBackButtonListener(function() {
-  if (navigator.notification.confirm("Are you sure to close the app?", 
+  if (navigator.notification.confirm("Are you sure to close the app?",
     function(index) {
       if (index === 1) { // OK button
         navigator.app.exitApp(); // Close the app
@@ -1851,7 +1851,7 @@ All components fire a `ons-component-name:init` event when they are initialized.
 $(document).on('ons-navigator:init', '#my-navigator', function(event) {
    var navigator = event.component;
    navigator.pushPage('login.html');
-}); 
+});
 ```
 
 <h4 id="Componentevents">Component events</h4>
