@@ -141,9 +141,15 @@ gulp.task('deploy', ['clean', 'generate'], function() {
       path.dirname = 'OnsenUI/build/' + path.dirname;
     }));
 
-  return merge(site, templates, build)
+  var stream = merge(site, templates, build)
     .pipe(publisher.publish())
     .pipe(publisher.sync())
     .pipe($.awspublish.reporter());
 
+  // Invalidate Cloudfront cache.
+  if (aws.distributionId) {
+    stream = stream.pipe($.cloudfront(aws));
+  }
+
+  return stream;
 });
