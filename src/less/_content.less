@@ -39,11 +39,12 @@
     line-height: 38px;
     font-weight: 500;
   }
-}
 
-.newsletter-footer {
-  margin-top: 0px;
-  margin-bottom: 28px;
+  &-footer {
+    margin-top: 0px;
+    margin-bottom: 28px;
+  }
+
 }
 
 .content-container {
@@ -152,7 +153,12 @@
 }
 
 .toc-title + .toc {
+  margin-top: -12px;
   margin-bottom: 24px;
+}
+
+.toc-title-no-toggle + .toc {
+  margin-top: 0px;
 }
 
 .toc-2 {
@@ -457,8 +463,46 @@
     }
 
   }
+}
 
+.doc-page-header {
+  background-repeat: no-repeat;
+  background-position: left center;
 
+  &-js {
+    .desktop-query({
+      background-image: url(/images/common/docs-js-icon.png);
+      padding-left: 48px;
+    });
+  }
+
+  &-css {
+    .desktop-query({
+      background-image: url(/images/common/docs-css-components-icon.png);
+      padding-left: 48px;
+    });
+  }
+
+  &-getting-started {
+    .desktop-query({
+      background-image: url(/images/common/docs-getting-started-icon.png);
+      padding-left: 54px;
+    });
+  }
+
+  &-guide {
+    .desktop-query({
+      background-image: url(/images/common/docs-guide-icon.png);
+      padding-left: 54px;
+    });
+  }
+
+  &-patterns {
+    .desktop-query({
+      background-image: url(/images/common/docs-patterns-icon.png);
+      padding-left: 64px;
+    });
+  }
 }
 
 

@@ -25,6 +25,7 @@
     width: @width;
     min-height: @header-height;
     max-width: 100%;
+    background-color: white;
   }
 
   &-logo {
@@ -100,6 +101,10 @@
     .desktop-query({
       &:hover {
         background-color: #f3f3f3;
+
+        img {
+          opacity: 1;
+        }
       }
     });
   }

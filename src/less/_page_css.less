@@ -23,9 +23,10 @@
     position: fixed;
     box-sizing: border-box;
     width: 320px;
-    height: 568px;
-    top: 305px;
-    z-index: 2;
+    height: 569px;
+    top: 50%;
+    transform: translateY(-50%) translateY(1px);
+    z-index: 1;
     margin-left: 591px;
 
     .tablet-query({
@@ -72,7 +73,8 @@
     position: fixed;
     z-index: 0;
     margin-left: 560px;
-    margin-top: -50px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   &-placeholder {
