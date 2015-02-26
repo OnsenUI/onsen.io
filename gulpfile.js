@@ -13,6 +13,7 @@ var siteGenerator = require('./modules/metalsmith');
 //--
 
 var lang = argv.lang === 'en' ? 'en' : 'ja';
+
 gutil.log('Language: --lang=' + lang);
 gutil.log('Source: \'./src/documents_' + lang + '\'');
 gutil.log('Destination: \'./out_' + lang + '\'');
@@ -113,14 +114,16 @@ gulp.task('serve', ['generate'], function() {
 // deploy
 //////////////////////////////
 gulp.task('deploy', ['clean', 'generate'], function() {
-  var aws;
+  var aws,
+    fn = 'aws_' + lang + (argv.production ? '_prod' : '') + '.json';
+
   try {
-    aws = JSON.parse(fs.readFileSync(path.join(__dirname, 'aws_' + lang + '.json')));
+    aws = JSON.parse(fs.readFileSync(path.join(__dirname, fn)));
   } catch(e) {
   }
 
   if (!aws) {
-    throw new Error('aws_' + lang + '.json missing! Please create it before trying to deploy!');
+    throw new Error(fn + ' is missing! Please create it before trying to deploy!');
   }
 
   var dst = 'out_' + lang;

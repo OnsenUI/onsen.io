@@ -40,7 +40,7 @@ Deploying the Onsen UI Website to S3
 $ gulp deploy --lang en
 ```
 
-To deploy to S3 a aws_en.json file must be created with the following structure:
+To deploy to S3 a `aws_en.json` file must be created with the following structure:
 
 ```json
 {
@@ -50,6 +50,14 @@ To deploy to S3 a aws_en.json file must be created with the following structure:
   "region": "..."
 }
 ```
+
+To deploy to production server use the `--production` flag:
+
+```bash
+$ gulp deploy --leng en --production
+```
+
+This time it will read a file called `aws_en_prod.json`.
 
 How to contribute
 -----------------
