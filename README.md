@@ -47,9 +47,12 @@ To deploy to S3 a `aws_en.json` file must be created with the following structur
   "key": "...",
   "secret": "...",
   "bucket": "...",
-  "region": "..."
+  "region": "...",
+  "distributionId": "..."
 }
 ```
+
+The `distributionId` value is optional. If it exists the Cloudfront cache will be invalidated. Please use this when deploying to the production bucket.
 
 To deploy to production server use the `--production` flag:
 
