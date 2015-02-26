@@ -1,0 +1,17 @@
+machine:
+  node:
+    version: 0.10.32
+dependencies:
+  override:
+    - npm install
+    - cd OnsenUI; npm install
+    - cd OnsenUI/css-components; npm install
+test:
+  override:
+    - echo "Add tests!"
+deployment:
+  tasks:
+    branch: master
+    commands:
+      - npm install -g gulp
+      - ./scripts/deploy.sh
