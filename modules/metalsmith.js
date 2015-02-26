@@ -32,10 +32,10 @@ module.exports = function(lang) {
             sortBy: 'name'
           },
           objects: {
-            soryBy: 'name'
+            sortBy: 'name'
           },
           guides: {
-            soryBy: 'name'
+            sortBy: 'name'
           }
         }))
         .use(function(files, metalsmith, done) {
@@ -104,7 +104,7 @@ module.exports = function(lang) {
         .use(collections({
           articles: {
             pattern: '*.markdown',
-            soryBy: 'date',
+            sortBy: 'date',
             reverse: true
           }
         }))
