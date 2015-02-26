@@ -52,7 +52,7 @@
     <aside class="content-info">
 
       <!--
-      <div class="toc-title<% if @docCategory == 'guides': %> toc-title-active<% end %>"><a class="toggle-toc">Guides</a></div>
+      <div class="toc-title<% if @docCategory == 'guides': %> toc-title-active<% end %>"><a>Guides</a></div>
       <ul class="toc toc-1" <% if @docCategory != 'guides': %>style="display: none"<% end %>>
         <% for guide in @guides: %>
         <li class="toc-item toc-1-item">
@@ -66,13 +66,13 @@
 
       <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
 
-      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/css.html">CSS</a></div>
+      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>
 
       <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
         <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
       </ul>
 
-      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a class="toggle-toc" href="/reference/javascript.html">JavaScript</a></div>
+      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a href="/reference/javascript.html">JavaScript</a></div>
 
       <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
         <% for category, docs of @componentCategoryDict: %>
@@ -89,7 +89,7 @@
         <% end %>
       </ul>
 
-      <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html" class="toggle-toc">Page Patterns</a></div>
+      <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html">Page Patterns</a></div>
 
       <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
         <% for pattern in @patterns: %>
@@ -133,27 +133,6 @@
     }
   });
 
-  // toggle menu
-  $(function() {
-    $('.toggle-toc').click(function(event) {
-      var toggleTarget = $(event.target).parent().next();
-      $(event.target).parent().siblings('.toc').each(function() {
-        if (toggleTarget[0] !== this) {
-          $(this).hide();
-        }
-      });
-
-      toggleTarget.toggle();
-      $('.toc-title').removeClass('toc-title-active');
-
-      if (toggleTarget.css('display') !== 'none') {
-        $(this).parent().addClass('toc-title-active');
-      }
-
-      event.preventDefault();
-      return false;
-    });
-  });
   </script>
 
   <script src="/scripts/navigation_highlighter.js"></script>
