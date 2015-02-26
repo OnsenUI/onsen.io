@@ -1,5 +1,10 @@
 $(function() {
   var sticked = $('.content-info');
+
+  if (sticked.length === 0) {
+    return;
+  }
+
   var elementTop = sticked.offset().top;
   var footerHeight = $('.footer-container').height();
 
