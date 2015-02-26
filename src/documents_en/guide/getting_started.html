@@ -11,11 +11,11 @@ autotoc: true
 
 <h3>Onsen UI with the Cordova</h3>
 
-<p>The preferred method is to use <code>cordova</code> command line tool. For that purpose, you need to install <a href="http://nodejs.org">node.js</a> and <code>npm</code> command needs to be available.
+<p>The preferred method is to use <code class="bash">cordova</code> command line tool. For that purpose, you need to install <a href="http://nodejs.org">node.js</a> and <code class="bash">npm</code> command needs to be available.
 
 <h4>1. Install Cordova package</h4>
 
-<pre><code>$ sudo npm install -g cordova</code></pre>
+<pre><code class="bash">$ sudo npm install -g cordova</code></pre>
 
 <p>For more details how to use Cordova tool, please refer to <a href="https://cordova.apache.org/docs/en/edge/index.html">Cordova documentation</a>.
 
@@ -65,14 +65,14 @@ autotoc: true
 
 <p>You need to add the platform SDK to the project to run on the simulator or device.</p>
 
-<pre><code>$ cd /path/to/the/project
+<pre><code class="bash">$ cd /path/to/the/project
 $ cordova platform add ios (or android)</code></pre>
 
 <h4>4. Run on the simulator</h4>
 
 <p>The following command will run the application in the simulator.</p>
 
-<pre><code>$ cordova emulate</code></pre>
+<pre><code class="bash">$ cordova emulate</code></pre>
 
 <p>If the command fails, you are missing something. If you want a quicker solution, try Monaca with the following instructions.</p>
 
@@ -116,5 +116,5 @@ $ cordova platform add ios (or android)</code></pre>
 
 <p>You can use Onsen UI <a href="http://bower.io">Bower</a> module for a quicker setup.</p>
 
-<pre><code>$ sudo npm install -g bower
+<pre><code class="bash">$ sudo npm install -g bower
 $ bower install onsenui</code></pre>

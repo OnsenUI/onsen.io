@@ -13,11 +13,11 @@ autotoc: true
 
 <div class="h3-wrapper">
 
-  <p>コマンドラインから利用する場合は、<code>cordova</code>ツールを使うことが推奨されます。そのためには、<a href="http://nodejs.org">node.js</a>と<code>npm</code>をあらかじめインストールしておく必要があります。
+  <p>コマンドラインから利用する場合は、<code class="bash">cordova</code>ツールを使うことが推奨されます。そのためには、<a href="http://nodejs.org">node.js</a>と<code class="bash">npm</code>をあらかじめインストールしておく必要があります。
 
   <h4 id="1-1">1. Cordovaのインストール</h4>
 
-  <pre><code>$ sudo npm install -g cordova</code></pre>
+  <pre><code class="bash">$ sudo npm install -g cordova</code></pre>
 
   <p>Cordovaツールの使い方については、<a href="https://cordova.apache.org/docs/en/edge/index.html">Cordovaドキュメント</a>を参照してください。
 
@@ -67,14 +67,14 @@ autotoc: true
 
   <p>シミュレータや実機上で動作させるために、プロジェクトにプラットフォームSDKを追加してください。</p>
 
-  <pre><code>$ cd /path/to/the/project
+  <pre><code class="bash">$ cd /path/to/the/project
 $ cordova platform add ios (もしくはandroid)</code></pre>
 
   <h4 id="1-4">4. シミュレータでの実行</h4>
 
   <p>下記のコマンドでシミュレータ上でアプリを実行できます。</p>
 
-  <pre><code>$ cordova emulate</code></pre>
+  <pre><code class="bash">$ cordova emulate</code></pre>
 
   <p>コマンド実行が失敗する場合は、上記の手順が失敗している可能性があります。下記のMonacaを使った方法をぜひお試しください。</p>
 </div>
@@ -122,7 +122,7 @@ $ cordova platform add ios (もしくはandroid)</code></pre>
 <div class="h3-wrapper">
   <p>Onsen UIの<a href="http://bower.io">Bower</a>モジュールを使うと、簡単にプロジェクトに組み込めます。</p>
 
-  <pre><code>$ sudo npm install -g bower
+  <pre><code class="bash">$ sudo npm install -g bower
 $ bower install onsenui</code></pre>
 
 </div>
