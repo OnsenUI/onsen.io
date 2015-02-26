@@ -51,19 +51,6 @@
     <% else if @reference: %>
     <aside class="content-info">
 
-      <!--
-      <div class="toc-title<% if @docCategory == 'guides': %> toc-title-active<% end %>"><a>Guides</a></div>
-      <ul class="toc toc-1" <% if @docCategory != 'guides': %>style="display: none"<% end %>>
-        <% for guide in @guides: %>
-        <li class="toc-item toc-1-item">
-          <a href="/reference/<%= guide.name %>.html" class="toc-link toc-1-link<% if @name == guide.name: %> current<% end %>">
-            <%- guide.name %>
-          </a>
-        </li>
-        <% end %>
-      </ul>
-      -->
-
       <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
 
       <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>

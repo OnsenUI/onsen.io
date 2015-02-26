@@ -82,6 +82,7 @@
         <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">FORUM</a></li>
         <li class="header-navi-item <%- if @page is 'blog' or @isBlogArticle then 'current' %>"><a href="/blog/">BLOG</a></li>
         <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="" height="12"></a></li>
+        <li class="header-navi-item"><a href="http://ja.onsen.io/">JAPANESE</a></li>
       <% else: %>
         <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
         <li class="header-navi-item <%- if @page is 'docs' or @reference then 'current' %>">
