@@ -3,7 +3,9 @@ machine:
     version: 0.10.32
 checkout:
   post:
-    - git submodule update --init
+    - git submodule sync
+    - git submodule update --init --recursive
+
 dependencies:
   override:
     - npm install
