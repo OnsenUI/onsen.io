@@ -77,6 +77,12 @@ module.exports = function() {
         return result;
       },
 
+      renderBlogDateShort: function(date) {
+        var date = moment(date);
+        var result = date.format('YYYY-MM-DD');
+        return result;
+      },
+
       getAbstractText: function(contents) {
         var options = {
           include_script: false,
