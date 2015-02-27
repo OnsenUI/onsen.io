@@ -1690,11 +1690,51 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', end
 
 <script>
 $(function() {
+  var showcases = $('.css-component-showcase');
+  var showcaseFrame = $('.css-component-showcase-frame-wrapper');
+
+  function adjust() {
+    showcases.css({
+      transform: 
+        'translateY(-' +
+        (Math.round(showcases.height() / 2) + 1) +
+        'px)'
+    });
+    showcaseFrame.css({
+      transform:
+        'translateY(-' +
+        Math.round(showcaseFrame.height() / 2) +
+        'px)'
+    });
+  }
+
+  adjust();
+
+  var timeoutId = null;
+  $(window).on('resize', function() {
+    if (!timeoutId) {
+      timeoutId = setTimeout(function() {
+        adjust();
+        timeoutId = null;
+      }, 80);
+    }
+  });
+});
+
+$(function() {
   var sections = $('.css-component').toArray();
   var showcases = $('.css-component-showcase');
   var padding = 30;
 
-  $(window).scroll(update);
+  var timeoutId = null;
+  $(window).scroll(function() {
+    if (!timeoutId) {
+      timeoutId = setTimeout(function() {
+        update();
+        timeoutId = null;
+      }, 80);
+    }
+  });
   update();
   
   function update() {

@@ -102,12 +102,13 @@ module.exports = function() {
       },
 
       /**
-       * css highlighter 
+       * highlighter 
        */
-      highlight: function(capture) {
+      highlight: function(capture, language) {
         var code = stripIndent(capture().toString()).trim();
+        var extra = language ? ' class="' + language + '"' : '';
         try {
-          return '<pre class="css-component-highlight"><code>' +
+          return '<pre class="css-component-highlight"><code' + extra + '>' +
             escape(code) + '</code></pre>';
         } catch(e) {
           return e.toString();
@@ -152,7 +153,7 @@ module.exports = function() {
           return '<div class="css-component-example" ' +
             extraAttributes + '><div class="ons-css">' +
             wrapStart + capture().toString() + wrapEnd +
-            '</div></div>\n' + this.highlight(capture);
+           '</div></div>\n' + this.highlight(capture, 'html');
         } catch(e) {
           return e.toString();
         }
