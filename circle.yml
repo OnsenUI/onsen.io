@@ -6,8 +6,6 @@ checkout:
     - git submodule sync
     - git submodule update --init --recursive
     - git submodule foreach git checkout 1.2.2
-    - git submodule foreach git pull
-
 dependencies:
   override:
     - npm install
