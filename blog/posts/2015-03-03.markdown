@@ -1,0 +1,41 @@
+---
+author: andreas
+date: 2015-03-03
+id: new-website-open-source 
+title: "We have a New Website and it's Open Source!"
+---
+
+In conjunction with the release of Onsen UI 1.2.2 we made a complete rehaul of [the website](/) which is now public. In addition to improving the design we've added lots of new content. 
+
+The new documentation is packed with useful information, we've added nightly builds, integrated the blog into the website and we're also releasing the website code publicly on GitHub to make it easier for you to make contributions. 
+
+### Better Documentation
+
+We've updated the documentation and added a new [overview page](/docs.html). From this page you can navigate to all the different parts of the documentation. 
+
+![Documentation Overview](/blog/content/images/2015/Mar/doc-overview.png)
+
+The documentation for every component has been extended as well. We've added information about events emitted by the components, modifiers to alter the styles and more information about the component methods. The components are now divided into categories to make finding them easier.
+
+As an example, please check out the new documentation for [`<ons-alert-dialog>`](/reference/ons-alert-dialog.html) or the new [list of components](/reference/javascript.html).
+
+### Available on GitHub
+
+![GitHub](/blog/content/images/2015/Mar/github-octocat.png)
+
+While we kept the previous website in a private repository we've now decided to make the website public on GitHub. The code is available in the ["onsen.io" repository](https://github.com/OnsenUI/onsen.io).
+
+This makes it's easy for users to easily make changes to the documentation and even add additional content. Please fork the repository and open a [Pull Request](https://help.github.com/articles/using-pull-requests/) if there's anything you want to change.
+
+We would like to add a small plug for [Metalsmith](http://metalsmith.io/) which is the static site generator that we switched to recently. It's a customizable site generator that fits our needs perfectly. Please check it out if you're looking for a fast, reliable and _pluggable_ site generator. 
+
+### New Download page and "Nightly" Builds
+
+Every time a change is made in the "master" branch of the [Onsen UI repository](https://github.com/OnsenUI/OnsenUI) it will now trigger an automatic build. This version can be downloaded by pressing the "Get Latest Build" button on the new [Download page](/download.html#latest-build).
+
+We would like to add a warning that this version is work in progress so we don't recommend using it in a production environment. This code has not been tested on as many devices as a proper release so it may be incompatible with some devices.
+
+For the automatic builds we are using [CircleCI](https://circleci.com/) which is a cloud based continuous integration service.
+
+We hope you enjoy using the new website!
+
