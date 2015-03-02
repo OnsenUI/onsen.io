@@ -1,5 +1,5 @@
 (function() {
-  $('#latest-build').click(function(event) {
+  $('#get-latest-build').click(function(event) {
     event.preventDefault();
 
     var rootUrl = 'https://circleci.com/api/v1/project/OnsenUI/OnsenUI';
