@@ -5,7 +5,7 @@ checkout:
   post:
     - git submodule sync
     - git submodule update --init --recursive
-    - git submodule foreach git checkout master
+    - git submodule foreach git checkout 1.2.2
     - git submodule foreach git pull
 
 dependencies:
@@ -17,8 +17,14 @@ test:
   override:
     - echo "Add tests!"
 deployment:
-  tasks:
+  staging:
     branch: master
     commands:
       - npm install -g gulp
-      - ./scripts/deploy.sh
+      - ./scripts/deploy_staging.sh
+  production:
+    branch: production
+    commands:
+      - npm install -g gulp
+      - ./scripts/deploy_production.sh
+
