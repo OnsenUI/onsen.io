@@ -50,9 +50,9 @@ Onsen UIはAngularJSの上に作られています。そのため、AngularJSの
 </html>
 ```
 
-<h4 id="UsingOnsenUIwithjQueryorwithanyJSframeworks">通常のJavaScriptからOnsen UIを扱う</h4>
+<h4 id="UsingOnsenUIwithjQueryorwithanyJSframeworks">AngularJSを意識せずにOnsen UIを扱う</h4>
 
-Onsen UIはAngularJS以外から使うことが可能です。下記のサンプルは、Onsen UIを通常のJavaScriptのような記述で利用しています。
+Onsen UIはAngularJSを学ばない状態でも使い始めることができます。下記のサンプルは、Onsen UIを通常のJavaScriptのような記述で利用しています。
 
 ```html
 <!doctype html>
@@ -631,6 +631,156 @@ tabbar.on('prechange', function(event) {
 
 <%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
 
+<h3 id="UsingLazyRepeat">レイジーリピート（無限スクロール）を使う</h3>
+
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html)コンポーネントを使うと、DOMには見えている範囲の項目だけが読み込まれます。項目が見えない状態では、DOMから自動的に取り除かれます。[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html)を使うと、パフォーマンスが低下することなく、何百万もの要素を表示することができます。
+
+<%- @partial('codepen.html.eco', { id: "QwrGBm" } ) %>
+
+<h4 id="PreparingLazyRepeat">レイジーリピートのデリゲートを準備する</h4>
+
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html)を使用するためには、リストの情報を持つデリゲートオブジェクトを作成する必要があります。
+
+<h5 id="DelegateAngularJS">AngularJSを用いてデリゲートを作成する</h5>
+
+デリゲートオブジェクトは、ビューからアクセスするためにリストと同じコントローラのスコープに作成します。以下は、`MyDelegate`という名前のデリゲートオブジェクトを作成した例です。
+
+```javascript
+$scope.MyDelegate = {
+  configureItemScope: function(index, itemScope) {
+    console.log(index + "番目の要素を作成します");
+    itemScope.item = {
+      name: '要素 No.' + (index + 1)
+    };
+  },
+  calculateItemHeight: function(index) {
+    return 40;
+  },
+  countItems: function() {
+    return 10000000;
+  },
+  destroyItemScope: function(index, scope) {
+    console.log("要素No. " + index + "を削除します");
+  }
+};
+```
+
+* `configureItemScope`は、その要素に関する情報を返します。このメソッドは、要素の配列を用いて動的に作成されたり、呼び出されます。
+* `calculateItemHeight`は、その要素の高さをピクセル単位で返します。各要素が別の高さを返すことができます。
+* `countItems`は全体の要素数を返します。
+* `destroyItemScope`は要素が取り除かれた場合に呼ばれるメソッドを指定できます。メモリーリークを防ぐために要素を削除したり、イベントリスナーを解除する場合に使用してください。
+
+<h5 id="DelegateJQuery">jQueryを用いてデリゲートを作成する</h5>
+
+```javascript
+var MyDelegate = {
+  createItemContent: function(index, oldContent) {
+    console.log(index + "番目の要素を作成します");
+
+    var $element = $("<span>要素 No."+(index+1)+"</span>");
+    return $element[0];
+  },
+  calculateItemHeight: function(index) {
+    return 40;
+  },
+  countItems: function() {
+    return 10000000;
+  },
+  destroyItemContent: function(index, element) {
+    console.log("要素 No." + index + "を削除します");
+  }
+}
+```
+
+* `createItemContent`は`index`で指定した要素の内容を、HTMLエレメントして返します。
+* `calculateItemHeight`は要素の高さをピクセル単位で返します。各要素が別の高さを返すことができます。
+* `countItems`は全体の要素数を返します。
+* `destroyItemContent`は要素が取り除かれた場合に呼ばれるメソッドを指定できます。メモリーリークを防ぐために要素を削除したり、イベントリスナーを解除する場合に使用してください。
+
+<h4 id="LazyRepeatInHTML">レイジーリピート機能をタグに付与する</h4>
+
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html)は属性として汎用的に使用できます。今回は`ons-list-item`に使用しますが、高さの計算ができる他のタグ（`<div>`タグなど）であれば、すべてのタグに使用できます。`ons-lazy-repeat`をタグに付与するには、下記の例のようにデリゲートを指定します。
+
+AngularJSを使用する場合、通常通りitemプロパティにアクセスすることができます。
+
+```html
+<ons-list>
+  <ons-list-item ons-lazy-repeat="MyDelegate">
+    {{ item.name }}
+  </ons-list-item>
+</ons-list>
+```
+
+AngularJSを使用しない場合、コンテンツは`createItemContent`メソッドで生成されます。そのため、ビューには何も記述する必要がありません。
+
+```html
+<ons-list>
+  <ons-list-item ons-lazy-repeat="MyDelegate">
+  </ons-list-item>
+</ons-list>
+```
+
+<h4 id="LazyRepeatAsync">非同期で内容を生成する</h4>
+
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html)を使うと、非同期で呼び出して生成するコンテンツを要素として表示することができます。これは、HTTPリクエストやデータベースから値を取得して表示するときに便利です。この実装を行う場合、リクエストの呼び出しが完了する前に要素が破棄された場合は、リクエストをキャンセルする必要があることに注意が必要です。
+
+<h5 id="AsynchSampleAngularJS">AngularJSを用いた書き方</h5>
+
+```javascript
+configureItemScope: function(index, itemScope) {
+  if (!itemScope.item) {
+    itemScope.canceler = $q.defer();
+    itemScope.item = {
+      title: 'Item #' + (index + 1),
+      label: '',
+      desc: '',
+      rand: Math.random()
+    };
+
+    $http.get('https://baconipsum.com/api/?type=meat-and-filler&sentences=1', {timeout: itemScope.canceler.promise})
+    .success(function(data) {
+      itemScope.item.desc = data[0];
+      itemScope.item.label = data[0].substr(0, data[0].indexOf(" ")) + 'bacon';
+    })
+    .error(function() {
+      itemScope.item.desc = 'No bacon lorem ipsum';
+      itemScope.item.label = 'No bacon';
+    });
+
+  }
+},
+destroyItemScope: function(index, itemScope) {
+  itemScope.canceler.resolve();
+}
+```
+
+<%- @partial('codepen.html.eco', { id: "gbzLQW" } ) %>
+
+<h5 id="AsynchSampleJQuery">AngularJSを使わない書き方</h5>
+
+```javascript
+createItemContent: function(index, oldContent) {
+  if (oldContent) {
+    return oldContent;
+  }
+
+  var $element = $("<div><span style='opacity: 0.7;'><ons-icon icon='fa-spinner' spin='true'></ons-icon> Loading bacon...</span></div>");
+
+  var request = $.getJSON('https://baconipsum.com/api/?type=meat-and-filler&sentences=1&callback=?', function(data) {
+    $element.text(data[0]);
+  });
+
+  $element.data('request', request);
+  return $element[0];
+},
+destroyItemContent: function(index, element) {
+  var request = $element.data('request');
+  request.abort();
+}
+```
+
+<%- @partial('codepen.html.eco', { id: "YPLpBW" } ) %>
+
 <h3 id="UsingAlert">アラートダイアログを使う</h3>
 
 Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に表示することができます。また、[`<ons-alert-dialog>`](/reference/ons-alert-dialog.html)コンポーネントを用いてカスタムなアラートダイアログを用事することもできます。
@@ -930,6 +1080,30 @@ myCarousel.next({
 
   カルーセルのレイアウトが変更されたり、`refresh()`メソッドが実行された場合に呼ばれます。
 
+- `overscroll`
+
+  項目がオーバースクロール状態になった場合に呼ばれます。コールバック関数には、`carousel`、`activeIndex`および`lastActiveIndex`プロパティを持つオブジェクトが渡されます。
+
+  - `carousel`: カルーセルオブジェクトが格納されます。
+  - `direction`: オーバースクロールの方向（`left`、`right`、`up`もしくは`down`のいずれか）が格納されます。
+  - `activeIndex`: 現在のアクティブなアイテムの番号が格納されます。
+  - `waitToReturn()`: Promiseオブジェクトをとり、それが解決されるまでスクロールが戻らないように指示できます。
+
+  下記の例は`waitToReturn(promise)`メソッドを使用して、処理が完了するまでオーバースクロール状態を維持する例です。
+
+  ```
+  carousel.on('overscroll', function(event) {
+    var deferred = $q.defer(); // AngularJSの$qサービスを使用しています
+    event.waitToReturn(deferred.promise);
+    window.setTimeout(function() {
+      deferred.resolve();
+    }, 3000);
+    // 3秒間カルーセルはオーバースクロール状態を維持します
+  })
+  ```
+
+  <%- @partial('codepen.html.eco', { id: "ByPLyP" } ) %>
+
 <h3 id="UsingModal">モーダルを使う</h3>
 
 [`<ons-modal>`](/reference/ons-modal.html)コンポーネントを使うと、モーダル画面が表示されている間は外の入力操作を禁止することができます。プログレスバーを表示したり、ユーザーの選択を確実に行う場合などに使用されます。
@@ -1021,6 +1195,52 @@ ons.ready(function() {
 - `postshow`、`posthide`
 
   ポップオーバーを開いたり閉じた後に呼ばれます。コールバック関数には、`popover`プロパティを持つオブジェクトが返ります。
+
+<h3 id="UsingPullHook">プルフックを使う</h3>
+
+プルフックコンポーネントは、[`<ons-page>`](/reference/ons-page.html)や[`<ons-scroller>`](/reference/ons-scroller.html)コンポーネントに対して「Pull-To-Refresh（引っ張って更新する）」機能を提供するものです。外部ソース（データベース、RSSフィードやWeb APIなど）からデータを取得する場合に、この機能を便利に活用することができます。
+
+<%- @partial('codepen.html.eco', { id: "WbJogM" } ) %>
+
+<h4 id="ShowingPullHook">プルフックを表示する</h4>
+
+プルフックコンポーネントを表示するには、[`<ons-pull-hook>`](/reference/ons-pull-hook.html)タグを使用します。
+
+```html
+<ons-pull-hook ng-action="load($done)" var="loader">
+  <span ng-switch="loader.getCurrentState()">
+    <span ng-switch-when="initial"><ons-icon size="35px" icon="ion-arrow-down-a"></ons-icon> 更新するにはプルダウンしてください</span>
+    <span ng-switch-when="preaction"><ons-icon size="35px" icon="ion-arrow-up-a"></ons-icon> 手をはなしてください</span>
+    <span ng-switch-when="action"><ons-icon size="35px" spin="true" icon="ion-load-d"></ons-icon> データを読み込んでいます...</span>
+  </span>
+</ons-pull-hook>
+```
+
+プルフックの動作は`ng-action="load($done)"`もしくは`on-action="load(done)"`属性にて指定します。指定した関数は、プルダウンされて、手を離したときに呼び出されます。
+
+プルフックは3つの状態を持ち、それぞれ見た目をカスタマイズすることができます。
+
+* `initial`: デフォルトの状態で、ユーザーが操作する前の状態です。指定した高さを超えてプルダウンされるまでは、この状態となります。
+
+* `preaction`: 手を離したら実行に移れる状態です。この場合でも、上向きにドラッグをすることで、ユーザーは操作をキャンセルすることができます。
+
+* `action`: 実行中の状態です。`$done()`関数が呼ばれたら`initial`状態に戻ります。
+
+<h4 id="PullHookActions">プルフックのアクション</h4>
+
+[`<ons-pull-hook>`](/reference/ons-pull-hook.html)コンポーネントには、実行する動作を定義するための属性として`ng-action`と`on-action`が用意されています。
+
+* `ng-action`: プルダウンしたときの挙動を指定するために使用します。操作が完了した後で`$done()`関数を呼び出します。
+
+* `on-action`: `ng-action`と同様の働きをしますが、AngularJSを使わずに記述できます。操作が完了した後で、`done`関数を呼び出します。
+
+<h4 id="PullHookHeightParamenters">プルフックの高さパラメータ</h4>
+
+[`<ons-pull-hook>`](/reference/ons-pull-hook.html)コンポーネントには、プルダウンしたときのしきい値を指定するための属性を指定できます。
+
+* `height`: この属性でコンポーネントの高さを指定します。この値を超えてプルダウンを行った場合に`preaction`状態に遷移します。デフォルトは64pxです。
+
+* `threshold-height`: 高さのしきい値を指定します。この値を超えてプルダウンを行った場合に`action`状態に遷移します。デフォルトの値は96pxです。マイナス値、もしくは`height`よりも小さな数値を指定した場合は、このプロパティが無効になります。
 
 <h3 id="UsingFormComponents">フォームを使う</h3>
 

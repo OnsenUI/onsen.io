@@ -630,15 +630,15 @@ Lists are frequently used in the configuration pages. Here is a sample list with
 
 <%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
 
-<h3 id="UsingLazyRepeat">Using Lazy Repeat</h3>
+<h3 id="UsingLazyRepeat">Using Lazy Repeat　(or Infinite Scrolling)</h3>
 
-With `ons-lazy-repeat` only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty.
+With [`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty.
 
 <%- @partial('codepen.html.eco', { id: "QwrGBm" } ) %>
 
 <h4 id="PreparingLazyRepeat">Preparing a "delegate" object for Lazy Repeat</h4>
 
-`ons-lazy-repeat` relies on a delegate object that contains all the required information about the list.
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) relies on a delegate object that contains all the required information about the list.
 
 <h5 id="DelegateAngularJS">Delegate object in AngularJS</h5>
 
@@ -698,7 +698,7 @@ var MyDelegate = {
 
 <h4 id="LazyRepeatInHTML">Adding Lazy Repeat to tags</h4>
 
-`onz-lazy-repeat` is a general attribute. In these examples it's used with `ons-list-item` but it's not limited to this component. It works well with any tag where item heights are calculable, such as `<div>` tags. When adding `ons-lazy-repeat` to a tag the delegate object must also be specified: `ons-lazy-repeat="MyDelegate"`.
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) is a general attribute. In these examples it's used with `ons-list-item` but it's not limited to this component. It works well with any tag where item heights are calculable, such as `<div>` tags. When adding [`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) to a tag the delegate object must also be specified: `ons-lazy-repeat="MyDelegate"`.
 
 For AngularJS, item properties can be accessed normally:
 
@@ -721,7 +721,7 @@ In jQuery or pure Javascript, the content is generated in the `createItemContent
 
 <h4 id="LazyRepeatAsync">Another sample: asynchronous calls</h4>
 
-`ons-lazy-repeat` could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic. It is important to remember to cancel the requests if an item is destroyed before the request is finished.
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic. It is important to remember to cancel the requests if an item is destroyed before the request is finished.
 
 <h5 id="AsynchSampleAngularJS">In AngularJS</h5>
 
@@ -1075,7 +1075,7 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
 - `postchange`
 
-  Fired when the active item is changed. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` property.
+  Fired when the active item is changed. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` properties.
 
   - `carousel`: Contains the carousel object.
   - `activeIndex`: The index of the current active item.
@@ -1086,6 +1086,30 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 - `refresh`
 
   Fired when the carousel layout has changed, or `refresh()` method is called.
+
+- `overscroll`
+
+  Fired when the item is overscrolled. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` properties.
+
+  - `carousel`: Contains the carousel object.
+  - `direction`: Overscroll direction. Can be one of `left`, `right`, `up` or `down`.
+  - `activeIndex`: The index of the current active item.
+  - `waitToReturn()`: A method that takes a promise and waits for the promise to be resolved (or rejected) before scrolling back. 
+
+  The following example uses `waitToReturn(promise)` to keep overscroll until some job is done.
+
+  ```
+  carousel.on('overscroll', function(event) {
+    var deferred = $q.defer(); // Use AngularJS $q service
+    event.waitToReturn(deferred.promise);
+    window.setTimeout(function() {
+      deferred.resolve();
+    }, 3000);
+    // The carousel keeps its state for 3 seconds
+  })
+  ```
+  
+  <%- @partial('codepen.html.eco', { id: "ByPLyP" } ) %>
 
 <h3 id="UsingModal">Using Modal</h3>
 
