@@ -157,7 +157,7 @@ module.exports = function(lang) {
         .use(branch('*.html')
           // index page
           .use(paginate({
-            perPage: 10,
+            perPage: 2,
             path: 'blog'
           }))
           .use(function(files, metalsmith, done) {
