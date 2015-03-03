@@ -117,7 +117,14 @@
           <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     
         </div>
+
       </div>
+
+      <div class="blog-feed">
+        <a href="/blog/rss.xml"><i class="fa fa-rss" style="font-size: 16px"></i></a>
+        <a href="/blog/rss.xml">Blog RSS Feed</a>
+      </div>
+
       <% else: %>
       <%- @contents %>
       <% end %>
