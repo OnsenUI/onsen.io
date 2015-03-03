@@ -32,9 +32,7 @@
     fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
   </script>
-  <script>
-    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
-  </script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   <script type="text/javascript">
     (function() {
       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -42,6 +40,7 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
     })();
   </script>
+
 </head>
 
 <body id="blog">
@@ -60,11 +59,7 @@
 
         <div class="article-share">
           <div class="article-share-twitter">
-            <a class="twitter-share-button"
-              href="https://twitter.com/share">
-              Tweet
-            </a>
-   
+            <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%- @getShortenedTitle(100) %>" data-via="Onsen_UI">Tweet</a>
           </div>
           <div class="article-share-fb">
             <div id="fb-root"></div>

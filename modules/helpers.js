@@ -171,6 +171,17 @@ module.exports = function() {
         return this.site.keywords;
       },
 
+      getShortenedTitle: function(len) {
+        var title = this.title || this.site.title;
+
+        if (title.length > len) {
+          return title.substr(0, len - 3).trim() + '...';
+        }
+        else {
+          return title;
+        }
+      },
+
       fileExist: function(path) {
         return fs.existsSync(path);
       },
