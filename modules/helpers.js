@@ -187,6 +187,10 @@ module.exports = function() {
       },
 
       hasAlternateLangPage: function() {
+        if (metalsmith.metadata().isBlog) {
+          return false;
+        }
+
         var alternateLang = this.lang === 'en' ? 'ja' : 'en';
         var alternatePath = metalsmith.source().replace(/_(en|ja)$/, '_' + alternateLang) + '/' + this.origPath;
 
