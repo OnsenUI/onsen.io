@@ -52,9 +52,6 @@
       <div class="article">
         <h2 class="article-title"><%- @title %></h2>
         <div class="article-date"><time datetime="<%- @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time></div>
-        <div class="article-content">
-          <%- @contents %>
-        </div>
 
         <div class="article-share">
           <div class="article-share-twitter">
@@ -66,6 +63,22 @@
           </div>
           <div class="article-share-gplus">
             <div class="g-plusone" data-size="medium"></div>
+          </div>
+        </div>
+
+        <div class="article-content">
+          <%- @contents %>
+        </div>
+
+        <div class="article-newsletter newsletter">
+          <div class="newsletter-inner">
+            <p class="article-newsletter-desc">Want to stay updated on Onsen UI? Sign up here to get the latest news and updates!</p>
+
+            <form>
+              <input type="text" placeholder="your@email.address" name="email">
+              <input type="submit" value="Subscribe">
+            </form>
+            <div class="newsletter-thankyou">Thank you!</div>
           </div>
         </div>
 
@@ -84,6 +97,7 @@
           <div class="article-author-name"><%- @author.name %></div>
           <% end %>
         </div>
+
 
         <div class="article-comments">
           <h3>Comments</h3>

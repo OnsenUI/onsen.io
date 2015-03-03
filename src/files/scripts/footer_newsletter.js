@@ -1,5 +1,5 @@
 $(function() {
-  $('.newsletter-footer form').submit(function() {
+  $('.newsletter form').submit(function() {
     var email = $('input[name=email]', this).val();
 
     $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
@@ -7,7 +7,7 @@ $(function() {
         var ret = JSON.parse(data);
 
         if (ret.status !== undefined && ret.status === 'success') {
-          $('.newsletter-footer form').hide();
+          $('.newsletter form').hide();
           $('.newsletter-thankyou').show();
         } else {
           alert('Something wrong with the request. Sorry.');
