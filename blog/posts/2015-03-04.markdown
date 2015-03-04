@@ -23,7 +23,7 @@ And, finally, some examples! Hover over this code to see a demonstration:
 
 
 <style>
-#example1 {
+#example {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -33,7 +33,7 @@ And, finally, some examples! Hover over this code to see a demonstration:
   -o-transform: rotate3d(0, 0, 0, 0deg);
   transform: rotate3d(0, 0, 0, 0deg);
 }
-#example1:hover {
+#example:hover {
   -webkit-transform: rotate3d(0, 1, 0, 180deg);
   -moz-transform: rotate3d(0, 1, 0, 180deg);
   -o-transform: rotate3d(0, 1, 0, 180deg);
@@ -47,9 +47,9 @@ And, finally, some examples! Hover over this code to see a demonstration:
 <td>
 <pre>
 <code>
-#example1 {
+#example {
   transition: all 0.3s ease-in-out;
-transform: rotate3d(0,0,0,0deg);
+  transform: rotate3d(0,0,0,0deg);
 }
 </code>
 </pre>
@@ -57,9 +57,10 @@ transform: rotate3d(0,0,0,0deg);
 <td>
 <pre>
 <code>
-#example1:hover {
+#example:hover {
   transform: rotate3d(0,1,0,180deg);
 }
+
 </code>
 </pre>
 </td>
@@ -67,7 +68,7 @@ transform: rotate3d(0,0,0,0deg);
 </tbody>
 </table>
 
-Cool, isn't it?
+Pretty cool, isn't it?
 
 However, since some of the CSS3 are still under testing and are not fully supported by all browser, it is advisable to add the corresponding prefixes (*-webkit-*, *-moz-*, *-o-*) to every function depending on the browser where the transitions will be displayed. You have more information about it [here](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions/#Browser_compatibility). An example would be like this:
 
@@ -124,7 +125,7 @@ We are animating here a Pull Hook in order to make it looks like Twitter. Let's 
 </ons-pull-hook>
 ```
 
-<p style='text-align: justify;'>Internally, Pull Hook establishes several states for its own operation which can be accessed by CSS3. These states are the default one, "initial", when Pull Hook is idle; "preaction", when the element is being dragged around; and "action", when it is dropped and starts performing its programmed functionality. As you can see in the previous code, we have included a couple of icons to make it fancy, and now we will transform these icons depending on the transition state.</p>
+Internally, Pull Hook establishes several states for its own operation which can be accessed by CSS3. These states are the default one, "initial", when Pull Hook is idle; "preaction", when the element is being dragged around; and "action", when it is dropped and starts performing its programmed functionality. As you can see in the previous code, we have included a couple of icons to make it fancy, and now we will transform these icons depending on the transition state.
 
 <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 <style>
@@ -134,18 +135,20 @@ We are animating here a Pull Hook in order to make it looks like Twitter. Let's 
     vertical-align: middle;
 }
 </style>
-* <p style='text-align: justify;'>State "initial" (this state also includes the early dragging, since it is not considered "preaction" yet):</p>
+* State "initial" (this state also includes the early dragging, since it is not considered "preaction" yet):
 
 <table style="width:100%;">
 <tbody>
 <tr>
 <td>
 <pre>
+<code>
 ons-pull-hook
 [state="initial"] > .icons > .arrow {
   transition: all 0.2s ease-in-out;
   transform: rotate3d(0,0,1,0deg);
 }
+</code>
 </pre>
 </td>
 <td class="tdIcon">
@@ -153,11 +156,13 @@ ons-pull-hook
 </td>
 <td>
 <pre>
+<code>
 ons-pull-hook
 [state="initial"] > .icons > .loader {
   display: none;
 }
 
+</code>
 </pre>
 </td>
 <td class="tdIcon">
@@ -167,18 +172,20 @@ ons-pull-hook
 </tbody>
 </table>
 
-* <p style='text-align: justify;'>State "preaction" (while dragging it):</p>
+* State "preaction" (while dragging it):
 
 <table style="width:100%;">
 <tbody>
 <tr>
 <td>
 <pre>
+<code>
 ons-pull-hook
 [state="preaction"] > .icons > .arrow {
   transition: all 0.2s ease-in-out;
-  transform: rotate3d(0,0,1,-180deg);
+  transform:rotate3d(0,0,1,-180deg);
 }
+</code>
 </pre>
 </td>
 <td class="tdIcon">
@@ -187,11 +194,13 @@ ons-pull-hook
 </td>
 <td>
 <pre>
+<code>
 ons-pull-hook
 [state="preaction"] > .icons > .loader {
   display: none;
 }
 
+</code>
 </pre>
 </td>
 <td class="tdIcon">
@@ -201,17 +210,19 @@ ons-pull-hook
 </tbody>
 </table>
 
-* <p style='text-align: justify;'>State "action" (when we stop dragging and drop it):</p>
+* State "action" (when we stop dragging and drop it):
 
 <table style="width:100%;">
 <tbody>
 <tr>
 <td>
 <pre>
+<code>
 ons-pull-hook
 [state="action"] > .icons > .arrow {
   display: none;
 }
+</code>
 </pre>
 </td>
 <td class="tdIcon">
@@ -219,10 +230,12 @@ ons-pull-hook
 </td>
 <td>
 <pre>
+<code>
 ons-pull-hook
-[state="action"] > .icons > .loader{
+[state="action"] > .icons > .loader {
   display: inline;
 }
+</code>
 </pre>
 </td>
 <td class="tdIcon">
@@ -232,8 +245,8 @@ ons-pull-hook
 </tbody>
 </table>
 
-<p style='text-align: justify;'>And, of course, when the "action" state is over it will change to "initial" status again, and CSS3 will restore its appearance to the original one using the transition we described in the idle status.</p>
+And, of course, when the "action" state is over it will change to "initial" status again, and CSS3 will restore its appearance to the original one using the transition we described in the idle status.
 
 ### Conclusion
 
-<p style='text-align: justify;'>CSS3 transitions are a really interesting tool to consider for creating smooth animations. They are much lighter and more efficient than JavaScript animations, so we can speed up our interfaces with them. There are plenty of CSS3 transitions examples already out there, check it out on Google and you will be surprised about of the fancy stuff you can do with them!</p>
+CSS3 transitions are a really interesting tool to consider for creating smooth animations. They are much lighter and more efficient than JavaScript animations, so we can speed up our interfaces with them. There are plenty of CSS3 transitions examples already out there, check it out on Google and you will be surprised about the fancy stuff you can do with them!
