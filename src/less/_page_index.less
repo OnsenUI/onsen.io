@@ -92,8 +92,17 @@
 
     .getting-started {
       .site-large-button();
-      transition: all 0.1s ease;
       background-color: @onsen-color;
+
+      &:hover {
+        background-color: #FFEDEB;
+        color: @onsen-color;
+      }
+
+      &:active {
+        background-color: @onsen-color;
+        color: white;
+      }
     }
 
     .download {
@@ -358,6 +367,16 @@
     .getstarted-button {
       .site-large-button();
       background-color: @onsen-color;
+
+      &:hover {
+        background-color: #FFEDEB;
+        color: @onsen-color;
+      }
+
+      &:active {
+        background-color: @onsen-color;
+        color: white;
+      }
     }
   }
 

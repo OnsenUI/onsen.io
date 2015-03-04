@@ -12,24 +12,25 @@
   display: inline-block;
   text-align: center;
   border-radius: 0px;
-  transition: all 0.2s linear;
+  transition: all 0.1s linear;
   outline: none;
   appearance: none;
   -webkit-appearance: none;
-  box-shadow: none;
 
-  &:hover {
-    opacity: 1;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  }
   &:link, &:visited, &:hover, &:active, &:focus {
     text-decoration: none;
     color: white;
   }
+
+  &:hover {
+    background-color: #eee;
+    color: @onsen-navy;
+  }
+
   &:active {
-    opacity: 0.7;
-    transition: all 0s linear;
-    box-shadow: none;
+    background-color: @onsen-navy;
+    color: white;
+    transition: all 0.05s linear;
     outline: none;
   }
 
@@ -42,14 +43,19 @@
   }
 }
 
-.highlight-button {
+.onsen-button, .highlight-button {
   .site-button();
   background-color: @onsen-color;
-}
 
-.onsen-button {
-  .site-button();
-  background-color: @onsen-color;
+  &:hover {
+    background-color: #eee;
+    color: @onsen-color;
+  }
+
+  &:active {
+    background-color: @onsen-color;
+    color: white;
+  }
 }
 
 .site-large-button {
