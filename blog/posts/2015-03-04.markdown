@@ -11,6 +11,8 @@ title: "Using CSS3 Transitions for Smooth Animations"
 
 CSS3 provides a way to create transitions between states with really smooth animations. When we want to modify the style of any element, usually changes are applied instantly. With transitions, this behavior is modifiable, allowing us to easily set not only how long does it takes to change but also the way it does with some simple directives. This customization will give us the possibility to change the look and feel of our applications by just including these easy to create transitions instead of inefficient JavaScript animations.
 
+<!-- more -->
+
 CSS3 transitions are not fully supported in every desktop browser (IE9 and earlier), but all of the main mobile browsers support it. Therefore, they are a great ally to combine with our Onsen UI modern interfaces to make them feel even better. In this post we will review how CSS3 transitions work and make a simple example to animate [Onsen UI's Pull Hook](/blog/sneak-peeking-1-2-2-pull-hook/), so every time we try to update the element it will show a loading animation similar to Twitter's.
 
 ### How CSS3 transitions work
