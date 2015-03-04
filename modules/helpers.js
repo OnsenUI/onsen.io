@@ -171,11 +171,26 @@ module.exports = function() {
         return this.site.keywords;
       },
 
+      getShortenedTitle: function(len) {
+        var title = this.title || this.site.title;
+
+        if (title.length > len) {
+          return title.substr(0, len - 3).trim() + '...';
+        }
+        else {
+          return title;
+        }
+      },
+
       fileExist: function(path) {
         return fs.existsSync(path);
       },
 
       hasAlternateLangPage: function() {
+        if (metalsmith.metadata().isBlog) {
+          return false;
+        }
+
         var alternateLang = this.lang === 'en' ? 'ja' : 'en';
         var alternatePath = metalsmith.source().replace(/_(en|ja)$/, '_' + alternateLang) + '/' + this.origPath;
 

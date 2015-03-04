@@ -434,6 +434,15 @@ mySlidingMenu.openMenu({
 });
 ```
 
+<h5 id="SlidingMenuCloseOnTap">Closing menu by tapping the background</h5>
+
+Using `close-on-tap` attribute of `<ons-sliding-menu>`, the menu will be automatically closed by tapping the background.
+
+```html
+<ons-sliding-menu close-on-tap>
+</ons-sliding-menu>
+```
+
 <h4 id="SettingaboveandbehindpagebyJavaScript">Setting menu and main page with JavaScript</h4>
 
 To change the main and menu page manually, use [`setMainPage()`](/reference/ons-sliding-menu.html#method-setMainPage) and [`setMenuPage()`](/reference/ons-sliding-menu.html#method-setMenuPage) methods. These methods can specify parameters in the second argument.
@@ -562,6 +571,10 @@ A tab can change its content by its active state. To do so, define the underlyin
 </ons-tab>
 ```
 
+<h5 id="TabbarPersistent">Do not reload when switching tabs</h5>
+
+By default, the specified page will be reloaded when the user taps on a tab. Using `persistent` attribute in [`<ons-tab>`](/reference/ons-tab.html), the content will not be reloaded so that the content can be dynamically injected. To know that the tab is switched, you can use [`postchange`](#Tabbarevents) event on `<ons-tabbar>` component.
+
 <h4 id="Tabbarmethods">Managing tab items</h4>
 
 Tab bar have some JavaScript APIs for fine-grain control over the page management. To call them, you should use a `var` attribute as described in the [Calling Component APIs from JavaScript](overview.html#CallingComponentAPIsfromJavaScript) section.
@@ -630,15 +643,15 @@ Lists are frequently used in the configuration pages. Here is a sample list with
 
 <%- @partial('codepen.html.eco', { id: "ohqDk" } ) %>
 
-<h3 id="UsingLazyRepeat">Using Lazy Repeat</h3>
+<h3 id="UsingLazyRepeat">Using Lazy Repeat　(or Infinite Scrolling)</h3>
 
-With `ons-lazy-repeat` only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty.
+With [`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty.
 
 <%- @partial('codepen.html.eco', { id: "QwrGBm" } ) %>
 
 <h4 id="PreparingLazyRepeat">Preparing a "delegate" object for Lazy Repeat</h4>
 
-`ons-lazy-repeat` relies on a delegate object that contains all the required information about the list.
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) relies on a delegate object that contains all the required information about the list.
 
 <h5 id="DelegateAngularJS">Delegate object in AngularJS</h5>
 
@@ -698,7 +711,7 @@ var MyDelegate = {
 
 <h4 id="LazyRepeatInHTML">Adding Lazy Repeat to tags</h4>
 
-`onz-lazy-repeat` is a general attribute. In these examples it's used with `ons-list-item` but it's not limited to this component. It works well with any tag where item heights are calculable, such as `<div>` tags. When adding `ons-lazy-repeat` to a tag the delegate object must also be specified: `ons-lazy-repeat="MyDelegate"`.
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) is a general attribute. In these examples it's used with `ons-list-item` but it's not limited to this component. It works well with any tag where item heights are calculable, such as `<div>` tags. When adding [`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) to a tag the delegate object must also be specified: `ons-lazy-repeat="MyDelegate"`.
 
 For AngularJS, item properties can be accessed normally:
 
@@ -721,7 +734,7 @@ In jQuery or pure Javascript, the content is generated in the `createItemContent
 
 <h4 id="LazyRepeatAsync">Another sample: asynchronous calls</h4>
 
-`ons-lazy-repeat` could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic. It is important to remember to cancel the requests if an item is destroyed before the request is finished.
+[`ons-lazy-repeat`](/reference/ons-lazy-repeat.html) could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic. It is important to remember to cancel the requests if an item is destroyed before the request is finished.
 
 <h5 id="AsynchSampleAngularJS">In AngularJS</h5>
 
@@ -1075,7 +1088,7 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
 - `postchange`
 
-  Fired when the active item is changed. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` property.
+  Fired when the active item is changed. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` properties.
 
   - `carousel`: Contains the carousel object.
   - `activeIndex`: The index of the current active item.
@@ -1086,6 +1099,30 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 - `refresh`
 
   Fired when the carousel layout has changed, or `refresh()` method is called.
+
+- `overscroll`
+
+  Fired when the item is overscrolled. The event will be supplied with an object that contains `carousel`, `activeIndex`, and `lastActiveIndex` properties.
+
+  - `carousel`: Contains the carousel object.
+  - `direction`: Overscroll direction. Can be one of `left`, `right`, `up` or `down`.
+  - `activeIndex`: The index of the current active item.
+  - `waitToReturn()`: A method that takes a promise and waits for the promise to be resolved (or rejected) before scrolling back. 
+
+  The following example uses `waitToReturn(promise)` to keep overscroll until some job is done.
+
+  ```
+  carousel.on('overscroll', function(event) {
+    var deferred = $q.defer(); // Use AngularJS $q service
+    event.waitToReturn(deferred.promise);
+    window.setTimeout(function() {
+      deferred.resolve();
+    }, 3000);
+    // The carousel keeps its state for 3 seconds
+  })
+  ```
+  
+  <%- @partial('codepen.html.eco', { id: "ByPLyP" } ) %>
 
 <h3 id="UsingModal">Using Modal</h3>
 
@@ -1719,7 +1756,7 @@ In order to call those APIs, you need to assign a variable to the component by u
 <ons-navigator var="myNavigator">
 ```
 
-Now, `myNavigator` has become a global accessible variable. It is defined as a `window` property, and also in the AngularJS global scope.
+Now, `myNavigator` has become a global accessible variable. It is defined in the `window` object, and also in the AngularJS global scope.
 
 To use the defined variable, you can refer the variable like the code below.
 
@@ -1740,6 +1777,23 @@ Or, the AngularJS way.
     });
   });
 </script>
+```
+
+<h5 id="ChangingComponentBase">Changing component base object</h5>
+
+As described above, a component defined with `var` attribute will create a property in `window` object. You can change the targeting object if you don't want the global scope to be polluted.
+
+The following example changes the component base to a variable named `onsenComponents`.
+
+```
+var onsenComponents;
+ons.componentBase = onsenComponents;
+```
+
+Then, you can access to the components like the example below.
+
+```
+onsenComponents.myNavigator.doSomething();
 ```
 
 <h4 id="UsingVarAttributeToSpecifyAComponent">Querying a component from the DOM tree</h4>

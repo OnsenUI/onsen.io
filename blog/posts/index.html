@@ -4,16 +4,31 @@ page: blog
 paginate: articles
 ---
 
+
 <% for article in @articles.slice(@pagination.start, @pagination.end + 1): %>
 <section class="article-overview">
 
-  <h2 class="article-overview-title"><a href="<%- @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
+  <h2 class="article-overview-title"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
 
-  <div class="article-overview-date"><%- @renderBlogDate article.date %></div>
+  <div class="article-overview-date"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%- @renderBlogDate article.date %></a></div>
 
-  <p><%= @getAbstractText(article.contents) %></p>
+  <p><%- article.contents %></p>
 
-  <div class="article-overview-more"><a href="<%- @rootUrl %>blog/<%- article.id %>/">READ THIS ARTICLE</a></div>
+  <div class="article-footer">
+    <div class="article-avator">
+      <% if article.author.gravator: %>
+      <img src="//www.gravatar.com/avatar/<%- article.author.gravator %>?s=80" alt="" class="article-avator-image">
+      <% else if article.author.image: %>
+      <img src="<%= article.author.image %>" alt="" class="article-avator-image">
+      <% end %>
+    </div>
+    <div class="article-author-label">AUTHOR</div>
+    <% if article.author.url: %>
+    <div class="article-author-name"><a href="<%- article.author.url %>" target="_blank"><%- article.author.name %></a></div>
+    <% else: %>
+    <div class="article-author-name"><%- article.author.name %></div>
+    <% end %>
+  </div>
 
 </section>
 <% end %>
@@ -32,3 +47,8 @@ paginate: articles
   <p class="blog-pagination-position">PAGE <%= @pagination.num %> OF <%= @pagination.total %></p>
 </nav>
 <% end %>
+
+<div class="blog-feed">
+  <a href="/blog/rss.xml"><i class="fa fa-rss" style="font-size: 16px"></i></a>
+  <a href="/blog/rss.xml">Blog RSS Feed</a>
+</div>

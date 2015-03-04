@@ -183,24 +183,6 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
 
 <script>
   $(function() {
-    $.getJSON('https://cdn.api.twitter.com/1/users/show.json?screen_name=Onsen_UI&callback=?').success(function(data) {
-      if(data && data.followers_count) {
-        $('div.social > a.twitter-follower > strong').text(data.followers_count);
-      }
-    }).error(function() {
-      $('div.social  img.twitter-icon-mini').remove();
-      $('div.social  a.twitter-follower').remove();
-    });
-
-    // event tracking
-    $('.keyvisual .download').click(function() {
-      ga('send', 'event', 'website', 'download');
-    });
-  });
-</script>
-
-<script>
-  $(function() {
     $('.newsletter form').submit(function() {
       var email = $('input[name=email]', this).val();
       ga('send', 'event', 'website', 'email');

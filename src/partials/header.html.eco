@@ -127,8 +127,8 @@
       }
     })($('.language-dialog-button.japanese-version'));    
  
-    <% if @lang == 'en': %>
-    if (browserLanguage() == "ja" && !getCookie('language_dialog_accepted')) {
+    <% if @lang == 'en' and @hasAlternateLangPage(): %>
+    if (browserLanguage() == 'ja' && !getCookie('language_dialog_accepted')) {
       $('.language-dialog-mask').show();
       $('.language-dialog').show();
     }
@@ -152,43 +152,43 @@
     }
   }
 
-  function setCookie(c_name,value,expiredays){
+  function setCookie(c_name, value, expiredays) {
     var path = location.pathname;
     var paths = new Array();
-    paths = path.split("/");
-    if(paths[paths.length-1] != ""){
-      paths[paths.length-1] = "";
-      path = paths.join("/");
+    paths = path.split('/');
+    if(paths[paths.length - 1] != ''){
+      paths[paths.length - 1] = '';
+      path = paths.join('/');
     }
     var extime = new Date().getTime();
-    var cltime = new Date(extime + (60*60*24*1000*expiredays));
+    var cltime = new Date(extime + (60 * 60 * 24 * 1000 * expiredays));
     var exdate = cltime.toUTCString();
-    var s = "";
-    s += c_name + "=" + escape(value);
-    s += "; path="+ path;
+    var s = '';
+    s += c_name + '=' + escape(value);
+    s += '; path='+ path;
     if (expiredays) {
-      s += "; expires=" +exdate+"; ";
+      s += '; expires=' +exdate+'; ';
     } else {
-      s += "; ";
+      s += '; ';
     }
     document.cookie=s;
   } 
  
   function getCookie(c_name) {
-    var st = "";
-    var ed = "";
+    var st = '';
+    var ed = '';
     if (document.cookie.length > 0) {
-      st = document.cookie.indexOf(c_name + "=");
+      st = document.cookie.indexOf(c_name + '=');
       if (st != -1) {
         st = st + c_name.length + 1;
-        ed = document.cookie.indexOf(";", st);
+        ed = document.cookie.indexOf(';', st);
         if (ed == -1) {
           ed = document.cookie.length;
         }
         return unescape(document.cookie.substring(st, ed));
       }
     }
-    return "";
+    return '';
   }
 
 </script>

@@ -14,8 +14,8 @@ module.exports = function(language) {
       url: 'http://anatoo.jp'
     },
     masa: {
-      name: 'Masa',
-      email: 'massie@asial.co.jp',
+      name: 'Masa Tanaka',
+      email: 'masahiro@asial.co.jp',
       url: 'http://www.asial.co.jp/en/',
       gravator: '0b0ed6f4c5962b764d9bdb0ade4aa7ae'
     },
