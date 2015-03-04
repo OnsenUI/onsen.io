@@ -159,7 +159,7 @@ module.exports = function(lang) {
         .use(branch('*.html')
           // index page
           .use(paginate({
-            perPage: 2,
+            perPage: 4,
             path: 'blog'
           }))
           .use(currentPath())

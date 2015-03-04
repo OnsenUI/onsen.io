@@ -8,6 +8,7 @@ var htmlstrip = require('htmlstrip-native').html_strip;
 var slug = require('slug');
 var escape = require('escape-html');
 var stripIndent = require('strip-indent');
+var htmlIntro = require('./html-intro');
 
 marked.setOptions({
   gfm: true,
@@ -184,6 +185,10 @@ module.exports = function() {
 
       fileExist: function(path) {
         return fs.existsSync(path);
+      },
+
+      renderBlogIntro: function(html) {
+        return htmlIntro(html);
       },
 
       hasAlternateLangPage: function() {
