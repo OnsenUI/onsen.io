@@ -1,6 +1,8 @@
 onsen.io
 ====
 
+[![Circle CI](https://circleci.com/gh/OnsenUI/OnsenUI.svg?style=svg)](https://circleci.com/gh/OnsenUI/onsen.io)
+
 [![devDependency Status](https://david-dm.org/OnsenUI/onsen.io/dev-status.svg)](https://david-dm.org/OnsenUI/onsen.io#info=devDependencies)
 
 This repository contains the assets in Onsen UI Website, available on http://onsen.io.
