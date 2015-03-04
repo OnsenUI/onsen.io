@@ -7,42 +7,23 @@ title: "CSS3 transitions to simulate smooth animations"
 
 ![Documentation Overview](/blog/content/images/2015/Mar/css3_transitions.jpg)
 
-<p style='text-align: justify;'>CSS3 provides a way to create transitions  through multiple states that really feels like smooth animations. When we want to modify the style of any element, usually changes are applied instantly right after we indicate it. With transitions, this behavior is modifiable, allowing us to easily set not only how long does it takes to change but also the way it does with some simple directives. This customization will give us the possibility to change the look and feel of our applications by just including these light and easy to make transitions instead of inefficient JavaScript animations.</p>
+CSS3 provides a way to create transitions  through multiple states that really feels like smooth animations. When we want to modify the style of any element, usually changes are applied instantly right after we indicate it. With transitions, this behavior is modifiable, allowing us to easily set not only how long does it takes to change but also the way it does with some simple directives. This customization will give us the possibility to change the look and feel of our applications by just including these light and easy to make transitions instead of inefficient JavaScript animations.
 
-<p style='text-align: justify;'>CSS3 transitions are not fully supported in every desktop browser (IE9 and earlier), but all of the main mobile browsers do it. Therefore, they are a great ally to combine with our Onsen UI modern interfaces to make them feel even better. In this post we will review how CSS3 transitions work and make a simple example to animate [Onsen UI's Pull Hook](/blog/sneak-peeking-1-2-2-pull-hook/), so every time we try to update the element it will show a loading animation similar to Twitter's.</p>
-
+CSS3 transitions are not fully supported in every desktop browser (IE9 and earlier), but all of the main mobile browsers do it. Therefore, they are a great ally to combine with our Onsen UI modern interfaces to make them feel even better. In this post we will review how CSS3 transitions work and make a simple example to animate [Onsen UI's Pull Hook](/blog/sneak-peeking-1-2-2-pull-hook/), so every time we try to update the element it will show a loading animation similar to Twitter's.
 
 ### How CSS3 transitions work
 
-<p style='text-align: justify;'>CSS3 transitions work similarly to a finite state machine: the element is in only one state at a time, and it can change from one state to another when some event (*hovers*, *clicks*, custom ones, etc.) is triggered. With CSS3 we can specify how an element changes by just describing its current and target states. CSS3 will create a smooth transition between these states by applying a cubic Bézier curve and gradually change the element appearance. The good thing is that we don't need to deal with any mathematic function (although we can specify some parameter to increase customization), just describe the origin and the expected result.</p>
+CSS3 transitions work similarly to a finite state machine: the element is in only one state at a time, and it can change from one state to another when some event (*hovers*, *clicks*, custom ones, etc.) is triggered. With CSS3 we can specify how an element changes by just describing its current and target states. CSS3 will create a smooth transition between these states by applying a cubic Bézier curve and gradually change the element appearance. The good thing is that we don't need to deal with any mathematic function (although we can specify some parameter to increase customization), just describe the origin and the expected result.
 
 ![Documentation Overview](/blog/content/images/2015/Mar/fsm.png)
 
-<p style='text-align: justify;'>The way to proceed is the following. For every state, we specify three basic parameters: the CSS properties affected by the transition (width, height, color...); the duration of the actual transition in seconds; the Bézier curve we want to apply. It is also possible to modify the transition delay, but mostly we will want to have 0ms delay, so just omit it. For a complete list of modifiable properties and other information, you can have a look at [Mozilla Developers Docs](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions). For the Bézier curve election, you can choose among "ease", "linear", "ease-in", "ease-out" and "ease-in-out" (also explained in the previous link), or you can specify your own parameters with `cubic-bezier(x1,y1,x2,y2)`. You can have a look at [Cubic Bézier Curve](http://cubic-bezier.com/) to see how it changes depending on the parameters.</p>
+The way to proceed is the following. For every state, we specify three basic parameters: the CSS properties affected by the transition (width, height, color...); the duration of the actual transition in seconds; the Bézier curve we want to apply. It is also possible to modify the transition delay, but mostly we will want to have 0ms delay, so just omit it. For a complete list of modifiable properties and other information, you can have a look at [Mozilla Developers Docs](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions). For the Bézier curve election, you can choose among "ease", "linear", "ease-in", "ease-out" and "ease-in-out" (also explained in the previous link), or you can specify your own parameters with `cubic-bezier(x1,y1,x2,y2)`. You can have a look at [Cubic Bézier Curve](http://cubic-bezier.com/) to see how it changes depending on the parameters.>
 
-<p style='text-align: justify;'>And, finally, some examples! Hover over this code to see a demonstration:</p>
-
-<style>
-pre {
-    padding: 15px 0px 5px 20px;
-}
-</style>
+And, finally, some examples! Hover over this code to see a demonstration:
 
 
 <style>
 #example1 {
-  position: relative;
-  -webkit-transition: all 0.5s linear;
-  -moz-transition: all 0.5s linear;
-  -o-transition: all 0.5s linear;
-  transition: all 0.5s linear;
-}
-#example1:hover {
-  color: red;
-  font-size: 28px;
-}
-
-#example2 {
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -o-transition: all 0.3s ease-in-out;
@@ -52,7 +33,7 @@ pre {
   -o-transform: rotate3d(0, 0, 0, 0deg);
   transform: rotate3d(0, 0, 0, 0deg);
 }
-#example2:hover {
+#example1:hover {
   -webkit-transform: rotate3d(0, 1, 0, 180deg);
   -moz-transform: rotate3d(0, 1, 0, 180deg);
   -o-transform: rotate3d(0, 1, 0, 180deg);
@@ -65,76 +46,67 @@ pre {
 <tr id="example1">
 <td>
 <pre>
+<code>
 #example1 {
-    position: relative;
-    transition:
-    all 0.5s linear;
+  transition: all 0.3s ease-in-out;
+transform: rotate3d(0,0,0,0deg);
 }
+</code>
 </pre>
 </td>
 <td>
 <pre>
+<code>
 #example1:hover {
-    color: red;
-    font-size: 28px;
+  transform: rotate3d(0,1,0,180deg);
 }
-
-</pre>
-</td>
-</tr>
-<tr id="example2">
-<td>
-<pre>
-#example2 {
-    transition: all 0.3s ease-in-out;
-    transform: rotate3d(0,0,0,0deg);
-}
-</pre>
-</td>
-<td>
-<pre>
-#example2:hover {
-    transform: rotate3d(0,1,0,180deg);
-}
-
+</code>
 </pre>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p style='text-align: justify;'>Cool, isn't it?</p>
+Cool, isn't it?
 
-<p style='text-align: justify;'>However, since some of the CSS3 are still under testing and are not fully supported by all browser, it is advisable to add the corresponding prefixes (*-webkit-*, *-moz-*, *-o-*) to every function depending on the browser where the transitions will be displayed. You have more information about it [here](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions/#Browser_compatibility). An example would be like this:</p>
+However, since some of the CSS3 are still under testing and are not fully supported by all browser, it is advisable to add the corresponding prefixes (*-webkit-*, *-moz-*, *-o-*) to every function depending on the browser where the transitions will be displayed. You have more information about it [here](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions/#Browser_compatibility). An example would be like this:
 
 <table style="width:100%;">
 <tbody>
 <tr>
 <td>
 <pre>
-  -webkit-transition: all 0.5s linear;
-     -moz-transition: all 0.5s linear;
-       -o-transition: all 0.5s linear;
-           transition: all 0.5s linear;
+<code>
+#myid {
+-webkit-transition: all 0.5s linear;
+   -moz-transition: all 0.5s linear;
+     -o-transition: all 0.5s linear;
+        transition: all 0.5s linear;
+}
+</code>
 </pre>
 </td>
 <td>
 <pre>
+<code>
+#myid {
   -webkit-transform: rotate3d(0,0,0,0deg);
      -moz-transform: rotate3d(0,0,0,0deg);
        -o-transform: rotate3d(0,0,0,0deg);
           transform: rotate3d(0,0,0,0deg);
+}
+</code>
 </pre>
 </td>
 </tr>
 </tbody>
 </table>
 
-<p style='text-align: justify;'>Normal CSS properties (such as color, font-size, etc.) don't need these prefixes, only the transition-related functionalities. When CSS3 transitions are totally supported, these prefixes won't be necessary anymore, so it is also advisable to include it also without prefix.</p>
+Normal CSS properties (such as color, font-size, etc.) don't need these prefixes, only the transition-related functionalities. When CSS3 transitions are totally supported, these prefixes won't be necessary anymore, so it is also advisable to include it also without prefix.
 
 ### CSS3 transition example to animate Pull Hook like Twitter
 
-<p style='text-align: justify;'>We are animating here a Pull Hook in order to make it looks like Twitter. Let's see a live example first:</p>
+We are animating here a Pull Hook in order to make it looks like Twitter. Let's see a live example first:
 
 <div style="height: 480px; width: 320px; margin: 0 auto;" class="codepen-wrapper">
     <p data-height="480" data-theme-id="11531" data-slug-hash="gbKRXX" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/gbKRXX/'>Pull hook (transitions)</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
