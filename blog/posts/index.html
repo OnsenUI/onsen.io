@@ -12,6 +12,8 @@ paginate: articles
 
   <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%- @renderBlogDate article.date %></a></div>
 
+  <%- @partial('blog-share.html.eco', {id: article.id}) %>
+
   <p><%- article.contents %></p>
 
   <% if article.author: %>
@@ -44,11 +46,11 @@ paginate: articles
 <nav class="blog-pagination">
 
   <% if @pagination.prev: %>
-  <a class="button blog-pagination-newer" href="<%= @getPath(@pagination.prev) %>">&lt; NEWER</a>
+  <a class="button blog-pagination-newer" href="/blog/<%= @pagination.prev.path %>">&lt; NEWER</a>
   <% end %>
 
   <% if @pagination.num < @pagination.total and @pagination.next: %>
-  <a class="button blog-pagination-older" href="<%= @getPath(@pagination.next) %>">OLDER &gt;</a>
+  <a class="button blog-pagination-older" href="/blog/<%= @pagination.next.path %>">OLDER &gt;</a>
   <% end %>
 
   <p class="blog-pagination-position">PAGE <%= @pagination.num %> OF <%= @pagination.total %></p>

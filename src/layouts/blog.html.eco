@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
@@ -16,6 +16,12 @@
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/rss.xml"/>
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="<%= @title %>" />
+  <meta property="og:site_name" content="Onsen UI" />
+  <meta property="og:url" content="<%= @site.url %>/blog/<%= @path %>" />
+  <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
 
   <script src="/vendor/jquery.js"></script>
 
@@ -53,18 +59,7 @@
         <h2 class="article-title"><%- @title %></h2>
         <div class="article-date"><time datetime="<%- @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time></div>
 
-        <div class="article-share">
-          <div class="article-share-twitter">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-text="<%- @getShortenedTitle(100) %>" data-via="Onsen_UI">Tweet</a>
-          </div>
-          <div class="article-share-fb">
-            <div id="fb-root"></div>
-            <div class="fb-share-button" data-href="http://onsen.io/blog/<%- @id %>/" data-type="button_count"></div>
-          </div>
-          <div class="article-share-gplus">
-            <div class="g-plusone" data-size="medium"></div>
-          </div>
-        </div>
+        <%- @partial('blog-share.html.eco', {id: @id}) %>
 
         <div class="article-content">
           <%- @contents %>

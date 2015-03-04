@@ -1,0 +1,16 @@
+
+<div class="article-share">
+  <div class="article-share-twitter">
+    <a 
+      href="https://twitter.com/share" class="twitter-share-button" 
+      data-text="<%- @getShortenedTitle(100) %>" data-via="Onsen_UI" data-url="http://onsen.io/blog/<%= @id %>/">Tweet</a>
+  </div>
+  <div class="article-share-fb">
+    <div id="fb-root"></div>
+    <div class="fb-share-button" data-href="http://onsen.io/blog/<%= @id %>/" data-type="button_count"></div>
+  </div>
+  <div class="article-share-gplus">
+    <div class="g-plusone" data-size="medium" data-href="http://onsen.io/blog/<%= @id %>/"></div>
+  </div>
+</div>
+
