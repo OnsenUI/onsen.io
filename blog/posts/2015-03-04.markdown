@@ -5,7 +5,9 @@ id: css3-transitions-smooth-animations
 title: "Using CSS3 Transitions for Smooth Animations"
 ---
 
-![Documentation Overview](/blog/content/images/2015/Mar/css3_transitions.jpg)
+![CSS3 Transitions](/blog/content/images/2015/Mar/css3_transitions.jpg)
+
+[Este artículo en español](http://frandiox.com/transiciones-css3-animaciones-fluidas)
 
 CSS3 provides a way to create transitions between states with really smooth animations. When we want to modify the style of any element, usually changes are applied instantly. With transitions, this behavior is modifiable, allowing us to easily set not only how long does it takes to change but also the way it does with some simple directives. This customization will give us the possibility to change the look and feel of our applications by just including these easy to create transitions instead of inefficient JavaScript animations.
 
@@ -15,7 +17,7 @@ CSS3 transitions are not fully supported in every desktop browser (IE9 and earli
 
 CSS3 transitions work similarly to a finite state machine: the element is in only one state at a time, and it can change from one state to another when some event (*hovers*, *clicks*, custom ones, etc.) is triggered. With CSS3 we can specify how an element changes by just describing its current and target states. CSS3 will create a smooth transition between these states by applying a cubic Bézier curve and gradually change the element appearance. The good thing is that we don't need to deal with any mathematic function (although we can specify parameters to customize the transition), just describe the origin and the expected result.
 
-![Documentation Overview](/blog/content/images/2015/Mar/fsm.png)
+![State transitions](/blog/content/images/2015/Mar/fsm.png)
 
 The way to proceed is the following. For every state, we specify three basic parameters: the CSS properties affected by the transition (width, height, color...); the duration of the actual transition in seconds; the Bézier curve we want to apply. It is also possible to modify the transition delay, but mostly we will want to have 0ms delay, so we can often omit it. For a complete list of modifiable properties and other information, you can have a look at [Mozilla Developers Docs](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_transitions). For the Bézier curve selection, you can choose among "ease", "linear", "ease-in", "ease-out" and "ease-in-out" (also explained in the previous link), or you can specify your own parameters with `cubic-bezier(x1, y1, x2, y2)`. You can have a look at [Cubic Bézier Curve](http://cubic-bezier.com/) to see how it changes depending on the parameters.
 
