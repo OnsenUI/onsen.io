@@ -15,6 +15,7 @@ var draft = require('metalsmith-drafts');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 var sortObject = require('sort-object');
+var currentPath = require('./current-path');
 
 module.exports = function(lang) {
   return {
@@ -64,6 +65,7 @@ module.exports = function(lang) {
           metalsmith.metadata().cssToc = cssToc;
           done();
         })
+        .use(currentPath())
         .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
         .use(assets({source: './src/files'}))
         .use(require('./css-transform')(lang))
@@ -160,18 +162,7 @@ module.exports = function(lang) {
             perPage: 2,
             path: 'blog'
           }))
-          .use(function(files, metalsmith, done) {
-            metalsmith.metadata().getPath = function(file) {
-              file = file || this;
-              for (var path in files) {
-                if (file === files[path]) {
-                  return path;
-                }
-              }
-              return '???';
-            };
-            done();
-          })
+          .use(currentPath())
           .use(templates({inPlace: true, engine: 'eco'}))
         )
         .use(metalsmithDebug())
@@ -185,6 +176,7 @@ module.exports = function(lang) {
           }
         }))
         .use(branch('!rss.xml')
+          .use(currentPath())
           .use(layouts({
             engine: 'eco',
             directory: './src/layouts/',

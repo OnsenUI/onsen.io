@@ -101,6 +101,7 @@ gulp.task('serve', ['generate'], function() {
       'blog/*',
       'blog/posts/*',
       'blog/content/**/*',
+      'src/partials/*',
       'src/layouts/blog.html.eco'
     ], options, function() {
       runSequence('blog', function() {
