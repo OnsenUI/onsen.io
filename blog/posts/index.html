@@ -5,7 +5,7 @@ paginate: articles
 ---
 
 
-<% for article in @articles.slice(@pagination.start, @pagination.end + 1): %>
+<% for article, index in @articles.slice(@pagination.start, @pagination.end + 1): %>
 <section class="article-overview">
 
   <h2 class="article-overview-title"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
@@ -14,6 +14,7 @@ paginate: articles
 
   <p><%- article.contents %></p>
 
+  <% if article.author: %>
   <div class="article-footer">
     <div class="article-avator">
       <% if article.author.gravator: %>
@@ -29,8 +30,14 @@ paginate: articles
     <div class="article-author-name"><%- article.author.name %></div>
     <% end %>
   </div>
+  <% end %>
+
+  <% if index < @pagination.end - @pagination.start: %>
+  <%- @partial('blog-newsletter.html.eco') %>
+  <% end %>
 
 </section>
+
 <% end %>
 
 <% if @pagination: %>
