@@ -1,83 +1,10 @@
 
-.article-title-base() {
-  text-align: center;
-
-  .lang-en & {
-    font-family: @en-header-font-family;
-  }
-
-  a, a:link, a:visited, a:hover {
-    color: @header-text-color;
-    text-decoration: none;
-
-    .lang-en & {
-      font-family: @en-header-font-family;
-    }
-  }
-}
-
-.article-date-base() {
-  text-align: center;
-  font-size: 19px;
-  font-weight: 200;
-  color: #bbb;
-
-  a, a:link, a:visited, a:hover {
-    color: #bbb;
-    text-decoration: none;
-  }
-}
-
 #blog {
   .content {
     width: 720px;
     padding-top: 50px;
   }
-
-  .blog-newsletter {
-    & {
-      border-top: 1px solid #ddd;
-      border-bottom: 1px solid #ddd;
-      background-color: #f9f9f9;
-      padding: 16px;
-      margin: 40px auto 40px auto;
-      text-align: center;
-      box-sizing: border-box;
-    }
-
-    &-inner {
-      padding: 0;
-      margin: 0;
-    }
-
-    &-desc {
-      font-size: 16px;
-      padding: 0;
-      margin: 0px 0 8px 0;
-    }
-  }
-
   
-  .article-overview {
-
-    margin-bottom: 100px;
-
-    &-title {
-      .article-title-base();
-
-      a:hover {
-        color: @link-color;
-        text-decoration: none;
-      }
-    }
-
-    &-date {
-      .article-date-base();
-      margin-top: 12px;
-    }
-
-  }
-
   .article {
 
     &-share {
@@ -100,12 +27,33 @@
     }
 
     &-title {
-      .article-title-base();
+      text-align: center;
+
+      .lang-en & {
+        font-family: @en-header-font-family;
+      }
+
+      a, a:link, a:visited, a:hover {
+        color: @header-text-color;
+        text-decoration: none;
+
+        .lang-en & {
+          font-family: @en-header-font-family;
+        }
+      }
     }
 
     &-date {
-      .article-date-base();
+      text-align: center;
+      font-size: 19px;
+      font-weight: 200;
+      color: #bbb;
       margin-bottom: 28px;
+
+      a, a:link, a:visited, a:hover {
+        color: #bbb;
+        text-decoration: none;
+      }
     }
 
     &-footer {
@@ -142,6 +90,22 @@
     }
   }
 
+  .article-overview {
+
+    margin-bottom: 100px;
+
+    &-title {
+      a:hover {
+        color: @link-color;
+        text-decoration: none;
+      }
+    }
+
+    &-date {
+      margin-top: 12px;
+    }
+  }
+
 
 }
 
@@ -166,4 +130,27 @@
   text-align: center;
   font-size: 18px;
   font-weight: 200;
+}
+
+.blog-newsletter {
+  & {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #f9f9f9;
+    padding: 16px;
+    margin: 40px auto 40px auto;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  &-inner {
+    padding: 0;
+    margin: 0;
+  }
+
+  &-desc {
+    font-size: 16px;
+    padding: 0;
+    margin: 0px 0 8px 0;
+  }
 }
