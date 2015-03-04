@@ -59,7 +59,7 @@
         <h2 class="article-title"><%- @title %></h2>
         <div class="article-date"><time datetime="<%- @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time></div>
 
-        <%- @partial('blog-share.html.eco', {id: @id}) %>
+        <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
 
         <div class="article-content">
           <%- @contents %>

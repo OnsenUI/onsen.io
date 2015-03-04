@@ -172,9 +172,7 @@ module.exports = function() {
         return this.site.keywords;
       },
 
-      getShortenedTitle: function(len) {
-        var title = this.title || this.site.title;
-
+      getShortenedTitle: function(title, len) {
         if (title.length > len) {
           return title.substr(0, len - 3).trim() + '...';
         }
