@@ -434,6 +434,15 @@ mySlidingMenu.openMenu({
 });
 ```
 
+<h5 id="SlidingMenuCloseOnTap">Closing menu by tapping the background</h5>
+
+Using `close-on-tap` attribute of `<ons-sliding-menu>`, the menu will be automatically closed by tapping the background.
+
+```html
+<ons-sliding-menu close-on-tap>
+</ons-sliding-menu>
+```
+
 <h4 id="SettingaboveandbehindpagebyJavaScript">Setting menu and main page with JavaScript</h4>
 
 To change the main and menu page manually, use [`setMainPage()`](/reference/ons-sliding-menu.html#method-setMainPage) and [`setMenuPage()`](/reference/ons-sliding-menu.html#method-setMenuPage) methods. These methods can specify parameters in the second argument.
@@ -561,6 +570,10 @@ A tab can change its content by its active state. To do so, define the underlyin
   </div>
 </ons-tab>
 ```
+
+<h5 id="TabbarPersistent">Do not reload when switching tabs</h5>
+
+By default, the specified page will be reloaded when the user taps on a tab. Using `persistent` attribute in [`<ons-tab>`](/reference/ons-tab.html), the content will not be reloaded so that the content can be dynamically injected. To know that the tab is switched, you can use [`postchange`](#Tabbarevents) event on `<ons-tabbar>` component.
 
 <h4 id="Tabbarmethods">Managing tab items</h4>
 
@@ -1743,7 +1756,7 @@ In order to call those APIs, you need to assign a variable to the component by u
 <ons-navigator var="myNavigator">
 ```
 
-Now, `myNavigator` has become a global accessible variable. It is defined as a `window` property, and also in the AngularJS global scope.
+Now, `myNavigator` has become a global accessible variable. It is defined in the `window` object, and also in the AngularJS global scope.
 
 To use the defined variable, you can refer the variable like the code below.
 
@@ -1764,6 +1777,23 @@ Or, the AngularJS way.
     });
   });
 </script>
+```
+
+<h5 id="ChangingComponentBase">Changing component base object</h5>
+
+As described above, a component defined with `var` attribute will create a property in `window` object. You can change the targeting object if you don't want the global scope to be polluted.
+
+The following example changes the component base to a variable named `onsenComponents`.
+
+```
+var onsenComponents;
+ons.componentBase = onsenComponents;
+```
+
+Then, you can access to the components like the example below.
+
+```
+onsenComponents.myNavigator.doSomething();
 ```
 
 <h4 id="UsingVarAttributeToSpecifyAComponent">Querying a component from the DOM tree</h4>

@@ -438,6 +438,15 @@ mySlidingMenu.openMenu({
 });
 ```
 
+<h5 id="SlidingMenuCloseOnTap">背景のタップで非表示にする</h5>
+
+`<ons-sliding-menu>`の`close-on-tap`属性を使用すると、背景をタップするだけでメニューが自動的に非表示になります。
+
+```html
+<ons-sliding-menu close-on-tap>
+</ons-sliding-menu>
+```
+
 <h4 id="SettingaboveandbehindpagebyJavaScript">JavaScriptからページを指定する</h4>
 
 プログラムからページを指定する場合は、`setMainPage()`と`setMenuPage()`メソッドを使用します。これらのメソッドでは、2番目の引数にパラメータを指定できます。
@@ -564,6 +573,10 @@ ons.ready(function() {
   </div>
 </ons-tab>
 ```
+
+<h5 id="TabbarPersistent">タブの切り替え時に再読み込みを行わない</h5>
+
+[`<ons-tab>`](/reference/ons-tab.html)コンポーネントの`persistent`属性を使用すると、ユーザーがタブを切り替えたときにタブの内容がリロードされなくなります。コンテンツを動的に切り替えたい場合に使用してください。タブが変更されたことを知るには、[`postchange`](#Tabbarevents)イベントを使用すると良いでしょう。
 
 <h4 id="Tabbarmethods">タブバーアイテムの管理</h4>
 
@@ -1756,6 +1769,23 @@ AngularJSを用いる場合は、下記のようにして実行できます。
     });
   });
 </script>
+```
+
+<h5 id="ChangingComponentBase">コンポーネントの基底オブジェクトを変更する</h5>
+
+上記の通り、`var`属性で定義されたコンポーネントは、`window`オブジェクトにそのプロパティが作成されます。グローバルスコープの汚染が気になる場合は、対象オブジェクトを変更することができます。
+
+下記の例は、`onsenComponents`という名前の変数に、コンポーネントの基底オブジェクトを変更しています。
+
+```
+var onsenComponents;
+ons.componentBase = onsenComponents;
+```
+
+こうすることで、下記のようにコンポーネントにアクセスすることができます。
+
+```
+onsenComponents.myNavigator.doSomething();
 ```
 
 <h4 id="UsingVarAttributeToSpecifyAComponent">DOMツリーからコンポーネントを検索する</h4>
