@@ -1,24 +1,48 @@
 <div class="need-help">
-  <h3>Need Help?</h3>
+  <% if @lang == 'en': %>
+    <h3>Need Help?</h3>
 
-  <p>
-    If you have any questions, please ask them on <a href="http://stackoverflow.com/questions/tagged/onsen-ui">Stack Overflow</a> using the 'onsen-ui' tag. The Onsen UI team and your peers in the community will work together to help solve your issues.
-  </p>
+    <p>
+      If you have any questions, please ask them on <a href="http://stackoverflow.com/questions/tagged/onsen-ui">Stack Overflow</a> using the 'onsen-ui' tag. The Onsen UI team and your peers in the community will work together to help solve your issues.
+    </p>
 
-  <p>
-    For bug reports and feature requests use our <a href="http://github.com/OnsenUI/OnsenUI/issues">GitHub Issues</a> page.
-  </p>
+    <p>
+      For bug reports and feature requests use our <a href="http://github.com/OnsenUI/OnsenUI/issues">GitHub Issues</a> page.
+    </p>
 
-  <p>
-    You may also find helpful information in the resources below:
-  </p>
+    <p>
+      You may also find helpful information in the resources below:
+    </p>
 
-  <ul>
-    <li><a href="/guide/overview.html">Onsen UI Guide</a></li>
-    <li><a href="https://github.com/OnsenUI/OnsenUI" target="_blank">GitHub OnsenUI/OnsenUI</a></li>
-    <li><a href="http://stackoverflow.com/questions/tagged/onsen-ui">Stack Overflow 'onsen-ui' tag</a></li>
-    <li><a href="https://github.com/OnsenUI/OnsenUI/issues" target="_blank">GitHub Issues</a></li>
-    <li><a href="http://docs.angularjs.org/guide/" target="_blank">Guide to AngularJS Documentation</a></li>
-  </ul>
+    <ul>
+      <li><a href="/guide/overview.html">Onsen UI Guide</a></li>
+      <li><a href="https://github.com/OnsenUI/OnsenUI" target="_blank">GitHub OnsenUI/OnsenUI</a></li>
+      <li><a href="http://stackoverflow.com/questions/tagged/onsen-ui">Stack Overflow 'onsen-ui' tag</a></li>
+      <li><a href="https://github.com/OnsenUI/OnsenUI/issues" target="_blank">GitHub Issues</a></li>
+      <li><a href="http://docs.angularjs.org/guide/" target="_blank">Guide to AngularJS Documentation</a></li>
+    </ul>
+  <% else: %>
+    <h3>お困りですか?</h3>
 
+    <p>
+      Onsen UIに関する質問は、<a href="http://ja.stackoverflow.com/questions/tagged/onsen-ui">Stack Overflowにてonsen-uiタグ</a>を付与してください。Onsen UIチームはあなたの問題解決をお手伝いします。
+    </p>
+
+    <p>
+      バグ報告や機能要望については、<a href="http://github.com/OnsenUI/OnsenUI/issues">GitHub Issues</a>に記載をお願いいたします。
+    </p>
+
+    <p>
+      あわせて、下記の情報も参考にしてください。
+    </p>
+
+    <ul>
+      <li><a href="/guide/overview.html">Onsen UIガイド</a></li>
+      <li><a href="https://github.com/OnsenUI/OnsenUI" target="_blank">GitHub OnsenUI/OnsenUI</a></li>
+      <li><a href="http://ja.stackoverflow.com/questions/tagged/onsen-ui">Stack Overflowのonsen-uiタグ（日本語）</a></li>
+      <li><a href="http://stackoverflow.com/questions/tagged/onsen-ui">Stack Overflowのonsen-uiタグ（英語）</a></li>
+      <li><a href="https://github.com/OnsenUI/OnsenUI/issues" target="_blank">GitHub Issues</a></li>
+      <li><a href="http://docs.angularjs.org/guide/" target="_blank">AngularJSのドキュメント</a></li>
+    </ul>
+  <% end %>
 </div>
