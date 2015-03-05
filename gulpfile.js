@@ -13,8 +13,10 @@ var siteGenerator = require('./modules/metalsmith');
 //--
 
 var lang = argv.lang === 'en' ? 'en' : 'ja';
+var env = argv.production ? 'production' : 'staging';
 
 gutil.log('Language: --lang=' + lang);
+gutil.log('Environment: ' + env);
 gutil.log('Source: \'./src/documents_' + lang + '\'');
 gutil.log('Destination: \'./out_' + lang + '\'');
 
@@ -23,15 +25,18 @@ gutil.log('Destination: \'./out_' + lang + '\'');
 //////////////////////////////
 gulp.task('generate', ['less', 'metalsmith', 'blog']);
 
+//////////////////////////////
+// blog
+//////////////////////////////
 gulp.task('blog', function(done) {
-  siteGenerator(lang).blog(done);
+  siteGenerator(lang, env === 'staging').blog(done);
 });
 
 //////////////////////////////
 // metalsmith
 //////////////////////////////
 gulp.task('metalsmith', function(done) {
-  siteGenerator(lang).site(done);
+  siteGenerator(lang, env === 'staging').site(done);
 });
 
 //////////////////////////////
@@ -116,7 +121,7 @@ gulp.task('serve', ['generate'], function() {
 //////////////////////////////
 gulp.task('deploy', ['clean', 'generate'], function() {
   var aws,
-    fn = 'aws_' + lang + (argv.production ? '_prod' : '') + '.json';
+    fn = 'aws_' + lang + (env == 'production' ? '_prod' : '') + '.json';
 
   try {
     aws = JSON.parse(fs.readFileSync(path.join(__dirname, fn)));
@@ -142,7 +147,7 @@ gulp.task('deploy', ['clean', 'generate'], function() {
       path.dirname = 'OnsenUI/build/' + path.dirname;
     }));
 
-  var headers = {'Cache-Control': 'max-age=900, no-transform, public'};
+  var headers = env == 'production' ? {'Cache-Control': 'max-age=900, no-transform, public'} : {'Cache-Control': 'no-cache'};
 
   var stream = merge(site, templates, build)
     .pipe($.awspublish.gzip())

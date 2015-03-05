@@ -17,7 +17,7 @@ var browserSync = require('browser-sync');
 var sortObject = require('sort-object');
 var currentPath = require('./current-path');
 
-module.exports = function(lang) {
+module.exports = function(lang, isStaging) {
   return {
     site: function(done) {
       metalsmith(__dirname + '/../')
@@ -40,6 +40,8 @@ module.exports = function(lang) {
           }
         }))
         .use(function(files, metalsmith, done) {
+          setImmediate(done);
+
           var dict = {};
           for (var path in files) {
             var file = files[path];
@@ -53,21 +55,27 @@ module.exports = function(lang) {
             }
           }
           metalsmith.metadata().componentCategoryDict = sortObject(dict);
-
-          done();
         })
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
         .use(function(files, metalsmith, done) {
+          setImmediate(done);
+
           var cssFile = files['reference/css.html'];
           var cssToc = cssFile.toc;
           delete cssFile.toc;
           metalsmith.metadata().cssToc = cssToc;
-          done();
         })
         .use(currentPath())
         .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
         .use(assets({source: './src/files'}))
+        .use(function(files, metalsmith, done) {
+          if (isStaging) {
+            assets({source: './src/staging_files'})(files, metalsmith, done);
+          } else {
+            setImmediate(done);
+          }
+        })
         .use(require('./css-transform')(lang))
         .use(redirect({
           '/components.html' : '/reference/javascript.html',
