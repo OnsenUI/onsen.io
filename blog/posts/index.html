@@ -11,7 +11,7 @@ paginate: articles
 
   <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%- @renderBlogDate article.date %></a></div>
 
-  <%- @partial('blog-share.html.eco', {id: article.id}) %>
+  <%- @partial('blog-share.html.eco', {id: article.id, blogTitle: article.title}) %>
 
   <div><%- @renderBlogIntro(article.contents) %></div>
 
