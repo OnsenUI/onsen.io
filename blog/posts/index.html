@@ -13,7 +13,7 @@ paginate: articles
 
   <%- @partial('blog-share.html.eco', {id: article.id, blogTitle: article.title}) %>
 
-  <div><%- @renderBlogIntro(article.contents) %></div>
+  <div><%- @renderArticleIntroAsHTML(article.contents) %></div>
 
   <div class="article-overview-readmore">
     <a class="site-button" href="<%= @rootUrl %>blog/<%- article.id %>/">READ MORE</a>

@@ -22,6 +22,7 @@
   <meta property="og:site_name" content="Onsen UI" />
   <meta property="og:url" content="<%= @site.url %>/blog/<%= @path %>" />
   <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
+  <meta property="og:description" content="<%= @renderArticleIntroAsText(@contents, 200) %>" />
 
   <script src="/vendor/jquery.js"></script>
 

@@ -9,6 +9,7 @@ var slug = require('slug');
 var escape = require('escape-html');
 var stripIndent = require('strip-indent');
 var htmlIntro = require('./html-intro');
+var htmlExcerpts = require('./html-excerpt');
 
 marked.setOptions({
   gfm: true,
@@ -185,8 +186,12 @@ module.exports = function() {
         return fs.existsSync(path);
       },
 
-      renderBlogIntro: function(html) {
+      renderArticleIntroAsHTML: function(html) {
         return htmlIntro(html);
+      },
+
+      renderArticleIntroAsText: function(html) {
+        return htmlExcerpts(html, 200);
       },
 
       hasAlternateLangPage: function() {
