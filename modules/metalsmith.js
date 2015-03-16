@@ -110,8 +110,10 @@ module.exports = function(lang, isStaging) {
         .destination('./out_en/blog/')
         .metadata(require('../config.js')('en'))
         .use(function(files, metalsmith, done) {
+          setImmediate(done);
           metalsmith.metadata().isBlog = true;
-          done();
+          var site = metalsmith.metadata().site;
+          site.url = site.url + '/blog/';
         })
         .use(draft())
         .use(require('./helpers')())
@@ -180,7 +182,7 @@ module.exports = function(lang, isStaging) {
           destination: 'rss.xml',
           feedOptions: {
             title: 'Onsen UI Blog',
-            url: 'http://onsen.io/blog'
+            url: 'http://onsen.io/'
           }
         }))
         .use(branch('!rss.xml')
