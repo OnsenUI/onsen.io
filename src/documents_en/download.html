@@ -7,22 +7,64 @@ needHelp: true
 
 <h2>Download</h2>
 
+<p>To download Onsen UI as a .ZIP archive, please click this button:</p>
+
+<a class="site-button" href="/OnsenUI/build/onsenui.zip">Download v<%- @framework.version %></a>
+
 <h3>Installing with Bower</h3>
 
-<p>You can download Onsen UI with <a href="http://bower.io" target="_blank">bower</a>:</p>
+<p>You can also download Onsen UI using <a href="http://bower.io" target="_blank">bower</a>:</p>
 
 <pre><code>$ bower install onsenui</pre></code>
 
-<h3>Download as a .ZIP archive</h3>
+<h3 id="latest-build">Latest build</h3>
 
-<p>To download Onsen UI as a .ZIP archive, please click the <strong>Download</strong> button.</p>
+<p>You can also get latest build version in development on the <a href="https://github.com/OnsenUI/OnsenUI">"master" branch</a>. Click the button below to download it. This package is generated every time a change is made so it should be used with caution!</p>
 
-<a class="site-button" href="/OnsenUI/project_templates/onsen_master_detail.zip">Download v<%- @framework.version %></a>
+<button class="site-button" id="get-latest-build">Get the latest build!</button>
 
-<h3 id="latest-build">Latest Build</h3>
+<h3 id="download-templates">Download a template</h3>
 
-<p>You can also get latest build version in development on the <a href="https://github.com/OnsenUI/OnsenUI">"master" branch</a>. Click the <strong>Get Latest Build</strong> button to download it. This package is generated every time a change is made so it should be used with caution!</p>
+<p>If you want to get started quickly you can chose one of the ready-made templates before. They are interactive so you can try playing around with them.<p>
 
-<button class="site-button" id="get-latest-build">Get Latest Build</button>
+<p>Each of the templates implements a common design pattern in mobile apps.</p>
+
+<div class="templates-container">
+<div class="flex-item">
+  <div class="template-title">Master-Detail</div>
+  <a href="/OnsenUI/project_templates/gen/master_detail/www/index.html" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_master_detail.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_master_detail.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/gen/master_detail/www/index.html" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-title">Sliding menu</div>
+  <a href="/OnsenUI/project_templates/gen/sliding_menu/www/index.html" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_sliding_menu.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_sliding_menu.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/gen/sliding_menu/www/index.html" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-title">Tab bar</div>
+  <a href="/OnsenUI/project_templates/gen/tab_bar/www/index.html" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_tab_bar.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_tab_bar.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/OnsenUI/project_templates/gen/tab_bar/www/index.html" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item center">
+  <div class="template-title">Split view</div>
+  <a href="/OnsenUI/project_templates/gen/split_view/www/index.html" target="_blank" class="template-link"><i class="fa fa-external-link"></i>Open<a>
+  <div class="template-download"><a class="btn-download" href="/OnsenUI/project_templates/onsen_split_view.zip" onclick="trackOutboundLink('/OnsenUI/project_templates/onsen_split_view.zip')">Download</a></div>
+  <div class="template-iframe-landscape">
+    <iframe src="/OnsenUI/project_templates/gen/split_view/www/index.html" width="570" height="320"></iframe>
+  </div>
+</div>
+</div>
 
 <script src="<%= @rootUrl %>scripts/latest_build.js"></script>
