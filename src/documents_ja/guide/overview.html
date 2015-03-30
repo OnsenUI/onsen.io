@@ -130,7 +130,7 @@ var options = {
   onTransitionEnd: function() {} // アニメーションが完了した際によばれるコールバック
 };
 myNavigator.pushPage("page2.html", options);
-</script>      
+</script>
 ```
 
 上記のコードのように、遷移時のオプションを`pushPage()`メソッドに渡すことができます。
@@ -297,7 +297,7 @@ pages[pages.length - 2].destroy();
 <ons-bottom-toolbar inline>
    <div class="center">Bottom Inline Toolbar</div>
    <div class="left">Label</div>
-</ons-bottom-toolbar> 
+</ons-bottom-toolbar>
 ```
 
 <h4 id="Androidbackbutton">Androidの戻るボタンへの対応</h4>
@@ -336,7 +336,8 @@ ons.ready(function() {
 
 <h5 id="prepushandprepopevent">`prepush`と`prepop`イベント</h5>
 
-これらのイベントは、pushPageとpopPageの前に発火します。`event`オブジェクトには、下記のパラメータが備わっています。
+`prepush`は、pushPage、replacePage、resetToPageの前に発火します。`prepop`は、popPageの前に発火します。
+`event`オブジェクトには、下記のパラメータが備わっています。
 
 - `currentPage`: 現在の`page`オブジェクト。詳細は、[ページスタックを管理する](#managing-page-stacks)を参照してください
 - `cancel()`: 画面遷移をキャンセルする
@@ -344,7 +345,8 @@ ons.ready(function() {
 
 <h5 id="postpushandpostpopevent">`postpush`と`postpop`イベント</h5>
 
-これらのイベントは、pushPageとpopPageが実行された後に発火します。`event`オブジェクトには、下記のパラメータが備わっています。
+`postpush`は、pushPage、replacePage、resetToPageの後に発火します。`postpop`は、popPageの後に発火します。
+`event`オブジェクトには、下記のパラメータが備わっています。
 
 - `leavePage`: 現在のページの`page`オブジェクト
 - `enterPage`: 新しいページの`page`オブジェクト
@@ -858,7 +860,7 @@ Onsen UIでは、3種類の汎用的なアラートダイアログを簡単に�
   <div class="alert-dialog-footer">
     <button class="alert-dialog-button" ng-click="alertDialog.hide(); alertDialog.show()">OK</button>
   </div>
-</ons-alert-dialog>      
+</ons-alert-dialog>
 </ons-template>
 
 <script>
@@ -897,7 +899,7 @@ ons.ready(function() {
   });
 });
 </script>
-``` 
+```
 
 <%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
@@ -945,7 +947,7 @@ ons.ready(function() {
     // e.dialogにはDialogViewオブジェクトが格納される
     e.cancel());
   });
-  ``` 
+  ```
 
 - postshow、posthide
 
@@ -957,7 +959,7 @@ ons.ready(function() {
 
 それぞれのカルーセルアイテムは[`<ons-carousel-item>`](/reference/ons-carousel-item.html)コンポーネントで表現されます。[`<ons-carousel>`](/reference/ons-carousel.html)コンポーネントは、複数の`<ons-carousel-item>`コンポーネントを格納するコンテナの役割を持ちます。
 
-<h4 id="ShowingFullScreenCarousel">全画面のカルーセルを表示する</h4> 
+<h4 id="ShowingFullScreenCarousel">全画面のカルーセルを表示する</h4>
 
 全画面のカルーセルを表示するには、[`<ons-carousel>`](/reference/ons-carousel.html)コンポーネントに`fullscreen`属性を指定します。
 
@@ -974,7 +976,7 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "xbbzOQ" } ) %>
 
-<h4 id="ShowingCarouselInAPage">ページ内にカルーセルを表示する</h4> 
+<h4 id="ShowingCarouselInAPage">ページ内にカルーセルを表示する</h4>
 
 カルーセルを他のコンポーネントの内部に表示する場合は、CSSを用いてその高さと幅を指定します。幅が指定されていない場合は、`100%`を指定したものとして扱われます。
 
@@ -1140,8 +1142,8 @@ myCarousel.next({
 
 ```html
 <ons-template id="popover.html">
-  <ons-popover 
-  style="height: 200px; width: 200px" 
+  <ons-popover
+  style="height: 200px; width: 200px"
   animation="fade">
       <ons-page>
         ポップオーバーの内容
@@ -1150,7 +1152,7 @@ myCarousel.next({
 </ons-template>
 <script>
 ons.ready(function() {
-  var targetElement = document.getElementById("myButton"); 
+  var targetElement = document.getElementById("myButton");
   var popover = ons.createPopover('popover.html')
   .then(function(popover) {
       popover.show(targetElement);
@@ -1623,7 +1625,7 @@ AngularJS方式で記述する場合は、`ng-ジェスチャーイベント名`
 </div>
 <div ons-keyboard-inactive>
   キーボードが隠れている時に表示されるコンテンツです。
-</div> 
+</div>
 ```
 
 JavaScriptでキーボードの状態を取得するには、`ons.softwareKeyboard`オブジェクトを使用できます。
@@ -1709,7 +1711,7 @@ Onsen UIアプリでは、デフォルトで戻るボタンが押されると、
 
 ```javascript
 ons.setDefaultDeviceBackButtonListener(function() {
-  if (navigator.notification.confirm("本当に閉じてもいいですか？", 
+  if (navigator.notification.confirm("本当に閉じてもいいですか？",
     function(index) {
       if (index == 1) { // OKボタンが押された
         navigator.app.exitApp(); // アプリを閉じる
@@ -1897,7 +1899,7 @@ document.addEventListener("pageinit", function(e) {
 $(document).on('ons-navigator:init', '#my-navigator', function(event) {
    var navigator = event.component;
    navigator.pushPage('login.html');
-}); 
+});
 ```
 
 <h4 id="Componentevents">コンポーネントのイベント</h4>

@@ -332,7 +332,8 @@ ons.ready(function() {
 
 <h5 id="prepushandprepopevent">Prepush and prepop events</h5>
 
-`prepush` and `prepop` events are fired before the pushPage and popPage. `event` object has the following parameters.
+`prepush` events are fired before the pushPage, replacePage and resetToPage. `prepop` events are fired before the popPage.
+`event` object has the following parameters.
 
 - `currentPage`: Page object. See [Managing Page Stacks](#managing-page-stacks) for details.
 - `cancel()`: Call to cancel transition.
@@ -340,7 +341,8 @@ ons.ready(function() {
 
 <h5 id="postpushandpostpopevent">Postpush and postpop events</h5>
 
-`postpush` and `postpop` events are fired after the pushPage and popPage. `event` object has the following parameters.
+`postpush` events are fired after the pushPage, replacePage and resetToPage. `postpop` events are fired after the popPage.
+`event` object has the following parameters.
 
 - `leavePage`: Page object of the current page.
 - `enterPage`: Page object of the new page.
@@ -1107,7 +1109,7 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
   - `carousel`: Contains the carousel object.
   - `direction`: Overscroll direction. Can be one of `left`, `right`, `up` or `down`.
   - `activeIndex`: The index of the current active item.
-  - `waitToReturn()`: A method that takes a promise and waits for the promise to be resolved (or rejected) before scrolling back. 
+  - `waitToReturn()`: A method that takes a promise and waits for the promise to be resolved (or rejected) before scrolling back.
 
   The following example uses `waitToReturn(promise)` to keep overscroll until some job is done.
 
@@ -1121,7 +1123,7 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
     // The carousel keeps its state for 3 seconds
   })
   ```
-  
+
   <%- @partial('codepen.html.eco', { id: "ByPLyP" } ) %>
 
 <h3 id="UsingModal">Using Modal</h3>
