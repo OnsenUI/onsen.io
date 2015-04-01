@@ -40,7 +40,7 @@ $(function() {
           avatar_url = 'https://avatars.githubusercontent.com/u/0?v=2'; 
         }
 
-        $copy.find('.github-widget-commiter-image').attr('src', avatar_url)
+        $copy.find('.github-widget-commiter-image').attr('src', avatar_url + '&s=56')
           .parent().attr('href', commit.html_url);
 
         $copy.appendTo($('.github-widget')).show();
