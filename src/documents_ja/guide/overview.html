@@ -907,6 +907,21 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
+`ons.createDialog()` メソッドには、`options`オブジェクトも渡すことができます。 その中の`options.parentScope`パラメータでは、ダイアログ内のスコープが継承するスコープオブジェクトを指定することができます。
+
+```javascript
+angular.module('myApp').controller('MyController', function($scope) {
+  ons.ready(function() {
+    ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
+      $scope.dialog = dialog;
+    });
+  });
+
+  // この変数は、ダイアログのスコープ内でも使えるようになります。
+  $scope.myVariable = 'Hello!';
+});
+```
+
 <h4 id="UsingDialogViewObject">`DialogView`オブジェクトを使う</h4>
 
 `DialogView`オブジェクトを通じて、ダイアログの操作や情報を取得できます。下記のメソッドを有しています。
@@ -1163,6 +1178,21 @@ ons.ready(function() {
     });
 });
 </script>
+```
+
+`ons.createPopover()`メソッドには、`options`オブジェクトも渡すことができます。 その中の`options.parentScope`パラメータでは、ポップオーバー内のスコープが継承するスコープオブジェクトを指定することができます。
+
+```javascript
+angular.module('myApp').controller('MyController', function($scope) {
+  ons.ready(function() {
+    ons.createPopover('popover.html', {parentScope: $scope}).then(function(popover) {
+      $scope.popover = popover;
+    });
+  });
+
+  // この変数は、ポップオーバーのスコープ内でも使えるようになります。
+  $scope.myVariable = 'Hello!';
+});
 ```
 
 `ons.createPopover()`関数が呼ばれると、下記のメソッドを持つ`PopoverView`オブジェクトが`Promise`形式で返されます。
@@ -1841,6 +1871,9 @@ Onsen UIのコンポーネントはCustom Elements形式ではありますが、
 
 コンポーネントのなかには、イベントに対応したものがあります。イベントを使うと、コンポーネントの挙動を上書きし、挙動をカスタマイズすることができます。
 
+それぞれのコンポーネントがサポートしているイベントの一覧については、コンポーネントのページを参照してください。
+`<ons-navigator>`は、[これらのイベント](/reference/ons-navigator.html#events-summary)を発します。
+
 イベントにハンドラーを追加するには、コンポーネントの`on()`、`off()`および`once()`メソッドを使用します。そのために前述の通り、コンポーネントに変数を割り当てる必要があります。
 
 ```html
@@ -1876,6 +1909,18 @@ AngularJSのイベント処理に精通している方は、`ng-click`ハンド�
 
 どちらの場合でも、fastclickライブラリーを用いることで、イベントの検出に300msの遅延は発生しません。そのため、すばやくユーザーの挙動に反応します。
 
+<h4 id="Attributeevents">イベントハンドラ属性</h4>
+
+コンポーネントのイベントハンドラは、HTML属性を使って追加することもできます。それらの属性は全て、イベント名の前に`ons-`が付いた名前になります。`<ons-navigator>`の発した`prepop`イベントを捉えるには、`ons-prepop`属性を使います。
+
+```html
+<ons-navigator ons-prepop="doSomething()">
+  ...
+</ons-navigator>
+```
+
+属性の値はAngularの式である必要があります。そのため、AngularJSを使用していないときは、これらの属性を使うことはできません。
+
 <h4 id="Pageinitevent">ページ初期化のイベント</h4>
 
 [`<ons-page>`](/reference/ons-page.html)の初期化が完了すると、`pageinit`イベントが発生します。このイベントを用いて、各ページの挙動を変更してください。
@@ -1895,7 +1940,7 @@ document.addEventListener("pageinit", function(e) {
 </ons-page>
 ```
 
-<h4 id="ComponentInitEvent">コンポーネント初期化のイベント</h4>
+<h4 id="ComponentInitEvent">コンポーネントのDOMイベント</h4>
 
 すべてのコンポーネントは、初期化時に`ons-component-name:init`イベントを発行します。このイベントを用いると、コンポーネントを初期化した直後に特定の処理を記述できます。初期化されたコンポーネントは、コールバック関数にて`component`プロパティとして取得できます。
 
@@ -1903,6 +1948,16 @@ document.addEventListener("pageinit", function(e) {
 $(document).on('ons-navigator:init', '#my-navigator', function(event) {
    var navigator = event.component;
    navigator.pushPage('login.html');
+});
+```
+
+他の全てのコンポーネントイベントはDOMイベントとしても発火され、イベント名の前にはコンポーネント名が付きます。このDOMイベントは、コンポーネントイベントの全てのプロパティを継承します。
+
+```javascript
+$(document).on('ons-dialog:preshow', '#my-dialog', function(event) {
+  if (dontShowDialog()) {
+    event.cancel();
+  }
 });
 ```
 
