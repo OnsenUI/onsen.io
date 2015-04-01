@@ -10,7 +10,7 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
       <h2><img src="/images/index/keyvisual-subheader-text-ja.png" alt="Custom Elements対応のUIフレームワーク" height="100%"></h2>
       <img src="/images/index/keyvisual-small-ja.png" class="keyvisual-small">
       <a class="getting-started" href="/guide/getting_started.html">今すぐ始める</a><!--
-      --><a class="download" href="/OnsenUI/project_templates/onsen_master_detail.zip">ダウンロード(v<%- @framework.version %>)</a>
+      --><a class="download" href="download.html">ダウンロード(v<%- @framework.version %>)</a>
     </div>
 
     <div class="social">
@@ -180,15 +180,6 @@ title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
   </div>
 
 </div>
-
-<script>
-  $(function() {
-    // event tracking
-    $('.keyvisual .download').click(function() {
-      ga('send', 'event', 'website', 'download');
-    });
-  });
-</script>
 
 <script src="<%= @rootUrl %>vendor/moment.js"></script>
 <script src="<%= @rootUrl %>scripts/github_commits.js"></script>
