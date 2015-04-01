@@ -1,7 +1,7 @@
 
 var md5 = require('MD5');
 
-module.exports = function(language) {
+module.exports = function(language, isStaging) {
   var authors = {
     andreas: {
       name: 'Andreas Argelius',
@@ -69,6 +69,7 @@ module.exports = function(language) {
     env: env,
     rootUrl: '/',
     lang: language,
+    isStaging: isStaging,
     site: env[language],
 
     framework: {

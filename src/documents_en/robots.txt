@@ -1,0 +1,9 @@
+# robotstxt.org/
+
+User-agent: *
+<% if @isStaging: %>
+Disallow: /
+<% else: %>
+Sitemap: http://<%= if @site.lang == 'ja' then 'ja.' else '' %>onsen.io/sitemap.xml
+<% if @lang != 'ja': %>Sitemap: http://<%= if @site.lang == 'ja' then 'ja.' else '' %>onsen.io/blog/sitemap.xml<% end %>
+<% end %>

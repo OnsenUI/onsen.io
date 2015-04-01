@@ -5,6 +5,7 @@ var layouts = require('metalsmith-layouts');
 var assets = require('metalsmith-assets');
 var collections = require('metalsmith-collections');
 var markdown = require('metalsmith-markdown');
+var sitemap = require('metalsmith-sitemap');
 var branch = require('metalsmith-branch');
 var permalinks = require('metalsmith-permalinks');
 var metalsmithDebug = require('metalsmith-debug');
@@ -23,7 +24,7 @@ module.exports = function(lang, isStaging) {
       metalsmith(__dirname + '/../')
         .clean(false)
         .source('./src/documents_' + lang)
-        .metadata(require('../config.js')(lang))
+        .metadata(require('../config.js')(lang, isStaging))
         .use(draft())
         .use(require('./helpers')())
         .use(require('./import-api-docs')(lang))
@@ -64,22 +65,43 @@ module.exports = function(lang, isStaging) {
           var cssFile = files['reference/css.html'];
           var cssToc = cssFile.toc;
           delete cssFile.toc;
+
           metalsmith.metadata().cssToc = cssToc;
         })
         .use(currentPath())
-        .use(layouts({engine: 'eco', directory: './src/layouts/', default: 'default.html.eco'}))
+        .use(branch('!robots.txt')
+          .use(layouts({
+            engine: 'eco', 
+            directory: './src/layouts/',
+            default: 'default.html.eco'
+          }))
+        )
         .use(assets({source: './src/files'}))
-        .use(function(files, metalsmith, done) {
-          if (isStaging) {
-            assets({source: './src/staging_files'})(files, metalsmith, done);
-          } else {
-            setImmediate(done);
-          }
-        })
         .use(require('./css-transform')(lang))
         .use(redirect({
           '/components.html' : '/reference/javascript.html',
           '/guide/components.html' : '/reference/javascript.html'
+        }))
+        .use(branch('*.html').use(currentPath()))
+        .use(function(files, metalsmith, done) {
+          setImmediate(done);
+
+          for (var file in files) {
+            if (file.match(/\.html$/)) {
+              files[file].path = file;
+            }
+          }
+        })
+        .use(branch('robots.txt').use(templates({
+          inPlace: true, engine: 'eco'
+        })))
+        .use(sitemap({
+          ignoreFiles: [/\.gitignore/],
+          output: 'sitemap.xml',
+          hostname: 'http://' + (isStaging ? 's.' : '') + (lang === 'ja' ? 'ja.' : '') + 'onsen.io',
+          defaults: {
+            priority: 0.5
+          }
         }))
         .destination('./out_' + lang)
         .build(function(error) {
@@ -196,6 +218,13 @@ module.exports = function(lang, isStaging) {
         .use(assets({
           source: './blog/content',
           destination: './content'
+        }))
+        .use(sitemap({
+          output: 'sitemap.xml',
+          hostname: 'http://' + (isStaging ? 's.' : '') + (lang === 'ja' ? 'ja.' : '') + 'onsen.io',
+          defaults: {
+            priority: 0.5
+          }
         }))
         .build(function(error) {
           if (error) {
