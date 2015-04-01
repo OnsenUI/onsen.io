@@ -906,6 +906,22 @@ ons.ready(function() {
 
 <%- @partial('codepen.html.eco', { id: "zxxaGa" } ) %>
 
+
+The `ons.createDialog()` method also accepts an `options` object. One of the parameters, `options.parentScope`, can be used to pass a scope object that the inner scope of the dialog will inherit from.
+
+```javascript
+angular.module('myApp').controller('MyController', function($scope) {
+  ons.ready(function() {
+    ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
+      $scope.dialog = dialog;
+    });
+  });
+
+  // This variable will be available in the dialog scope as well.
+  $scope.myVariable = 'Hello!';
+});
+```
+
 <h4 id="UsingDialogViewObject">Using the `DialogView` object</h4>
 
 `DialogView` object is the main object that contains the dialog information. It has following methods to provide fine-grain control.
@@ -1169,6 +1185,21 @@ ons.ready(function() {
   });
 });
 </script>
+```
+
+The `ons.createPopover()` method also accepts an `options` object. One of the parameters, `options.parentScope`, can be used to pass a scope object that the inner scope of the popover will inherit from.
+
+```javascript
+angular.module('myApp').controller('MyController', function($scope) {
+  ons.ready(function() {
+    ons.createPopover('popover.html', {parentScope: $scope}).then(function(popover) {
+      $scope.popover = popover;
+    });
+  });
+
+  // This variable will be available in the popover scope as well.
+  $scope.myVariable = 'Hello!';
+});
 ```
 
 When the `ons.createPopover()` function is called, it will return a `Promise` object. The object resolves to the `PopoverView` object which has following methods:
@@ -1849,6 +1880,8 @@ Even though the Onsen UI components are custom elements based, you can query the
 
 Some components supports events. By using those events, you can hook your code to a specific action in the component and customize the behavior.
 
+For a list of events that a component supports, please see the component page. The `<ons-navigator>` emits [these events](/reference/ons-navigator.html#events-summary).
+
 To add a handler to a event, use `on()`, `off()` and `once()` method of the target component. Therefore, you need to define a variable of the component, as described in the previous section.
 
 ```html
@@ -1884,6 +1917,18 @@ Also, if you are familiar with AngularJS events, you can also get the same event
 
 In both cases, thanks to the fastclick library, there is no 300ms delay when detecting the event. This means the app responds much quicker to the user interactions.
 
+<h4 id="Attributeevents">Event handler attributes</h4>
+
+Component event handlers can also be added using HTML attributes. These attributes are all prefixed with `ons-` followed by the event name. To catch the `prepop` event emitted by the `<ons-navigator>` the `ons-prepop` attributes is used:
+
+```html
+<ons-navigator ons-prepop="doSomething()">
+  ...
+</ons-navigator>
+```
+
+The value of the attribute should be an Angular expression, so in the case where you are not using AngularJS these attributes can't be used.
+
 <h4 id="Pageinitevent">Page init event</h4>
 
 `pageinit` event is called after [`<ons-page>`](/reference/ons-page.html) is initialized. Use this event to alter the behavior on each pages.
@@ -1903,7 +1948,7 @@ document.addEventListener("pageinit", function(e) {
 </ons-page>
 ```
 
-<h4 id="ComponentInitEvent">Component init event</h4>
+<h4 id="ComponentInitEvent">Component DOM events</h4>
 
 All components fire a `ons-component-name:init` event when they are initialized. This event is useful when you want to access and execute the component method right after the initialization. The component initialized can be obtained as `component` property in the callback function.
 
@@ -1911,6 +1956,16 @@ All components fire a `ons-component-name:init` event when they are initialized.
 $(document).on('ons-navigator:init', '#my-navigator', function(event) {
    var navigator = event.component;
    navigator.pushPage('login.html');
+});
+```
+
+All other component events are also fired as DOM events and the event name is prefixed with the component name. This DOM event will inherit all properties from the component event.
+
+```javascript
+$(document).on('ons-dialog:preshow', '#my-dialog', function(event) {
+  if (dontShowDialog()) {
+    event.cancel();
+  }
 });
 ```
 
