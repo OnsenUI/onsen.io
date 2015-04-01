@@ -3,7 +3,7 @@
   <div class="article-share-twitter">
     <a 
       href="https://twitter.com/share" class="twitter-share-button" 
-      data-text="<%= @getShortenedTitle(@blogTitle, 10) %>" data-via="Onsen_UI" data-url="http://onsen.io/blog/<%= @id %>/">Tweet</a>
+      data-text="<%= @getShortenedTitle(@blogTitle, 100) %>" data-via="Onsen_UI" data-url="http://onsen.io/blog/<%= @id %>/">Tweet</a>
   </div>
   <div class="article-share-fb">
     <div id="fb-root"></div>
