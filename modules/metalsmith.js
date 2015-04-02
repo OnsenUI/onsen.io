@@ -221,7 +221,7 @@ module.exports = function(lang, isStaging) {
         }))
         .use(sitemap({
           output: 'sitemap.xml',
-          hostname: 'http://' + (isStaging ? 's.' : '') + (lang === 'ja' ? 'ja.' : '') + 'onsen.io',
+          hostname: 'http://' + (isStaging ? 's.' : '') + (lang === 'ja' ? 'ja.' : '') + 'onsen.io/blog/',
           defaults: {
             priority: 0.5
           }
