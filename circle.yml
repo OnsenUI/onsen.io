@@ -22,13 +22,13 @@ deployment:
   staging:
     branch: master
     commands:
-      - cd OnsenUI; git pull; git checkout master
+      - cd OnsenUI; git checkout master
       - npm install -g gulp
       - ./scripts/deploy_staging.sh
   production:
     branch: production
     commands:
-      - cd OnsenUI; git pull; git checkout `git tag | grep -v "\-" | tail -n 1` # Check out latest stable version.
+      - cd OnsenUI; git checkout `git tag | grep -v "\-" | tail -n 1` # Check out latest stable version.
       - npm install -g gulp
       - ./scripts/deploy_production.sh
 
