@@ -22,7 +22,6 @@ deployment:
   staging:
     branch: master
     commands:
-      - cd OnsenUI; git checkout master
       - npm install -g gulp
       - ./scripts/deploy_staging.sh
   production:
