@@ -59,6 +59,7 @@ gulp.task('less', function() {
       browsers: ['last 2 versions'],
       cascade: false
     }))
+    .pipe($.cssmin())
     .pipe(gulp.dest('./out_' + lang + '/css/'));
 });
 
