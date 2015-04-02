@@ -33,7 +33,6 @@
   <% end %>
 
   <script src="/vendor/jquery.js"></script>
-  <script src="/vendor/jquery.lazyloadxt.min.js"></script>
 
   <script src="//use.typekit.net/vwb2tfq.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
@@ -41,6 +40,7 @@
 </head>
 
 <body id="<%- @page %>">
+
 
   <%- @partial('header.html.eco') %>
 
@@ -107,9 +107,8 @@
 
   <%- @partial('footer.html.eco') %>
 
-  <script src="<%= @rootUrl %>scripts/sticky.js"></script>
+  <script src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script>
-
   // iframe lazy loader
   $(function() {
     $.extend($.lazyLoadXT, {
@@ -124,9 +123,9 @@
       iframe.lazyLoadXT();
     }
   });
-
   </script>
 
+  <script src="/scripts/sticky.js"></script>
   <script src="/scripts/tracking.js"></script>
   <script src="/scripts/navigation_highlighter.js"></script>
   <script src="/vendor/highlight.min.js"></script>
