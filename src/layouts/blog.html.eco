@@ -24,7 +24,7 @@
   <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
   <meta property="og:description" content="<%= @renderArticleIntroAsText(@contents, 200) %>" />
 
-  <script src="/vendor/jquery.js"></script>
+  <script defer src="/vendor/jquery.js"></script>
 
   <script src="//use.typekit.net/vwb2tfq.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
@@ -119,7 +119,10 @@
 
   <%- @partial('footer.html.eco') %>
 
-  <script src="/scripts/tracking.js"></script>
+  <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
+  <script defer src="/scripts/default.js"></script>
   <script src="/vendor/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
 </body>
 </html>

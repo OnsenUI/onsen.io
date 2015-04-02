@@ -30,10 +30,18 @@
   <link rel="alternate" href="<%= @getAlternateLangPage() %>" hreflang="<%= @getAlternateLang() %>" />
   <% end %>
 
-  <script src="/vendor/jquery.js"></script>
+  <script defer src="/vendor/jquery.js"></script>
 
   <script src="//use.typekit.net/vwb2tfq.js"></script>
   <script>try{Typekit.load();}catch(e){}</script>
+
+  <script>
+    window.SITE_ENV = {
+      lang: <% if @lang == 'en': %>'en'<% else: %>'ja'<% end %>,
+      hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
+    };
+  </script>
+  
 
 </head>
 
@@ -105,28 +113,10 @@
 
   <%- @partial('footer.html.eco') %>
 
-  <script src="/vendor/jquery.lazyloadxt.min.js"></script>
-  <script>
-  // iframe lazy loader
-  $(function() {
-    $.extend($.lazyLoadXT, {
-      autoInit: false,
-      edgeY: 0,
-      srcAttr: 'data-src',
-      throttle: 1000
-    });
-
-    var iframe = $('iframe');
-    if (iframe.length > 0) {
-      iframe.lazyLoadXT();
-    }
-  });
-  </script>
-
-  <script src="/scripts/sticky.js"></script>
-  <script src="/scripts/tracking.js"></script>
-  <script src="/scripts/navigation_highlighter.js"></script>
+  <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
+  <script defer src="/scripts/default.js"></script>
   <script src="/vendor/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
 
 </body>
 </html>
