@@ -10,6 +10,7 @@ checkout:
   post:
     - git submodule sync
     - git submodule update --init --recursive
+    - cd OnsenUI; git checkout `git tag | grep -v "\-" | tail -n 1` # Check out latest stable version.
 dependencies:
   override:
     - npm install
@@ -27,7 +28,6 @@ deployment:
   production:
     branch: production
     commands:
-      - cd OnsenUI; git checkout `git tag | grep -v "\-" | tail -n 1` # Check out latest stable version.
       - npm install -g gulp
       - ./scripts/deploy_production.sh
 
