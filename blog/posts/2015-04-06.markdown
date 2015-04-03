@@ -1,0 +1,60 @@
+---
+author: andi
+date: 2015-04-06
+id: onsen-ui-1-2-2-pull-to-refresh-infinite-list 
+title: "Onsen UI 1.3 is out, with new awesome features and partian Windows Phone 8.1 support!"
+---
+
+Dear users, we are happy to announce that Onsen UI 1.3 has just been released. In this new version, you can find not only the classic bug fixes and improvements, but also new awesome features that will improve the user experience. One of the main features introduced with this version of Onsen UI is a partial support for Windows Phone 8.1 platform! In this article we will introduce some of the main features we have integrated in the framework, but we invite you to also take a look at the full version of the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md) to understand better which are the changes and how to update your apps.
+
+<!-- more -->
+
+You can download Onsen UI from our [website](http://onsen.io/), fork our [GitHub repository](https://github.com/OnsenUI/OnsenUI) or, if you want to use Bower, execute the following command:
+
+```bash
+bower install onsenui
+```
+
+First of all, let's talk about the feature that can, probably, be considered the most appealing of this new version of Onsen UI: the support for Windows Phone 8.1 platform.
+
+### Windows Phone 8.1 support
+
+As you know, Onsen UI has been created mainly to improve the development of apps based on [Apache Cordova](https://cordova.apache.org/). Since Apace Cordova officialy supports Windows platform and, since a large portion of developers, that use Onsen UI to implement the user interface of their apps, have expressed they interest of making their apps available also for Windows Phone platform, we have decided that was time, for us, to support also this emerging platform. We strongly support the concept of Hybrid App, that's why we want to give, to everybody, the possibility to use our product on all the main platforms available on the market, despite their market share. That's why, the Windows support is just a natural step in this direction.
+
+Actually, we are able only to provide a partial support for Windows platform. There are still a couple of elements that are not working properly and, some animations, are still not smooth as in Android and iOS, but we are confident that there will be improvements in the future.
+Since the release of Windows 10 is planned for this summer, the have planned to offer full support when it will be available on the market.
+
+
+
+### Event Handler attributes
+
+Since this release, many Onsen UI elements have been extended with Event Handler attributes, such `ons-preopen`, `ons-close`, `ons-destroy` etc. You can find a list of all the elements, in which this feature is implemented, inside the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+
+Some of these events were already supported by onsen, but the way to implement them was not intuitive and user friendly. That's why we decided to map them with attributes, making there implementation easy and fast.
+
+Lets' now take a look a some of them with this CodePen example:
+
+<br>
+<p data-height="268" data-theme-id="0" data-slug-hash="XJQozg" data-default-tab="result" data-user="andipavllo" class='codepen'>See the Pen <a href='http://codepen.io/andipavllo/pen/XJQozg/'>Sliding Menu</a> by Andi Pavllo (<a href='http://codepen.io/andipavllo'>@andipavllo</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+<br>
+
+As you can see, we have just added the Event Handler attributes at the `ons-sliding-menu` element and defined the relative AngularJS $scope methods.
+
+### Navigator replacePage() method added
+
+A new functionality has been added to the Navigator element. Using the method `repacePage()`, is possible to replace the current page with another page, at the same level of the stack. The method takes, as input, `pageUrl`, which can be either a HTML document or an `ons-template`, and some optional attributes like:
+
+* *animation:* animation name. Available animations are `slide`, `simpleslide`, `lift`, `fade` and `none`.
+* *onTransitionEnd:* function that is called when the transition has ended.
+
+
+### What's next?
+
+We will continue trying to make Onsen UI the best framework possible. To do that we need your help! If you enjoy using Onsen UI please spread the word so we can grow the community!
+
+With this release we're getting very close to having implemented all the features we want to include in Onsen UI. We will focus our efforts on making the existing components better, more intuitive and improve stability. We're also interested in extending support to more devices like Windows Phones and also make it possible to integrate Onsen UI with the new Google Material Design spec.
+
+If you have a feature that you would like to see in an upcoming version of Onsen UI please feel free to tell us by opening an issue on our [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). You're also welcome to open a [pull request](https://github.com/OnsenUI/OnsenUI/pulls) to fix bugs, correct mistakes or even implement a new feature. We will happily accept contributions if we deem them good enough. 
+
+Thank you for using Onsen UI and stay tuned for more updates!
