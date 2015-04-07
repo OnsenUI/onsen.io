@@ -1,11 +1,20 @@
 ---
-author: andi
+author: fran
 date: 2015-04-08
-id: onsen-ui-partial-support-for-windows-universal-apps
-title: "Onsen UI now has partial support for Windows Universal Apps!"
+id: onsen-ui-supports-windows-phone
+title: "Onsen UI now supports Windows Phone 8.1!"
 ---
 
-As you know, Onsen UI has been created mainly to improve the development of apps based on [Apache Cordova](https://cordova.apache.org/). Since Apace Cordova officially supports Windows platform and, since a large portion of developers, that use Onsen UI to implement the user interface of their apps, have expressed they interest of making their apps available also for Windows Universal platform, we have decided that was time, for us, to support also this emerging platform. We strongly support the concept of Hybrid App, that's why we want to give, to everybody, the possibility to use our product on all the main platforms available on the market, despite their market share. For us, the Windows support is just a natural step in this direction.
+![Windows Phone](/blog/content/images/2015/Apr/onsen_windows.png)
 
-Actually, we are able only to provide a partial support for Windows Universal platform. There is still a couple of elements that are not working properly and, some animations, are still not smooth as in Android and iOS, but we are confident that there will be improvements in the future. We will release soon a document containing all the issues related to Windows Universal app development with Onsen UI.
-Since the release of Windows 10 is planned for this summer, the have planned to offer full support only when it will be available on the market.
+And finally it is here, more hybrid and cross-platform than ever: your mobile apps developed with Onsen UI are now able to run on Windows Phone platform!
+
+Miscrosoft's platform is getting popular and it is expectable to rise its numbers when Windows 10 arrives, and Onsen UI will help you to reach this market with the same effort than creating apps for the already present Android and iOS. Why just score two points when you can get three with just one hit!
+
+<!-- more -->
+
+[Apache Cordova](https://cordova.apache.org/) officially supports Windows Universal platform since there is an increasing number of developers, so in Onsen UI we decided that it was time to support this emerging platform as well. Of course, Windows has historically been *slighly* hard to support in the same way than the other main platforms, but we are making great effort to overcome this gap.
+
+Up to date we have fixed many incompatibilities that made applications crash in Windows Universal, and we are currently solving glitches and minor misbehavior that may occur in some situations with certain elements, but the bulk of the process is already done! In the incoming weeks we will keep testing (and, hopefully, receiving feedback from you!) in order to make apps in Windows Phone feel as smooth as in Android or iOS.
+
+We will provide soon a document containing all the known issues related to Windows Universal app development with Onsen UI. We are confident to fix all of it with the help of the community and make Onsen UI a great bet for cross-platform applications!
