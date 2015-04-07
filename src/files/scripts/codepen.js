@@ -30,4 +30,10 @@ $(function() {
 
     return false;
   });
+
+  $(".resize-btn").on("click", function(elm) {
+    var hash = $(elm.target).data("slug-hash");
+    $(".codepen-content-" + hash).toggleClass("expanded");
+    return false;
+  });
 });
