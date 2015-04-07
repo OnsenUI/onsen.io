@@ -37,7 +37,7 @@ ons.createDialog('dialog.html', {parentScope: $scope}).then(function(dialog) {
 });
 ```
 
-The dialog scope dialog will now be a child to the `$scope` variable in the example above. Thus, the methods as well as the data can be accessed inside the dialog.
+The dialog scope will now be a child to the `$scope` variable in the example above. Thus, the methods as well as the data can be accessed inside the dialog.
 
 In this simple example the feature is used to do data binding with form elements inside a dialog:
 
