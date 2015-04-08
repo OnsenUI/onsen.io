@@ -1,0 +1,28 @@
+---
+author: andi
+date: 2015-04-06
+id: type-definitions-onsenui-typescript
+title: "Type definitions for Onsen UI: Developing with TypeScript"
+---
+
+<span style="float:left;">[![Definitely Typed](/blog/content/images/2015/Apr/standard-flat.svg)](http://definitelytyped.org/)</span>
+![Onsen UI 1.3](/blog/content/images/2015/Apr/typescript_onsenui.png)
+
+As part of the new utilities introduced in  [1.3.0 version](blog/onsenui-1-3-released/), Onsen UI finally hugs [**TypeScript**](http://www.typescriptlang.org). Don't worry, we won't port Onsen UI to TypeScript nor OnScript, but we've got **type definitions** to support those who prefer a strongly typed development!
+
+These definitions will inform you about the existing objects, functions and parameters while you develop with Onsen UI, and will automagically check that your app doesn't mess up with function and variable types.
+
+<!-- more -->
+
+In the next lines we will show how to get these definitions and how to use them to develop with Onsen UI.
+
+### onsenui.d.ts in Definitely Typed
+
+<span style="float:right;">![Definitely Typed](/blog/content/images/2015/Apr/dt-logo.png)</span>
+ [Definitely Typed](http://definitelytyped.org/) is a project that aims to provide high quality [TypeScript type definitions](https://github.com/borisyankov/DefinitelyTyped) for third party libraries written in Javascript, so every developer can include them in a TypeScript project. They accept only checked and tested definitions to ensure the quality of the content, and Onsen UI is now part of it with the new definitions that have just been merged. You can find the [onsenui.d.ts file here](https://github.com/borisyankov/DefinitelyTyped/tree/master/onsenui).
+
+### Including onsenui.d.ts
+
+#### Visual Studio
+
+#### Sublime Text
