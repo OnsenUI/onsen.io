@@ -1,0 +1,26 @@
+---
+author: fran
+date: 2015-04-08
+id: onsen-ui-supports-windows-phone
+title: "Onsen UI now supports Windows Phone 8.1!"
+---
+
+![Windows Phone](/blog/content/images/2015/Apr/onsen_windows.png)
+
+More hybrid and cross-platform than ever: your mobile apps developed with Onsen UI now run on Windows Phone!
+
+Miscrosoft's platform is getting popular and its popularity is expected to keep rising when Windows 10 arrives. Onsen UI will help you to reach this market with the same code that is already running on Android and iOS. You can now support three platforms with the same effort as supporting one would take.!
+
+<!-- more -->
+
+Since [Apache Cordova](https://cordova.apache.org/) now officially supports Windows Universal there is an increasing number of developers. We decided that it was time to support this emerging platform as well (Windows Phone 8.1, Windows 8.1 and IE 11). Of course, Windows has historically been *slighly* hard to support in the same way as other main platforms, but we are making great effort to overcome this gap.
+
+![Windows Phone](/blog/content/images/2015/Apr/windows_onsen_app_medium.png)
+
+Up to date we have fixed many incompatibilities that made applications crash in Windows Universal, and we are currently solving glitches and minor misbehavior that may occur in some situations with certain elements, but the bulk of the process is already done. In the coming weeks we will keep testing (and, hopefully, receive feedback from you!) in order to make apps in Windows Phone feel as smooth as in Android or iOS. We will soon provide a document containing all the known issues related to Windows Universal app development with Onsen UI. We are confident to fix all of it with the help of the community and make Onsen UI even better for cross-platform applications!
+
+![Visual Studio](/blog/content/images/2015/Apr/vs.png)
+
+That's not all! Since after this changes there will be even more Onsen UI app developers working with Windows OS, we are releasing a bunch of features that will ease the development for those who choose **Visual Studio**. This includes **IntelliSense** with descriptions and autocompletion, **TypeScript** definitions and a set of **templates** prepared to be run also in Windows Phone (downloadable from Visual Studio Gallery). More information about it will come in next posts.
+
+As already mentioned, Windows support is a complex task that requires big efforts. We would also like your help and feedback. You can leave your opinion in the comments, if you have any doubts please ask [on Stackoverflow](https://stackoverflow.com/questions/tagged/onsen-ui) or [open an issue on Github](https://github.com/OnsenUI/OnsenUI/issues) if you find a bug or have any feature request. Of course, any fix or improvement that you can contribute with will be very welcome. We hope you like these features and **help us to improve and spread Onsen UI!**
