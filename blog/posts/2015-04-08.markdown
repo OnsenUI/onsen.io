@@ -7,14 +7,20 @@ title: "Onsen UI now supports Windows Phone 8.1!"
 
 ![Windows Phone](/blog/content/images/2015/Apr/onsen_windows.png)
 
-And finally it is here, more hybrid and cross-platform than ever: your mobile apps developed with Onsen UI are now able to run on Windows Phone platform!
+And finally it is here, more hybrid and cross-platform than ever: your mobile apps developed with Onsen UI are now able to run on Windows Phone!
 
 Miscrosoft's platform is getting popular and it is expectable to rise its numbers when Windows 10 arrives, and Onsen UI will help you to reach this market with the same effort than creating apps for the already present Android and iOS. Why just score two points when you can get three with just one hit!
 
 <!-- more -->
 
-[Apache Cordova](https://cordova.apache.org/) officially supports Windows Universal platform since there is an increasing number of developers, so in Onsen UI we decided that it was time to support this emerging platform as well. Of course, Windows has historically been *slighly* hard to support in the same way than the other main platforms, but we are making great effort to overcome this gap.
+[Apache Cordova](https://cordova.apache.org/) officially supports Windows Universal platform since there is an increasing number of developers, and in Onsen UI we decided that it was time to support this emerging platform as well (Windows Phone 8.1, Windows 8.1 and IE 11). Of course, Windows has historically been *slighly* hard to support in the same way than the other main platforms, but we are making great effort to overcome this gap.
 
-Up to date we have fixed many incompatibilities that made applications crash in Windows Universal, and we are currently solving glitches and minor misbehavior that may occur in some situations with certain elements, but the bulk of the process is already done! In the incoming weeks we will keep testing (and, hopefully, receiving feedback from you!) in order to make apps in Windows Phone feel as smooth as in Android or iOS.
+![Windows Phone](/blog/content/images/2015/Apr/windows_onsen_app_medium.png)
 
-We will provide soon a document containing all the known issues related to Windows Universal app development with Onsen UI. We are confident to fix all of it with the help of the community and make Onsen UI a great bet for cross-platform applications!
+Up to date we have fixed many incompatibilities that made applications crash in Windows Universal, and we are currently solving glitches and minor misbehavior that may occur in some situations with certain elements, but the bulk of the process is already done. In the incoming weeks we will keep testing (and, hopefully, receiving feedback from you!) in order to make apps in Windows Phone feel as smooth as in Android or iOS. We will provide soon a document containing all the known issues related to Windows Universal app development with Onsen UI. We are confident to fix all of it with the help of the community and make Onsen UI a great bet for cross-platform applications!
+
+![Visual Studio](/blog/content/images/2015/Apr/vs.png)
+
+But that's not all! Since after this changes there will be predictably even more Onsen UI app developers working with Windows OS, we are releasing soon a bunch of features that will ease the development for those who choose **Visual Studio**. This includes **IntelliSense** with descriptions and autocompletion, **TypeScript** definitions and a set of **templates** prepared to be run also in Windows Phone (downloadable from Visual Studio Gallery). More information about it will come in next posts.
+
+As already mentioned, Windows support is a complex task that requires big efforts, so we would also like to count on your help and feedback. You can leave your opinion in the comments, ask [any doubt on Stackoverflow](https://stackoverflow.com/questions/tagged/onsen-ui) or [open issues on Github](https://github.com/OnsenUI/OnsenUI/issues) if you find a bug or have any feature request. And, of course, any fix or improvement that you can contribute with will be very welcome. We hope you like these features and **help us to improve and spread Onsen UI!**
