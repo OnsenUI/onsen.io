@@ -18,6 +18,8 @@ Before starting, there are some prerequisites that you should install:
 
 **Install Cordova**
 
+First you need install Node.js. You can download it from [here](https://nodejs.org/). It gives you access to a program called `npm`, a package manager for Node.js.
+
 ```bash
 $ sudo npm install -g cordova
 ```
@@ -52,10 +54,10 @@ The development process of a sample app with Windows Phone 8.1 and Onsen UI is v
 Navigate to the the directory where you want to store your project project and create it by executing:
 
 ```bash
-$ cordova create test io.cordova.onsen OnsenWindowsTest
+$ cordova create test io.onsen.windowsapp OnsenWindowsTest
 ```
 
-We just created a project called `OnsenWindowsTest`, which has id `io.cordova.onsen`, inside the folder `test`.
+We just created a project called `OnsenWindowsTest`, which has id `io.onsen.windowsapp`, inside the folder `test`.
 
 Next step is to add the Windows platform to our project. To do it, just navigate inside the folder `test` and execute:
 
