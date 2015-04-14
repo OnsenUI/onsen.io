@@ -146,7 +146,7 @@ gulp.task('deploy', ['clean', 'generate'], function() {
   var dst = 'out_' + lang;
   var publisher = $.awspublish.create(aws);
 
-  var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI']);
+  var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI', '!' + dst + '/project-templates']);
 
   var templates = gulp.src('project-templates/gen/**')
     .pipe($.rename(function(path) {
