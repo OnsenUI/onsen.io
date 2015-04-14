@@ -70,6 +70,7 @@ gulp.task('clean', function(done) {
   del([
     'out_' + lang + '/*',
     '!out_' + lang + '/OnsenUI',
+    '!out_' + lang + '/project-templates',
   ], done);
 });
 
