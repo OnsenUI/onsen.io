@@ -148,9 +148,9 @@ gulp.task('deploy', ['clean', 'generate'], function() {
 
   var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI']);
 
-  var templates = gulp.src('OnsenUI/project_templates/**')
+  var templates = gulp.src('project-templates/gen/**')
     .pipe($.rename(function(path) {
-      path.dirname = 'OnsenUI/project_templates/' + path.dirname;
+      path.dirname = 'project-templates/gen/' + path.dirname;
     }));
 
   var build = gulp.src('OnsenUI/build/**')
