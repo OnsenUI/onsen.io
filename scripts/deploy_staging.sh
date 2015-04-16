@@ -10,6 +10,10 @@ pushd $DIR/../OnsenUI
 gulp build
 popd
 
+pushd $DIR/../project-templates
+gulp build
+popd
+
 pushd $DIR/..
 echo "{\"key\": \"${AWS_KEY}\", \"secret\": \"${AWS_SECRET}\", \"bucket\": \"${AWS_BUCKET_EN}\", \"region\": \"${AWS_REGION_EN}\"}" > aws_en.json 
 gulp deploy --lang en
