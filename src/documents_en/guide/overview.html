@@ -1,6 +1,6 @@
 ---
-page: 'guide'
 title: 'Onsen UI Guide'
+page: 'guide'
 needHelp: true
 autotoc: true
 ---
@@ -100,7 +100,7 @@ More commonly seen in iPhone and iPad apps, tab bar is displayed in the bottom o
 
 <h4 id="Splitviewpattern">Split view pattern</h4>
 
-This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate pages. [`<ons-split-view>`](/reference/ons-split-view.html) component allows you to use this pattern. It also has capability to transform to a sliding menu pattern on smaller devices or displayed vertically.
+This pattern is usually used for larger screen devices like tablets, or when rotating display in horizontal. It divides the screen into 2 columns, and displays two separate pages. [`<ons-split-view>`](/reference/ons-split-view.html) component allows you to use this pattern. It also has capability to hide sub-page on smaller devices or displayed vertically.
 
 <h3 id="PageNavigation">Page Navigation</h3>
 
@@ -2092,14 +2092,5 @@ If you need to build Onsen UI manually, there is a `gulp` task for that purpose.
 
 <% end %>
 
-<script src="<%= @rootUrl %>scripts/codepen.js"></script>
+<script defer src="<%= @rootUrl %>scripts/codepen.js"></script>
 
-<script>
-$(function() {
-  $(".resize-btn").on("click", function(elm) {
-    var hash = $(elm.target).data("slug-hash");
-    $(".codepen-content-" + hash).toggleClass("expanded");
-    return false;
-  });
-});
-</script>
