@@ -70,7 +70,6 @@ gulp.task('clean', function(done) {
   del([
     'out_' + lang + '/*',
     '!out_' + lang + '/OnsenUI',
-    '!out_' + lang + '/project-templates',
   ], done);
 });
 
@@ -146,11 +145,11 @@ gulp.task('deploy', ['clean', 'generate'], function() {
   var dst = 'out_' + lang;
   var publisher = $.awspublish.create(aws);
 
-  var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI', '!' + dst + '/project-templates']);
+  var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI']);
 
-  var templates = gulp.src('project-templates/gen/**')
+  var templates = gulp.src('OnsenUI/project_templates/**')
     .pipe($.rename(function(path) {
-      path.dirname = 'project-templates/gen/' + path.dirname;
+      path.dirname = 'OnsenUI/project_templates/' + path.dirname;
     }));
 
   var build = gulp.src('OnsenUI/build/**')

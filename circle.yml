@@ -14,7 +14,6 @@ checkout:
 dependencies:
   override:
     - npm install
-    - cd project-templates; npm install
     - cd OnsenUI; npm install
     - cd OnsenUI/css-components; npm install
 test:
