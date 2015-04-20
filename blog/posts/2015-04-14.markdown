@@ -16,12 +16,20 @@ As you know, last week we announced the new version of Onsen UI, which offers Wi
 In order to develop Windows Universal applications, you need to have Windows 8.1 installed.
 Before starting, there are some prerequisites that you should install:
 
+**Install Apache Ant**
+
+Download Apache Ant from the [official website](https://ant.apache.org/bindownload.cgi). Once installed, test if you can run `ant --version` command through Windows Terminal (`cmd.exe`). If not, just add the Apache Ant directory into the Windows environment variables.
+
+**Install Node.js**
+
+Download Node.js from the [official website](https://nodejs.org/download/). It gives you access to a program called `npm`, a package manager for Node.js. Once installed, test if you can run `node --version` command through Windows Terminal. If not, just add the Node.js directory into the Windows environment variables.
+
 **Install Cordova**
 
-First you need install Node.js. You can download it from [here](https://nodejs.org/). It gives you access to a program called `npm`, a package manager for Node.js.
+Once Node.js and Apache Ant have been successfully installed, you can proceed with Cordova installation. You can download it from [here](https://nodejs.org/). 
 
 ```bash
-$ sudo npm install -g cordova
+npm install -g cordova
 ```
 
 For more details, about how to use Cordova tool, please refer to [Cordova documentation](https://cordova.apache.org/docs/en/edge/index.html).
@@ -31,7 +39,7 @@ For more details, about how to use Cordova tool, please refer to [Cordova docume
 There are several ways to install Onsen UI. You can download Onsen UI from our [download page](http://onsen.io/download.html), clone our [GitHub repository](https://github.com/OnsenUI/OnsenUI) or, if you prefer using Bower, by executing the following command:
 
 ```bash
-$ bower install onsenui
+bower install onsenui
 ```
 
 During this tutorial, we'll use the Master-Detail template, that can be downloaded [here](http://onsen.io/OnsenUI/project_templates/onsen_master_detail.zip) but you are free to use whatever resource you prefer.
@@ -54,7 +62,7 @@ The development process of a sample app with Windows Phone 8.1 and Onsen UI is v
 Navigate to the the directory where you want to store your project project and create it by executing:
 
 ```bash
-$ cordova create test io.onsen.windowsapp OnsenWindowsTest
+cordova create test io.onsen.windowsapp OnsenWindowsTest
 ```
 
 We just created a project called `OnsenWindowsTest`, which has id `io.onsen.windowsapp`, inside the folder `test`.
@@ -62,7 +70,7 @@ We just created a project called `OnsenWindowsTest`, which has id `io.onsen.wind
 Next step is to add the Windows platform to our project. To do it, just navigate inside the folder `test` and execute:
 
 ```bash
-$ cordova platform add windows
+cordova platform add windows
 ```
 
 Now we have two ways about how to develop our Cordova app:
@@ -122,8 +130,8 @@ Once our application is ready, we can deploy it on our device (or emulator) in t
 * **Using command line**: this procedure is recommended in case you have developed your application with another editor. Open the terminal and navigate in the root directory of the project, then execute: 
 
 ```bash
-$ cordova run windows -- --phone  # deploy app to Windows Phone 8.1 emulator
-$ cordova run windows --device -- --phone  # deploy app to connected device
+cordova run windows -- --phone  # deploy app to Windows Phone 8.1 emulator
+cordova run windows --device -- --phone  # deploy app to connected device
 ```
 
 <br>
