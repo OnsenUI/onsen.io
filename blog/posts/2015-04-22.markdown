@@ -1,0 +1,136 @@
+---
+author: andi
+date: 2015-04-22
+id: tutorial-customize-onsen-ui-themes
+title: "Tutorial: customize Onsen UI Themes"
+---
+
+![Onsen UI Components](/blog/content/images/2015/Apr/components.png)
+
+As probably most of our followers have noticed, Onsen UI has a wide set of premade themes, which cover a rich set of color combinations. But, how can the developer modify these themes, combining the preferred colors with the desired Onsen UI element? There are two ways to accomplish this.
+<br>
+The first one is to use our [Theme Roller Tool](http://components.onsen.io/), which provides, thanks to an intuitive graphical interface, an easy way to customize Onsen UI themes.
+<br>
+The second way to customize themes is to modify directly the Stylus files. In this tutorial, we will analyze how to accomplish that and explain why this approach can be a powerful alternative to the Theme Roller Tool.
+
+<!-- more -->
+
+### Why should I modify themes manually?
+
+ If you have already took a look at [this tutorial](http://onsen.io/blog/introducing-onsen-css-components/), you probably noticed that Onsen UI Theme Roller Tool doesn't only allow you to customize themes, but it also provides the functionality to export them, making your new themes ready to be imported into the app's project.
+<br>
+ But this approach has some limitations: the theme will be limited to the current version of Onsen UI. In case of future structure changes, it could not be compatible anymore with the new framework releases.
+<br>
+ Another limitation is that the themes are static and cannot be customized following the app behavior.
+
+ The dynamic customization of the themes is the solution of this kind of problems. Onsen UI themes are codified as Stylus, providing an efficient, dynamic, and expressive way to generate CSS.
+ <br>
+ Using the `.styl` file extension, Stylus accepts the standard CSS syntax, but it also accepts some other variations where brackets, colons, and semi-colons are all optional.
+ <br>
+ Modifying directly the `.styl` files provide the possibility to make Onsen UI layout dynamic, for example having different color combinations in different pages and offers an easier way to update the app layout once an Onsen UI upgrade is performed.
+
+ Let's watch now how to modify the Stylus themes and how to verify, real time, the changes.
+
+ ### Prerequisites
+
+** Install Apache Ant **
+
+Download Apache Ant from the [official website](https://ant.apache.org/bindownload.cgi). Once installed, test if you can run `ant --version` command through the terminal. If not, just add the Apache Ant directory into the environment variables.
+
+** Install Node.js **
+
+Download Node.js from the [official website](https://nodejs.org/download/). It gives you access to a program called `npm`, a package manager for Node.js. Once installed, test if you can run `node --version` command through the terminal. If not, just add the Node.js directory into the environment variables.
+
+** Cordova **
+
+Once Node.js and Apache Ant have been successfully installed, you can proceed with Cordova installation You can install it, globally, by executing:
+
+```bash
+npm install -g cordova
+```
+
+For more details, about how to use Cordova tool, please refer to [Cordova documentation](https://cordova.apache.org/docs/en/edge/index.html).
+
+### Let's start!
+
+Fist of all, download one of the Onsen UI templates at [this page](http://onsen.io/download.html#download-templates) (any template is fine), extract it and open the folder. If you navigate to `www/lib/onsen/stylus/`, you'll find all the default themes, with `.styl` extension.
+<br>
+Try to open one of them, for example `blue-basic-theme.styl`, with your code editor. You'll find something like: 
+
+```styl
+$background-color = #f9f9f9
+$text-color = #1f1f21
+$sub-text-color = #999
+$highlight-color = rgba(24,103,194,0.81)
+$second-highlight-color = #25a6d9
+$border-color = #ddd
+$toolbar-background-color = #fff
+$toolbar-button-color = rgba(38,100,171,0.81)
+$toolbar-text-color = #1f1f21
+$toolbar-border-color = #ddd
+$buttonbar-color = rgba(18,114,224,0.77)
+$buttonbar-active-text-color = #fff
+$list-background-color = #fff
+$list-header-background-color = #eee
+$list-tap-active-background-color = #d9d9d9
+$tabbar-background-color = #222
+$tabbar-text-color = #999
+$tabbar-highlight-text-color = #7abfff
+$tabbar-border-color = rgba(0,0,0,.0)
+$switch-highlight-color = #5198db
+$modal-background-color = rgba(0, 0, 0, 0.7)
+$modal-text-color = #fff
+$alert-dialog-background-color = rgba(255, 255, 255, 0.92)
+$alert-dialog-text-color = #1f1f21
+$alert-dialog-button-color = rgba(24,103,194,0.81)
+$alert-dialog-separator-color = #ddd
+$dialog-background-color = rgba(255, 255, 255, 0.92)
+$popover-background-color = white
+$popover-text-color = #1f1f21
+$notification-background-color = #dc5236
+
+@import 'components'
+```
+
+As you can see, it contains all the attributes, related with colors, of all the Onsen UI components. You can choose to modify these attributes manually, or dynamically (through JavaScript, for example), increasing the personalization and the dynamism of your app.
+
+Once the file will be saved, the changes will be reflected automatically on the app, but how to verify that?
+<br>
+Open the terminal and navigate to the root directory and install all the dependencies in the local node_modules folder, by executing:
+
+```bash
+npm install
+```
+
+Next step consists in adding a platform to the Cordova project (all Onsen UI templates are Cordova projects). It doesn't matter which platform you'll add, it's necessary just to deploy the application.
+<br>
+For example, if you choose Android, type:
+
+```bash
+cordova platform add android
+```
+
+At this point, we can build our project solution and start our HTTP Server by executing:
+
+```bash
+gulp serve
+```
+
+It should create an HTTP Server at the port 3000 (default). Sometimes the port is different, but the full address will be printed once the Server is in execution, so there should not be problems.
+<br>
+Now, you just need to open your browser and paste the provided address (should be something like `localhost:3000`), to see the app running.
+<br>
+From now on, each time you'll save the theme file, the relative browser page will be automatically updated, with the new changes.
+
+### Conclusion
+
+Have you seen how easy is to modify an Onsen UI theme? Why don't you try and share your results with us?!
+<br>
+Continue to follow our [Blog](http://onsen.io/blog/) and take a look at our [GitHub page](https://github.com/OnsenUI/OnsenUI) (in case you like it, give us a star, please!).
+In case you have comments or advice, please let us know: your opinion is important for the growing of Onsen UI!
+
+
+
+
+
+
