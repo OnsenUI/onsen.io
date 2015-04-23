@@ -1,0 +1,206 @@
+---
+author: andreas
+date: 2015-04-24
+id: make-a-twinkling-web-component
+title: "Let's make a Twinkling Web Component!"
+---
+
+Recently we've started using the Web Components API for [Onsen UI](https://github.com/OnsenUI/OnsenUI/). The API gives the developer the power to create new tags and extend the HTML vocabulary. We've rewritten some of the simpler Onsen UI components as Web Components but we're not going to stop at just that. The goal is to rewrite the core functionality of Onsen UI as Web Components and provide Angular 1.x support in the form of wrappers.
+
+The reason why we're doing this is that we don't want the Onsen UI components to be usable only for AngularJS developers. We want you to be able to use Onsen UI regardless if you're a Angular 1.x, React.js or a jQuery developer. We're very excited about the upcoming Angular 2.0 as well which is built on top of Web Components standard.
+
+In this tutorial we we'll take a look at the API and implement a simple component.
+
+<!-- more -->
+
+Although all parts of the Web Components specification hasn't been implemented in all browsers yet, there are polyfills that add the functionality to all modern browsers.
+
+The code for the component in this tutorial is available [here](https://github.com/argelius/favorite-star).
+
+### What are we going to make?
+
+<script src="https://cdn.rawgit.com/argelius/favorite-star/gh-pages/bower_components/webcomponentsjs/webcomponents.js"></script>
+<link rel="import" href="https://cdn.rawgit.com/argelius/favorite-star/gh-pages/favorite-star.html">
+
+The component we're going to implement is a "favorite star". You know the kind of star that can be found all over the web and you can click to show that you like something.
+
+This kind of star:
+
+<p style="font-size: 50px; text-align: center;">
+  <favorite-star></favorite-star>
+</p>
+
+The two greatest powers of Web Component API is simplicity and abstraction. The implementation is encapsulated inside the custom element so the developer using the tag won't have to care about it. Using the tag is as easy as going:
+
+```html
+<favorite-star></favorite-star>
+```
+
+Just by doing this we get a nice <favorite-star></favorite-star> that our users can click. If, instead, we want the <favorite-star active></favorite-star> to be golden, we can do like this:
+
+```html
+<favorite-star active></favorite-star>
+```
+
+### Let's get to it!
+
+First we need to create our tag. To register a new tag there is a new function called `document.registerElement()`. It takes a tag name as well as a parameter object as arguments. The parameters can contain a `prototype` object that defines the behavior of the element.
+
+```javascript
+window.FavoriteStarElement = document.registerElement('favorite-star', {
+  prototype: proto
+});
+```
+
+Since we are extending the HTML vocabulary, it makes sense to extend the prototype of the `HTMLElement` object:
+
+```javascript
+var proto = Object.create(HTMLElement.prototype);
+```
+
+#### The `<template>` tag
+
+The `<template>` tag is used to encapsulate HTML. We put our style definitions and the inner HTML of the element here. In our case the inner HTML is just a `<span>` tag with a unicode &#x2605; inside it. 
+
+Please see the [complete file](https://github.com/argelius/favorite-star/blob/master/favorite-star.html) for the style. It defines the colors and the "bounce" animation.
+
+```html
+<template>
+  <style>
+    ...
+  </style>
+  <span class="favorite-star-character">&#x2605;</span>
+</template>
+```
+
+#### The Shadow DOM
+
+One of most confusing parts of the Web Components specification is the Shadow DOM. It can be seen as a part of the DOM that is separate from the rest of the page. The styles that are defined inside the Shadow DOM don't affect the rest of the page.
+
+This is very good when creating custom elements since we can define our classes and styles without having to worry that they will have side effects. To create a new Shadow DOM tree the `element.createShadowRoot()` is used.
+
+Chrome already has support for the Shadow DOM so when inspecting with the DevTools it will look like this when you find a Shadow DOM root:
+
+![Shadow DOM](/blog/content/images/2015/Apr/ShadowDOM.png)
+
+#### Life cycle callbacks
+
+For Web Components there are four callbacks that are executed during the life cycle of the custom element. They can be defined in the prototype. The most important is the `createdCallback` which is executed when (you guessed it!) the element is created.
+
+There are also two callbacks called `attachedCallback` and `detachedCallback` that are executed when the element is added to or removed from the DOM. These are good for registering and destroying event handlers as to avoid memory leaks.
+
+We start by creating the `createdCallback` for our component:
+
+```javascript
+// Get the document element.
+var currentScript = document._currentScript || document.currentScript,
+  doc = currentScript.ownerDocument,
+
+// Create the prototype.
+var proto = Object.create(HTMLElement.prototype);
+
+// Callback that's executed when the element is created.
+proto.createdCallback = function() {
+  // Fetch the <template> element and extract the content..
+  var template = doc.querySelector('template'),
+      clone = document.importNode(template.content, true);
+
+  // Create a Shadow DOM root and append the template content.
+  this.shadowRoot = this.createShadowRoot();
+  this.shadowRoot.appendChild(clone);
+
+  // Find the inner <span> element.
+  this.element = this.shadowRoot.querySelector('.favorite-star-character');
+
+  // Create event handlers.
+  this.boundOnClick = this.onClick.bind(this);
+  this.boundOnMouseover = this.onMouseover.bind(this);
+  this.boundOnMouseout = this.onMouseout.bind(this);
+
+  // Check if it's initialized as active.
+  if (this.hasAttribute('active')) {
+    this.element.setAttribute('active', '');
+  }
+};
+```
+
+We need some custom behavior for when the user hovers over the star as well as when it's clicked. The event handlers are registered in the `attachedCallback` and removed in `detachedCallback`.
+
+```javascript
+proto.attachedCallback = function() {
+  var el = this.element;
+
+  // Register event handlers.
+  el.addEventListener('click', this.boundOnClick);
+  el.addEventListener('mouseout', this.boundOnMouseout);
+  el.addEventListener('mouseover', this.boundOnMouseover);
+}
+
+proto.detachedCallback = function() {
+  var el = this.element;
+
+  // Remove event handlers.
+  el.removeEventListener('click', this.boundOnClick);
+  el.removeEventListener('mouseout', this.boundOnMouseout);
+  el.removeEventListener('mouseover', this.boundOnMouseover);
+}
+
+proto.toggle = function() {
+  if (this.hasAttribute('active')) {
+    this.removeAttribute('active');
+  }
+  else {
+    this.setAttribute('active', '');
+  }
+}
+
+proto.onClick = function() {
+  this.toggle();
+}
+
+// We cannot use the :hover pseudoclass since it would have incorrect behavior
+// when the user deactivates the star. Thus we add our own "hover" class.
+proto.onMouseover = function() {
+  var el = this.element;
+  if (!el.hasAttribute('active')) {
+    el.setAttribute('hover', '');
+  }
+}
+
+proto.onMouseout = function() {
+  var el = this.element;
+  el.removeAttribute('hover');
+}
+```
+
+Finally we need to add a `attributeChangedCallback` since we want to have correct behavior when the attribute is changed programatically.
+
+```javascript
+proto.attributeChangedCallback = function(attr) {
+  if (attr === 'active') {
+    var el = this.element;
+    if (this.hasAttribute('active')) {
+      el.setAttribute('active', '');
+    }
+    else {
+      el.removeAttribute('active');
+      el.removeAttribute('hover');
+    }
+  }
+}
+```
+
+### Conclusion
+
+As of today there is still not universal support for these APIs. However, since we can add the functionality using polyfills we feel that Web Components are mature enough to use in a production environment.
+
+We mentioned it earlier but I think it's work mentioning again. The current incarnation of Onsen UI is using Angular 1.x directives to define the custom elements. With the Web Components API we get a new way to define custom elements that is more powerful so we decided to use that instead. We still love AngularJS 1.x however so we will keep support in the form of wrappers.
+
+By rewriting the components using Web Components we get into a good position to extend the support to other frameworks. With Angular 2.0 in the horizon this is something we are very excited about!
+
+Please continue supporting Onsen UI. If you have any questions about the content of this blog, feel free to drop a comment below.
+
+### References
+
+* [Custom Elements](http://www.html5rocks.com/en/tutorials/webcomponents/customelements/)
+* [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Shadow_DOM)
