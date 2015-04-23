@@ -1,0 +1,129 @@
+---
+author: andi
+date: 2015-04-23
+id: tutorial-customizing-onsen-ui-themes
+title: "Tutorial: Customizing Onsen UI Themes"
+---
+
+![Onsen UI Theme Customization](/blog/content/images/2015/Apr/AppBranding.png)
+
+Onsen UI has a wide set of premade themes, which cover a rich set of color combinations. Although the default colors look good, when creating an app with Onsen UI we recommend customizing the theme to give the app a personal touch. Branding is important since it differentiates your app from others and makes it easily recognizable.
+
+How can the developer modify these themes, to give the Onsen UI components the desired colors? There are two ways to accomplish this.
+
+The first one is to use our [Theme Roller Tool](http://comptnents.onsen.io/), which provides, thanks to an intuitive graphical interface, an easy way to customize Onsen UI themes.
+
+The second way to customize themes is by modifying and compiling the [Stylus](https://learnboost.github.io/stylus/) files. Using an automated [gulp](http://gulpjs.com/) task and live reloading this approach also powerful and easier to integrate into a normal developer workflow.
+
+<!-- more -->
+
+### Why should I modify themes manually?
+
+If you have already took a look at [this tutorial](http://onsen.io/blog/introducing-onsen-css-components/), you probably noticed that the Onsen UI Theme Roller Tool not only allows you to customize themes, but also provides the functionality to export them, making your new themes ready to be imported into the app's project. This approach has some limitations: the theme will be limited to the current version of Onsen UI. In case of future structure changes, it could not be compatible anymore with the new framework releases.
+
+The dynamic customization of the themes is the solution of this kind of problems. Onsen UI themes are codified as Stylus, providing an efficient, dynamic, and expressive way to generate CSS.
+
+Using the `.styl` file extension, Stylus accepts the standard CSS syntax, but it also accepts some other variations where brackets, colons, and semi-colons are all optional.
+
+Let's see how to modify the Stylus themes and how to verify the changes in real time.
+
+### Prerequisites
+
+If you already have `gulp` installed you can skip this.
+
+You will need Node.js in this tutorial. Please download it from the [official website](https://nodejs.org/). After Node.js is installed you will have access to a program called `npm` which is a package manager for Node.js, it allows you to easily install Node.js modules.
+
+We now need to install `gulp`, which is a task runner for Node.js. In a terminal run the following command:
+
+```bash
+$ sudo npm install -g gulp
+```
+
+If you're on Windows you can omit the "sudo". This will install gulp globally so you have access to it everywhere.
+
+### Let's start!
+
+First of all, download one of the Onsen UI templates at [this page](http://onsen.io/download.html#download-templates) (any template is fine), extract it and navigate to the root folder.
+
+We now need to install some dependencies, so we run:
+
+```bash
+$ npm install
+```
+
+After that is done we can start serving the project:
+
+```bash
+$ gulp serve
+```
+
+This starts a web server and the output should look something like this:
+
+```
+[18:19:54] Using gulpfile ~/Documents/master_detail/gulpfile.js
+[18:19:54] Starting 'compile-stylus'...
+[18:20:01] Starting 'jshint'...
+[18:20:04] Starting 'browser-sync'...
+[18:20:04] Finished 'browser-sync' after 354 ms
+[BS] Local URL: http://localhost:8901/index.html
+[BS] External URL: http://10.0.1.122:8901/index.html
+[BS] Serving files from: /Users/andreas/Documents/master_detail/www/
+```
+
+Normally a browser will open automatically but if it doesn't (or you accidentally close it) you can find the URL in the output.
+
+Now open `www/index.html` in a text editor. We can see what theme is currently used near the top of the file:
+
+```html
+<link rel="stylesheet" href="styles/onsen-css-components-blue-basic-theme.css">
+```
+
+This corresponds to the colors defined in `www/lib/onsen/stylus/blue-basic-theme.styl`. The content of that file will be something like this:
+
+```
+$background-color = #f9f9f9
+$text-color = #1f1f21
+$sub-text-color = #999
+$highlight-color = rgba(24,103,194,0.81)
+$second-highlight-color = #25a6d9
+$border-color = #ddd
+$toolbar-background-color = #fff
+$toolbar-button-color = rgba(38,100,171,0.81)
+$toolbar-text-color = #1f1f21
+$toolbar-border-color = #ddd
+$buttonbar-color = rgba(18,114,224,0.77)
+$buttonbar-active-text-color = #fff
+$list-background-color = #fff
+$list-header-background-color = #eee
+$list-tap-active-background-color = #d9d9d9
+$tabbar-background-color = #222
+$tabbar-text-color = #999
+$tabbar-highlight-text-color = #7abfff
+$tabbar-border-color = rgba(0,0,0,.0)
+$switch-highlight-color = #5198db
+$modal-background-color = rgba(0, 0, 0, 0.7)
+$modal-text-color = #fff
+$alert-dialog-background-color = rgba(255, 255, 255, 0.92)
+$alert-dialog-text-color = #1f1f21
+$alert-dialog-button-color = rgba(24,103,194,0.81)
+$alert-dialog-separator-color = #ddd
+$dialog-background-color = rgba(255, 255, 255, 0.92)
+$popover-background-color = white
+$popover-text-color = #1f1f21
+$notification-background-color = #dc5236
+
+@import 'components'
+```
+
+As you can see it contains are the colors for the Onsen UI components. By customizing this file you can add personality to your app.
+
+Try changing the color of the toolbar by changing the `$toolbar-background-color` variable. When you save the file the Stylus files will be instantly compiled and the browser reloaded so you can see the changes instantly.
+
+Keep customizing the variables until you're satisfied with how your app looks. The colors is just one part of making a successful app but I think most people would agree when I say that it's darn important!
+
+### Conclusion
+
+Have you seen how easy is to modify an Onsen UI theme? Why don't you try and share your results with us?! If you have any trouble getting started please ask in the comments and we will do our best to help you.
+
+Continue to follow our [Blog](http://onsen.io/blog/) and take a look at our [GitHub page](https://github.com/OnsenUI/OnsenUI) (in case you like it, give us a star, please!).
+In case you have comments or advice, please let us know. Your opinion matters!
