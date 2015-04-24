@@ -9,20 +9,18 @@ Recently we've started using the Web Components API for [Onsen UI](https://githu
 
 The reason why we're doing this is that we don't want the Onsen UI components to be usable only for AngularJS developers. We want you to be able to use Onsen UI regardless if you're a Angular 1.x, React.js or a jQuery developer. We're very excited about the upcoming Angular 2.0 as well which is built on top of Web Components standard.
 
-In this tutorial we we'll take a look at the API and implement a simple component.
+In this tutorial we we'll take a look at the API and implement a simple component. Let's learn Web Components while making a "favorite button".
 
 <!-- more -->
-
-Although all parts of the Web Components specification hasn't been implemented in all browsers yet, there are polyfills that add the functionality to all modern browsers.
 
 The code for the component in this tutorial is available [here](https://github.com/argelius/favorite-star).
 
 ### What are we going to make?
 
-<script src="https://cdn.rawgit.com/argelius/favorite-star/gh-pages/bower_components/webcomponentsjs/webcomponents.js"></script>
-<link rel="import" href="https://cdn.rawgit.com/argelius/favorite-star/gh-pages/favorite-star.html">
+<script src="https://cdn.rawgit.com/argelius/favorite-star/0.1.4/bower_components/webcomponentsjs/webcomponents.js"></script>
+<link rel="import" href="https://cdn.rawgit.com/argelius/favorite-star/0.1.4/favorite-star.html">
 
-The component we're going to implement is a "favorite star". You know the kind of star that can be found all over the web and you can click to show that you like something.
+The component we're going to implement is a "favorite star" / "farovite button". You know the kind of star that can be found all over the web and you can click to show that you like something.
 
 This kind of star:
 
