@@ -9,7 +9,7 @@ Recently we've started using the Web Components API for [Onsen UI](https://githu
 
 The reason why we're doing this is that we don't want the Onsen UI components to be usable only for AngularJS developers. We want you to be able to use Onsen UI regardless if you're a Angular 1.x, React.js or a jQuery developer. We're very excited about the upcoming Angular 2.0 as well which is built on top of Web Components standard.
 
-In this tutorial we we'll take a look at the API and implement a simple component. Let's learn Web Components while making a "favorite button".
+In this tutorial we we'll take a look at the API and implement a simple component. Let's learn Web Components while making a "favorite button"!
 
 <!-- more -->
 
@@ -58,7 +58,7 @@ var proto = Object.create(HTMLElement.prototype);
 
 #### The `<template>` tag
 
-The `<template>` tag is used to encapsulate HTML. We put our style definitions and the inner HTML of the element here. In our case the inner HTML is just a `<span>` tag with a unicode &#x2605; inside it. 
+The `<template>` tag is used to encapsulate HTML. We put our style definitions and the inner HTML of the element here. In our case the inner HTML is just a `<span>` tag with a UTF-8 &#x2605; inside it.
 
 Please see the [complete file](https://github.com/argelius/favorite-star/blob/master/favorite-star.html) for the style. It defines the colors and the "bounce" animation.
 
@@ -73,7 +73,7 @@ Please see the [complete file](https://github.com/argelius/favorite-star/blob/ma
 
 #### The Shadow DOM
 
-One of most confusing parts of the Web Components specification is the Shadow DOM. It can be seen as a part of the DOM that is separate from the rest of the page. The styles that are defined inside the Shadow DOM don't affect the rest of the page.
+One of most confusing parts of the Web Components specification is the Shadow DOM. The Shadow DOM is a subtree with special properties. It can be seen as a part of the DOM that is separate from the rest of the page. The styles that are defined inside the Shadow DOM don't affect the rest of the page.
 
 This is very good when creating custom elements since we can define our classes and styles without having to worry that they will have side effects. To create a new Shadow DOM tree the `element.createShadowRoot()` is used.
 
@@ -86,6 +86,8 @@ Chrome already has support for the Shadow DOM so when inspecting with the DevToo
 For Web Components there are four callbacks that are executed during the life cycle of the custom element. They can be defined in the prototype. The most important is the `createdCallback` which is executed when (you guessed it!) the element is created.
 
 There are also two callbacks called `attachedCallback` and `detachedCallback` that are executed when the element is added to or removed from the DOM. These are good for registering and destroying event handlers as to avoid memory leaks.
+
+Finally, there is a callback called `attributeChangedCallback`. As the name implies it will be executed whenever the value of an HTML attribute is modified. This gives us the power to react to changes made from outside the element, e.g. when the developer uses `element.setAttribute()` or `element.removeAttribute()`.
 
 We start by creating the `createdCallback` for our component:
 
