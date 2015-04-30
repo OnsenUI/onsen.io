@@ -1,0 +1,26 @@
+---
+author: fran
+date: 2015-04-30
+id: templates-windows-phone-visual-studio
+title: "Onsen UI templates for Visual Studio working on Windows Phone"
+---
+
+![Cordova + Onsen UI + Visual Studio1](/blog/content/images/2015/Apr/cordova_onsen_vs.png)
+
+We are releasing a set of **Cordova + Onsen UI templates** prepared to run on [Windows Phone 8.1](/windows-phone-8-1-tutorial/), so we finally have a reference to develop in this platform using Onsen UI. These templates follow the Cordova App pattern, what means that they are appropriate for **Cordova CLI** but also for the new **Visual Studio 2015**, as we will explain in this post. And to top it off, these templates are also available for [TypeScript](type-definitions-onsenui-typescript/)!
+
+<!-- more -->
+
+As mentioned, these templates have everything necessary to run on Windows Phone 8.1 (in addition to Android and iOS, of course) and optionally use AngularJS without problems. Just remember to code accordingly to Windows Phone requirements, e.g. avoid using JavaScript alerts, and everything should work alright.
+
+The templates include working versions of the [four navigation patterns](../guide/overview.html#ManagingMultiplePages): *Navigator*, *Sliding Menu*, *Tab Bar* and *Split View*. Therefore, we can extend them easily and make our own apps without worrying about the set up.
+
+<img src="/blog/content/images/2015/Apr/Master-Details.png" alt="Onsen UI template Navigator Master-Details" style="display: inline-block; margin: 1em; border: 1px solid grey"/>
+<img src="/blog/content/images/2015/Apr/SlidingMenu.png" alt="Onsen UI template Sliding Menu" style="display: inline-block; margin: 1em; border: 1px solid grey"/>
+<img src="/blog/content/images/2015/Apr/TabBar.png" alt="Onsen UI template Tab Bar" style="display: inline-block; margin: 1em; border: 1px solid grey"/>
+
+If you are using the new Visual Studio 2015 there is an easy and direct way to start working with these templates. You just need to connect to [Visual Studio Gallery and download Onsen UI's extension](https://visualstudiogallery.msdn.microsoft.com/8968a18d-cc94-4ebf-8183-ed0e1f6247f3), what comes with the four mentioned templates and their respective TypeScript versions (including type definitions!). After installation, starting a new Onsen UI project will be as simple as doing *File > New > Project* and selecting an Onsen UI template under *JavaScript/ TypeScript > Apache Cordova Apps* categories.
+
+On the other hand, for those of you who don't use Visual Studio but still want to support Windows Phone 8.1 we will provide these raw templates on Github as well. Donwload and run them with Cordova CLI, [Monaca](https://monaca.io/) or any other compatible tool you want.
+
+Do you have any question or suggestion about Onsen UI or these templates? We are willing to hear from you, let us know in the comments, on [Github](https://github.com/OnsenUI/OnsenUI/issues) or [Stackoverflow](https://stackoverflow.com/questions/tagged/onsen-ui). More news will be coming soon!
