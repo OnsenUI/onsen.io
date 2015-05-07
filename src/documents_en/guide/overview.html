@@ -2090,6 +2090,24 @@ The JavaScript code for each component is located in the `directives` directory.
 
 If you need to build Onsen UI manually, there is a `gulp` task for that purpose. Please follow the instruction from the [project Website](https://github.com/OnsenUI/OnsenUI).
 
+<h3 id="WindowsDevelopmentKnownIssues">Windows Development Known Issues</h3>
+
+Since version 1.3, Onsen UI supports Windows platform apps development.
+
+Here is a list of known issues, which we recommend to read before planning your app development:
+
+* **Rendering:**  the rendering of the animations (transactions) might be laggy on low performance devices.
+
+* **Glitches:** some elements might be affected by graphical glitches when rendered.
+
+* **Pull Hook:** works, but it's affected by poor scrolling performance when associated with a `ons-list` element.
+
+* **Touch events:** the vertical swipe and scroll touch events seem not being recognised, but the functionalities seem working fine. touch events name, on Windows browser, have different names, even between Windows 8.1 and Windows Phone 8.1, but are supported by Hammer.js.
+
+* **CSS:**  minor CSS bugs, for example the highlight effect, when a 'ons-list-item' is selected, is not correctly applied.
+
+In case you find other bugs, we invite you to report them at our [GitHub Issues](https://github.com/OnsenUI/OnsenUI/issues) page.
+
 <% end %>
 
 <script defer src="<%= @rootUrl %>scripts/codepen.js"></script>
