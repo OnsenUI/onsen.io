@@ -162,7 +162,7 @@ module.exports = function() {
       },
 
       getPreparedTitle: function() {
-        return this.title ? this.title + ' | Onsen UI' : this.site.title;
+        return this.title ? this.title + ' | Onsen' : this.site.title;
       },
 
       getPreparedDescription: function() {
