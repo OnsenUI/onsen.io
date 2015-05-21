@@ -51,16 +51,16 @@ module.exports = function(language, isStaging) {
     en: {
       url: 'http://onsen.io',
       title: 'The Answer to PhoneGap UI Development | Onsen UI',
-      description: 'Onsen UI from Monaca is a Custom Elements-Based HTML5 UI Framework for Building PhoneGap/Cordova Hybrid apps',
-      keywords: 'phonegap, cordova, custom-elements, onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast',
+      description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
+      keywords: '',
       twitter: 'Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.'
     },
 
     ja: {
       url: 'http://ja.onsen.io',
       title: 'HTML5モバイルアプリをもっと速く、もっと美しく Onsen UI',
-      description: 'Onsen UI from Monaca is a Custom Elements-Based HTML5 UI Framework for Building PhoneGap/Cordova Hybrid apps',
-      keywords: 'phonegap, cordova, custom-elements, onsen, ui, html5, monaca, framework, mobile, app, hybrid, simple, powerful, fast',
+      description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
+      keywords: '',
       twitter: 'Onsen UIでHTML5モバイルアプリをもっと速く、美しく。'
     }
   };

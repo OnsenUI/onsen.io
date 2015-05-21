@@ -203,7 +203,7 @@ module.exports = function(lang, isStaging) {
           limit: 10,
           destination: 'rss.xml',
           feedOptions: {
-            title: 'Onsen UI Blog',
+            title: 'The Official Onsen UI Framework Blog',
             url: 'http://onsen.io/'
           }
         }))
