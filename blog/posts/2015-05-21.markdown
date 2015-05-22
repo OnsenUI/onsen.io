@@ -7,15 +7,15 @@ title: "Tutorial: Todo App with Onsen UI and Azure"
 
 ![Onsen UI Theme Customization](/blog/content/images/2015/May/OnsenAzure.png)
 
-After having explained how to [create a Simple App for Windows Phone 8.1 using Onsen UI](http://onsen.io/blog/windows-phone-8-1-tutorial/), it's time to demonstrate the potentialities of our framework with a new tutorial! This time we will see how to create a Todo App with Onsen UI, using the services provided by [Azure](http://azure.microsoft.com/), to host our data, and the new [Onsen UI Templates](Onsen UI Templates for Visual Studio working on Windows Phone) for Visual Studio 2015.
+After having introduced how to [create a Simple App for Windows Phone 8.1 using Onsen UI](http://onsen.io/blog/windows-phone-8-1-tutorial/), it's time to demonstrate the potentialities of our framework with a new tutorial! This time we will see how to create a Todo App with Onsen UI, using the services provided by [Azure](http://azure.microsoft.com/), to host our data, and the new [Onsen UI Templates](Onsen UI Templates for Visual Studio working on Windows Phone) for Visual Studio 2015.
+
+<!-- more -->
 
 For those that have never heard about it, [Azure](http://azure.microsoft.com/) is Microsoft’s cloud platform: a growing collection of integrated services, storage, data, networking and app. Azure offers a wide range of tools, but we are just interested in suitable tools for the development of hybrid apps.
 
 That's why, during this tutorial, we will only implement a cloud-based backend service, using [Azure Mobile Services](http://azure.microsoft.com/en-in/services/app-service/mobile/). This will allow us to host our data in an easy and intuitive way, regardless the mobile platform in which the app will be executed.
 
 A full working Sample App is available on this [GitHub repository](https://github.com/andipavllo/Onsen-UI-Todo-App-with-Azure), we invite you to take a look at it before starting!
-
-<!-- more -->
 
 ### Prerequisites
 
@@ -70,6 +70,8 @@ Now we have a table where to host our data, but we still need to customize it, a
 * *Browser*: navigate to the portal address (http://manage.windowsazure.com/).
 
 * *Visual Studio*: open the Service Explorer, right click on the mobile service name and select `Open in Management Portal`.
+
+![Onsen UI Theme Customization](/blog/content/images/2015/May/addService.png)
 
 Once the portal has been opened, navigate into the TodoOnsenUI service, go in DATA and select TodoItem table. You'll notice that it's still empty, but some attributes have already been created. They are mainly related with the ID of the records and the creation/modification timestamp. We need to add three new attributes: the title, the content and the active status of our item. To do it, just select COLUMNS from the menu and add the first two attributes as strings and the active attribute as boolean. This operation can be also done automatically the first time that we insert the data inside the database but, to be sure about the attributes type, it's recommended to create them manually. You can also modify the database permissions in order to increase its security. As default, the access is allowed to all the users that have the key but an authentication process can be implemented. In this app, we haven't implemented it, but if you are interested, take a look at [this link](http://azure.microsoft.com/en-us/documentation/articles/mobile-services-windows-store-javascript-get-started-users/).
 
@@ -140,24 +142,23 @@ To realize this Todo App, we have hosted all the HTML content inside a single HT
 
       <ons-template id="addMemo.html">
         <ons-page>
-            <ons-toolbar>
-                <div class="left"><ons-back-button>Back</ons-back-button></div>
-                <div class="center">New Memo</div>
-            </ons-toolbar>
-            <div style="text-align: center">
-                <section style="padding: 8px">
-                    <input id="noteTitle" maxlength="10" placeholder="Insert title (max 10 char.)" class="textarea" ng-model="data.itemTitle" style="width: 100%;">
-                </section>
-                <section style="padding: 0 8px 8px">
-                    <textarea id="noteContent" maxlength="20" placeholder="Insert description (max 20 char.) " class="textarea" ng-model="data.itemContent" style="width: 100%; height: 100px;"></textarea>
-                </section>
-
-                <section style="padding: 0 8px 8px">
-                    <ons-button modifier="large" ng-click="addMemo()">Save</ons-button>
-                </section>
-            </div>
+          <ons-toolbar>
+            <div class="left"><ons-back-button>Back</ons-back-button></div>
+            <div class="center">New Memo</div>
+          </ons-toolbar>
+          <form style="text-align: center" name="myForm">
+            <section style="padding: 8px">
+              <input id="noteTitle" required maxlength="10" placeholder="Insert title (required - max 10 char.)" class="textarea" ng-model="data.itemTitle" style="width: 100%;">
+            </section>
+            <section style="padding: 0 8px 8px">
+              <textarea id="noteContent" required maxlength="20" placeholder="Insert description (required - max 20 char.) " class="textarea" ng-model="data.itemContent" style="width: 100%; height: 100px;"></textarea>
+              </section>
+              <section style="padding: 0 8px 8px">
+                <ons-button var="saveBtn" ng-disabled="myForm.$invalid" modifier="large" ng-click="addMemo()">Save</ons-button>
+              </section>
+            </form>
         </ons-page>
-    </ons-template>
+    	</ons-template>
 
       <ons-template id="active.html">
         ...
@@ -195,7 +196,7 @@ The two attributes of the `$scope.items` array, that will be displayed, are the 
 
 This page contains two input fields where the user can insert the Todo item title and content. These two fields are binded with two different variables inside the controller, by using `ng-model` directive. For space reasons, in this sample app we have limited their size respectively to 10 and 20 characters.
 
-Once the form has been compiled, it can be submitted by pressing an `ons-button`, which will call a function that will save the Todo item inside the cloud storage and the local object array.
+Once the form has been compiled, it can be submitted by pressing an `ons-button`, which will call a function that will save the Todo item inside the cloud storage and the local object array. The form contend cannot be submitted until both the fields are not compiled. Using `ng-disable` directive, we can keep the submit button disabled until the form content is not considered valid.
 
 ##### active.html - completed.html
 
@@ -229,7 +230,16 @@ The `.destroy> class is applied to the `ons-button` which, once clicked, will de
 
 #### Mobile Service Javascript file
 
-This file has been automatically generated once the Azure mobile service has been linked with the app, using Visual Studio. It can be found inside `www/services/...` folder and contains the connection URL of the mobile service and the key needed to authenticate. Open this file because we need to edit it.
+This file has been automatically generated once the Azure mobile service has been linked with the app, using Visual Studio. It can be found inside `www/services/...` folder and contains the connection URL of the mobile service and the key needed to authenticate. The content should be like this:
+
+```javascript
+var todoOnsenClient = new WindowsAzure.MobileServiceClient(
+                        "https://[service].azure-mobile.net/",
+                        "[key]"
+);
+```
+
+In case it defers, because of the default platform choose during the mobile service creation, we invite you to edit the file in this way.
 
 #### Controller
 
@@ -260,6 +270,10 @@ The purpose of this function is to add a new element inside the cloud storage an
 
 ```javascript
 $scope.addMemo = function () {
+
+	//Disable the 'save' button
+  saveBtn.setDisabled(true);
+
   //Create a memo object
   var memo = {
     title: $scope.data.itemTitle,
@@ -282,12 +296,15 @@ $scope.addMemo = function () {
       $scope.myNavigator.popPage();
 
   }, function (err) {
+  	//Enable the 'save' button
+    saveBtn.setDisabled(false);
+
     alert("Error: " + err);
   })
 };
 ```
 
-First of all, a new memo object is created, based on the values of the two fields compiled by the user, inside `addMemo.html` page. Afterward, the new item will be sent to the cloud storage for being hosted. The callback function will return the information about the item that was previously saved. The most important information is the `id`, which has been automatically created by the backend service and which is necessary for saving the element once it'll be edited. In case the operation succeeds, the information will be added inside the local object array, the input fields will be clean, the list content view will be updated and the user will be redirected to the main Todo list page. In case of failure, an error log will be displayed.
+First of all, the save button is disabled, to avoid undesired user behavior, and a new memo object is created, based on the values of the two fields compiled by the user, inside `addMemo.html` page. Afterward, the new item will be sent to the cloud storage for being hosted. The callback function will return the information about the item that was previously saved. The most important information is the `id`, which has been automatically created by the backend service and which is necessary for saving the element once it'll be edited. In case the operation succeeds, the information will be added inside the local object array, the input fields will be clean, the list content view will be updated and the user will be redirected to the main Todo list page. In case of failure, the save button will be enabled, to allow another try, and an error log will be displayed.
 
 ##### $scope.deleteMemo()
 
@@ -363,13 +380,16 @@ cordova platform add 'platform name'
 
 In case you have executed the app, with Visual Studio, on a platform, you can skip this step. That's because the platform has already been added the first time the app has been executed.
 
-In case you'll experience crashes at the app's startup, we suggest you to remove the platform and add it by command line. That's because not always Visual Studio Apache Tools for Cordova is updated to the last version.
+In case you'll experience crashes at the app's startup or errors, we suggest you to install Cordova 4.3.0 (we had problems with Cordova 5.0.0), remove the platform and add it by command line. That's because not always Visual Studio Apache Tools for Cordova is updated to the last version.
 
-To remove the platform, from the project, just execute:
+To change Cordova platform and remove the platform from the project just execute:
 
 ```bash
+npm install cordova @4.3.0
 cordova platform rm 'platform name'
 ```
+
+Also take a look at Azure Mobile Service plugin for Cordova at this [GitHub repository](https://github.com/Azure/azure-mobile-services-cordova), for new updates. We have used this version of the library, instead of the one autogenerated during the mobile service initialization.
 
 To deploy the app we can use, depending by the platform and the target, these commands (you can find a full list of them on [Cordova documentation](https://cordova.apache.org/docs/en/4.0.0/guide_cli_index.md.html)).
 
