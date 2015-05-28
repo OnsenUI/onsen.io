@@ -1929,14 +1929,24 @@ Component event handlers can also be added using HTML attributes. These attribut
 
 The value of the attribute should be an Angular expression, so in the case where you are not using AngularJS these attributes can't be used.
 
-<h4 id="Pageinitevent">Page init event</h4>
+<h4 id="Pagelifecycle">Page life cycle events</h4>
 
-`pageinit` event is called after [`<ons-page>`](/reference/ons-page.html) is initialized. Use this event to alter the behavior on each pages.
+[`<ons-page>`](/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cyle. Use these events to alter the behavior on each page.
+
+* `create` event is called after `<ons-page>` is created and attached to DOM. In order to provide backward compatibility, the old `pageinit` event is still fired but will be deprecated in upcoming versions.
+
+* `destroy` event is called before `<ons-page>` is destroyed and prior to DOM detachment.
+
+* `show` event is called after `<ons-page>` comes into view by changing its CSS, i.e. the page already existed in the page stack and is now shown. It is usually fired, for example, when popping pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
+
+* `hide` event is called after `<ons-page>` disappear from view by changing its CSS, i.e. the page is hidden but still exists in the page stack. It is usually fired, for example, when pushing pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
+
+Example:
 
 ```html
 <script>
-document.addEventListener("pageinit", function(e) {
-  if (e.target.id == "my-page") {
+document.addEventListener("create", function(event) {
+  if (event.target.id == "my-page") {
     document.getElementById("my-content").innerHTML = "I am fine!";
   }
 }, false);
