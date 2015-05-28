@@ -1931,13 +1931,13 @@ The value of the attribute should be an Angular expression, so in the case where
 
 <h4 id="Pagelifecycle">Page life cycle events</h4>
 
-[`<ons-page>`](/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cyle. Use these events to alter the behavior on each page.
+[`<ons-page>`](/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
 
 * `create` event is called after `<ons-page>` is created and attached to DOM. In order to provide backward compatibility, the old `pageinit` event is still fired but will be deprecated in upcoming versions.
 
 * `destroy` event is called before `<ons-page>` is destroyed and prior to DOM detachment.
 
-* `show` event is called after `<ons-page>` comes into view by changing its CSS, i.e. the page already existed in the page stack and is now shown. It is usually fired, for example, when popping pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
+* `show` event is called after `<ons-page>` comes into view by changing its CSS, i.e. the page already exists in the page stack and is now shown. It is usually fired, for example, when popping pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
 
 * `hide` event is called after `<ons-page>` disappear from view by changing its CSS, i.e. the page is hidden but still exists in the page stack. It is usually fired, for example, when pushing pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
 
