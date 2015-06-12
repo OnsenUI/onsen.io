@@ -1937,10 +1937,6 @@ The value of the attribute should be an Angular expression, so in the case where
 
 * `destroy` event is called before `<ons-page>` is destroyed and prior to DOM detachment.
 
-* `show` event is called after `<ons-page>` comes into view by changing its CSS, i.e. the page already exists in the page stack and is now shown. It is usually fired, for example, when popping pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
-
-* `hide` event is called after `<ons-page>` disappear from view by changing its CSS, i.e. the page is hidden but still exists in the page stack. It is usually fired, for example, when pushing pages with `<ons-navigator>` or swapping persistent tabs with `<ons-tabbar>`.
-
 Example:
 
 ```html
