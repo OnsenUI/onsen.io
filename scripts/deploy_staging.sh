@@ -2,14 +2,6 @@
 
 DIR=$(dirname $0)
 
-pushd $DIR/../OnsenUI/css-components
-gulp build
-popd
-
-pushd $DIR/../OnsenUI
-gulp build
-popd
-
 pushd $DIR/../project-templates
 gulp build
 popd
