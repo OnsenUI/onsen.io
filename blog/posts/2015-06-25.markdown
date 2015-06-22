@@ -1,0 +1,26 @@
+---
+author: fran
+date: 2015-06-25
+id: onsen-ui-router-app
+title: "Tutorial: Onsen-UI-router"
+---
+
+![Onsen UI Theme Customization](/blog/content/images/2015/Jun/onsen-ui-router.png)
+
+AngularUI Router is perhaps one of the most used modules out there for AngularJS that allows you organize the parts of your interface into a state machine. Onsen UI doesn't use URL routing but navigates from one page to another programmatically using the custom elements. However, since in ui-router we can define state transitions and not only URL routes we are able to combine Onsen UI and ui-router in the same app. Learn here how to do it.
+
+<!-- more -->
+
+Onsen UI uses its own route system and was not meant to be used with an external router but definitely it is compatible with a router such as ui-router. Due to this reason we have to mention that there is not only one way to integrate Onsen UI with ui-router. Here we will explain a basic solution to combine them both that is likely to be enough in most cases. However, if you already have some experience with ui-router probably you can find a way that fits your needs better.
+
+## Routing in Onsen UI
+
+In this tutorial we will combine three different Onsen UI patterns in order to make it useful for everyone. The main element of our app will be the Tabbar pattern and it will have two child tabs: a Navigator in the first one (MasterDetail) and a Sliding Menu in the second. In addition, since this routing is based on states we will be able to make a transition to a deep route in the Navigator from, for example, the main page of the Sliding Menu.
+
+As usual, all the code of this example is [available to download on Github](https://github.com/frankdiox/OnsenUI-router). You can check here the final result as well before explaining how it is done:
+
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frankdiox.github.io/OnsenUI-router/" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
+
+Looks like a normal Onsen UI app but it really uses ui-router for the state transitions behind the scenes. And the good news is that it is not hard at all once you understand the basic rules.
+
+
