@@ -29,30 +29,30 @@ In this example we include all the dependencies from CDNs but you can download t
 
 ```html
 <ons-tabbar var="myTabbar" animation="none">
-	<ons-tab ui-sref="navigator.master">
-		<ons-icon icon="ion-home"></ons-icon>
-		<span style="font-size: 14px">MasterDetail</span>
-	</ons-tab>
-	<ons-tab ui-sref="sliding.main">
-		<ons-icon icon="ion-star"></ons-icon>
-		<span style="font-size: 14px">SlidingMenu</span>
-	</ons-tab>
+  <ons-tab ui-sref="navigator.master">
+    <ons-icon icon="ion-home"></ons-icon>
+    <span style="font-size: 14px">MasterDetail</span>
+  </ons-tab>
+  <ons-tab ui-sref="sliding.main">
+    <ons-icon icon="ion-star"></ons-icon>
+    <span style="font-size: 14px">SlidingMenu</span>
+  </ons-tab>
 </ons-tabbar>
 
 <ons-template id="html/tab1.html">
-	<ons-navigator title="Navigator" var="myNavigator">
-	</ons-navigator>
+  <ons-navigator title="Navigator" var="myNavigator">
+  </ons-navigator>
 </ons-template>
 
 <ons-template id="html/tab2.html">
-	<ons-sliding-menu menu-page="html/menu.html" side="left" var="myMenu" type="reveal" max-slide-distance="260px" swipeable="true">
-	</ons-sliding-menu>
+  <ons-sliding-menu menu-page="html/menu.html" side="left" var="myMenu" type="reveal" max-slide-distance="260px" swipeable="true">
+  </ons-sliding-menu>
 </ons-template>
 ```
 
 Here we have a Tabbar as the parent element of our project and two templates with a Navigator and a SlidingMenu. Notice that we are not setting the main page of any element, not even telling the Tabbar that the Navigator and the SlidingMenu are its childs yet. We will connect them later using *ui-router*.
 
----- Note: This example tries to show how to do everything with *ui-router*. However, you may want to keep using Onsen UI attributes such as Navigator's `page` or SlidingMenu's `main-page` to link views instead of doing it manually with *ui-router*.
+<div style="border-left: thick double #787878; padding-left: 8px; color: #888888"> <strong>Note:</strong> This example tries to show how to do everything with *ui-router*. However, you may want to keep using Onsen UI attributes such as Navigator's `page` or SlidingMenu's `main-page` to link views instead of doing it manually with *ui-router*.</div>
 
 The `ui-sref` attribute substitute the normal `page` attribute in an Onsen UI tab. It does not work exactly in the same way since `ui-sref` just links to a different state and not to the page itself, but it will do the trick. We will show how to define those states soon.
 
@@ -60,29 +60,50 @@ Now we can create all the HTML pages we want to use in the corresponding folder.
 
 ```html
 <ons-page>
-	<ons-toolbar>
-		<div class="center">Simple Navigation</div>
-	</ons-toolbar>
-	<ons-list ng-controller="MasterController">
-		<ons-list-item modifier="chevron" class="item" ng-repeat="item in items"  ui-sref="navigator.master.detail({index: $index})">
-		<ons-row>
-			<ons-col width="60px">
-				<div class="item-thum"></div>
-			</ons-col>
-			<ons-col>
-				<header>
-					<span class="item-title">{{item.title}}</span>
-					<span class="item-label">{{item.label}}</span>
-				</header>
-				<p class="item-desc">{{item.desc}}</p>
-			</ons-col>
-		</ons-row>
-		</ons-list-item>
-	</ons-list>
+  <ons-toolbar>
+    <div class="center">Simple Navigation</div>
+  </ons-toolbar>
+  <ons-list ng-controller="MasterController">
+    <ons-list-item modifier="chevron" class="item" ng-repeat="item in items"  ui-sref="navigator.master.detail({index: $index})">
+    <ons-row>
+      <ons-col width="60px">
+        <div class="item-thum"></div>
+      </ons-col>
+      <ons-col>
+        <header>
+          <span class="item-title">{{item.title}}</span>
+          <span class="item-label">{{item.label}}</span>
+        </header>
+        <p class="item-desc">{{item.desc}}</p>
+      </ons-col>
+    </ons-row>
+    </ons-list-item>
+  </ons-list>
 </ons-page>
 ```
 
 As you can see there, we have a normal Onsen UI page with its own AngularJS controller (in `js/controllers.js`). The only difference is that, instead of pushing page with `ng-click="myNavigator.pushPage('detail.html', {index: $index})"`, we pass the index parameter to a *ui-router* state: `ui-sref="navigator.master.detail({index: $index})"`. The rest of the pages are not more complex than this one, so you can check the code on Github.
+
+Apart from that, we have to be careful if we need an `<ons-back-button>` in our pages since we cannot change its inner behavior. Instead, we can just use the back button style manually and point it to the state where we want to move with `ui-sref`. Usually it will be `ui-sref="^"` since we want to move to the parent state:
+
+```html
+<span class="toolbar-button--quiet" ui-sref="^"
+     style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
+
+  <i class="ion-ios-arrow-back ons-back-button__icon"
+     style="vertical-align: top; background-color: transparent; height: 44px;
+     　　　　line-height: 44px; font-size: 36px; margin-left: 8px;　margin-right: 2px;
+     　　　　width: 16px; display: inline-block; padding-top: 1px;">
+  </i>
+
+  <span style="vertical-align: top; display: inline-block;
+  　　　　　　　line-height: 44px; height: 44px;"
+  　　　　class="back-button__label">
+  　　Back
+  </span>
+
+</span>
+```
 
 ### The states
 
@@ -93,9 +114,9 @@ var app = angular.module('myApp', ['onsen', 'ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
-	$urlRouterProvider.otherwise('/master');
+  $urlRouterProvider.otherwise('/master');
 
-	// States …
+  // States …
 
 });
 ```
@@ -107,96 +128,85 @@ Finally, we have the most awaited part, the *ui-router* states for Onsen UI page
 ```javascript
 $stateProvider
 
-	// Tab 1 - MasterDetail example - Navigator init
-	.state('navigator', {
-		abstract: true,
-		// url: '/navigator', // Optional url prefix
-		resolve: {
-			loaded: function($rootScope) {
-				$rootScope.myTabbar.setActiveTab(0);
-				return $rootScope.myTabbar.loadPage('html/tab1.html');
-			}
-		}
-	})
+  // Tab 1 - MasterDetail example - Navigator init
+  .state('navigator', {
+    abstract: true,
+    // url: '/navigator', // Optional url prefix
+    resolve: {
+      loaded: function($rootScope) {
+        $rootScope.myTabbar.setActiveTab(0);
+        return $rootScope.myTabbar.loadPage('html/tab1.html');
+      }
+    }
+  })
 
-	// Tab 1 - MasterDetail example - List of items
-	.state('navigator.master', {
-		parent: 'navigator',
-		url: '/master',
-		onEnter: ['$rootScope', function($rootScope) {
-			$rootScope.myNavigator.resetToPage('html/master.html');
-		}]
-	})
+  // Tab 1 - MasterDetail example - List of items
+  .state('navigator.master', {
+    parent: 'navigator',
+    url: '/master',
+    onEnter: ['$rootScope', function($rootScope) {
+      $rootScope.myNavigator.resetToPage('html/master.html');
+    }]
+  })
 
-	// Tab 1 - MasterDetail example - Item details
-	.state('navigator.master.detail', {
-		parent: 'navigator.master',
-		url: '/detail/:index',
-		onEnter: ['$rootScope','$stateParams', function($rootScope,$stateParams) {
-			$rootScope.myNavigator.pushPage('html/detail.html', {'index': $stateParams.index});
-		}],
-		onExit: function($rootScope) {
-			$rootScope.myNavigator.popPage();
-		}
-	})
+  // Tab 1 - MasterDetail example - Item details
+  .state('navigator.master.detail', {
+    parent: 'navigator.master',
+    url: '/detail/:index',
+    onEnter: ['$rootScope','$stateParams', function($rootScope,$stateParams) {
+      $rootScope.myNavigator.pushPage('html/detail.html', {'index': $stateParams.index});
+    }],
+    onExit: function($rootScope) {
+      $rootScope.myNavigator.popPage();
+    }
+  })
 ```
 
 Those are the states for the MasterDetail example. The very first state is called "navigator" but notice that it is an abstract state. It only provides some functionality and an optional URL prefix. In this state we are setting up the actual Navigator and linking it to the first tab of our Tabbar. The *ui-router*'s `resolve` property will wait until everything is finished so we ensure that the state won't change without a working Navigator. The truth is that we could combine "navigator" and "navigator.master" states together, but it is more readable in this way.
 
 In the next states we have to play with `onEnter` and `onExit` properties in order to update the Navigator with `resetToPage()`, `pushPage()` and `popPage()`. As mentioned before, we can also pass parameters to states by using URLs like `'/master/detail/:index'` and the `$stateParams` service.
 
-Apart from that, we have to be careful if we need an `<ons-back-button>` in our pages since we cannot change its inner behavior. Instead, we can just use the back button style manually and point it to the state where we want to move with `ui-sref`. Usually it will be `ui-sref="^"` since we want to move to the parent state:
-
-```html
-<span class="toolbar-button--quiet" style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;" ui-sref="^">
-	<i class="ion-ios-arrow-back ons-back-button__icon" style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;" data-animit-orig-style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i>
-	<span style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" class="back-button__label" data-animit-orig-style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;">Back</span>
-</span>
-```
-
-That should do the trick.
-
 Similarly, the states for Sliding Menu will be as follows:
 
 ```javascript
-	// Tab 2 - SlidingMenu example - SlidingMenu init
-	.state('sliding', {
-		abstract: true,
-		// url: '/sliding', // Optional url prefix
-		resolve: {
-			loaded: function($rootScope) {
-				$rootScope.myTabbar.setActiveTab(1);
-				return $rootScope.myTabbar.loadPage('html/tab2.html');
-			}
-		}
-	})
+  // Tab 2 - SlidingMenu example - SlidingMenu init
+  .state('sliding', {
+    abstract: true,
+    // url: '/sliding', // Optional url prefix
+    resolve: {
+      loaded: function($rootScope) {
+        $rootScope.myTabbar.setActiveTab(1);
+        return $rootScope.myTabbar.loadPage('html/tab2.html');
+      }
+    }
+  })
 
-	// Tab 2 - SlidingMenu example - Landing page
-	.state('sliding.main', {
-		parent: 'sliding',
-		url: '/main',
-		onEnter: ['$rootScope', function($rootScope) {
-			$rootScope.myMenu.setMainPage('html/main.html', {closeMenu: true});
-		}]
-	})
+  // Tab 2 - SlidingMenu example - Landing page
+  .state('sliding.main', {
+    parent: 'sliding',
+    url: '/main',
+    onEnter: ['$rootScope', function($rootScope) {
+      $rootScope.myMenu.setMainPage('html/main.html', {closeMenu: true});
+    }]
+  })
 
-	// Tab 2 - SlidingMenu example - Example page 1
-	.state('sliding.page1', {
-		parent: 'sliding',
-		url: '/page1',
-		onEnter: ['$rootScope', function($rootScope) {
-			$rootScope.myMenu.setMainPage('html/page1.html', {closeMenu: true});
-		}]
-	})
+  // Tab 2 - SlidingMenu example - Example page 1
+  .state('sliding.page1', {
+    parent: 'sliding',
+    url: '/page1',
+    onEnter: ['$rootScope', function($rootScope) {
+      $rootScope.myMenu.setMainPage('html/page1.html', {closeMenu: true});
+    }]
+  })
 
-	// Tab 2 - SlidingMenu example - Example page 2
-	.state('sliding.page2', {
-		parent: 'sliding',
-		url: '/page2',
-		onEnter: ['$rootScope', function($rootScope) {
-			$rootScope.myMenu.setMainPage('html/page2.html', {closeMenu: true});
-		}]
-	})
+  // Tab 2 - SlidingMenu example - Example page 2
+  .state('sliding.page2', {
+    parent: 'sliding',
+    url: '/page2',
+    onEnter: ['$rootScope', function($rootScope) {
+      $rootScope.myMenu.setMainPage('html/page2.html', {closeMenu: true});
+    }]
+  })
 ;
 ```
 
