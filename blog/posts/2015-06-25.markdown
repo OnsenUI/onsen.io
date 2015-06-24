@@ -2,7 +2,7 @@
 author: fran
 date: 2015-06-25
 id: onsen-ui-router-app
-title: "Tutorial: Onsen-UI-router"
+title: "Tutorial: Onsen UI with ui-router"
 ---
 
 ![Onsen UI Theme Customization](/blog/content/images/2015/Jun/onsen-ui-router.png)
@@ -82,7 +82,7 @@ Now we can create all the HTML pages we want to use in the corresponding folder.
 </ons-page>
 ```
 
-As you can see there, we have a normal Onsen UI page with its own AngularJS controller (in `js/controllers.js`). The only difference is that, instead of pushing page with `ng-click="myNavigator.pushPage('detail.html', {index: $index})"`, we pass the index parameter to a *ui-router* state: `ui-sref="navigator.master.detail({index: $index})"`. The rest of the pages are not more complex than this one, so you can check the code on Github.
+As you can see there, we have a normal Onsen UI page with its own AngularJS controller (in `js/controllers.js`). The only difference is that, instead of pushing a page with `ng-click="myNavigator.pushPage('detail.html', {index: $index})"`, we pass the index parameter to a *ui-router* state: `ui-sref="navigator.master.detail({index: $index})"`. The rest of the pages are not more complex than this one, so you can check the code on Github.
 
 Apart from that, we have to be careful if we need an `<ons-back-button>` in our pages since we cannot change its inner behavior. Instead, we can just use the back button style manually and point it to the state where we want to move with `ui-sref`. Usually it will be `ui-sref="^"` since we want to move to the parent state:
 
@@ -214,5 +214,5 @@ The first "sliding" state is similar to "navigator" state. It simply sets up the
 
 ## Conclusion
 
-As mentioned before, this was just one way to integrate Onsen UI with *ui-router*. Have you found useful this post or you have any suggestion related to *ui-router* and Onsen UI? Please leave your impressions in the comments if you feel like. Since *ui-router* is a great module and we would like to support it better, some updates to Onsen UI could come in next versions related to this topic. Stay tuned!
+As mentioned before, this was just one way to integrate Onsen UI with *ui-router*. Have you found this post useful or do you have any suggestion related to *ui-router* and Onsen UI? Please leave your impressions in the comments. Since *ui-router* is a great module and we would like to support it better, some updates to Onsen UI could come in next versions related to this topic. Stay tuned!
 
