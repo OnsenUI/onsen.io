@@ -45,7 +45,8 @@ In this example we include all the dependencies from CDNs but you can download t
 </ons-template>
 
 <ons-template id="html/tab2.html">
-  <ons-sliding-menu menu-page="html/menu.html" side="left" var="myMenu" type="reveal" max-slide-distance="260px" swipeable="true">
+  <ons-sliding-menu menu-page="html/menu.html" side="left" var="myMenu"
+                  type="reveal" max-slide-distance="260px" swipeable="true">
   </ons-sliding-menu>
 </ons-template>
 ```
@@ -64,7 +65,8 @@ Now we can create all the HTML pages we want to use in the corresponding folder.
     <div class="center">Simple Navigation</div>
   </ons-toolbar>
   <ons-list ng-controller="MasterController">
-    <ons-list-item modifier="chevron" class="item" ng-repeat="item in items"  ui-sref="navigator.master.detail({index: $index})">
+    <ons-list-item modifier="chevron" class="item" ng-repeat="item in items"
+                  ui-sref="navigator.master.detail({index: $index})">
     <ons-row>
       <ons-col width="60px">
         <div class="item-thum"></div>
@@ -87,22 +89,22 @@ As you can see there, we have a normal Onsen UI page with its own AngularJS cont
 Apart from that, we have to be careful if we need an `<ons-back-button>` in our pages since we cannot change its inner behavior. Instead, we can just use the back button style manually and point it to the state where we want to move with `ui-sref`. Usually it will be `ui-sref="^"` since we want to move to the parent state:
 
 ```html
-<span class="toolbar-button--quiet" ui-sref="^"
-     style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">
+<style>
+  .ons-back-button__icon {
+    vertical-align: top;
+    font-size: 36px;
+    margin-left: 8px;
+    margin-right: 2px;
+    width: 16px;
+    display: inline-block;
+    padding-top: 1px;
+  }
+</style>
 
-  <i class="ion-ios-arrow-back ons-back-button__icon"
-     style="vertical-align: top; background-color: transparent; height: 44px;
-     　　　　line-height: 44px; font-size: 36px; margin-left: 8px;　margin-right: 2px;
-     　　　　width: 16px; display: inline-block; padding-top: 1px;">
-  </i>
-
-  <span style="vertical-align: top; display: inline-block;
-  　　　　　　　line-height: 44px; height: 44px;"
-  　　　　class="back-button__label">
-  　　Back
-  </span>
-
-</span>
+<ons-toolbar-button class="toolbar-button--quiet" ui-sref="^">
+  <ons-icon class="ion-ios-arrow-back ons-back-button__icon"></ons-icon>
+  Back
+</ons-toolbar-button>
 ```
 
 ### The states
