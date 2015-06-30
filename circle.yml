@@ -10,7 +10,8 @@ checkout:
   post:
     - git submodule sync
     - git submodule update --init --recursive
-    - cd OnsenUI; git checkout `git tag | grep -v "\-" | tail -n 1` # Check out latest stable version.
+    - git submodule foreach git fetch --tags
+    - cd OnsenUI; git fetch --tags; git checkout `git tag | grep -v "\-" | tail -n 1` # Check out latest stable version.
 dependencies:
   override:
     - npm install
