@@ -1586,7 +1586,7 @@ ons.ready(function() { });
 
 You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or [`ons.platform`](/reference/ons.platform.html) object to detect the platform.
 
-[`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under a specific platform.
+[`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under some specific platforms. It accepts one or multiple space separated values.
 
 ```html
 <div ons-if-platform="ios">Content for only iPhone and iPad users</div>
@@ -1606,6 +1606,10 @@ In addition to it, `ons.platform` object provides following methods to detect th
 - `ons.platform.isChrome()`: Returns `true` if the app is running under Google Chrome browser.
 - `ons.platform.isIE()`: Returns `true` if the app is running under Internet Explorer browser.
 - `ons.platform.isIOS7()`: Returns `true` if the running iOS is version 7.0 or later.
+
+For testing purposes it also provides a way to select a platform:
+
+- `ons.platform.select( platform )`: Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
 
 <h4 id="Landscapeportraitdetection">Landscape / portrait detection</h4>
 
