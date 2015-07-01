@@ -15,6 +15,8 @@ var redirect = require('metalsmith-redirect');
 var draft = require('metalsmith-drafts');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
+var tags = require('metalsmith-tags');
+var wordcloud = require('metalsmith-wordcloud');
 var sortObject = require('sort-object');
 var currentPath = require('./current-path');
 
@@ -173,6 +175,7 @@ module.exports = function(lang, isStaging) {
 
               doc.isArticle = true;
               doc.author = authors[doc.author];
+              doc.origContents = doc.contents;
 
               if (!doc.author) {
                 throw new Error('no such author: ' + authorName);
@@ -187,6 +190,14 @@ module.exports = function(lang, isStaging) {
             }
             done();
           })
+          .use(tags({
+            handle: 'tags',
+            path: 'tags/:tag.html'
+          }))
+          .use(wordcloud({
+            category: 'tags',
+            path: '/blog/tags'
+          }))
         )
         .use(branch('*.html')
           // index page

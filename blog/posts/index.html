@@ -15,6 +15,14 @@ paginate: articles
 
   <div><%- @renderArticleIntroAsHTML(article.contents) %></div>
 
+  <% if article.tags: %>
+    <div>Tagged:
+      <% for tag in article.tags: %>
+        <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+      <% end %>
+    </div>
+  <% end %>
+
   <div class="article-overview-readmore">
     <a class="site-button" href="<%= @rootUrl %>blog/<%- article.id %>/">READ MORE</a>
   </div>

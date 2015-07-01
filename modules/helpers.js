@@ -194,6 +194,22 @@ module.exports = function() {
         return htmlExcerpts(html, 200);
       },
 
+      calculateTagFontSize: function(cloud, tag) {
+        var min = 16,
+          max = 30,
+          items = tag.wght;
+
+        var largest = cloud
+          .map(function(tag) {
+            return tag.wght;
+          })
+          .reduce(function(a, b) {
+            return Math.max(a, b);
+          });
+
+         return (Math.log(items) / Math.log(largest) * (max - min) + min) + 'px';
+      },
+
       hasAlternateLangPage: function() {
         if (metalsmith.metadata().isBlog) {
           return false;

@@ -54,6 +54,7 @@
 
   <section class="content-container clearfix">
     <div class="content">
+
       <% if @isArticle: %>
       <div class="article">
         <h2 class="article-title"><%- @title %></h2>
@@ -64,6 +65,14 @@
         <div class="article-content">
           <%- @contents %>
         </div>
+
+        <% if @tags: %>
+        <div>Tagged:
+          <% for tag in @tags: %>
+          <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+          <% end %>
+        </div>
+        <% end %>
 
         <%- @partial('blog-newsletter.html.eco') %>
 
@@ -110,9 +119,44 @@
         <a href="/blog/rss.xml">Blog RSS Feed</a>
       </div>
 
+      <% else if @tag: %>
+        <h1>Posts for "<%- @tag %>"</h1>
+        <% for article in @pagination.files: %>
+        <section class="article article-overview">
+
+        <h2 class="article-title article-overview-title"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
+
+        <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%- @renderBlogDate article.date %></a></div>
+
+        <%- @partial('blog-share.html.eco', {id: article.id, blogTitle: article.title}) %>
+
+        <%- @renderArticleIntroAsHTML article.origContents %>
+
+        <% if article.tags: %>
+        <div>Tagged:
+          <% for tag in article.tags: %>
+          <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+          <% end %>
+        </div>
+        <% end %>
+
+        <div class="article-overview-readmore">
+          <a class="site-button" href="<%= @rootUrl %>blog/<%- article.id %>/">READ MORE</a>
+        </div>
+
+        </section>
+        <% end %>
       <% else: %>
       <%- @contents %>
       <% end %>
+      <div class="tag-cloud">
+        <% for tag in @cloud: %>
+        <a
+          style="font-size: <%- @calculateTagFontSize @cloud, tag %>"
+          href="/blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
+          <%- tag.ctg %> (<%- tag.wght %>)</a>
+        <% end %>
+      </div>
       </div>
   </section>
 
