@@ -1,13 +1,13 @@
 ---
 author: andreas
-date: 2015-06-25
+date: 2015-07-03
 id: onsen-ui-roadmap-new-release-onsen-2-0
 title: "Onsen UI Roadmap: New release and Onsen 2.0"
 ---
 
 ![Onsen UI Theme Customization](/blog/content/images/2015/Jul/onsenui-roadmap.jpg)
 
-We'd like to give you an update on what we've been working on lately and what we have in store for the future.
+We would like to give you an update on what we've been working on lately and what we have in store for the future.
 
 Onsen UI 1.3.4 was just released with a bunch of improvements. As we've mentioned earlier we're also hard at work with the next major release of Onsen UI which will be version 2.0.
 
@@ -21,6 +21,18 @@ We realized that there hasn't been a good place for general discussion about Ons
 
 Come and talk about Onsen UI, hybrid apps, JavaScript or development in general! If you have any questions or issues with Onsen UI there will be someone there to help you or you might be able to work it out together.
 
+### Onsen UI 1.3.4 has been released
+
+Event though we have 2.0 on the horizon we will still be releasing new versions for 1.x. Actually, we just released Onsen UI 1.3.3 which contained a bunch of fixes and improvements. Shortly thereafter we released 1.3.4 which fixes some minor bugs.
+
+This is a rundown of some of the important changes:
+
+* The `<ons-navigator>` component's `'prepop'` event object will now contain information about both the current page and the next page in the stack. This will make it easier for developers to prepare the page before the transition animation is executed.
+* The `insertPage()` method of `<ons-navigator>` will now be correctly animated when inserting a page on the top of the stack.
+* Prevent popping two pages when the user taps the `<ons-back-button>` element in quick succession.
+
+Please have a look at the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md) for an exhaustive list of changes.
+
 ### Version 2.0 is coming up
 
 The release of Onsen 2.0 is getting closer every day. If you take a look at the ["master" branch](https://github.com/OnsenUI/OnsenUI/tree/master/core/elements) you can see that most components already have been reimplemented as Web Components in ES6.
@@ -33,23 +45,11 @@ This is a quick overview of the changes we're making:
 <p>
   Another added benifit is that you'll be able to use Onsen UI even if you're not an Angular developer. A lot of you are using Onsen UI together with pure jQuery or other MVC frameworks like Backbone.js, with the Web Components you'll be able to use Onsen UI without using the `ons.compile()` method every time you create an element.
 </p>
-* <p>Or course, we will also be adding some new features. If you have any suggestions please open an [issue on GitHub](https://github.com/OnsenUI/OnsenUI/issues) or talk to us on [Gitter](https://gitter.im/OnsenUI/OnsenUI).</p>
+* <p>Of course, we will also be adding some new features. If you have any suggestions please open an [issue on GitHub](https://github.com/OnsenUI/OnsenUI/issues) or talk to us on [Gitter](https://gitter.im/OnsenUI/OnsenUI).</p>
 * <p>Since we're increasing the major version number we will make some changes to the API and the components. We'll be careful not to break anything since we want migration to be as smooth as possible.</p>
 * <p>Charts is a common UI component that Onsen UI is currently lacking so we're considering adding built-in support for charts and diagrams in Onsen 2.0.</p>
 
-So when will 2.0 be released? We have not decided on a date for the final release yet but there will be a alpha version available for you to test out in the upcoming months.
-
-### Onsen UI 1.3.4 has been released
-
-Event though we have 2.0 on the horizon we will still be releasing new versions for 1.x. Actually, we just released Onsen UI 1.3.3 which contained a bunch of fixes and improvements. Shortly thereafter we released 1.3.4 which fixes some minor bugs.
-
-This is a rundown of some of the important changes:
-
-* The `<ons-navigator>` component's `'prepop'` event object will now contain information about both the current page and the next page in the stack. This will make it easier for developers to prepare the page before the transition animation is executed.
-* The `insertPage()` method of `<ons-navigator>` will now be correctly animated when inserting a page on the top of the stack.
-* Prevent popping two pages when the user taps the `<ons-back-button>` element in quick succession.
-
-Please have a look at the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md) for an exhaustive list of changes.
+So when will 2.0 be released? We have not decided on a date for the final release yet but there will be an alpha version available for you to test out in the upcoming months.
 
 ### We need your help!
 
