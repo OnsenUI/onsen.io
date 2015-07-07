@@ -1,0 +1,48 @@
+---
+author: fran
+date: 2015-07-07
+id: lokijs-nosql-db-cordova
+title: "LokiJS: in-memory NoSQL datastore for Cordova apps"
+---
+
+![LokiJS](/blog/content/images/2015/Jul/lokijs.png)
+
+[LokiJS](http://lokijs.org/) is a lightweight JavaScript in-memory database made by [Techfort](https://github.com/techfort) that provides a document-oriented alternative to the already well known SQLite. For many applications a NoSQL approach could be more preferable than relational data when working with complex object stores. LokiJS gives us the chance to do this in a very efficient way.
+
+<!-- more -->
+
+LokiJS is intended to be used as an in-memory database with the possibility of persisting the data. It is compatible with Node.js (filesystem) and browsers, what means that can be also used in our hybrid mobile apps (*localStorage* and *indexedDB*).
+
+A block of code is worth a thousand words:
+
+```javascript
+// Create the database:
+var db = new loki('loki.json')
+
+// Create a collection:
+var children = db.addCollection('children')
+
+// Insert a document:
+children.insert({name:'Sleipnir', legs: 8})
+children.insert({name:'Jormungandr', legs: 0})
+children.insert({name:'Hel', legs: 2})
+
+// Retrieve documents:
+children.get(1); // returns Sleipnir
+children.find( {'name':'Sleipnir'} )
+children.find( { legs: { '$gt' : 2 } } )
+```
+
+Furthermore, LokiJS supports field indexing for faster document access and provides a built-in DynamicView class that also enables to use indexes on data subsets for even faster performance. DynamicViews work as queries that are recomputed in the background when data changes, so once a view is created you never have to worry about recalling or refreshing data, it is always updated and available.
+
+Even it is available for AngularJS through the `lokijs` module:
+
+```
+var myApp = angular.module('myApp', ['lokijs'])
+.controller('MyController', ['$scope', 'Loki', function ($scope, Loki) {
+  var db = new Loki();
+  // etc.
+}])
+```
+
+Its low footprint and high performance, along with a bunch of other features, make it worth giving a try! You can follow its [Github repo here](https://github.com/techfort/LokiJS) and learn more about it [here](http://lokijs.org/#/docs). We hope you find this tool useful for your future hybrid apps!
