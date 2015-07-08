@@ -54,6 +54,7 @@
 
   <section class="content-container clearfix">
     <div class="content">
+
       <% if @isArticle: %>
       <div class="article">
         <h2 class="article-title"><%- @title %></h2>
@@ -64,6 +65,14 @@
         <div class="article-content">
           <%- @contents %>
         </div>
+
+        <% if @tags: %>
+        <div>Tagged:
+          <% for tag in @tags: %>
+          <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+          <% end %>
+        </div>
+        <% end %>
 
         <%- @partial('blog-newsletter.html.eco') %>
 
@@ -110,9 +119,22 @@
         <a href="/blog/rss.xml">Blog RSS Feed</a>
       </div>
 
+      <% else if @tag: %>
+        <h1>Posts for "<%- @tag %>"</h1>
+        <% for article in @pagination.files: %>
+          <%- @partial('blog-post.html.eco', {article: article}) %>
+        <% end %>
       <% else: %>
       <%- @contents %>
       <% end %>
+      <div class="tag-cloud">
+        <% for tag in @cloud: %>
+        <a
+          style="font-size: <%- @calculateTagFontSize @cloud, tag %>"
+          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
+          <%- tag.ctg %> (<%- tag.wght %>)</a>
+        <% end %>
+      </div>
       </div>
   </section>
 

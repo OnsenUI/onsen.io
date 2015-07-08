@@ -1,0 +1,24 @@
+<section class="article article-overview">
+
+  <h2 class="article-title article-overview-title"><a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%= @article.title %></a></h2>
+
+  <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%- @renderBlogDate @article.date %></a></div>
+
+  <%- @partial('blog-share.html.eco', {id: @article.id, blogTitle: @article.title}) %>
+
+  <div><%- @renderArticleIntroAsHTML(@article.origContents) %></div>
+
+  <% if @article.tags: %>
+    <div>Tagged:
+      <% for tag in @article.tags: %>
+        <a href="<%= @rootUrl %>blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="article-overview-readmore">
+    <a class="site-button" href="<%= @rootUrl %>blog/<%- @article.id %>/">READ MORE</a>
+  </div>
+
+</section>
+
