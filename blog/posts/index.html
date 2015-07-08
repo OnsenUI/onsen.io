@@ -5,22 +5,7 @@ paginate: articles
 ---
 
 <% for article, index in @articles.slice(@pagination.start, @pagination.end + 1): %>
-<section class="article article-overview">
-
-  <h2 class="article-title article-overview-title"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
-
-  <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%- @renderBlogDate article.date %></a></div>
-
-  <%- @partial('blog-share.html.eco', {id: article.id, blogTitle: article.title}) %>
-
-  <div><%- @renderArticleIntroAsHTML(article.contents) %></div>
-
-  <div class="article-overview-readmore">
-    <a class="site-button" href="<%= @rootUrl %>blog/<%- article.id %>/">READ MORE</a>
-  </div>
-
-</section>
-
+  <%- @partial('blog-post.html.eco', {article: article}) %>
 <% end %>
 
 <%- @partial('blog-newsletter.html.eco') %>
