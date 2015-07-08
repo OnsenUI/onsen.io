@@ -3,13 +3,14 @@ author: fran
 date: 2015-07-08
 id: lokijs-nosql-db-cordova
 title: "LokiJS: in-memory NoSQL datastore for Cordova apps"
+tags: lokijs, database, nosql, cordova
 ---
 
 ![LokiJS](/blog/content/images/2015/Jul/lokijs.png)
 
 [LokiJS](http://lokijs.org/) is a lightweight JavaScript in-memory database made by [Techfort](https://github.com/techfort) that provides a document-oriented alternative to the already well known SQLite. For many applications a NoSQL approach could be more preferable than relational data when working with complex object stores. LokiJS gives us the chance to do this in a very efficient way.
 
-LokiJS is intended to be used as an in-memory database with the possibility of persisting the data. It is compatible with Node.js (filesystem) and browsers, what means that can be also used in our hybrid mobile apps (*localStorage* and *indexedDB*).
+LokiJS is intended to be used as an in-memory database with the possibility of persisting the data. It is compatible with Node.js (filesystem) and browsers, which means that it can be also used in our hybrid mobile Cordova apps (*localStorage* and *indexedDB*).
 
 <!-- more -->
 
@@ -35,7 +36,7 @@ children.find( { legs: { '$gt' : 2 } } )
 
 Furthermore, LokiJS supports field indexing for faster document access and provides a built-in DynamicView class that also enables to use indexes on data subsets for even faster performance. DynamicViews work as queries that are recomputed in the background when data changes, so once a view is created you never have to worry about recalling or refreshing data, it is always updated and available.
 
-Even it is available for AngularJS through the `lokijs` module:
+It is also available for AngularJS through the [`lokijs`](https://github.com/techfort/LokiJS/blob/master/src/loki-angular.js) module:
 
 ```
 var myApp = angular.module('myApp', ['lokijs'])
