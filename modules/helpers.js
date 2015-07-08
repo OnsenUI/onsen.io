@@ -195,8 +195,8 @@ module.exports = function() {
       },
 
       calculateTagFontSize: function(cloud, tag) {
-        var min = 16,
-          max = 30,
+        var min = 15,
+          max = 28,
           items = tag.wght;
 
         var largest = cloud
