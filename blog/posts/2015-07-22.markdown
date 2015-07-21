@@ -1,0 +1,142 @@
+---
+author: fran
+date: 2015-07-08
+id: onsen-ui-youtube-api-3
+title: "Tutorial: YouTube app with Onsen UI"
+tags: tutorial, youtube, angular, onsen-ui
+---
+
+![OnsenUI-YouTube](/blog/content/images/2015/Jul/onsen-ui-youtube.png)
+
+In this tutorial we will learn how to consume YouTube Data API v3 JavaScript from our hybrid app with Onsen UI interface using AngularJS. We will be able to add YouTube functionality to play videos and show them on top of our Onsen UI elements very easily!
+
+<!-- more -->
+
+[YouTube Data API v3](https://developers.google.com/youtube/v3/) is the last API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial we will create and set up a basic YouTube player that will run our requests and play the videos we select. We are using an `ons-tabbar` to separate the search results from our video history, and videos will be displayed inside an `ons-modal`.
+
+Once again, all the code of this example is [available to download on Github](https://github.com/frankdiox/OnsenUI-YouTube). You can play some videos with this app and see how it works before getting to the actual code:
+
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frankdiox.github.io/OnsenUI-YouTube/" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
+
+This app is based on an open-source [YouTube Jukebox](http://jgthms.com/juketube/) made by [J. Thomas](http://jgthms.com) on Github. In this tutorial the app has been simplified for beginners, but if you want to see something more complex (like playlists) you can check out his project!
+
+### YouTube API v3
+
+Before starting to code we need to get a valid API key. To do so we have to visit [Google Developers Console](https://console.developers.google.com/project) (with our Google account), create a new project an activate access for YouTube Data API v3. In the credentials section we have to select a method to access this API that, in our case, will be public access only from our Github gh-pages repository. We will need to attach the generated API key to every request we make to the YouTube player later on.
+
+Once we have got our API key, the next step will be to understand how the API works. In this example we will embed a YouTube player in our app and we will send requests to it by using the [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference). This API will serve an HTML5 player instead of a Flash player for mobile devices that don't support Flash, what is perfect for our objective.
+
+To start with the code, first of all we need to load the YouTube IFrame Player API JavaScript code, and to do so we modify the DOM as explained in the API docs:
+
+```javascript
+var app = angular.module('myApp', ['onsen']);
+
+app.run(function () {
+  var tag = document.createElement('script');
+  tag.src = "http://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+});
+```
+
+Now that we have the API loaded, we need to create a "placeholder" for our YouTube player that will be filled with the actual player later on. In this case we will show the videos inside an [`ons-modal`](http://onsen.io/reference/ons-modal.html), so our `index.html` will be as simple as this:
+
+```html
+<body ng-app="myApp" ng-controller="VideosController">
+
+  <ons-modal var="modal" ng-click="youtube.player.stopVideo(); modal.hide();">
+  <div id="player">
+    <div id="placeholder" style="width: 100%"></div>
+  </div>
+  </ons-modal>
+
+  <ons-tabbar>
+  <ons-tab page="html/search.html" persistent no-reload active="true"
+          icon="fa fa-search" label="Search"></ons-tab>
+  <ons-tab page="html/history.html" persistent no-reload
+          icon="fa fa-history" label="History"></ons-tab>
+  </ons-tabbar>
+
+</body>
+```
+
+As you can see there, we create an [`ons-modal`](http://onsen.io/reference/ons-modal.html) and inside it we just need to place a normal `div`. This `div` will be replaced with an `iframe` later on, so we can directly use an `iframe` instead and specify values like `width` and `height` on it. Furthermore, we have an `ons-tabbar` to organise the navigation pattern of our app.
+
+The API code is loaded but we still need to bootstrap our YouTube player. We have to implement a JavaScript function named `onYouTubeIframeAPIReady` that will be called once the player's code has been downloaded and it will create the actual player. In this example we create a `VideosController` that will take care of all related to YouTube API. We define a `youtube` object with some usefult data that will hold the final player as follows:
+
+```javascript
+var youtube = {
+  ready: false,
+  player: null,
+  playerId: null,
+  videoId: null,
+  videoTitle: null,
+  playerHeight: '480',
+  playerWidth: '640',
+  state: 'stopped'
+};
+```
+
+Now we have to bind this object to the HTML element where we want to display the player:
+
+```javascript
+this.bindPlayer = function (elementId) {
+  $log.info('Binding to ' + elementId);
+  youtube.playerId = elementId;
+};
+```
+
+And we create the actual YouTube player using its API:
+
+```javascript
+this.createPlayer = function () {
+  $log.info('Creating a new Youtube player for DOM id ' + youtube.playerId + ' and video ' + youtube.videoId);
+  return new YT.Player(youtube.playerId, {
+    height: youtube.playerHeight,
+    width: youtube.playerWidth,
+    playerVars: {
+    rel: 0,
+    showinfo: 0
+    }
+  });
+};
+
+this.loadPlayer = function () {
+  if (youtube.ready && youtube.playerId) {
+    if (youtube.player) {
+    youtube.player.destroy();
+    }
+    youtube.player = service.createPlayer();
+  }
+};
+```
+
+Finally, we define the `onYouTubeIframeAPIReady` function that will use the previous methods:
+
+```javascript
+$window.onYouTubeIframeAPIReady = function () {
+  $log.info('Youtube API is ready');
+  service.bindPlayer('placeholder');
+  service.loadPlayer();
+  $rootScope.$apply();
+};
+
+```
+
+And that's it, our YouTube player is created and working inside our `ons-modal`. If you check the HTML code again, you will see that we have added `ng-click="youtube.player.stopVideo(); modal.hide();` to the modal. We want to stop the video and hide it when we click outside the actual video (over the rest part of the modal) so this will do the trick.
+
+In order to load a new video, we make a new method that will send the video ID to the API for us:
+
+```javascript
+this.launchPlayer = function (id, title) {
+  youtube.player.loadVideoById(id);
+  youtube.videoId = id;
+  youtube.videoTitle = title;
+  return youtube;
+}
+```
+
+We have our `VideosService` fully prepared to consume the YouTube API v3 now, so we just need to create a `VideosController` and call the service from our app:
+
+
+
