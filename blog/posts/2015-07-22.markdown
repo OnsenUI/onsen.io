@@ -2,7 +2,7 @@
 author: fran
 date: 2015-07-22
 id: onsen-ui-youtube-api-3
-title: "Tutorial: Make a YouTube app with AngularJS and Onsen UI"
+title: "Make a YouTube app with AngularJS and Onsen UI"
 tags: tutorial, youtube, angular, onsen-ui
 ---
 
@@ -12,14 +12,9 @@ In this tutorial, we will learn how to consume YouTube Data API v3 JavaScript fr
 
 <!-- more -->
 
-<<<<<<< HEAD
-[YouTube Data API v3](https://developers.google.com/youtube/v3/) is the last API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial, we will create and set up a basic YouTube player that will run our requests and play the videos we select. Even though we are using AngularJS here, this guide may help those who prefer pure JavaScript or jQuery since the YouTube API usage is very similar. Also, we will use [Monaca](https://monaca.io/) here with its awesome Monaca Debugger to quickly test this app on real devices:
+[YouTube Data API v3](https://developers.google.com/youtube/v3/) is the latest API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial, we will create and set up a basic YouTube player that will run our requests and play the videos we select. Even though we are using AngularJS here, this guide may help those who prefer pure JavaScript or jQuery since the YouTube API usage is very similar. Also, we will use [Monaca](https://monaca.io/) here with its awesome Monaca Debugger to quickly test this app on real devices:
 
 ![Monaca-YouTube](/blog/content/images/2015/Jul/monaca-youtube.png)
-
-=======
-[YouTube Data API v3](https://developers.google.com/youtube/v3/) is the latest API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial, we will create and set up a basic YouTube player that will run our requests and play the videos we select. Even though we are using AngularJS here, this guide may help those who prefer pure JavaScript or jQuery since the YouTube API usage is very similar. Also, we will use [Monaca](https://monaca.io/) here with its awesome Monaca Debugger to quickly test this app on real devices.
->>>>>>> master
 
 This app will have an `ons-tabbar` to separate the search results from our video history and every video will be displayed inside an `ons-modal`. Once again, all the code of this example is [available to download on GitHub](https://github.com/frankdiox/OnsenUI-YouTube). You can play some videos with this app and see how it works before getting to the actual code:
 
