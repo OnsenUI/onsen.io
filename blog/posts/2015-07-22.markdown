@@ -1,8 +1,8 @@
 ---
 author: fran
-date: 2015-07-08
+date: 2015-07-22
 id: onsen-ui-youtube-api-3
-title: "Make a YouTube app with AngularJS and Onsen UI"
+title: "Tutorial: Make a YouTube app with AngularJS and Onsen UI"
 tags: tutorial, youtube, angular, onsen-ui
 ---
 
@@ -12,20 +12,19 @@ In this tutorial, we will learn how to consume YouTube Data API v3 JavaScript fr
 
 <!-- more -->
 
-[YouTube Data API v3](https://developers.google.com/youtube/v3/) is the last API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial, we will create and set up a basic YouTube player that will run our requests and play the videos we select. Even though we are using AngularJS here, this guide may help those who prefer pure JavaScript or jQuery since the YouTube API usage is very similar. Also, we will use [Monaca](https://monaca.io/) here with its awesome Monaca Debugger to quickly test this app on real devices.
+[YouTube Data API v3](https://developers.google.com/youtube/v3/) is the latest API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial, we will create and set up a basic YouTube player that will run our requests and play the videos we select. Even though we are using AngularJS here, this guide may help those who prefer pure JavaScript or jQuery since the YouTube API usage is very similar. Also, we will use [Monaca](https://monaca.io/) here with its awesome Monaca Debugger to quickly test this app on real devices.
 
-This app will have an `ons-tabbar` to separate the search results from our video history and every video will be displayed inside an `ons-modal`. Once again, all the code of this example is [available to download on Github](https://github.com/frankdiox/OnsenUI-YouTube). You can play some videos with this app and see how it works before getting to the actual code:
+This app will have an `ons-tabbar` to separate the search results from our video history and every video will be displayed inside an `ons-modal`. Once again, all the code of this example is [available to download on GitHub](https://github.com/frankdiox/OnsenUI-YouTube). You can play some videos with this app and see how it works before getting to the actual code:
 
 <iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frankdiox.github.io/OnsenUI-YouTube/" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
 
-This sample app is based on an open-source [YouTube Jukebox](http://jgthms.com/juketube/) made by [J. Thomas](http://jgthms.com) on Github. However, here the app has been simplified for beginners, but if you want to see something a little bit more complex (like playlists) you can check out his project!
+This sample app is based on an open-source [YouTube Jukebox](http://jgthms.com/juketube/) made by [J. Thomas](http://jgthms.com) on GitHub. However, here the app has been simplified for beginners. If you want to see something a little bit more complex (like playlists) you can check out his project!
 
 ### Starting with YouTube Data API v3
 
-Before starting to code we need to get a valid API key to interact with YouTube Data API v3. We have to visit [Google Developers Console](https://console.developers.google.com/project) (with our Google account), create a new project and activate access for YouTube Data API v3. In the credentials section, we have to select a method to access to this API that, in our case, will be public access only from our Github gh-pages repository. We will need to attach the generated API key to every request we make to the YouTube player later on.
+Before starting to code we need to get a valid API key to interact with YouTube Data API v3. We have to visit [Google Developers Console](https://console.developers.google.com/project) (with our Google account), create a new project and activate access for YouTube Data API v3. In the credentials section, we have to select a method to access to this API that, in our case, will be public access only from our GitHub `gh-pages` repository. We will need to attach the generated API key to every request we make to the YouTube player later on.
 
-Once we've got our API key, the next step will be understanding how the API works. In this example, we will embed a YouTube player in our app and we will send requests to it by using the [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference). This API will serve an HTML5 player instead of a Flash player for mobile devices that don't support Flash, what is perfect for our objective.
-
+Once we've got our API key, the next step will be understanding how the API works. In this example, we will embed a YouTube player in our app and we will send requests to it by using the [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference). This API will serve an HTML5 player instead of a Flash player for mobile devices that don't support Flash, which is perfect for mobile apps.
 
 ### Bootstrapping YouTube Player in an AngularJS service
 
@@ -54,12 +53,14 @@ Now that we have the API loaded, we need to create a "placeholder" for our YouTu
   </ons-modal>
 
   <ons-tabbar>
-  <ons-tab page="html/search.html" persistent no-reload active="true"
-          icon="fa fa-search" label="Search"></ons-tab>
-  <ons-tab page="html/history.html" persistent no-reload
-          icon="fa fa-history" label="History"></ons-tab>
+    <ons-tab 
+      page="html/search.html" persistent no-reload active="true" icon="fa fa-search" label="Search">
+    </ons-tab>
+    <ons-tab 
+      page="html/history.html" persistent no-reload icon="fa fa-history" label="History">
+    </ons-tab>
   </ons-tabbar>
-
+  
 </body>
 ```
 
@@ -111,7 +112,7 @@ this.loadPlayer = function () {
 };
 ```
 
-Finally, we define the mentioned `onYouTubeIframeAPIReady` function that will call the previous methods:
+Finally, we define the mentioned `onYouTubeIframeAPIReady()` function that will call the previous methods:
 
 ```javascript
 $window.onYouTubeIframeAPIReady = function () {
@@ -124,7 +125,7 @@ $window.onYouTubeIframeAPIReady = function () {
 
 ```
 
-And that's it, our YouTube player is created and working inside our `ons-modal`. If you check the HTML code again, you will see that we have added `ng-click="youtube.player.stopVideo(); modal.hide();` to the modal. We want to stop the video and hide it when we click outside the actual video (over the rest of the modal) so this will do the trick. Instead of stopping and hiding it here we could also display it on a corner of the screen like the official YouTube app, for example.
+And that's it! Our YouTube player is created and displayed inside our `ons-modal`. If you check the HTML code again, you will see that we have added `ng-click="youtube.player.stopVideo(); modal.hide();` to the modal. We want to stop the video and hide it when we click outside the actual video (over the rest of the modal) so this will do the trick. Instead of stopping and hiding it here we could also display it on a corner of the screen like the official YouTube app, for example.
 
 In order to load a new video, we make a new method in our `VideosService` that will send the video ID to the API for us:
 
@@ -180,10 +181,10 @@ $scope.search = function (isNewQuery) {
 };
 ```
 
-The way to make a search request to YouTube API v3 is through HTTP Get to `https://www.googleapis.com/youtube/v3/search`. Here we need to specify some values for the query:
+To search with the YouTube API v3 we make a GET request to `https://www.googleapis.com/youtube/v3/search`. Here we need to specify some values for the query:
 * **key**: The API key we got on previous steps.
 * **type**: The type of the resource we are asking for (video, playlist, channel).
-* **maxResults**: Number of videos that YouTube will return at once.
+* **maxResults**: Number of videos that YouTube will return.
 * **pageToken**: this is a very good feature for pagination. Normally we should do something like `query().skip( nItems * nPages ).limit( nItems )` in order to perform pagination, but YouTube will ease this process and will return a "nextPageToken" and a "prevPageToken" in each request we make. In case we want to get the next page we just need to attach the obtained "nextPageToken" to this field and YouTube will skip the videos we already got in the previous request. This feature will be very handy since we just need a button to load more videos but we are not interested in the actual page number.
 * **part**: Specifies a comma-separated list of one or more search resource properties that the API response will include.
 * **fields**: This is just a selector that specifies which fields to include in the partial response. Don't forget to include `nextPageToken`.
@@ -240,7 +241,7 @@ function onYoutubeStateChange (event) {
 }
 ```
 
-Like these events, there are many other features in YouTube API v3 that you can discover in their docs:
+Like these events, there are many other features in YouTube API v3 that you can discover in the docs:
 
 * [Youtube Data API v3](https://developers.google.com/youtube/v3/)
 * [YouTube Data API Overview](https://developers.google.com/youtube/v3/getting-started)
@@ -250,4 +251,4 @@ Like these events, there are many other features in YouTube API v3 that you can 
 
 ### Conclusion
 
-As you have seen, accessing to YouTube videos and other resources is quite easy with YouTube Data API v3. Hopefully we will start seeing more multimedia hybrid apps with YouTube and Onsen UI from now on! If you have any doubt don't hesitate to ask in the comments, on [Github issues](https://github.com/OnsenUI/OnsenUI/issues) or [Stackoverflow](http://stackoverflow.com/questions/tagged/onsen-ui). More tutorials will be coming soon!
+As you have seen, accessing to YouTube videos and other resources is quite easy with YouTube Data API v3. Hopefully we will start seeing more multimedia hybrid apps with YouTube and Onsen UI from now on! If you have any doubt don't hesitate to ask in the comments, on [GitHub issues](https://github.com/OnsenUI/OnsenUI/issues) or [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui). More tutorials will be coming soon!
