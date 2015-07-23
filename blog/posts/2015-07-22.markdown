@@ -6,7 +6,7 @@ title: "Make a YouTube app with AngularJS and Onsen UI"
 tags: tutorial, youtube, angular, onsen-ui
 ---
 
-![OnsenUI-YouTube](/blog/content/images/2015/Jul/onsen-ui-youtube.png)
+![OnsenUI-YouTube](/blog/content/images/2015/Jul/onsenui-yt.png)
 
 In this tutorial, we will learn how to consume YouTube Data API v3 JavaScript from our hybrid app with an Onsen UI interface using AngularJS. We will be able to add YouTube functionality to play videos and show them on top of our Onsen UI elements very easily!
 
@@ -14,7 +14,7 @@ In this tutorial, we will learn how to consume YouTube Data API v3 JavaScript fr
 
 [YouTube Data API v3](https://developers.google.com/youtube/v3/) is the latest API that Google provides to interact with its famous video platform. They provide code samples for many languages such as Go, Java, .NET, Python, Ruby and, of course, JavaSript. In this tutorial, we will create and set up a basic YouTube player that will run our requests and play the videos we select. Even though we are using AngularJS here, this guide may help those who prefer pure JavaScript or jQuery since the YouTube API usage is very similar. Also, we will use [Monaca](https://monaca.io/) here with its awesome Monaca Debugger to quickly test this app on real devices:
 
-![Monaca-YouTube](/blog/content/images/2015/Jul/monaca-youtube.png)
+![Monaca-YouTube](/blog/content/images/2015/Jul/monaca-yt.png)
 
 This app will have an `ons-tabbar` to separate the search results from our video history and every video will be displayed inside an `ons-modal`. Once again, all the code of this example is [available to download on GitHub](https://github.com/frankdiox/OnsenUI-YouTube). You can play some videos with this app and see how it works before getting to the actual code:
 
