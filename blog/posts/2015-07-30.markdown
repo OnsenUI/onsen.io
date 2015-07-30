@@ -20,11 +20,11 @@ Some other popular JavaScript libraries are:
 * [Chart.js](http://www.chartjs.org/) - Simpler to use than D3.js but still very customizable. Instead of SVG it's using canvas, so it's a very good option if you need to support older browsers or WebViews.
 * [n3-charts](http://n3-charts.github.io/line-chart/#/) - This library is built on top of AngularJS and D3.js. It makes displaying charts in an AngularJS a breeze.
 
-We've recently been discussing if we should support a charting library in Onsen UI, and if so which one we should choose. One of the candidates is NVD3 since it provides a good combination of ease-of-use and the power of D3. It's also very simple to integrate in AngularJS apps, as we will see in this article.
+We've recently been discussing if we should support a charting library in Onsen UI, and if so which one we should choose. One of the best candidates is NVD3 since it provides a good combination of ease-of-use and the powerful data visualization of D3.js. It's also very simple to integrate in AngularJS apps, as we will see in this article.
 
 Some good things about NVD3:
 
-* Responsive - Charts created using NVD3 will be rendered differently depending on the size of the screen and the orientation. 
+* Responsive - Charts created using NVD3 will be rendered differently depending on the size of the screen and the orientation.
 * Dynamic - Charts can be refreshed easily when the data changes.
 
 Below is a simple app using NVD3 and Onsen UI that shows the population for all the countries on Earth.
@@ -33,7 +33,7 @@ Below is a simple app using NVD3 and Onsen UI that shows the population for all 
 
 ### Creating a chart with NVD3
 
-First create an empty html element and load the following files:
+First create a new HTML file and load the following resources:
 
 * `d3.js`
 * `nv.d3.js`
@@ -42,19 +42,19 @@ First create an empty html element and load the following files:
 They are all available on CDN, so we can do:
 
 ```html
-  <html>
-    <head>
-      <title>My chart</title>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
-      <link rel="stylesheet" type="text/css" href="theme.css">
-      <script src="chart.js"></script>
-    </head>
-    <body>
-      <!-- D3 will use this "svg" tag to draw the chart -->
-      <svg></svg>
-    </body>
-  </html>
+<html>
+  <head>
+    <title>My chart</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.js"></script>
+    <link rel="stylesheet" typte="text/cssr href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.1/nv.d3.min.css">
+    <script src="chart.js"></script>
+  </head>
+  <body>
+    <!-- D3 will use this "svg" tag to render the chart! -->
+    <svg></svg>
+  </body>
+</html>
 ```
 
 Let's first make a chart and render it on the screen. Create a file called `chart.js` and add the following code:
@@ -132,7 +132,9 @@ We also add some `<input>` tags so the user can change the data. The final marku
 ```html
 <div ng-app="app" ng-controller="MyController as main">
   <line-chart height="250px" data="main.data"></line-chart>
+
   <h3>Change the values: </h3>
+
   <p ng-repeat="datum in main.data[0].values">
     <input type="number" ng-model="datum.y">
   </p>
@@ -169,7 +171,7 @@ angular.module('app', [])
   }]);
 ```
 
-At this point we have not written any code for the directive so only the input elements will work. Implementing the directive is pretty straight forward and we'll borrow some code from the previous pure JavaScript example. I've used two services (`d3` and `nv`) that just return the global objects.
+At this point we have not written any code for the directive so only the input elements will work. Implementing the directive is pretty straight forward and we'll borrow some code from the previous pure JavaScript example. I've used two services (`d3` and `nv`) that just return the respective objects.
 
 ```javascript
 angular.module('app')
@@ -189,6 +191,7 @@ angular.module('app')
         var svg = element.find('svg'),
           chart;
 
+        // This function is called when the data is changed.
         var update = function() {
           d3.select(svg[0])
             .datum(scope.data)
@@ -237,6 +240,12 @@ angular.module('app')
   }]);
 ```
 
+In the `$watch` callback we check if the chart has been initialized before calling the `update()` function. Since `nv.addGraph()` is asynchronous the callback might fire before the chart has been created, in which case we get the following error:
+
+```
+TypeError: Cannot read property 'apply' of undefined
+```
+
 You can play around with the chart below. Because of the data-binding the chart will be re-rendered every time the data changes.
 
 <p data-height="580" data-theme-id="13819" data-slug-hash="VLVyjM" data-default-tab="result" data-user="argelius" class='codepen'>See the Pen <a href='http://codepen.io/argelius/pen/VLVyjM/'>NVD3 Line Chart Sample</a> by Andreas Argelius (<a href='http://codepen.io/argelius'>@argelius</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
@@ -246,4 +255,4 @@ A directive similar to this one was used in the example at the start of the arti
 
 ### Conclusion
 
-If you have any questions about the content of the article please write a comment below. In the case you found some mistake or you would like to improve the content, feel free to make a pull request to the [website repository](https://github.com/OnsenUI/onsen.io/tree/master/blog/posts). I appreciate all kind of feedback!
+If you have any questions about the content of the article please write a comment below. In the case you found some mistake or you would like to improve the content, feel free to make a pull request to the [website repository](https://github.com/OnsenUI/onsen.io/tree/master/blog/posts). We appreciate all kinds of feedback!
