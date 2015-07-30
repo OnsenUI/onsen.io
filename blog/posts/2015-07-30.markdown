@@ -20,7 +20,7 @@ Some other popular JavaScript libraries are:
 * [Chart.js](http://www.chartjs.org/) - Simpler to use than D3.js but still very customizable. Instead of SVG it's using canvas, so it's a very good option if you need to support older browsers or WebViews.
 * [n3-charts](http://n3-charts.github.io/line-chart/#/) - This library is built on top of AngularJS and D3.js. It makes displaying charts in an AngularJS a breeze.
 
-We've recently been discussing if we should support a charting library in Onsen UI, and if so which one we should choose. One of the best candidates is NVD3 since it provides a good combination of ease-of-use and the powerful data visualization of D3.js. It's also very simple to integrate in AngularJS apps, as we will see in this article.
+We've recently been discussing if we should support a charting library in Onsen UI and if so which one we should choose. One of the best candidates is NVD3 since it provides a good combination of ease-of-use and the powerful data visualization of D3.js. It's also very simple to integrate in AngularJS apps, as we will see in this article.
 
 Some good things about NVD3:
 
@@ -199,8 +199,10 @@ angular.module('app')
         };
 
         // Render the chart every time the data changes.
-        // I serializie the data in order to easily check if the data has changed.
+        // The data is serialized in order to easily check for changes.
         scope.$watch(function() { return angular.toJson(scope.data); }, function() {
+          // The chart may not have been initialized at this point so we need
+          // to account for that.
           if (chart) {
             update();
           }
@@ -255,4 +257,4 @@ A directive similar to this one was used in the example at the start of the arti
 
 ### Conclusion
 
-If you have any questions about the content of the article please write a comment below. In the case you found some mistake or you would like to improve the content, feel free to make a pull request to the [website repository](https://github.com/OnsenUI/onsen.io/tree/master/blog/posts). We appreciate all kinds of feedback!
+If you have any questions about the content of the article please write a comment below. In the case you found some mistakes or you would like to improve the content, feel free to make a pull request to the [website repository](https://github.com/OnsenUI/onsen.io/tree/master/blog/posts). We appreciate all kinds of feedback!
