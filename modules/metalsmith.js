@@ -198,6 +198,16 @@ module.exports = function(lang, isStaging) {
             category: 'tags',
             path: '/blog/tags'
           }))
+          .use(function(files, metalsmith, done) {
+            for (var path in files) {
+              var file = files[path];
+
+              if (file.tag) {
+                file.title = 'Articles about "' + file.tag + '"';
+              }
+            }
+            done();
+          })
         )
         .use(branch('*.html')
           // index page
