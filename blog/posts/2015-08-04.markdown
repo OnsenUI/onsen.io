@@ -2,7 +2,7 @@
 author: andreas
 date: 2015-08-04
 id: mocha-chaijs-unit-test-coverage-es6
-title: "Using Mocha and Chai.js to unit test and generate coverage for ES6 code"
+title: "Mocha + Chai.js unit testing for ES6 with Istanbul code coverage"
 tags: tutorial, javascript, es6, testing
 ---
 
@@ -14,13 +14,13 @@ Testing is very important for finding bugs, verifying the functionality and impr
 
 In Onsen UI we do end to end testing of all the AngularJS directives using [Protractor](https://angular.github.io/protractor/#/) and we also test the internal logic of the components with the [Karma test runner](http://karma-runner.github.io/0.13/index.html). This helps us find and fix bugs quickly and also makes it a lot easier to refactor the code without worrying about breaking something.
 
-Lately we've reimplemented all the Onsen UI components using ES6 (recently renamed to ES2015). This introduces some challenges when testing since most browsers don't currently support running ES6 code directly, so we need to transpile it into ES5 which the browser can understand. In this article we will take a look at how ES6 code can be tested with [Mocha] and also how to generate coverage for the ES6 code. [Chai.js](http://chaijs.com/) is used for the assertions, but of course you can use any assertion library you like. For the Onsen UI unit tests we use Chai.js and we love it!
+Lately we've reimplemented all the Onsen UI components using ES6 (recently renamed to ES2015). This introduces some challenges when testing since most browsers don't currently support running ES6 code directly, so we need to transpile it into ES5 which the browser can understand. In this article we will take a look at how ES6 code can be tested with [Mocha](http://mochajs.org/) and also how to generate coverage for the ES6 code with [Istanbul](https://gotwarlost.github.io/istanbul/). [Chai.js](http://chaijs.com/) is used for the assertions, but of course you can use any assertion library you like. For the Onsen UI unit tests we use Chai.js and we love it!
 
 The code used in this article is available on my [GitHub page](https://github.com/argelius/chai-es6-sample).
 
 ### The code to test
 
-I'll assume that you already have `Node.js` and `npm` installed. If you don't please download and install it before continuing. You can find it at the [official website](https://nodejs.org/).
+I'll assume that you already have `Node.js` and `npm` installed. If you don't please download and install them before continuing. You can find them at the [official Node.js website](https://nodejs.org/).
 
 Let's start by creating a new project. Create an empty directory and run the following command:
 
@@ -28,7 +28,7 @@ Let's start by creating a new project. Create an empty directory and run the fol
 $ npm init
 ```
 
-It will ask you to answer a bunch of questions. When you've answered every questions a `package.json` will be generated for you in the current directory.
+It will ask you to answer a bunch of questions. When you've answered every questions a `package.json` will be generated for you in the current directory. The `package.json` file contains meta data about a Node.js module.
 
 The next step is to write some code to test. As mentioned earlier we will write it in ES6, so people who are not familiar with the new additions to the JavaScript language may feel a bit lost. Don't worry, I'll explain the new keywords in the comments as we go along.
 
@@ -40,7 +40,10 @@ We'll create a simple class that describes a rectangle, so fire up your favorite
 // is nothing out of the ordinary.
 class Rectangle {
   // The constructor will be executed if you initiate a
-  // "Rectangle" object with "new Rectangle(...)".
+  // "Rectangle" object with
+  //
+  //   new Rectangle(width, height)
+  //
   constructor(width, height) {
     this.width = width;
     this.height = height;
@@ -120,7 +123,7 @@ SyntaxError: Unexpected reserved word
     at node.js:814:3
 ```
 
-If you don't get this error you are probably from the future and all the ES6 features have already been implemented in V8. As we can see from the error message it complains that the `class` keyword is used. In the current implementation of V8 `class` is a reserved word but the functionality has not yet been implemented. This is to avoid breaking older code when classes are finally added to the interpreter.
+If you don't get this error you are probably from the future where all the ES6 features have already been implemented. As we can see from the error message it complains that the `class` keyword is used. In the current implementation of V8, `class` is a reserved word but the functionality has not yet been implemented. This is to avoid breaking older code when classes are finally added to the interpreter.
 
 ### Writing unit tests with Chai.js
 
@@ -246,7 +249,7 @@ SyntaxError: Unexpected identifier
     at node.js:814:3
 ```
 
-The reason for this is that the tests are written in ES6 and Node.js can not execute them. This is the reason why we installed Babel earlier. Mocha accepts a `--compilers` parameter so we can tell it to use Babel to transpile the code before running the tests:
+The tests are written in ES6 and Node.js can not execute them. This is the reason why we installed Babel earlier. Mocha accepts a `--compilers` parameter so we can tell it to use Babel to transpile the code before running the tests:
 
 Let's try running it again:
 
@@ -264,11 +267,11 @@ $ ./node_modules/.bin/mocha --compilers js:babel/register
   3 passing (16ms)
 ```
 
-Great! This time the tests worked. However, it's not time to celebrate yet. We also need to add code coverage.
+Great! This time the tests worked. However, it's not time to celebrate yet. We also need to add code coverage generation.
 
 ### Generating coverage using Istanbul
 
-Code coverage is metric used to see how well your code is tested. If a piece of software has 100% test coverage it means that every line is executed at least once in the tests. One of the most popular way to generate coverage in JavaScript is using a library called [Istanbul](https://gotwarlost.github.io/istanbul/). It will output information about the code coverage to the command line as well as generating a comprehensize HTML report.
+Code coverage is metric used to see how well your code is tested. If a piece of software has 100% test coverage it means that every line is executed at least once in the tests. One of the most popular way to generate coverage in JavaScript is using a library called [Istanbul](https://gotwarlost.github.io/istanbul/). It will output information about the code coverage to the command line as well as generating a comprehensive HTML report.
 
 Let's start by installing Istanbul:
 
@@ -352,12 +355,11 @@ Lines        : 73.33% ( 11/15 )
 ================================================================================
 ```
 
-This outputs a nasty error message but if we take a look at the Mocha code it's not actually a problem since the program was terminating at that line anyway. The reason for the error is that when using `babel-node` return statements are only allowed within functions, while in the Mocha code there is a return statement in the outermost scope.
+This outputs a nasty error message but if we take a look at the Mocha code it's not actually a problem since the program was terminating at that line anyway. The reason for the error is that when using `babel-node` return statements are only allowed within functions, while in the Mocha source code there is a return statement in the outermost scope.
 
 In spite of the error it looks like the tests were run and the coverage report was generated succesfully. Let's take a look at it!
 
-
-![Isparta generates coverage for the transpiled ES6 code!](/blog/content/images/2015/Aug/es5-coverage.png)
+![Isparta generates coverage for the transpiled ES6 code!](/blog/content/images/2015/Aug/es6-coverage.png)
 
 Great! Using `isparta` and `babel-node` we were able to generate a coverage report for the ES6 code. This makes it a lot more easy to read the coverage report.
 
@@ -494,3 +496,22 @@ describe('Rectangle', () => {
   });
 });
 ```
+
+After adding these tests we have covered every line in our tests so we will get the following summary.
+
+```
+=============================== Coverage summary ===============================
+Statements   : 100% ( 36/36 ), 3 ignored
+Branches     : 100% ( 14/14 ), 4 ignored
+Functions    : 100% ( 12/12 )
+Lines        : 100% ( 15/15 )
+================================================================================
+```
+
+Finally, every line is covered and we've generated a nice coverage report for the ES6 code!
+
+### Conclusion
+
+We hope this tutorial will be useful for people who are starting to write projects using ES6 and want a simple way to unit test and generate coverage for their code. So far we have only looked at how to do it for a Node.js module but in the upcoming weeks we will also publish an article on how to test ES6 code in the browser, which is a bit more complicated but definitely doable.
+
+Happy testing!
