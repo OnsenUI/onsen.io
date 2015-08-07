@@ -49,16 +49,22 @@
 </head>
 
 <body id="blog">
-
-  <%- @partial('header.html.eco') %>
-
+  <%- @partial('blog-header.html.eco') %>
   <section class="content-container clearfix">
+
     <div class="content">
 
       <% if @isArticle: %>
       <div class="article">
-        <h2 class="article-title"><%- @title %></h2>
-        <div class="article-date"><time datetime="<%- @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time></div>
+        <div class="article-title">
+          <img class="article-title-image" src="http://placekitten.com/g/62/62"></img>
+          <h2>
+             <%- @title %>
+             <div class="article-date">
+               <%- @renderBlogDate @date %> / BY <a href="<%- @author.url %>"><%- @author.name %></a>
+             </div>
+          </h2>
+        </div>
 
         <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
 
@@ -67,14 +73,12 @@
         </div>
 
         <% if @tags and @tags.length: %>
-        <div>Tagged:
+        <div class="article-tags">
           <% for tag in @tags: %>
           <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
           <% end %>
         </div>
         <% end %>
-
-        <%- @partial('blog-newsletter.html.eco') %>
 
         <div class="article-footer">
           <div class="article-avator">
@@ -127,12 +131,20 @@
       <% else: %>
       <%- @contents %>
       <% end %>
+
       <div class="tag-cloud">
+        <h2>Related tags</h3>
+
         <% for tag in @cloud: %>
         <a
-          style="font-size: <%- @calculateTagFontSize @cloud, tag %>"
           href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
-          <%- tag.ctg %> (<%- tag.wght %>)</a>
+          <span class="tag-cloud-name">
+            <%- tag.ctg %>
+          </span>
+          <span class="tag-cloud-weight">
+            <%- tag.wght %>
+          </span>
+        </a>
         <% end %>
       </div>
       </div>

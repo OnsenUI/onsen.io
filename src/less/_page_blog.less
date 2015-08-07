@@ -4,12 +4,24 @@
     width: 720px;
     padding-top: 50px;
   }
-  
+
+  .description {
+    h2 {
+      text-align: center;
+      margin-bottom: 0px;
+    }
+    p {
+      color: #999;
+    }
+  }
+
   .article {
+
+    padding-top: 60px;
 
     &-share {
       overflow: hidden;
-      margin: 20px 0 10px 0;
+      margin: 20px auto 10px auto;
 
       &-twitter, &-fb, &-gplus {
         float: left;
@@ -24,14 +36,29 @@
     }
 
     &-title {
-      text-align: center;
+      margin-left: -24px;
+      position: relative;
+
+      &-image {
+        position: absolute;
+        top: 0;
+        left: -106px;
+        clear: both;
+        border-right: 1px solid @onsen-red;
+        padding-right: 44px;
+      }
+
+      h2 {
+        font-size: 40px;
+        padding-left: 24px;
+      }
 
       .lang-en & {
         font-family: @en-header-font-family;
       }
 
       a, a:link, a:visited, a:hover {
-        color: @header-text-color;
+        color: @link-color;
         text-decoration: none;
 
         .lang-en & {
@@ -40,20 +67,41 @@
       }
     }
 
+    &-tags {
+      margin: auto;
+
+      a {
+        background-color: @blog-tag-background-color;
+        padding: 4px 8px 4px 8px;
+        text-decoration: none;
+        color: @blog-tag-link-color;
+
+        &:hover {
+          color: lighten(@blog-tag-link-color, 20%);
+        }
+      }
+    }
+
     &-date {
-      text-align: center;
+      text-transform: uppercase;
+      text-align: left;
       font-size: 19px;
       font-weight: 200;
       color: #bbb;
       margin-bottom: 28px;
 
       a, a:link, a:visited, a:hover {
-        color: #bbb;
+        color: @link-color;
         text-decoration: none;
       }
     }
 
+    &-content {
+      margin: auto;
+    }
+
     &-footer {
+      margin-top: 20px;
       border-top: 1px solid #ddd;
       padding-top: 10px;
       padding-bottom: 20px;
@@ -88,6 +136,7 @@
   }
 
   .article-overview {
+    border-top: 1px solid @onsen-red;
 
     margin-bottom: 100px;
 
@@ -112,6 +161,12 @@
 }
 
 .blog-pagination {
+  height: 69px;
+  line-height: 69px;
+
+  border-top: 1px solid #bcbcbc;
+  border-bottom: 1px solid #bcbcbc;
+
   &-older {
     float: right;
   }
@@ -121,14 +176,25 @@
   }
 
   &-position {
+    &-number {
+      color: #000;
+    }
+
+    color: #a0a0a0;
     text-align: center;
+    line-height: 69px;
     width: 120px;
-    margin: 0 auto;
+    margin: 0 auto 0 auto;
   }
 }
 
 .blog-feed {
-  margin-top: 30px;
+  height: 69px;
+  line-height: 69px;
+  text-transform: uppercase;
+
+  border-bottom: 1px solid #bcbcbc;
+
   text-align: center;
   font-size: 18px;
   font-weight: 200;
@@ -136,14 +202,48 @@
 
 .tag-cloud {
   margin-top: 30px;
-  text-align: center;
+  text-align: left;
+
+  h2 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
 
   a {
-    white-space: nowrap;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+
+    &:hover {
+      .tag-cloud-name {
+        color: lighten(@blog-tag-link-color, 20%) !important;
+      }
+
+      .tag-cloud-weight {
+        color: lighten(@blog-tag-weight-color, 20%) !important;
+      }
+    }
+  }
+
+  &-name {
+    background-color: @blog-tag-background-color;
+    padding: 4px 8px 4px 8px;
+    color: @blog-tag-link-color;
+  }
+
+  &-weight {
+    margin-left: 1px;
+    background-color: @blog-tag-background-color;
+    padding: 4px 8px 4px 8px;
+    color: @blog-tag-weight-color;
   }
 }
 
 .blog-newsletter {
+  display: none;
+
   & {
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;

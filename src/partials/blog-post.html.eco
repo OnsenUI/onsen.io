@@ -1,15 +1,22 @@
 <section class="article article-overview">
 
-  <h2 class="article-title article-overview-title"><a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%= @article.title %></a></h2>
+  <div class="article-title article-overview-title">
+    <img class="article-title-image" src="http://placekitten.com/g/62/62"></img>
+    <h2>
+       <a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%= @article.title %></a>
+       <div class="article-date article-overview-date">
+         <%- @renderBlogDate @article.date %> / BY <a href="<%- @article.author.url %>"><%- @article.author.name %></a>
+       </div>
+    </h2>
+  </div>
 
-  <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%- @renderBlogDate @article.date %></a></div>
 
   <%- @partial('blog-share.html.eco', {id: @article.id, blogTitle: @article.title}) %>
 
-  <div><%- @renderArticleIntroAsHTML(@article.origContents) %></div>
+  <div class="article-content"><%- @renderArticleIntroAsHTML(@article.origContents) %></div>
 
   <% if @article.tags: %>
-    <div>Tagged:
+    <div class="article-tags">
       <% for tag in @article.tags: %>
         <a href="<%= @rootUrl %>blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
       <% end %>

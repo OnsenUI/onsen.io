@@ -1,0 +1,241 @@
+.blog-header {
+  height: @blog-header-height;
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+  left: 0px;
+  right: 0px;
+  z-index: 20;
+  border-bottom: 1px solid #d9d9d9;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.07);
+
+  .gnav-icon {
+    display: none;
+  }
+
+  &-inner {
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding-top: 11px;
+    position: relative;
+    text-align: left;
+    width: @width;
+    min-height: @blog-header-height;
+    max-width: 100%;
+    background-color: white;
+  }
+
+  &-logo-image {
+    position: absolute;
+    top: 20px;
+    left: 14px;
+    height: 32px;
+  }
+
+  &-navi {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: @blog-header-height;
+    line-height: @blog-header-height;
+    margin: 0;
+    font-size: 0px;
+  }
+
+  &-navi-item {
+    display: inline-block;
+    position: relative;
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -mz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
+    box-sizing: border-box;
+    height: @blog-header-height;
+    line-height: @blog-header-height;
+
+    .lang-en & {
+      font-size: 16px;
+    }
+
+    .tablet-query({
+      & {
+        display: block;
+      }
+    });
+  }
+
+  &-navi-item > a {
+    height: @blog-header-height;
+    line-height: @blog-header-height;
+    display: block;
+    box-sizing: border-box;
+    transition: all 0.1s linear;
+    padding: 0 16px;
+    margin: 0;
+
+    &:link, &:visited {
+      color: @blog-header-link-color;
+      text-decoration: none;
+    }
+
+    &:hover {
+      color: @blog-header-link-color-hover;
+    }
+  }
+}
+
+.desktop-query({
+  .header-navi-item.current {
+    > a {
+      background-color: #f3f3f3;
+      font-weight: bold;
+
+      &:link, &:hover, &:visited {
+        color: #333;
+        text-decoration: none;
+      }
+    }
+  }
+
+  .header .gnav-icon {
+    display: none !important;
+  }
+});
+
+.tablet-query({
+  .blog-header {
+    height: auto;
+    min-height: @blog-header-height;
+    position: static;
+
+    > div:first-child {
+      padding-left: 20px;
+    }
+
+    &-logo-img {
+      margin-left: 20px;
+    }
+
+    &-navi {
+      display: none;
+    }
+
+    &-inner {
+      border-bottom: none;
+    }
+
+    &-navi {
+      position: static;
+      height: auto;
+      display: none;
+      margin-left: -20px;
+      margin: 66px 0 0 -20px;
+      padding: 0 0 36px 0;
+
+    }
+
+    &-navi-item {
+      display: block;
+      width: 100%;
+      line-height: 48px;
+      height: 48px;
+      padding: 0 12px 0 12px;
+    }
+  }
+
+  .gnav-icon {
+    display: block !important;
+    position: absolute;
+    top: 22px;
+    right: 18px;
+    img {
+      width: 32px;
+      height: 32px;
+      opacity: 0.3;
+      cursor: pointer;
+    }
+  }
+});
+
+.language-dialog {
+  position: fixed;
+  width: 500px;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  box-sizing: border-box;
+  max-width: 95%;
+  padding: 32px;
+  background-color: #313e50;
+  z-index: 91;
+
+  &-mask {
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    opacity: 0.15;
+    background-color: #2a3e54;
+    z-index: 90;
+  }
+
+  &-header {
+    font-size: 24px;
+    color: white;
+
+    .tablet-query({
+      font-size: 18px;
+    });
+  }
+
+  &-footer {
+    margin-top: 52px;
+    text-align: center;
+
+    .tablet-query({
+      margin-top: 22px;
+    });
+  }
+
+  &-button {
+    font-size: 20px;
+    display: inline-block;
+    color: white;
+    background-color: #6c7480;
+    border: none;
+    border-radius: 2px;
+    padding: 0 18px;
+    height: 48px;
+    line-height: 48px;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+
+    .tablet-query({
+      padding: 0 10px;
+      height: 30px;
+      line-height: 30px;
+      font-size: 15px;
+    });
+
+    &:active, &:visited, &:hover, &:link {
+      text-decoration: none;
+      color: white;
+    }
+    &:active {
+      outline: none;
+      opacity: 0.8;
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
+

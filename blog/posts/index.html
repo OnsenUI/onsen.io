@@ -4,6 +4,21 @@ page: blog
 paginate: articles
 ---
 
+<div class="description">
+  <h2>
+    Two Products, One Blog, One Goal
+  </h2>
+  <p>
+    We build mobile dev tools that just work. Onsen is an HTML5 framework
+    to create modern User Interfaces. Monaca is a comprehensive set of
+    cloud-powered app development tools and services. Using Monaca with
+    Onsen will ease most of the processes of importing plugins, debugging
+    and building a full app, and you don’t need to setup a local
+    environment. This blog covers Onsen and Monaca topics for both
+    beginners and advanced users.
+  </p>
+</div>
+
 <% for article, index in @articles.slice(@pagination.start, @pagination.end + 1): %>
   <%- @partial('blog-post.html.eco', {article: article}) %>
 <% end %>
@@ -21,7 +36,7 @@ paginate: articles
   <a class="button blog-pagination-older" href="/blog/<%= @pagination.next.path %>">OLDER &gt;</a>
   <% end %>
 
-  <p class="blog-pagination-position">PAGE <%= @pagination.num %> OF <%= @pagination.total %></p>
+  <p class="blog-pagination-position">PAGE <span class="blog-pagination-position-number"><%= @pagination.num %></span> OF <span class="blog-pagination-position-number"><%= @pagination.total %></span></p>
 </nav>
 <% end %>
 
