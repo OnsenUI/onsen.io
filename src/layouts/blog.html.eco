@@ -124,7 +124,7 @@
       </div>
 
       <% else if @tag: %>
-        <h1>Posts for "<%- @tag %>"</h1>
+        <h2>Posts for <span class="tag-name"><%- @tag %></span></h2>
         <% for article in @pagination.files: %>
           <%- @partial('blog-post.html.eco', {article: article}) %>
         <% end %>
