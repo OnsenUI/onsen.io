@@ -16,7 +16,6 @@
   }
 
   .article {
-
     padding-top: 60px;
 
     &-share {
@@ -35,6 +34,24 @@
       }
     }
 
+    &-monaca {
+      .article-divider {
+        background-color: @monaca-blue;
+      }
+
+      .article-title-image {
+        border-color: @monaca-blue;
+        background-image: url("http://placekitten.com/g/62/63");
+      }
+    }
+
+    &-divider {
+      margin-left: -150px;
+      margin-right: -150px;
+      margin-bottom: 60px;
+      background-color: @onsen-red;
+    }
+
     &-title {
       margin-left: -24px;
       position: relative;
@@ -42,10 +59,14 @@
       &-image {
         position: absolute;
         top: 0;
-        left: -106px;
+        left: -80px;
         clear: both;
         border-right: 1px solid @onsen-red;
-        padding-right: 44px;
+        padding-right: 15px;
+        background-image: url("http://placekitten.com/g/62/62");
+        background-repeat: no-repeat;
+        width: 65px;
+        height: 61px;
       }
 
       h2 {
@@ -135,9 +156,9 @@
     }
   }
 
-  .article-overview {
-    border-top: 1px solid @onsen-red;
+  
 
+  .article-overview {
     margin-bottom: 100px;
 
     &-title {

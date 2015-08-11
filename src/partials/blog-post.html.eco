@@ -1,7 +1,8 @@
-<section class="article article-overview">
+<section class="article article-overview <% if @article.category == 'monaca': %>article-monaca<% end %>">
+  <hr class="article-divider">
 
   <div class="article-title article-overview-title">
-    <img class="article-title-image" src="http://placekitten.com/g/62/62"></img>
+    <div class="article-title-image"></div>
     <h2>
        <a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%= @article.title %></a>
        <div class="article-date article-overview-date">
