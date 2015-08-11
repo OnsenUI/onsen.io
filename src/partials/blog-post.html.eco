@@ -5,14 +5,17 @@
     <div class="article-title-image"></div>
     <h2>
        <a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%= @article.title %></a>
-       <div class="article-date article-overview-date">
-         <%- @renderBlogDate @article.date %> / BY <a href="<%- @article.author.url %>"><%- @article.author.name %></a>
-       </div>
     </h2>
+
+    <%- @partial('blog-share.html.eco', {id: @article.id, blogTitle: @article.title}) %>
+    <div class="article-avator">
+      <img src="//www.gravatar.com/avatar/<%- @article.author.gravator %>?s=30" alt="" class="article-avator-image">
+    </div>
+    <div class="article-date article-overview-date">
+      BY <a href="<%- @article.author.url %>"><%- @article.author.name %></a> / <%- @renderBlogDate @article.date %>
+    </div>
+
   </div>
-
-
-  <%- @partial('blog-share.html.eco', {id: @article.id, blogTitle: @article.title}) %>
 
   <div class="article-content"><%- @renderArticleIntroAsHTML(@article.origContents) %></div>
 

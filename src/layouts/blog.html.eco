@@ -60,13 +60,19 @@
           <div class="article-title-image"></div>
           <h2>
              <%- @title %>
-             <div class="article-date">
-               <%- @renderBlogDate @date %> / BY <a href="<%- @author.url %>"><%- @author.name %></a>
-             </div>
           </h2>
+
+          <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
+          <div class="article-avator">
+            <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=30" alt="" class="article-avator-image">
+          </div>
+
+          <div class="article-date">
+            BY <a href="<%- @author.url %>"><%- @author.name %></a> / <%- @renderBlogDate @date %>
+          </div>
+
         </div>
 
-        <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
 
         <div class="article-content">
           <%- @contents %>
@@ -79,23 +85,6 @@
           <% end %>
         </div>
         <% end %>
-
-        <div class="article-footer">
-          <div class="article-avator">
-            <% if @author.gravator: %>
-            <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=80" alt="" class="article-avator-image">
-            <% else if @author.image: %>
-            <img src="<%= @author.image %>" alt="" class="article-avator-image">
-            <% end %>
-          </div>
-          <div class="article-author-label">AUTHOR</div>
-          <% if @author.url: %>
-          <div class="article-author-name"><a href="<%- @author.url %>" target="_blank"><%- @author.name %></a></div>
-          <% else: %>
-          <div class="article-author-name"><%- @author.name %></div>
-          <% end %>
-        </div>
-
 
         <div class="article-comments">
           <h3>Comments</h3>

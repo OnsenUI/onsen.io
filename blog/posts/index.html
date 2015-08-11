@@ -36,7 +36,7 @@ paginate: articles
   <a class="button blog-pagination-older" href="/blog/<%= @pagination.next.path %>">OLDER &gt;</a>
   <% end %>
 
-  <p class="blog-pagination-position">PAGE <span class="blog-pagination-position-number"><%= @pagination.num %></span> OF <span class="blog-pagination-position-number"><%= @pagination.total %></span></p>
+  <span class="blog-pagination-position">PAGE <span class="blog-pagination-position-number"><%= @pagination.num %></span> OF <span class="blog-pagination-position-number"><%= @pagination.total %></span></span>
 </nav>
 <% end %>
 

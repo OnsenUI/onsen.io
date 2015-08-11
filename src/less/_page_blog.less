@@ -5,6 +5,12 @@
     padding-top: 50px;
   }
 
+  p {
+    font-size: 14px;
+    line-height: 1.6em;
+    color: @blog-text-color;
+  }
+
   .tag-name {
     background-color: @blog-tag-background-color;
     font-family: @en-font-family;
@@ -18,18 +24,22 @@
     h2 {
       text-align: center;
       margin-bottom: 0px;
+      font-size: 30px;
     }
     p {
       color: #999;
+      margin-top: 10px;
+      margin-bottom: 60px;
     }
   }
 
   .article {
-    padding-top: 60px;
-
     &-share {
       overflow: hidden;
-      margin: 20px auto 10px auto;
+      margin: -3px auto 10px auto;
+
+      float: right;
+      width: 300px;
 
       &-twitter, &-fb, &-gplus {
         float: left;
@@ -80,7 +90,9 @@
 
       h2 {
         font-size: 40px;
-        padding-left: 24px;
+        line-height: 44px;
+        padding-left: 26px;
+        margin-bottom: 14px;
       }
 
       .lang-en & {
@@ -105,9 +117,10 @@
         padding: 4px 8px 4px 8px;
         text-decoration: none;
         color: @blog-tag-link-color;
+        font-size: 13px;
 
         &:hover {
-          color: lighten(@blog-tag-link-color, 20%);
+          background-color: @blog-tag-background-hover-color;
         }
       }
     }
@@ -115,10 +128,13 @@
     &-date {
       text-transform: uppercase;
       text-align: left;
-      font-size: 19px;
+      font-size: 14px;
+      line-height: 14px;
       font-weight: 200;
       color: #bbb;
-      margin-bottom: 28px;
+      margin-bottom: 38px;
+      padding-left: 58px;
+      font-weight: bold;
 
       a, a:link, a:visited, a:hover {
         color: @link-color;
@@ -149,14 +165,14 @@
     }
 
     &-avator {
+      margin-left: 22px;
+      margin-top: -9px;
       float: left;
-      margin-right: 14px;
-      margin-top: 10px;
     }
 
     &-avator-image {
-      border-radius: 60px;
-      height: 60px;
+      border-radius: 30px;
+      height: 30px;
     }
 
     img {
@@ -168,7 +184,7 @@
   
 
   .article-overview {
-    margin-bottom: 100px;
+    margin-bottom: 60px;
 
     &-title {
       a:hover {
@@ -182,8 +198,21 @@
     }
 
     &-readmore {
-      text-align: center;
       margin: 30px 0;
+
+      .site-button {
+        font-size: 13px;
+        line-height: 32px;
+        padding: 0px 16px 0px 16px;
+        background-color: #ff4d35;
+
+        color: #fff;
+
+        &:hover, &:active {
+          background-color: #cc3e2b;
+          color: #fff;
+        }
+      }
     }
   }
 
@@ -192,29 +221,33 @@
 
 .blog-pagination {
   height: 69px;
-  line-height: 69px;
 
   border-top: 1px solid #bcbcbc;
   border-bottom: 1px solid #bcbcbc;
 
+  text-align: center;
+  font-family: @en-header-font-family !important;
+  font-size: 18px;
+  line-height: 69px;
+
   &-older {
-    float: right;
+    position: absolute;
+    right: 0px;
   }
 
   &-newer {
-    float: left;
+    position: absolute;
+    left: 0px;
   }
 
   &-position {
+    color: #a0a0a0;
+    text-align: center;
+    width: 120px;
+    margin: 0 auto 0 auto;
     &-number {
       color: #000;
     }
-
-    color: #a0a0a0;
-    text-align: center;
-    line-height: 69px;
-    width: 120px;
-    margin: 0 auto 0 auto;
   }
 }
 
@@ -222,6 +255,8 @@
   height: 69px;
   line-height: 69px;
   text-transform: uppercase;
+  font-family: @en-header-font-family !important;
+  font-size: 18px !important;
 
   border-bottom: 1px solid #bcbcbc;
 
@@ -237,7 +272,7 @@
   h2 {
     text-align: center;
     text-transform: uppercase;
-    font-size: 26px;
+    font-size: 18px;
     margin-bottom: 10px;
   }
 
@@ -245,14 +280,15 @@
     display: inline-block;
     margin-top: 10px;
     text-decoration: none;
+    font-size: 13px;
 
     &:hover {
       .tag-cloud-name {
-        color: lighten(@blog-tag-link-color, 20%) !important;
+        background-color: @blog-tag-background-hover-color;
       }
 
       .tag-cloud-weight {
-        color: lighten(@blog-tag-weight-color, 20%) !important;
+        background-color: @blog-tag-background-hover-color;
       }
     }
   }
