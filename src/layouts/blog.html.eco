@@ -55,9 +55,9 @@
     <div class="content">
 
       <% if @isArticle: %>
-      <div class="article">
+      <div class="article <% if @category == 'monaca': %>article-monaca<% end %>">
         <div class="article-title">
-          <img class="article-title-image" src="http://placekitten.com/g/62/62"></img>
+          <div class="article-title-image"></div>
           <h2>
              <%- @title %>
              <div class="article-date">
