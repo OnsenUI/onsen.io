@@ -155,8 +155,8 @@ $(function() {
   // for mobile website menu
   var header = $('.header')[0];
   $('.gnav-icon', header).click(function() {
-    $('.header-navi, .blog-header-navi', header).toggle();
-
+    $('.header-navi', header).toggleClass('header-navi-open');
+    $('.blog-header-navi', header).toggleClass('blog-header-navi-open');
   });
 
   // for language switch dialog
