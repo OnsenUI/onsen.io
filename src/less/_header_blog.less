@@ -16,7 +16,6 @@
   &-inner {
     box-sizing: border-box;
     margin: 0 auto;
-    padding-top: 11px;
     position: relative;
     text-align: left;
     width: @width;
@@ -25,11 +24,24 @@
     background-color: white;
   }
 
+  &-top {
+    position: relative;
+    height: 74px;
+  }
+
   &-logo-image {
     position: absolute;
     top: 20px;
     left: 14px;
     height: 32px;
+
+    .tablet-query({
+      top: 50%;
+      transform: translateY(-50%);
+      width: auto;
+      height: auto;
+      max-width: ~"calc(100% - 100px)";
+    });
   }
 
   &-navi {
@@ -112,7 +124,7 @@
     position: static;
 
     > div:first-child {
-      padding-left: 20px;
+      padding-left: 10px;
     }
 
     &-logo-img {
@@ -132,7 +144,7 @@
       height: auto;
       display: none;
       margin-left: -20px;
-      margin: 66px 0 0 -20px;
+      margin: 0px 0 0 -20px;
       padding: 0 0 36px 0;
 
     }
