@@ -51,8 +51,11 @@
     }
   }
 
-  .article {
+  .copyright {
+    margin-top: 0px;
+  }
 
+  .article {
     &-share {
       overflow: hidden;
       margin: -3px auto 10px auto;
@@ -239,13 +242,20 @@
     }
   }
 
+  .article-monaca {
+    border-color: @monaca-blue !important;
+  }
+
   .article-overview {
     .tablet-query({
-      border-bottom: 1px solid #e6e6e6;
+      border-top: 1px solid @onsen-red;
 
-      &:last-of-type {
-        border-bottom: none;
+      &:first-of-type {
+        border-top: none;
       }
+
+      padding-top: 30px;
+      margin-bottom: 30px;
     });
 
     margin-bottom: 60px;
@@ -283,8 +293,6 @@
       }
     }
   }
-
-
 }
 
 .blog-pagination {
