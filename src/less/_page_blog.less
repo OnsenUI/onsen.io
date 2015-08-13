@@ -3,12 +3,26 @@
   .content {
     width: 720px;
     padding-top: 50px;
+
+    .tablet-query({
+      padding-top: 25px;
+      padding-bottom: 70px;
+    });
   }
 
   p {
     font-size: 14px;
     line-height: 1.6em;
     color: @blog-text-color;
+
+    .tablet-query({
+      font-size: 17px;
+
+      &:last-child {
+          margin-bottom: 0px !important;
+      }
+    });
+
   }
 
   .tag-name {
@@ -38,6 +52,7 @@
   }
 
   .article {
+
     &-share {
       overflow: hidden;
       margin: -3px auto 10px auto;
@@ -152,16 +167,19 @@
       }
     }
 
+    &-comments {
+      margin-top: 70px;
+    }
+
     &-date {
       text-transform: uppercase;
       text-align: left;
       font-size: 13px;
       line-height: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: #bbb;
       margin-bottom: 38px;
       padding-left: 58px;
-      font-weight: bold;
 
       .tablet-query({
         padding-left: 26px;
@@ -170,6 +188,7 @@
       a, a:link, a:visited, a:hover {
         color: @link-color;
         text-decoration: none;
+        font-weight: 700 !important;
       }
     }
 
@@ -216,13 +235,19 @@
 
     img {
       display: block;
-      margin: 0 auto;
+      margin: 0px auto 36px auto;
     }
   }
 
-  
-
   .article-overview {
+    .tablet-query({
+      border-bottom: 1px solid #e6e6e6;
+
+      &:last-of-type {
+        border-bottom: none;
+      }
+    });
+
     margin-bottom: 60px;
 
     &-title {
@@ -238,6 +263,10 @@
 
     &-readmore {
       margin: 14px 0px 30px 0px;
+
+      .tablet-query({
+        margin-top: 24px;
+      });
 
       .site-button {
         font-size: 13px;
