@@ -25,6 +25,10 @@
 
   }
 
+  .tag {
+    margin-bottom: -12px;
+  }
+
   .tag-name {
     background-color: @blog-tag-background-color;
     font-family: @en-font-family;
@@ -245,6 +249,14 @@
     }
   }
 
+  .tag + .article-overview {
+    .tablet-query({
+      border-width: 1px !important;
+      margin-top: 40px !important;
+      padding-top: 40px !important;
+    });
+  }
+
   .article-monaca {
     border-color: @monaca-blue !important;
   }
@@ -254,12 +266,12 @@
       border-top: 1px solid @onsen-red;
 
       &:first-of-type {
-        border-top: none;
+        border-width: 0px;
         margin-top: 0px;
         padding-top: 0px;
       }
 
-      padding-top: 30px;
+      padding-top: 40px;
       margin-top: 40px;
       margin-bottom: 50px;
     });
