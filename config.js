@@ -21,11 +21,13 @@ module.exports = function(language, isStaging) {
     },
     fran: {
       name: 'Fran Dios',
+      email: 'fran@asial.co.jp',
       url: 'http://frandiox.com/en/',
       image: '/blog/content/images/2015/Feb/yo2.jpg'
     },
     andi: {
       name: 'Andi Pavllo',
+      email: 'andi@asial.co.jp',
       image: '/blog/content/images/2015/Feb/1423814226357.jpg'
     },
     kruy: {
