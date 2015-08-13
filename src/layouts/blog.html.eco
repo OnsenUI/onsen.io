@@ -62,7 +62,6 @@
              <%- @title %>
           </h2>
 
-          <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
           <div class="article-avator">
             <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=30" alt="" class="article-avator-image">
           </div>
@@ -71,6 +70,7 @@
             BY <a href="<%- @author.url %>"><%- @author.name %></a> / <%- @renderBlogDate @date %>
           </div>
 
+          <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
         </div>
 
 

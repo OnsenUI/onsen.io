@@ -19,7 +19,7 @@
       font-size: 17px;
 
       &:last-child {
-          margin-bottom: 0px !important;
+        margin-bottom: 0px !important;
       }
     });
 
@@ -59,9 +59,11 @@
     &-share {
       overflow: hidden;
       margin: -3px auto 10px auto;
-
-      float: right;
       width: 300px;
+
+      position: absolute;
+      right: 0px;
+      margin-top: -56px;
 
       &-twitter, &-fb, &-gplus {
         float: left;
@@ -75,7 +77,7 @@
       }
 
       .tablet-query({
-        float: initial;
+        position: initial;
         margin: 0px 0px 10px 26px;
       });
     }
@@ -186,6 +188,7 @@
 
       .tablet-query({
         padding-left: 26px;
+        margin-bottom: 16px;
       });
 
       a, a:link, a:visited, a:hover {
@@ -252,6 +255,7 @@
 
       &:first-of-type {
         border-top: none;
+        padding-top: 0px;
       }
 
       padding-top: 30px;
