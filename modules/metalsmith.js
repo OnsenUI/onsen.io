@@ -19,6 +19,7 @@ var tags = require('metalsmith-tags');
 var wordcloud = require('metalsmith-wordcloud');
 var sortObject = require('sort-object');
 var currentPath = require('./current-path');
+var nodePath = require('path');
 
 module.exports = function(lang, isStaging) {
   return {
@@ -64,7 +65,7 @@ module.exports = function(lang, isStaging) {
         .use(function(files, metalsmith, done) {
           setImmediate(done);
 
-          var cssFile = files['reference/css.html'];
+          var cssFile = files['reference' + nodePath.sep + 'css.html'];
           var cssToc = cssFile.toc;
           delete cssFile.toc;
 
