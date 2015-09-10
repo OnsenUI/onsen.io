@@ -4,7 +4,7 @@
     
     <% if @lang == 'en': %>
     <ul id="header-monaca-navi">
-      <li><a href="#">Products</a>
+      <li><a href="#">Other Products</a>
         <ul class="header-monaca-navi-sub-menu">
           <li><a href="https://monaca.io/cloud.html">Monaca Cloud</a></li>
           <li><a href="https://monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
@@ -14,10 +14,14 @@
           <li><a href="http://www.kidozen.com">KidoZen</a></li>
         </ul>
       </li>
+	  <li>
+		<a href="http://monaca.mobi/en/page/company">About Us</a>
+	  </li>
       <li>
         <a href="http://monaca.mobi/en/showcase">Showcase</a>
       </li>
     </ul>
+	
     <% else: %>
     <ul id="header-monaca-navi">
       <li><a href="#">製品</a>
