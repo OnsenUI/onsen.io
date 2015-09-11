@@ -1,0 +1,107 @@
+---
+author: andreas
+date: 2015-09-14
+id: material-design-onsen-ui
+title: "Material Design in Onsen UI"
+tags: material design, onsen ui
+---
+
+We have some exciting news for people developing hybrid apps for Android!
+
+Onsen UI is a hybrid app framework that can be used to create apps for both iOS and Android. It makes sense that it provides native-like UI components for both iOS and Android. For this reason, we are currently implementing Material Design for Onsen UI. The Material Design components will be available alongside the iOS based components that are currently available.
+
+A lot of our users have been eager for us to add Material Design support. We've listened to those voices and are working hard to make it available for you as soon as possible. Material Design is currently being implemented alongside Onsen UI 2.0 so the next major version will include native-like Android components.
+
+Concerning the release of Onsen UI 2.0 we have are happy to tell you that we're getting close to alpha. There are still some important tasks remaining but for most of the parts are already in place. We just finished implementing a new component called `<ons-splitter>` which is a responsive component that combines a draggable slide menu with a two-column tablet layout. This component makes it very easy to make apps that look great on both tablets and phones using the same code-base.
+
+### New components
+
+In addition to typography and page layout, the [Material Design spec](https://www.google.com/design/spec/material-design/introduction.html) introduces a collection of UI components. Some of these are already available in Onsen UI, in which case we will implement new styles that conform to the spec. In the case where a component doesn't currently exist in Onsen UI, we will add it as a new Custom Element.
+
+A bunch of Material Design components have already been created and merged into the [`master` branch](https://github.com/OnsenUI/OnsenUI). Feel free too give it a test ride! The examples in the following section are all running with the current Onsen UI codebase. They are all interactive so go ahead and play around with them.
+
+#### Floating action button
+
+We have added a component called `<ons-fab>`. It is used to display a Floating action button, which is a circular button that when pressed performs the primary action of an application.
+
+<iframe height="76" style="display: block;" src="https://argelius.github.io/onsen-material-samples/fab.html"></iframe>
+
+When clicking or tapping the button it shows a "ripple" effect which is actually implemented as a separate custom element called `<ons-ripple>`. In Android apps the position of the button is usually fixed but for the purpose of this blog it's displayed inline.
+
+The way to use it is really simple and requires very little markup.
+
+```html
+<ons-fab>
+  <ons-ripple></ons-ripple>
+  <ons-icon icon="fa-twitter"></ons-icon>
+</ons-fab>
+```
+
+The `<ons-ripple>` component can be attached to any element to create a ripple effect.
+
+#### Speed dial
+
+With the `<ons-speed-dial>` component the Floating action button displays a menu with related actions when pressed. It's useful when there are several important actions performed by the app.
+
+<iframe height="76" style="display: block;" src="https://argelius.github.io/onsen-material-samples/speed-dial.html"></iframe>
+
+This one is also really easy to integrate in your apps and its behavior can be customized using attributes.
+
+```html
+<ons-speed-dial direction="right">
+  <ons-ripple></ons-ripple>
+  <ons-icon icon="fa-share"></ons-icon>
+
+  <ons-speed-dial-item>
+    <ons-ripple></ons-ripple>
+    <ons-icon icon="fa-twitter"></ons-icon>
+  </ons-speed-dial-item>
+  <ons-speed-dial-item>
+    <ons-ripple></ons-ripple>
+    <ons-icon icon="fa-facebook"></ons-icon>
+  </ons-speed-dial-item>
+</ons-speed-dial>
+```
+
+#### Toggle switch
+
+The `<ons-switch>` used to only display a switch similar to the one in iOS native apps. We have added a modifier attribute called `material` to change the style of the component. The functionality is just like a normal `<ons-switch>`
+
+<iframe height="44" style="display: block;" src="https://argelius.github.io/onsen-material-samples/switch.html"></iframe>
+
+```
+<ons-switch modifier="material"></ons-switch>
+<ons-switch modifier="material" disabled></ons-switch>
+```
+
+In the current version the switch will only switch value when tapped or clicked. We will make it possible to toggle the switch by dragging as well to give a more native experience.
+
+#### Progress indicator
+
+This is another component that didn't already exist in Onsen UI. A new element called `<ons-progress>` has been added to display a progress indicator.
+
+The element comes in two flavors. There is a horizontal progress bar as well as a circular loader that both can be displayed using the same custom element. They both have an "indeterminate" mode that displays a infinite looping animation that can be used when the total progress is unknown.
+
+<iframe height="116" style="display: block;" src="https://argelius.github.io/onsen-material-samples/progress.html"></iframe>
+
+The behavior can be customized using custom attributes.
+
+```html
+<ons-progress value="34" secondary-value="74"></ons-progress>
+<ons-progress indeterminate></ons-progress>
+<ons-progress type="circular" value="75" secondary-value="0"></ons-progress>
+<ons-progress type="circular" value="32" secondary-value="55"></ons-progress>
+<ons-progress type="circular" indeterminate></ons-progress>
+```
+
+#### Form elements
+
+We have also implemented new form elements like checkboxes, radio buttons and range sliders.
+
+<iframe height="136" style="display: block;" src="https://argelius.github.io/onsen-material-samples/form.html"></iframe>
+
+#### More components
+
+These are just some of the components that have already been merged to the `master` branch. We will keep adding components like input elements, toasts, dialogs and icons.
+
+If there is some component that you really would like to see in Onsen UI, please write in the comments below or [open an issue](https://github.com/OnsenUI/OnsenUI/issues/new) on Github.
