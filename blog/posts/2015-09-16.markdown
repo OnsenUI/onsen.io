@@ -1,35 +1,39 @@
 ---
 author: andi
-date: 2015-09-14
-id: material-design-onsen-ui
-title: "Tutorial: Onsen UI + React + Instagram API Sample App"
+date: 2015-09-16
+id: tutorial-create-your-instagram-gallery-app-with-onsenui-react
+title: "Tutorial: Create your Instagram Gallery App with Onsen UI + React"
 tags: react, onsen ui, instagram
 ---
 
-![Onsen UI 2.0 Material Design](/blog/content/images/2015/Sep/materialdesign_header.png)
+![Onsen UI 2.0 Material Design](/blog/content/images/2015/Sep/react_onsenui.png)
 
-As you probably already know, Onsen UI is essentialy based on AngularJS. Nevertheless, many of our users asked us if it's possible to use with other frameworks, like React. And here we come! In this tutorial we will see how to develop a very simple Instagram app by using Onsen UI and React together, in order to create a simple carousel gallery, everything without using Angular!
+As you probably already know, Onsen UI is essentially based on AngularJS. Nevertheless, many of our users asked us if it's possible to use with other frameworks, like React. And here we come! In this tutorial, we will see how to develop a very simple Instagram app by using Onsen UI and React together, in order to create a simple carousel gallery, without using Angular!
 
 For those that never heard about it, React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for building performant user interfaces. It has been created and maintained by Facebook with the collaboration of Instagram and a community of individual developers and corporations. React is intended to help developers build large applications that use data that changes over time. Its goal is to be simple, declarative and composable.
 <!-- more -->
 
-To achieve this goal, React makes use of a virtual DOM and a patching mechanism, which allow React to only update relevant portions of the application rather than having to re-render the entire site on each change. This mechanist puts React on the top of the JS Frameworks for what concerns performances.
+To achieve this goal, React makes use of a virtual DOM and a patching mechanism, which allow React to only update relevant portions of the application rather than having to re-render the entire site on each change. This mechanism puts React on the top of the JS Frameworks for what concerns performances.
+
+<font color="red">**Disclaimer**: the images are randomly retrieved from Instagram API, we don't take any responsibility about their content.</font>
+
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://andipavllo.github.io/OnsenUI-React-SampleApp/www/index.html" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
 
 ### Prerequisites
 
 Before starting the development process, there are a few prerequisites regarding the development. Furthermore, you can download the full project from this [GitHub repository](https://github.com/andipavllo/OnsenUI-React-SampleApp). This tutorial idea comes from Tutorialzine's article [5 Practical Examples For Learning The React Framework](http://tutorialzine.com/2014/07/5-practical-examples-for-learning-facebooks-react-framework/).
 
-* **IDE**: every IDE is fine for what concerns the sample app development. Nevertheless, we have used [Monaca](http://www.monaca.io) due to its integration with Onsen UI.
+* **IDE**: every IDE choice will be fine for what concerns the sample app development. Nevertheless, we have used [Monaca](http://www.monaca.io) due to its integration with Onsen UI.
 
-* **Libraries**: if you don't use Monaca as IDE, you need to download the Onsen UI library from the [official website](http://www.onsen.io). Furthermore, you need to download the React libraries from [this link](http://facebook.github.io/react/). To implement this sample app we have used the dev version from [React's GitHub repository](https://github.com/facebook/react) but also the stable release should work fine.
+* **Libraries**: if you will not use Monaca as IDE, you need to download the Onsen UI library from the [official website](http://www.onsen.io). Furthermore, you need to download the React libraries from [this link](http://facebook.github.io/react/). To implement this sample app we have used the dev version from [React's GitHub repository](https://github.com/facebook/react) but also the stable release should work fine.
 
 * **Documentation**: we invite you to take a look at the [Onsen UI](http://onsen.io/docs.html) and [React](https://facebook.github.io/react/docs/getting-started.html) documentation in case some concepts are not very clear.
 
-Once all the prerequisites have been sactisfied, we can start with the development process.
+Once all the prerequisites have been satisfied, we can start with the development process.
 
 ### Development
 
-First of all, we need to include the libraries in the project. Even if this operation is very basic, we should be careful because the order of the inclusion matters! Here is a possible combination which doesn't generates issues.
+First of all, we need to include the libraries in the project. Even if this operation is very basic, we should be careful because the order of the inclusions matters! Here is a possible combination which doesn't generate issues.
 
 ```html
 <!-- JS dependencies (order matters!) -->
@@ -43,15 +47,15 @@ First of all, we need to include the libraries in the project. Even if this oper
 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 ```
 
-As you would have probably noticed we still have included the Angular library. That's because some Onsen UI elements are still depending by Angular so, even if we will not use it during the development process, we need to include it.
+As you would have probably noticed we still have included the Angular library. That's because some Onsen UI elements are still depending by Angular so, even if it will not be used during the development process, we need to include it.
 
 `JSXTransformer.js` is a library already included in the React package. JSX is a JavaScript syntax extension that looks similar to XML. You can use a simple JSX syntactic transform with React. Even if you are still allowed to use plain JS with React, it's recommend to use JSX because it is a concise and familiar syntax for defining tree structures with attributes, which can be more familiar for casual developers and designers.
 
-We also have included a JQuery library but don't worry: we will use it only during an Ajax call for retriving the datas that will populate our app.
+We also have included a JQuery library but don't worry: we will use it only during an Ajax call for retrieving the data that will populate our app.
 
 #### HTML
 
-The HTML is very essential because almost all the app will be generated by React.
+The HTML page content is very simple because almost all the content will be generated by React.
 
 ```html```
 <ons-page>
@@ -66,9 +70,9 @@ We just mention it because the `div` element will be the mounting point, namely 
 
 ##### JS
 
-Here we are with the logic of our application. First of all we need to execute the `ons.bootstrap` funtion, which is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS and make it callable from any scope in the app. It must always be executed after `onsenui.js` is loaded.
+Here we are with the logic of our application. First of all we need to execute the `ons.bootstrap` function, which is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS and make it callable from any scope in the app. It must always be executed after `onsenui.js` is loaded.
 
-Let's now take a look at the heart of our app: the React implementation. First of all, we need to identify the React Components to implement. Instances of a React Component are created internally in React when rendering. These instances are reused in subsequent renders, and can be accessed in your component methods as `this`. The only way to get a handle to a React Component instance outside of React is by storing the return value of `React.render`.
+Let's now take a look at the heart of our app: the React implementation. First of all, we need to identify the React components to implement. Instances of a React components are created internally in React when rendering. These instances are reused in subsequent renders, and can be accessed in your component methods as `this`. The only way to get a handle to a React component instance outside of React is by storing the return value of `React.render`.
 
 In our case, just two components are enough:
 
@@ -88,9 +92,9 @@ var Carousel = React.createClass({
 });
 ````
 
-This component just contains a static `ons.carousel` element without any dynamic content, that's why it's directly rendered. As every React Component, it's created by `React.createClass` function and rendered by using the default `render` function which, as explained before, is the only way to display React Components inside the DOM.
+This component just contains a static `ons.carousel` element without any dynamic content. As every React Component, it's created by `React.createClass` function and rendered by using the default `render` function which, as explained before, is the only way to display React components inside the DOM.
 
-The interesting part of this Component is the content of the Carousel: `PictureList`. It is the other React Component, which contains all the logic of our app and which will be analyzed soon. It is a children of the Carousel Component which means that, everytime it will be rendered, the parent state will not change. It also passes as parameter the `apiKey`, which will be used during the Ajax call to retrieve the data.
+The interesting part of this component is the content of the Carousel: `PictureList`. It is the other React Component, which contains all the logic of our app and which will be analyzed soon. `PictureList`component is a child of the `Carousel` component, which means that every time it will be rendered, the parent state will not change. It also passes `apiKey` as a parameter, which will be used during the Ajax call to retrieve the data. We suggest you to generate your own Instagram API key from the [official website](https://instagram.com/developer/). 
 
 ##### PictureList Component
 
@@ -163,7 +167,7 @@ var PictureList = React.createClass({
 });
 ```
 
-Before entering in the details of the component, we need to explain its lifecircle, which is defined in three states:
+Before entering in the details of the component, we need to explain its lifecycle, which is defined in three states:
 
 * **getInitialState**: Invoked once before the component is mounted. The return value will be used as the initial value of `this.state`.
 
@@ -171,18 +175,36 @@ Before entering in the details of the component, we need to explain its lifecirc
 
 * **componentDidUpdate**: Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
 
-During `getInitialState`, we just define an empty array state called `pictures`, which will be populated at a later stage. A state is just an internal data-set which affects the rendering of components. By defining a state we are telling to the component which values should be available from the first render cycle, until the state values are changed. A state should never be used without first declaring it in this manner.
+During `getInitialState`, we just define an empty state called `pictures`, which will be populated at a later stage. A state is just an internal data-set which affects the rendering of components. By defining a state, we are telling to the component which values should be available from the first render cycle until the state values are changed. A state should never be used without first declaring it in this manner.
 
-In `componentDidMount`, we retreive the data from the Instagram API. To access the apiKey paramenter, we use `this.props.apiKey`. `this.props` contains all the properties of the component, which can be sent as parameters or internally defined.
+In `componentDidMount`, we retrieve the data from the Instagram API. To access the apiKey parameter, we use `this.props.apiKey`. `this.props` contains all the properties of the component, which can be sent as parameters or internally defined.
 
-A JSON request will be made and the result, in case of success, will be hosted in the `pictures` variable. To conclude we need to update the `pictures` state by executing `self.setState({ pictures: pictures });`.
+A JSON request will be made and the result, in case of success, will be hosted in the `pictures` variable. To conclude, we need to update the `pictures` state by executing `self.setState({ pictures: pictures });`.
 
-At this point, the state got updated, which means that it will also be rendered. It's good to notice that this is not the first time that our state has been rendered, indeed also after the creation a rendering event has occured.
+At this point the state got updated, which means that it will also be rendered. It's good to notice that this is not the first time that our state has been rendered, indeed also after the creation a rendering event has occurred. We need to render each image contained into the `pictures` state as an `ons-carousel item` component. To do that we will use a map function, which is not a React function but it's already included in JS. The map function just creates a new array with the results of calling a provided function on every element in this array.
+
+In React, when children are shuffled around or if new components are added onto the front of the list, the identity and state of each child must be maintained across render passes. That's why we have to uniquely identify each child by assigning it a key, in this case `this.state.prictures.id`. Another important thing that should be noticed is that it's not possible to render adjacent JSX: the elements must be wrapped in an enclosing tag. That's what we have enclosed all the content inside a `div` element.
+
+Even if the content has been already rendered you will notice that it's not yet visible in the DOM, that' why we need to compile the carousel element inside the `componentDidUpdate` function by using `ons.compile`. This function converts a custom elements based HTML to a normal DOM structure. Most browsers does not (yet) support custom elements by default, that's why you need to call the function every time to make the magic happen!
+
+##### Final Rendering
+
+At this point, we are almost at the end of the sample app development. We have already rendered internally all the content but how to also render it inside the DOM structure? By using another rendering function, of course!
+
+```javascript
+React.render(
+  <Carousel />,
+  document.getElementById('content')
+);
+````
+
+This time we are rendering the `Carousel` component, which contains the `PictureList` component, inside the DOM. The second parameter specifies the mounting point, in this case the element with `content` id.
 
 ###Conclusion
 
+In this tutorial you have seen how to create a sample Instagram gallery app by using Onsen UI and React. You have now a basic layout to customize and enrich as you wish, show us what you are able to do!
 
-Onsen UI is an open source project and a community effort. There is nothing that makes us happier than getting contributions from the community.
+As always, we want to remember you that Onsen UI is an open source project and a community effort. There is nothing that makes us happier than getting contributions from the community.
 
 A good place to start is the [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). If there's an issue that you would like to solve, go ahead and fork the repository and make a Pull request. We also appreciate new features. Upon receiving a pull request, we will review it as soon as possible.
 
