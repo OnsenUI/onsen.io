@@ -1,0 +1,91 @@
+---
+author: andi
+date: 2015-09-21
+id: preview-new-splitter-element-hits-onsenui
+title: "Preview: New Splitter Element Hits Onsen UI"
+tags: preview, splitter, onsen ui 2.0
+---
+
+![Onsen UI Splitter](/blog/content/images/2015/Sep/splitter.png)
+
+The road that will bring to Onsen UI 2.0 becomes day by day more prosperous and exciting, that's why we are happy to introduce you a new Onsen UI element: `ons-splitter`!
+
+The splitter element has been developed with the purpose of offering even more UI customization than before! If navigator, tabbar, sliding-menu and split-view were not enough for you, here it as a new alternative which will allow you to customize your app and satisfy your needs.
+
+What are you waiting for? Let's take immediately a look at it and see more in detail what it has to offer!
+
+<!-- more -->
+
+Being more specific, `ons-splitter` is a hybrid element which can be seen as a fusion between `ons-split-view` and  `ons-sliding-menu` elements. It allows the developer to define up to three different views in the same page. The big plus is that the two lateral views can be also managed as sliding menu. Let's take a look at the demo before entering in the technical details.
+
+
+<iframe height="400" width="100%" style="display: block;" src="https://andipavllo.github.io/OnsenUI-Splitter-Preview/splitter-preview/www/index.html"></iframe>
+
+The splitter element is actually a combination of multiple elements:
+
+* **ons-splitter**: it's the main element and is declared by using the `<ons-splitter>` tag. Some of the internal methods allow to toggle and open/close the side elements or just get their status, get the content, manage the children elements, etc.
+
+* **ons-splitter-content**: as the name says, it contains the main content and it's usually placed in the middle (depending on the side elements). It just hosts a `<ons-page>` element and doesn't have any particular attribute or method. It's declared by using the `<ons-splitter-content>` tag.
+
+* **ons-splitter-side**: analog to the `ons-splitter-content`, this element contains the side content and it's declared by using the `<ons-splitter-side>`. Every `ons-splitter` element can contain up to two `ons-splitter-side` elements, which can be placed on the left or right side by using the attribute `side`. Furthermore, they can be set, by using the adequate attributes, as `swipeable` and `collapse`. This last attribute is similar to the one we have seen in `ons-split-view` element: it specifies the collapse behavior of the views. Valid values are `portrait`, `landscape`, `width #px` or a `media query`. `portrait` or `landscape` means the view will collapse when the device is in landscape or portrait orientation. `width #px` means the view will collapse when the window width is smaller than the specified #px. If the value is a `media query`, the view will collapse when the media query is true.
+
+* **ons-splitter-mask**: this element is displayed when one or both the `ons-splitter-side` elements are set as swipeable and are actually open. By clucking the mask, the menu gets closed.
+
+A full example of structure is the following one:
+
+```html
+<ons-splitter>
+    <ons-splitter-side side="left" collapse="portrait" width="200px">
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">ons-splitter-side left</div>
+        </ons-toolbar>
+
+      </ons-page>
+    </ons-splitter-side>
+
+    <ons-splitter-content>
+      <ons-page>
+        <ons-toolbar>
+          <div class="center">ons-splitter-content</div>
+        </ons-toolbar>
+
+        <p style="text-align: left">
+          <ons-button id="toggle-btn" onclick="toggleRight()">toggle right menu</ons-button>
+        </p>
+        <br>
+        <p style="text-align: left">
+          <ons-button onclick="fixRight()">set right menu fixed</ons-button>
+        </p>
+        <br>
+        <p style="text-align: left">
+          <ons-button onclick="collapseLeft()">collapse portrait/landscape left view</ons-button>
+        </p>
+      </ons-page>
+    </ons-splitter-content>
+
+    <ons-splitter-side side="right" width="250px" collapse="landscape" swipeable>
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="toggleRight()">Close</ons-toolbar-button>
+          </div>
+          <div class="center">ons-splitter-side right</div>
+        </ons-toolbar>
+
+      </ons-page>
+    </ons-splitter-side>
+  </ons-splitter>
+```
+
+We have seen a quick overview of `ons-splitter` element, you can find a full working demo at this [GitHub repository](https://github.com/andipavllo/OnsenUI-Splitter-Preview). It's a Cordova app so you can also easily install in on your smartphone.
+
+If you want to make you want to use own sample app, we invite you to fork [Onsen UI GitHub repository](https://github.com/OnsenUI/OnsenUI) and build the latest version of our library.
+
+### We need your help!
+
+Onsen UI is an open source project and a community effort. There is nothing that makes us happier than getting contributions from the community.
+
+A good place to start is the [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). If there's an issue that you would like to solve, go ahead and fork the repository and make a Pull request. We also appreciate new features. Upon receiving a pull request, we will review it as soon as possible.
+
+Another way to contribute is by helping other users on [Gitter](https://gitter.im/OnsenUI/OnsenUI) or [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui).
