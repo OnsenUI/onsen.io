@@ -8,21 +8,28 @@ tags: react, onsen ui, instagram
 
 ![React Onsen UI](/blog/content/images/2015/Sep/react_onsenui.png)
 
-As you probably already know, Onsen UI is based on AngularJS. Nevertheless, many of our users asked us if it's possible to use with other frameworks, especially React. In this tutorial, we will show you how to develop a very simple Instagram app by using Onsen UI and React. We will create a simple gallery using React and the development version of Onsen UI 2.0 without using Angular at all!
+As you probably already know, Onsen UI is based on AngularJS. Nevertheless, many of our users asked us if it's possible to use it with other frameworks, especially React. In this tutorial, we will show you how to develop a very simple Instagram app by using Onsen UI and React. We will create a simple gallery using React and Onsen UI!
 
-For those that never heard about it, React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for building performant user interfaces. It is created and maintained by Facebook with the collaboration of Instagram and a community of individual developers and corporations. React is intended to help developers build large scale applications that use data that changes over time. Its goal is to be simple, declarative and composable.
+Although the current stable version of Onsen UI is 1.3.11, we will be using the development version of Onsen UI 2.0. We are getting close to releasing the alpha version and it is already quite stable. Onsen UI 2.0 is framework agnostic. It is no longer dependent on Angular which means it integrates a lot better with other frameworks.
 
 <!-- more -->
 
+For some more info about the new and features of the upcoming Onsen UI 2.0 please take a look at these links:
+
+* [Onsen UI Roadmap: New release and Onsen 2.0](http://onsen.io/blog/onsen-ui-roadmap-new-release-onsen-2-0/)
+* [Material Design in Onsen UI](http://onsen.io/blog/material-design-onsen-ui/)
+
+For those that never heard about it, React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for building performant user interfaces. It is created and maintained by Facebook with the collaboration of Instagram and a community of individual developers and corporations. React is intended to help developers build large scale applications that use data that changes over time. Its goal is to be simple, declarative and composable.
+
 To achieve this goal, React makes use of a Virtual DOM and a patching mechanism, which allow React to only update relevant portions of the application rather than having to re-render the entire site on each change. This mechanism makes React one of the more performant JavaScript frameworks.
 
-<font color="red">**Disclaimer**: The images are randomly retrieved from Instagram API, we don't take any responsibility for the content.</font>
+<span style="color: red">**Disclaimer**: The images are randomly retrieved from Instagram API, we don't take any responsibility for the content.</span>
 
 <iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://argelius.github.io/OnsenUI-React-SampleApp/www/index.html" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
 
 ### Prerequisites
 
-Before starting the development process, there are a few prerequisites. You can download the full project from this [GitHub repository](https://github.com/argelius/OnsenUI-React-SampleApp). This tutorial idea comes from Tutorialzine's article [5 Practical Examples For Learning The React Framework](http://tutorialzine.com/2014/07/5-practical-examples-for-learning-facebooks-react-framework/).
+Before starting the development process, there are a few prerequisites. You can download the full project from this [GitHub repository](https://github.com/argelius/OnsenUI-React-SampleApp).
 
 #### Libraries
 
@@ -30,7 +37,7 @@ In this tutorial we will be using React and Onsen UI. You can download the React
 
 We are using the development version of Onsen UI which will soon be released as Onsen UI 2.0. In Onsen UI 2.0 we have removed the AngularJS dependency and are instead using Web Components to implement the UI components.
 
-In order to use the development version you need to clone the [Onsen UI repository](https://github.com/OnsenUI/OnsenUI) and build from source. The build process is very simple and can he found [here](https://github.com/OnsenUI/OnsenUI#how-to-build). Another way is to download the [latest build](http://onsen.io/download.html#latest-build) from our website.
+In order to use the development version you can clone the [Onsen UI repository](https://github.com/OnsenUI/OnsenUI) and build from source. The build process is very simple and can he found [here](https://github.com/OnsenUI/OnsenUI#how-to-build). Another way is to download the [latest build](http://onsen.io/download.html#latest-build) from our website.
 
 #### Documentation
 
@@ -49,9 +56,11 @@ First of all, we need to include the libraries in the project. So start by creat
 <script src="lib/react/JSXTransformer.js"></script>
 ```
 
+We are only importing `ons-core.js` instead of the `onsenui.js` file. The `ons-core.js` file contains everything we need while the `onsenui.js` file contains Angular bindings which are not required in this app.
+
 `JSXTransformer.js` is a library already included in the React package. JSX is a JavaScript syntax extension that looks similar to XML. You can use a simple JSX syntactic transform with React. Even if you are still allowed to use plain JS with React, it's recommended that you use JSX because it is more concise.
 
-jQuery is just there to make AJAX calls. We could have used XHR instead, but jQuery makes the code a bit cleaner.
+jQuery is just there to make AJAX calls. We could have used pure JavaScript to do this, but jQuery makes the code a bit cleaner.
 
 We also need to import the Onsen UI stylesheets so the app displays correctly:
 
@@ -60,7 +69,7 @@ We also need to import the Onsen UI stylesheets so the app displays correctly:
 <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css" />
 ```
 
-There is also some custom CSS to display the images and buttons nicely:
+We also define some custom CSS to make the images and buttons display nicely:
 
 ```html
 <style>
@@ -136,7 +145,7 @@ The HTML is very simple because almost all the content will be generated by Reac
 </ons-page>
 ```
 
-We just mention it because the `div` element will be the mounting point, namely the one in which all the dynamic content will be appended to.
+We just mention it because the `div` element will be the mounting point, which all the dynamic content will be appended to.
 
 #### JS
 
@@ -146,7 +155,7 @@ In our case, just one component is enough: a `PictureList` component.
 
 ##### `PictureList` Component
 
-This is the code that implements the picture list. It will render a `<ons-carousel>` which is a swipeable carousel element. The component will fetch a list of images from the Instagram API and render them as a list of `<ons-carousel-item>` elements so the user can browse through them by swiping.
+This is the code that implements the picture list. It will render a `<ons-carousel>` which is a swipeable carousel element. The component will fetch a list of images from the Instagram API and render them as a list of `<ons-carousel-item>` elements so the user can browse through them by swiping. When the list of images changes it will automatically refresh the carousel.
 
 We will also add some buttons to enable refreshing the list of images and going back and forth.
 
@@ -154,21 +163,20 @@ We will also add some buttons to enable refreshing the list of images and going 
 
 // The main Component.
 var PictureList = React.createClass({
-  getInitialState: function(){
-    // The pictures array will be populated via AJAX, and
-    // the favorites one when the user clicks on an image:
+  getInitialState: function() {
+    // The pictures array will be populated via AJAX.
     return {
       pictures: [],
       loading: false
     };
   },
 
-  componentDidMount: function(){
+  componentDidMount: function() {
     // When the component loads, refresh the images.
     this.refresh();
   },
 
-  componentDidUpdate: function(){
+  componentDidUpdate: function() {
     // We need to tell the carousel to refresh when the content changes.
     // This is to ensure that it's displayed correctly.
     this.refs.carousel.refresh();
@@ -255,19 +263,19 @@ Before entering in the details of the component, we need to explain its lifecycl
 
 * **getInitialState**: Invoked once before the component is mounted. The return value will be used as the initial value of `this.state`.
 
-* **componentDidMount**: Invoked once, immediately after the initial rendering occurs. At this point in the lifecycle, the component has a DOM representation. The componentDidMount() method of child components is invoked before that of parent components.
+* **componentDidMount**: Invoked once, immediately after the initial rendering occurs. At this point in the lifecycle, the component has a DOM representation. The `componentDidMount()` method of child components is invoked before the ones of parent components.
 
 * **componentDidUpdate**: Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
 
-During `getInitialState`, we just define an empty state called `pictures` and a boolean called `loading`, which will be populated at a later stage. A state is just an internal data-set which affects the rendering of components. By defining a state, we are telling to the component which values should be available from the first render cycle until the state values are changed. A state should never be used without first declaring it in this manner.
+During `getInitialState()`, we just define an empty state called `pictures` and a boolean called `loading`. A state is just an internal data-set which affects the rendering of components. By defining a state, we are telling to the component which values should be available from the first render cycle until the state values are changed. A state should never be used without first declaring it in this manner.
 
-In `componentDidMount`, we call the `refresh()` method which retrieves the data from the Instagram API. To access the apiKey parameter, we use `this.props.apiKey`. `this.props` contains all the properties of the component, which can be sent as parameters or internally defined.
+In `componentDidMount`, we call the `refresh()` method which retrieves the data from the Instagram API. To access the API key parameter, we use `this.props.apiKey`. `this.props` contains all the properties of the component, which can be sent as parameters or be internally defined.
 
-A JSON request will be made and the result, in case of success, will be hosted in the `pictures` variable. To conclude, we need to update the `pictures` state by executing `self.setState({ pictures: pictures });`.
+A JSON request will be made and the result, in case of success, will be put in the `pictures` variable. To conclude, we need to update the `pictures` state by executing `self.setState({ pictures: pictures });`.
 
-At this point the state got updated, which means that it will also be rendered. It's good to notice that this is not the first time that our state has been rendered, indeed also after the creation a rendering event has occurred. We need to render each image contained into the `pictures` state as an `ons-carousel item` component. To do that we will use a map function, which is not a React function but it's already included in JavaScript. The `map()` function just creates a new array with the results of calling a provided function on every element in this array.
+At this point the state got updated, which means that it will also be rendered. It's good to notice that this is not the first time that our state has been rendered, also after the creation a rendering event has occurred. We need to render each image contained into the `pictures` state as an `ons-carousel item` component. To do that we will use a map function, which is not a React function but it's already included in JavaScript. The `map()` function just creates a new array with the results of calling a provided function on every element in this array.
 
-In React, when children are shuffled around or if new components are added onto the front of the list, the identity and state of each child must be maintained across render passes. That's why we have to uniquely identify each child by assigning it a key, in this case `this.state.prictures.id`.
+In React, when children are shuffled around or if new components are added onto the front of the list, the identity and state of each child must be maintained across render passes. That's why we have to uniquely identify each child by assigning it a key, in this case `this.state.pictures.id`.
 
 ##### Final Rendering
 
@@ -285,9 +293,9 @@ This time we are rendering the `Carousel` component, which contains the `Picture
 
 ### Conclusion
 
-In this tutorial you have seen how to create a sample Instagram gallery app by using Onsen UI and React. You have now a basic layout to customize and enrich as you wish, show us what you are able to do!
+In this tutorial you have seen how to create a sample Instagram gallery app by using Onsen UI and React. You have now a basic layout to customize and enrich as you wish, show us what you are able to do! The idea for this tutorial comes from Tutorialzine's article [5 Practical Examples For Learning The React Framework](http://tutorialzine.com/2014/07/5-practical-examples-for-learning-facebooks-react-framework/).
 
-As always, we want to remember you that Onsen UI is an open source project and a community effort. There is nothing that makes us happier than getting contributions from the community.
+As always, we want to remind you that Onsen UI is an open source project and a community effort. There is nothing that makes us happier than getting contributions from the community.
 
 A good place to start is the [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). If there's an issue that you would like to solve, go ahead and fork the repository and make a Pull request. We also appreciate new features. Upon receiving a pull request, we will review it as soon as possible.
 
