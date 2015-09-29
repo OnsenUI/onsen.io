@@ -1,0 +1,294 @@
+---
+author: andi
+date: 2015-09-29
+id: tutorial-create-instagram-gallery-app-with-onsenui-react
+title: "Tutorial: Create a Instagram Gallery App with Onsen UI + React"
+tags: react, onsen ui, instagram
+---
+
+![React Onsen UI](/blog/content/images/2015/Sep/react_onsenui.png)
+
+As you probably already know, Onsen UI is based on AngularJS. Nevertheless, many of our users asked us if it's possible to use with other frameworks, especially React. In this tutorial, we will show you how to develop a very simple Instagram app by using Onsen UI and React. We will create a simple gallery using React and the development version of Onsen UI 2.0 without using Angular at all!
+
+For those that never heard about it, React (sometimes styled React.js or ReactJS) is an open-source JavaScript library for building performant user interfaces. It is created and maintained by Facebook with the collaboration of Instagram and a community of individual developers and corporations. React is intended to help developers build large scale applications that use data that changes over time. Its goal is to be simple, declarative and composable.
+
+<!-- more -->
+
+To achieve this goal, React makes use of a Virtual DOM and a patching mechanism, which allow React to only update relevant portions of the application rather than having to re-render the entire site on each change. This mechanism makes React one of the more performant JavaScript frameworks.
+
+<font color="red">**Disclaimer**: The images are randomly retrieved from Instagram API, we don't take any responsibility for the content.</font>
+
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://argelius.github.io/OnsenUI-React-SampleApp/www/index.html" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
+
+### Prerequisites
+
+Before starting the development process, there are a few prerequisites. You can download the full project from this [GitHub repository](https://github.com/argelius/OnsenUI-React-SampleApp). This tutorial idea comes from Tutorialzine's article [5 Practical Examples For Learning The React Framework](http://tutorialzine.com/2014/07/5-practical-examples-for-learning-facebooks-react-framework/).
+
+#### Libraries
+
+In this tutorial we will be using React and Onsen UI. You can download the React libraries from [this link](http://facebook.github.io/react/). To implement this sample app we have used the dev version from [React's GitHub repository](https://github.com/facebook/react) but the stable release should work fine.
+
+We are using the development version of Onsen UI which will soon be released as Onsen UI 2.0. In Onsen UI 2.0 we have removed the AngularJS dependency and are instead using Web Components to implement the UI components.
+
+In order to use the development version you need to clone the [Onsen UI repository](https://github.com/OnsenUI/OnsenUI) and build from source. The build process is very simple and can he found [here](https://github.com/OnsenUI/OnsenUI#how-to-build). Another way is to download the [latest build](http://onsen.io/download.html#latest-build) from our website.
+
+#### Documentation
+
+We invite you to take a look at the [Onsen UI](http://onsen.io/docs.html) and [React](https://facebook.github.io/react/docs/getting-started.html) documentation in case some concepts are not clear.
+
+Once all the prerequisites have been satisfied, we can start with the development process.
+
+### Development
+
+First of all, we need to include the libraries in the project. So start by creating an `index.html` file and import the following libraries:
+
+```html
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="lib/onsen/js/ons-core.js"></script>
+<script src="lib/react/react.js"></script>
+<script src="lib/react/JSXTransformer.js"></script>
+```
+
+`JSXTransformer.js` is a library already included in the React package. JSX is a JavaScript syntax extension that looks similar to XML. You can use a simple JSX syntactic transform with React. Even if you are still allowed to use plain JS with React, it's recommended that you use JSX because it is more concise.
+
+jQuery is just there to make AJAX calls. We could have used XHR instead, but jQuery makes the code a bit cleaner.
+
+We also need to import the Onsen UI stylesheets so the app displays correctly:
+
+```html
+<link rel="stylesheet" href="lib/onsen/css/onsenui.css" />
+<link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css" />
+```
+
+There is also some custom CSS to display the images and buttons nicely:
+
+```html
+<style>
+  img {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 85%;
+    margin: auto;
+    transform: translate3d(0, -10%, 0);
+  }
+
+  .navigation-bar {
+    background-color: #125688;
+  }
+
+  .navigation-bar__center {
+    color: #fafafa;
+  }
+
+  .prev-button {
+    position: absolute;
+    font-size: 30px;
+    left: 30px;
+    bottom: 20px;
+    color: #125688;
+    z-index: 1;
+  }
+
+  .next-button {
+    position: absolute;
+    font-size: 30px;
+    right: 30px;
+    bottom: 20px;
+    color: #125688;
+    z-index: 1;
+  }
+
+  .refresh-button {
+    position: absolute;
+    font-size: 30px;
+    right: 50%;
+    bottom: 20px;
+    color: #125688;
+    z-index: 1;
+    transform: translate3d(50%, 0, 0);
+  }
+
+  .refresh-button--loading > ons-icon {
+    -webkit-animation:spin 1s ease-in infinite;
+    -moz-animation:spin 1s ease-in infinite;
+    animation:spin 1s ease-in infinite;
+  }
+
+  @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+  @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+  @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+</style>
+```
+
+#### HTML
+
+The HTML is very simple because almost all the content will be generated by React.
+
+```html```
+<ons-page>
+    <ons-toolbar>
+        <div class="center">Onstagram</div>
+    </ons-toolbar>
+    <div id="content"></div>
+</ons-page>
+```
+
+We just mention it because the `div` element will be the mounting point, namely the one in which all the dynamic content will be appended to.
+
+#### JS
+
+Let's now take a look at the heart of our app: the React code. First of all, we need to identify the React components to implement. Instances of a React components are created internally in React when rendering. These instances are reused in subsequent renders, and can be accessed in your component methods as `this`. The only way to get a handle to a React component instance outside of React is by storing the return value of `React.render`.
+
+In our case, just one component is enough: a `PictureList` component.
+
+##### `PictureList` Component
+
+This is the code that implements the picture list. It will render a `<ons-carousel>` which is a swipeable carousel element. The component will fetch a list of images from the Instagram API and render them as a list of `<ons-carousel-item>` elements so the user can browse through them by swiping.
+
+We will also add some buttons to enable refreshing the list of images and going back and forth.
+
+```javascript
+
+// The main Component.
+var PictureList = React.createClass({
+  getInitialState: function(){
+    // The pictures array will be populated via AJAX, and
+    // the favorites one when the user clicks on an image:
+    return {
+      pictures: [],
+      loading: false
+    };
+  },
+
+  componentDidMount: function(){
+    // When the component loads, refresh the images.
+    this.refresh();
+  },
+
+  componentDidUpdate: function(){
+    // We need to tell the carousel to refresh when the content changes.
+    // This is to ensure that it's displayed correctly.
+    this.refs.carousel.refresh();
+  },
+
+  prev: function() {
+    // Slide to the previous item.
+    this.refs.carousel.prev();
+  },
+
+  next: function() {
+    // Slide to the next item.
+    this.refs.carousel.next();
+  },
+
+  refresh: function() {
+    var self = this;
+
+    // API endpoint for Instagram's popular images for the day.
+    // The API requires a key that is defined as a property of the component.
+    var url = 'https://api.instagram.com/v1/media/popular?client_id=' + this.props.apiKey + '&callback=?';
+
+    // Empty the current array. This will trigger a render.
+    this.setState({pictures: [], loading: true});
+
+    // Fetch some new images.
+    $.getJSON(url, function(result) {
+      if(!result || !result.data || !result.data.length){
+        return;
+      }
+
+      var pictures = result.data.map(function(p){
+        return {
+          id: p.id,
+          url: p.link,
+          src: p.images.low_resolution.url,
+          title: p.caption ? p.caption.text : ''
+        };
+      });
+
+      // Update the component's state. This will trigger a render.
+      self.setState({pictures: pictures, loading: false});
+    });
+  },
+
+  render: function() {
+    var refreshButton;
+
+    // Make the refresh button spin and disabled it while loading.
+    if (this.state.loading) {
+      refreshButton =
+        <div className="refresh-button refresh-button--loading">
+          <ons-icon icon="refresh"></ons-icon>
+        </div>;
+    }
+    else {
+      refreshButton =
+        <div className="refresh-button" onClick={this.refresh}>
+          <ons-icon icon="refresh"></ons-icon>
+        </div>;
+    }
+
+    // Return the component content. Since we can use JavaScript inside JSX, the
+    // <ons-carousel-item> elements can be rendered by looping through the images.
+    return (
+      <ons-carousel ref="carousel" swipeable auto-scroll fullscreen overscrollable>
+        <ons-icon class="prev-button" onClick={this.prev} icon="arrow-left"></ons-icon>
+        {refreshButton}
+        <ons-icon class="next-button" onClick={this.next} icon="arrow-right"></ons-icon>
+        {this.state.pictures.map(function(value) {
+          return
+            <ons-carousel-item key={value.id}>
+              <img className="centered" key={value.id} src={value.src}></img>
+            </ons-carousel-item>
+        })}
+      </ons-carousel>
+    );
+  }
+});
+
+```
+
+Before entering in the details of the component, we need to explain its lifecycle, which is defined in three states:
+
+* **getInitialState**: Invoked once before the component is mounted. The return value will be used as the initial value of `this.state`.
+
+* **componentDidMount**: Invoked once, immediately after the initial rendering occurs. At this point in the lifecycle, the component has a DOM representation. The componentDidMount() method of child components is invoked before that of parent components.
+
+* **componentDidUpdate**: Invoked immediately after the component's updates are flushed to the DOM. This method is not called for the initial render.
+
+During `getInitialState`, we just define an empty state called `pictures` and a boolean called `loading`, which will be populated at a later stage. A state is just an internal data-set which affects the rendering of components. By defining a state, we are telling to the component which values should be available from the first render cycle until the state values are changed. A state should never be used without first declaring it in this manner.
+
+In `componentDidMount`, we call the `refresh()` method which retrieves the data from the Instagram API. To access the apiKey parameter, we use `this.props.apiKey`. `this.props` contains all the properties of the component, which can be sent as parameters or internally defined.
+
+A JSON request will be made and the result, in case of success, will be hosted in the `pictures` variable. To conclude, we need to update the `pictures` state by executing `self.setState({ pictures: pictures });`.
+
+At this point the state got updated, which means that it will also be rendered. It's good to notice that this is not the first time that our state has been rendered, indeed also after the creation a rendering event has occurred. We need to render each image contained into the `pictures` state as an `ons-carousel item` component. To do that we will use a map function, which is not a React function but it's already included in JavaScript. The `map()` function just creates a new array with the results of calling a provided function on every element in this array.
+
+In React, when children are shuffled around or if new components are added onto the front of the list, the identity and state of each child must be maintained across render passes. That's why we have to uniquely identify each child by assigning it a key, in this case `this.state.prictures.id`.
+
+##### Final Rendering
+
+At this point, we are almost at the end of the sample app development. We have already rendered internally all the content but how to also render it inside the DOM structure? By using another rendering function, of course!
+
+```javascript
+// Renders the Carousel component, and adds it to the content div.
+React.render(
+  <PictureList apiKey="YOUR_API_KEY" />,
+  document.getElementById('content')
+);
+````
+
+This time we are rendering the `Carousel` component, which contains the `PictureList` component, inside the DOM. The second parameter specifies the mounting point, in this case the element with `content` id.
+
+### Conclusion
+
+In this tutorial you have seen how to create a sample Instagram gallery app by using Onsen UI and React. You have now a basic layout to customize and enrich as you wish, show us what you are able to do!
+
+As always, we want to remember you that Onsen UI is an open source project and a community effort. There is nothing that makes us happier than getting contributions from the community.
+
+A good place to start is the [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues). If there's an issue that you would like to solve, go ahead and fork the repository and make a Pull request. We also appreciate new features. Upon receiving a pull request, we will review it as soon as possible.
+
+Another way to contribute is by helping other users on [Gitter](https://gitter.im/OnsenUI/OnsenUI) or [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui).
