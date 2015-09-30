@@ -45,6 +45,8 @@ module.exports = function(language, isStaging) {
     if (authors[author].email && (!authors[author].gravator || !authors[author].image)) {
       authors[author].gravator = md5(authors[author].email.toLowerCase());
     }
+
+    authors[author].id = author;
   }
 
   var env = {
