@@ -122,9 +122,9 @@
       <% end %>
 
       <div class="tag-cloud">
-        <h2>Related tags</h3>
+        <h2>Related tags</h2>
 
-        <% for tag in @cloud: %>
+        <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
         <a
           href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
           <span class="tag-cloud-name">
