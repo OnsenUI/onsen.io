@@ -61,6 +61,16 @@
     transform: translate3d(0, 50%, 0);
     -webkit-transform: translate3d(0, 50%, 0);
     width: 20%;
+    background: transparent url('/images/index/contest/icn_ninjabnr.png') no-repeat;
+    background-size: 100%;
+
+    transition: background 0.2s linear;
+    -webkit-transition: background 0.2s linear;
+
+    &:hover {
+      background: transparent url('/images/index/contest/icn_ninjabnr_on.png') no-repeat;
+      background-size: 100%;
+    }
 
     .mobile-query({
       bottom: 4%;
@@ -71,24 +81,11 @@
       -webkit-transform: initial;
     });
 
-    &-active,
-    &-inactive {
-      max-width: 100%;
-      max-height: 100%;
-    }
-
-    &-inactive {
-      pointer-events: none;
-    }
-
-    &-active {
-      position: absolute;
+    &-image {
       opacity: 0;
-      transition: opacity 0.2s linear;
-      -webkit-transition: opacity 0.2s linear;
 
       &:hover {
-        opacity: 1;
+        opacity: 0;
       }
     }
   }
