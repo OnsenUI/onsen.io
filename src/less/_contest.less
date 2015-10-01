@@ -55,25 +55,41 @@
   }
 
   &-button {
-    background-image: url('/images/index/contest/icn_ninjabnr_s.png');
-    width: 79px;
-    height: 31px;
     position: absolute;
-    right: 20px;
+    right: 16px;
     bottom: 50%;
     transform: translate3d(0, 50%, 0);
     -webkit-transform: translate3d(0, 50%, 0);
-    transition: background-image 0.2s linear;
-    -webkit-transition: background-image 0.2s linear;
-
-    &:hover {
-      background-image: url('/images/index/contest/icn_ninjabnr_on_s.png');
-    }
+    width: 20%;
 
     .mobile-query({
-      bottom: 18%;
+      bottom: 4%;
+      width: 24%;
       left: 9%;
       right: initial;
+      transform: initial;
+      -webkit-transform: initial;
     });
+
+    &-active,
+    &-inactive {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    &-inactive {
+      pointer-events: none;
+    }
+
+    &-active {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 0.2s linear;
+      -webkit-transition: opacity 0.2s linear;
+
+      &:hover {
+        opacity: 1;
+      }
+    }
   }
 }
