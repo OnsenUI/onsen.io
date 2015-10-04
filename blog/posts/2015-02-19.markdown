@@ -32,16 +32,16 @@ You can try the app using the sample above, or directly from the browser by clic
 
 Except the HTML content illustrated above, the application contains other two key elements: `controller.js` and `style.css`.
 
-###Controllers
+### Controllers
 
 The controllers contain the logic of the application. To build this app we need two controllers, one for the management of the `ons-sliding-menu` and one for the map interaction. Both controllers can be found in the file `controller.js`.
 
-####SlidingMenuController
+#### SlidingMenuController
 
 One of the biggest trouble of having a `ons-sliding-menu` element and a `Google Map` element is that both have an event associated with the scroll action, in this case the horizontal one. That's why is mandatory the creation of a controller to adapt the behaviour of the sliding menu swipe functionality to the current situation.
 Adding a listener on the element that controls every time a `'postopen'` or `'postclose'` event is triggered is the way to fix this issue. The sliding menu swipe functionality is disabled by default, it will be enabled only after the menu is opened from a `ons-toolbar-button` click and will be available only until the menu is closed, via swipe or again via `ons-toolbar-button`. The listener is created after the first time the sliding menu has been opened.
 
-####MapController
+#### MapController
 
 This controller contains all the logic related to the map object and the interactions with the Onsen UI elements.
 The first step is the declaration of the Markers array, which will be used later, and of the map element. To initialize the map we had to use AngularJS's timer service `$timeout` and put a delay of **100ms** before the map's initialization. This step is necessary because AngularJS's controller initialization occur before the **DOM** is loaded.
@@ -254,7 +254,7 @@ After the elaboration is over, a `ons.notification.confirm` element will ask the
 
 ```
 
-###CSS
+### CSS
 
 Except the default **CSS sheet** provided by default by Onsen UI, it's necessary to define new style properties for the **DOM** elements. The content of the CSS can be found in `style.css`. The main purpose of this sheet is to dispose in a proper way the elements of the Google Maps JavaScript API v3 and of Onsen UI. A full fusion is not possible cause of the differences between the two products, that's why is necessary to define two layers in which display the different elements.
 
@@ -301,11 +301,11 @@ Also the element's size is very important, for example a `div` that is too big w
 ```
 
 
-###HTML
+### HTML
 
 The application is organized in four pages: `index.html`, `menu.html`, `map.html` and `settings.html`(which will not be described). Each one of these pages is a combination of HTML, Onsen UI and AngularJS elements. The structure of the application is based on Onsen's Sliding Menu template that can be found as a premade template in [Monaca](https://monaca.io/). I chose this template cause it seemed to me the most appropriate one, but nothing prohibits to use another one that adapts better to your idea of organization of the DOM.
 
-####index.html
+#### index.html
 
 This is, of course, the main page of the application, the one loaded by default. Just after the HTML opening tag, we can find `ng-app="myApp"`, the directive used to auto-bootstrap an AngularJS application. This directive designates the root element of the application and is typically placed near the root element of the page - e.g. on the `<body>` or `<html>` tags.
 
@@ -341,7 +341,7 @@ At this point we can analyze the body content. As you can see, inside the body t
 
 ```
 
-####menu.html
+#### menu.html
 
 This page contains the auto generated code for the `<ons-sliding-menu>` element. Inside it we can find a `<ons-list`> with two `<ons-list-item>` which contain the redirect at `map.html` and `settings.html`. In case you want to add more pages inside the application, it's necessary to create new items to permit an easy navigation of the app content.
 
@@ -364,7 +364,7 @@ This page contains the auto generated code for the `<ons-sliding-menu>` element.
 </ons-page>
 ```
 
-####map.html
+#### map.html
 
 This is probably the most important page of the application, the one that contains the map and most of the Onsen UI's elements. At the top of it we can find the declaration of the controller `ng-controller="MapController"`. Considering that the controller is declared on the root element, his visibility will be extended to each element of the page.
 
@@ -400,6 +400,6 @@ The rest of the code is the one that displays the map, the search bar and the tw
 </ons-navigator>
 ```
 
-###Conclusion
+### Conclusion
 
 With this sample application you have seen how to create an application using Onsen UI, Google Maps JavaScript API v3 and AngularJS. You have now a basic layout to customize as you wish. Just remember that a lot of features are already provided by Google Maps API, so check about them before trying to implement by yourself.
