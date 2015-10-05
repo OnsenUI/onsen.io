@@ -45,7 +45,15 @@
     <div class="content">
       <div class="author">
         <h2 class="author-title"><%= @name %></h2>
-        <img class="author-gravatar" src="http://www.gravatar.com/avatar/<%= @gravatar %>?s=100" />
+        <div class="author-gravatar">
+          <% if @url: %>
+          <a href="<%= @url %>" target="_blank">
+          <% end %>
+          <img class="author-gravatar" src="http://www.gravatar.com/avatar/<%= @gravatar %>?s=100" />
+          <% if @url: %>
+          </a>
+          <% end %>
+        </div>
         <div class="author-description">
           <%- @contents %>
         </div>
