@@ -23,13 +23,20 @@ gutil.log('Destination: \'./out_' + lang + '\'');
 //////////////////////////////
 // generate
 //////////////////////////////
-gulp.task('generate', ['less', 'metalsmith', 'blog']);
+gulp.task('generate', ['less', 'metalsmith', 'blog', 'authors']);
 
 //////////////////////////////
 // blog
 //////////////////////////////
 gulp.task('blog', function(done) {
   siteGenerator(lang, env === 'staging').blog(done);
+});
+
+//////////////////////////////
+// authors
+//////////////////////////////
+gulp.task('authors', function(done) {
+  siteGenerator(lang, env === 'staging').authors(done);
 });
 
 //////////////////////////////
@@ -99,7 +106,7 @@ gulp.task('serve', ['generate'], function() {
     'src/partials/*',
     'src/files/**/*',
   ], options, function() {
-    runSequence(['metalsmith', 'blog'], function() {
+    runSequence(['metalsmith', 'blog', 'authors'], function() {
       browserSync.reload();
     });
   });
@@ -116,6 +123,7 @@ gulp.task('serve', ['generate'], function() {
     gulp.watch([
       'blog/*',
       'blog/posts/*',
+      'blog/authors/*',
       'blog/content/**/*',
       'src/partials/*',
       'src/layouts/blog.html.eco'
