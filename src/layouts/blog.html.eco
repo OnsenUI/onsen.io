@@ -67,7 +67,7 @@
           </div>
 
           <div class="article-date">
-            BY <a href="<%- @author.url %>"><%- @author.name %></a> / <%- @renderBlogDate @date %>
+            BY <a href="/blog/<%- @author.id %>/"><%- @author.name %></a> / <%- @renderBlogDate @date %>
           </div>
 
           <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
@@ -122,9 +122,9 @@
       <% end %>
 
       <div class="tag-cloud">
-        <h2>Related tags</h3>
+        <h2>Related tags</h2>
 
-        <% for tag in @cloud: %>
+        <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
         <a
           href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
           <span class="tag-cloud-name">

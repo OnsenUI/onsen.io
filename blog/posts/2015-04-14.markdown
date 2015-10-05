@@ -106,7 +106,7 @@ Since Windows apps prevent the WebView from using eval or function(string) gener
 
 Now our Onsen UI sample app compatible with Windows Phone 8.1 is ready! Let's see how we can debug it.
 
-###Debugging
+### Debugging
 
 To debug our app, we just need to select the target, which can be a physical device or an emulator, and simply launch it. The app will be automatically loaded and displayed.
 
@@ -122,7 +122,7 @@ The are three main debugging features that we can use to test our application:
 
 ![Visual Studio Debug](/blog/content/images/2015/Apr/vs_debug2.png)
 
-###Deployment
+### Deployment
 
 Once our application is ready, we can deploy it on our device (or emulator) in two ways:
 
@@ -138,7 +138,7 @@ cordova run windows --device -- --phone  # deploy app to connected device
 <br>
 <i style="color: red">**ATTENTION**</i>: if you have developed your app using Microsoft Visual Studio, but you want to deploy it using the command line, copy the content of `platforms/windows/www/` inside the `www/` folder situated in the root project directory, otherwise all the content will be overwritten once the app is deployed!
 
-###Conclusion
+### Conclusion
 
 Have you seen how easy is to develop hybrid apps, compatible with Windows Phone 8.1, using Onsen UI?!
 

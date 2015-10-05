@@ -122,6 +122,52 @@ module.exports = function(lang, isStaging) {
 
     },
 
+    authors: function(done) {
+      if (lang === 'ja') {
+        done();
+        return;
+      }
+
+      metalsmith(__dirname + '/../')
+        .clean(false)
+        .source('./blog/authors/')
+        .metadata(require('../config.js')(lang, isStaging))
+        .destination('./out_en/blog/')
+        .use(require('./helpers')())
+        .use(branch('*.markdown')
+          .use(markdown({
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: true
+          }))
+          .use(permalinks({
+            pattern: ':id'
+          }))
+        )
+        .use(function(files, metalsmith, done) {
+          for (var path in files) {
+            files[path].title = files[path].name;
+          }
+          done();
+        })
+        .use(layouts({
+          engine: 'eco',
+          directory: './src/layouts/',
+          default: 'author.html.eco'
+        }))
+        .build(function(error) {
+          if (error) {
+            gutil.log('ERROR: ' + error);
+          }
+          done();
+        });
+
+   },
+
     blog: function(done) {
 
       if (lang === 'ja') {
