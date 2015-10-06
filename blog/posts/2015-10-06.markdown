@@ -10,21 +10,21 @@ tags: responsive, onsen ui
 
 The road that will bring us to Onsen UI 2.0 becomes more exciting every day. That's why we are happy to introduce a new Onsen UI element: The `<ons-splitter>`!
 
-The element has been developed with the purpose of offering even more UI customization than before as well as making it easier to make responsive hybrid apps! With `<ons-splitter>` you can easily support both tablets and phones with the same code. The element will automatically transform depending on the size/orientation of the device. Wouldn't it be great to support iPhone and iPad with the same code? With this element it's not only possible. It becomes a simple task.
+The element has been developed with the purpose of offering even more UI customization than before, as well as making it easier to make responsive hybrid apps! With `<ons-splitter>` you can easily support both tablets and phones with the same code. The element will automatically transform depending on the size/orientation of the device. Wouldn't it be great to support iPhone and iPad with the same code? With this element it's not only possible. It becomes a simple task.
 
 What are you waiting for? Let's take a look at it and see what it has to offer!
 
 <!-- more -->
 
-Being more specific, `ons-splitter` is a hybrid element which can be seen as a fusion between the `ons-split-view` and `ons-sliding-menu` elements. It allows the developer to define up to three different views in the same page. The big plus is that the two lateral views can be managed as sliding menus. Let's take a look at the demo before entering in the technical details.
+Being more specific, `ons-splitter` is a hybrid element which can be seen as a fusion between the `ons-split-view` and `ons-sliding-menu` elements. It allows the developer to define up to three different views in the same page. The big plus is that the two lateral views can be managed as sliding menus. Let's take a look at the demo before entering technical details.
 
 ### Demo
 
-In the following example we have simulated the same code running in two different orientations. The `<ons-splitter>` element can be configured to automatically expand to a column-layout in landscape mode while collapsing into a menu layout in portrait mode. This does not only work for orientation. Other conditions, like width or even a media query, can be used.
+In the following example we have simulated the same code running in two different orientations. The `<ons-splitter>` element can be configured to automatically expand to a column-layout in landscape mode, while collapsing into a menu layout in portrait mode. This does not only work for orientation. Other conditions, like width or even a media query, can be used.
 
 #### Portrait mode
 
-In portrait mode the menu is hidden but can be displayed by swiping or pressing a button. This way we make better use of the limited space.
+In portrait mode the menu is hidden, but can be displayed by swiping or pressing a button. This way we make better use of the limited space.
 
 <iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); max-width: initial; padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://argelius.github.io/OnsenUI-Splitter-Preview/www/" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
 
@@ -38,19 +38,19 @@ When the device is in landscape mode, the menu on the left site will be expanded
 
 The splitter element is actually a combination of multiple elements:
 
-* **ons-splitter**: The main element is declared by using the `<ons-splitter>` tag. Some of the internal methods allow to toggle and open/close the side elements or just get their status, get the content, manage the child elements, etc.
+* **ons-splitter**: The main element is declared by using the `<ons-splitter>` tag. Some internal methods allow to toggle and open/close the side elements or just get their status, get the content, manage the child elements, etc.
 
-* **ons-splitter-content**: As the name implies, it contains the main content and is usually placed in the middle (depending on the side elements). It just hosts a `<ons-page>` element and doesn't have any particular attribute or method. It's declared by using the `<ons-splitter-content>` tag.
+* **ons-splitter-content**: As the name implies, it contains the main content and is usually placed in the middle (depending on the side elements). It just hosts an `<ons-page>` element and doesn't have any particular attribute or method. It's declared using the `<ons-splitter-content>` tag.
 
 * **ons-splitter-side**: Analog to the `ons-splitter-content`, this element contains the side content and it's declared by using the `<ons-splitter-side>`. Every `ons-splitter` element can contain up to two `ons-splitter-side` elements, which can be placed on the left or right side by using the attribute `side`. Furthermore, they can be set, by using attributes, as `swipeable` and `collapse`. This last attribute is similar to the one we have seen in `ons-split-view` element: it specifies the collapse behavior of the views. Valid values are `portrait`, `landscape`, width in pixels, or a media query.
 
-* **ons-splitter-mask**: This element is displayed when one or both the `ons-splitter-side` elements are set as swipeable and are actually open. By clicking the mask, the menu is closed.
+* **ons-splitter-mask**: This element is displayed when one or both `ons-splitter-side` elements are set as swipeable and are actually open. By clicking the mask, the menu is closed.
 
 Just like the rest of the Onsen UI 2.0 components, the `<ons-splitter>` and all its child elements are implemented as Web Components. We have created a [simple introduction to Web Components](/blog/tutorial-favorite-star-button-javascript-web-components-api/) if you are not already familiar with this new API.
 
 #### Code
 
-The `<ons-splitter>` element is very easy to use. Just declare a `<ons-splitter>` element and put the `<ons-splitter-side>` and `<ons-splitter-content>` elements inside it. The attributes are quite easy to understand and since we're dealing with Web Components, the component methods are attached to the DOM elements.
+The `<ons-splitter>` element is very easy to use. Just declare an `<ons-splitter>` element and put the `<ons-splitter-side>` and `<ons-splitter-content>` elements inside it. The attributes are quite easy to understand and since we're dealing with Web Components, the component methods are attached to the DOM elements.
 
 ```html
 <ons-splitter>
