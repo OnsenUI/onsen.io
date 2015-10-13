@@ -1,0 +1,125 @@
+---
+author: andreas
+date: 2015-10-14
+id: build-a-hacker-news-mobile-app-with-firebase
+title: "Build a Hacker News Mobile App with Firebase"
+tags: tutorial, cordova, firebase, onsen ui
+---
+
+![Firebase Logo](/blog/content/images/2015/Oct/firebase_logo.png)
+
+[Firebase](https://www.firebase.com/) provides a realtime Backend as a Service (or BaaS) that allows the developer to sync data instantly between the backend and all connected devices. In addition to being a database that’s accessible from anywhere, they also have a very useful JavaScript API that let’s you listen for events for when items are changed, added or removed from the database. The company was recently acquired by Google.
+
+I’m very excited by the possibilities Firebase has for mobile apps. Using Onsen UI, AngularJS and Firebase I’ve made a simple app to illustrate how it can be used. Instead of creating my own database, I’ve used the [Hacker News API](https://github.com/HackerNews/API) since it already has a lot of data and new items are added frequently so we can try out the live syncing functionality in Firebase.
+
+<!-- more -->
+
+This project is made available on my [GitHub account](https://github.com/argelius/onsen-firebase-sample) and can be easily deployed on a mobile device using Cordova.
+Please try out the app here:
+
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); max-width: initial; padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="http://argelius.github.io/onsen-firebase-sample/www/index.html" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
+
+### Adding Firebase to an app
+
+To use Firebase in an app the `firebase.js` file must be loaded. We can then create a `Firebase` object to communicate with the backend.
+
+```js
+<script src="https://cdn.firebase.com/js/client/2.1.1/firebase.js"></script>
+<script>
+  var fb = new Firebase('https://hacker-news.firebaseio.com/v0');
+</script>
+```
+
+### Accessing Firebase resources
+
+All resources in Firebase are reachable through a URL. For the Hacker News API the top 100 news stories can be fetched through the following URL:
+
+* https://hacker-news.firebaseio.com/v0/topstories
+
+Resources can be accessed using the `Firebase.child(name)` method:
+
+```js
+// Create a reference to https://hacker-news.firebaseio.com/v0/topstories
+var topStoriesRef = fb.child('topstories');
+```
+
+### Fetching data
+
+When a reference to a Firebase resource has been created, event listeners can be attached to the object to react when the data changes or just to fetch the current data. There are two methods that can be used to attach event listeners: `Firebase.once(eventName, callback)` and `Firebase.on(eventName, callback)`. As the name implies, once will only be executed the first time the event is triggered while `on` will keep listening indefinitely.
+
+To remove event listeners the `Firebase.off(eventName, [callback])` is used. The callback function is optional but if it isn’t specified all event listeners for a given event type are removed.
+
+There are four event types in Firebase. To listen for changes in the data, `'value'` is used. `'child_added'`, `'child_removed'` and `'child_moved'` can be used to listen for more specific changes. To listen for changes in the `topstories` resource the following code can be used:
+
+```js
+topStoriesRef.on('value', function(snapshot) {
+  console.log(snapshot.val());
+});
+```
+
+Running the above code will output a list of IDs. The IDs can be used to fetch stories from the item resource. Thus, the URL for the first resource in the database is:
+
+* https://hacker-news.firebaseio.com/v0/item/1
+
+This makes it extremely easy to create an app that shows the top stories and dynamically update them when they change.
+
+### Making a Hacker News App
+
+![Firebase Screenshot](/blog/content/images/2015/Oct/firebase_screenshot.png)
+
+There is an AngularJS module called [AngularFire](https://www.firebase.com/docs/web/libraries/angular/index.html) that provides a `$firebase` service that can be used to easily communicate with the backend as well as create data binding between the models in the database and the models in AngularJS.
+
+However, since the app we’re making is very simple I’ve decided to just use the `Firebase` object directly without the help of AngularFire. For a bigger project it might be helpful, but I think it’s more instructive to use the API in `firebase.js` since it operates at a lower level.
+
+This is a list of the important files in the project:
+
+* [index.html](https://github.com/argelius/onsen-firebase-sample/blob/master/www/index.html)
+* [www/css/app.css](https://github.com/argelius/onsen-firebase-sample/blob/master/www/css/app.css)
+* [www/js/app.coffee](https://github.com/argelius/onsen-firebase-sample/blob/master/www/js/app.coffee)
+* [www/js/controllers.coffee](https://github.com/argelius/onsen-firebase-sample/blob/master/www/js/controllers.coffee)
+* [www/js/services.coffee](https://github.com/argelius/onsen-firebase-sample/blob/master/www/js/services.coffee)
+
+I chose to implement the app using CoffeeScript instead of plain JavaScript to make the code a bit shorter and cleaner. We begin by making a simple service that just returns the `Firebase` object so I can reuse it in my controllers.
+
+```js
+angular.module 'app.services', []
+  .factory 'HackerNews', ->
+    new Firebase 'https://hacker-news.firebaseio.com/v0'
+```
+
+I also wrote three controllers. `TopController` fetches the top stories from the Hacker News API and updates them whenever they change. `LatestController` gets the latest stories and waits for new stories to be added. A main controller called `AppController` is used to switch between the two views. Since it’s a parent to the two other controllers, I’ve put some utility methods in it that the child controllers can use.
+
+This is the code for `TopController` which shows how easy it is to add an event listener in Firebase and update data dynamically when there’s a change on the database side:
+
+```js
+.controller 'TopController', ['$scope', '$q', 'HackerNews', ($scope, $q, HackerNews) ->
+  $scope.stories = []
+
+  # Get the top stories from the Hacker News API.
+  $scope.getTopStories = ->
+    HackerNews
+      .child 'topstories'
+      .limitToFirst 20
+      .once 'value', (data) ->
+        ids = data.val()
+
+        promises = []
+        for id in ids
+          promises.push $scope.getStory(id)
+
+        $q.all(promises).then (stories) ->
+          stories = stories.filter (story) ->
+            typeof story != 'undefined'
+          if stories.length > 0
+            $scope.stories = stories
+
+  # Reload top stories every time they are changed.
+  HackerNews
+    .child 'topstories'
+    .on 'value', $scope.getTopStories
+]
+```
+
+Then the controllers are tied together in [index.html](https://github.com/argelius/onsen-firebase-sample/blob/master/www/index.html) and I used the [Theme Roller](http://components.onsen.io/) on the Onsen UI website to create a theme that’s similar to the Hacker News style.
+
+And that’s how easy a Hacker News app is made using AngularJS and Onsen UI. Firebase gives us the power to instantly update the view when a new item is added or the top stories change.
