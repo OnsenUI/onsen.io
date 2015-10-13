@@ -37,7 +37,7 @@ module.exports = function(language, isStaging) {
     onsen: {
       name: 'Onsen UI Team',
       url: 'http://onsen.io',
-      image: '/blog/content/images/2014/Mar/blog_author-1.png'
+      gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
     }
   };
 
@@ -45,6 +45,8 @@ module.exports = function(language, isStaging) {
     if (authors[author].email && (!authors[author].gravator || !authors[author].image)) {
       authors[author].gravator = md5(authors[author].email.toLowerCase());
     }
+
+    authors[author].id = author;
   }
 
   var env = {
