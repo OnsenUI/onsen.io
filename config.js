@@ -38,6 +38,10 @@ module.exports = function(language, isStaging) {
       name: 'Onsen UI Team',
       url: 'http://onsen.io',
       gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
+    },
+    amanda: {
+      name: 'Amanda Cline',
+      email: 'amandacline111@gmail.com'
     }
   };
 
