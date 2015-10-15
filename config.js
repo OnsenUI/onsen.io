@@ -41,7 +41,7 @@ module.exports = function(language, isStaging) {
     },
     amanda: {
       name: 'Amanda Cline',
-      email: 'amandacline111@gmail.com'
+      gravator: 'd293328028341a95e89f13dd84beb449'
     }
   };
 
