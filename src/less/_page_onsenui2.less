@@ -1,0 +1,120 @@
+#onsenui2-landing {
+  .first-view {
+    text-align: center;
+    background-color: #FF5544;
+    background: linear-gradient(#BB3E31, #ff5544);
+    color: white;
+
+    &-inner {
+      padding: 48px 0 0 0;
+      background-image: url(/images/2/onsen-mark-bg.png);
+      background-repeat: no-repeat;
+      background-position: right top;
+    }
+
+    &-logo {
+      color: white;
+    }
+
+    &-title {
+      font-size: 53px;
+      margin: 10px auto 0 auto;
+      color: white;
+      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+      font-family: 'ff-enzo-web', Arial, sans-serif;
+      font-weight: bold;
+      letter-spacing: -2px;
+      max-width: 90%;
+      line-height: 59px;
+    }
+
+    &-tagline {
+      font-size: 24px;
+      opacity: 0.7;
+      margin: 0 auto 0 auto;
+      color: white;
+      font-weight: 200;
+      font-family: 'proxima-nova', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      max-width: 90%;
+    }
+
+    &-quickstart {
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.36);
+      text-align: left;
+      padding: 4px 8px;
+      width: 500px;
+      max-width: 85%;
+      margin: 60px auto 0 auto;
+    }
+
+    &-quickstart-header {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    &-quickstart-code {
+      margin: 0;
+      border: none;
+      background-color: transparent;
+      > code {
+        color: white;
+        font-size: 14px;
+      }
+    }
+
+    &-link, &-link:link, &-link:visited {
+      color: white;
+      text-decoration: underline;
+      font-size: 15px;
+    }
+
+    &-link:hover {
+      text-decoration: none;
+    }
+
+    &-footer {
+      padding: 20px 0 35px 0;
+    }
+  }
+
+  .content {
+    width: 780px;
+    font-size: 16px;
+    line-height: 23px;
+
+    &-article {
+      margin: 0;
+    }
+
+    &-summary {
+      margin-top: 30px;
+      background-color: #f0f0f0;
+      padding: 10px 30px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    &-article-header2 {
+      color: #444;
+      text-align: center;
+      font-weight: normal;
+      font-size: 40px;
+      margin: 80px 0 32px 0;
+    }
+
+    &-article-header3 {
+      color: #444;
+      border-bottom: none;
+      font-size: 30px;
+      margin: 0;
+      margin: 22px 0 0 0;
+    }
+  }
+}
+
+.tablet-query({
+  #onsenui2-landing {
+  }
+});
+
