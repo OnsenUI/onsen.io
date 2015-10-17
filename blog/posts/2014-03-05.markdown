@@ -4,14 +4,15 @@ date: 2014-03-05
 id: onsen-ui-tutorial-angularjs-essentials-for-using-onsen-ui-part-2
 title: "Onsen UI-Tutorial: AngularJS Essentials for Using Onsen UI Part 2"
 ---
-## AngularJS Essentials for Using Onsen UI
-### Part 2:Click Events and DOM Manipulation
+Part 2: Click Events and DOM Manipulation
 
 We are going to learn how to add click events within apps developed with Onsen UI. This blog entry is in response to frequently asked questions from users who are familiar with jQuery but not with AngularJS.
 
 We are going to register click events to buttons, and dynamically change CSS classes of HTML elements.
 
-index.html
+<!-- more -->
+
+### index.html
 
     <!DOCTYPE html>
     <html>
@@ -33,7 +34,7 @@ index.html
     
     </html>
     
-app.js
+### app.js
 
 	var myApp = angular.module('myApp', []);
  
@@ -55,7 +56,7 @@ app.js
     
 	});
 
-style.css
+### style.css
 
     .red{
       color:#FF0000;
