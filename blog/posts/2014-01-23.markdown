@@ -7,9 +7,11 @@ title: "Onsen UI and PhoneGap/Cordova on iOS 7"
 
 iOS 7 comes with new UI design that the application now run in full screen with the status bar overlay the application.
 
+<!-- more -->
+
 If you run current Onsen UI version (0.6), you will see something like this:
 
-![](/content/images/2014/Jan/1_PNG.png)
+![Onsen UI 0.6](/blog/content/images/2014/Jan/1_PNG.png)
 
 Solution
 ------------
@@ -18,7 +20,7 @@ The solution is to increase the height of the navigation bar and pad the top sec
 
 Below is the code to solve this problem.
 
-**index.html**
+### index.html
 
 ```
 <script>
@@ -36,7 +38,7 @@ function onDeviceReady() {
 ```
     
 
-**css/ios7.css**
+### css/ios7.css
 
 ```
 .topcoat-navigation-bar {
@@ -51,4 +53,4 @@ Result
 Below is what it look like after applying the code.
 
 
-![](/content/images/2014/Jan/2_PNG.png)
+![](/blog/content/images/2014/Jan/2_PNG.png)

@@ -6,6 +6,8 @@ title: "Customizing Onsen UI Navigator Toolbar's Icon"
 ---
 Onsen UI supports font-awesome which has 369 icons! That's alot but no matter how many icons provided, there is no gurantee that it will support your app icon's need.
 
+<!-- more -->
+
 What you need to do is specify the **css class name** in left-button-icon/right-button-icon.
 
 	<ons-navigator right-button-icon="my-icon">
@@ -13,7 +15,7 @@ What you need to do is specify the **css class name** in left-button-icon/right-
     
 Then in your css file. Specify the properties of your css class name as shown below.
 
-**css**
+### css
 
 	.my-icon {
       background-image: url(heart.png);
