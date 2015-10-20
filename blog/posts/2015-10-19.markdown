@@ -282,7 +282,6 @@ Then, we will store returned data into the variable in the success call we defin
 ```
 
 Finally, define MainController.
-<!-- そして最後に MainController を定義します。 -->
 
 ```js
 myApp.controller("MainController", function ($scope, $http, ItemService) {
