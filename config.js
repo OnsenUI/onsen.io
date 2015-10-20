@@ -42,6 +42,10 @@ module.exports = function(language, isStaging) {
     amanda: {
       name: 'Amanda Cline',
       gravator: 'd293328028341a95e89f13dd84beb449'
+    },
+    moongift: {
+      name: 'Atsushi Nakatsugawa',
+      gravator: '4cafe6a1c6287d64d7252279eeeffa94'
     }
   };
 

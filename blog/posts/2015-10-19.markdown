@@ -1,14 +1,17 @@
 ---
-author: onsen
+author: moongift 
 date: 2015-10-19
 id: create-your-kintone-app-using-monaca
 title: "Create your Kintone app using Monaca"
+category: monaca
 tags: tutorial, javascript, cordova, onsen ui, monaca, kintone
 ---
 
+![Kintone by cybozu.com](/blog/content/images/2015/Oct/kintone-logo.png)
+
 Kintone by Cybozu lets you quickly and easily build your own customized business applications such as daily reports, minutes, time-card, and surveys. It also lets you create applications using Excel or CSV files to satisfy your own needs.
 
-Kintone provides a lot of features on web browser though we focused on developping further using Kintone API and Monaca to transform your custom business application into a hybrid mobile application.
+Kintone provides a lot of features in the web browser but here we focus on developing using Kintone API and Monaca to transform your custom business application into a hybrid mobile application.
 
 <!-- more -->
 
@@ -19,16 +22,16 @@ Kintone provides a lot of features on web browser though we focused on developpi
 
 #### Creating Sales Records Management System
 
-In this blog post, we are creating sales records management system. 
+In this blog post, we are creating sales records management system.
 Let's go ahead and create minimum template project in Monaca IDE.
 
 ![Monaca Minimum Template](/blog/content/images/2015/Oct/monaca_minimum_template.png)
 
-Next, navigate your cursor to "Config" and select "Manage JS/CSS Components" 
+Next, navigate your cursor to "Config" and select "Manage JS/CSS Components"
 
 ![Manage JS/CSS Components](/blog/content/images/2015/Oct/monaca_manage_components.png)
 
-Then, add Onsen UI into the project. At the time of this writing, most recent version of Onsen UI is 1.3.11.
+Then, add Onsen UI into the project. At the time of writing this, the most recent version of Onsen UI is 1.3.11.
 
 ![Add Onsen UI Component](/blog/content/images/2015/Oct/monaca_adding_onsenui.png)
 
@@ -36,7 +39,7 @@ Then, add Onsen UI into the project. At the time of this writing, most recent ve
 
 Now, we can modify our index.html file as shown below.
 
-We added "myApp" module for AngularJS as well as Onsen UI.
+We added `myApp` module for AngularJS as well as Onsen UI.
 
 ```html
 <!DOCTYPE HTML>
@@ -52,8 +55,8 @@ We added "myApp" module for AngularJS as well as Onsen UI.
     </script>
 </head>
 <body style="height:100%">
-    <ons-navigator var="myNavigator" page="login.html"> 
-    </ons-navigator> 
+    <ons-navigator var="myNavigator" page="login.html">
+    </ons-navigator>
 </body>
 </html>
 ```
@@ -68,12 +71,12 @@ We will also create login.html to show our app's landing page.
     <br><br>
     Please wait.
   </ons-modal>
-  
+
   <!-- Login form -->
   <div id="loginContainer">
     <div id="loginContents">
       <h4 id="subTitle"  >Kintone API x Monaca</h4>
-      <h4 id="title">Sales Records Management System</h4>    
+      <h4 id="title">Sales Records Management System</h4>
       <ons-row id="url" align="center">
         <ons-col align="right" width="20%" class="fontSmaller">https://</ons-col>
         <ons-col width="50%"><input placeholder="Domain" type="text" id="test2" ng-model="domain" class="loginItems"></ons-col>
@@ -89,28 +92,28 @@ We will also create login.html to show our app's landing page.
         <ons-col width="20%"></ons-col><ons-col width="50%"><input placeholder="Password" type="password" ng-model="loginPass" class="loginItems"></ons-col>
         <ons-col></ons-col>
       </ons-row><br />
-      <ons-row id="saveInfo"> 
+      <ons-row id="saveInfo">
         <ons-col><input type="checkbox" ng-model="remember">Remember me</ons-col>
       </ons-row>
-      <ons-button ng-click="showList()" modifier="quiet" id="loginButton">Login</ons-button>  
+      <ons-button ng-click="showList()" modifier="quiet" id="loginButton">Login</ons-button>
     </div>
   </div>
 </ons-page>
 ```
 
-We used Onsen UI components to make our life easier as in above code. In order to access Kintone API, what we really need in this page are:
+We used Onsen UI components to make our life easier in the above code. In order to access Kintone API, what we really need in this page are:
 
-* domain
-* loginName
-* LoginPass
+* `domain`
+* `loginName`
+* `loginPass`
 
 Let's take a look at what we have right now in Monaca Debugger.
 
-![App Login Page](/blog/content/images/2015/Oct/Kintone_login_page.png)
+![App Login Page](/blog/content/images/2015/Oct/kintone_login_page.png)
 
 #### Implementing Login Process
 
-It's time to make back-end login process. First of all, we need Base64 library to use Kintone API. For this demo we use [BASE64 (RFC2045) Encode/Decode for string in JavaScript](http://tociyuki.flop.jp/archive/base64.js) by MIZUTANI Tociyuki. Download and upload into the project under "js" folder (by creating new folder). Also, we will make kintone.js file for later modification.
+It's time to make the back-end login process. First of all, we need a Base64 library to use Kintone API. For this demo we use [BASE64 (RFC2045) Encode/Decode for string in JavaScript](http://tociyuki.flop.jp/archive/base64.js) by MIZUTANI Tociyuki. Download and upload into the project under "js" folder (by creating new folder). Also, we will make kintone.js file for later modification.
 
 Include those files in index.html.
 
@@ -125,30 +128,30 @@ Include those files in index.html.
         var myApp = angular.module('myApp', ['onsen']);
     </script>
   <!-- Add starts here -->
-    <script src="js/base64.js"></script> 
+    <script src="js/base64.js"></script>
     <script src="js/kintone.js"></script>
   <!-- Add ends here -->
 </head>
 ```
 
-As in HTML file, when you tap Login button we want to show records of sales report. The code below defines ```showList``` function and will make HTTP request to get data from Kintone API. 
+When you tap Login button we want to show records of sales report. The code below defines a `showList` function that will make a HTTP request to get data from the Kintone API.
 
 ```js
 // We will make this global variable in case of other use.
 var authorization; // for authentication
- 
+
 myApp.controller("LoginController", function ($scope, $http, ItemService) {
- 
+
   // Start Login process
   $scope.showList = function () {
     ItemService.domain = $scope.domain;
-    
+
     console.log("Start Login process");
-  
+
     // Set required info based on input value.
     $scope.url = "https://"+$scope.domain+".cybozu.com/k/v1/records.json";
     authorization = base64encode($scope.loginName+":"+$scope.loginPass);
-  
+
     // Creating data to send refering kintoneAPIdocument.
     $scope.req = {
       url: $scope.url,
@@ -161,7 +164,7 @@ myApp.controller("LoginController", function ($scope, $http, ItemService) {
         "app": 13
       }
     };
-  
+
     // Send http request
     $http($scope.req)
       .success(function success(data, status, headers, config) {
@@ -181,10 +184,10 @@ myApp.controller("LoginController", function ($scope, $http, ItemService) {
         }
       })
       .error(function error(data, status, headers, config) {
-        alert("Login name or password is incorrect.");  
+        alert("Login name or password is incorrect.");
       });
   };
-  
+
   // If the data is already stored in a device, we'll use those data to make a request.
   if (localStorage.getItem("LoginName")) {
     $scope.loginName = localStorage.getItem("LoginName");
@@ -199,18 +202,17 @@ myApp.controller("LoginController", function ($scope, $http, ItemService) {
     });
   }
 });
- 
+
 myApp.service("ItemService", function () {
- 
+
 });
 ```
 
-To make sure this is working, try logging in with your account information. You will see "Start login process" and "Successfully logged in" messages in a console window. 
-*Kintone's server will reject if you access from a desktop browser.
+To make sure this is working, try logging in with your account information. You will see "Start login process" and "Successfully logged in" messages in a console window. Kintone's server will reject if you access from a desktop browser.
 
-#### Receiving Data 
+#### Receiving Data
 
-Now that we are successfully logged in, we can get data. Add following code.
+Now that we are successfully logged in, we can get data. Add the following code:
 
 ```js
 if ($scope.remember == true) {
@@ -225,9 +227,9 @@ if ($scope.remember == true) {
   localStorage.removeItem("Password");
   localStorage.removeItem("Domain");
 }
- 
+
 // Add starts here
-// Nagigate to list view if login is successful
+// Navigate to list view if login is successful
 myNavigator.pushPage("list.html",{animation:"none"});
 // Add ends here
 ```
@@ -259,7 +261,7 @@ The content of list.html is as follows.
 
 We use items variable to store list of records in list.html so we will modify js/kintone.js slightly.
 
-First, reset $scope.items in a very beginning of the ```showList``` function.
+First, reset `$scope.items` in a very beginning of the `showList` function.
 
 ```js
 $scope.showList = function () {
