@@ -1,5 +1,7 @@
 #onsenui2-landing {
+
   .first-view {
+    -webkit-font-smoothing: antialiased;
     text-align: center;
     background-color: #FF5544;
     background: linear-gradient(#BB3E31, #ff5544);
@@ -81,11 +83,17 @@
 
   .content {
     width: 780px;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 23px;
+    color: #555;
+    -webkit-font-smoothing: antialiased;
 
     &-article {
       margin: 0;
+    }
+
+    &-article-eyecatch {
+      text-align: center;
     }
 
     &-summary {
@@ -96,19 +104,20 @@
     }
 
     &-article-header2 {
-      color: #444;
+      color: #333;
       text-align: center;
-      font-weight: normal;
+      font-weight: 600;
       font-size: 40px;
-      margin: 80px 0 32px 0;
+      margin: 124px 0 42px 0;
+      line-height: 1.2;
     }
 
     &-article-header3 {
-      color: #444;
+      color: #333;
       border-bottom: none;
       font-size: 30px;
-      margin: 0;
-      margin: 22px 0 0 0;
+      margin: 42px 0 0 0;
+      line-height: 1.2;
     }
   }
 }
