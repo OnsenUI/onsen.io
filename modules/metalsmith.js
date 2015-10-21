@@ -23,6 +23,15 @@ var nodePath = require('path');
 
 module.exports = function(lang, isStaging) {
   return {
+    /*
+    apiref: function(done) {
+      metalsmith(__dirname + '/../')
+        .clean(false)
+        .source('./src/documents_' + lang)
+        .metadata(require('../config.js')(lang, isStaging))
+        .use(require('./2-api-docs')(lang))
+    },*/
+
     site: function(done) {
       metalsmith(__dirname + '/../')
         .clean(false)
@@ -71,6 +80,7 @@ module.exports = function(lang, isStaging) {
 
           metalsmith.metadata().cssToc = cssToc;
         })
+        .use(require('./2-api-docs')(lang))
         .use(currentPath())
         .use(branch('!robots.txt')
           .use(layouts({
