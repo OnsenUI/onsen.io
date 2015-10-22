@@ -9,7 +9,7 @@ $(function() {
   });
 
   var iframe = $('iframe');
-  if (iframe.length > 0) {
+  if (iframe.length > 0 && iframe.lazyLoadXT instanceof Function) {
     iframe.lazyLoadXT();
   }
 });
