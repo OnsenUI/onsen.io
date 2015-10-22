@@ -8,6 +8,9 @@ layout: '2.html.eco'
 ---
 
 <div class="content">
+  <a href="/2/index.html">&lt; Back</a>
+
+  <br>
   <h2 class="doc-page-header">JavaScript Reference</h2>
 
   <br>
@@ -22,9 +25,8 @@ layout: '2.html.eco'
         <% for doc in docs: %>
         <li class="js-index-list-item
           js-index-list-item-<%- if doc.collection[0] == 'objects' then 'object' else 'element' %>">
-          <a href="/2/reference/<%= doc.name %>.html" class="js-index-link">
-            <%- doc.name %>
-          </a>
+          <a href="/2/reference/<%= doc.name %>.html" class="js-index-link"><%= doc.name %></a>
+          <% if doc.doc.extensionOf: %><span class="js-index-extension-name"><%= doc.doc.extensionOf %></span><% end %>
         </li>
         <% end %>
       </ul>
@@ -33,6 +35,5 @@ layout: '2.html.eco'
 
   </div></div>
 
-  <a href="/2/index.html">Back</a>
 </div>
 

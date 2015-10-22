@@ -7,10 +7,12 @@ layout: '2.html.eco'
 ---
 
 <div class="content"><div class="reference-container">
+  <div><a href="/2/reference/javascript.html">&lt; Back</a></div>
+
   <h2><%= @doc.name %></h2>
 
   <% if @doc.extensionOf: %>
-  <span class="extension-name"><%= @doc.extensionOf %></span>
+  <span class="reference-extension-name"><%= @doc.extensionOf %></span>
   <% end %>
 
   <section class="reference-description">
@@ -133,7 +135,12 @@ layout: '2.html.eco'
       <tbody>
         <% for attribute in @doc.attributes: %>
         <tr>
-          <td class="attribute-name" id="<%= @doc.name %>-<%= attribute.name %>"><%= attribute.name %></td>
+          <td class="attribute-name" id="<%= @doc.name %>-<%= attribute.name %>">
+            <%= attribute.name %>
+            <% if attribute.extensionOf: %>
+            <span class="reference-extension-name"><%= attribute.extensionOf %></span>
+            <% end %>
+          </td>
           <td>
             <% if attribute.type: %>
             <span class="value-type"><%= attribute.type.typeExpression %></span>
@@ -146,21 +153,17 @@ layout: '2.html.eco'
             <%= @translate attribute.description %>
 
             <% if attribute.required: %>
-            <span style="font-size: 12px;"><% if @lang == "en": %>Required<% else: %>必須<% end %></span>
+            <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
             <% else: %>
-            <span style="font-size: 12px"><% if @lang == "en": %>Optional<% else: %>Optional<% end %></span>
+            <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
             <% end %>
 
             <% if attribute.initonly: %>
-            <span style="font-size: 12px;"><%= @translate '[en]Works only during initialization[/en][ja]初期化時のみ有効[/ja]' %></span>
-            <% end %>
-
-            <% if attribute.extensionOf: %>
-            <span class="extension-name"><%= @translate attribute.extensionOf %></span>
+            <span style="font-size: 12px;"><%= @translate '[en]Works only during initialization.[/en][ja]初期化時のみ有効[/ja]' %></span>
             <% end %>
 
             <% if attribute.deprecated != undefined: %>
-            <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
+            <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
             <% end %>
           </td>
         </tr>
@@ -225,13 +228,15 @@ layout: '2.html.eco'
       <tbody>
         <% for method in @doc.methods: %>
         <tr>
-          <td><a href="#method-<%= method.name %>"><%= method.signature %></a></td>
-          <td><%= @translate method.description %>
-            <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+          <td>
+            <a href="#method-<%= method.name %>"><%= method.signature %></a>
 
             <% if method.extensionOf: %>
-            <span class="extension-name"><%= @translate method.extensionOf %></span>
+            <span class="reference-extension-name"><%= method.extensionOf %></span>
             <% end %>
+          </td>
+          <td><%= @translate method.description %>
+            <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
           </td>
         </tr>
         <% end %>
@@ -268,7 +273,7 @@ layout: '2.html.eco'
             <% if event.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
             <% if event.extensionOf: %>
-            <span class="extension-name"><%= @translate event.extensionOf %></span>
+            <span class="reference-extension-name"><%= event.extensionOf %></span>
             <% end %>
           </td>
         </tr>
@@ -294,7 +299,7 @@ layout: '2.html.eco'
     <p><%= @translate method.description %></p>
 
     <% if method.extensionOf: %>
-    <span class="extension-name"><%= @translate method.extensionOf %></span>
+    <span class="reference-extension-name"><%= method.extensionOf %></span>
     <% end %>
 
     <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
@@ -354,7 +359,7 @@ layout: '2.html.eco'
     <p><%= @translate event.description %></p>
 
     <% if event.extensionOf: %>
-    <span class="extension-name"><%= @translate event.extensionOf %></span>
+    <span class="reference-extension-name"><%= event.extensionOf %></span>
     <% end %>
 
     <% if event.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
