@@ -1,0 +1,1694 @@
+---
+page: 'css'
+title: 'Find CSS Components You Need'
+reference: true
+layout: '2.html.eco'
+---
+
+<div class="content" style="width: 400px">
+  <h2 class="doc-page-header">CSS Components</h2>
+
+  <div class="css-component-showcase-frame-wrapper">
+    <div class="css-component-showcase-frame">
+      <div class="css-component-showcase-frame-inner">
+        <div class="css-component-showcase-frame-placeholder">EMPTY</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="css-component">
+    <h3>Switch</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Switch</div> 
+    </div>
+
+    <br>
+
+    <ul class="list">
+      <li class="list__header">Share</li>
+
+      <li class="list__item">
+        <i class="fa fa-facebook fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Facebook
+        
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+
+      <li class="list__item">
+        <i class="fa fa-twitter fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Twitter
+        
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" checked>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+
+      <li class="list__item">
+        <i class="fa fa-tumblr-square fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Tumblr
+        
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+
+      <li class="list__item">
+        <i class="fa fa-share-alt fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Other
+        
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input" disabled>
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+    </ul>
+
+    <% end %>
+
+    <%- @cssExample -> %>
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle"></div>
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle"></div>
+    </label>
+
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle"></div>
+    </label>
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Range</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Range</div> 
+    </div>
+
+    <br>
+
+    <ul class="list">
+      <li class="list__item" style="text-align: center;">
+        <div style="float: left"><i class="fa fa-volume-down fa-fw"></i></div>
+        <div style="float: right"><i class="fa fa-volume-up fa-fw"></i></div>
+        <input type="range" value="50" class="range" style="margin-top: 6px; width: 220px;">
+      </li>
+
+      <li class="list__item" style="text-align: center;">
+        <div style="float: left"><i class="fa fa-umbrella fa-fw" style="opacity: 0.3"></i></div>
+        <div style="float: right"><i class="fa fa-umbrella fa-fw"></i></div>
+        <input type="range" value="12" class="range" style="margin-top: 6px; width: 220px;">
+      </li>
+
+      <li class="list__item" style="text-align: center;">
+        <div style="float: left"><i class="fa fa-sun-o fa-fw" style="opacity: 0.3"></i></div>
+        <div style="float: right"><i class="fa fa-sun-o fa-fw"></i></div>
+        <input type="range" value="80" class="range" style="margin-top: 6px; width: 220px;">
+      </li>
+
+      <li class="list__item" style="text-align: center;">
+        <div style="float: left"><i class="fa fa-bolt fa-fw" style="opacity: 0.3"></i></div>
+        <div style="float: right"><i class="fa fa-bolt fa-fw"></i></div>
+        <input type="range" value="32" class="range" style="margin-top: 6px; width: 220px;">
+      </li>
+
+      <li class="list__item" style="text-align: center;">
+        <div style="float: left"><i class="fa fa-moon-o fa-fw" style="opacity: 0.3"></i></div>
+        <div style="float: right"><i class="fa fa-moon-o fa-fw"></i></div>
+        <input type="range" value="68" class="range" style="margin-top: 6px; width: 220px;">
+      </li>
+
+    </ul>
+    <br>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <input type="range" class="range">
+    <input type="range" class="range" disabled>
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Checkbox</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Checkbox</div> 
+    </div>
+
+    <ul class="list" style="border-top: none;">
+      <li class="list__header">Sports</li>
+
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox" checked="checked">
+          <div class="checkbox__checkmark
+            checkbox--list-item__checkmark"></div>
+          Baseball
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox" checked="checked">
+          <div class="checkbox__checkmark
+            checkbox--list-item__checkmark"></div>
+          Bascketball
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark
+            checkbox--list-item__checkmark"></div>
+          Golf
+        </label>
+      </li>
+
+      <li class="list__header">Food</li>
+
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked="checked">
+          <div class="checkbox__checkmark checkbox--noborder__checkmark
+            checkbox--list-item__checkmark"></div>
+          Hamburger
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox">
+          <div class="checkbox__checkmark checkbox--noborder__checkmark
+            checkbox--list-item__checkmark"></div>
+          Beefsteak
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="checkbox checkbox--noborder checkbox--list-item">
+          <input type="checkbox" checked="checked">
+          <div class="checkbox__checkmark checkbox--noborder__checkmark
+            checkbox--list-item__checkmark"></div>
+          Spaghetti
+        </label>
+      </li>
+    </ul>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <label class="checkbox">
+      <input type="checkbox" checked="checked">
+      <div class="checkbox__checkmark"></div>
+      ON
+    </label><br>
+
+    <label class="checkbox">
+      <input type="checkbox">
+      <div class="checkbox__checkmark"></div>
+      OFF
+    </label>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <label class="checkbox checkbox--noborder">
+      <input type="checkbox" checked="checked">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      ON
+    </label><br>
+
+    <label class="checkbox checkbox--noborder">
+      <input type="checkbox">
+      <div class="checkbox__checkmark checkbox--noborder__checkmark"></div>
+      OFF
+    </label>
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Radio Button</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Radio Button</div>
+    </div>
+
+    <br>
+
+    <ul class="list">
+      <li class="list__header">Browsers</li>
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="browser-choice" checked="checked">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Chrome
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="browser-choice">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Safari
+        </label>
+      </li>
+      
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="browser-choice">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Internet Explorer
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="browser-choice">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Opera
+        </label>
+      </li>
+
+      <li class="list__item list__item--tappable">
+        <label class="radio-button radio-button--list-item">
+          <input type="radio" name="browser-choice">
+          <div class="radio-button__checkmark radio-button--list-item__checkmark"></div>
+          Firefox
+        </label>
+      </li>
+    </ul>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <label class="radio-button">
+      <input type="radio" name="r" checked="checked">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label><br>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label><br>
+
+    <label class="radio-button">
+      <input type="radio" name="r">
+      <div class="radio-button__checkmark"></div>
+      Label
+    </label>
+    <% end %>
+  </div>
+
+
+  <div class="css-component">
+    <h3>Segment</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Segment</div> 
+    </div>
+
+    <br>
+
+    <div class="button-bar" style="width: 90%; margin: 0 auto;">
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-a" checked>
+        <button class="button-bar__button">One</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-a">
+        <button class="button-bar__button">Two</button>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="button-bar" style="width: 90%; margin: 0 auto;">
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-b">
+        <button class="button-bar__button">One</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-b" checked>
+        <button class="button-bar__button">Two</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-b">
+        <button class="button-bar__button">Three</button>
+      </div>
+
+    </div>
+
+    <br>
+
+    <div class="button-bar" style="width: 90%; margin: 0 auto;">
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-c">
+        <button class="button-bar__button">One</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-c">
+        <button class="button-bar__button">Two</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-c" checked>
+        <button class="button-bar__button">Three</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-c">
+        <button class="button-bar__button">Four</button>
+      </div>
+    </div>
+
+    <br>
+
+    <div class="button-bar" style="width: 90%; margin: 0 auto;">
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-d">
+        <button class="button-bar__button">One</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-d">
+        <button class="button-bar__button">Two</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-d">
+        <button class="button-bar__button">Three</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-d" checked>
+        <button class="button-bar__button">Four</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="showcase-d">
+        <button class="button-bar__button">Five</button>
+      </div>
+    </div>
+
+    <% end %>
+
+    <%- @cssExample -> %>
+    <div class="button-bar" style="width:280px;">
+      <div class="button-bar__item">
+        <input type="radio" name="segment-a" checked>
+        <button class="button-bar__button">One</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="segment-a">
+        <button class="button-bar__button">Two</button>
+      </div>
+
+      <div class="button-bar__item">
+        <input type="radio" name="segment-a">
+        <button class="button-bar__button">Three</button>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Notification</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Notification</div> 
+    </div>
+
+    <br>
+
+    <div style="text-align: center">
+      <span class="notification">1</span>
+      <span class="notification">10</span>
+      <span class="notification">999</span>
+    </div>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <span class="notification">1</span>
+    <span class="notification">10</span>
+    <span class="notification">999</span>
+    <% end %>
+  </div>
+
+
+  <div class="css-component">
+    <h3>Button</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__left"></div>
+      <div class="navigation-bar__center navigation-bar__title">Button</div>
+      <div class="navigation-bar__right"></div>
+    </div>
+
+    <div style="margin: 10px">
+      <button class="button">Button</button>
+    </div>
+
+    <div style="margin: 10px">
+      <button class="button button--cta">Button</button>
+    </div>
+
+    <div style="margin: 10px">
+      <button class="button button--outline">Button</button>
+    </div>
+
+    <div style="margin: 10px">
+      <button class="button button--quiet">Button</button>
+    </div>
+
+    <div style="margin: 10px">
+      <button class="button button--light">Button</button>
+    </div>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <button class="button">Button</button>
+    <button class="button button--cta">Button</button>
+    <button class="button button--outline">Button</button>
+    <button class="button button--quiet">Button</button>
+    <button class="button button--light">Button</button>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Large Buttons</h4>
+
+      <%- @cssShowcase -> %>
+      <div class="navigation-bar">
+        <div class="navigation-bar__left"></div>
+        <div class="navigation-bar__center navigation-bar__title">Button</div>
+        <div class="navigation-bar__right"></div>
+      </div>
+
+      <div style="margin: 10px">
+        <button class="button button--large">Button</button>
+      </div>
+
+      <div style="margin: 10px">
+        <button class="button button--large--cta">Button</button>
+      </div>
+
+      <div style="margin: 10px">
+        <button class="button button--large--quiet">Button</button>
+      </div>
+      <% end %>
+
+      <%- @cssExample -> %>
+      <button class="button button--large">Button</button><br>
+      <button class="button button--large--cta">Button</button><br>
+      <button class="button button--large--quiet">Button</button>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="css-component">
+    <h3>Button Bar</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Button Bar</div> 
+    </div>
+
+    <div style="margin: 10px">
+
+      <div class="button-bar" style="width: 100%; margin: 0 auto;">
+        <div class="button-bar__item">
+          <button class="button-bar__button">One</button>
+        </div>
+
+        <div class="button-bar__item">
+          <button class="button-bar__button">Two</button>
+        </div>
+
+        <div class="button-bar__item">
+          <button class="button-bar__button">Three</button>
+        </div>
+
+        <div class="button-bar__item">
+          <button class="button-bar__button">Four</button>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <div class="button-bar" style="width:280px;">
+      <div class="button-bar__item">
+        <button class="button-bar__button">One</button>
+      </div>
+
+      <div class="button-bar__item">
+        <button class="button-bar__button">Two</button>
+      </div>
+
+      <div class="button-bar__item">
+        <button class="button-bar__button">Three</button>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Toolbar</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Toolbar</div> 
+    </div>
+    <% end %>
+
+    <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Toolbar</div> 
+    </div>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Toolbar Buttons</h4>
+
+      <%- @cssShowcase -> %>
+      <div class="navigation-bar">
+
+        <div class="navigation-bar__left">
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-navicon"
+              style="font-size:32px; vertical-align:-6px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center navigation-bar__title">Toolbar Title</div> 
+
+        <div class="navigation-bar__right">
+          <span class="toolbar-button--quiet
+            navigation-bar__line-height">Label</span>
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="navigation-bar">
+        <div class="navigation-bar__left">
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-navicon"
+              style="font-size:32px; vertical-align:-6px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center">
+          Toolbar Buttons
+        </div>
+
+        <div class="navigation-bar__right">
+          <span class="toolbar-button--quiet
+            navigation-bar__line-height">Label</span>
+        </div>
+      </div>
+      <% end %>
+
+      <!--
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="navigation-bar">
+        <div class="navigation-bar__left">
+          <span class="toolbar-button--outline navigation-bar__line-height">
+            <i class="ion-navicon"
+              style="font-size:32px; vertical-align:-6px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center">
+          Toolbar
+        </div>
+
+        <div class="navigation-bar__right">
+          <span class="toolbar-button--outline
+            navigation-bar__line-height">Button</span>
+        </div>
+      </div>
+      <% end %>
+      -->
+    </div>
+
+    <div class="css-component">
+      <h4>Android-like Toolbar</h4>
+
+      <%- @cssShowcase -> %>
+      <div class="navigation-bar navigation-bar--android">
+
+        <div class="navigation-bar__left navigation-bar--android__left">
+          <span class="toolbar-button navigation-bar__line-height"
+            style="padding:0 5px 0 5px;">
+            <i class="ion-android-arrow-back" style="font-size:20px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center
+          navigation-bar--android__center navigation-bar__title">
+          Toolbar
+        </div>
+
+        <div class="navigation-bar__right navigation-bar--android__right">
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-share" style="font-size:20px;"></i>
+          </span>
+
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-more-vertical" style="font-size: 26px;"></i>
+          </span>
+        </div>
+
+      </div>
+      <% end %>
+
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="navigation-bar navigation-bar--android">
+        <div class="navigation-bar__left navigation-bar--android__left"></div> 
+
+        <div class="navigation-bar__center navigation-bar--android__center
+          navigation-bar__title navigation-bar--android__title">Toolbar</div> 
+
+        <div class="navigation-bar__right navigation-bar--android__right"></div> 
+      </div>
+      <% end %>
+
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="navigation-bar navigation-bar--android">
+        <div class="navigation-bar__left navigation-bar--android__left">
+          <span class="toolbar-button navigation-bar__line-height"
+            style="padding: 0 5px 0 5px;">
+            <i class="ion-android-arrow-back" style="font-size:20px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center
+          navigation-bar--android__center navigation-bar__title">
+          Toolbar
+        </div>
+
+        <div class="navigation-bar__right navigation-bar--android__right">
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-share" style="font-size:20px;"></i>
+          </span>
+
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-more-vertical" style="font-size: 26px;"></i>
+          </span>
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="navigation-bar navigation-bar--android">
+        <div class="navigation-bar__left navigation-bar--android__left">
+          <span class="toolbar-button navigation-bar__line-height"
+            style="padding: 0 5px 0 5px;">
+            <i class="ion-android-arrow-back" style="font-size:20px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center navigation-bar--android__center">
+          Toolbar
+        </div>
+
+        <div class="navigation-bar__right navigation-bar--android__right">
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-star" style="font-size:20px;"></i>
+          </span>
+
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-search" style="font-size:20px;"></i>
+          </span>
+
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-android-more-vertical" style="font-size:26px;"></i>
+          </span>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+
+    <div class="css-component">
+      <h4>Transparent Toolbar</h4>
+
+      <%- @cssShowcase -> %>
+      <div class="page" style="
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #dddddd 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffffff 0%,#dddddd 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffffff 0%,#dddddd 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ffffff 0%,#dddddd 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dddddd',GradientType=0 ); /* IE6-9 */
+        ">
+        <div class="navigation-bar navigation-bar--transparent">
+
+          <div class="navigation-bar__left">
+            <span class="toolbar-button--quiet navigation-bar__line-height">
+              <i class="ion-navicon"
+                style="font-size:32px; vertical-align:-6px;"></i>
+            </span>
+          </div>
+
+          <div class="navigation-bar__center
+            navigation-bar--transparent__center navigation-bar__title">
+            Transparent Toolbar
+          </div>
+
+          <div class="navigation-bar__right">
+            <span class="toolbar-button--quiet
+              navigation-bar__line-height">Label</span>
+          </div>
+
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="navigation-bar navigation-bar--transparent">
+        <div class="navigation-bar__left">
+          <span class="toolbar-button--quiet navigation-bar__line-height">
+            <i class="ion-navicon"
+              style="font-size:32px;vertical-align:-6px;"></i>
+          </span>
+        </div>
+
+        <div class="navigation-bar__center">
+          Transparent Toolbar
+        </div>
+
+        <div class="navigation-bar__right">
+          <span class="toolbar-button--quiet
+            navigation-bar__line-height">Label</span>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Bottom Toolbar</h4>
+
+      <%- @cssShowcase -> %>
+      <div class="navigation-bar">
+        <div class="navigation-bar__center navigation-bar__title">
+          Bottom Toolbar
+        </div>
+      </div>
+
+      <div class="bottom-bar" style="text-align: center">
+        <div class="bottom-bar__line-height" style="color: #4F81BB;">
+          <span style="padding: 0 16px; cursor: pointer;"><i class="ion-home" style="font-size: 30px;"></i></span>
+          <span style="padding: 0 16px; cursor: pointer;"><i class="ion-star" style="font-size: 30px;"></i></span>
+          <span style="padding: 0 16px; cursor: pointer;"><i class="ion-gear-a" style="font-size: 30px;"></i></span>
+          <span style="padding: 0 16px; cursor: pointer;"><i class="ion-trash-b" style="font-size: 30px;"></i></span>
+          <span style="padding: 0 16px; cursor: pointer;"><i class="ion-funnel" style="font-size: 30px;"></i></span>
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {wrapPage: true, minHeight: 70}, -> %>
+      <div class="bottom-bar" style="text-align: center">
+        <div class="bottom-bar__line-height">
+          Bottom Toolbar
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="css-component">
+    <h3>Tab Bar</h3>
+
+    <%- @cssShowcase -> %>
+
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Tab Bar</div> 
+    </div>
+
+    <br>
+
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="showcase-tabbar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+          <div class="tab-bar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="showcase-tabbar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+          <div class="tab-bar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="showcase-tabbar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+          <div class="tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+    <% end %>
+
+    <%- @cssExample {minHeight: 100, wrapPage: true}, -> %>
+    <div class="tab-bar">
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a" checked="checked">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-stop"></i>
+          <div class="tab-bar__label">One</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-record"></i>
+          <div class="tab-bar__label">Two</div>
+        </button>
+      </label>
+
+      <label class="tab-bar__item">
+        <input type="radio" name="tab-bar-a">
+        <button class="tab-bar__button">
+          <i class="tab-bar__icon ion-star"></i>
+          <div class="tab-bar__label">Three</div>
+        </button>
+      </label>
+    </div>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Text Tab Bar</h4>
+
+      <%- @cssExample {minHeight: 100, wrapPage: true}, -> %>
+      <div class="tab-bar">
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-c" checked="checked">
+          <button class="tab-bar__button">
+            <div class="tab-bar__label">One</div>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-c">
+          <button class="tab-bar__button">
+            <div class="tab-bar__label">Two</div>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-c">
+          <button class="tab-bar__button">
+            <div class="tab-bar__label">Three</div>
+          </button>
+        </label>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Icon Tab Bar</h4>
+
+      <%- @cssExample {minHeight: 100, wrapPage: true}, -> %>
+      <div class="tab-bar">
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-b" checked="checked">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-stop"></i>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-record"></i>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-star"></i>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-ios7-cloud-outline"></i>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="tab-bar-b">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-ios7-pie"></i>
+          </button>
+        </label>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Top Tab Bar</h4>
+
+      <%- @cssShowcase -> %>
+
+      <div class="tab-bar tab-bar--top tab-bar--top-border">
+        <label class="tab-bar__item tab-bar--top-border__item">
+          <input type="radio" name="showcase-top-tabbar-a" checked="checked">
+          <button class="tab-bar__button tab-bar--top-border__button">
+            Home
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--top-border__item">
+          <input type="radio" name="showcase-top-tabbar-a">
+          <button class="tab-bar__button tab-bar--top-border__button">
+            Comments
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--top-border__item">
+          <input type="radio" name="showcase-top-tabbar-a">
+          <button class="tab-bar__button tab-bar--top-border__button">
+            Activity
+          </button>
+        </label>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="bottom-bar__line-height" style="text-align: center; color: gray;">
+          Top Tab Bar
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {minHeight: 100, wrapPage: true}, -> %>
+      <div class="tab-bar tab-bar--top">
+        <label class="tab-bar__item">
+          <input type="radio" name="top-tab-bar-a" checked="checked">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-stop"></i>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="top-tab-bar-a">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-record"></i>
+          </button>
+        </label>
+
+        <label class="tab-bar__item">
+          <input type="radio" name="top-tab-bar-a">
+          <button class="tab-bar__button">
+            <i class="tab-bar__icon ion-star"></i>
+          </button>
+        </label>
+      </div>
+      <% end %>
+
+      <%- @cssExample {minHeight: 100, wrapPage: true}, -> %>
+      <div class="tab-bar tab-bar--top tab-bar--top-border">
+        <label class="tab-bar__item tab-bar--top-border__item">
+          <input type="radio" name="top-tab-bar-b" checked="checked">
+          <button class="tab-bar__button tab-bar--top-border__button">
+            Home
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--top-border__item">
+          <input type="radio" name="top-tab-bar-b">
+          <button class="tab-bar__button tab-bar--top-border__button">
+            Comments
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--top-border__item">
+          <input type="radio" name="top-tab-bar-b">
+          <button class="tab-bar__button tab-bar--top-border__button">
+            Activity
+          </button>
+        </label>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="css-component">
+    <h3>List</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">List</div> 
+    </div>
+
+    <br>
+
+    <ul class="list">
+      <li class="list__header">Header</li>
+      <li class="list__item">Item</li>
+      <li class="list__item">
+        Item
+        <label class="switch switch--list-item">
+          <input type="checkbox" class="switch__input">
+          <div class="switch__toggle"></div>
+        </label>
+      </li>
+      <li class="list__header">Header</li>
+      <li class="list__item list__item--chevron">Item</li>
+      <li class="list__item list__item--chevron">Item</li>
+    </ul>
+
+    <ul class="list list--inset" style="margin-top: 10px">
+      <li class="list__item">Item</li>
+      <li class="list__item list__item--chevron">Item</li>
+      <li class="list__item list__item--chevron">Item</li>
+    </ul>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <ul class="list">
+      <li class="list__item">Item</li>
+      <li class="list__item">Item</li>
+    </ul>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Category Header</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__header">Header</li>
+        <li class="list__item">Item</li>
+        <li class="list__header">Header</li>
+        <li class="list__item">Item</li>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Tappale List</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__item list__item--tappable">Tappable Item</li>
+        <li class="list__item list__item--tappable">Tappable Item</li>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Chevron</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__item list__item--chevron">Chevron Item</li>
+        <li class="list__item list__item--chevron">Chevron Item</li>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Inset List</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list list--inset">
+        <li class="list__item list__item--inset">List Item</li>
+        <li class="list__item list__item--inset">List Item</li>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>List and Checkbox</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__item list__item--tappable">
+          <label class="checkbox checkbox--list-item">
+            <input type="checkbox">
+            <div class="checkbox__checkmark
+              checkbox--list-item__checkmark"></div>
+            Checkbox
+          </label>
+        </li>
+
+        <li class="list__item list__item--tappable">
+          <label class="checkbox checkbox--list-item">
+            <input type="checkbox" checked>
+            <div class="checkbox__checkmark
+              checkbox--list-item__checkmark"></div>
+            Checkbox
+          </label>
+        </li>
+      </ul>
+      <% end %>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__item list__item--tappable">
+          <label class="checkbox
+            checkbox--noborder checkbox--list-item">
+            <input type="checkbox">
+            <div class="checkbox__checkmark 
+              checkbox--noborder checkbox--list-item__checkmark"></div>
+            Checkbox
+          </label>
+        </li>
+
+        <li class="list__item list__item--tappable">
+          <label class="checkbox
+            checkbox--noborder checkbox--list-item">
+            <input type="checkbox" checked>
+            <div class="checkbox__checkmark
+              checkbox--noborder checkbox--list-item__checkmark"></div>
+            Checkbox
+          </label>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>List and Radio Button</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__item list__item--tappable">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" name="b" checked="checked">
+            <div class="radio-button__checkmark
+              radio-button--list-item__checkmark"></div>
+            Radio Button
+          </label>
+        </li>
+
+        <li class="list__item list__item--tappable">
+          <label class="radio-button radio-button--list-item">
+            <input type="radio" name="b">
+            <div class="radio-button__checkmark
+              radio-button--list-item__checkmark"></div>
+            Radio Button
+          </label>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>List and Switch</h4>
+
+      <%- @cssExample -> %>
+      <ul class="list">
+        <li class="list__item">
+          Label
+          <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle"></div>
+          </label>
+        </li>
+
+        <li class="list__item">
+          Label
+          <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input">
+            <div class="switch__toggle"></div>
+          </label>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="css-component">
+    <h3>Text Input</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Text Input</div> 
+    </div>
+
+    <div style="text-align: center; padding: 10px 0;">
+      <input type="text" class="text-input" placeholder="Title" value="" style="width: 95%;">
+    </div>
+    <div style="text-align: center; padding: 0 0 10px 0;">
+      <textarea class="textarea"
+        style="width:95%; height:70px;"
+        placeholder="Message"></textarea>
+    </div>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <input type="text" class="text-input" placeholder="text" value=""><br>
+    <input type="text" class="text-input" placeholder="text" value="" disabled>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Underbar Text Input</h4>
+
+      <%- @cssExample -> %>
+      <input type="text" class="text-input text-input--underbar"
+        placeholder="underbar text" value="">
+      <% end %>
+
+      <%- @cssShowcase -> %>
+      <div class="navigation-bar">
+        <div class="navigation-bar__center navigation-bar__title">Text Input</div> 
+      </div>
+
+      <div style="text-align: center; padding: 50px 0 10px 0;">
+        <input type="text" class="text-input text-input--underbar"
+          placeholder="Name" value="" style="width: 85%;">
+      </div>
+
+      <div style="text-align: center; padding: 10px 0 10px 0;">
+        <input type="text" class="text-input text-input--underbar"
+          placeholder="Email" value="" style="width: 85%;">
+      </div>
+
+      <div style="text-align: center; padding: 20px 0 10px 0;">
+        <button class="button button--large" style="width: 85%; margin: 0 auto;">Submit</button>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Transparent Text Input</h4>
+
+      <%- @cssExample -> %>
+      <input type="text" class="text-input text-input--transparent"
+        placeholder="transparent text" value="">
+      <% end %>
+
+      <%- @cssShowcase -> %>
+      <div class="navigation-bar">
+        <div class="navigation-bar__center navigation-bar__title">Text Input</div> 
+      </div>
+
+      <ul class="list" style="border-top: none;">
+        <li class="list__item">
+          <input type="text" class="text-input text-input--transparent"
+            style="width:100%; margin-top:4px;" placeholder="Name">
+        </li>
+        <li class="list__item">
+          <input type="text" class="text-input text-input--transparent"
+            style="width:100%; margin-top:4px;" placeholder="Email">
+        </li>
+        <li class="list__item">
+          <textarea class="textarea textarea--transparent" style="width:100%;height:70px;margin-top:4px;" placeholder="Message"></textarea>
+        </li>
+      </ul>
+
+      <div style="padding: 10px">
+        <button class="button button--large">Submit</button>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Search Input</h4>
+
+      <%- @cssExample -> %>
+      <input type="search" class="search-input"
+        placeholder="Search..." style="width: 200px;">
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Textarea</h4>
+
+      <%- @cssExample -> %>
+      <textarea class="textarea" rows="3" placeholder="Textarea"></textarea>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Transparent Textarea</h4>
+
+      <%- @cssExample -> %>
+      <textarea class="textarea textarea--transparent"
+        rows="3" placeholder="Textarea"></textarea>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="css-component">
+    <h3>Alert</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__center navigation-bar__title">Alert</div> 
+    </div>
+
+    <div class="alert-dialog-mask"></div>
+
+    <div class="alert-dialog">
+      <div class="alert-dialog-title" style="margin-bottom: 20px;">
+        "AudioTest" Would Like to Access the Microphone
+      </div>
+
+      <div class="alert-dialog-footer alert-dialog-footer--one">
+        <button class="alert-dialog-button
+          alert-dialog-button--one">Don't Allow</button>
+
+        <button class="alert-dialog-button alert-dialog-button--primal
+          alert-dialog-button--one">OK</button>
+      </div>
+    </div>
+    <% end %>
+
+    <%- @cssExample {minHeight: 200}, -> %>
+    <div class="alert-dialog-mask"></div>
+
+    <div class="alert-dialog">
+      <div class="alert-dialog-title">Alert</div>
+
+      <div class="alert-dialog-content">
+        Hello World!
+      </div>
+
+      <div class="alert-dialog-footer">
+        <button class="alert-dialog-button
+          alert-dialog-button--primal">OK</button>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Simple Alert</h4>
+
+      <%- @cssExample {minHeight: 200}, -> %>
+      <div class="alert-dialog-mask"></div>
+
+      <div class="alert-dialog">
+        <div class="alert-dialog-content">
+          <p>Hello World!</p>
+        </div>
+
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button
+            alert-dialog-button--primal">OK</button>
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {minHeight: 200}, -> %>
+      <div class="alert-dialog-mask"></div>
+
+      <div class="alert-dialog">
+        <div class="alert-dialog-content">
+          Loading...
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Alert Buttons</h4>
+
+      <%- @cssExample {minHeight: 200}, -> %>
+      <div class="alert-dialog-mask"></div>
+
+      <div class="alert-dialog">
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button">Cancel</button>
+          <button class="alert-dialog-button
+            alert-dialog-button--primal">OK</button>
+        </div>
+      </div>
+      <% end %>
+
+      <%- @cssExample {minHeight: 200}, -> %>
+      <div class="alert-dialog-mask"></div>
+
+      <div class="alert-dialog">
+        <div class="alert-dialog-title">Alert</div>
+
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer alert-dialog-footer--one">
+
+          <button class="alert-dialog-button
+            alert-dialog-button--one">Left</button>
+
+          <button class="alert-dialog-button alert-dialog-button--primal
+            alert-dialog-button--one">Center</button>
+
+          <button class="alert-dialog-button
+            alert-dialog-button--one">Right</button>
+
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Android-like Alert</h4>
+
+      <%- @cssExample {minHeight: 200}, -> %>
+      <div class="alert-dialog-mask"></div>
+
+      <div class="alert-dialog alert-dialog--android">
+        <div class="alert-dialog-title alert-dialog-title--android">
+          Alert
+        </div>
+
+        <div class="alert-dialog-content alert-dialog-content--android">
+          Hello World!
+        </div>
+
+        <div class="alert-dialog-footer alert-dialog-footer--one">
+          <button class="alert-dialog-button
+            alert-dialog-button--one">Cancel</button>
+
+          <button class="alert-dialog-button
+            alert-dialog-button--primal alert-dialog-button--one">OK</button>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="css-component">
+    <h3>Dialog</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="dialog-mask"></div>
+
+    <div class="dialog" style="min-height: 200px; width: 96%">
+      <div class="page">
+        <div class="navigation-bar">
+          <div class="navigation-bar__left"></div>
+
+          <div class="navigation-bar__center navigation-bar__title">
+            Dialog
+          </div>
+
+          <div class="navigation-bar__right">
+            <span class="toolbar-button--quiet
+              navigation-bar__line-height">Close</span>
+          </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 40px; color: gray; font-size: 15px;">
+          Contents
+        </p>
+
+        <div class="bottom-bar" style="text-align: center">
+          <div class="bottom-bar__line-height" style="color: #4F81BB;">
+            <span style="padding: 0 30px; cursor: pointer;"><i class="ion-home" style="font-size: 30px;"></i></span>
+            <span style="padding: 0 30px; cursor: pointer;"><i class="ion-star" style="font-size: 30px;"></i></span>
+            <span style="padding: 0 30px; cursor: pointer;"><i class="ion-gear-a" style="font-size: 30px;"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+
+    <%- @cssExample {minHeight: 200}, -> %>
+    <div class="dialog-mask"></div>
+
+    <div class="dialog" style="height: 140px;">
+      <div class="page">
+        <p style="text-align: center; 
+          margin-top: 54px; color: gray;">
+          Content
+        </p>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Popover</h3>
+
+    <%- @cssShowcase -> %>
+    <div class="navigation-bar">
+      <div class="navigation-bar__left"></div>
+      <div class="navigation-bar__center navigation-bar__title">Popover</div> 
+      <div class="navigation-bar__right">
+        <span class="toolbar-button--quiet
+          navigation-bar__line-height">Label</span>
+      </div>
+    </div>
+
+    <div class="popover-mask"></div>
+
+    <div class="popover popover--down" style="top: 60px; right: 10px; width: 180px;">
+      <div class="popover__top-arrow" style="margin-left: 60px;"></div>
+
+      <div class="popover__content" style="min-height: 0px;">
+
+        <ul class="list list--noborder">
+          <li class="list__item list__item--tappable">
+            <label class="radio-button radio-button--list-item">
+              <input type="radio" name="popover-radio-button" checked>
+              <div class="radio-button__checkmark
+                radio-button--list-item__checkmark"></div>
+              Red
+            </label>
+          </li>
+
+          <li class="list__item list__item--tappable">
+            <label class="radio-button radio-button--list-item">
+              <input type="radio" name="popover-radio-button">
+              <div class="radio-button__checkmark
+                radio-button--list-item__checkmark"></div>
+              Green
+            </label>
+          </li>
+
+          <li class="list__item list__item--tappable">
+            <label class="radio-button radio-button--list-item">
+              <input type="radio" name="popover-radio-button">
+              <div class="radio-button__checkmark
+                radio-button--list-item__checkmark"></div>
+              Blue
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <% end %>
+
+    <%- @cssExample {minHeight: 150}, -> %>
+    <div class="popover-mask"></div>
+
+    <div class="popover popover--down" style="top: 20px; left: 165px;">
+      <div class="popover__top-arrow"></div>
+
+      <div class="popover__content">
+        <div style="text-align:center;
+          opacity: 0.4; margin-top: 40px">Content</div>
+      </div>
+    </div>
+    <% end %>
+
+    <div class="css-component">
+      <h4>Up Popover</h4>
+
+      <%- @cssExample {minHeight: 150}, -> %>
+      <div class="popover-mask"></div>
+
+      <div class="popover popover--up" style="bottom: 20px; left: 165px;">
+        <div class="popover__bottom-arrow"></div>
+
+        <div class="popover__content">
+          <div style="text-align: center;
+            opacity: 0.4; margin-top: 40px">Content</div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Left Popover</h4>
+
+      <%- @cssExample {minHeight: 150}, -> %>
+      <div class="popover-mask"></div>
+
+      <div class="popover popover--left" style="top: 20px; left: 20px;">
+        <div class="popover__left-arrow"></div>
+
+        <div class="popover__content">
+          <div style="text-align: center;
+            opacity: 0.4; margin-top: 40px">Content</div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Right Popover</h4>
+
+      <%- @cssExample {minHeight: 150}, -> %>
+      <div class="popover-mask"></div>
+
+      <div class="popover popover--left" style="top: 20px; right: 20px;">
+        <div class="popover__right-arrow"></div>
+
+        <div class="popover__content">
+          <div style="text-align: center;
+            opacity: 0.4; margin-top: 40px">Content</div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="css-component">
+      <h4>Android-like Popover</h4>
+
+      <%- @cssExample {minHeight: 150}, -> %>
+      <div class="popover-mask"></div>
+
+      <div class="popover popover--up popover" style="top: 10px; right: 10px;">
+        <div class="popover__content popover__content--android">
+          <div style="text-align: center;
+            opacity: 0.4; margin-top: 40px">Content</div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+
+  </div>
+
+</div>
+
+<script defer src="/scripts/cssref.js"></script>

@@ -43,7 +43,8 @@ module.exports = function(lang) {
           file.doc = json;
           file.title = json.name;
           file.name = json.name;
-          file.componentCategory = json.categories
+          file.is2 = true;
+          file.componentCategory = json.categories.join(', ');
 
           var name = '2/reference/' + json.name + '.html';
           files[name] = file;
