@@ -23,14 +23,6 @@ var nodePath = require('path');
 
 module.exports = function(lang, isStaging) {
   return {
-    /*
-    apiref: function(done) {
-      metalsmith(__dirname + '/../')
-        .clean(false)
-        .source('./src/documents_' + lang)
-        .metadata(require('../config.js')(lang, isStaging))
-        .use(require('./2-api-docs')(lang))
-    },*/
 
     site: function(done) {
       metalsmith(__dirname + '/../')
@@ -40,6 +32,7 @@ module.exports = function(lang, isStaging) {
         .use(draft())
         .use(require('./helpers')())
         .use(require('./import-api-docs')(lang))
+        .use(require('./2-api-docs')(lang))
         .use(require('./patterns-collection')(lang))
         .use(collections({
           components: {
@@ -58,7 +51,7 @@ module.exports = function(lang, isStaging) {
           var dict = {};
           for (var path in files) {
             var file = files[path];
-            if (file.componentCategory) {
+            if (file.componentCategory && typeof file.componentCategory === 'string') {
               file.componentCategory.split(/, */).forEach(function(category) {
                 if (!dict[category]) {
                   dict[category] = [];
@@ -80,7 +73,6 @@ module.exports = function(lang, isStaging) {
 
           metalsmith.metadata().cssToc = cssToc;
         })
-        .use(require('./2-api-docs')(lang))
         .use(currentPath())
         .use(branch('!robots.txt')
           .use(layouts({

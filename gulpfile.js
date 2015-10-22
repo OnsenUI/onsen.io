@@ -103,6 +103,7 @@ gulp.task('serve', ['generate'], function() {
     'src/documents_' + lang + '/**/*',
     'OnsenUI/build/docs/' + lang + '/partials/*/*.html',
     'src/layouts/*',
+    'src/misc/*',
     'src/partials/*',
     'src/files/**/*',
   ], options, function() {

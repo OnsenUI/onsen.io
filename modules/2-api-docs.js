@@ -40,7 +40,7 @@ module.exports = function(lang) {
             throw error;
           }
 
-          file.api = json;
+          file.doc = json;
           file.title = json.name;
           file.name = json.name;
           file.componentCategory = json.categories
