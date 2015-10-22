@@ -228,6 +228,35 @@ module.exports = function() {
 
       getAlternateLang: function() {
         return this.lang === 'en' ? 'ja' : 'en';
+      },
+
+      translate: function(message) {
+
+        var lang = this.lang;
+
+        if (typeof message !== 'string') {
+          return message;
+        }
+
+        // Parse string
+        if (message.indexOf('[' + lang + ']') == -1) {
+
+          if (lang === 'ja') {
+            // Change to English if the specified locale is not found
+            lang = 'en';
+          } else {
+            return '';
+          }
+        }
+
+        // Pull out part of string
+        var regex = lang === 'en' ?  /\[en]((.|\r|\n)*)\[\/en]/m : /\[ja]((.|\r|\n)*)\[\/ja]/m;
+        var match;
+        if (match = regex.exec(message)) {
+          return match[1];
+        }
+
+        return message;
       }
     };
 
