@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <% if @page == 'css': %>
-  <link rel="stylesheet" href="<%= @rootUrl %>reference/onsen-css-components.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>2/reference/onsen-css-components.css">
   <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/ionicons/css/ionicons.min.css">
   <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/font_awesome/css/font-awesome.min.css">
   <% end %>
