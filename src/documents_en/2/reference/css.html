@@ -39,6 +39,52 @@ layout: '2.html.eco'
     </label>
       
     <% end %>
+
+    <%- @cssShowcase -> %>
+    <div class="page--material">
+      <div class="navigation-bar navigation-bar--material">
+        <div class="navigation-bar__left navigation-bar--material__left"></div> 
+        <div class="navigation-bar__center navigation-bar--material__center">Material Switch</div> 
+        <div class="navigation-bar__right navigation-bar--material__right"></div> 
+      </div>
+
+      <br>
+
+      <ul class="list list--material">
+        <li class="list__item list__item--material">
+          <label class="switch switch--material" style="float: right">
+            <input type="checkbox" class="switch__input switch--material__input" checked>
+            <div class="switch__toggle switch--material__toggle"></div>
+          </label>
+
+          Orange
+          <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+        </li>
+
+        <li class="list__item list__item--material">
+          <label class="switch switch--material" style="float: right">
+            <input type="checkbox" class="switch__input switch--material__input">
+            <div class="switch__toggle switch--material__toggle"></div>
+          </label>
+
+          Pear
+          <div style="opacity:0.7;font-size:14px;margin-top:4px;">Funny-shaped fruit.</div>
+        </li>
+
+        <li class="list__item list__item--material">
+          <label class="switch switch--material" style="float: right">
+            <input type="checkbox" class="switch__input switch--material__input">
+            <div class="switch__toggle switch--material__toggle"></div>
+          </label>
+
+          Apple
+        </li>
+      </ul>
+
+    </div>
+
+    <% end %>
+
   </div>
 
   <div class="css-component">
