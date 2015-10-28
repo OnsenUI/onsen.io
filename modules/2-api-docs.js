@@ -32,7 +32,7 @@ module.exports = function(lang) {
         } else if (minimatch(path, '**/object/*.json')) {
           templatePath = 'src/misc/object-reference.html';
         } else {
-          throw new Error();
+          throw new Error('Invalid path: ' + path);
         }
 
         metalsmith.readFile(__dirname + '/../' + templatePath, function(error, file) {
