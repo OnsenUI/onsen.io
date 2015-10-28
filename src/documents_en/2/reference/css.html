@@ -144,6 +144,20 @@ layout: '2.html.eco'
   </div>
 
   <div class="css-component">
+    <h3>Material Button</h3>
+
+    <%- @cssExample -> %>
+    <button class="button button--material">BUTTON</button>
+    <button class="button button--material" disabled>DISABLED</button>
+    <% end %>
+
+    <%- @cssExample -> %>
+    <button class="button button--material--flat">BUTTON</button>
+    <button class="button button--material--flat" disabled>DISABLED</button>
+    <% end %>
+  </div>
+
+  <div class="css-component">
     <h3>Material Input</h3>
 
     <%- @cssExample -> %>
