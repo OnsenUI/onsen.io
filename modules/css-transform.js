@@ -2,13 +2,15 @@ var postcss = require('postcss');
 var fs = require('fs');
 
 var transform = postcss(function(css) {
-  css.eachRule(function (rule) {
+  css.walkRules(function (rule) {
     if (rule.selector === 'body' || rule.selector === 'html') {
-      rule.removeSelf();
+      rule.remove();
     } else {
-      rule.selector = rule.selector.split(/,/).map(function(selector) {
-        return '.ons-css ' + selector;
-      }).join(', ');
+      if (!(rule.parent.type === 'atrule' && rule.parent.name.match(/^(-o-|-moz-|-webkit-)?keyframes$/))) {
+        rule.selectors = rule.selectors.map(function(selector) {
+          return '.ons-css ' + selector;
+        });
+      }
     }
   });
 });
