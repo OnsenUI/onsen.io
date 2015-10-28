@@ -27,9 +27,9 @@ module.exports = function(lang) {
 
         var templatePath;
 
-        if (minimatch(path, '**/directive/*.json')) {
+        if (path.match(/directive\/[-._a-zA-Z0-9]+?.json$/)) {
           templatePath = 'src/misc/element-reference.html';
-        } else if (minimatch(path, '**/object/*.json')) {
+        } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
           templatePath = 'src/misc/object-reference.html';
         } else {
           throw new Error('Invalid path: ' + path);
