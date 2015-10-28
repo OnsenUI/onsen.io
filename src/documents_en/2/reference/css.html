@@ -92,18 +92,17 @@ layout: '2.html.eco'
   <div class="css-component">
     <h3>Material Progress Bar</h3>
 
+    <!--
     <%- @cssExample -> %>
-    <div class="progress-bar">
+    <div class="progress-bar progress-bar--determinate">
       <div class="progress-bar__primary"></div>
       <div class="progress-bar__secondary"></div>
     </div>
     <% end %>
+    -->
 
     <%- @cssExample -> %>
-    <div class="progress-bar progress-bar--indeterminate">
-      <div class="progress-bar__primary"></div>
-      <div class="progress-bar__secondary"></div>
-    </div>
+    <div class="progress-bar progress-bar--indeterminate"></div>
     <% end %>
   </div>
 
@@ -111,10 +110,6 @@ layout: '2.html.eco'
     <h3>Progress Circle</h3>
 
     <%- @cssExample -> %>
-      <svg class="progress-circular">
-        <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="10"/>
-      </svg>
-
       <svg class="progress-circular">
         <circle class="progress-circular__primary" cx="50%" cy="50%" r="40%" fill="none" stroke-width="10%" stroke-miterlimit="20"/>
       </svg>
