@@ -7,7 +7,7 @@ $(function() {
     showcases.css({
       transform: 
         'translateY(-' +
-        (Math.round(showcases.height() / 2) + 1) +
+        (Math.round(showcases.height() / 2) - 1) +
         'px)'
     });
     showcaseFrame.css({

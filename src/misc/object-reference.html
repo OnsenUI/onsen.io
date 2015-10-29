@@ -1,0 +1,316 @@
+---
+page: 'reference-detail'
+needHelp: true
+reference: true
+docCategory: 'js'
+layout: '2.html.eco'
+---
+
+<div class="content"><div class="reference-container">
+  <div><a href="/2/reference/javascript.html">&lt; Back</a></div>
+
+  <h2><%= @doc.name %></h2>
+
+  <% if @doc.extensionOf: %>
+  <span class="reference-extension-name"><%= @doc.extensionOf %></span>
+  <% end %>
+
+  <section class="reference-description">
+    <p><%= @translate @doc.description %></p>
+
+    <% if @doc.deprecated != undefined: %>
+    <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
+    <% end %>
+  </section>
+
+  <ul class="reference-quick-navi">
+    <% if @doc.examples && @doc.examples[0]: %>
+    <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
+    <% end %>
+
+    <% if @doc.codepen: %>
+    <li><a href="#example"><%= @translate '[en]Live Example[/en][ja]実例[/ja]' %></a></li>
+    <% end %>
+
+    <% if @doc.methods.length > 0: %>
+    <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
+    <% end %>
+
+    <% if @doc.events.length > 0: %>
+    <li><a href="#events-summary"><%= @translate '[en]Events[/en][ja]イベント[/ja]' %></a></li>
+    <% end %>
+
+    <% if @doc.guides or @doc.seealsos: %>
+    <li><a href="#seealso"><%= @translate '[en]See Also[/en][ja]関連情報[/ja]' %></a></li>
+    <% end %>
+
+    <li><a href="#discussion"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
+  </ul>
+
+  <% if @doc.examples && @doc.examples[0]: %>
+    <section>
+      <h3 id="usage">
+        <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
+      <pre><code class="xml"><%= @doc.examples[0] %></code></pre>
+    </section>
+  <% end %>
+
+  <% if @doc.note: %>
+  <section class="reference-note">
+    <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%= @translate @doc.note %></p>
+  </section>
+  <% end %>
+
+  <% if @doc.codepen: %>
+  <h3 id="example">
+    <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <% if @doc.codepen.isWide: %>
+  <div style="height: 480px; width: 100%;" class="codepen-wrapper">
+  <% else: %>
+  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
+  <% end %>
+    <p data-height="480" data-theme-id="11531" data-slug-hash="<%= @doc.codepen.id %>" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/<%= @doc.codepen.id %>/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+  </div>
+
+  <div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/full/<%= @doc.codepen.id %>/" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  <% end %>
+
+
+  <% if @doc.guides or @doc.seealsos: %>
+  <h3 id="seealso">
+    <% if @lang == "en": %>See also<% else: %>関連情報<% end %>
+    <a href="#seealso" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <ul class="seealso">
+    <% if @doc.guides: %>
+      <% for guide in @doc.guides: %>
+        <li class="guide"><a href="/guide/overview.html#<%= guide.name %>"><%= @translate guide.description %></a></li>
+      <% end %>
+    <% end %>
+    <% if @doc.seealsos: %>
+      <% for seealso in @doc.seealsos: %>
+        <li class="seealso"><a href="<%= seealso.name %>.html"><%= @translate seealso.description %></a></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <!-- methods summary -->
+  <% if @doc.methods.length > 0: %>
+  <section>
+    <h3 id="methods-summary">
+      <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Signature</th>
+          <th>Description</th>
+          <% else: %>
+          <th>シグネチャ</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for method in @doc.methods: %>
+        <tr>
+          <td>
+            <a href="#method-<%= method.name %>"><%= method.signature %></a>
+
+            <% if method.extensionOf: %>
+            <span class="reference-extension-name"><%= method.extensionOf %></span>
+            <% end %>
+          </td>
+          <td><%= @translate method.description %>
+            <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end methods summary -->
+
+  <!-- events summary -->
+  <% if @doc.events.length > 0: %>
+  <section>
+    <h3 id="events-summary">
+      <% if @lang == "en": %>Events Summary<% else: %>イベント概要<% end %>
+      <a href="#events-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for event in @doc.events: %>
+        <tr>
+          <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
+          <td><%= @translate event.description %>
+            <% if event.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div><% end %>
+
+            <% if event.extensionOf: %>
+            <span class="reference-extension-name"><%= event.extensionOf %></span>
+            <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end events summary -->
+
+
+  <!-- methods details -->
+  <% if @doc.methods.length > 0: %>
+  <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
+  <% for method in @doc.methods: %>
+  <section class="method-detail">
+    <h4 id="method-<%= method.name %>">
+      <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.typeExpression %></span><% end %>
+
+      <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p><%= @translate method.description %></p>
+
+    <% if method.extensionOf: %>
+    <span class="reference-extension-name"><%= method.extensionOf %></span>
+    <% end %>
+
+    <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+
+    <% if method.returns and method.returns.description: %>
+    <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%= @translate method.returns.description %></p>
+    <% end %>
+
+    <% if method.params: %>
+    <!-- method parameter -->
+    <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for param in method.params: %>
+        <tr>
+          <td><span class="parameter-name"><%= param.name %></span></td>
+          <td class="value-type"><%= param.typeExpression %></td>
+          <td><%= @translate param.description %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <!-- end method parameter -->
+    <% end %>
+  </section>
+
+  <% end %>
+
+  <% end %>
+  <!-- end methods -->
+
+
+  <!-- events -->
+  <% if @doc.events.length > 0: %>
+  <h3><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
+  <% for event in @doc.events: %>
+  <section class="event-detail">
+    <h4 id="event-<%= event.name %>">
+      <%= event.name %>
+      <a href="#event-<%= event.name %>" class="reference-loop-anchor">#</a>
+    </h4>
+
+    <p><%= @translate event.description %></p>
+
+    <% if event.extensionOf: %>
+    <span class="reference-extension-name"><%= event.extensionOf %></span>
+    <% end %>
+
+    <% if event.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+
+    <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>型</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for param in event.params: %>
+        <tr>
+          <td><span class="parameter-name"><%= param.name %></span></td>
+          <td class="value-type"><%= param.typeExpression %></td>
+          <td><%= @translate param.description %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <% end %>
+  <!-- end events -->
+
+  <!-- disqus -->
+  <h3 id="discussion">
+    <% if @lang == "en": %>Discussion<% else: %>議論<% end %>
+    <a href="#discussion" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+      var disqus_shortname = 'onsenui<% if @lang == "ja": %>-ja<% end %>'; // required: replace example with your forum shortname
+
+      /* * * DON'T EDIT BELOW THIS LINE * * */
+      (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <!-- end disqus -->
+
+</div></div>

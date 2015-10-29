@@ -103,6 +103,7 @@ gulp.task('serve', ['generate'], function() {
     'src/documents_' + lang + '/**/*',
     'OnsenUI/build/docs/' + lang + '/partials/*/*.html',
     'src/layouts/*',
+    'src/misc/*',
     'src/partials/*',
     'src/files/**/*',
   ], options, function() {
@@ -154,7 +155,12 @@ gulp.task('deploy', ['clean', 'generate'], function() {
   var dst = 'out_' + lang;
   var publisher = $.awspublish.create(aws);
 
-  var site = gulp.src([dst + '/**', '!' + dst + '/OnsenUI', '!' + dst + '/project-templates']);
+  var site = gulp.src([
+    dst + '/**',
+    '!' + dst + '/OnsenUI',
+    '!' + dst + '/2/OnsenUI',
+    '!' + dst + '/project-templates'
+  ]);
 
   var templates = gulp.src('project-templates/gen/**')
     .pipe($.rename(function(path) {
@@ -166,9 +172,14 @@ gulp.task('deploy', ['clean', 'generate'], function() {
       path.dirname = 'OnsenUI/build/' + path.dirname;
     }));
 
+  var build2 = gulp.src('2/OnsenUI/build/**')
+    .pipe($.rename(function(path) {
+      path.dirname = '2/OnsenUI/build/' + path.dirname;
+    }));
+
   var headers = env == 'production' ? {'Cache-Control': 'max-age=900, no-transform, public'} : {'Cache-Control': 'no-cache'};
 
-  var stream = merge(site, templates, build)
+  var stream = merge(site, templates, build, build2)
     .pipe($.awspublish.gzip())
     .pipe(publisher.publish(headers))
     .pipe(publisher.sync())

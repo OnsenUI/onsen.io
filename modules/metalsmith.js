@@ -23,6 +23,7 @@ var nodePath = require('path');
 
 module.exports = function(lang, isStaging) {
   return {
+
     site: function(done) {
       metalsmith(__dirname + '/../')
         .clean(false)
@@ -31,6 +32,7 @@ module.exports = function(lang, isStaging) {
         .use(draft())
         .use(require('./helpers')())
         .use(require('./import-api-docs')(lang))
+        .use(require('./2-api-docs')(lang))
         .use(require('./patterns-collection')(lang))
         .use(collections({
           components: {
@@ -47,18 +49,22 @@ module.exports = function(lang, isStaging) {
           setImmediate(done);
 
           var dict = {};
+          var dict2 = {};
           for (var path in files) {
             var file = files[path];
             if (file.componentCategory) {
+              var currentDict = file.is2 ? dict2 : dict;
               file.componentCategory.split(/, */).forEach(function(category) {
-                if (!dict[category]) {
-                  dict[category] = [];
+                if (!currentDict[category]) {
+                  currentDict[category] = [];
                 }
-                dict[category].push(file);
+                currentDict[category].push(file);
               });
             }
           }
+
           metalsmith.metadata().componentCategoryDict = sortObject(dict);
+          metalsmith.metadata().componentCategoryDict2 = sortObject(dict2);
         })
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
