@@ -1,0 +1,136 @@
+---
+author: moongift 
+date: 2015-10-26
+id: make-your-own-facebook-mobile-app-with-monaca
+title: "Make Your Own Facebook Mobile App With Monaca"
+category: monaca
+tags: tutorial, javascript, plugin, cordova, monaca, facebook
+---
+
+In this blog post we are going to create a sample project with Facebook integration using "Wizcorp/phonegap-facebook-plugin."
+
+#### Using Plugin
+
+Wizcorp/phonegap-facebook-plugin: [https://github.com/Wizcorp/phonegap-facebook-plugin](https://github.com/Wizcorp/phonegap-facebook-plugin)
+
+#### About Sample Project
+
+This time our goal is to let you login to Facebook then get your email address and a Facebook friend list. We will simply show the data in an alert dialog just for the sake of demonstration. Also, we will be creating based on a Monaca's minimum template.
+
+##### Development Environment
+
+* iPhone6 (iOS 8.1.2)
+* GALAXY Note 2 SC-02E (Android4.3)
+* Checked with a debug build
+
+#### What to Prepare
+
+Before you start the actual coding, please obtain Facebook `APP_ID` and `APP_NAME` by referring to the link below under *Prerequisite*.
+
+* Sample Project Facebook Client: [http://docs.monaca.mobi/cur/en/sampleapp/samples/facebook](http://docs.monaca.mobi/cur/en/sampleapp/samples/facebook)
+
+#### Installing Plugin
+
+Monaca provides two ways to install plugins:
+* By uploading a Zip file
+* By providing a package name or specific URL
+
+![Importing Plugin](/blog/content/images/2015/Oct/monaca_import_plugin_1.png)
+
+![Importing Plugin Zip](/blog/content/images/2015/Oct/monaca_import_plugin_2.png)
+
+We will always recommend installing plugins by uploading ZIP files so that you can modify the plugins as you want. Let's download a ZIP file from GitHub and try uploading on Monaca. If you are having trouble installing the plugin, the way to get around this is to unzip a file and compress it again. Then, try the same process.
+
+#### Setting up Plugin
+
+Now that the plugin is installed, we will pass the plugin our `APP_ID` and `APP_NAME` in the settings. Use those values you got from *What to Prepare* section.
+
+![Plugin Settings](/blog/content/images/2015/Oct/monaca_plugin_settings.png)
+
+#### Login to Facebook
+
+Let's write some code. When the `deviceready` is triggered, we will initiate Facebook login process. If the login is successful, `fbLoginSuccess` will be performed, otherwise, we will return an error.
+
+```js
+document.addEventListener('deviceready', initApp, false);
+ 
+function initApp() {
+    // Login
+    facebookConnectPlugin.login(["public_profile"], fbLoginSuccess, function (error) {
+      alert("" + error)
+    });
+  }
+```
+
+#### Getting User Data
+
+In here, we use Facebook Graph API to get user's email and friends list.
+
+```js
+var fbLoginSuccess = function (userData) {
+    alert("UserInfo: " + JSON.stringify(userData));
+ 
+    // Get email and friends 
+    facebookConnectPlugin.api(userData.authResponse.userID + "/?fields=id,email,friends", ["email", "user_friends"], function (result) {
+      alert("Result: " + JSON.stringify(result));
+    }, function (error) {
+      alert("Failed: " + JSON.stringify(error));
+    });
+  };
+```
+
+#### Sample Project Code
+
+index.html
+
+```html
+<!DOCTYPE HTML>
+<html>
+ 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script src="components/loader.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+ 
+<body>
+<br/>This is a template for Monaca app.
+<div id="fb-root"></div>
+</body>
+<script>
+  document.addEventListener('deviceready', initApp, false);
+ 
+  function initApp() {
+    // Login
+    facebookConnectPlugin.login(["public_profile"], fbLoginSuccess, function (error) {
+      alert("" + error)
+    });
+  }
+ 
+  var fbLoginSuccess = function (userData) {
+    alert("UserInfo: " + JSON.stringify(userData));
+ 
+    // Get email and friends 
+    facebookConnectPlugin.api(userData.authResponse.userID + "/?fields=id,email,friends", ["email", "user_friends"], function (result) {
+      alert("Result: " + JSON.stringify(result));
+    }, function (error) {
+      alert("Failed: " + JSON.stringify(error));
+    });
+  };
+ 
+</script>
+ 
+</html>
+```
+
+#### Reference
+
+* Wizcorp/phonegap-facebook-plugin: [https://github.com/Wizcorp/phonegap-facebook-plugin](https://github.com/Wizcorp/phonegap-facebook-plugin)
+
+### We Are Hiring
+
+Monaca team is now looking for new development members!
+[Learn more](http://www.asial.co.jp/en/careers.php)
+<!-- https://ja.monaca.io/careers.html -->
