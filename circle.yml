@@ -5,7 +5,7 @@ general:
       - production
 machine:
   node:
-    version: 0.10.32
+    version: 0.12.7
 checkout:
   post:
     - git submodule sync
