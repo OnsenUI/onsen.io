@@ -1,8 +1,8 @@
 ---
-author: moongift 
-date: 2015-10-26
-id: make-your-own-facebook-mobile-app-with-monaca
-title: "Make Your Own Facebook Mobile App With Monaca"
+author: takuya
+date: 2015-10-29
+id: make-facebook-hybrid-mobile-app-with-monaca
+title: "Make Your Own Facebook Mobile App with Monaca"
 category: monaca
 tags: tutorial, javascript, plugin, cordova, monaca, facebook
 ---
@@ -15,7 +15,7 @@ Wizcorp/phonegap-facebook-plugin: [https://github.com/Wizcorp/phonegap-facebook-
 
 #### About Sample Project
 
-This time our goal is to let you login to Facebook then get your email address and a Facebook friend list. We will simply show the data in an alert dialog just for the sake of demonstration. Also, we will be creating based on a Monaca's minimum template.
+This time our goal is to let you login to Facebook then get your email address and a Facebook friend list. We will simply show the data in an alert dialog just for the sake of demonstration. Also, we will be starting from Monaca's minimum template.
 
 ##### Development Environment
 
@@ -32,7 +32,8 @@ Before you start the actual coding, please obtain Facebook `APP_ID` and `APP_NAM
 #### Installing Plugin
 
 Monaca provides two ways to install plugins:
-* By uploading a Zip file
+
+* By uploading a ZIP file
 * By providing a package name or specific URL
 
 ![Importing Plugin](/blog/content/images/2015/Oct/monaca_import_plugin_1.png)
@@ -69,8 +70,8 @@ In here, we use Facebook Graph API to get user's email and friends list.
 ```js
 var fbLoginSuccess = function (userData) {
     alert("UserInfo: " + JSON.stringify(userData));
- 
-    // Get email and friends 
+
+    // Get email and friends
     facebookConnectPlugin.api(userData.authResponse.userID + "/?fields=id,email,friends", ["email", "user_friends"], function (result) {
       alert("Result: " + JSON.stringify(result));
     }, function (error) {
@@ -86,51 +87,42 @@ index.html
 ```html
 <!DOCTYPE HTML>
 <html>
- 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <script src="components/loader.js"></script>
-  <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
- 
-<body>
-<br/>This is a template for Monaca app.
-<div id="fb-root"></div>
-</body>
-<script>
-  document.addEventListener('deviceready', initApp, false);
- 
-  function initApp() {
-    // Login
-    facebookConnectPlugin.login(["public_profile"], fbLoginSuccess, function (error) {
-      alert("" + error)
-    });
-  }
- 
-  var fbLoginSuccess = function (userData) {
-    alert("UserInfo: " + JSON.stringify(userData));
- 
-    // Get email and friends 
-    facebookConnectPlugin.api(userData.authResponse.userID + "/?fields=id,email,friends", ["email", "user_friends"], function (result) {
-      alert("Result: " + JSON.stringify(result));
-    }, function (error) {
-      alert("Failed: " + JSON.stringify(error));
-    });
-  };
- 
-</script>
- 
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <br />This is a template for Monaca app.
+    <div id="fb-root"></div>
+    <script>
+      document.addEventListener('deviceready', initApp, false);
+
+      function initApp() {
+        // Login
+        facebookConnectPlugin.login(["public_profile"], fbLoginSuccess, function (error) {
+          alert("" + error)
+        });
+      }
+
+      var fbLoginSuccess = function (userData) {
+        alert("UserInfo: " + JSON.stringify(userData));
+
+        // Get email and friends
+        facebookConnectPlugin.api(userData.authResponse.userID + "/?fields=id,email,friends", ["email", "user_friends"], function (result) {
+          alert("Result: " + JSON.stringify(result));
+        }, function (error) {
+          alert("Failed: " + JSON.stringify(error));
+        });
+      };
+
+    </script>
+  </body>
 </html>
 ```
 
 #### Reference
 
 * Wizcorp/phonegap-facebook-plugin: [https://github.com/Wizcorp/phonegap-facebook-plugin](https://github.com/Wizcorp/phonegap-facebook-plugin)
-
-### We Are Hiring
-
-Monaca team is now looking for new development members!
-[Learn more](http://www.asial.co.jp/en/careers.php)
-<!-- https://ja.monaca.io/careers.html -->
