@@ -12,7 +12,9 @@ layout: '2.html.eco'
   <h2><%= @doc.name %></h2>
 
   <% if @doc.extensionOf: %>
-  <span class="reference-extension-name"><%= @doc.extensionOf %></span>
+  <p>
+    <span class="reference-extension-name"><%= @doc.extensionOf %></span> This object is available on <%= @doc.extensionOf %> binding only.
+  </p>
   <% end %>
 
   <section class="reference-description">
