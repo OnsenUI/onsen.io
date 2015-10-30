@@ -1933,9 +1933,15 @@ The value of the attribute should be an Angular expression, so in the case where
 
 [`<ons-page>`](/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
 
-* `init` event is called after `<ons-page>` is attached to DOM. In order to provide backward compatibility, the old `pageinit` event is still fired but will be deprecated in upcoming versions.
+* `init` event is fired after `<ons-page>` is attached to DOM. In order to provide backward compatibility, the old `pageinit` event is still fired but will be deprecated in upcoming versions.
 
-* `destroy` event is called before `<ons-page>` is destroyed and prior to DOM detachment.
+* `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
+
+* `show` event is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up.
+
+* `hide` event is fired every time `<ons-page>` disappear from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack.
+
+Page lifecycle events will be propagated to the page's descendants so they are correspondingly shown, hidden or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator's top page) and `destroy` event for every page in navigator's page stack.
 
 Example:
 
