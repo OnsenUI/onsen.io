@@ -1,0 +1,141 @@
+#onsenui2-landing {
+
+  .first-view {
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    background-color: #FF5544;
+    background: linear-gradient(#BB3E31, #ff5544);
+    color: white;
+
+    &-inner {
+      padding: 48px 0 40px 0;
+      background-image: url(/images/2/onsen-mark-bg.png);
+      background-repeat: no-repeat;
+      background-position: right top;
+    }
+
+    &-logo {
+      color: white;
+    }
+
+    &-title {
+      font-size: 53px;
+      margin: 10px auto 0 auto;
+      color: white;
+      text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.15);
+      font-family: 'ff-enzo-web', Arial, sans-serif;
+      font-weight: bold;
+      letter-spacing: -2px;
+      max-width: 90%;
+      line-height: 59px;
+    }
+
+    &-tagline {
+      font-size: 24px;
+      opacity: 0.7;
+      margin: 0 auto 0 auto;
+      color: white;
+      font-weight: 200;
+      font-family: 'proxima-nova', Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      max-width: 90%;
+    }
+
+    &-quickstart {
+      border-radius: 3px;
+      background-color: rgba(0, 0, 0, 0.36);
+      text-align: left;
+      padding: 4px 8px;
+      width: 500px;
+      max-width: 85%;
+      margin: 70px auto 0px auto;
+    }
+
+    &-quickstart-header {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    &-quickstart-code {
+      margin: 0;
+      border: none;
+      background-color: transparent;
+      > code {
+        color: white;
+        font-size: 14px;
+      }
+    }
+
+  }
+
+  .ref-links {
+    padding: 30px 0 0 0;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .ref-link {
+    padding: 8px 24px 8px 12px;
+    font-size: 22px;
+    background-image: url(/images/2/arrow.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+
+    &:link, &:visited {
+      color: #ff5544;
+      text-decoration: underline;
+    }
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .content {
+    width: 780px;
+    font-size: 17px;
+    line-height: 23px;
+    color: #555;
+    -webkit-font-smoothing: antialiased;
+
+    &-article {
+      margin: 0;
+    }
+
+    &-article-eyecatch {
+      text-align: center;
+    }
+
+    &-summary {
+      margin-top: 20px;
+      background-color: #f0f0f0;
+      padding: 10px 60px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    &-article-header2 {
+      color: #333;
+      text-align: center;
+      font-weight: 600;
+      font-size: 40px;
+      margin: 124px 0 42px 0;
+      line-height: 1.2;
+    }
+
+    &-article-header3 {
+      color: #333;
+      border-bottom: none;
+      font-size: 30px;
+      margin: 42px 0 0 0;
+      line-height: 1.2;
+    }
+  }
+}
+
+.tablet-query({
+  #onsenui2-landing {
+  }
+});
+

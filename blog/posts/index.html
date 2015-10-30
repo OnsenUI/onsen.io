@@ -4,23 +4,23 @@ page: blog
 paginate: articles
 ---
 
+<div class="description">
+  <h2>
+    Two Products, One Blog, One Goal
+  </h2>
+  <p>
+    We build mobile dev tools that just work. Onsen is an HTML5 framework
+    to create modern User Interfaces. Monaca is a comprehensive set of
+    cloud-powered app development tools and services. Using Monaca with
+    Onsen will ease most of the processes of importing plugins, debugging
+    and building a full app, and you don’t need to setup a local
+    environment. This blog covers Onsen and Monaca topics for both
+    beginners and advanced users.
+  </p>
+</div>
+
 <% for article, index in @articles.slice(@pagination.start, @pagination.end + 1): %>
-<section class="article article-overview">
-
-  <h2 class="article-title article-overview-title"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%= article.title %></a></h2>
-
-  <div class="article-date article-overview-date"><a href="<%= @rootUrl %>blog/<%- article.id %>/"><%- @renderBlogDate article.date %></a></div>
-
-  <%- @partial('blog-share.html.eco', {id: article.id, blogTitle: article.title}) %>
-
-  <div><%- @renderArticleIntroAsHTML(article.contents) %></div>
-
-  <div class="article-overview-readmore">
-    <a class="site-button" href="<%= @rootUrl %>blog/<%- article.id %>/">READ MORE</a>
-  </div>
-
-</section>
-
+  <%- @partial('blog-post.html.eco', {article: article}) %>
 <% end %>
 
 <%- @partial('blog-newsletter.html.eco') %>
@@ -36,7 +36,7 @@ paginate: articles
   <a class="button blog-pagination-older" href="/blog/<%= @pagination.next.path %>">OLDER &gt;</a>
   <% end %>
 
-  <p class="blog-pagination-position">PAGE <%= @pagination.num %> OF <%= @pagination.total %></p>
+  <span class="blog-pagination-position">PAGE <span class="blog-pagination-position-number"><%= @pagination.num %></span> OF <span class="blog-pagination-position-number"><%= @pagination.total %></span></span>
 </nav>
 <% end %>
 

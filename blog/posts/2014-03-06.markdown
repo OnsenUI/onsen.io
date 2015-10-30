@@ -4,11 +4,13 @@ date: 2014-03-06
 id: onsen-ui-tutorial-angularjs-essentials-for-using-onsen-ui-part-3
 title: "Onsen UI-Tutorial: AngularJS Essentials for Using Onsen UI Part 3"
 ---
-##AngularJS Essentials for Using Onsen UI 
+Part 3: Services
 
-###Part 3: Services
+We are going to make an app with Onsen UI using AngularJS services.
 
-We are going to make an app with Onsen UI using AngularJS services. First, let's learn the basics of services.
+<!-- more -->
+
+First, let's learn the basics of services.
 
 When you are using AngularJS and defining all sorts of data and functions in a controller, the controller gets bloated very quickly, often causing source code to be tangled and unstructured. However, there is a way to keep controllers slim and fit. That is to have them focused on managing and processing only view-related data, and export other data or processing to [services](http://code.angularjs.org/1.2.14/docs/guide/dev_guide.services.creating_services) to share with other controllers. Controllers can access data or functions stored in services via [dependency injection (DI)](http://docs.angularjs.org/guide/di).
 
@@ -103,14 +105,13 @@ You may find it a little complicated at first, but you will get comfortable as y
 
 After defining the myApp module, the "MenuService" service is registered underneath it. The MenuService has the following data and functions:
 
-
 * menu:  menu data [array]
 * getMenu() :  function to get menu
 * addMenu() :  function to add new menu
 * removeMenu() :  function to remove menu
 
+
 		var myApp = angular.module('myApp', []);
-      
  
         myApp.factory('MenuService', function(){
           
@@ -234,7 +235,7 @@ The menu that is added or removed by these functions will be immediately reflect
 
 This is how you can share data and functions between controllers.
 
-###Making an HTML5 mobile app using AngularJS services.
+### Making an HTML5 mobile app using AngularJS services.
 
 This is a simple to-do app made with Onsen UI. It uses AngularJS services internally.
 

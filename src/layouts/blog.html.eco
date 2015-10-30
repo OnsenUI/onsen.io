@@ -25,8 +25,8 @@
 
   <script defer src="/vendor/jquery.js"></script>
 
-  <script src="//use.typekit.net/vwb2tfq.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
+  <script src="//use.typekit.net/bys8jdj.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
   <script>
     (function(d, s, id) {
@@ -45,44 +45,46 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
     })();
   </script>
-
+  <script src="//load.sumome.com/" data-sumo-site-id="88eeec262191805f37fa9c2d72a8a6df439639902dfffa32902adefa7ab3a1ac" async="async"></script> 
 </head>
 
 <body id="blog">
-
-  <%- @partial('header.html.eco') %>
-
+  <%- @partial('blog-header.html.eco') %>
   <section class="content-container clearfix">
-    <div class="content">
-      <% if @isArticle: %>
-      <div class="article">
-        <h2 class="article-title"><%- @title %></h2>
-        <div class="article-date"><time datetime="<%- @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time></div>
 
-        <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
+    <div class="content">
+
+      <% if @isArticle: %>
+      <div class="article <% if @category == 'monaca': %>article-monaca<% end %>">
+        <div class="article-title">
+          <div class="article-title-image"></div>
+          <h2>
+             <%- @title %>
+          </h2>
+
+          <div class="article-avator">
+            <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=30" alt="" class="article-avator-image">
+          </div>
+
+          <div class="article-date">
+            BY <a href="/blog/<%- @author.id %>/"><%- @author.name %></a> / <%- @renderBlogDate @date %>
+          </div>
+
+          <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
+        </div>
+
 
         <div class="article-content">
           <%- @contents %>
         </div>
 
-        <%- @partial('blog-newsletter.html.eco') %>
-
-        <div class="article-footer">
-          <div class="article-avator">
-            <% if @author.gravator: %>
-            <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=80" alt="" class="article-avator-image">
-            <% else if @author.image: %>
-            <img src="<%= @author.image %>" alt="" class="article-avator-image">
-            <% end %>
-          </div>
-          <div class="article-author-label">AUTHOR</div>
-          <% if @author.url: %>
-          <div class="article-author-name"><a href="<%- @author.url %>" target="_blank"><%- @author.name %></a></div>
-          <% else: %>
-          <div class="article-author-name"><%- @author.name %></div>
+        <% if @tags and @tags.length: %>
+        <div class="article-tags">
+          <% for tag in @tags: %>
+          <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
           <% end %>
         </div>
-
+        <% end %>
 
         <div class="article-comments">
           <h3>Comments</h3>
@@ -110,13 +112,34 @@
         <a href="/blog/rss.xml">Blog RSS Feed</a>
       </div>
 
+      <% else if @tag: %>
+        <h2 class="tag">Posts for <span class="tag-name"><%- @tag %></span></h2>
+        <% for article in @pagination.files: %>
+          <%- @partial('blog-post.html.eco', {article: article}) %>
+        <% end %>
       <% else: %>
       <%- @contents %>
       <% end %>
+
+      <div class="tag-cloud">
+        <h2>Related tags</h2>
+
+        <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
+        <a
+          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
+          <span class="tag-cloud-name">
+            <%- tag.ctg %>
+          </span>
+          <span class="tag-cloud-weight">
+            <%- tag.wght %>
+          </span>
+        </a>
+        <% end %>
+      </div>
       </div>
   </section>
 
-  <%- @partial('footer.html.eco') %>
+  <%- @partial('blog-footer.html.eco') %>
 
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script defer src="/scripts/default.js"></script>

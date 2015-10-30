@@ -1,0 +1,517 @@
+---
+author: andreas
+date: 2015-08-04
+id: mocha-chaijs-unit-test-coverage-es6
+title: "Mocha + Chai.js unit testing for ES6 with Istanbul code coverage"
+tags: tutorial, javascript, es6, testing
+---
+
+![Chai and mocha](/blog/content/images/2015/Aug/chaijs-mocha.png)
+
+Testing is very important for finding bugs, verifying the functionality and improving the general stability of a piece of software. Almost all (if not all) developers test their code in some way. One way to test would be to manually run the program and try out all the functions to see if everything is working as expected. Another (and better) way is to write automated tests that are run every time the code changes.
+
+<!-- more -->
+
+In Onsen UI we do end to end testing of all the AngularJS directives using [Protractor](https://angular.github.io/protractor/#/) and we also test the internal logic of the components with the [Karma test runner](http://karma-runner.github.io/0.13/index.html). This helps us find and fix bugs quickly and also makes it a lot easier to refactor the code without worrying about breaking something.
+
+Lately we've reimplemented all the Onsen UI components using ES6 (recently renamed to ES2015). This introduces some challenges when testing since most browsers don't currently support running ES6 code directly, so we need to transpile it into ES5 which the browser can understand. In this article we will take a look at how ES6 code can be tested with [Mocha](http://mochajs.org/) and also how to generate coverage for the ES6 code with [Istanbul](https://gotwarlost.github.io/istanbul/). [Chai.js](http://chaijs.com/) is used for the assertions, but of course you can use any assertion library you like. For the Onsen UI unit tests we use Chai.js and we love it!
+
+The code used in this article is available on my [GitHub page](https://github.com/argelius/chai-es6-sample).
+
+### The code to test
+
+I'll assume that you already have `Node.js` and `npm` installed. If you don't please download and install them before continuing. You can find them at the [official Node.js website](https://nodejs.org/).
+
+Let's start by creating a new project. Create an empty directory and run the following command:
+
+```bash
+$ npm init
+```
+
+It will ask you to answer a bunch of questions. When you've answered every questions a `package.json` will be generated for you in the current directory. The `package.json` file contains meta data about a Node.js module.
+
+The next step is to write some code to test. As mentioned earlier we will write it in ES6, so people who are not familiar with the new additions to the JavaScript language may feel a bit lost. Don't worry, I'll explain the new keywords in the comments as we go along.
+
+We'll create a simple class that describes a rectangle, so fire up your favorite editor and create a file called `rectangle.js`.
+
+```javascript
+// ES6 introduces "classes". For people familiar with
+// object oriented languages such as Java as C++ this
+// is nothing out of the ordinary.
+class Rectangle {
+  // The constructor will be executed if you initiate a
+  // "Rectangle" object with
+  //
+  //   new Rectangle(width, height)
+  //
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+  }
+
+  // This is also a new feature of ES6. The "get" keyword
+  // is used to define a "getter".
+  //
+  // This means that if you access the "height" like this:
+  //
+  //   let rectangle = new Rectangle(5, 7);
+  //   console.log(rectangle.width);
+  //
+  // The code below will be executed.
+  get height() {
+    return this._height;
+  }
+
+  // This defines a "setter". If you write something like:
+  //
+  //   let rectangle = new Rectangle(5, 7);
+  //   rectangle.height = 10;
+  //
+  // the code in the method will be executed with an
+  // argument of value 10.
+  set height(value) {
+    if (typeof value !== 'number') {
+      throw new Error('"height" must be a number.');
+    }
+
+    this._height = value;
+  }
+
+  get width() {
+    return this._width;
+  }
+
+  set width(value) {
+    if (typeof value !== 'number') {
+      throw new Error('"width" must be a number.');
+    }
+
+    this._width = value;
+  }
+
+  // This getter calculates the area of the rectangle.
+  get area() {
+    return this.width * this.height;
+  }
+
+  // This calculates its circumference.
+  get circumference() {
+    return 2 * this.width + 2 * this.height;
+  }
+}
+
+// We export the Rectangle class so it can
+// be require()'d in other files.
+module.exports = Rectangle;
+```
+
+Please save the file after you've finished editing it. If at this point you try to execute it using node you will get an error:
+
+```bash
+$ node rectangle.js
+/home/andreas/Documents/tut/rectangle.js:1
+(function (exports, require, module, __filename, __dirname) { class Rectangle
+                                                              ^^^^^
+SyntaxError: Unexpected reserved word
+    at exports.runInThisContext (vm.js:73:16)
+    at Module._compile (module.js:443:25)
+    at Object.Module._extensions..js (module.js:478:10)
+    at Module.load (module.js:355:32)
+    at Function.Module._load (module.js:310:12)
+    at Function.Module.runMain (module.js:501:10)
+    at startup (node.js:129:16)
+    at node.js:814:3
+```
+
+If you don't get this error you are probably from the future where all the ES6 features have already been implemented. As we can see from the error message it complains that the `class` keyword is used. In the current implementation of V8, `class` is a reserved word but the functionality has not yet been implemented. This is to avoid breaking older code when classes are finally added to the interpreter.
+
+### Writing unit tests with Chai.js
+
+Before we start writing the tests we need to install Mocha and Chai.js. We also need to install [Babel](https://babeljs.io/), which is a transpiler that translates ES6 code to ES5 so it can be executed in Node.js.
+
+```bash
+$ npm install --save-dev mocha chai babel
+```
+
+Mocha is the program we use to run the tests and Chai.js is a library that we use to write the test assertions. Chai.js implements three different assertion styles:
+
+#### Should
+
+```javascript
+let chai = require('chai');
+chai.should();
+1.should.be.a('number');
+```
+
+#### Expect
+```javascript
+var expect = require('chai').expect;
+expect(1).to.be.a('number');
+```
+
+#### Assert
+```javascript
+let assert = require('chai').assert;
+assert.typeOf(1, 'number');
+```
+
+Which one you choose is just a matter of preference. In this tutorial I will be using `should` since I think it's the one that produces the cleanest tests.
+
+Let's start by writing a simple test for the `width` attribute. We'll be writing the tests in ES6 as well. Make a directory called `test` and create a new file called `rectangle.spec.js` and type the following code.
+
+```javascript
+// Import chai.
+let chai = require('chai'),
+  path = require('path');
+
+// Tell chai that we'll be using the "should" style assertions.
+chai.should();
+
+// Import the Rectangle class.
+let Rectangle = require(path.join(__dirname, '..', 'rectangle'));
+
+// The fat arrow (=>) syntax is a new way to define
+// functions in ES6. One feature that is different
+// from the usual "function" keyword is that the scope
+// is inherited from the parent, so there is no need to write
+//
+//   function() {
+//     ...
+//   }.bind(this)
+//
+// anymore. In this case we are not using "this" so the new
+// syntax is just used for brevity.
+describe('Rectangle', () => {
+  describe('#width', () => {
+    let rectangle;
+
+    beforeEach(() => {
+      // Create a new Rectangle object before every test.
+      rectangle = new Rectangle(10, 20);
+    });
+
+    it('returns the width', () => {
+      // This will fail if "rectangle.width" does
+      // not equal 10.
+      rectangle.width.should.equal(10);
+    });
+
+    it('can be changed', () => {
+      // Assert that the width can be changed.
+      rectangle.width = 30;
+      rectangle.width.should.equal(30);
+    });
+
+    it('only accepts numerical values', () => {
+      // Assert that an error will be thrown if
+      // the width it set to a non-numerical value.
+      () => {
+        rectangle.width = 'foo';
+      }.should.throw(Error);
+    });
+  });
+
+```
+
+### Running the tests with Mocha
+
+Let's run the test and see if it works! Do so by typing
+
+```bash
+$ ./node_modules/.bin/mocha # We have installed mocha locally in the project.
+```
+
+Since we put the test file in a directory called `test` Mocha will find it automatically. However, the tests will not work and Node.js will spit out the following error:
+
+```bash
+/home/andreas/Documents/tut/test/rectangle.spec.js:1
+(function (exports, require, module, __filename, __dirname) { let chai = requi
+                                                                  ^^^^
+SyntaxError: Unexpected identifier
+    at exports.runInThisContext (vm.js:73:16)
+    at Module._compile (module.js:443:25)
+    at Object.Module._extensions..js (module.js:478:10)
+    at Module.load (module.js:355:32)
+    at Function.Module._load (module.js:310:12)
+    at Module.require (module.js:365:17)
+    at require (module.js:384:17)
+    at /usr/local/lib/node_modules/mocha/lib/mocha.js:192:27
+    at Array.forEach (native)
+    at Mocha.loadFiles (/usr/local/lib/node_modules/mocha/lib/mocha.js:189:14)
+    at Mocha.run (/usr/local/lib/node_modules/mocha/lib/mocha.js:422:31)
+    at Object.<anonymous> (/usr/local/lib/node_modules/mocha/bin/_mocha:398:16)
+    at Module._compile (module.js:460:26)
+    at Object.Module._extensions..js (module.js:478:10)
+    at Module.load (module.js:355:32)
+    at Function.Module._load (module.js:310:12)
+    at Function.Module.runMain (module.js:501:10)
+    at startup (node.js:129:16)
+    at node.js:814:3
+```
+
+The tests are written in ES6 and Node.js can not execute them. This is the reason why we installed Babel earlier. Mocha accepts a `--compilers` parameter so we can tell it to use Babel to transpile the code before running the tests:
+
+Let's try running it again:
+
+```bash
+$ ./node_modules/.bin/mocha --compilers js:babel/register
+
+
+  Rectangle
+    #width
+      ✓ returns the width
+      ✓ can be changed
+      ✓ only accepts numerical values
+
+
+  3 passing (16ms)
+```
+
+Great! This time the tests worked. However, it's not time to celebrate yet. We also need to add code coverage generation.
+
+### Generating coverage using Istanbul
+
+Code coverage is metric used to see how well your code is tested. If a piece of software has 100% test coverage it means that every line is executed at least once in the tests. One of the most popular way to generate coverage in JavaScript is using a library called [Istanbul](https://gotwarlost.github.io/istanbul/). It will output information about the code coverage to the command line as well as generating a comprehensive HTML report.
+
+Let's start by installing Istanbul:
+
+```bash
+$ npm install --save-dev istanbul
+```
+
+We can now create a code coverage report by running:
+
+```bash
+$ ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- --compilers js:babel/register
+
+
+  Rectangle
+    #width
+      ✓ returns the width
+      ✓ can be changed
+      ✓ only accepts numerical values
+
+
+  3 passing (13ms)
+
+=============================================================================
+Writing coverage object [/home/andreas/Documents/tut/coverage/coverage.json]
+Writing coverage reports at [/home/andreas/Documents/tut/coverage]
+=============================================================================
+
+=============================== Coverage summary ===============================
+Statements   : 88.89% ( 32/36 ), 3 ignored
+Branches     : 92.86% ( 13/14 ), 4 ignored
+Functions    : 75% ( 9/12 )
+Lines        : 80% ( 16/20 )
+================================================================================
+```
+
+As we can see 80% of the lines in the project have been covered. Istanbul also generates HTML report in `coverage/lcov-report/index.html`. Open it in your browser and we can see which lines were not covered.
+
+![Istanbul generates coverage for the transpiled ES5 code!](/blog/content/images/2015/Aug/es5-coverage.png)
+
+Well that's a mess! It turns out since we're using the `--compilers` parameter to transpile the code into ES5, the code that Istanbul generates coverage for is actually the transpiled code. Even though the coverage was generated succesfully, this is not really what we want.
+
+### Coverage for the original ES6 code
+
+So how do we get the coverage for the original ES6 code? To do that we want to make Node.js itself be able to execute ES6 code. Luckily, with Babel there's an easy way to do that. When you install Babel it will also add a script called `babel-node` which works just like the regular `node` executable but it pipes all the code through Babel before executing it. However, this is not enough since Istanbul must also be able to understand ES6. To do that we need to install a module called `isparta` which works as a drop-in replacement for the `istanbul` command.
+
+```bash
+$ npm install --save-dev isparta
+```
+
+Using this we can modify the test running command:
+
+```bash
+$ ./node_modules/.bin/babel-node ./node_modules/.bin/isparta cover ./node_modules/.bin/_mocha
+Transformation error; return original code
+{ [SyntaxError: /home/andreas/Documents/tut/node_modules/mocha/bin/_mocha: 'return' outside of function (392:2)]
+  pos: 9902,
+  loc: { line: 392, column: 2 },
+  _babel: true,
+  codeFrame: '\u001b[0m  390 |   \u001b[32m}\u001b[39m\u001b[34m\u001b[1m)\u001b[22m\u001b[39m\u001b[1m;\u001b[22m\n  391 | \n> 392 |   \u001b[36mreturn\u001b[39m\u001b[1m;\u001b[22m\n      |   ^\n  393 | \u001b[32m}\u001b[39m\n  394 | \n  395 | \u001b[90m// load\u001b[39m\u001b[0m' }
+
+
+  Rectangle
+    #width
+      ✓ returns the width
+      ✓ can be changed
+      ✓ only accepts numerical values
+
+
+  3 passing (11ms)
+
+================================================================================
+Writing coverage object [/home/andreas/Documents/tut/coverage/coverage.json]
+Writing coverage reports at [/home/andreas/Documents/tut/coverage]
+================================================================================
+
+=============================== Coverage summary ===============================
+Statements   : 88.89% ( 32/36 ), 3 ignored
+Branches     : 92.86% ( 13/14 ), 4 ignored
+Functions    : 75% ( 9/12 )
+Lines        : 73.33% ( 11/15 )
+================================================================================
+```
+
+This outputs a nasty error message but if we take a look at the Mocha code it's not actually a problem since the program was terminating at that line anyway. The reason for the error is that when using `babel-node` return statements are only allowed within functions, while in the Mocha source code there is a return statement in the outermost scope.
+
+In spite of the error it looks like the tests were run and the coverage report was generated succesfully. Let's take a look at it!
+
+![Isparta generates coverage for the transpiled ES6 code!](/blog/content/images/2015/Aug/es6-coverage.png)
+
+Great! Using `isparta` and `babel-node` we were able to generate a coverage report for the ES6 code. This makes it a lot more easy to read the coverage report.
+
+The command used to run the tests is getting rather long and messy. To avoid having to write it every time you run the tests you can add it to your `package.json` file. Edit the file and add the following line:
+
+```json
+{
+...
+  "scripts": {
+    "test": "babel-node ./node_modules/.bin/isparta cover _mocha"
+  },
+...
+}
+
+```
+
+By doing this the tests can be run by just doing:
+
+```bash
+$ npm test
+```
+
+We will finish up the testing by increasing the coverage to 100%.
+
+```javascript
+let chai = require('chai'),
+  path = require('path');
+
+chai.should();
+
+let Rectangle = require(path.join(__dirname, '..', 'rectangle'));
+
+describe('Rectangle', () => {
+  describe('#constructor()', () => {
+    it('requires two numerical arguments', () => {
+      () => {
+        new Rectangle();
+      }.should.throw(Error);
+
+      () => {
+        new Rectangle(1.0);
+      }.should.throw(Error);
+
+      () => {
+        new Rectangle('foo', 'bar');
+      }.should.throw(Error);
+
+      () => {
+        new Rectangle(5, 7);
+      }.should.not.throw(Error);
+    });
+  });
+
+  describe('#width', () => {
+    let rectangle;
+
+    beforeEach(() => {
+      rectangle = new Rectangle(10, 20);
+    });
+
+    it('returns the width', () => {
+      rectangle.width.should.equal(10);
+    });
+
+    it('can be changed', () => {
+      rectangle.width = 30;
+      rectangle.width.should.equal(30);
+    });
+
+    it('only accepts numerical values', () => {
+      () => {
+        rectangle.width = 'foo';
+      }.should.throw(Error);
+    });
+  });
+
+  describe('#height', () => {
+    let rectangle;
+
+    beforeEach(() => {
+      rectangle = new Rectangle(10, 20);
+    });
+
+    it('returns the height', () => {
+      rectangle.height.should.equal(20);
+    });
+
+    it('can be changed', () => {
+      rectangle.height = 30;
+      rectangle.height.should.equal(30);
+    });
+
+    it('only accepts numerical values', () => {
+      () => {
+        rectangle.height = 'foo';
+      }.should.throw(Error);
+    });
+  });
+
+  describe('#area', () => {
+    let rectangle;
+
+    beforeEach(() => {
+      rectangle = new Rectangle(10, 20);
+    });
+
+    it('returns the area', () => {
+      rectangle.area.should.equal(200);
+    });
+
+    it('can not be changed', () => {
+      () => {
+        rectangle.area = 1000;
+      }.should.throw(Error);
+    });
+  });
+
+  describe('#circumference', () => {
+    let rectangle;
+
+    beforeEach(() => {
+      rectangle = new Rectangle(10, 20);
+    });
+
+    it('returns the circumference', () => {
+      rectangle.circumference.should.equal(60);
+    });
+
+    it('can not be changed', () => {
+      () => {
+        rectangle.circumference = 1000;
+      }.should.throw(Error);
+    });
+  });
+});
+```
+
+After adding these tests we have covered every line in our tests so we will get the following summary.
+
+```
+=============================== Coverage summary ===============================
+Statements   : 100% ( 36/36 ), 3 ignored
+Branches     : 100% ( 14/14 ), 4 ignored
+Functions    : 100% ( 12/12 )
+Lines        : 100% ( 15/15 )
+================================================================================
+```
+
+Finally, every line is covered and we've generated a nice coverage report for the ES6 code!
+
+### Conclusion
+
+We hope this tutorial will be useful for people who are starting to write projects using ES6 and want a simple way to unit test and generate coverage for their code. So far we have only looked at how to do it for a Node.js module but in the upcoming weeks we will also publish an article on how to test ES6 code in the browser, which is a bit more complicated but definitely doable.
+
+Happy testing!

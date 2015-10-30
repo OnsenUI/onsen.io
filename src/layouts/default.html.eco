@@ -31,8 +31,8 @@
 
   <script defer src="/vendor/jquery.js"></script>
 
-  <script src="//use.typekit.net/vwb2tfq.js"></script>
-  <script>try{Typekit.load();}catch(e){}</script>
+  <script src="//use.typekit.net/bys8jdj.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
 
   <script>
     window.SITE_ENV = {
@@ -40,7 +40,7 @@
       hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
     };
   </script>
-  
+  <script src="//load.sumome.com/" data-sumo-site-id="88eeec262191805f37fa9c2d72a8a6df439639902dfffa32902adefa7ab3a1ac" async="async"></script>
 
 </head>
 

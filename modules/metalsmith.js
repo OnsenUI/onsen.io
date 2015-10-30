@@ -15,11 +15,15 @@ var redirect = require('metalsmith-redirect');
 var draft = require('metalsmith-drafts');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
+var tags = require('metalsmith-tags');
+var wordcloud = require('metalsmith-wordcloud');
 var sortObject = require('sort-object');
 var currentPath = require('./current-path');
+var nodePath = require('path');
 
 module.exports = function(lang, isStaging) {
   return {
+
     site: function(done) {
       metalsmith(__dirname + '/../')
         .clean(false)
@@ -28,6 +32,7 @@ module.exports = function(lang, isStaging) {
         .use(draft())
         .use(require('./helpers')())
         .use(require('./import-api-docs')(lang))
+        .use(require('./2-api-docs')(lang))
         .use(require('./patterns-collection')(lang))
         .use(collections({
           components: {
@@ -44,25 +49,29 @@ module.exports = function(lang, isStaging) {
           setImmediate(done);
 
           var dict = {};
+          var dict2 = {};
           for (var path in files) {
             var file = files[path];
             if (file.componentCategory) {
+              var currentDict = file.is2 ? dict2 : dict;
               file.componentCategory.split(/, */).forEach(function(category) {
-                if (!dict[category]) {
-                  dict[category] = [];
+                if (!currentDict[category]) {
+                  currentDict[category] = [];
                 }
-                dict[category].push(file);
+                currentDict[category].push(file);
               });
             }
           }
+
           metalsmith.metadata().componentCategoryDict = sortObject(dict);
+          metalsmith.metadata().componentCategoryDict2 = sortObject(dict2);
         })
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
         .use(function(files, metalsmith, done) {
           setImmediate(done);
 
-          var cssFile = files['reference/css.html'];
+          var cssFile = files['reference' + nodePath.sep + 'css.html'];
           var cssToc = cssFile.toc;
           delete cssFile.toc;
 
@@ -119,6 +128,52 @@ module.exports = function(lang, isStaging) {
 
     },
 
+    authors: function(done) {
+      if (lang === 'ja') {
+        done();
+        return;
+      }
+
+      metalsmith(__dirname + '/../')
+        .clean(false)
+        .source('./blog/authors/')
+        .metadata(require('../config.js')(lang, isStaging))
+        .destination('./out_en/blog/')
+        .use(require('./helpers')())
+        .use(branch('*.markdown')
+          .use(markdown({
+            gfm: true,
+            tables: true,
+            breaks: false,
+            pedantic: false,
+            sanitize: false,
+            smartLists: true,
+            smartypants: true
+          }))
+          .use(permalinks({
+            pattern: ':id'
+          }))
+        )
+        .use(function(files, metalsmith, done) {
+          for (var path in files) {
+            files[path].title = files[path].name;
+          }
+          done();
+        })
+        .use(layouts({
+          engine: 'eco',
+          directory: './src/layouts/',
+          default: 'author.html.eco'
+        }))
+        .build(function(error) {
+          if (error) {
+            gutil.log('ERROR: ' + error);
+          }
+          done();
+        });
+
+   },
+
     blog: function(done) {
 
       if (lang === 'ja') {
@@ -173,6 +228,7 @@ module.exports = function(lang, isStaging) {
 
               doc.isArticle = true;
               doc.author = authors[doc.author];
+              doc.origContents = doc.contents;
 
               if (!doc.author) {
                 throw new Error('no such author: ' + authorName);
@@ -184,6 +240,24 @@ module.exports = function(lang, isStaging) {
           .use(function(files, metalsmith, done) {
             for (var path in files) {
               files[path].isBlogArticle = true;
+            }
+            done();
+          })
+          .use(tags({
+            handle: 'tags',
+            path: 'tags/:tag.html'
+          }))
+          .use(wordcloud({
+            category: 'tags',
+            path: '/blog/tags'
+          }))
+          .use(function(files, metalsmith, done) {
+            for (var path in files) {
+              var file = files[path];
+
+              if (file.tag) {
+                file.title = 'Articles about "' + file.tag + '"';
+              }
             }
             done();
           })

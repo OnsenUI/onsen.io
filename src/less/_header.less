@@ -11,6 +11,8 @@
   z-index: 20;
   border-bottom: 1px solid #ddd;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.07);
+  border-radius: 1px;
+  background-color: white;
 
   .gnav-icon {
     display: none;
@@ -47,6 +49,12 @@
     line-height: @header-height;
     margin: 0;
     font-size: 0px;
+  }
+
+  &-navi-open {
+    .tablet-query({
+      display: block !important;
+    })
   }
 
   &-navi-item {

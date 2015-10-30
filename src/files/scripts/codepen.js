@@ -14,15 +14,23 @@ $(function() {
       .addClass('codepen')
       .removeClass('codepen-unloaded');
 
+    var showEmbeds = function() {
+      if (CodePenEmbed.showCodePenEmbeds) {
+        CodePenEmbed.showCodePenEmbeds();
+      }
+      else {
+        CodePenEmbed._showCodePenEmbeds();
+      }
+    };
 
     if (window.CodePenEmbed) {
-      CodePenEmbed.showCodePenEmbeds();
+      showEmbeds();
     } else {
       var dom = document.createElement('script');
       $(dom)
         .attr('src', '//assets.codepen.io/assets/embed/ei.js')
         .on('load', function() {
-          CodePenEmbed.showCodePenEmbeds();
+          showEmbeds();
         });
       document.body.appendChild(dom);
       dom = null;

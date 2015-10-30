@@ -1,0 +1,35 @@
+<section class="article article-overview <% if @article.category == 'monaca': %>article-monaca<% end %>">
+  <hr class="article-divider">
+
+  <div class="article-title article-overview-title">
+    <div class="article-title-image"></div>
+    <h2>
+       <a href="<%= @rootUrl %>blog/<%- @article.id %>/"><%= @article.title %></a>
+    </h2>
+
+    <div class="article-avator">
+      <img src="//www.gravatar.com/avatar/<%- @article.author.gravator %>?s=30" alt="" class="article-avator-image">
+    </div>
+    <div class="article-date article-overview-date">
+      BY <a href="/blog/<%- @article.author.id %>/"><%- @article.author.name %></a> / <%- @renderBlogDate @article.date %>
+    </div>
+    <%- @partial('blog-share.html.eco', {id: @article.id, blogTitle: @article.title}) %>
+
+  </div>
+
+  <div class="article-content"><%- @renderArticleIntroAsHTML(@article.origContents) %></div>
+
+  <% if @article.tags: %>
+    <div class="article-tags">
+      <% for tag in @article.tags: %>
+        <a href="<%= @rootUrl %>blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="article-overview-readmore">
+    <a class="site-button" href="<%= @rootUrl %>blog/<%- @article.id %>/">READ MORE</a>
+  </div>
+
+</section>
+

@@ -9,7 +9,7 @@ $(function() {
   });
 
   var iframe = $('iframe');
-  if (iframe.length > 0) {
+  if (iframe.length > 0 && iframe.lazyLoadXT instanceof Function) {
     iframe.lazyLoadXT();
   }
 });
@@ -155,7 +155,8 @@ $(function() {
   // for mobile website menu
   var header = $('.header')[0];
   $('.gnav-icon', header).click(function() {
-    $('.header-navi', header).toggle();
+    $('.header-navi', header).toggleClass('header-navi-open');
+    $('.blog-header-navi', header).toggleClass('blog-header-navi-open');
   });
 
   // for language switch dialog

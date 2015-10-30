@@ -21,11 +21,13 @@ module.exports = function(language, isStaging) {
     },
     fran: {
       name: 'Fran Dios',
+      email: 'fran@asial.co.jp',
       url: 'http://frandiox.com/en/',
       image: '/blog/content/images/2015/Feb/yo2.jpg'
     },
     andi: {
       name: 'Andi Pavllo',
+      email: 'andi@asial.co.jp',
       image: '/blog/content/images/2015/Feb/1423814226357.jpg'
     },
     kruy: {
@@ -35,7 +37,15 @@ module.exports = function(language, isStaging) {
     onsen: {
       name: 'Onsen UI Team',
       url: 'http://onsen.io',
-      image: '/blog/content/images/2014/Mar/blog_author-1.png'
+      gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
+    },
+    amanda: {
+      name: 'Amanda Cline',
+      gravator: 'd293328028341a95e89f13dd84beb449'
+    },
+    moongift: {
+      name: 'Atsushi Nakatsugawa',
+      gravator: '4cafe6a1c6287d64d7252279eeeffa94'
     }
   };
 
@@ -43,6 +53,8 @@ module.exports = function(language, isStaging) {
     if (authors[author].email && (!authors[author].gravator || !authors[author].image)) {
       authors[author].gravator = md5(authors[author].email.toLowerCase());
     }
+
+    authors[author].id = author;
   }
 
   var env = {
