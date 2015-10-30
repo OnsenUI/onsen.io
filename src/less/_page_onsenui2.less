@@ -8,7 +8,7 @@
     color: white;
 
     &-inner {
-      padding: 48px 0 0 0;
+      padding: 48px 0 40px 0;
       background-image: url(/images/2/onsen-mark-bg.png);
       background-repeat: no-repeat;
       background-position: right top;
@@ -48,7 +48,7 @@
       padding: 4px 8px;
       width: 500px;
       max-width: 85%;
-      margin: 60px auto 0 auto;
+      margin: 70px auto 0px auto;
     }
 
     &-quickstart-header {
@@ -66,18 +66,30 @@
       }
     }
 
-    &-link, &-link:link, &-link:visited {
-      color: white;
+  }
+
+  .ref-links {
+    padding: 30px 0 0 0;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+  }
+
+  .ref-link {
+    padding: 8px 24px 8px 12px;
+    font-size: 22px;
+    background-image: url(/images/2/arrow.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    -webkit-font-smoothing: antialiased;
+
+    &:link, &:visited {
+      color: #ff5544;
       text-decoration: underline;
-      font-size: 15px;
     }
 
-    &-link:hover {
+    &:hover {
       text-decoration: none;
-    }
-
-    &-footer {
-      padding: 20px 0 35px 0;
     }
   }
 
@@ -97,9 +109,9 @@
     }
 
     &-summary {
-      margin-top: 30px;
+      margin-top: 20px;
       background-color: #f0f0f0;
-      padding: 10px 30px;
+      padding: 10px 60px;
       border-bottom: 1px solid #ccc;
     }
 
