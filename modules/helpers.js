@@ -147,7 +147,7 @@ module.exports = function() {
         var wrapStart = '';
         var wrapEnd = '';
         if (options.wrapPage) {
-          wrapStart = '<div class="page" style="border: 1px solid #ddd: overflow: hidden;">';
+          wrapStart = '<div class="page" style="border: 1px solid #ddd; overflow: hidden;">';
           wrapEnd = '</div>';
         }
 
