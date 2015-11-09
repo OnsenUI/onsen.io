@@ -22,9 +22,9 @@ We have also added a new component called the `<ons-splitter>` that can be seen 
 
 Onsen UI 2.0 is a UI framework for mobile/hybrid apps. It provides native-like UI components as well as utility functions that help when developing HTML5 mobile apps. It's designed to create hybrid apps with [Cordova](http://cordova.apache.org/) but can be used to create mobile web sites as well.
 
-It aims to provide a native-like UI for mobile apps using HTML5, CSS and JavaScript.
+It provides a native-like UI for mobile apps using HTML5, CSS and JavaScript.
 
-So how is it different from Onsen UI 1.x? Apart from adding a lot of more features we have also made a few fundamental changes to the framework.
+So how is it different from Onsen UI 1.x? Apart from adding many more features, we have also made a few fundamental changes to the framework.
 
 ![ES6 and Web Components](/blog/content/images/2015/Nov/es6-webcomponents.png)
 
@@ -55,14 +55,14 @@ We realize that the documentation is not as extensive yet as the one for Onsen U
 
 As mentioned earlier we will also provide a binding library for AngularJS. We wanted to make migrating to 2.0 as painless as possible so this library is almost 100% compatible with Onsen UI 1.3.
 
-The file structure has been altered slightly so I will give a rundown here. The names of the CSS files have not changed since 1.3 so you can just include them as usual:
+The file structure has been altered slightly so I will give a rundown here. The names of the CSS files have not changed since 1.3, so you can just include them as usual:
 
 ```html
 <link rel="stylesheet" href="onsenui.css">
 <link rel="stylesheet" href="onsen-css-components.css">
 ```
 
-However, for the JS files we have made some small changes. The file named `onsenui.js` now only contains the core library with the Custom Elements but not the Angular bindings. We have added a new file called `angular-onsenui.js` that provides directives and services for AngularJS.
+However, for the JS files we have made some small changes. The file named `onsenui.js` now only contains the core library with the Custom Elements, but not the Angular bindings. We have added a new file called `angular-onsenui.js` that provides directives and services for AngularJS.
 
 To use Onsen UI 2.0 with the Angular bindings you should import the files in the following order:
 
@@ -72,7 +72,7 @@ To use Onsen UI 2.0 with the Angular bindings you should import the files in the
 <script src="angular-onsenui.js"></script>
 ```
 
-To make the download more compact we do not bundle Onsen UI with Angular so it needs to be downloaded separately.
+To make the download more compact we do not bundle Onsen UI with Angular, so it needs to be downloaded separately.
 
 Also, the newly added components have Angular bindings so you can write things like:
 
@@ -121,7 +121,7 @@ The new `<ons-splitter>` component is a truly versatile tool that we hope will h
 
 ![The &lt;ons-splitter&gt; component.](/blog/content/images/2015/Nov/ipad-ons-splitter.png)
 
-It's actually got a lot more features than that. For a more in-depth look please refer to [this blog bost](http://onsen.io/blog/onsen-ui-2-preview-responsive-hybrid-apps-splitter-element/).
+It actually has many more features than that. For a more in-depth look please refer to [this blog bost](http://onsen.io/blog/onsen-ui-2-preview-responsive-hybrid-apps-splitter-element/).
 
 ### Stable version
 
