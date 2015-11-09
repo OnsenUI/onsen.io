@@ -1260,7 +1260,7 @@ The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/re
 
 <h4 id="ShowingPullHook">Displaying Pull Hook</h4>
 
-To display a Pull Hook component, the [`<ons-pull-hook>`](/reference/ons-pull-hook.html) tag is used.
+[`<ons-pull-hook>`](/reference/ons-pull-hook.html) tag is used to create and display a new Pull Hook component. By default, Pull Hook will drag down all the content of the page when pulling it. The attribute `fixed-content` will prevent the page content to be dragged along with the Pull Hook.
 
 ```html
 <ons-pull-hook ng-action="load($done)" var="loader">
@@ -1491,6 +1491,8 @@ If using Onsen UI for a Web application, you typically want a loading screen tha
 </body>
 ```
 
+If no page is provided to `ons-loading-placeholder` attribute it will wait until `ons.resolveLoadingPlaceholder(page)` is called.
+
 <h3 id="UtilityAPIs">Utility APIs</h3>
 
 Onsen UI also provides several general purpose APIs to help make developing your app easier.
@@ -1584,7 +1586,7 @@ ons.ready(function() { });
 
 You can use either [`<ons-if-platform>`](/reference/ons-if-platform.html) attribute or [`ons.platform`](/reference/ons.platform.html) object to detect the platform.
 
-[`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under a specific platform.
+[`<ons-if-platform>`](/reference/ons-if-platform.html) attribute is useful when only displaying contents under some specific platforms. It accepts one or multiple space separated values.
 
 ```html
 <div ons-if-platform="ios">Content for only iPhone and iPad users</div>
@@ -1605,6 +1607,10 @@ In addition to it, `ons.platform` object provides following methods to detect th
 - `ons.platform.isIE()`: Returns `true` if the app is running under Internet Explorer browser.
 - `ons.platform.isIOS7()`: Returns `true` if the running iOS is version 7.0 or later.
 
+For testing purposes it also provides a way to select a platform:
+
+- `ons.platform.select( platform )`: Sets the platform used to render the elements. Possible values are: "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "wp".
+
 <h4 id="Landscapeportraitdetection">Landscape / portrait detection</h4>
 
 Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](/reference/ons-if-orientation.html) attribute can be used to switch content between portrait and landscape.
@@ -1612,6 +1618,10 @@ Similar to `ons-if-platform` attribute, [`<ons-if-orientation>`](/reference/ons-
 ```html
 <div ons-if-orientation="portrait">Content only shown for portrait</div>
 ```
+
+<h4 id="enabledisableanimations">Enable / disable animations</h4>
+
+`ons.enableAnimations()` and `ons.disableAnimations()` are provided for testing purposes and performance on older devices. All the animations will be completely disabled.
 
 <h3 id="DetectingFingerGestures">Detecting Finger Gestures</h3>
 
