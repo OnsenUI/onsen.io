@@ -46,6 +46,10 @@ module.exports = function(language, isStaging) {
     moongift: {
       name: 'Atsushi Nakatsugawa',
       gravator: '4cafe6a1c6287d64d7252279eeeffa94'
+    },
+    takuya: {
+      name: 'Takuya Watanabe',
+      gravator: '7ff040f6fd196a1dbffaea6572095969'
     }
   };
 
