@@ -1,0 +1,131 @@
+---
+author: andreas 
+date: 2015-11-09
+id: announcing-onsen-ui-2-beta
+title: "Announcing the Onsen UI 2.0 Beta"
+tags: tutorial, javascript, plugin, cordova, monaca, facebook
+---
+
+![Announcing Onsen UI 2.0 Beta](/blog/content/images/2015/Nov/onsen2-beta.png)
+
+After several months of hard work we are happy to announce the release of the Onsen UI 2.0 beta version. This release comes packed with new features and beautiful UI components.
+
+One of the new features we are most excited about is the introduction of Material Design into Onsen UI. Material Design lets you easily create a native-like experience for Android users. Of course, the original flat theme is still included so you can now easily create apps that look good and native on both iOS and Android.
+
+Even though this is a completely new version of Onsen UI, we realize that a lot of users have apps written for Onsen UI 1.x and want to upgrade. For this reason we want to make migration easy and painless. We provide a binding library for AngularJS that is almost 100% backwards compatible.
+
+<!-- more -->
+
+We have also added a new component called the `<ons-splitter>` that can be seen as a swiss army knife of mobile app layouting. In a single component it combines the features of both the `<ons-split-view>` and the `<ons-sliding-menu>`.
+
+### What is Onsen UI 2.0?
+
+Onsen UI 2.0 is a UI framework for mobile/hybrid apps. It provides native-like UI components as well as utility functions that help when developing HTML5 mobile apps.
+
+It aims to provide a native-like UI for hybrid apps using HTML5, CSS and JavaScript.
+
+So how is it different from Onsen UI 1.x? Apart from adding a lot of more features we have also made a few fundamental changes to the framework.
+
+![ES6 and Web Components](/blog/content/images/2015/Nov/es6-webcomponents.png)
+
+The biggest change is that we have reimplemented all components as Web Components instead of AngularJS directives. Onsen UI 2.0 is no longer dependent on AngularJS. The core library has no external dependencies as it has been implemented in pure JavaScript.
+
+This means that it can easily be integrated in apps built with other Frameworks. While Onsen UI 1.x was tied to AngularJS, we aim to make Onsen UI 2.0 compatible with most popular frameworks.
+
+Another change we made was to implement the core library using ES6 instead of ES5. This makes the code a lot cleaner and for the distributed version we transpile the code using babel so it can be run in all browsers and devices.
+
+The library being written in ES6 does not imply that Onsen UI apps must be written in ES6. You are free to use plain JavaScript, ES6 or any language that compiles to JavaScript.
+
+### Getting Started
+
+We have set up a simple ["quickstart" repository](https://github.com/OnsenUI/onsenui2-quickstart) so you can get your feet wet.
+
+We have also created [a website solely dedicated to the beta](http://onsen.io/2/) where you can find documentation of all the components as well as code examples and design patterns both for the new Material Design components as well classic iOS flat design patterns.
+
+The site contains
+
+ * [Gallery of the CSS Components](http://onsen.io/2/reference/css.html)
+ * [Reference of the JavaScripts API](http://onsen.io/2/reference/javascript.html)
+
+Finally we have updated the [CSS Components Theme Roller](http://components2.onsen.io) so you can easily customize the colors of the components to add personality and branding to your apps.
+
+We realize that the documentation is not as extensive yet as the one for Onsen UI 1.x. During the beta phase we will, with the help of you the users, work on creating a great user guide for Onsen UI 2.0.
+
+### Migration from Onsen UI 1.x
+
+As mentioned earlier we will also provide a binding library for AngularJS. We wanted to make migrating to 2.0 as painless as possible so this library is almost 100% compatible with Onsen UI 1.3.
+
+The file structure has been altered slightly so I will give a rundown here. The names of the CSS files have not changed since 1.3 so you can just include them as usual:
+
+```html
+<link rel="stylesheet" href="onsenui.css">
+<link rel="stylesheet" href="onsen-css-components.css">
+```
+
+For the JS files we have made some changes. The file named `onsenui.js` now only contains the core library with the Web Components but not the Angular bindings. We have added a new file called `angular-onsenui.js` that provides directives and services for AngularJS.
+
+To use Onsen UI 2.0 with the Angular bindings you should import the files in the following order:
+
+```html
+<script src="onsenui.js"></script>
+<script src="angular.js"></script>
+<script src="angular-onsenui.js"></script>
+```
+
+To make the download more compact we do not bundle Onsen UI with Angular so it needs to be downloaded separately.
+
+Also, the newly added components have Angular bindings so you can write things like:
+
+```html
+  <ons-material-input label="Name" ng-model="name"></ons-material-input>
+  </p>Hello, {{ name }}!</p>
+```
+
+In the documentation, attributes and methods that are only available when using the Angular bindings have been explicitly labeled.
+
+### Material Design
+
+With Onsen UI 2.0 we introduce Material Design components alongside the classic iOS flat design components.
+
+An easy way to take a look at the new Material Design components is our [Theme Roller](components2.onsen.io). For information about how to use them, please take a look at the [JavaScript reference](http://onsen.io/2/reference/javascript.html).
+
+For some components it's as easy as adding a `modifier` attribute:
+
+```html
+<ons-switch></ons-switch>
+```
+
+will render as a iOS switch while if we write
+
+```html
+<ons-switch modifier="material"></ons-switch>
+```
+
+it will be rendered as a Material Design switch.
+
+<p data-height="300" data-theme-id="13819" data-slug-hash="YyJOaP" data-default-tab="result" data-user="argelius" class='codepen'>See the Pen <a href='http://codepen.io/argelius/pen/YyJOaP/'>Switch</a> by Andreas Argelius (<a href='http://codepen.io/argelius'>@argelius</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+For some components we have added a new custom element instead of just a modifier. The reason for this is that some components are impossible to implement using only CSS, and need some JavaScript to get them to work.
+
+One example is the Material input element, which needs some JavaScript to implement the floating label. In this case we have created a new element called `<ons-material-input>`.
+
+<p data-height="200" data-theme-id="13819" data-slug-hash="MaPqXX" data-default-tab="result" data-user="argelius" class='codepen'>See the Pen <a href='http://codepen.io/argelius/pen/MaPqXX/'>Material Input</a> by Andreas Argelius (<a href='http://codepen.io/argelius'>@argelius</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+We have already written [an article](http://onsen.io/blog/material-design-onsen-ui/) about the components. Feel free to check it out for more information about the new components.
+
+### The `<ons-splitter>` component
+
+The new `<ons-splitter>` component is a truly versatile tool that we hope will help developers to create responsive layouts in their hybrid apps. On phones it can be used to create a layout with a swipeable menu while the same code will automatically transform into a two-column on larger screens like tablets. The `<ons-splitter>`
+
+![The &lt;ons-splitter&gt; component.](/blog/content/images/2015/Nov/ipad-ons-splitter.png)
+
+It's actually got a lot more features than that. For a more in-depth look please refer to [this blog bost](http://onsen.io/blog/onsen-ui-2-preview-responsive-hybrid-apps-splitter-element/).
+
+### Stable version
+
+So when will the stable version be ready? We have not decided on a fixed date yet. We want to collect as much feedback as possible before releasing the final stable version. It might take a couple of months before we are content enough to release a stable version.
+
+We want to make this version of Onsen UI as good as we possibly can. Please help us by reporting bugs and suggesting features.
+
