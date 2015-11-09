@@ -8,11 +8,11 @@ tags: onsen2, material design, beta
 
 ![Announcing Onsen UI 2.0 Beta](/blog/content/images/2015/Nov/onsen2-beta.png)
 
-After several months of hard work we are happy to announce the release of the Onsen UI 2.0 beta version. This release comes packed with new features and beautiful UI components.
+After several months of hard work we are happy to announce the release of the Onsen UI 2.0 beta version. This release comes packed with new features and beautiful UI components. We have created a [webpage](http://onsen.io/2/) solely dedicated to the Onsen UI 2.0 beta, complete with documentation and design patterns.
 
 One of the new features we are most excited about is the introduction of Material Design into Onsen UI. Material Design lets you easily create a native-like experience for Android users. Of course, the original flat theme is still included so you can now easily create apps that look good and native on both iOS and Android.
 
-Even though this is a completely new version of Onsen UI, we realize that a lot of users have apps written for Onsen UI 1.x and want to upgrade. For this reason we want to make migration easy and painless. We provide a binding library for AngularJS that is almost 100% backwards compatible.
+Although this is a completely new version of Onsen UI, we realize that a lot of users have apps made using Onsen UI 1.x and want to upgrade. For this reason we want to make migration as easy and painless as humanly possible. We provide a binding library for AngularJS that is almost 100% backwards compatible.
 
 <!-- more -->
 
@@ -20,9 +20,9 @@ We have also added a new component called the `<ons-splitter>` that can be seen 
 
 ### What is Onsen UI 2.0?
 
-Onsen UI 2.0 is a UI framework for mobile/hybrid apps. It provides native-like UI components as well as utility functions that help when developing HTML5 mobile apps.
+Onsen UI 2.0 is a UI framework for mobile/hybrid apps. It provides native-like UI components as well as utility functions that help when developing HTML5 mobile apps. It's designed to create hybrid apps with [Cordova](http://cordova.apache.org/) but can be used to create mobile web sites as well.
 
-It aims to provide a native-like UI for hybrid apps using HTML5, CSS and JavaScript.
+It aims to provide a native-like UI for mobile apps using HTML5, CSS and JavaScript.
 
 So how is it different from Onsen UI 1.x? Apart from adding a lot of more features we have also made a few fundamental changes to the framework.
 
@@ -30,9 +30,9 @@ So how is it different from Onsen UI 1.x? Apart from adding a lot of more featur
 
 The biggest change is that we have reimplemented all components as Web Components instead of AngularJS directives. Onsen UI 2.0 is no longer dependent on AngularJS. The core library has no external dependencies as it has been implemented in pure JavaScript.
 
-This means that it can easily be integrated in apps built with other Frameworks. While Onsen UI 1.x was tied to AngularJS, we aim to make Onsen UI 2.0 compatible with most popular frameworks.
+This means that it can easily be integrated in apps built with other frameworks. While Onsen UI 1.x was tied to AngularJS, we aim to make Onsen UI 2.0 compatible with all the popular frameworks.
 
-Another change we made was to implement the core library using ES6 instead of ES5. This makes the code a lot cleaner and for the distributed version we transpile the code using babel so it can be run in all browsers and devices.
+Another change we made was to implement the core library using ES6 instead of ES5. This makes the code a lot cleaner and for the distributed version we transpile the code using babel so it can be run in all browsers and devices. We have also added a bunch of polyfills to make it work in Windows Phones as well as older versions of Android and iOS.
 
 The library being written in ES6 does not imply that Onsen UI apps must be written in ES6. You are free to use plain JavaScript, ES6 or any language that compiles to JavaScript.
 
@@ -40,7 +40,7 @@ The library being written in ES6 does not imply that Onsen UI apps must be writt
 
 We have set up a simple ["quickstart" repository](https://github.com/OnsenUI/onsenui2-quickstart) so you can get your feet wet.
 
-We have also created [a website solely dedicated to the beta](http://onsen.io/2/) where you can find documentation of all the components as well as code examples and design patterns both for the new Material Design components as well classic iOS flat design patterns.
+We have also created [a website solely dedicated to the beta](http://onsen.io/2/) where you can find documentation for all the components as well as code examples and design patterns both for the new Material Design components as well classic iOS flat design patterns.
 
 The site contains
 
@@ -62,7 +62,7 @@ The file structure has been altered slightly so I will give a rundown here. The 
 <link rel="stylesheet" href="onsen-css-components.css">
 ```
 
-For the JS files we have made some changes. The file named `onsenui.js` now only contains the core library with the Web Components but not the Angular bindings. We have added a new file called `angular-onsenui.js` that provides directives and services for AngularJS.
+However, for the JS files we have made some small changes. The file named `onsenui.js` now only contains the core library with the Custom Elements but not the Angular bindings. We have added a new file called `angular-onsenui.js` that provides directives and services for AngularJS.
 
 To use Onsen UI 2.0 with the Angular bindings you should import the files in the following order:
 
@@ -117,7 +117,7 @@ We have already written [an article](http://onsen.io/blog/material-design-onsen-
 
 ### The `<ons-splitter>` component
 
-The new `<ons-splitter>` component is a truly versatile tool that we hope will help developers to create responsive layouts in their hybrid apps. On phones it can be used to create a layout with a swipeable menu while the same code will automatically transform into a two-column on larger screens like tablets. The `<ons-splitter>`
+The new `<ons-splitter>` component is a truly versatile tool that we hope will help developers when creating responsive layouts in their hybrid apps. On phones it can be used to create a layout with a swipeable menu while the same code will automatically transform into a two-column on larger screens like tablets. The `<ons-splitter>`
 
 ![The &lt;ons-splitter&gt; component.](/blog/content/images/2015/Nov/ipad-ons-splitter.png)
 
@@ -125,7 +125,9 @@ It's actually got a lot more features than that. For a more in-depth look please
 
 ### Stable version
 
-So when will the stable version be ready? We have not decided on a fixed date yet. We want to collect as much feedback as possible before releasing the final stable version. It might take a couple of months before we are content enough to release a stable version.
+So when will the stable version be ready? We have not decided on a fixed date yet. We want to collect as much feedback as possible before releasing the final stable version. It might take a couple of months before we are content enough to release.
 
-We want to make this version of Onsen UI as good as we possibly can. Please help us by reporting bugs and suggesting features.
+We want to make this version of Onsen UI as good as we possibly can. Please help us by reporting bugs and suggesting features on our [GitHub issues page](https://github.com/OnsenUI/OnsenUI/issues/new). We also love getting pull request. If you want to fix a bug or add a feature, please feel free to open a pull request.
+
+You can also help by fixing one of the current [issues](https://github.com/OnsenUI/OnsenUI/issues) and submitting a pull request. Please take a look at the list and see if there's anything you feel you can solve. If you have any questions or want to discuss something you can come to our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI/~chat#).
 
