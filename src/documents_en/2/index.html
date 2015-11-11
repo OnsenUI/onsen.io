@@ -76,8 +76,8 @@ layout: '2.html.eco'
 
     <p>Although Onsen UI 2.0 is no longer AngularJS dependent, we provide AngularJS binding to supplement AnuglarJS cool features. To include ng-* bindings, please include “angular-onsenui.js" after loading onsenui.js.</p>
 
-    <pre><code class="html">&lt;script src="angular.js"&gt;&lt;/script&gt;
-&lt;script src="onsenui.js"&gt;&lt;/script&gt;
+    <pre><code class="html">&lt;script src="onsenui.js"&gt;&lt;/script&gt;
+&lt;script src="angular.js"&gt;&lt;/script&gt;
 &lt;script src="angular-onsenui.js"&gt;&lt;/script&gt;</code></pre>
   </article>
 
@@ -100,11 +100,19 @@ $ gulp serve</code></pre>
 
     <p>With bower:</p>
 
-    <pre><code class="bash">$ bower install onsen@2.0.0-beta</code></pre>
+    <pre><code class="bash">$ bower install onsen#2.0.0-beta</code></pre>
 
     <p>With npm:</p>
 
     <pre><code class="bash">$ npm install onsen@2.0.0-beta</code></pre>
+
+    Onsen UI 2.0 can be used with browserify:
+
+    <pre><code class="bash">var onsen = require('onsenui/js/onsenui');
+
+onsen.ready(function() {
+  onsen.notification.alert({message: 'Onsen UI works with browserify!'});
+});</code></pre>
 
     <h3 class="content-article-header3">3. Develop Your App</h3>
 
