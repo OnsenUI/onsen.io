@@ -1,6 +1,6 @@
 ---
 author: andreas
-date: 2015-11-10
+date: 2015-11-11
 id: announcing-onsen-ui-2-beta
 title: "Announcing the Onsen UI 2.0 Beta"
 tags: onsen2, material design, beta
@@ -35,6 +35,8 @@ This means that it can easily be integrated in apps built with other frameworks.
 Another change we made was to implement the core library using ES6 instead of ES5. This makes the code a lot cleaner and for the distributed version we transpile the code using babel so it can be run in all browsers and devices. We have also added a bunch of polyfills to make it work in Windows Phones as well as older versions of Android and iOS.
 
 The library being written in ES6 does not imply that Onsen UI apps must be written in ES6. You are free to use plain JavaScript, ES6 or any language that compiles to JavaScript.
+
+For a complete list of changes, please refer to the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
 
 ### Getting Started
 
@@ -112,6 +114,12 @@ One example is the Material input element, which needs some JavaScript to implem
 
 <p data-height="200" data-theme-id="13819" data-slug-hash="MaPqXX" data-default-tab="result" data-user="argelius" class='codepen'>See the Pen <a href='http://codepen.io/argelius/pen/MaPqXX/'>Material Input</a> by Andreas Argelius (<a href='http://codepen.io/argelius'>@argelius</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+To check out some of the new components, take a look at the Onsen UI 2.0 docs:
+
+* [CSS reference](http://onsen.io/2/reference/css.html)
+* [JavaScript reference](http://onsen.io/2/reference/javascript.html)
+* [Theme Roller](http://components2.onsen.io/)
 
 We have already written [an article](http://onsen.io/blog/material-design-onsen-ui/) about the components. Feel free to check it out for more information about the new components.
 
