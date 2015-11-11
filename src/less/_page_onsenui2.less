@@ -1,5 +1,4 @@
 #onsenui2-landing {
-
   .first-view {
     -webkit-font-smoothing: antialiased;
     text-align: center;
@@ -49,6 +48,10 @@
       width: 500px;
       max-width: 85%;
       margin: 70px auto 0px auto;
+
+      &-prompt::before {
+        content: '$ ';
+      }
     }
 
     &-quickstart-header {
