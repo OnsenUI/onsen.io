@@ -17,6 +17,28 @@
       color: white;
     }
 
+    &-social {
+      min-height: 30px;
+      margin: 20px auto 0px auto;
+
+      &-twitter, &-facebook, &-gplus {
+        display: inline-block;
+      }
+
+      &-facebook {
+        margin: 0 40px;
+        vertical-align: 6px;
+
+        .tablet-query({
+          margin: 0 10px;
+        });
+      }
+
+      &-gplus {
+        vertical-align: 2px;
+      }
+    }
+
     &-title {
       font-size: 53px;
       margin: 10px auto 0 auto;
@@ -47,7 +69,7 @@
       padding: 4px 8px;
       width: 500px;
       max-width: 85%;
-      margin: 70px auto 0px auto;
+      margin: 20px auto 0px auto;
 
       &-prompt::before {
         content: '$ ';
