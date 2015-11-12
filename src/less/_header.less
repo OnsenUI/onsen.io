@@ -36,9 +36,27 @@
 
   &-logo-image {
     position: absolute;
-    top: 20px;
+    top: 18px;
     left: 14px;
     height: 32px;
+  }
+
+  &-news {
+    position: absolute;
+    top: 26px;
+    left: 170px;
+  }
+
+  &-news-link {
+    font-size: 14px;
+    &:link, &:visited {
+      color: @onsen-red;
+      text-decoration: underline;
+    }
+    &:hover {
+      color: @onsen-red;
+      text-decoration: none;
+    }
   }
 
   &-navi {

@@ -1,7 +1,7 @@
 <div id="header-monaca">
   <div id="header-monaca-inner">
     <a href="http://monaca.io"><img src="/images/header/monaca_logo.png"></a>
-    
+
     <% if @lang == 'en': %>
     <ul id="header-monaca-navi">
       <li><a href="#">Other Products</a>
@@ -14,9 +14,9 @@
           <li><a href="http://www.kidozen.com">KidoZen</a></li>
         </ul>
       </li>
-    <li>
-    <a href="http://monaca.mobi/en/page/company">About Us</a>
-    </li>
+      <li>
+        <a href="http://monaca.mobi/en/page/company">About Us</a>
+      </li>
       <li>
         <a href="http://monaca.mobi/en/showcase">Showcase</a>
       </li>
@@ -66,7 +66,13 @@
 <header class="header">
   <div class="header-inner">       
     <a href="/" class="header-logo"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="header-logo-image"></a>
+
+    <% if @lang == 'en': %>
+    <div class="header-news"><a class="header-news-link" href="/blog/announcing-onsen-ui-2-beta/" target="_blank">v2.0 Beta Released!</a></div>
+    <% end %>
+    
     <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg"></a></div>
+
     <ul class="header-navi">
       <% if @lang == "en": %>
         <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
