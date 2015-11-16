@@ -1,0 +1,102 @@
+---
+author: andi
+date: 2015-11-16
+id: cordova-5-2-hits-monaca-release-notes-revealed
+title: "Cordova 5.2 Hits Monaca, Release Notes Revealed!"
+tags: monaca, cordova 5.2, release notes
+---
+
+![Cordova 5.2 Hits Monaca, Release Notes Revealed!](/blog/content/images/2015/Nov/cordova-main.png)
+
+We are happy to announce that soon will update Monaca's Cordova to version 5.2. Therefore, we have prepared a guidance for completely migrating existing projects (with Cordova version 3.5 or 4.1) to 5.2.
+
+<!-- more -->
+
+### Monaca Support Policy for Cordova 5.2
+
+* New projects will be automatically created as Cordova 5.2.
+
+* You need manually update your project to migrate to Cordova 5.2. A backup of the project is automatically created before conversion.
+
+* Once Cordova 5.2 is updated, you cannot downgrade to older Cordova versions.
+
+### New Cordova Plugins
+
+Two new plugins will be added into Monaca core plugins.
+
+1) Whitelist Plugin: This plugin is used to enhance security configuration for the app. Please note that you cannot remove this plugin. This plugin only applies to Android platform.
+
+2) Crosswalk Plugin: This plugin enables your application to use Crosswalk engine for Android devices.
+
+### Other Cordova Plugin Changes
+
+* All Monaca core plugins will be updated to the newer version.
+
+* Monaca Enterprise plugins are not supported at the moment. We will support them soon.
+
+* Monaca Bluetooth Plugin is removed from core plugins.
+
+### Android Platform Changes
+
+* Please use Monaca Debugger 5.0 for debugging Cordova 5 apps.
+
+* Android Debugger and High Performance (Crosswalk) Debugger are integrated. Therefore, please debug Crosswalk WebView apps using Monaca Debugger. The debugger will automatically switch its WebView based on the project settings.
+
+* Crosswalk version is updated from 13.42.319.11 to 14.43.343.25. You can now change the Crosswalk version in the plugin configuration (requires a valid plan).
+
+* Cordova 5 apps require Android 4.0 or higher.
+
+* Cordova Android platform is updated from 3.6.3 to 4.1.1, and API LEVEL is set to 22.
+
+* Config.xml AppBackgroundColor has been discontinued.
+
+* Debugger cannot simulate [Allow External Access URL] configuration in the Android settings.
+
+### iOS Platform Changes
+
+* Cordova iOS platform is updated from 3.7.0 to 3.9.1.
+
+* Cordova 5 apps require iOS 8.0 or higher.
+
+* Xcode version is updated from 6.2 to 6.4.
+
+### Updating Project to Cordova 5.2
+
+1) From Monaca Cloud IDE, go to **Config → Manage Cordova Plugins**.
+
+2) Select the preferred Cordova Version from the dropdown list as shown below.
+
+![change-cordova1](/blog/content/images/2015/Nov/change-cordova1.png)
+
+### Changing WebView and Crosswalk Version
+
+1) From Monaca Cloud IDE, go to **Config → Cordova Plugins**.
+
+2) Enable the Crosswalk WebView Engine (see the screenshot below).
+
+![change-cordova2](/blog/content/images/2015/Nov/change-cordova2.png)
+
+3) After enabling the Crosswalk WebView Engine, you can also change its version by clicking on **Settings** button.
+
+![change-cordova3](/blog/content/images/2015/Nov/change-cordova3.png)
+
+4) Then, the following dialog will appear. You can change either plugin version or Crosswalk version. However, not all version combination between the two are applicable. After finishing your configuration, click **OK**.
+
+![change-cordova4](/blog/content/images/2015/Nov/change-cordova4.png)
+
+### Changing Cordova Plugin Version
+
+1) From Monaca Cloud IDE, go to **Config → Cordova Plugins**.
+
+2) Click on **Settings** button of the plugin.
+
+![change-cordova5](/blog/content/images/2015/Nov/change-cordova5.png)
+
+3) Then, choose the desired version of the plugin and click **OK**.
+
+![change-cordova6](/blog/content/images/2015/Nov/change-cordova6.png)
+
+### Conclusion
+
+So, what do you think about these changes? Let us know, we are always open to new suggestions!
+
