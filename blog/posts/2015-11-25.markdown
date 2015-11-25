@@ -9,26 +9,18 @@ tags: Monaca, LocalKit
 
 
 Monaca Localkit provides a local development option for your Monaca applications. This blog post will highlight 6 things you can do with Monaca LocalKit.
-<!-- 
-Monacaアプリの開発がローカル環境で可能になるMonaca Localkit、お使いでしょうか。今回の記事ではMonaca Cloudとどう違うのか、どういった方々にMonaca Localkitが向いているのかについて紹介したいと思います。 -->
-
 <!-- more -->
 
 ### 1. Better version controll
-<!-- バージョン管理が使いやすい -->
 
 Monaca Localkit gives you better version controll because all of your files are stored locally. With you file stored locally, you can easily use a number of version controll system such as Git, Subversion, and Mercurial. Of course you will be able store the data on Github.
-<!-- Monaca Localkitは必要なファイルがローカルに配置されています。そのためGitであったり、Subversion、Mercurialといったバージョン管理システムとの接続がとても容易です。もちろんGitHubにデータを保存することもできます。 -->
 
 
 ### 2. Combine with various builders
-<!-- 各種ビルダーとの組み合わせ -->
 
 In contrast to integrated preview function on Monaca Cloud, you will need to prepare your own with Monaca Localkit. In that case, there are various options like Gulp and Grunt to build or deploy HTTP server.
-<!-- Monaca Cloudの場合、予めWebブラウザでプレビューできる機能がありましたが、Monaca Localkitを使った場合は自分で用意するのが一般的です。そんな時、GulpであったりGruntなどと組み合わせることでビルド作業であったり、HTTPサーバを立てたりするのが簡単になります。 -->
 
 You can easily minify or combine JavaScript / CSS files using Gulp. Additionally, if you use Bower installing external library can also be simple as ABC.
-<!-- Gulpを使うことでJavaScript/スタイルシートファイルを編集したらミニファイしたり、連結するようなことも簡単にできるようになります。他にもBowerを使って外部ライブラリを容易にインストールすることもできるでしょう。 -->
 
 
 ### 3. Easy to use alternative language
@@ -37,57 +29,31 @@ Using Gulp or Grunt gives us another advantage. Some of you may use preprocessor
 
 LocalKit gives a flexibility by not sacrificing advantages of alternative languages. Make use of those alternative languages while creating Monaca applications and speed up your development.
 
-<!-- 
-Gulp、Gruntなどを使うもう一つの利点として、JavaScriptやCSS、HTMLの代替言語が使いやすいというのが挙げられます。JavaScriptであったらCoffeeScriptやTypeScriptであったり、スタイルシートであればLessやSassがよく知られています。HTMLにおいてもHamlのような軽量なマークアップ言語があります。
 
-そうした代替言語を使ってMonacaアプリを作成しつつ、編集したタイミングでHTML/JavaScript/CSSファイルを生成するようにすれば開発はとてもスムーズになるのではないでしょうか。 -->
-
-
-### 4. Editor of your choice 
-<!-- 好きなエディタが使える -->
+### 4. Editor of your choice
 
 One of the most important advantages using LocalKit is that you can use the editor you are used to. As you know, there are many kinds of editors available Textmate, Emacs, Vim, Sublime Text, Atom and many more. Of course, you can use IDEs such as Visual Studion, Webstorm, and Eclipse.
 
-<!-- 
-そして大きな利点の一つがWebブラウザ上のIDEではなく、自分の好きなエディタが使えるということでしょう。秀丸エディタ、Textmate、Emacs、Vim、Sublimetext、Atomなど多くのエディタが存在します。Visual StudioやWebstorm、EclipseのようなIDEを使うこともできます。
- -->
-
 Using the editor you are familiar with will dramatically increase your development speed unquestionably.
-<!-- 
-普段使い慣れたエディタを使って開発できればそれだけで開発効率は向上するでしょう。 -->
 
 
 ### 5. Debug with Chrome Dev Tools
-<!-- Chrome Dev Toolsでデバッグできる -->
 
 Localkit has a built-in the debugging tool. Just plug the device into the computer via an USB cable to debug with Chrome Dev Tools. Dinamically changed DOM inspection, break points, and step executions are all possible with LocalKit.
 
-<!-- Monaca Localkitを使いつつUSBケーブルで母艦とつなぐことでChrome Dev Toolsを使ったデバッグ環境が使えるようになります。JavaScriptで動的に変更したDOMの確認はもちろん、ブレークポイントやステップ実行に使うこともできます。 -->
-
 Specified DOM element will be highlighted even on the smartphone. Your debug efficiency will be greatly improved.
-<!-- 
-指定したDOMがスマートフォン上でもハイライト表示されるなど、デバッグ効率が大幅に向上するはずです。 -->
 
 
 ### 6. Unit testing
-<!-- ユニットテストができる -->
 
 It's not limited in application development, but testing is an important process in the development. Automated testing is now easier with Monaca LocalKit. Monaca applications had difficulty with automated testing because it was an IDE on the web browser while LocalKit allows you to do testing on the fly.
-<!-- 
-アプリに限った話ではありませんが、開発を行う上でテストはとても大事です。これまでのMonacaアプリの場合、Web上のIDEであるために自動テストがしづらいという問題がありました。その点、ローカルであればいつでも自由にユニットテストが行えます。 -->
 
 There are many possibilities. For example, you can run a test when you push on GitHub and build on Monaca Cloud if it passes the test.
 Monaca LocalKit will be an essential tool for creating more automated development environment.
-
-<!-- 
-GitHubなどにプッシュしたタイミングでテストを行ったり、それが通ったらMonaca Cloudでビルドすると言ったような操作も考えられるでしょう。より自動化された開発環境を作る上でMonaca Localkitは欠かせないツールと言えるでしょう。 -->
 
 
 ### Conclusion
 
 There are a lot more advantages using Monaca LocalKit, for example, developping without an Internet connection. But first and foremost, we would like you to try the stress-free development environment with Monaca LocalKit.
-<!-- 
-Monaca Localkitを使うメリットは他にも考えられますが（インターネット接続がなくても開発できるなど）、何よりもまず使ってみてもらうのが早いと思います。ビルドだけクラウド上で行い、普段の開発はMonaca LocalkitとMonacaデバッガーを使ってさくさくと進められる楽しさが感じられるはずです。 -->
 
 [Monaca LocalKit - Local Development Environment](https://monaca.io/localkit.html)
-<!-- Monaca Localkit - ローカル型HTML5ハイブリッドアプリ開発ツール -->
