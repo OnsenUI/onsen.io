@@ -12,10 +12,6 @@ We've introduced some advantages using Monaca LocalKit in [this blog post]().
 One of the big advantages we pointed out was ease of automated testing when you use Monaca LocalKit.
 Today, we are introducing some of the JavaScript unit test frameworks.
 
-<!-- LocalKitを使っているなら自動テストも簡単。JavaScriptテストフレームワークまとめ -->
-<!-- 
-LocalKitを使うメリットの一つにテストフレームワークが容易に使えるようになるという点が挙げられます。そこで今回は開発したJavaScriptコードでユニットテストを実現するためのフレームワークを紹介します。 -->
-
 
 <!-- more -->
 
@@ -26,7 +22,6 @@ LocalKitを使うメリットの一つにテストフレームワークが容易
 ![Jasmine](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-1.png)
 
 Jasmine is a testing framework that has a similar syntax as RSpec. For example:
-<!-- JasmineはRSecに似た記述のテスト文法をもったテストフレームワークとなっています。例えば次のように記述します。 -->
 
 ```javascript
 describe("CallTracker", function() {
@@ -54,7 +49,6 @@ describe("CallTracker", function() {
 ```
 
 In here, we are comparing returned values and expected values with `expect` function.
-<!-- expectで取得される値と期待される値とを比較する形になります。 -->
 
 #### [QUnit](https://qunitjs.com/)
 
@@ -63,7 +57,6 @@ In here, we are comparing returned values and expected values with `expect` func
 
 QUnit framework has been around for a while. You might be familiar with their result screen on a web browser.
 Testing code is as follows:
-<!-- QUnitは長く知られているユニットテストフレームワークになります。HTMLの結果画面を見たことがある方も多いのではないでしょうか。テストコードは次のように書きます。 -->
 
 
 ```javascript
@@ -76,14 +69,10 @@ QUnit.test("prettydate basics", function( assert ) {
 ```
 
 QUnit was originally developed as part of jQuery. But a rewrite in 2009 made QUnit runs completely standalone.
-<!-- 元々jQueryから派生したツールと言うこともあり、jQuery必須となっています。 -->
-
 
 #### [alexyoung/riotjs](https://github.com/alexyoung/riotjs)
 
 riotjs is a JavaScript implimentation of Riot.
-<!-- riotjsはRubyのテストフレームワークRiotのJavaScript版です。テストは次のように記述します。
- -->
 
 ```javascript
 Riot.run(function() {
@@ -111,7 +100,6 @@ Riot.run(function() {
 ```
 
 It will run on a browser, Rhino, or Node.
-<!-- ブラウザの他、RhinoやNodeでも動作します。 -->
 
 
 #### [Unit testing framework for Javascript - Unit JS](http://unitjs.com/)
@@ -120,7 +108,6 @@ It will run on a browser, Rhino, or Node.
 
 
 Unit.js also runs on a browser or Node. It has it's own unique syntax.
-<!-- Unit.jsもWebブラウザ、Nodeの両方で動作します。書き方が独特かも知れません。 -->
 
 
 ```javascript
@@ -152,13 +139,11 @@ test.value(req).hasHeaderJson();
 ```
 
 There is a `test` variable contains Unit.js module. From that variable, you can do various testings like properties, length, RegEx and so on.
-<!-- testというオブジェクトがあり、その下に変数の型を指定してプロパティや文字の長さ、正規表現などでチェックを行います。 -->
 
 
 #### [nathansobo/screw-unit](https://github.com/nathansobo/screw-unit)
 
 Screw.Unit is Behavior-Driven Testing framework for JavaScript.  It has familiar RSpec-like and readable syntax.
-<!-- Screw.UnitはBDDフレームワーク（ビヘイビア駆動開発）になります。RSpecに似た記述で、より仕様が分かりやすい文章を使ってテストを記述します。 -->
 
 
 ```javascript
@@ -187,7 +172,6 @@ describe("a nested describe", function() {
 ![Protractor](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-4.png)
 
 Protractor is a E2E test framework for AngularJS. Protractor will be a great choice if you are developing AngularJS application.
-<!-- ProtractorはAngularJS用のE2Eテストフレームワークになります。専用ということもありますのでAngularJSアプリの場合はProtractorを使うのが良さそうです。 -->
 
 
 ```javascript
@@ -215,8 +199,7 @@ describe('angularjs homepage todo list', function() {
 ![Mocha](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-5.png)
 
 Mocha is JavaScript test framework made testing simple and fun. It runs on a browser and Node. Syntax is similar to Jasmine.
-<!-- Mochaはシンプルなテストフレームワークになっています。ブラウザでもNodeでも動作します。コードはJasmineなどに近いものになります。
- -->
+
 
 ```javascript
 var assert = require("assert")
@@ -232,10 +215,6 @@ describe('Array', function() {
 
 ### Conclusion
 
-
 Make sure to cover a variety of test to deliver your high-quality applications with these testing frameworks.
 Many of the frameworks we discussed here works with a browser and Node. So do unit test over JavaScript implementation  when developing Monaca application.
 Protractor will be a great choice if you are developing apps with our Onsen UI 1.x. 
-
-<!-- 今回紹介したフレームワークはWebブラウザやNodeで実行するものが多くなっています。そのため、MonacaアプリのJavaScript実装部分においてユニットテストができるでしょう。 -->
-<!-- もしOnsen UIを使われているならばProtractorは良い選択肢になるかと思います。品質高いアプリを目指し、しっかりとテストを作り込んでください。 -->
