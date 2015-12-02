@@ -39,10 +39,6 @@ module.exports = function(language, isStaging) {
       url: 'http://onsen.io',
       gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
     },
-    amanda: {
-      name: 'Amanda Cline',
-      gravator: 'd293328028341a95e89f13dd84beb449'
-    },
     moongift: {
       name: 'Atsushi Nakatsugawa',
       gravator: '4cafe6a1c6287d64d7252279eeeffa94'
