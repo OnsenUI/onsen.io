@@ -82,6 +82,7 @@ layout: '2.html.eco'
           </label>
 
           Apple
+          <div style="opacity:0.7;font-size:14px;margin-top:4px;">A very tasty fruit.</div>
         </li>
       </ul>
 
@@ -169,6 +170,100 @@ layout: '2.html.eco'
             <i class="zmdi zmdi-refresh"></i>
           </span>
         </div>
+      </div>
+
+      <div style="margin: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); background-color: white; height: 150px;"></div>
+      <div style="margin: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); background-color: white; height: 150px;"></div>
+      <div style="margin: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); background-color: white; height: 150px;"></div>
+
+    </div>
+
+    <% end %>
+  </div>
+
+  <div class="css-component">
+    <h3>Material Tabs</h3>
+
+    <%- @cssExample {wrapPage: true, minHeight: 100}, -> %>
+    <div class="tab-bar tab-bar--top tab-bar--material">
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a" checked="checked">
+        <button class="tab-bar__button tab-bar--material__button">
+          Music
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Movies
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Books
+        </button>
+      </label>
+
+      <label class="tab-bar__item tab-bar--material__item">
+        <input type="radio" name="tab-bar-material-a">
+        <button class="tab-bar__button tab-bar--material__button">
+          Games
+        </button>
+      </label>
+    </div>
+    <% end %>
+
+    <%- @cssShowcase -> %>
+    <div class="page--material">
+
+      <div class="navigation-bar navigation-bar--material navigation-bar--noshadow">
+        <div class="navigation-bar__left navigation-bar--material__left">
+          <span class="toolbar-button toolbar-button--material">
+            <i class="zmdi zmdi-menu"></i>
+          </span>
+        </div> 
+        <div class="navigation-bar__center navigation-bar--material__center">Tabs</div> 
+        <div class="navigation-bar__right navigation-bar--material__right">
+          <span class="toolbar-button toolbar-button--material">
+            <i class="zmdi zmdi-search"></i>
+          </span>
+          <span class="toolbar-button toolbar-button--material">
+            <i class="zmdi zmdi-refresh"></i>
+          </span>
+        </div>
+      </div>
+
+      <div class="tab-bar tab-bar--top tab-bar--material">
+        <label class="tab-bar__item tab-bar--material__item">
+          <input type="radio" name="tab-bar-material-a" checked="checked">
+          <button class="tab-bar__button tab-bar--material__button">
+            Music
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--material__item">
+          <input type="radio" name="tab-bar-material-a">
+          <button class="tab-bar__button tab-bar--material__button">
+            Movies
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--material__item">
+          <input type="radio" name="tab-bar-material-a">
+          <button class="tab-bar__button tab-bar--material__button">
+            Books
+          </button>
+        </label>
+
+        <label class="tab-bar__item tab-bar--material__item">
+          <input type="radio" name="tab-bar-material-a">
+          <button class="tab-bar__button tab-bar--material__button">
+            Games
+          </button>
+        </label>
       </div>
 
       <div style="margin: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); background-color: white; height: 150px;"></div>
