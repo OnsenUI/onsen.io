@@ -27,7 +27,12 @@
 
   <script src="//use.typekit.net/bys8jdj.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
-
+  <script>
+    window.SITE_ENV = {
+      lang: <% if @lang == 'en': %>'en'<% else: %>'ja'<% end %>,
+      hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
+    };
+  </script>
   <script>
     (function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
