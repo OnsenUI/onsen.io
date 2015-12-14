@@ -4,8 +4,8 @@ name: "Andi Pavllo"
 gravatar: fdc813eb181ac5366025115510b371d7
 ---
 
-Andi is a programmer from Italy currently living in Tokyo. He has studied Computer Science and Engineering at University of Bologna, Italy. His passion for different cultures brought him to spend one semester at the University of Paris-Est Marne-la-Vallée in France, which made him even more motivated about discovering the world. He joined Onsen UI team as an intern in 2015. After the scholarship period was over, he decided to continue to live in Japan and, with big happiness, he was able to continue to work on Onsen UI.
+Andi’s childhood interest in Data Management, Business Intelligence, Computer Security and discovering different cultures led his decision to study Computer Science and Engineering in Italy, France and Japan. What initially started as a short-term internship program in Tokyo evolved into life-changing decision to move to Japan and continue working on Onsen UI.
 
-He likes to spend his free time traveling and getting in touch with new cultures, enjoying nice food and drink with friends, watching movies and dramas, reading, photography and, of course, learning Japanese. He is also a big sports fan, addicted to soccer and motorsport.
+Just like with coding, Andi enjoys diversity in daily life. When he is not writing multiplatform code, he enjoys exploring multicultural environments, nice food and drinks with friends, watching movies and dramas, as well as capturing stunning photographs.
 
-Even if the projects in which he is involved are mostly related to Web and Mobile Development, he is also very interested in Data Management, Business Intelligence and Computer Security, which has fascinated him since he was a kid.
+In addition to speaking quite a few languages (including newly acquired Japanese),  Andi speaks openly about his passion for soccer and motorsport.

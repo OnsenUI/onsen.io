@@ -5,8 +5,9 @@ gravatar: 99e1126ed06c2c997f60dc595f14a3f0
 url: http://argeli.us/
 ---
 
-Andreas is a programmer from Sweden. He's been working in Japan as a JavaScript engineer on the Onsen UI team since 2014.
+After his studies of engineering and mathematics, Andreas worked as a programmer in Sweden. As he could not deny his love for Japanese food and language, he moved to Tokyo to enjoy the local lifestyle and lead the Onsen UI development team. 
 
-He studied engineering and mathematics at Lund University in Sweden. After graduating from university he worked for a couple of years in Sweden before deciding to move to Japan. The move was mainly motivated by a love of Japanese food and an interest in the Japanese language.
+He lives by the rule of speed and efficiency, which he applies to Onsen UI, as well as every running training. His team is very supportive of his framework and UI components projects, as well as his upcoming Yokohama Marathon participation.
 
-When he is not writing code, Andreas enjoys cooking and drinking beer.
+When he is not writing code (or running away from it), Andreas enjoys cooking and drinking beer.
+
