@@ -50,7 +50,7 @@ gulp.task('metalsmith', function(done) {
 // imagemin
 //////////////////////////////
 gulp.task('imagemin-core', function() {
-  return gulp.src('src/files/images/**/*.png')
+  return gulp.src('src/files/images/**/*')
     .pipe($.imagemin())
     .pipe(gulp.dest('src/files/images/'));
 });
