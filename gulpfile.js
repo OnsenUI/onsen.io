@@ -58,7 +58,7 @@ gulp.task('imagemin-core', function() {
 gulp.task('imagemin-blog', function() {
   return gulp.src('blog/content/images/**/*')
     .pipe($.imagemin())
-    .pipe(gulp.dest('src/files/images/'));
+    .pipe(gulp.dest('blog/content/images/'));
 });
 
 gulp.task('imagemin', ['imagemin-core', 'imagemin-blog']);
