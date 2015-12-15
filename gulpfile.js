@@ -177,7 +177,7 @@ gulp.task('deploy', ['clean', 'generate'], function() {
       path.dirname = '2/OnsenUI/build/' + path.dirname;
     }));
 
-  var headers = env == 'production' ? {'Cache-Control': 'max-age=900, no-transform, public'} : {'Cache-Control': 'no-cache'};
+  var headers = env == 'production' ? {'Cache-Control': 'max-age=3600, no-transform, public'} : {'Cache-Control': 'no-cache'};
 
   var stream = merge(site, templates, build, build2)
     .pipe($.awspublish.gzip())
