@@ -15,6 +15,7 @@ checkout:
     - cd 2/OnsenUI; git fetch --tags; git checkout master; git pull; # Check out master branch.
 dependencies:
   override:
+    - sudo apt-get update; sudo apt-get install g++
     - npm install
     - cd project-templates; npm install
     - cd OnsenUI; npm install
