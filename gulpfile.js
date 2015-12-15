@@ -49,11 +49,19 @@ gulp.task('metalsmith', function(done) {
 //////////////////////////////
 // imagemin
 //////////////////////////////
-gulp.task('imagemin', function() {
+gulp.task('imagemin-core', function() {
   return gulp.src('src/files/images/**/*.png')
     .pipe($.imagemin())
     .pipe(gulp.dest('src/files/images/'));
 });
+
+gulp.task('imagemin-blog', function() {
+  return gulp.src('blog/content/images/**/*')
+    .pipe($.imagemin())
+    .pipe(gulp.dest('src/files/images/'));
+});
+
+gulp.task('imagemin', ['imagemin-core', 'imagemin-blog']);
 
 //////////////////////////////
 // less
