@@ -17,6 +17,7 @@ dependencies:
   override:
     - sudo apt-get update; sudo apt-get install g++
     - npm install
+    - sudo npm install -g gulp
     - cd project-templates; npm install
     - cd OnsenUI/css-components; npm install; gulp build;
     - cd OnsenUI; npm install; gulp build;
