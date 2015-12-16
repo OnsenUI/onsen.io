@@ -1,0 +1,99 @@
+---
+author: moongift
+date: 2015-12-16
+id: 3-ways-to-save-important-data-in-monaca
+title: "3 ways to save important data in Monaca Apps"
+category: monaca
+tags: monaca, security, cordova
+---
+
+Building secure applications is a challenge you might face while developing Monaca applications.
+Important data, such as payment information or personal files, are potentially dangerous if it falls into the wrong hands.
+Today, we are introducing 3 ways to ensure the security of your applications' data.
+<!--
+Monacaでアプリを開発していて、外部に漏洩できない重要なデータを保持したいと思うことがあるはずです。今回はその方法について幾つか紹介します。 -->
+
+
+<!-- more -->
+
+#### Contents
+1. Using KeychainPlugin
+2. Using Server-Side
+3. Using Secure Storage
+
+
+#### Using KeychainPlugin
+<!-- Keychainプラグインを使う -->
+
+
+[KeychainPlugin](https://github.com/shazron/KeychainPlugin) provides native iOS secure storage for your data.
+Downside of this is that this option is limited to iOS applications.
+<!-- これはiOSに限定した利用法になります。KeychainPluginを使って行います。Keychainを使えばiOSが標準で提供するセキュアなデータの保存が実現します。 -->
+
+First, install [KeychainPlugin](https://github.com/shazron/KeychainPlugin) in Monaca. (require Gold Plan with Monaca)
+<!-- まずMonacaにてプラグインKeychainPluginをインストールします。そのためGoldプラン以上の方法になります。 -->
+
+![Monaca KeychainPlugin Import](/blog/content/images/2015/Dec/monaca-import-keychain-plugin.png)
+
+After the installation, fill out necessary configurations in both iOS App Setting and Build Setting.
+Build has to be done as an iOS application in stead of regular Monaca Debugger.
+Note that you will be ask to provide your Developer Certificate in the Build Setting.
+
+![Monaca iOS Build Setting](/blog/content/images/2015/Dec/monaca-ios-build-setting.png)
+<!--
+インストールしたらiOSアプリ設定、ビルド設定を行います。任意のプラグインを使った場合、Monacaデバッガーではなくアプリとしてビルドとインストールをしなければなりません。ビルド設定時にはあらかじめ作成した開発者証明書などをアップロードしてください。 -->
+
+Also, provisioning registration is required when you build your application so create your provisioning profile in advance.
+<!-- また、ビルドを実行する際にはプロビジョニングが求められますので、iOSアプリ設定で指定したIDでプロビジョニングを作成しておいてください。 -->
+
+![Monaca iOS Debug Build](/blog/content/images/2015/Dec/monaca-ios-debug-build.png)
+
+Below are snapshots of a demo application with KeychainPlugin.
+<!-- デモアプリとしてビルドしてインストールした結果が下記になります。 -->
+
+Successfully stored data using Keychain.
+<!-- Keychainアクセスを使ってデータを保存しました。 -->
+
+![KeychainPlugin Demo App](/blog/content/images/2015/Dec/monaca-keychain-demo-app-1.png)
+
+If the key does not exist, null is returned.
+<!-- 存在しないキーの場合、nullが返ってきます。 -->
+If the key does exist, we can retrieve the data.
+<!-- そしてキーを指定してデータの取得ができます。 -->
+
+![KeychainPlugin Demo App](/blog/content/images/2015/Dec/monaca-keychain-demo-app-2.png)
+
+Now we can store important data, such as user tokens or user IDs, securely with the KeychainPlugin.
+<!--
+Keychainプラグインによってデータを安全に保管できるようになります。ユーザのトークンやユーザIDなど個人に関わる機密データを扱う際に便利かと思います。 -->
+
+
+#### Using Server-Side
+<!-- サーバサイドを使う -->
+
+Another way is to return the data that are stored on the server side to applications.
+In this case, you will use authentication (such as OAuth2) to establish connection to the server side.
+Once the connection is established, the server side can return the required data to the applications.
+One advantage is that even if some problem happens, you only need to handle the server-side (e.g. refreshing tokens).
+As a trade off this method requires an Internet connection during the process.
+<!-- サーバサイドに保存したデータをアプリに返す方法です。この場合、一旦何らかの認証（OAuth2など）を行った上で設定やアプリを使う上で必要なデータを渡すようにします。サーバサイドにあるので何らかの問題が起きてもサーバ側の対応だけで済む（トークンをリフレッシュするなど）のが利点ですが、利用時に必ずインターネット接続が必要になるのが不便かも知れません。 -->
+
+
+#### Using Secure Storage
+<!-- セキュアストレージを使う -->
+
+Monaca Enterprise plan offers Secure Storage. Secure storage can provide reliable access to your data for you applications.
+It is provided by encrypting saved data on devices, preventing information leaks in the case of theft or loss.
+<!-- Monacaのエンタープライズプランではセキュアストレージを提供しています。セキュアストレージはデータを暗号化して保存しますので安全な利用ができるようになります。内部ストレージ全体を暗号化しますので、万一機器を紛失したといった場合においてもデータ漏洩を未然に防止します。 -->
+
+![KeychainPlugin Demo App](/blog/content/images/2015/Dec/monaca-secure-storage.jpg)
+
+
+[Monaca Enterprise - Accelerate Your Mobile Strategy with Monaca Enterprise](https://monaca.io/enterprise.html)
+
+#### Conclusion
+
+Ensuring data security involves numerous steps. It is difficult.
+We could have users log in every time they open the app, but it is certainly against user experience.
+We should keep in mind the importance of the data we are handling and apply proper security options for those data.
+<!-- アプリにおいてデータのセキュリティを確保するというのは大変なことです。毎回ログインさせるなどといった仕組みは利便性と相反するものになるでしょう。データの重要性をランク付けて、必要なデータの種類に応じてセキュリティの方法を変えてみると良いのではないでしょうか。 -->
