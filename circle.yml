@@ -18,10 +18,10 @@ dependencies:
     - sudo apt-get update; sudo apt-get install g++
     - npm install
     - cd project-templates; npm install
-    - cd OnsenUI; npm install
-    - cd OnsenUI/css-components; npm install
-    - cd 2/OnsenUI; npm install
-    - cd 2/OnsenUI/css-components; npm install
+    - cd OnsenUI/css-components; npm install; gulp build;
+    - cd OnsenUI; npm install; gulp build;
+    - cd 2/OnsenUI/css-components; npm install; gulp build;
+    - cd 2/OnsenUI; npm install; gulp build;
 test:
   override:
     - echo "Add tests!"
