@@ -76,7 +76,7 @@ How to add a Blog post
 
 If you are interested in publishing your own blog article in our blog, take a look at the following guide.
 
-**Add a new author**
+### Add a new author
 
 Create a file called **{{NAME}}.markdown** in **blog/authors/** observing the following layout:
 
@@ -94,20 +94,21 @@ Also, add yourself to the **authors** variable in **config.js** file in the root
 
 ```
 your_id: {
-      name: 'your name',
-      email: 'your email'
-    }
+  name: 'your name',
+  email: 'your email'
+}
 ```
 
-**Where to upload the blog post and the resources**
+### Where to upload the blog post and the resources
 
 * Upload the blog post in **blog/posts** dir.
 
 * Upload the images in **blog/content/images/YEAR_OF_POST'S_RELEASE/MONTH_OF_POST'S_RELEASE** dir. If it doesn't exist, create it.
 
-**Blog post layout**
+### Blog post layout
 
-All the blog posts are written in Markdown. If you are not practical with it, you can take a look at [this guide](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
+All the blog posts are written in Markdown. If you are not practical with it, you can take a look at https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet.
+
 The post file name is related with its publication date. For example, if you want the article to be published on January 15, 2016, call the file **2016-01-15.markdown**
 
 The post should observe the following layout:
@@ -126,9 +127,11 @@ A short preview of the blog post.
 Post's main content.
 ```
 
-**Publish the blog post**
+### Publish the blog post
 
-In order to see your blog post published, you need to create a pull request at https://github.com/OnsenUI/onsen.io by referring the master branch. We will review it as soon as possible and publish it if the guidelines have been correctly followed and the quality of the post is satisfying. Otherwise, we may ask you to edit it and improve the overall content quality and layout.
+In order to see your blog post published, you need to create a pull request at https://github.com/OnsenUI/onsen.io by referring the master branch. If you have never made a pull request before, take a look at [this guide](https://help.github.com/articles/using-pull-requests/).
+
+We will review it as soon as possible and publish it if the guidelines have been correctly followed and the quality of the post is satisfying. Otherwise, we may ask you to edit it and improve the overall content quality and layout.
 
 Getting support
 ---------------
