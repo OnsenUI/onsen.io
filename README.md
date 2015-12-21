@@ -71,23 +71,24 @@ We will happily accept contributions to Onsen UI Website and the framework. It c
 3. Make a pull request to master branch.
 4. After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
 
-How to add a Blog post
+How to add a blog post
 -----------------
 
-If you are interested in publishing your own blog article in our blog, take a look at the following guide.
+If you are interested in publishing your own article in the [Monaca x Onsen UI blog](http://onsen.io/blog/), please take a look at the following guide.
 
-### Add a new author
+### Adding a new author
 
-Create a file called **{{NAME}}.markdown** in **blog/authors/** observing the following layout:
+Create a file called **{{your_id}}.markdown** in [**blog/authors/**](https://github.com/OnsenUI/onsen.io/tree/master/blog/authors) observing the following layout:
 
 ```
 ---
 id: your_id
-name: "your_name"
-gravatar: gravatar_hash (you can create one [here](https://en.gravatar.com/))
+name: "Your Name"
+gravatar: Gravatar hash (you can create one [here](https://en.gravatar.com/))
+url: https://example.com/
 ---
 
-Write something about yourself.
+Write something about yourself in Markdown.
 ```
 
 Also, add yourself to the **authors** variable in **config.js** file in the root directory, observing the following layout:
@@ -99,11 +100,11 @@ your_id: {
 }
 ```
 
-### Where to upload the blog post and the resources
+### Where to add the blog post and the resources
 
-* Upload the blog post in **blog/posts** dir.
+* Add the blog post in [**blog/posts**](https://github.com/OnsenUI/onsen.io/tree/master/blog/posts) directory.
 
-* Upload the images in **blog/content/images/YEAR_OF_POST'S_RELEASE/MONTH_OF_POST'S_RELEASE** dir. If it doesn't exist, create it.
+* Add the images to the  [**blog/content/images/YEAR/MONTH**](https://github.com/OnsenUI/onsen.io/tree/master/blog/content/images) directory. If it doesn't exist, create it.
 
 ### Blog post layout
 
@@ -111,16 +112,17 @@ All the blog posts are written in Markdown. If you are not practical with it, yo
 
 The post file name is related with its publication date. For example, if you want the article to be published on January 15, 2016, call the file **2016-01-15.markdown**
 
-The post should observe the following layout:
+The post should use the following layout:
 
 ```
 ---
 author: your_id
 date: publication_date (for example **2014-02-04**, it should be the same of the file's name)
-id: blog_post_id (for example, if the title is "Introducing Onsen UI 1.0", the id should be something like **introducing-onsen-ui-1-0**)
-title: "blog_post_title" (Uppercase the first character of important words, for example, **Introducing Onsen UI 1.0**)
-tags: important_tags (separate by comma, for example: onsen ui, app ninja contest, showcase)
+id: blog-post-id (for example, if the title is "Introducing Onsen UI 2.0", the id should be something like **introducing-onsen-ui-2-0**)
+title: "Blog Post Title"
+tags: List of tags (comma separated list)
 ---
+
 A short preview of the blog post.
 
 <!-- more -->  //This tag indicates the end of the preview
