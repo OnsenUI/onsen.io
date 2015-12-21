@@ -119,6 +119,7 @@ author: your_id
 date: publication_date (for example **2014-02-04**, it should be the same of the file's name)
 id: blog_post_id (for example, if the title is "Introducing Onsen UI 1.0", the id should be something like **introducing-onsen-ui-1-0**)
 title: "blog_post_title" (Uppercase the first character of important words, for example, **Introducing Onsen UI 1.0**)
+tags: important_tags (separate by *,* for example: onsen ui, app ninja contest, showcase)
 ---
 A short preview of the blog post.
 
