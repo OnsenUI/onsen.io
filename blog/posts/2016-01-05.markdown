@@ -1,0 +1,306 @@
+---
+author: moongift
+date: 2016-01-05
+id: ski-patrol-mobile-app-for-safe-joys-of-winter-2
+title: "Ski Patrol Mobile App for Safe Joys of Winter"
+tags: onsen ui, electron, javascript, tutorial
+---
+
+Electron, formally known as Atom Shell, allows people to use web technologies to build cross-platform applications.
+Unfortunately, Electron hasn't supported any design framework so here comes our Onsen UI framework.
+In this blog post, we will try integrating our Onsen UI framework into a demo Electron app to see how it works.
+<!-- Electronはクロスプラットフォームで稼働するアプリをHTML5、CSS3、Javascriptで構築できるプラットフォームアプリケーションとなっています。しかし、まだデザインフレームワークが確立されておらず、その辺りはスクラッチで作成するか、既存のWEBテンプレートで対応するしかありません。そこで今回はOnsenUIを利用してElectron上で動かしてみたいと思います。 -->
+
+<!-- more -->
+
+### Installation and Setting Up
+<!-- Electronのインストールとプロジェクトの起動方法 -->
+
+Note that our development environment is following:
+<!-- 執筆時点でのElectronとOnsenUIのバージョンは下記の通りです。 -->
+- Electron: v0.36.2
+- OnsenUI: v1.3.14
+- AngularJS: v1.4.8
+
+
+#### Installation
+<!-- インストール -->
+
+First, let's install Election.
+We can simply use `npm` to install.
+<!-- まずはベースとなるElectronのインストールからです。Nodeを利用してインストールします。 -->
+
+```
+$ sudo npm install -g electron-prebuilt
+```
+
+#### Project Set Up
+<!-- プロジェクト設定 -->
+
+Now, we will create `/electron-sample` directly to work on for this tutorial.
+Following commands will automatically create `package.json`.
+<!-- プロジェクトディレクトリを作成して、package.jsonの初期設定を行います。ここでは /electron-sample を対象ディレクトリとします。 -->
+
+```
+$ mkdir /electron-sample
+$ cd /electron-sample
+$ npm init -y
+```
+
+In `package.json` file, modify and include `main.js` for an Electron app.
+<!-- 以下のようなpackage.jsonができ上がると思いますが、Electronの起動は、main.jsとなりますので、“main”の属性だけ修正しておいて下さい。 -->
+
+```
+{
+  "name": "electron-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js", // modify here
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+```
+
+#### Create A Project
+<!-- まずはプロジェクト作成 -->
+
+A minimum Electron app is structured like this:
+<!-- ディレクトリの最小構成は、下記の通りです。 -->
+
+```
+.
+├── ./index.html
+├── ./main.js
+└── ./package.json
+```
+
+`main.js` should contain the script that runs in the main process.
+<!-- `main.js` は、Electronの起動スクリプトです。 -->
+
+```
+'use strict';
+
+var app = require('app');
+var BrowserWindow = require('browser-window');
+
+require('crash-reporter').start();
+
+var mainWindow = null;
+
+app.on('window-all-closed', function() {
+    if (process.platform != 'darwin')
+        app.quit();
+});
+
+app.on('ready', function() {
+
+    // Windowサイズの指定
+    mainWindow = new BrowserWindow({width: 800, height: 600});
+    // 初期ロードのファイル
+    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+
+    mainWindow.on('closed', function() {
+        mainWindow = null;
+    });
+});
+```
+
+Right now, we simply display `Hello World` in `index.html`.
+<!-- `index.html` では、“Hello World” を表示するHTMLを作成します。 -->
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Electron at OnsenUI</title>
+</head>
+<body>
+  <h1>Hello World</h1>
+</body>
+</html>
+```
+
+#### Execution
+<!-- Electronの実行 -->
+
+Under the project root directory (/electron-sample), we can run the following command.
+<!-- プロジェクトルート（/electron-sample）より下記のコマンドを実行します。 -->
+
+```
+$ electron .
+```
+
+Now, you should see something like this.
+<!-- このように起動すればOKです。 -->
+
+![Display Hello World](/blog/content/images/2016/Jan/hello-electron.png)
+
+
+### Integrating Onsen UI
+<!-- OnsenUIを組み込んでみる -->
+
+#### Installing Onsen UI
+<!-- OnsenUIのインストール -->
+
+Download Onsen UI using bower:
+<!-- OnsenUIで用意されているbowerを利用して、OnsenUIをプロジェクトに組み込みましょう。 -->
+
+```
+$ sudo npm install -g bower
+$ bower install onsenui
+```
+
+Now, our directory should look like this.
+<!-- ディレクトリ構成は以下の通りになります。 -->
+
+```
+.
+├── ./bower_components
+│   ├── ./OnsenUI
+│   └── ./angular
+├── ./index.html
+├── ./main.js
+└── ./package.json
+```
+
+#### Modification
+<!-- 最初のElectronとOnsenUI -->
+
+Let's modify the `index.html` to display a simple Onsen UI toolbar this time.
+<!-- `index.html` を以下の通り書き換えます。まずはツールバーにメッセージを表示するだけの、簡単なサンプルです。 -->
+
+```
+<!DOCTYPE html>
+<html lang="ja" ng-app="app">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="bower_components/OnsenUI/css/onsenui.css"/>
+    <link rel="stylesheet" href="bower_components/OnsenUI/css/onsen-css-components-blue-basic-theme.css"/>
+
+    <!-- JavaScript -->
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/OnsenUI/js/onsenui.js"></script>
+
+    <title>Electron de OnsenUI</title>
+
+    <script>
+        var module = ons.bootstrap('app', ['onsen']);
+        module.controller('AppController', function($scope) { });
+    </script>
+</head>
+
+<body ng-controller="AppController">
+
+<ons-toolbar>
+    <div class="center">Electron & Onsen UI</div>
+</ons-toolbar>
+
+</body>
+</html>
+```
+
+Run Electron like earlier.
+<!-- 書き換えたら、Electronを起動します。 -->
+
+```
+$ electron .
+```
+
+![Electron with OnsenUI](/blog/content/images/2016/Jan/electron-onsen.png)
+
+
+#### Displaying Tab bar
+<!-- タブを表示してみる -->
+
+Adding a tab bar is very easy with Onsen UI.
+Let's replace inside of the `<body>` tag in `index.html` as follows:
+<!-- `index.html` の`<body>`タグの内部を、以下の通り書き換えます。 -->
+
+```
+<ons-tabbar>
+    <ons-tab page="home.html" label="Home" icon="ion-home" active="true"></ons-tab>
+    <ons-tab page="comments.html" label="Comments" icon="ion-chatbox-working"></ons-tab>
+    <ons-tab page="tags.html" label="Tags" icon="ion-ios-pricetag"></ons-tab>
+    <ons-tab page="settings.html" label="Settings" icon="ion-ios-cog"></ons-tab>
+</ons-tabbar>
+
+<ons-template id="home.html">
+    <ons-toolbar>
+        <div class="center">Home</div>
+    </ons-toolbar>
+
+    <p style="padding-top: 100px; color: #999; text-align: center">Page Contents</p>
+</ons-template>
+
+<ons-template id="comments.html">
+    <ons-toolbar>
+        <div class="center">Comments</div>
+    </ons-toolbar>
+
+    <p style="padding-top: 100px; color: #999; text-align: center">Page Contents</p>
+</ons-template>
+
+<ons-template id="tags.html">
+    <ons-toolbar>
+        <div class="center">Tags</div>
+    </ons-toolbar>
+
+    <p style="padding-top: 100px; color: #999; text-align: center">Page Contents</p>
+</ons-template>
+
+<ons-template id="feed.html">
+    <ons-toolbar>
+        <div class="center">Feed</div>
+    </ons-toolbar>
+
+    <p style="padding-top: 100px; color: #999; text-align: center">Page Contents</p>
+</ons-template>
+
+<ons-template id="settings.html">
+    <ons-toolbar>
+        <div class="center">Settings</div>
+    </ons-toolbar>
+
+    <p style="padding-top: 100px; color: #999; text-align: center">Page Contents</p>
+</ons-template>
+```
+
+Run `electron .` command in the same way.
+Click on any tabs to see page transitions.
+<!-- 同様にElectronを実行して、次の通り起動すればOKです。各タブをクリックすると、画面が遷移します。 -->
+
+![Electron with OnsenUI (Tab bar)](/blog/content/images/2016/Jan/electron-tab-bar.png)
+
+
+### Compatibility
+<!-- ElectronとOnsenUIの相性について -->
+
+I noticed some of the Onsen UI elements, sush as sliding-menu or carousel had conflictions with Electron due to Hammer script.
+Also, touch/swipe events had compatibility issues with Electron.
+Hopefully, those issues will resolve as version upgrades thought you might be able to support them with AngularJS directives.
+
+<!-- 今回は試した限りではスライドナビゲータや、カルーセルの動作はできませんでした。カルーセルで利用している、Hammerスクリプトとの相性の問題がありそうです。
+
+また、OnsenUIはタッチやスワイプイベントを利用することもありますが、その辺りはElectronと相性の問題で動作が難しいケースがあるでしょう。今後変わっていくと思われますが、AngulerJSのディレクティブで対応してみる手もありそうです。拡張についてはOnsenUIが柔軟な設計になっていますので、AngulerJSに明るければ、対応は十分可能でしょう。 -->
+
+
+### Conclusion
+<!-- 最後に -->
+
+Finally, we have quickly implemented an Electron application with our Onsen UI today.
+There was a few confliction though it won't be that much of trouble if you have adequate AngulerJS skills.
+Onsen UI and Electron combination will certainly be a great choice developing cross-platform applications.
+<!-- 駆け足でElectron上でOnsenUIの可能性を見てきましたが、多少相性の問題があるものの、AngulerJSにも明るければ実用には問題ないレベルかと思います。ただ、初期のテンプレートで躓くとプロジェクトが思うように進まない状況が多々あります。また、UIをスクラッチで作るのも、コストの面から選択技としてはないでしょう。Electronをタブレットに見立て、OnsenUIを利用して開発すると良いかもしれません。 -->
+
+I hope this tutorial helped you.
+
+Happy coding!
+<!-- 本記事が、皆さまのお役に立てれば幸いです。 -->
