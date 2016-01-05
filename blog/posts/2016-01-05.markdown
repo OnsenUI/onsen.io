@@ -1,45 +1,40 @@
 ---
 author: moongift
 date: 2016-01-05
-id: ski-patrol-mobile-app-for-safe-joys-of-winter-2
-title: "Ski Patrol Mobile App for Safe Joys of Winter"
+id: create-cross-platform-app-with-electron-onsenui
+title: "Create Cross-Platform App with Electron + Onsen UI"
 tags: onsen ui, electron, javascript, tutorial
 ---
 
+![Electron and Onsen UI](/blog/content/images/2016/Jan/electron-onsenui.png)
+
 Electron, formally known as Atom Shell, allows people to use web technologies to build cross-platform applications.
-Unfortunately, Electron hasn't supported any design framework so here comes our Onsen UI framework.
+Unfortunately, Electron hasn't supported any design framework so here comes our Onsen UI framework, a HTML5 UI framework.
 In this blog post, we will try integrating our Onsen UI framework into a demo Electron app to see how it works.
-<!-- Electronはクロスプラットフォームで稼働するアプリをHTML5、CSS3、Javascriptで構築できるプラットフォームアプリケーションとなっています。しかし、まだデザインフレームワークが確立されておらず、その辺りはスクラッチで作成するか、既存のWEBテンプレートで対応するしかありません。そこで今回はOnsenUIを利用してElectron上で動かしてみたいと思います。 -->
 
 <!-- more -->
 
 ### Installation and Setting Up
-<!-- Electronのインストールとプロジェクトの起動方法 -->
 
 Note that our development environment is following:
-<!-- 執筆時点でのElectronとOnsenUIのバージョンは下記の通りです。 -->
 - Electron: v0.36.2
 - OnsenUI: v1.3.14
 - AngularJS: v1.4.8
 
 
 #### Installation
-<!-- インストール -->
 
 First, let's install Election.
 We can simply use `npm` to install.
-<!-- まずはベースとなるElectronのインストールからです。Nodeを利用してインストールします。 -->
 
 ```
 $ sudo npm install -g electron-prebuilt
 ```
 
 #### Project Set Up
-<!-- プロジェクト設定 -->
 
 Now, we will create `/electron-sample` directly to work on for this tutorial.
 Following commands will automatically create `package.json`.
-<!-- プロジェクトディレクトリを作成して、package.jsonの初期設定を行います。ここでは /electron-sample を対象ディレクトリとします。 -->
 
 ```
 $ mkdir /electron-sample
@@ -48,7 +43,6 @@ $ npm init -y
 ```
 
 In `package.json` file, modify and include `main.js` for an Electron app.
-<!-- 以下のようなpackage.jsonができ上がると思いますが、Electronの起動は、main.jsとなりますので、“main”の属性だけ修正しておいて下さい。 -->
 
 ```
 {
@@ -66,10 +60,8 @@ In `package.json` file, modify and include `main.js` for an Electron app.
 ```
 
 #### Create A Project
-<!-- まずはプロジェクト作成 -->
 
 A minimum Electron app is structured like this:
-<!-- ディレクトリの最小構成は、下記の通りです。 -->
 
 ```
 .
@@ -79,7 +71,6 @@ A minimum Electron app is structured like this:
 ```
 
 `main.js` should contain the script that runs in the main process.
-<!-- `main.js` は、Electronの起動スクリプトです。 -->
 
 ```
 'use strict';
@@ -110,7 +101,6 @@ app.on('ready', function() {
 ```
 
 Right now, we simply display `Hello World` in `index.html`.
-<!-- `index.html` では、“Hello World” を表示するHTMLを作成します。 -->
 
 ```
 <!DOCTYPE html>
@@ -126,29 +116,23 @@ Right now, we simply display `Hello World` in `index.html`.
 ```
 
 #### Execution
-<!-- Electronの実行 -->
 
 Under the project root directory (/electron-sample), we can run the following command.
-<!-- プロジェクトルート（/electron-sample）より下記のコマンドを実行します。 -->
 
 ```
 $ electron .
 ```
 
 Now, you should see something like this.
-<!-- このように起動すればOKです。 -->
 
 ![Display Hello World](/blog/content/images/2016/Jan/hello-electron.png)
 
 
 ### Integrating Onsen UI
-<!-- OnsenUIを組み込んでみる -->
 
 #### Installing Onsen UI
-<!-- OnsenUIのインストール -->
 
 Download Onsen UI using bower:
-<!-- OnsenUIで用意されているbowerを利用して、OnsenUIをプロジェクトに組み込みましょう。 -->
 
 ```
 $ sudo npm install -g bower
@@ -156,7 +140,6 @@ $ bower install onsenui
 ```
 
 Now, our directory should look like this.
-<!-- ディレクトリ構成は以下の通りになります。 -->
 
 ```
 .
@@ -169,10 +152,8 @@ Now, our directory should look like this.
 ```
 
 #### Modification
-<!-- 最初のElectronとOnsenUI -->
 
 Let's modify the `index.html` to display a simple Onsen UI toolbar this time.
-<!-- `index.html` を以下の通り書き換えます。まずはツールバーにメッセージを表示するだけの、簡単なサンプルです。 -->
 
 ```
 <!DOCTYPE html>
@@ -208,7 +189,6 @@ Let's modify the `index.html` to display a simple Onsen UI toolbar this time.
 ```
 
 Run Electron like earlier.
-<!-- 書き換えたら、Electronを起動します。 -->
 
 ```
 $ electron .
@@ -218,11 +198,9 @@ $ electron .
 
 
 #### Displaying Tab bar
-<!-- タブを表示してみる -->
 
 Adding a tab bar is very easy with Onsen UI.
 Let's replace inside of the `<body>` tag in `index.html` as follows:
-<!-- `index.html` の`<body>`タグの内部を、以下の通り書き換えます。 -->
 
 ```
 <ons-tabbar>
@@ -275,32 +253,23 @@ Let's replace inside of the `<body>` tag in `index.html` as follows:
 
 Run `electron .` command in the same way.
 Click on any tabs to see page transitions.
-<!-- 同様にElectronを実行して、次の通り起動すればOKです。各タブをクリックすると、画面が遷移します。 -->
 
 ![Electron with OnsenUI (Tab bar)](/blog/content/images/2016/Jan/electron-tab-bar.png)
 
 
 ### Compatibility
-<!-- ElectronとOnsenUIの相性について -->
 
-I noticed some of the Onsen UI elements, sush as sliding-menu or carousel had conflictions with Electron due to Hammer script.
+I noticed some of the Onsen UI elements, sush as sliding-menu or carousel, had conflicts with Electron due to Hammer script.
 Also, touch/swipe events had compatibility issues with Electron.
 Hopefully, those issues will resolve as version upgrades thought you might be able to support them with AngularJS directives.
 
-<!-- 今回は試した限りではスライドナビゲータや、カルーセルの動作はできませんでした。カルーセルで利用している、Hammerスクリプトとの相性の問題がありそうです。
-
-また、OnsenUIはタッチやスワイプイベントを利用することもありますが、その辺りはElectronと相性の問題で動作が難しいケースがあるでしょう。今後変わっていくと思われますが、AngulerJSのディレクティブで対応してみる手もありそうです。拡張についてはOnsenUIが柔軟な設計になっていますので、AngulerJSに明るければ、対応は十分可能でしょう。 -->
-
 
 ### Conclusion
-<!-- 最後に -->
 
 Finally, we have quickly implemented an Electron application with our Onsen UI today.
-There was a few confliction though it won't be that much of trouble if you have adequate AngulerJS skills.
+There was a few conflict though it won't be that much of trouble if you have adequate AngulerJS skills.
 Onsen UI and Electron combination will certainly be a great choice developing cross-platform applications.
-<!-- 駆け足でElectron上でOnsenUIの可能性を見てきましたが、多少相性の問題があるものの、AngulerJSにも明るければ実用には問題ないレベルかと思います。ただ、初期のテンプレートで躓くとプロジェクトが思うように進まない状況が多々あります。また、UIをスクラッチで作るのも、コストの面から選択技としてはないでしょう。Electronをタブレットに見立て、OnsenUIを利用して開発すると良いかもしれません。 -->
 
 I hope this tutorial helped you.
 
 Happy coding!
-<!-- 本記事が、皆さまのお役に立てれば幸いです。 -->
