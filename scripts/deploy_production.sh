@@ -3,6 +3,7 @@
 DIR=$(dirname $0)
 
 pushd $DIR/../project-templates
+npm install
 gulp build
 popd
 

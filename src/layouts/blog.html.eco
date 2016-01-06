@@ -6,7 +6,7 @@
 
   <title><%= @getPreparedTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
-  <meta name="date" content="<%= @renderBlogDateShort @date %>" scheme="YYYY-MM-DD" />
+  <meta name="date" content="<%= @renderBlogDateShort @date %> 12:00" scheme="YYYY-MM-DD" />
       
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -70,57 +70,58 @@
     <div class="content">
 
       <% if @isArticle: %>
-      <div class="article <% if @category == 'monaca': %>article-monaca<% end %>">
-        <div class="article-title">
+      <article class="article <% if @category == 'monaca': %>article-monaca<% end %>">
+        <header class="article-title">
           <div class="article-title-image"></div>
-          <h2>
+          <h1>
              <%- @title %>
-          </h2>
+          </h1>
 
           <div class="article-avator">
             <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=30" alt="" class="article-avator-image">
           </div>
 
           <div class="article-date">
-            BY <a href="/blog/<%- @author.id %>/"><%- @author.name %></a> / <%- @renderBlogDate @date %>
+            BY <a href="/blog/<%- @author.id %>/"><%- @author.name %></a> / <time datetime="<%= @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time>
           </div>
 
           <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
-        </div>
+        </header>
 
 
         <div class="article-content">
           <%- @contents %>
         </div>
 
-        <% if @tags and @tags.length: %>
-        <div class="article-tags">
-          <% for tag in @tags: %>
-          <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+        <footer>
+          <% if @tags and @tags.length: %>
+          <div class="article-tags">
+            <% for tag in @tags: %>
+            <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+            <% end %>
+          </div>
           <% end %>
-        </div>
-        <% end %>
 
-        <div class="article-comments">
-          <h3>Comments</h3>
+          <div class="article-comments">
+            <h3>Comments</h3>
 
-          <div id="disqus_thread"></div>
-          <script type="text/javascript">
-            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-            var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
+            <div id="disqus_thread"></div>
+            <script type="text/javascript">
+              /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+              var disqus_shortname = 'onsenui'; // required: replace example with your forum shortname
 
-            /* * * DON'T EDIT BELOW THIS LINE * * */
-            (function() {
-                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-            })();
-          </script>
-          <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    
-        </div>
-
-      </div>
+              /* * * DON'T EDIT BELOW THIS LINE * * */
+              (function() {
+                  var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+              })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      
+          </div>
+        </footer>
+      </article>
 
       <div class="blog-feed">
         <a href="/blog/rss.xml"><i class="fa fa-rss" style="font-size: 16px"></i></a>

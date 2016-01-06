@@ -60,6 +60,12 @@
   }
 
   .article {
+    &:first-of-type {
+      .article-divider {
+        display: none;
+      }
+    }
+
     &-share {
       overflow: hidden;
       margin: -3px auto 10px auto;
@@ -134,7 +140,8 @@
         });
       }
 
-      h2 {
+      h1 {
+        font-family: @en-header-font-family;
         font-size: 40px;
         line-height: 44px;
         padding-left: 26px;
@@ -199,6 +206,10 @@
         color: @link-color;
         text-decoration: none;
         font-weight: 700 !important;
+      }
+
+      time {
+        font-weight: 700;
       }
     }
 
