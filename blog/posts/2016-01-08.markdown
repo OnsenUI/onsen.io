@@ -1,0 +1,53 @@
+---
+author: moongift
+date: 2015-01-08
+id: 6-things-you-can-do-with-the-monaca-localkit
+title: "6 things you can do with the Monaca LocalKit"
+category: monaca
+tags: Monaca, LocalKit
+---
+
+Monaca Localkit provides a local development option for your Monaca applications. This blog post will highlight 6 things you can do with Monaca LocalKit.
+
+<!-- more -->
+
+### 1. Better version control
+
+Monaca Localkit gives you better version control because all of your files are stored locally. With you file stored locally, you can easily use a number of version control systems such as Git, Subversion, or Mercurial. Of course you will be able store the data on Github.
+
+### 2. Combine with various builders
+
+In contrast to integrated preview function on Monaca Cloud, you will need to prepare your own with Monaca Localkit. In that case, there are various options like Gulp and Grunt to build or deploy HTTP server.
+
+You can easily minify or combine JavaScript/CSS files using Gulp. Additionally, if you use Bower for installing external libraries it can be as simple as ABC.
+
+### 3. Easy to use alternative languages
+
+Using Gulp or Grunt gives us another advantage. Some of you may use preprocessors such as CoffeeScript or TypeScript for JavaScript, Less or Sass for CSS, and Haml for HTML. Let Gulp or Grunt compile your scripts when you make changes.
+
+LocalKit gives a flexibility by not sacrificing advantages of alternative languages. Make use of those alternative languages while creating Monaca applications and speed up your development.
+
+### 4. Editor of your choice
+
+One of the most important advantages using LocalKit is that you can use the editor you are used to. As you know, there are many kinds of editors available such as Textmate, Emacs, Vim, Sublime Text, Atom and many more. Of course, you can use IDEs such as Visual Studio, Webstorm, and Eclipse.
+
+Using the editor you are familiar with will dramatically increase your development speed.
+
+### 5. Debug with the Chrome DevTools
+
+Localkit has a built-in debugging tool. Just plug the device into the computer via an USB cable to debug with Chrome DevTools. Dynamical DOM inspection, break points, and step executions are all possible with LocalKit.
+
+Selected DOM element will be highlighted even on the smartphone. Your debug efficiency will be greatly improved.
+
+### 6. Unit testing
+
+Testing is an important process in the development. Automated testing is now easier with Monaca LocalKit. Monaca applications had difficulty with automated testing because it was an IDE on the web browser while LocalKit allows you to do testing on the fly.
+
+There are many possibilities. For example, you can run a test when you push on GitHub and build on Monaca Cloud if it passes the test.
+Monaca LocalKit will be an essential tool for creating a more automated development environment.
+
+### Conclusion
+
+There are a lot more advantages to using Monaca LocalKit, for example, developing without an Internet connection. But first and foremost, we would like you to try the stress-free development environment with Monaca LocalKit.
+
+[Monaca LocalKit - Local Development Environment](https://monaca.io/localkit.html)
