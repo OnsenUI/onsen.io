@@ -70,7 +70,7 @@
     <div class="content">
 
       <% if @isArticle: %>
-      <article class="article <% if @category == 'monaca': %>article-monaca<% end %>">
+      <article class="article <% if @product == 'monaca': %>article-monaca<% end %>">
         <header class="article-title">
           <div class="article-title-image"></div>
           <h1>
