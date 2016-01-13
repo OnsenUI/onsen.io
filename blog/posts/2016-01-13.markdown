@@ -3,12 +3,12 @@ author: moongift
 date: 2016-01-13
 id: test-your-javascript-code-with-these-unit-testing-frameworks
 title: "Test your Javascript Code with these Unit Testing Frameworks"
-category: monaca, onsen-ui
+category: monaca
 tags: javascript, testing, test, jasmine, qunit, unit.js, screw.unit, protractor, mocha
 ---
 
-Recently we've introduced some advantages using Monaca LocalKit in [this blog post](https://onsen.io/blog/6-things-you-can-do-with-monaca-localkit/).
-One of the big advantages we pointed out was ease of automated testing when you use Monaca LocalKit.
+Recently we introduced some advantages to using Monaca LocalKit in [this blog post](https://onsen.io/blog/6-things-you-can-do-with-monaca-localkit/).
+One of the big advantages we pointed out was the ease of automated testing when you use Monaca LocalKit.
 Let's take a look at some major JavaScript Unit Testing Frameworks offered by the community!
 
 <!-- more -->
@@ -19,7 +19,7 @@ See the [GitHub Repository](http://jasmine.github.io/)
 
 ![Jasmine](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-1.png)
 
-Jasmine is a testing framework that has a similar syntax as RSpec. For example:
+Jasmine is a testing framework that has a similar syntax to RSpec. For example:
 
 ```javascript
 describe("CallTracker", function() {
@@ -65,13 +65,13 @@ QUnit.test("prettydate basics", function( assert ) {
 });
 ```
 
-QUnit was originally developed as part of jQuery. But a rewrite in 2009 made QUnit runs completely standalone.
+QUnit was originally developed as a part of jQuery. But a rewrite in 2009 made QUnit run completely standalone.
 
 ### alexyoung/riotjs
 
 See the [GitHub Repository](https://github.com/alexyoung/riotjs)
 
-Riotjs is a JavaScript implementation of Riot.
+Riot.js is a JavaScript implementation of Riot.
 
 ```javascript
 Riot.run(function() {
@@ -100,7 +100,7 @@ Riot.run(function() {
 
 It will run on a browser, Rhino, or Node.
 
-### Unit testing framework for Javascript - Unit JS
+### Unit testing framework for Javascript - Unit.js
 
 See the [GitHub Repository](http://unitjs.com/)
 
@@ -136,13 +136,13 @@ test.value(req).hasHeader('content-type', 'application/json');
 test.value(req).hasHeaderJson();
 ```
 
-There is a `test` variable which contains Unit.js module. From that variable, you can do various testings like properties, length, RegEx and so on.
+There is a `test` variable which contains the Unit.js module. From that variable, you can do various testing like properties, length, RegEx and so on.
 
 ### nathansobo/screw-unit
 
 See the [GitHub Repository](https://github.com/nathansobo/screw-unit)
 
-Screw.Unit is Behavior-Driven Testing framework for JavaScript.  It has familiar RSpec-like and readable syntax.
+Screw.Unit is Behavior-Driven Testing framework for JavaScript. It has familiar RSpec-like and readable syntax.
 
 ```javascript
 describe("a nested describe", function() {
@@ -200,7 +200,6 @@ See the [GitHub Repository](http://mochajs.org/)
 
 Mocha is a JavaScript testing framework which makes testing simple and fun. It runs on a browser and on Node. The syntax is similar to Jasmine.
 
-
 ```javascript
 var assert = require("assert")
 describe('Array', function() {
@@ -216,5 +215,6 @@ describe('Array', function() {
 ### Conclusion
 
 Make sure to cover a variety of tests to deliver your high-quality applications with these testing frameworks.
-Many of the frameworks we discussed here work with a browser and Node. So remember do Unit Testing over JavaScript implementation when developing Monaca applications!
+Many of the frameworks we discussed here work with a browser and Node. So remember to do Unit Testing of your JavaScript code when developing Monaca applications!
+
 Moreover, Protractor will be a great choice if you are developing apps with our UI!
