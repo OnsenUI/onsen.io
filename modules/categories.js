@@ -67,7 +67,7 @@ function plugin(opts) {
       var page = {
         contents: '',
         category: category,
-        posts: posts,
+        posts: posts.reverse(),
         isCategory: true
       };
 
