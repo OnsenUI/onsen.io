@@ -1,6 +1,6 @@
 <div id="header-monaca">
   <div id="header-monaca-inner">
-    <a href="http://monaca.io"><img src="/images/header/monaca_logo.png"></a>
+    <a href="http://monaca.io"><img src="/images/header/monaca_logo.png" alt="Monaca logo" title="Monaca"></a>
 
     <% if @lang == 'en': %>
     <ul id="header-monaca-navi">
@@ -71,7 +71,7 @@
     <div class="header-news"><a class="header-news-link" href="/blog/announcing-onsen-ui-2-beta/" target="_blank">v2.0 Beta Released!</a></div>
     <% end %>
     
-    <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg"></a></div>
+    <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg" alt="Menu hamburger icon" title="Menu"></a></div>
 
     <ul class="header-navi">
       <% if @lang == "en": %>
@@ -83,12 +83,12 @@
             <li class="header-navi-sub-item"><a href="/reference/css.html">CSS</a></li>
             <li class="header-navi-sub-item"><a href="/reference/javascript.html">JavaScript</a></li>
             <li class="header-navi-sub-item"><a href="/patterns.html">Page Patterns</a></li>
-            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt=""></a></a></li>
+            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a></a></li>
           </ul>
         </li>
         <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
         <li class="header-navi-item <%- if @page is 'blog' or @isBlogArticle then 'current' %>"><a href="/blog/">BLOG</a></li>
-        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="" height="12"></a></li>
+        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="Jump icon" title="External link" height="12"></a></li>
         <li class="header-navi-item"><a href="http://ja.onsen.io/">JAPANESE</a></li>
       <% else: %>
         <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
@@ -99,11 +99,11 @@
             <li class="header-navi-sub-item"><a href="/reference/css.html">CSS</a></li>
             <li class="header-navi-sub-item"><a href="/reference/javascript.html">JavaScript</a></li>
             <li class="header-navi-sub-item"><a href="/patterns.html">Page Patterns</a></li>
-            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt=""></a></a></li>
+            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a></a></li>
           </ul>
         </li>
         <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
-        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="" height="12"></a></li>
+        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="Jump icon" title="External link" height="12"></a></li>
         <li class="header-navi-item"><a href="http://onsen.io/">ENGLISH</a></li>
       <% end %>
     </ul>

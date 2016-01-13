@@ -39,10 +39,6 @@ module.exports = function(language, isStaging) {
       url: 'http://onsen.io',
       gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
     },
-    amanda: {
-      name: 'Amanda Cline',
-      gravator: 'd293328028341a95e89f13dd84beb449'
-    },
     moongift: {
       name: 'Atsushi Nakatsugawa',
       gravator: '4cafe6a1c6287d64d7252279eeeffa94'
@@ -50,6 +46,14 @@ module.exports = function(language, isStaging) {
     takuya: {
       name: 'Takuya Watanabe',
       gravator: '7ff040f6fd196a1dbffaea6572095969'
+    },
+    hosoi: {
+      name: 'Kazuho Hosoi',
+      gravatar: 'a963b1289748255706b7d630b5e6514f'
+    },
+    una: {
+      name: 'Una Softic',
+      email: 'una.softic@gmail.com'
     }
   };
 
