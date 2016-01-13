@@ -65,8 +65,28 @@ module.exports = function(language, isStaging) {
     authors[author].id = author;
   }
 
+  var categories = {
+    'showcase': {
+      name: 'Showcase',
+      title: 'Showcase of apps made with Onsen UI and Monaca'
+    },
+    'announcement': {
+      name: 'Announcements',
+      title: 'Announcements of new features in Monaca and Onsen UI'
+    },
+    'development': {
+      name: 'Development',
+      title: 'Articles about hybrid app development, HTML5, CSS and more'
+    },
+    'tutorial': {
+      name: 'Tutorial',
+      title: 'Tutorials on how to create hybrid mobile apps, web apps, HTML5, CSS and JavaScript'
+    }
+  };
+
   var env = {
     authors: authors,
+    categories: categories,
 
     en: {
       url: 'http://onsen.io',

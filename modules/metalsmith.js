@@ -1,4 +1,5 @@
 var metalsmith = require('metalsmith');
+var path = require('path');
 var templates = require('metalsmith-templates');
 var ignore = require('metalsmith-ignore');
 var layouts = require('metalsmith-layouts');
@@ -20,6 +21,7 @@ var wordcloud = require('metalsmith-wordcloud');
 var sortObject = require('sort-object');
 var currentPath = require('./current-path');
 var nodePath = require('path');
+var categories = require(path.join(__dirname, 'categories'));
 
 module.exports = function(lang, isStaging) {
   return {
@@ -251,12 +253,24 @@ module.exports = function(lang, isStaging) {
             category: 'tags',
             path: '/blog/tags'
           }))
+          .use(categories({
+            handle: 'category',
+            path: 'categories/:category.html'
+          }))
           .use(function(files, metalsmith, done) {
             for (var path in files) {
               var file = files[path];
 
               if (file.tag) {
                 file.title = 'Articles about "' + file.tag + '"';
+              }
+
+              file.categories = metalsmith.metadata().env.categories;
+
+              if (file.isCategory) {
+                var c = file.categories[file.category];
+
+                file.title = c.title || c.name || file.category;
               }
             }
             done();
@@ -306,7 +320,6 @@ module.exports = function(lang, isStaging) {
           }
           done();
         });
-
     }
   };
 };
