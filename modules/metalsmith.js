@@ -20,6 +20,7 @@ var wordcloud = require('metalsmith-wordcloud');
 var sortObject = require('sort-object');
 var currentPath = require('./current-path');
 var nodePath = require('path');
+var crypto = require('crypto');
 
 module.exports = function(lang, isStaging) {
   return {
@@ -202,7 +203,17 @@ module.exports = function(lang, isStaging) {
           }
         }))
         .use(branch('*.markdown')
-          // articles 
+          // articles
+          .use(function(files, metalsmith, done) {
+            for (var path in files) {
+              var doc = files[path];
+              doc.markdownContents = doc.contents.toString('utf8');
+              doc.numericId = crypto.createHash('md5').update(doc.id).digest('hex');
+              doc.cid = 7;
+            }
+
+            done();
+          })
           .use(markdown({
             gfm: true,
             tables: true,
