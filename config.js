@@ -65,8 +65,24 @@ module.exports = function(language, isStaging) {
     authors[author].id = author;
   }
 
+  var categories = {
+    'showcase': {
+      name: 'Showcase'
+    },
+    'announcement': {
+      name: 'Announcement'
+    },
+    'development': {
+      name: 'Development'
+    },
+    'tutorial': {
+      name: 'Tutorial'
+    }
+  };
+
   var env = {
     authors: authors,
+    categories: categories,
 
     en: {
       url: 'http://onsen.io',
