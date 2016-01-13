@@ -17,7 +17,7 @@ Let's take a look at some major JavaScript Unit Testing Frameworks offered by th
 
 See the [GitHub Repository](http://jasmine.github.io/)
 
-![Jasmine](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-1.png)
+![Jasmine](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-1.png)
 
 Jasmine is a testing framework that has a similar syntax as RSpec. For example:
 
@@ -52,7 +52,7 @@ Here we are comparing returned values and expected values with `expect` function
 
 See the [GitHub Repository](https://qunitjs.com/)
 
-![QUnit](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-2.png)
+![QUnit](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-2.png)
 
 QUnit framework has been around for a while. You might be familiar with their result screen on a web browser.
 Testing code is as follows:
@@ -62,7 +62,6 @@ QUnit.test("prettydate basics", function( assert ) {
   var now = "2008/01/28 22:25:00";
   assert.equal(prettyDate(now, "2008/01/28 22:24:30"), "just now");
   assert.equal(prettyDate(now, "2008/01/28 22:23:30"), "1 minute ago");
-  :
 });
 ```
 
@@ -105,7 +104,7 @@ It will run on a browser, Rhino, or Node.
 
 See the [GitHub Repository](http://unitjs.com/)
 
-![Unit.js](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-3.png)
+![Unit.js](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-3.png)
 
 Unit.js also runs on a browser or Node. It has its own unique syntax.
 
@@ -169,7 +168,7 @@ describe("a nested describe", function() {
 
 See the [GitHub Repository](http://www.protractortest.org/#/)
 
-![Protractor](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-4.png)
+![Protractor](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-4.png)
 
 Protractor is an E2E test framework for AngularJS. Protractor will be a great choice if you are developing AngularJS applications.
 
@@ -197,7 +196,7 @@ describe('angularjs homepage todo list', function() {
 
 See the [GitHub Repository](http://mochajs.org/)
 
-![Mocha](/blog/content/images/2015/Nov/monaca-javascript-test-frameworks-5.png)
+![Mocha](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-5.png)
 
 Mocha is JavaScript testing framework made testing simple and fun. It runs on a browser and Node. The syntax is similar to Jasmine.
 
@@ -218,4 +217,4 @@ describe('Array', function() {
 
 Make sure to cover a variety of tests to deliver your high-quality applications with these testing frameworks.
 Many of the frameworks we discussed here work with a browser and Node. So remember do Unit Testing over JavaScript implementation when developing Monaca applications!
-Moreover, Protractor will be a great choice if you are developing apps with our Onsen UI!
+Moreover, Protractor will be a great choice if you are developing apps with our UI!
