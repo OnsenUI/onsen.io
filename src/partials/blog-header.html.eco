@@ -1,16 +1,52 @@
-<header class="blog-header">
+<div class="blog-header">
   <div class="blog-header-inner">
     <div class="blog-header-top">
       <a href="/blog" class="blog-header-logo"><img src="/images/header/logo_monaca_onsen.png" alt="Monaca X Onsen Blog" class="blog-header-logo-image"></a>
       <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg" alt="Menu hamburger icon" title="Menu"></a></div>
     </div>
 
-    <ul class="blog-header-navi">
-      <li class="blog-header-navi-item"><a href="http://monaca.io">Monaca</a></li>
-      <li class="blog-header-navi-item"><a href="http://onsen.io/">Onsen UI</a></li>
-      <li class="blog-header-navi-item"><a href="http://monaca.mobi/en/page/company">About us</a></li>
+    <ul class="blog-header-links">
+      <li class="blog-header-links-item"><a href="http://monaca.io">Monaca</a></li>
+      <li class="blog-header-links-item"><a href="http://onsen.io/">Onsen UI</a></li>
+      <li class="blog-header-links-item"><a href="http://monaca.mobi/en/page/company">About us</a></li>
     </ul>
+
+    <div class="blog-header-navi">
+      <ul class="blog-header-navi-links">
+        <li class="blog-header-navi-links-item"><a href="http://monaca.io">Monaca</a></li>
+        <li class="blog-header-navi-links-item"><a href="http://onsen.io/">Onsen UI</a></li>
+        <li class="blog-header-navi-links-item"><a href="http://monaca.mobi/en/page/company">About us</a></li>
+      </ul>
+
+      <ul class="blog-header-navi-category">
+        <li class="blog-header-navi-category-item"><a href="/blog/">All</a></li>
+        <% for category of @env.categories: %>
+          <li class="blog-header-navi-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+
   </div>
-</header>
+</div>
+<div class="blog-header">
+  <div class="blog-header-inner">
+    <ul class="blog-header-category">
+      <li class="blog-header-category-item"><a href="/blog/">All</a></li>
+      <% for category of @env.categories: %>
+        <li class="blog-header-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
+      <% end %>
+    </ul>
+
+    <div class="blog-header-newsletter">
+      <div class="blog-header-newsletter-inner">
+        <form>
+          <input class="blog-header-newsletter-input" type="text" placeholder="Enter email for Onsen UI updates" name="email">
+          <input type="submit" class="blog-header-newsletter-submit" value="Sign up">
+        </form>
+        <div class="blog-header-newsletter-thankyou">Thank you!</div>
+      </div>
+    </div>
+  </div>
+</div>
 
 

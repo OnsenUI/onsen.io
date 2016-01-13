@@ -73,6 +73,21 @@ function plugin(opts) {
       files[getFilePath(opts.path, category)] = page;
     }
 
+    // Add empty pages for categories defined in metadata but with no articles.
+    for (var category in metalsmith.metadata().env.categories) {
+     var path = getFilePath(opts.path, category);
+
+      if (!files.hasOwnProperty(path)) {
+        var page = {
+          contents: '',
+          category: category,
+          posts: []
+        };
+
+        files[path] = page;
+      }
+    }
+
     done();
   };
 }

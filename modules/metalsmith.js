@@ -265,10 +265,7 @@ module.exports = function(lang, isStaging) {
                 file.title = 'Articles about "' + file.tag + '"';
               }
 
-              if (file.category) {
-                var metadata = metalsmith.metadata();
-                file.categories = metadata.env.categories;
-              }
+              file.categories = metalsmith.metadata().env.categories;
             }
             done();
           })
