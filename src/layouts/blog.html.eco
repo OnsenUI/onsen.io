@@ -134,7 +134,7 @@
           <%- @partial('blog-post.html.eco', {article: article}) %>
         <% end %>
       <% else if @category: %>
-        <h2 class="category"><%- @categories[@category].name or @category %> category</span></h2>
+        <h2 class="category"><%- @categories[@category].name or @category %></span></h2>
         <% for article in @posts: %>
           <%- @partial('blog-post.html.eco', {article: article}) %>
         <% end %>

@@ -266,6 +266,12 @@ module.exports = function(lang, isStaging) {
               }
 
               file.categories = metalsmith.metadata().env.categories;
+
+              if (file.isCategory) {
+                var c = file.categories[file.category];
+
+                file.title = c.title || c.name || file.category;
+              }
             }
             done();
           })

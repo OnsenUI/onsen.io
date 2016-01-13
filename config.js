@@ -67,16 +67,20 @@ module.exports = function(language, isStaging) {
 
   var categories = {
     'showcase': {
-      name: 'Showcase'
+      name: 'Showcase',
+      title: 'Showcase of apps made with Onsen UI and Monaca'
     },
     'announcement': {
-      name: 'Announcement'
+      name: 'Announcements',
+      title: 'Announcements of new features in Monaca and Onsen UI'
     },
     'development': {
-      name: 'Development'
+      name: 'Development',
+      title: 'Articles about hybrid app development, HTML5, CSS and more'
     },
     'tutorial': {
-      name: 'Tutorial'
+      name: 'Tutorial',
+      title: 'Tutorials on how to create hybrid mobile apps, web apps, HTML5, CSS and JavaScript'
     }
   };
 

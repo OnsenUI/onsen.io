@@ -67,7 +67,8 @@ function plugin(opts) {
       var page = {
         contents: '',
         category: category,
-        posts: posts
+        posts: posts,
+        isCategory: true
       };
 
       files[getFilePath(opts.path, category)] = page;
@@ -81,7 +82,8 @@ function plugin(opts) {
         var page = {
           contents: '',
           category: category,
-          posts: []
+          posts: [],
+          isCategory: true
         };
 
         files[path] = page;
