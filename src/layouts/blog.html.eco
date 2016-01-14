@@ -118,7 +118,7 @@
                 url: '<%= @site.url %><%= @id %>',
                 tags: '<%= @tags %>'.split(',').map(function(e) { return {title: e}; }),
                 cid: <%= @cid %>,
-                markDownContent: '<div>' + "<%- JSON.stringify(@markdownContents).replace(/^\"/, '\\"').replace(/\"$/, '\\"').replace(/<[\s]*script/g, '\\<script').replace(/script[\s]*>/g, 'script\\>') %>".slice(1,-1).split('\n\n').slice(0,2).join('\n\n').replace('](/blog/', '](<%= @site.url %>') + '</div>'
+                markDownContent: '<div>' + "<%- JSON.stringify(@markdownContents).replace(/^\"/, '\\"').replace(/\"$/, '\\"').replace(/<[\s]*script/g, '\\<script').replace(/script[\s]*>/g, 'script\\>') %>".slice(1,-1).split('\n\n').slice(0,2).join('\n\n').replace('](/blog/', '](<%= @site.url %>').replace(/<!--[\w\s]+-->/, '') + '</div>'
               };
 
               (function() {
