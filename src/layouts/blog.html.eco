@@ -70,7 +70,7 @@
     <div class="content">
 
       <% if @isArticle: %>
-      <article class="article <% if @category == 'monaca': %>article-monaca<% end %>">
+      <article class="article <% if @product == 'monaca': %>article-monaca<% end %>">
         <header class="article-title">
           <div class="article-title-image"></div>
           <h1>
@@ -141,6 +141,11 @@
       <% else if @tag: %>
         <h2 class="tag">Posts for <span class="tag-name"><%- @tag %></span></h2>
         <% for article in @pagination.files: %>
+          <%- @partial('blog-post.html.eco', {article: article}) %>
+        <% end %>
+      <% else if @category: %>
+        <h2 class="category"><%- @categories[@category].name or @category %></span></h2>
+        <% for article in @posts: %>
           <%- @partial('blog-post.html.eco', {article: article}) %>
         <% end %>
       <% else: %>

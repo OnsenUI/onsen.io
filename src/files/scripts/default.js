@@ -150,6 +150,29 @@ $(function() {
   });
 });
 
+$(function() {
+  $('.blog-header-newsletter form').submit(function() {
+    var email = $(this).find('input[name=email]').val();
+
+    if (email) {
+      $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
+        .success(function(data) {
+          var ret = JSON.parse(data);
+
+          if (typeof ret.status !== 'undefined' && ret.status === 'success') {
+            $('.blog-header-newsletter form').hide();
+            $('.blog-header-newsletter-thankyou').show();
+          }
+          else {
+            alert('Something wrong with the request. Sorry.');
+          }
+        });
+    }
+
+    return false;
+  });
+});
+
 // header
 $(function() {
   // for mobile website menu
