@@ -132,7 +132,7 @@ $(function() {
 
 // footer newsletter
 $(function() {
-  $('.newsletter form').submit(function() {
+  $('.newsletter-signup form').submit(function() {
     var email = $('input[name=email]', this).val();
 
     $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
@@ -140,35 +140,12 @@ $(function() {
         var ret = JSON.parse(data);
 
         if (ret.status !== undefined && ret.status === 'success') {
-          $('.newsletter form').hide();
-          $('.newsletter-thankyou').show();
+          $('.newsletter-signup form').hide();
+          $('.newsletter-signup-thankyou').show();
         } else {
           alert('Something wrong with the request. Sorry.');
         }
       });
-    return false;
-  });
-});
-
-$(function() {
-  $('.blog-header-newsletter form').submit(function() {
-    var email = $(this).find('input[name=email]').val();
-
-    if (email) {
-      $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
-        .success(function(data) {
-          var ret = JSON.parse(data);
-
-          if (typeof ret.status !== 'undefined' && ret.status === 'success') {
-            $('.blog-header-newsletter form').hide();
-            $('.blog-header-newsletter-thankyou').show();
-          }
-          else {
-            alert('Something wrong with the request. Sorry.');
-          }
-        });
-    }
-
     return false;
   });
 });
