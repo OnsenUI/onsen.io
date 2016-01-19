@@ -116,7 +116,7 @@
               var articleData = {
                 title_plain: '<%= @title.replace(/\'/g, '\\\'') %>',
                 url: '<%= @site.url %><%= @id %>',
-                tags: '<%= if @tags.length then @tags.toString().replace(/\'/g, '\\\'') else '' %>'.split(',').map(function(e) { return {title: e}; }),
+                tags: <% if @tags.length: %>'<%= @tags.toString().replace(/\'/g, '\\\'') %>'.split(',').map(function(e) { return {title: e}; })<% else: %>[]<% end %>,
                 cid: <%= @cid %>,
                 markDownContent: '<div>' + "<%- JSON.stringify(@markdownContents).replace(/^\"/, '\\"').replace(/\"$/, '\\"').replace(/<[\s]*script/g, '\\<script').replace(/script[\s]*>/g, 'script\\>') %>".slice(1,-1).split('\n\n').slice(0,2).join('\n\n').replace('](/blog/', '](<%= @site.url %>').replace(/<!--[\w\s]+-->/, '') + '</div>'
               };
