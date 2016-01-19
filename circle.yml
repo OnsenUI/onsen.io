@@ -2,6 +2,7 @@ general:
   branches:
     only:
       - master
+      - staging
       - production
 machine:
   node:
@@ -25,7 +26,7 @@ test:
     - echo "Add tests!"
 deployment:
   staging:
-    branch: master
+    branch: [master, staging]
     commands:
       - npm install -g gulp
       - ./scripts/deploy_staging.sh

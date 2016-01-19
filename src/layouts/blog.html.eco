@@ -114,9 +114,9 @@
               //url: '<%= @site.url %><%= @id %>'
               //url: 'http://localhost:3000/blog/<%= @id %>',
               var articleData = {
-                title_plain: '<%= @title %>',
+                title_plain: '<%= @title.replace(/\'/g, '\\\'') %>',
                 url: '<%= @site.url %><%= @id %>',
-                tags: '<%= @tags %>'.split(',').map(function(e) { return {title: e}; }),
+                tags: '<%= if @tags.length then @tags.toString().replace(/\'/g, '\\\'') else '' %>'.split(',').map(function(e) { return {title: e}; }),
                 cid: <%= @cid %>,
                 markDownContent: '<div>' + "<%- JSON.stringify(@markdownContents).replace(/^\"/, '\\"').replace(/\"$/, '\\"').replace(/<[\s]*script/g, '\\<script').replace(/script[\s]*>/g, 'script\\>') %>".slice(1,-1).split('\n\n').slice(0,2).join('\n\n').replace('](/blog/', '](<%= @site.url %>').replace(/<!--[\w\s]+-->/, '') + '</div>'
               };
