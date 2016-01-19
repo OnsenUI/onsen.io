@@ -108,6 +108,34 @@
         display: block;
       }
     });
+
+    &-new {
+      &:before {
+        transition: all 0.1s linear;
+        content: 'New!';
+        position: absolute;
+        right: 4px;
+        background-color: #FF4D35;
+        top: 18px;
+        display: block;
+        padding: 4px;
+        color: #FFFFFF;
+        border-radius: 4px;
+        height: 8px;
+        line-height: 8px;
+        font-size: 10px;
+        transform: rotate(17deg);
+
+        .tablet-query({
+          right: initial;
+          left: 68px;
+        })
+      }
+
+      &:hover:before {
+        transform: scale(1.2) rotate(17deg);
+      }
+    }
   }
 
   &-navi-item > a {
