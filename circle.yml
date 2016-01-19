@@ -26,12 +26,7 @@ test:
     - echo "Add tests!"
 deployment:
   staging:
-    branch: master
-    commands:
-      - npm install -g gulp
-      - ./scripts/deploy_staging.sh
-  staging:
-    branch: staging
+    branch: [master, staging]
     commands:
       - npm install -g gulp
       - ./scripts/deploy_staging.sh
