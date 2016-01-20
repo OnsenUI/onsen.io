@@ -258,7 +258,9 @@ module.exports = function(lang, isStaging) {
           })
           .use(tags({
             handle: 'tags',
-            path: 'tags/:tag.html'
+            path: 'tags/:tag.html',
+            sortBy: 'date',
+            reverse: true
           }))
           .use(wordcloud({
             category: 'tags',
