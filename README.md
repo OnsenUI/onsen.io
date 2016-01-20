@@ -18,6 +18,13 @@ $ npm install gulp -g
 $ npm install
 $ git submodule init
 $ git submodule update
+$ cd OnsenUI
+$ npm install
+$ gulp build
+$ cd ../2/OnsenUI
+$ npm install
+$ gulp build
+$ cd ..
 ```
 
 How to Build
