@@ -4,6 +4,7 @@
     <% if @lang == "en": %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
         <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">DOCS</a></li>
+        <li class=><a href="https://community.onsen.io/">FORUM</a></li>
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
         <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
         <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
@@ -42,7 +43,8 @@
         </iframe>
       </div>
       <div class="footer-cont-share-github">
-        <iframe src="https://ghbtns.com/github-btn.html?user=OnsenUI&repo=OnsenUI&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+        <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-count-href="/OnsenUI/OnsenUI/stargazers" data-count-api="/repos/OnsenUI/OnsenUI#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
       </div>
     </div>
 
