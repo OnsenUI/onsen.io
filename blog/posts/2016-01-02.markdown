@@ -1,14 +1,14 @@
 ---
 author: moongift
 date: 2016-01-02
-id: try-out-javascript-es6-using-babel
-title: "Try out JavaScript ES6 using Babel"
+id: trying-out-javascript-es6-using-babel
+title: "Trying out JavaScript ES6 using Babel"
 category: monaca
 tags: javascript, ES6, Babel
 ---
 
-ECMAScript 2015 Commonly referred to as "ES6" is the current version of the ECMAScript Language Specification standard,
-though it will take sometime to be supported in current browser.
+ECMAScript 2015 Commonly referred to as "ES6" is the current version of the ECMAScript Language Specification standard.
+The support for this new ES6 features are on it's way, though it will take sometime to be fully supported in modern browsers.
 This blog post will introduce how to use Babel, a JavaScript transpiler, for those who want to try out ES6 in advance.
 <!-- 2015年6月17日に標準仕様として発行された ECMAScript6 通称“ ES6 ”ですが、脚光を浴びているものの実際のブラウザが対応するには時間がかかると思います。そのような状況の中、トランスパイラの一つである Babel で一足先にES6（ECMAScript6）を体感したいと思います。 -->
 
@@ -20,7 +20,8 @@ This blog post will introduce how to use Babel, a JavaScript transpiler, for tho
 <!-- ES6からES5へトランスパイラするBabel -->
 
 Traspiler is a specific term for taking source code written in one language and transforming into another language.
-So in this case, Babel is tool to transform ES6 to ES5.
+So in this case, Babel is a tool to transform ES6 into ES5.
+Babel has no overhead and produces fairly readable output.
 <!--
 トランスパイラとはコード変換ツールの意味として利用されています。Babelは現行のES5へ、ES6のコードを変換する（トランスパイルする）ツールです。Babelはランタイムライブラリとちがって、実行時のオーバーヘッドがありません。また、トランスパイル後の変換コードが比較的読みやすいという評判です。 では見ていきましょう！ -->
 
@@ -77,7 +78,7 @@ You can configure some rules in a `.eslintrc` file under your root directory.
 }
 ```
 
-There are lot more rules can be found in a [List of available rules - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/rules/).
+There are a lot more rules can be found in a [List of available rules - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/rules/).
 <!--
 上記は最低限のルールですのでを参照しながらルールをブラッシュアップしていくと良いでしょう。 -->
 
@@ -166,7 +167,7 @@ This polyfill is not included in initially so we will install babel-core package
 $ npm install --save-dev babel-core
 ```
 
-After installation, place browser-polyfill.js before ES5 script.
+After the installation, place browser-polyfill.js before ES5 script.
 <!-- インストール後は、パッケージにあるbrowser-polyfill.jsを、変換されたES5のスクリプトより前に設定します。 -->
 
 Example HTML polyfill:
@@ -175,7 +176,7 @@ Example HTML polyfill:
 ```
 <body>
 
-... HTMLコード ...
+... HTML code ...
 
 <script src="node_modules/babel-core/browser-polyfill.min.js"></script>
 <script src="dist/js/main.js"></script>
@@ -191,15 +192,20 @@ Here are some list of IDEs that support ES6 syntax as of 08/25/2015.
 
 #### IntelliJ IDEA 14
 
-IntelliJ IDEA14をお使いであれば、構文レベルでES6サポートしています。
+IntelliJ IDEA14 supports sentence-level syntax.
+<!-- IntelliJ IDEA14をお使いであれば、構文レベルでES6サポートしています。 -->
 
-Preferences＞Languages&Frameworks＞JavaScript の画面で、
+Go to Preferences and under Languages & Frameworks. Select JavaScript.
+<!-- Preferences＞Languages&Frameworks＞JavaScript の画面で、 -->
 
-Scriptバージョンを設定することで、コードフォーマットなどに対応できるようになります。姉妹製品のWebStormなども同様な対応となっています。
+You can enables useful features like code formatter by selecting a proper script version.
+Of course, same features can be found on lightweight editor WebStorm as well.
+<!-- Scriptバージョンを設定することで、コードフォーマットなどに対応できるようになります。姉妹製品のWebStormなども同様な対応となっています。 -->
 
 ![IntelliJ IDEA ES6 Support](/blog/content/images/2016/Jan/IDEA-ES6-support.png)
 
-また、プラグインの[intellij-es67](https://github.com/casser/intellij-es67)を入れることも検討して下さい。plugin の browse repositoriesから、「javascript.next support plugin」で検索出来ます。
+Also, [intellij-es67](https://github.com/casser/intellij-es67) plugin features JavaScript ES6/7 syntax improvements and additions for Inteliij IDEA 14.
+<!-- また、プラグインの[intellij-es67](https://github.com/casser/intellij-es67)を入れることも検討して下さい。plugin の browse repositoriesから、「javascript.next support plugin」で検索出来ます。 -->
 
 
 #### Atom
@@ -229,12 +235,15 @@ Their release in June comes with support for ES6 syntax highlighting.
 ### Conclusion
 
 Growing the popularity of transpilers, such as Babel, suggests that many of the developers are eager to use ES6.
-Many of the functionality can be implemented in ES6 already as we know that Babel transpiles into current ES5.
+Many of the functionality can be implemented in ES6 already as we know that Babel transpiles into ES5.
 
-At the same time, there are things we need to consider. For example, it might cause compatibility errors with your existing libraries or testing.
-Let's say, in the near future, even though all browsers support ES6, there will be some browser differences like exhaustive Internet Explorer or multi browser support.
+At the same time, there are things we need to consider like compatibility issues with your existing libraries or testing.
+Additionally, I really hope that there won't be huge problems with browser differences all developers had to deal with like exhaustive Internet Explorer or cross browser support.
 
-For those reasons, all we could say is that we have no choice but rely on transpilers for now.
+For those reasons, using transpilers such as Babel to maintain compatibility is a safe bet for now.
+
+So dive in and start using ES6 using Babel today!
+
 
 <!-- 現在Babelに限らず、ES6界隈でこのようなトランスパイラが発達するのは、やはり開発側において早くES6への対応を希望しているからと言えます。
 Babelのトランスパイルは現行のES5として変換されますので、多くの機能はすでにES6で開発できると思ってよいでしょう。
