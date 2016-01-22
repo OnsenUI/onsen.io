@@ -107,7 +107,6 @@ See how it's actually converting and get the hang of it for later development.
 
 
 #### Use Babel in Build Tools
-<!-- BuildツールでBabelを利用する -->
 
 In an actual development, we use JS build tools generally.
 Let's take a look at how to combine Gulp with Babel for example.
@@ -135,7 +134,6 @@ References to other build tools are available in a [Babel Setup](https://babeljs
 
 
 #### Using in a browser
-<!-- ブラウザでの利用 -->
 
 When you use converted code from Babel in a browser, you will need a babel-polyfill. This babel-polyfill is a library that gives ability to use new functionality of ES6 for ES5.
 This polyfill is not included initially so we will install babel-core package in the project.
