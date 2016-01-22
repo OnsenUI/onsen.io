@@ -1,59 +1,83 @@
-
 var async = require('async');
 var globby = require('globby');
-var minimatch = require('minimatch');
 var fs = require('fs');
 var nodePath = require('path');
 
+function glob(src) {
+  return new Promise(function(resolve, reject) {
+    globby(src, function(error, paths) {
+      return error ? reject(error) : resolve(paths);
+    });
+  });
+}
+
+function getTemplatePath(path) {
+  if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
+    return __dirname + '/../src/misc/element-reference.html';
+  } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
+    return __dirname + '/../src/misc/object-reference.html';
+  } else {
+    throw new Error('Invalid path: ' + path);
+  }
+}
+
+function getExtensionPath(path) {
+  var name = nodePath.basename(path, '.json');
+
+  if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
+  } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
+    return __dirname + '/../2/OnsenUI/build/docs/angular1-binding/' + name + '.json';
+  } else {
+    throw new Error('Invalid path: ' + path);
+  }
+}
+
+function setupFile(metalsmith, docPath) {
+  return new Promise(function(resolve, reject) {
+    metalsmith.readFile(getTemplatePath(docPath), function(error, file) {
+      if (error) {
+        return reject(error);
+      }
+
+      var doc = JSON.parse(fs.readFileSync(docPath));
+
+      file.doc = doc;
+      file.title = doc.name;
+      file.name = doc.name;
+      file.is2 = true;
+      file.componentCategory = doc.category;
+
+      resolve({doc: doc, file: file});
+    });
+  });
+}
+
 module.exports = function(lang) {
-  var baseDir = __dirname + '/../2/OnsenUI/build/docs/json/';
 
   return function(files, metalsmith, done) {
 
-    // 2/OnsenUI/build/docs/json/directive/*.json
-    // 2/OnsenUI/build/docs/json/object/*.json
-    globby([
-      baseDir + 'directive/*.json',
-      baseDir + 'object/*.json'
-    ], function(error, paths) {
+    // 2/OnsenUI/build/docs/angular1-binding/element/*.json
+    // 2/OnsenUI/build/docs/angular1-binding/object/*.json
 
-      if (error) {
-        done(error);
-        return;
-      }
+    // 2/OnsenUI/build/docs/core/element/*.json
+    // 2/OnsenUI/build/docs/core/object/*.json
 
-      async.each(paths, function(path, done) {
-        var json = JSON.parse(fs.readFileSync(path));
+    var baseDir = nodePath.resolve(__dirname + '/../2/OnsenUI/build/docs/core/');
+    glob([
+      nodePath.join(baseDir, 'element', '*.json'),
+      nodePath.join(baseDir, 'object', '*.json')
+    ]).then(function(paths) {
 
-        var templatePath;
-
-        if (path.match(/directive\/[-._a-zA-Z0-9]+?.json$/)) {
-          templatePath = 'src/misc/element-reference.html';
-        } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
-          templatePath = 'src/misc/object-reference.html';
-        } else {
-          throw new Error('Invalid path: ' + path);
-        }
-
-        metalsmith.readFile(__dirname + '/../' + templatePath, function(error, file) {
-          if (error) {
-            throw error;
-          }
-
-          file.doc = json;
-          file.title = json.name;
-          file.name = json.name;
-          file.is2 = true;
-          file.componentCategory = json.categories.join(', ');
-
-          var name = '2/reference/' + json.name + '.html';
-          files[name] = file;
-
-          done();
+      return Promise.all(paths.map(function(path) {
+        return setupFile(metalsmith, path).then(function(result) {
+          files['2/reference/' + result.doc.name + '.html'] = result.file;
         });
+      }))
 
-      }, done);
-
+    }).then(function() {
+      done();
+    }).catch(function(error) {
+      done(error);
     });
   }
 };
