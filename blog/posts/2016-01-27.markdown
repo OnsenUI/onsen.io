@@ -1,6 +1,6 @@
 ---
 author: patrick
-date: 2016-01-26
+date: 2016-01-27
 id: onsen-ui-places-foursquare-google-maps 
 title: "Build a Places app with Foursquare and Google Maps using Onsen UI and Angular"
 tags: tutorial, onsen ui, angular, foursquare, google maps
@@ -21,10 +21,9 @@ The app is structured into three views. In the main view enables the user to sea
 <div style="display: flex;" >
 <div style="flex-grow: 1;"> </div>
 <div style="background-image: url('/blog/content/images/2016/Jan/iphone6.png'); width: 401px; height: 806px; ">
-<iframe style=" margin-top: 92px; margin-left: 26px;  " src="https://philolo1.github.io/OnsenUI-Places-App/" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
+<iframe style=" margin-top: 92px; margin-left: 26px;" src="https://philolo1.github.io/OnsenUI-Places-App/" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
 </div>
 <div style="flex-grow: 1;"> </div>
-
 </div>
 
 
@@ -86,15 +85,12 @@ $scope.search = function() {
     if (records.shops) category.push('shops');
     if (records.outdoors) category.push('outdoors');
 
-    var clientID = "YZQZP1Q2HEJWMD5ZVBMIQD3VSZC1W4BQCCQTVFEPJWNHL0RK";
-    var clientSecret = "ORHPL2VKKHUTB3KTJVDTB4D20AXBRCFKWVL12EPQNJNDFYBX";
-
     $http.get(
       "https://api.foursquare.com/v2/venues/explore/?near=" + 
       $scope.obj.searchString  +
       "&venuePhotos=1&section=" + 
       category.join(',') +
-      "&client_id=" +clientID +
+      "&client_id=" + clientID +
       "&client_secret=" + clientSecret + 
       " &v=20131124"
     ).then(function (result,status) {
@@ -391,9 +387,6 @@ angular.module('app').controller('DetailController', function ($scope, $http) {
   $scope.obj = {
     state: 'loading',
   }; 
-
-  var clientID = "YZQZP1Q2HEJWMD5ZVBMIQD3VSZC1W4BQCCQTVFEPJWNHL0RK";
-  var clientSecret = "ORHPL2VKKHUTB3KTJVDTB4D20AXBRCFKWVL12EPQNJNDFYBX";
 
   $http.get(
       "https://api.foursquare.com/v2/venues/" + 
