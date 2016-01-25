@@ -1,23 +1,8 @@
 ---
-title: The Official Onsen UI Framework Blog
+title: Mobile Hybrid App & UI/UX Blog
 page: blog
 paginate: articles
 ---
-
-<div class="description">
-  <h2>
-    Two Products, One Blog, One Goal
-  </h2>
-  <p>
-    We build mobile dev tools that just work. Onsen is an HTML5 framework
-    to create modern User Interfaces. Monaca is a comprehensive set of
-    cloud-powered app development tools and services. Using Monaca with
-    Onsen will ease most of the processes of importing plugins, debugging
-    and building a full app, and you don’t need to setup a local
-    environment. This blog covers Onsen and Monaca topics for both
-    beginners and advanced users.
-  </p>
-</div>
 
 <% for article, index in @articles.slice(@pagination.start, @pagination.end + 1): %>
   <%- @partial('blog-post.html.eco', {article: article}) %>

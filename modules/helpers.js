@@ -162,7 +162,8 @@ module.exports = function() {
       },
 
       getPreparedTitle: function() {
-        return this.title ? this.title + ' | Onsen' : this.site.title;
+        var title = this.pageTitle || this.title || this.site.title;
+        return 'Onsen: ' + title;
       },
 
       getPreparedDescription: function() {

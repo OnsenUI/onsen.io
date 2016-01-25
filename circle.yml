@@ -2,10 +2,11 @@ general:
   branches:
     only:
       - master
+      - staging
       - production
 machine:
   node:
-    version: 0.12.7
+    version: 5.2.0
 checkout:
   post:
     - git submodule sync
@@ -15,18 +16,17 @@ checkout:
     - cd 2/OnsenUI; git fetch --tags; git checkout master; git pull; # Check out master branch.
 dependencies:
   override:
+    - sudo apt-get update; sudo apt-get install g++
     - npm install
-    - cd project-templates; npm install
-    - cd OnsenUI; npm install
-    - cd OnsenUI/css-components; npm install
-    - cd 2/OnsenUI; npm install
-    - cd 2/OnsenUI/css-components; npm install
+    - npm install -g gulp
+    - cd 2/OnsenUI/css-components; npm install; gulp build;
+    - cd 2/OnsenUI; npm install; gulp build;
 test:
   override:
     - echo "Add tests!"
 deployment:
   staging:
-    branch: master
+    branch: [master, staging]
     commands:
       - npm install -g gulp
       - ./scripts/deploy_staging.sh
