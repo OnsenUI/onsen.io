@@ -132,7 +132,7 @@ layout: '2.html.eco'
             <% end %>
           </td>
           <td><%= @translate method.description %>
-            <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+            <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
           </td>
         </tr>
         <% end %>
@@ -209,7 +209,7 @@ layout: '2.html.eco'
     <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%= @translate method.returns.description %></p>
     <% end %>
 
-    <% if method.params: %>
+    <% if method.params.length > 0: %>
     <!-- method parameter -->
     <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
 
@@ -287,7 +287,7 @@ layout: '2.html.eco'
         <% for param in event.params: %>
         <tr>
           <td><span class="parameter-name"><%= param.name %></span></td>
-          <td class="value-type"><%= param.typeExpression %></td>
+          <td class="value-type"><%= param.type %></td>
           <td><%= @translate param.description %></td>
         </tr>
         <% end %>

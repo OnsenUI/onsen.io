@@ -2,6 +2,7 @@ var async = require('async');
 var globby = require('globby');
 var fs = require('fs');
 var nodePath = require('path');
+var basePath = nodePath.resolve(__dirname + '/../../');
 
 function glob(src) {
   return new Promise(function(resolve, reject) {
@@ -13,9 +14,9 @@ function glob(src) {
 
 function getTemplatePath(path) {
   if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
-    return __dirname + '/../src/misc/element-reference.html';
+    return nodePath.resolve(basePath + '/src/misc/element-reference.html');
   } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
-    return __dirname + '/../src/misc/object-reference.html';
+    return nodePath.resolve(basePath + '/src/misc/object-reference.html');
   } else {
     throw new Error('Invalid path: ' + path);
   }
@@ -26,7 +27,7 @@ function getExtensionPath(path) {
 
   if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
   } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
-    return __dirname + '/../2/OnsenUI/build/docs/angular1-binding/' + name + '.json';
+    return basePath + '/2/OnsenUI/build/docs/angular1-binding/' + name + '.json';
   } else {
     throw new Error('Invalid path: ' + path);
   }
@@ -62,21 +63,23 @@ module.exports = function(lang) {
     // 2/OnsenUI/build/docs/core/element/*.json
     // 2/OnsenUI/build/docs/core/object/*.json
 
-    var baseDir = nodePath.resolve(__dirname + '/../2/OnsenUI/build/docs/core/');
-    glob([
+    var baseDir = nodePath.resolve(__dirname + '/../../2/OnsenUI/build/docs/core/');
+    var src = [
       nodePath.join(baseDir, 'element', '*.json'),
       nodePath.join(baseDir, 'object', '*.json')
-    ]).then(function(paths) {
+    ];
 
+    glob(src).then(function(paths) {
       return Promise.all(paths.map(function(path) {
         return setupFile(metalsmith, path).then(function(result) {
           files['2/reference/' + result.doc.name + '.html'] = result.file;
         });
-      }))
+      }));
 
     }).then(function() {
       done();
     }).catch(function(error) {
+      console.error(error);
       done(error);
     });
   }
