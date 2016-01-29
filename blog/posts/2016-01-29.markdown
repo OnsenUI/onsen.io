@@ -7,7 +7,7 @@ category: development
 tags: monaca, security, cordova
 ---
 
-![KeychainPlugin Demo App](/blog/content/images/2015/Dec/monaca-secure-storage.jpg)
+![KeychainPlugin Demo App](/blog/content/images/2016/Jan/monaca-secure-storage.jpg)
 
 Building secure applications is a challenge you might face while developing Monaca applications.
 Important data, such as payment information or personal files, are potentially dangerous if they fall into the wrong hands.
@@ -29,28 +29,28 @@ The downside of this is that this option is limited to iOS applications.
 
 First, install [KeychainPlugin](https://github.com/shazron/KeychainPlugin) in Monaca. (require Gold Plan with Monaca)
 
-![Monaca KeychainPlugin Import](/blog/content/images/2015/Dec/monaca-import-keychain-plugin.png)
+![Monaca KeychainPlugin Import](/blog/content/images/2016/Jan/monaca-import-keychain-plugin.png)
 
 After the installation finishes, fill out necessary configurations in both iOS App Setting and Build Setting.
 The build has to be done as an iOS application instead of using Monaca Debugger.
 Note that you will be asked to provide your Developer Certificate in the Build Setting.
 
-![Monaca iOS Build Setting](/blog/content/images/2015/Dec/monaca-ios-build-setting.png)
+![Monaca iOS Build Setting](/blog/content/images/2016/Jan/monaca-ios-build-setting.png)
 
 Also, provisioning registration is required when you build your application so create your provisioning profile in advance.
 
-![Monaca iOS Debug Build](/blog/content/images/2015/Dec/monaca-ios-debug-build.png)
+![Monaca iOS Debug Build](/blog/content/images/2016/Jan/monaca-ios-debug-build.png)
 
 Below you can find the snapshots of a demo application with KeychainPlugin.
 
 Successfully stored data using Keychain.
 
-![KeychainPlugin Demo App](/blog/content/images/2015/Dec/monaca-keychain-demo-app-1.png)
+![KeychainPlugin Demo App](/blog/content/images/2016/Jan/monaca-keychain-demo-app-1.png)
 
 If the key does not exist, null is returned.
 If the key does exist, the data can be retrieved.
 
-![KeychainPlugin Demo App](/blog/content/images/2015/Dec/monaca-keychain-demo-app-2.png)
+![KeychainPlugin Demo App](/blog/content/images/2016/Jan/monaca-keychain-demo-app-2.png)
 
 Now we can store important data, such as user tokens or user IDs, securely with the KeychainPlugin.
 
