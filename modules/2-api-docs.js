@@ -2,7 +2,7 @@ var async = require('async');
 var globby = require('globby');
 var fs = require('fs');
 var nodePath = require('path');
-var basePath = nodePath.resolve(__dirname + '/../../');
+var basePath = nodePath.resolve(__dirname + '/../');
 
 function glob(src) {
   return new Promise(function(resolve, reject) {
@@ -33,7 +33,7 @@ function getExtensionPath(path) {
   }
 }
 
-function setupFile(metalsmith, docPath) {
+function generateAPIDocument(metalsmith, docPath) {
   return new Promise(function(resolve, reject) {
     metalsmith.readFile(getTemplatePath(docPath), function(error, file) {
       if (error) {
@@ -56,26 +56,15 @@ function setupFile(metalsmith, docPath) {
 module.exports = function(lang) {
 
   return function(files, metalsmith, done) {
-
-    // 2/OnsenUI/build/docs/angular1-binding/element/*.json
-    // 2/OnsenUI/build/docs/angular1-binding/object/*.json
-
-    // 2/OnsenUI/build/docs/core/element/*.json
-    // 2/OnsenUI/build/docs/core/object/*.json
-
-    var baseDir = nodePath.resolve(__dirname + '/../../2/OnsenUI/build/docs/core/');
-    var src = [
-      nodePath.join(baseDir, 'element', '*.json'),
-      nodePath.join(baseDir, 'object', '*.json')
-    ];
-
-    glob(src).then(function(paths) {
+    glob([
+      basePath + '/2/OnsenUI/build/docs/element/*.json',
+      basePath + '/2/OnsenUI/build/docs/object/*.json'
+    ]).then(function(paths) {
       return Promise.all(paths.map(function(path) {
-        return setupFile(metalsmith, path).then(function(result) {
+        return generateAPIDocument(metalsmith, path).then(function(result) {
           files['2/reference/' + result.doc.name + '.html'] = result.file;
         });
       }));
-
     }).then(function() {
       done();
     }).catch(function(error) {
