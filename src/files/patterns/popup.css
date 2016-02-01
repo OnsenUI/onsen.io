@@ -46,4 +46,17 @@
   left: 0;
   background: rgba(0,0,0,.8);
   z-index: 1000;
+  overflow: hidden;
+}
+
+.button-close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  color: #FF4D35;
+  font-size: 30px;
+}
+
+.button-close:hover {
+  color: #F7A397;
 }
