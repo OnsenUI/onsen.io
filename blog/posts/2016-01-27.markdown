@@ -68,44 +68,44 @@ In the search function, we will first change the variable state to `isLoading` a
 
 ```javascript
 $scope.search = function() {
-    $scope.obj.state = 'isLoading';
+  $scope.obj.state = 'isLoading';
 
-    // load filter options from localStorage
-    records = JSON.parse(localStorage.getItem('records'));
-    if (records == null) {
-      records = {
-        food: true,
-        shops: false,
-        outdoors: false
-      };
-      localStorage.setItem('records', JSON.stringify(records));
+  // load filter options from localStorage
+  records = JSON.parse(localStorage.getItem('records'));
+  if (records == null) {
+    records = {
+      food: true,
+      shops: false,
+      outdoors: false
+    };
+    localStorage.setItem('records', JSON.stringify(records));
+  }
+
+  // create the category array
+  var category= [];
+  if (records.food) category.push('food');
+  if (records.shops) category.push('shops');
+  if (records.outdoors) category.push('outdoors');
+
+  $http.get(
+    "https://api.foursquare.com/v2/venues/explore/?near=" +
+    $scope.obj.searchString  +
+    "&venuePhotos=1&section=" +
+    category.join(',') +
+    "&client_id=" + clientID +
+    "&client_secret=" + clientSecret +
+    " &v=20131124"
+  ).then(function (result,status) {
+    var items = result.data.response.groups[0].items;
+
+    var help = [];
+    for (var el in items) {
+      var place = $scope.parseVenue(items[el]);
+      help.push(place);
     }
 
-    // create the category array
-    var category= [];
-    if (records.food) category.push('food');
-    if (records.shops) category.push('shops');
-    if (records.outdoors) category.push('outdoors');
-
-    $http.get(
-      "https://api.foursquare.com/v2/venues/explore/?near=" +
-      $scope.obj.searchString  +
-      "&venuePhotos=1&section=" +
-      category.join(',') +
-      "&client_id=" + clientID +
-      "&client_secret=" + clientSecret +
-      " &v=20131124"
-    ).then(function (result,status) {
-      var items = result.data.response.groups[0].items;
-
-      var help = [];
-      for (var el in items) {
-        var place = parseVenue(items[el]);
-        help.push(place);
-      }
-
-      $scope.obj.state = 'loaded';
-      $scope.venues = help;
+    $scope.obj.state = 'loaded';
+    $scope.venues = help;
    }, function (data,status) {
       $scope.obj.state = 'noResult';
    });
@@ -115,10 +115,10 @@ $scope.search = function() {
 Since we want to update the cells, once the user enters a different `searchString`, we need to keep track of the value of the variable `searchString`. We can do this by using Angular $watch function.
 
 ```javascript
-   // in the main view controller ...
-  $scope.$watch('obj.searchString', function() {
-    $scope.search();
-  });
+// in the main view controller ...
+$scope.$watch('obj.searchString', function() {
+  $scope.search();
+});
 
 ```
 
@@ -130,38 +130,41 @@ The top of the main view page consists of an `ons-toolbar` and an `input` search
 ```html
 <ons-navigator var="navi">
   <ons-page ng-controller="AppController"  var="appController">
-     <ons-toolbar class="toolbar" >
-         <div class="center">
-             Foursquare Onsen
-         </div>
-         <div class="right">
-             <ons-toolbar-button ng-click="filterClick()" >Filter</ons-toolbar-button>
-         </div>
-     </ons-toolbar>
-     <!-- INPUT TEXT FIELD -->
-     <input type="search" ng-model="obj.searchString" ng-change="search()"  placeholder="Search" class="search-input searchBar">
+    <ons-toolbar class="toolbar" >
+      <div class="center">
+        Foursquare Onsen
+      </div>
+      <div class="right">
+        <ons-toolbar-button ng-click="filterClick()" >Filter</ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+    <!-- INPUT TEXT FIELD -->
+    <input type="search" ng-model="obj.searchString" 
+           ng-change="search()"  placeholder="Search" class="search-input searchBar">
 
-     <!-- LOADING CONTAINER  -->
-     <div ng-show="obj.state == 'isLoading'" class="loader">
-       <div > </div>
-       <ons-icon icon="ion-load-c" spin="true"></ons-icon>
-       <div > </div>
-     </div>
+      <!-- LOADING CONTAINER  -->
+      <div ng-show="obj.state == 'isLoading'" class="loader">
+        <div > </div>
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+        <div > </div>
+      </div>
 
-     <!-- NO RESULT CONTAINER  -->
-     <div ng-show="obj.state == 'noResult'"  class="noResult">
-         No results found
-     </div>
+      <!-- NO RESULT CONTAINER  -->
+      <div ng-show="obj.state == 'noResult'"  class="noResult">
+        No results found
+      </div>
 
-     <!-- LIST CONTAINER  -->
-     <ons-list ng-show="obj.state == 'loaded'"  class="myList fullHeight" >
-         <ons-list-item modifier="tappable"  ng-click="cellClick(venue.venueID, $event)"  ng-repeat="venue in venues">
-            <!-- LIST ITEM CONTENT-->
-            ..
-         </ons-list-item>
-     </ons-list>
-    </ons-page>
+      <!-- LIST CONTAINER  -->
+      <ons-list ng-show="obj.state == 'loaded'"  class="myList fullHeight" >
+        <ons-list-item modifier="tappable"  ng-click="cellClick(venue.venueID, $event)"  
+                       ng-repeat="venue in venues">
+          <!-- LIST ITEM CONTENT-->
+          ..
+      </ons-list-item>
+    </ons-list>
+  </ons-page>
 </ons-navigator>
+
 ```
 
 Each `ons-list-item` is responsible for representing a venue. The structure of the HTML consists mainly of a combination of `ons-row` and `ons-col`. For a better illustration, take a look at the image below.
@@ -171,26 +174,27 @@ Each `ons-list-item` is responsible for representing a venue. The structure of t
 Each list item consists of a single `ons-row` that contains itself three `ons-col`: the first column contains the photo of the place, the second displays important information about the place and the third column displays the chevron. The second column is splitted into four rows: the first one for the title, the second one for the rating, the reviews and the price, the third on for the address and the forth one for the category. Furthermore, we use `ng-repeat` to generate the right quantity of yellow and grey stars:
 
 ```html
-<ons-list-item modifier="tappable"  ng-click="cellClick(venue.venueID, $event)"  ng-repeat="venue in venues">
-      <ons-row class="item">
-        <ons-col width="100px">
-          <img class="shop"  ng-src="{{venue.picture_url}}" />
+<ons-list-item modifier="tappable"  ng-click="cellClick(venue.venueID, $event)"  
+  ng-repeat="venue in venues">
+  <ons-row class="item">
+    <ons-col width="100px">
+      <img class="shop"  ng-src="{{venue.picture_url}}" />
+    </ons-col>
+    <ons-col>
+      <ons-row class="item-row">
+        <ons-col class="shopTitle">
+          {{venue.title}}
         </ons-col>
-        <ons-col>
-          <ons-row class="item-row">
-            <ons-col class="shopTitle">
-              {{venue.title}}
-            </ons-col>
-            </ons-row>
-        <ons-row class="item-row2">
-          <ons-col width="96px" >
+      </ons-row>
+      <ons-row class="item-row2">
+        <ons-col width="96px" >
+          <div>
             <div>
-              <div>
-                <span ng-repeat="el in venue.plus">
-                  <img src="star_gold.png" height="15px" alt=""/>
-                </span>
+              <span ng-repeat="el in venue.plus">
+                <img src="star_gold.png" height="15px" alt=""/>
+              </span>
               <span ng-repeat="el in venue.minus" >
-              <img src="star_grey.png" height="15px" alt=""/>
+                <img src="star_grey.png" height="15px" alt=""/>
               </spane>
             </div>
           </div>
@@ -233,8 +237,8 @@ The more challenging part of the styling is the search box, which we want to sti
 }
 
 .fullHeight {
-    -webkit-overflow-scrolling: touch;
-    height: 100%;
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
 }
 
 ```
@@ -243,10 +247,10 @@ Furthermore, we need to style the chevron image since we created a custom image 
 
 ```css
 .chevron {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      margin-left: 10px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 10px;
 }
 
 ```
@@ -299,7 +303,6 @@ angular.module('app').controller('FilterController', function ($scope, $http) {
   $scope.records = JSON.parse(localStorage.getItem('records'));
 
   angular.element(document).ready(function () {
-
     if ($scope.records.food)  {
       foodSlider.setChecked(true);
     }
@@ -323,6 +326,7 @@ angular.module('app').controller('FilterController', function ($scope, $http) {
       $scope.records.shops = slider.value;
     });
   });
+});
 ```
 
 Once the user clicks on either the cancel or the apply button, the navigation controller will pop the page. If the apply button is clicked, the filter options need to be saved in the localStorage and the main view controller needs to reload the data and initiate a search. To communicate between the controllers, we use a custom event. The main view controller will listen to the event and the filter view controller will fire it once the apply button has been clicked.
@@ -389,11 +393,11 @@ angular.module('app').controller('DetailController', function ($scope, $http) {
   };
 
   $http.get(
-      "https://api.foursquare.com/v2/venues/" +
-      $scope.venueID +
-      "?client_id=" + clientID +
-      "&client_secret=" + clientSecret +
-      "&v=20131124"
+    "https://api.foursquare.com/v2/venues/" +
+    $scope.venueID +
+    "?client_id=" + clientID +
+    "&client_secret=" + clientSecret +
+    "&v=20131124"
   ).then(function (result,status) {
     $scope.obj.state = 'loaded';
     var venue = result.data.response.venue;
@@ -441,46 +445,46 @@ For the HTML part we only need to put the data together. First we have an `img` 
 <ons-page ng-controller="DetailController">
   <ons-toolbar class="toolbar" >
     <div class="left">
-          <ons-gesture-detector class="backText"  ng-tap="cancel()">
-               Back
-              </ons-gesture-detector>
-            </div>
-            <div class="center">
-              {{title}}
-            </div>
-          </ons-toolbar>
-          <div ng-show="obj.state == 'loading'" class="loader2">
-            <div > </div>
-            <ons-icon icon="ion-load-c"  spin="true"></ons-icon>
-            <div > </div>
-          </div>
-          <div ng-show="obj.state == 'noResult'"  class="noResults">
-             No results found
-          </div>
-          <ons-list ng-show="obj.state == 'loaded'">
-            <ons-row>
-              <ons-col >
-                <img ng-click="mapClick()" style="width:100%;" ng-src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=640x3200&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{lat}},{{lng}}&key=AIzaSyBGmoYFxRHlmsK6LUPiPLWkeh0ti6iw2i4" />
-              </ons-col>
-            </ons-row>
-            <ons-row class="border" style="padding-top: 5px; padding-bottom: 5px;" >
-              <ons-col class="myC" style="align-self: center;" >
-                  Address:
-              </ons-col>
-              <ons-col>
-                {{address}}
-              </ons-col>
-            </ons-row>
-            <ons-row class="border" style="padding-top: 5px; padding-bottom: 5px;">
-              <ons-col class="myC" style="align-self: center;" >
-                  Open:
-              </ons-col>
-              <ons-col>
-                {{openInfo}}
-              </ons-col>
-            </ons-row>
-          </ons-list>
-   </ons-page>
+      <ons-back-button ng-tap="backClick()">
+        Back
+      </ons-back-button>
+    </div>
+    <div class="center">
+      {{title}}
+    </div>
+  </ons-toolbar>
+  <div ng-show="obj.state == 'loading'" class="loader2">
+    <div > </div>
+    <ons-icon icon="ion-load-c"  spin="true"></ons-icon>
+    <div > </div>
+  </div>
+  <div ng-show="obj.state == 'noResult'"  class="noResults">
+    No results found
+  </div>
+  <ons-list ng-show="obj.state == 'loaded'">
+    <ons-row>
+      <ons-col style="min-height: 800">
+        <img ng-click="mapClick()" style="width:100%;" ng-src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=640x3200&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{lat}},{{lng}}&key=AIzaSyBGmoYFxRHlmsK6LUPiPLWkeh0ti6iw2i4" />
+      </ons-col>
+    </ons-row>
+    <ons-row class="border" style="padding-top: 5px; padding-bottom: 5px;" >
+      <ons-col class="myC" style="align-self: center;" >
+        Address:
+      </ons-col>
+      <ons-col>
+        {{address}}
+      </ons-col>
+    </ons-row>
+    <ons-row class="border" style="padding-top: 5px; padding-bottom: 5px;">
+      <ons-col class="myC" style="align-self: center;" >
+        Open:
+      </ons-col>
+      <ons-col>
+        {{openInfo}}
+      </ons-col>
+    </ons-row>
+  </ons-list>
+</ons-page>
 
 ```
 
