@@ -1,0 +1,502 @@
+---
+author: patrick
+date: 2016-02-04
+id: build-a-places-app-with-foursquare-and-google-maps-using-onsen-ui-and-angularjs
+title: "Build a Places App with Foursquare and Google Maps using Onsen UI and AngularJS"
+tags: tutorial, onsen ui, angular, foursquare, google maps
+category: tutorial
+---
+
+![OnsenUI-Places](/blog/content/images/2016/Feb/onsen-places.png)
+
+In this tutorial we are going to learn how to use the [Foursquare API](https://developer.foursquare.com/docs/) and [Google Static Maps API](https://developers.google.com/maps/documentation/static-maps/?hl=en) to create a Places App with Onsen UI and AngularJS. In this app we will be able to search for a particular place and filter the results by food, shops and outdoor places. There will be also an integrated static map which will lead to the Google Website once clicked.
+
+<!-- more -->
+
+[Foursquare API](https://developer.foursquare.com/docs/) gives us access to a huge database of different venues from all around the world. It includes a rich variety of information such as the place's addresses, popularity, tips and photos. The access to the API is available for free and provides an easy setup.
+
+[Google Static API](https://developers.google.com/maps/documentation/static-maps) makes easy to visualize a location on a map using integrated markers. These tools, combined with the power of Monaca and OnsenUI, enable us to build a Place App in almost no time!
+
+The app is structured into three views. The main view enables the user to search for places using a simple input box. This information is fetched from the Foursquare API and displayed in an `ons-list`, which contains some `ons-list-item` elements. Furthermore, there is an `ons-button` in the `ons-toolbar` which leads to a filtered view. In the filter view, the user has the possibility to filter the place's categories (Food, Shops and Outdoor). In the main view, the user can also click on a cell which will be directed to a the details viewpage. In the details page, a static map containing the places location is generated using the Google Static Maps API. Some additional information, like the opening hours, will be displayed too. An insite version of the app can be seen below. The code is freely [available to download on GitHub](https://github.com/philolo1/OnsenUI-Places-App).
+
+
+<div style="display: flex;" >
+<div style="flex-grow: 1;"> </div>
+<div style="background-image: url('/blog/content/images/2016/Feb/iphone6.png'); width: 401px; height: 806px; ">
+<iframe style=" margin-top: 92px; margin-left: 26px;" src="https://philolo1.github.io/OnsenUI-Places-App/" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
+</div>
+<div style="flex-grow: 1;"> </div>
+</div>
+
+
+### Getting the API keys
+
+Before getting started, we need to create two accounts for accessing the APIs: one for Foursquare, in order to access the places information, and one for Google's Static Map API in order to be able to display the static map.
+
+To get the API key from Foursquare, we first need to create an account on [their website](https://foursquare.com/login?continue=%2Fdevelopers%2Fapps), click on "Create a new app" and fill in the details. At the new page, we will be granted with a Client ID and a Client Secret, both needed in order to be able to perform request to the API.
+
+For getting the API key from Google, we have to visit Google Developers Console (with our Google account), create a new project and enable the access for the Google Static Map API. In the credentials section we can select a method to access to this API. In our case, we will restrict it to only from our GitHub gh-pages repository. For every request we will send to the Google Maps API, we need to attach the generated API key.
+
+### The Main View: JavaScript Part
+
+Let's have a look at the JavaScript part first. In our Angular scope we will need to save two pieces of information: The search string, whose value will be bound to the `input` content, and a state variable that indicates whenever the content is loading, which may not have results at all:
+
+```javascript
+angular.module('app').controller('AppController', function ($scope, $http) {
+  $scope.obj = {
+    searchString: 'shibuya',
+    state: 'isLoading',
+  };
+  // some more code ...
+});
+```
+
+We start by implementing the search function. First, we need to figure out what kind of request we have to do in order to get the data we desire. According to the documentation, we will do a simple HTTP request which will return JSON data. The URL is in the form:
+
+```html
+https://api.foursquare.com/v2/venues/explore/?near=Shibuya&venuePhotos=1&section=food&client_id=YZQZP1Q2HEJWMD5ZVBMIQD3VSZC1W4BQCCQTVFEPJWNHL0RK&client_secret=ORHPL2VKKHUTB3KTJVDTB4D20AXBRCFKWVL12EPQNJNDFYBX&v=20131124
+```
+
+The parameters are:
+* **near**: the place we want to look for. We will use the string in the textbox.
+* **section**: it will include the options for the filter (Shops, Cafe and Outdoors). Since we want this information to be persistent after the app has been closed, we will use [LocalStorage](http://www.w3schools.com/html/html5_webstorage.asp) to store the information.
+* **client_id**: the generated client ID from Foursquare.
+* **client_secret**:  the generated secret from the Foursquare.
+* **v**: the version of the API that we are using.
+
+In the search function, we will first change the variable state to `isLoading` and then read the filter options from the localStorage. Afterwards, the app will make an HTTP request using Angular $http core service. After the query will be executed, the variable state will be changed to `noResults` or `loaded`, depending on the returned output. If some data has been returned, it will be parsed from the returned JSON object.
+
+```javascript
+$scope.search = function() {
+  $scope.obj.state = 'isLoading';
+
+  // load filter options from localStorage
+  records = JSON.parse(localStorage.getItem('records'));
+  if (records == null) {
+    records = {
+      food: true,
+      shops: false,
+      outdoors: false
+    };
+    localStorage.setItem('records', JSON.stringify(records));
+  }
+
+  // create the category array
+  var category= [];
+  if (records.food) category.push('food');
+  if (records.shops) category.push('shops');
+  if (records.outdoors) category.push('outdoors');
+
+  $http.get(
+    "https://api.foursquare.com/v2/venues/explore/?near=" +
+    $scope.obj.searchString  +
+    "&venuePhotos=1&section=" +
+    category.join(',') +
+    "&client_id=" + clientID +
+    "&client_secret=" + clientSecret +
+    " &v=20131124"
+  ).then(function (result,status) {
+    var items = result.data.response.groups[0].items;
+
+    var help = [];
+    for (var el in items) {
+      var place = $scope.parseVenue(items[el]);
+      help.push(place);
+    }
+
+    $scope.obj.state = 'loaded';
+    $scope.venues = help;
+   }, function (data,status) {
+      $scope.obj.state = 'noResult';
+   });
+};
+```
+
+Since we want to update the cells, once the user enters a different `searchString`, we need to keep track of the value of the variable `searchString`. We can do this by using Angular $watch function.
+
+```javascript
+// in the main view controller ...
+$scope.$watch('obj.searchString', function() {
+  $scope.search();
+});
+
+```
+
+
+### The Main View: HTML + CSS
+
+The top of the main view page consists of an `ons-toolbar` and an `input` search box. The rest contains an `ons-list` and two div's. The `ons-list` will contain the list of places while one of the divs will contain the no-results view and the other div the loading. Depending on the value of the variable `state`, the appropriate containers will be shown and the other containers will be hidden.
+
+```html
+<ons-navigator var="navi">
+  <ons-page ng-controller="AppController"  var="appController">
+    <ons-toolbar class="toolbar" >
+      <div class="center">
+        Foursquare Onsen
+      </div>
+      <div class="right">
+        <ons-toolbar-button ng-click="filterClick()" >Filter</ons-toolbar-button>
+      </div>
+    </ons-toolbar>
+    <!-- INPUT TEXT FIELD -->
+    <input type="search" ng-model="obj.searchString" 
+           ng-change="search()"  placeholder="Search" class="search-input searchBar">
+
+      <!-- LOADING CONTAINER  -->
+      <div ng-show="obj.state == 'isLoading'" class="loader">
+        <div > </div>
+        <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+        <div > </div>
+      </div>
+
+      <!-- NO RESULT CONTAINER  -->
+      <div ng-show="obj.state == 'noResult'"  class="noResult">
+        No results found
+      </div>
+
+      <!-- LIST CONTAINER  -->
+      <ons-list ng-show="obj.state == 'loaded'"  class="myList fullHeight" >
+        <ons-list-item modifier="tappable"  ng-click="cellClick(venue.venueID, $event)"  
+                       ng-repeat="venue in venues">
+          <!-- LIST ITEM CONTENT-->
+          ..
+      </ons-list-item>
+    </ons-list>
+  </ons-page>
+</ons-navigator>
+
+```
+
+Each `ons-list-item` is responsible for representing a venue. The structure of the HTML consists mainly of a combination of `ons-row` and `ons-col`. For a better illustration, take a look at the image below.
+
+![OnsenUI-Places](/blog/content/images/2016/Feb/onsen-places-cell.png)
+
+Each list item consists of a single `ons-row` that contains itself three `ons-col`: the first column contains the photo of the place, the second displays important information about the place and the third column displays the chevron. The second column is splitted into four rows: the first one for the title, the second one for the rating, the reviews and the price, the third on for the address and the forth one for the category. Furthermore, we use `ng-repeat` to generate the right quantity of yellow and grey stars:
+
+```html
+<ons-list-item modifier="tappable"  ng-click="cellClick(venue.venueID, $event)"  
+  ng-repeat="venue in venues">
+  <ons-row class="item">
+    <ons-col width="100px">
+      <img class="shop"  ng-src="{{venue.picture_url}}" />
+    </ons-col>
+    <ons-col>
+      <ons-row class="item-row">
+        <ons-col class="shopTitle">
+          {{venue.title}}
+        </ons-col>
+      </ons-row>
+      <ons-row class="item-row2">
+        <ons-col width="96px" >
+          <div>
+            <div>
+              <span ng-repeat="el in venue.plus">
+                <img src="star_gold.png" height="15px" alt=""/>
+              </span>
+              <span ng-repeat="el in venue.minus" >
+                <img src="star_grey.png" height="15px" alt=""/>
+              </spane>
+            </div>
+          </div>
+        </ons-col>
+        <ons-col class="info" >
+          {{venue.reviews}}
+        </ons-col>
+        <ons-col class="rightText info" width="20px">
+          {{venue.price}}
+        </ons-col>
+      </ons-row>
+      <ons-row class="item-row3" >
+        <ons-col class="street">
+          {{venue.place}}
+        </ons-col>
+      </ons-row>
+      <ons-row class="item-row4" >
+        <ons-col class="info">
+          {{venue.category}}
+        </ons-col>
+      </ons-row>
+    </ons-col>
+    <ons-col width="20px">
+      <img class="chevron" src="./chevron.png" />
+    </ons-col>
+  </ons-row>
+</ons-list-item>
+
+```
+
+The style of the cells of the main view is pretty straightforward: most of the positioning is done by `ons-row` and `ons-cell`. The containing elements just need small adjustments. For more details, check out the [GitHub Repo](https://github.com/philolo1/OnsenUI-Places-App).
+
+The more challenging part of the styling is the search box, which we want to stick to the view. Since iOS does not really support `position: fixed`, we need to use `position: absolute` and set the `list-item-container` `height` to `100%`:
+
+```css
+.searchBar {
+  position: absolute;
+  top: 0px;
+  z-index: 10000;
+}
+
+.fullHeight {
+  -webkit-overflow-scrolling: touch;
+  height: 100%;
+}
+
+```
+
+Furthermore, we need to style the chevron image since we created a custom image due to the bigger height of our cells.
+
+```css
+.chevron {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 10px;
+}
+
+```
+
+### Filter Page
+
+The filter page consists in an `ons-toolbar` and an `ons-list` with 3 list items, which are the switches for the filter options: Food, Shop and Outdoors.
+
+```html
+<ons-page ng-controller="FilterController">
+  <ons-toolbar class="toolbar" >
+    <div class="left">
+      <ons-gesture-detector class="cancelButton" ng-tap="cancelClick()">
+        Cancel
+      </ons-gesture-detector>
+    </div>
+    <div class="center">
+      Filter
+    </div>
+    <div class="right">
+      <ons-toolbar-button ng-click="applyClick()"> Apply </ons-toolbar-button>
+    </div>
+  </ons-toolbar>
+
+  <ons-list>
+    <ons-list-item >
+      <ons-row >
+        <ons-col  class="border filterCol" >
+          Food
+        </ons-col>
+        <ons-col width="60px" class="border filterCol2" >
+          <ons-switch var="foodSlider" > </ons-switch>
+        </ons-col>
+      </ons-row>
+    </ons-list-item>
+
+    <!-- code for Shop and Outdoor -->
+    ...
+  </ons-list>
+</ons-page>
+```
+
+
+
+For the JavasScript part, we will load the filter options into the scope of our controller. Furthermore, the values of the switches will be set according to the value of the options. We need to also watch the sliders in order to adjust the values of the filter options.
+
+```javascript
+angular.module('app').controller('FilterController', function ($scope, $http) {
+
+  $scope.records = JSON.parse(localStorage.getItem('records'));
+
+  angular.element(document).ready(function () {
+    if ($scope.records.food)  {
+      foodSlider.setChecked(true);
+    }
+    if ($scope.records.shops)  {
+       shopSlider.setChecked(true);
+    }
+
+    if ($scope.records.outdoors)  {
+      outdoorSlider.setChecked(true);
+    }
+
+    foodSlider.on('change', function(slider) {
+      $scope.records.food = slider.value;
+    });
+
+    outdoorSlider.on('change', function(slider) {
+      $scope.records.outdoors = slider.value;
+    });
+
+    shopSlider.on('change', function(slider) {
+      $scope.records.shops = slider.value;
+    });
+  });
+});
+```
+
+Once the user clicks on either the cancel or the apply button, the navigation controller will pop the page. If the apply button is clicked, the filter options need to be saved in the localStorage and the main view controller needs to reload the data and initiate a search. To communicate between the controllers, we use a custom event. The main view controller will listen to the event and the filter view controller will fire it once the apply button has been clicked.
+
+```javascript
+// in the filter controller
+$scope.cancelClick = function() {
+  navi.popPage();
+};
+
+$scope.applyClick = function() {
+  localStorage.setItem('records', JSON.stringify($scope.records));
+
+  var event = new CustomEvent("prepop", { });
+  document.dispatchEvent(event);
+
+  navi.popPage();
+};
+
+// in the main view controller
+document.addEventListener(
+  'prepop',
+  function() {
+    $scope.search();
+  }
+);
+```
+
+### Details Page
+
+In the details page we would like to display a static map of the location of the place. When clicked, it will bring us to the Google Maps website. Furthermore, we would like to show some additional information about this place. For our purpose the address and the opening hours are sufficient.
+
+In order to get these information, we need to query the Foursquare API for details using a query like the following one:
+
+```html
+https://api.foursquare.com/v2/venues/VENUE_ID?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20131124
+```
+
+According to the [documentation](https://developer.foursquare.com/docs/venues/venues), the parameters are as following:
+* **venue_id**: the ID of the place.
+* **client_id**: the generated client ID from Foursquare.
+* **client_secret**: the generated secret from Foursquare.
+* **v**: the version of the API that we are using.
+
+The venue ID is retrieved from the search query executed in the mainview controller. When we push the page, the ID is given as a parameter and used inside the details controller.
+
+```javascript
+// in the mainview controller
+$scope.cellClick = function(venueID, event) {
+  navi.pushPage('detail.html', {venueID: venueID});
+};
+
+// in the details view controller
+$scope.venueID = navi.getCurrentPage().options.venueID;
+```
+
+After reading the ID, a query to the API will be executed. After the query has finished, our application will parse the desired data out of the returned JSON object.
+
+```javascript
+angular.module('app').controller('DetailController', function ($scope, $http) {
+  $scope.venueID = navi.getCurrentPage().options.venueID;
+  $scope.obj = {
+    state: 'loading',
+  };
+
+  $http.get(
+    "https://api.foursquare.com/v2/venues/" +
+    $scope.venueID +
+    "?client_id=" + clientID +
+    "&client_secret=" + clientSecret +
+    "&v=20131124"
+  ).then(function (result,status) {
+    $scope.obj.state = 'loaded';
+    var venue = result.data.response.venue;
+    $scope.title = venue.name;
+    $scope.imgSrc = venue.bestPhoto.prefix + '300x300' +  venue.bestPhoto.suffix;
+    $scope.lat = venue.location.lat;
+    $scope.lng = venue.location.lng;
+    $scope.address = venue.location.formattedAddress[0] + ',' +
+                     venue.location.formattedAddress[1];
+    $scope.openInfo = parseOpenInfomation(venue.popular);
+  }, function (data,status) {
+    $scope.obj.state = 'noResult';
+  });
+
+  // some other code (function definitions, etc) ...
+});
+```
+
+We are almost done! In order to finish the application, we need to layout and display the page. For the static map we will use Google Maps Static API. The URL of the image will be like the following one:
+
+```html
+<img ng-src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=640x3200&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{lat}},{{lng}}&key=AIzaSyBGmoYFxRHlmsK6LUPiPLWkeh0ti6iw2i4" />
+```
+
+The parameters are:
+* **zoom**: the zoom factor of the image.
+* **size**: the dimension of the image.
+* **lat**: the latitude of the location.
+* **lng**: the longitude of the location.
+* **key**: our google API key.
+
+For more information, please consult the [documentation](https://developers.google.com/maps/documentation/static-maps/intro?hl=en). Ones the map has been clicked, the full version of the map will be displayed in Google Maps webpage (or mobile app):
+
+```javascript
+// in the details view controller
+$scope.mapClick = function() {
+  window.location.href = "http://maps.google.com/maps?z=16&t=m&q=loc:" +
+                          $scope.lat + "+" + $scope.lng;
+};
+```
+
+For the HTML part we only need to put the data together. First we have an `img` of the map abd an `ons-list` that contains the address and the opening hours. We will also use a scope variable to show the loading spinner, as long as the data has not been completely loaded.
+
+```html
+<ons-page ng-controller="DetailController">
+  <ons-toolbar class="toolbar" >
+    <div class="left">
+      <ons-back-button ng-tap="backClick()">
+        Back
+      </ons-back-button>
+    </div>
+    <div class="center">
+      {{title}}
+    </div>
+  </ons-toolbar>
+  <div ng-show="obj.state == 'loading'" class="loader2">
+    <div > </div>
+    <ons-icon icon="ion-load-c"  spin="true"></ons-icon>
+    <div > </div>
+  </div>
+  <div ng-show="obj.state == 'noResult'"  class="noResults">
+    No results found
+  </div>
+  <ons-list ng-show="obj.state == 'loaded'">
+    <ons-row>
+      <ons-col style="min-height: 800">
+        <img ng-click="mapClick()" style="width:100%;" ng-src="https://maps.googleapis.com/maps/api/staticmap?zoom=16&size=640x3200&maptype=roadmap&markers=color:blue%7Clabel:S%7C{{lat}},{{lng}}&key=AIzaSyBGmoYFxRHlmsK6LUPiPLWkeh0ti6iw2i4" />
+      </ons-col>
+    </ons-row>
+    <ons-row class="border" style="padding-top: 5px; padding-bottom: 5px;" >
+      <ons-col class="myC" style="align-self: center;" >
+        Address:
+      </ons-col>
+      <ons-col>
+        {{address}}
+      </ons-col>
+    </ons-row>
+    <ons-row class="border" style="padding-top: 5px; padding-bottom: 5px;">
+      <ons-col class="myC" style="align-self: center;" >
+        Open:
+      </ons-col>
+      <ons-col>
+        {{openInfo}}
+      </ons-col>
+    </ons-row>
+  </ons-list>
+</ons-page>
+
+```
+
+Finally we are done!
+
+### Further information
+
+Both the Foursquare API and the Google Static Map API enables us to do much more than what we have seen in this tutorial. For those who are interested, take a look at the documentations:
+
+* [Foursquare API]( https://developer.foursquare.com/)
+* [Google Statics Maps API](https://developers.google.com/maps/documentation/static-maps/?hl=en)
+
+### Conclusion
+
+We have seen that it is relatively easy to build a Places App with OnsenUI, AngularJS, Foursquare API and Google Static Maps API. We invite you to play with the source code on [Github](https://github.com/philolo1/OnsenUI-Places-App) and, if you have any question, don't hesitate to ask in the comments, on [Onsen GitHub issues](https://github.com/OnsenUI/OnsenUI/issues) or our new [Community](https://community.onsen.io/). More tutorials will be coming soon!
