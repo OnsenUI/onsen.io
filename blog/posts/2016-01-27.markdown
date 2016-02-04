@@ -1,13 +1,13 @@
 ---
 author: patrick
-date: 2016-01-27
-id: onsen-ui-places-foursquare-google-maps
-title: "Build a Places app with Foursquare and Google Maps using Onsen UI and Angular"
+date: 2016-02-04
+id: build-a-places-app-with-foursquare-and-google-maps-using-onsen-ui-and-angularjs
+title: "Build a Places App with Foursquare and Google Maps using Onsen UI and AngularJS"
 tags: tutorial, onsen ui, angular, foursquare, google maps
 category: tutorial
 ---
 
-![OnsenUI-Places](/blog/content/images/2016/Jan/onsen-places.png)
+![OnsenUI-Places](/blog/content/images/2016/Feb/onsen-places.png)
 
 In this tutorial we are going to learn how to use the [Foursquare API](https://developer.foursquare.com/docs/) and [Google Static Maps API](https://developers.google.com/maps/documentation/static-maps/?hl=en) to create a Places App with Onsen UI and AngularJS. In this app we will be able to search for a particular place and filter the results by food, shops and outdoor places. There will be also an integrated static map which will lead to the Google Website once clicked.
 
@@ -22,7 +22,7 @@ The app is structured into three views. The main view enables the user to search
 
 <div style="display: flex;" >
 <div style="flex-grow: 1;"> </div>
-<div style="background-image: url('/blog/content/images/2016/Jan/iphone6.png'); width: 401px; height: 806px; ">
+<div style="background-image: url('/blog/content/images/2016/Feb/iphone6.png'); width: 401px; height: 806px; ">
 <iframe style=" margin-top: 92px; margin-left: 26px;" src="https://philolo1.github.io/OnsenUI-Places-App/" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
 </div>
 <div style="flex-grow: 1;"> </div>
@@ -53,16 +53,16 @@ angular.module('app').controller('AppController', function ($scope, $http) {
 
 We start by implementing the search function. First, we need to figure out what kind of request we have to do in order to get the data we desire. According to the documentation, we will do a simple HTTP request which will return JSON data. The URL is in the form:
 
-```javascript
+```html
 https://api.foursquare.com/v2/venues/explore/?near=Shibuya&venuePhotos=1&section=food&client_id=YZQZP1Q2HEJWMD5ZVBMIQD3VSZC1W4BQCCQTVFEPJWNHL0RK&client_secret=ORHPL2VKKHUTB3KTJVDTB4D20AXBRCFKWVL12EPQNJNDFYBX&v=20131124
 ```
 
 The parameters are:
-* near: the place we want to look for. We will use the string in the textbox.
-* section: it will include the options for the filter (Shops, Cafe and Outdoors). Since we want this information to be persistent after the app has been closed, we will use [LocalStorage](http://www.w3schools.com/html/html5_webstorage.asp) to store the information.
-* client_id: the generated client ID from Foursquare.
-* client_secret:  the generated secret from the Foursquare.
-* v: the version of the API that we are using.
+* **near**: the place we want to look for. We will use the string in the textbox.
+* **section**: it will include the options for the filter (Shops, Cafe and Outdoors). Since we want this information to be persistent after the app has been closed, we will use [LocalStorage](http://www.w3schools.com/html/html5_webstorage.asp) to store the information.
+* **client_id**: the generated client ID from Foursquare.
+* **client_secret**:  the generated secret from the Foursquare.
+* **v**: the version of the API that we are using.
 
 In the search function, we will first change the variable state to `isLoading` and then read the filter options from the localStorage. Afterwards, the app will make an HTTP request using Angular $http core service. After the query will be executed, the variable state will be changed to `noResults` or `loaded`, depending on the returned output. If some data has been returned, it will be parsed from the returned JSON object.
 
@@ -169,7 +169,7 @@ The top of the main view page consists of an `ons-toolbar` and an `input` search
 
 Each `ons-list-item` is responsible for representing a venue. The structure of the HTML consists mainly of a combination of `ons-row` and `ons-col`. For a better illustration, take a look at the image below.
 
-![OnsenUI-Places](/blog/content/images/2016/Jan/onsen-places-cell.png)
+![OnsenUI-Places](/blog/content/images/2016/Feb/onsen-places-cell.png)
 
 Each list item consists of a single `ons-row` that contains itself three `ons-col`: the first column contains the photo of the place, the second displays important information about the place and the third column displays the chevron. The second column is splitted into four rows: the first one for the title, the second one for the rating, the reviews and the price, the third on for the address and the forth one for the category. Furthermore, we use `ng-repeat` to generate the right quantity of yellow and grey stars:
 
@@ -361,15 +361,15 @@ In the details page we would like to display a static map of the location of the
 
 In order to get these information, we need to query the Foursquare API for details using a query like the following one:
 
-```javascript
+```html
 https://api.foursquare.com/v2/venues/VENUE_ID?client_id=CLIENT_ID&client_secret=CLIENT_SECRET&v=20131124
 ```
 
 According to the [documentation](https://developer.foursquare.com/docs/venues/venues), the parameters are as following:
-* VENUE_ID: the ID of the place.
-* client_id: the generated client ID from Foursquare.
-* client_secret: the generated secret from Foursquare.
-* v: the version of the API that we are using.
+* **venue_id**: the ID of the place.
+* **client_id**: the generated client ID from Foursquare.
+* **client_secret**: the generated secret from Foursquare.
+* **v**: the version of the API that we are using.
 
 The venue ID is retrieved from the search query executed in the mainview controller. When we push the page, the ID is given as a parameter and used inside the details controller.
 
@@ -423,11 +423,11 @@ We are almost done! In order to finish the application, we need to layout and di
 ```
 
 The parameters are:
-* zoom : the zoom factor of the image
-* size : the dimension of the image
-* lat  : the latitude of the location
-* lng : the longitude of the location
-* key : our google API key
+* **zoom**: the zoom factor of the image.
+* **size**: the dimension of the image.
+* **lat**: the latitude of the location.
+* **lng**: the longitude of the location.
+* **key**: our google API key.
 
 For more information, please consult the [documentation](https://developers.google.com/maps/documentation/static-maps/intro?hl=en). Ones the map has been clicked, the full version of the map will be displayed in Google Maps webpage (or mobile app):
 
