@@ -111,7 +111,7 @@ The next step is to add navigation to our app. In native apps you will often nav
   <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://cdn.rawgit.com/argelius/5949819bd89fbfaeba6e/raw/420794b212ab95a694d6e518bc78fe097af22e3d/tabs.html" width="384" height="567"></iframe>
 </p>
 
-Finally we can add a floating action button to one of the tabs. In the Material Design spec it says that the floating action button should represent the primary action of the app. In our app it can be used to add some data so we will add an plus icon inside it. The floating action button is represented by the `<ons-fab>` element in Onsen UI.
+Finally we can add a floating action button to one of the tabs. In the Material Design spec it says that the floating action button should represent the primary action of the app. In our app it can be used to add some data so we will add a plus icon inside it. The floating action button is represented by the `<ons-fab>` element in Onsen UI.
 
 ```html
 <ons-fab position="bottom right">
