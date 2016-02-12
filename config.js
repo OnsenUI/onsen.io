@@ -54,6 +54,10 @@ module.exports = function(language, isStaging) {
     una: {
       name: 'Una Softic',
       email: 'una.softic@gmail.com'
+    },
+    patrick: {
+      name: 'Patrick Klitzke',
+      email: 'patrick@asial.co.jp'
     }
   };
 
