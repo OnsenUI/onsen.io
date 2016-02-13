@@ -67,7 +67,7 @@ module.exports = function(lang, isStaging) {
           }
 
           metalsmith.metadata().componentCategoryDict = sortObject(dict);
-          metalsmith.metadata().componentCategoryDict2 = sortObject(dict2);
+          metalsmith.metadata().componentCategoryIndex2 = sortObject(dict2);
         })
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
