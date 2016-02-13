@@ -20,7 +20,7 @@ dependencies:
     - npm install
     - npm install -g gulp
     - cd 2/OnsenUI/css-components; npm install; gulp build;
-    - cd 2/OnsenUI; npm install; gulp build;
+    - cd 2/OnsenUI; npm install; gulp build; gulp build-docs;
 test:
   override:
     - echo "Add tests!"
