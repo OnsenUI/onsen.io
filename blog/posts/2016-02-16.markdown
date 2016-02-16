@@ -1,16 +1,17 @@
 ---
 author: moongift
-date: 2016-01-05
-id: create-cross-platform-app-with-electron-onsenui
-title: "Create Cross-Platform App with Electron + Onsen UI"
+date: 2016-02-16
+id: create-cross-platform-app-with-electron-and-onsen-ui
+title: "Create Cross-Platform App with Electron and Onsen UI"
 tags: onsen ui, electron, javascript, tutorial
+category: tutorial
 ---
 
-![Electron and Onsen UI](/blog/content/images/2016/Jan/electron-onsenui.png)
+![Electron and Onsen UI](/blog/content/images/2016/Feb/electron-onsenui.png)
 
 Electron, formally known as Atom Shell, allows people to use web technologies to build cross-platform applications.
-Unfortunately, Electron hasn't supported any design framework so here comes our Onsen UI framework, a HTML5 UI framework.
-In this blog post, we will try integrating our Onsen UI framework into a demo Electron app to see how it works.
+Unfortunately, Electron hasn't supported any Hybrid App Framework so here comes Onsen UI!
+In this blog post, we will try to integrate Onsen UI framework into a demo Electron app to see how it works.
 
 <!-- more -->
 
@@ -24,7 +25,7 @@ Note that our development environment is following:
 
 #### Installation
 
-First, let's install Election.
+First, let's install Electron.
 We can simply use `npm` to install.
 
 ```
@@ -33,8 +34,7 @@ $ sudo npm install -g electron-prebuilt
 
 #### Project Set Up
 
-Now, we will create `/electron-sample` directly to work on for this tutorial.
-Following commands will automatically create `package.json`.
+Now, we need to create an `/electron-sample` dir and generate `package.json` file executing the following commands:
 
 ```
 $ mkdir /electron-sample
@@ -42,7 +42,7 @@ $ cd /electron-sample
 $ npm init -y
 ```
 
-In `package.json` file, modify and include `main.js` for an Electron app.
+In `package.json` file, modify and include `main.js` for Electron.
 
 ```
 {
@@ -61,7 +61,7 @@ In `package.json` file, modify and include `main.js` for an Electron app.
 
 #### Create A Project
 
-A minimum Electron app is structured like this:
+A minimum Electron app is structured in this way:
 
 ```
 .
@@ -117,7 +117,7 @@ Right now, we simply display `Hello World` in `index.html`.
 
 #### Execution
 
-Under the project root directory (/electron-sample), we can run the following command.
+Under the project root directory (/electron-sample), we can run the following command:
 
 ```
 $ electron .
@@ -125,7 +125,7 @@ $ electron .
 
 Now, you should see something like this.
 
-![Display Hello World](/blog/content/images/2016/Jan/hello-electron.png)
+![Display Hello World](/blog/content/images/2016/Feb/hello-electron.png)
 
 
 ### Integrating Onsen UI
@@ -153,7 +153,7 @@ Now, our directory should look like this.
 
 #### Modification
 
-Let's modify the `index.html` to display a simple Onsen UI toolbar this time.
+Let's modify `index.html` in order to display a simple Onsen UI toolbar.
 
 ```
 <!DOCTYPE html>
@@ -194,13 +194,13 @@ Run Electron like earlier.
 $ electron .
 ```
 
-![Electron with OnsenUI](/blog/content/images/2016/Jan/electron-onsen.png)
+![Electron with OnsenUI](/blog/content/images/2016/Feb/electron-onsen.png)
 
 
 #### Displaying Tab bar
 
 Adding a tab bar is very easy with Onsen UI.
-Let's replace inside of the `<body>` tag in `index.html` as follows:
+Let's insert it inside the `<body>` tag in `index.html` as follows:
 
 ```
 <ons-tabbar>
@@ -252,23 +252,23 @@ Let's replace inside of the `<body>` tag in `index.html` as follows:
 ```
 
 Run `electron .` command in the same way.
-Click on any tabs to see page transitions.
+Click on any tab to see page transitions.
 
-![Electron with OnsenUI (Tab bar)](/blog/content/images/2016/Jan/electron-tab-bar.png)
+![Electron with OnsenUI (Tab bar)](/blog/content/images/2016/Feb/electron-tab-bar.png)
 
 
 ### Compatibility
 
-I noticed some of the Onsen UI elements, sush as sliding-menu or carousel, had conflicts with Electron due to Hammer script.
+I noticed that some of the Onsen UI elements, such as sliding-menu or carousel, had conflicts with Electron due to Hammer script.
 Also, touch/swipe events had compatibility issues with Electron.
-Hopefully, those issues will resolve as version upgrades thought you might be able to support them with AngularJS directives.
+Hopefully, those issues will be resolved in a future release, bringing also support to AngularJS directives.
 
 
 ### Conclusion
 
-Finally, we have quickly implemented an Electron application with our Onsen UI today.
-There was a few conflict though it won't be that much of trouble if you have adequate AngulerJS skills.
-Onsen UI and Electron combination will certainly be a great choice developing cross-platform applications.
+Today we have seen how to quickly implement an Electron application with Onsen UI.
+There were a few conflicts which should not affect the development if your AngularJS skills are good.
+Onsen UI and Electron combination will certainly be a great choice for developing cross-platform applications.
 
 I hope this tutorial helped you.
 
