@@ -15,7 +15,7 @@ In this blog post, we will try to integrate Onsen UI framework into a demo Elect
 
 <!-- more -->
 
-### Installation and Setting Up
+### Installation and Setup
 
 Note that our development environment is following:
 - Electron: v0.36.2
@@ -32,7 +32,7 @@ We can simply use `npm` to install.
 $ sudo npm install -g electron-prebuilt
 ```
 
-#### Project Set Up
+#### Project Setup
 
 Now, we need to create an `/electron-sample` dir and generate `package.json` file executing the following commands:
 
@@ -129,8 +129,6 @@ Now, you should see something like this.
 
 
 ### Integrating Onsen UI
-
-#### Installing Onsen UI
 
 Download Onsen UI using bower:
 
