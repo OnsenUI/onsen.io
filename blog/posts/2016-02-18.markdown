@@ -1,0 +1,131 @@
+---
+author: moongift
+date: 2016-02-18
+id: localkit-web-ide-differences-between-monaca-development-environment
+title: "LocalKit, Web IDE: Differences Between Monaca Development Environment"
+product: monaca
+tags: monaca, localkit, azure
+category: development
+---
+
+
+<!-- 現在、Monaca上で新しいプロジェクトを開始しようとすると次のような画面が表示されます。 -->
+
+Today, Monaca offers various development environment choices for your needs.
+However, it may be difficult for you to understand each characteristics.
+<!-- 従来はMonacaクラウドのみでしたが、今では数多くの環境でMonacaアプリが開発できるようになっています。しかしそれぞれ何が違うのか分かりづらいかも知れません。 -->
+
+![Monaca Development Platforms](/blog/content/images/2016/Feb/monaca-platforms.png)
+
+In this blog post, I would like to introduce each environment and their characteristics.
+<!-- そこで今回は各環境の違いやどういった用途において向いているのか紹介したいと思います。 -->
+
+<!-- more -->
+
+
+### monaca.io
+
+monaca.io, or Monaca IDE, is a cloud based development environment.
+Being able to code with any computer that has access to internet reduces time and effort to install environment on the computer. All you need is web browser and you can start developing your hybrid mobile applications.
+<!-- これまでMonaca IDEと呼ばれていた、クラウド上での開発環境になります。Webブラウザ上でコーディングができますので開発環境をローカルコンピュータ上に整備する必要がありません。Webブラウザさえあればすぐにハイブリッドアプリの開発をはじめることができます。 -->
+
+
+![monaca.io](/blog/content/images/2016/Feb/monaca-ide.png)
+
+
+Obviously, web browser works on any platform, Windows of course, Mac OSX, Linux.
+Something like creating iOS applications with Windows or Linux is possible once you configure iOS Build Setting.
+<!-- Webブラウザのみということはマルチプラットフォームで動作するということです。Windowsはもちろん、Mac OSXやLinuxでも開発できます。iOSアプリのビルド設定さえしてしまえば、WindowsやLinuxからでもiOSアプリのビルドを行うことができます。 -->
+
+It also offer TypeScript as your alternate language. You will be able to use TypeScript's static type and other tools to develop your hybrid mobile app.
+<!-- JavaScriptの代替言語してTypeScriptの自動変換にも対応しています。TypeScriptを使って型指定であったり、高度な機能を使った開発ができるようになります。 -->
+
+On the down side, monaca.io requires internet connectivity.
+There won't be a trouble if you are working from your office. However, there will be if you are outside or on an airplane (There are internet access on airplanes recently yet speed and cost are still a problem).
+<!-- 逆にデメリットとしてはインターネットにつながった環境が必要という点が挙げられます。オフィスのように常時接続できる環境であれば問題ありませんが、外出時や飛行機の中など（最近では機内でもインターネットが使えますが、速度や料金面が問題でしょう）オフライン環境では開発できなくなります。 -->
+
+Also, some of you are more comfortable to use your preferred editor.
+For those, I would recommend to use our LocalKit described below.
+<!-- また、人によってはWeb IDEの使い勝手がよくないと感じる方もいます。すでに使い慣れたテキストエディタ、開発環境がある場合は後述のLocalKitなどがおすすめです。 -->
+
+
+### Monaca Localkit
+
+
+Monaca LocalKit is a GUI application we provide for Windows and Mac OSX.
+It has built-in server, and is able to manage your local Monaca projects.
+Monaca LocalKit can work with Monaca Debugger and output your hybrid mobile app real-time on your smartphone under the same network. Note that the Debugger needs internet connection but LocalKit itself works even if you are offline.
+<!-- Monaca LocalkitはWindowsとMac OSX向けに提供されているGUIアプリケーションです。それ単体でサーバになり、かつローカルのMonacaプロジェクトを管理できるようになっています。Monaca LocalkitをLANの中で立ち上げ、同じネットワーク内にあるスマートフォンでMonacaデバッガーを立ち上げればローカルでのコーディング結果を即座にMonacaデバッガーで確認できるようになります。デバッガーを使う上でネットワークは必須ですが、インターネットに接続されていなくても使える魅力があります。 -->
+
+![Monaca LocalKit](/blog/content/images/2016/Feb/monaca-localkit.png)
+
+Because LocalKit manages your project locally, it works with version control tools such as Git and Subversion, your favorite editor, build tools like gulp, and alternative language like CoffeeScript and TypeScript.
+There are more flexibility when you work with LocalKit.
+<!-- ローカルでMonacaプロジェクトを作り、そのまま開発が行えますのでクラウドを見ることはほとんどないでしょう。また、ローカル環境が使えますのでGitやSubversionといったバージョン管理、使い慣れたエディタ、gulpなどのビルドツール、CoffeeScriptやTypeScriptなどの代替言語など自由度が格段に高まります。 -->
+
+When you debug under local environment, you can use debug build option to install directly on your smartphone.
+With Chrome's DevTools, debugging can be much easier.
+<!-- ローカル環境下でデバッグを行う際には専用のデバッグビルドを行い、それをスマートフォンにインストールします。そうするとChromeのDevToolsと通信できるようになり、デバッグが格段にスムーズになります。 -->
+
+Downside might be that LocalKit requires you setup an environment to start working on your hybrid mobile app.
+However, I assume that most of you have already have your favorite development setup.
+
+LocalKit is provided to those who have our subscription plan.
+<!-- デメリットとしては開発環境を整える必要があるということでしょうか。ただし基本的に自分でこれまで使っていたツールを組み合わせて行えますので、すでに開発環境が整っている方が多いのではないかと思います。また、Localkitは月額5,000円（年額50,000円）のGoldプラン以上向けに提供されています。より実践的にMonacaを使っていく方向けのツールと言えます。 -->
+
+
+### Monaca for Visual Studio
+
+Monaca for Visual Studio is our Visual Studio Extension that lets you create your hybrid mobile app from Visual Studio.
+
+<!-- Monaca for Visual Studioはその名の通り、Visual Studio向けのプラグインです。Visual Studioの中からMonacaの機能を呼び出し、そのまま開発を進めることができます。MonacaはiOS/Android向けのアプリが開発できますので、Monaca for Visual Studioを使えばVisual StudioからiOS向けのアプリ開発も可能です。 -->
+
+![Monaca for Visual Studio](/blog/content/images/2016/Feb/monaca-visual-studio.png)
+
+Distinctive feature here is that we will get to use powerful features Visual Studio offers.
+you can also quickly build cloud-based applications by using the Visual Studio taking advantage of compatibility with each Azure service.
+This option will provide efficient and powerful environment especially for those who are used to Visual Studio.
+<!-- 特徴としてはVisual Studioならではの強力な補完をはじめ、多くの便利な機能を活用できることでしょう。また、Azureの各サービスとも親和性の高いVisual Studioを使うことでクラウド連携型アプリも素早く構築できます。Visual Studioを普段から使っている方にとっては使い慣れたツールである分、効率的な開発が可能です。 -->
+
+There aren't much disadvantage with this option but this option is limited to Windows users.
+And Visual Studio Professional users requires our paid plan. (Free for Visual Studio Community Edition users)
+<!-- 強いて挙げればデメリットとしてはWindowsユーザ向けに限定される点かと思います。また、Visual Studio Professional版をお使いの場合はGoldプランの登録が必須になります（Visual Studio コミュニティ版は無料で利用できます）。 -->
+
+
+### Monaca CLI
+
+Monaca CLI is a command line, or terminal, tool to manage your Monaca application.
+Similar to LocalKit, CLI lets you develop Monaca hybrid mobile apps on your local environment.
+It can create Monaca projects, download and upload to manage projects that are on Monaca.io.
+<!-- Monaca Localkit同様にローカルコンピュータ上でMonacaアプリの開発が行えるツールになります。CLIの名前の通り、コマンドプロンプトやターミナルを使って操作するものになります。Monacaプロジェクトの作成、Monaca.io上のプロジェクト取り込みやアップロードができます。 -->
+
+You can connect a debugger and a local project to debug like LocalKit.
+Of course, it supports Chrome's DevTools as well.
+Once you finish development, you can do remote build to generate an executable application.
+<!--
+デバッガーと接続してローカルプロジェクトのデバッグもできます。Monaca Localkit同様に専用のデバッグアプリをビルドしてデスクトップのChromeを使ったデバッグも可能です。開発が終わったらリモートビルドを実行すればアプリが生成されます。ローカル環境下ではフロントエンド開発に必要な開発環境を整える程度です。 -->
+
+
+Monaca CLI doesn't offer fancy GUI. I would say it is for experienced Monaca developers who enjoy a command line.
+It also requires node.js installed in your environment.
+<!-- Monaca CLIは特に分かりやすいGUIの画面があるという訳ではありませんので、より慣れた開発者向けのツールと言えます。また、利用に際してnode.jsのインストールが必須になります。 -->
+
+
+### Conclusion
+
+So to summarize, each platform has their distinctive characteristics and it really depends on your development environment and a project itself.
+
+Monaca.io provides inexpensive environment to get you jump start.
+Classroom style and large scale project can take big advantages from web browser and cloud-based environment.
+<!--
+いかがでしょうか。それぞれ異なる特徴がありますので、利用する環境やプロジェクトの特性によって選んでください。最初はmonaca.ioからはじめるのが手軽でしょうし、スクール形式の場合などもWebブラウザを使った開発の方がサポートしやすいというメリットもあります。大規模なプロジェクトになれば同様にクラウド上でステータスが可視化される方が便利そうです。 -->
+
+When it comes to a fewer team and existing environment, Monaca LocalKit or CLI can speed up your hybrid mobile app development using your favorite editor, version control tool, and build tool.
+<!-- 少人数ですでに組み上がっている開発環境がある場合はLocalkitやCLIが活躍しそうです。使い慣れたエディタやバージョン管理、ビルドシステムが使えることで開発効率性が大幅に向上するのではないでしょうか。 -->
+
+If you are using Visual Studio, there is no doubt that Monaca for Visual Studio is your best choice.
+Using Monaca for Visual Studio can open up choices for your app with Microsoft's various services and Azure.
+<!-- Visual Studioを使って開発している場合はMonaca for Visual Studioが良いでしょう。また、Microsoft系の各種サービスやAzureとVisual Studioの親和性は高いので、そういったシステム構成の場合も選択肢にあがるのではないでしょうか。 -->
+
+Hope this helps you to find development environment that suits your style.
+<!-- ぜひ皆さんのスタイルに合った開発環境を選択してください。 -->
