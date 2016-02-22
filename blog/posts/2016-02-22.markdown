@@ -1,19 +1,19 @@
 ---
 author: moongift
-date: 2016-01-21
+date: 2016-02-22
 id: trying-out-javascript-es6-using-babel
 title: "Trying out JavaScript ES6 using Babel"
-category: monaca
-tags: javascript, ES6, Babel
+category: tutorial
+tags: javascript, ES6, babel, tutorial, sublime, atom, intellij
 ---
 
-ECMAScript 2015 Commonly referred to as "ES6" is the current version of the ECMAScript Language Specification standard.
-The support for this new ES6 features are on it's way, though it will take sometime to be fully supported in modern browsers.
+![Babel](/blog/content/images/2016/Feb/babel.png)
+
+ECMAScript 2015, commonly referred to as "ES6", is the current version of the ECMAScript Language Specification standard.
+The support for this new ES6 features is on its way though it will take some time to be fully supported in modern browsers.
 This blog post will introduce how to use Babel, a JavaScript transpiler, for those who want to try out ES6 in advance.
 
 <!-- more -->
-
-![Babel](/blog/content/images/2016/Jan/babel.png)
 
 ### Babel transpiles ES6 to ES5
 
@@ -68,7 +68,7 @@ You can configure some rules in a `.eslintrc` file under your root directory.
 }
 ```
 
-There are a lot more rules can be found in a [List of available rules - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/rules/).
+There are a lot more rules can be found on the [List of available rules - ESLint - Pluggable JavaScript linter](http://eslint.org/docs/rules/).
 
 
 #### Using Babel
@@ -100,15 +100,15 @@ var nums = evens.map(function (v, i) {
 
 #### Try it out - Babel
 
-Babel has a [Try it out](https://babeljs.io/repl/) page for you to check their conversion in real-time.
+Babel has a [Try it out](https://babeljs.io/repl/) page which allows to check their conversion in real-time.
 See how it's actually converting and get the hang of it for later development.
 
-![babel try it out](/blog/content/images/2016/Jan/babel-try-it-out.png)
+![babel try it out](/blog/content/images/2016/Feb/babel-try-it-out.png)
 
 
 #### Use Babel in Build Tools
 
-In an actual development, we use JS build tools generally.
+In the actual development, we use JS build tools generally.
 Let's take a look at how to combine Gulp with Babel for example.
 First, we will install Gulp and Babel module for Gulp.
 
@@ -130,13 +130,13 @@ gulp.task("default", function () {
 });
 ```
 
-References to other build tools are available in a [Babel Setup](https://babeljs.io/docs/setup/) page.
+References to other build tools are available on the [Babel Setup](https://babeljs.io/docs/setup/) page.
 
 
 #### Using in a browser
 
-When you use converted code from Babel in a browser, you will need a babel-polyfill. This babel-polyfill is a library that gives ability to use new functionality of ES6 for ES5.
-This polyfill is not included initially so we will install babel-core package in the project.
+When you use converted code from Babel in a browser, you will need a babel-polyfill. This babel-polyfill is a library that gives the ability to use new functionalities of ES6 for ES5.
+The polyfill is not included initially so we will install babel-core package in the project.
 
 ```
 $ npm install --save-dev babel-core
@@ -158,21 +158,21 @@ Example HTML polyfill:
 
 ### ES6 Ready IDEs
 
-Here are some list of IDEs that support ES6 syntax as of 08/25/2015.
+Here is a list of IDEs that support ES6 syntax as of 08/25/2015.
 
 
 #### IntelliJ IDEA 14
 
 IntelliJ IDEA14 supports sentence-level syntax.
 
-Go to Preferences and under Languages & Frameworks. Select JavaScript.
+Go to Preferences and under Languages & Frameworks select JavaScript.
 
-You can enables useful features like code formatter by selecting a proper script version.
+You can enable useful features like code formatting by selecting a proper script version.
 Of course, same features can be found on lightweight editor WebStorm as well.
 
-![IntelliJ IDEA ES6 Support](/blog/content/images/2016/Jan/IDEA-ES6-support.png)
+![IntelliJ IDEA ES6 Support](/blog/content/images/2016/Feb/IDEA-ES6-support.png)
 
-Also, [intellij-es67](https://github.com/casser/intellij-es67) plugin features JavaScript ES6/7 syntax improvements and additions for Inteliij IDEA 14.
+Also, [intellij-es67](https://github.com/casser/intellij-es67) plugin features JavaScript ES6/7 syntax improvements and additions for InteliJ IDEA 14.
 
 
 #### Atom
@@ -182,7 +182,7 @@ Atom, an open source editor, has a [language-babel](https://atom.io/packages/lan
 
 #### Sublime Text
 
-Sublime Text, usually compared to Atom, also has a plugin for syntax su
+Sublime Text, usually compared to Atom, also has a syntax plugin.
 
 You can find [Babel - Packages - Package Control](https://packagecontrol.io/packages/Babel) from Package Control.
 
@@ -190,7 +190,7 @@ You can find [Babel - Packages - Package Control](https://packagecontrol.io/pack
 #### Visual Studio Code
 
 Visual Studio Code is a cross-platform editor from Microsoft.
-Their release in June comes with support for ES6 syntax highlighting.
+June's release comes with support for ES6 syntax highlighting.
 
 [Visual Studio Code](https://code.visualstudio.com/)
 
@@ -198,11 +198,11 @@ Their release in June comes with support for ES6 syntax highlighting.
 ### Conclusion
 
 Growing popularity of transpilers, such as Babel, suggests that many of the developers are eager to use ES6.
-Many of the functionality can be implemented in ES6 already as we know that Babel transpiles into ES5.
+Many of the functionalities can be implemented in ES6 already as we know that Babel transpiles them into ES5.
 
-At the same time, there are things we need to consider like compatibility issues with your existing libraries or testing.
-Additionally, I really hope that there won't be huge problems with browser differences all developers had to deal with like exhaustive Internet Explorer or cross browser support.
+At the same time there are things we need to consider, like compatibility issues with your existing libraries or testing.
+I really hope that there won't be huge problems with browser differences all developers had to deal with, like exhaustive Internet Explorer or cross browser support.
 
-For those reasons, using transpilers such as Babel to maintain compatibility is a safe bet for now.
+For these reasons, using transpilers such as Babel to maintain compatibility is a safe bet for now.
 
-So dive in and start using ES6 using Babel today!
+So dive in and start using ES6 with Babel today!
