@@ -1,4 +1,178 @@
-/*! onsenui - v1.2.1 - 2014-12-01 */
+/*! onsenui - v1.3.15 - 2016-01-14 */
+// Copyright (c) Microsoft Open Technologies, Inc.  All rights reserved.  Licensed under the Apache License, Version 2.0.  See License.txt in the project root for license information.
+// JavaScript Dynamic Content shim for Windows Store apps
+(function () {
+
+    if (window.MSApp && MSApp.execUnsafeLocalFunction) {
+
+        // Some nodes will have an "attributes" property which shadows the Node.prototype.attributes property
+        //  and means we don't actually see the attributes of the Node (interestingly the VS debug console
+        //  appears to suffer from the same issue).
+        //
+        var Element_setAttribute = Object.getOwnPropertyDescriptor(Element.prototype, "setAttribute").value;
+        var Element_removeAttribute = Object.getOwnPropertyDescriptor(Element.prototype, "removeAttribute").value;
+        var HTMLElement_insertAdjacentHTMLPropertyDescriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, "insertAdjacentHTML");
+        var Node_get_attributes = Object.getOwnPropertyDescriptor(Node.prototype, "attributes").get;
+        var Node_get_childNodes = Object.getOwnPropertyDescriptor(Node.prototype, "childNodes").get;
+        var detectionDiv = document.createElement("div");
+
+        function getAttributes(element) {
+            return Node_get_attributes.call(element);
+        }
+
+        function setAttribute(element, attribute, value) {
+            try {
+                Element_setAttribute.call(element, attribute, value);
+            } catch (e) {
+                // ignore
+            }
+        }
+
+        function removeAttribute(element, attribute) {
+            Element_removeAttribute.call(element, attribute);
+        }
+
+        function childNodes(element) {
+            return Node_get_childNodes.call(element);
+        }
+
+        function empty(element) {
+            while (element.childNodes.length) {
+                element.removeChild(element.lastChild);
+            }
+        }
+
+        function insertAdjacentHTML(element, position, html) {
+            HTMLElement_insertAdjacentHTMLPropertyDescriptor.value.call(element, position, html);
+        }
+
+        function inUnsafeMode() {
+            var isUnsafe = true;
+            try {
+                detectionDiv.innerHTML = "<test/>";
+            }
+            catch (ex) {
+                isUnsafe = false;
+            }
+
+            return isUnsafe;
+        }
+
+        function cleanse(html, targetElement) {
+            var cleaner = document.implementation.createHTMLDocument("cleaner");
+            empty(cleaner.documentElement);
+            MSApp.execUnsafeLocalFunction(function () {
+                insertAdjacentHTML(cleaner.documentElement, "afterbegin", html);
+            });
+
+            var scripts = cleaner.documentElement.querySelectorAll("script");
+            Array.prototype.forEach.call(scripts, function (script) {
+                switch (script.type.toLowerCase()) {
+                    case "":
+                        script.type = "text/inert";
+                        break;
+                    case "text/javascript":
+                    case "text/ecmascript":
+                    case "text/x-javascript":
+                    case "text/jscript":
+                    case "text/livescript":
+                    case "text/javascript1.1":
+                    case "text/javascript1.2":
+                    case "text/javascript1.3":
+                        script.type = "text/inert-" + script.type.slice("text/".length);
+                        break;
+                    case "application/javascript":
+                    case "application/ecmascript":
+                    case "application/x-javascript":
+                        script.type = "application/inert-" + script.type.slice("application/".length);
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+
+            function cleanseAttributes(element) {
+                var attributes = getAttributes(element);
+                if (attributes && attributes.length) {
+                    // because the attributes collection is live it is simpler to queue up the renames
+                    var events;
+                    for (var i = 0, len = attributes.length; i < len; i++) {
+                        var attribute = attributes[i];
+                        var name = attribute.name;
+                        if ((name[0] === "o" || name[0] === "O") &&
+                            (name[1] === "n" || name[1] === "N")) {
+                            events = events || [];
+                            events.push({ name: attribute.name, value: attribute.value });
+                        }
+                    }
+                    if (events) {
+                        for (var i = 0, len = events.length; i < len; i++) {
+                            var attribute = events[i];
+                            removeAttribute(element, attribute.name);
+                            setAttribute(element, "x-" + attribute.name, attribute.value);
+                        }
+                    }
+                }
+                var children = childNodes(element);
+                for (var i = 0, len = children.length; i < len; i++) {
+                    cleanseAttributes(children[i]);
+                }
+            }
+            cleanseAttributes(cleaner.documentElement);
+
+            var cleanedNodes = [];
+
+            if (targetElement.tagName === 'HTML') {
+                cleanedNodes = Array.prototype.slice.call(document.adoptNode(cleaner.documentElement).childNodes);
+            } else {
+                if (cleaner.head) {
+                    cleanedNodes = cleanedNodes.concat(Array.prototype.slice.call(document.adoptNode(cleaner.head).childNodes));
+                }
+                if (cleaner.body) {
+                    cleanedNodes = cleanedNodes.concat(Array.prototype.slice.call(document.adoptNode(cleaner.body).childNodes));
+                }
+            }
+
+            return cleanedNodes;
+        }
+
+        function cleansePropertySetter(property, setter) {
+            var propertyDescriptor = Object.getOwnPropertyDescriptor(HTMLElement.prototype, property);
+            var originalSetter = propertyDescriptor.set;
+            Object.defineProperty(HTMLElement.prototype, property, {
+                get: propertyDescriptor.get,
+                set: function (value) {
+                    if(window.WinJS && window.WinJS._execUnsafe && inUnsafeMode()) {
+                        originalSetter.call(this, value);
+                    } else {
+                        var that = this;
+                        var nodes = cleanse(value, that);
+                        MSApp.execUnsafeLocalFunction(function () {
+                            setter(propertyDescriptor, that, nodes);
+                        });
+                    }
+                },
+                enumerable: propertyDescriptor.enumerable,
+                configurable: propertyDescriptor.configurable,
+            });
+        }
+        cleansePropertySetter("innerHTML", function (propertyDescriptor, target, elements) {
+            empty(target);
+            for (var i = 0, len = elements.length; i < len; i++) {
+                target.appendChild(elements[i]);
+            }
+        });
+        cleansePropertySetter("outerHTML", function (propertyDescriptor, target, elements) {
+            for (var i = 0, len = elements.length; i < len; i++) {
+                target.insertAdjacentElement("afterend", elements[i]);
+            }
+            target.parentNode.removeChild(target);
+        });
+
+    }
+
+}());
 /* Simple JavaScript Inheritance
  * By John Resig http://ejohn.org/
  * MIT Licensed.
@@ -63,778 +237,848 @@
     return Class;
   };
 })();
-/**
- * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
- *
- * @version 1.0.0
- * @codingstandard ftlabs-jsv2
- * @copyright The Financial Times Limited [All Rights Reserved]
- * @license MIT License (see LICENSE.txt)
- */
-
-/*jslint browser:true, node:true*/
-/*global define, Event, Node*/
-
-
-/**
- * Instantiate fast-clicking listeners on the specificed layer.
- *
- * @constructor
- * @param {Element} layer The layer to listen on
- */
-function FastClick(layer) {
+;(function () {
 	'use strict';
-	var oldOnClick;
+
+	/**
+	 * @preserve FastClick: polyfill to remove click delays on browsers with touch UIs.
+	 *
+	 * @codingstandard ftlabs-jsv2
+	 * @copyright The Financial Times Limited [All Rights Reserved]
+	 * @license MIT License (see LICENSE.txt)
+	 */
+
+	/*jslint browser:true, node:true*/
+	/*global define, Event, Node*/
 
 
 	/**
-	 * Whether a click is currently being tracked.
+	 * Instantiate fast-clicking listeners on the specified layer.
+	 *
+	 * @constructor
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	function FastClick(layer, options) {
+		var oldOnClick;
+
+		options = options || {};
+
+		/**
+		 * Whether a click is currently being tracked.
+		 *
+		 * @type boolean
+		 */
+		this.trackingClick = false;
+
+
+		/**
+		 * Timestamp for when click tracking started.
+		 *
+		 * @type number
+		 */
+		this.trackingClickStart = 0;
+
+
+		/**
+		 * The element being tracked for a click.
+		 *
+		 * @type EventTarget
+		 */
+		this.targetElement = null;
+
+
+		/**
+		 * X-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartX = 0;
+
+
+		/**
+		 * Y-coordinate of touch start event.
+		 *
+		 * @type number
+		 */
+		this.touchStartY = 0;
+
+
+		/**
+		 * ID of the last touch, retrieved from Touch.identifier.
+		 *
+		 * @type number
+		 */
+		this.lastTouchIdentifier = 0;
+
+
+		/**
+		 * Touchmove boundary, beyond which a click will be cancelled.
+		 *
+		 * @type number
+		 */
+		this.touchBoundary = options.touchBoundary || 10;
+
+
+		/**
+		 * The FastClick layer.
+		 *
+		 * @type Element
+		 */
+		this.layer = layer;
+
+		/**
+		 * The minimum time between tap(touchstart and touchend) events
+		 *
+		 * @type number
+		 */
+		this.tapDelay = options.tapDelay || 200;
+
+		/**
+		 * The maximum time for a tap
+		 *
+		 * @type number
+		 */
+		this.tapTimeout = options.tapTimeout || 700;
+
+		if (FastClick.notNeeded(layer)) {
+			return;
+		}
+
+		// Some old versions of Android don't have Function.prototype.bind
+		function bind(method, context) {
+			return function() { return method.apply(context, arguments); };
+		}
+
+
+		var methods = ['onMouse', 'onClick', 'onTouchStart', 'onTouchMove', 'onTouchEnd', 'onTouchCancel'];
+		var context = this;
+		for (var i = 0, l = methods.length; i < l; i++) {
+			context[methods[i]] = bind(context[methods[i]], context);
+		}
+
+		// Set up event handlers as required
+		if (deviceIsAndroid) {
+			layer.addEventListener('mouseover', this.onMouse, true);
+			layer.addEventListener('mousedown', this.onMouse, true);
+			layer.addEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.addEventListener('click', this.onClick, true);
+		layer.addEventListener('touchstart', this.onTouchStart, false);
+		layer.addEventListener('touchmove', this.onTouchMove, false);
+		layer.addEventListener('touchend', this.onTouchEnd, false);
+		layer.addEventListener('touchcancel', this.onTouchCancel, false);
+
+		// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+		// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
+		// layer when they are cancelled.
+		if (!Event.prototype.stopImmediatePropagation) {
+			layer.removeEventListener = function(type, callback, capture) {
+				var rmv = Node.prototype.removeEventListener;
+				if (type === 'click') {
+					rmv.call(layer, type, callback.hijacked || callback, capture);
+				} else {
+					rmv.call(layer, type, callback, capture);
+				}
+			};
+
+			layer.addEventListener = function(type, callback, capture) {
+				var adv = Node.prototype.addEventListener;
+				if (type === 'click') {
+					adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
+						if (!event.propagationStopped) {
+							callback(event);
+						}
+					}), capture);
+				} else {
+					adv.call(layer, type, callback, capture);
+				}
+			};
+		}
+
+		// If a handler is already declared in the element's onclick attribute, it will be fired before
+		// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
+		// adding it as listener.
+		if (typeof layer.onclick === 'function') {
+
+			// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
+			// - the old one won't work if passed to addEventListener directly.
+			oldOnClick = layer.onclick;
+			layer.addEventListener('click', function(event) {
+				oldOnClick(event);
+			}, false);
+			layer.onclick = null;
+		}
+	}
+
+	/**
+	* Windows Phone 8.1 fakes user agent string to look like Android and iPhone.
+	*
+	* @type boolean
+	*/
+	var deviceIsWindowsPhone = navigator.userAgent.indexOf("Windows Phone") >= 0;
+
+	/**
+	 * Android requires exceptions.
 	 *
 	 * @type boolean
 	 */
-	this.trackingClick = false;
+	var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0 && !deviceIsWindowsPhone;
 
 
 	/**
-	 * Timestamp for when when click tracking started.
+	 * iOS requires exceptions.
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.trackingClickStart = 0;
+	var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent) && !deviceIsWindowsPhone;
 
 
 	/**
-	 * The element being tracked for a click.
+	 * iOS 4 requires an exception for select elements.
 	 *
-	 * @type EventTarget
+	 * @type boolean
 	 */
-	this.targetElement = null;
+	var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
 
 
 	/**
-	 * X-coordinate of touch start event.
+	 * iOS 6.0-7.* requires the target element to be manually derived
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.touchStartX = 0;
-
+	var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS [6-7]_\d/).test(navigator.userAgent);
 
 	/**
-	 * Y-coordinate of touch start event.
+	 * BlackBerry requires exceptions.
 	 *
-	 * @type number
+	 * @type boolean
 	 */
-	this.touchStartY = 0;
-
+	var deviceIsBlackBerry10 = navigator.userAgent.indexOf('BB10') > 0;
 
 	/**
-	 * ID of the last touch, retrieved from Touch.identifier.
+	 * Determine whether a given element requires a native click.
 	 *
-	 * @type number
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element needs a native click
 	 */
-	this.lastTouchIdentifier = 0;
+	FastClick.prototype.needsClick = function(target) {
+		switch (target.nodeName.toLowerCase()) {
 
-
-	/**
-	 * Touchmove boundary, beyond which a click will be cancelled.
-	 *
-	 * @type number
-	 */
-	this.touchBoundary = 10;
-
-
-	/**
-	 * The FastClick layer.
-	 *
-	 * @type Element
-	 */
-	this.layer = layer;
-
-	if (FastClick.notNeeded(layer)) {
-		return;
-	}
-
-	// Some old versions of Android don't have Function.prototype.bind
-	function bind(method, context) {
-		return function() { return method.apply(context, arguments); };
-	}
-
-	// Set up event handlers as required
-	if (deviceIsAndroid) {
-		layer.addEventListener('mouseover', bind(this.onMouse, this), true);
-		layer.addEventListener('mousedown', bind(this.onMouse, this), true);
-		layer.addEventListener('mouseup', bind(this.onMouse, this), true);
-	}
-
-	layer.addEventListener('click', bind(this.onClick, this), true);
-	layer.addEventListener('touchstart', bind(this.onTouchStart, this), false);
-	layer.addEventListener('touchmove', bind(this.onTouchMove, this), false);
-	layer.addEventListener('touchend', bind(this.onTouchEnd, this), false);
-	layer.addEventListener('touchcancel', bind(this.onTouchCancel, this), false);
-
-	// Hack is required for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-	// which is how FastClick normally stops click events bubbling to callbacks registered on the FastClick
-	// layer when they are cancelled.
-	if (!Event.prototype.stopImmediatePropagation) {
-		layer.removeEventListener = function(type, callback, capture) {
-			var rmv = Node.prototype.removeEventListener;
-			if (type === 'click') {
-				rmv.call(layer, type, callback.hijacked || callback, capture);
-			} else {
-				rmv.call(layer, type, callback, capture);
-			}
-		};
-
-		layer.addEventListener = function(type, callback, capture) {
-			var adv = Node.prototype.addEventListener;
-			if (type === 'click') {
-				adv.call(layer, type, callback.hijacked || (callback.hijacked = function(event) {
-					if (!event.propagationStopped) {
-						callback(event);
-					}
-				}), capture);
-			} else {
-				adv.call(layer, type, callback, capture);
-			}
-		};
-	}
-
-	// If a handler is already declared in the element's onclick attribute, it will be fired before
-	// FastClick's onClick handler. Fix this by pulling out the user-defined handler function and
-	// adding it as listener.
-	if (typeof layer.onclick === 'function') {
-
-		// Android browser on at least 3.2 requires a new reference to the function in layer.onclick
-		// - the old one won't work if passed to addEventListener directly.
-		oldOnClick = layer.onclick;
-		layer.addEventListener('click', function(event) {
-			oldOnClick(event);
-		}, false);
-		layer.onclick = null;
-	}
-}
-
-
-/**
- * Android requires exceptions.
- *
- * @type boolean
- */
-var deviceIsAndroid = navigator.userAgent.indexOf('Android') > 0;
-
-
-/**
- * iOS requires exceptions.
- *
- * @type boolean
- */
-var deviceIsIOS = /iP(ad|hone|od)/.test(navigator.userAgent);
-
-
-/**
- * iOS 4 requires an exception for select elements.
- *
- * @type boolean
- */
-var deviceIsIOS4 = deviceIsIOS && (/OS 4_\d(_\d)?/).test(navigator.userAgent);
-
-
-/**
- * iOS 6.0(+?) requires the target element to be manually derived
- *
- * @type boolean
- */
-var deviceIsIOSWithBadTarget = deviceIsIOS && (/OS ([6-9]|\d{2})_\d/).test(navigator.userAgent);
-
-
-/**
- * Determine whether a given element requires a native click.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element needs a native click
- */
-FastClick.prototype.needsClick = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-
-	// Don't send a synthetic click to disabled inputs (issue #62)
-	case 'button':
-	case 'select':
-	case 'textarea':
-		if (target.disabled) {
-			return true;
-		}
-
-		break;
-	case 'input':
-
-		// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
-		if ((deviceIsIOS && target.type === 'file') || target.disabled) {
-			return true;
-		}
-
-		break;
-	case 'label':
-	case 'video':
-		return true;
-	}
-
-	return (/\bneedsclick\b/).test(target.className);
-};
-
-
-/**
- * Determine whether a given element requires a call to focus to simulate click into element.
- *
- * @param {EventTarget|Element} target Target DOM element
- * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
- */
-FastClick.prototype.needsFocus = function(target) {
-	'use strict';
-	switch (target.nodeName.toLowerCase()) {
-	case 'textarea':
-		return true;
-	case 'select':
-		return !deviceIsAndroid;
-	case 'input':
-		switch (target.type) {
+		// Don't send a synthetic click to disabled inputs (issue #62)
 		case 'button':
-		case 'checkbox':
-		case 'file':
-		case 'image':
-		case 'radio':
-		case 'submit':
-			return false;
-		}
-
-		// No point in attempting to focus disabled inputs
-		return !target.disabled && !target.readOnly;
-	default:
-		return (/\bneedsfocus\b/).test(target.className);
-	}
-};
-
-
-/**
- * Send a click event to the specified element.
- *
- * @param {EventTarget|Element} targetElement
- * @param {Event} event
- */
-FastClick.prototype.sendClick = function(targetElement, event) {
-	'use strict';
-	var clickEvent, touch;
-
-	// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
-	if (document.activeElement && document.activeElement !== targetElement) {
-		document.activeElement.blur();
-	}
-
-	touch = event.changedTouches[0];
-
-	// Synthesise a click event, with an extra attribute so it can be tracked
-	clickEvent = document.createEvent('MouseEvents');
-	clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
-	clickEvent.forwardedTouchEvent = true;
-	targetElement.dispatchEvent(clickEvent);
-};
-
-FastClick.prototype.determineEventType = function(targetElement) {
-	'use strict';
-
-	//Issue #159: Android Chrome Select Box does not open with a synthetic click event
-	if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
-		return 'mousedown';
-	}
-
-	return 'click';
-};
-
-
-/**
- * @param {EventTarget|Element} targetElement
- */
-FastClick.prototype.focus = function(targetElement) {
-	'use strict';
-	var length;
-
-	// Issue #160: on iOS 7, some input elements (e.g. date datetime) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
-	if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time') {
-		length = targetElement.value.length;
-		targetElement.setSelectionRange(length, length);
-	} else {
-		targetElement.focus();
-	}
-};
-
-
-/**
- * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
- *
- * @param {EventTarget|Element} targetElement
- */
-FastClick.prototype.updateScrollParent = function(targetElement) {
-	'use strict';
-	var scrollParent, parentElement;
-
-	scrollParent = targetElement.fastClickScrollParent;
-
-	// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
-	// target element was moved to another parent.
-	if (!scrollParent || !scrollParent.contains(targetElement)) {
-		parentElement = targetElement;
-		do {
-			if (parentElement.scrollHeight > parentElement.offsetHeight) {
-				scrollParent = parentElement;
-				targetElement.fastClickScrollParent = parentElement;
-				break;
+		case 'select':
+		case 'textarea':
+			if (target.disabled) {
+				return true;
 			}
 
-			parentElement = parentElement.parentElement;
-		} while (parentElement);
-	}
+			break;
+		case 'input':
 
-	// Always update the scroll top tracker if possible.
-	if (scrollParent) {
-		scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
-	}
-};
+			// File inputs need real clicks on iOS 6 due to a browser bug (issue #68)
+			if ((deviceIsIOS && target.type === 'file') || target.disabled) {
+				return true;
+			}
 
-
-/**
- * @param {EventTarget} targetElement
- * @returns {Element|EventTarget}
- */
-FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
-	'use strict';
-
-	// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
-	if (eventTarget.nodeType === Node.TEXT_NODE) {
-		return eventTarget.parentNode;
-	}
-
-	return eventTarget;
-};
-
-
-/**
- * On touch start, record the position and scroll offset.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchStart = function(event) {
-	'use strict';
-	var targetElement, touch, selection;
-
-	// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
-	if (event.targetTouches.length > 1) {
-		return true;
-	}
-
-	targetElement = this.getTargetElementFromEventTarget(event.target);
-	touch = event.targetTouches[0];
-
-	if (deviceIsIOS) {
-
-		// Only trusted events will deselect text on iOS (issue #49)
-		selection = window.getSelection();
-		if (selection.rangeCount && !selection.isCollapsed) {
+			break;
+		case 'label':
+		case 'iframe': // iOS8 homescreen apps can prevent events bubbling into frames
+		case 'video':
 			return true;
 		}
 
-		if (!deviceIsIOS4) {
+		return (/\bneedsclick\b/).test(target.className);
+	};
 
-			// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
-			// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
-			// with the same identifier as the touch event that previously triggered the click that triggered the alert.
-			// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
-			// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
-			if (touch.identifier === this.lastTouchIdentifier) {
-				event.preventDefault();
+
+	/**
+	 * Determine whether a given element requires a call to focus to simulate click into element.
+	 *
+	 * @param {EventTarget|Element} target Target DOM element
+	 * @returns {boolean} Returns true if the element requires a call to focus to simulate native click.
+	 */
+	FastClick.prototype.needsFocus = function(target) {
+		switch (target.nodeName.toLowerCase()) {
+		case 'textarea':
+			return true;
+		case 'select':
+			return !deviceIsAndroid;
+		case 'input':
+			switch (target.type) {
+			case 'button':
+			case 'checkbox':
+			case 'file':
+			case 'image':
+			case 'radio':
+			case 'submit':
 				return false;
 			}
 
-			this.lastTouchIdentifier = touch.identifier;
-
-			// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
-			// 1) the user does a fling scroll on the scrollable layer
-			// 2) the user stops the fling scroll with another tap
-			// then the event.target of the last 'touchend' event will be the element that was under the user's finger
-			// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
-			// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
-			this.updateScrollParent(targetElement);
+			// No point in attempting to focus disabled inputs
+			return !target.disabled && !target.readOnly;
+		default:
+			return (/\bneedsfocus\b/).test(target.className);
 		}
-	}
-
-	this.trackingClick = true;
-	this.trackingClickStart = event.timeStamp;
-	this.targetElement = targetElement;
-
-	this.touchStartX = touch.pageX;
-	this.touchStartY = touch.pageY;
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		event.preventDefault();
-	}
-
-	return true;
-};
+	};
 
 
-/**
- * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.touchHasMoved = function(event) {
-	'use strict';
-	var touch = event.changedTouches[0], boundary = this.touchBoundary;
+	/**
+	 * Send a click event to the specified element.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 * @param {Event} event
+	 */
+	FastClick.prototype.sendClick = function(targetElement, event) {
+		var clickEvent, touch;
 
-	if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
-		return true;
-	}
+		// On some Android devices activeElement needs to be blurred otherwise the synthetic click will have no effect (#24)
+		if (document.activeElement && document.activeElement !== targetElement) {
+			document.activeElement.blur();
+		}
 
-	return false;
-};
-
-
-/**
- * Update the last position.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchMove = function(event) {
-	'use strict';
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// If the touch has moved, cancel the click tracking
-	if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
-		this.trackingClick = false;
-		this.targetElement = null;
-	}
-
-	return true;
-};
-
-
-/**
- * Attempt to find the labelled control for the given label element.
- *
- * @param {EventTarget|HTMLLabelElement} labelElement
- * @returns {Element|null}
- */
-FastClick.prototype.findControl = function(labelElement) {
-	'use strict';
-
-	// Fast path for newer browsers supporting the HTML5 control attribute
-	if (labelElement.control !== undefined) {
-		return labelElement.control;
-	}
-
-	// All browsers under test that support touch events also support the HTML5 htmlFor attribute
-	if (labelElement.htmlFor) {
-		return document.getElementById(labelElement.htmlFor);
-	}
-
-	// If no for attribute exists, attempt to retrieve the first labellable descendant element
-	// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
-	return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
-};
-
-
-/**
- * On touch end, determine whether to send a click event at once.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onTouchEnd = function(event) {
-	'use strict';
-	var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
-
-	if (!this.trackingClick) {
-		return true;
-	}
-
-	// Prevent phantom clicks on fast double-tap (issue #36)
-	if ((event.timeStamp - this.lastClickTime) < 200) {
-		this.cancelNextClick = true;
-		return true;
-	}
-
-	// Reset to prevent wrong click cancel on input (issue #156).
-	this.cancelNextClick = false;
-
-	this.lastClickTime = event.timeStamp;
-
-	trackingClickStart = this.trackingClickStart;
-	this.trackingClick = false;
-	this.trackingClickStart = 0;
-
-	// On some iOS devices, the targetElement supplied with the event is invalid if the layer
-	// is performing a transition or scroll, and has to be re-detected manually. Note that
-	// for this to function correctly, it must be called *after* the event target is checked!
-	// See issue #57; also filed as rdar://13048589 .
-	if (deviceIsIOSWithBadTarget) {
 		touch = event.changedTouches[0];
 
-		// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
-		targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
-		targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
-	}
+		// Synthesise a click event, with an extra attribute so it can be tracked
+		clickEvent = document.createEvent('MouseEvents');
+		clickEvent.initMouseEvent(this.determineEventType(targetElement), true, true, window, 1, touch.screenX, touch.screenY, touch.clientX, touch.clientY, false, false, false, false, 0, null);
+		clickEvent.forwardedTouchEvent = true;
+		targetElement.dispatchEvent(clickEvent);
+	};
 
-	targetTagName = targetElement.tagName.toLowerCase();
-	if (targetTagName === 'label') {
-		forElement = this.findControl(targetElement);
-		if (forElement) {
-			this.focus(targetElement);
-			if (deviceIsAndroid) {
-				return false;
+	FastClick.prototype.determineEventType = function(targetElement) {
+
+		//Issue #159: Android Chrome Select Box does not open with a synthetic click event
+		if (deviceIsAndroid && targetElement.tagName.toLowerCase() === 'select') {
+			return 'mousedown';
+		}
+
+		return 'click';
+	};
+
+
+	/**
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.focus = function(targetElement) {
+		var length;
+
+		// Issue #160: on iOS 7, some input elements (e.g. date datetime month) throw a vague TypeError on setSelectionRange. These elements don't have an integer value for the selectionStart and selectionEnd properties, but unfortunately that can't be used for detection because accessing the properties also throws a TypeError. Just check the type instead. Filed as Apple bug #15122724.
+		if (deviceIsIOS && targetElement.setSelectionRange && targetElement.type.indexOf('date') !== 0 && targetElement.type !== 'time' && targetElement.type !== 'month') {
+			length = targetElement.value.length;
+			targetElement.setSelectionRange(length, length);
+		} else {
+			targetElement.focus();
+		}
+	};
+
+
+	/**
+	 * Check whether the given target element is a child of a scrollable layer and if so, set a flag on it.
+	 *
+	 * @param {EventTarget|Element} targetElement
+	 */
+	FastClick.prototype.updateScrollParent = function(targetElement) {
+		var scrollParent, parentElement;
+
+		scrollParent = targetElement.fastClickScrollParent;
+
+		// Attempt to discover whether the target element is contained within a scrollable layer. Re-check if the
+		// target element was moved to another parent.
+		if (!scrollParent || !scrollParent.contains(targetElement)) {
+			parentElement = targetElement;
+			do {
+				if (parentElement.scrollHeight > parentElement.offsetHeight) {
+					scrollParent = parentElement;
+					targetElement.fastClickScrollParent = parentElement;
+					break;
+				}
+
+				parentElement = parentElement.parentElement;
+			} while (parentElement);
+		}
+
+		// Always update the scroll top tracker if possible.
+		if (scrollParent) {
+			scrollParent.fastClickLastScrollTop = scrollParent.scrollTop;
+		}
+	};
+
+
+	/**
+	 * @param {EventTarget} targetElement
+	 * @returns {Element|EventTarget}
+	 */
+	FastClick.prototype.getTargetElementFromEventTarget = function(eventTarget) {
+
+		// On some older browsers (notably Safari on iOS 4.1 - see issue #56) the event target may be a text node.
+		if (eventTarget.nodeType === Node.TEXT_NODE) {
+			return eventTarget.parentNode;
+		}
+
+		return eventTarget;
+	};
+
+
+	/**
+	 * On touch start, record the position and scroll offset.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchStart = function(event) {
+		var targetElement, touch, selection;
+
+		// Ignore multiple touches, otherwise pinch-to-zoom is prevented if both fingers are on the FastClick element (issue #111).
+		if (event.targetTouches.length > 1) {
+			return true;
+		}
+
+		targetElement = this.getTargetElementFromEventTarget(event.target);
+		touch = event.targetTouches[0];
+
+		if (deviceIsIOS) {
+
+			// Only trusted events will deselect text on iOS (issue #49)
+			selection = window.getSelection();
+			if (selection.rangeCount && !selection.isCollapsed) {
+				return true;
 			}
 
-			targetElement = forElement;
+			if (!deviceIsIOS4) {
+
+				// Weird things happen on iOS when an alert or confirm dialog is opened from a click event callback (issue #23):
+				// when the user next taps anywhere else on the page, new touchstart and touchend events are dispatched
+				// with the same identifier as the touch event that previously triggered the click that triggered the alert.
+				// Sadly, there is an issue on iOS 4 that causes some normal touch events to have the same identifier as an
+				// immediately preceeding touch event (issue #52), so this fix is unavailable on that platform.
+				// Issue 120: touch.identifier is 0 when Chrome dev tools 'Emulate touch events' is set with an iOS device UA string,
+				// which causes all touch events to be ignored. As this block only applies to iOS, and iOS identifiers are always long,
+				// random integers, it's safe to to continue if the identifier is 0 here.
+				if (touch.identifier && touch.identifier === this.lastTouchIdentifier) {
+					event.preventDefault();
+					return false;
+				}
+
+				this.lastTouchIdentifier = touch.identifier;
+
+				// If the target element is a child of a scrollable layer (using -webkit-overflow-scrolling: touch) and:
+				// 1) the user does a fling scroll on the scrollable layer
+				// 2) the user stops the fling scroll with another tap
+				// then the event.target of the last 'touchend' event will be the element that was under the user's finger
+				// when the fling scroll was started, causing FastClick to send a click event to that layer - unless a check
+				// is made to ensure that a parent layer was not scrolled before sending a synthetic click (issue #42).
+				this.updateScrollParent(targetElement);
+			}
 		}
-	} else if (this.needsFocus(targetElement)) {
 
-		// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
-		// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
-		if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
-			this.targetElement = null;
-			return false;
-		}
+		this.trackingClick = true;
+		this.trackingClickStart = event.timeStamp;
+		this.targetElement = targetElement;
 
-		this.focus(targetElement);
-		this.sendClick(targetElement, event);
+		this.touchStartX = touch.pageX;
+		this.touchStartY = touch.pageY;
 
-		// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
-		if (!deviceIsIOS4 || targetTagName !== 'select') {
-			this.targetElement = null;
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay && (event.timeStamp - this.lastClickTime) > -1) {
 			event.preventDefault();
 		}
 
-		return false;
-	}
+		return true;
+	};
 
-	if (deviceIsIOS && !deviceIsIOS4) {
 
-		// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
-		// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
-		scrollParent = targetElement.fastClickScrollParent;
-		if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+	/**
+	 * Based on a touchmove event object, check whether the touch has moved past a boundary since it started.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.touchHasMoved = function(event) {
+		var touch = event.changedTouches[0], boundary = this.touchBoundary;
+
+		if (Math.abs(touch.pageX - this.touchStartX) > boundary || Math.abs(touch.pageY - this.touchStartY) > boundary) {
 			return true;
 		}
-	}
-
-	// Prevent the actual click from going though - unless the target node is marked as requiring
-	// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
-	if (!this.needsClick(targetElement)) {
-		event.preventDefault();
-		this.sendClick(targetElement, event);
-	}
-
-	return false;
-};
-
-
-/**
- * On touch cancel, stop tracking the click.
- *
- * @returns {void}
- */
-FastClick.prototype.onTouchCancel = function() {
-	'use strict';
-	this.trackingClick = false;
-	this.targetElement = null;
-};
-
-
-/**
- * Determine mouse events which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onMouse = function(event) {
-	'use strict';
-
-	// If a target element was never set (because a touch event was never fired) allow the event
-	if (!this.targetElement) {
-		return true;
-	}
-
-	if (event.forwardedTouchEvent) {
-		return true;
-	}
-
-	// Programmatically generated events targeting a specific element should be permitted
-	if (!event.cancelable) {
-		return true;
-	}
-
-	// Derive and check the target element to see whether the mouse event needs to be permitted;
-	// unless explicitly enabled, prevent non-touch click events from triggering actions,
-	// to prevent ghost/doubleclicks.
-	if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
-
-		// Prevent any user-added listeners declared on FastClick element from being fired.
-		if (event.stopImmediatePropagation) {
-			event.stopImmediatePropagation();
-		} else {
-
-			// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
-			event.propagationStopped = true;
-		}
-
-		// Cancel the event
-		event.stopPropagation();
-		event.preventDefault();
 
 		return false;
-	}
-
-	// If the mouse event is permitted, return true for the action to go through.
-	return true;
-};
+	};
 
 
-/**
- * On actual clicks, determine whether this is a touch-generated click, a click action occurring
- * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
- * an actual click which should be permitted.
- *
- * @param {Event} event
- * @returns {boolean}
- */
-FastClick.prototype.onClick = function(event) {
-	'use strict';
-	var permitted;
+	/**
+	 * Update the last position.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchMove = function(event) {
+		if (!this.trackingClick) {
+			return true;
+		}
 
-	// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
-	if (this.trackingClick) {
-		this.targetElement = null;
+		// If the touch has moved, cancel the click tracking
+		if (this.targetElement !== this.getTargetElementFromEventTarget(event.target) || this.touchHasMoved(event)) {
+			this.trackingClick = false;
+			this.targetElement = null;
+		}
+
+		return true;
+	};
+
+
+	/**
+	 * Attempt to find the labelled control for the given label element.
+	 *
+	 * @param {EventTarget|HTMLLabelElement} labelElement
+	 * @returns {Element|null}
+	 */
+	FastClick.prototype.findControl = function(labelElement) {
+
+		// Fast path for newer browsers supporting the HTML5 control attribute
+		if (labelElement.control !== undefined) {
+			return labelElement.control;
+		}
+
+		// All browsers under test that support touch events also support the HTML5 htmlFor attribute
+		if (labelElement.htmlFor) {
+			return document.getElementById(labelElement.htmlFor);
+		}
+
+		// If no for attribute exists, attempt to retrieve the first labellable descendant element
+		// the list of which is defined here: http://www.w3.org/TR/html5/forms.html#category-label
+		return labelElement.querySelector('button, input:not([type=hidden]), keygen, meter, output, progress, select, textarea');
+	};
+
+
+	/**
+	 * On touch end, determine whether to send a click event at once.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onTouchEnd = function(event) {
+		var forElement, trackingClickStart, targetTagName, scrollParent, touch, targetElement = this.targetElement;
+
+		if (!this.trackingClick) {
+			return true;
+		}
+
+		// Prevent phantom clicks on fast double-tap (issue #36)
+		if ((event.timeStamp - this.lastClickTime) < this.tapDelay && (event.timeStamp - this.lastClickTime) > -1) {
+			this.cancelNextClick = true;
+			return true;
+		}
+
+		if ((event.timeStamp - this.trackingClickStart) > this.tapTimeout) {
+			return true;
+		}
+
+		// Reset to prevent wrong click cancel on input (issue #156).
+		this.cancelNextClick = false;
+
+		this.lastClickTime = event.timeStamp;
+
+		trackingClickStart = this.trackingClickStart;
 		this.trackingClick = false;
-		return true;
-	}
+		this.trackingClickStart = 0;
 
-	// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
-	if (event.target.type === 'submit' && event.detail === 0) {
-		return true;
-	}
+		// On some iOS devices, the targetElement supplied with the event is invalid if the layer
+		// is performing a transition or scroll, and has to be re-detected manually. Note that
+		// for this to function correctly, it must be called *after* the event target is checked!
+		// See issue #57; also filed as rdar://13048589 .
+		if (deviceIsIOSWithBadTarget) {
+			touch = event.changedTouches[0];
 
-	permitted = this.onMouse(event);
+			// In certain cases arguments of elementFromPoint can be negative, so prevent setting targetElement to null
+			targetElement = document.elementFromPoint(touch.pageX - window.pageXOffset, touch.pageY - window.pageYOffset) || targetElement;
+			targetElement.fastClickScrollParent = this.targetElement.fastClickScrollParent;
+		}
 
-	// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
-	if (!permitted) {
-		this.targetElement = null;
-	}
-
-	// If clicks are permitted, return true for the action to go through.
-	return permitted;
-};
-
-
-/**
- * Remove all FastClick's event listeners.
- *
- * @returns {void}
- */
-FastClick.prototype.destroy = function() {
-	'use strict';
-	var layer = this.layer;
-
-	if (deviceIsAndroid) {
-		layer.removeEventListener('mouseover', this.onMouse, true);
-		layer.removeEventListener('mousedown', this.onMouse, true);
-		layer.removeEventListener('mouseup', this.onMouse, true);
-	}
-
-	layer.removeEventListener('click', this.onClick, true);
-	layer.removeEventListener('touchstart', this.onTouchStart, false);
-	layer.removeEventListener('touchmove', this.onTouchMove, false);
-	layer.removeEventListener('touchend', this.onTouchEnd, false);
-	layer.removeEventListener('touchcancel', this.onTouchCancel, false);
-};
-
-
-/**
- * Check whether FastClick is needed.
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.notNeeded = function(layer) {
-	'use strict';
-	var metaViewport;
-	var chromeVersion;
-
-	// Devices that don't support touch don't need FastClick
-	if (typeof window.ontouchstart === 'undefined') {
-		return true;
-	}
-
-	// Chrome version - zero for other browsers
-	chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
-
-	if (chromeVersion) {
-
-		if (deviceIsAndroid) {
-			metaViewport = document.querySelector('meta[name=viewport]');
-
-			if (metaViewport) {
-				// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
-				if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
-					return true;
+		targetTagName = targetElement.tagName.toLowerCase();
+		if (targetTagName === 'label') {
+			forElement = this.findControl(targetElement);
+			if (forElement) {
+				this.focus(targetElement);
+				if (deviceIsAndroid) {
+					return false;
 				}
-				// Chrome 32 and above with width=device-width or less don't need FastClick
-				if (chromeVersion > 31 && window.innerWidth <= window.screen.width) {
-					return true;
-				}
+
+				targetElement = forElement;
+			}
+		} else if (this.needsFocus(targetElement)) {
+
+			// Case 1: If the touch started a while ago (best guess is 100ms based on tests for issue #36) then focus will be triggered anyway. Return early and unset the target element reference so that the subsequent click will be allowed through.
+			// Case 2: Without this exception for input elements tapped when the document is contained in an iframe, then any inputted text won't be visible even though the value attribute is updated as the user types (issue #37).
+			if ((event.timeStamp - trackingClickStart) > 100 || (deviceIsIOS && window.top !== window && targetTagName === 'input')) {
+				this.targetElement = null;
+				return false;
 			}
 
-		// Chrome desktop doesn't need FastClick (issue #15)
-		} else {
+			this.focus(targetElement);
+			this.sendClick(targetElement, event);
+
+			// Select elements need the event to go through on iOS 4, otherwise the selector menu won't open.
+			// Also this breaks opening selects when VoiceOver is active on iOS6, iOS7 (and possibly others)
+			if (!deviceIsIOS || targetTagName !== 'select') {
+				this.targetElement = null;
+				event.preventDefault();
+			}
+
+			return false;
+		}
+
+		if (deviceIsIOS && !deviceIsIOS4) {
+
+			// Don't send a synthetic click event if the target element is contained within a parent layer that was scrolled
+			// and this tap is being used to stop the scrolling (usually initiated by a fling - issue #42).
+			scrollParent = targetElement.fastClickScrollParent;
+			if (scrollParent && scrollParent.fastClickLastScrollTop !== scrollParent.scrollTop) {
+				return true;
+			}
+		}
+
+		// Prevent the actual click from going though - unless the target node is marked as requiring
+		// real clicks or if it is in the whitelist in which case only non-programmatic clicks are permitted.
+		if (!this.needsClick(targetElement)) {
+			event.preventDefault();
+			this.sendClick(targetElement, event);
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * On touch cancel, stop tracking the click.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.onTouchCancel = function() {
+		this.trackingClick = false;
+		this.targetElement = null;
+	};
+
+
+	/**
+	 * Determine mouse events which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onMouse = function(event) {
+
+		// If a target element was never set (because a touch event was never fired) allow the event
+		if (!this.targetElement) {
 			return true;
 		}
-	}
 
-	// IE10 with -ms-touch-action: none, which disables double-tap-to-zoom (issue #97)
-	if (layer.style.msTouchAction === 'none') {
+		if (event.forwardedTouchEvent) {
+			return true;
+		}
+
+		// Programmatically generated events targeting a specific element should be permitted
+		if (!event.cancelable) {
+			return true;
+		}
+
+		// Derive and check the target element to see whether the mouse event needs to be permitted;
+		// unless explicitly enabled, prevent non-touch click events from triggering actions,
+		// to prevent ghost/doubleclicks.
+		if (!this.needsClick(this.targetElement) || this.cancelNextClick) {
+
+			// Prevent any user-added listeners declared on FastClick element from being fired.
+			if (event.stopImmediatePropagation) {
+				event.stopImmediatePropagation();
+			} else {
+
+				// Part of the hack for browsers that don't support Event#stopImmediatePropagation (e.g. Android 2)
+				event.propagationStopped = true;
+			}
+
+			// Cancel the event
+			event.stopPropagation();
+			event.preventDefault();
+
+			return false;
+		}
+
+		// If the mouse event is permitted, return true for the action to go through.
 		return true;
+	};
+
+
+	/**
+	 * On actual clicks, determine whether this is a touch-generated click, a click action occurring
+	 * naturally after a delay after a touch (which needs to be cancelled to avoid duplication), or
+	 * an actual click which should be permitted.
+	 *
+	 * @param {Event} event
+	 * @returns {boolean}
+	 */
+	FastClick.prototype.onClick = function(event) {
+		var permitted;
+
+		// It's possible for another FastClick-like library delivered with third-party code to fire a click event before FastClick does (issue #44). In that case, set the click-tracking flag back to false and return early. This will cause onTouchEnd to return early.
+		if (this.trackingClick) {
+			this.targetElement = null;
+			this.trackingClick = false;
+			return true;
+		}
+
+		// Very odd behaviour on iOS (issue #18): if a submit element is present inside a form and the user hits enter in the iOS simulator or clicks the Go button on the pop-up OS keyboard the a kind of 'fake' click event will be triggered with the submit-type input element as the target.
+		if (event.target.type === 'submit' && event.detail === 0) {
+			return true;
+		}
+
+		permitted = this.onMouse(event);
+
+		// Only unset targetElement if the click is not permitted. This will ensure that the check for !targetElement in onMouse fails and the browser's click doesn't go through.
+		if (!permitted) {
+			this.targetElement = null;
+		}
+
+		// If clicks are permitted, return true for the action to go through.
+		return permitted;
+	};
+
+
+	/**
+	 * Remove all FastClick's event listeners.
+	 *
+	 * @returns {void}
+	 */
+	FastClick.prototype.destroy = function() {
+		var layer = this.layer;
+
+		if (deviceIsAndroid) {
+			layer.removeEventListener('mouseover', this.onMouse, true);
+			layer.removeEventListener('mousedown', this.onMouse, true);
+			layer.removeEventListener('mouseup', this.onMouse, true);
+		}
+
+		layer.removeEventListener('click', this.onClick, true);
+		layer.removeEventListener('touchstart', this.onTouchStart, false);
+		layer.removeEventListener('touchmove', this.onTouchMove, false);
+		layer.removeEventListener('touchend', this.onTouchEnd, false);
+		layer.removeEventListener('touchcancel', this.onTouchCancel, false);
+	};
+
+
+	/**
+	 * Check whether FastClick is needed.
+	 *
+	 * @param {Element} layer The layer to listen on
+	 */
+	FastClick.notNeeded = function(layer) {
+		var metaViewport;
+		var chromeVersion;
+		var blackberryVersion;
+		var firefoxVersion;
+
+		// Devices that don't support touch don't need FastClick
+		if (typeof window.ontouchstart === 'undefined') {
+			return true;
+		}
+
+		// Chrome version - zero for other browsers
+		chromeVersion = +(/Chrome\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (chromeVersion) {
+
+			if (deviceIsAndroid) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// Chrome on Android with user-scalable="no" doesn't need FastClick (issue #89)
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// Chrome 32 and above with width=device-width or less don't need FastClick
+					if (chromeVersion > 31 && document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
+				}
+
+			// Chrome desktop doesn't need FastClick (issue #15)
+			} else {
+				return true;
+			}
+		}
+
+		if (deviceIsBlackBerry10) {
+			blackberryVersion = navigator.userAgent.match(/Version\/([0-9]*)\.([0-9]*)/);
+
+			// BlackBerry 10.3+ does not require Fastclick library.
+			// https://github.com/ftlabs/fastclick/issues/251
+			if (blackberryVersion[1] >= 10 && blackberryVersion[2] >= 3) {
+				metaViewport = document.querySelector('meta[name=viewport]');
+
+				if (metaViewport) {
+					// user-scalable=no eliminates click delay.
+					if (metaViewport.content.indexOf('user-scalable=no') !== -1) {
+						return true;
+					}
+					// width=device-width (or less than device-width) eliminates click delay.
+					if (document.documentElement.scrollWidth <= window.outerWidth) {
+						return true;
+					}
+				}
+			}
+		}
+
+		// IE10 with -ms-touch-action: none or manipulation, which disables double-tap-to-zoom (issue #97)
+		if (layer.style.msTouchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		// Firefox version - zero for other browsers
+		firefoxVersion = +(/Firefox\/([0-9]+)/.exec(navigator.userAgent) || [,0])[1];
+
+		if (firefoxVersion >= 27) {
+			// Firefox 27+ does not have tap delay if the content is not zoomable - https://bugzilla.mozilla.org/show_bug.cgi?id=922896
+
+			metaViewport = document.querySelector('meta[name=viewport]');
+			if (metaViewport && (metaViewport.content.indexOf('user-scalable=no') !== -1 || document.documentElement.scrollWidth <= window.outerWidth)) {
+				return true;
+			}
+		}
+
+		// IE11: prefixed -ms-touch-action is no longer supported and it's recomended to use non-prefixed version
+		// http://msdn.microsoft.com/en-us/library/windows/apps/Hh767313.aspx
+		if (layer.style.touchAction === 'none' || layer.style.touchAction === 'manipulation') {
+			return true;
+		}
+
+		return false;
+	};
+
+
+	/**
+	 * Factory method for creating a FastClick object
+	 *
+	 * @param {Element} layer The layer to listen on
+	 * @param {Object} [options={}] The options to override the defaults
+	 */
+	FastClick.attach = function(layer, options) {
+		return new FastClick(layer, options);
+	};
+
+
+	if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+
+		// AMD. Register as an anonymous module.
+		define(function() {
+			return FastClick;
+		});
+	} else if (typeof module !== 'undefined' && module.exports) {
+		module.exports = FastClick.attach;
+		module.exports.FastClick = FastClick;
+	} else {
+		window.FastClick = FastClick;
 	}
+}());
 
-	return false;
-};
-
-
-/**
- * Factory method for creating a FastClick object
- *
- * @param {Element} layer The layer to listen on
- */
-FastClick.attach = function(layer) {
-	'use strict';
-	return new FastClick(layer);
-};
-
-
-if (typeof define !== 'undefined' && define.amd) {
-
-	// AMD. Register as an anonymous module.
-	define(function() {
-		'use strict';
-		return FastClick;
-	});
-} else if (typeof module !== 'undefined' && module.exports) {
-	module.exports = FastClick.attach;
-	module.exports.FastClick = FastClick;
-} else {
-	window.FastClick = FastClick;
-}
 /*! Hammer.JS - v1.1.3 - 2014-05-20
  * http://eightmedia.github.io/hammer.js
  *
@@ -4641,15 +4885,15 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     attachTo.setImmediate = setImmediate;
     attachTo.clearImmediate = clearImmediate;
-}(new Function("return this")()));
+}(function() {return this;}()));
 
 (function() {
     function Viewport() {
 
         this.PRE_IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
-        this.IOS7_VIEWPORT = "width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no";
+        this.IOS7_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
         this.DEFAULT_VIEWPORT = "initial-scale=1, maximum-scale=1, user-scalable=no";
-        
+
         this.ensureViewportElement();
         this.platform = {};
         this.platform.name = this.getPlatformName();
@@ -4664,7 +4908,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
             this.viewportElement = document.createElement('meta');
             this.viewportElement.name = "viewport";
             document.head.appendChild(this.viewportElement);
-        }        
+        }
     },
 
     Viewport.prototype.setup = function() {
@@ -4713,22 +4957,33 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/back_button.tpl',
-    '<span class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage()" style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
-    '  <i class="ion-ios7-arrow-back ons-back-button__icon" style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i><span style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" class="back-button__label"></span>\n' +
+    '<span \n' +
+    '  class="toolbar-button--quiet {{modifierTemplater(\'toolbar-button--*\')}}" \n' +
+    '  ng-click="$root.ons.findParentComponentUntil(\'ons-navigator\', $event).popPage({cancelIfRunning: true})"\n' +
+    '  ng-show="showBackButton"\n' +
+    '  style="height: 44px; line-height: 0; padding: 0 10px 0 0; position: relative;">\n' +
+    '  \n' +
+    '  <i \n' +
+    '    class="ion-ios-arrow-back ons-back-button__icon" \n' +
+    '    style="vertical-align: top; background-color: transparent; height: 44px; line-height: 44px; font-size: 36px; margin-left: 8px; margin-right: 2px; width: 16px; display: inline-block; padding-top: 1px;"></i>\n' +
+    '\n' +
+    '  <span \n' +
+    '    style="vertical-align: top; display: inline-block; line-height: 44px; height: 44px;" \n' +
+    '    class="back-button__label"></span>\n' +
     '</span>\n' +
     '');
 }]);
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/button.tpl',
     '<span class="label ons-button-inner"></span>\n' +
@@ -4738,9 +4993,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/dialog.tpl',
     '<div class="dialog-mask"></div>\n' +
@@ -4751,9 +5006,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/icon.tpl',
     '<i class="fa fa-{{icon}} fa-{{spin}} fa-{{fixedWidth}} fa-rotate-{{rotate}} fa-flip-{{flip}}" ng-class="sizeClass" ng-style="style"></i>\n' +
@@ -4762,9 +5017,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/popover.tpl',
     '<div class="popover-mask"></div>\n' +
@@ -4777,9 +5032,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/row.tpl',
     '<div class="row row-{{align}} ons-row-inner"></div>\n' +
@@ -4788,9 +5043,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/sliding_menu.tpl',
     '<div class="onsen-sliding-menu__menu ons-sliding-menu-inner"></div>\n' +
@@ -4800,9 +5055,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/split_view.tpl',
     '<div class="onsen-split-view__secondary full-screen ons-split-view-inner"></div>\n' +
@@ -4812,9 +5067,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/switch.tpl',
     '<label class="switch {{modifierTemplater(\'switch--*\')}}">\n' +
@@ -4826,9 +5081,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab.tpl',
     '<input type="radio" name="tab-bar-{{tabbarId}}" style="display: none">\n' +
@@ -4839,9 +5094,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/tab_bar.tpl',
     '<div class="ons-tab-bar__content tab-bar__content"></div>\n' +
@@ -4851,9 +5106,9 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 (function(module) {
-try { app = angular.module('templates-main'); }
-catch(err) { app = angular.module('templates-main', []); }
-app.run(['$templateCache', function($templateCache) {
+try { module = angular.module('templates-main'); }
+catch(err) { module = angular.module('templates-main', []); }
+module.run(['$templateCache', function($templateCache) {
   'use strict';
   $templateCache.put('templates/toolbar_button.tpl',
     '<span class="toolbar-button {{modifierTemplater(\'toolbar-button--*\')}} navigation-bar__line-height" ng-transclude></span>\n' +
@@ -4862,7 +5117,7 @@ app.run(['$templateCache', function($templateCache) {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -4966,7 +5221,7 @@ window.DoorLock = (function() {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -4981,6 +5236,213 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+
+/**
+ * @ngdoc object
+ * @name ons
+ * @category util
+ * @description 
+ *   [ja]Onsen UIで利用できるグローバルなオブジェクトです。このオブジェクトは、AngularJSのスコープから参照することができます。 [/ja]
+ *   [en]A global object that's used in Onsen UI. This object can be reached from the AngularJS scope.[/en]
+ */
+
+/**
+ * @ngdoc method
+ * @signature ready(callback)
+ * @description 
+ *   [ja]アプリの初期化に利用するメソッドです。渡された関数は、Onsen UIの初期化が終了している時点で必ず呼ばれます。[/ja]
+ *   [en]Method used to wait for app initialization. The callback will not be executed until Onsen UI has been completely initialized.[/en]
+ * @param {Function} callback
+ *   [en]Function that executes after Onsen UI has been initialized.[/en]
+ *   [ja]Onsen UIが初期化が完了した後に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature bootstrap([moduleName, [dependencies]])
+ * @description 
+ *   [ja]Onsen UIの初期化を行います。Angular.jsのng-app属性を利用すること無しにOnsen UIを読み込んで初期化してくれます。[/ja]
+ *   [en]Initialize Onsen UI. Can be used to load Onsen UI without using the <code>ng-app</code> attribute from AngularJS.[/en]
+ * @param {String} [moduleName] 
+ *   [en]AngularJS module name.[/en]
+ *   [ja]Angular.jsでのモジュール名[/ja]
+ * @param {Array} [dependencies] 
+ *   [en]List of AngularJS module dependencies.[/en]
+ *   [ja]依存するAngular.jsのモジュール名の配列[/ja]
+ * @return {Object}
+ *   [en]An AngularJS module object.[/en]
+ *   [ja]AngularJSのModuleオブジェクトを表します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableAutoStatusBarFill()
+ * @description 
+ *   [en]Enable status bar fill feature on iOS7 and above.[/en]
+ *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を有効にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature disableAutoStatusBarFill()
+ * @description 
+ *   [en]Disable status bar fill feature on iOS7 and above.[/en]
+ *   [ja]iOS7以上で、ステータスバー部分の高さを自動的に埋める処理を無効にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature findParentComponentUntil(name, [dom])
+ * @param {String} name
+ *   [en]Name of component, i.e. 'ons-page'.[/en]
+ *   [ja]コンポーネント名を指定します。例えばons-pageなどを指定します。[/ja]
+ * @param {Object|jqLite|HTMLElement} [dom]
+ *   [en]$event, jqLite or HTMLElement object.[/en]
+ *   [ja]$eventオブジェクト、jqLiteオブジェクト、HTMLElementオブジェクトのいずれかを指定できます。[/ja]
+ * @return {Object}
+ *   [en]Component object. Will return null if no component was found.[/en]
+ *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
+ * @description 
+ *   [en]Find parent component object of <code>dom</code> element.[/en]
+ *   [ja]指定されたdom引数の親要素をたどってコンポーネントを検索します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature findComponent(selector, [dom])
+ * @param {String} selector
+ *   [en]CSS selector[/en]
+ *   [ja]CSSセレクターを指定します。[/ja]
+ * @param {HTMLElement} [dom]
+ *   [en]DOM element to search from.[/en]
+ *   [ja]検索対象とするDOM要素を指定します。[/ja]
+ * @return {Object}
+ *   [en]Component object. Will return null if no component was found.[/en]
+ *   [ja]コンポーネントのオブジェクトを返します。もしコンポーネントが見つからなかった場合にはnullを返します。[/ja]
+ * @description 
+ *   [en]Find component object using CSS selector.[/en]
+ *   [ja]CSSセレクタを使ってコンポーネントのオブジェクトを検索します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDefaultDeviceBackButtonListener(listener)
+ * @param {Function} listener 
+ *   [en]Function that executes when device back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時に実行される関数オブジェクトを指定します。[/ja]
+ * @description 
+ *   [en]Set default handler for device back button.[/en]
+ *   [ja]デバイスのバックボタンのためのデフォルトのハンドラを設定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature disableDeviceBackButtonHandler()
+ * @description 
+ * [en]Disable device back button event handler.[/en]
+ * [ja]デバイスのバックボタンのイベントを受け付けないようにします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature enableDeviceBackButtonHandler()
+ * @description 
+ * [en]Enable device back button event handler.[/en]
+ * [ja]デバイスのバックボタンのイベントを受け付けるようにします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isReady()
+ * @return {Boolean}
+ *   [en]Will be true if Onsen UI is initialized.[/en]
+ *   [ja]初期化されているかどうかを返します。[/ja]
+ * @description 
+ *   [en]Returns true if Onsen UI is initialized.[/en]
+ *   [ja]Onsen UIがすでに初期化されているかどうかを返すメソッドです。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature compile(dom)
+ * @param {HTMLElement} dom
+ *   [en]Element to compile.[/en]
+ *   [ja]コンパイルする要素を指定します。[/ja]
+ * @description 
+ *   [en]Compile Onsen UI components.[/en]
+ *   [ja]通常のHTMLの要素をOnsen UIのコンポーネントにコンパイルします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isWebView()
+ * @return {Boolean}
+ *   [en]Will be true if the app is running in Cordova.[/en]
+ *   [ja]Cordovaで実行されている場合にtrueになります。[/ja]
+ * @description 
+ *   [en]Returns true if running inside Cordova.[/en]
+ *   [ja]Cordovaで実行されているかどうかを返すメソッドです。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature createAlertDialog(page, [options])
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-alert-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ * @return {Promise}
+ *   [en]Promise object that resolves to the alert dialog component object.[/en]
+ *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
+ * @description 
+ *   [en]Create a alert dialog instance from a template.[/en]
+ *   [ja]テンプレートからアラートダイアログのインスタンスを生成します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature createDialog(page, [options])
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ * @return {Promise}
+ *   [en]Promise object that resolves to the dialog component object.[/en]
+ *   [ja]ダイアログのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
+ * @description 
+ *   [en]Create a dialog instance from a template.[/en]
+ *   [ja]テンプレートからダイアログのインスタンスを生成します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature createPopover(page, [options])
+ * @param {String} page
+ *   [en]Page name. Can be either an HTML file or an <ons-template> containing a <ons-dialog> component.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Object} [options.parentScope]
+ *   [en]Parent scope of the dialog. Used to bind models and access scope methods from the dialog.[/en]
+ *   [ja]ダイアログ内で利用する親スコープを指定します。ダイアログからモデルやスコープのメソッドにアクセスするのに使います。[/ja]
+ * @return {Promise}
+ *   [en]Promise object that resolves to the popover component object.[/en]
+ *   [ja]ポップオーバーのコンポーネントオブジェクトを解決するPromiseオブジェクトを返します。[/ja]
+ * @description 
+ *   [en]Create a popover instance from a template.[/en]
+ *   [ja]テンプレートからポップオーバーのインスタンスを生成します。[/ja]
+ */
 
 window.ons = (function(){
   'use strict';
@@ -5020,10 +5482,6 @@ window.ons = (function(){
         document.body.appendChild(document.createElement('ons-dummy-for-init'));
       } else {
         throw new Error('Invalid initialization state.');
-      }
-
-      if (document.querySelector('ons-alert-dialog')) {
-        console.warn('Invalid usage of <ons-alert-dialog>.');
       }
 
       $rootScope.$on('$ons-ready', unlockOnsenUI);
@@ -5103,6 +5561,10 @@ window.ons = (function(){
 
       _unlockersDict: {},
 
+      // Object to attach component variables to when using the var="..." attribute.
+      // Can be set to null to avoid polluting the global scope.
+      componentBase: window,
+
       /**
        * Bootstrap this document as a Onsen UI application.
        *
@@ -5123,7 +5585,7 @@ window.ons = (function(){
         var module = angular.module(name, deps);
 
         var doc = window.document;
-        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized') {
+        if (doc.readyState == 'loading' || doc.readyState == 'uninitialized' || doc.readyState == 'interactive') {
           doc.addEventListener('DOMContentLoaded', function() {
             angular.bootstrap(doc.documentElement, [name]);
           }, false);
@@ -5147,7 +5609,7 @@ window.ons = (function(){
       },
 
       /**
-       * Disabled status bar fill feature on iOS7 and above.
+       * Disable status bar fill feature on iOS7 and above.
        */
       disableAutoStatusBarFill: function() {
         if (this.isReady()) {
@@ -5277,16 +5739,20 @@ window.ons = (function(){
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
        * @return {Promise}
        */
-      createAlertDialog: function(page) {
+      createAlertDialog: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
 
         var alertDialog = angular.element('<ons-alert-dialog>'),
           $onsen = this._getOnsenService();
-        
+
         angular.element(document.body).append(angular.element(alertDialog));
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -5301,10 +5767,22 @@ window.ons = (function(){
             alertDialog.attr(attrs[i].name, attrs[i].value); 
           }
           alertDialog.html(el.html());
-          ons.compile(alertDialog[0]);
-      
+
+          var parentScope;
+          if (options.parentScope) {
+            parentScope = options.parentScope.$new();
+            ons.$compile(alertDialog)(parentScope);
+          }
+          else {
+            ons.compile(alertDialog[0]);
+          }
+
           if (el.attr('disabled')) {
             alertDialog.attr('disabled', 'disabled');
+          }
+
+          if (parentScope) {
+            alertDialog.data('ons-alert-dialog')._parentScope = parentScope;
           }
 
           return  alertDialog.data('ons-alert-dialog');
@@ -5313,9 +5791,13 @@ window.ons = (function(){
 
       /**
       * @param {String} page
+      * @param {Object} [options]
+      * @param {Object} [options.parentScope]
       * @return {Promise}
       */
-      createDialog: function(page) {
+      createDialog: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
@@ -5337,7 +5819,15 @@ window.ons = (function(){
             dialog.attr(attrs[i].name, attrs[i].value); 
           }
           dialog.html(el.html());
-          ons.compile(dialog[0]);
+
+          var parentScope;
+          if (options.parentScope) {
+            parentScope = options.parentScope.$new();
+            ons.$compile(dialog)(parentScope);
+          }
+          else {
+            ons.compile(dialog[0]);
+          }
 
           if (el.attr('disabled')) {
             dialog.attr('disabled', 'disabled');
@@ -5361,6 +5851,10 @@ window.ons = (function(){
               child.setAttribute('style', newStyle);
             }
 
+            if (parentScope) {
+              e.component._parentScope = parentScope;
+            }
+
             deferred.resolve(e.component);
           });
 
@@ -5370,16 +5864,20 @@ window.ons = (function(){
 
       /**
        * @param {String} page
+       * @param {Object} [options]
+       * @param {Object} [options.parentScope]
        * @return {Promise}
        */
-      createPopover: function(page) {
+      createPopover: function(page, options) {
+        options = options || {};
+
         if (!page) {
           throw new Error('Page url must be defined.');
         }
 
         var popover = angular.element('<ons-popover>'),
           $onsen = this._getOnsenService();
-        
+
         angular.element(document.body).append(angular.element(popover));
 
         return $onsen.getPageHTMLAsync(page).then(function(html) {
@@ -5394,8 +5892,16 @@ window.ons = (function(){
             popover.attr(attrs[i].name, attrs[i].value); 
           }
           popover.html(el.html());
-          ons.compile(popover[0]);
-      
+
+          var parentScope;
+          if (options.parentScope) {
+            parentScope = options.parentScope.$new();
+            ons.$compile(popover)(parentScope);
+          }
+          else {
+            ons.compile(popover[0]);
+          }
+
           if (el.attr('disabled')) {
             popover.attr('disabled', 'disabled');
           }
@@ -5418,90 +5924,15 @@ window.ons = (function(){
               child.setAttribute('style', newStyle);
             }
 
+            if (parentScope) {
+              e.component._parentScope = parentScope;
+            }
+
             deferred.resolve(e.component);
           });
 
           return deferred.promise;
         });
-      },
-
-      platform: {
-        /**
-         * @return {Boolean}
-         */
-        isWebView: function() {
-          return ons.isWebView();
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIOS: function() {
-          return /iPhone|iPad|iPod/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isAndroid: function() {
-          return /Android/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIPhone: function() {
-          return /iPhone/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIPad: function() {
-          return /iPad/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isBlackBerry: function() {
-          return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isOpera: function() {
-          return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isFirefox: function() {
-          return (typeof InstallTrigger !== 'undefined');
-        },
-        /**
-         * @return {Boolean}
-         */
-        isSafari: function() {
-          return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
-        },
-        /**
-         * @return {Boolean}
-         */
-        isChrome: function() {
-          return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIE: function() {
-          return false || !!document.documentMode;
-        },
-        /**
-         * @return {Boolean}
-         */
-        isIOS7above: function() {
-          if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/)||[''])[0].replace(/_/g,'.');
-            return (parseInt(ver.split('.')[0]) >= 7);
-          }
-          return false;
-        }
       }
     };
     return ons;
@@ -5510,7 +5941,7 @@ window.ons = (function(){
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -5543,6 +5974,8 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
+
         this._element.css({
           display: 'none',
           zIndex: 20001
@@ -5561,6 +5994,8 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._createMask(attrs.maskColor);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -5654,15 +6089,24 @@ limitations under the License.
        * Destroy alert dialog.
        */
       destroy: function() {
+        if (this._parentScope) {
+          this._parentScope.$destroy();
+          this._parentScope = null;
+        } else {
+          this._scope.$destroy();
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._mask.off();
-  
+
         this._element.remove();
         this._mask.remove();
         this._deviceBackButtonHandler.destroy();
 
-        this._scope.$destroy();
-
-        this._deviceBackButtonHandler = this._element = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._mask = null;
       },
 
       /**
@@ -5773,7 +6217,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -5909,7 +6353,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6044,7 +6488,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6124,7 +6568,7 @@ limitations under the License.
        * Returns whether the button is disabled or not.
        */
       isDisabled: function() {
-        return this._attrs.disabled;
+        return this._element[0].hasAttribute('disabled');
       },
 
       /**
@@ -6150,7 +6594,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6184,19 +6628,23 @@ limitations under the License.
       },
 
       _getElementSize: function() {
-        return this._element[0].getBoundingClientRect().height;
+        if (!this._currentElementSize) {
+          this._currentElementSize = this._element[0].getBoundingClientRect().height;
+        }
+
+        return this._currentElementSize;
       },
 
       _generateScrollTransform: function(scroll) {
         return 'translate3d(0px, ' + -scroll + 'px, 0px)';
       },
-      
+
       _layoutCarouselItems: function() {
         var children = this._getCarouselItemElements();
 
         var sizeAttr = this._getCarouselItemSizeAttr();
         var sizeInfo = this._decomposeSizeString(sizeAttr);
-        
+
         for (var i = 0; i < children.length; i++) {
           angular.element(children[i]).css({
             position: 'absolute',
@@ -6221,7 +6669,11 @@ limitations under the License.
       },
 
       _getElementSize: function() {
-        return this._element[0].getBoundingClientRect().width;
+        if (!this._currentElementSize) {
+          this._currentElementSize = this._element[0].getBoundingClientRect().width;
+        }
+
+        return this._currentElementSize;
       },
 
       _generateScrollTransform: function(scroll) {
@@ -6297,6 +6749,8 @@ limitations under the License.
         this._layoutCarouselItems();
         this._setupInitialIndex();
 
+        this._attrs.$observe('direction', this._onDirectionChange.bind(this));
+
         this._scope.$on('$destroy', this._destroy.bind(this));
 
         this._saveLastState();
@@ -6306,10 +6760,25 @@ limitations under the License.
         this.refresh();
       },
 
+      _onDirectionChange: function() {
+         if (this._isVertical()) {
+          this._element.css({
+            overflowX: 'auto',
+            overflowY: ''
+          });
+        }
+        else {
+          this._element.css({
+            overflowX: '',
+            overflowY: 'auto'
+          });
+        }
+      },
+
       _saveLastState: function() {
         this._lastState = {
           elementSize: this._getCarouselItemSize(),
-          caroulseElementCount: this._getCarouselItemCount(),
+          carouselElementCount: this._getCarouselItemCount(),
           width: this._getCarouselItemSize() * this._getCarouselItemCount()
         };
       },
@@ -6391,21 +6860,32 @@ limitations under the License.
       },
 
       /**
-       * @param {Boolean} draggable
+       * @param {Number} ratio
        */
-      setDraggable: function(draggable) {
-        if (draggable) {
-          this._element[0].setAttribute('draggable', '');
-        } else {
-          this._element[0].removeAttribute('draggable');
+      setAutoScrollRatio: function(ratio) {
+        if (ratio < 0.0 || ratio > 1.0) {
+          throw new Error('Invalid ratio.');
         }
+
+        this._element[0].setAttribute('auto-scroll-ratio', ratio);
       },
 
       /**
-       * @return {Boolean}
+       * @return {Number}
        */
-      isDraggable: function() {
-        return this._element[0].hasAttribute('draggable');
+      getAutoScrollRatio: function(ratio) {
+        var attr = this._element[0].getAttribute('auto-scroll-ratio');
+
+        if (!attr) {
+          return 0.5;
+        }
+
+        var scrollRatio = parseFloat(attr);
+        if (scrollRatio < 0.0 || scrollRatio > 1.0) {
+          throw new Error('Invalid ratio.');
+        }
+
+        return isNaN(scrollRatio) ? 0.5 : scrollRatio;
       },
 
       /**
@@ -6541,9 +7021,11 @@ limitations under the License.
       },
 
       _prepareEventListeners: function() {
-        this._hammer = new Hammer(this._element[0]);
+        this._hammer = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
 
-        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.on('dragend', this._bindedOnDragEnd);
 
         angular.element(window).on('resize', this._bindedOnResize);
@@ -6565,6 +7047,17 @@ limitations under the License.
       },
 
       _onDrag: function(event) {
+        if (!this.isSwipeable()) {
+          return;
+        }
+
+        var direction = event.gesture.direction;
+        if ((this._isVertical() && (direction === 'left' || direction === 'right')) || (!this._isVertical() && (direction === 'up' || direction === 'down'))) {
+          return;
+        }
+
+        event.stopPropagation();
+
         this._lastDragEvent = event;
 
         var scroll = this._scroll - this._getScrollDelta(event);
@@ -6575,16 +7068,55 @@ limitations under the License.
       },
 
       _onDragEnd: function(event) {
+        this._currentElementSize = undefined;
+        this._carouselItemElements = undefined;
+
+        if (!this.isSwipeable()) {
+          return;
+        }
+
         this._scroll = this._scroll - this._getScrollDelta(event);
-        this._tryFirePostChangeEvent();
+
+        if (this._getScrollDelta(event) !== 0) {
+          event.stopPropagation();
+        }
 
         if (this._isOverScroll(this._scroll)) {
-          this._scrollToKillOverScroll();
-        } else if (this._lastDragEvent !== null) {
+          var waitForAction = false;
+
+          this.emit('overscroll', {
+            carousel: this,
+            activeIndex: this.getActiveCarouselItemIndex(),
+            direction: this._getOverScrollDirection(),
+            waitToReturn: function(promise) {
+              waitForAction = true;
+              promise.then(
+                function() {
+                  this._scrollToKillOverScroll();
+                }.bind(this)
+              );
+            }.bind(this)
+          });
+
+          if (!waitForAction) {
+            this._scrollToKillOverScroll();
+          }
+        } else {
           this._startMomemtumScroll(event);
         }
         this._lastDragEvent = null;
         event.gesture.preventDefault();
+      },
+
+      _getTouchEvents: function() {
+        var EVENTS = [
+          'drag', 'dragstart', 'dragend',
+          'dragup', 'dragdown', 'dragleft', 
+          'dragright', 'swipe', 'swipeup',
+          'swipedown', 'swipeleft', 'swiperight'
+        ];
+
+        return EVENTS.join(' ');
       },
 
       /**
@@ -6595,7 +7127,7 @@ limitations under the License.
       },
 
       _startMomemtumScroll: function(event) {
-        if (this._lastDragEvent !== null) {
+        if (this._lastDragEvent) {
           var velocity = this._getScrollVelocity(this._lastDragEvent);
           var duration = 0.3;
           var scrollDelta = duration * 100 * velocity;
@@ -6640,6 +7172,22 @@ limitations under the License.
             return left - right;
           });
 
+          arr = arr.filter(function(item, pos) {
+            return !pos || item != arr[pos - 1];
+          });
+
+          var lastScroll = this._lastActiveIndex * size,
+            scrollRatio = Math.abs(scroll - lastScroll) / size;
+
+          if (scrollRatio <= this.getAutoScrollRatio()) {
+            return lastScroll;
+          }
+          else if (scrollRatio > this.getAutoScrollRatio() && scrollRatio < 1.0) {
+            if (arr[0] === lastScroll && arr.length > 1) {
+              return arr[1];
+            }
+          }
+
           return arr[0];
         } else {
           return Math.max(0, Math.min(max, scroll));
@@ -6650,16 +7198,18 @@ limitations under the License.
        * @return {Array}
        */
       _getCarouselItemElements: function() {
-        var items = [];
-        var children = this._element.children();
+        var nodeList = this._element[0].children,
+          rv = [];
 
-        for (var i = 0; i < children.length; i++) {
-          if (children[i].nodeName.toLowerCase() === 'ons-carousel-item') {
-            items.push(children[i]);
-          }
+        for (var i = nodeList.length; i--; ) {
+          rv.unshift(nodeList[i]);
         }
 
-        return items;
+        rv = rv.filter(function(item) {
+          return item.nodeName.toLowerCase() === 'ons-carousel-item';
+        });
+
+        return rv;
       },
 
       /**
@@ -6705,7 +7255,8 @@ limitations under the License.
       },
 
       _calculateMaxScroll: function() {
-        return this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        var max = this._getCarouselItemCount() * this._getCarouselItemSize() - this._getElementSize();
+        return Math.ceil(max < 0 ? 0 : max); // Need to return an integer value.
       },
 
       _isOverScroll: function(scroll) {
@@ -6713,6 +7264,25 @@ limitations under the License.
           return true;
         }
         return false;
+      },
+
+      _getOverScrollDirection: function() {
+        if (this._isVertical()) {
+          if (this._scroll <= 0) {
+            return 'up';
+          }
+          else {
+            return 'down';
+          }
+        }
+        else {
+          if (this._scroll <= 0) {
+            return 'left';
+          }
+          else {
+            return 'right';
+          }
+        }
       },
 
       _scrollToKillOverScroll: function() {
@@ -6726,6 +7296,10 @@ limitations under the License.
               duration: duration,
               timing: 'cubic-bezier(.1, .4, .1, 1)'
             })
+            .queue(function(done) {
+              done();
+              this._tryFirePostChangeEvent();
+            }.bind(this))
             .play();
           this._scroll = 0;
           return;
@@ -6741,6 +7315,10 @@ limitations under the License.
               duration: duration,
               timing: 'cubic-bezier(.1, .4, .1, 1)'
             })
+            .queue(function(done) {
+              done();
+              this._tryFirePostChangeEvent();
+            }.bind(this))
             .play();
           this._scroll = maxScroll;
           return;
@@ -6760,12 +7338,27 @@ limitations under the License.
        * Refresh carousel item layout.
        */
       refresh: function() {
+        // Bug fix
+        if (this._getCarouselItemSize() === 0) {
+          return;
+        }
+
         this._mixin(this._isVertical() ? VerticalModeTrait : HorizontalModeTrait);
         this._layoutCarouselItems();
 
         if (this._lastState && this._lastState.width > 0) {
-          this._scroll = this._scroll / this._lastState.width * this._getCarouselItemSize() * this._getCarouselItemCount();
-          this._scrollTo(this._scroll);
+          var scroll = this._scroll;
+
+          if (this._isOverScroll(scroll)) {
+            this._scrollToKillOverScroll();
+          } 
+          else {
+            if (this.isAutoScrollEnabled()) {
+              scroll = this._normalizeScrollPosition(scroll);
+            }
+
+            this._scrollTo(scroll);
+          }
         }
 
         this._saveLastState();
@@ -6790,9 +7383,9 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
-        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('drag dragleft dragright dragup dragdown swipe swipeleft swiperight swipeup swipedown', this._bindedOnDrag);
         this._hammer.off('dragend', this._bindedOnDragEnd);
 
         angular.element(window).off('resize', this._bindedOnResize);
@@ -6808,7 +7401,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -6841,6 +7434,7 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._scope = scope;
         this._element = element;
+        this._attrs = attrs;
 
         this._element.css('display', 'none');
 
@@ -6863,6 +7457,8 @@ limitations under the License.
         }
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       /**
@@ -6870,6 +7466,10 @@ limitations under the License.
        */
       getDeviceBackButtonHandler: function() {
         return this._deviceBackButtonHandler;
+      },
+
+      _getMaskColor: function() {
+        return this._element[0].getAttribute('mask-color') || 'rgba(0, 0, 0, 0.2)';
       },
 
       /**
@@ -6896,6 +7496,8 @@ limitations under the License.
 
             this._element.css('display', 'block');
             this._mask.css('opacity', 1);
+
+            this._mask.css('backgroundColor', this._getMaskColor());
 
             if (options.animation) {
               animation = DialogView._animatorDict[options.animation];
@@ -6961,13 +7563,22 @@ limitations under the License.
        * Destroy dialog.
        */
       destroy: function() {
+        if (this._parentScope) {
+          this._parentScope.$destroy();
+          this._parentScope = null;
+        } else {
+          this._scope.$destroy();
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
         this._element.remove();
         this._deviceBackButtonHandler.destroy();
         this._mask.off();
 
-        this._scope.$destroy();
-
-        this._deviceBackButtonHandler = this._element = this._dialog = this._mask = null;
+        this._deviceBackButtonHandler = this._scope = this._attrs = this._element = this._dialog = this._mask = null;
       },
 
       /**
@@ -7067,7 +7678,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -7106,7 +7717,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7230,7 +7841,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7366,7 +7977,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7408,7 +8019,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7542,7 +8153,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -7673,7 +8284,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8196,7 +8807,366 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('LazyRepeatView', ['$onsen', '$document', '$compile', function($onsen, $document, $compile) {
+
+    var LazyRepeatView = Class.extend({
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs, linker) {
+        this._element = element;
+        this._scope = scope;
+        this._attrs = attrs;
+        this._linker = linker;
+
+        this._parentElement = element.parent();
+        this._pageContent = this._findPageContent();
+
+        if (!this._pageContent) {
+          throw new Error('ons-lazy-repeat must be a descendant of an <ons-page> or an <ons-scroller> element.');
+        }
+
+        this._itemHeightSum = [];
+        this._maxIndex = 0;
+
+        this._delegate = this._getDelegate();
+
+        this._renderedElements = {};
+        this._addEventListeners();
+
+        this._scope.$watch(this._countItems.bind(this), this._onChange.bind(this));
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+        this._onChange();
+      },
+
+      _getDelegate: function() {
+        var delegate = this._scope.$eval(this._attrs.onsLazyRepeat);
+
+        if (typeof delegate === 'undefined') {
+          /*jshint evil:true */
+          delegate = eval(this._attrs.onsLazyRepeat);
+        }
+
+        return delegate;
+      },
+
+      _countItems: function() {
+        return this._delegate.countItems();
+      },
+
+      _getItemHeight: function(i) {
+        return this._delegate.calculateItemHeight(i);
+      },
+      
+      _getTopOffset: function() {
+        return this._parentElement[0].getBoundingClientRect().top;
+      },
+
+      _render: function() {
+        var items = this._getItemsInView(),
+          keep = {};
+
+        this._parentElement.css('height', this._itemHeightSum[this._maxIndex] + 'px');
+
+        for (var i = 0, l = items.length; i < l; i ++) {
+          var _item = items[i];
+          this._renderElement(_item);
+          keep[_item.index] = true;
+        }
+
+        for (var key in this._renderedElements) {
+          if (this._renderedElements.hasOwnProperty(key) && !keep.hasOwnProperty(key)) {
+            this._removeElement(key);
+          }
+        }
+      },
+
+      _isRendered: function(i) {
+        return this._renderedElements.hasOwnProperty(i);
+      },
+      
+      _renderElement: function(item) {
+        if (this._isRendered(item.index)) {
+          // Update content even if it's already added to DOM
+          // to account for changes within the list.
+          var currentItem = this._renderedElements[item.index];
+
+          if (this._delegate.configureItemScope) {
+            this._delegate.configureItemScope(item.index, currentItem.scope);
+          }
+
+          // Fix position.
+          var element = this._renderedElements[item.index].element;
+          element[0].style.top = item.top + 'px';
+
+          return;
+        }
+
+        var childScope = this._scope.$new();
+        this._addSpecialProperties(item.index, childScope);
+
+        this._linker(childScope, function(clone) {
+          if (this._delegate.configureItemScope) {
+            this._delegate.configureItemScope(item.index, childScope);
+          }
+          else if (this._delegate.createItemContent) {
+            clone.append(this._delegate.createItemContent(item.index));
+            $compile(clone[0].firstChild)(childScope);
+          }
+
+          this._parentElement.append(clone);
+
+          clone.css({
+            position: 'absolute',
+            top: item.top + 'px',
+            left: '0px',
+            right: '0px',
+            display: 'none'
+          });
+
+          var element = {
+            element: clone,
+            scope: childScope
+          };
+
+          // Don't show elements before they are finished rendering.
+          this._scope.$evalAsync(function() {
+            clone.css('display', 'block');
+          });
+
+          this._renderedElements[item.index] = element;
+        }.bind(this));
+      },
+
+      _removeElement: function(i) {
+        if (!this._isRendered(i)) {
+          return;
+        }
+
+        var element = this._renderedElements[i];
+
+        if (this._delegate.destroyItemScope) {
+          this._delegate.destroyItemScope(i, element.scope);
+        }
+        else if (this._delegate.destroyItemContent) {
+          this._delegate.destroyItemContent(i, element.element.children()[0]);
+        }
+
+        element.element.remove();
+        element.scope.$destroy();
+        element.element = element.scope = null;
+
+        delete this._renderedElements[i];
+      },
+
+      _removeAllElements: function() {
+        for (var key in this._renderedElements) {
+          if (this._removeElement.hasOwnProperty(key)) {
+            this._removeElement(key);
+          }
+        }
+      },
+
+      _calculateStartIndex: function(current) {
+        var start = 0,
+          end = this._maxIndex;
+
+        // Binary search for index at top of screen so
+        // we can speed up rendering.
+        while (true) {
+          var middle = Math.floor((start + end) / 2),
+            value = current + this._itemHeightSum[middle];
+
+          if (end < start) {
+            return 0;
+          }
+          else if (value >= 0 && value - this._getItemHeight(middle) < 0) {
+            return middle;
+          }
+          else if (isNaN(value) || value >= 0) {
+            end = middle - 1;
+          }
+          else {
+            start = middle + 1;
+          }
+
+        }
+      },
+
+      _recalculateItemHeightSum: function() {
+        var sums = this._itemHeightSum;
+
+        for (var i = 0, sum = 0; i < Math.min(sums.length, this._countItems()); i++) {
+          sum += this._getItemHeight(i);
+          sums[i] = sum;
+        }
+      },
+
+      _getItemsInView: function() {
+        var topOffset = this._getTopOffset(),
+          topPosition = topOffset,
+          cnt = this._countItems();
+
+        if (cnt !== this._itemCount){
+          this._recalculateItemHeightSum();
+          this._maxIndex = cnt - 1;
+        }
+        this._itemCount = cnt;
+
+        var startIndex = this._calculateStartIndex(topPosition);
+        startIndex = Math.max(startIndex - 30, 0);
+
+        if (startIndex > 0) {
+          topPosition += this._itemHeightSum[startIndex - 1];
+        }
+
+        var items = [];
+        for (var i = startIndex; i < cnt && topPosition < 4 * window.innerHeight; i++) {
+          var h = this._getItemHeight(i);
+
+          if (i >= this._itemHeightSum.length) {
+            this._itemHeightSum = this._itemHeightSum.concat(new Array(100));
+          }
+
+          if (i > 0) {
+            this._itemHeightSum[i] = this._itemHeightSum[i - 1] + h;
+          }
+          else {
+            this._itemHeightSum[i] = h;
+          }
+
+          this._maxIndex = Math.max(i, this._maxIndex);
+
+          items.push({
+            index: i,
+            top: topPosition - topOffset
+          });
+
+          topPosition += h;
+        }
+
+        return items;
+      },
+
+      _addSpecialProperties: function(i, scope) {
+        scope.$index = i;
+        scope.$first = i === 0;
+        scope.$last = i === this._countItems() - 1;
+        scope.$middle = !scope.$first && !scope.$last;
+        scope.$even = i % 2 === 0;
+        scope.$odd = !scope.$even;
+      },
+
+      _onChange: function() {
+        this._render();
+      },
+
+      _findPageContent: function() {
+        var e = this._element[0];
+
+        while(e.parentNode) {
+          e = e.parentNode;
+
+          if (e.className) {
+            var classNames = e.className.split(/\s+/);
+            if (classNames.indexOf('page__content') >= 0 || classNames.indexOf('ons-scroller__content') >= 0) {
+              return e;
+            }
+          }
+        }
+
+        return null;
+      },
+
+      _debounce: function(func, wait, immediate) {
+        var timeout;
+        return function() {
+          var context = this, args = arguments;
+          var later = function() {
+            timeout = null;
+            if (!immediate) {
+              func.apply(context, args);
+            }
+          };
+          var callNow = immediate && !timeout;
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+          if (callNow) {
+            func.apply(context, args);
+          }
+        };
+      },
+
+      _doubleFireOnTouchend: function(){
+        this._render();
+        this._debounce(this._render.bind(this), 100);
+      },
+
+      _addEventListeners: function() {
+        if (ons.platform.isIOS()) {
+          this._boundOnChange = this._debounce(this._onChange.bind(this), 30);
+        } else {
+          this._boundOnChange = this._onChange.bind(this);
+        }
+
+        this._pageContent.addEventListener('scroll', this._boundOnChange, true);
+
+        if (ons.platform.isIOS()) {
+          this._pageContent.addEventListener('touchmove', this._boundOnChange, true);
+          this._pageContent.addEventListener('touchend', this._doubleFireOnTouchend, true);
+        }
+
+        $document[0].addEventListener('resize', this._boundOnChange, true);
+      },
+
+      _removeEventListeners: function() {
+        this._pageContent.removeEventListener('scroll', this._boundOnChange, true);
+
+        if (ons.platform.isIOS()) {
+          this._pageContent.removeEventListener('touchmove', this._boundOnChange, true);
+          this._pageContent.removeEventListener('touchend', this._doubleFireOnTouchend, true);
+        }
+
+        $document[0].removeEventListener('resize', this._boundOnChange, true);
+      },
+
+      _destroy: function() {
+        this._removeEventListeners();
+        this._removeAllElements();
+        this._parentElement = this._renderedElements = this._element = this._scope = this._attrs = null;
+      }
+    });
+
+    return LazyRepeatView;
+  }]);
+})();
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8358,7 +9328,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8379,7 +9349,7 @@ limitations under the License.
 
   var module = angular.module('onsen');
 
-  module.factory('ModalView', ['$onsen', function($onsen) {
+  module.factory('ModalView', ['$onsen', '$rootScope', function($onsen, $rootScope) {
 
     var ModalView = Class.extend({
       _element: undefined,
@@ -8392,6 +9362,11 @@ limitations under the License.
       init: function(scope, element) {
         this._scope = scope;
         this._element = element;
+
+        var pageView = $rootScope.ons.findParentComponentUntil('ons-page', this._element);
+        if (pageView) {
+          this._pageContent = angular.element(pageView._element[0].querySelector('.page__content'));
+        }
 
         this._scope.$on('$destroy', this._destroy.bind(this));
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
@@ -8453,7 +9428,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -8490,7 +9465,19 @@ limitations under the License.
       this.pageScope = params.pageScope;
       this.options = params.options;
       this.navigator = params.navigator;
+
+      // Block events while page is being animated to stop scrolling, pressing buttons, etc.
+      this._blockEvents = function(event) {
+        if (this.navigator._isPopping || this.navigator._isPushing) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }.bind(this);
+
+      this.element.on(this._pointerEvents, this._blockEvents);
     },
+
+    _pointerEvents: 'touchmove',
 
     /**
      * @return {PageView}
@@ -8508,9 +9495,11 @@ limitations under the License.
     destroy: function() {
       this.pageScope.$destroy();
 
+      this.element.off(this._pointerEvents, this._blockEvents);
       this.element.remove();
-      this._pageView = null;
       this.element = null;
+
+      this._pageView = null;
       this.pageScope = null;
       this.options = null;
 
@@ -8535,9 +9524,14 @@ limitations under the License.
     var NavigatorView = Class.extend({
 
       /**
-       * @member jqLite Object
+       * @member {jqLite} Object
        */
       _element: undefined,
+
+      /**
+       * @member {Object} Object
+       */
+      _attrs: undefined,
 
       /**
        * @member {Array}
@@ -8560,24 +9554,26 @@ limitations under the License.
       _profiling: false,
 
       /**
-       * @param {Object} options
-       * @param options.element jqLite Object to manage with navigator
-       * @param options.scope Angular.js scope object
+       * @param {Object} scope
+       * @param {jqLite} element jqLite Object to manage with navigator
+       * @param {Object} attrs
        */
-      init: function(options) {
-        options = options || options;
+      init: function(scope, element, attrs) {
 
-        this._element = options.element || angular.element(window.document.body);
-        this._scope = options.scope || this._element.scope();
+        this._element = element || angular.element(window.document.body);
+        this._scope = scope || this._element.scope();
+        this._attrs = attrs;
         this._doorLock = new DoorLock();
         this.pages = [];
+
+        this._isPopping = this._isPushing = false;
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
         this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _destroy: function() {
-        this.emit('destroy', {navigator: this});
+        this.emit('destroy');
 
         this.pages.forEach(function(page) {
           page.destroy();
@@ -8585,11 +9581,13 @@ limitations under the License.
 
         this._deviceBackButtonHandler.destroy();
         this._deviceBackButtonHandler = null;
+
+        this._element = this._scope = this._attrs = null;
       },
 
       _onDeviceBackButton: function(event) {
         if (this.pages.length > 1) {
-          this.popPage();
+          this._scope.$evalAsync(this.popPage.bind(this));
         } else {
           event.callParentHandler();
         }
@@ -8608,7 +9606,6 @@ limitations under the License.
 
         throw new Error('invalid state');
       },
-
 
       _createPageElementAndLinkFunction : function(templateHTML, pageScope, done) {
         var div = document.createElement('div');
@@ -8656,8 +9653,8 @@ limitations under the License.
           throw new Error('options must be an object. You supplied ' + options);
         }
 
-        if (this.pages.length === 0) {
-          return this.pushPage.apply(this, arguments);
+        if (index === this.pages.length) {
+          return this.pushPage.apply(this, [].slice.call(arguments, 1));
         }
 
         this._doorLock.waitUnlock(function() {
@@ -8726,6 +9723,10 @@ limitations under the License.
 
         options = options || {};
 
+        if (options.cancelIfRunning && this._isPushing) {
+          return;
+        }
+
         if (options && typeof options != 'object') {
           throw new Error('options must be an object. You supplied ' + options);
         }
@@ -8768,8 +9769,9 @@ limitations under the License.
 
       /**
        * @param {Object} options pushPage()'s options parameter
+       * @param {NavigatorTransitionAnimator} [defaultAnimator]
        */
-      _getAnimatorOption: function(options) {
+      _getAnimatorOption: function(options, defaultAnimator) {
         var animator = null;
 
         if (options.animation instanceof NavigatorTransitionAnimator) {
@@ -8785,7 +9787,7 @@ limitations under the License.
         }
 
         if (!animator) {
-          animator = NavigatorView._transitionAnimatorDict['default'];
+          animator = defaultAnimator || NavigatorView._transitionAnimatorDict['default'];
         }
 
         if (!(animator instanceof NavigatorTransitionAnimator)) {
@@ -8854,6 +9856,7 @@ limitations under the License.
             console.timeEnd('pushPageDOM');
           }
 
+          this._isPushing = false;
           unlock();
 
           this.emit('postpush', event);
@@ -8863,6 +9866,8 @@ limitations under the License.
           }
           element = null;
         }.bind(this);
+
+        this._isPushing = true;
 
         if (this.pages.length > 1) {
           var leavePage = this.pages.slice(-2)[0];
@@ -8903,9 +9908,12 @@ limitations under the License.
        */
       _emitPrePopEvent: function() {
         var isCanceled = false;
+        var leavePage = this.getCurrentPage();
         var prePopEvent = {
           navigator: this,
-          currentPage: this.getCurrentPage(),
+          currentPage: leavePage,
+          leavePage: leavePage,
+          enterPage: this.pages[this.pages.length - 2],
           cancel: function() {
             isCanceled = true;
           }
@@ -8924,15 +9932,18 @@ limitations under the License.
       popPage: function(options) {
         options = options || {};
 
-        if (this.pages.length <= 1) {
-          throw new Error('NavigatorView\'s page stack is empty.');
-        }
-
-        if (this._emitPrePopEvent()) {
+        if (options.cancelIfRunning && this._isPopping) {
           return;
         }
 
         this._doorLock.waitUnlock(function() {
+          if (this.pages.length <= 1) {
+            throw new Error('NavigatorView\'s page stack is empty.');
+          }
+
+          if (this._emitPrePopEvent()) {
+            return;
+          }
           this._popPage(options);
         }.bind(this));
       },
@@ -8956,8 +9967,11 @@ limitations under the License.
 
         var callback = function() {
           leavePage.destroy();
+
+          this._isPopping = false;
           unlock();
           this.emit('postpop', event);
+
           event.leavePage = null;
 
           if (typeof options.onTransitionEnd === 'function') {
@@ -8965,7 +9979,31 @@ limitations under the License.
           }
         }.bind(this);
 
-        leavePage.options.animator.pop(enterPage, leavePage, callback);
+        this._isPopping = true;
+
+        var animator = this._getAnimatorOption(options, leavePage.options.animator);
+        animator.pop(enterPage, leavePage, callback);
+      },
+
+      /**
+       * Replaces the current page with the specified one.
+       *
+       * @param {String} page
+       * @param {Object} [options]
+       */
+      replacePage: function(page, options) {
+        options = options || {};
+
+        var onTransitionEnd = options.onTransitionEnd || function() {};
+
+        options.onTransitionEnd = function() {
+          if (this.pages.length > 1) {
+            this.pages[this.pages.length - 2].destroy();
+          }
+          onTransitionEnd();
+        }.bind(this);
+
+        this.pushPage(page, options);
       },
 
       /**
@@ -8990,6 +10028,7 @@ limitations under the License.
           while (self.pages.length > 1) {
             self.pages.shift().destroy();
           }
+          self._scope.$digest();
           onTransitionEnd();
         };
 
@@ -9002,7 +10041,7 @@ limitations under the License.
        * Use this method to access options passed by pushPage() or resetToPage() method.
        * eg. ons.navigator.getCurrentPage().options
        *
-       * @return {Object} 
+       * @return {Object}
        */
       getCurrentPage: function() {
         return this.pages[this.pages.length - 1];
@@ -9054,7 +10093,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -9092,7 +10131,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -9124,7 +10163,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9180,6 +10219,10 @@ limitations under the License.
           display: 'none',
           zIndex: 2
         });
+
+        // Fix for transparent menu page on iOS8.
+        menuPage.css('-webkit-transform', 'translate3d(0px, 0px, 0px)');
+
         mainPage.css({zIndex: 1});
 
         if (this._isRight) {
@@ -9377,7 +10420,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9641,7 +10684,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -9673,10 +10716,11 @@ limitations under the License.
       init: function(scope, element, attrs) {
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mask = angular.element(this._element[0].querySelector('.popover-mask'));
         this._popover = angular.element(this._element[0].querySelector('.popover'));
-        
+
         this._mask.css('z-index', 20000);
         this._popover.css('z-index', 20001);
         this._element.css('display', 'none');
@@ -9699,12 +10743,19 @@ limitations under the License.
 
         this._deviceBackButtonHandler = $onsen.DeviceBackButtonHandler.create(this._element, this._onDeviceBackButton.bind(this));
 
-        this._onResize = function() {
-          if (this._currentTarget) {
-            this._positionPopover(this._currentTarget);
-          }
+        this._onChange = function() {
+          setImmediate(function() {
+            if (this._currentTarget) {
+              this._positionPopover(this._currentTarget);
+            }
+          }.bind(this));
         }.bind(this);
-        window.addEventListener('resize', this._onResize, false);
+
+        this._popover[0].addEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].addEventListener('DOMNodeRemoved', this._onChange, false);
+        window.addEventListener('resize', this._onChange, false);
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
       },
 
       _onDeviceBackButton: function(event) {
@@ -9927,17 +10978,28 @@ limitations under the License.
        * Destroy the popover and remove it from the DOM tree.
        */
       destroy: function() {
-        this._scope.$destroy();
+        if (this._parentScope) {
+          this._parentScope.$destroy();
+          this._parentScope = null;
+        } else {
+          this._scope.$destroy();
+        }
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+
+        this._deviceBackButtonHandler.destroy();
+        this._popover[0].removeEventListener('DOMNodeInserted', this._onChange, false);
+        this._popover[0].removeEventListener('DOMNodeRemoved', this._onChange, false);
+        window.removeEventListener('resize', this._onChange, false);
 
         this._mask.off();
         this._mask.remove();
         this._popover.remove();
         this._element.remove();
-        
-        this._deviceBackButtonHandler.destroy();
-        window.removeEventListener('resize', this._onResize, false);
 
-        this._onResize = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
+        this._onChange = this._deviceBackButtonHandler = this._mask = this._popover = this._element = this._scope = null;
       },
 
       /**
@@ -9997,7 +11059,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -10035,7 +11097,359 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+(function(){
+  'use strict';
+  var module = angular.module('onsen');
+
+  module.factory('PullHookView', ['$onsen', '$parse', function($onsen, $parse) {
+
+    var PullHookView = Class.extend({
+
+      STATE_INITIAL: 'initial',
+      STATE_PREACTION: 'preaction',
+      STATE_ACTION: 'action',
+
+      /**
+       * @param {Object} scope
+       * @param {jqLite} element
+       * @param {Object} attrs
+       */
+      init: function(scope, element, attrs) {
+        this._element = element;
+        this._scope = scope;
+        this._attrs = attrs;
+
+        this._scrollElement = this._createScrollElement();
+        this._pageElement = this._scrollElement.parent();
+
+        if (!this._pageElement.hasClass('page__content') && !this._pageElement.hasClass('ons-scroller__content')) {
+          throw new Error('<ons-pull-hook> must be a direct descendant of an <ons-page> or an <ons-scroller> element.');
+        }
+
+        this._currentTranslation = 0;
+
+        this._createEventListeners();
+        this._setState(this.STATE_INITIAL, true);
+        this._setStyle();
+
+        this._scope.$on('$destroy', this._destroy.bind(this));
+      },
+
+      _createScrollElement: function() {
+        var scrollElement = angular.element('<div>')
+          .addClass('scroll');
+
+        var pageElement = this._element.parent(),
+          children = pageElement.children();
+
+        pageElement.append(scrollElement);
+        scrollElement.append(children);
+
+        return scrollElement; 
+      },
+
+      _setStyle: function() {
+        var h = this._getHeight();
+
+        this._element.css({
+          top: '-' + h + 'px',
+          height: h + 'px',
+          lineHeight: h + 'px'
+        });
+      },
+    
+      _onScroll: function(event) {
+        var el = this._pageElement[0];
+
+        if (el.scrollTop < 0) {
+          el.scrollTop = 0;
+        }
+      },
+
+      _generateTranslationTransform: function(scroll) {
+        return 'translate3d(0px, ' + scroll + 'px, 0px)';
+      },
+
+      _onDrag: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        // Ignore when dragging left and right.
+        if (event.gesture.direction === 'left' || event.gesture.direction === 'right') {
+          return;
+        }
+
+        // Hack to make it work on Android 4.4 WebView. Scrolls manually near the top of the page so
+        // there will be no inertial scroll when scrolling down. Allowing default scrolling will
+        // kill all 'touchmove' events.
+        var el = this._pageElement[0];
+        el.scrollTop = this._startScroll - event.gesture.deltaY;
+        if (el.scrollTop < window.innerHeight && event.gesture.direction !== 'up') {
+          event.gesture.preventDefault();
+        }
+
+        if (this._currentTranslation === 0 && this._getCurrentScroll() === 0) {
+          this._transitionDragLength = event.gesture.deltaY;
+
+          var direction = event.gesture.interimDirection;
+          if (direction === 'down') {
+            this._transitionDragLength -= 1;
+          }
+          else {
+            this._transitionDragLength += 1;
+          }
+        }
+
+        var scroll = event.gesture.deltaY - this._startScroll;
+
+        scroll = Math.max(scroll, 0);
+
+        if (this._thresholdHeightEnabled() && scroll >= this._getThresholdHeight()) {
+          event.gesture.stopDetect();
+
+          setImmediate(function() {
+            this._setState(this.STATE_ACTION);
+            this._translateTo(this._getHeight(), {animate: true});
+
+            this._waitForAction(this._onDone.bind(this));
+          }.bind(this));
+        }
+        else if (scroll >= this._getHeight()) {
+          this._setState(this.STATE_PREACTION);
+        }
+        else {
+          this._setState(this.STATE_INITIAL);
+        }
+ 
+        event.stopPropagation();
+        this._translateTo(scroll);
+      },
+
+      _onDragStart: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        this._startScroll = this._getCurrentScroll();
+      },
+
+      _onDragEnd: function(event) {
+        if (this.isDisabled()) {
+          return;
+        }
+
+        if (this._currentTranslation > 0) {
+          var scroll = this._currentTranslation;
+
+          if (scroll > this._getHeight()) {
+            this._setState(this.STATE_ACTION);
+
+            this._translateTo(this._getHeight(), {animate: true});
+
+            this._waitForAction(this._onDone.bind(this));
+          }
+          else {
+            this._translateTo(0, {animate: true});
+          }
+        }
+      },
+
+      _waitForAction: function(done) {
+        if (this._attrs.ngAction) {
+          this._scope.$eval(this._attrs.ngAction, {$done: done});
+        }
+        else if (this._attrs.onAction) {
+          /*jshint evil:true */
+          eval(this._attrs.onAction);
+        }
+        else {
+          done();
+        }
+      },
+
+      _onDone: function(done) {
+        // Check if the pull hook still exists.
+        if (this._element) {
+          this._translateTo(0, {animate: true});
+          this._setState(this.STATE_INITIAL);
+        }
+      },
+
+      _getHeight: function() {
+        return parseInt(this._element[0].getAttribute('height') || '64', 10);
+      },
+
+      setHeight: function(height) {
+        this._element[0].setAttribute('height', height + 'px');
+
+        this._setStyle();
+      },
+
+      setThresholdHeight: function(thresholdHeight) {
+        this._element[0].setAttribute('threshold-height', thresholdHeight + 'px');
+      },
+
+      _getThresholdHeight: function() {
+        return parseInt(this._element[0].getAttribute('threshold-height') || '96', 10);
+      },
+
+      _thresholdHeightEnabled: function() {
+        var th = this._getThresholdHeight();
+        return th > 0 && th >= this._getHeight();
+      },
+
+      _setState: function(state, noEvent) {
+        var oldState = this._getState();
+
+        this._scope.$evalAsync(function() {
+          this._element[0].setAttribute('state', state);
+
+          if (!noEvent && oldState !== this._getState()) {
+            this.emit('changestate', {
+              state: state,
+              pullHook: this
+            });
+          }
+        }.bind(this));
+      },
+
+      _getState: function() {
+        return this._element[0].getAttribute('state');
+      },
+
+      getCurrentState: function() {
+        return this._getState();
+      },
+
+      _getCurrentScroll: function() {
+        return this._pageElement[0].scrollTop;
+      },
+
+      isDisabled: function() {
+        return this._element[0].hasAttribute('disabled');
+      },
+
+      setDisabled: function(disabled) {
+        if (disabled) {
+          this._element[0].setAttribute('disabled', '');
+        }
+        else {
+          this._element[0].removeAttribute('disabled');
+        }
+      },
+
+      _translateTo: function(scroll, options) {
+        options = options || {};
+
+        if (this._currentTranslation == 0 && scroll == 0) {
+          return;
+        }
+
+        var done = function() {
+          if (scroll === 0) {
+            this._scrollElement[0].removeAttribute('style');
+          }
+
+          if (options.callback) {
+            options.callback();
+          }
+        }.bind(this);
+
+        this._currentTranslation = scroll;
+
+        if (options.animate) {
+          animit(this._scrollElement[0])
+            .queue({
+              transform: this._generateTranslationTransform(scroll)
+            }, {
+              duration: 0.3,
+              timing: 'cubic-bezier(.1, .7, .1, 1)'
+            })
+            .play(done);
+        }
+        else {
+          animit(this._scrollElement[0])
+            .queue({
+              transform: this._generateTranslationTransform(scroll)
+            })
+            .play(done);
+        }
+      },
+
+      _getMinimumScroll: function() {
+        var scrollHeight = this._scrollElement[0].getBoundingClientRect().height,
+          pageHeight = this._pageElement[0].getBoundingClientRect().height;
+
+        if (scrollHeight > pageHeight) {
+          return -(scrollHeight - pageHeight);
+        }
+        else {
+          return 0;
+        }
+
+      },
+
+      _createEventListeners: function() {
+        var element = this._scrollElement.parent();
+
+        this._hammer = new Hammer(element[0], {
+          dragMinDistance: 1,
+          dragDistanceCorrection: false
+        });
+
+        // Event listeners
+        this._bindedOnDrag = this._onDrag.bind(this);
+        this._bindedOnDragStart = this._onDragStart.bind(this);
+        this._bindedOnDragEnd = this._onDragEnd.bind(this);
+        this._bindedOnScroll = this._onScroll.bind(this);
+
+        // Bind listeners
+        this._hammer.on('drag', this._bindedOnDrag);
+        this._hammer.on('dragstart', this._bindedOnDragStart);
+        this._hammer.on('dragend', this._bindedOnDragEnd);
+        element.on('scroll', this._bindedOnScroll);
+      },
+
+      _destroyEventListeners: function() {
+        var element = this._scrollElement.parent();
+
+        this._hammer.off('drag', this._bindedOnDrag);
+        this._hammer.off('dragstart', this._bindedOnDragStart);
+        this._hammer.off('dragend', this._bindedOnDragEnd);
+        element.off('scroll', this._bindedOnScroll);
+      },
+
+      _destroy: function() {
+        this.emit('destroy');
+        this._destroyEventListeners();
+        this._element = this._scope = this._attrs = null;
+      }
+    });
+
+    MicroEvent.mixin(PullHookView);
+    return PullHookView;
+  }]);
+})();
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10273,7 +11687,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10544,7 +11958,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10574,7 +11988,7 @@ limitations under the License.
 
       /** Black mask */
       backgroundMask : angular.element(
-        '<div style="position: absolute; width: 100%;' +
+        '<div style="z-index: 2; position: absolute; width: 100%;' +
         'height: 100%; background-color: black; opacity: 0;"></div>'
       ),
 
@@ -10733,7 +12147,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -10864,7 +12278,7 @@ limitations under the License.
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11045,6 +12459,10 @@ limitations under the License.
 
         this._isRightMenu = attrs.side === 'right';
 
+        // Close menu on tap event.
+        this._mainPageHammer = new Hammer(this._mainPage[0]);
+        this._bindedOnTap = this._onTap.bind(this);
+
         var maxDistance = this._normalizeMaxSlideDistanceAttr();
         this._logic = new SlidingMenuViewModel({maxDistance: Math.max(maxDistance, 1)});
         this._logic.on('translate', this._translate.bind(this));
@@ -11058,7 +12476,8 @@ limitations under the License.
         attrs.$observe('maxSlideDistance', this._onMaxSlideDistanceChanged.bind(this));
         attrs.$observe('swipeable', this._onSwipeableChanged.bind(this));
 
-        window.addEventListener('resize', this._onWindowResize.bind(this));
+        this._bindedOnWindowResize = this._onWindowResize.bind(this);
+        window.addEventListener('resize', this._bindedOnWindowResize);
 
         this._boundHandleEvent = this._handleEvent.bind(this);
         this._bindEvents();
@@ -11096,6 +12515,10 @@ limitations under the License.
         }.bind(this), 400);
 
         scope.$on('$destroy', this._destroy.bind(this));
+
+        if (!attrs.swipeable) {
+          this.setSwipeable(true);
+        }
       },
 
       getDeviceBackButtonHandler: function() {
@@ -11107,6 +12530,12 @@ limitations under the License.
           this.closeMenu();
         } else {
           event.callParentHandler();
+        }
+      },
+
+      _onTap: function() {
+        if (this.isMenuOpened()) {
+          this.closeMenu();
         }
       },
 
@@ -11122,9 +12551,12 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {slidingMenu: this});
+        this.emit('destroy');
 
         this._deviceBackButtonHandler.destroy();
+        window.removeEventListener('resize', this._bindedOnWindowResize);
+
+        this._mainPageHammer.off('tap', this._bindedOnTap);
         this._element = this._scope = this._attrs = null;
       },
 
@@ -11204,11 +12636,13 @@ limitations under the License.
       },
 
       _bindEvents: function() {
-        this._hammertime = new Hammer(this._element[0]);
+        this._hammertime = new Hammer(this._element[0], {
+          dragMinDistance: 1
+        });
       },
 
       _appendMainPage: function(pageUrl, templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -11230,7 +12664,7 @@ limitations under the License.
        * @param {String}
        */
       _appendMenuPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = angular.element(templateHTML);
         var link = $compile(pageContent);
 
@@ -11315,22 +12749,17 @@ limitations under the License.
         }
 
         if (this._isInsideIgnoredElement(event.target)){
-          event.gesture.stopDetect();
+          this._deactivateHammer();
         }
 
         switch (event.type) {
-
-          case 'touch':
-            if (this._logic.isClosed()) {
-              if (!this._isInsideSwipeTargetArea(event)) {
-                event.gesture.stopDetect();
-              }
-            }
-
-            break;
-
           case 'dragleft':
           case 'dragright':
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             event.gesture.preventDefault();
 
             var deltaX = event.gesture.deltaX;
@@ -11360,6 +12789,10 @@ limitations under the License.
           case 'swipeleft':
             event.gesture.preventDefault();
 
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
+
             if (this._isRightMenu) {
               this.open();
             } else {
@@ -11371,6 +12804,10 @@ limitations under the License.
 
           case 'swiperight':
             event.gesture.preventDefault();
+
+            if (this._logic.isClosed() && !this._isInsideSwipeTargetArea(event)) {
+              return;
+            }
 
             if (this._isRightMenu) {
               this.close();
@@ -11447,12 +12884,16 @@ limitations under the License.
       close: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
-        
-        this.emit('preclose');
 
-        this._doorLock.waitUnlock(function() {
-          this._logic.close(options);
-        }.bind(this));
+        if (!this._logic.isClosed()) {
+          this.emit('preclose', {
+            slidingMenu: this
+          });
+
+          this._doorLock.waitUnlock(function() {
+            this._logic.close(options);
+          }.bind(this));
+        }
       },
 
       _close: function(options) {
@@ -11462,11 +12903,24 @@ limitations under the License.
 
         this._animator.closeMenu(function() {
           unlock();
-          this.emit('postclose');
+
+          this._mainPage.children().css('pointer-events', '');
+          this._mainPageHammer.off('tap', this._bindedOnTap);
+
+          this.emit('postclose', {
+            slidingMenu: this
+          });
+
           callback();
         }.bind(this), instant);
       },
 
+      /**
+       * Open sliding-menu page.
+       *
+       * @param {Object} [options]
+       * @param {Function} [options.callback]
+       */
       openMenu: function() {
         return this.open.apply(this, arguments);
       },
@@ -11474,13 +12928,16 @@ limitations under the License.
       /**
        * Open sliding-menu page.
        *
-       * @param {Object} options 
+       * @param {Object} [options]
+       * @param {Function} [options.callback]
        */
       open: function(options) {
         options = options || {};
         options = typeof options == 'function' ? {callback: options} : options;
 
-        this.emit('preopen');
+        this.emit('preopen', {
+          slidingMenu: this
+        });
 
         this._doorLock.waitUnlock(function() {
           this._logic.open(options);
@@ -11494,13 +12951,22 @@ limitations under the License.
 
         this._animator.openMenu(function() {
           unlock();
-          this.emit('postopen');
+
+          this._mainPage.children().css('pointer-events', 'none');
+          this._mainPageHammer.on('tap', this._bindedOnTap);
+
+          this.emit('postopen', {
+            slidingMenu: this
+          });
+
           callback();
         }.bind(this), instant);
       },
 
       /**
        * Toggle sliding-menu page.
+       * @param {Object} [options]
+       * @param {Function} [options.callback]
        */
       toggle: function(options) {
         if (this._logic.isClosed()) {
@@ -11559,7 +13025,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11638,7 +13104,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11666,11 +13132,12 @@ limitations under the License.
 
     var SplitView = Class.extend({
 
-      init: function(scope, element) {
+      init: function(scope, element, attrs) {
         element.addClass('onsen-sliding-menu');
 
         this._element = element;
         this._scope = scope;
+        this._attrs = attrs;
 
         this._mainPage = angular.element(element[0].querySelector('.onsen-split-view__main'));
         this._secondaryPage = angular.element(element[0].querySelector('.onsen-split-view__secondary'));
@@ -11688,12 +13155,12 @@ limitations under the License.
 
         this._element.css('display', 'none');
 
-        if (scope.mainPage) {
-          this.setMainPage(scope.mainPage);
+        if (attrs.mainPage) {
+          this.setMainPage(attrs.mainPage);
         }
 
-        if (scope.secondaryPage) {
-          this.setSecondaryPage(scope.secondaryPage);
+        if (attrs.secondaryPage) {
+          this.setSecondaryPage(attrs.secondaryPage);
         }
 
         var unlock = this._doorLock.lock();
@@ -11713,7 +13180,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendSecondPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._secondaryPage.append(pageContent);
@@ -11731,7 +13198,7 @@ limitations under the License.
        * @param {String} templateHTML
        */
       _appendMainPage: function(templateHTML) {
-        var pageScope = this._scope.$parent.$new();
+        var pageScope = this._scope.$new();
         var pageContent = $compile(templateHTML)(pageScope);
 
         this._mainPage.append(pageContent);
@@ -11777,6 +13244,7 @@ limitations under the License.
 
       _onResize: function() {
         var lastMode = this._mode;
+
         this._considerChangingCollapse();
 
         if (lastMode === COLLAPSE_MODE && this._mode === COLLAPSE_MODE) {
@@ -11790,14 +13258,16 @@ limitations under the License.
       },
 
       _considerChangingCollapse: function() {
-        if (this._shouldCollapse() && this._mode !== COLLAPSE_MODE) {
+        var should = this._shouldCollapse();
+
+        if (should && this._mode !== COLLAPSE_MODE) {
           this._fireUpdateEvent();
           if (this._doSplit) {
             this._activateSplitMode();
           } else {
             this._activateCollapseMode();
           }
-        } else if (!this._shouldCollapse() && this._mode === COLLAPSE_MODE) {
+        } else if (!should && this._mode === COLLAPSE_MODE) {
           this._fireUpdateEvent();
           if (this._doCollapse) {
             this._activateCollapseMode();
@@ -11812,13 +13282,15 @@ limitations under the License.
       update: function() {
         this._fireUpdateEvent();
 
+        var should = this._shouldCollapse();
+
         if (this._doSplit) {
           this._activateSplitMode(); 
         } else if (this._doCollapse) {
           this._activateCollapseMode(); 
-        } else if (this._shouldCollapse()) {
+        } else if (should) {
           this._activateCollapseMode();
-        } else if (!this._shouldCollapse()) {
+        } else if (!should) {
           this._activateSplitMode();
         }
 
@@ -11843,10 +13315,10 @@ limitations under the License.
 
       _shouldCollapse: function() {
         var c = 'portrait';
-        if (typeof this._scope.collapse === 'string') {
-          c = this._scope.collapse.trim();
+        if (typeof this._attrs.collapse === 'string') {
+          c = this._attrs.collapse.trim();
         }
-        
+
         if (c == 'portrait') {
           return $onsGlobal.orientation.isPortrait();
         } else if (c == 'landscape') {
@@ -11856,12 +13328,8 @@ limitations under the License.
           if (num.indexOf('px') >= 0) {
             num = num.substr(0,num.length-2);
           }
-       
+
           var width = window.innerWidth;
-          
-          if ($onsen.isAndroid()) {
-            width = screen.width;
-          }
 
           return isNumber(num) && width < num;
         } else {
@@ -11872,18 +13340,18 @@ limitations under the License.
 
       _setSize: function() {
         if (this._mode === SPLIT_MODE) {
-          if (!this._scope.mainPageWidth) {
-            this._scope.mainPageWidth = '70';
+          if (!this._attrs.mainPageWidth) {
+            this._attrs.mainPageWidth = '70';
           }
 
-          var secondarySize = 100 - this._scope.mainPageWidth.replace('%', '');
+          var secondarySize = 100 - this._attrs.mainPageWidth.replace('%', '');
           this._secondaryPage.css({
             width: secondarySize + '%',
             opacity: 1
           });
 
           this._mainPage.css({
-            width: this._scope.mainPageWidth + '%'
+            width: this._attrs.mainPageWidth + '%'
           });
 
           this._mainPage.css('left', secondarySize + '%');
@@ -11955,7 +13423,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {splitView: this});
+        this.emit('destroy');
 
         this._element = null;
         this._scope = null;
@@ -11973,7 +13441,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12056,7 +13524,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -12207,6 +13675,7 @@ limitations under the License.
        * @param {Number} index
        * @param {Object} [options]
        * @param {Boolean} [options.keepPage]
+       * @param {String} [options.animation]
        * @return {Boolean} success or not
        */
       setActiveTab: function(index, options) {
@@ -12214,12 +13683,12 @@ limitations under the License.
         var previousTabItem = this._tabItems[this.getActiveTabIndex()];
         var selectedTabItem = this._tabItems[index];
 
-        if(typeof selectedTabItem.noReload !== 'undefined' && 
-            index == this.getActiveTabIndex()) {
+        if ((typeof selectedTabItem.noReload !== 'undefined' || selectedTabItem.isPersistent()) &&
+            index === this.getActiveTabIndex()) {
           this.emit('reactive', {
             index: index,
             tabItem: selectedTabItem,
-          }); 
+          });
           return false;
         }
 
@@ -12248,34 +13717,43 @@ limitations under the License.
 
         selectedTabItem.setActive();
 
-        if (needLoad) {
-          this._loadPage(selectedTabItem.page, {
-            callback: function() {
-              this.emit('postchange', {index: index, tabItem: selectedTabItem});
-            }.bind(this)
-          });
-        }
-
         for (var i = 0; i < this._tabItems.length; i++) {
           if (this._tabItems[i] != selectedTabItem) {
             this._tabItems[i].setInactive();
           } else {
-            this._triggerActiveTabChanged(i, selectedTabItem);
-
             if (!needLoad) {
               this.emit('postchange', {index: index, tabItem: selectedTabItem});
             }
           }
         }
 
-        return true;
-      },
+        if (needLoad) {
+          var removeElement = true;
 
-      _triggerActiveTabChanged: function(index, tabItem){
-        this._scope.onActiveTabChanged({
-          $index: index,
-          $tabItem: tabItem
-        });
+          if (previousTabItem && previousTabItem.isPersistent()) {
+              removeElement = false;
+              previousTabItem._pageElement = this._currentPageElement;
+          }
+
+          var params = {
+            callback: function() {
+              this.emit('postchange', {index: index, tabItem: selectedTabItem});
+            }.bind(this),
+            _removeElement: removeElement
+          };
+          if (options.animation) {
+              params.animation = options.animation;
+          }
+
+          if (selectedTabItem.isPersistent() && selectedTabItem._pageElement) {
+            this._loadPersistentPageDOM(selectedTabItem._pageElement, params);
+          }
+          else {
+            this._loadPage(selectedTabItem.page, params);
+          }
+        }
+
+        return true;
       },
 
       /**
@@ -12295,9 +13773,9 @@ limitations under the License.
           }
         } else {
           if (this._scope.hideTabs) {
-            this._tabbarElement.css('bottom', '0px');
+            this._contentElement.css('bottom', '0px');
           } else {
-            this._tabbarElement.css('bottom', '');
+            this._contentElement.css('bottom', '');
           }
         }
       },
@@ -12344,7 +13822,7 @@ limitations under the License.
         $onsen.getPageHTMLAsync(page).then(function(html) {
           var pageElement = angular.element(html.trim());
 
-          this._loadPageDOM(page, pageElement, options);
+          this._loadPageDOM(pageElement, options);
 
         }.bind(this), function() {
           throw new Error('Page is not found: ' + page);
@@ -12352,30 +13830,27 @@ limitations under the License.
       },
 
       /**
-       * @param {String} page
        * @param {jqLite} element
+       * @param {Object} scope
        * @param {Object} options
        * @param {Object} options.animation
        */
-      _loadPageDOM: function(page, element, options) {
-        options = options || {};
-        var pageScope = this._scope.$parent.$new();
-        var link = $compile(element);
-
-        this._contentElement.append(element);
-        var pageContent = link(pageScope);
-        pageScope.$evalAsync();
-
+      _switchPage: function(element, options) {
         if (this._currentPageElement) {
           var oldPageElement = this._currentPageElement;
           var oldPageScope = this._currentPageScope;
 
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
+          this._currentPageElement = element;
+          this._currentPageScope = element.data('_scope');
 
-          this._getAnimatorOption(options).apply(pageContent, oldPageElement, function() {
-            oldPageElement.remove();
-            oldPageScope.$destroy();
+          this._getAnimatorOption(options).apply(element, oldPageElement, function() {
+            if (options._removeElement) {
+              oldPageElement.remove();
+              oldPageScope.$destroy();
+            }
+            else {
+              oldPageElement.css('display', 'none');
+            }
 
             if (options.callback instanceof Function) {
               options.callback();
@@ -12383,13 +13858,43 @@ limitations under the License.
           });
 
         } else {
-          this._currentPageElement = pageContent;
-          this._currentPageScope = pageScope;
+          this._currentPageElement = element;
+          this._currentPageScope = element.data('_scope');
 
           if (options.callback instanceof Function) {
             options.callback();
           }
-        }
+        } 
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPageDOM: function(element, options) {
+        options = options || {};
+        var pageScope = this._scope.$new();
+        var link = $compile(element);
+
+        this._contentElement.append(element);
+        var pageContent = link(pageScope);
+
+        pageScope.$evalAsync();
+
+        this._switchPage(pageContent, options);
+      },
+
+      /**
+       * @param {jqLite} element
+       * @param {Object} options
+       * @param {Object} options.animation
+       */
+      _loadPersistentPageDOM: function(element, options) {
+        options = options || {};
+
+        element.css('display', 'block');
+        this._switchPage(element, options);
       },
 
       /**
@@ -12404,7 +13909,7 @@ limitations under the License.
       },
 
       _destroy: function() {
-        this.emit('destroy', {tabbar: this});
+        this.emit('destroy');
 
         this._element = this._scope = this._attrs = null;
       }
@@ -12427,73 +13932,44 @@ limitations under the License.
         throw new Error('"animator" param must be an instance of TabbarAnimator');
       }
 
-      this._transitionAnimatorDict[name] = animator;
+      this._animatorDict[name] = animator;
     };
-
 
     return TabbarView;
   }]);
 
 })();
 
+
 /**
  * @ngdoc directive
- * @id alert-dialog 
+ * @id alert-dialog
  * @name ons-alert-dialog
- * @description 
- *  [en]Alert dialog that is displayed on top of the current screen.[/en]
- *  [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
- * @param var 
- *  [en]Variable name to refer this alert dialog.[/en]
- *  [ja]このアラートダイアログを参照するための名前を指定します。[/ja]
- * @param modifier
- *  [en]The appearance of the dialog.[/en]
- *  [ja]ダイアログの表現を指定します。[/ja]
- * @param cancelable
- *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en] 
- *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
- * @param disabled
- *  [en]If this attribute is set the dialog is disabled.[/en]
- *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
- * @param animation
- *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
- *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
- * @param mask-color
- *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
- *  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
- * @property show(options)
- *  [en]Show the alert dialog.[/en]
- *  [ja]ダイアログを開きます。[/ja]
- * @property hide(options)
- *  [en]Hide the alert dialog.[/en]
- *  [ja]ダイアログを閉じます。[/ja]
- * @property isShown()
- *  [en]Returns whether the dialog is visible or not.[/en]
- *  [ja]ダイアログが表示されているかどうかを返します。[/ja]
- * @property destroy()
- *  [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
- *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
- * @property setCancelable(cancelable)
- *  [en]Define whether the dialog can be canceled by the user or not.[/en]
- *  [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
- * @property isCancelable()
- *  [en]Returns whether the dialog is cancelable or not.[/en]
- *  [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
- * @property setDisabled(disabled)
- *  [en]Disable or enable the alert dialog.[/en]
- *  [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
- * @property isDisabled()
- *  [en]Returns whether the dialog is disabled or enabled.[/en]
- *  [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
- *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
+ * @category dialog
+ * @modifier android
+ *   [en]Display an Android style alert dialog.[/en]
+ *   [ja]Androidライクなスタイルを表示します。[/ja]
+ * @description
+ *   [en]Alert dialog that is displayed on top of the current screen.[/en]
+ *   [ja]現在のスクリーンにアラートダイアログを表示します。[/ja]
  * @codepen Qwwxyp
+ * @guide UsingAlert
+ *   [en]Learn how to use the alert dialog.[/en]
+ *   [ja]アラートダイアログの使い方の解説。[/ja]
+ * @seealso ons-dialog
+ *   [en]ons-dialog component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-dialogコンポーネント[/ja]
+ * @seealso ons.notification
+ *   [en]Using ons.notification utility functions.[/en]
+ *   [ja]アラートダイアログを表示するには、ons.notificationオブジェクトのメソッドを使うこともできます。[/ja]
  * @example
  * <script>
  *   ons.ready(function() {
  *     ons.createAlertDialog('alert.html').then(function(alertDialog) {
- *       alertDialog.show();   
+ *       alertDialog.show();
  *     });
  *   });
  * </script>
@@ -12502,13 +13978,305 @@ limitations under the License.
  *   <ons-alert-dialog animation="default" cancelable>
  *     <div class="alert-dialog-title">Warning!</div>
  *     <div class="alert-dialog-content">
- *      An error has occurred!
+ *       An error has occurred!
  *     </div>
  *     <div class="alert-dialog-footer">
  *       <button class="alert-dialog-button">OK</button>
  *     </div>
- *   </ons-alert-dialog>  
+ *   </ons-alert-dialog>
  * </script>
+ */
+
+/**
+ * @ngdoc event
+ * @name preshow
+ * @description
+ *   [en]Fired just before the alert dialog is displayed.[/en]
+ *   [ja]アラートダイアログが表示される直前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.alertDialog
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Execute to stop the dialog from showing.[/en]
+ *   [ja]この関数を実行すると、アラートダイアログの表示を止めます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postshow
+ * @description
+ *   [en]Fired just after the alert dialog is displayed.[/en]
+ *   [ja]アラートダイアログが表示された直後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.alertDialog
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name prehide
+ * @description
+ *   [en]Fired just before the alert dialog is hidden.[/en]
+ *   [ja]アラートダイアログが隠れる直前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.alertDialog
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Execute to stop the dialog from hiding.[/en]
+ *   [ja]この関数を実行すると、アラートダイアログが閉じようとするのを止めます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name posthide
+ * @description
+ * [en]Fired just after the alert dialog is hidden.[/en]
+ * [ja]アラートダイアログが隠れた後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.alertDialog
+ *   [en]Alert dialog object.[/en]
+ *   [ja]アラートダイアログのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this alert dialog.[/en]
+ *  [ja]このアラートダイアログを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the dialog.[/en]
+ *  [ja]ダイアログの見た目を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name cancelable
+ * @description
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
+ *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *  [en]If this attribute is set the dialog is disabled.[/en]
+ *  [ja]この属性がある時、アラートダイアログはdisabled状態になります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default default
+ * @description
+ *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
+ *  [ja]ダイアログを表示する際のアニメーション名を指定します。デフォルトでは"none"か"default"が指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name mask-color
+ * @type {String}
+ * @default rgba(0, 0, 0, 0.2)
+ * @description
+ *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+ *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature show([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+ *   [ja]アニメーション名を指定します。指定できるのは、"fade", "slide", "none"のいずれかです。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function to execute after the dialog has been revealed.[/en]
+ *   [ja]ダイアログが表示され終わった時に呼び出されるコールバックを指定します。[/ja]
+ * @description
+ *   [en]Show the alert dialog.[/en]
+ *   [ja]ダイアログを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature hide([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade", "slide" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade", "slide", "none"のいずれかを指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function to execute after the dialog has been hidden.[/en]
+ *   [ja]このダイアログが閉じた時に呼び出されるコールバックを指定します。[/ja]
+ * @description
+ *   [en]Hide the alert dialog.[/en]
+ *   [ja]ダイアログを閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isShown()
+ * @description
+ *   [en]Returns whether the dialog is visible or not.[/en]
+ *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ *   [en]true if the dialog is currently visible.[/en]
+ *   [ja]ダイアログが表示されていればtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature destroy()
+ * @description
+ *   [en]Destroy the alert dialog and remove it from the DOM tree.[/en]
+ *   [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setCancelable(cancelable)
+ * @description
+ *   [en]Define whether the dialog can be canceled by the user or not.[/en]
+ *   [ja]アラートダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
+ * @param {Boolean} cancelable
+ *   [en]If true the dialog will be cancelable.[/en]
+ *   [ja]キャンセルできるかどうかを真偽値で指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isCancelable()
+ * @description
+ *   [en]Returns whether the dialog is cancelable or not.[/en]
+ *   [ja]このアラートダイアログがキャンセル可能かどうかを返します。[/ja]
+ * @return {Boolean}
+ *   [en]true if the dialog is cancelable.[/en]
+ *   [ja]キャンセル可能であればtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @description
+ *   [en]Disable or enable the alert dialog.[/en]
+ *   [ja]このアラートダイアログをdisabled状態にするかどうかを設定します。[/ja]
+ * @param {Boolean} disabled
+ *   [en]If true the dialog will be disabled.[/en]
+ *   [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @description
+ *   [en]Returns whether the dialog is disabled or enabled.[/en]
+ *   [ja]このアラートダイアログがdisabled状態かどうかを返します。[/ja]
+ * @return {Boolean}
+ *   [en]true if the dialog is disabled.[/en]
+ *   [ja]disabled状態であればtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火された際に呼び出されるコールバックを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出されるコールバックを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしlistenerパラメータが指定されなかった場合、そのイベントのリスナーが全て削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーの関数オブジェクトを渡します。[/ja]
  */
 
 (function() {
@@ -12528,9 +14296,9 @@ limitations under the License.
 
       compile: function(element, attrs) {
         var modifierTemplater = $onsen.generateModifierTemplater(attrs);
- 
+
         element.addClass('alert-dialog ' + modifierTemplater('alert-dialog--*'));
-       
+
         var titleElement = angular.element(element[0].querySelector('.alert-dialog-title')),
           contentElement = angular.element(element[0].querySelector('.alert-dialog-content'));
 
@@ -12547,7 +14315,7 @@ limitations under the License.
             var alertDialog = new AlertDialogView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, alertDialog);
-            $onsen.aliasStack.register('ons.alertDialog', alertDialog);
+            $onsen.registerEventHandlers(alertDialog, 'preshow prehide postshow posthide destroy');
             $onsen.addModifierMethods(alertDialog, 'alert-dialog--*', element);
 
             if (titleElement.length) {
@@ -12565,7 +14333,6 @@ limitations under the License.
               alertDialog._events = undefined;
               $onsen.removeModifierMethods(alertDialog);
               element.data('ons-alert-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.alertDialog', alertDialog);
               element = null;
             });
           },
@@ -12583,15 +14350,27 @@ limitations under the License.
  * @ngdoc directive
  * @id back_button
  * @name ons-back-button
+ * @category toolbar
  * @description
  *   [en]Back button component for ons-toolbar. Can be used with ons-navigator to provide back button support.[/en]
- *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネント。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
+ *   [ja]ons-toolbarに配置できる「戻るボタン」用コンポーネントです。ons-navigatorと共に使用し、ページを1つ前に戻る動作を行います。[/ja]
  * @codepen aHmGL
- * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
- * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
- * @guide Returningfromapage [en]Returning from a page[/en][ja]一つ前のページに戻る[/ja]
+ * @seealso ons-toolbar 
+ *   [en]ons-toolbar component[/en]
+ *   [ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-navigator
+ *   [en]ons-navigator component[/en]
+ *   [ja]ons-navigatorコンポーネント[/en]
+ * @guide Addingatoolbar 
+ *   [en]Adding a toolbar[/en]
+ *   [ja]ツールバーの追加[/ja]
+ * @guide Returningfromapage 
+ *   [en]Returning from a page[/en]
+ *   [ja]一つ前のページに戻る[/ja]
  * @example
- *   <ons-back-button>Back</ons-back-button>
+ * <ons-back-button>
+ *   Back
+ * </ons-back-button>
  */
 (function(){
   'use strict';
@@ -12611,21 +14390,24 @@ limitations under the License.
       link: {
         pre: function(scope, element, attrs, controller, transclude) {
           var backButton = new GenericView(scope, element, attrs);
-          
+
           $onsen.declareVarAttribute(attrs, backButton);
 
-          $onsen.aliasStack.register('ons.backButton', backButton);
           element.data('ons-back-button', backButton);
 
           scope.$on('$destroy', function() {
             backButton._events = undefined;
             $onsen.removeModifierMethods(backButton);
             element.data('ons-back-button', undefined);
-            $onsen.aliasStack.unregister('ons.backButton', backButton);
             element = null;
           });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
+
+          var navigator = ons.findParentComponentUntil('ons-navigator', element);
+          scope.$watch(function() { return navigator.pages.length; }, function(nbrOfPages) {
+            scope.showBackButton = nbrOfPages > 1;
+          });
 
           $onsen.addModifierMethods(backButton, 'toolbar-button--*', element.children());
 
@@ -12655,19 +14437,40 @@ limitations under the License.
  * @ngdoc directive
  * @id bottom_toolbar
  * @name ons-bottom-toolbar
+ * @category toolbar
  * @description
- * [en]Toolbar component that is positioned at the bottom of the page. Has same functionality as the ons-toolbar component.[/en]
- * [ja]ページ下部に配置されるツールバー用コンポーネント。機能的にはons-toolbarと同様です。[/ja]
- * @param inline
- *  [en]Display the toolbar as an inline element.[/en]
- *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのままツールバーが表示されます。[/ja]
+ *   [en]Toolbar component that is positioned at the bottom of the page.[/en]
+ *   [ja]ページ下部に配置されるツールバー用コンポーネントです。[/ja]
+ * @modifier transparent
+ *   [en]Make the toolbar transparent.[/en]
+ *   [ja]ツールバーの背景を透明にして表示します。[/ja]
  * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
- * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
+ * @guide Addingatoolbar
+ *   [en]Adding a toolbar[/en]
+ *   [ja]ツールバーの追加[/ja]
  * @example
  * <ons-bottom-toolbar>
- *  <div style="text-align: center; line-height: 44px">Text</div>
+ *   <div style="text-align: center; line-height: 44px">Text</div>
  * </ons-bottom-toolbar>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]The appearance of the toolbar.[/en]
+ *   [ja]ツールバーの見た目の表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name inline
+ * @description
+ *   [en]Display the toolbar as an inline element.[/en]
+ *   [ja]この属性があると、ツールバーを画面下部ではなくスクロール領域内にそのまま表示します。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -12697,16 +14500,14 @@ limitations under the License.
         return {
           pre: function(scope, element, attrs) {
             var bottomToolbar = new GenericView(scope, element, attrs);
-            
+
             $onsen.declareVarAttribute(attrs, bottomToolbar);
-            $onsen.aliasStack.register('ons.bottomToolbar', bottomToolbar);
             element.data('ons-bottomToolbar', bottomToolbar);
 
             scope.$on('$destroy', function() {
               bottomToolbar._events = undefined;
               $onsen.removeModifierMethods(bottomToolbar);
               element.data('ons-bottomToolbar', undefined);
-              $onsen.aliasStack.unregister('ons.bottomToolbar', bottomToolbar);
               element = null;
             });
 
@@ -12731,45 +14532,135 @@ limitations under the License.
  * @ngdoc directive
  * @id button
  * @name ons-button
+ * @category form
+ * @modifier outline
+ *   [en]Button with outline and transparent background[/en]
+ *   [ja]アウトラインを持ったボタンを表示します。[/ja]
+ * @modifier light
+ *   [en]Button that doesn't stand out.[/en]
+ *   [ja]目立たないボタンを表示します。[/ja]
+ * @modifier quiet
+ *   [en]Button with no outline and or background..[/en]
+ *   [ja]枠線や背景が無い文字だけのボタンを表示します。[/ja]
+ * @modifier cta
+ *   [en]Button that really stands out.[/en]
+ *   [ja]目立つボタンを表示します。[/ja]
+ * @modifier large
+ *   [en]Large button that covers the width of the screen.[/en]
+ *   [ja]横いっぱいに広がる大きなボタンを表示します。[/ja]
+ * @modifier large--quiet
+ *   [en]Large quiet button.[/en]
+ *   [ja]横いっぱいに広がるquietボタンを表示します。[/ja]
+ * @modifier large--cta
+ *   [en]Large call to action button.[/en]
+ *   [ja]横いっぱいに広がるctaボタンを表示します。[/ja]
  * @description
- *    [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
- *    [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用してください。[/ja]
- * @param modifier
- *    [en]The appearance of the button. Predefined modifiers are quiet, light, large, large--quiet, cta, and large--cta.[/en]
- *    [ja]ボタンの表現を指定します。次の値からも選択できます: quiet, light, large, large--quiet, cta, large--cta[/ja]
- * @param should-spin
- *    [en]Specify if the button should have a spinner.[/en]
- *    [ja]ボタンにスピナーを表示する場合は指定してください。[/ja]
- * @param animation
- *    [en]The animation when the button transitions to and from the spinner. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
- *    [ja]スピナーを表示する場合のアニメーションを指定します。次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
- * @param disabled
- *    [en]Specify if button should be disabled.[/en]
- *    [ja]ボタンを無効化する場合は指定してください。[/ja]
- * @property startSpin()
- *    [en]Show spinner on the button.[/en]
- *    [ja]ボタンにスピナーを表示します。[/ja]
- * @property stopSpin()
- *    [en]Remove spinner from button.[/en]
- *    [ja]ボタンのスピナーを除きます。[/ja]
- * @property isSpinning()
- *    [en]Return whether the spinner is visible or not.[/en]
- *    [ja]ボタンにスピナーは表示されているかどうかを返します。[/ja]
- * @property setSpinAnimation(animation)
- *    [en]Set spin animation. Possible values are slide-left (default), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in.[/en]
- *    [ja]スピナーを表示する場合のアニメーションを指定します。スピナーを表示する次の値から選択してください: slide-left (デフォルト), slide-right, slide-up, slide-down, expand-left, expand-right, expand-up, expand-down, zoom-out, zoom-in。[/ja]
- * @property setDisabled(disabled)
- *    [en]Disable or enable the button.[/en]
- *    [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
- * @property isDisabled()
- *    [en]Returns whether the button is disabled or enabled.[/en]
- *    [ja]このボタンがdisabled状態かどうかを返します。[/ja] 
+ *   [en]Button component. If you want to place a button in a toolbar, use ons-toolbar-button or ons-back-button instead.[/en]
+ *   [ja]ボタン用コンポーネント。ツールバーにボタンを設置する場合は、ons-toolbar-buttonもしくはons-back-buttonコンポーネントを使用します。[/ja]
  * @codepen hLayx
  * @guide Button [en]Guide for ons-button[/en][ja]ons-buttonの使い方[/ja]
  * @guide OverridingCSSstyles [en]More details about modifier attribute[/en][ja]modifier属性の使い方[/ja]
  * @example
- *   <ons-button>Tap Me</ons-button>
+ * <ons-button modifier="large--cta">
+ *   Tap Me
+ * </ons-button>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the button.[/en]
+ *  [ja]ボタンの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name should-spin
+ * @type {Boolean}
+ * @description
+ *  [en]Specify if the button should have a spinner. [/en]
+ *  [ja]ボタンにスピナーを表示する場合に指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @description
+ *   [en]The animation when the button transitions to and from the spinner. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
+ *   [ja]スピナーを表示する場合のアニメーションを指定します。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *   [en]Specify if button should be disabled.[/en]
+ *   [ja]ボタンを無効化する場合は指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature startSpin()
+ * @description
+ *   [en]Show spinner on the button.[/en]
+ *   [ja]ボタンにスピナーを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature stopSpin()
+ * @description
+ *   [en]Remove spinner from button.[/en]
+ *   [ja]ボタンのスピナーを隠します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isSpinning()
+ * @return {Boolean}
+ *   [en]true if the button is spinning.[/en]
+ *   [ja]spinしているかどうかを返します。[/ja]
+ * @description
+ *   [en]Return whether the spinner is visible or not.[/en]
+ *   [ja]ボタン内にスピナーが表示されているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setSpinAnimation(animation)
+ * @description
+ *   [en]Set spin animation. Possible values are "slide-left" (default), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in".[/en]
+ *   [ja]スピナーを表示する場合のアニメーションを指定します。"slide-left" (デフォルト), "slide-right", "slide-up", "slide-down", "expand-left", "expand-right", "expand-up", "expand-down", "zoom-out", "zoom-in"のいずれかを指定します。[/ja]
+ * @param {String} animation
+ *   [en]Animation name.[/en]
+ *   [ja]アニメーション名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @description
+ *   [en]Disable or enable the button.[/en]
+ *   [ja]このボタンをdisabled状態にするかどうかを設定します。[/ja]
+ * @param {String} disabled
+ *   [en]If true the button will be disabled.[/en]
+ *   [ja]disabled状態にするかどうかを真偽値で指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @return {Boolean}
+ *   [en]true if the button is disabled.[/en]
+ *   [ja]ボタンがdisabled状態になっているかどうかを返します。[/ja]
+ * @description
+ *   [en]Returns whether the button is disabled or enabled.[/en]
+ *   [ja]このボタンがdisabled状態かどうかを返します。[/ja]
+ */
+
 (function(){
   'use strict';
   var module = angular.module('onsen');
@@ -12785,26 +14676,24 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/button.tpl',
       link: function(scope, element, attrs, _, transclude) {
         var button = new ButtonView(scope, element, attrs);
-        
+
         $onsen.declareVarAttribute(attrs, button);
-        $onsen.aliasStack.register('ons.button', button);
         element.data('ons-button', button);
 
         scope.$on('$destroy', function() {
           button._events = undefined;
           $onsen.removeModifierMethods(button);
           element.data('ons-button', undefined);
-          $onsen.aliasStack.unregister('ons.button', button);
           element = null;
         });
         var initialAnimation = 'slide-left';
-        
+
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         element.addClass('button effeckt-button');
         element.addClass(scope.modifierTemplater('button--*'));
         element.addClass(initialAnimation);
 
-        $onsen.addModifierMethods(button, 'button--*', element); 
+        $onsen.addModifierMethods(button, 'button--*', element);
 
         transclude(scope.$parent, function(cloned) {
           angular.element(element[0].querySelector('.ons-button-inner')).append(cloned);
@@ -12817,14 +14706,6 @@ limitations under the License.
         scope.item = {};
         // if animation is not specified -> default is slide-left
         scope.item.animation = initialAnimation;
-
-        attrs.$observe('disabled', function(disabled) {
-          if (disabled === 'true') {
-            element.attr('disabled', true);
-          } else {
-            element.attr('disabled', false);
-          }
-        });
 
         scope.$watch('animation', function(newAnimation) {
           if (newAnimation) {
@@ -12853,7 +14734,7 @@ limitations under the License.
 
           scope = element = attrs = null;
         });
-        
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -12864,101 +14745,434 @@ limitations under the License.
  * @ngdoc directive
  * @id carousel
  * @name ons-carousel
- *
+ * @category carousel
  * @description
  *   [en]Carousel component.[/en]
  *   [ja]カルーセルを表示できるコンポーネント。[/ja]
- *
- * @param direction
- *    [en]The direction of the carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
- *    [ja]カルーセルの方向を指定します。horizontalかverticalを指定できます。デフォルトはhorizontalです。[/ja]
- * @param fullscreen
- *    [en]If this attribute is set the carousel will cover the whole screen.[/en]
- *    [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]
- * @param var
- *    [en]Variable name to refer this carousel.[/en]
- *    [ja]このカルーセルを参照するための変数名を指定します。[/ja]
- * @param overscrollable
- *    [en]If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.[/en]
- *    [ja]この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たります。[/ja]
- * @param item-width
- *    [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
- *    [ja]ons-carousel-itemの幅を指定します。direction属性にhorizontalを指定した時のみ有効です。[/ja]
- * @param item-height
- *    [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
- *    [ja]ons-carousel-itemの高さを指定します。direction属性にverticalを指定した時のみ有効です。[/ja]
- * @param auto-scroll
- *    [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
- *    [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
- * @param swipeable
- *    [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
- *    [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
- * @param disabled
- *    [en]If this attribute is set the carousel is disabled.[/en]
- *    [ja]この属性がある時、dargやtouchやswipeで受け付けなくなります。[/ja]
- * @param initial-index
- *    [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
- *    [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルトは0です。[/ja]
- *
- * @property next()
- *    [en]Show next ons-carousel item.[/en]
- *    [ja]次のons-carousel-itemを表示する。[/ja] 
- * @property prev()
- *    [en]Show previous ons-carousel item.[/en]
- *    [ja]前のons-carousel-itemを表示する。[/ja] 
- * @property first()
- *    [en]Show first ons-carousel item.[/en]
- *    [ja]最初のons-carousel-itemを表示する。[/ja] 
- * @property last()
- *    [en]Show last ons-carousel item.[/en]
- *    [ja]最後のons-carousel-itemを表示する。[/ja] 
- * @property setSwipeable(swipeable)
- *    [en]Set whether the carousel is swipeable or not.[/en]
- *    [ja]swipeable属性があるかどうかを設定する。[/ja] 
- * @property isSwipeable()
- *    [en]Returns whether the carousel is swipeable or not.[/en]
- *    [ja]swiapble属性があるかどうかを返す。[/ja] 
- * @property setActiveCarouselItemIndex(index)
- *    [en]Specify the index of the ons-carousel-item to show.[/en]
- *    [ja]表示するons-carousel-itemをindexで指定する。[/ja] 
- * @property getActiveCarouselItemIndex()
- *    [en]Returns the index of the currently visible ons-carousel-item.[/en]
- *    [ja]現在表示されているons-carousel-itemのindexを返す。[/ja] 
- * @property setAutoScrollEnabled(enabled)
- *    [en]Enable or disable "auto-scroll" attribute.[/en]
- *    [ja]auto-scroll属性があるかどうかを設定する。[/ja] 
- * @property isAutoScrollEnabled()
- *    [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
- *    [ja]auto-scroll属性があるかどうかを返す。[/ja] 
- * @property setOverscrollable(overscrollable)
- *    [en]Set whether the carousel is overscrollable or not.[/en]
- *    [ja]overscroll属性があるかどうかを設定する。[/ja] 
- * @property isOverscrollable()
- *    [en]Returns whether the carousel is overscrollable or not.[/en]
- *    [ja]overscroll属性があるかどうかを返す。[/ja] 
- * @property on(eventName,listener)
- *    [en]Add an event listener. Preset events are "postchange" and "refresh".[/en]
- *    [ja]イベントリスナーを追加します。"postchange"か"refresh"を指定できます。[/ja]
- * @property refresh()
- *    [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
- *    [ja]レイアウトや内部の状態を最新のものに更新する。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用する。[/ja] 
- * @property isDisabled()
- *    [en]Returns whether the dialog is disabled or enabled.[/en]
- *    [ja]disabled属性があるかどうかを返す。[/ja] 
- * @property setDisabled(disabled)
- *    [en]Disable or enable the dialog.[/en]
- *    [ja]disabled属性があるかどうかを設定する。[/ja] 
  * @codepen xbbzOQ
+ * @guide UsingCarousel
+ *   [en]Learn how to use the carousel component.[/en]
+ *   [ja]carouselコンポーネントの使い方[/ja]
  * @example
- *   <ons-carousel style="width: 100%; height: 200px">
- *     <ons-carousel-item>
- *      ...
- *     </ons-carousel-item>
- *     <ons-carousel-item>
- *      ...
- *     </ons-carousel-item>
- *   </ons-carousel>
+ * <ons-carousel style="width: 100%; height: 200px">
+ *   <ons-carousel-item>
+ *    ...
+ *   </ons-carousel-item>
+ *   <ons-carousel-item>
+ *    ...
+ *   </ons-carousel-item>
+ * </ons-carousel>
  */
+
+/**
+ * @ngdoc event
+ * @name postchange
+ * @description
+ *   [en]Fired just after the current carousel item has changed.[/en]
+ *   [ja]現在表示しているカルーセルの要素が変わった時に発火します。[/ja]
+ * @param {Object} event 
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.carousel
+ *   [en]Carousel object.[/en]
+ *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
+ * @param {Number} event.activeIndex
+ *   [en]Current active index.[/en]
+ *   [ja]現在アクティブになっている要素のインデックス。[/ja]
+ * @param {Number} event.lastActiveIndex
+ *   [en]Previous active index.[/en]
+ *   [ja]以前アクティブだった要素のインデックス。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name refresh
+ * @description
+ *   [en]Fired when the carousel has been refreshed.[/en]
+ *   [ja]カルーセルが更新された時に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.carousel
+ *   [en]Carousel object.[/en]
+ *   [ja]イベントが発火したCarouselオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name overscroll
+ * @description
+ *   [en]Fired when the carousel has been overscrolled.[/en]
+ *   [ja]カルーセルがオーバースクロールした時に発火します。[/ja]
+ * @param {Object} event 
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.carousel
+ *   [en]Fired when the carousel has been refreshed.[/en]
+ *   [ja]カルーセルが更新された時に発火します。[/ja]
+ * @param {Number} event.activeIndex
+ *   [en]Current active index.[/en]
+ *   [ja]現在アクティブになっている要素のインデックス。[/ja]
+ * @param {String} event.direction
+ *   [en]Can be one of either "up", "down", "left" or "right".[/en]
+ *   [ja]オーバースクロールされた方向が得られます。"up", "down", "left", "right"のいずれかの方向が渡されます。[/ja]
+ * @param {Function} event.waitToReturn
+ *   [en]Takes a <code>Promise</code> object as an argument. The carousel will not scroll back until the promise has been resolved or rejected.[/en]
+ *   [ja]この関数はPromiseオブジェクトを引数として受け取ります。渡したPromiseオブジェクトがresolveされるかrejectされるまで、カルーセルはスクロールバックしません。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name direction
+ * @type {String}
+ * @description
+ *   [en]The direction of the carousel. Can be either "horizontal" or "vertical". Default is "horizontal".[/en]
+ *   [ja]カルーセルの方向を指定します。"horizontal"か"vertical"を指定できます。"horizontal"がデフォルト値です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name fullscreen
+ * @description
+ *   [en]If this attribute is set the carousel will cover the whole screen.[/en]
+ *   [ja]この属性があると、absoluteポジションを使ってカルーセルが自動的に画面いっぱいに広がります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this carousel.[/en]
+ *   [ja]このカルーセルを参照するための変数名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name overscrollable
+ * @description
+ *   [en]If this attribute is set the carousel will be scrollable over the edge. It will bounce back when released.[/en]
+ *   [ja]この属性がある時、タッチやドラッグで端までスクロールした時に、バウンドするような効果が当たります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name item-width
+ * @type {String}
+ * @description
+ *    [en]ons-carousel-item's width. Only works when the direction is set to "horizontal".[/en]
+ *    [ja]ons-carousel-itemの幅を指定します。この属性は、direction属性に"horizontal"を指定した時のみ有効になります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name item-height
+ * @type {String}
+ * @description
+ *   [en]ons-carousel-item's height. Only works when the direction is set to "vertical".[/en]
+ *   [ja]ons-carousel-itemの高さを指定します。この属性は、direction属性に"vertical"を指定した時のみ有効になります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name auto-scroll
+ * @description
+ *   [en]If this attribute is set the carousel will be automatically scrolled to the closest item border when released.[/en]
+ *   [ja]この属性がある時、一番近いcarosel-itemの境界まで自動的にスクロールするようになります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name auto-scroll-ratio
+ * @type {Number}
+ * @description
+ *    [en]A number between 0.0 and 1.0 that specifies how much the user must drag the carousel in order for it to auto scroll to the next item.[/en]
+ *    [ja]0.0から1.0までの値を指定します。カルーセルの要素をどれぐらいの割合までドラッグすると次の要素に自動的にスクロールするかを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name swipeable
+ * @description
+ *   [en]If this attribute is set the carousel can be scrolled by drag or swipe.[/en]
+ *   [ja]この属性がある時、カルーセルをスワイプやドラッグで移動できるようになります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *   [en]If this attribute is set the carousel is disabled.[/en]
+ *   [ja]この属性がある時、dragやtouchやswipeを受け付けなくなります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name intial-index
+ * @type {Number}
+ * @description
+ *   [en]Specify the index of the ons-carousel-item to show initially. Default is 0.[/en]
+ *   [ja]最初に表示するons-carousel-itemを0始まりのインデックスで指定します。デフォルト値は 0 です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name auto-refresh
+ * @description
+ *   [en]When this attribute is set the carousel will automatically refresh when the number of child nodes change.[/en]
+ *   [ja]この属性がある時、子要素の数が変わるとカルーセルは自動的に更新されるようになります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-refresh
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "refresh" event is fired.[/en]
+ *  [ja]"refresh"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-overscroll
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "overscroll" event is fired.[/en]
+ *  [ja]"overscroll"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature next()
+ * @description
+ *   [en]Show next ons-carousel item.[/en]
+ *   [ja]次のons-carousel-itemを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature prev()
+ * @description
+ *   [en]Show previous ons-carousel item.[/en]
+ *   [ja]前のons-carousel-itemを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature first()
+ * @description
+ *   [en]Show first ons-carousel item.[/en]
+ *   [ja]最初のons-carousel-itemを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature last()
+ * @description
+ *   [en]Show last ons-carousel item.[/en]
+ *   [ja]最後のons-carousel-itemを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setSwipeable(swipeable)
+ * @param {Booelan} swipeable
+ *   [en]If value is true the carousel will be swipeable.[/en]
+ *   [ja]swipeableにする場合にはtrueを指定します。[/ja]
+ * @description
+ *   [en]Set whether the carousel is swipeable or not.[/en]
+ *   [ja]swipeできるかどうかを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isSwipeable()
+ * @return {Boolean}
+ *   [en]true if the carousel is swipeable.[/en]
+ *   [ja]swipeableであればtrueを返します。[/ja]
+ * @description
+ *   [en]Returns whether the carousel is swipeable or not.[/en]
+ *   [ja]swiapble属性があるかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setActiveCarouselItemIndex(index)
+ * @param {Number} index
+ *   [en]The index that the carousel should be set to.[/en]
+ *   [ja]carousel要素のインデックスを指定します。[/ja]
+ * @description
+ *   [en]Specify the index of the ons-carousel-item to show.[/en]
+ *   [ja]表示するons-carousel-itemをindexで指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getActiveCarouselItemIndex()
+ * @return {Number}
+ *   [en]The current carousel item index.[/en]
+ *   [ja]現在表示しているカルーセル要素のインデックスが返されます。[/ja]
+ * @description
+ *   [en]Returns the index of the currently visible ons-carousel-item.[/en]
+ *   [ja]現在表示されているons-carousel-item要素のインデックスを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setAutoScrollEnabled(enabled)
+ * @param {Boolean} enabled
+ *   [en]If true auto scroll will be enabled.[/en]
+ *   [ja]オートスクロールを有効にする場合にはtrueを渡します。[/ja]
+ * @description
+ *   [en]Enable or disable "auto-scroll" attribute.[/en]
+ *   [ja]auto-scroll属性があるかどうかを設定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isAutoScrollEnabled()
+ * @return {Boolean}
+ *   [en]true if auto scroll is enabled.[/en]
+ *   [ja]オートスクロールが有効であればtrueを返します。[/ja]
+ * @description
+ *   [en]Returns whether the "auto-scroll" attribute is set or not.[/en]
+ *   [ja]auto-scroll属性があるかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setAutoScrollRatio(ratio)
+ * @param {Number} ratio
+ *   [en]The desired ratio.[/en]
+ *   [ja]オートスクロールするのに必要な0.0から1.0までのratio値を指定します。[/ja]
+ * @description
+ *   [en]Set the auto scroll ratio. Must be a value between 0.0 and 1.0.[/en]
+ *   [ja]オートスクロールするのに必要なratio値を指定します。0.0から1.0を必ず指定しなければならない。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getAutoScrollRatio()
+ * @return {Number}
+ *   [en]The current auto scroll ratio.[/en]
+ *   [ja]現在のオートスクロールのratio値。[/ja]
+ * @description
+ *   [en]Returns the current auto scroll ratio.[/en]
+ *   [ja]現在のオートスクロールのratio値を返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setOverscrollable(overscrollable)
+ * @param {Boolean} overscrollable
+ *   [en]If true the carousel will be overscrollable.[/en]
+ *   [ja]overscrollできるかどうかを指定します。[/ja]
+ * @description
+ *   [en]Set whether the carousel is overscrollable or not.[/en]
+ *   [ja]overscroll属性があるかどうかを設定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isOverscrollable()
+ * @return {Boolean}
+ *   [en]Whether the carousel is overscrollable or not.[/en]
+ *   [ja]overscrollできればtrueを返します。[/ja]
+ * @description
+ *   [en]Returns whether the carousel is overscrollable or not.[/en]
+ *   [ja]overscroll属性があるかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature refresh()
+ * @description
+ *   [en]Update the layout of the carousel. Used when adding ons-carousel-items dynamically or to automatically adjust the size.[/en]
+ *   [ja]レイアウトや内部の状態を最新のものに更新します。ons-carousel-itemを動的に増やしたり、ons-carouselの大きさを動的に変える際に利用します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @return {Boolean}
+ *   [en]Whether the carousel is disabled or not.[/en]
+ *   [ja]disabled状態になっていればtrueを返します。[/ja]
+ * @description
+ *   [en]Returns whether the dialog is disabled or enabled.[/en]
+ *   [ja]disabled属性があるかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @param {Boolean} disabled
+ *   [en]If true the carousel will be disabled.[/en]
+ *   [ja]disabled状態にする場合にはtrueを指定します。[/ja]
+ * @description
+ *   [en]Disable or enable the dialog.[/en]
+ *   [ja]disabled属性があるかどうかを設定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -12980,23 +15194,38 @@ limitations under the License.
         element.addClass(templater('carousel--*'));
 
         return function(scope, element, attrs) {
-          setImmediate(function() {
-            var carousel = new CarouselView(scope, element, attrs);
+          var carousel = new CarouselView(scope, element, attrs);
 
-            $onsen.aliasStack.register('ons.carousel', carousel);
-            element.data('ons-carousel', carousel);
+          element.data('ons-carousel', carousel);
 
-            $onsen.declareVarAttribute(attrs, carousel);
+          $onsen.registerEventHandlers(carousel, 'postchange refresh overscroll destroy');
+          $onsen.declareVarAttribute(attrs, carousel);
 
-            scope.$on('$destroy', function() {
-              carousel._events = undefined;
-              element.data('ons-carousel', undefined);
-              $onsen.aliasStack.unregister('ons.carousel', carousel);
-              element = null;
-            });
-
-            $onsen.fireComponentEvent(element[0], 'init');
+          scope.$on('$destroy', function() {
+            carousel._events = undefined;
+            element.data('ons-carousel', undefined);
+            element = null;
           });
+
+          if (element[0].hasAttribute('auto-refresh')) {
+            // Refresh carousel when items are added or removed.
+            scope.$watch(
+              function () {
+                return element[0].childNodes.length;
+              },
+              function () {
+                setImmediate(function() {
+                  carousel.refresh();
+                });
+              }
+            );
+          }
+
+          setImmediate(function() {
+            carousel.refresh();
+          });
+
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       },
 
@@ -13032,19 +15261,13 @@ limitations under the License.
  * @ngdoc directive
  * @id col
  * @name ons-col
+ * @category grid
  * @description
- *    [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
- *    [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントの配置に使用します。[/ja]
- * @param align
- *    [en]Vertical alignment of the column. Valid values are "top", "center", and "bottom".[/en]
- *    [ja]縦の配置を指定します。次の値から選択してください: top, center, bottom[/ja]
- *
- * @param width
- *    [en]The width of the column. Valid values are css width values ("10%", "50px").[/en]
- *    [ja]カラムの横幅を指定します。パーセントもしくはピクセルで指定します（10%や50px）。[/ja]
+ *   [en]Represents a column in the grid system. Use with ons-row to layout components.[/en]
+ *   [ja]グリッドシステムにて列を定義します。ons-rowとともに使用し、コンポーネントのレイアウトに利用します。[/ja]
  * @note
- *    [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
- *    [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *   [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
  * @codepen GgujC {wide}
  * @guide layouting [en]Layouting guide[/en][ja]レイアウト機能[/ja]
  * @seealso ons-row [en]ons-row component[/en][ja]ons-rowコンポーネント[/ja]
@@ -13054,6 +15277,25 @@ limitations under the License.
  *   <ons-col>Text</ons-col>
  * </ons-row>
  */
+
+/**
+ * @ngdoc attribute
+ * @name align
+ * @type {String}
+ * @description
+ *   [en]Vertical alignment of the column. Valid values are "top", "center", and "bottom".[/en]
+ *   [ja]縦の配置を指定する。"top", "center", "bottom"のいずれかを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name width
+ * @type {String}
+ * @description
+ *   [en]The width of the column. Valid values are css width values ("10%", "50px").[/en]
+ *   [ja]カラムの横幅を指定する。パーセントもしくはピクセルで指定します（10%や50px）。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -13144,63 +15386,22 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id dialog 
+ * @id dialog
  * @name ons-dialog
- * @description 
+ * @category dialog
+ * @description
  *  [en]Dialog that is displayed on top of current screen.[/en]
  *  [ja]現在のスクリーンにダイアログを表示します。[/ja]
- * @param var 
- *  [en]Variable name to refer this dialog.[/en]
- *  [ja]このダイアログを参照するための名前を指定します。[/ja]
- * @param modifier
- *  [en]The appearance of the dialog.[/en]
- *  [ja]ダイアログの表現を指定します。[/ja]
- * @param cancelable
- *  [en]If this attribute is set the dialog can be closed by tapping the background or pressing the back button.[/en] 
- *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
- * @param disabled
- *  [en]If this attribute is set the dialog is disabled.[/en]
- *  [ja]この属性がある時、ダイアログはdisabled状態になります。[/ja]
- * @param animation
- *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
- *  [ja]ダイアログを表示する際のアニメーション名を指定します。[/ja]
- * @param mask-color
- *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
- *  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
- * @property show(options)
- *  [en]Show the dialog.[/en]
- *  [ja]ダイアログを開きます。[/ja]
- * @property hide(options)
- *  [en]Hide the dialog.[/en]
- *  [ja]ダイアログを閉じます。[/ja]
- * @property isShown()
- *  [en]Returns whether the dialog is visible or not.[/en]
- *  [ja]ダイアログが表示されているかどうかを返します。[/ja]
- * @property destroy()
- *  [en]Destroy the dialog and remove it from the DOM tree.[/en]
- *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
- *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
- * @property setCancelable(cancelable)
- *  [en]Set whether the dialog can be canceled by the user or not.[/en]
- *  [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
- * @property isCancelable()
- *  [en]Returns whether the dialog is cancelable or not.[/en]
- *  [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
- * @property setDisabled(disabled)
- *  [en]Disable or enable the dialog.[/en]
- *  [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
- * @property isDisabled()
- *  [en]Returns whether the dialog is disabled or enabled.[/en]
- *  [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
- *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are preshow, postshow, prehide and posthide.[/en]
- *  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
  * @codepen zxxaGa
+ * @guide UsingDialog
+ *   [en]Learn how to use the dialog component.[/en]
+ *   [ja]ダイアログコンポーネントの使い方[/ja]
+ * @seealso ons-alert-dialog
+ *   [en]ons-alert-dialog component[/en]
+ *   [ja]ons-alert-dialogコンポーネント[/ja]
+ * @seealso ons-popover
+ *   [en]ons-popover component[/en]
+ *   [ja]ons-popoverコンポーネント[/ja]
  * @example
  * <script>
  *   ons.ready(function() {
@@ -13213,8 +15414,311 @@ limitations under the License.
  * <script type="text/ons-template" id="dialog.html">
  *   <ons-dialog cancelable>
  *     ...
- *   </ons-dialog>  
+ *   </ons-dialog>
  * </script>
+ */
+
+/**
+ * @ngdoc event
+ * @name preshow
+ * @description
+ * [en]Fired just before the dialog is displayed.[/en]
+ * [ja]ダイアログが表示される直前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Function} event.cancel 
+ *   [en]Execute this function to stop the dialog from being shown.[/en]
+ *   [ja]この関数を実行すると、ダイアログの表示がキャンセルされます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postshow
+ * @description
+ * [en]Fired just after the dialog is displayed.[/en]
+ * [ja]ダイアログが表示された直後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name prehide
+ * @description
+ * [en]Fired just before the dialog is hidden.[/en]
+ * [ja]ダイアログが隠れる直前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Function} event.cancel 
+ *   [en]Execute this function to stop the dialog from being hidden.[/en]
+ *   [ja]この関数を実行すると、ダイアログの非表示がキャンセルされます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name posthide
+ * @description
+ * [en]Fired just after the dialog is hidden.[/en]
+ * [ja]ダイアログが隠れた後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.dialog
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this dialog.[/en]
+ *  [ja]このダイアログを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the dialog.[/en]
+ *  [ja]ダイアログの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name cancelable
+ * @description
+ *  [en]If this attribute is set the dialog can be closed by tapping the background or by pressing the back button.[/en]
+ *  [ja]この属性があると、ダイアログが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *  [en]If this attribute is set the dialog is disabled.[/en]
+ *  [ja]この属性がある時、ダイアログはdisabled状態になります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default default
+ * @description
+ *  [en]The animation used when showing and hiding the dialog. Can be either "none" or "default".[/en]
+ *  [ja]ダイアログを表示する際のアニメーション名を指定します。"none"もしくは"default"を指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name mask-color
+ * @type {String}
+ * @default rgba(0, 0, 0, 0.2)
+ * @description
+ *  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+ *  [ja]背景のマスクの色を指定します。"rgba(0, 0, 0, 0.2)"がデフォルト値です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature show([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function is called after the dialog has been revealed.[/en]
+ *   [ja]ダイアログが表示され終わった後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *  [en]Show the dialog.[/en]
+ *  [ja]ダイアログを開きます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature hide([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This functions is called after the dialog has been hidden.[/en]
+ *   [ja]ダイアログが隠れた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Hide the dialog.[/en]
+ *   [ja]ダイアログを閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isShown()
+ * @description
+ *   [en]Returns whether the dialog is visible or not.[/en]
+ *   [ja]ダイアログが表示されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ *   [en]true if the dialog is visible.[/en]
+ *   [ja]ダイアログが表示されている場合にtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature destroy()
+ * @description
+ *  [en]Destroy the dialog and remove it from the DOM tree.[/en]
+ *  [ja]ダイアログを破棄して、DOMツリーから取り除きます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+ * @description
+ *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setCancelable(cancelable)
+ * @param {Boolean} cancelable
+ *   [en]If true the dialog will be cancelable.[/en]
+ *   [ja]ダイアログをキャンセル可能にする場合trueを指定します。[/ja]
+ * @description
+ *   [en]Define whether the dialog can be canceled by the user or not.[/en]
+ *   [ja]ダイアログを表示した際に、ユーザがそのダイアログをキャンセルできるかどうかを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isCancelable()
+ * @description
+ *   [en]Returns whether the dialog is cancelable or not.[/en]
+ *   [ja]このダイアログがキャンセル可能かどうかを返します。[/ja]
+ * @return {Boolean}
+ *   [en]true if the dialog is cancelable.[/en]
+ *   [ja]ダイアログがキャンセル可能な場合trueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @description
+ *   [en]Disable or enable the dialog.[/en]
+ *   [ja]このダイアログをdisabled状態にするかどうかを設定します。[/ja]
+ * @param {Boolean} disabled
+ *   [en]If true the dialog will be disabled.[/en]
+ *   [ja]trueを指定するとダイアログをdisabled状態になります。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @description
+ *   [en]Returns whether the dialog is disabled or enabled.[/en]
+ *   [ja]このダイアログがdisabled状態かどうかを返します。[/ja]
+ * @return {Boolean}
+ *   [en]true if the dialog is disabled.[/en]
+ *   [ja]ダイアログがdisabled状態の場合trueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーが指定されなかった場合には、そのイベントに紐付いているイベントリスナーが全て削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
  */
 
 (function() {
@@ -13242,17 +15746,16 @@ limitations under the License.
 
             var dialog = new DialogView(scope, element, attrs);
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            
+
             $onsen.addModifierMethods(dialog, 'dialog--*', angular.element(element[0].querySelector('.dialog')));
             $onsen.declareVarAttribute(attrs, dialog);
-            $onsen.aliasStack.register('ons.dialog', dialog);
-            
+            $onsen.registerEventHandlers(dialog, 'preshow prehide postshow posthide destroy');
+
             element.data('ons-dialog', dialog);
             scope.$on('$destroy', function() {
               dialog._events = undefined;
               $onsen.removeModifierMethods(dialog);
               element.data('ons-dialog', undefined);
-              $onsen.aliasStack.unregister('ons.dialog', dialog);
               element = null;
             });
           },
@@ -13296,12 +15799,13 @@ limitations under the License.
  * @ngdoc directive
  * @id gestureDetector
  * @name ons-gesture-detector
+ * @category input
  * @description
- *    [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
- *    [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
+ *   [en]Component to detect finger gestures within the wrapped element. See the guide for more details.[/en]
+ *   [ja]要素内のジェスチャー操作を検知します。詳しくはガイドを参照してください。[/ja]
  * @guide DetectingFingerGestures
- *  [en]Detecting finger gestures[/en]
- *  [ja]ジェスチャー操作を検知する[/ja]
+ *   [en]Detecting finger gestures[/en]
+ *   [ja]ジェスチャー操作の検知[/ja]
  * @example
  * <ons-gesture-detector>
  *   ...
@@ -13357,7 +15861,7 @@ limitations under the License.
               scope[attr]({$event: event});
             }
           }
-       
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
@@ -13374,32 +15878,77 @@ limitations under the License.
  * @ngdoc directive
  * @id icon
  * @name ons-icon
+ * @category icon
  * @description
- *    [en]Displays an icon. Font Awesome and Ionicon icons are supported.[/en]
- *    [ja]アイコンを表示するコンポーネントです。Font AwesomeもしくはIoniconsから選択できます。[/ja]
- * @param icon
- *    [en]The icon name. `fa-` prefix for Font Awesome, `ion-` prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
- *    [ja]アイコン名を指定します。`fa-`で始まるものはFont Awesomeとして、`ion-`で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]
- * @param size
- *    [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
- *    [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
- * @param rotate
- *    [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
- *    [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
- * @param flip
- *    [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]
- *    [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
- * @param fixed-width
- *    [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
- *    [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはfalseです。[/ja]
- * @param spin
- *    [en]Whether to spin the icon. Valid values are true and false.[/en]
- *    [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+ *   [en]Displays an icon. Font Awesome and Ionicon icons are supported.[/en]
+ *   [ja]アイコンを表示するコンポーネントです。Font AwesomeもしくはIoniconsから選択できます。[/ja]
  * @codepen xAhvg
  * @guide UsingIcons [en]Using icons[/en][ja]アイコンを使う[/ja]
  * @example
- *   <ons-icon icon="fa-twitter" size="20px" fixed-width="false" style="color: red"></ons-icon>
+ * <ons-icon
+ *   icon="fa-twitter"
+ *   size="20px"
+ *   fixed-width="false"
+ *   style="color: red">
+ * </ons-icon>
  */
+
+/**
+ * @ngdoc attribute
+ * @name icon
+ * @type {String}
+ * @description
+ *   [en]The icon name. <code>fa-</code> prefix for Font Awesome, <code>ion-</code> prefix for Ionicons icons. See all icons at http://fontawesome.io/icons/ and http://ionicons.com.[/en]
+ *   [ja]アイコン名を指定します。<code>fa-</code>で始まるものはFont Awesomeとして、<code>ion-</code>で始まるものはIoniconsとして扱われます。使用できるアイコンはこちら: http://fontawesome.io/icons/　および　http://ionicons.com。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name size
+ * @type {String}
+ * @description
+ *   [en]The sizes of the icon. Valid values are lg, 2x, 3x, 4x, 5x, or in pixels.[/en]
+ *   [ja]アイコンのサイズを指定します。値は、lg, 2x, 3x, 4x, 5xもしくはピクセル単位で指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name rotate
+ * @type {Number}
+ * @description
+ *   [en]Number of degrees to rotate the icon. Valid values are 90, 180, or 270.[/en]
+ *   [ja]アイコンを回転して表示します。90, 180, 270から指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name flip
+ * @type {String}
+ * @description
+ *   [en]Flip the icon. Valid values are "horizontal" and "vertical".[/en]
+ *   [ja]アイコンを反転します。horizontalもしくはverticalを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name fixed-width
+ * @type {Boolean}
+ * @default false
+ * @description
+ *  [en]When used in the list, you want the icons to have the same width so that they align vertically by setting the value to true. Valid values are true, false. Default is false.[/en]
+ *  [ja]等幅にするかどうかを指定します。trueもしくはfalseを指定できます。デフォルトはfalseです。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name spin
+ * @type {Boolean}
+ * @default false
+ * @description
+ *   [en]Specify whether the icon should be spinning. Valid values are true and false.[/en]
+ *   [ja]アイコンを回転するかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -13438,7 +15987,7 @@ limitations under the License.
     } else {
       classList.push('fa-lg');
     }
-    
+
     return {
       'class': classList.join(' '),
       'style': style
@@ -13483,7 +16032,7 @@ limitations under the License.
           });
           element = scope = attrs = null;
         });
-      
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -13495,19 +16044,27 @@ limitations under the License.
  * @ngdoc directive
  * @id if-orientation
  * @name ons-if-orientation
+ * @category util
  * @description
- *    [en]Conditionally display content depending on screen orientation. Valid values are portrait and landscape. Different from other components, this component is used as attribute in any element.[/en]
- *    [ja]画面の向きに応じてコンテンツの制御を行います。portraitもしくはlandscapeを指定できます。すべての要素の属性に使用できます。[/ja]
- * @param ons-if-orientation
- *    [en]Either portrait or landscape.[/en]
- *    [ja]portraitもしくはlandscapeを指定します。[/ja]
+ *   [en]Conditionally display content depending on screen orientation. Valid values are portrait and landscape. Different from other components, this component is used as attribute in any element.[/en]
+ *   [ja]画面の向きに応じてコンテンツの制御を行います。portraitもしくはlandscapeを指定できます。すべての要素の属性に使用できます。[/ja]
  * @seealso ons-if-platform [en]ons-if-platform component[/en][ja]ons-if-platformコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
- * <div if-orientation="portrait">
- *   ...
+ * <div ons-if-orientation="portrait">
+ *   <p>This will only be visible in portrait mode.</p>
  * </div>
  */
+
+/**
+ * @ngdoc attribute
+ * @name ons-if-orientation
+ * @type {String}
+ * @description
+ *   [en]Either "portrait" or "landscape".[/en]
+ *   [ja]portraitもしくはlandscapeを指定します。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -13572,12 +16129,10 @@ limitations under the License.
  * @ngdoc directive
  * @id if-platform
  * @name ons-if-platform
+ * @category util
  * @description
  *    [en]Conditionally display content depending on the platform / browser. Valid values are "ios", "android", "blackberry", "chrome", "safari", "firefox", and "opera".[/en]
  *    [ja]プラットフォームやブラウザーに応じてコンテンツの制御をおこないます。ios, android, blackberry, chrome, safari, firefox, operaを指定できます。[/ja]
- * @param ons-if-platform
- *    [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
- *    [ja]opera, firefox, safari, chrome, ie, android, blackberry, ios, windowsから指定します。[/ja]
  * @seealso ons-if-orientation [en]ons-if-orientation component[/en][ja]ons-if-orientationコンポーネント[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
@@ -13585,6 +16140,16 @@ limitations under the License.
  *   ...
  * </div>
  */
+
+/**
+ * @ngdoc attribute
+ * @name ons-if-platform
+ * @type {String}
+ * @description
+ *   [en]Either "opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios" or "windows".[/en]
+ *   [ja]"opera", "firefox", "safari", "chrome", "ie", "android", "blackberry", "ios", "windows"のいずれかを指定します。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -13689,16 +16254,19 @@ limitations under the License.
  * @ngdoc directive
  * @id ons-keyboard-active
  * @name ons-keyboard-active
+ * @category input
  * @description
- *    [en]Conditionally display content depending on if the software keyboard is visible or hidden. This component requires cordova and that the com.ionic.keyboard plugin is installed.[/en]
- *    [ja]ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。[/ja]
- * @param ons-keyboard-active
- *    [en]The content of tags with this attribute will be visible when the software keyboard is open.[/en]
- *    [ja]この属性がついた要素は、ソフトウェアキーボードが表示された時に初めて表示されます。[/ja]
- * @param ons-keyboard-inactive
- *    [en]The content of tags with this attribute will be visible when the software keyboard is hidden.[/en]
- *    [ja]この属性がついた要素は、ソフトウェアキーボードが隠れている時のみ表示されます。[/ja]
- * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
+ *   [en]
+ *     Conditionally display content depending on if the software keyboard is visible or hidden.
+ *     This component requires cordova and that the com.ionic.keyboard plugin is installed.
+ *   [/en]
+ *   [ja]
+ *     ソフトウェアキーボードが表示されているかどうかで、コンテンツを表示するかどうかを切り替えることが出来ます。
+ *     このコンポーネントは、Cordovaやcom.ionic.keyboardプラグインを必要とします。
+ *   [/ja]
+ * @guide UtilityAPIs
+ *   [en]Other utility APIs[/en]
+ *   [ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-keyboard-active>
  *   This will only be displayed if the software keyboard is open.
@@ -13707,6 +16275,23 @@ limitations under the License.
  *   There is also a component that does the opposite.
  * </div>
  */
+
+/**
+ * @ngdoc attribute
+ * @name ons-keyboard-active
+ * @description
+ *   [en]The content of tags with this attribute will be visible when the software keyboard is open.[/en]
+ *   [ja]この属性がついた要素は、ソフトウェアキーボードが表示された時に初めて表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-keyboard-inactive
+ * @description
+ *   [en]The content of tags with this attribute will be visible when the software keyboard is hidden.[/en]
+ *   [ja]この属性がついた要素は、ソフトウェアキーボードが隠れている時のみ表示されます。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -13725,7 +16310,7 @@ limitations under the License.
         var onHide = function() {
           element.css('display', dispHide);
         };
-       
+
         var onInit = function(e) {
           if (e.visible) {
             onShow();
@@ -13783,15 +16368,120 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id lazy-repeat
+ * @name ons-lazy-repeat
+ * @category control
+ * @description 
+ *   [en]
+ *     Using this component a list with millions of items can be rendered without a drop in performance.
+ *     It does that by "lazily" loading elements into the DOM when they come into view and
+ *     removing items from the DOM when they are not visible.
+ *   [/en]
+ *   [ja]
+ *     このコンポーネント内で描画されるアイテムのDOM要素の読み込みは、画面に見えそうになった時まで自動的に遅延され、
+ *     画面から見えなくなった場合にはその要素は動的にアンロードされます。
+ *     このコンポーネントを使うことで、パフォーマンスを劣化させること無しに巨大な数の要素を描画できます。
+ *   [/ja]
+ * @codepen QwrGBm
+ * @guide UsingLazyRepeat 
+ *   [en]How to use Lazy Repeat[/en]
+ *   [ja]レイジーリピートの使い方[/ja]
+ * @example
+ * <script>
+ *   ons.bootstrap()
+ *
+ *   .controller('MyController', function($scope) {
+ *     $scope.MyDelegate = {
+ *       countItems: function() {
+ *         // Return number of items.
+ *         return 1000000;
+ *       },
+ *
+ *       calculateItemHeight: function(index) {
+ *         // Return the height of an item in pixels.
+ *         return 45;
+ *       },
+ *
+ *       configureItemScope: function(index, itemScope) {
+ *         // Initialize scope
+ *         itemScope.item = 'Item #' + (index + 1);
+ *       },
+ *
+ *       destroyItemScope: function(index, itemScope) {
+ *         // Optional method that is called when an item is unloaded.
+ *         console.log('Destroyed item with index: ' + index);
+ *       }
+ *     };
+ *   });
+ * </script>
+ *
+ * <ons-list ng-controller="MyController">
+ *   <ons-list-item ons-lazy-repeat="MyDelegate">
+ *     {{ item }}
+ *   </ons-list-item>
+ * </ons-list>
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-lazy-repeat
+ * @type {Expression}
+ * @description
+ *  [en]A delegate object, can be either an object attached to the scope (when using AngularJS) or a normal JavaScript variable.[/en]
+ *  [ja]要素のロード、アンロードなどの処理を委譲するオブジェクトを指定します。AngularJSのスコープの変数名や、通常のJavaScriptの変数名を指定します。[/ja]
+ */
+
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Lazy repeat directive.
+   */
+  module.directive('onsLazyRepeat', ['$onsen', 'LazyRepeatView', function($onsen, LazyRepeatView) {
+    return {
+      restrict: 'A',
+      replace: false,
+      priority: 1000,
+      transclude: 'element',
+      compile: function(element, attrs, linker) {
+        return function(scope, element, attrs) {
+          var lazyRepeat = new LazyRepeatView(scope, element, attrs, linker);
+
+          scope.$on('$destroy', function() {
+            scope = element = attrs = linker = null;
+          });
+        };
+      }
+    };
+  }]);
+
+})();
+
+/**
+ * @ngdoc directive
  * @id list
  * @name ons-list
+ * @category list
+ * @modifier inset
+ *   [en]Inset list that doesn't cover the whole width of the parent.[/en]
+ *   [ja]親要素の画面いっぱいに広がらないリストを表示します。[/ja]
+ * @modifier noborder
+ *   [en]A list with no borders at the top and bottom.[/en]
+ *   [ja]リストの上下のボーダーが無いリストを表示します。[/ja]
  * @description
- *    [en]Component to define a list, and the container for ons-list-item(s).[/en]
- *    [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
- * @param modifier
- * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
- * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
+ *   [en]Component to define a list, and the container for ons-list-item(s).[/en]
+ *   [ja]リストを表現するためのコンポーネント。ons-list-itemのコンテナとして使用します。[/ja]
+ * @seealso ons-list-item
+ *   [en]ons-list-item component[/en]
+ *   [ja]ons-list-itemコンポーネント[/ja]
+ * @seealso ons-list-header
+ *   [en]ons-list-header component[/en]
+ *   [ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList
+ *   [en]Using lists[/en]
+ *   [ja]リストを使う[/ja]
  * @codepen yxcCt
  * @example
  * <ons-list>
@@ -13800,6 +16490,16 @@ limitations under the License.
  *   <ons-list-item>Item</ons-list-item>
  * </ons-list>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]The appearance of the list.[/en]
+ *   [ja]リストの表現を指定します。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -13815,19 +16515,17 @@ limitations under the License.
       replace: false,
       transclude: false,
       compile: function(element, attrs) {
-     
+
         return function(scope, element, attrs) {
           var list = new GenericView(scope, element, attrs);
-          
+
           $onsen.declareVarAttribute(attrs, list);
-          $onsen.aliasStack.register('ons.list', list);
           element.data('ons-list', list);
 
           scope.$on('$destroy', function() {
             list._events = undefined;
             $onsen.removeModifierMethods(list);
             element.data('ons-list', undefined);
-            $onsen.aliasStack.unregister('ons.list', list);
             element = null;
           });
 
@@ -13835,9 +16533,9 @@ limitations under the License.
 
           element.addClass('list ons-list-inner');
           element.addClass(templater('list--*'));
-         
+
           $onsen.addModifierMethods(list, 'list--*', element);
-          $onsen.fireComponentEvent(element[0], 'init'); 
+          $onsen.fireComponentEvent(element[0], 'init');
         };
       }
     };
@@ -13849,11 +16547,13 @@ limitations under the License.
  * @ngdoc directive
  * @id list-header
  * @name ons-list-header
- * @param modifier
+ * @category list
  * @description
- *    [en]Header element for list items. Must be put inside ons-list component.[/en]
- *    [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
- * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
+ *   [en]Header element for list items. Must be put inside ons-list component.[/en]
+ *   [ja]リスト要素に使用するヘッダー用コンポーネント。ons-listと共に使用します。[/ja]
+ * @seealso ons-list
+ *   [en]ons-list component[/en]
+ *   [ja]ons-listコンポーネント[/ja]
  * @seealso ons-list-item [en]ons-list-item component[/en][ja]ons-list-itemコンポーネント[/ja]
  * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
  * @codepen yxcCt
@@ -13864,6 +16564,16 @@ limitations under the License.
  *   <ons-list-item>Item</ons-list-item>
  * </ons-list>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]The appearance of the list header.[/en]
+ *   [ja]ヘッダーの表現を指定します。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -13884,17 +16594,15 @@ limitations under the License.
 
           $onsen.declareVarAttribute(attrs, listHeader);
 
-          $onsen.aliasStack.register('ons.listHeader', listHeader);
           element.data('ons-listHeader', listHeader);
 
           scope.$on('$destroy', function() {
             listHeader._events = undefined;
             $onsen.removeModifierMethods(listHeader);
             element.data('ons-listHeader', undefined);
-            $onsen.aliasStack.unregister('ons.listHeader', listHeader);
             element = null;
           });
-         
+
           var templater = $onsen.generateModifierTemplater(attrs);
           element.addClass('list__header ons-list-header-inner');
           element.addClass(templater('list__header--*'));
@@ -13912,13 +16620,25 @@ limitations under the License.
  * @ngdoc directive
  * @id list-item
  * @name ons-list-item
- * @param modifier
+ * @category list
+ * @modifier tappable
+ *   [en]Made the list item change appearance when it's tapped.[/en]
+ *   [ja]タップやクリックした時に効果が表示されるようになります。[/ja]
+ * @modifier chevron
+ *   [en]Display a chevron at the right end of the list item and make it change appearance when tapped.[/en]
+ *   [ja]要素の右側に右矢印が表示されます。また、タップやクリックした時に効果が表示されるようになります。[/ja]
  * @description
- *    [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]
- *    [ja]リストの各要素を表現するためのコンポーネント。ons-listコンポーネントと共に使用します。[/ja]
- * @seealso ons-list [en]ons-list component[/en][ja]ons-listコンポーネント[/ja]
- * @seealso ons-list-header [en]ons-list-header component[/en][ja]ons-list-headerコンポーネント[/ja]
- * @guide UsingList [en]Using lists[/en][ja]リストを使う[/ja]
+ *   [en]Component that represents each item in the list. Must be put inside the ons-list component.[/en]
+ *   [ja]リストの各要素を表現するためのコンポーネントです。ons-listコンポーネントと共に使用します。[/ja]
+ * @seealso ons-list
+ *   [en]ons-list component[/en]
+ *   [ja]ons-listコンポーネント[/ja]
+ * @seealso ons-list-header
+ *   [en]ons-list-header component[/en]
+ *   [ja]ons-list-headerコンポーネント[/ja]
+ * @guide UsingList 
+ *   [en]Using lists[/en]
+ *   [ja]リストを使う[/ja]
  * @codepen yxcCt
  * @example
  * <ons-list>
@@ -13927,6 +16647,16 @@ limitations under the License.
  *   <ons-list-item>Item</ons-list-item>
  * </ons-list>
  */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]The appearance of the list item.[/en]
+ *   [ja]各要素の表現を指定します。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -13947,14 +16677,12 @@ limitations under the License.
 
           $onsen.declareVarAttribute(attrs, listItem);
 
-          $onsen.aliasStack.register('ons.listItem', listItem);
           element.data('ons-list-item', listItem);
 
           scope.$on('$destroy', function() {
             listItem._events = undefined;
             $onsen.removeModifierMethods(listItem);
             element.data('ons-list-item', undefined);
-            $onsen.aliasStack.unregister('ons.listItem', listItem);
             element = null;
           });
 
@@ -13973,20 +16701,28 @@ limitations under the License.
 
 /**
  * @ngdoc directive
- * @id loading-placeholder 
+ * @id loading-placeholder
  * @name ons-loading-placeholder
+ * @category util
  * @description
- *    [en]Display a placeholder while the content is loading.[/en]
- *    [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]
- * @param ons-loading-placeholder 
- *    [en]The url of the page to load.[/en]
- *    [ja]読み込むページのURLを指定します。[/ja]
+ *   [en]Display a placeholder while the content is loading.[/en]
+ *   [ja]Onsen UIが読み込まれるまでに表示するプレースホルダーを表現します。[/ja]
  * @guide UtilityAPIs [en]Other utility APIs[/en][ja]他のユーティリティAPI[/ja]
  * @example
  * <div ons-loading-placeholder="page.html">
  *   Loading...
  * </div>
  */
+
+/**
+ * @ngdoc attribute
+ * @name ons-loading-placeholder
+ * @type {String}
+ * @description
+ *   [en]The url of the page to load.[/en]
+ *   [ja]読み込むページのURLを指定します。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -13998,27 +16734,40 @@ limitations under the License.
       replace: false,
       transclude: false,
       scope: false,
-      compile: function(element, attrs) {
+      link: function(scope, element, attrs) {
         if (!attrs.onsLoadingPlaceholder.length) {
           throw Error('Must define page to load.');
         }
-        
-        $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
-          setImmediate(function() { 
+
+        setImmediate(function() {
+          $onsen.getPageHTMLAsync(attrs.onsLoadingPlaceholder).then(function(html) {
+
+            // Remove page tag.
+            html = html
+              .trim()
+              .replace(/^<ons-page>/, '')
+              .replace(/<\/ons-page>$/, '');
+
             var div = document.createElement('div');
-            div.innerHTML = html.trim();
+            div.innerHTML = html;
 
             var newElement = angular.element(div);
             newElement.css('display', 'none');
 
             element.append(newElement);
-            ons.compile(newElement[0]);
+            $compile(newElement)(scope);
 
-            angular.element(element.children()[0]).remove();
+            for (var i = element[0].childNodes.length - 1; i >= 0; i--){
+              var e = element[0].childNodes[i];
+              if (e !== div) {
+                element[0].removeChild(e);
+              }
+            }
+
             newElement.css('display', 'block');
           });
         });
-      }    
+      }
     };
   }]);
 })();
@@ -14028,32 +16777,73 @@ limitations under the License.
  * @ngdoc directive
  * @id modal
  * @name ons-modal
+ * @category modal
  * @description 
- *  [en]Modal component that masks current screen. Underlying components are not subject to any events while the modal component is shown.[/en]
- *  [ja]画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、モーダルが表示されている間はイベント通知が行われません。[/ja]
- * @param var 
- *  [en]Variable name to refer this modal.[/en]
- *  [ja]このコンポーネントを参照するための変数名を指定します。[/ja]
- * @property toggle()
- *  [en]Toggle modal visibility.[/en]
- *  [ja]モーダルの表示を切り替えます。[/ja]
- * @property show()
- *  [en]Show modal.[/en]
- *  [ja]モーダルを表示します。[/ja]
- * @property hide()
- *  [en]Hide modal.[/en]
- *  [ja]モーダルを非表示にします。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back button handler.[/en]
- *  [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
- * @guide UsingModal [en]Using ons-modal component[/en][ja]モーダルの使い方[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ *   [en]
+ *     Modal component that masks current screen.
+ *     Underlying components are not subject to any events while the modal component is shown.
+ *   [/en]
+ *   [ja]
+ *     画面全体をマスクするモーダル用コンポーネントです。下側にあるコンポーネントは、
+ *     モーダルが表示されている間はイベント通知が行われません。
+ *   [/ja]
+ * @guide UsingModal
+ *   [en]Using ons-modal component[/en]
+ *   [ja]モーダルの使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @codepen devIg
  * @example
  * <ons-modal>
  *   ...
  * </ons-modal>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this modal.[/en]
+ *   [ja]このモーダルを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature toggle()
+ * @description
+ *   [en]Toggle modal visibility.[/en]
+ *   [ja]モーダルの表示を切り替えます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature show()
+ * @description
+ *   [en]Show modal.[/en]
+ *   [ja]モーダルを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature hide()
+ * @description
+ *   [en]Hide modal.[/en]
+ *   [ja]モーダルを非表示にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+ * @description
+ *   [en]Retrieve the back button handler.[/en]
+ *   [ja]ons-modalに紐付いているバックボタンハンドラを取得します。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -14069,7 +16859,7 @@ limitations under the License.
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      scope: false, 
+      scope: false,
       transclude: false,
 
       compile: function(element, attrs) {
@@ -14089,14 +16879,12 @@ limitations under the License.
 
             $onsen.declareVarAttribute(attrs, modal);
 
-            $onsen.aliasStack.register('ons.modal', modal);
             element.data('ons-modal', modal);
 
             scope.$on('$destroy', function() {
               modal._events = undefined;
               $onsen.removeModifierMethods(modal);
               element.data('ons-modal', undefined);
-              $onsen.aliasStack.unregister('ons.modal', modal);
             });
           },
 
@@ -14132,45 +16920,29 @@ limitations under the License.
  * @ngdoc directive
  * @id navigator
  * @name ons-navigator
+ * @category navigation
  * @description
- *  [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
- *  [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
- * @param page
- *  [en]First page to show when navigator is initialized.[/en]
- *  [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
- * @param var
- *  [en]Variable name to refer this navigator.[/en]
- *  [ja]ナビゲーターを参照するための変数を指定します。[/ja]
- * @property pushPage(pageUrl,options)
- *  [en]Pushes the specified pageUrl into the page stack.[/en]
- *  [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
- * @property insertPage(index,pageUrl,options)
- *  [en]Insert the specified pageUrl into the page stack with specified index.[/en]
- *  [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
- * @property popPage()
- *  [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
- *  [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
- * @property resetToPage(pageUrl,options)
- *  [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
- *  [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
- * @property getCurrentPage()
- *  [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
- *  [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
- * @property getPages()
- *  [en]Retrieve the entire page stack of the navigator.[/en]
- *  [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back button handler for overriding the default behavior.[/en]
- *  [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are prepop, prepush, postpop and postpush.[/en]
- *  [ja]イベントリスナーを追加します。prepop, prepush, postpop, postpushを指定できます。[/ja]
+ *   [en]A component that provides page stack management and navigation. This component does not have a visible content.[/en]
+ *   [ja]ページスタックの管理とナビゲーション機能を提供するコンポーネント。画面上への出力はありません。[/ja]
  * @codepen yrhtv
- * @guide PageNavigation [en]Guide for page navigation[/en][ja]ページナビゲーションの概要[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
+ * @guide PageNavigation
+ *   [en]Guide for page navigation[/en]
+ *   [ja]ページナビゲーションの概要[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-toolbar
+ *   [en]ons-toolbar component[/en]
+ *   [ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button
+ *   [en]ons-back-button component[/en]
+ *   [ja]ons-back-buttonコンポーネント[/ja]
  * @example
  * <ons-navigator animation="slide" var="app.navi">
  *   <ons-page>
@@ -14197,6 +16969,313 @@ limitations under the License.
  * </ons-template>
  */
 
+/**
+ * @ngdoc event
+ * @name prepush
+ * @description
+ *   [en]Fired just before a page is pushed.[/en]
+ *   [ja]pageがpushされる直前に発火されます。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Object} event.currentPage
+ *   [en]Current page object.[/en]
+ *   [ja]現在のpageオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Call this function to cancel the push.[/en]
+ *   [ja]この関数を呼び出すと、push処理がキャンセルされます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name prepop
+ * @description
+ *   [en]Fired just before a page is popped.[/en]
+ *   [ja]pageがpopされる直前に発火されます。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Object} event.currentPage
+ *   [en]Current page object.[/en]
+ *   [ja]現在のpageオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Call this function to cancel the pop.[/en]
+ *   [ja]この関数を呼び出すと、pageのpopがキャンセルされます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postpush
+ * @description
+ *   [en]Fired just after a page is pushed.[/en]
+ *   [ja]pageがpushされてアニメーションが終了してから発火されます。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Object} event.enterPage
+ *   [en]Object of the next page.[/en]
+ *   [ja]pushされたpageオブジェクト。[/ja]
+ * @param {Object} event.leavePage
+ *   [en]Object of the previous page.[/en]
+ *   [ja]以前のpageオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postpop
+ * @description
+ *   [en]Fired just after a page is popped.[/en]
+ *   [ja]pageがpopされてアニメーションが終わった後に発火されます。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.navigator
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Object} event.enterPage
+ *   [en]Object of the next page.[/en]
+ *   [ja]popされて表示されるページのオブジェクト。[/ja]
+ * @param {Object} event.leavePage
+ *   [en]Object of the previous page.[/en]
+ *   [ja]popされて消えるページのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name page
+ * @type {String}
+ * @description
+ *   [en]First page to show when navigator is initialized.[/en]
+ *   [ja]ナビゲーターが初期化された時に表示するページを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this navigator.[/en]
+ *  [ja]このナビゲーターを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prepush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepush" event is fired.[/en]
+ *  [ja]"prepush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prepop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prepop" event is fired.[/en]
+ *  [ja]"prepop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpush
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpush" event is fired.[/en]
+ *  [ja]"postpush"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postpop
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postpop" event is fired.[/en]
+ *  [ja]"postpop"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature pushPage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]pushPage()による画面遷移が終了した時に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Pushes the specified pageUrl into the page stack.[/en]
+ *   [ja]指定したpageUrlを新しいページスタックに追加します。新しいページが表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature insertPage(index, pageUrl, [options])
+ * @param {Number} index
+ *   [en]The index where it should be inserted.[/en]
+ *   [ja]スタックに挿入する位置のインデックスを指定します。[/ja]
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or a <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @description
+ *   [en]Insert the specified pageUrl into the page stack with specified index.[/en]
+ *   [ja]指定したpageUrlをページスタックのindexで指定した位置に追加します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature popPage([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Pops the current page from the page stack. The previous page will be displayed.[/en]
+ *   [ja]現在表示中のページをページスタックから取り除きます。一つ前のページに戻ります。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature replacePage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Replaces the current page with the specified one.[/en]
+ *   [ja]現在表示中のページをを指定したページに置き換えます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature resetToPage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either a HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくはons-templateで宣言したテンプレートのid属性の値を指定できます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "slide", "simpleslide", "lift", "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定できます。"slide", "simpleslide", "lift", "fade", "none"のいずれかを指定できます。[/ja]
+ * @param {Function} [options.onTransitionEnd]
+ *   [en]Function that is called when the transition has ended.[/en]
+ *   [ja]このメソッドによる画面遷移が終了した際に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Clears page stack and adds the specified pageUrl to the page stack.[/en]
+ *   [ja]ページスタックをリセットし、指定したページを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCurrentPage()
+ * @return {Object}
+ *   [en]Current page object.[/en]
+ *   [ja]現在のpageオブジェクト。[/ja]
+ * @description
+ *   [en]Get current page's navigator item. Use this method to access options passed by pushPage() or resetToPage() method.[/en]
+ *   [ja]現在のページを取得します。pushPage()やresetToPage()メソッドの引数を取得できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getPages()
+ * @return {List}
+ *   [en]List of page objects.[/en]
+ *   [ja]pageオブジェクトの配列。[/ja]
+ * @description
+ *   [en]Retrieve the entire page stack of the navigator.[/en]
+ *   [ja]ナビゲーターの持つページスタックの一覧を取得します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+ * @description
+ *   [en]Retrieve the back button handler for overriding the default behavior.[/en]
+ *   [ja]バックボタンハンドラを取得します。デフォルトの挙動を変更することができます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -14217,12 +17296,10 @@ limitations under the License.
 
         return {
           pre: function(scope, element, attrs, controller) {
-            var navigator = new NavigatorView({
-              scope: scope, 
-              element: element
-            });
+            var navigator = new NavigatorView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, navigator);
+            $onsen.registerEventHandlers(navigator, 'prepush prepop postpush postpop destroy');
 
             if (attrs.page) {
               navigator.pushPage(attrs.page, {});
@@ -14238,13 +17315,14 @@ limitations under the License.
               pageElement = null;
             }
 
-            $onsen.aliasStack.register('ons.navigator', navigator);
             element.data('ons-navigator', navigator);
 
+            element.data('_scope', scope);
+
             scope.$on('$destroy', function() {
+              element.data('_scope', undefined);
               navigator._events = undefined;
               element.data('ons-navigator', undefined);
-              $onsen.aliasStack.unregister('ons.navigator', navigator);
               element = null;
             });
 
@@ -14262,39 +17340,25 @@ limitations under the License.
  * @ngdoc directive
  * @id page
  * @name ons-page
+ * @category base
  * @description
- *  [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
- *  [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
- * @param var
- *  [en]Variable name to refer this page.[/en]
- *  [ja]このページを参照するための変数名を指定します。[/ja]
- * @param modifier
- *  [en]Specify modifier name to specify custom styles.[/en]
- *  [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
- * @param on-device-backbutton
- *  [en]Allows you to specify custom behavior when the back button is pressed.[/en]
- *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
- * @param ng-device-backbutton
- *  [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
- *  [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
- *  [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ *   [en]Should be used as root component of each page. The content inside page component is scrollable.[/en]
+ *   [ja]ページ定義のためのコンポーネントです。このコンポーネントの内容はスクロールが許可されます。[/ja]
  * @guide ManagingMultiplePages
- *  [en]Managing multiple pages[/en]
- *  [ja]複数のページを管理する[/ja]
+ *   [en]Managing multiple pages[/en]
+ *   [ja]複数のページを管理する[/ja]
  * @guide Pageinitevent
- *  [en]Event for page initialization[/en]
- *  [ja]ページ初期化のイベント[/ja]
+ *   [en]Event for page initialization[/en]
+ *   [ja]ページ初期化のイベント[/ja]
  * @guide HandlingBackButton
- *  [en]Handling back button[/en]
- *  [ja]バックボタンに対応する[/ja]
+ *   [en]Handling back button[/en]
+ *   [ja]バックボタンに対応する[/ja]
  * @guide OverridingCSSstyles
- *  [en]Overriding CSS styles[/en]
- *  [ja]CSSスタイルのオーバーライド[/ja]
+ *   [en]Overriding CSS styles[/en]
+ *   [ja]CSSスタイルのオーバーライド[/ja]
  * @guide DefiningMultiplePagesinSingleHTML
- *  [en]Defining multiple pages in single html[/en]
- *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
  * <ons-page>
  *   <ons-toolbar>
@@ -14304,6 +17368,54 @@ limitations under the License.
  *   ...
  * </ons-page>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this page.[/en]
+ *   [ja]このページを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]Specify modifier name to specify custom styles.[/en]
+ *   [ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name on-device-backbutton
+ * @type {Expression}
+ * @description
+ *   [en]Allows you to specify custom behavior when the back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-device-backbutton
+ * @type {Expression}
+ * @description
+ *   [en]Allows you to specify custom behavior with an AngularJS expression when the back button is pressed.[/en]
+ *   [ja]デバイスのバックボタンが押された時の挙動を設定できます。AngularJSのexpressionを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+ * @description
+ *   [en]Get the associated back button handler. This method may return null if no handler is assigned.[/en]
+ *   [ja]バックボタンハンドラを取得します。このメソッドはnullを返す場合があります。[/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -14333,9 +17445,9 @@ limitations under the License.
     }
 
     function fireActualPageInitEvent(element) {
-      var event = document.createEvent('HTMLEvents');    
+      var event = document.createEvent('HTMLEvents');
       event.initEvent('pageinit', true, true);
-      element.dispatchEvent(event);    
+      element.dispatchEvent(event);
     }
 
     function fillStatusBar(element) {
@@ -14361,7 +17473,6 @@ limitations under the License.
 
       $onsen.declareVarAttribute(attrs, page);
 
-      $onsen.aliasStack.register('ons.page', page);
       element.data('ons-page', page);
 
       var modifierTemplater = $onsen.generateModifierTemplater(attrs),
@@ -14377,11 +17488,13 @@ limitations under the License.
       pageBackground.addClass(modifierTemplater('page--*__background'));
       pageBackground = null;
 
+      element.data('_scope', scope);
+
       $onsen.cleaner.onDestroy(scope, function() {
+        element.data('_scope', undefined);
         page._events = undefined;
         $onsen.removeModifierMethods(page);
         element.data('ons-page', undefined);
-        $onsen.aliasStack.unregister('ons.page', page);
 
         $onsen.clearComponent({
           element: element,
@@ -14461,76 +17574,336 @@ limitations under the License.
 })();
 
 /**
-* @ngdoc directive
-* @id popover 
-* @name ons-popover 
-* @description
-*  [en]A component that displays a popover next to an element.[/en]
-*  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
-* @param var 
-*  [en]Variable name to refer this popover.[/en]
-*  [ja]このポップオーバーを参照するための名前を指定します。[/ja]
-* @param modifier
-*  [en]The appearance of the popover.[/en]
-*  [ja]ポップオーバーの表現を指定します。[/ja]
-* @param direction
-*  [en]A space separated list of directions. If more than one will be chosen automatically. Valid directions are "up", "down", "left" and "right".[/en]
-*  [ja]ポップオーバーを表示する方向を空白区切りで複数指定できます。指定できる方向は、"up", "down", "left", "right"の4つです。複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。[/ja]
-* @param cancelable
-*  [en]If this attribute is set the popover can be closed by tapping the background or pressing the back button.[/en] 
-*  [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にダイアログを閉じます。[/ja]
-* @param disabled
-*  [en]If this attribute is set the popover is disabled.[/en]
-*  [ja]この属性がある時、ポップオーバーはdisabled状態になります。[/ja]
-* @param animation
-*  [en]The animation used when showing an hiding the popover. Can be either "none" or "fade".[/en]
-*  [ja]ポップオーバーを表示する際のアニメーション名を指定します。[/ja]
-* @param mask-color
-*  [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
-*  [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
-* @property show(target,options)
-*  [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
-*  [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
-* @property hide()
-*  [en]Close the popover.[/en]
-*  [ja]ポップオーバーを閉じます。[/ja]
-* @property isShown()
-*  [en]Returns whether the popover is visible or not.[/en]
-*  [ja]ポップオーバーが表示されているかどうかを返します。[/ja]
-* @property destroy()
-*  [en]Destroy the popover and remove it from the DOM tree.[/en]
-*  [ja]ポップオーバーを破棄して、DOMツリーから取り除きます。[/ja]
-* @property setCancelable(cancelable)
-*  [en]Set whether the popover can be canceled by the user when it is shown.[/en]
-*  [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]
-* @property isCancelable()
-*  [en]Returns whether the popover is cancelable or not.[/en]
-*  [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]
-* @property setDisabled(disabled)
-*  [en]Disable or enable the popover.[/en]
-*  [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]
-* @property isDisabled()
-*  [en]Returns whether the popover is disabled or enabled.[/en]
-*  [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]
-* @property on(eventName,listener)
-*  [en]Add an event listener. Preset events are "preshow", "postshow", "prehide" and "posthide".[/en]
-*  [ja]イベントリスナーを追加します。preshow, postshow, prehide, posthideを指定できます。[/ja]
-* @codepen ZYYRKo
-* @example
-* <script>
-* ons.ready(function() {
-*   ons.createPopover('popover.html').then(function(popover) {
-*     popover.show('#mybutton');   
-*   });
-* });
-* </script>
-*
-* <script type="text/ons-template" id="popover.html">
-*   <ons-popover cancelable>
-*     <p style="text-align: center; opacity: 0.5;">This popover will choose which side it's displayed on automatically.</p>
-*   </ons-popover>
-* </script>
-*/
+ * @ngdoc directive
+ * @id popover
+ * @name ons-popover
+ * @category popover
+ * @modifier android
+ *   [en]Display an Android style popover.[/en]
+ *   [ja]Androidライクなポップオーバーを表示します。[/ja]
+ * @description
+ *  [en]A component that displays a popover next to an element.[/en]
+ *  [ja]ある要素を対象とするポップオーバーを表示するコンポーネントです。[/ja]
+ * @codepen ZYYRKo
+ * @example
+ * <script>
+ * ons.ready(function() {
+ *   ons.createPopover('popover.html').then(function(popover) {
+ *     popover.show('#mybutton');   
+ *   });
+ * });
+ * </script>
+ *
+ * <script type="text/ons-template" id="popover.html">
+ *   <ons-popover cancelable>
+ *     <p style="text-align: center; opacity: 0.5;">This popover will choose which side it's displayed on automatically.</p>
+ *   </ons-popover>
+ * </script>
+ */
+
+/**
+ * @ngdoc event
+ * @name preshow
+ * @description
+ *   [en]Fired just before the popover is displayed.[/en]
+ *   [ja]ポップオーバーが表示される直前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Function} event.cancel 
+ *   [en]Call this function to stop the popover from being shown.[/en]
+ *   [ja]この関数を呼び出すと、ポップオーバーの表示がキャンセルされます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postshow
+ * @description
+ *   [en]Fired just after the popover is displayed.[/en]
+ *   [ja]ポップオーバーが表示された直後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name prehide
+ * @description
+ *   [en]Fired just before the popover is hidden.[/en]
+ *   [ja]ポップオーバーが隠れる直前に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {Function} event.cancel 
+ *   [en]Call this function to stop the popover from being hidden.[/en]
+ *   [ja]この関数を呼び出すと、ポップオーバーが隠れる処理をキャンセルします。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name posthide
+ * @description
+ *   [en]Fired just after the popover is hidden.[/en]
+ *   [ja]ポップオーバーが隠れた後に発火します。[/ja]
+ * @param {Object} event [en]Event object.[/en]
+ * @param {Object} event.popover
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ */
+
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this popover.[/en]
+ *  [ja]このポップオーバーを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the popover.[/en]
+ *  [ja]ポップオーバーの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name direction
+ * @type {String}
+ * @description
+ *  [en]
+ *    A space separated list of directions. If more than one direction is specified,
+ *    it will be chosen automatically. Valid directions are "up", "down", "left" and "right".
+ *  [/en]
+ *  [ja]
+ *    ポップオーバーを表示する方向を空白区切りで複数指定できます。
+ *    指定できる方向は、"up", "down", "left", "right"の4つです。空白区切りで複数指定することもできます。
+ *    複数指定された場合、対象とする要素に合わせて指定した値から自動的に選択されます。
+ *  [/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name cancelable
+ * @description
+ *   [en]If this attribute is set the popover can be closed by tapping the background or by pressing the back button.[/en]
+ *   [ja]この属性があると、ポップオーバーが表示された時に、背景やバックボタンをタップした時にをポップオーバー閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *   [en]If this attribute is set the popover is disabled.[/en]
+ *   [ja]この属性がある時、ポップオーバーはdisabled状態になります。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @description
+ *   [en]The animation used when showing an hiding the popover. Can be either "none" or "fade".[/en]
+ *   [ja]ポップオーバーを表示する際のアニメーション名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name mask-color
+ * @type {Color}
+ * @description
+ *   [en]Color of the background mask. Default is "rgba(0, 0, 0, 0.2)".[/en]
+ *   [ja]背景のマスクの色を指定します。デフォルトは"rgba(0, 0, 0, 0.2)"です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preshow" event is fired.[/en]
+ *  [ja]"preshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prehide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prehide" event is fired.[/en]
+ *  [ja]"prehide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postshow
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postshow" event is fired.[/en]
+ *  [ja]"postshow"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-posthide
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "posthide" event is fired.[/en]
+ *  [ja]"posthide"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature show(target, [options])
+ * @param {String|Event|HTMLElement} target
+ *   [en]Target element. Can be either a CSS selector, an event object or a DOM element.[/en]
+ *   [ja]ポップオーバーのターゲットとなる要素を指定します。CSSセレクタかeventオブジェクトかDOM要素のいずれかを渡せます。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+ * @description
+ *   [en]Open the popover and point it at a target. The target can be either an event, a css selector or a DOM element..[/en]
+ *   [ja]対象とする要素にポップオーバーを表示します。target引数には、$eventオブジェクトやDOMエレメントやCSSセレクタを渡すことが出来ます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature hide([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade"もしくは"none"を指定できます。[/ja]
+ * @description
+ *   [en]Close the popover.[/en]
+ *   [ja]ポップオーバーを閉じます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isShown()
+ * @return {Boolean}
+ *   [en]true if the popover is visible.[/en]
+ *   [ja]ポップオーバーが表示されている場合にtrueとなります。[/ja]
+ * @description
+ *   [en]Returns whether the popover is visible or not.[/en]
+ *   [ja]ポップオーバーが表示されているかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature destroy()
+ * @description
+ *   [en]Destroy the popover and remove it from the DOM tree.[/en]
+ *   [ja]ポップオーバーを破棄して、DOMツリーから取り除きます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setCancelable(cancelable)
+ * @param {Boolean} cancelable
+ *   [en]If true the popover will be cancelable.[/en]
+ *   [ja]ポップオーバーがキャンセル可能にしたい場合にtrueを指定します。[/ja]
+ * @description
+ *   [en]Set whether the popover can be canceled by the user when it is shown.[/en]
+ *   [ja]ポップオーバーを表示した際に、ユーザがそのポップオーバーをキャンセルできるかどうかを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isCancelable()
+ * @return {Boolean}
+ *   [en]true if the popover is cancelable.[/en]
+ *   [ja]ポップオーバーがキャンセル可能であればtrueとなります。[/ja]
+ * @description
+ *   [en]Returns whether the popover is cancelable or not.[/en]
+ *   [ja]このポップオーバーがキャンセル可能かどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @param {Boolean} disabled
+ *   [en]If true the popover will be disabled.[/en]
+ *   [ja]ポップオーバーをdisabled状態にしたい場合にはtrueを指定します。[/ja]
+ * @description
+ *   [en]Disable or enable the popover.[/en]
+ *   [ja]このポップオーバーをdisabled状態にするかどうかを設定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @return {Boolean}
+ *   [en]true if the popover is disabled.[/en]
+ *   [ja]ポップオーバーがdisabled状態であればtrueとなります。[/ja]
+ * @description
+ *   [en]Returns whether the popover is disabled or enabled.[/en]
+ *   [ja]このポップオーバーがdisabled状態かどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
 
 (function(){
   'use strict';
@@ -14545,7 +17918,7 @@ limitations under the License.
       scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/popover.tpl',
       compile: function(element, attrs, transclude) {
-        return { 
+        return {
           pre: function(scope, element, attrs) {
             transclude(scope, function(clone) {
               angular.element(element[0].querySelector('.popover__content')).append(clone);
@@ -14554,7 +17927,7 @@ limitations under the License.
             var popover = new PopoverView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, popover);
-            $onsen.aliasStack.register('ons.popover', popover);
+            $onsen.registerEventHandlers(popover, 'preshow prehide postshow posthide destroy');
 
             element.data('ons-popover', popover);
 
@@ -14562,13 +17935,12 @@ limitations under the License.
               popover._events = undefined;
               $onsen.removeModifierMethods(popover);
               element.data('ons-popover', undefined);
-              $onsen.aliasStack.unregister('ons.popover', popover);
               element = null;
             });
 
             scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
-            $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover'))); 
-            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content'))); 
+            $onsen.addModifierMethods(popover, 'popover--*', angular.element(element[0].querySelector('.popover')));
+            $onsen.addModifierMethods(popover, 'popover__content--*', angular.element(element[0].querySelector('.popover__content')));
 
             if ($onsen.isAndroid()) {
               setImmediate(function() {
@@ -14591,25 +17963,285 @@ limitations under the License.
 
 /**
  * @ngdoc directive
+ * @id pull-hook
+ * @name ons-pull-hook
+ * @category control
+ * @description
+ *   [en]Component that adds "pull-to-refresh" to an <ons-page> element.[/en]
+ *   [ja]ons-page要素以下でいわゆるpull to refreshを実装するためのコンポーネントです。[/ja]
+ * @codepen WbJogM
+ * @guide UsingPullHook 
+ *   [en]How to use Pull Hook[/en]
+ *   [ja]プルフックを使う[/ja]
+ * @example
+ * <script>
+ *   ons.bootstrap()
+ *
+ *   .controller('MyController', function($scope, $timeout) {
+ *     $scope.items = [3, 2 ,1];
+ *
+ *     $scope.load = function($done) {
+ *       $timeout(function() {
+ *         $scope.items.unshift($scope.items.length + 1);
+ *         $done();
+ *       }, 1000);
+ *     };
+ *   });
+ * </script>
+ *
+ * <ons-page ng-controller="MyController">
+ *   <ons-pull-hook var="loaded" ng-action="load($done)">
+ *     <span ng-switch="loader.getCurrentState()">
+ *       <span ng-switch-when="initial">Pull down to refresh</span>
+ *       <span ng-switch-when="preaction">Release to refresh</span>
+ *       <span ng-switch-when="action">Loading data. Please wait...</span>
+ *     </span>
+ *   </ons-pull-hook>
+ *   <ons-list>
+ *     <ons-list-item ng-repeat="item in items">
+ *       Item #{{ item }}
+ *     </ons-list-item>
+ *   </ons-list>
+ * </ons-page>
+ */
+
+/**
+ * @ngdoc event
+ * @name changestate
+ * @description
+ *   [en]Fired when the state is changed. The state can be either "initial", "preaction" or "action".[/en]
+ *   [ja]コンポーネントの状態が変わった場合に発火します。状態は、"initial", "preaction", "action"のいずれかです。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Object} event.pullHook
+ *   [en]Component object.[/en]
+ *   [ja]コンポーネントのオブジェクト。[/ja]
+ * @param {String} event.state
+ *   [en]Current state.[/en]
+ *   [ja]現在の状態名を参照できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this component.[/en]
+ *   [ja]このコンポーネントを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *   [en]If this attribute is set the "pull-to-refresh" functionality is disabled.[/en]
+ *   [ja]この属性がある時、disabled状態になりアクションが実行されなくなります[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ng-action
+ * @type {Expression}
+ * @description
+ *   [en]Use to specify custom behavior when the page is pulled down. A <code>$done</code> function is available to tell the component that the action is completed.[/en]
+ *   [ja]pull downしたときの振る舞いを指定します。アクションが完了した時には<code>$done</code>関数を呼び出します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name on-action
+ * @type {Expression}
+ * @description
+ *   [en]Same as <code>ng-action</code> but can be used without AngularJS. A function called <code>done</code> is available to call when action is complete.[/en]
+ *   [ja]<code>ng-action</code>と同じですが、AngularJS無しで利用する場合に利用できます。アクションが完了した時には<code>done</code>関数を呼び出します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name height
+ * @type {String}
+ * @description
+ *   [en]Specify the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".[/en]
+ *   [ja]コンポーネントの高さを指定します。この高さ以上にpull downすると"preaction"状態に移行します。デフォルトの値は"64px"です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name threshold-height
+ * @type {String}
+ * @description
+ *   [en]Specify the threshold height. The component automatically switches to the "action" state when pulled further than this value. The default value is "96px". A negative value or a value less than the height will disable this property.[/en]
+ *   [ja]閾値となる高さを指定します。この値で指定した高さよりもpull downすると、このコンポーネントは自動的に"action"状態に移行します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-changestate
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "changestate" event is fired.[/en]
+ *  [ja]"changestate"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setDisabled(disabled)
+ * @param {Boolean} disabled
+ *   [en]If true the pull hook will be disabled.[/en]
+ *   [ja]trueを指定すると、プルフックがdisabled状態になります。[/ja]
+ * @description
+ *   [en]Disable or enable the component.[/en]
+ *   [ja]disabled状態にするかどうかを設定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isDisabled()
+ * @return {Boolean}
+ *   [en]true if the pull hook is disabled.[/en]
+ *   [ja]プルフックがdisabled状態の場合、trueを返します。[/ja]
+ * @description
+ *   [en]Returns whether the component is disabled or enabled.[/en]
+ *   [ja]dsiabled状態になっているかを得ることが出来ます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setHeight(height)
+ * @param {Number} height
+ *   [en]Desired height.[/en]
+ *   [ja]要素の高さを指定します。[/ja]
+ * @description
+ *   [en]Specify the height.[/en]
+ *   [ja]高さを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setThresholdHeight(thresholdHeight)
+ * @param {Number} thresholdHeight
+ *   [en]Desired threshold height.[/en]
+ *   [ja]プルフックのアクションを起こす閾値となる高さを指定します。[/ja]
+ * @description
+ *   [en]Specify the threshold height.[/en]
+ *   [ja]閾値となる高さを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
+
+(function() {
+  'use strict';
+
+  var module = angular.module('onsen');
+
+  /**
+   * Pull hook directive.
+   */
+  module.directive('onsPullHook', ['$onsen', 'PullHookView', function($onsen, PullHookView) {
+    return {
+      restrict: 'E',
+      replace: false,
+      scope: true,
+      compile: function(element, attrs) {
+        return {
+          pre: function(scope, element, attrs) {
+            var pullHook = new PullHookView(scope, element, attrs);
+
+            $onsen.declareVarAttribute(attrs, pullHook);
+            $onsen.registerEventHandlers(pullHook, 'changestate destroy');
+            element.data('ons-pull-hook', pullHook);
+
+            scope.$on('$destroy', function() {
+              pullHook._events = undefined;
+              element.data('ons-pull-hook', undefined);
+              scope = element = attrs = null;
+            });
+          },
+          post: function(scope, element) {
+            $onsen.fireComponentEvent(element[0], 'init');
+          }
+        };
+      }
+    };
+  }]);
+
+})();
+
+/**
+ * @ngdoc directive
  * @id row
  * @name ons-row
+ * @category grid
  * @description
- *  [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
- *  [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
- * @param align
- *  [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
- *  [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
- *  [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
- *  [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
+ *   [en]Represents a row in the grid system. Use with ons-col to layout components.[/en]
+ *   [ja]グリッドシステムにて行を定義します。ons-colとともに使用し、コンポーネントの配置に使用します。[/ja]
  * @codepen GgujC {wide}
- * @guide Layouting [en]Layouting guide[/en][ja]レイアウト調整[/ja]
- * @seealso ons-col [en]ons-col component[/en][ja]ons-colコンポーネント[/ja]
+ * @guide Layouting
+ *   [en]Layouting guide[/en]
+ *   [ja]レイアウト調整[/ja]
+ * @seealso ons-col
+ *   [en]ons-col component[/en]
+ *   [ja]ons-colコンポーネント[/ja]
+ * @note
+ *   [en]For Android 4.3 and earlier, and iOS6 and earlier, when using mixed alignment with ons-row and ons-column, they may not be displayed correctly. You can use only one align.[/en]
+ *   [ja]Android 4.3以前、もしくはiOS 6以前のOSの場合、ons-rowとons-columnを組み合わせた場合に描画が崩れる場合があります。[/ja]
  * @example
  * <ons-row>
  *   <ons-col width="50px"><ons-icon icon="fa-twitter"></ons-icon></ons-col>
  *   <ons-col>Text</ons-col>
  * </ons-row>
  */
+
+/**
+ * @ngdoc attribute
+ * @name align
+ * @type {String}
+ * @description
+ *   [en]Short hand attribute for aligning vertically. Valid values are top, bottom, and center.[/en]
+ *   [ja]縦に整列するために指定します。top、bottom、centerのいずれかを指定できます。[/ja]
+ */
+
 (function(){
   'use strict';
 
@@ -14642,7 +18274,7 @@ limitations under the License.
               element.addClass('row-' + align);
             }
           }
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
@@ -14655,8 +18287,10 @@ limitations under the License.
  * @ngdoc directive
  * @id scroller
  * @name ons-scroller
+ * @category base
  * @description
- * Makes the content inside this tag scrollable.
+ *   [en]Makes the content inside this tag scrollable.[/en]
+ *   [ja]要素内をスクロール可能にします。[/ja]
  * @example
  * <ons-scroller style="height: 200px; width: 100%">
  *   ...
@@ -14679,15 +18313,15 @@ limitations under the License.
 
       compile: function(element, attrs) {
         var content = element.addClass('ons-scroller').children().remove();
-        
-        var wrapper = angular.element('<div></div>');
-        wrapper.addClass('ons-scroller__content ons-scroller-inner');
-        element.append(wrapper);
 
         return function(scope, element, attrs, controller, transclude) {
           if (attrs.ngController) {
             throw new Error('"ons-scroller" can\'t accept "ng-controller" directive.');
           }
+
+          var wrapper = angular.element('<div></div>');
+          wrapper.addClass('ons-scroller__content ons-scroller-inner');
+          element.append(wrapper);
 
           transclude(scope.$parent, function(cloned) {
             wrapper.append(cloned);
@@ -14744,7 +18378,7 @@ limitations under the License.
 
             }, 500);
           }
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
@@ -14756,64 +18390,26 @@ limitations under the License.
  * @ngdoc directive
  * @id sliding_menu
  * @name ons-sliding-menu
+ * @category navigation
  * @description
- *  [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
- *  [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
- * @param menu-page
- *  [en]The url of the menu page.[/en]
- *  [ja]左に位置するメニューページのURLを指定します。[/ja]
- * @param main-page
- *  [en]The url of the main page.[/en]
- *  [ja]右に位置するメインページのURLを指定します。[/ja]
- * @param swipeable
- *  [en]Whether to enable swipe interaction.[/en]
- *  [ja]スワイプ操作を有効にする場合に指定します。[/ja]
- * @param swipe-target-width
- *  [en]The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
- *  [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
- * @param max-slide-distance
- *  [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
- *  [ja]menu-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
- * @param var
- *  [en]Variable name to refer this sliding menu.[/en]
- *  [ja]JavaScriptから操作するための変数名を指定します。[/ja]
- * @param side
- *  [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
- *  [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
- *
- * @property setMainPage(pageUrl,[options])
- *  [en]Show the page specified in pageUrl in the main contents pane.[/en]
- *  [ja]中央部分に表示されるページをpageUrlに指定します。[/ja]
- * @property setMenuPage(pageUrl,[options])
- *  [en]Show the page specified in pageUrl in the side menu pane.[/en]
- *  [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
- * @property openMenu([options])
- *  [en]Slide the above layer to reveal the layer behind.[/en]
- *  [ja]メニューページを表示します。[/ja]
- * @property closeMenu([options])
- *  [en]Slide the above layer to hide the layer behind.[/en]
- *  [ja]メニューページを非表示にします。[/ja]
- * @property toggleMenu([options])
- *  [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
- *  [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are preopen, preclose, postopen and postclose.[/en]
- *  [ja]イベントリスナーを追加します。preopen, preclose, postopen, postcloseのイベントに対応しています。[/ja]
- * @property isMenuOpened()
- *  [en]Returns true if the menu page is open, otherwise false.[/en]
- *  [ja]メニューページが開いている場合はtrue、そうでない場合はfalseを返します。[/ja]
- * @property getDeviceBackButtonHandler()
- *  [en]Retrieve the back-button handler.[/en]
- *  [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
- * @property setSwipeable(swipeable)
- *  [en]Specify if the menu should be swipeable or not.[/en]
- *  [ja]スワイプで開閉するかどうかを設定する。[/ja]
+ *   [en]Component for sliding UI where one page is overlayed over another page. The above page can be slided aside to reveal the page behind.[/en]
+ *   [ja]スライディングメニューを表現するためのコンポーネントで、片方のページが別のページの上にオーバーレイで表示されます。above-pageで指定されたページは、横からスライドして表示します。[/ja]
  * @codepen IDvFJ
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
- * @guide UsingSlidingMenu [en]Using sliding menu[/en][ja]スライディングメニューを使う[/ja]
- * @guide EventHandling [en]Using events[/en][ja]イベントの利用[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
+ * @guide UsingSlidingMenu
+ *   [en]Using sliding menu[/en]
+ *   [ja]スライディングメニューを使う[/ja]
+ * @guide EventHandling
+ *   [en]Using events[/en]
+ *   [ja]イベントの利用[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
  * <ons-sliding-menu var="app.menu" main-page="page.html" menu-page="menu.html" max-slide-distance="200px" type="reveal" side="left">
  * </ons-sliding-menu>
@@ -14833,6 +18429,337 @@ limitations under the License.
  * </ons-template>
  *
  */
+
+/**
+ * @ngdoc event
+ * @name preopen
+ * @description
+ *   [en]Fired just before the sliding menu is opened.[/en]
+ *   [ja]スライディングメニューが開く前に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postopen
+ * @description
+ *   [en]Fired just after the sliding menu is opened.[/en]
+ *   [ja]スライディングメニューが開き終わった後に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name preclose
+ * @description
+ *   [en]Fired just before the sliding menu is closed.[/en]
+ *   [ja]スライディングメニューが閉じる前に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postclose
+ * @description
+ *   [en]Fired just after the sliding menu is closed.[/en]
+ *   [ja]スライディングメニューが閉じ終わった後に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.slidingMenu
+ *   [en]Sliding menu view object.[/en]
+ *   [ja]イベントが発火したSlidingMenuオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this sliding menu.[/en]
+ *  [ja]このスライディングメニューを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name menu-page
+ * @type {String}
+ * @description
+ *   [en]The url of the menu page.[/en]
+ *   [ja]左に位置するメニューページのURLを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name main-page
+ * @type {String}
+ * @description
+ *   [en]The url of the main page.[/en]
+ *   [ja]右に位置するメインページのURLを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name swipeable
+ * @type {Boolean}
+ * @description
+ *   [en]Whether to enable swipe interaction.[/en]
+ *   [ja]スワイプ操作を有効にする場合に指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name swipe-target-width
+ * @type {String}
+ * @description
+ *   [en]The width of swipeable area calculated from the left (in pixels). Use this to enable swipe only when the finger touch on the screen edge.[/en]
+ *   [ja]スワイプの判定領域をピクセル単位で指定します。画面の端から指定した距離に達するとページが表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name max-slide-distance
+ * @type {String}
+ * @description
+ *   [en]How far the menu page will slide open. Can specify both in px and %. eg. 90%, 200px[/en]
+ *   [ja]menu-pageで指定されたページの表示幅を指定します。ピクセルもしくは%の両方で指定できます（例: 90%, 200px）[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name direction
+ * @type {String}
+ * @description
+ *   [en]Specify which side of the screen the menu page is located on. Possible values are "left" and "right".[/en]
+ *   [ja]menu-pageで指定されたページが画面のどちら側から表示されるかを指定します。leftもしくはrightのいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name type
+ * @type {String}
+ * @description
+ *   [en]Sliding menu animator. Possible values are reveal (default), push and overlay.[/en]
+ *   [ja]スライディングメニューのアニメーションです。"reveal"（デフォルト）、"push"、"overlay"のいずれかを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preopen" event is fired.[/en]
+ *  [ja]"preopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-preclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "preclose" event is fired.[/en]
+ *  [ja]"preclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postopen
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postopen" event is fired.[/en]
+ *  [ja]"postopen"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postclose
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postclose" event is fired.[/en]
+ *  [ja]"postclose"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setMainPage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Boolean} [options.closeMenu]
+ *   [en]If true the menu will be closed.[/en]
+ *   [ja]trueを指定すると、開いているメニューを閉じます。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function that is executed after the page has been set.[/en]
+ *   [ja]ページが読み込まれた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Show the page specified in pageUrl in the main contents pane.[/en]
+ *   [ja]中央部分に表示されるページをpageUrlに指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setMenuPage(pageUrl, [options])
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Boolean} [options.closeMenu]
+ *   [en]If true the menu will be closed after the menu page has been set.[/en]
+ *   [ja]trueを指定すると、開いているメニューを閉じます。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be executed after the menu page has been set.[/en]
+ *   [ja]メニューページが読み込まれた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Show the page specified in pageUrl in the side menu pane.[/en]
+ *   [ja]メニュー部分に表示されるページをpageUrlに指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature openMenu([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been opened.[/en]
+ *   [ja]メニューが開いた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Slide the above layer to reveal the layer behind.[/en]
+ *   [ja]メニューページを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature closeMenu([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been closed.[/en]
+ *   [ja]メニューが閉じられた後に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description
+ *   [en]Slide the above layer to hide the layer behind.[/en]
+ *   [ja]メニューページを非表示にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature toggleMenu([options])
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]This function will be called after the menu has been opened or closed.[/en]
+ *   [ja]メニューが開き終わった後か、閉じ終わった後に呼び出される関数オブジェクトです。[/ja]
+ * @description
+ *   [en]Slide the above layer to reveal the layer behind if it is currently hidden, otherwise, hide the layer behind.[/en]
+ *   [ja]現在の状況に合わせて、メニューページを表示もしくは非表示にします。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isMenuOpened()
+ * @return {Boolean}
+ *   [en]true if the menu is currently open.[/en]
+ *   [ja]メニューが開いていればtrueとなります。[/ja]
+ * @description
+ *   [en]Returns true if the menu page is open, otherwise false.[/en]
+ *   [ja]メニューページが開いている場合はtrue、そうでない場合はfalseを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getDeviceBackButtonHandler()
+ * @return {Object}
+ *   [en]Device back button handler.[/en]
+ *   [ja]デバイスのバックボタンハンドラを返します。[/ja]
+ * @description
+ *   [en]Retrieve the back-button handler.[/en]
+ *   [ja]ons-sliding-menuに紐付いているバックボタンハンドラを取得します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setSwipeable(swipeable)
+ * @param {Boolean} swipeable
+ *   [en]If true the menu will be swipeable.[/en]
+ *   [ja]スワイプで開閉できるようにする場合にはtrueを指定します。[/ja]
+ * @description
+ *   [en]Specify if the menu should be swipeable or not.[/en]
+ *   [ja]スワイプで開閉するかどうかを設定する。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -14863,11 +18790,13 @@ limitations under the License.
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
-          
+
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__menu ons-sliding-menu-inner'));
           element.append(angular.element('<div></div>').addClass('onsen-sliding-menu__main ons-sliding-menu-inner'));
 
           var slidingMenu = new SlidingMenuView(scope, element, attrs);
+
+          $onsen.registerEventHandlers(slidingMenu, 'preopen preclose postopen postclose destroy');
 
           if (mainHtml && !attrs.mainPage) {
             slidingMenu._appendMainPage(null, mainHtml);
@@ -14877,14 +18806,15 @@ limitations under the License.
             slidingMenu._appendMenuPage(menuHtml);
           }
 
-          $onsen.aliasStack.register('ons.slidingMenu', slidingMenu);
           $onsen.declareVarAttribute(attrs, slidingMenu);
           element.data('ons-sliding-menu', slidingMenu);
 
-          scope.$on('$destroy', function(){
+          element.data('_scope', scope);
+
+          scope.$on('$destroy', function() {
+            element.data('_scope', undefined);
             slidingMenu._events = undefined;
             element.data('ons-sliding-menu', undefined);
-            $onsen.aliasStack.unregister('ons.slidingMenu', slidingMenu);
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
@@ -14898,47 +18828,319 @@ limitations under the License.
  * @ngdoc directive
  * @id split-view
  * @name ons-split-view
+ * @category control
  * @description
  *  [en]Divides the screen into a left and right section.[/en]
- *  [ja]画面を左右に分割します。[/ja]
- * @param main-page
- *  [en]The url of the page on the right.[/en]
- *  [ja]右側に表示するページのURLを指定します。[/ja]
- * @param main-page-width
- *  [en]Main page width percentage. The secondary page width will be the remaining percentage.[/en]
- *  [ja]右側のページの幅をパーセント単位で指定します。[/ja]
- * @param secondary-page
- *  [en]The url of the page on the left.[/en]
- *  [ja]左側に表示するページのURLを指定します。[/ja]
- * @param collapse
- *  [en]Specify the collapse behavior. Valid values are portrait, landscape, width ##px or a media query. "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation. "width ##px" means the view will collapse when the window width is smaller than the specified ##px. If the value is a media query, the view will collapse when the media query is true.[/en]
- *  [ja]左側のページを非表示にする条件を指定します。portrait, landscape、width ##pxもしくはメディアクエリの指定が可能です。portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。width ##pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。[/ja]
- * @param var 
- *  [en]Variable name to refer to this split view.[/en]
- *  [ja]JavaScriptからスプリットビューコンポーネントにアクセスするための変数を定義します。[/ja]
- * @property setMainPage(pageUrl) 
- *  [en]Show the page specified in pageUrl in the right section[/en]
- *  [ja]指定したURLをメインページを読み込みます。[/ja]
- * @property setSecondaryPage(pageUrl) 
- *  [en]Show the page specified in pageUrl in the left section[/en]
- *  [ja]指定したURLを左のページの読み込みます。[/ja]
- * @property update() 
- *  [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
- *  [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Preset events are presplit, postsplit, precollapse and postcollapse.[/en]
- *  [ja]イベントリスナーを追加します。presplit, postsplit, precollapse, postcollapse, updateを指定できます。[/ja]
+ *  [ja]画面を左右に分割するコンポーネントです。[/ja]
  * @codepen nKqfv {wide}
- * @guide Usingonssplitviewcomponent [en]Using ons-split-view.[/en][ja]ons-split-viewコンポーネントを使う[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide Usingonssplitviewcomponent
+ *   [en]Using ons-split-view.[/en]
+ *   [ja]ons-split-viewコンポーネントを使う[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
  * @example
- * <ons-split-view 
- *   secondary-page="secondary.html" 
- *   main-page="main.html" 
- *   main-page-width="70%" 
+ * <ons-split-view
+ *   secondary-page="secondary.html"
+ *   main-page="main.html"
+ *   main-page-width="70%"
  *   collapse="portrait">
  * </ons-split-view>
  */
+
+/**
+ * @ngdoc event
+ * @name update
+ * @description
+ *   [en]Fired when the split view is updated.[/en]
+ *   [ja]split viewの状態が更新された際に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Object} event.splitView
+ *   [en]Split view object.[/en]
+ *   [ja]イベントが発火したSplitViewオブジェクトです。[/ja]
+ * @param {Boolean} event.shouldCollapse
+ *   [en]True if the view should collapse.[/en]
+ *   [ja]collapse状態の場合にtrueになります。[/ja]
+ * @param {String} event.currentMode
+ *   [en]Current mode.[/en]
+ *   [ja]現在のモード名を返します。"collapse"か"split"かのいずれかです。[/ja]
+ * @param {Function} event.split
+ *   [en]Call to force split.[/en]
+ *   [ja]この関数を呼び出すと強制的にsplitモードにします。[/ja]
+ * @param {Function} event.collapse
+ *   [en]Call to force collapse.[/en]
+ *   [ja]この関数を呼び出すと強制的にcollapseモードにします。[/ja]
+ * @param {Number} event.width
+ *   [en]Current width.[/en]
+ *   [ja]現在のSplitViewの幅を返します。[/ja]
+ * @param {String} event.orientation
+ *   [en]Current orientation.[/en]
+ *   [ja]現在の画面のオリエンテーションを返します。"portrait"かもしくは"landscape"です。 [/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name presplit
+ * @description
+ *   [en]Fired just before the view is split.[/en]
+ *   [ja]split状態にる前に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Object} event.splitView
+ *   [en]Split view object.[/en]
+ *   [ja]イベントが発火したSplitViewオブジェクトです。[/ja]
+ * @param {Number} event.width
+ *   [en]Current width.[/en]
+ *   [ja]現在のSplitViewnの幅です。[/ja]
+ * @param {String} event.orientation
+ *   [en]Current orientation.[/en]
+ *   [ja]現在の画面のオリエンテーションを返します。"portrait"もしくは"landscape"です。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postsplit
+ * @description
+ *   [en]Fired just after the view is split.[/en]
+ *   [ja]split状態になった後に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Object} event.splitView
+ *   [en]Split view object.[/en]
+ *   [ja]イベントが発火したSplitViewオブジェクトです。[/ja]
+ * @param {Number} event.width
+ *   [en]Current width.[/en]
+ *   [ja]現在のSplitViewnの幅です。[/ja]
+ * @param {String} event.orientation
+ *   [en]Current orientation.[/en]
+ *   [ja]現在の画面のオリエンテーションを返します。"portrait"もしくは"landscape"です。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name precollapse
+ * @description
+ *   [en]Fired just before the view is collapsed.[/en]
+ *   [ja]collapse状態になる前に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Object} event.splitView
+ *   [en]Split view object.[/en]
+ *   [ja]イベントが発火したSplitViewオブジェクトです。[/ja]
+ * @param {Number} event.width
+ *   [en]Current width.[/en]
+ *   [ja]現在のSplitViewnの幅です。[/ja]
+ * @param {String} event.orientation
+ *   [en]Current orientation.[/en]
+ *   [ja]現在の画面のオリエンテーションを返します。"portrait"もしくは"landscape"です。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postcollapse
+ * @description
+ *   [en]Fired just after the view is collapsed.[/en]
+ *   [ja]collapse状態になった後に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Object} event.splitView
+ *   [en]Split view object.[/en]
+ *   [ja]イベントが発火したSplitViewオブジェクトです。[/ja]
+ * @param {Number} event.width
+ *   [en]Current width.[/en]
+ *   [ja]現在のSplitViewnの幅です。[/ja]
+ * @param {String} event.orientation
+ *   [en]Current orientation.[/en]
+ *   [ja]現在の画面のオリエンテーションを返します。"portrait"もしくは"landscape"です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this split view.[/en]
+ *   [ja]このスプリットビューコンポーネントを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name main-page
+ * @type {String}
+ * @description
+ *   [en]The url of the page on the right.[/en]
+ *   [ja]右側に表示するページのURLを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name main-page-width
+ * @type {Number}
+ * @description
+ *   [en]Main page width percentage. The secondary page width will be the remaining percentage.[/en]
+ *   [ja]右側のページの幅をパーセント単位で指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name secondary-page
+ * @type {String}
+ * @description
+ *   [en]The url of the page on the left.[/en]
+ *   [ja]左側に表示するページのURLを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name collapse
+ * @type {String}
+ * @description
+ *   [en]
+ *     Specify the collapse behavior. Valid values are portrait, landscape, width #px or a media query.
+ *     "portrait" or "landscape" means the view will collapse when device is in landscape or portrait orientation.
+ *     "width #px" means the view will collapse when the window width is smaller than the specified #px.
+ *     If the value is a media query, the view will collapse when the media query is true.
+ *   [/en]
+ *   [ja]
+ *     左側のページを非表示にする条件を指定します。portrait, landscape、width #pxもしくはメディアクエリの指定が可能です。
+ *     portraitもしくはlandscapeを指定すると、デバイスの画面が縦向きもしくは横向きになった時に適用されます。
+ *     width #pxを指定すると、画面が指定した横幅よりも短い場合に適用されます。
+ *     メディアクエリを指定すると、指定したクエリに適合している場合に適用されます。
+ *   [/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-update
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "update" event is fired.[/en]
+ *  [ja]"update"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-presplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "presplit" event is fired.[/en]
+ *  [ja]"presplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-precollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "precollapse" event is fired.[/en]
+ *  [ja]"precollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postsplit
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postsplit" event is fired.[/en]
+ *  [ja]"postsplit"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postcollapse
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postcollapse" event is fired.[/en]
+ *  [ja]"postcollapse"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setMainPage(pageUrl)
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+ * @description
+ *   [en]Show the page specified in pageUrl in the right section[/en]
+ *   [ja]指定したURLをメインページを読み込みます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setSecondaryPage(pageUrl)
+ * @param {String} pageUrl
+ *   [en]Page URL. Can be either an HTML document or an <ons-template>.[/en]
+ *   [ja]pageのURLか、ons-templateで宣言したテンプレートのid属性の値を指定します。[/ja]
+ * @description
+ *   [en]Show the page specified in pageUrl in the left section[/en]
+ *   [ja]指定したURLを左のページの読み込みます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature update()
+ * @description
+ *   [en]Trigger an 'update' event and try to determine if the split behaviour should be changed.[/en]
+ *   [ja]splitモードを変えるべきかどうかを判断するための'update'イベントを発火します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -14949,12 +19151,7 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: false,
-      scope: {
-        secondaryPage: '@',
-        mainPage: '@',
-        collapse: '@',
-        mainPageWidth: '@'
-      },
+      scope: true,
 
       compile: function(element, attrs) {
         var mainPage = element[0].querySelector('.main-page'),
@@ -14987,14 +19184,15 @@ limitations under the License.
           }
 
           $onsen.declareVarAttribute(attrs, splitView);
+          $onsen.registerEventHandlers(splitView, 'update presplit precollapse postsplit postcollapse destroy');
 
           element.data('ons-split-view', splitView);
-          $onsen.aliasStack.register('ons.splitView', splitView);
+          element.data('_scope', scope);
 
           scope.$on('$destroy', function() {
+            element.data('_scope', undefined);
             splitView._events = undefined;
             element.data('ons-split-view', undefined);
-            $onsen.aliasStack.unregister('ons.splitView', splitView);
           });
 
           $onsen.fireComponentEvent(element[0], 'init');
@@ -15008,39 +19206,152 @@ limitations under the License.
  * @ngdoc directive
  * @id switch
  * @name ons-switch
+ * @category form
  * @description
  *  [en]Switch component.[/en]
  *  [ja]スイッチを表示するコンポーネントです。[/ja]
- * @param disabled
- *  [en]Whether the switch should be disabled.[/en]
- *  [ja]スイッチを無効の状態にする場合に指定します。[/ja]
- * @param checked
- *  [en]Whether the switch is checked.[/en]
- *  [ja]スイッチがONの状態にするときに指定します。[/ja]
- * @param var
- *  [en]Variable name to refer this switch.[/en]
- *  [ja]JavaScriptから参照するための変数名を指定します。[/ja]
- * @param modifier
- *  [en]Modifier name to apply custom styles.[/en]
- *  [ja]カスタムなスタイルを適用するための名前を指定します。[/ja]
- * @property isChecked()
- *  [en]Returns true if the switch is ON.[/en]
- *  [ja]スイッチがONの場合にtrueを返します。[/ja]
- * @property setChecked(isChecked)
- *  [en]Set the value of the switch. isChecked can be either true or false.[/en]
- *  [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
- * @property getCheckboxElement()
- *  [en]Get inner input[type=checkbox] element.[/en]
- *  [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Possible event name is "change".[/en]
- *  [ja]イベントリスナーを追加します。changeイベントを使用できます。[/ja]
- * @guide UsingFormComponents [en]Using form components[/en][ja]フォームを使う[/ja]
- * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
- * @seealso ons-button [en]ons-button component[/en][ja]ons-buttonコンポーネント[/ja]
+ * @guide UsingFormComponents
+ *   [en]Using form components[/en]
+ *   [ja]フォームを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @seealso ons-button
+ *   [en]ons-button component[/en]
+ *   [ja]ons-buttonコンポーネント[/ja]
  * @example
- *   <ons-switch checked></ons-switch>
+ * <ons-switch checked></ons-switch>
  */
+
+/**
+ * @ngdoc event
+ * @name change
+ * @description
+ *   [en]Fired when the value is changed.[/en]
+ *   [ja]ON/OFFが変わった時に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Object} event.switch
+ *   [en]Switch object.[/en]
+ *   [ja]イベントが発火したSwitchオブジェクトを返します。[/ja]
+ * @param {Boolean} event.value
+ *   [en]Current value.[/en]
+ *   [ja]現在の値を返します。[/ja]
+ * @param {Boolean} event.isInteractive
+ *   [en]True if the change was triggered by the user clicking on the switch.[/en]
+ *   [ja]タップやクリックなどのユーザの操作によって変わった場合にはtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this switch.[/en]
+ *   [ja]JavaScriptから参照するための変数名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *  [en]The appearance of the switch.[/en]
+ *  [ja]スイッチの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *   [en]Whether the switch should be disabled.[/en]
+ *   [ja]スイッチを無効の状態にする場合に指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name checked
+ * @description
+ *   [en]Whether the switch is checked.[/en]
+ *   [ja]スイッチがONの状態にするときに指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isChecked()
+ * @return {Boolean}
+ *   [en]true if the switch is on.[/en]
+ *   [ja]ONになっている場合にはtrueになります。[/ja]
+ * @description
+ *   [en]Returns true if the switch is ON.[/en]
+ *   [ja]スイッチがONの場合にtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setChecked(checked)
+ * @param {Boolean} checked
+ *   [en]If true the switch will be set to on.[/en]
+ *   [ja]ONにしたい場合にはtrueを指定します。[/ja]
+ * @description
+ *   [en]Set the value of the switch. isChecked can be either true or false.[/en]
+ *   [ja]スイッチの値を指定します。isCheckedにはtrueもしくはfalseを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getCheckboxElement()
+ * @return {HTMLElement}
+ *   [en]The underlying checkbox element.[/en]
+ *   [ja]コンポーネント内部のcheckbox要素になります。[/ja]
+ * @description
+ *   [en]Get inner input[type=checkbox] element.[/en]
+ *   [ja]スイッチが内包する、input[type=checkbox]の要素を取得します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
+
 (function(){
   'use strict';
   var module = angular.module('onsen');
@@ -15072,7 +19383,7 @@ limitations under the License.
           $onsen.addModifierMethods(switchView, 'switch--*', label);
           $onsen.addModifierMethods(switchView, 'switch--*__input', input);
           $onsen.addModifierMethods(switchView, 'switch--*__toggle', toggle);
-          
+
           attrs.$observe('checked', function(checked) {
             scope.model = !!element.attr('checked');
           });
@@ -15090,20 +19401,21 @@ limitations under the License.
               scope.model = value;
             });
 
-            scope.$watch('model', function(model) {
-              set(scope.$parent, model);
+            scope.$watch('model', function(to, from) {
+              set(scope.$parent, to);
+              if (to !== from) {
+                scope.$eval(attrs.ngChange);
+              }
             });
           }
 
           $onsen.declareVarAttribute(attrs, switchView);
           element.data('ons-switch', switchView);
-          $onsen.aliasStack.register('ons.switch', switchView);
 
           $onsen.cleaner.onDestroy(scope, function() {
             switchView._events = undefined;
             $onsen.removeModifierMethods(switchView);
             element.data('ons-switch', undefined);
-            $onsen.aliasStack.unregister('ons.switch', switchView);
             $onsen.clearComponent({
               element : element,
               scope : scope,
@@ -15111,7 +19423,7 @@ limitations under the License.
             });
             checkbox = element = attrs = scope = null;
           });
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
@@ -15123,33 +19435,29 @@ limitations under the License.
  * @ngdoc directive
  * @id tabbar_item
  * @name ons-tab
+ * @category navigation
  * @description
- *  [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
- *  [ja]タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。[/ja]
- * @param page
- *  [en]The page that this ons-tab points to.[/en]
- *  [ja]ons-tabが参照するページへのURLを指定します。[/ja]
- * @param icon
- *  [en]The icon name of the tab. Can specify the same icon name as ons-icon. If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.[/en]
- *  [ja]アイコン名を指定します。ons-iconと同じアイコン名を指定できます。個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。[/ja]
- * @param active-icon
- *  [en]The icon name of the tab when active.[/en]
- *  [ja]アクティブの際のアイコン名を指定します。[/ja]
- * @param label
- *  [en]The label of the tab item.[/en]
- *  [ja]アイコン下に表示されるラベルを指定します。[/ja]
- * @param active
- *  [en]Set whether this item should be active or not. Valid values are true and false.[/en]
- *  [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
- * @param no-reload
- *  [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
- *  [jp]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/jp]
+ *   [en]Represents a tab inside tabbar. Each ons-tab represents a page.[/en]
+ *   [ja]
+ *     タブバーに配置される各アイテムのコンポーネントです。それぞれのons-tabはページを表します。
+ *     ons-tab要素の中には、タブに表示されるコンテンツを直接記述することが出来ます。
+ *   [/ja]
  * @codepen pGuDL
- * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tabbar [en]ons-tabbar component[/en][ja]ons-tabbarコンポーネント[/ja]
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
- * @seealso ons-icon [en]ons-icon component[/en][ja]ons-iconコンポーネント[/ja]
+ * @guide UsingTabBar
+ *   [en]Using tab bar[/en]
+ *   [ja]タブバーを使う[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tabbar
+ *   [en]ons-tabbar component[/en]
+ *   [ja]ons-tabbarコンポーネント[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
+ * @seealso ons-icon
+ *   [en]ons-icon component[/en]
+ *   [ja]ons-iconコンポーネント[/ja]
  * @example
  * <ons-tabbar>
  *   <ons-tab page="home.html" active="true">
@@ -15178,6 +19486,82 @@ limitations under the License.
  *   ...
  * </ons-template>
  */
+
+/**
+ * @ngdoc attribute
+ * @name page
+ * @type {String}
+ * @description
+ *   [en]The page that this <code>&lt;ons-tab&gt;</code> points to.[/en]
+ *   [ja]<code>&lt;ons-tab&gt;</code>が参照するページへのURLを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name icon
+ * @type {String}
+ * @description
+ *   [en]
+ *     The icon name for the tab. Can specify the same icon name as <code>&lt;ons-icon&gt;</code>.
+ *     If you need to use your own icon, create a css class with background-image or any css properties and specify the name of your css class here.
+ *   [/en]
+ *   [ja]
+ *     アイコン名を指定します。<code>&lt;ons-icon&gt;</code>と同じアイコン名を指定できます。
+ *     個別にアイコンをカスタマイズする場合は、background-imageなどのCSSスタイルを用いて指定できます。
+ *   [/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name active-icon
+ * @type {String}
+ * @description
+ *   [en]The name of the icon when the tab is active.[/en]
+ *   [ja]アクティブの際のアイコン名を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name label
+ * @type {String}
+ * @description
+ *   [en]The label of the tab item.[/en]
+ *   [ja]アイコン下に表示されるラベルを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name active
+ * @type {Boolean}
+ * @default false
+ * @description
+ *   [en]Set whether this item should be active or not. Valid values are true and false.[/en]
+ *   [ja]このタブアイテムをアクティブ状態にするかどうかを指定します。trueもしくはfalseを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name no-reload
+ * @description
+ *   [en]Set if the page shouldn't be reloaded when clicking on the same tab twice.[/en]
+ *   [ja]すでにアクティブになったタブを再びクリックするとページの再読み込みは発生しません。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name persistent
+ * @description
+ *   [en]
+ *     Set to make the tab content persistent.
+ *     If this attribute it set the DOM will not be destroyed when navigating to another tab.
+ *   [/en]
+ *   [ja]
+ *     このタブで読み込んだページを永続化します。
+ *     この属性があるとき、別のタブのページに切り替えても、
+ *     読み込んだページのDOM要素は破棄されずに単に非表示になります。
+ *   [/ja]
+ */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -15185,9 +19569,9 @@ limitations under the License.
   module.directive('onsTab', tab);
   module.directive('onsTabbarItem', tab); // for BC
 
-  var defaultInnerTemplate = 
+  var defaultInnerTemplate =
     '<div ng-if="icon != undefined" class="tab-bar__icon">' +
-      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' + 
+      '<ons-icon icon="{{tabIcon}}" style="font-size: 28px; line-height: 34px; vertical-align: top;"></ons-icon>' +
     '</div>' +
     '<div ng-if="label" class="tab-bar__label">{{label}}</div>';
 
@@ -15202,7 +19586,8 @@ limitations under the License.
         icon: '@',
         activeIcon: '@',
         label: '@',
-        noReload: '@'
+        noReload: '@',
+        persistent: '@'
       },
 
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab.tpl',
@@ -15263,6 +19648,10 @@ limitations under the License.
             angular.element(element[0].querySelectorAll('[ons-tab-active]')).css('display', 'none');
           };
 
+          scope.isPersistent = function() {
+            return typeof scope.persistent != 'undefined';
+          };
+
           /**
            * @return {Boolean}
            */
@@ -15277,7 +19666,7 @@ limitations under the License.
           if (scope.active) {
             tabbarView.setActiveTab(tabbarView._tabItems.indexOf(scope));
           }
-        
+
           $onsen.fireComponentEvent(element[0], 'init');
         };
       }
@@ -15290,40 +19679,29 @@ limitations under the License.
  * @ngdoc directive
  * @id tabbar
  * @name ons-tabbar
+ * @category navigation
  * @description
- *  [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
- *  [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
- * @param hide-tabs
- *  [en]Whether to hide the tabs. Valid values are true/false.[/en]
- *  [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
- * @param var
- *  [en]Variable name to refer this tabbar.[/en]
- *  [ja]JavaScriptからコンポーネントにアクセスするための変数名を指定します。[/ja]
- * @param animation
- *  [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
- *  [ja]ページ読み込み時のアニメーションを指定します。noneもしくはfadeを選択できます。デフォルトはnoneです。[/ja]
- * @param position
- *  [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
- *  [ja]タブバーの位置を指定します。bottomもしくはtopを選択できます。デフォルトはbottomです。[/ja]
- * @property on(eventName,listener)
- *  [en]Add an event listener. Possible events are prechange, postchange and reactive. See the guide for more details.[/en]
- *  [ja]イベントリスナーを追加します。prechangeおよびpostchangeイベントが定義されています。詳細はガイドを参照してください。[/ja]
- * @property setActiveTab(index,[options])
- *  [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
- *  [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
- * @property getActiveTabIndex()
- *  [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
- *  [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
- * @property loadPage(url)
- *  [en]Displays a new page without changing the active index.[/en]
- *  [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
+ *   [en]A component to display a tab bar on the bottom of a page. Used with ons-tab to manage pages using tabs.[/en]
+ *   [ja]タブバーをページ下部に表示するためのコンポーネントです。ons-tabと組み合わせて使うことで、ページを管理できます。[/ja]
  * @codepen pGuDL
- * @guide UsingTabBar [en]Using tab bar[/en][ja]タブバーを使う[/ja]
- * @guide EventHandling [en]Event handling descriptions[/en][ja]イベント処理の使い方[/ja]
- * @guide CallingComponentAPIsfromJavaScript [en]Using navigator from JavaScript[/en][ja]JavaScriptからコンポーネントを呼び出す[/ja]
- * @guide DefiningMultiplePagesinSingleHTML [en]Defining multiple pages in single html[/en][ja]複数のページを1つのHTMLに記述する[/ja]
- * @seealso ons-tab [en]ons-tab component[/en][ja]ons-tabコンポーネント[/ja]
- * @seealso ons-page [en]ons-page component[/en][ja]ons-pageコンポーネント[/ja]
+ * @guide UsingTabBar
+ *   [en]Using tab bar[/en]
+ *   [ja]タブバーを使う[/ja]
+ * @guide EventHandling
+ *   [en]Event handling descriptions[/en]
+ *   [ja]イベント処理の使い方[/ja]
+ * @guide CallingComponentAPIsfromJavaScript
+ *   [en]Using navigator from JavaScript[/en]
+ *   [ja]JavaScriptからコンポーネントを呼び出す[/ja]
+ * @guide DefiningMultiplePagesinSingleHTML
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
+ * @seealso ons-tab
+ *   [en]ons-tab component[/en]
+ *   [ja]ons-tabコンポーネント[/ja]
+ * @seealso ons-page
+ *   [en]ons-page component[/en]
+ *   [ja]ons-pageコンポーネント[/ja]
  * @example
  * <ons-tabbar>
  *   <ons-tab page="home.html" active="true">
@@ -15352,6 +19730,223 @@ limitations under the License.
  *   ...
  * </ons-template>
  */
+
+/**
+ * @ngdoc event
+ * @name prechange
+ * @description
+ *   [en]Fires just before the tab is changed.[/en]
+ *   [ja]アクティブなタブが変わる前に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Number} event.index
+ *   [en]Current index.[/en]
+ *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+ * @param {Object} event.tabItem
+ *   [en]Tab item object.[/en]
+ *   [ja]tabItemオブジェクト。[/ja]
+ * @param {Function} event.cancel
+ *   [en]Call this function to cancel the change event.[/en]
+ *   [ja]この関数を呼び出すと、アクティブなタブの変更がキャンセルされます。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name postchange
+ * @description
+ *   [en]Fires just after the tab is changed.[/en]
+ *   [ja]アクティブなタブが変わった後に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Number} event.index
+ *   [en]Current index.[/en]
+ *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+ * @param {Object} event.tabItem
+ *   [en]Tab item object.[/en]
+ *   [ja]tabItemオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name reactive
+ * @description
+ *   [en]Fires if the already open tab is tapped again.[/en]
+ *   [ja]すでにアクティブになっているタブがもう一度タップやクリックされた場合に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクト。[/ja]
+ * @param {Number} event.index
+ *   [en]Current index.[/en]
+ *   [ja]現在アクティブになっているons-tabのインデックスを返します。[/ja]
+ * @param {Object} event.tabItem
+ *   [en]Tab item object.[/en]
+ *   [ja]tabItemオブジェクト。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this tab bar.[/en]
+ *   [ja]このタブバーを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name hide-tabs
+ * @type {Boolean}
+ * @default false
+ * @description
+ *   [en]Whether to hide the tabs. Valid values are true/false.[/en]
+ *   [ja]タブを非表示にする場合に指定します。trueもしくはfalseを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name animation
+ * @type {String}
+ * @default none
+ * @description
+ *   [en]Animation name. Preset values are "none" and "fade". Default is "none".[/en]
+ *   [ja]ページ読み込み時のアニメーションを指定します。"none"もしくは"fade"を選択できます。デフォルトは"none"です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name position
+ * @type {String}
+ * @default bottom
+ * @description
+ *   [en]Tabbar's position. Preset values are "bottom" and "top". Default is "bottom".[/en]
+ *   [ja]タブバーの位置を指定します。"bottom"もしくは"top"を選択できます。デフォルトは"bottom"です。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-reactive
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "reactive" event is fired.[/en]
+ *  [ja]"reactive"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-prechange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "prechange" event is fired.[/en]
+ *  [ja]"prechange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-postchange
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "postchange" event is fired.[/en]
+ *  [ja]"postchange"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name ons-destroy
+ * @type {Expression}
+ * @description
+ *  [en]Allows you to specify custom behavior when the "destroy" event is fired.[/en]
+ *  [ja]"destroy"イベントが発火された時の挙動を独自に指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature setActiveTab(index, [options])
+ * @param {Number} index
+ *   [en]Tab index.[/en]
+ *   [ja]タブのインデックスを指定します。[/ja]
+ * @param {Object} [options]
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクト。[/ja]
+ * @param {Boolean} [options.keepPage]
+ *   [en]If true the page will not be changed.[/en]
+ *   [ja]タブバーが現在表示しているpageを変えない場合にはtrueを指定します。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "fade" and "none".[/en]
+ *   [ja]アニメーション名を指定します。"fade", "none"のいずれかを指定できます。[/ja]
+ * @return {Boolean}
+ *   [en]true if the change was successful.[/en]
+ *   [ja]変更が成功した場合にtrueを返します。[/ja]
+ * @description
+ *   [en]Show specified tab page. Animations and other options can be specified by the second parameter.[/en]
+ *   [ja]指定したインデックスのタブを表示します。アニメーションなどのオプションを指定できます。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature getActiveTabIndex()
+ * @return {Number}
+ *   [en]The index of the currently active tab.[/en]
+ *   [ja]現在アクティブになっているタブのインデックスを返します。[/ja]
+ * @description
+ *   [en]Returns tab index on current active tab. If active tab is not found, returns -1.[/en]
+ *   [ja]現在アクティブになっているタブのインデックスを返します。現在アクティブなタブがない場合には-1を返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature loadPage(url)
+ * @param {String} url
+ *   [en]Page URL. Can be either an HTML document or an <code>&lt;ons-template&gt;</code>.[/en]
+ *   [ja]pageのURLか、もしくは<code>&lt;ons-template&gt;</code>で宣言したid属性の値を利用できます。[/ja]
+ * @description
+ *   [en]Displays a new page without changing the active index.[/en]
+ *   [ja]現在のアクティブなインデックスを変更せずに、新しいページを表示します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
+
 (function() {
   'use strict';
   var module = angular.module('onsen');
@@ -15361,15 +19956,9 @@ limitations under the License.
       restrict: 'E',
       replace: false,
       transclude: true,
-      scope: {
-        onActiveTabChanged: '&'
-      },
+      scope: true,
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/tab_bar.tpl',
       link: function(scope, element, attrs, controller, transclude) {
-
-        if (attrs.ngController) {
-          throw new Error('This element can\'t accept ng-controller directive.');
-        }
 
         scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
         scope.selectedTabItem = {source: ''};
@@ -15381,14 +19970,14 @@ limitations under the License.
 
         var tabbarView = new TabbarView(scope, element, attrs);
         $onsen.addModifierMethods(tabbarView, 'tab-bar--*', angular.element(element.children()[1]));
+        $onsen.registerEventHandlers(tabbarView, 'reactive prechange postchange destroy');
 
         scope.tabbarId = tabbarView._tabbarId;
 
-        $onsen.aliasStack.register('ons.tabbar', tabbarView);
         element.data('ons-tabbar', tabbarView);
         $onsen.declareVarAttribute(attrs, tabbarView);
 
-        transclude(function(cloned) {
+        transclude(scope, function(cloned) {
           angular.element(element[0].querySelector('.ons-tabbar-inner')).append(cloned);
         });
 
@@ -15396,9 +19985,8 @@ limitations under the License.
           tabbarView._events = undefined;
           $onsen.removeModifierMethods(tabbarView);
           element.data('ons-tabbar', undefined);
-          $onsen.aliasStack.unregister('ons.tabbar', tabbarView);
         });
-      
+
         $onsen.fireComponentEvent(element[0], 'init');
       }
     };
@@ -15409,12 +19997,13 @@ limitations under the License.
  * @ngdoc directive
  * @id template
  * @name ons-template
+ * @category util
  * @description
- *  [en]Define a separate HTML fragment and use as a template.[/en]
- *  [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。[/ja]
+ *   [en]Define a separate HTML fragment and use as a template.[/en]
+ *   [ja]テンプレートとして使用するためのHTMLフラグメントを定義します。この要素でHTMLを宣言すると、id属性に指定した名前をpageのURLとしてons-navigatorなどのコンポーネントから参照できます。[/ja]
  * @guide DefiningMultiplePagesinSingleHTML
- *  [en]Defining multiple pages in single html[/en]
- *  [ja]複数のページを1つのHTMLに記述する[/ja]
+ *   [en]Defining multiple pages in single html[/en]
+ *   [ja]複数のページを1つのHTMLに記述する[/ja]
  * @example
  * <ons-template id="foobar.html">
  *   ...
@@ -15442,24 +20031,28 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar
  * @name ons-toolbar
+ * @category toolbar
+ * @modifier transparent
+ *   [en]Transparent toolbar[/en]
+ *   [ja]透明な背景を持つツールバーを表示します。[/ja]
+ * @modifier android
+ *   [en]Android style toolbar. Title is left-aligned.[/en]
+ *   [ja]Androidライクなツールバーを表示します。タイトルが左に寄ります。[/ja]
  * @description
- *  [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
- *  [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
- * @param inline
- *  [en]Display the toolbar as an inline element.[/en]
- *  [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
- * @param modifier
- *  [en]The appearance of the toolbar.[/en]
- *  [ja]ツールバーの表現を指定します。[/ja]
- * @param fixed-style
- *  [en]By default the center element will be left-aligned on Android and center-aligned on iOS. Use this attribute to override this behavior so it's always displayed in the center.[/en]
- *  [ja]中央揃え要素は、デフォルトとしてAndroidでは左配置、iOSでは中央配置です。この属性を使用すると、要素はAndroidとiOSともに中央配置となります。[/ja]
+ *   [en]Toolbar component that can be used with navigation. Left, center and right container can be specified by class names.[/en]
+ *   [ja]ナビゲーションで使用するツールバー用コンポーネントです。クラス名により、左、中央、右のコンテナを指定できます。[/ja]
  * @codepen aHmGL
  * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
- * @seealso ons-bottom-toolbar [en]ons-bottom-toolbar component[/en][ja]ons-bottom-toolbarコンポーネント[/ja]
- * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
- * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
- * @example 
+ * @seealso ons-bottom-toolbar
+ *   [en]ons-bottom-toolbar component[/en]
+ *   [ja]ons-bottom-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button
+ *   [en]ons-back-button component[/en]
+ *   [ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button
+ *   [en]ons-toolbar-button component[/en]
+ *   [ja]ons-toolbar-buttonコンポーネント[/ja]
+ * @example
  * <ons-page>
  *   <ons-toolbar>
  *     <div class="left"><ons-back-button>Back</ons-back-button></div>
@@ -15468,6 +20061,46 @@ limitations under the License.
  *   </ons-toolbar>
  * </ons-page>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *  [en]Variable name to refer this toolbar.[/en]
+ *  [ja]このツールバーを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name inline
+ * @description
+ *   [en]Display the toolbar as an inline element.[/en]
+ *   [ja]ツールバーをインラインに置きます。スクロール領域内にそのまま表示されます。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @description
+ *   [en]The appearance of the toolbar.[/en]
+ *   [ja]ツールバーの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name fixed-style
+ * @description
+ *   [en]
+ *     By default the center element will be left-aligned on Android and center-aligned on iOS.
+ *     Use this attribute to override this behavior so it's always displayed in the center.
+ *   [/en]
+ *   [ja]
+ *     このコンポーネントは、Androidではタイトルを左寄せ、iOSでは中央配置します。
+ *     この属性を使用すると、要素はAndroidとiOSともに中央配置となります。
+ *   [/ja]
+ */
+
 (function() {
   'use strict';
 
@@ -15585,7 +20218,7 @@ limitations under the License.
 
       // NOTE: This element must coexists with ng-controller.
       // Do not use isolated scope and template's ng-transclde.
-      scope: false, 
+      scope: false,
       transclude: false,
 
       compile: function(element, attrs) {
@@ -15613,14 +20246,12 @@ limitations under the License.
             var toolbar = new GenericView(scope, element, attrs);
 
             $onsen.declareVarAttribute(attrs, toolbar);
-        
-            $onsen.aliasStack.register('ons.toolbar', toolbar);
+
 
             scope.$on('$destroy', function() {
               toolbar._events = undefined;
               $onsen.removeModifierMethods(toolbar);
               element.data('ons-toolbar', undefined);
-              $onsen.aliasStack.unregister('ons.toolbar', toolbar);
               element = null;
             });
 
@@ -15641,7 +20272,7 @@ limitations under the License.
             element.data('ons-toolbar', toolbar);
           },
           post: function(scope, element, attrs) {
-            $onsen.fireComponentEvent(element[0], 'init');  
+            $onsen.fireComponentEvent(element[0], 'init');
           }
         };
       }
@@ -15654,22 +20285,60 @@ limitations under the License.
  * @ngdoc directive
  * @id toolbar_button
  * @name ons-toolbar-button
+ * @category toolbar
+ * @modifier outline
+ *   [en]A button with an outline.[/en]
+ *   [ja]アウトラインをもったボタンを表示します。[/ja]
  * @description
- *  [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
- *  [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
- * @param modifier [en]Specify modifier name to specify custom styles.[/en][ja]スタイル定義をカスタマイズするための名前を指定します。[/ja]
+ *   [en]Button component for ons-toolbar and ons-bottom-toolbar.[/en]
+ *   [ja]ons-toolbarあるいはons-bottom-toolbarに設置できるボタン用コンポーネントです。[/ja]
  * @codepen aHmGL
- * @guide Addingatoolbar [en]Adding a toolbar[/en][ja]ツールバーの追加[/ja]
- * @seealso ons-toolbar [en]ons-toolbar component[/en][ja]ons-toolbarコンポーネント[/ja]
- * @seealso ons-back-button [en]ons-back-button component[/en][ja]ons-back-buttonコンポーネント[/ja]
- * @seealso ons-toolbar-button [en]ons-toolbar-button component[/en][ja]ons-toolbar-buttonコンポーネント[/ja]
- * @example 
+ * @guide Addingatoolbar
+ *   [en]Adding a toolbar[/en]
+ *   [ja]ツールバーの追加[/ja]
+ * @seealso ons-toolbar
+ *   [en]ons-toolbar component[/en]
+ *   [ja]ons-toolbarコンポーネント[/ja]
+ * @seealso ons-back-button
+ *   [en]ons-back-button component[/en]
+ *   [ja]ons-back-buttonコンポーネント[/ja]
+ * @seealso ons-toolbar-button
+ *   [en]ons-toolbar-button component[/en]
+ *   [ja]ons-toolbar-buttonコンポーネント[/ja]
+ * @example
  * <ons-toolbar>
  *   <div class="left"><ons-toolbar-button>Button</ons-toolbar-button></div>
  *   <div class="center">Title</div>
  *   <div class="right"><ons-toolbar-button><ons-icon icon="ion-navion" size="28px"></ons-icon></ons-toolbar-button></div>
  * </ons-toolbar>
  */
+
+/**
+ * @ngdoc attribute
+ * @name var
+ * @type {String}
+ * @description
+ *   [en]Variable name to refer this buttom.[/en]
+ *   [ja]このボタンを参照するための名前を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name modifier
+ * @type {String}
+ * @description
+ *   [en]The appearance of the button.[/en]
+ *   [ja]ボタンの表現を指定します。[/ja]
+ */
+
+/**
+ * @ngdoc attribute
+ * @name disabled
+ * @description
+ *   [en]Specify if button should be disabled.[/en]
+ *   [ja]ボタンを無効化する場合は指定してください。[/ja]
+ */
+
 (function(){
   'use strict';
   var module = angular.module('onsen');
@@ -15682,32 +20351,40 @@ limitations under the License.
       templateUrl: $onsen.DIRECTIVE_TEMPLATE_URL + '/toolbar_button.tpl',
       link: {
         pre: function(scope, element, attrs) {
-          var toolbarButton = new GenericView(scope, element, attrs);
+          var toolbarButton = new GenericView(scope, element, attrs),
+            innerElement = element[0].querySelector('.toolbar-button');
 
           $onsen.declareVarAttribute(attrs, toolbarButton);
 
-          $onsen.aliasStack.register('ons.toolbarButton', toolbarButton);
           element.data('ons-toolbar-button', toolbarButton);
 
           scope.$on('$destroy', function() {
             toolbarButton._events = undefined;
             $onsen.removeModifierMethods(toolbarButton);
             element.data('ons-toolbar-button', undefined);
-            $onsen.aliasStack.unregister('ons.toolbarButton', toolbarButton);
             element = null;
           });
 
           var modifierTemplater = $onsen.generateModifierTemplater(attrs);
-          
+
           if (attrs.ngController) {
             throw new Error('This element can\'t accept ng-controller directive.');
           }
+
+          attrs.$observe('disabled', function(value) {
+            if (value === false || typeof value === 'undefined') {
+              innerElement.removeAttribute('disabled');
+            }
+            else {
+              innerElement.setAttribute('disabled', 'disabled');
+            }
+          });
 
           scope.modifierTemplater = $onsen.generateModifierTemplater(attrs);
           $onsen.addModifierMethods(toolbarButton, 'toolbar-button--*', element.children());
 
           element.children('span').addClass(modifierTemplater('toolbar-button--*'));
-            
+
           $onsen.cleaner.onDestroy(scope, function() {
             $onsen.clearComponent({
               scope: scope,
@@ -15726,7 +20403,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -15855,7 +20532,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16123,7 +20800,7 @@ limitations under the License.
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16150,7 +20827,6 @@ limitations under the License.
   module.factory('$onsen', ['$rootScope', '$window', '$cacheFactory', '$document', '$templateCache', '$http', '$q', '$onsGlobal', 'ComponentCleaner', 'DeviceBackButtonHandler', function($rootScope, $window, $cacheFactory, $document, $templateCache, $http, $q, $onsGlobal, ComponentCleaner, DeviceBackButtonHandler) {
 
     var unlockerDict = createUnlockerDict();
-    var aliasStack = createAliasStack();
     var $onsen = createOnsenService();
 
     return $onsen;
@@ -16159,8 +20835,6 @@ limitations under the License.
       return {
 
         DIRECTIVE_TEMPLATE_URL: 'templates',
-
-        aliasStack: aliasStack,
 
         cleaner: ComponentCleaner,
 
@@ -16430,6 +21104,35 @@ limitations under the License.
           }
         },
 
+        _registerEventHandler: function(component, eventName) {
+          var capitalizedEventName = eventName.charAt(0).toUpperCase() + eventName.slice(1);
+
+          component.on(eventName, function(event) {
+            $onsen.fireComponentEvent(component._element[0], eventName, event);
+
+            var handler = component._attrs['ons' + capitalizedEventName];
+            if (handler) {
+              component._scope.$eval(handler, {$event: event});
+              component._scope.$evalAsync();
+            }
+          });
+        },
+
+        /**
+         * Register event handlers for attributes.
+         *
+         * @param {Object} component
+         * @param {String} eventNames
+         */
+        registerEventHandlers: function(component, eventNames) {
+          eventNames = eventNames.trim().split(/\s+/);
+
+          for (var i = 0, l = eventNames.length; i < l; i ++) {
+            var eventName = eventNames[i];
+            this._registerEventHandler(component, eventName);
+          }
+        },
+
         /**
          * @return {Boolean}
          */
@@ -16471,12 +21174,21 @@ limitations under the License.
          * @param {HTMLElement} [dom]
          * @param {String} event name
          */
-        fireComponentEvent: function(dom, eventName) {
+        fireComponentEvent: function(dom, eventName, data) {
+          data = data || {};
+
           var event = document.createEvent('HTMLEvents');
 
-          event.component = dom ? 
+          for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+              event[key] = data[key];
+            }
+          }
+
+          event.component = dom ?
             angular.element(dom).data(dom.nodeName.toLowerCase()) || null : null;
           event.initEvent(dom.nodeName.toLowerCase() + ':' + eventName, true, true);
+
           dom.dispatchEvent(event);
         },
 
@@ -16506,9 +21218,16 @@ limitations under the License.
             }
 
             container[names[names.length - 1]] = object;
+
+            if (container[names[names.length -1]] !== object) {
+              throw new Error('Cannot set var="' + object._attrs.var + '" because it will overwrite a read-only variable.');
+            }
           }
 
-          set($window, names, object);
+          if (ons.componentBase) {
+            set(ons.componentBase, names, object);
+          }
+
           set($rootScope, names, object);
         }
       };
@@ -16581,60 +21300,11 @@ limitations under the License.
         }
       };
     }
-
-    function createAliasStack() {
-      /**
-       * Global object stack manager.
-       *
-       * e.g. "ons.screen", "ons.navigator"
-       */
-      return {
-        _stackDict : {},
-
-        /**
-         * @param {String} name
-         * @param {Object} object
-         */
-        register: function(name, object) {
-          this._getStack(name).push(object);
-          
-          $onsen._defineVar(name, object);
-        },
-
-        /**
-         * @param {String} name
-         * @param {Object} target
-         */
-        unregister: function(name, target) {
-          var stack = this._getStack(name);
-
-          var index = stack.indexOf(target);
-          if (index === -1) {
-            throw new Error('no such object: ' + target);
-          }
-          stack.splice(index, 1);
-
-          var obj = stack.length > 0 ? stack[stack.length - 1] : null;
-          $onsen._defineVar(name, obj);
-        },
-
-        /**
-         * @param {String} name
-         */
-        _getStack: function(name) {
-          if (!this._stackDict[name]) {
-            this._stackDict[name] = [];
-          }
-
-          return this._stackDict[name];
-        }
-      };
-    }
   }]);
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -16994,10 +21664,9 @@ window.animit = (function(){
             });
           });
 
-          elements.forEach(function(element) {
-            // force to update rendering
-            element.getBoundingClientRect();
-          });
+          if (elements.length) {
+            elements[0].offsetHeight;
+          }
 
           if (window.requestAnimationFrame) {
             requestAnimationFrame(callback);
@@ -17110,7 +21779,7 @@ window.animit = (function(){
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17125,6 +21794,180 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+
+/**
+ * @ngdoc object
+ * @name ons.notification
+ * @category dialog
+ * @codepen Qwwxyp
+ * @description 
+ *   [en]Utility methods to create different kinds of alert dialogs. There are three methods available: alert, confirm and prompt.[/en]
+ *   [ja]いくつかの種類のアラートダイアログを作成するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
+ * @example
+ * <script>
+ *   ons.notification.alert({
+ *     message: 'Hello, world!'
+ *   });
+ *
+ *   ons.notification.confirm({
+ *     message: 'Are you ready?'
+ *     callback: function(answer) {
+ *       // Do something here.
+ *     }
+ *   });
+ *
+ *   ons.notification.prompt({
+ *     message: 'How old are you?',
+ *     callback: function(age) {
+ *       ons.notification.alert({
+ *         message: 'You are ' + age + ' years old.'
+ *       });
+ *     });
+ *   });
+ * </script>
+ */
+
+/**
+ * @ngdoc method
+ * @signature alert(options)
+ * @param {Object} options
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
+ * @param {String} [options.message]
+ *   [en]Alert message.[/en]
+ *   [ja]アラートダイアログに表示する文字列を指定します。[/ja]
+ * @param {String} [options.messageHTML]
+ *   [en]Alert message in HTML.[/en]
+ *   [ja]アラートダイアログに表示するHTMLを指定します。[/ja]
+ * @param {String} [options.buttonLabel]
+ *   [en]Label for confirmation button. Default is "OK".[/en]
+ *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アラートダイアログを表示する際のアニメーション名を指定します。"none", "fade", "slide"のいずれかを指定できます。[/ja]
+ * @param {String} [options.title]
+ *   [en]Dialog title. Default is "Alert".[/en]
+ *   [ja]アラートダイアログの上部に表示するタイトルを指定します。"Alert"がデフォルトです。[/ja]
+ * @param {String} [options.modifier]
+ *   [en]Modifier for the dialog.[/en]
+ *   [ja]アラートダイアログのmodifier属性の値を指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]Function that executes after dialog has been closed.[/en]
+ *   [ja]アラートダイアログが閉じられた時に呼び出される関数オブジェクトを指定します。[/ja]
+ * @description 
+ *   [en]
+ *     Display an alert dialog to show the user a message.
+ *     The content of the message can be either simple text or HTML.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザーへメッセージを見せるためのアラートダイアログを表示します。
+ *     表示するメッセージは、テキストかもしくはHTMLを指定できます。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature confirm(options)
+ * @param {Object} options
+ *   [en]Parameter object.[/en]
+ * @param {String} [options.message]
+ *   [en]Confirmation question.[/en]
+ *   [ja]確認ダイアログに表示するメッセージを指定します。[/ja]
+ * @param {String} [options.messageHTML]
+ *   [en]Dialog content in HTML.[/en]
+ *   [ja]確認ダイアログに表示するHTMLを指定します。[/ja]
+ * @param {Array} [options.buttonLabels]
+ *   [en]Labels for the buttons. Default is ["Cancel", "OK"].[/en]
+ *   [ja]ボタンのラベルの配列を指定します。["Cancel", "OK"]がデフォルトです。[/ja]
+ * @param {Number} [options.primaryButtonIndex]
+ *   [en]Index of primary button. Default is 1.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
+ * @param {Boolean} [options.cancelable]
+ *   [en]Whether the dialog is cancelable or not. Default is false.[/en]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.title]
+ *   [en]Dialog title. Default is "Confirm".[/en]
+ *   [ja]ダイアログのタイトルを指定します。"Confirm"がデフォルトです。[/ja]
+ * @param {String} [options.modifier]
+ *   [en]Modifier for the dialog.[/en]
+ *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]
+ *     Function that executes after the dialog has been closed.
+ *     Argument for the function is the index of the button that was pressed or -1 if the dialog was canceled.
+ *   [/en]
+ *   [ja]
+ *     ダイアログが閉じられた後に呼び出される関数オブジェクトを指定します。
+ *     この関数の引数として、押されたボタンのインデックス値が渡されます。
+ *     もしダイアログがキャンセルされた場合には-1が渡されます。
+ *   [/ja]
+ * @description 
+ *   [en]
+ *     Display a dialog to ask the user for confirmation.
+ *     The default button labels are "Cancel" and "OK" but they can be customized.
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザに確認を促すダイアログを表示します。
+ *     デオルとのボタンラベルは、"Cancel"と"OK"ですが、これはこのメソッドの引数でカスタマイズできます。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature prompt(options)
+ * @param {Object} options
+ *   [en]Parameter object.[/en]
+ *   [ja]オプションを指定するオブジェクトです。[/ja]
+ * @param {String} [options.message]
+ *   [en]Prompt question.[/en]
+ *   [ja]ダイアログに表示するメッセージを指定します。[/ja]
+ * @param {String} [options.messageHTML]
+ *   [en]Dialog content in HTML.[/en]
+ *   [ja]ダイアログに表示するHTMLを指定します。[/ja]
+ * @param {String} [options.buttonLabel]
+ *   [en]Label for confirmation button. Default is "OK".[/en]
+ *   [ja]確認ボタンのラベルを指定します。"OK"がデフォルトです。[/ja]
+ * @param {Number} [options.primaryButtonIndex]
+ *   [en]Index of primary button. Default is 1.[/en]
+ *   [ja]プライマリボタンのインデックスを指定します。デフォルトは 1 です。[/ja]
+ * @param {Boolean} [options.cancelable]
+ *   [en]Whether the dialog is cancelable or not. Default is false.[/en]
+ *   [ja]ダイアログがキャンセル可能かどうかを指定します。デフォルトは false です。[/ja]
+ * @param {String} [options.animation]
+ *   [en]Animation name. Available animations are "none", "fade" and "slide".[/en]
+ *   [ja]アニメーション名を指定します。"none", "fade", "slide"のいずれかを指定します。[/ja]
+ * @param {String} [options.title]
+ *   [en]Dialog title. Default is "Alert".[/en]
+ *   [ja]ダイアログのタイトルを指定します。デフォルトは "Alert" です。[/ja]
+ * @param {String} [options.modifier]
+ *   [en]Modifier for the dialog.[/en]
+ *   [ja]ダイアログのmodifier属性の値を指定します。[/ja]
+ * @param {Function} [options.callback]
+ *   [en]
+ *     Function that executes after the dialog has been closed.
+ *     Argument for the function is the value of the input field or null if the dialog was canceled.
+ *   [/en]
+ *   [ja]
+ *     ダイアログが閉じられた後に実行される関数オブジェクトを指定します。
+ *     関数の引数として、インプット要素の中の値が渡されます。ダイアログがキャンセルされた場合には、nullが渡されます。
+ *   [/ja]
+ * @description 
+ *   [en]
+ *     Display a dialog with a prompt to ask the user a question. 
+ *     Must specify either message or messageHTML.
+ *   [/en]
+ *   [ja]
+ *     ユーザーに入力を促すダイアログを表示します。
+ *     このメソッドの引数には、options.messageもしくはoptions.messageHTMLのどちらかを必ず指定する必要があります。
+ *   [/ja]
+ */
 
 window.ons.notification = (function() {
   var createAlertDialog = function(title, message, buttonLabels, primaryButtonIndex, modifier, animation, callback, messageIsHTML, cancelable, promptDialog, autofocus, placeholder) {
@@ -17159,7 +22002,8 @@ window.ons.notification = (function() {
     dialogEl.append(footerEl);
 
     angular.element(document.body).append(dialogEl);
-    ons.compile(dialogEl[0]);
+
+    ons.$compile(dialogEl)(dialogEl.injector().get('$rootScope'));
     var alertDialog = dialogEl.data('ons-alert-dialog');
 
     if (buttonLabels.length <= 2) {
@@ -17168,7 +22012,7 @@ window.ons.notification = (function() {
 
     var createButton = function(i) {
       var buttonEl = angular.element('<button>').addClass('alert-dialog-button').text(buttonLabels[i]);
-      
+
       if (i == primaryButtonIndex) {
         buttonEl.addClass('alert-dialog-button--primal');
       }
@@ -17178,6 +22022,8 @@ window.ons.notification = (function() {
       }
 
       buttonEl.on('click', function() {
+        buttonEl.off('click');
+
         alertDialog.hide({
           callback: function() {
             if (promptDialog) {
@@ -17186,14 +22032,13 @@ window.ons.notification = (function() {
               callback(i);
             }
             alertDialog.destroy();
-            alertDialog = null;
-            inputEl = null;
+            alertDialog = inputEl = buttonEl = null;
           }
         });
       });
       footerEl.append(buttonEl);
-      buttonEl = null;
     };
+
     for (var i = 0; i < buttonLabels.length; i++) {
       createButton(i);
     }
@@ -17243,7 +22088,7 @@ window.ons.notification = (function() {
         title: 'Alert',
         callback: function() {}
       };
-    
+
       options = angular.extend({}, defaults, options);
       if (!options.message && !options.messageHTML) {
         throw new Error('Alert dialog must contain a message.');
@@ -17330,7 +22175,7 @@ window.ons.notification = (function() {
       if (!options.message && !options.messageHTML) {
         throw new Error('Prompt dialog must contain a message.');
       }
-      
+
       createAlertDialog(
         options.title,
         options.message || options.messageHTML,
@@ -17351,7 +22196,7 @@ window.ons.notification = (function() {
 
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17366,6 +22211,93 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
 */
+
+/**
+ * @ngdoc object
+ * @name ons.orientation
+ * @category util
+ * @description 
+ *   [en]Utility methods for orientation detection.[/en]
+ *   [ja]画面のオリエンテーション検知のためのユーティリティメソッドを収めているオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc event
+ * @name change
+ * @description
+ *   [en]Fired when the device orientation changes.[/en]
+ *   [ja]デバイスのオリエンテーションが変化した際に発火します。[/ja]
+ * @param {Object} event
+ *   [en]Event object.[/en]
+ *   [ja]イベントオブジェクトです。[/ja]
+ * @param {Boolean} event.isPortrait
+ *   [en]Will be true if the current orientation is portrait mode.[/en]
+ *   [ja]現在のオリエンテーションがportraitの場合にtrueを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isPortrait()
+ * @return {Boolean}
+ *   [en]Will be true if the current orientation is portrait mode.[/en]
+ *   [ja]オリエンテーションがportraitモードの場合にtrueになります。[/ja]
+ * @description 
+ *   [en]Returns whether the current screen orientation is portrait or not.[/en]
+ *   [ja]オリエンテーションがportraitモードかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isLandscape()
+ * @return {Boolean}
+ *   [en]Will be true if the current orientation is landscape mode.[/en]
+ *   [ja]オリエンテーションがlandscapeモードの場合にtrueになります。[/ja]
+ * @description 
+ *   [en]Returns whether the current screen orientation is landscape or not.[/en]
+ *   [ja]オリエンテーションがlandscapeモードかどうかを返します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature on(eventName, listener)
+ * @description
+ *   [en]Add an event listener.[/en]
+ *   [ja]イベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]このイベントが発火された際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature once(eventName, listener)
+ * @description
+ *  [en]Add an event listener that's only triggered once.[/en]
+ *  [ja]一度だけ呼び出されるイベントリスナーを追加します。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]イベントが発火した際に呼び出される関数オブジェクトを指定します。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature off(eventName, [listener])
+ * @description
+ *  [en]Remove an event listener. If the listener is not specified all listeners for the event type will be removed.[/en]
+ *  [ja]イベントリスナーを削除します。もしイベントリスナーを指定しなかった場合には、そのイベントに紐づく全てのイベントリスナーが削除されます。[/ja]
+ * @param {String} eventName
+ *   [en]Name of the event.[/en]
+ *   [ja]イベント名を指定します。[/ja]
+ * @param {Function} listener
+ *   [en]Function to execute when the event is triggered.[/en]
+ *   [ja]削除するイベントリスナーを指定します。[/ja]
+ */
 
 window.ons.orientation = (function() {
   return create()._init();
@@ -17406,11 +22338,11 @@ window.ons.orientation = (function() {
       },
 
       _onDOMContentLoaded: function() {
-        this._installIsPortraintImplementation();
+        this._installIsPortraitImplementation();
         this.emit('change', {isPortrait: this.isPortrait()});
       },
 
-      _installIsPortraintImplementation: function() {
+      _installIsPortraitImplementation: function() {
         var isPortrait = window.innerWidth < window.innerHeight;
 
         if (!('orientation' in window)) {
@@ -17429,10 +22361,27 @@ window.ons.orientation = (function() {
       },
 
       _onOrientationChange: function() {
-        // We use setImmediate because window's dimention information is not updated on "orientationchange" in some cases.
-        setImmediate(function() {
-          this.emit('change', {isPortrait: this.isPortrait()});
-        }.bind(this));
+        var isPortrait = this._isPortrait();
+
+        // Wait for the dimensions to change because
+        // of Android inconsistency.
+        var nIter = 0;
+        var interval = setInterval(function() {
+          nIter++;
+
+          var w = window.innerWidth,
+            h = window.innerHeight;
+
+          if ((isPortrait && w <= h) ||
+             (!isPortrait && w >= h)) {
+            this.emit('change', {isPortrait: isPortrait});
+            clearInterval(interval);
+          }
+          else if (nIter === 50) {
+            this.emit('change', {isPortrait: isPortrait});
+            clearInterval(interval);
+          }
+        }.bind(this), 20);
       },
 
       // Run on not mobile browser.
@@ -17445,6 +22394,223 @@ window.ons.orientation = (function() {
 
     return obj;
   }
+})();
+
+
+/*
+Copyright 2013-2015 ASIAL CORPORATION
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+*/
+
+/**
+ * @ngdoc object
+ * @name ons.platform
+ * @category util
+ * @description 
+ *   [en]Utility methods to detect current platform.[/en]
+ *   [ja]現在実行されているプラットフォームを検知するためのユーティリティメソッドを収めたオブジェクトです。[/ja]
+ */
+
+/**
+ * @ngdoc method
+ * @signature isWebView()
+ * @description 
+ *   [en]Returns whether app is running in Cordova.[/en]
+ *   [ja]Cordova内で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isIOS()
+ * @description 
+ *   [en]Returns whether the OS is iOS.[/en]
+ *   [ja]iOS上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isAndroid()
+ * @description 
+ *   [en]Returns whether the OS is Android.[/en]
+ *   [ja]Android上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isIPhone()
+ * @description 
+ *   [en]Returns whether the device is iPhone.[/en]
+ *   [ja]iPhone上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isIPad()
+ * @description 
+ *   [en]Returns whether the device is iPad.[/en]
+ *   [ja]iPad上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isBlackBerry()
+ * @description 
+ *   [en]Returns whether the device is BlackBerry.[/en]
+ *   [ja]BlackBerry上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isOpera()
+ * @description 
+ *   [en]Returns whether the browser is Opera.[/en]
+ *   [ja]Opera上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isFirefox()
+ * @description 
+ *   [en]Returns whether the browser is Firefox.[/en]
+ *   [ja]Firefox上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isSafari()
+ * @description 
+ *   [en]Returns whether the browser is Safari.[/en]
+ *   [ja]Safari上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isChrome()
+ * @description 
+ *   [en]Returns whether the browser is Chrome.[/en]
+ *   [ja]Chrome上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isIE()
+ * @description 
+ *   [en]Returns whether the browser is Internet Explorer.[/en]
+ *   [ja]Internet Explorer上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+/**
+ * @ngdoc method
+ * @signature isIOS7above()
+ * @description 
+ *   [en]Returns whether the iOS version is 7 or above.[/en]
+ *   [ja]iOS7以上で実行されているかどうかを返します。[/ja]
+ * @return {Boolean}
+ */
+
+(function() {
+  'use strict';
+  window.ons.platform = {
+    /**
+    * @return {Boolean}
+    */
+    isWebView: function() {
+      return ons.isWebView();
+    },
+    /**
+    * @return {Boolean}
+    */
+    isIOS: function() {
+      return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isAndroid: function() {
+      return /Android/i.test(navigator.userAgent);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isIPhone: function() {
+      return /iPhone/i.test(navigator.userAgent);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isIPad: function() {
+      return /iPad/i.test(navigator.userAgent);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isBlackBerry: function() {
+      return /BlackBerry|RIM Tablet OS|BB10/i.test(navigator.userAgent);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isOpera: function() {
+      return (!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isFirefox: function() {
+      return (typeof InstallTrigger !== 'undefined');
+    },
+    /**
+    * @return {Boolean}
+    */
+    isSafari: function() {
+      return (Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0);
+    },
+    /**
+    * @return {Boolean}
+    */
+    isChrome: function() {
+      return (!!window.chrome && !(!!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0));
+    },
+    /**
+    * @return {Boolean}
+    */
+    isIE: function() {
+      return false || !!document.documentMode;
+    },
+    /**
+    * @return {Boolean}
+    */
+    isIOS7above: function() {
+      if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        var ver = (navigator.userAgent.match(/\b[0-9]+_[0-9]+(?:_[0-9]+)?\b/)||[''])[0].replace(/_/g,'.');
+        return (parseInt(ver.split('.')[0]) >= 7);
+      }
+      return false;
+    }
+  };
 })();
 
 
@@ -17473,7 +22639,7 @@ window.ons.orientation = (function() {
 })();
 
 /*
-Copyright 2013-2014 ASIAL CORPORATION
+Copyright 2013-2015 ASIAL CORPORATION
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

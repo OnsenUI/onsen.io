@@ -61,7 +61,7 @@
   &-share {
     overflow: hidden;
     margin: auto;
-    width: 310px;
+    max-width: 320px;
 
     &-github,
     &-twitter {
@@ -71,7 +71,7 @@
     }
 
     &-twitter {
-      width: 210px;
+      width: 220px;
     }
   }
 
@@ -114,6 +114,39 @@
       &, &:link, &:hover, &:visited, &:active {
         color: #aaa;
       }
+    }
+  }
+}
+
+.footer-newsletter {
+  margin: 24px 0;
+
+  &-input {
+    border: 1px #ccc solid;
+    height: 36px;
+    width: 100px;
+    width: 320px;
+    border-radius: 2px;
+    padding-left: 10px;
+  }
+
+  &-thankyou {
+    display: none;
+    margin-top: 8px;
+  }
+
+  &-submit {
+    height: 36px;
+    width: 90px;
+    background-color: #ff4d35;
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    font-size: 13px;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #cc3e2b;
     }
   }
 }

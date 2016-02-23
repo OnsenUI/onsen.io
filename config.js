@@ -36,7 +36,7 @@ module.exports = function(language, isStaging) {
     },
     onsen: {
       name: 'Onsen UI Team',
-      url: 'http://onsen.io',
+      url: 'https://onsen.io',
       gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
     },
     moongift: {
@@ -54,6 +54,10 @@ module.exports = function(language, isStaging) {
     una: {
       name: 'Una Softic',
       email: 'una.softic@gmail.com'
+    },
+    patrick: {
+      name: 'Patrick Klitzke',
+      email: 'patrick@asial.co.jp'
     }
   };
 
@@ -65,11 +69,31 @@ module.exports = function(language, isStaging) {
     authors[author].id = author;
   }
 
+  var categories = {
+    'showcase': {
+      name: 'Showcase',
+      title: 'Showcase of apps made with Onsen UI and Monaca'
+    },
+    'announcement': {
+      name: 'Announcements',
+      title: 'Announcements of new features in Monaca and Onsen UI'
+    },
+    'development': {
+      name: 'Development',
+      title: 'Articles about hybrid app development, HTML5, CSS and more'
+    },
+    'tutorial': {
+      name: 'Tutorial',
+      title: 'Tutorials on how to create hybrid mobile apps, web apps, HTML5, CSS and JavaScript'
+    }
+  };
+
   var env = {
     authors: authors,
+    categories: categories,
 
     en: {
-      url: 'http://onsen.io',
+      url: 'https://onsen.io',
       title: 'The Answer to PhoneGap UI Development | Onsen UI',
       description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
       keywords: '',

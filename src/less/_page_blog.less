@@ -26,7 +26,9 @@
   }
 
   .tag {
-    margin-bottom: -12px;
+    .tablet-query({
+      margin-bottom: -12px;
+    });
   }
 
   .tag-name {
@@ -60,19 +62,29 @@
   }
 
   .article {
+    &:first-of-type {
+      .article-divider {
+        display: none;
+      }
+    }
+
     &-share {
       overflow: hidden;
       margin: -3px auto 10px auto;
       width: 300px;
 
       position: absolute;
-      right: 0px;
+      right: -50px;
       margin-top: -56px;
 
       &-twitter, &-fb, &-gplus {
         float: left;
         width: 95px;
         height: 25px;
+      }
+
+      &-twitter {
+        width: 80px;
       }
 
       &-fb {
@@ -134,7 +146,8 @@
         });
       }
 
-      h2 {
+      h1 {
+        font-family: @en-header-font-family;
         font-size: 40px;
         line-height: 44px;
         padding-left: 26px;
@@ -199,6 +212,10 @@
         color: @link-color;
         text-decoration: none;
         font-weight: 700 !important;
+      }
+
+      time {
+        font-weight: 700;
       }
     }
 

@@ -1,0 +1,221 @@
+---
+author: moongift
+date: 2016-01-13
+id: test-your-javascript-code-with-these-unit-testing-frameworks
+title: "Test your Javascript Code with these Unit Testing Frameworks"
+product: monaca
+category: development
+tags: javascript, testing, test, jasmine, qunit, unit.js, screw.unit, protractor, mocha
+---
+
+Recently we introduced some advantages to using Monaca LocalKit in [this blog post](https://onsen.io/blog/6-things-you-can-do-with-monaca-localkit/).
+One of the big advantages we pointed out was the ease of automated testing when you use Monaca LocalKit.
+Let's take a look at some major JavaScript Unit Testing Frameworks offered by the community!
+
+<!-- more -->
+
+### Jasmine: Behavior-Driven JavaScript
+
+See the [GitHub Repository](http://jasmine.github.io/)
+
+![Jasmine](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-1.png)
+
+Jasmine is a testing framework that has a similar syntax to RSpec. For example:
+
+```javascript
+describe("CallTracker", function() {
+  it("tracks that it was called when executed", function() {
+    var callTracker = new j$.CallTracker();
+
+    expect(callTracker.any()).toBe(false);
+
+    callTracker.track();
+
+    expect(callTracker.any()).toBe(true);
+  });
+
+  it("tracks that number of times that it is executed", function() {
+    var callTracker = new j$.CallTracker();
+
+    expect(callTracker.count()).toEqual(0);
+
+    callTracker.track();
+
+    expect(callTracker.count()).toEqual(1);
+  });
+  :
+});
+```
+
+Here we are comparing returned values and expected values with `expect` function.
+
+### QUnit
+
+See the [GitHub Repository](https://qunitjs.com/)
+
+![QUnit](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-2.png)
+
+QUnit framework has been around for a while. You might be familiar with their result screen on a web browser.
+Testing code is as follows:
+
+```javascript
+QUnit.test("prettydate basics", function( assert ) {
+  var now = "2008/01/28 22:25:00";
+  assert.equal(prettyDate(now, "2008/01/28 22:24:30"), "just now");
+  assert.equal(prettyDate(now, "2008/01/28 22:23:30"), "1 minute ago");
+});
+```
+
+QUnit was originally developed as a part of jQuery. But a rewrite in 2009 made QUnit run completely standalone.
+
+### alexyoung/riotjs
+
+See the [GitHub Repository](https://github.com/alexyoung/riotjs)
+
+Riot.js is a JavaScript implementation of Riot.
+
+```javascript
+Riot.run(function() {
+  context('basic riot functionality', function() {
+    given('some simple equality tests', function() {
+      asserts('a simple truth test should return true', true).isTrue();
+      asserts('isNull is null', null).isNull();
+    });
+
+    given('another context', function() {
+      asserts('equals should compare strings as expected', 'test string').equals('test string');
+    });
+
+    given('a context concerned with functions', function() {
+      asserts('asserts() should allow functions to be compared', function() {
+        return 'test string';
+      }).equals('test string');
+    });
+  });
+
+  given('yet another context', function() {
+    asserts('equals should compare strings as expected', 'test string').equals('test string');
+  });
+});
+```
+
+It will run on a browser, Rhino, or Node.
+
+### Unit testing framework for Javascript - Unit.js
+
+See the [GitHub Repository](http://unitjs.com/)
+
+![Unit.js](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-3.png)
+
+Unit.js also runs on a browser or Node. It has its own unique syntax.
+
+```javascript
+var test = require('unit.js');
+
+var obj = {
+  message : 'hello',
+  name    : 'Nico'
+};
+
+var str = 'Hello world';
+
+// By example, provided by Express framework and other modules.
+var req = {
+  headers: {
+    'content-type': 'application/json'
+  }
+};
+
+test.object(obj).hasProperty('name');
+test.object(obj).hasProperty('message', 'hello');
+test.string(str).startsWith('Hello');
+test.string(str).contains('world');
+test.string(str).match(/[a-zA-Z]/);
+test.value(req).hasHeader('content-type');
+test.value(req).hasHeader('content-type', 'application/json');
+// or
+test.value(req).hasHeaderJson();
+```
+
+There is a `test` variable which contains the Unit.js module. From that variable, you can do various testing like properties, length, RegEx and so on.
+
+### nathansobo/screw-unit
+
+See the [GitHub Repository](https://github.com/nathansobo/screw-unit)
+
+Screw.Unit is Behavior-Driven Testing framework for JavaScript. It has familiar RSpec-like and readable syntax.
+
+```javascript
+describe("a nested describe", function() {
+  var invocations = [];
+
+  before(function() {
+    invocations.push("before");
+  });
+
+  describe("a doubly nested describe", function() {
+    before(function() {
+      invocations.push('inner before');
+    });
+
+    it("runs befores in all ancestors prior to an it", function() {
+      expect(invocations).to(equal, ["before", "inner before"]);
+    });
+  });
+});
+```
+
+### Protractor - end to end testing for AngularJS
+
+See the [GitHub Repository](http://www.protractortest.org/#/)
+
+![Protractor](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-4.png)
+
+Protractor is an E2E test framework for AngularJS. Protractor will be a great choice if you are developing AngularJS applications.
+
+```javascript
+describe('angularjs homepage todo list', function() {
+  it('should add a todo', function() {
+    browser.get('https://angularjs.org');
+
+    element(by.model('todoList.todoText')).sendKeys('write first protractor test');
+    element(by.css('[value="add"]')).click();
+
+    var todoList = element.all(by.repeater('todo in todoList.todos'));
+    expect(todoList.count()).toEqual(3);
+    expect(todoList.get(2).getText()).toEqual('write first protractor test');
+
+    // You wrote your first test, cross it off the list
+    todoList.get(2).element(by.css('input')).click();
+    var completedAmount = element.all(by.css('.done-true'));
+    expect(completedAmount.count()).toEqual(2);
+  });
+});
+```
+
+### Mocha - the fun, simple, flexible JavaScript test framework
+
+See the [GitHub Repository](http://mochajs.org/)
+
+![Mocha](/blog/content/images/2016/Jan/monaca-javascript-test-frameworks-5.png)
+
+Mocha is a JavaScript testing framework which makes testing simple and fun. It runs on a browser and on Node. The syntax is similar to Jasmine.
+
+```javascript
+var assert = require("assert")
+describe('Array', function() {
+  describe('#indexOf()', function () {
+    it('should return -1 when the value is not present', function () {
+      assert.equal(-1, [1,2,3].indexOf(5));
+      assert.equal(-1, [1,2,3].indexOf(0));
+    });
+  });
+});
+```
+
+### Conclusion
+
+Make sure to cover a variety of tests to deliver your high-quality applications with these testing frameworks.
+Many of the frameworks we discussed here work with a browser and Node. So remember to do Unit Testing of your JavaScript code when developing Monaca applications!
+
+Moreover, Protractor will be a great choice if you are developing apps with our UI!

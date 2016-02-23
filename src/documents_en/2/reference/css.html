@@ -25,19 +25,24 @@ layout: '2.html.eco'
     <%- @cssExample -> %>
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input">
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle"></div>
+      </div>
     </label>
 
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input" checked>
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle"></div>
+      </div>
     </label>
 
     <label class="switch switch--material">
       <input type="checkbox" class="switch__input switch--material__input" disabled>
-      <div class="switch__toggle switch--material__toggle"></div>
+      <div class="switch__toggle switch--material__toggle">
+        <div class="switch__handle switch--material__handle"></div>
+      </div>
     </label>
-      
     <% end %>
 
     <%- @cssShowcase -> %>
@@ -52,37 +57,50 @@ layout: '2.html.eco'
         <div class="navigation-bar__right navigation-bar--material__right"></div> 
       </div>
 
-      <br>
-
       <ul class="list list--material">
         <li class="list__item list__item--material">
-          <label class="switch switch--material" style="float: right">
-            <input type="checkbox" class="switch__input switch--material__input" checked>
-            <div class="switch__toggle switch--material__toggle"></div>
-          </label>
-
-          Orange
-          <div style="opacity:0.7;font-size:14px;margin-top:4px;">Sweet fruit that grows on trees.</div>
+          <div class="list__item__center list__item--material__center">
+            <div class="list__item__title list__item--material__title">Orange</div>
+            <div class="list__item__subtitle list__item--material__subtitle">Sweet fruit that grows on trees.</div>
+          </div>
+          <div class="list__item__right list__item--material__right">
+            <label class="switch switch--material" style="float: right">
+              <input type="checkbox" class="switch__input switch--material__input">
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle"></div>
+              </div>
+            </label>
+          </div>
         </li>
 
         <li class="list__item list__item--material">
-          <label class="switch switch--material" style="float: right">
-            <input type="checkbox" class="switch__input switch--material__input">
-            <div class="switch__toggle switch--material__toggle"></div>
-          </label>
-
-          Pear
-          <div style="opacity:0.7;font-size:14px;margin-top:4px;">Funny-shaped fruit.</div>
+          <div class="list__item__center list__item--material__center">
+            <div class="list__item__title list__item--material__title">Pear</div>
+            <div class="list__item__subtitle list__item--material__subtitle">Funny-shaped fruit.</div>
+          </div>
+          <div class="list__item__right list__item--material__right">
+            <label class="switch switch--material" style="float: right">
+              <input type="checkbox" class="switch__input switch--material__input" checked>
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle"></div>
+              </div>
+            </label>
+          </div>
         </li>
 
         <li class="list__item list__item--material">
-          <label class="switch switch--material" style="float: right">
-            <input type="checkbox" class="switch__input switch--material__input">
-            <div class="switch__toggle switch--material__toggle"></div>
-          </label>
-
-          Apple
-          <div style="opacity:0.7;font-size:14px;margin-top:4px;">A very tasty fruit.</div>
+          <div class="list__item__center list__item--material__center">
+            <div class="list__item__title list__item--material__title">Apple</div>
+            <div class="list__item__subtitle list__item--material__subtitle">A very tasty fruit.</div>
+          </div>
+          <div class="list__item__right list__item--material__right">
+            <label class="switch switch--material" style="float: right">
+              <input type="checkbox" class="switch__input switch--material__input">
+              <div class="switch__toggle switch--material__toggle">
+                <div class="switch__handle switch--material__handle"></div>
+              </div>
+            </label>
+          </div>
         </li>
       </ul>
 
@@ -297,21 +315,23 @@ layout: '2.html.eco'
         </div>
       </div>
 
-      <div class="dialog-mask dialog--material-mask"></div>
+      <div class="dialog-mask dialog-mask--material"></div>
       <div class="dialog dialog--material">
-        <div style="padding: 0 22px 22px 22px">
-          <p style="font-weight: 500;">Volumes</p>
+        <div class="dialog-container dialog-container--material">
+          <div style="padding: 0 22px 22px 22px">
+            <p style="font-weight: 500;">Volumes</p>
 
-          <p style="opacity: 0.6; font-size: 80%;">Media volume</p>
-          <div>
-            <input type="range" class="range range--material" style="float: right; width: 190px; margin-top: -4px;" value="30">
-            <i class="zmdi zmdi-volume-up" style="font-size: 24px; opacity: 0.6"></i>
-          </div>
+            <p style="opacity: 0.6; font-size: 80%;">Media volume</p>
+            <div>
+              <input type="range" class="range range--material" style="float: right; width: 190px; margin-top: -4px;" value="30">
+              <i class="zmdi zmdi-volume-up" style="font-size: 24px; opacity: 0.6"></i>
+            </div>
 
-          <p style="opacity: 0.6; font-size: 80%;">Alarm volume</p>
-          <div>
-            <input type="range" class="range range--material" style="float: right; width: 190px; margin-top: -4px;" value="40">
-            <i class="zmdi zmdi-alarm" style="font-size: 24px; opacity: 0.6"></i>
+            <p style="opacity: 0.6; font-size: 80%;">Alarm volume</p>
+            <div>
+              <input type="range" class="range range--material" style="float: right; width: 190px; margin-top: -4px;" value="40">
+              <i class="zmdi zmdi-alarm" style="font-size: 24px; opacity: 0.6"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -397,38 +417,61 @@ layout: '2.html.eco'
           <span class="toolbar-button toolbar-button--material">
             <i class="zmdi zmdi-menu"></i>
           </span>
-        </div> 
+        </div>
         <div class="navigation-bar__center navigation-bar--material__center">Radio Button</div> 
         <div class="navigation-bar__right navigation-bar--material__right">
         </div>
       </div>
 
-      <div style="margin: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); background-color: white; padding: 10px 18px;">
-        <div>
-          <label class="radio-button radio-button--material">
-            <input type="radio" class="radio-button__input radio-button--material__input" name="mr1" checked="checked">
-            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
-            Option One
+      <ul style="margin: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);" class="list list--material">
+        <li class="list__header list__header--material">
+          Musketeers
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="radio-button radio-button--material">
+              <input id="option1" type="radio" class="radio-button__input radio-button--material__input" name="mr1">
+              <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option1" class="list__item__center list__item--material__center">
+            Athos
           </label>
-        </div>
-
-        <div>
-          <label class="radio-button radio-button--material">
-            <input type="radio" class="radio-button__input radio-button--material__input" name="mr1" checked="checked">
-            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
-            Option Two
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="radio-button radio-button--material">
+              <input id="option2" type="radio" class="radio-button__input radio-button--material__input" name="mr1" checked>
+              <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option2" class="list__item__center list__item--material__center">
+            Porthos
           </label>
-        </div>
-
-        <div>
-          <label class="radio-button radio-button--material">
-            <input type="radio" class="radio-button__input radio-button--material__input" name="mr1" checked="checked">
-            <div class="radio-button__checkmark radio-button--material__checkmark"></div>
-            Option Three
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="radio-button radio-button--material">
+              <input id="option3" type="radio" class="radio-button__input radio-button--material__input" name="mr1">
+              <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option3" class="list__item__center list__item--material__center">
+            Aramis
           </label>
-        </div>
-      </div>
-
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="radio-button radio-button--material">
+              <input id="option4" type="radio" class="radio-button__input radio-button--material__input" name="mr1" disabled>
+              <div class="radio-button__checkmark radio-button--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option4" class="list__item__center list__item--material__center">
+            D'Artagnan
+          </label>
+        </li>
+      </ul>
     </div>
 
     <% end %>
@@ -508,12 +551,12 @@ layout: '2.html.eco'
 
           <div style="padding: 12px 0;">
             <i class="zmdi zmdi-email zmdi-hc-fw" style="font-size: 20px; opacity: 0.8;"></i>
-            <input class="text-input--material" placeholder="Username" type="text" required style="margin-left: 4px; width: 236px;">
+            <input class="text-input--material" placeholder="Email address" type="email" required style="margin-left: 4px; width: 230px;">
           </div>
 
           <div style="padding: 12px 0;">
             <i class="zmdi zmdi-lock zmdi-hc-fw" style="font-size: 20px; opacity: 0.8;"></i>
-            <input class="text-input--material" placeholder="Password" type="password" required style="margin-left: 4px; width: 236px;">
+            <input class="text-input--material" placeholder="Password" type="password" required style="margin-left: 4px; width: 230px;">
           </div>
 
           <div style="padding: 10px 0 4px 0; text-align: right">
@@ -570,31 +613,55 @@ layout: '2.html.eco'
         </div>
       </div>
 
-      <div style="margin: 12px 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.2); background-color: white; padding: 10px 18px;">
-        <div>
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" class="checkbox__input checkbox--material__input" checked="checked">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-            Option One
+      <ul style="margin: 12px; box-shadow: 0 1px 4px rgba(0,0,0,0.2);" class="list list--material">
+        <li class="list__header list__header--material">
+          Musketeers
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="checkbox checkbox--material">
+              <input id="option5" type="checkbox" class="checkbox__input checkbox--material__input">
+              <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option5" class="list__item__center list__item--material__center">
+            Athos
           </label>
-        </div>
-
-        <div>
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" class="checkbox__input checkbox--material__input">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-            Option Two
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="checkbox checkbox--material">
+              <input id="option6" type="checkbox" class="checkbox__input checkbox--material__input" checked>
+              <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option6" class="list__item__center list__item--material__center">
+            Porthos
           </label>
-        </div>
-
-        <div>
-          <label class="checkbox checkbox--material">
-            <input type="checkbox" class="checkbox__input checkbox--material__input">
-            <div class="checkbox__checkmark checkbox--material__checkmark"></div>
-            Option Three
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="checkbox checkbox--material">
+              <input id="option7" type="checkbox" class="checkbox__input checkbox--material__input">
+              <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option7" class="list__item__center list__item--material__center">
+            Aramis
           </label>
-        </div>
-      </div>
+        </li>
+        <li class="list__item list__item--material">
+          <div class="list__item__left list__item--material__left">
+            <label class="checkbox checkbox--material">
+              <input id="option8" type="checkbox" class="checkbox__input checkbox--material__input" disabled>
+              <div class="checkbox__checkmark checkbox--material__checkmark"></div>
+            </label>
+          </div>
+          <label for="option8" class="list__item__center list__item--material__center">
+            D'Artagnan
+          </label>
+        </li>
+      </ul>
     </div>
     <% end %>
   </div>
@@ -605,7 +672,9 @@ layout: '2.html.eco'
     <%- @cssExample {wrapPage: true, minHeight: 200}, -> %>
     <div class="dialog-mask dialog--material-mask"></div>
     <div class="dialog dialog--material">
-      <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      <div style="min-height: 100px;" class="dialog-container dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
     </div>
     <% end %>
 
@@ -626,7 +695,9 @@ layout: '2.html.eco'
 
     <div class="dialog-mask dialog--material-mask"></div>
     <div class="dialog dialog--material">
-      <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      <div style="min-height: 100px;" class="dialog-container dialog-container--material">
+        <p style="margin-left:24px;margin-right:24px">The quick brown fox jumps over the lazy dog.</p>
+      </div>
     </div>
     <% end %>
   </div>
@@ -637,15 +708,17 @@ layout: '2.html.eco'
     <%- @cssExample {wrapPage: true, minHeight: 200}, -> %>
     <div class="alert-dialog-mask alert-dialog-mask--material"></div>
     <div class="alert-dialog alert-dialog--material">
-      <div class="alert-dialog-title alert-dialog-title--material">
-        Dialog title
-      </div>
-      <div class="alert-dialog-content alert-dialog-content--material">
-        Some dialog content.
-      </div>
-      <div class="alert-dialog-footer alert-dialog-footer--material">
-        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
-        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      <div class="alert-dialog-container alert-dialog-container--material">
+        <div class="alert-dialog-title alert-dialog-title--material">
+          Dialog title
+        </div>
+        <div class="alert-dialog-content alert-dialog-content--material">
+          Some dialog content.
+        </div>
+        <div class="alert-dialog-footer alert-dialog-footer--material">
+          <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+          <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+        </div>
       </div>
     </div>
     <% end %>
@@ -667,15 +740,17 @@ layout: '2.html.eco'
 
     <div class="alert-dialog-mask alert-dialog-mask--material"></div>
     <div class="alert-dialog alert-dialog--material">
-      <div class="alert-dialog-title alert-dialog-title--material">
-        Dialog title
-      </div>
-      <div class="alert-dialog-content alert-dialog-content--material">
-        Some dialog content.
-      </div>
-      <div class="alert-dialog-footer alert-dialog-footer--material">
-        <button class="alert-dialog-button alert-dialog-button--material">OK</button>
-        <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+      <div class="alert-dialog-container alert-dialog-container--material">
+        <div class="alert-dialog-title alert-dialog-title--material">
+          Dialog title
+        </div>
+        <div class="alert-dialog-content alert-dialog-content--material">
+          Some dialog content.
+        </div>
+        <div class="alert-dialog-footer alert-dialog-footer--material">
+          <button class="alert-dialog-button alert-dialog-button--material">OK</button>
+          <button class="alert-dialog-button alert-dialog-button--material">CANCEL</button>
+        </div>
       </div>
     </div>
     <% end %>
@@ -690,46 +765,85 @@ layout: '2.html.eco'
       <div class="navigation-bar__center navigation-bar__title">Switch</div> 
     </div>
 
-    <br>
-
     <ul class="list">
       <li class="list__header">Share</li>
 
       <li class="list__item">
-        <i class="fa fa-facebook fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Facebook
-        
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input">
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__left">
+          <i class="fa fa-facebook fa-fw list__item__icon"></i>
+        </div>
+
+        <div class="list__item__center">
+          Facebook
+        </div>
+
+        <div class="list__item__right">
+          <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
       </li>
 
       <li class="list__item">
-        <i class="fa fa-twitter fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Twitter
-        
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input" checked>
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__left">
+          <i class="fa fa-twitter fa-fw list__item__icon"></i>
+        </div>
+
+        <div class="list__item__center">
+          Twitter
+        </div>
+
+        <div class="list__item__right">
+          <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
       </li>
 
       <li class="list__item">
-        <i class="fa fa-tumblr-square fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Tumblr
-        
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input">
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__left">
+          <i class="fa fa-tumblr-square fa-fw list__item__icon"></i>
+        </div>
+
+        <div class="list__item__center">
+          Tumblr
+        </div>
+
+        <div class="list__item__right">
+          <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
       </li>
 
       <li class="list__item">
-        <i class="fa fa-share-alt fa-fw" style="color: #A2A7B0; font-size: 22px; vertical-align: middle;"></i> Other
-        
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input" disabled>
-          <div class="switch__toggle"></div>
-        </label>
+        <div class="list__item__left">
+          <i class="fa fa-share-alt fa-fw list__item__icon"></i>
+        </div>
+
+        <div class="list__item__center">
+          Other
+        </div>
+
+        <div class="list__item__right">
+          <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" checked>
+            <div class="switch__toggle">
+              <div class="switch__handle"></div>
+            </div>
+          </label>
+        </div>
       </li>
+
     </ul>
 
     <% end %>
@@ -737,17 +851,23 @@ layout: '2.html.eco'
     <%- @cssExample -> %>
     <label class="switch">
       <input type="checkbox" class="switch__input">
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
 
     <label class="switch">
       <input type="checkbox" class="switch__input" checked>
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
 
     <label class="switch">
       <input type="checkbox" class="switch__input" disabled>
-      <div class="switch__toggle"></div>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
     </label>
     <% end %>
   </div>
@@ -763,38 +883,66 @@ layout: '2.html.eco'
     <br>
 
     <ul class="list">
-      <li class="list__item" style="text-align: center;">
-        <div style="float: left"><i class="fa fa-volume-down fa-fw"></i></div>
-        <div style="float: right"><i class="fa fa-volume-up fa-fw"></i></div>
-        <input type="range" value="50" class="range" style="margin-top: 6px; width: 220px;">
+      <li class="list__item">
+        <div class="list__item__left">
+          <div><i style="opacity: 0.3" class="fa fa-volume-down fa-fw"></i></div>
+        </div>
+        <div class="list__item__center">
+          <input type="range" value="10" class="range" style="width: 100%; margin-right: 10px;">
+        </div>
+        <div class="list__item__right">
+          <div><i class="fa fa-volume-up fa-fw"></i></div>
+        </div>
       </li>
 
-      <li class="list__item" style="text-align: center;">
-        <div style="float: left"><i class="fa fa-umbrella fa-fw" style="opacity: 0.3"></i></div>
-        <div style="float: right"><i class="fa fa-umbrella fa-fw"></i></div>
-        <input type="range" value="12" class="range" style="margin-top: 6px; width: 220px;">
+      <li class="list__item">
+        <div class="list__item__left">
+          <div><i style="opacity: 0.3" class="fa fa-umbrella fa-fw"></i></div>
+        </div>
+        <div class="list__item__center">
+          <input type="range" value="30" class="range" style="width: 100%; margin-right: 10px;">
+        </div>
+        <div class="list__item__right">
+          <div><i class="fa fa-umbrella fa-fw"></i></div>
+        </div>
       </li>
 
-      <li class="list__item" style="text-align: center;">
-        <div style="float: left"><i class="fa fa-sun-o fa-fw" style="opacity: 0.3"></i></div>
-        <div style="float: right"><i class="fa fa-sun-o fa-fw"></i></div>
-        <input type="range" value="80" class="range" style="margin-top: 6px; width: 220px;">
+      <li class="list__item">
+        <div class="list__item__left">
+          <div><i style="opacity: 0.3" class="fa fa-sun-o fa-fw"></i></div>
+        </div>
+        <div class="list__item__center">
+          <input type="range" value="50" class="range" style="width: 100%; margin-right: 10px;">
+        </div>
+        <div class="list__item__right">
+          <div><i class="fa fa-sun-o fa-fw"></i></div>
+        </div>
       </li>
 
-      <li class="list__item" style="text-align: center;">
-        <div style="float: left"><i class="fa fa-bolt fa-fw" style="opacity: 0.3"></i></div>
-        <div style="float: right"><i class="fa fa-bolt fa-fw"></i></div>
-        <input type="range" value="32" class="range" style="margin-top: 6px; width: 220px;">
+      <li class="list__item">
+        <div class="list__item__left">
+          <div><i style="opacity: 0.3" class="fa fa-bolt fa-fw"></i></div>
+        </div>
+        <div class="list__item__center">
+          <input type="range" value="70" class="range" style="width: 100%; margin-right: 10px;">
+        </div>
+        <div class="list__item__right">
+          <div><i class="fa fa-bolt fa-fw"></i></div>
+        </div>
       </li>
 
-      <li class="list__item" style="text-align: center;">
-        <div style="float: left"><i class="fa fa-moon-o fa-fw" style="opacity: 0.3"></i></div>
-        <div style="float: right"><i class="fa fa-moon-o fa-fw"></i></div>
-        <input type="range" value="68" class="range" style="margin-top: 6px; width: 220px;">
+      <li class="list__item">
+        <div class="list__item__left">
+          <div><i style="opacity: 0.3" class="fa fa-moon-o fa-fw"></i></div>
+        </div>
+        <div class="list__item__center">
+          <input type="range" value="90" class="range" style="width: 100%; margin-right: 10px;">
+        </div>
+        <div class="list__item__right">
+          <div><i class="fa fa-moon-o fa-fw"></i></div>
+        </div>
       </li>
-
     </ul>
-    <br>
     <% end %>
 
     <%- @cssExample -> %>
@@ -1738,17 +1886,11 @@ layout: '2.html.eco'
       <div class="navigation-bar__center navigation-bar__title">List</div> 
     </div>
 
-    <br>
-
     <ul class="list">
       <li class="list__header">Header</li>
       <li class="list__item">Item</li>
       <li class="list__item">
         Item
-        <label class="switch switch--list-item">
-          <input type="checkbox" class="switch__input">
-          <div class="switch__toggle"></div>
-        </label>
       </li>
       <li class="list__header">Header</li>
       <li class="list__item list__item--chevron">Item</li>
@@ -1783,7 +1925,7 @@ layout: '2.html.eco'
     </div>
 
     <div class="css-component">
-      <h4>Tappale List</h4>
+      <h4>Tappable List</h4>
 
       <%- @cssExample -> %>
       <ul class="list">
@@ -1897,19 +2039,31 @@ layout: '2.html.eco'
       <%- @cssExample -> %>
       <ul class="list">
         <li class="list__item">
-          Label
-          <label class="switch switch--list-item">
-            <input type="checkbox" class="switch__input" checked>
-            <div class="switch__toggle"></div>
-          </label>
+          <div class="list__item__center">
+            Label
+          </div>
+          <div class="list__item__right">
+            <label class="switch switch--list-item">
+              <input type="checkbox" class="switch__input" checked>
+              <div class="switch__toggle">
+                <div class="switch__handle"></div>
+              </div>
+            </label>
+          </div>
         </li>
 
         <li class="list__item">
-          Label
-          <label class="switch switch--list-item">
-            <input type="checkbox" class="switch__input">
-            <div class="switch__toggle"></div>
-          </label>
+          <div class="list__item__center">
+            Label
+          </div>
+          <div class="list__item__right">
+            <label class="switch switch--list-item">
+              <input type="checkbox" class="switch__input">
+              <div class="switch__toggle">
+                <div class="switch__handle"></div>
+              </div>
+            </label>
+          </div>
         </li>
       </ul>
       <% end %>
@@ -2039,16 +2193,18 @@ layout: '2.html.eco'
     <div class="alert-dialog-mask"></div>
 
     <div class="alert-dialog">
-      <div class="alert-dialog-title" style="margin-bottom: 20px;">
-        "AudioTest" Would Like to Access the Microphone
-      </div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title" style="margin-bottom: 20px;">
+          "AudioTest" Would Like to Access the Microphone
+        </div>
 
-      <div class="alert-dialog-footer alert-dialog-footer--one">
-        <button class="alert-dialog-button
-          alert-dialog-button--one">Don't Allow</button>
+        <div class="alert-dialog-footer alert-dialog-footer--one">
+          <button class="alert-dialog-button
+            alert-dialog-button--one">Don't Allow</button>
 
-        <button class="alert-dialog-button alert-dialog-button--primal
-          alert-dialog-button--one">OK</button>
+          <button class="alert-dialog-button alert-dialog-button--primal
+            alert-dialog-button--one">OK</button>
+        </div>
       </div>
     </div>
     <% end %>
@@ -2057,15 +2213,17 @@ layout: '2.html.eco'
     <div class="alert-dialog-mask"></div>
 
     <div class="alert-dialog">
-      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-container">
+        <div class="alert-dialog-title">Alert</div>
 
-      <div class="alert-dialog-content">
-        Hello World!
-      </div>
+        <div class="alert-dialog-content">
+          Hello World!
+        </div>
 
-      <div class="alert-dialog-footer">
-        <button class="alert-dialog-button
-          alert-dialog-button--primal">OK</button>
+        <div class="alert-dialog-footer">
+          <button class="alert-dialog-button
+            alert-dialog-button--primal">OK</button>
+        </div>
       </div>
     </div>
     <% end %>
@@ -2077,13 +2235,15 @@ layout: '2.html.eco'
       <div class="alert-dialog-mask"></div>
 
       <div class="alert-dialog">
-        <div class="alert-dialog-content">
-          <p>Hello World!</p>
-        </div>
+        <div class="alert-dialog-container">
+          <div class="alert-dialog-content">
+            <p>Hello World!</p>
+          </div>
 
-        <div class="alert-dialog-footer">
-          <button class="alert-dialog-button
-            alert-dialog-button--primal">OK</button>
+          <div class="alert-dialog-footer">
+            <button class="alert-dialog-button
+              alert-dialog-button--primal">OK</button>
+          </div>
         </div>
       </div>
       <% end %>
@@ -2092,8 +2252,10 @@ layout: '2.html.eco'
       <div class="alert-dialog-mask"></div>
 
       <div class="alert-dialog">
-        <div class="alert-dialog-content">
-          Loading...
+        <div class="alert-dialog-container">
+          <div class="alert-dialog-content">
+            Loading...
+          </div>
         </div>
       </div>
       <% end %>
@@ -2106,14 +2268,16 @@ layout: '2.html.eco'
       <div class="alert-dialog-mask"></div>
 
       <div class="alert-dialog">
-        <div class="alert-dialog-content">
-          Hello World!
-        </div>
+        <div class="alert-dialog-container">
+          <div class="alert-dialog-content">
+            Hello World!
+          </div>
 
-        <div class="alert-dialog-footer">
-          <button class="alert-dialog-button">Cancel</button>
-          <button class="alert-dialog-button
-            alert-dialog-button--primal">OK</button>
+          <div class="alert-dialog-footer">
+            <button class="alert-dialog-button">Cancel</button>
+            <button class="alert-dialog-button
+              alert-dialog-button--primal">OK</button>
+          </div>
         </div>
       </div>
       <% end %>
@@ -2122,49 +2286,25 @@ layout: '2.html.eco'
       <div class="alert-dialog-mask"></div>
 
       <div class="alert-dialog">
-        <div class="alert-dialog-title">Alert</div>
+        <div class="alert-dialog-container">
+          <div class="alert-dialog-title">Alert</div>
 
-        <div class="alert-dialog-content">
-          Hello World!
-        </div>
+          <div class="alert-dialog-content">
+            Hello World!
+          </div>
 
-        <div class="alert-dialog-footer alert-dialog-footer--one">
+          <div class="alert-dialog-footer alert-dialog-footer--one">
 
-          <button class="alert-dialog-button
-            alert-dialog-button--one">Left</button>
+            <button class="alert-dialog-button
+              alert-dialog-button--one">Left</button>
 
-          <button class="alert-dialog-button alert-dialog-button--primal
-            alert-dialog-button--one">Center</button>
+            <button class="alert-dialog-button alert-dialog-button--primal
+              alert-dialog-button--one">Center</button>
 
-          <button class="alert-dialog-button
-            alert-dialog-button--one">Right</button>
+            <button class="alert-dialog-button
+              alert-dialog-button--one">Right</button>
 
-        </div>
-      </div>
-      <% end %>
-    </div>
-
-    <div class="css-component">
-      <h4>Android-like Alert</h4>
-
-      <%- @cssExample {minHeight: 200}, -> %>
-      <div class="alert-dialog-mask"></div>
-
-      <div class="alert-dialog alert-dialog--android">
-        <div class="alert-dialog-title alert-dialog-title--android">
-          Alert
-        </div>
-
-        <div class="alert-dialog-content alert-dialog-content--android">
-          Hello World!
-        </div>
-
-        <div class="alert-dialog-footer alert-dialog-footer--one">
-          <button class="alert-dialog-button
-            alert-dialog-button--one">Cancel</button>
-
-          <button class="alert-dialog-button
-            alert-dialog-button--primal alert-dialog-button--one">OK</button>
+          </div>
         </div>
       </div>
       <% end %>
@@ -2177,30 +2317,32 @@ layout: '2.html.eco'
     <%- @cssShowcase -> %>
     <div class="dialog-mask"></div>
 
-    <div class="dialog" style="min-height: 200px; width: 96%">
-      <div class="page">
-        <div class="navigation-bar">
-          <div class="navigation-bar__left"></div>
+    <div class="dialog" style="height: 200px;">
+      <div class="dialog-container">
+        <div class="page">
+          <div class="navigation-bar">
+            <div class="navigation-bar__left"></div>
 
-          <div class="navigation-bar__center navigation-bar__title">
-            Dialog
+            <div class="navigation-bar__center navigation-bar__title">
+              Dialog
+            </div>
+
+            <div class="navigation-bar__right">
+              <span class="toolbar-button--quiet
+                navigation-bar__line-height">Close</span>
+            </div>
           </div>
 
-          <div class="navigation-bar__right">
-            <span class="toolbar-button--quiet
-              navigation-bar__line-height">Close</span>
-          </div>
-        </div>
+          <p style="text-align: center; margin-top: 40px; color: gray; font-size: 15px;">
+            Contents
+          </p>
 
-        <p style="text-align: center; margin-top: 40px; color: gray; font-size: 15px;">
-          Contents
-        </p>
-
-        <div class="bottom-bar" style="text-align: center">
-          <div class="bottom-bar__line-height" style="color: #4F81BB;">
-            <span style="padding: 0 30px; cursor: pointer;"><i class="ion-home" style="font-size: 30px;"></i></span>
-            <span style="padding: 0 30px; cursor: pointer;"><i class="ion-star" style="font-size: 30px;"></i></span>
-            <span style="padding: 0 30px; cursor: pointer;"><i class="ion-gear-a" style="font-size: 30px;"></i></span>
+          <div class="bottom-bar" style="text-align: center">
+            <div class="bottom-bar__line-height" style="color: #4F81BB;">
+              <span style="padding: 0 30px; cursor: pointer;"><i class="ion-home" style="font-size: 30px;"></i></span>
+              <span style="padding: 0 30px; cursor: pointer;"><i class="ion-star" style="font-size: 30px;"></i></span>
+              <span style="padding: 0 30px; cursor: pointer;"><i class="ion-gear-a" style="font-size: 30px;"></i></span>
+            </div>
           </div>
         </div>
       </div>
@@ -2211,11 +2353,13 @@ layout: '2.html.eco'
     <div class="dialog-mask"></div>
 
     <div class="dialog" style="height: 140px;">
-      <div class="page">
-        <p style="text-align: center; 
-          margin-top: 54px; color: gray;">
-          Content
-        </p>
+      <div class="dialog-container">
+        <div class="page">
+          <p style="text-align: center; 
+            margin-top: 54px; color: gray;">
+            Content
+          </p>
+        </div>
       </div>
     </div>
     <% end %>
