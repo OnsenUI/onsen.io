@@ -67,7 +67,7 @@ module.exports = function(lang, isStaging) {
           }
 
           metalsmith.metadata().componentCategoryDict = sortObject(dict);
-          metalsmith.metadata().componentCategoryDict2 = sortObject(dict2);
+          metalsmith.metadata().componentCategoryIndex2 = sortObject(dict2);
         })
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
@@ -258,7 +258,9 @@ module.exports = function(lang, isStaging) {
           })
           .use(tags({
             handle: 'tags',
-            path: 'tags/:tag.html'
+            path: 'tags/:tag.html',
+            sortBy: 'date',
+            reverse: true
           }))
           .use(wordcloud({
             category: 'tags',

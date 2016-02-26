@@ -1,0 +1,146 @@
+---
+author: andreas
+date: 2016-02-10
+id: what-is-material-design
+title: "What is Material Design?"
+tags: onsen ui, material design
+category: development
+---
+
+<p style="text-align: center">
+  <iframe src="https://cdn.rawgit.com/argelius/ec5ef84029d5dba9d8ef/raw/b4e0248d9d68ea711f2e88943f79446665135dd5/header.html" width="500" height="75"></iframe>
+</p>
+
+I would like to take some time to expand on what Material Design is and the approach we have been taking when implementing it in the new version of Onsen UI.
+
+In the previous version of Onsen UI, there was only one theme and it only tried to mimic the visual design of iOS. This is not a problem as long as you only target iOS, but since the app will look like an iOS app, the users might not feel at home when they run the app on an Android device. Things like the navigation bar, tabs, buttons all look completely different in iOS and Android. There are even some components that exist in Android that don't even have a counterpart in the visual language of iOS native apps.
+
+An important thing to note when talking about hybrid apps is that even though the developer might regard it as nothing but a web app, from a user's perspective the app is actually more often compared to native apps since that is what the user is normally running on his or her device. In this case the user's perspective more important. You should not be able to distinguish an ideal hybrid app from it's native equivalent. Of course, it might be impossible to get the exact same performance from a hybrid app, but for the visual appearance it is possible to get very close. That is what we're trying to do with Onsen UI. By adding Material Design we are getting one step closer to that ideal.
+
+We have also gone one step further by adding automatic styles. What this means is that an Onsen UI app will use the Material Design components when running on the Android platform while it automatically switches to the flat design when running on iOS. This makes it possible to write truly hybrid apps where you can use not only the same JavaScript code on both platforms but even run the same HTML on Android and iOS and still give a close-to-native experience to your users.
+
+<!-- more -->
+
+### Material Design is a specification
+
+Material Design is a specification that describes the visual language of native Android apps. However, it is not tied to Android at all and might as well be used in web apps or even desktop apps. The design spec was announced on the Google I/O conference in 2014, almost two years ago. Since then Google has changed the design of most of their apps to follow the spec and also added the Material Design components into the Android SDK so native app developers can use them. They also created a JavaScript library called [Polymer](https://github.com/Polymer/polymer) which makes it possible for web developers to use Material Design components in their apps.
+
+The full specification can be found [here](https://www.google.com/design/spec/material-design/introduction.html). Since Google have been kind enough to release a full specification, anyone can develop their own library of Material Design components. While developing Onsen UI 2.0 we are trying to follow this specification in order for apps built using our library to resemble native Android apps as closely as possible.
+
+### Material Design in Onsen UI
+
+When adding new components to Onsen UI we are very careful to follow the specification precisely. In the app below, we have tried to mimic the design of the native Contacts App that is available in most Android devices. If you have an Android phone, please fire up the app yourself and compare them.
+
+<p style="text-align: center">
+  <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://frankdiox.github.io/OnsenUI-Material-Tabbar/" width="384" height="567"></iframe>
+</p>
+
+This app is built using the Material Design components available in Onsen UI 2.0. All the animations and transitions are handled by the JavaScript library. I could give you a list of all the components we have implemented, but I think it's easier to get an overview by showing how a simple app is created.
+
+These examples show some behavior that is still not released but will be available in the next beta version. Some of the things we are releasing in `beta.7` are:
+
+* Automatic style switching based on platform
+* A new `<ons-input>` element that supports `type` attribute so it can be used for both text input, checkboxes, radio buttons, etc.
+* The `<ons-range>` element that renders as a slider.
+* All async methods now return a Promise object.
+* The ripple effect has been improved to look more like the native version.
+* Lots of performance tweaks, mainly to remove a lot of memory overhead and speed up initialization of some components.
+
+#### Making a simple app
+
+All Onsen UI apps start with an element called `<ons-page>` which serves as the root element of the app. Inside the `<ons-page>` we will go ahead and add an `<ons-toolbar>` element to add a fixed toolbar to the top of the app.
+
+```html
+<ons-page>
+  <ons-toolbar></ons-toolbar>
+</ons-page>
+```
+
+<p style="text-align: center">
+  <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://cdn.rawgit.com/argelius/63481a3c9501ff5cb895/raw/dee297d2a426995c0e1530234bd8925609e2a3b3/step2.html" width="384" height="567"></iframe>
+</p>
+
+In order to populate the toolbar we can add some buttons with icons. To do that we will use the `<ons-toolbar-button>` and the `<ons-icon>` components.
+
+```html
+<ons-toolbar>
+  <div class="left">
+    <ons-toolbar-button>
+      <ons-icon icon="md-menu">
+    </ons-toolbar-button>
+  </div>
+  <div class="center">
+    My App
+  </div>
+  <div class="right">
+    <ons-toolbar-button>
+      <ons-icon icon="md-search">
+    </ons-toolbar-button>
+    <ons-toolbar-button>
+      <ons-icon icon="md-more-vert">
+    </ons-toolbar-button>
+  </div>
+</ons-toolbar>
+```
+
+The next step is to add navigation to our app. In native apps you will often navigate using tabs, so by using the `<ons-tabbar>` element and the `<ons-tab>` elements I will create an app with two tabs. Underneath the toolbar we add the following code:
+
+```html
+<ons-tabbar>
+  <ons-tab
+    active
+    label="Tab 1"
+    page="tab1.html">
+  </ons-tab>
+  <ons-tab
+    label="Tab 2"
+    page="tab2.html">
+  </ons-tab>
+</ons-tabbar>
+
+<ons-template id="tab1.html">
+  <ons-page></ons-page>
+</ons-template>
+
+<ons-template id="tab2.html">
+  <ons-page></ons-page>
+</ons-template>
+```
+
+<p style="text-align: center">
+  <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://cdn.rawgit.com/argelius/5949819bd89fbfaeba6e/raw/420794b212ab95a694d6e518bc78fe097af22e3d/tabs.html" width="384" height="567"></iframe>
+</p>
+
+Finally we can add a floating action button to one of the tabs. In the Material Design spec it says that the floating action button should represent the primary action of the app. In our app it can be used to add some data so we will add a plus icon inside it. The floating action button is represented by the `<ons-fab>` element in Onsen UI.
+
+```html
+<ons-fab position="bottom right">
+  <ons-icon icon="md-plus"></ons-icon>
+</ons-fab>
+```
+
+<p style="text-align: center">
+  <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://cdn.rawgit.com/argelius/5949819bd89fbfaeba6e/raw/7dd576c25c60f0c8fcb56584be1f8c9162e29195/tabs.html" width="384" height="567"></iframe>
+</p>
+
+Let's go ahead and add a list with some form elements to create a settings page in the left tab. For the full code please take a look at [this gist](https://gist.github.com/argelius/5949819bd89fbfaeba6e).
+
+<p style="text-align: center">
+  <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://cdn.rawgit.com/argelius/5949819bd89fbfaeba6e/raw/b206d74925538c8db2b9e1dbbcf7df13e60c6fae/tabs.html" width="384" height="567"></iframe>
+</p>
+
+This UI was created using only Onsen UI 2.0 components and I didn't write any custom CSS at all. As mentioned earlier, the UI will automatically transform based on the platform. This is how it would look on iOS:
+
+<p style="text-align: center">
+  <iframe style="box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);" src="https://cdn.rawgit.com/argelius/5949819bd89fbfaeba6e/raw/1de253bba217dc87008bac2a2df77a8801a4d91c/tabs.html" width="320" height="568"></iframe>
+</p>
+
+### Conclusion
+
+We are continuously developing Onsen UI to make it the best hybrid app framework we can possibly make. Since launching our [Community forum](https://community.onsen.io/) we have received lots of great feedback from the users. If you have any questions don't hesitate to post there.
+
+Currently we are focusing on fixing bugs in the core framework and developing bindings for Angular 2.0 and React.js. We are moving along nicely and will be able to support both Angular 2.0 and React.js when we reach the stable release.
+
+We are also hard at work making a new documentation. A lot of you have commented that the docs were lacking for 1.x and we are doing our best to fix that. The new docs will contain examples for both vanilla JavaScript as well as examples for all the major frameworks.
+
+If you are having trouble using the beta or if you found a bug, please open an [issue](https://github.com/OnsenUI/OnsenUI/issues) and we will take a look at it as soon as we are available.

@@ -13,24 +13,25 @@ layout: '2.html.eco'
 
   <% if @doc.extensionOf: %>
   <p>
-    <span class="reference-extension-name"><%= @doc.extensionOf %></span> This object is available on <%= @doc.extensionOf %> binding only.
+    <span class="reference-extension-name"><%= @doc.extensionOf %></span>
+    This object is available on <%= @doc.extensionOf %> binding only.
   </p>
   <% end %>
 
   <section class="reference-description">
     <p><%= @translate @doc.description %></p>
 
-    <% if @doc.deprecated != undefined: %>
+    <% if @doc.deprecated: %>
     <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
     <% end %>
   </section>
 
   <ul class="reference-quick-navi">
-    <% if @doc.examples && @doc.examples[0]: %>
+    <% if @doc.examples.length > 0: %>
     <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.codepen: %>
+    <% if @doc.codepens.length > 0: %>
     <li><a href="#example"><%= @translate '[en]Live Example[/en][ja]実例[/ja]' %></a></li>
     <% end %>
 
@@ -42,14 +43,14 @@ layout: '2.html.eco'
     <li><a href="#events-summary"><%= @translate '[en]Events[/en][ja]イベント[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.guides or @doc.seealsos: %>
+    <% if @doc.guides.length > 0 or @doc.seealsos.length > 0: %>
     <li><a href="#seealso"><%= @translate '[en]See Also[/en][ja]関連情報[/ja]' %></a></li>
     <% end %>
 
     <li><a href="#discussion"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
   </ul>
 
-  <% if @doc.examples && @doc.examples[0]: %>
+  <% if @doc.examples.length > 0: %>
     <section>
       <h3 id="usage">
         <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
@@ -65,23 +66,23 @@ layout: '2.html.eco'
   </section>
   <% end %>
 
-  <% if @doc.codepen: %>
+  <% if @doc.codepens[0]: %>
   <h3 id="example">
     <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
     <a href="#example" class="reference-loop-anchor">#</a>
   </h3>
 
-  <% if @doc.codepen.isWide: %>
+  <% if @doc.codepens[0].isWide: %>
   <div style="height: 480px; width: 100%;" class="codepen-wrapper">
   <% else: %>
   <div style="height: 480px; width: 320px;" class="codepen-wrapper">
   <% end %>
-    <p data-height="480" data-theme-id="11531" data-slug-hash="<%= @doc.codepen.id %>" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/<%= @doc.codepen.id %>/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+    <p data-height="480" data-theme-id="11531" data-slug-hash="<%= @doc.codepens[0].id %>" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/<%= @doc.codepens[0].id %>/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
     <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
   </div>
 
-  <div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/full/<%= @doc.codepen.id %>/" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  <div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/full/<%= @doc.codepens[0].id %>/" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
   <% end %>
 
 
@@ -92,15 +93,11 @@ layout: '2.html.eco'
   </h3>
 
   <ul class="seealso">
-    <% if @doc.guides: %>
-      <% for guide in @doc.guides: %>
-        <li class="guide"><a href="/guide/overview.html#<%= guide.name %>"><%= @translate guide.description %></a></li>
-      <% end %>
+    <% for guide in @doc.guides: %>
+      <li class="guide"><a href="/guide/overview.html#<%= guide.name %>"><%= @translate guide.description %></a></li>
     <% end %>
-    <% if @doc.seealsos: %>
-      <% for seealso in @doc.seealsos: %>
-        <li class="seealso"><a href="<%= seealso.name %>.html"><%= @translate seealso.description %></a></li>
-      <% end %>
+    <% for seealso in @doc.seealsos: %>
+      <li class="seealso"><a href="<%= seealso.name %>.html"><%= @translate seealso.description %></a></li>
     <% end %>
   </ul>
   <% end %>
@@ -135,7 +132,7 @@ layout: '2.html.eco'
             <% end %>
           </td>
           <td><%= @translate method.description %>
-            <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+            <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
           </td>
         </tr>
         <% end %>
@@ -169,7 +166,9 @@ layout: '2.html.eco'
         <tr>
           <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
           <td><%= @translate event.description %>
-            <% if event.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div><% end %>
+            <% if event.deprecated: %>
+            <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
+            <% end %>
 
             <% if event.extensionOf: %>
             <span class="reference-extension-name"><%= event.extensionOf %></span>
@@ -187,10 +186,11 @@ layout: '2.html.eco'
   <!-- methods details -->
   <% if @doc.methods.length > 0: %>
   <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
+
   <% for method in @doc.methods: %>
   <section class="method-detail">
     <h4 id="method-<%= method.name %>">
-      <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.typeExpression %></span><% end %>
+      <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.type %></span><% end %>
 
       <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
     </h4>
@@ -201,13 +201,15 @@ layout: '2.html.eco'
     <span class="reference-extension-name"><%= method.extensionOf %></span>
     <% end %>
 
-    <% if method.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+    <% if method.deprecated: %>
+    <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
+    <% end %>
 
     <% if method.returns and method.returns.description: %>
     <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%= @translate method.returns.description %></p>
     <% end %>
 
-    <% if method.params: %>
+    <% if method.params.length > 0: %>
     <!-- method parameter -->
     <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
 
@@ -229,7 +231,7 @@ layout: '2.html.eco'
         <% for param in method.params: %>
         <tr>
           <td><span class="parameter-name"><%= param.name %></span></td>
-          <td class="value-type"><%= param.typeExpression %></td>
+          <td class="value-type"><%= param.type %></td>
           <td><%= @translate param.description %></td>
         </tr>
         <% end %>
@@ -261,7 +263,9 @@ layout: '2.html.eco'
     <span class="reference-extension-name"><%= event.extensionOf %></span>
     <% end %>
 
-    <% if event.deprecated != undefined: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+    <% if event.deprecated: %>
+    <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
+    <% end %>
 
     <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
 
@@ -283,7 +287,7 @@ layout: '2.html.eco'
         <% for param in event.params: %>
         <tr>
           <td><span class="parameter-name"><%= param.name %></span></td>
-          <td class="value-type"><%= param.typeExpression %></td>
+          <td class="value-type"><%= param.type %></td>
           <td><%= @translate param.description %></td>
         </tr>
         <% end %>
