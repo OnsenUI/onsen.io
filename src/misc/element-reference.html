@@ -393,33 +393,4 @@ layout: '2.html.eco'
   <% end %>
   <!-- end events -->
 
-  <h3 id="discussion">
-    <% if @lang == "en": %>Discussion<% else: %>議論<% end %>
-    <a href="#discussion" class="reference-loop-anchor">#</a>
-  </h3>
-
-  <!-- nodebb -->
-  <a id="nodebb/comments"></a>
-  <script type="text/javascript">
-  var nodeBBURL = 'https://community.onsen.io';
-
-  articleID = '<%= @doc.name %>';
-
-  var articleData = {
-    title_plain: '<%= @doc.name %>',
-    url: '<%= @site.url %>reference/<%= @doc.name %>.html',
-    tags: [{title: '<%= @doc.name %>'}],
-    cid: 9,
-    markDownContent: '<div>' + '<%= @doc.description %>' + '</div>'
-  };
-
-  (function() {
-  var nbb = document.createElement('script'); nbb.type = 'text/javascript'; nbb.async = true;
-  nbb.src = nodeBBURL + '/plugins/nodebb-plugin-blog-comments/lib/general.js';
-  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(nbb);
-  })();
-  </script>
-  <noscript>Please enable JavaScript to view comments</noscript>
-  <!-- end nodebb -->
-
 </div></div>
