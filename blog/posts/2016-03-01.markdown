@@ -1,0 +1,139 @@
+---
+author: moongift
+date: 2016-03-01
+id: develop-monaca-project-with-visual-studio-code
+title: "Develop Monaca Project with Visual Studio Code"
+product: monaca
+category: development
+tags: monaca, visual studio code, phonegap, cordova, tutorial
+---
+
+
+Visual Studio Code is an open source code editor developed by Microsoft. It is based on Electron, a framework allows creating desktop GUI applications using the Node.js. Visual Studio Code comes with tons of features like debugging, Git integration, syntax highlighting, IntelliSense and more. It is also highly customizable. On top of that, Microsoft recently announced [Cordova Tools](https://github.com/Microsoft/vscode-cordova) for Visual Studio Code. With Cordova Tools extension, you can build, debug and preview Cordova hybrid mobile apps on Visual Studio Code.
+
+With that in mind, in this blog post, we will quickly introduce how we can create a Monaca hybrid application using Microsoft's Visual Studio Code with Cordova Tools.
+
+<!-- Microsoftが開発しているプログラミングエディタがVisual Studio Codeです。Atomをベースにしたエディタとなっており、元々幾つかの機能が組み込まれているのが特徴となっています。さらに機能拡張にも対応しているので機能追加も可能です。
+
+
+今回はMicrosoft社がリリースしたCordova Toolsというプラグインを使ってみたいと思います。これはVisual Studio Code上でCordovaアプリを開発できるようにするものです。ファイルの配置を変えればMonacaアプリの開発でも使えそうなので、Monaca Localkitで開発する際のエディタとして使ってみるのが良さそうです。 -->
+
+<!-- more -->
+
+### Preparation
+<!-- 事前準備 -->
+
+First of all, make sure you have Node.js installed on your device.
+And, install Cordova using following code:
+<!-- まずNode.jsがインストールされている必要があります。そして、コマンドプロンプトやターミナルでcordovaをインストールします。 -->
+
+```
+npm install -g cordova
+```
+
+If you are targeting iOS devices, install libraries using Homebrew.
+Note that iOS debugging is not supported in Windows.
+<!-- 次にiOSをターゲットする場合、Mac OSX側でライブラリをインストールします。WindowsではiOSに対応したデバッグは未対応です。Homebrewを使うのが推奨されています。 -->
+
+```
+brew install ideviceinstaller ios-webkit-debug-proxy
+```
+
+<!-- これで準備は完了です。 -->
+
+
+### installation
+<!-- インストール -->
+
+If you don't have Visual Studio Code, download one from [here](https://code.visualstudio.com/
+).
+Once it's installed, start up Visual Studio Code.
+Let's install Cordova Tools extension.
+`CTRL+SHIFT+P` (`CMD+SHIFT+P` for Mac OSX) will open Command Palette.
+Simply type `Install Extension` and hit enter.
+
+<!-- Visual Studio Codeを立ち上げて、Ctrl+Shift+P（Mac OSXの場合はコマンド+Shift+P）を押します。そして出てきたフローティングで install と入力します。そうするとInstall Extensionが一番上に出ますのでエンターキーを押します。 -->
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-1.png)
+
+Find Cordova Tools by, again, simply type `cordova`.
+Your command line should look something like this.
+Once you hit enter, Visual Studio Code will install the extension in a moment.
+<!-- ext install と出たら、cordovaと入力します。そうするとCordova Toolsが出るので、エンターキーを押してインストールを行います。進捗は出ませんが、しばらく待つとインストールが完了します。 -->
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-2.png)
+
+
+### Creating Project
+<!-- プロジェクトの作成 -->
+
+For this tutorial, we will be using our Monaca LocalKit.
+Create a Monaca project.
+After creating a project, please copy the separately created Cordova project's platforms/ios, or platforms/android, into the Monaca application's platforms directory.
+
+<!--
+Monacaプロジェクトを作成します。なお、LocalKitを対象としていますので注意してください。プロジェクトを追加したら、別途作成しておくCordovaプロジェクトのplatforms/ios（またはplatforms/android）以下のファイルをMonacaアプリのplatforms以下にコピーしてください。 -->
+
+
+### Open Project in Visual Studio Code
+<!-- Visual Studo Codeでプロジェクトを開く -->
+
+Open the Monaca hybrid mobile app project in Visual Studio Code.
+You can see your directory tree on the left side of the window.
+<!-- ではVisual Studio Codeを立ち上げて、Monacaアプリのプロジェクトを開きます。このようにIDE風にファイルやフォルダが表示されます。 -->
+
+You can also set breakpoints in JavaScript files by clicking in the left margin.
+<!-- 行の左側をクリックしてブレイクポイントを設定できます。 -->
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-3.png)
+
+
+Click on the debug icon in the sidebar or `CMD+SHIFT+D`.
+Then, click on the gear icon next to the debug button in the upper left.
+Select Cordova.
+<!-- デバッグは左側にある虫のアイコンをクリックします。そしてSelect Debug EnvironmentでCordovaを選択してください。 -->
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-4.png)
+
+
+We can now run our hybrid mobile apps on an iOS/Android simulator, emulator, or actual device.
+<!-- そうすると左上に環境の選択が出ます。iOS/Androidのシミュレータやエミュレータ、そして実機での実行が選択できるようになっています。 -->
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-5.png)
+
+
+You can also run some JavaScript directly in Visual Studio Code's console.
+Below is a screenshot when we run following line:
+```
+alert(true);
+```
+<!-- さらにコンソールをつなげてJavaScriptを実行させることもできます。 -->
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-6.png)
+
+
+
+### Features of Visual Studio Code
+<!-- Visual Studo Codeの機能について -->
+
+Today, we have quickly went through how we use Visual Studio Code to create Monaca hybrid mobile apps.
+As I mentioned before, Visual Studio Code provides varieties of features out of the box.
+Keep in mind that Visual Studio Code is still in an early stage of development with some minor bugs.
+
+However, Built-in support for Git and debugging tool are great. Also, IntelliSense, snippets, code refactoring, and Extensions are exactly the type of features that will increase your productivity.
+It is a powerful and reliable tool to create Monaca and Cordova applications.
+
+<!-- Visual Studo Codeを使って変数の一覧、ウォッチ、コールスタックそしてブレイクポイントの設定ができます。まだリリースされたばかりとあって不安定な（ちゃんとブレイクしないなど）ところもありますが、MonacaやCordovaアプリを本格的に作り込んでいく際にはとても役立ちそうです。 -->
+<!--
+Visual Studio Codeは最初からGit連携やデバッグ機能があり、プログラミングエディタとして十分な機能が備わっています。Atomがベースとあって、最近のモダンな開発に最適なエディタとなっています。ぜひVisual Studio Codeを使ってMonacaアプリの開発を進めてみてください。 -->
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-7.png)
+
+
+
+[Apache Cordova development lands on Visual Studio Code | The Visual Studio Blog](https://blogs.msdn.microsoft.com/visualstudio/2016/01/28/apache-cordova-development-lands-on-visual-studio-code/)
