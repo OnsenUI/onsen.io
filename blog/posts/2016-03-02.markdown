@@ -15,43 +15,32 @@ In case you don't know, both TypeScript and CoffeeScript provide syntactic sugar
 To solve this problem, ECMAScript6 (ES6) will tackle many of the core language shortcomings addressed, and it is a huge improvement over ES5.
 As you may remember that we've discussed how we can use ES6 using Babel in [this blog post](https://onsen.io/blog/trying-out-javascript-es6-using-babel/), today we will be creating a Monaca application with ES6.
 
-<!-- 今、JavaScriptの主流はECMAScript5となっています。色々と書きづらい点も多く、そのためにCoffeeScriptやTypeScriptのような代替言語が生み出されています。書き方の他、クラスや定数などの機能が不足している感も否めません。
-
-それを解決してくれるのがECMAScript6になります。いち早く体験するにはBabelが良いのは以前も書きましたが、今回はMonacaアプリでBabelを利用する方法を紹介します。なお、利用に際してはMonaca Localkitを前提としています。また、Node.jsは予めインストールされていることとします。 -->
-
-
 <!-- more -->
 
 ### Creating A Project
-<!-- LocalKitでプロジェクトを作成する -->
 
 As always, we will first create a Monaca project.
-For this blog, we will simply use [Hello World App](https://github.com/monaca/project-templates/tree/master/0-helloworld).
+In this blog, we will simply use [Hello World App](https://github.com/monaca/project-templates/tree/master/0-helloworld).
 If you create the project, your folder directory should look like this.
-
-<!-- まず最初にMonaca LocalKitを使ってプロジェクトを作成します。今回はHello World Appを使っています。作成するとこのようなファイル構成になっているかと思います。 -->
 
 
 ![Monaca LocalKit Project](/blog/content/images/2016/Mar/monaca-coffeescript-1.png)
 
 
 ### Installing Gulp
-<!-- Gulpなどをインストールする -->
 
 Gulp is a javascript task runner design to automate tasks.
 Let Gulp automate our transpiling work.
 When working with Babel, Gulp is a great tool to have.
 
 Let's install gulp and some other libraries.
-To start run following code:
-<!-- Babelを使う際にはGulpを使ってECMAScript6から通常のJavaScriptへの変換を自動化するのがお勧めです。そこでGulpなど必要なライブラリをインストールします。まず最初にnpm initを実行しておきます。 -->
+To start, run following code:
 
 ```
 npm init
 ```
 
 Next, we will install libraries.
-<!-- ではライブラリをインストールします。 -->
 
 ```
 npm install --save-dev gulp gulp-babel \
@@ -60,7 +49,6 @@ npm install --save-dev gulp gulp-babel \
 ```
 
 These are the list of plugins we are installing:
-<!-- インストールしているライブラリを解説します。 -->
 
  - gulp : JavaScript task runner for Node.js
  - gulp-babel : Gulp plugin for Babel
@@ -70,11 +58,9 @@ These are the list of plugins we are installing:
 
 
 ### Creating Gulp tasks
-<!-- Gulpファイルを記述する -->
 
 Since we are focusing on ECMAScript6 in this tutorial, we will also be writing gulpfile in ES6.
 In order to that, we first need to write following in `package.json` to enable es2015 preset.
-<!-- Babelを使うための設定を行います。今回はGulpの設定もECMAScript6で書きたいと思います。そこでまず package.json に下記の設定を追加します。 -->
 
 ```
 "babel": {
@@ -84,7 +70,6 @@ In order to that, we first need to write following in `package.json` to enable e
 
 We then need to instruct gulp to use Babel by renaming the `gulpfile.js` to `gulpfile.babel.js`.
 We are now able to use ES6 in our gulpfile.
-<!-- この指定があることでGulpがデフォルトでECMAScript6の記法を理解してくれます。Babelを使う場合、ファイル名は gulpfile.babel.js になりますので注意してください。例えば次のような内容になります。 -->
 
 ```
 import gulp       from 'gulp'
@@ -114,15 +99,12 @@ gulp.task('default', ['build', 'watch']);
 ```
 
 You may notice that here we have utilized ES6 import and arrow functions.
-<!-- importが使えること、functionという記述が省略できるのがECMAScript6らしいところでしょうか。 -->
 
 
 ### Creating JavaScript files
-<!-- 試してみる -->
 
 Let's play around with the new ES6 syntax.
 Here is our code snippet with arrow functions, classes, and template strings in `www/src` folder:
-<!-- 今回の設定の場合、www以下にsrcというフォルダを作成し、そこにJavaScriptを記述していきます。例えば次のようになります。functionの省略は先ほど同じで、クラスやテンプレートも使っています。 -->
 
 ```
 var onDeviceReady = () => {
@@ -143,12 +125,10 @@ var event = typeof cordova === 'undefined' ? 'DOMContentLoaded' : 'deviceready';
 document.addEventListener(event, onDeviceReady, false);
 ```
 
-In our gulpfile, we instruct gulp to concat and output all of our ES6 JavaScript files in a single file.
+In our gulpfile, we instruct gulp to concatenate and output all of our ES6 JavaScript files in a single file.
 To confirm this, we trigger our gulp process and you'll see `all.js` under `www/js/` directory.
-<!-- そしてgulpコマンドを打つとwww/js/all.jsというファイルが生成されます。今後はファイルの追加、変更をウォッチしていますので気にせずプログラミングが続けられます。 -->
 
 In our application side, we can simply load that file like:
-<!-- 後はこの生成されたファイルをHTMLから読むようにします。複数のJavaScriptファイルであっても連結されますので、この1ファイルだけ読み込めばOKです。 -->
 
 ```
 <script src="js/all.js"></script>
@@ -158,22 +138,19 @@ In our application side, we can simply load that file like:
 
 We have now setup our first Monaca hybrid mobile app with ES6, and Gulp environment.
 When we see our application, you'll notice that our transpiled JavaScript outputs our log successfully.
-<!-- 実際にアプリをプレビューで開くと、コンソールに次のように表示されるはずです。ECMAScript6がJavaScriptに変換され、テンプレートメッセージも使われています。 -->
 
 
 ![Application Preview With Babel](/blog/content/images/2016/Mar/monaca-babel-2.png)
 
 
 We've also included Source Maps into our project so that we can add breakpoints for debugging.
-<!-- ソースマップファイルも出力しているので、ECMAScript6側のコードでブレークポイントの挿入が可能です。 -->
 
 
 ![Preview With Breakpoint](/blog/content/images/2016/Mar/monaca-babel-3.png)
 
 The next generation of javascript will bring us a simpler and friendlier syntax.
-Babel allows you to write ES6+ features today and have it work across different browsers on the client side.
+Babel will allow you to write ES6+ features today and have it work across different browsers on the client side.
 It is certainly a great tool and help you speed up your production time when working with Monaca applications.
-<!-- Babelを使うことでよりモダンなJavaScriptの書き方できるようになります。これまで感じていた機能不足感、書きづらさも解消されてくるでしょう。ぜひMonacaアプリでも使ってみてください。 -->
 
 
 [Monaca Localkit - HTML5 Mobile App Framework](https://monaca.io/localkit.html)
