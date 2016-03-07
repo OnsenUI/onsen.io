@@ -9,7 +9,7 @@ tags: onsen ui, vanilla js, material design
 
 ![Automatic Styling](/blog/content/images/2016/Mar/auto_styling_onsen.png)
 
-As we mentioned in a [previous post](https://onsen.io/blog/new-features-onsen-beta-7/), we just released a killing new feature called *automatic styling* for [Onsen 2.0](https://onsen.io/2). This feature allows you to style your app for both iOS and Android automatically with little to no effort.
+As we mentioned in a [previous post](https://onsen.io/blog/new-features-onsen-beta-7/), we just released a new killer feature called *automatic styling* for [Onsen UI 2.0](https://onsen.io/2). This feature allows you to style your app for both iOS and Android automatically with little to no effort.
 
 In this post we will explain how to make a sample To-Do app step by step using as many Onsen UI 2.0 features as we can: implementation in Vanilla JavaScript (framework agnostic), automatic styling, notification promises and combination of Navigator + Tabbar + Splitter (new sliding menu) in the same app.
 
@@ -31,20 +31,20 @@ We will make a simple To-Do List app. This app is perfect to show what we can do
     <iframe style="width: 100%; height: 100%; box-shadow: 0 0 1px 1px;" src="https://frankdiox.github.io/OnsenUI-Todo-App/?links=false" scrolling="no" class="lazy-hidden"></iframe>
   </div>
   <div style="display:inline-block; box-sizing: border-box; background-size: contain; width: 350px; height: 700px; padding: 61px 13px 56px 11px; vertical-align: middle; margin-bottom: 30px; background-image: url('/blog/content/images/mockups/nexus5_halfpage.png');">
-    <iframe style="width: 100%; height: 100%; box-shadow: 0 0 1px 1px;" src="https://frankdiox.github.io/OnsenUI-Todo-App/?links=false&amp;platform=android"scrolling="no" class="lazy-hidden"></iframe>
+    <iframe style="width: 100%; height: 100%; box-shadow: 0 0 1px 1px;" src="https://frankdiox.github.io/OnsenUI-Todo-App/?links=false&amp;platform=android" scrolling="no" class="lazy-hidden"></iframe>
   </div>
 </div>
 
 
 As usual, the [code is available on Github](https://github.com/frankdiox/OnsenUI-Todo-App). It's full of explanatory comments so it should be easy to follow!
 
-As mentioned above, this sample app is implemented in Vanilla JavaScript without any other library or framework, so it could be a good reference when you start your own app. There are many ways to make a To-Do List and here we just show one of them. Perhaps not the best, perhaps not the worst, but we believe it could be didactic. Please choose your own style when you start your projects.
+As mentioned above, this sample app is implemented in Vanilla JavaScript without any other library or framework, so it could be a good reference when you start your own app. There are many ways to make a To-Do List and here we just show one of them. Perhaps not the best, perhaps not the worst, but we believe it could be instructive. Please choose your own style when you start your projects.
 
 Anyhow, let's get started with the tutorial.
 
 #### App structure: HTML
 
-We will put all the navigation components (`ons-navigator`, `ons-splitter`, `ons-tabbar`) in `index.html` using `ons-template` so we can easily manipulate the flow in the same file. The pages which this components load will be located in `html` directoy as separate files.
+We will put all the navigation components (`ons-navigator`, `ons-splitter`, `ons-tabbar`) in `index.html` using `ons-template` so we can easily manipulate the flow in the same file. The pages which this components load will be located in `html` directory as separate files.
 
 ##### What we want
 
@@ -95,7 +95,7 @@ Starting from the lowest level navigation component, we want an `ons-tabbar` to 
 
 * Splitter (menu)
 
-We need a menu common to these two lists. Therefore, `ons-splitter` component should be the parent of the previous `ons-tabbar`. Other wise we would need to create two splitters, one for each list page.
+We need a menu common to these two lists. Therefore, `ons-splitter` component should be the parent of the previous `ons-tabbar`. Otherwise we would need to create two splitters, one for each list page.
 
 ```
 <ons-template id="splitter.html">
@@ -118,8 +118,6 @@ Now that we have the basic functionality covered with the previous two component
 ```
 
 Notice that this navigator is not wrapped inside `ons-template` since it's the main component of the app.
-
-
 
 #### App structure: JS
 
@@ -344,7 +342,7 @@ There will be parts of the layout that only make sense on iOS and others only on
 ...
 ```
 
-Notice that both of them have the same `component="button/new-task"` attribute since they will do exactly the same. Howerver, only one of them will be present at the same time since the other will be removed by `ons-if`.
+Notice that both of them have the same `component="button/new-task"` attribute since they will do exactly the same. However, only one of them will be present at the same time since the other will be removed by `ons-if`.
 
 Another example of `ons-if` can be seen in the details page:
 
