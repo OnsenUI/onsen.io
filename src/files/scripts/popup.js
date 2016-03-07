@@ -4,6 +4,7 @@
   var oneDay = 1000 * 60 * 60 * 24;
   var defaultPopupDelay = 15000;
   var scrollPopupDelay = 1000;
+  var popup = ["popup-newsletter", "popup-google-maps", "popup-material-design"];
 
   function checkScrollPosition(e) {
     body = document.body;
@@ -29,7 +30,7 @@
   function setLocalStorage(popupName, now, days) {
     var expireDate =  now + (oneDay * days);
 
-    localStorage.setItem(popupName + ".latestUpdate", expireDate);
+    localStorage.setItem(popupName + ".expireDate", expireDate);
     localStorage.setItem("latestUpdate", now);
   }
 
@@ -38,8 +39,8 @@
     var delay = 0;
     emailInput = el.getElementsByTagName("input")[0].value;
 
-    if (target === container || target.classList.contains("pop-button-close") || (target.id === "pop-button-submit" && emailInput)) {
-      if (e.target.id === "pop-button-submit") {
+    if (target === container || target.classList.contains("pop-button-close") || (target.id === "button-submit" && emailInput)) {
+      if (e.target.id === "button-submit") {
         delay = delay + 1000;
       }
 
@@ -54,7 +55,7 @@
 
   function canUpdateStorage(popupName, now) {
     var latestStorageUpdate = parseInt(localStorage.getItem("latestUpdate"));
-    var latestPopupUpdate = parseInt(localStorage.getItem(popupName + ".latestUpdate"));
+    var latestPopupUpdate = parseInt(localStorage.getItem(popupName + ".expireDate"));
 
     return (!latestStorageUpdate || ((latestPopupUpdate - now <= 0) && (latestStorageUpdate + oneDay - now <= 0)));
   }
@@ -83,11 +84,10 @@
   }
 
   function checkPopup(delay) {
-    localStorage.clear();
     if (typeof(Storage) !== "undefined") {
       setTimeout(function() {
-        var popup = ["popup-newsletter", "popup-google-maps", "popup-material-design"];
         var now = new Date().getTime();
+        var popupName;
 
         for (var i in popup) {
           popupName = popup[i];
