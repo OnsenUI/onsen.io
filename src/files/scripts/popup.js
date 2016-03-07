@@ -17,7 +17,7 @@
   }
 
   function onPopupClose(e) {
-    container.classList.add("hidden");
+    container.classList.add("pop-container-hidden");
     document.body.style.position = "";
     document.body.style.overflow = "scroll";
 
@@ -38,16 +38,16 @@
     var delay = 0;
     emailInput = el.getElementsByTagName("input")[0].value;
 
-    if (target === container || target.classList.contains("button-close") || (target.id === "button-submit" && emailInput)) {
-      if (e.target.id === "button-submit") {
+    if (target === container || target.classList.contains("pop-button-close") || (target.id === "pop-button-submit" && emailInput)) {
+      if (e.target.id === "pop-button-submit") {
         delay = delay + 1000;
       }
 
       setTimeout(function() {
-        container.classList.add("hidden-container");
+        container.classList.add("pop-container-hidden");
         document.body.style.position = "";
         document.body.style.overflow = "scroll";
-        el.classList.add("hidden");
+        el.classList.add("pop-hidden");
       }, delay);
     }
   }
@@ -61,20 +61,20 @@
 
   function showPopup(popupName, now) {
     el = document.getElementById(popupName);
-    container = document.getElementById("container-popup");
+    container = document.getElementById("popup-container");
 
     setLocalStorage(popupName, now, 30);
-    el.classList.remove("hidden");
-    container.classList.remove("hidden");
+    el.classList.remove("pop-hidden");
+    container.classList.remove("pop-container-hidden");
     document.body.style.overflow = "hidden";
 
     if (isMobile()) {
-      el.classList.add("popup-mobile");
+      el.classList.add("pop-mobile");
       document.body.style.position = "fixed";
       emailInput = el.getElementsByTagName("input")[0];
       emailInput.style.width = "200px";
     } else {
-      el.classList.add("popup-desktop");
+      el.classList.add("pop-desktop");
     }
   }
 
