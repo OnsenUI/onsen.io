@@ -17,7 +17,6 @@
 
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/patterns/popup.css">
 
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
@@ -122,19 +121,7 @@
     </div>
   </section>
 
-  <div class="container-popup hidden newsletter newsletter-signup" id="container-popup">
-    <div class="hidden popup centered newsletter-inner" id="popup-newsletter">
-      <i class="fa fa-times button-close"></i>
-      <p align="middle" style="font-size:28px;">Stay up to date</p>
-      <p align="center" style="font-size:15px; margin: 5px;">Get new updates, usually 2 -3 times a month - it features tips, how-to & news on Onsen, Monaca and hybrid app development.</p>
-      <br>
-      <form class="middle">
-            <input id="input-email" class="input-email-popup" style="width: 300px;" type="text" placeholder="Enter your email" name="email">
-            <input id="button-submit" type="submit" value="Send">
-      </form>
-      <div class="newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
-    </div>
-  </div>
+  <%- @partial('popup.html.eco') %>
 
   <%- @partial('footer.html.eco') %>
 
