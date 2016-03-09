@@ -16,6 +16,7 @@
   <% end %>
 
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
 
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
@@ -33,6 +34,7 @@
 
   <script src="//use.typekit.net/bys8jdj.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script src="scripts/popup.js"></script>
 
   <script>
     window.SITE_ENV = {
@@ -119,6 +121,8 @@
     </div>
   </section>
 
+  <%- @partial('popup.html.eco') %>
+
   <%- @partial('footer.html.eco') %>
 
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
@@ -126,5 +130,5 @@
   <script src="/vendor/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
-</body>
-</html>
+ </body>
+ </html>
