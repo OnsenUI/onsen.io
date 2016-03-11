@@ -1,0 +1,129 @@
+---
+author: fran
+date: 2016-03-02
+id: new-features-onsen-beta-7
+title: "Preview: New features in Onsen UI beta.7"
+category: development
+tags: onsen ui, vanilla js, material design
+---
+
+![Automatic Styling](/blog/content/images/2016/Mar/autostyling.png)
+
+The new beta version of [Onsen UI 2.0](https://onsen.io/2/) is out! Apart from several fixes and performance improvements, we are introducing a bunch of new features that will make you fall for Onsen UI 2.0 if you didn't already. Automatic styling, new structure for list items, promises for asynchronous methods and more.
+
+In this post we will briefly explain these new features and give some quick examples about how to use them. You can also see a live demo of these features implemented in Vanilla JavaScript.
+
+<!-- more -->
+
+### New Features
+
+#### Automatic styling
+
+Automatic styling is perhaps the main and most awaited feature of this beta. The main advantages of hybrid apps is the fact that we can run the same code on multiple platforms. But this is, in most of the cases, not enough to develop a real app with a good user experience. In Onsen UI we want to make this possible with our new *Automatic Styling*. You can now develop your iOS app in flat design and have its equivalent in Material Design with little to no effort.
+
+Automatic Styling will add Material Design styles only if the app is running on Android. Styles include CSS but also some behavior like ripple effect. It will be added automatically to those components where it makes sense, such as buttons, tabs and list items that were tappable on iOS.
+
+Of course, we will always need to make small adjustments in order to enhance the user experience in both platforms. We are releasing a bunch of tools that will make this process almost painless.
+
+For example, what if you want a floating action button on our Android apps but you prefer a large button on iOS? Well, you can use the new `<ons-if>` component and make its content appear only where you want.
+
+```
+<ons-if platform="android">
+  <ons-fab>
+    +
+  </ons-fab>
+</ons-if>
+```
+
+Same story when you want to change icons depending on the platform.
+
+Or, another issue, when you want a Tabbar to be displayed at the bottom for iOS but prefer it at the top for Android. You can now set `<ons-tabbar position="auto">` and forget about this problem.
+
+Automatic Styling is enabled by default so you don't need to do anything else. In case you want to style manually, you can call `ons.disableAutoStyling()` at the beginning of the app. You can also add `disable-auto-styling` attribute to specific components where you don't want Automatic Styling instead of disabling it for the whole app. In case you want to force platform styling you can call `ons.platform.select('android')`, for example, and your app will be displayed as Material Design in every place.
+
+This feature truly makes possible to *"write one app and run it on both iOS and Android"*.
+
+
+#### Improved list items
+
+`ons-list-item` has been updated to fit the latest styles in iOS and Material Design. Although some of these styles were already supported in previous betas, with the last changes we can now apply them very easily:
+
+```
+<ons-list-item>
+  <div class="left"> Thumbnail </div>
+  <div class="center"> Title </div>
+  <div class="right"> Icon </div>
+</ons-list-item>
+```
+
+This will add the corresponding paddings and margins for iOS or Android. By default it will add a "short divider" under the center and right elements, but it also supports `modifier="nodivider"` and `modifier="longdivider"`.
+
+Apart from that, there are also CSS classes available such as `list__item__title`, `list__item__subtitle`, `list__item__thumbnail`, etc. Those will be soon available in the Theme Roller.
+
+
+#### Extended ons-input
+
+We have extended `ons-input` component to support `type` attribute. Specifically, we have added support for `checkbox` and `radio` types, apart from the already supported `text` and `password`. Also, this component has been slightly improved and can now set an ID to its inner input with `input-id="myInnerInputID"` attribute. This way we can use HTML Labels to focus the inputs like this: `<label for="myInnerInputID">`. Let's make an example using the new structure already explained of `ons-list-item`:
+
+```
+<ons-list-item>
+  <label class="left">
+    <ons-input type="checkbox" input-id="inner-checkbox"></ons-input>
+  </label>
+  <label class="center" for="inner-checkbox">
+    Clicking this text triggers the checkbox
+  </label>
+</ons-list-item>
+```
+
+As you can see, we can add the new classes to any element, not only `div`.
+
+
+#### Promises for async methods
+
+So far we had to rely on callbacks or events to know when some method or animation had finished. From now we can use promises as well. For instance, `myNavigator.pushPage('page.html', {onTransitionEnd: myCallback})` is equivalent to `myNavigator.pushPage('page.html').then(myCallback)`.
+
+ We can see here another handy example with notifications:
+
+```
+ons.notification.confirm({
+  title: 'Save changes?',
+  message: 'Previous data will be overwritten.'
+  buttonLabels: ['Save', 'Discard'],
+  cancelable: true
+})
+.then(function(buttonIndex) {
+  console.log( buttonIndex === 0 ? 'Saved' : 'Discarded' );
+})
+.catch(function() {
+  console.log('Canceled');
+});
+
+```
+
+
+#### Other improved components
+
+* ons-ripple
+
+We have a new `<ons-ripple>` component that looks much more similar to the real ripple effect in Material Design. Try to tap and hold it!
+
+Also, you can now add ripple effect by just including `ripple` attribute in those elements where ripple effect makes sense, such as buttons, tabs, list items, floating action buttons, speed dial items, etc.
+
+* ons-tab
+
+Tabs are now always persistent. This means that they will be loaded at the beginning of your app and there won't be any delay the first time you change tabs.
+
+* ons-switch
+
+It's now draggable! It also accepts an `input-id` attribute just like the `<ons-input>` component does.
+
+### Preview
+
+Do you want to see all of this in action? Check out this [To-Do sample app](https://frankdiox.github.io/OnsenUI-Todo-App/) implemented in Vanilla JavaScript. You can of course find the [code on Github](https://github.com/frankdiox/OnsenUI-Todo-App). In order to see the Auto Styling in the browser you can use Chrome's "View as Device" tool. Change from iPhone to Google Nexus and you will see two completely different apps. In the next days we will provide a step by step tutorial for this sample app. Stay tuned!
+
+### Conclusion
+
+We hope you liked these new features and start using them as soon as possible. Ping us if you discover any bug or have any suggestion. If you haven't done it yet, we recommend you to register in our [community forum](https://community.onsen.io). You can find help there not only from the Onsen UI team itself but also from other Onsen UI users. 
+
+If you like Onsen UI, please [star us on GitHub](https://github.com/OnsenUI/OnsenUI). Happy coding!
