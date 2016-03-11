@@ -121,9 +121,9 @@
     </div>
   </section>
 
-  <%- @partial('popup.html.eco') %>
-
   <%- @partial('footer.html.eco') %>
+
+  <%- @partial('popup.html.eco') %>
 
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script defer src="/scripts/default.js"></script>
