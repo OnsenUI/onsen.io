@@ -1,0 +1,78 @@
+---
+author: moongift
+date: 2016-03-16
+id: localkit-web-ide-everything-you-need-to-know-about-monaca-development-environment
+title: "LocalKit, Web IDE: Everything You Need to Know about Monaca Development Environment"
+product: monaca
+tags: monaca, localkit, azure, cloud ide, visual studio, cli, git, apache subversion, typescript, coffeescript, chrome devtools
+category: development
+---
+
+As you probably already know, Monaca offers various development environment choices to fit all your needs.
+However, it may be difficult for a new developer to understand each one's characteristics and which one to choose. That's why in this blog post we would like to introduce each environment and their features, helping you to choose the right one for your development.
+
+![Monaca Development Platforms](/blog/content/images/2016/Mar/monaca-platforms.png)
+
+<!-- more -->
+
+### Monaca IDE
+
+[Monaca.io](https://monaca.io/), or [Monaca Cloud IDE](https://monaca.io/), is a cloud-based development environment which allows you to code with any computer that has access to internet, eliminating the time and the effort needed to install and configure the development environment on the computer. All you need is a web browser and you can immediately start developing your hybrid mobile applications!
+
+![monaca.io](/blog/content/images/2016/Mar/monaca-ide.png)
+
+Obviously, web browsers work on any platform, like Windows, OS X and Linux so you should not have any particular issue while accessing our cloud services. Moreover, creating iOS applications with Windows or Linux is possible once iOS Build Settings have been configured.
+
+[Monaca IDE](https://monaca.io/) offers [TypeScript](http://www.typescriptlang.org/) as an alternative language, allowing you to use TypeScript's static type and other tools to develop your hybrid mobile app.
+
+On the downside, as previously mentioned, [Monaca IDE](https://monaca.io/) requires internet connectivity to be accessed. There won't be any trouble if you are working from your office but there will be if you are outside or on an airplane (even if recently internet connection has been introduced by some airlines, speed and cost are still a problem).
+
+Moreover, some of you may find more comfortable to use your own favorite editor.
+For those, we would recommend to take a look at our LocalKit, which we are going to introduce immediately.
+
+### Monaca Localkit
+
+[Monaca LocalKit](https://monaca.io/localkit.html) is a GUI application we provide for Windows and Mac OSX (and probably also for Linux, in the future).
+It has a built-in server which allows the management of your local Monaca projects.
+[Monaca LocalKit](https://monaca.io/localkit.html) can work with Monaca Debugger and easily preview your hybrid mobile app real-time on your smartphone, under the same network. Note that the debugger needs an internet connection but LocalKit itself works even if you are offline.
+
+![Monaca LocalKit](/blog/content/images/2016/Mar/monaca-localkit.png)
+
+Because LocalKit manages your project locally, it's able to work with version control tools such as [Git](https://git-scm.com/) and [Apache Subversion](https://subversion.apache.org/), your favorite editor, build tools like gulp and alternative languages like [CoffeeScript](http://coffeescript.org/) and [TypeScript](http://www.typescriptlang.org/). But you can have even more flexibility while working with LocalKit.
+
+When you debug under local environment, you can use debug build option to install the app directly on your smartphone.
+There is also a support for [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/?hl=en), which allows debugging to be much easier.
+
+For LocalKit the downside is that it requires to setup an environment in order to start your hybrid mobile app development. However, this may worth the effort as probably most of you already have their favorite development tools already installed locally.
+
+### Monaca for Visual Studio
+
+[Monaca for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/21a7a495-5a24-4eab-a519-2f6e6d176049) is our Visual Studio extension that supports your hybrid mobile app development directly from Microsoft Visual Studio
+
+![Monaca for Visual Studio](/blog/content/images/2016/Mar/monaca-visual-studio.png)
+
+This extension allows you to use all the powerful features Visual Studio offers. For example, you can also quickly build cloud-based applications by taking advantage of the integration of [Azure](https://azure.microsoft.com/) services. This option will provide efficient and powerful environment especially for those who are used to develop with Visual Studio.
+
+There aren't many disadvantages except that it's just available to users who have access to a Windows-based environment.
+
+
+### Monaca CLI
+
+[Monaca CLI](https://github.com/monaca/monaca-cli) is a command line tool which allows to manage your Monaca applications directly from your terminal. Similar to LocalKit, CLI allows you to develop hybrid mobile apps on your local environment by integrating Monaca's basic features, like project creation, download, and upload.
+
+You can connect a debugger to a local project in order to debug, exactly like LocalKit. Moreover, it also supports [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/?hl=en). Once you development has finished, you can execute a remote build, which will generate an app ready do be published or installed on your device.
+
+[Monaca CLI](https://github.com/monaca/monaca-cli) doesn't offer a fancy GUI, but it will probably make happy experienced developers who enjoy using command line tools. Just don't forget that it requires node.js to be installed in your environment.
+
+### Conclusion
+
+To conclude, each platform has its own distinctive features and the choice of it really depends totally on you personal needs and preferences.
+
+[Monaca Cloud IDE](https://monaca.io/) provides a simple and friendly environment to get you get you started.
+Classroom style and large scale project can take big advantages from web browsers and its cloud-based environment.
+
+When it comes to teams and existing environments, [Monaca LocalKit](https://monaca.io/localkit.html) and [Monaca CLI](https://github.com/monaca/monaca-cli) can speed up your hybrid mobile app development using your favorite editors, version control tools and build tools.
+
+If you are using Visual Studio, there is no doubt that [Monaca for Visual Studio](https://visualstudiogallery.msdn.microsoft.com/21a7a495-5a24-4eab-a519-2f6e6d176049) is your best choice as it will allow you to take full advantage of various Microsoft features and services, like [Azure](https://azure.microsoft.com/).
+
+We hope this guide helped you to find the development tool that suits your style, keep enjoying Monaca!
