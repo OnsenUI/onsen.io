@@ -16,6 +16,7 @@
   <% end %>
 
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
 
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
@@ -33,6 +34,7 @@
 
   <script src="//use.typekit.net/bys8jdj.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script src="scripts/popup.js"></script>
 
   <script>
     window.SITE_ENV = {
@@ -40,7 +42,6 @@
       hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
     };
   </script>
-  <script src="//load.sumome.com/" data-sumo-site-id="88eeec262191805f37fa9c2d72a8a6df439639902dfffa32902adefa7ab3a1ac" async="async"></script>
   <script>
     (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -121,10 +122,12 @@
 
   <%- @partial('footer.html.eco') %>
 
+  <%- @partial('popup.html.eco') %>
+
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script defer src="/scripts/default.js"></script>
   <script src="/vendor/highlight.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
-</body>
-</html>
+ </body>
+ </html>
