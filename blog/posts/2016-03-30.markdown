@@ -1,0 +1,56 @@
+---
+author: bryan
+date: 2016-03-30
+id: how-to-guide-monaca-cloud-ide-with-git-integration
+title: "How-To-Guide: Monaca Cloud IDE with Git Integration"
+product: monaca
+tags: monaca, git, github, version control, source control
+category: development
+---
+Monaca Cloud IDE now supports GitHub and Git operations.  Git is software that helps the management process of source code.  This type of software is better known as version control or source control.  Some of the benefits that Git provides is full source code version history and cross collaboration with distributed development.
+
+In this release, we support basic Git operations such as commit, push, pull, importing (clone), switching branches and tracking local history changes.  Currently, we support only GitHub, one of the largest online Git repository hosting providers, as a remote repository provider but looking to expand the options in the future.
+
+Let’s take a look at how you can start using Git immediately with your Monaca project.
+
+First we need to integrate your GitHub account with your Monaca account.  If you do not already have a GitHub account, you can create a free account at [GitHub](https://github.com).
+
+With the two accounts prepared, login to Monaca Cloud IDE’s dashboard and click on your profile name in the top right corner, and select GitHub Integration.
+
+
+![GitHub Integration](/blog/content/images/2016/Mar/dashboard-github-integration.png)
+
+This will bring you to the “Link to GitHub” configuration page. On this page, you can link and unlink your GitHub account from Monaca at anytime.  To complete the linking process, click on the “Link” button.
+
+![Link To GitHub](/blog/content/images/2016/Mar/management-link-to-github.png)
+
+If you are not logged into your GitHub account, you will be redirected to the GitHub login page. After logging in you will will the GitHub’s “Authorize application.
+The “Authorize application” page provides a review of required permissions that Monaca Cloud IDE needs to perform necessary operations.  By clicking on the “Authorize application” button, GitHub and Monaca accounts will be linked.
+
+![GitHub Authorize application](/blog/content/images/2016/Mar/github-authorize-application.png)
+
+Additionally, by linking your GitHub account with Monaca, you can use the “Sign In With GitHub”, Single-Sign-On method, to log in the Monaca Cloud IDE!   You will still need your Monaca account credentials to use services such as Monaca Debugger, Monaca CLI, and Monaca LocalKit.
+
+![GitHub Single-Sign-On](/blog/content/images/2016/Mar/github-single-sign-on.png)
+
+Now that the two accounts are linked, lets configured an existing or new Monaca project.
+
+First open up the Monaca project and click on “Version Control”  “Configure”.  If there are no empty repositories on GitHub, you will be notified that an empty repository needs to be created first.
+
+![Create Empty Repository](/blog/content/images/2016/Mar/ide-vcs-create-empty-repository.png)
+
+Once the repository is created though GitHub, try to configure the project again and you will notice that your newly created repository is listed in the “Select Repository” dropdown.
+
+![Select Empty Repository](/blog/content/images/2016/Mar/ide-vcs-select-empty-repository.png)
+
+Once you are satisfied with the configurations, clicking “Initialize” will initialize the project with Git services and uploaded to the selected remote repository.  You can return to the configurations at anytime to change the commit email, commit name, or current working branch.
+
+Now that the project is linked to a repository, you have the ability to commit, push, pull, view local and remote history.
+
+# Commit
+![Commit](/blog/content/images/2016/Mar/ide-vcs-commit.png)
+
+# Local Commit History
+![Local Commit History](/blog/content/images/2016/Mar/ide-vcs-local-commit-history.png)
+
+For more information on Git and GitHub integration with Monaca Cloud IDE, see [Monaca Support Doc](http://docs.monaca.mobi/cur/manual/development/monaca_ide/version_control/).
