@@ -1,0 +1,166 @@
+---
+author: andreas
+date: 2016-03-30
+id: react-onsen-ui-preview
+title: "Preview of React Components for Onsen UI 2.0"
+category: development
+tags: onsen ui, react
+---
+
+![React Onsen UI](/blog/content/images/2015/Sep/react_onsenui.png)
+
+React has gotten immensely popular in the last couple of years. I don't know how many times we have been asked if Onsen UI can be used with React or when we are going to add support for React. When we first announced Onsen UI 2.0 we promised that it will ship with React support and I am happy to say that we will fulfill that promise.
+
+We have developed a collection of React components for Onsen UI 2.0. In this article we will take a look at some of them and show how they are used.
+
+<!-- more -->
+
+Onsen UI 1.x was built on top of Angular. The Angular dependency made it hard for us to develop React components for Onsen UI 1.x since Angular and React don't play well together, not to mention that the developer would be forced to load two libraries just to be able to use the components. With Onsen UI 2.0 this is not an issue anymore since the core library has been reimplemented in pure JavaScript as [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
+
+The demos in this article are available [here](http://argelius.github.io/react-onsenui-demos/www/index.html). In case you missed it we released [automatic styling](https://onsen.io/blog/auto-style-app-onsen/) in the latest beta. The demos use the latest development version so they will be automatically styled based on the platform. To see it in action you can open DevTools in Chrome and change to an Android device. If you reload the page the components will automatically switch to Material Design.
+
+### Kitchen-sink example
+
+The following example shows the React extension for Onsen UI in action. It showcases some of the components as well as the automatic styling. Please try changing the platform on the first screen to see how it renders on both iOS and Android.
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/react-onsenui-kitchensink/"></iframe>
+
+The code for the example is available on my [GitHub page](https://github.com/argelius/react-onsenui-kitchensink).
+
+### React
+
+[React](https://facebook.github.io/react/) is a JavaScript library that is used to create reusable components. It is *reactive* in the sense that the components will update when the data changes. These updates are done in a smart way so that React only renders the elements it needs to. Unlike Angular it is not a full-fledged frontend framework but instead only provides APIs to create components. This gives the developer a lot of freedom in choosing the rest of the technologies used in an app.
+
+Since React is easy to use with other technologies there is a large ecosystem of libraries and tools. You can get routing using the [React router](https://github.com/reactjs/react-router) library and state management with [Redux](https://github.com/reactjs/redux).
+
+Creating a component with React is very simple. When using ES6 every component can be defined as a class. In the following example I create a simple component that keeps tracks of how many times the user has clicked a button.
+
+The full code is available on [my GitHub page](https://github.com/argelius/react-sample).
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+class MyComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      clicks: 0
+    };
+  }
+
+  handleClick() {
+    this.setState({
+      clicks: this.state.clicks + 1
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <p>
+          <button onClick={this.handleClick.bind(this)}>Click me!</button>
+        </p>
+        <p>
+          You have clicked {this.state.clicks} times!
+        </p>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(<MyComponent />, document.getElementById('app'));
+```
+
+The code is pretty self-explanatory. When the component is first created the `constructor` method is run to set the initial state. We set the click counter to 0 in the constructor. The component is rendered using the `render` method which will be run every time the state is updated using the `setState` method.
+
+The code
+
+```html
+<button onClick={this.handleClick.bind(this)}>Click me!</button>
+```
+
+will cause the `handleClick` method to be called every time the button is clicked. Inside `handleClick` the state is updated by increasing the click counter which will trigger the `render` method to run again.
+
+See the component in action below:
+
+<iframe height="100" src="http://argelius.github.io/react-sample/"></iframe>
+
+To learn more about React, please refer to the [documentation](https://facebook.github.io/react/docs/getting-started.html).
+
+### Not just a wrapper
+
+The React extension for Onsen UI 2.0 is not just a simple wrapper. The Web Components in Onsen UI 2.0 are created using the [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) API. We use this API to create new HTML tags and give them functionality. The behavior of the elements is controlled by setting the HTML attributes and calling methods attached to the elements.
+
+Of course we could create React components that just wrap these elements and expose these methods. However, we don't believe this is a good idea since a lot of the methods don't fit into the philosophy of React. We want to make the APIs that the extension provides to make as much sense as possible for React developers.
+
+We would love to know what you think about these components. You can try them out and play with them by cloning [this repository](https://github.com/argelius/react-onsenui-demos). If you think the interface is lacking or if you find some bugs, please let us know in our [forum](https://community.onsen.io/) or in the comments below.
+
+This is a list of some of the components that have already been implemented:
+
+* `OnsDialog`
+Modal dialogs
+* `OnsPopover`
+A popover element
+* `OnsFab`
+The [Floating action button](https://www.google.com/design/spec/components/buttons-floating-action-button.html) from Material Design
+* `OnsInput`
+Input elements such as text inputs, checkboxes and radio buttons
+* `OnsNavigator`
+Stack based navigation
+* `OnsPullHook`
+A "pull to refresh" component
+* `OnsSwitch`
+Draggable toggle switch
+* `OnsTabbar`
+Tab based navigation
+* And many more...
+
+### Using the extension
+
+Using the Onsen UI components in React is very simple. The `react-onsenui` library is [released on NPM](https://www.npmjs.com/package/react-onsenui) and it exports all the components so they can be used easily in browserify or webpack or even loaded directly in the browser.
+
+The currently released version of the core Onsen UI library does not support these bindings yet so in order to try them out, please install the experimental version by putting the following in the `devDepencies` of your `package.json`:
+
+```
+"onsenui": "git://github.com/OnsenUI/OnsenUI-dist.git#2.0.0-react.4"
+```
+
+We will release a new version on NPM soon that is compatible with the React extension.
+
+To use the components all you need to do is load the library and use them in your JSX.
+
+```javascript
+import React from 'react';
+import Ons from 'react-onsenui';
+import onsen from 'onsenui';
+
+class MyPage extends React.Component {
+  handleClick() {
+    onsen.notification.alert('You clicked the button!');
+  }
+
+  render() {
+    return (
+      <Ons.Page>
+        <Ons.Toolbar>
+          <div className="center">Title</div>
+        </Ons.Toolbar>
+
+        <Ons.Button onClick={this.handleClick}>Click me!</Ons.Button>
+      </Ons.Page>
+    );
+  }
+}
+```
+
+These components are still in alpha stage, so don't be alarmed if something breaks. If you find any issues or have any ideas on how to improve them, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues) on GitHub.
+
+### Conclusion
+
+We hope you are as excited as we are about the React extension. We would like to get your feedback on the interface. Please share your thoughts in the comments or on the [forum](https://community.onsen.io/).
+
+In a few days we will release an article on how to use the navigation components in React. We have changed the APIs for the `Navigator` and `Tabbar` components to make more sense for React developers. If you are an Angular 2 developer we are happy to say that we are developing components for Angular 2 as well. We will preview them as well in the coming weeks. Stay tuned!
+
+If you like Onsen UI please leave us a star on [our GitHub page](https://github.com/OnsenUI/OnsenUI).
