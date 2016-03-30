@@ -31,7 +31,7 @@ Additionally, by linking your GitHub account with Monaca, you can use the "Sign 
 
 ![GitHub Single-Sign-On](/blog/content/images/2016/Mar/github-single-sign-on.png)
 
-Now that the two accounts are linked, lets configured an existing or new Monaca project.
+Now that the two accounts are linked, lets configure an existing or new Monaca project.
 
 First open up the Monaca project and click on "Version Control" -> "Configure".  If there are no empty repositories on GitHub, you will be notified that an empty repository needs to be created first.
 
@@ -41,7 +41,7 @@ Once the repository is created though GitHub, try to configure the project again
 
 ![Select Empty Repository](/blog/content/images/2016/Mar/ide-vcs-select-empty-repository.png)
 
-Once you are satisfied with the configurations, click on the "Initialize" button.  This will initialize the project with Git services and upload your source code to the selected remote repository.  You can return to the configurations at anytime to change the commit email, commit name, or current working branch.
+Once you are satisfied with the configuration, click on the "Initialize" button. This will initialize the project with Git services and upload your source code to the selected remote repository. You can return to the configuration at any time to change the commit email, commit name, or current working branch.
 
 Now that the project is linked to a repository, you have the ability to commit, push, pull, view local and remote history.
 
