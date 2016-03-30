@@ -21,7 +21,7 @@ The demos in this article are available [here](http://argelius.github.io/react-o
 
 ### Kitchen-sink example
 
-The following example shows the React extension for Onsen UI in action. It showcases some of components as well as the automatic styling. Please try changing the platform on the first screen to see how it renders on both iOS and Android.
+The following example shows the React extension for Onsen UI in action. It showcases some of the components as well as the automatic styling. Please try changing the platform on the first screen to see how it renders on both iOS and Android.
 
 <iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/react-onsenui-kitchensink/"></iframe>
 
@@ -73,7 +73,7 @@ class MyComponent extends React.Component {
 ReactDOM.render(<MyComponent />, document.getElementById('app'));
 ```
 
-The code is pretty self-explanatory. When the component is first created the `constructor` method is run to set the initial state. We set the click counter to 0 in the constructor. The component is rendered using the `render` method which will be run every time the state changes.
+The code is pretty self-explanatory. When the component is first created the `constructor` method is run to set the initial state. We set the click counter to 0 in the constructor. The component is rendered using the `render` method which will be run every time the state is updated using the `setState` method.
 
 The code
 
