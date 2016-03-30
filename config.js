@@ -58,6 +58,10 @@ module.exports = function(language, isStaging) {
     patrick: {
       name: 'Patrick Klitzke',
       email: 'patrick@asial.co.jp'
+    },
+    bryan: {
+      name: 'Bryan Ellis',
+      gravator: '12e050bf226a74ef0c65fe0a637f6a31'
     }
   };
 
