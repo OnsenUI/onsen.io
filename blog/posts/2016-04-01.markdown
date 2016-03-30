@@ -1,0 +1,272 @@
+---
+author: andreas
+date: 2016-04-01
+id: react-onsen-ui-navigator-tabs
+title: "Navigation and Tabs in the Onsen UI React Extension"
+category: development
+tags: onsen ui, react
+---
+
+![React Onsen UI](/blog/content/images/2015/Sep/react_onsenui.png)
+
+As seen in [the previous blog post](/blog/react-onsen-ui-preview/) we have just announced a React extension for Onsen UI 2.0. It will provide all the Onsen UI custom elements in the form of React components.
+
+In this article we will take a look at how some of the more complex components are used. Since this extension is still in development we would like to get all the feedback we can so we can refine the APIs and iron out all the creases.
+
+### Navigator
+
+People who are familiar with Onsen UI knows that we have an element called `<ons-navigator>` that provides stack based navigation. Using the methods `pushPage()` and `popPage()` the app transitions back and forth between views.
+
+Traditionally one would have to use the `<ons-template>` element to define the content of a page before using the `pushPage()` method. However, React doesn't use templates so it wouldn't make sense for us to expose this kind of API in React. Instead we have taken a look at the [Navigator](https://facebook.github.io/react-native/docs/navigator.html) component in React Native. It provides a very powerful API that gives the developer a lot of freedom in managing their page stack.
+
+The component has a method called `pushPage(route)` which pushes a `route` object to an internal stack. The `route` object can be anything. To render the `route` object into a view the Navigator requires a `renderScene` function which returns the rendered view.
+
+#### Methods
+
+The component provides a number of methods to control the page stack:
+
+* `pushPage(route, options)` - Push a `route` object to the stack and trigger a transition animation. The `options` object can be used to control the animation.
+* `popPage(options)` - Pops the `route` object from the top of the stack and transitions to the previous view.
+* `resetPage(route, options)` - Reset the stack to a single route.
+* `resetPageStack(routes, options)` - Reset the stack to an array of routes.
+
+#### Props
+
+* `initialRoute` - Define the first `route` in the stack.
+* `initialRoutes` - Initialize the Navigator with a stack of routes.
+* `renderScene` - Function that takes two arguments:
+```javascript
+(route, navigator) => <MyComponent title={route.title} data={route.data} />
+```
+
+The component requires on of either `initialRoute` or `initialRoutes` to be specified in order to initialize the stack. It also requires the `renderScene` prop so the route objects can be rendered.
+
+#### Usage
+
+This is the code that is used in the example above. In this code the `renderScene` function returns the page inline, but you can of course create a component that renders the page to make the function smaller.
+
+```javascript
+var App = React.createClass({
+  render: function() {
+    return (
+      <Ons.Navigator
+        initialRoute={{
+          title: 'First page',
+          content: 'This is the first page!',
+          backButton: false
+        }}
+        renderScene={(route, navigator) =>
+          <Ons.Page>
+            <Ons.Toolbar>
+              <div className="left">
+                {route.backButton ? <ons-back-button></ons-back-button> : null}
+              </div>
+              <div className="center">{route.title}</div>
+            </Ons.Toolbar>
+
+            <p>{route.content}</p>
+
+            <p>
+              <Ons.Button onClick={navigator.pushPage.bind(navigator, {
+                title: 'Another page',
+                content: 'This is another page!',
+                backButton: true
+              })}>
+                Push another page
+              </Ons.Button>
+            </p>
+            { route.backButton ? <p>
+              <Ons.Button onClick={navigator.popPage.bind(navigator)}>
+                Go back
+              </Ons.Button>
+            </p> : null}
+          </Ons.Page>
+        }
+      />
+    );
+  }
+});
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+### Tabbar
+
+Onsen UI provides a number of components for page navigation. In addition to the `<ons-navigator>` element there is an element called `<ons-tabbar>` which is used for tab based navigation. Just like the `<ons-navigator>` it is traditionally used in conjunction with `<ons-template>` so we decided to provide a special interface for React that doesn't rely on templates.
+
+Similar to the Navigator this component also requires the developer to provide a function in order for it to work. In this case the function is called `renderTabs` and has the following structure:
+
+```
+(activeIndex, tabbar) => [
+  {
+    content: <Home />,
+    tab: <Ons.Tab label="Home" />
+  },
+  {
+    content: <Comments />,
+    tab: <Ons.Tab label="Comments" />
+  },
+  ...
+]
+```
+
+It needs to return an array of objects where each object has the following structure:
+
+```javscript
+{
+  content: <SomeComponent />,
+  tab: <Ons.Tab ... />
+}
+```
+
+#### Methods
+
+The Tabbar component provides methods to change the active tab and to get the current active tab index.
+
+* `setActiveTab(index, options)` - Change the active tab to `index`. The `options` object can be used to select the transition animation.
+* `getActiveTabIndex()` - Return the current active tab index.
+
+#### Props
+
+* `initialIndex` - Specify the tab that is opened initially.
+* `renderTabs` - A function that returns an array of tabs and their content.
+
+#### Usage
+
+```javascript
+var MyPage = React.createClass({
+  render: function() {
+    return (
+      <Ons.Page>
+        <Ons.Toolbar>
+          <div className="center">{this.props.title}</div>
+        </Ons.Toolbar>
+
+        <p>
+          {this.props.content}
+        </p>
+      </Ons.Page>
+    );
+  },
+});
+
+var App = React.createClass({
+  render: function() {
+    return (
+      <Ons.Tabbar
+        initialIndex={1}
+        renderTabs={(activeIndex, tabbar) => [
+            {
+              content: <MyPage title="Home" content="Home content" />,
+              tab: <Ons.Tab label="Home" />
+            },
+            {
+              content: <MyPage title="Comments" content="Comments content" />,
+              tab: <Ons.Tab label="Comments" />
+            }
+          ]
+        } />
+    );
+  }
+});
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+### The components are composable
+
+In complex apps there is often a need to combine tabs with stack based navigation. For example, you might want to use a navigator inside one of the tabs or in some cases you would want the tabbar to be one of the pages in the stack.
+
+There is nothing stopping us from combining the Tabbar and the Navigator components in the same app to enable more complex navigation. In the demo below we have an Navigator component where the first page in the stack is an Tabbar component. Using the navigator we can push pages on top of the tabbar.
+
+This is easy to achieve by putting the Tabbar inside the Navigator.
+
+#### Code
+
+The code for this demo is a bit longer but still pretty simple:
+
+```javascript
+var MyModal = React.createClass({
+  pop: function() {
+    this.props.navigator.popPage();
+  },
+
+  render: function() {
+    return (
+      <Ons.Page>
+        <p style={{textAlign: 'center'}}>
+          <Ons.Button onClick={this.pop}>Go back</Ons.Button>
+        </p>
+      </Ons.Page>
+    );
+  }
+});
+
+var MyPage = React.createClass({
+  push: function() {
+    this.props.navigator.pushPage(MyModal);
+  },
+
+  render: function() {
+    return (
+      <Ons.Page>
+        <Ons.Toolbar><div className="center">{this.props.title}</div></Ons.Toolbar>
+        <p style={{textAlign: 'center'}}>
+          <Ons.Button onClick={this.push}>Push a page</Ons.Button>
+        </p>
+      </Ons.Page>
+    );
+  }
+});
+
+var MyTabbar = React.createClass({
+  renderTabs: function() {
+    return [
+      {
+        content: <MyPage title="Home" navigator={this.props.navigator} />,
+        tab: <Ons.Tab label="Home" />
+      },
+      {
+        content: <MyPage title="Comments" navigator={this.props.navigator} />,
+        tab: <Ons.Tab label="Comments" />
+      }
+    ];
+  },
+
+  render: function() {
+    return (
+      <Ons.Page>
+        <Ons.Tabbar
+          renderTabs={this.renderTabs}
+        />
+      </Ons.Page>
+    );
+  }
+});
+
+var App = React.createClass({
+  renderScene: function(route, navigator) {
+    return React.createElement(route, {navigator: navigator});
+  },
+
+  render: function() {
+    return (
+      <Ons.Navigator
+        animation={'lift'}
+        renderScene={this.renderScene}
+        initialRoute={MyTabbar}
+      />
+    );
+  }
+});
+
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+### Conclusion
+
+We hope you are as excited as we are about the React extension. As mentioned earlier we would like to get your feedback on the interface. Please share your thoughts in the comments or on the [forum](https://community.onsen.io/).
+
+If you are an Angular 2 developer we are happy to say that we are developing components for Angular 2 as well. We will preview them as well in the coming weeks. Stay tuned!
+
+If you like Onsen UI please leave us a star on [our GitHub page](https://github.com/OnsenUI/OnsenUI).
