@@ -1,66 +1,74 @@
 
 .pop-default {
-	background-color: white;
-	border-radius: 3px;
-	border-style: solid;
-	box-shadow: 15px 15px 10px rgba(0,0,0,.3);
-	position: absolute;
-	top: 50%;
-	transition: transform 1s ease, top 1s ease, visibility 1s ease;
-	z-index: 1001;
-	p {
-		margin: auto;
-	}
-}
-.pop-desktop {
-	height: 210px;
-	width: 500px;
-}
-.pop-mobile {
-	height: 250px;
-	width: 300px;
-}
-.pop-centered {
-	left: 50%;
-	transform: translate(-50%, -50%);
-}
-.pop-middle {
-	left: 50%;
-	position: fixed;
-	transform: translate(-50%, -50%);
-	white-space: nowrap;
+  background-color: white;
+  border-radius: 3px;
+  border-style: solid;
+  box-shadow: 15px 15px 10px rgba(0,0,0,.3);
+  position: absolute;
+  top: 50%;
+  transition: top 1s ease, visibility 1s ease;
+  z-index: 1001;
+  p {
+    margin: auto;
+  }
+  @media (max-width: @mobile-width) {
+    height: 250px;
+    width: 300px;
+  }
+  height: 210px;
+  width: 500px;
 }
 .pop-hidden {
-	top:115%;
-	visibility: hidden;
+  top:110%;
+  visibility: hidden;
 }
-.pop-container-hidden {
-	top:115%;
-	transition-delay: 1s;
-	visibility: hidden;
+.pop-email {
+  @media (max-width: @mobile-width) {
+    width: 200px;
+  }
+  width: 300px;
+}
+.pop-centered {
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.pop-middle {
+  left: 50%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
 }
 .pop-container {
-	background: rgba(0,0,0,.3);
-	bottom: 0;
-	left: 0;
-	overflow: hidden;
-	position: fixed;
-	right: 0;
-	top: 0;
-	z-index: 1000;
+  background: rgba(0,0,0,.3);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  position: fixed;
+  z-index: 1000;
+  transition: all 1s linear;
+}
+.pop-container-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+.pop-container-visible {
+  opacity: 1;
+  visibility: visible;
 }
 .pop-button-close {
-	color: #F7A397;
-	font-size: 30px;
-	position: absolute;
-	right: 7px;
-	top: 3px;
+  color: #F7A397;
+  font-size: 30px;
+  position: absolute;
+  right: 7px;
+  top: 3px;
 }
 .pop-button-close {
-	&:hover {
-		color: #FF4D35;
-	}
+  &:hover {
+    color: #FF4D35;
+  }
 }
 .pop-popup-google-title {
-	font-size: 1px;
+  font-size: 1px;
 }

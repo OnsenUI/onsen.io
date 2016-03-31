@@ -4,7 +4,6 @@ var eco = require('eco');
 var extend = require('extend');
 var fs = require('fs');
 var moment = require('moment');
-var htmlstrip = require('htmlstrip-native').html_strip;
 var slug = require('slug');
 var escape = require('escape-html');
 var stripIndent = require('strip-indent');
@@ -83,16 +82,6 @@ module.exports = function() {
         var date = moment(date);
         var result = date.format('YYYY-MM-DD');
         return result;
-      },
-
-      getAbstractText: function(contents) {
-        var options = {
-          include_script: false,
-          include_style: false,
-          compact_whitespace: false,
-          include_attributes: false
-        };
-        return htmlstrip(contents.toString('utf8'), options).slice(0, 400) + '...';
       },
 
       markdown: function(capture) {

@@ -1,11 +1,11 @@
-<div class="pop-container pop-container-hidden newsletter newsletter-signup" id="popup-container">
+<div class="pop-container pop-container-hidden newsletter newsletter-signup" style="margin-top: 0" id="popup-container">
   <div class="pop-hidden pop-default pop-centered newsletter-inner" id="popup-newsletter">
     <i class="fa fa-times pop-button-close"></i>
     <p align="middle" style="font-size:32px;">Stay up to date!</p>
     <p align="center" style="font-size:15px; margin: 5px;">Get new updates, usually 2 -3 times a month - it features tips, how-to & news on Onsen, Monaca and hybrid app development.</p>
     <br>
     <form class="pop-middle">
-          <input id="input-email" class="input-email-popup-newsletter" style="width: 300px;" type="text" placeholder="Enter your email" name="email">
+          <input id="input-email" class="input-email-popup-newsletter" type="text" placeholder="Enter your email" name="email">
           <input id="button-submit" type="submit" value="Send">
     </form>
     <div class="newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
@@ -17,7 +17,7 @@
     <p align="center" style="font-size:15px; margin: 5px;">Join our free newsletter and get more hybrid app development tips, how-to & updates.</p>
     <br>
     <form class="pop-middle">
-          <input id="input-email" class="input-email-popup" style="width: 300px;" type="text" placeholder="Enter your email" name="email">
+          <input id="input-email" class="input-email-popup-google-maps" type="text" placeholder="Enter your email" name="email">
           <input id="button-submit" type="submit" value="Send">
     </form>
     <div class="newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
