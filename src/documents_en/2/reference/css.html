@@ -1941,6 +1941,8 @@ layout: '2.html.eco'
       <li class="list__item">
         <div class="list__item__center">Item</div>
       </li>
+    </ul>
+    <ul class="list">
       <li class="list__header">Header</li>
       <li class="list__item list__item--chevron">
         <div class="list__item__center">Item</div>
@@ -1951,13 +1953,13 @@ layout: '2.html.eco'
     </ul>
 
     <ul class="list list--inset" style="margin-top: 10px">
-      <li class="list__item">
+      <li class="list__item list--inset__item">
         <div class="list__item__center">Item</div>
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         <div class="list__item__center">Item</div>
       </li>
-      <li class="list__item list__item--chevron">
+      <li class="list__item list--inset__item list__item--chevron">
         <div class="list__item__center">Item</div>
       </li>
     </ul>
@@ -1965,8 +1967,12 @@ layout: '2.html.eco'
 
     <%- @cssExample -> %>
     <ul class="list">
-      <li class="list__item">Item</li>
-      <li class="list__item">Item</li>
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
+      <li class="list__item">
+        <div class="list__item__center">Item</div>
+      </li>
     </ul>
     <% end %>
 
@@ -1976,9 +1982,15 @@ layout: '2.html.eco'
       <%- @cssExample -> %>
       <ul class="list">
         <li class="list__header">Header</li>
-        <li class="list__item">Item</li>
+        <li class="list__item">
+          <div class="list__item__center">Item</div>
+        </li>
+      </ul>
+      <ul class="list">
         <li class="list__header">Header</li>
-        <li class="list__item">Item</li>
+        <li class="list__item">
+          <div class="list__item__center">Item</div>
+        </li>
       </ul>
       <% end %>
     </div>
@@ -1988,8 +2000,13 @@ layout: '2.html.eco'
 
       <%- @cssExample -> %>
       <ul class="list">
-        <li class="list__item list__item--tappable">Tappable Item</li>
-        <li class="list__item list__item--tappable">Tappable Item</li>
+        <li class="list__item list__item--tappable">
+          <div class="list__item__center">Tappable Item</div>
+        </li>
+
+        <li class="list__item list__item--tappable">
+          <div class="list__item__center">Tappable Item</div>
+        </li>
       </ul>
       <% end %>
     </div>
@@ -1999,8 +2016,13 @@ layout: '2.html.eco'
 
       <%- @cssExample -> %>
       <ul class="list">
-        <li class="list__item list__item--chevron">Chevron Item</li>
-        <li class="list__item list__item--chevron">Chevron Item</li>
+        <li class="list__item list__item--chevron">
+          <div class="list__item__center">Chevron Item</div>
+        </li>
+
+        <li class="list__item list__item--chevron">
+          <div class="list__item__center">Chevron Item</div>
+        </li>
       </ul>
       <% end %>
     </div>
@@ -2010,8 +2032,13 @@ layout: '2.html.eco'
 
       <%- @cssExample -> %>
       <ul class="list list--inset">
-        <li class="list__item list__item--inset">List Item</li>
-        <li class="list__item list__item--inset">List Item</li>
+        <li class="list__item list--inset__item">
+          <div class="list__item__center">List Item</div>
+        </li>
+
+        <li class="list__item list--inset__item">
+          <div class="list__item__center">List Item</div>
+        </li>
       </ul>
       <% end %>
     </div>
@@ -2022,45 +2049,25 @@ layout: '2.html.eco'
       <%- @cssExample -> %>
       <ul class="list">
         <li class="list__item list__item--tappable">
-          <label class="checkbox checkbox--list-item">
-            <input type="checkbox" class="checkbox__input">
-            <div class="checkbox__checkmark
-              checkbox--list-item__checkmark"></div>
-            Checkbox
+           <label class="list__item__left">
+            <label class="checkbox checkbox--list-item">
+              <input type="checkbox" class="checkbox__input" id="c1" checked>
+              <div class="checkbox__checkmark
+                checkbox--list-item__checkmark"></div>
+            </label>
           </label>
+          <label class="list__item__center" for="c1">Checkbox</label>
         </li>
 
         <li class="list__item list__item--tappable">
-          <label class="checkbox checkbox--list-item">
-            <input type="checkbox" class="checkbox__input" checked>
-            <div class="checkbox__checkmark
-              checkbox--list-item__checkmark"></div>
-            Checkbox
+           <label class="list__item__left">
+            <label class="checkbox checkbox--list-item">
+              <input type="checkbox" class="checkbox__input" id="c2">
+              <div class="checkbox__checkmark
+                checkbox--list-item__checkmark"></div>
+            </label>
           </label>
-        </li>
-      </ul>
-      <% end %>
-
-      <%- @cssExample -> %>
-      <ul class="list">
-        <li class="list__item list__item--tappable">
-          <label class="checkbox
-            checkbox--noborder checkbox--list-item">
-            <input type="checkbox" class="checkbox__input">
-            <div class="checkbox__checkmark 
-              checkbox--noborder checkbox--list-item__checkmark"></div>
-            Checkbox
-          </label>
-        </li>
-
-        <li class="list__item list__item--tappable">
-          <label class="checkbox
-            checkbox--noborder checkbox--list-item">
-            <input type="checkbox" class="checkbox__input" checked>
-            <div class="checkbox__checkmark
-              checkbox--noborder checkbox--list-item__checkmark"></div>
-            Checkbox
-          </label>
+          <label class="list__item__center" for="c2">Checkbox</label>
         </li>
       </ul>
       <% end %>
@@ -2072,21 +2079,25 @@ layout: '2.html.eco'
       <%- @cssExample -> %>
       <ul class="list">
         <li class="list__item list__item--tappable">
-          <label class="radio-button radio-button--list-item">
-            <input type="radio" class="radio-button__input" name="b" checked="checked">
-            <div class="radio-button__checkmark
-              radio-button--list-item__checkmark"></div>
-            Radio Button
+          <label>
+            <label class="radio-button radio-button--list-item">
+              <input type="radio" class="radio-button__input" name="b" id ="r1" checked>
+              <div class="radio-button__checkmark
+                radio-button--list-item__checkmark"></div>
+            </label>
           </label>
+          <label class="list__item__center" for="r1">Radio Button</label>
         </li>
 
         <li class="list__item list__item--tappable">
-          <label class="radio-button radio-button--list-item">
-            <input type="radio" class="radio-button__input" name="b">
-            <div class="radio-button__checkmark
-              radio-button--list-item__checkmark"></div>
-            Radio Button
+          <label>
+            <label class="radio-button radio-button--list-item">
+              <input type="radio" class="radio-button__input" name="b" id ="r2" checked>
+              <div class="radio-button__checkmark
+                radio-button--list-item__checkmark"></div>
+            </label>
           </label>
+          <label class="list__item__center" for="r2">Radio Button</label>
         </li>
       </ul>
       <% end %>
@@ -2098,31 +2109,31 @@ layout: '2.html.eco'
       <%- @cssExample -> %>
       <ul class="list">
         <li class="list__item">
-          <div class="list__item__center">
+          <label class="list__item__center" for="s1">
             Label
-          </div>
-          <div class="list__item__right">
+          </label>
+          <label class="list__item__right">
             <label class="switch switch--list-item">
-              <input type="checkbox" class="switch__input" checked>
+              <input type="checkbox" class="switch__input" id="s1" checked>
               <div class="switch__toggle">
                 <div class="switch__handle"></div>
               </div>
             </label>
-          </div>
+          </label>
         </li>
 
         <li class="list__item">
-          <div class="list__item__center">
+          <label class="list__item__center" for="s2">
             Label
-          </div>
-          <div class="list__item__right">
+          </label>
+          <label class="list__item__right">
             <label class="switch switch--list-item">
-              <input type="checkbox" class="switch__input">
+              <input type="checkbox" class="switch__input" id="s2">
               <div class="switch__toggle">
                 <div class="switch__handle"></div>
               </div>
             </label>
-          </div>
+          </label>
         </li>
       </ul>
       <% end %>
