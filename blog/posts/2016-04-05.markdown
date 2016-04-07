@@ -23,14 +23,6 @@ To add Onsen UI and the React extension to your project you can run:
 npm install --save-dev onsenui react-onsenui
 ```
 
-Disclaimer: The currently released version of Onsen UI is lacking some functionality that is needed for the React extension so right now you need to do:
-
-```bash
-npm install --save-dev git://github.com/OnsenUI/OnsenUI-dist.git#2.0.0-react.5
-```
-
-A new version will be released shortly and this disclaimer will be removed.
-
 How you load it depends on your preference. For the people who like browserify you can take a look at [this repo](https://github.com/argelius/react-onsenui-kitchensink) on GitHub. It uses browserify to load the libraries and Babel to transpile ES6 and JSX into JavaScript that the browser can understand.
 
 You can also load it in a simple `<script>` tag. When doing this it's important that you load all the dependencies in the correct order. The `react-onsenui.js` file must be loaded after both the React files and the core Onsen UI library since it's dependent on both.
