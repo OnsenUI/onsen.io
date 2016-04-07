@@ -1,0 +1,241 @@
+---
+page: 'onsenui2-landing-react'
+title: 'Hybrid App Framework Onsen UI 2.0 With React'
+layout: '2.html.eco'
+description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS. Features bindings for React.js.'
+---
+
+<div class="design-2016">
+  <nav id="main-nav">
+    <ul>
+      <li>
+        <a href="#">Other Monaca Products</a>
+        <ul>
+          <li><a href="https://monaca.io/cloud.html">Monaca Cloud</a></li>
+          <li><a href="https://monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
+          <li><a href="https://monaca.io/debugger.html">Monaca Debugger</a></li>
+          <li><a href="https://monaca.io/localkit.html">Monaca Localkit</a></li>
+          <li><a href="https://monaca.io/enterprise.html">Monaca Enterprise</a></li>
+          <li><a href="http://www.kidozen.com">KidoZen</a></li>
+        </ul>
+      </li>
+      <!--
+      <li>
+        <a href="#">Getting Started</a>
+        <ul></ul>
+      </li>
+      <li>
+        <a href="#">Develop</a>
+        <ul></ul>
+      </li>
+      <li>
+        <a href="#">Docs</a>
+        <ul></ul>
+      </li>
+      <li>
+        <a href="#">Forum</a>
+      </li>
+      <li>
+        <a href="#">Blog</a>
+      </li> -->
+    </ul>
+  </nav>
+  <div id="start">
+    <div class="wrapper">
+      <div id="intro">
+        <h1>
+          <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
+          for
+          <img src="/images/design_2016/logo_react.png" alt="React">
+        </h1>
+        <nav>
+          Onsen UI with React Extensions
+        </nav>
+        <p>Cross-platform UI framework for React<br> driven hybrid (Cordove/PhoneGap) apps.</p>
+        <ul id="actions">
+          <li class="twitter"><a href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a></li>
+          <li class="github"><a href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a></li>
+        </ul>
+        <form class="newsletter-form">
+          <input type="email" placeholder="Input email address to get newsletter!">
+          <button id="register">Sign up</button>
+        </form>
+        <button id="getting-started">Getting Started with Onsen UI for React</button>
+        <p class="small" id="release-info">Latest <u>2.0.0-beta8</u> released 3 days ago. See <u>all versions</u><br>Distributed free and open source (Apache 2.0) via <a href="//github.com">GitHub</a></p>
+      </div>
+      <div id="demo">
+        <div class="phones">
+          <div class="phone ios selected"></div>
+          <div class="phone android"></div>
+        </div>
+        <div class="actions">
+          <a class="change-view" href="#">Change View</a>
+          <a class="source-code" href="#">Source Code</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="features">
+    <div id="components" class="feature">
+      <h2>Beautifully made with Android and iOS components</h2>
+      <p>More than <a href="#">100 components</a> are specially made for Material and Flat design, with <a href="#">automatic platform detection</a></p>
+      <iframe id="showcase-carousel" src="http://onsenui.github.io/showcase-carousel"></iframe>
+    </div>
+    <div id="react" class="feature">
+      <h2>Tailored for React Developers</h2>
+      <p>With our Onsen UI React bindings, Onsen UI React Components play nicely with Virtual DOM</p>
+      <div class="platform-buttons">
+        <div class="ios selected"></div>
+        <div class="android"></div>
+      </div>
+      <div class="code-explanation ios selected">
+
+        <img src="/images/design_2016/app_ios.png" alt="react-app-ios">
+        <div class="arrow-container">
+          <div class="arrow a1"></div>
+          <div class="arrow a2"></div>
+          <div class="arrow a3"></div>
+          <div class="arrow a4"></div>
+          <div class="bracket"></div>
+        </div>
+        <div class="react-code">
+        <code>
+          &lt;Ons.Navigator
+            initialRoute={this.initialRoute}
+            renderScene={this.renderScene}
+          /&gt;
+        </code>
+
+        <code>
+          &lt;Ons.Toolbar&gt;
+            &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
+            &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
+            &lt;div class=&quot;right&quot;&gt;...&lt;/div&gt;
+          &lt;/Ons.Toolbar&gt;
+        </code>
+
+        <code>
+          &lt;Ons.List
+            dataSource={this.todos}
+            renderRow={(todo) =&gt;
+              &lt;Todo data={todo} /&gt;
+            }
+          /&gt;
+        </code>
+
+        <code>
+          &lt;Ons.Tabbar
+            initialIndex={0}
+            renderTabs={this.renderTabs}
+          /&gt;
+        </code>
+        </div>
+      </div>
+
+
+      <div class="code-explanation android">
+
+        <img src="/images/design_2016/app_android.png" alt="react-app-android">
+        <div class="arrow-container">
+          <div class="arrow a1"></div>
+          <div class="arrow a2"></div>
+          <div class="arrow a3"></div>
+          <div class="arrow a4"></div>
+          <div class="arrow a5"></div>
+          <div class="bracket"></div>
+        </div>
+        <div class="react-code">
+          <code>
+            &lt;Ons.Navigator
+              initialRoute={this.initialRoute}
+              renderScene={this.renderScene}
+            /&gt;
+          </code>
+
+          <code>
+            &lt;Ons.Toolbar&gt;
+              &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
+              &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
+            &lt;/Ons.Toolbar&gt;
+          </code>
+
+          <code>
+            &lt;Ons.Tabbar
+              initialIndex={0}
+              renderTabs={this.renderTabs}
+            /&gt;
+          </code>
+
+          <code>
+            &lt;Ons.List
+              dataSource={this.todos}
+              renderRow={(todo) =&gt;
+                &lt;Todo data={todo} /&gt;
+              }
+            /&gt;
+          </code>
+
+          <code>
+            &lt;Ons.Fab&gt;
+              &lt;Ons.Icon icon=&quot;md-edit&quot; /&gt;
+            &lt;/Ons.Fab&gt;
+          </code>
+        </div>
+      </div>
+
+    </div>
+    <div id="develop" class="feature">
+      <h2>Develop and build flawlessly</h2>
+      <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
+      <ul class="icons">
+        <li class="icon debug">Debug</li>
+        <li class="icon build">Remote build</li>
+        <li class="icon push">Push</li>
+        <li class="icon user">User</li>
+        <li class="icon onlineide">Online IDE</li>
+        <li class="icon inappupdater">In-App update</li>
+        <li class="icon lock">Encryption</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script>
+  var $ = document.querySelector.bind(document);
+  var $$ = document.querySelectorAll.bind(document);
+  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
+  var code = $$('code');
+  var arrows = $$('.arrow');
+  var height = $('.code-explanation').offsetHeight;
+
+  each(arrows, function (e, i) {
+    var lines = code[i].textContent.split(/\n/);
+    var indent = lines[1].match(/\s*/)[0].length;
+    code[i].textContent = lines.map(function(e) {
+      return e.slice(indent);
+    }).join('\n').trim();
+    hljs.highlightBlock(code[i]);
+    e.style.bottom = height - (code[i].offsetTop + code[i].offsetHeight / 2) + 'px';
+  });
+
+  var buttons = $('.platform-buttons').children;
+  var examples = $$('.code-explanation');
+  each(buttons, function(e, i) {
+    e.onclick = function () {
+      var j = (i + 1) % 2;
+      if (!this.classList.contains('selected')) {
+        buttons[i].classList.add('selected');
+        buttons[j].classList.remove('selected');
+        examples[i].classList.add('selected');
+        examples[j].classList.remove('selected');
+      }
+    }
+  });
+
+  var phones = $$('.phone');
+  $('.change-view').onclick = function (){
+    phones[0].classList.toggle('selected');
+    phones[1].classList.toggle('selected');
+  }
+</script>

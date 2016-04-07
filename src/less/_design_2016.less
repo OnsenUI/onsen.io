@@ -1,0 +1,542 @@
+.design-2016 {
+
+  /***** General *****/
+
+  #start {
+    background: linear-gradient(190deg, #E54738, #9A292C);
+    padding-top: 80px;
+  }
+
+  #start, #start a, #start h1 {
+    color: #fff;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  ul, li {
+    margin: 0;
+    padding: 0;
+  }
+
+  #main-nav > ul, .wrapper, #features {
+    width: 960px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /***** Main navigation *****/
+
+  #main-nav {
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    right: 0;
+    z-index: 10;
+    opacity: 0.8;
+    font-size: 16px;
+  }
+
+  #main-nav a {
+    color: rgba(255,255,255,0.9);
+    display: inline-block;
+    padding: 10px;
+    text-decoration: none;
+    width: 230px;
+    box-sizing: border-box;
+  }
+  #main-nav:hover {
+    opacity: 1;
+  }
+
+  #main-nav > ul > li:first-child > a:before {
+    content: '';
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    background: url(/images/design_2016/logo_monaca.png);
+  }
+
+  #main-nav li {
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+  }
+
+  #main-nav li li{
+    display: none;
+  }
+  #main-nav li:hover li{
+    display: block;
+  }
+
+  #main-nav > ul > li:hover{
+    box-shadow: 0px 0px 4px 2px #c55;
+    background: rgba(180,50,40,0.8);
+    border-radius: 5px;
+  }
+
+  #main-nav a + ul:before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 10px;
+    display: inline-block;
+    vertical-align: top;
+    border: 6px solid transparent;
+    border-top-color: rgba(255,255,255,0.9);
+  }
+
+  /***** Top part *****/
+
+  #intro h1 {
+    display: inline-block;
+    margin: 0;
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+
+  #intro h1 img {
+    vertical-align: -10px;
+  }
+
+  #intro nav {
+    position: relative;
+    left: 2px;
+    font-size: 15px;
+  }
+
+  #start input, #register, #getting-started {
+    border-radius: 3px;
+  }
+
+  #actions li {
+    display: inline-block;
+    margin: 5px 25px;
+    margin-left: 0px;
+    font-size: 14px;
+  }
+
+  #actions li:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+  }
+
+  #actions a {
+    display: inline-block;
+    vertical-align: middle;
+    text-decoration: underline;
+  }
+
+  #actions a:hover {
+    text-decoration: none;
+  }
+
+  #actions li.twitter:before {
+    background-image: url('/images/design_2016/icon_twitter.png');
+  }
+
+  #actions li.github:before {
+    background-image: url('/images/design_2016/icon_github.png');
+  }
+
+  #start input {
+    border: 0;
+    font-size: 13px;
+    padding: 15px 20px;
+    xbackground: #cD6A68;
+    background: #B74744;
+    color: #eee;
+    width: 275px;
+  }
+
+  #register {
+    padding: 14px 25px;
+    box-sizing: border-box;
+    font-size: 14px;
+    background: transparent;
+    border: 1px solid #eee;
+    color: #eee;
+  }
+
+  .newsletter-form {
+    margin: 20px 0;
+  }
+
+  .newsletter-form ::-webkit-input-placeholder {
+    color: #E8CCCC;
+  }
+
+  #getting-started {
+    width: 420px;
+    font-size: 20px;
+    padding: 12px 0;
+    border: 0;
+    color: #A72E2E;
+    background: #fff;
+  }
+
+  #release-info, #release-info a {
+    color: #b77;
+    font-size: 12px;
+    line-height: 14px;
+    padding: 50px 0 35px;
+  }
+
+
+  /***** Demo *****/
+
+  #demo {
+    position: absolute;
+    right: 0;
+    top: -50px;
+  }
+
+  #demo .phones, #demo .actions {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  #demo .phones {
+    width: 310px;
+    height: 570px;
+    margin-right: 5px;
+    position: relative;
+  }
+
+  #demo .phones .ios, #demo .phones .android {
+    width: 269px;
+    height: 543px;
+    position: absolute;
+  }
+
+  #demo .ios {
+    background: url(/images/design_2016/iphone.png);
+  }
+
+  #demo .android {
+    background: url(/images/design_2016/nexus5.png);
+  }
+
+  #demo .phone {
+    top: 20px;
+    left: 40px;
+    transition: 0.2s top ease-in, 0.2s left ease-in;
+  }
+
+  #demo .phone.selected {
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+  }
+
+  #demo .actions {
+    width: 75px;
+    padding: 15px 5px;
+    border-radius: 5px;
+    background: #BF3A2F;
+    position: relative;
+    margin-top: 20px;
+  }
+
+  #demo .actions:before {
+    content: '';
+    display: block;
+    left: -20px;
+    top: 30px;
+    position: absolute;
+    border: 10px solid transparent;
+    border-right-color: #BF3A2F;
+  }
+
+  #demo .actions a {
+    display: block;
+    text-decoration: none;
+    font-size: 12px;
+    text-align: center;
+  }
+
+  #demo .actions a:before {
+    height: 60px;
+    content: '';
+    display: block;
+  }
+
+  .source-code:before {
+    background: url(/images/design_2016/icon_sourcecode.png) center 25px  no-repeat;
+  }
+
+  .change-view:before {
+    background: url(/images/design_2016/icon_changeview.png) center no-repeat;
+  }
+
+  /***** Features *****/
+
+  #features {
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  #features h2 {
+    font-size: 32px;
+    color: #111;
+    margin-bottom: 20px;
+  }
+
+  h2 + p {
+    margin-bottom: 50px;
+  }
+
+  .feature {
+    padding: 50px 0;
+  }
+
+  .feature + .feature {
+    border-top: 1px solid #D3D4D8;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  /***** Android and iOS components *****/
+
+  #showcase-carousel {
+    height: 310px;
+    width: 1000px;
+    max-width: 1000px;
+    margin: 0 -20px;
+  }
+
+  /***** Tailored for React Developers *****/
+
+  #react {
+    height: 600px;
+  }
+
+  .code-explanation img {
+    width: 260px;
+    height: 450px;
+    display: inline-block;
+  }
+
+  .code-explanation {
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    margin-left: -350px;
+    width: 700px;
+    height: 450px;
+    opacity: 0;
+    transition: 0.5s opacity ease-in;
+  }
+
+  .code-explanation.selected {
+    z-index: 2;
+    opacity: 1;
+  }
+
+  .react-code {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 80px;
+    max-width: 400px;
+    text-align: left;
+  }
+
+  .code-explanation code {
+    display: block;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    width: 240px;
+    background: #F6F6F6;
+    white-space: pre;
+    font-size: 12px;
+  }
+
+  .code-explanation.ios code:last-child {
+    bottom: 0;
+    margin-bottom: 0;
+    position: absolute;
+  }
+
+  #react-app,.arrow-container,.react-code {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .platform-buttons {
+    position: relative;
+  }
+
+  .platform-buttons .ios, .platform-buttons .android {
+    width: 60px;
+    height: 60px;
+    background: red;
+    position: absolute;
+    top: 200px;
+    opacity: 0.2;
+  }
+
+  .platform-buttons .selected {
+    opacity: 1;
+  }
+
+  .platform-buttons .ios {
+    left: 40px;
+    background: url(/images/design_2016/slide_icon_apple.png);
+  }
+
+  .platform-buttons .android {
+    right: 40px;
+    background: url(/images/design_2016/slide_icon_android.png);
+  }
+
+
+  /***** Develop and build flawlessly *****/
+  #develop ul {
+    display: flex;
+  }
+
+  .icon {
+    display: inline-block;
+    width: 13%;
+    flex-grow: 1;
+    font-size: 14px;
+  }
+
+  .icon:before {
+    content: '';
+    display: block;
+    height: 100px;
+    background: url('./alien.png') center no-repeat;
+  }
+
+  .icon.debug:before {
+    background-image: url(/images/design_2016/icon_debug.png);
+  }
+
+  .icon.build:before {
+    background-image: url(/images/design_2016/icon_build.png);
+  }
+
+  .icon.push:before {
+    background-image: url(/images/design_2016/icon_push.png);
+  }
+
+  .icon.user:before {
+    background-image: url(/images/design_2016/icon_user.png);
+  }
+
+  .icon.onlineide:before {
+    background-image: url(/images/design_2016/icon_onlineide.png);
+  }
+
+  .icon.inappupdater:before {
+    background-image: url(/images/design_2016/icon_inappupdater.png);
+  }
+
+  .icon.lock:before {
+    background-image: url(/images/design_2016/icon_lock.png);
+  }
+
+  /***** Highlight.js overrides *****/
+
+  .hljs-tag {
+    color: #3B3B98;
+  }
+
+  .hljs-name,.hljs-attr {
+    font-weight: bold;
+  }
+
+  .hljs-attr {
+    color: #5C2699;
+  }
+
+  .hljs-string {
+    color: #080;
+  }
+
+  /***** Arrows *****/
+  .arrow-container {
+    width: 75px;
+    position: absolute;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .arrow {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    position: absolute;
+    left: 40px;
+    right: 3px;
+  }
+
+  .arrow:before {
+    content: '';
+    border-top: 1px solid gray;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    width: 100px;
+    left: -100px;
+  }
+
+  .arrow:after {
+    content: '';
+    border: 3px solid transparent;
+    border-left-color: gray;
+    position: absolute;
+    bottom: -3px;
+    right: -6px;
+  }
+
+  .bracket {
+    position: absolute;
+    border: 1px solid gray;
+    top: 100px;
+    height: 280px;
+    width: 20px;
+    border-left-color: transparent;
+    background: white;
+  }
+
+  .a1 {
+    top: 3px;
+    height: 0;
+  }
+
+  .a2 {
+    top: 20px;
+    left: 60px;
+  }
+
+  .a3 {
+    top: 60px;
+  }
+
+  .a4 {
+    top: 280px;
+  }
+
+  .ios .a3 {
+    top: auto;
+  }
+
+  .ios .a4 {
+    top: auto;
+  }
+
+  .ios .bracket {
+    top: 38px;
+  }
+}
