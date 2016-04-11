@@ -2,21 +2,25 @@
 author: patrick
 date: 2016-04-12
 id: onsenui-redux 
-title: "Building a Calculator App with Redux and OnsenUI"
+title: "Building a Calculator App with Redux and Onsen UI"
 tags: onsen ui, redux, autostyle
 category: tutorial
 ---
 
-There are many frameworks and concepts around in the JavaScript world. In today's blog post we are going to write a pure mobile JavaScript application with [OnsenUI](https://github.com/OnsenUI/OnsenUI.git) and  [Redux](https://github.com/reactjs/redux), which is a very small but powerful library that enables to write Javascript applications in a conceptual different way.
 
-Redux is inspired by [Flux](https://facebook.github.io/flux/), which was developed by Facebook. Unlike Flux,  Redux is quite flexible and does not require any specific infrastructure like GraphQL, which is required by Flux.  We will use Redux in combination with OnsenUI to build a simple Calculator mobile app. One of the nice things about this app is that it will look both on Android and iOS due to  Onsen's autostyle feature. 
+![Jasmine](/blog/content/images/2016/Apr/onsen_redux.png)
 
+There are many frameworks and concepts around in the JavaScript world. In today's blog post we are going to write a pure mobile JavaScript application with [Onsen UI](https://github.com/OnsenUI/OnsenUI.git) and  [Redux](https://github.com/reactjs/redux), which is a very small but powerful library that enables to write Javascript applications in a conceptual different way.
+
+Redux is inspired by [Flux](https://facebook.github.io/flux/), which was developed by Facebook. Unlike Flux,  Redux is quite flexible and does not require any specific infrastructure like GraphQL, which is required by Flux.  We will use Redux in combination with Onsen UI to build a simple Calculator mobile app. One of the nice things about this app is that it will look both on Android and iOS due to  Onsen's autostyle feature. 
+
+
+<!-- more -->
 
 <div style="display: flex; justify-content: center;">
 <iframe src="http://philolo1.github.io/frame-auto-style/?platform=ios&src=http://philolo1.github.io/OnsenUI-redux-calculator" scrolling="no" style="border: 0; width: 400px; height: 800px;"></iframe>
 </div>
 
-<!-- more -->
 
 All the source code is if freely available under [https://github.com/philolo1/OnsenUI-redux-calculator/](https://github.com/philolo1/OnsenUI-redux-calculator/).
 
