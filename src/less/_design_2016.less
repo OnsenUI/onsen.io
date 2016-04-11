@@ -1,14 +1,21 @@
 .design-2016 {
+  min-width: 1000px;
 
   /***** General *****/
 
   #start {
-    background: linear-gradient(190deg, #E54738, #9A292C);
+    background: linear-gradient(190deg, #E54738, #C13932, #9A292C);
     padding-top: 80px;
+    height: 470px;
+    display: flex;
   }
 
   #start, #start a, #start h1 {
     color: #fff;
+  }
+
+  #start .wrapper {
+    display: flex;
   }
 
   p {
@@ -31,11 +38,10 @@
   #main-nav {
     position: absolute;
     top: 20px;
-    left: -10px;
+    left: 0;
     right: 0;
     z-index: 10;
-    opacity: 0.8;
-    font-size: 16px;
+    font-size: 14px;
   }
 
   #main-nav a {
@@ -43,13 +49,21 @@
     display: inline-block;
     padding: 10px;
     text-decoration: none;
-    width: 230px;
     box-sizing: border-box;
   }
-  #main-nav:hover {
-    opacity: 1;
+
+  #main-nav li {
+    opacity: 0.7;
+    color: rgba(255,255,255,0.9);
   }
 
+  #main-nav li:hover {
+    opacity: 1;
+  }
+  #main-nav > ul > li:first-child {
+    float: left;
+    margin-left: -10px;
+  }
   #main-nav > ul > li:first-child > a:before {
     content: '';
     display: inline-block;
@@ -63,31 +77,49 @@
   #main-nav li {
     display: inline-block;
     vertical-align: top;
-    position: relative;
+    margin: 0 10px;
   }
 
-  #main-nav li li{
-    display: none;
-  }
-  #main-nav li:hover li{
+  #main-nav li li, #main-nav li li a{
     display: block;
   }
 
-  #main-nav > ul > li:hover{
+  #main-nav li ul{
+    display: none;
+  }
+  #main-nav li:hover ul{
+    display: block;
+  }
+
+  #main-nav ul ul{
     box-shadow: 0px 0px 4px 2px #c55;
     background: rgba(180,50,40,0.8);
     border-radius: 5px;
   }
 
-  #main-nav a + ul:before {
+  #main-nav .dropdown > a,a.dropdown {
+    padding-right: 25px;
+  }
+
+  .dropdown {
+    position: relative;
+  }
+
+  .dropdown:after {
     content: '';
     position: absolute;
-    top: 20px;
+    top: 19px;
     right: 10px;
     display: inline-block;
     vertical-align: top;
     border: 6px solid transparent;
-    border-top-color: rgba(255,255,255,0.9);
+    border-top-color: initial;
+  }
+  #main-nav ul ul {
+    position: absolute;
+    left: 50%;
+    margin-left: -110px;
+    width: 220px;
   }
 
   /***** Top part *****/
@@ -113,41 +145,48 @@
     border-radius: 3px;
   }
 
-  #actions li {
+  .action:before {
+    content: '';
+    display: inline-block;
+    vertical-align: middle;
+    width: 21px;
+    height: 21px;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 5px;
+    margin-top: -4px;
+  }
+
+  .action {
     display: inline-block;
     margin: 5px 25px;
     margin-left: 0px;
     font-size: 14px;
-  }
-
-  #actions li:before {
-    content: '';
-    display: inline-block;
-    vertical-align: middle;
-    width: 16px;
-    height: 16px;
-    margin-right: 10px;
-  }
-
-  #actions a {
-    display: inline-block;
     vertical-align: middle;
     text-decoration: underline;
   }
 
-  #actions a:hover {
+  .action:hover {
     text-decoration: none;
   }
 
-  #actions li.twitter:before {
-    background-image: url('/images/design_2016/icon_twitter.png');
+  .twitter:before {
+    background-image: url('/images/design_2016/twitter.svg');
   }
 
-  #actions li.github:before {
-    background-image: url('/images/design_2016/icon_github.png');
+  .github:before {
+    background-image: url('/images/design_2016/github.svg');
   }
 
-  #start input {
+  .newsletter:before {
+    background-image: url('/images/design_2016/icon_mail.svg');
+  }
+
+  .ask:before {
+    background-image: url('/images/design_2016/icon_ask.svg');
+  }
+
+  .newsletter-form input {
     border: 0;
     font-size: 13px;
     padding: 15px 20px;
@@ -183,6 +222,11 @@
     background: #fff;
   }
 
+  #release-info {
+    position: absolute;
+    bottom: 0px;
+    margin: 0;
+  }
   #release-info, #release-info a {
     color: #b77;
     font-size: 12px;
@@ -194,9 +238,10 @@
   /***** Demo *****/
 
   #demo {
-    position: absolute;
-    right: 0;
+    position: relative;
     top: -50px;
+    flex-grow: 1;
+    text-align: right;
   }
 
   #demo .phones, #demo .actions {
@@ -211,10 +256,16 @@
     position: relative;
   }
 
-  #demo .phones .ios, #demo .phones .android {
+  #demo .phone{
     width: 269px;
     height: 543px;
     position: absolute;
+    box-sizing:border-box;
+    padding: 60px 14px;
+  }
+  #demo iframe {
+    width: 100%;
+    height: 100%;
   }
 
   #demo .ios {
@@ -223,6 +274,7 @@
 
   #demo .android {
     background: url(/images/design_2016/nexus5.png);
+    padding: 50px 9px 44px;
   }
 
   #demo .phone {
@@ -306,7 +358,7 @@
     position: relative;
   }
 
-  /***** Android and iOS components *****/
+  /***** Carousel *****/
 
   #showcase-carousel {
     height: 310px;
@@ -315,10 +367,10 @@
     margin: 0 -20px;
   }
 
-  /***** Tailored for React Developers *****/
+  /***** Code explanation *****/
 
-  #react {
-    height: 600px;
+  .code-explanation-container {
+    height: 450px;
   }
 
   .code-explanation img {
@@ -361,111 +413,11 @@
     font-size: 12px;
   }
 
-  .code-explanation.ios code:last-child {
-    bottom: 0;
-    margin-bottom: 0;
-    position: absolute;
-  }
-
   #react-app,.arrow-container,.react-code {
     display: inline-block;
     vertical-align: top;
   }
 
-  .platform-buttons {
-    position: relative;
-  }
-
-  .platform-buttons .ios, .platform-buttons .android {
-    width: 60px;
-    height: 60px;
-    background: red;
-    position: absolute;
-    top: 200px;
-    opacity: 0.2;
-  }
-
-  .platform-buttons .selected {
-    opacity: 1;
-  }
-
-  .platform-buttons .ios {
-    left: 40px;
-    background: url(/images/design_2016/slide_icon_apple.png);
-  }
-
-  .platform-buttons .android {
-    right: 40px;
-    background: url(/images/design_2016/slide_icon_android.png);
-  }
-
-
-  /***** Develop and build flawlessly *****/
-  #develop ul {
-    display: flex;
-  }
-
-  .icon {
-    display: inline-block;
-    width: 13%;
-    flex-grow: 1;
-    font-size: 14px;
-  }
-
-  .icon:before {
-    content: '';
-    display: block;
-    height: 100px;
-    background: url('./alien.png') center no-repeat;
-  }
-
-  .icon.debug:before {
-    background-image: url(/images/design_2016/icon_debug.png);
-  }
-
-  .icon.build:before {
-    background-image: url(/images/design_2016/icon_build.png);
-  }
-
-  .icon.push:before {
-    background-image: url(/images/design_2016/icon_push.png);
-  }
-
-  .icon.user:before {
-    background-image: url(/images/design_2016/icon_user.png);
-  }
-
-  .icon.onlineide:before {
-    background-image: url(/images/design_2016/icon_onlineide.png);
-  }
-
-  .icon.inappupdater:before {
-    background-image: url(/images/design_2016/icon_inappupdater.png);
-  }
-
-  .icon.lock:before {
-    background-image: url(/images/design_2016/icon_lock.png);
-  }
-
-  /***** Highlight.js overrides *****/
-
-  .hljs-tag {
-    color: #3B3B98;
-  }
-
-  .hljs-name,.hljs-attr {
-    font-weight: bold;
-  }
-
-  .hljs-attr {
-    color: #5C2699;
-  }
-
-  .hljs-string {
-    color: #080;
-  }
-
-  /***** Arrows *****/
   .arrow-container {
     width: 75px;
     position: absolute;
@@ -510,33 +462,227 @@
     background: white;
   }
 
-  .a1 {
-    top: 3px;
-    height: 0;
+  .platform-buttons {
+    position: relative;
   }
 
-  .a2 {
-    top: 20px;
-    left: 60px;
+  .platform-buttons .ios, .platform-buttons .android {
+    width: 60px;
+    height: 60px;
+    background: red;
+    position: absolute;
+    top: 200px;
+    opacity: 0.2;
   }
 
-  .a3 {
-    top: 60px;
+  .platform-buttons .selected {
+    opacity: 1;
   }
 
-  .a4 {
-    top: 280px;
+  .platform-buttons .ios {
+    left: 40px;
+    background: url(/images/design_2016/slide_icon_apple.png);
   }
 
-  .ios .a3 {
-    top: auto;
+  .platform-buttons .android {
+    right: 40px;
+    background: url(/images/design_2016/slide_icon_android.png);
   }
 
-  .ios .a4 {
-    top: auto;
+
+  /***** Icons *****/
+  ul.icons {
+    display: flex;
   }
 
-  .ios .bracket {
-    top: 38px;
+  .icons li {
+    display: inline-block;
+    width: 13%;
+    flex-grow: 1;
+    font-size: 14px;
   }
+
+  .icon:before {
+    content: '';
+    display: block;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .icon.debug:before {
+    background-image: url(/images/design_2016/icon_debug.png);
+  }
+
+  .icon.build:before {
+    background-image: url(/images/design_2016/icon_build.png);
+  }
+
+  .icon.push:before {
+    background-image: url(/images/design_2016/icon_push.png);
+  }
+
+  .icon.user:before {
+    background-image: url(/images/design_2016/icon_user.png);
+  }
+
+  .icon.onlineide:before {
+    background-image: url(/images/design_2016/icon_onlineide.png);
+  }
+
+  .icon.inappupdater:before {
+    background-image: url(/images/design_2016/icon_inappupdater.png);
+  }
+
+  .icon.lock:before {
+    background-image: url(/images/design_2016/icon_lock.png);
+  }
+
+  .icon.blog:before {
+    background-image: url(/images/design_2016/icon_blog.png);
+  }
+
+  .icon.react:before {
+    background-image: url(/images/design_2016/icon_react.png);
+  }
+
+  .icon.forum:before {
+    background-image: url(/images/design_2016/icon_forum.png);
+  }
+
+  .icon.reference:before {
+    background-image: url(/images/design_2016/icon_reference.png);
+  }
+
+
+  /***** Info *****/
+
+  .info {
+    background: #FCFEFF;
+    padding: 10px;
+    margin: 10px 0;
+    display: block;
+    font-size: 14px;
+    color: #999;
+    border: 1px solid #64B1FF;
+  }
+
+  .info:before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    margin-right: 15px;
+    display: inline-block;
+    background: url(/images/design_2016/icon_idea.png) no-repeat;
+    vertical-align: middle;
+  }
+
+  /***** Code *****/
+  code.shell br {
+    content: '';
+  }
+
+  code.shell br:before {
+    content: '';
+    display: block;
+  }
+
+  code.shell:before, code.shell br:after {
+    content: '$ ';
+    display: inline-block;
+    margin-right: 6px;
+  }
+
+  .hljs-tag {
+    color: #3B3B98;
+  }
+
+  .hljs-name,.hljs-attr {
+    font-weight: bold;
+  }
+
+  .hljs-attr {
+    color: #5C2699;
+  }
+
+  .hljs-string {
+    color: #080;
+  }
+
+  /***** Simple flex row *****/
+  .row {
+    display: flex;
+  }
+
+  .row > a {
+    display: inline-block;
+    margin: auto;
+  }
+  .row > li {
+    display: inline-block;
+    flex-grow: 1;
+  }
+  .row img {
+    display: block;
+    margin: auto;
+  }
+
+  /***** Tabs *****/
+  .tabs {
+    display: flex;
+    box-shadow: 0 9px 5px -2px #eee;
+  }
+
+  .tabs a {
+    flex-grow: 1;
+    text-decoration: none;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    padding: 10px;
+  }
+
+  .tabs a.selected {
+    border-color: #EB5959;
+    color: #953535;
+  }
+
+  .tabs .action {
+    margin-bottom: 0;
+  }
+
+  .tab-contents {
+    text-align: left;
+  }
+
+  .tab-contents ol {
+    counter-reset: sa;
+    list-style-type: none;
+  }
+
+  .tab-contents li:before {
+    content: counter(sa);
+    counter-increment: sa;
+    xcontent: '';
+    color: white;
+    background: #EB5959;
+    float: left;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 45px;
+    display: inline-block;
+    margin-left: -60px;
+  }
+
+  .tab-contents li {
+    margin-left: 60px;
+  }
+
+  .tab-contents > div:not(.selected) {
+    display: none;
+  }
+
 }

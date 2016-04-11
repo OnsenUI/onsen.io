@@ -1,5 +1,5 @@
 ---
-page: 'onsenui2-landing-react'
+page: 'react-landing'
 title: 'Hybrid App Framework Onsen UI 2.0 With React'
 layout: '2.html.eco'
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS. Features bindings for React.js.'
@@ -8,7 +8,7 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
 <div class="design-2016">
   <nav id="main-nav">
     <ul>
-      <li>
+      <li class="dropdown">
         <a href="#">Other Monaca Products</a>
         <ul>
           <li><a href="https://monaca.io/cloud.html">Monaca Cloud</a></li>
@@ -19,25 +19,6 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
           <li><a href="http://www.kidozen.com">KidoZen</a></li>
         </ul>
       </li>
-      <!--
-      <li>
-        <a href="#">Getting Started</a>
-        <ul></ul>
-      </li>
-      <li>
-        <a href="#">Develop</a>
-        <ul></ul>
-      </li>
-      <li>
-        <a href="#">Docs</a>
-        <ul></ul>
-      </li>
-      <li>
-        <a href="#">Forum</a>
-      </li>
-      <li>
-        <a href="#">Blog</a>
-      </li> -->
     </ul>
   </nav>
   <div id="start">
@@ -49,13 +30,13 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
           <img src="/images/design_2016/logo_react.png" alt="React">
         </h1>
         <nav>
-          Onsen UI with React Extensions
+          Onsen UI with <a class="dropdown">React Extensions</a>
         </nav>
         <p>Cross-platform UI framework for React<br> driven hybrid (Cordove/PhoneGap) apps.</p>
-        <ul id="actions">
-          <li class="twitter"><a href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a></li>
-          <li class="github"><a href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a></li>
-        </ul>
+        <nav class="actions">
+          <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
+          <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
+        </nav>
         <form class="newsletter-form">
           <input type="email" placeholder="Input email address to get newsletter!">
           <button id="register">Sign up</button>
@@ -65,86 +46,45 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
       </div>
       <div id="demo">
         <div class="phones">
-          <div class="phone ios selected"></div>
-          <div class="phone android"></div>
+          <div class="phone ios selected">
+            <iframe src="http://frankdiox.github.io/OnsenUI-Todo-App/?platform=ios" frameborder="0"></iframe>
+          </div>
+          <div class="phone android">
+            <iframe src="http://frankdiox.github.io/OnsenUI-Todo-App/?platform=android" frameborder="0"></iframe>
+          </div>
         </div>
         <div class="actions">
           <a class="change-view" href="#">Change View</a>
-          <a class="source-code" href="#">Source Code</a>
+          <a class="source-code" href="https://github.com/frankdiox/OnsenUI-Todo-App">Source Code</a>
         </div>
       </div>
     </div>
   </div>
   <div id="features">
-    <div id="components" class="feature">
+    <div class="feature">
       <h2>Beautifully made with Android and iOS components</h2>
       <p>More than <a href="#">100 components</a> are specially made for Material and Flat design, with <a href="#">automatic platform detection</a></p>
       <iframe id="showcase-carousel" src="http://onsenui.github.io/showcase-carousel"></iframe>
     </div>
-    <div id="react" class="feature">
+    <div class="feature">
       <h2>Tailored for React Developers</h2>
       <p>With our Onsen UI React bindings, Onsen UI React Components play nicely with Virtual DOM</p>
       <div class="platform-buttons">
         <div class="ios selected"></div>
         <div class="android"></div>
       </div>
-      <div class="code-explanation ios selected">
+      <div class="code-explanation-container">
+        <div class="code-explanation ios selected">
 
-        <img src="/images/design_2016/app_ios.png" alt="react-app-ios">
-        <div class="arrow-container">
-          <div class="arrow a1"></div>
-          <div class="arrow a2"></div>
-          <div class="arrow a3"></div>
-          <div class="arrow a4"></div>
-          <div class="bracket"></div>
-        </div>
-        <div class="react-code">
-        <code>
-          &lt;Ons.Navigator
-            initialRoute={this.initialRoute}
-            renderScene={this.renderScene}
-          /&gt;
-        </code>
-
-        <code>
-          &lt;Ons.Toolbar&gt;
-            &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
-            &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
-            &lt;div class=&quot;right&quot;&gt;...&lt;/div&gt;
-          &lt;/Ons.Toolbar&gt;
-        </code>
-
-        <code>
-          &lt;Ons.List
-            dataSource={this.todos}
-            renderRow={(todo) =&gt;
-              &lt;Todo data={todo} /&gt;
-            }
-          /&gt;
-        </code>
-
-        <code>
-          &lt;Ons.Tabbar
-            initialIndex={0}
-            renderTabs={this.renderTabs}
-          /&gt;
-        </code>
-        </div>
-      </div>
-
-
-      <div class="code-explanation android">
-
-        <img src="/images/design_2016/app_android.png" alt="react-app-android">
-        <div class="arrow-container">
-          <div class="arrow a1"></div>
-          <div class="arrow a2"></div>
-          <div class="arrow a3"></div>
-          <div class="arrow a4"></div>
-          <div class="arrow a5"></div>
-          <div class="bracket"></div>
-        </div>
-        <div class="react-code">
+          <img src="/images/design_2016/app_ios.png" alt="react-app-ios">
+          <div class="arrow-container">
+            <div class="arrow a1"></div>
+            <div class="arrow a2"></div>
+            <div class="arrow a3"></div>
+            <div class="arrow a4"></div>
+            <div class="bracket"></div>
+          </div>
+          <div class="react-code">
           <code>
             &lt;Ons.Navigator
               initialRoute={this.initialRoute}
@@ -156,14 +96,8 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
             &lt;Ons.Toolbar&gt;
               &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
               &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
+              &lt;div class=&quot;right&quot;&gt;...&lt;/div&gt;
             &lt;/Ons.Toolbar&gt;
-          </code>
-
-          <code>
-            &lt;Ons.Tabbar
-              initialIndex={0}
-              renderTabs={this.renderTabs}
-            /&gt;
           </code>
 
           <code>
@@ -176,15 +110,67 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
           </code>
 
           <code>
-            &lt;Ons.Fab&gt;
-              &lt;Ons.Icon icon=&quot;md-edit&quot; /&gt;
-            &lt;/Ons.Fab&gt;
+            &lt;Ons.Tabbar
+              initialIndex={0}
+              renderTabs={this.renderTabs}
+            /&gt;
           </code>
+          </div>
+        </div>
+
+
+        <div class="code-explanation android">
+
+          <img src="/images/design_2016/app_android.png" alt="react-app-android">
+          <div class="arrow-container">
+            <div class="arrow a1"></div>
+            <div class="arrow a2"></div>
+            <div class="arrow a3"></div>
+            <div class="arrow a4"></div>
+            <div class="arrow a5"></div>
+            <div class="bracket"></div>
+          </div>
+          <div class="react-code">
+            <code>
+              &lt;Ons.Navigator
+                initialRoute={this.initialRoute}
+                renderScene={this.renderScene}
+              /&gt;
+            </code>
+
+            <code>
+              &lt;Ons.Toolbar&gt;
+                &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
+                &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
+              &lt;/Ons.Toolbar&gt;
+            </code>
+
+            <code>
+              &lt;Ons.Tabbar
+                initialIndex={0}
+                renderTabs={this.renderTabs}
+              /&gt;
+            </code>
+
+            <code>
+              &lt;Ons.List
+                dataSource={this.todos}
+                renderRow={(todo) =&gt;
+                  &lt;Todo data={todo} /&gt;
+                }
+              /&gt;
+            </code>
+
+            <code>
+              &lt;Ons.Fab&gt;
+                &lt;Ons.Icon icon=&quot;md-edit&quot; /&gt;
+              &lt;/Ons.Fab&gt;
+            </code>
+          </div>
         </div>
       </div>
-
     </div>
-    <div id="develop" class="feature">
+    <div class="feature">
       <h2>Develop and build flawlessly</h2>
       <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
       <ul class="icons">
