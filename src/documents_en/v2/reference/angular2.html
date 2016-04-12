@@ -4,16 +4,18 @@ title: 'JavaScript'
 needHelp: true
 reference: true
 docCategory: js
-layout: '2.html.eco'
+layout: 'default.html.eco'
 ---
 
 <div class="content">
-  <a href="/2/index.html">&lt; Back</a>
+  <a href="/v2/index.html">&lt; Back</a>
 
   <br>
   <h2 class="doc-page-header">JavaScript Reference</h2>
 
-  <br>
+  <div class="extension-switch">
+  Plain JS | <a href="angular1.html">Angular 1</a> | <a href="react.html">React</a> | Angular 2 (Coming Soon)
+  </div>
 
   <div class="js-index"><div class="js-index-inner">
 
@@ -25,7 +27,7 @@ layout: '2.html.eco'
         <% for doc in docs: %>
         <li class="js-index-list-item
           js-index-list-item-<%- if doc.doc.docType == 'object' then 'object' else 'element' %>">
-          <a href="/2/reference/<%= doc.name %>.html" class="js-index-link"><%= doc.name %></a>
+          <a href="/v2/reference/angular2/<%= doc.name %>.html" class="js-index-link"><%= doc.name %></a>
           <% if doc.doc.extensionOf: %><span class="js-index-extension-name"><%= doc.doc.extensionOf %></span><% end %>
         </li>
         <% end %>

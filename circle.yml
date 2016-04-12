@@ -12,15 +12,18 @@ checkout:
     - git submodule sync
     - git submodule update --init --recursive
     - git submodule foreach git fetch --tags
-    - cd OnsenUI; git fetch --tags; git checkout `git tag | grep -v "\-" | sort --version-sort | tail -n 1`; cd ..; # Check out latest stable version.
-    - cd 2/OnsenUI; git fetch --tags; git checkout master; git pull; # Check out master branch.
+    - cd v1/OnsenUI; git fetch --tags; git checkout `git tag | grep "^1." | sort --version-sort | tail -n 1`; cd ..; # Latest 1.x
+    - cd v2/OnsenUI; git fetch --tags; git checkout master; git pull;
+    - cd v2/react-onsenui; git fetch --tags; git checkout master; git pull;
 dependencies:
   override:
     - sudo apt-get update; sudo apt-get install g++
     - npm install
     - npm install -g gulp
-    - cd 2/OnsenUI/css-components; npm install; gulp build;
-    - cd 2/OnsenUI; npm install; gulp build; gulp build-docs;
+    - cd v1/OnsenUI/css-components; npm install; gulp build;
+    - cd v1/OnsenUI; npm install; gulp build; gulp build-docs;
+    - cd v2/OnsenUI/css-components; npm install; gulp build;
+    - cd v2/OnsenUI; npm install; gulp build; gulp build-docs;
 test:
   override:
     - echo "Add tests!"

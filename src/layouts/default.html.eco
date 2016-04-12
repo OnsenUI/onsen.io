@@ -10,9 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <% if @page == 'css': %>
-  <link rel="stylesheet" href="<%= @rootUrl %>reference/onsen-css-components.css">
-  <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="<%= @rootUrl %>OnsenUI/build/css/font_awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/font_awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+  <link rel="stylesheet" href="<%= @rootUrl %>v2/reference/onsen-css-components.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300italic,300,100italic,400italic,500,700,500italic,700italic,900,900italic" rel="stylesheet" type="text/css">
   <% end %>
 
   <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
@@ -54,71 +57,67 @@
   </script>
 </head>
 
-<body id="<%- @page %>">
+<body id="<%- @page %>" class="design-2016">
 
+  <%- @partial('main-nav.html.eco') %>
+  <%- @partial('top-bar.html.eco') %>
+  <%- @partial('actions-bar.html.eco') %>
 
-  <%- @partial('header.html.eco') %>
+  <% if @toc: %>
 
-  <section class="content-container clearfix">
+  <aside class="content-info content-info-page">
+    <div class="toc-title toc-title-no-toggle">Table Of Contents</div>
+    <%- @partial('toc.html.eco', {tocItems: @toc}) %>
+  </aside>
 
-    <% if @toc: %>
+  <% else if @reference: %>
+  <aside class="content-info">
 
-    <aside class="content-info content-info-page">
-      <div class="toc-title toc-title-no-toggle">Table Of Contents</div>
-      <%- @partial('toc.html.eco', {tocItems: @toc}) %>
-    </aside>
+    <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
 
-    <% else if @reference: %>
-    <aside class="content-info">
+    <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>
 
-      <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
+    <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
+      <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
+    </ul>
 
-      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>
+    <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a href="/reference/javascript.html">JavaScript</a></div>
 
-      <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
-        <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
-      </ul>
-
-      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a href="/reference/javascript.html">JavaScript</a></div>
-
-      <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
-        <% for category, docs of @componentCategoryDict: %>
-        <li class="toc-item toc-1-item">
-          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
-          <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
-          <% for doc in docs: %>
-            <li class="toc-item toc-2-item">
-              <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
-            </li>
-          <% end %>
-          </ul>
-        </li>
+    <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
+      <% for category, docs of @componentCategoryDict: %>
+      <li class="toc-item toc-1-item">
+        <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
+        <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
+        <% for doc in docs: %>
+          <li class="toc-item toc-2-item">
+            <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
+          </li>
         <% end %>
-      </ul>
-
-      <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html">Page Patterns</a></div>
-
-      <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
-        <% for pattern in @patterns: %>
-        <li class="toc-item toc-1-item">
-          <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link<% if @patternName == pattern: %> current<% end %>">
-            <%= @renderPatternName(pattern) %>
-          </a>
-        </li>
-        <% end %>
-      </ul>
-
-    </aside>
-    <% end %>
-
-    <div class="content">
-      <%- @contents %>
-
-      <% if @needHelp: %>
-        <%- @partial('need_help.html.eco') %>
+        </ul>
+      </li>
       <% end %>
-    </div>
-  </section>
+    </ul>
+
+    <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html">Page Patterns</a></div>
+
+    <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
+      <% for pattern in @patterns: %>
+      <li class="toc-item toc-1-item">
+        <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link<% if @patternName == pattern: %> current<% end %>">
+          <%= @renderPatternName(pattern) %>
+        </a>
+      </li>
+      <% end %>
+    </ul>
+
+  </aside>
+  <% end %>
+
+  <%- @contents %>
+
+  <% if @needHelp: %>
+    <%- @partial('need_help.html.eco') %>
+  <% end %>
 
   <%- @partial('footer.html.eco') %>
 

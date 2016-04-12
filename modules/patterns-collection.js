@@ -7,8 +7,7 @@ var nodePath = require('path');
 var clone = require('clone');
 var helpers = require('./helpers');
 
-module.exports = function(lang) {
-  var baseDir = __dirname + '/../src/files/patterns/';
+module.exports = function(lang, baseDir) {
   var patternTemplatePath = nodePath.resolve(__dirname + '/../src/misc/pattern-template.html');
 
   return function(files, metalsmith, done) {
@@ -19,7 +18,7 @@ module.exports = function(lang) {
       }
 
       globby([
-        baseDir + '*.html',
+        baseDir + '/*.html',
       ], function(error, paths) {
 
         metalsmith.metadata().patterns = paths.map(function(path) {
@@ -27,11 +26,11 @@ module.exports = function(lang) {
         });
 
         metalsmith.metadata().patterns.forEach(function(name) {
-          var doc = files['pattern-' + name] = clone(template);
+          var doc = files['patterns/pattern-' + name] = clone(template);
           doc.patternName = name;
           doc.title = 'Pattern: ' + helpers.renderPatternName(name);
-          doc.html = fs.readFileSync(__dirname + '/../src/files/patterns/' + name);
-          doc.css = fs.readFileSync(__dirname + '/../src/files/patterns/' + nodePath.basename(name, '.html') + '.css');
+          doc.html = fs.readFileSync(baseDir + '/' + name);
+          doc.css = fs.readFileSync(baseDir + '/' + nodePath.basename(name, '.html') + '.css');
         });
 
         done();

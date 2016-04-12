@@ -34,9 +34,10 @@ module.exports = function(lang, isStaging) {
         .metadata(require('../config.js')(lang, isStaging))
         .use(draft())
         .use(require('./helpers')())
-        .use(require('./import-api-docs')(lang))
-        .use(require('./2-api-docs')(lang))
-        .use(require('./patterns-collection')(lang))
+        .use(require('./v1-api-docs')(lang))
+        .use(require('./v2-wc-api-docs')(lang, 'js'))
+        .use(require('./v2-wc-api-docs')(lang, 'angular1'))
+        .use(require('./patterns-collection')(lang, __dirname + '/../v2/OnsenUI/css-components/www/patterns'))
         .use(collections({
           components: {
             sortBy: 'name'
@@ -74,7 +75,7 @@ module.exports = function(lang, isStaging) {
         .use(function(files, metalsmith, done) {
           setImmediate(done);
 
-          var cssFile = files['reference' + nodePath.sep + 'css.html'];
+          var cssFile = files['v2' + nodePath.sep + 'reference' + nodePath.sep + 'css.html'];
           var cssToc = cssFile.toc;
           delete cssFile.toc;
 
@@ -89,6 +90,8 @@ module.exports = function(lang, isStaging) {
           }))
         )
         .use(assets({source: './src/files'}))
+        .use(assets({source: './v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
+        .use(assets({source: './v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
         .use(require('./css-transform')(lang))
         .use(redirect({
           '/components.html' : '/reference/javascript.html',

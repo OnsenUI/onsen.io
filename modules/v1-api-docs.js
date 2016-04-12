@@ -6,7 +6,7 @@ var fs = require('fs');
 var nodePath = require('path');
 
 module.exports = function(lang) {
-  var baseDir = __dirname + '/../OnsenUI/build/docs/' + lang + '/';
+  var baseDir = __dirname + '/../v1/OnsenUI/build/docs/' + lang + '/';
 
   return function(files, metalsmith, done) {
 
@@ -32,11 +32,11 @@ module.exports = function(lang) {
           }
 
           if (minimatch(path, '**/directive/*.html')) {
-            path = 'reference/' + nodePath.basename(path);
+            path = 'v1/reference/' + nodePath.basename(path);
           } else if (minimatch(path, '**/object/*.html')) {
-            path = 'reference/' + nodePath.basename(path);
+            path = 'v1/reference/' + nodePath.basename(path);
           } else if (minimatch(path, '**/overview/*.html')) {
-            path = 'reference/' + nodePath.basename(path);
+            path = 'v1/reference/' + nodePath.basename(path);
           } else {
             console.log(path);
           }
