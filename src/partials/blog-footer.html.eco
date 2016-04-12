@@ -1,16 +1,20 @@
 <footer class="footer-container">
   <div class="footer-cont">
-    <div class="footer-newsletter newsletter-signup">
-      <div class="footer-newsletter-inner">
-        <form>
-          <input class="footer-newsletter-input" type="text" placeholder="Enter email for Onsen UI updates" name="email">
-          <input type="submit" class="footer-newsletter-submit" value="Sign up">
-        </form>
-        <div class="footer-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
+    <% if @lang == 'en': %>
+      <div class="footer-newsletter newsletter-signup">
+        <div class="footer-newsletter-inner">
+          <form>
+            <input class="footer-newsletter-input" type="text" placeholder="Enter email for Onsen UI updates" name="email">
+            <input type="submit" class="footer-newsletter-submit" value="Sign up">
+          </form>
+          <div class="footer-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
+        </div>
       </div>
-    </div>
 
-    <p class="copyright">Copyright &copy; 2013-2015 Asial Corporation. All rights reserved. <a href="http://monaca.mobi/en/page/policy">Privacy Policy</a></p>
+      <p class="copyright">Copyright &copy; 2013-2016 Asial Corporation. All rights reserved. <a href="http://monaca.mobi/en/page/policy">Privacy Policy</a></p>
+      <% else: %>
+      <p class="copyright">Copyright &copy; 2013-2016 Asial Corporation. All rights reserved. <a href="http://monaca.mobi/en/page/policy">Privacy Policy</a></p>
+      <% end %>
   </div>
 </footer>
 

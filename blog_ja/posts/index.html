@@ -1,0 +1,31 @@
+---
+title: Hybrid App Development, Framework & UI/UX Blog
+page: blog
+paginate: articles
+---
+
+<% for article, index in @articles.slice(@pagination.start, @pagination.end + 1): %>
+  <%- @partial('blog-post.html.eco', {article: article}) %>
+<% end %>
+
+<%- @partial('blog-newsletter.html.eco') %>
+
+<% if @pagination: %>
+<nav class="blog-pagination">
+
+  <% if @pagination.prev: %>
+  <a class="button blog-pagination-newer" href="/blog/<%= @pagination.prev.path %>">&lt; 前へ</a>
+  <% end %>
+
+  <% if @pagination.num < @pagination.total and @pagination.next: %>
+  <a class="button blog-pagination-older" href="/blog/<%= @pagination.next.path %>">次へ &gt;</a>
+  <% end %>
+
+  <span class="blog-pagination-position"><span class="blog-pagination-position-number"><%= @pagination.num %></span> | <span class="blog-pagination-position-number"><%= @pagination.total %></span></span>
+</nav>
+<% end %>
+
+<div class="blog-feed">
+  <a href="/blog/rss.xml"><i class="fa fa-rss" style="font-size: 16px"></i></a>
+  <a href="/blog/rss.xml">ブログのRSSフィード</a>
+</div>

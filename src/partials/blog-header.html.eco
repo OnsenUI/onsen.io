@@ -1,10 +1,11 @@
 <div class="blog-header">
   <div class="blog-header-inner">
+    <% if @lang == 'en': %>
     <div class="blog-header-top">
       <a href="/blog" class="blog-header-logo"><img src="/images/header/logo_monaca_onsen.png" alt="Monaca X Onsen Blog" class="blog-header-logo-image"></a>
       <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg" alt="Menu hamburger icon" title="Menu"></a></div>
     </div>
-
+  
     <ul class="blog-header-links">
       <li class="blog-header-links-item"><a href="http://monaca.io">Monaca</a></li>
       <li class="blog-header-links-item"><a href="http://onsen.io/">Onsen UI</a></li>
@@ -25,10 +26,34 @@
         <% end %>
       </ul>
     </div>
+  <% else: %>
+  <div class="blog-header-top">
+      <a href="/blog" class="blog-header-logo"><img src="/images/header/logo_monaca_onsen_ja.png" alt="Monaca X Onsen ブログ" class="blog-header-logo-image"></a>
+      <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg" alt="Menu hamburger icon" title="Menu"></a></div>
+    </div>
+    <ul class="blog-header-links">
+      <li class="blog-header-links-item"><a href="http://ja.monaca.io">Monaca</a></li>
+      <li class="blog-header-links-item"><a href="http://ja.onsen.io/">Onsen UI</a></li>
+    </ul>
 
+    <div class="blog-header-navi">
+      <ul class="blog-header-navi-links">
+        <li class="blog-header-navi-links-item"><a href="http://monaca.io"><img src="/images/header/icon_monaca.png" alt="Monaca logo"></img>Monaca</a></li>
+        <li class="blog-header-navi-links-item"><a href="http://onsen.io/"><img src="/images/header/icon_onsenui.png" alt="Onsen UI logo">Onsen UI</a></li>
+      </ul>
+
+      <ul class="blog-header-navi-category">
+        <li class="blog-header-navi-category-item"><a href="/blog/">All</a></li>
+        <% for category of @env.categories: %>
+          <li class="blog-header-navi-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>  
   </div>
 </div>
 <div class="blog-header">
+  <% if @lang == 'en': %>
   <div class="blog-header-inner">
     <ul class="blog-header-category">
       <li class="blog-header-category-item"><a href="/blog/">All</a></li>
@@ -46,6 +71,15 @@
         <div class="blog-header-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
       </div>
     </div>
+  </div>
+  <% else: %>
+  <div class="blog-header-inner">
+    <ul class="blog-header-category">
+      <li class="blog-header-category-item"><a href="/blog/">All</a></li>
+      <% for category of @env.categories: %>
+        <li class="blog-header-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
+      <% end %>
+    </ul>
   </div>
 </div>
 

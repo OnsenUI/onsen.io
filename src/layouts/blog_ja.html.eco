@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title><%= @getPreparedTitle() %></title>
+  <meta name="description" content="<%= @getPreparedDescription() %>" />
+  <meta name="date" content="<%= @renderBlogDateShort @date %> 12:00" scheme="YYYY-MM-DD" />
+      
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
+
+  <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/rss.xml"/>
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="<%= @title %>" />
+  <meta property="og:site_name" content="Onsen UI" />
+  <meta property="og:url" content="<%= @site.url %>/blog/<%= @path %>" />
+  <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
+  <meta property="og:description" content="<%= @renderArticleIntroAsText(@contents, 200) %>" />
+
+  <script defer src="/vendor/jquery.js"></script>
+
+  <script src="//use.typekit.net/bys8jdj.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script>
+    window.SITE_ENV = {
+      lang: <% if @lang == 'ja': %>'ja'<% else: %>'en'<% end %>,
+      hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
+    };
+  </script>
+  <script>
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <script type="text/javascript">
+    (function() {
+      var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+      po.src = 'https://apis.google.com/js/platform.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+    })();
+  </script>
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:<% if @lang == 'ja': %>100912<% else: %>100914<% end %>,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+</head>
+
+<body id="blog">
+  <%- @partial('blog-header.html.eco') %>
+  <section class="content-container clearfix">
+
+    <div class="content">
+
+      <% if @isArticle: %>
+      <article class="article <% if @product == 'monaca': %>article-monaca<% end %>">
+        <header class="article-title">
+          <div class="article-title-image"></div>
+          <h1>
+             <%- @title %>
+          </h1>
+
+          <div class="article-avator">
+            <img src="//www.gravatar.com/avatar/<%- @author.gravator %>?s=30" alt="" class="article-avator-image">
+          </div>
+
+          <div class="article-date">
+            BY <%- @author.name %> / <time datetime="<%= @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time>
+          </div>
+
+          <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
+        </header>
+
+
+        <div class="article-content">
+          <%- @contents %>
+        </div>
+
+        <footer>
+          <% if @tags and @tags.length: %>
+          <div class="article-tags">
+            <% for tag in @tags: %>
+            <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+            <% end %>
+          </div>
+          <% end %>
+        </footer>
+      </article>
+
+      <div class="blog-feed">
+        <a href="/blog/rss.xml"><i class="fa fa-rss" style="font-size: 16px"></i></a>
+        <a href="/blog/rss.xml">ブログのRSSフィード</a>
+      </div>
+
+      <% else if @tag: %>
+        <h2 class="tag">Posts for <span class="tag-name"><%- @tag %></span></h2>
+        <% for article in @pagination.files: %>
+          <%- @partial('blog-post.html.eco', {article: article}) %>
+        <% end %>
+      <% else if @category: %>
+        <h2 class="category"><%- @categories[@category].name or @category %></span></h2>
+        <% for article in @posts: %>
+          <%- @partial('blog-post.html.eco', {article: article}) %>
+        <% end %>
+      <% else: %>
+      <%- @contents %>
+      <% end %>
+
+      <div class="tag-cloud">
+        <h2>Related tags</h2>
+
+        <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
+        <a
+          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
+          <span class="tag-cloud-name">
+            <%- tag.ctg %>
+          </span>
+          <span class="tag-cloud-weight">
+            <%- tag.wght %>
+          </span>
+        </a>
+        <% end %>
+      </div>
+      </div>
+  </section>
+
+  <%- @partial('blog-footer.html.eco') %>
+
+  <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
+  <script defer src="/scripts/default.js"></script>
+  <script src="/vendor/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+</body>
+</html>

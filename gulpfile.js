@@ -141,7 +141,20 @@ gulp.task('serve', ['generate'], function() {
         browserSync.reload();
       });
     });
-  }
+  } else if (lang === 'ja') {
+    gulp.watch([
+      'blog_ja/*',
+      'blog_ja/posts/*',
+      'blog_ja/authors/*',
+      'blog_ja/content/**/*',
+      'src/partials/*',
+      'src/layouts/blog_ja.html.eco'
+    ], options, function() {
+      runSequence('blog', function() {
+        browserSync.reload();
+      });
+    });
+  } 
 });
 
 //////////////////////////////
