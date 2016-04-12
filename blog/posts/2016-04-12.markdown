@@ -1,0 +1,292 @@
+---
+author: patrick
+date: 2016-04-12
+id: building-a-calculator-app-with-redux-and-onsenui
+title: "Building a Calculator App with Redux and Onsen UI"
+tags: onsen ui, redux, autostyle
+category: tutorial
+---
+
+![Redux and Onsen UI](/blog/content/images/2016/Apr/onsen_redux.png)
+
+There are many frameworks and concepts around in the JavaScript world. In today's blog post we are going to write a pure mobile JavaScript application with [Onsen UI](https://github.com/OnsenUI/OnsenUI.git) and [Redux](https://github.com/reactjs/redux), which is a very small but powerful library that enables to write JavaScript applications in a conceptually different way.
+
+Redux is inspired by [Flux](https://facebook.github.io/flux/), which was developed by Facebook. Unlike Flux, Redux is quite flexible and does not require any specific infrastructure like GraphQL.  We will use Redux in combination with Onsen UI to build a simple Calculator mobile app. One of the nicest things about this app is that it will look native, both on Android and iOS, due to Onsen's autostyle feature.
+
+<div style="display: flex; justify-content: center;">
+<iframe src="http://philolo1.github.io/frame-auto-style/?platform=ios&src=http://philolo1.github.io/OnsenUI-redux-calculator" scrolling="no" style="border: 0; width: 400px; height: 800px;"></iframe>
+</div>
+
+<!-- more -->
+
+All the source code is freely available at [https://github.com/philolo1/OnsenUI-redux-calculator/](https://github.com/philolo1/OnsenUI-redux-calculator/).
+
+### Understanding Redux
+
+Let's first see what Redux is and how it works. Redux consists of three main components:
+
+* Store: This structure stores the complete state of our application. Given only the content of the store, the application should be able to save and recover the current state of the application.
+* Actions: Actions are how the application interacts with the store. The application sends an action with some attached data. These actions are than handles by a so called **reducer**.
+* Reducer: The Reducer is a function that takes the current state and an action and transforms it to a new state.
+
+In addition to these three components, there are [three principles](https://github.com/reactjs/redux/blob/master/docs/introduction/ThreePrinciples.md) of how a redux application should be written.
+
+1. Single Source of Truth: As mentioned previously the store is the only place where data is stored. This enables the application to do nice things like undoing an action and also helps to more easily debug.
+2. The state is read-only: The state of the application can only be changed via actions. This is very useful for debugging, since the changing state flow is much more clear.
+3. The reducer consists only of pure functions: Pure functions are functions that do not change the parameter object they are given.
+
+The first two points should be very clear. For the second one lets have a look at what a pure function is. Let's say we want to create a function `handleLoaded`, that should add the property `isLoaded: true` to the state:
+
+```
+function handleLoadedSimple(state, action) {
+  // this is not pure, since it manipulates the original project
+  state.isLoaded = true;
+  return state;
+}
+
+function handleLoadedPure(state, action) {
+  return {...state, isLoaded: true};
+}
+```
+
+As you can see, we need to be careful to write pure functions and don't manipulate the parameters. If the function wasn't pure, it would be hard to recover the previous state and would make debugging much harder because of side effects.
+
+### Calculator: HTML + CSS
+
+Now that we have understood the basics, let's create our Calculator app. The calculator consists of 6 rows: The first one will be a simple `div` that contains the display, the remaining rows will consist of buttons of the calculator. For simplicity, we will only support integer manipulation. Combined with the power of `ons-button` and `ons-page` we get:
+
+```
+<ons-page>
+  <ons-row style="height: 20%">
+    <div id="screen" class="screen" > </div>
+  </ons-row>
+  <ons-row style="height:80%">
+    <ons-row style=" height: 20%">
+      <ons-button  onclick="clean()" class="actionButton" > C </ons-button>
+      <ons-button  onclick="changeSign()" class="actionButton"> ± </ons-button>
+      <ons-button  onclick="mod()" class="actionButton"> % </ons-button>
+      <ons-button  onclick="divide()" class="actionButton"> ÷ </ons-button>
+    </ons-row>
+    <ons-row style=" height: 20%">
+      <ons-button onclick="type(7)"> 7 </ons-button>
+      <ons-button onclick="type(8)"> 8 </ons-button>
+      <ons-button onclick="type(9)"> 9 </ons-button>
+      <ons-button onclick="multiply()" class="actionButton"> × </ons-button>
+    </ons-row>
+    <ons-row style=" height: 20%">
+      <ons-button onclick="type(4)"> 4 </ons-button>
+      <ons-button onclick="type(5)"> 5 </ons-button>
+      <ons-button onclick="type(6)"> 6 </ons-button>
+      <ons-button onclick="minus()" class="actionButton"> - </ons-button>
+    </ons-row>
+    <ons-row style=" height: 20%">
+      <ons-button onclick="type(1)"> 1 </ons-button>
+      <ons-button onclick="type(2)"> 2 </ons-button>
+      <ons-button onclick="type(3)"> 3 </ons-button>
+      <ons-button onclick="plus()" class="actionButton"> + </ons-button>
+    </ons-row>
+    <ons-row style=" height: 20%">
+      <ons-button onclick="type(0)" 
+                  style="flex: 1 1 calc(75% - 4px);"> 0 </ons-button>
+      <ons-button onclick="equal()" class="actionButton"> = </ons-button>
+    </ons-row>
+  </ons-row>
+</ons-page>
+```
+
+There is now real magic going on here. Every row is split equally across the screen and every column has equal height using flexbox and percentages. The colors of the buttons are done by different opacity. CSS contains only a few lines of code:
+
+```
+.button {
+  display: flex;
+  flex: 1 1 calc(25% - 4px);
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin: 2px;
+  opacity: 0.7;
+}
+
+ons-row {
+  background: rgba(180, 206, 232, 0.3);
+}
+
+.actionButton {
+  opacity: 1;
+}
+
+.screen {
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+```
+
+### Calculator: JavaScript Code
+
+To write the JavaScript code we need to first think about the state and actions of our application. For the actions we use:
+* `TYPE` : This action indicated that a number is typed on the calculator.
+* `CHANGE_SIGN` : This action indicates a change of the sign ('+'/'-') of the display.
+* `CLEAN` : This action will reset the calculator.
+* `EQUAL` : This action will be triggered when the `=` is pressed.
+* `OPERATION` : This action will be called whenever we press an action button that will do a mathematic operation with two operands.
+
+We can now already write some part of our JavaScript code:
+
+```
+// all Actions
+var changeSign = () => store.dispatch({type: 'CHANGE_SIGN'})
+var clean = () => store.dispatch({type:'CLEAN'})
+var divide = () => store.dispatch({type: 'OPERATION', func: (a, b) => Math.floor(a / b) });
+var equal = () => store.dispatch({type: 'EQUAL', func: (a, b) => b});
+var minus = () => store.dispatch({type: 'OPERATION', func: (a, b) => a - b});
+var mod = () => store.dispatch({type: 'OPERATION', func: (a, b) => a % b });
+var multiply = () => store.dispatch({type: 'OPERATION', func: (a, b) => a * b});
+var plus = () => store.dispatch({type: 'OPERATION', func: (a, b) => a + b});
+var type = (number) => store.dispatch({type: 'TYPE', number});
+
+// call store with our reducer
+var store = Redux.createStore(calculator)
+
+function render() {
+  var el = document.getElementById('screen');
+  el.innerHTML = store.getState().number;
+}
+
+store.subscribe(render)
+ons.ready(render);
+
+```
+
+The Redux Framework manages the store. We will need to give it our reducer with `Redux.createStore(ourReducer)`, which we will define later. Since we want to rerender every time the state changes, we need to listen to the store. Fortunately, Redux provides us with a function `store.subscribe` to which we pass our render function.
+
+The complicated part is writing the reducer. Our reducer will have four states:
+
+* `number`: This represents the number that will be displayed on the screen.
+* `operation`: This will store the last operation function, that has been calculated like plus, minus etc.
+* `storedFunc`: This function will be used to store results and operations that are not directly displayed. For example, if we type `1 +`, the value of the storedFunc will be `(x) => 1 + x`. This makes evaluation quite easy since we have to only call `storedFunc(num)`.
+* `originalFunc`: This function is necessary to support repeating the last operation for the '=' sign.
+* `lastAction`: This piece of data should contain the last action that has been done.
+
+Now that we have the state and actions, we only need to write the reducer. We will split our reducer into two, one for adding the lastAction and the other one doing the main state transformation.
+
+```
+function lastAction(state, action) {
+  return {...state, lastAction: action.type};
+}
+
+function calculator(state, action) {
+  console.log('state before action');
+  console.log(state);
+  var ret = lastAction(help(state, action), action);
+  console.log('state after action:');
+  console.log(ret);
+  return ret;
+}
+```
+
+Next, we will write our general reducer that handles all the actions. We will split the reducer up into multiple functions:
+
+```
+function help(state, action) {
+  const initialState = {
+    number: 0,
+    storedFunc: (x) => x,
+  };
+
+  if (typeof state === 'undefined') {
+    return initialState;
+  }
+
+  switch (action.type) {
+    case "TYPE":
+      var number = state.number;
+      if (state.lastAction !== 'TYPE') {
+        number = 0;
+      }
+      return {...state, number: 10 * number + action.number};
+    case 'CLEAN':
+      return initialState;
+    case 'CHANGE_SIGN':
+      if (state.lastAction === 'OPERATION' ) {
+        return {...state, number: 0}
+      } else if (state.lastAction === 'EQUAL') {
+        return {...state, number: -state.number, storedFunc: (x) => x}
+      }
+
+      return {...state, number: -state.number}
+    case "OPERATION":
+      return handleOperation(state, action);
+    case "EQUAL":
+      return handleEqual(state, action);
+
+          default:
+      return state
+  }
+}
+```
+
+It should be noted here that at the beginning of our application, the state will be undefined, that is why we need to define our initial state with `number: 0` to display 0 at the beginning. Now we need to define the `handleEqual` and `handleOperation` function. As stated previously we take advantage of our `storedFunc` and `operation` states.
+
+
+```
+function handleEqual(state, action) {
+  if (state.lastAction !== 'EQUAL') {
+    var myFun =  (a) => {
+      return state.operation(a, state.number);
+    }
+
+    return {
+      ...state,
+      storedFunc: myFun,
+      number: state.storedFunc(state.number)
+    };
+  } else {
+    return {
+      ...state,
+      number: state.storedFunc(state.number)
+    };
+
+  }
+}
+
+function handleOperation(state, action) {
+  if ( state.lastAction == 'EQUAL') {
+    var myFun =  (a) => action.func(state.originalFunc(state.number), a);
+    return {
+      ...state,
+      operation: action.func,
+      storedFunc: myFun,
+      number: state.number
+    };
+  }  else if (state.lastAction == 'OPERATION') {
+    var myFun =  (a) => action.func(state.number, a);
+    return {
+      ...state,
+      operation: action.func,
+      storedFunc: myFun,
+      number: state.number
+    };
+
+  }
+  var myFun =  (a) => action.func(state.storedFunc(state.number), a);
+  return {
+    ...state,
+    operation: action.func,
+    originalFunc: state.storedFunc,
+    storedFunc: myFun,
+    number: state.storedFunc(state.number)
+  };
+}
+```
+
+And now we are done and have our app perfectly working! It might take a while to get used to this code thinking, but we could give you a small glance at the word of redux and functional programming.
+
+## Resources
+
+The source code is available [here](https://github.com/philolo1/OnsenUI-redux-calculator/).
+We only covered a small app that shows how to develop in Redux. There are tons of resources on the internet. I truly can recommend the video tutorial:
+https://egghead.io/lessons/javascript-redux-the-single-immutable-state-tree
+and having a look at https://github.com/reactjs/redux. If any questions arise, feel free to ask it on our [Community Forum](https://community.onsen.io/).
