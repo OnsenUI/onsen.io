@@ -2,22 +2,31 @@
   #start {
     background: linear-gradient(#E54738, #D64135, #C13932, #9A292C);
   }
+
   #intro {
     order: 2;
     flex-grow: 1;
     padding-left: 80px;
   }
+
   #demo {
     order: 1;
     flex-grow: 0;
   }
+
   .apps {
     margin: 50px 0;
+
+    img {
+      box-shadow: 0 0 5px #999;
+    }
   }
-  .apps img {
-    box-shadow: 0 0 5px #999;
-  }
+
   #main-nav > ul > li {
     left: 485px;
+
+    &:not(:first-child) {
+      display: none;
+    }
   }
 }

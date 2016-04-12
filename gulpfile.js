@@ -67,7 +67,7 @@ gulp.task('imagemin', ['imagemin-core', 'imagemin-blog']);
 // less
 //////////////////////////////
 gulp.task('less', function() {
-  return gulp.src('src/less/style.less')
+  return gulp.src(['src/less/main.less', 'src/less/blog.less'])
     .pipe($.plumber())
     .pipe($.less())
     .pipe($.autoprefixer({

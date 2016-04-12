@@ -19,7 +19,7 @@ body {
 }
 
 .lang-ja {
-  font-family: 
+  font-family:
     'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic ProN W3',
     'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
 }
@@ -43,6 +43,10 @@ input:focus, input:active {
 
 input[type=submit] {
   cursor: pointer;
+}
+
+article + div {
+  margin-top: 16px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -192,12 +196,8 @@ img, iframe, object {
 }
 
 a {
-
-  &, &:link, &:hover, &:visited, &:active {
-    color: @link-color;
-    text-decoration: underline;
-    cursor: pointer;
-  }
+  color: @link-color;
+  text-decoration: underline;
 
   code {
     color: @link-color;
@@ -247,36 +247,3 @@ li {
 p, pre, ul, ol {
   margin: 16px 0;
 }
-
-code {
-  font-family: Menlo, Consolas, Courier, Monaco, monospace;
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  padding: 1px 2px;
-  font-weight: normal;
-  font-size: 85%;
-}
-
-pre {
-  border: 1px solid #ddd;
-  background-color: #f9f9f9;
-  padding-left: 4px;
-
-  > code, >.hljs {
-    font-style: normal;
-    background-color: transparent;
-    border: none;
-    font-size: 13px;
-    font-weight: 200;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    .lang-en & {
-      font-size: 13px;
-    }
-  }
-}
-
-.lt-ie9 img, .lt-ie9 object {
-  width: auto;
-}
-

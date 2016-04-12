@@ -2,96 +2,67 @@
 page: 'landing-new'
 title: 'Hybrid App Framework Onsen UI 2.0'
 layout: 'default.html.eco'
+header: false
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
 ---
 
-<div class="design-2016">
-  <nav id="main-nav">
-    <ul>
-      <li class="dropdown">
-        <a href="#">Other Monaca Products</a>
-        <ul>
-          <li><a href="https://monaca.io/cloud.html">Monaca Cloud</a></li>
-          <li><a href="https://monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
-          <li><a href="https://monaca.io/debugger.html">Monaca Debugger</a></li>
-          <li><a href="https://monaca.io/localkit.html">Monaca Localkit</a></li>
-          <li><a href="https://monaca.io/enterprise.html">Monaca Enterprise</a></li>
-        </ul>
-      </li>
+<div id="start">
+  <div class="wrapper">
+    <div id="intro">
+      <h1>
+        <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
+      </h1>
+      <p>HTML5 Hybrid Mobile App Framework<br>and UI components<br>for PhoneGap &amp; Cordova.</p>
+      <nav class="actions">
+        <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
+        <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
+      </nav>
+      <p class="small" id="release-info">Latest <u>2.0.0-beta8</u> released 3 days ago. See <u>all versions</u><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+    </div>
+    <%- @partial('demo.html.eco') %>
+  </div>
+</div>
+<div id="features">
+  <div class="feature">
+    <h2>Lets Get Started!</h2>
+    <p>Onsen UI is framework agnostic, meaning it pairs nicely with awesome front-end frameworks that you love or with the plain Javascript which you're used to.</p>
+    <ul class="row">
+      <li><a href="v2/getting-started.html"><img src="/images/landing/logo_plainjs.png">Plain JS</a></li>
+      <li><a href="v2/getting-started-angular1.html"><img src="/images/landing/logo_angular1.png">Angular</a></li>
+      <li><a href="v2/getting-started-react.html"><img src="/images/landing/logo_react.png">React</a></li>
+      <li><img src="/images/landing/logo_angular2.png">Angular 2<br>(Coming Soon)</li>
     </ul>
-  </nav>
-  <div id="start">
-    <div class="wrapper">
-      <div id="intro">
-        <h1>
-          <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
-        </h1>
-        <p>HTML5 Hybrid Mobile App Framework<br>and UI components<br>for PhoneGap &amp; Cordova.</p>
-        <nav class="actions">
-          <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
-          <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
-        </nav>
-        <p class="small" id="release-info">Latest <u>2.0.0-beta8</u> released 3 days ago. See <u>all versions</u><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
-      </div>
-      <div id="demo">
-        <div class="phones">
-          <div class="phone ios selected">
-            <iframe src="http://frankdiox.github.io/OnsenUI-Todo-App/?platform=ios" frameborder="0"></iframe>
-          </div>
-          <div class="phone android">
-            <iframe src="http://frankdiox.github.io/OnsenUI-Todo-App/?platform=android" frameborder="0"></iframe>
-          </div>
-        </div>
-        <div class="actions">
-          <a class="change-view" href="#">Change View</a>
-          <a class="source-code" href="https://github.com/frankdiox/OnsenUI-Todo-App" target="_blank">Source Code</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="features">
-    <div class="feature">
-      <h2>Lets Get Started!</h2>
-      <p>Onsen UI is framework agnostic, meaning it pairs nicely with awesome front-end frameworks that you love or with the plain Javascript which you're used to.</p>
-      <ul class="row">
-        <li><a href="v2/getting-started.html"><img src="/images/landing/logo_plainjs.png">Plain JS</a></li>
-        <li><a href="v2/getting-started-angular1.html"><img src="/images/landing/logo_angular1.png">Angular</a></li>
-        <li><a href="v2/getting-started-react.html"><img src="/images/landing/logo_react.png">React</a></li>
-        <li><img src="/images/landing/logo_angular2.png">Angular 2<br>(Coming Soon)</li>
-      </ul>
-    </div>
-
-    <div class="feature">
-      <h2>Beautifully made with Android and iOS components</h2>
-      <p>More than <a href="#">100 components</a> are specially made for Material and Flat design</p>
-      <iframe id="showcase-carousel" src="http://onsenui.github.io/showcase-carousel"></iframe>
-    </div>
-
-    <div class="feature">
-      <h2>Develop and build flawlessly</h2>
-      <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
-      <ul class="icons">
-        <li class="icon debug">Debug</li>
-        <li class="icon build">Remote build</li>
-        <li class="icon push">Push</li>
-        <li class="icon user">User</li>
-        <li class="icon onlineide">Online IDE</li>
-        <li class="icon inappupdater">In-App update</li>
-        <li class="icon lock">Encryption</li>
-      </ul>
-    </div>
-
-    <div class="feature">
-      <h2>Trusted by awesome developers like you</h2>
-      <ul class="row apps">
-        <li><img src="/images/landing/app-1.png" alt="app-img-1"></li>
-        <li><img src="/images/landing/app-2.png" alt="app-img-2"></li>
-        <li><img src="/images/landing/app-1.png" alt="app-img-1"></li>
-        <li><img src="/images/landing/app-2.png" alt="app-img-2"></li>
-      </ul>
-    </div>
   </div>
 
+  <div class="feature">
+    <h2>Beautifully made with Android and iOS components</h2>
+    <p>More than <a href="#">100 components</a> are specially made for Material and Flat design</p>
+    <iframe id="showcase-carousel" src="http://onsenui.github.io/showcase-carousel"></iframe>
+  </div>
+
+  <div class="feature">
+    <h2>Develop and build flawlessly</h2>
+    <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
+    <nav class="row icons">
+      <a href="#" class="icon debug">Debug</a>
+      <a href="#" class="icon build">Remote build</a>
+      <a href="#" class="icon push">Push</a>
+      <a href="#" class="icon user">User</a>
+      <a href="#" class="icon onlineide">Online IDE</a>
+      <a href="#" class="icon inappupdater">In-App update</a>
+      <a href="#" class="icon lock">Encryption</a>
+    </nav>
+  </div>
+
+  <div class="feature">
+    <h2>Trusted by awesome developers like you</h2>
+    <ul class="row apps">
+      <li><img src="/images/landing/app-1.png" alt="app-img-1"></li>
+      <li><img src="/images/landing/app-2.png" alt="app-img-2"></li>
+      <li><img src="/images/landing/app-1.png" alt="app-img-1"></li>
+      <li><img src="/images/landing/app-2.png" alt="app-img-2"></li>
+    </ul>
+  </div>
 </div>
 
 <script>

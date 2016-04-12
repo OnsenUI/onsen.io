@@ -2,25 +2,11 @@
 page: 'react-landing'
 title: 'Hybrid App Framework Onsen UI 2.0 With React'
 layout: 'default.html.eco'
+header: false
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS. Features bindings for React.js.'
 ---
 
 <div class="design-2016">
-  <nav id="main-nav">
-    <ul>
-      <li class="dropdown">
-        <a href="#">Other Monaca Products</a>
-        <ul>
-          <li><a href="https://monaca.io/cloud.html">Monaca Cloud</a></li>
-          <li><a href="https://monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
-          <li><a href="https://monaca.io/debugger.html">Monaca Debugger</a></li>
-          <li><a href="https://monaca.io/localkit.html">Monaca Localkit</a></li>
-          <li><a href="https://monaca.io/enterprise.html">Monaca Enterprise</a></li>
-          <li><a href="http://www.kidozen.com">KidoZen</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
   <div id="start">
     <div class="wrapper">
       <div id="intro">
@@ -44,20 +30,7 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
         <button id="getting-started">Getting Started with Onsen UI for React</button>
         <p class="small" id="release-info">Latest <u>2.0.0-beta8</u> released 3 days ago. See <u>all versions</u><br>Distributed free and open source (Apache 2.0) via <a href="//github.com">GitHub</a></p>
       </div>
-      <div id="demo">
-        <div class="phones">
-          <div class="phone ios selected">
-            <iframe src="http://frankdiox.github.io/OnsenUI-Todo-App/?platform=ios" frameborder="0"></iframe>
-          </div>
-          <div class="phone android">
-            <iframe src="http://frankdiox.github.io/OnsenUI-Todo-App/?platform=android" frameborder="0"></iframe>
-          </div>
-        </div>
-        <div class="actions">
-          <a class="change-view" href="#">Change View</a>
-          <a class="source-code" href="https://github.com/frankdiox/OnsenUI-Todo-App">Source Code</a>
-        </div>
-      </div>
+      <%- @partial('demo.html.eco') %>
     </div>
   </div>
   <div id="features">

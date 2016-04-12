@@ -1,3 +1,9 @@
+<div class="top-bar">
+  <div class="wrapper">
+    <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
+    <h1><%- @h1 || @title %></h1>
+  </div>
+</div>
 <div class="actions-bar">
   <div class="wrapper">
     <nav>
@@ -7,7 +13,7 @@
     </nav>
     <form class="newsletter-form">
       <input type="email" placeholder="Input email address to updates!">
-      <button id="register">Sign up</button>
+      <button>Sign up</button>
     </form>
   </div>
 </div>

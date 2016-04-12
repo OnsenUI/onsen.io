@@ -7,10 +7,10 @@
   <title><%= @getPreparedTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
   <meta name="date" content="<%= @renderBlogDateShort @date %> 12:00" scheme="YYYY-MM-DD" />
-      
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>css/blog.css">
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
 
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />

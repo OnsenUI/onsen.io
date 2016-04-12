@@ -1,3 +1,31 @@
+code {
+  font-family: Menlo, Consolas, Courier, Monaco, monospace;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  padding: 1px 2px;
+  font-weight: normal;
+  font-size: 85%;
+}
+
+pre {
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+  padding-left: 4px;
+
+  > code, >.hljs {
+    font-style: normal;
+    background-color: transparent;
+    border: none;
+    font-size: 13px;
+    font-weight: 200;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    .lang-en & {
+      font-size: 13px;
+    }
+  }
+}
+
 /*
 
 XCode style (c) Angel Garcia <angelgarcia.mail@gmail.com>
