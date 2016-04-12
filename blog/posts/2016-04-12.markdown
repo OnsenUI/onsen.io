@@ -13,12 +13,11 @@ There are many frameworks and concepts around in the JavaScript world. In today'
 
 Redux is inspired by [Flux](https://facebook.github.io/flux/), which was developed by Facebook. Unlike Flux, Redux is quite flexible and does not require any specific infrastructure like GraphQL.  We will use Redux in combination with Onsen UI to build a simple Calculator mobile app. One of the nicest things about this app is that it will look native, both on Android and iOS, due to Onsen's autostyle feature.
 
-<!-- more -->
-
 <div style="display: flex; justify-content: center;">
 <iframe src="http://philolo1.github.io/frame-auto-style/?platform=ios&src=http://philolo1.github.io/OnsenUI-redux-calculator" scrolling="no" style="border: 0; width: 400px; height: 800px;"></iframe>
 </div>
 
+<!-- more -->
 
 All the source code is freely available at [https://github.com/philolo1/OnsenUI-redux-calculator/](https://github.com/philolo1/OnsenUI-redux-calculator/).
 
@@ -27,16 +26,16 @@ All the source code is freely available at [https://github.com/philolo1/OnsenUI-
 Let's first see what Redux is and how it works. Redux consists of three main components:
 
 * Store: This structure stores the complete state of our application. Given only the content of the store, the application should be able to save and recover the current state of the application.
-* Actions: Actions are how the application interacts with the store. The application sends an action with some attached data. These actions are than handles by a so called reducer.
+* Actions: Actions are how the application interacts with the store. The application sends an action with some attached data. These actions are than handles by a so called **reducer**.
 * Reducer: The Reducer is a function that takes the current state and an action and transforms it to a new state.
 
 In addition to these three components, there are [three principles](https://github.com/reactjs/redux/blob/master/docs/introduction/ThreePrinciples.md) of how a redux application should be written.
 
 1. Single Source of Truth: As mentioned previously the store is the only place where data is stored. This enables the application to do nice things like undoing an action and also helps to more easily debug.
 2. The state is read-only: The state of the application can only be changed via actions. This is very useful for debugging, since the changing state flow is much more clear.
-3. The reducer consists only of pure functions: Pure functions are functions, that do not change the parameter object they are given.
+3. The reducer consists only of pure functions: Pure functions are functions that do not change the parameter object they are given.
 
-The first two points should be very clear. For the second one lets have a look at what a pure function is. Let's say we want to create a function `handleLoaded`, that should add the property `isLoaded : true` to the state:
+The first two points should be very clear. For the second one lets have a look at what a pure function is. Let's say we want to create a function `handleLoaded`, that should add the property `isLoaded: true` to the state:
 
 ```
 function handleLoadedSimple(state, action) {
@@ -50,9 +49,9 @@ function handleLoadedPure(state, action) {
 }
 ```
 
-As you can see, we need to be careful to write pure functions and don't manipulate the parameters. If the function would be not pure, it would be hard to recover to the previous state and would make debugging much harder because of side effects.
+As you can see, we need to be careful to write pure functions and don't manipulate the parameters. If the function wasn't pure, it would be hard to recover the previous state and would make debugging much harder because of side effects.
 
-### Calculator : HTML + CSS
+### Calculator: HTML + CSS
 
 Now that we have understood the basics, let's create our Calculator app. The calculator consists of 6 rows: The first one will be a simple `div` that contains the display, the remaining rows will consist of buttons of the calculator. For simplicity, we will only support integer manipulation. Combined with the power of `ons-button` and `ons-page` we get:
 
@@ -127,7 +126,7 @@ ons-row {
 
 ### Calculator: JavaScript Code
 
-To write the JavaScript code we need to first think about the state and actions of our application.  For the actions we use:
+To write the JavaScript code we need to first think about the state and actions of our application. For the actions we use:
 * `TYPE` : This action indicated that a number is typed on the calculator.
 * `CHANGE_SIGN` : This action indicates a change of the sign ('+'/'-') of the display.
 * `CLEAN` : This action will reset the calculator.
@@ -138,7 +137,7 @@ We can now already write some part of our JavaScript code:
 
 ```
 // all Actions
-var changeSign = () =>   store.dispatch({type: 'CHANGE_SIGN'})
+var changeSign = () => store.dispatch({type: 'CHANGE_SIGN'})
 var clean = () => store.dispatch({type:'CLEAN'})
 var divide = () => store.dispatch({type: 'OPERATION', func: (a, b) => Math.floor(a / b) });
 var equal = () => store.dispatch({type: 'EQUAL', func: (a, b) => b});
@@ -186,7 +185,6 @@ function calculator(state, action) {
   console.log(ret);
   return ret;
 }
-
 ```
 
 Next, we will write our general reducer that handles all the actions. We will split the reducer up into multiple functions:
@@ -230,7 +228,7 @@ function help(state, action) {
 }
 ```
 
-It should be noted here that at the beginning of our application, the state will be undefined, that is why we need to define our initial state with `number:0` to display 0 at the beginning. Now we need to define the `handleEqual` and `handleOperation` function.  As stated previously we take advantage of our `storedFunc` and `operation` states.
+It should be noted here that at the beginning of our application, the state will be undefined, that is why we need to define our initial state with `number: 0` to display 0 at the beginning. Now we need to define the `handleEqual` and `handleOperation` function. As stated previously we take advantage of our `storedFunc` and `operation` states.
 
 
 ```
