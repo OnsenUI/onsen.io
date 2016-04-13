@@ -4,7 +4,7 @@ date: 2016-04-08
 id: monaca-power-plugins-for-enterprise-users
 title: "Monaca Power Plugins For Cordova"
 product: monaca
-tags: monaca security, security plugins, security, monaca power, monaca plugins, monaca power plugins, enterprise users, monaca enterprise, enterprise
+tags: Monaca Power Plugins, Enterprise Plugins
 category: development
 ---
 
@@ -12,20 +12,19 @@ We are glad to announce our new feature plugins to boost your app development ex
 
 With Monaca Power Plugins, we deliver the ultimate protection which is providing our customers the ability to secure their work with the latest technologies in terms of security. Using this feature, Enterprise users have the opportunity to use the following security measures to protect their applications:
 
-![Monaca Power Plugins](/blog/content/images/2016/Apr/AdobeStockEnc.jpeg)
+<!--![Monaca Power Plugins](/blog/content/images/2016/Apr/AdobeStockEnc.jpeg) -->
 
 <!-- more -->
 
 ### Monaca HTML5 Resource Encryption
 
-This plugin provides the encryption function for HTML5 assets bundled up with the built app in Monaca and the decoding function for application execution time.
-In this plugin we are using AES encryption which is an algorithm for encrypting data. This algorithm is converting our HTML5 source code into a binary code and applies the encryption algorithm.
+This plugin provides a cryptographic method for securing the source code of your HTML5 applications. We are using AES encryption which is an algorithm for encrypting data. Your HTML5 source code will be converted into a binary code and the encryption algorithm will be applied. This plugin is not doing a simple obfuscation of your source code but it is applying a real encryption to your application. This security measure will prevent anyone from seeing your source code or stealing your work.
 
 [Read more](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/html5_resource_encryption/)
 
 ### Monaca Secure Storage
 
-This plugin provides an encrypted data storage function. If the application is uninstalled, saved data will also be deleted.
+Most people should have a certain expectation of privacy if they are using cloud technologies or transfering files over the internet. Other people shouldn't be able to see or access their files. Nobody wants his or her data to be compromised or stolen. It is always a good practice to keep your content secured. With this plugin there is no need anymore for users to pay for expensive services or applications to encrypt their data. This plugin provides the functionality to encrypt your data storage. If the application is uninstalled all the saved data will also be deleted.
 
 [Read more](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/secure_storage/)
 
@@ -36,16 +35,21 @@ This plugin updates HTML5 assets contained in the app without rebuilding and pac
 
 Please follow these steps to see how to use this plugin:
 
-1. Enable the plugin. [See Enable Plugin in Monaca.](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/in-app_updater/#enable-in-app-updater) 
-2. Choose the update mode and specify the deploy URL. [See Update Mode.](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/in-app_updater/#update-mode) 
-3. Create the update files for intended OS with proper version. [See Creating Update File and Update File Version.](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/in-app_updater/#create-update-file) 
-4. Create configuration file specifying the version number of the update files. [See Creating Configuration File.](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/in-app_up	dater/#config-file-in-app-updater) 
-5. Place the configuration and update files in the same directory level. [See Placing Update File.]()
-
+<p style="font-size: 14px">
+1. Enable the plugin. See [Enable Plugin in Monaca.](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#enable-in-app-updater)
+<br /> 
+2. Choose the update mode and specify the deploy URL. [See Update Mode.](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#update-mode) 
+<br />
+3. Create the update files for intended OS with proper version. [See Creating Update File](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#create-update-file) and [Update File Version.](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#update-file-version)
+<br />
+4. Create configuration file specifying the version number of the update files. [See Creating Configuration File.](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#config-file-in-app-updater)
+<br />
+5. Place the configuration and update files in the same directory level. [See Placing Update File.](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#files-placement)
+</p>
 
 ### Monaca In-App Purchases
 
-In-App Purchasing plugin is opening new marketing possibilities to the app developers. It greatly expands the marketing because it's giving an opportunity to the users to buy additional content from the applications we create. This functionality could be used in many different applications with different methodologies.
+In-App Purchasing plugin is opening new marketing possibilities to the app developers. It greatly expands the marketing because it's giving an opportunity to the users to buy additional content from the applications we create. This functionality could be used in many different applications with different methodologies. Using this plugin you can define features from your app that you want to monetize. In-app purchase plugin gives you additional opportunities to monetize both existing and new apps.
 
 
 ### How to benefit from our new features
