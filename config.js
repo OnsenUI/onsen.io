@@ -123,7 +123,7 @@ module.exports = function(language, isStaging) {
     framework: {
       displayName: 'Onsen UI',
       codeName: 'ons',
-      version: require('./v2/OnsenUI/package').version
+      version: require('./dist/v2/OnsenUI/package').version
     }
   };
 };

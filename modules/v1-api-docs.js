@@ -6,7 +6,7 @@ var fs = require('fs');
 var nodePath = require('path');
 
 module.exports = function(lang) {
-  var baseDir = __dirname + '/../v1/OnsenUI/build/docs/' + lang + '/';
+  var baseDir = __dirname + '/../dist/v1/OnsenUI/build/docs/' + lang + '/';
 
   return function(files, metalsmith, done) {
 

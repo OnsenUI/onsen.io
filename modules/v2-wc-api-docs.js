@@ -57,8 +57,8 @@ module.exports = function(lang, extension) {
 
   return function(files, metalsmith, done) {
     glob([
-      basePath + '/v2/OnsenUI/build/docs/element/*.json',
-      basePath + '/v2/OnsenUI/build/docs/object/*.json'
+      basePath + '/dist/v2/OnsenUI/build/docs/element/*.json',
+      basePath + '/dist/v2/OnsenUI/build/docs/object/*.json'
     ]).then(function(paths) {
       return Promise.all(paths.map(function(path) {
         return generateAPIDocument(metalsmith, path, extension).then(function(result) {

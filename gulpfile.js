@@ -109,8 +109,8 @@ gulp.task('serve', ['generate'], function() {
 
   gulp.watch([
     'src/documents_' + lang + '/**/*',
-    'v1/OnsenUI/build/docs/' + lang + '/partials/*/*.html',
-    'v2/OnsenUI/build/docs/' + lang + '/partials/*/*.html',
+    'dist/v1/OnsenUI/build/docs/' + lang + '/partials/*/*.html',
+    'dist/v2/OnsenUI/build/docs/' + lang + '/partials/*/*.html',
     'src/layouts/*',
     'src/misc/*',
     'src/partials/*',
