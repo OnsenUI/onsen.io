@@ -1,0 +1,50 @@
+---
+author: una
+date: 2016-04-13
+id: opal-app-is-getting-ready-to-assist-patients-at-the-montreal-cedars-cancer-centre
+title: "Opal app is getting ready to assist patients at the Montreal Cedars Cancer Centre"
+category: showcase
+tags: onsen ui, showcase
+---
+
+![Opal Monaca Onsen UI Ninja Contest Winner](/blog/content/images/2016/Apr/opal_team.jpg)
+
+Proudly presenting another Ninja App Contest winner, the patient waiting time monitoring app, Opal.
+
+### Winning app - on so many levels
+
+As David Herrera finished his undergraduate degree in Computer Science and Physics at McGill University (ready to start his Computer Science Master's Degree at McGill this year), he used his 2-year web technology and app and web development experience to create something magnificent:
+
+Working with the [Health Informatics Group (HIG)](http://sable.github.io/hig/) at McGill University and the Cedars Cancer Centre in Montreal, he started developing an app that would let patients monitor their waiting times. From conceptualization in 2015, Opal app has expanded to be way more than that. We will explain the details shortly, after a short introduction to HIG. 
+
+#### Health Informatics Group (HIG) at McGill
+
+The HIG is a research collaboration between computer scientists, radiation oncologists, medical physicists and students at McGill and Cedars. The collaboration's goal is to use data to improve the experiences and outcomes of radiation oncology patients. The group is deeply interested in mobile and web apps, machine learning and cryptography, as well as health informatics. In 2014, [the HIG won a grant from the McGill University Health Centre to use machine learning techniques to predict waiting times for patients](https://muhc.ca/newsroom/article/radiationwaittimesmeetmoderntechnology).
+
+Currently, you can only check the [web demo of Opal](https://www.depdocs.com/opal/), while the app will be released and available to all oncology patients at the Cedars Cancer Centre in Montreal this summer. At the moment, the team is working with a small number of patients and volunteers on a pilot study, assuring better efficiency of the app.
+
+### Technical details behind Opal
+
+![Opal Monaca Onsen UI Web App](/blog/content/images/2016/Apr/opal_web.png)
+
+Opal app was created as a patient waiting time monitoring app, but it also provides patients with access to their medical records, test results. It also enables secure messaging with healthcare workers and gives access to education material, questionnaires, and other useful information.
+
+It is an AngularJS-based Cordova app with Firebase as a backend. The added encryption and web portal enable users to take full advantage of a rule-based backend that securely connects to any medical record system. Patients can also print their medical documents via AirPrint/Cloud print services and documents emailing. They can use geolocation check-in for appointments and utilize a basic navigation feature to find a location in the hospital via QR codes and see graphs in history or lab results. Waiting times are calculated by machine learning to ensure the best accuracy.
+
+### Choosing Onsen UI for its page patterns
+
+When David chooses his software, he always looks for products with stable and advanced releases that are backwards compatible and supported. At the beginning of the Opal project, he looked for a framework with great page patterns. As Onsen UI offered out-of-the-box already built patterns, starting a new project was made easy. With time and some experience the most valuable tool became the [components.onsen.io](http://components.onsen.io/) site, simply because of the ability to customize content easily. In terms of the most heavily used javascript components, he is most excited about the page navigator, `<ons-list>`, `<ons-pull-to-refresh>` and grid components. Naturally, he also found all [Onsen UI CSS Components](http://components.onsen.io/) valuable.
+
+So far, David has been the only programmer working on Opal for the past 8 months, with the help of about 10 students who have been involved in the project in one way or another. They also have 3 project leaders who champion the project with the hospital and look for funding and investors.
+
+### Improving functionality and expanding to other areas
+
+![Opal Icon](/blog/content/images/2016/Apr/opalhealth_app_apple_icon.png)
+
+We already mentioned that Opal will be released within a few months. While they are working on an open source API to make data and information available to as many patients as possible, they hope to incorporate full in-hospital navigation and improve the questionnaires functionality for patients on research protocols. They are also working on patient provided education forum that would allow current patients to leave advice for future patients. New patients could also seek advice from former patients or ask staff for detailed information. Ultimately they would like to see Opal used by patients in many hospitals and disciplines, not only oncology at the Cedars Cancer Centre. And it doesn't stop there - a doctor version of the app is already in the works.
+
+### Learn more about the App Ninja Monthly Contest
+
+[The Monaca x Onsen UI App Ninja Contest](http://monaca.mobi/en/contest/) is an app development competition for the best hybrid app developed using [Monaca](https://monaca.io/) or [Onsen UI](https://onsen.io/). We have currently suspended the contest, but we will relaunch it after summer 2016.
+
+However, you can still [submit your app to our showcase page](http://monaca.mobi/en/showcase).
