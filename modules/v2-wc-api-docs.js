@@ -40,13 +40,20 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       }
 
       var doc = JSON.parse(fs.readFileSync(docPath));
-
       file.doc = doc;
       file.title = doc.name;
       file.name = doc.name;
       file.is2 = true;
       file.componentCategory = doc.category;
       file.extension = extension;
+
+      if (docPath.indexOf("/element/") > -1) {
+        file.icon = "element";
+      } else if (docPath.indexOf("/object/") > -1) {
+        file.icon = "object";
+      } else {
+        file.icon = null;
+      }
 
       resolve({doc: doc, file: file});
     });
