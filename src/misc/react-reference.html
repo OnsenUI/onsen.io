@@ -1,0 +1,188 @@
+---
+page: 'reference-detail'
+needHelp: true
+reference: true
+docCategory: 'react'
+layout: 'default.html.eco'
+---
+
+<div class="content"><div class="reference-container">
+  <div><a href="/v2/reference/javascript.html">&lt; Back</a></div>
+
+  <h2><%= @doc.name %></h2>
+
+  <p class="reference-extension-note">
+    This component is available with <span class="reference-extension-name">React extension</span>.
+  </p>
+
+  <section class="reference-description">
+    <p><%= @translate @doc.description %></p>
+
+    <% if @doc.deprecated: %>
+    <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
+    <% end %>
+  </section>
+
+  <% if @doc.example: %>
+    <section>
+      <h3 id="usage">
+        <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
+        <a href="#usage" class="reference-loop-anchor">#</a>
+      </h3>
+      <pre><code class="xml"><%= @doc.example %></code></pre>
+    </section>
+  <% end %>
+
+  <% if @doc.note: %>
+  <section class="reference-note">
+    <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%= @translate @doc.note %></p>
+  </section>
+  <% end %>
+
+  <!-- props -->
+  <% if @doc.props: %>
+  <section>
+    <h3 id="attributes">
+      <% if @lang == "en": %>Props<% else: %>Prop一覧<% end %>
+      <a href="#attributes" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Type<br>Default Value</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>型 / デフォルト値</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for key, prop of @doc.props: %>
+          <tr>
+            <td class="attribute-name" id="<%= @doc.name %>-<%= prop.name %>">
+              <%= prop.name %>
+            </td>
+            <td>
+              <% if prop.type: %>
+              <span class="value-type"><%= prop.type %></span>
+              <% end %>
+              <% if prop.defaultValue: %>
+              <br><span class="default-value" style="color: green"><%= prop.defaultValue %></span>
+              <% end %>
+            </td>
+            <td>
+              <%= @translate prop.description %>
+
+              <% if prop.required == 'true': %>
+              <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
+              <% else: %>
+              <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
+              <% end %>
+
+              <% if prop.deprecated: %>
+              <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end props -->
+
+  <!-- methods summary -->
+  <% if @doc.methods: %>
+  <section>
+    <h3 id="methods-summary">
+      <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
+      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Signature</th>
+          <th>Description</th>
+          <% else: %>
+          <th>シグネチャ</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for key, method of @doc.methods: %>
+          <tr>
+            <td>
+              <a href="#method-<%= method.name %>"><%= method.signature %></a>
+            </td>
+            <td><%= @translate method.description %>
+              <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end methods summary -->
+
+  <!-- methods details -->
+  <% if @doc.methods: %>
+  <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
+  <% for key, method of @doc.methods: %>
+    <section class="method-detail">
+      <h4 id="method-<%= method.name %>">
+        <%= method.signature %><% if method.return: %><span class="value-type">: <%= method.return %></span><% end %>
+        <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
+      </h4>
+
+      <p><%= @translate method.description %></p>
+
+      <% if method.extensionOf: %>
+      <span class="reference-extension-name"><%= method.extensionOf %></span>
+      <% end %>
+
+      <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+
+      <% if method.params: %>
+      <!-- method parameter -->
+      <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+
+      <table>
+        <thead>
+          <tr>
+            <% if @lang == "en": %>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <% else: %>
+            <th>名前</th>
+            <th>型</th>
+            <th>概要</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% for param in method.params: %>
+          <tr>
+            <td><span class="parameter-name"><%= param.name %></span></td>
+            <td class="value-type"><%= param.type %></td>
+            <td><%= @translate param.description %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <!-- end method parameter -->
+      <% end %>
+    </section>
+    <% end %>
+
+  <% end %>
+  <!-- end methods -->
+
+</div></div>

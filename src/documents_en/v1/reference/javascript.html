@@ -17,14 +17,6 @@ docCategory: js
     <h4 class="js-index-header"><%- @titlize(category) %></h4>
 
     <ul class="js-index-list">
-      <% for doc in docs: %>
-      <li class="js-index-list-item
-        js-index-list-item-<%- if doc.collection[0] == 'objects' then 'object' else 'element' %>">
-        <a href="/v1/reference/<%= doc.name %>.html" class="js-index-link">
-          <%- doc.name %>
-        </a>
-      </li>
-      <% end %>
     </ul>
   </div>
   <% end %>
