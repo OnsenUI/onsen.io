@@ -1,54 +1,47 @@
 ---
 author: konstantin
-date: 2016-04-08
+date: 2016-04-15
 id: boost-your-cordova-development-with-monaca-power-plugins
 title: "Boost your Cordova Development with Monaca Power Plugins"
 product: monaca
-tags: Monaca Power Plugins, Enterprise Plugins
+tags: Monaca Power Plugins, Enterprise Plugins, encryption, in-app updates, in-app purchases
 category: development
 ---
 
-We are glad to announce our new feature plugins to boost your app development experience!
-With Monaca Power Plugins, we deliver the ultimate protection which is providing our customers the ability to secure their work with the latest technologies in terms of security. Using this feature, Enterprise users have the opportunity to use the following security measures to protect their applications:
+![Monaca Power Plugins](/blog/content/images/2016/Apr/powerPluginsMain.jpg)
 
-<!--![Monaca Power Plugins](/blog/content/images/2016/Apr/AdobeStockEnc.jpeg) -->
+We are glad to announce our new feature plugins to boost your app development experience!
+With Monaca Power Plugins, we deliver developers the ability to secure their work with the latest technologies in terms of security. Additionally, we integrated In-App Purchases and Updates, leading to new development and business possibilities. Let's immediately take a more detailed look at the latest updates!
 
 <!-- more -->
 
 ### Monaca HTML5 Resource Encryption
 
-This plugin provides a cryptographic method for securing the source code of your HTML5 applications. We are using AES encryption which is an algorithm for encrypting data. Your HTML5 source code will be converted into a binary code and the encryption algorithm will be applied. This plugin is not doing a simple obfuscation of your source code but it is applying a real encryption to your application. This security measure will prevent anyone from seeing your source code or stealing your work.
+[Monaca HTML5 Resource Encryption plugin](https://docs.monaca.io/en/reference/third_party_phonegap/html5_resource_encryption/) provides the ability to encrypt HTML5 assets. Moreover, it allows to decrypt the previously encrypted assets directly on runtime. In order to implement such as features, the encryption is provided by [AES-256](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard) algorithm. Once the HTML5 source code has been converted into binary code, the algorithm is executed, providing the maximum level of security for your resources. This security measure will prevent anyone from seeing your source code or stealing your work, a key feature in today's development environment.
 
 [Read more](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/html5_resource_encryption/)
 
 ### Monaca Secure Storage
 
-Most people should have a certain expectation of privacy if they are using cloud technologies or transfering files over the internet. Other people shouldn't be able to see or access their files. Nobody wants his or her data to be compromised or stolen. It is always a good practice to keep your content secured. With this plugin there is no need anymore for users to pay for expensive services or applications to encrypt their data. This plugin provides the functionality to encrypt your data storage. If the application is uninstalled all the saved data will also be deleted.
+Most users have big expectations for what concerns privacy, in particular when they are using cloud technologies or transferring files over the internet. How will the data be managed on the backend? Will they be accessible to untrusted sources? Nobody wants its own data to be compromised, that's why it's always a good practice to keep content secured. With [Monaca Secure Storage plugin](https://docs.monaca.io/en/reference/third_party_phonegap/secure_storage/) there is no need anymore to pay for expensive services in order to encrypt data and storage. Monaca Secure Storage plugin provides the perfect solution, allowing the developers to fully encrypt the data storage in an automatic way. If the application will be uninstalled, all the saved data will also be deleted, allowing to preserve user's privacy.
 
 [Read more](http://docs.monaca.mobi/cur/en/reference/third_party_phonegap/secure_storage/)
 
 
 ### Monaca In-App Updater
 
-This plugin allows to update HTML5 assets contained into the app without any need to rebuild and package everytime. In-App Updater is designed to boost your app development process while providing the comfort of easily update your application with the minimum effort. The only requirement is a Web server to host the updated files which will be accessed by the app.
+As most of the mobile developers know, sometimes the app publishing process can be tough and require time before the submission gets processed. This can lead to business revenue loss and stress, that's why we decided to develop and integrate an In-App Updater feature into Monaca.
+[Monaca In-App Updater plugin](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/) allows updating HTML5 assets contained in the app without any need to rebuild and package every time. This plugin is designed to boost your app development process while providing the comfort of easily update your application with the minimum effort. The only requirement is a Web server to host the updated files which will be accessed by the app. No more need to wait for your app submission approval, the updates will be immediately available to the final user, which can immediately start to take advantage of the new features and content.
 
-Here are some easy steps to follow in order to integrate In-App Updater plugin into your app:
-
-1. Enable the plugin. See [Enable Plugin in Monaca](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#enable-in-app-updater).
-2. Choose the update mode and specify the deploy URL. [See Update Mode](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#update-mode).
-3. Create the update files for intended OS with the proper version. [See Creating Update File](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#create-update-file) and [Update File Version](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#update-file-version).
-4. Create configuration file specifying the version number of the update files. [See Creating Configuration File](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#config-file-in-app-updater).
-5. Place the configuration and update files in the same directory level. [See Placing Update File](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/#files-placement).
-
+[Read more](https://docs.monaca.io/en/reference/third_party_phonegap/in-app_updater/)
 
 ### Monaca In-App Purchases
 
-In-App Purchasing plugin is opening new marketing possibilities for mobile app developers. It greatly improves the profits by offering to the users the opportunity to buy additional content from the applications we create. This functionality could be used in many different applications with different methodologies. Using this plugin you can define features from your app that you want to monetize. In-app purchase plugin gives you additional opportunities to monetize both existing and new apps.
+Last but not least, we decided to introduce In-App Purchase plugin to open new business possibilities for mobile app developers. It greatly improves the profits by offering the users the opportunity to buy content (like additional turns in a game, different background themes, etc.) directly from the application, taking advantage of payment services like [Google Wallet](https://wallet.google.com/), [Apple Pay](www.apple.com/apple-pay/
+) etc. Monaca In-App Purchases works great in combination with In-App Updater, allowing to immediately monetize new app content and features.
 
 
 ### How to benefit from our new features
 
-As you already know more about Monaca Power Plugins by reading this article you can easily get our great new features to maximize the security and performance of your apps. 
-We offer a standalone package which can be added to your Monaca [subscription plan](https://monaca.io/pricing.html).
-
-
+Monaca Power Plugins represent a big step for Monaca's integrated services, allowing the developers to have more control than ever for what concerns their apps behavior, updates, and business. This was just a short introduction, now it's time for you to take a deeper look at Monaca Power Plugins and take advantage of these new services to boost your app development and revenue!
+Check out our [offer](https://monaca.io/pricing.html) and happy development with Monaca!
