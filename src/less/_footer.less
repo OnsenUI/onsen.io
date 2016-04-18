@@ -3,34 +3,21 @@
   text-align: center;
   margin-top: 14px;
 
-  &-inner {
-    margin: 0 auto;
+  input[type=text] {
+    font-size: 15px;
+    background-color: white;
+    width: 325px;
+    padding: 10px 8px 9px 8px;
+    line-height: 34px;
+    height: 36px;
+    border: 1px solid #ccc;
+    margin: 0;
+    border-radius: 2px;
     box-sizing: border-box;
-    padding: 12px 0 0 0;
+  }
 
-    form {
-      border-radius: 1px;
-      display: inline-block;
-      max-width: 100%;
-      width: auto;
-    }
-
-    input[type=text] {
-      font-size: 15px;
-      background-color: white;
-      width: 325px;
-      padding: 10px 8px 9px 8px;
-      line-height: 34px;
-      height: 36px;
-      border: 1px solid #ccc;
-      margin: 0;
-      border-radius: 2px;
-      box-sizing: border-box;
-    }
-
-    input[type=submit] {
-      .site-button();
-    }
+  input[type=submit] {
+    .site-button();
   }
 
   &-thankyou {
@@ -166,36 +153,22 @@
   }
 }
 
-.footer-newsletter {
-  margin: 24px 0;
+#blog footer .newsletter-signup {
+  margin: 28px auto;
 
-  &-input {
-    border: 1px #ccc solid;
-    height: 36px;
-    width: 100px;
-    width: 320px;
-    border-radius: 2px;
-    padding-left: 10px;
+  input[name="email"] {
+    font-size: 11px;
   }
 
-  &-thankyou {
-    display: none;
-    margin-top: 8px;
-  }
-
-  &-submit {
+  input[type="submit"] {
+    font-size: 13px;
+    font-weight: bold;
     height: 36px;
     width: 90px;
     background-color: #ff4d35;
     border: none;
     color: white;
     text-transform: uppercase;
-    font-size: 13px;
-    margin-top: 10px;
-
-    &:hover {
-      background-color: #cc3e2b;
-    }
   }
 }
 

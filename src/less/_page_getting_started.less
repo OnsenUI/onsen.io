@@ -1,4 +1,29 @@
-#getting_started_2 {
+#getting_started {
+  .top-bar .dropdown ul, #features .dropdown ul{
+    list-style-type: none;
+    text-align: left;
+    background: rgba(185, 62, 66, 0.9);
+    z-index: 1;
+
+    li {
+      margin: 0;
+    }
+
+    a {
+      font-size: 18px;
+      padding: 5px;
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+
+  #features .dropdown ul {
+    background: #fee;
+
+    a {
+      color: #000;
+    }
+  }
 
   .feature:first-child h2 {
     margin-bottom: 90px;
@@ -23,25 +48,27 @@
     margin: 70px 0 10px;
   }
 
-  p, code {
+  p, p + pre {
     display: inline-block;
     vertical-align: top;
     color: #999;
   }
 
-  p {
-    width: 56%;
+  li p {
+    width: 53%;
     margin: 0;
     margin-right: 4%;
     margin-bottom: 15px;
-  }
 
+    & + pre {
+      width: 43%;
+      box-sizing: border-box;
+      margin: 0 0 0 -5px;
+    }
+  }
   code {
-    width: 40%;
-    margin-left: -5px;
     font-size: 12px;
-    padding: 10px;
-    box-sizing: border-box;
+    color: #666;
   }
 
   #main-nav {
@@ -49,19 +76,12 @@
   }
 
   .button {
-    margin: auto;
-    display: inline-block;
-    padding: 13px 20px;
-    text-decoration: none;
-    border-radius: 3px;
-    color: #fff;
-    transition: all .1s linear;
+    width: 300px;
+    flex-grow: 0;
   }
-
   .guide {
     background: #FF4D35;
     font-size: 18px;
-    width: 300px;
     box-sizing: border-box;
     text-align: center;
     margin: auto;

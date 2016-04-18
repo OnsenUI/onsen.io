@@ -5,7 +5,13 @@ code {
   padding: 1px 2px;
   font-weight: normal;
   font-size: 85%;
+
+  &.bash .line:before {
+    content: '$ ';
+    display: inline;
+  }
 }
+
 
 pre {
   border: 1px solid #ddd;

@@ -23,12 +23,17 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
           <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
           <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
         </nav>
-        <form class="newsletter-form">
-          <input type="email" placeholder="Input email address to get newsletter!">
-          <button id="register">Sign up</button>
-        </form>
+        <div class="newsletter-signup newsletter-form">
+          <form>
+            <input type="email" placeholder="Input email address to receive updates" name="email">
+            <button>Sign up</button>
+          </form>
+          <div class="newsletter-thankyou">Thank you!</div>
+        </div>
+
         <button id="getting-started">Getting Started with Onsen UI for React</button>
-        <p class="small" id="release-info">Latest <u>2.0.0-beta8</u> released 3 days ago. See <u>all versions</u><br>Distributed free and open source (Apache 2.0) via <a href="//github.com">GitHub</a></p>
+
+        <p class="small" id="release-info" data-framework="react">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
       </div>
       <%- @partial('demo.html.eco') %>
     </div>
@@ -146,15 +151,15 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
     <div class="feature">
       <h2>Develop and build flawlessly</h2>
       <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
-      <ul class="icons">
-        <li class="icon debug">Debug</li>
-        <li class="icon build">Remote build</li>
-        <li class="icon push">Push</li>
-        <li class="icon user">User</li>
-        <li class="icon onlineide">Online IDE</li>
-        <li class="icon inappupdater">In-App update</li>
-        <li class="icon lock">Encryption</li>
-      </ul>
+      <nav class="row icons">
+        <a href="#" class="icon debug">Debug</a>
+        <a href="#" class="icon build">Remote build</a>
+        <a href="#" class="icon push">Push</a>
+        <a href="#" class="icon user">User</a>
+        <a href="#" class="icon onlineide">Online IDE</a>
+        <a href="#" class="icon inappupdater">In-App update</a>
+        <a href="#" class="icon lock">Encryption</a>
+      </nav>
     </div>
   </div>
 </div>

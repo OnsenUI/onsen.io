@@ -37,7 +37,7 @@
 
   <script src="//use.typekit.net/bys8jdj.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>
-  <script src="scripts/popup.js"></script>
+  <script src="/scripts/popup.js"></script>
 
   <script>
     window.SITE_ENV = {
@@ -62,69 +62,59 @@
   <%- @partial('main-nav.html.eco') %>
   <%- @partial('header.html.eco') if @header != false %>
 
-  <% if @toc: %>
-    <aside class="content-info content-info-page">
-      <div class="toc-title toc-title-no-toggle">Table Of Contents</div>
-      <%- @partial('toc.html.eco', {tocItems: @toc}) %>
-    </aside>
+  <% if @reference: %>
+    <section id="reference-container">
 
-    <div class="content">
-      <%- @contents %>
-      <%- @partial('need_help.html.eco') if @needHelp %>
-    </div>
+      <aside class="content-info">
 
-  <% else if @reference: %>
-    <aside class="content-info">
+        <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
 
-      <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
+        <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>
 
-      <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>
+        <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
+          <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
+        </ul>
 
-      <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
-        <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
-      </ul>
+        <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a href="/reference/javascript.html">JavaScript</a></div>
 
-      <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a href="/reference/javascript.html">JavaScript</a></div>
-
-      <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
-        <% for category, docs of @componentCategoryDict: %>
-        <li class="toc-item toc-1-item">
-          <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
-          <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
-          <% for doc in docs: %>
-            <li class="toc-item toc-2-item">
-              <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
-            </li>
+        <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
+          <% for category, docs of @componentCategoryDict: %>
+          <li class="toc-item toc-1-item">
+            <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
+            <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
+            <% for doc in docs: %>
+              <li class="toc-item toc-2-item">
+                <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
+              </li>
+            <% end %>
+            </ul>
+          </li>
           <% end %>
-          </ul>
-        </li>
-        <% end %>
-      </ul>
+        </ul>
 
-      <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html">Page Patterns</a></div>
+        <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html">Page Patterns</a></div>
 
-      <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
-        <% for pattern in @patterns: %>
-        <li class="toc-item toc-1-item">
-          <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link<% if @patternName == pattern: %> current<% end %>">
-            <%= @renderPatternName(pattern) %>
-          </a>
-        </li>
-        <% end %>
-      </ul>
+        <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
+          <% for pattern in @patterns: %>
+          <li class="toc-item toc-1-item">
+            <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link<% if @patternName == pattern: %> current<% end %>">
+              <%= @renderPatternName(pattern) %>
+            </a>
+          </li>
+          <% end %>
+        </ul>
 
-    </aside>
+      </aside>
 
-    <div class="content">
-      <%- @contents %>
-      <%- @partial('need_help.html.eco') if @needHelp %>
-    </div>
-
+      <div class="content">
+        <%- @contents %>
+        <%- @partial('need_help.html.eco') if @needHelp %>
+      </div>
+    </section>
   <% else: %>
     <%- @contents %>
     <%- @partial('need_help.html.eco') if @needHelp %>
   <% end %>
-
 
   <%- @partial('footer.html.eco') %>
 
@@ -133,6 +123,7 @@
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script defer src="/scripts/default.js"></script>
   <script src="/vendor/highlight.min.js"></script>
+  <script src="/vendor/moment.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
 
  </body>

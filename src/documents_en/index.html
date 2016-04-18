@@ -17,7 +17,7 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
         <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
         <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
       </nav>
-      <p class="small" id="release-info">Latest <a><%- @framework.version %></a> released 3 days ago. See <a>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
     </div>
     <%- @partial('demo.html.eco') %>
   </div>
@@ -74,4 +74,6 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
     phones[0].classList.toggle('selected');
     phones[1].classList.toggle('selected');
   }
+
+
 </script>

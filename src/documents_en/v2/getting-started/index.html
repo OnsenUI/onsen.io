@@ -1,52 +1,60 @@
 ---
 page: 'getting_started'
 title: 'Hybrid App Framework Onsen UI 2.0'
-h1: 'Getting started with Onsen UI using <a class="dropdown">Plain JavaScript</a>'
+h1: 'Getting started with Onsen UI using <a class="dropdown">Pure JavaScript</a>'
 layout: 'default.html.eco'
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
 ---
 
 <div id="features">
   <div class="feature">
-    <h2>Start building amazing apps with Onsen UI with <a class="dropdown">Plain JavaScript</a></h2>
+    <h2>Start building amazing apps with Onsen UI with <a class="dropdown">Pure JavaScript</a></h2>
     <nav class="tabs">
-      <a href="#" class="action terminal selected">Develop with Monaca CLI</a>
-      <a href="#" class="action cloud">Use Monaca Cloud IDE</a>
-      <a href="#" class="action tool">Install via NPM or Bower</a>
-      <a href="#" class="action download">Download Everything</a>
+      <a href="#cli" class="action terminal selected">Develop with Monaca CLI</a>
+      <a href="#cloud" class="action cloud">Use Monaca Cloud IDE</a>
+      <a href="#npm" class="action tool">Install via NPM or Bower</a>
+      <a href="#download" class="action download">Download Everything</a>
     </nav>
     <div class="tab-contents">
       <!-- Develop with Monaca CLI -->
-      <div class="selected">
+      <div id="cli" class="selected">
         <p>This instruction describes how to setup a local environment for developing Cordova hybrid app. Monaca provides a remote build capability, but you can <a href="">also use Cordova CLI together with Monaca CLI</a>.</p>
         <ol>
           <li>
             <h3>Install Monaca CLI, an Onsen UI toolkit</h3>
             <p>First install <a href="//nodejs.org/">Node.js</a>. Then, install Monaca CLI via npm, which provides command-line interface for Onsen UI development. Or, if you prefer GUI, download and install <a href="https://monaca.io/localkit.html">Monaca Localkit</a> desktop app for Windows and OS X.</p>
-            <pre class="shell">npm install -g monaca</pre>
+            <pre><code class="bash">npm install -g monaca</code></pre>
             <span class="info">Trouble setting up your environment? See <a href="#">Getting Started with Monaca Cloud IDE</a> to start writing code right away!</span>
           </li>
           <li>
             <h3>Create a project</h3>
             <p>Create Onsen UI app from various templates and examples.</p>
-            <pre class="shell">monaca create helloworld --framework="react"</pre>
+            <pre><code class="bash">monaca create helloworld --framework="react"</code></pre>
           </li>
           <li>
             <h3>Run on your device</h3>
             <p>monaca debug command will install the debugger on your device and run your app right away.</p>
-            <pre class="shell">cd helloworld<br>npm install<br>monaca preview # Preview on the browser<br>monaca debug # Run on the device in debugger<br>monaca remote build # Build the app</pre>
+            <pre><code class="bash">
+              cd helloworld
+              npm install
+              monaca preview # Preview on the browser
+              monaca debug # Run on the device in debugger
+              monaca remote build # Build the app
+            </code></pre>
           </li>
           <li>
             <h3>Visit Onsen UI Tutorial or read guide</h3>
             <p>Visit our interactive tutorial to learn more about Onsen UI!</p>
-            <a class="button guide" href="/v2/guide.html">Read Guide</a>
-            <a class="button guide" href="//tutorial.onsen.io">Try Interactive Tutorial</a>
+            <div class="row">
+              <a class="button guide" href="/v2/guide.html">Read Guide</a>
+              <a class="button" href="//tutorial.onsen.io">Try Interactive Tutorial</a>
+            </div>
           </li>
         </ol>
       </div>
 
       <!-- Use Monaca Cloud IDE -->
-      <div>
+      <div id="cloud">
         <p>Monaca Cloud IDE provides a cloud-based development environment with debug and remote build capability.</p>
         <ol>
           <li>
@@ -71,26 +79,26 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
       </div>
 
       <!-- Install via NPM or Bower -->
-      <div>
+      <div id="npm">
         <p>Onsen UI is distributed as a npm package or Bower package.</p>
-        <ol>
+        <ul>
           <li>
             <h3>Download using NPM</h3>
             <p>You can install the package using the following commands.</p>
-            <code class="shell">npm install onsenui</code>
+            <pre><code class="bash">npm install onsenui</code></pre>
             <p>Onsen UI supports both CommonJS and AMD, so you can use Browserify, RequireJS or Webpack to include in your code.</p>
             <span class="info">React package is distributed separately. Please see <a href="#">Getting started with React</a> instruction for details.</span>
           </li>
           <li>
             <h3>Download using Bower</h3>
             <p>You can use <a href="http://bower.io/" target="_blank">bower</a> to install our distribution package.</p>
-            <code class="shell">bower install onsenui</code>
+            <pre><code class="bash">bower install onsenui</code></pre>
           </li>
-        </ol>
+        </ul>
       </div>
 
       <!-- Download Everything -->
-      <div>
+      <div id="download">
         <ol>
           <li>
             <h3>Full source code</h3>
@@ -113,22 +121,4 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
   </div>
 </div>
 
-<script>
-  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
-  var menu = document.querySelector('.tabs').children;
-  var content = document.querySelector('.tab-contents').children;
-
-  each(menu, function (a, i) {
-    a.onclick = function (e) {
-      e.preventDefault();
-      if (!this.classList.contains('selected')) {
-        each(content, function(e, i) {
-          e.classList.remove('selected');
-          menu[i].classList.remove('selected');
-        });
-        this.classList.add('selected');
-        content[i].classList.add('selected');
-      }
-    };
-  });
-</script>
+<script src="/scripts/started.js"></script>
