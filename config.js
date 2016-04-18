@@ -62,6 +62,10 @@ module.exports = function(language, isStaging) {
     bryan: {
       name: 'Bryan Ellis',
       gravator: '12e050bf226a74ef0c65fe0a637f6a31'
+    },
+    konstantin: {
+      name: 'Konstantin Dinev',
+      gravator: '31893df4323fac99458ed86784e25a77'
     }
   };
 
