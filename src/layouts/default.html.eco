@@ -62,8 +62,19 @@
   <%- @partial('main-nav.html.eco') %>
   <%- @partial('header.html.eco') if @header != false %>
 
-  <% if @reference: %>
-    <section id="reference-container">
+  <section id="main-container">
+    <% if @toc: %>
+      <aside class="content-info content-info-page">
+        <div class="toc-title toc-title-no-toggle">Table Of Contents</div>
+        <%- @partial('toc.html.eco', {tocItems: @toc}) %>
+      </aside>
+
+      <div class="content">
+        <%- @contents %>
+        <%- @partial('need_help.html.eco') if @needHelp %>
+      </div>
+
+    <% else if @reference: %>
 
       <aside class="content-info">
 
@@ -110,11 +121,11 @@
         <%- @contents %>
         <%- @partial('need_help.html.eco') if @needHelp %>
       </div>
-    </section>
-  <% else: %>
-    <%- @contents %>
-    <%- @partial('need_help.html.eco') if @needHelp %>
-  <% end %>
+    <% else: %>
+      <%- @contents %>
+      <%- @partial('need_help.html.eco') if @needHelp %>
+    <% end %>
+  </section>
 
   <%- @partial('footer.html.eco') %>
 
