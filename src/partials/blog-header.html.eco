@@ -75,7 +75,7 @@
   <% else: %>
   <div class="blog-header-inner">
     <ul class="blog-header-category">
-      <li class="blog-header-category-item"><a href="/blog/">All</a></li>
+      <li class="blog-header-category-item"><a href="/blog/">すべて</a></li>
       <% for category of @env.categories: %>
         <li class="blog-header-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
       <% end %>
