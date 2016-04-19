@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var merge = require('merge-stream');
 var siteGenerator = require('./modules/metalsmith');
+var parallelize = require("concurrent-transform");
 
 //--
 
@@ -83,9 +84,7 @@ gulp.task('less', function() {
 //////////////////////////////
 gulp.task('clean', function(done) {
   del([
-    'out_' + lang + '/*',
-    '!out_' + lang + '/OnsenUI',
-    '!out_' + lang + '/project-templates',
+    'out_' + lang + '/*'
   ], done);
 });
 
@@ -148,17 +147,31 @@ gulp.task('serve', ['generate'], function() {
 //////////////////////////////
 // deploy
 //////////////////////////////
-gulp.task('deploy', ['clean', 'generate'], function() {
-  var aws,
-    fn = 'aws_' + lang + (env == 'production' ? '_prod' : '') + '.json';
+gulp.task('deploy', [], function(done) {
+  runSequence('clean', 'generate', 'deploy-aws', done);
+});
 
-  try {
-    aws = JSON.parse(fs.readFileSync(path.join(__dirname, fn)));
-  } catch(e) {
+gulp.task('deploy-aws', function() {
+  var aws,
+      aws_config = 'aws_' + lang + (env == 'production' ? '_prod' : '') + '.json';
+
+  if (fs.existsSync(path.join(__dirname, aws_config))) {
+    gutil.log("Loading from AWS config file.");
+    aws = JSON.parse(fs.readFileSync(path.join(__dirname, aws_config)));
+  } else if (process.env.AWS_KEY) {
+    gutil.log("Loading from environment variable.");
+    aws = {
+      accessKeyId: process.env.AWS_KEY,
+      secretAccessKey: process.env.AWS_SECRET,
+      region: process.env.AWS_REGION,
+      params: {
+        Bucket: process.env.AWS_BUCKET
+      }
+    };
   }
 
   if (!aws) {
-    throw new Error(fn + ' is missing! Please create it before trying to deploy!');
+    throw new Error('AWS configuration is missing! Please create a config file, or set it in the environment before trying to deploy!');
   }
 
   var dst = 'out_' + lang;
@@ -166,31 +179,13 @@ gulp.task('deploy', ['clean', 'generate'], function() {
 
   var site = gulp.src([
     dst + '/**',
-    '!' + dst + '/OnsenUI',
-    '!' + dst + '/2/OnsenUI',
-    '!' + dst + '/project-templates'
+    '!' + dst + '/dist',
   ]);
-
-  var templates = gulp.src('project-templates/gen/**')
-    .pipe($.rename(function(path) {
-      path.dirname = 'project-templates/gen/' + path.dirname;
-    }));
-
-  var build = gulp.src('OnsenUI/build/**')
-    .pipe($.rename(function(path) {
-      path.dirname = 'OnsenUI/build/' + path.dirname;
-    }));
-
-  var build2 = gulp.src('2/OnsenUI/build/**')
-    .pipe($.rename(function(path) {
-      path.dirname = '2/OnsenUI/build/' + path.dirname;
-    }));
 
   var headers = env == 'production' ? {'Cache-Control': 'max-age=7200, no-transform, public'} : {'Cache-Control': 'no-cache'};
 
-  var stream = merge(site, templates, build, build2)
-    .pipe($.awspublish.gzip())
-    .pipe(publisher.publish(headers))
+  var stream = merge(site)
+    .pipe(parallelize(publisher.publish(headers), 10))
     .pipe(publisher.sync())
     .pipe($.awspublish.reporter());
 
