@@ -1,16 +1,22 @@
 ---
-title: 'Learn How to Use Onsen Mobile Framework'
+title: 'Onsen UI Guide for JavaScript'
 page: 'guide'
 needHelp: true
 autotoc: true
 actionbar: false
+tocTitle: 'Main Guide'
 ---
+
+<nav class="tabs">
+  <a class="action selected">Main Guide</a>
+  <a href="react.html" class="action">Guide for React</a>
+  <a href="angular1.html" class="action">Guide for Angular 1</a>
+  <a class="action"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
+</nav>
 
 <%- @markdown => %>
 
 This document is based on the latest version of Onsen UI. To see the difference between the versions, please refer to the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
-
-### Getting Started with Onsen UI 2.0
 
 To quickly get started with Onsen UI, we recommend you to read the following article.
 
@@ -186,7 +192,7 @@ If you want to get all pages in the page stack, use `pages` property.
 
 `navigator.insertPage()` adds a page into any level in the stack by specifying the `index` parameter. If specified as `0`, it will add the page to the bottom of the page stack. If specified a negative value, it will be counted from the top level. Therefore, specifying `-1` will result in adding the page to the 2nd level from the top. The `page` and `options` parameters works the same as `pushPage()` API.
 
-#### Back button support
+#### Back button component (ons-back-button)
 
 If the app is running on an Android device and using Cordova, pressing the back button will trigger a navigator's `popPage()` method.
 
@@ -327,7 +333,7 @@ tabbar.loadPage('newpage.html');
 
 Please note that `prechange` and `postchange` event will not occur in this case.
 
-### Using Splitter Side Menu (ons-splitter)
+### Splitter Side Menu (ons-splitter)
 
 A menu can be added using the `<ons-splitter>`. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
 
@@ -403,7 +409,7 @@ ons.ready(function() {
 ```
 
 
-### Using List (ons-list)
+### List (ons-list)
 
 List is a very popular pattern to display a set of data in a scrollable view. Onsen UI supports scrollable lists by using [`<ons-list>`](/v2/reference/js/ons-list.html) and [`<ons-list-item>`](/v2/reference/js/ons-list-item.html) tags. `<ons-lazy-repeat>` is also provided if you want a list with a large number of items.
 
@@ -475,7 +481,7 @@ By adding the nodivider modifier the divider can be removed.
 </ons-list>
 ```
 
-### Using Lazy List (or Infinite Scrolling, ons-lazy-repeat)
+### Lazy List (or Infinite Scrolling, ons-lazy-repeat)
 
 With [`ons-lazy-repeat`](/v2/reference/js/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty. Here is the example of a simple list having 100,000,000 records.
 
@@ -543,7 +549,7 @@ destroyItemContent: function(index, element) {
 }
 ```
 
-### Using Dialogs (ons-dialog, ons-alert-dialog)
+### Dialogs (ons-dialog, ons-alert-dialog)
 
 Normal dialogs are defined using the `<ons-dialog>` tag. There is also an `<ons-alert-dialog>` tag that is used to display alert dialogs.
 
@@ -618,7 +624,7 @@ ons.notification.prompt({message: 'What is your name?'})
   });
 ```
 
-### Using Popover (ons-popover)
+### Popover (ons-popover)
 
 A popover can be used to give additional information about a component or add extra functionality.
 
@@ -692,7 +698,7 @@ The `<ons-popover>` supports the `cancelable` attribute. This enables hiding the
   Fired after showing or hiding the popover. The callback function provides an event object, which has `popover` property contains popover object.
 
 
-### Using Carousel (ons-carousel)
+### Carousel (ons-carousel)
 
 Carousel provides a container to display multiple items in the element. It can be used as a full screen component, or inside another element.
 
@@ -824,7 +830,7 @@ When you added or removed `<ons-carousel-item>` element into a `<ons-carousel>`,
   })
   ```
 
-### Using Modal (ons-modal)
+### Modal (ons-modal)
 
 [`<ons-modal>`](/v2/reference/js/ons-modal.html) is useful when showing a dialog that needs to forbid any user interaction while the modal is shown. Typically a modal is used to display progress indicators or to request a user action explicitly.
 
@@ -839,7 +845,7 @@ Modal content
 </script>
 ```
 
-### Using Pull Hook (ons-pull-hook)
+### Pull Hook (ons-pull-hook)
 
 The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/v2/reference/js/ons-page.html) element. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
 
@@ -1002,7 +1008,7 @@ By default, all [`<ons-col>`](/v2/reference/js/ons-col.html) inside a [`<ons-row
 
 [`<ons-row>`](/v2/reference/js/ons-row.html) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
 
-### Using Icons (ons-icon)
+### Icons (ons-icon)
 
 Onsen UI offers over 400 icons provided by [Font Awesome](http://fontawesome.github.io/) and over 500 icons by [Ionicons](http://ionicons.com/).
 
@@ -1059,6 +1065,34 @@ Adding `indeterminate` attribute will tell components to loop forever. In this c
 </ons-progress-bar>
 <ons-progress-circular indeterminate>
 </ons-progress-circular>
+```
+
+### Page (ons-page)
+
+`<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
+
+[`<ons-page>`](/v2/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+
+* `init` event is fired after `<ons-page>` is attached to DOM.
+* `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
+* `show` event is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up.
+* `hide` event is fired every time `<ons-page>` disappear from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack.
+
+Page lifecycle events will be propagated to the page's descendants so they are correspondingly shown, hidden or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator's top page) and `destroy` event for every page in navigator's page stack.
+
+``` html
+<script>
+document.addEventListener("init", function(event) {
+  if (event.target.id == "my-page") {
+    document.getElementById("my-content").innerHTML = "I am fine!";
+  }
+}, false);
+</script>
+
+<ons-page id="my-page">
+  <div>Hello, how are you?</div>
+  <div id="my-content">This content will be replaced.</div>
+</ons-page>
 ```
 
 ### Finger Gestures (ons-gesture-detector)

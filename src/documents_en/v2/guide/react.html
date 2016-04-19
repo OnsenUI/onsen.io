@@ -1,0 +1,294 @@
+---
+title: 'Onsen UI Guide for React'
+page: 'guide'
+needHelp: true
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for React'
+---
+
+<nav class="tabs">
+  <a href="js.html" class="action">Main Guide</a>
+  <a class="action selected">Guide for React</a>
+  <a href="angular1.html" class="action">Guide for Angular 1</a>
+  <a class="action"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
+</nav>
+
+<%- @markdown => %>
+
+Note: We are using ES6 + JSX and transpile using Browserify and Babel in the following examples. You might want to read through [React document]() for more details.
+
+### Onsen UI HelloWorld with React
+
+To get started, let's create a simple Hello World application. The following sample code is a React version of Onsen UI HelloWorld.
+
+``` html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/onsenui.css">
+    <link rel="stylesheet" href="css/onsen-css-components.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    var App = React.createClass({
+      render: function() {
+        return (
+          <Ons.Page>
+            <div>Hello World!</div>
+            <Ons.Button />
+          </Ons.Page>
+        );
+      }
+    });
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+</html>
+```
+
+This example is loading the following JS libraries, react.js, react-dom.js, onsen.js and react-onsen.js. For stylesheets, it is loading onsenui.css and onsen-css-components.css which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](#TODO) document.
+
+```
+<link rel="stylesheet" href="css/onsenui.css">
+<link rel="stylesheet" href="css/onsen-css-components.css">
+```
+
+In `<body>` tag, there is only a `<div>` tag having `app` id. This is where React will render the content into, and you can see it in the very bottom of JS code.
+
+Also notice `<script>` tag has `jsx`(#TODO) type. This means this script is not a pure JavaScript that browser supports (most commonly [EcmaScript 5](#TODO)), but is a EcmaScript 6 with JSX format #TODO. [Babel](#TODO) will transpile this code into EcmaScript 5 in the browser. To get better performance, we can use node.js to transpile the code. Please read [Setup node.js to transpile React app](#TODO) for details.
+
+``` js
+var App = React.createClass({
+  render: function() {
+  }
+});
+```
+
+Inside the script, `React.createClass()` function defines a React Class (#Not a component?) called `App`. It has one property called `render`, and this is the function that is called when the app is rendered. The returning object is described in [JSX](#TODO), which is a XML like language to represent React Virtual DOM(#correct?). In this case, it is returning `<Ons.Page>` component that has `<div>` and `<Ons.Button`> component.
+
+``` js
+return (
+  <Ons.Page>
+    <div>Hello World!</div>
+    <Ons.Button />
+  </Ons.Page>
+);
+```
+
+As you can see in this example, all `<Ons.*>` components are React Components, and they are loaded by react-onsenui.js. Click here to see our full [Onsen UI React Components Reference](#TODO#).
+
+Putting together, when index.html is loaded into the browser, it will compile JSX code, inject into the body, and renders the content.
+
+This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read their official [React Tutorial](#TODO).
+
+### Loading Onsen UI for React
+
+Onsen UI for React is an extension to Onsen UI core, a Web components based UI framework. You need to load the following two JavaScript modules.
+
+- Onsen UI Core ([GitHub](https://github.com/onsenui/onsen.io))
+- Onsen UI for React Extension ([GitHub](https://github.com/onsenui/react-onsenui))
+
+You can load with a normal `<script>` tag as follows:
+
+``` html
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="onsen.js"></script>
+<script src="react-onsen.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+```
+
+Or, you can use React and Onsen UI from npm with CommonJS module system like Browserify or Webpack. In this case, use the `onsenui` and `react-onsenui` packages, in addition to `react` and `react-dom` npm packages. In the example below `ons` contains Onsen UI core instance, and `Ons` contains React components.
+
+```
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ons = require('onsen');
+var Ons = require('react-onsen');
+```
+
+Alternatively, you can also use `import()` to specify the modules you want to use in `react-onsen` pacakge.
+
+```
+import {Page, Toolbar, Button} from 'react-onsenui';
+```
+
+To see the instructions and more details, please visit [Introduction to Onsen UI with React](#TODO).
+
+### Event Handling
+
+Onsen UI components are capable of handling React [SyntheticEvent](https://facebook.github.io/react/docs/events.html) events. For instance, you can catch a tap event by using `onClick` event handler, or the text box change by `onChange` event handler.
+
+The following example describes how to get events that are native to React.
+
+``` javascript
+class MyPage extends React.Component {
+  handleClick() {
+    ons.notification.alert('Hello, world!');
+  }
+  render() {
+    return() (
+      <Page>
+         <Button onClick={this.handleClick}>Click me!</Button>
+      </Page>
+    );
+  }
+}
+```
+
+### Using DOM events
+
+Many of Onsen UI components will trigger additional DOM events. For instance, `Ons.Navigator` has `postpop` event which fires after a page is popped (become hidden).
+
+To catch those events, you can attach a DOM event like the example below.
+
+```
+var MyNavigator = React.createClass({
+  updateInformation: function(e) {
+    // Do some work
+  },
+  componentDidMount: function() {
+    window.addEventListener('postpop', this.updateInformation);
+  },
+  componentWillUnmount: function() {
+    window.removeEventListener('postpop', this.updateInformation);
+  },
+  // More code to satisfy Ons.Navigator Component
+});
+
+ReactDOM.render(<MyNavigator />, document.getElementById('app'));
+```
+
+`componentDidMount` is called after the component is mounted, and has a DOM representation. Likewise, `componentWillUnmount` is called when the component is about to get unmounted. 
+
+Event callback is bound to the react component and not the original element. React automatically binds methods to the current component instance for you through a process of autobinding.
+
+### Navigator Component (Navigator)
+
+Similar to [Navigator component](https://facebook.github.io/react-native/docs/navigator.html) in React Native, `Navigator` component provides a navigation feature which is also referred as master-detail design. 
+
+The component has a method called `pushPage(route)` which pushes a route object to an internal stack. The route object will contain the information to store in the page. `renderScene` function should be defined to render the route object into a view.
+
+``` javascript
+class MainPage extends React.Component {
+  pushPage() {
+    this.props.navigator.pushPage({component: SecondPage});
+  }
+
+  render() {
+    return (
+      <Page>
+        <Toolbar>
+          <div className="center">Navigator</div>
+        </Toolbar>
+
+        <p style={{textAlign: 'center'}}>
+          <Button onClick={this.pushPage.bind(this)}>Push page</Button>
+        </p>
+      </Page>
+    );
+  }
+}
+
+class SecondPage extends React.Component {
+  pushPage() {
+    this.props.navigator.pushPage({component: SecondPage});
+  }
+
+  popPage() {
+    this.props.navigator.popPage();
+  }
+
+  render() {
+    return (
+      <Page>
+        <Toolbar>
+          <div className="left"><BackButton>Back</BackButton></div>
+          <div className="center">Another page</div>
+        </Toolbar>
+
+        <p style={{textAlign: 'center'}}>
+          <Button onClick={this.pushPage.bind(this)}>Push page</Button>
+          <Button onClick={this.popPage.bind(this)}>Pop page</Button>
+        </p>
+      </Page>
+    );
+  }
+}
+
+export default class extends React.Component {
+  renderScene(route, navigator) {
+    const props = route.props || {};
+    props.navigator = navigator;
+
+    return React.createElement(route.component, props);
+  }
+
+  render() {
+    return (
+    );
+  }
+}
+```
+
+### Tab Bar Component (Tabbar)
+
+Tabbar component provides a tab based navigation.
+
+```
+import React from 'react';
+import {Tabbar, Tab, Page, Toolbar} from 'react-onsenui';
+
+class TabPage extends React.Component {
+  render() {
+    return (
+      <Page>
+        <Toolbar>
+          <div className="center">{this.props.title}</div>
+        </Toolbar>
+
+        <p style={{padding: '0 15px'}}>
+          This is the <strong>{this.props.title}</strong> page!
+        </p>
+      </Page>
+    );
+  }
+}
+
+export default class extends React.Component {
+  renderTabs() {
+    const sections = [
+      'Home',
+      'Comments',
+      'Settings'
+    ];
+
+    return sections.map((section) => {
+      return {
+        content: <TabPage key={section} title={section} />,
+        tab: <Tab key={section} label={section} />
+      };
+    });
+  }
+
+  render() {
+    return (
+      <Tabbar
+        initialIndex={1}
+        renderTabs={this.renderTabs}
+      />
+    );
+  }
+}
+```
+
+### Splitter Component (Splitter)
+
+Splitter provides a side menu that can be used to split two views.
+
+
+<!-- End of markdown -->
+<% end %>

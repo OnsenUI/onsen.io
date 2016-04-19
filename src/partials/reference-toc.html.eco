@@ -1,0 +1,33 @@
+<div class="toc-title">Guide</div>    
+<ul class="toc toc-1">
+  <li class="toc-item toc-1-item"><a href="/v2/guide/js.html" class="toc-link toc-1-link">Onsen UI Guide</a></li>
+  <li class="toc-item toc-1-item"><a href="/v2/guide/react.html" class="toc-link toc-1-link">Guide for React</a></li>
+  <li class="toc-item toc-1-item"><a href="/v2/guide/angular1.html" class="toc-link toc-1-link">Guide for Angular 1</a></li>
+</ul>
+
+<% renderToc = (extension, categoryTitle) => %>
+
+  <div class="toc-title<% if @docCategory == extension: %> toc-title-active<% end %>"><a href="/v2/reference/<%=extension%>.html"><%=categoryTitle%></a></div>
+
+  <ul class="toc toc-1" <% if @docCategory != extension: %>style="display: none"<% end %>>
+    <% for category, docs of @componentCategoryIndex2: %>
+    <li class="toc-item toc-1-item">
+      <a href="/v2/reference/<%=extension%>/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
+      <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
+      <% for doc in docs: %>
+        <% if doc.extension == @docCategory: %>
+          <li class="toc-item toc-2-item">
+            <a href="/v2/reference/<%=extension%>/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
+          </li>
+        <% end %>
+      <% end %>
+      </ul>
+    </li>
+    <% end %>
+  </ul>
+
+<% end %>
+
+<%= renderToc "js", "Web Components" %>
+<%= renderToc "react", "React" %>
+<%= renderToc "angular1", "Angular 1" %>

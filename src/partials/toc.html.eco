@@ -8,7 +8,7 @@
   <% if items.length: %>
   <ul class="toc toc-<%= level %>">
     <% for item in items: %>
-      <li class="toc-<%= level %>-item toc-item"><a href="<%= base %>#<%= item.id %>" class="toc-<%= level %>-link toc-link"><%= item.text %></a>
+      <li class="toc-<%= level %>-item toc-item"><a href="<%= base %>#<%= item.id %>" class="toc-<%= level %>-link toc-link"><%= item.text.replace(/\(.+\)$/, "").trim() %></a>
         <% if item.children: %>
         <%- renderToc item.children, level + 1 %>
         <% end %>

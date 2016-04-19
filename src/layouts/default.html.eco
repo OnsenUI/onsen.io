@@ -63,60 +63,20 @@
   <%- @partial('header.html.eco') if @header != false %>
 
   <section id="main-container">
-    <% if @toc: %>
+
+    <% if @autotoc: %>
       <aside class="content-info content-info-page">
-        <div class="toc-title toc-title-no-toggle">Table Of Contents</div>
+        <div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
         <%- @partial('toc.html.eco', {tocItems: @toc}) %>
       </aside>
-
       <div class="content">
         <%- @contents %>
         <%- @partial('need_help.html.eco') if @needHelp %>
       </div>
-
     <% else if @reference: %>
-
-      <aside class="content-info">
-
-        <div class="toc-title"><a href="/guide/overview.html">Onsen UI Guide</a></div>
-
-        <div class="toc-title<% if @page == 'css': %> toc-title-active<% end %>"><a href="/reference/css.html">CSS</a></div>
-
-        <ul class="toc toc-1<% if @page == 'css': %> content-info-page<% end %>"<% if @page != 'css': %> style="display: none"<% end %>>
-          <%- @partial('toc.html.eco', {tocItems: @cssToc, base: if @page == 'css' then '' else '/reference/css.html'}) %>
-        </ul>
-
-        <div class="toc-title<% if @docCategory == 'js': %> toc-title-active<% end %>"><a href="/reference/javascript.html">JavaScript</a></div>
-
-        <ul class="toc toc-1" <% if @docCategory != 'js': %>style="display: none"<% end %>>
-          <% for category, docs of @componentCategoryDict: %>
-          <li class="toc-item toc-1-item">
-            <a href="/reference/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
-            <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
-            <% for doc in docs: %>
-              <li class="toc-item toc-2-item">
-                <a href="/reference/<%= doc.name %>.html" class="toc-link toc-2-link<% if @name == doc.name: %> current<% end %>"><%- doc.name %></a>
-              </li>
-            <% end %>
-            </ul>
-          </li>
-          <% end %>
-        </ul>
-
-        <div class="toc-title<% if @docCategory == 'patterns': %> toc-title-active<% end %>"><a href="/patterns.html">Page Patterns</a></div>
-
-        <ul class="toc toc-1" <% if @docCategory != 'patterns': %>style="display: none"<% end %>>
-          <% for pattern in @patterns: %>
-          <li class="toc-item toc-1-item">
-            <a href="/pattern-<%= pattern %>" class="toc-link toc-1-link<% if @patternName == pattern: %> current<% end %>">
-              <%= @renderPatternName(pattern) %>
-            </a>
-          </li>
-          <% end %>
-        </ul>
-
+      <aside class="content-info content-info-page">
+        <%- @partial('reference-toc.html.eco') %>
       </aside>
-
       <div class="content">
         <%- @contents %>
         <%- @partial('need_help.html.eco') if @needHelp %>

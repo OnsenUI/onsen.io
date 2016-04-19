@@ -46,6 +46,7 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.is2 = true;
       file.componentCategory = doc.category;
       file.extension = extension;
+      file.docCategory = extension;
 
       if (docPath.indexOf("/element/") > -1) {
         file.icon = "element";
