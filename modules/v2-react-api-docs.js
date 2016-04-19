@@ -1,3 +1,4 @@
+
 var async = require('async');
 var globby = require('globby');
 var fs = require('fs');
@@ -17,45 +18,54 @@ function getTemplatePath(path) {
   return nodePath.resolve(basePath + '/src/misc/react-reference.html');
 }
 
-function parseDocComment(doc) {
+function parseDocComment(componentName, doc) {
   var ret = {};
+
   for (var key in doc) {
     if (typeof doc[key] === 'object' && doc[key] !== null) {
-      ret[key] = parseDocComment(doc[key]);
+      ret[key] = parseDocComment(componentName, doc[key]);
     } else if (typeof doc[key] === 'string') {
       switch (key) {
         case 'description':
         case 'docblock':
 
-var src = [
-'/**',
-doc[key],
-'*/',
-'function dummy(){}'
-].join("\n");
-var r = jsdoc.explainSync({ source: src })
-//console.log(JSON.stringify(r, null, "  "));
+          if (doc[key].trim().length === 0) break;
 
+          // Create a dummy function and parse
+          var src = [
+            '/**',
+            doc[key],
+            '*/',
+            'function dummy(){}'
+          ].join("\n");
+          var docgen = jsdoc.explainSync({ source: src })[0]
+          
+          // Parse tags
+          if (docgen.tags && docgen.tags.length > 0) {
+            for (var i = 0; i < docgen.tags.length; i++) {
+              ret[docgen.tags[i].title] = docgen.tags[i].value;
+            }
+          }
 
-          /*
-          var value = doc[key], match;
-          doc[key] = {};
-          while ((match = /@(\S+)[\s\n]+([^@]+)/m.exec(value)) !== null) {
-            ret[match[1]] = match[2].trim();
-            value = value.replace(match[0], '')
-          }
-          if (value.trim().length > 0) {
-            ret[key] = value;
-          }
-          */
+          // Parse others
+          ret["description"] = docgen.description;
+          ret["examples"] = docgen.examples;
+          ret["name"] = docgen.name == "dummy" ? null : docgen.name;
+          ret["required"] = docgen.name == "dummy" ? null : docgen.name;
+          ret["type"] = docgen.type;
+          ret["defaultValue"] = docgen.defaultValue;
+          ret["returns"] = docgen.returns;
+          ret["params"] = docgen.params;
+
           break;
         default:
-          ret[key] = doc[key];
+          if (typeof ret[key] === "undefined") ret[key] = doc[key];
       }
     } else {
-      ret[key] = doc[key];
+      if (typeof ret[key] === "undefined") ret[key] = doc[key];
     }
   }
+
   return ret;
 }
 
@@ -65,11 +75,36 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       if (error) {
         return reject(error);
       }
+      
+      var componentName = nodePath.basename(docPath, nodePath.extname(docPath))
+      try {
+        var doc = parseDocComment(componentName, JSON.parse(fs.readFileSync(docPath)));
+      } catch (e) {
+        return reject();
+      }
 
-      var doc = parseDocComment(JSON.parse(fs.readFileSync(docPath)));
+      // Remove unnecessary methods
+      if (doc.methods) {
+        for (m in doc.methods) {
+          if (Array.isArray(doc.methods[m].returns)) {
+            doc.methods[m].returns = doc.methods[m].returns[0];
+            doc.methods[m].returns.type.name = doc.methods[m].returns.type.names[0];
+          }
+          if (!doc.methods[m].description) {
+            delete doc.methods[m];
+          }
+        }
+      }
+
+/*
+if (componentName == "Navigator") {
+  console.log(componentName + "\n\n")
+  console.log(JSON.stringify(doc, null, "  "))
+}
+*/
 
       file.doc = doc;
-      file.name = nodePath.basename(docPath, nodePath.extname(docPath));
+      file.name = componentName;
       file.title = file.name;
       file.name = file.name;
       file.original = doc.original;

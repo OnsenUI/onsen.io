@@ -17,7 +17,7 @@ actionbar: false
 <div class="content">
   <div class="js-index"><div class="js-index-inner">
 
-    <% for category, docs of @componentCategoryIndex2: %>
+    <% for category, docs of @componentCategoryReact: %>
     <div class="js-index-category">
       <h4 class="js-index-header"><%- @titlize category %></h4>
 
@@ -25,7 +25,7 @@ actionbar: false
         <% for doc in docs: %>
         <li class="js-index-list-item
           js-index-list-item-<%- if doc.doc.docType == 'object' then 'object' else 'element' %>">
-          <a href="/v2/reference/<%= doc.name %>.html" class="js-index-link"><%= doc.name %></a>
+          <a href="/v2/reference/react/<%= doc.name %>.html" class="js-index-link"><%= doc.name %></a>
         </li>
         <% end %>
       </ul>
@@ -33,8 +33,6 @@ actionbar: false
     <% end %>
 
   </div></div>
-
-  <p style="background-color: #eee; padding: 8px 12px;"><span class="js-index-extension-name">angular</span> <span style="font-size: 90%; opacity: 0.8">→ AngularJS binding only</span></p>
 
 </div>
 

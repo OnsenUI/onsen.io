@@ -2,18 +2,14 @@
 page: 'reference-detail'
 needHelp: true
 reference: true
+docCategory: react
 layout: 'default.html.eco'
-autotoc: true
 ---
 
 <div class="content"><div class="reference-container">
-  <div><a href="/v2/reference/javascript.html">&lt; Back</a></div>
+  <div><a href="/v2/reference/react.html">&lt; Back</a></div>
 
   <h2><%= @doc.name %></h2>
-
-  <p class="reference-extension-note">
-    This component is available with <span class="reference-extension-name">React extension</span>.
-  </p>
 
   <section class="reference-description">
     <p><%= @translate @doc.description %></p>
@@ -67,8 +63,8 @@ autotoc: true
               <%= prop.name %>
             </td>
             <td>
-              <% if prop.type: %>
-              <span class="value-type"><%= prop.type %></span>
+              <% if prop.type && prop.type.names: %>
+              <span class="value-type"><%= prop.type.names[0] %></span>
               <% end %>
               <% if prop.defaultValue: %>
               <br><span class="default-value" style="color: green"><%= prop.defaultValue %></span>
@@ -77,7 +73,7 @@ autotoc: true
             <td>
               <%= @translate prop.description %>
 
-              <% if prop.required == 'true': %>
+              <% if prop.required == prop.name: %>
               <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
               <% else: %>
               <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
@@ -118,7 +114,7 @@ autotoc: true
         <% for key, method of @doc.methods: %>
           <tr>
             <td>
-              <a href="#method-<%= method.name %>"><%= method.signature %></a>
+              <a href="#method-<%= method.name %>"><%= method.signature || method.name %></a>
             </td>
             <td><%= @translate method.description %>
               <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
@@ -137,14 +133,13 @@ autotoc: true
   <% for key, method of @doc.methods: %>
     <section class="method-detail">
       <h4 id="method-<%= method.name %>">
-        <%= method.signature %><% if method.return: %><span class="value-type">: <%= method.return %></span><% end %>
+        <%= method.signature || method.name %><% if method.returns && method.returns.type: %><span class="value-type">: <%= method.returns.type.name %></span><% end %>
         <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
       </h4>
 
       <p><%= @translate method.description %></p>
-
-      <% if method.extensionOf: %>
-      <span class="reference-extension-name"><%= method.extensionOf %></span>
+      <% if method.returns: %>
+        <p><% if @lang == "en": %>Returns: <% else: %>戻り値<% end %> <%= @translate method.returns.description %></p>
       <% end %>
 
       <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
@@ -168,7 +163,7 @@ autotoc: true
           </tr>
         </thead>
         <tbody>
-          <% for param in method.params: %>
+          <% for key, param of method.params: %>
           <tr>
             <td><span class="parameter-name"><%= param.name %></span></td>
             <td class="value-type"><%= param.type %></td>

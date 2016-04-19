@@ -53,23 +53,46 @@ module.exports = function(lang, isStaging) {
         .use(function(files, metalsmith, done) {
           setImmediate(done);
 
-          var dict = {};
-          var dict2 = {};
+          var dictV1 = {}, dictWc = {}, dictReact = {};
           for (var path in files) {
             var file = files[path];
-            if (file.componentCategory) {
-              var currentDict = file.is2 ? dict2 : dict;
+
+            if (file.componentCategory && !file.is2) {
+              // v1 file
               file.componentCategory.split(/, */).forEach(function(category) {
-                if (!currentDict[category]) {
-                  currentDict[category] = [];
+                if (!dictV1[category]) {
+                  dictV1[category] = [];
                 }
-                currentDict[category].push(file);
+                dictV1[category].push(file);
               });
+            } else if (file.componentCategory) {
+              switch (file.extension) {
+                case "react":
+                  file.doc.originalDoc = files["v2/reference/js/" + file.doc.original + ".html"].doc;
+                  file.componentCategory.split(/, */).forEach(function(category) {
+                    if (!dictReact[category]) {
+                      dictReact[category] = [];
+                    }
+                    dictReact[category].push(file);
+                  });
+
+                  break;
+                case "angular1":
+                case "js":
+                  file.componentCategory.split(/, */).forEach(function(category) {
+                    if (!dictWc[category]) {
+                      dictWc[category] = [];
+                    }
+                    dictWc[category].push(file);
+                  });
+                  break;
+              }
             }
           }
 
-          metalsmith.metadata().componentCategoryDict = sortObject(dict);
-          metalsmith.metadata().componentCategoryIndex2 = sortObject(dict2);
+          metalsmith.metadata().componentCategoryV1 = sortObject(dictV1);
+          metalsmith.metadata().componentCategoryWc = sortObject(dictWc);
+          metalsmith.metadata().componentCategoryReact = sortObject(dictReact);
         })
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())

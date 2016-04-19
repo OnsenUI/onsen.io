@@ -5,12 +5,12 @@
   <li class="toc-item toc-1-item"><a href="/v2/guide/angular1.html" class="toc-link toc-1-link">Guide for Angular 1</a></li>
 </ul>
 
-<% renderToc = (extension, categoryTitle) => %>
+<% renderToc = (categories, extension, categoryTitle) => %>
 
   <div class="toc-title<% if @docCategory == extension: %> toc-title-active<% end %>"><a href="/v2/reference/<%=extension%>.html"><%=categoryTitle%></a></div>
 
   <ul class="toc toc-1" <% if @docCategory != extension: %>style="display: none"<% end %>>
-    <% for category, docs of @componentCategoryIndex2: %>
+    <% for category, docs of categories: %>
     <li class="toc-item toc-1-item">
       <a href="/v2/reference/<%=extension%>/<%= docs[0].name %>.html" class="toc-link toc-1-link"><%- @titlize(category) %></a>
       <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
@@ -28,6 +28,6 @@
 
 <% end %>
 
-<%= renderToc "js", "Web Components" %>
-<%= renderToc "react", "React" %>
-<%= renderToc "angular1", "Angular 1" %>
+<%= renderToc @componentCategoryWc, "js", "Web Components" %>
+<%= renderToc @componentCategoryReact, "react", "React" %>
+<%= renderToc @componentCategoryWc, "angular1", "Angular 1" %>
