@@ -38,6 +38,10 @@ layout: '2.html.eco'
     <li><a href="#attributes"><%= @translate '[en]Attributes[/en][ja]属性[/ja]' %></a></li>
     <% end %>
 
+    <% if @doc.properties.length > 0: %>
+    <li><a href="#properties"><%= @translate '[en]Properties[/en][ja]プロパティ[/ja]' %></a></li>
+    <% end %>
+
     <% if @doc.modifiers.length > 0: %>
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
@@ -171,6 +175,42 @@ layout: '2.html.eco'
   </section>
   <% end %>
   <!-- end attributes -->
+
+  <!-- property -->
+  <% if @doc.properties.length > 0: %>
+  <section>
+    <h3 id="properties">
+      <% if @lang == "en": %>Properties<% else: %>プロパティ概要<% end %>
+      <a href="#properties" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for property in @doc.properties: %>
+        <tr>
+          <td class="attribute-name">
+            <%= property.name %>
+          </td>
+          <td><%= @translate property.description %>
+            <% if property.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end properties -->
 
   <!-- modifiers -->
   <% if @doc.modifiers.length > 0: %>

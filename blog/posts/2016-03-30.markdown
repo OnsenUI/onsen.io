@@ -15,6 +15,8 @@ We have developed a collection of React components for Onsen UI 2.0. In this art
 
 <!-- more -->
 
+We have just published an article on how to use the `Navigator` and `Tabbar` React components. Please take a look [here](/blog/react-onsen-ui-navigator-tabs) after reading this article.
+
 Onsen UI 1.x was built on top of Angular. The Angular dependency made it hard for us to develop React components for Onsen UI 1.x since Angular and React don't play well together, not to mention that the developer would be forced to load two libraries just to be able to use the components. With Onsen UI 2.0 this is not an issue anymore since the core library has been reimplemented in pure JavaScript as [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components).
 
 The demos in this article are available [here](http://argelius.github.io/react-onsenui-demos/www/index.html). In case you missed it we released [automatic styling](https://onsen.io/blog/auto-style-app-onsen/) in the latest beta. The demos use the latest development version so they will be automatically styled based on the platform. To see it in action you can open DevTools in Chrome and change to an Android device. If you reload the page the components will automatically switch to Material Design.
@@ -99,21 +101,21 @@ We would love to know what you think about these components. You can try them ou
 
 This is a list of some of the components that have already been implemented:
 
-* `OnsDialog`
+* `Dialog`
 Modal dialogs
-* `OnsPopover`
+* `Popover`
 A popover element
-* `OnsFab`
+* `Fab`
 The [Floating action button](https://www.google.com/design/spec/components/buttons-floating-action-button.html) from Material Design
-* `OnsInput`
+* `Input`
 Input elements such as text inputs, checkboxes and radio buttons
-* `OnsNavigator`
+* `Navigator`
 Stack based navigation
-* `OnsPullHook`
+* `PullHook`
 A "pull to refresh" component
-* `OnsSwitch`
+* `Switch`
 Draggable toggle switch
-* `OnsTabbar`
+* `Tabbar`
 Tab based navigation
 * And many more...
 
