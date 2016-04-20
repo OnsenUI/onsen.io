@@ -155,6 +155,12 @@ module.exports = function() {
         return 'Onsen: ' + title;
       },
 
+      getPreparedBlogTitle: function() {
+        var title = this.pageTitle || this.title || this.site.title;
+        var category = this.category ? (this.category[0].toUpperCase() + this.category.slice(1)) : "Monaca x Onsen Blog";
+        return category + ': ' + title;
+      },
+
       getPreparedDescription: function() {
         return this.description || this.site.description;
       },

@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-  <title><%= @getPreparedTitle() %></title>
+  <title><%= @getPreparedBlogTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
   <meta name="date" content="<%= @renderBlogDateShort @date %> 12:00" scheme="YYYY-MM-DD" />
       
