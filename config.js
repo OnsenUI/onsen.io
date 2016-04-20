@@ -79,7 +79,7 @@ module.exports = function(language, isStaging) {
 
   var categories = {
     'showcase': {
-      name: 'Showcases',
+      name: 'Showcase',
       title: 'Discover the apps made with Onsen UI and Monaca'
     },
     'announcement': {
