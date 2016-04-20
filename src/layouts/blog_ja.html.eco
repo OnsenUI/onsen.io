@@ -81,7 +81,7 @@
           </div>
 
           <div class="article-date">
-            BY <%- @author.name %> / <time datetime="<%= @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time>
+            <%- @author.name %> / <time datetime="<%= @renderBlogDateShort @date %>"><%- @renderBlogDate @date %></time>
           </div>
 
           <%- @partial('blog-share.html.eco', {id: @id, blogTitle: @title}) %>
@@ -123,7 +123,7 @@
       <% end %>
 
       <div class="tag-cloud">
-        <h2>Related tags</h2>
+        <h2>関連するタグ</h2>
 
         <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
         <a
