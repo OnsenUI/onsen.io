@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Dropdown
   var dropdown = $('.dropdown:not(#main-nav .dropdown)');
-  var extensions = ['Pure JavaScript', 'Angular 1', 'Angular 2', 'React'].filter(function(e) {
+  var extensions = ['JavaScript', 'Angular 1', 'Angular 2', 'React'].filter(function(e) {
     return e != dropdown.html();
   });
   dropdown.append('<ul>' + extensions.map(function(e) { return '<li><a>' + e + '</a></li>'; }).join('') + '</ul>');
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
       location.hash = tabs[0].href.split('#')[1];
     }
   };
-  window.onhashchange();
+  //window.onhashchange();
 
   $('[href=#]').click(function(e) {
     e.preventDefault();
