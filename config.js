@@ -68,7 +68,7 @@ module.exports = function(language, isStaging) {
       gravator: '31893df4323fac99458ed86784e25a77'
     },
     atsushi: {
-      name: '中津川 篤司',
+      name: '中津川篤司',
     }
   };
 
@@ -103,7 +103,7 @@ module.exports = function(language, isStaging) {
     ja: {
       news: {
         name: 'ニュース',
-        title: 'MonacaとOnsen UI に関するニュース'
+        title: 'MonacaとOnsen UIに関するニュース'
       },
       development: {
         name: '技術情報',
@@ -111,7 +111,7 @@ module.exports = function(language, isStaging) {
       },
       events: {
         name: 'イベント情報',
-        title: 'MonacaとOnsen UI に関するイベント情報'
+        title: 'MonacaとOnsen UIに関するイベント情報'
       },
       showcase: {
         name: '事例紹介',
