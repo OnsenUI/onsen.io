@@ -104,6 +104,7 @@
           </ul>
         </li>
         <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
+        <li class="header-navi-item <%- if @page is 'blog' or @isBlogArticle then 'current' %>"><a href="/blog/">BLOG</a></li>
         <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="Jump icon" title="External link" height="12"></a></li>
         <li class="header-navi-item"><a href="http://onsen.io/">ENGLISH</a></li>
       <% end %>

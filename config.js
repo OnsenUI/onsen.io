@@ -66,6 +66,9 @@ module.exports = function(language, isStaging) {
     konstantin: {
       name: 'Konstantin Dinev',
       gravator: '31893df4323fac99458ed86784e25a77'
+    },
+    atsushi: {
+      name: '中津川篤司',
     }
   };
 
@@ -78,27 +81,50 @@ module.exports = function(language, isStaging) {
   }
 
   var categories = {
-    'showcase': {
-      name: 'Showcases',
-      title: 'Discover the apps made with Onsen UI and Monaca'
+    en: {
+      showcase: {
+        name: 'Showcase',
+        title: 'Showcase of apps made with Onsen UI and Monaca'
+      },
+      announcement: {
+        name: 'Announcements',
+        title: 'Announcements of new features in Monaca and Onsen UI'
+      },
+      development: {
+        name: 'Development',
+        title: 'Articles about hybrid app development, HTML5, CSS and more'
+      },
+      tutorial: {
+        name: 'Tutorial',
+        title: 'Tutorials on how to create hybrid mobile apps, web apps, HTML5, CSS and JavaScript'
+      }
     },
-    'announcement': {
-      name: 'Announcements',
-      title: 'Check out the latest features in Monaca and Onsen UI'
-    },
-    'development': {
-      name: 'Development',
-      title: 'Articles about hybrid app development, HTML5, CSS and more'
-    },
-    'tutorial': {
-      name: 'Tutorials',
-      title: 'Learn how to create hybrid mobile apps, web apps, HTML5, CSS and JavaScript'
+
+    ja: {
+      news: {
+        name: 'ニュース',
+        title: 'MonacaとOnsen UIに関するニュース'
+      },
+      development: {
+        name: '技術情報',
+        title: 'ハイブリッドアプリ開発、HTML5、CSSなどに関する技術情報'
+      },
+      events: {
+        name: 'イベント情報',
+        title: 'MonacaとOnsen UIに関するイベント情報'
+      },
+      showcase: {
+        name: '事例紹介',
+        title: 'MonacaとOnsen UIの活用事例紹介'
+      }
     }
   };
 
+
+
   var env = {
     authors: authors,
-    categories: categories,
+    categories: categories[language],
 
     en: {
       url: 'https://onsen.io',
