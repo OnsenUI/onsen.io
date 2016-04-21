@@ -10,9 +10,15 @@
     <div class="article-avator">
       <img src="//www.gravatar.com/avatar/<%- @article.author.gravator %>?s=30" alt="" class="article-avator-image">
     </div>
+    <% if @lang == 'en': %>
     <div class="article-date article-overview-date">
       BY <a href="/blog/<%- @article.author.id %>/"><%- @article.author.name %></a> / <time datetime="<%= @renderBlogDateShort @article.date %> 12:00"><%- @renderBlogDate @article.date %></time>
     </div>
+    <% else: %>
+    <div class="article-date article-overview-date">
+      <%- @article.author.name %> / <time datetime="<%= @renderBlogDateShort @article.date %> 12:00"><%- @renderBlogDate @article.date %></time>
+    </div>
+    <% end %>
     <%- @partial('blog-share.html.eco', {id: @article.id, blogTitle: @article.title}) %>
 
   </header>
@@ -27,10 +33,15 @@
         <% end %>
       </div>
     <% end %>
-
+  <% if @lang == 'en': %>
     <div class="article-overview-readmore">
       <a class="site-button" href="<%= @rootUrl %>blog/<%- @article.id %>/">READ MORE</a>
     </div>
+  <% else: %>
+    <div class="article-overview-readmore">
+      <a class="site-button" href="<%= @rootUrl %>blog/<%- @article.id %>/">もっと読む</a>
+    </div>
+  <% end %> 
   </footer>
 
 </article>

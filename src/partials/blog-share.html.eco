@@ -1,16 +1,33 @@
 
 <div class="article-share">
-  <div class="article-share-twitter">
-    <a 
-      href="https://twitter.com/share" class="twitter-share-button" 
-      data-text="<%= @getShortenedTitle(@blogTitle, 100) %>" data-via="Onsen_UI" data-url="http://onsen.io/blog/<%= @id %>/">Tweet</a>
-  </div>
-  <div class="article-share-fb">
-    <div id="fb-root"></div>
-    <div class="fb-share-button" data-href="http://onsen.io/blog/<%= @id %>/" data-type="button_count"></div>
-  </div>
-  <div class="article-share-gplus">
-    <div class="g-plusone" data-size="medium" data-href="http://onsen.io/blog/<%= @id %>/"></div>
-  </div>
+  <% if @lang == 'en': %>
+    <div class="article-share-twitter">
+      <a 
+        href="https://twitter.com/share" class="twitter-share-button" 
+        data-text="<%= @getShortenedTitle(@blogTitle, 100) %>" data-via="Onsen_UI" data-url="http://onsen.io/blog/<%= @id %>/">Tweet</a>
+    </div>
+    <div class="article-share-fb">
+      <div id="fb-root"></div>
+      <div class="fb-share-button" data-href="http://onsen.io/blog/<%= @id %>/" data-type="button_count"></div>
+    </div>
+    <div class="article-share-gplus">
+      <div class="g-plusone" data-size="medium" data-href="http://onsen.io/blog/<%= @id %>/"></div>
+    </div>
+  <% else: %>
+    <div class="article-share-twitter">
+        <a 
+          href="https://twitter.com/share" class="twitter-share-button" 
+          data-text="<%= @getShortenedTitle(@blogTitle, 100) %>" data-via="Onsen_UI" data-url="http://ja.onsen.io/blog/<%= @id %>/">Tweet</a>
+    </div>
+    <div class="article-share-fb">
+      <div id="fb-root"></div>
+      <div class="fb-share-button" data-href="http://ja.onsen.io/blog/<%= @id %>/" data-type="button_count"></div>
+    </div>
+    <div class="article-share-hatena">
+      <a href="http://b.hatena.ne.jp/entry/add/http://ja.onsen.io/blog/">
+        <img src="http://b.st-hatena.com/images/entry-button/button-only.gif" width="20" height="20" alt="このエントリーをはてなブックマークに追加" title="このエントリーをはてなブックマークに追加">
+      </a>
+    </div>
+  <% end %>
 </div>
 

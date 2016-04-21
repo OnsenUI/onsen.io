@@ -132,16 +132,11 @@ module.exports = function(lang, isStaging) {
     },
 
     authors: function(done) {
-      if (lang === 'ja') {
-        done();
-        return;
-      }
-
       metalsmith(__dirname + '/../')
         .clean(false)
-        .source('./blog/authors/')
+        .source(lang === 'ja' ? './blog_ja/authors/' : './blog/authors/')
         .metadata(require('../config.js')(lang, isStaging))
-        .destination('./out_en/blog/')
+        .destination(lang === 'ja' ? './out_ja/blog/' : './out_en/blog/')
         .use(require('./helpers')())
         .use(branch('*.markdown')
           .use(markdown({
@@ -178,17 +173,11 @@ module.exports = function(lang, isStaging) {
    },
 
     blog: function(done) {
-
-      if (lang === 'ja') {
-        done();
-        return;
-      }
-
       metalsmith(__dirname + '/../')
         .clean(false)
-        .source('./blog/posts/')
-        .destination('./out_en/blog/')
-        .metadata(require('../config.js')('en'))
+        .source(lang === 'ja' ? './blog_ja/posts/' : './blog/posts/')
+        .destination(lang === 'ja' ? './out_ja/blog/' : './out_en/blog/')
+        .metadata(require('../config.js')(lang))
         .use(function(files, metalsmith, done) {
           setImmediate(done);
           metalsmith.metadata().isBlog = true;
@@ -313,11 +302,11 @@ module.exports = function(lang, isStaging) {
           .use(layouts({
             engine: 'eco',
             directory: './src/layouts/',
-            default: 'blog.html.eco'
+            default: lang === 'ja' ? 'blog_ja.html.eco' : 'blog.html.eco'
           }))
         )
         .use(assets({
-          source: './blog/content',
+          source: lang === 'ja' ? './blog_ja/content/' : './blog/content/',
           destination: './content'
         }))
         .use(sitemap({
