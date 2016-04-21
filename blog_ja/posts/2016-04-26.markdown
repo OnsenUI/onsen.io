@@ -1,0 +1,82 @@
+---
+author: atsushi
+date: 2016-04-26
+id: monaca-secure-storage
+title: "Monacaアプリで小さなデータをセキュアに保存するSecureStorageを試してみる"
+product: monaca
+tags: monaca, cordova, cordova-plugins, secure-storage
+category: development
+---
+
+Monacaアプリで小さなデータをセキュアに保存するSecureStorageを試してみる
+
+アプリにおいてデータをセキュアに保存する方法というのは常に問題になります。サーバサイドのソフトウェアであれば大して問題になりませんが、ユーザのスマートフォンにインストールされるスマートフォン/タブレットアプリにおいては方法を考える必要があります。
+
+今回はちょっとした文字データをセキュアに保存するためのCordovaプラグイン、[SecureStorage](https://github.com/Crypho/cordova-plugin-secure-storage)を試してみました。
+
+### インストールする
+
+SecureStorageはCordovaプラグインになるので、ゴールドプラン以上が対象になります。インストールはCordovaプラグインの管理から行ってください。
+
+検索でcordova-plugin-secure-storageを探します。
+
+インストールが終わったら使える状態になります。
+
+### 使ってみる
+
+SecureStorageはlocalStorageライクなKVSになります。まず最初にストレージオブジェクトを作ります。その際、ネームスペースを指定します。一つ目の引数が成功時、二つ目が失敗時になります。最後の引数がネームスペースです。
+
+```
+var ss = new cordova.plugins.SecureStorage(
+    function () {
+      console.log('Success')
+    },
+    function (error) {
+      console.log('Error ' + error);
+    },
+    'my_app');
+```
+
+値を設定するのはsetを使います。こちらも一つ目の引数が成功時、二つ目が失敗時のコールバックです。そして三つ目と四つ目でキーと値を指定します。この辺りの使い方は独特です。
+
+```
+ss.set(
+    function (key) {
+      console.log('Set ' + key);
+    },
+    function (error) {
+      console.log('Error ' + error);
+    },
+    'mykey', 'myvalue');
+```
+
+値を取得するのはgetになります。削除はremoveです。
+
+```
+ss.get(
+    function (value) {
+      console.log('Success, got ' + value);
+    },
+    function (error) {
+      console.log('Error ' + error);
+    },
+    'mykey');
+```
+
+![](/blog/content/images/2016/Apr/secure-storage.png)
+
+### SecureStorageの仕組み
+
+SecureStorageはiOSについてはキーチェーンを使っています。[SSKeychain](https://github.com/soffes/sskeychain)をラッピングする形になっています。
+
+Androidについてはキーチェーンがないので、256bitのAESキーを生成して暗号化、Android KeyStoreから生成したRSAを使ってAESキーも暗号化します。そして、キーと値をlocalStorageに保存するという仕組みになっています。
+
+実際に暗号化されたデータを確認できないのですが、キーチェーンなどを使って保存されていれば安心ではないでしょうか。
+
+----
+
+SecureStorageはCordovaプラグインなので、実際に試す際にはアプリとしてビルドしてください。また、各端末にインストールされたアプリごとにデータが保存されますので、アプリ全体で共通な暗号化ストレージとして使える訳ではありませんのでご注意ください。
+
+ユーザが作成したデータなどをKVSに安全に保存しておきたいといった場合に便利ではないでしょうか。アプリ全体を暗号化したい場合はエンタープライズの[アプリロジック暗号化 プラグイン ( Monaca エンタープライズ専用 )](https://docs.monaca.io/ja/reference/third_party_phonegap/html5_resource_encryption/)をご利用ください。
+
+[Crypho/cordova-plugin-secure-storage](https://github.com/Crypho/cordova-plugin-secure-storage)

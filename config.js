@@ -66,6 +66,9 @@ module.exports = function(language, isStaging) {
     konstantin: {
       name: 'Konstantin Dinev',
       gravator: '31893df4323fac99458ed86784e25a77'
+    },
+    atsushi: {
+      name: '中津川 篤司',
     }
   };
 
@@ -100,7 +103,7 @@ module.exports = function(language, isStaging) {
     ja: {
       news: {
         name: 'ニュース',
-        title: 'Monaca と　Onsen UI に関するニュース'
+        title: 'MonacaとOnsen UI に関するニュース'
       },
       development: {
         name: '技術情報',
@@ -108,11 +111,11 @@ module.exports = function(language, isStaging) {
       },
       events: {
         name: 'イベント情報',
-        title: 'Monaca と　Onsen UI に関するイベント情報'
+        title: 'MonacaとOnsen UI に関するイベント情報'
       },
-      tutorial: {
+      showcase: {
         name: '事例紹介',
-        title: 'ハイブリッドアプリ開発、Webアプリ、 HTML5 、 CSS 、およびJavaScriptについてのチュートリアル'
+        title: 'MonacaとOnsen UIの活用事例紹介'
       }
     }
   };
