@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-  <title><%= @getPreparedTitle() %></title>
+  <title><%= @getPreparedBlogTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
   <meta name="date" content="<%= @renderBlogDateShort @date %> 12:00" scheme="YYYY-MM-DD" />
       
@@ -109,7 +109,7 @@
       </div>
 
       <% else if @tag: %>
-        <h2 class="tag">Posts for <span class="tag-name"><%- @tag %></span></h2>
+        <h2 class="tag"><span class="tag-name"><%- @tag %></span>に関する投稿</h2>
         <% for article in @pagination.files: %>
           <%- @partial('blog-post.html.eco', {article: article}) %>
         <% end %>
