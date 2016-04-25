@@ -157,7 +157,8 @@ module.exports = function() {
 
       getPreparedBlogTitle: function() {
         var title = this.pageTitle || this.title || this.site.title;
-        var category = this.lang == 'ja' ? "Monaca x Onsenブログ" : (this.category ? (this.category[0].toUpperCase() + this.category.slice(1)) : "Monaca x Onsen Blog");
+        var category =  this.category ? (this.category[0].toUpperCase() + this.category.slice(1)) : 'Monaca x Onsen' + (this.lang == 'ja' ? 'ブログ' : ' Blog')
+
         return category + ': ' + title;
       },
 
