@@ -101,19 +101,19 @@ module.exports = function(language, isStaging) {
     },
 
     ja: {
-      news: {
+      'ニュース': {
         name: 'ニュース',
         title: 'MonacaとOnsen UIに関するニュース'
       },
-      development: {
+      '技術情報': {
         name: '技術情報',
         title: 'ハイブリッドアプリ開発、HTML5、CSSなどに関する技術情報'
       },
-      events: {
+      'イベント情報': {
         name: 'イベント情報',
         title: 'MonacaとOnsen UIに関するイベント情報'
       },
-      showcase: {
+      '事例紹介': {
         name: '事例紹介',
         title: 'MonacaとOnsen UIの活用事例紹介'
       }
