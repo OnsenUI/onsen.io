@@ -158,9 +158,9 @@ module.exports = function() {
       getPreparedBlogTitle: function() {
         var title = this.pageTitle || this.title || this.site.title;
         if (this.lang === 'ja') {
-          var category = this.category ? (this.category[0].toUpperCase() + this.category.slice(1)) : "Monaca x Onsenブログ";
+          var category = this.category ? this.category : "Monaca x Onsenブログ";
         } else {
-          var category = this.category ? this.category : "Monaca x Onsen Blog";
+          var category = this.category ? (this.category[0].toUpperCase() + this.category.slice(1)) : "Monaca x Onsen Blog";
         }
 
         return category + ': ' + title;
