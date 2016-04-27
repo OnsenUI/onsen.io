@@ -4,8 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-
-### Carousel (ons-carousel)
+## Carousel (ons-carousel)
 
 Carousel provides a container to display multiple items in the element. It can be used as a full screen component, or inside another element.
 

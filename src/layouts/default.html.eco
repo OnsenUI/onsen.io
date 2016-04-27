@@ -36,7 +36,7 @@
   <script defer src="/vendor/jquery.js"></script>
 
   <script src="//use.typekit.net/bys8jdj.js"></script>
-  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script>
   <script src="/scripts/popup.js"></script>
 
   <script>
@@ -76,7 +76,14 @@
         <%- @partial('need_help.html.eco') if @needHelp %>
       </div>
     <% else if @reference: %>
-      <% if @version != "v1": %>
+      <% if @version == "v1": %>
+
+        <aside class="content-info content-info-page">
+          <%- @partial('reference-toc-v1.html.eco') %>
+        </aside>
+
+
+      <% else: %>
         <aside class="content-info content-info-page">
           <%- @partial('reference-toc.html.eco') %>
         </aside>

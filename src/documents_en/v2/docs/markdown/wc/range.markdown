@@ -4,7 +4,7 @@ component: js/ons-range,angular1/ons-range
 framework: js,angular1
 ---
 
-### Range (ons-range)
+## Range (ons-range)
 
 To draw a range, use `<ons-range>` element.
 

@@ -4,6 +4,8 @@ component: js/ons-navigator,angular1/ons-navigator
 framework: js,angular1
 ---
 
+## Navigation
+
 In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/v2/reference/js/ons-navigator.html). `<ons-navigator>` is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/v2/reference/js/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
 
 [`<ons-navigator>`](/v2/reference/js/ons-navigator.html) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](/v2/reference/js/ons-page.html) elements; therefore only [`<ons-page>`](/v2/reference/js/ons-page.html) components can be placed directly under a [`<ons-navigator>`](/v2/reference/js/ons-navigator.html) element.

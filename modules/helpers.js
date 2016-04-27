@@ -86,7 +86,13 @@ module.exports = function() {
 
       markd: function(string) {
         try {
-          return marked(string.toString());
+          if (string.indexOf("\n") == -1) {
+            // Inline
+            var str = marked(string.toString());
+            return str.replace(new RegExp("^<p>"), '').replace(new RegExp("</p>\n$"), '');
+          } else {
+            return marked(string.toString());
+          }
         } catch(e) {
           return e.toString();
         }
@@ -225,6 +231,15 @@ module.exports = function() {
 
       getAlternateLang: function() {
         return this.lang === 'en' ? 'ja' : 'en';
+      },
+
+      frameworkName: function(framework) {
+        switch (framework) {
+          case "js": return "JavaScript";
+          case "angular1": return "Angular 1";
+          case "angular2": return "Angular 2";
+          case "react": return "React";
+        }
       },
 
       translate: function(message) {

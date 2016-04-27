@@ -4,7 +4,7 @@ component: js/ons-icon,angular1/ons-icon
 framework: js,angular1
 ---
 
-### Icons (ons-icon)
+## Icons (ons-icon)
 
 Onsen UI offers over 400 icons provided by [Font Awesome](http://fontawesome.github.io/) and over 500 icons by [Ionicons](http://ionicons.com/).
 

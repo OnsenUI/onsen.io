@@ -4,7 +4,7 @@ component: js/ons-list,js/ons-list-item,js/ons-list-header,angular1/ons-list,ang
 framework: js,angular1
 ---
 
-### List (ons-list)
+## List (ons-list)
 
 List is a very popular pattern to display a set of data in a scrollable view. Onsen UI supports scrollable lists by using [`<ons-list>`](/v2/reference/js/ons-list.html) and [`<ons-list-item>`](/v2/reference/js/ons-list-item.html) tags. `<ons-lazy-repeat>` is also provided if you want a list with a large number of items.
 

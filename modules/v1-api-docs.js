@@ -48,6 +48,13 @@ module.exports = function(lang) {
           files[path] = file;
           files[path].version = "v1";
           files[path].icon = icon;
+          if (lang == "en") {
+            files[path].title = files[path].title + " Reference - Onsen UI Framework";
+            files[path].h1 = files[path].title + " Reference";
+          } else {
+            files[path].title = files[path].title + " リファレンス - Onsen UIフレームワーク";
+            files[path].h1 = files[path].title + " リファレンス";
+          }
               
           done();
         });

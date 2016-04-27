@@ -10,11 +10,15 @@
   <% for category, docs of @componentCategories[@framework]: %>
   <div class="js-index-category">
     <h4 class="js-index-header">
-      <%- docs.title || @titlize category %>
-      <!--<img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16">-->
+      <% if docs.index: %>
+        <a href="/v2/docs/<%=@framework%>/<%=category%>.html"><%- docs.title || @titlize category %></a>
+      <% else: %>
+        <%- docs.title || @titlize category %>
+      <% end %>
+      <!-- <img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16"> -->
       <div class="js-index-guide">
         <% if docs.index: %>
-          <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Usage Guide</a></span>
+          <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Guide</a></span>
         <% end %>
       </div>
     </h4>

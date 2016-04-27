@@ -4,9 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-
-
-### Popover (ons-popover)
+## Popover (ons-popover)
 
 A popover can be used to give additional information about a component or add extra functionality.
 

@@ -4,8 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-
-### Splitter Side Menu (ons-splitter)
+## Splitter Side Menu (ons-splitter)
 
 A menu can be added using the `<ons-splitter>`. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
 

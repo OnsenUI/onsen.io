@@ -106,6 +106,11 @@
 
       > .logo {
         position: absolute;
+
+        > a {
+          padding-top: 8px;
+        }
+
       }
 
       > ul {
@@ -115,7 +120,7 @@
     }
 
     a {
-      color: #666;
+      color: #444;
       display: inline-block;
       padding: 10px;
       text-decoration: none;
@@ -126,7 +131,7 @@
       display: inline-block;
       vertical-align: top;
       margin: 0 10px;
-      opacity: 0.7;
+      opacity: 0.9;
       color: #666;
       text-align: left;
       position: relative;
@@ -136,9 +141,9 @@
       color: #fff;
       background-color: #E24637;
       border-radius: 15px;
-      margin-top: 5px;
-      padding: 3px 10px;
-      height: 30px;
+      margin-top: 6px;
+      padding: 4px 10px 2px 10px;
+      height: 31px;
     }
 
     li:hover {
@@ -222,7 +227,7 @@
         font-size: 30px;
         > strong {
           color: #EB5959;
-          font-weight: normal;
+          font-weight: inherit;
         }
       }
 
@@ -287,20 +292,11 @@
   }
 
   #intro h1 {
-    display: inline-block;
-    margin: 0;
-    font-size: 22px;
-    margin-bottom: 20px;
-  }
-
-  #intro h1 img {
-    vertical-align: -10px;
-  }
-
-  #intro h2 {
     margin: 30px 0;
-    font-size: 22px;
+    font-size: 33px;
+    line-height: 1.3;
     color: white;
+    font-weight: 300;
   }
 
   #intro a.keybutton {

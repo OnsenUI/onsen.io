@@ -4,7 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-Switch (ons-switch)
+## Switch (ons-switch)
 
 [`<ons-switch>`](/v2/reference/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/reference/js/ons-switch.html#method-isChecked) method.
 

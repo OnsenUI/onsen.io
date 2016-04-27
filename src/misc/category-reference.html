@@ -2,10 +2,14 @@
 page: 'reference-detail'
 reference: true
 layout: 'default.html.eco'
+actionbar: false
 ---
 
 <div class="content"><div class="reference-container">
-  <div><a href="/v2/docs/<%=@framework%>.html">&lt; All Components</a></div>
+  <div>
+    <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
+    <%=@title%>
+  </div>
 
   <%-@markd @categoryFile.contents %>
 

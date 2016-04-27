@@ -4,7 +4,7 @@ component: js/ons-ripple,angular1/ons-ripple
 framework: js,angular1
 ---
 
-### Ripple Effect (ons-ripple)
+## Ripple Effect (ons-ripple)
 
 This component adds a Material Design `ripple` effect to an element.
 

@@ -4,7 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-### Tab Bar (ons-tabbar, ons-tab)
+## Tab Bar (ons-tabbar, ons-tab)
 
 A tab bar is composed of a [`<ons-tabbar>`](/v2/reference/js/ons-tabbar.html) component and [`<ons-tab>`](/v2/reference/js/ons-tab.html) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
 
