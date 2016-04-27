@@ -4,7 +4,7 @@ component: js/ons-template,angular1/ons-template
 framework: js,angular1
 ---
 
-### Multiple page definitions (ons-template)
+## Multiple page definitions (ons-template)
 
 Some components require you to specify another HTML page. For instance, a `<ons-splitter-side>` needs to specify a menu page in following format.
 

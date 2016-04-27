@@ -4,7 +4,7 @@ component: js/ons-row,js/ons-col,angular1/ons-row,angular1/ons-col
 framework: js,angular1
 ---
 
-### Grid (ons-row, ons-col)
+## Grid (ons-row, ons-col)
 
 Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
 

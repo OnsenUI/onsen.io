@@ -4,8 +4,7 @@ component: js/ons-dialog,js/ons-alert-dialog,angular1/ons-dialog,angular1/ons-al
 framework: js,angular1
 ---
 
-
-### Dialogs (ons-dialog, ons-alert-dialog)
+## Dialogs (ons-dialog, ons-alert-dialog)
 
 Normal dialogs are defined using the `<ons-dialog>` tag. There is also an `<ons-alert-dialog>` tag that is used to display alert dialogs.
 

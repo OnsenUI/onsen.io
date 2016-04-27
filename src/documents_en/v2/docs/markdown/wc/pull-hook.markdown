@@ -4,8 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-
-### Pull Hook (ons-pull-hook)
+## Pull Hook (ons-pull-hook)
 
 The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/v2/reference/js/ons-page.html) element. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
 

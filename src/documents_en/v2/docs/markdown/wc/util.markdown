@@ -3,7 +3,8 @@ title: Utility Functions
 component: js/ons
 framework: js,angular1
 ---
-### Utility Functions (ons object)
+
+## Utility Functions (ons object)
 
 Onsen UI has `ons` object, which is a global proprty added to `window`. It includes several functions to help make developing your app easier.
 

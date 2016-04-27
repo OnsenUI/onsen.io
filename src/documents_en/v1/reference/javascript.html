@@ -1,6 +1,6 @@
 ---
 page: 'javascript'
-title: 'Onsen UI Version 1 Components Reference'
+title: 'Components Reference for Version 1.x - Onsen UI Framework'
 needHelp: true
 reference: true
 version: v1
@@ -10,10 +10,10 @@ version: v1
 
 <div class="js-index"><div class="js-index-inner">
 
-  <% for category, docs of @componentCategoryV1: %>
+  <% for category, docs of @componentCategories.v1: %>
   <div class="js-index-category">
     <h4 class="js-index-header"><%- @titlize(category) %></h4>
-        <% for doc in docs: %>
+        <% for doc in docs.files: %>
           <li class="js-index-list-item
             js-index-list-item-element">
             <a href="/v1/reference/<%=doc.name%>.html" class="js-index-link"><%= doc.name %></a>

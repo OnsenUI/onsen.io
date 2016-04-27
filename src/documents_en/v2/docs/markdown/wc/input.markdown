@@ -4,7 +4,7 @@ component: js/ons-input,angular1/ons-input
 framework: js,angular1
 ---
 
-### Text input (ons-input)
+## Text input (ons-input)
 
 `<ons-input>` is an alternative to `<input>` tag, with Material Design floating label and animation effect. To enable floating label style, use `placeholder` attribute and `float` attribute together. 
 

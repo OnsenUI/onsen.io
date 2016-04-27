@@ -4,7 +4,7 @@ component: js/ons-gesture-detector,js/ons.GestureDetector,angular1/ons-gesture-d
 framework: js,angular1
 ---
 
-### Finger Gestures (ons-gesture-detector)
+## Finger Gestures (ons-gesture-detector)
 
 Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/v2/reference/js/ons-gesture-detector.html) component. The following code does a swipe-left detection for a specific element.
 

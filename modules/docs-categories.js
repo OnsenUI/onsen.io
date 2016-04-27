@@ -92,6 +92,10 @@ module.exports = function(lang) {
       }
     }
 
+    for (var fw in categories) {
+      categories[fw] = sortObject(categories[fw]);
+    }
+
     metalsmith.metadata().componentCategories = categories;
 
     Promise.all(promises).then(function() {

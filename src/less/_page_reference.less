@@ -289,6 +289,7 @@
     box-sizing: border-box;
     padding: 10px 0;
     margin: 0 10px;
+    min-height: 90px;
 
     .desktop-query({
       display: inline-block;
@@ -310,6 +311,8 @@
     padding: 0;
     font-size: 15px;
     margin: 0;
+    font-weight: 700;
+    color: #777;
 
     > img {
       vertical-align: text-bottom;
@@ -318,6 +321,16 @@
     .lang-ja & {
       font-size: 14px;
       font-weight: bold;
+    }
+
+    > a {
+      line-height: 1.3em;
+      padding: 0;
+      font-size: 15px;
+      margin: 0;
+      font-weight: 700;
+      color: #777;
+      text-decoration: none;
     }
   }
 
@@ -386,5 +399,26 @@
       font-size: 13px;
     }
 
+  }
+}
+
+.getting-started-guide {
+  display: flex;
+  flex-wrap: wrap;
+
+  > li {
+    list-style: none;
+    /*border: 1px solid #ccc;*/
+    width: 140px;
+    text-align: center;
+    margin: 0 10px;
+    padding: 10px;
+
+    div {
+      display: table-cell;
+      font-size: 14px;
+      vertical-align: middle;
+      height: 40px;
+    }
   }
 }

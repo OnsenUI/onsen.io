@@ -3,7 +3,8 @@ title: Progress
 component: js/ons-progress-bar,js/ons-progress-circular,angular1/ons-progress-bar,angular1/ons-progress-circular
 framework: js,angular1
 ---
-### Page (ons-page)
+
+## Page (ons-page)
 
 `<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
 

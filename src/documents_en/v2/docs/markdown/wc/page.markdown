@@ -3,7 +3,8 @@ title: Page
 component: js/ons-page,angular1/ons-page
 framework: js,angular1
 ---
-### Page (ons-page)
+
+## Page (ons-page)
 
 `<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
 

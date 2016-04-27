@@ -4,7 +4,7 @@ component: js/ons-toolbar,angular1/ons-toolbar
 framework: js,angular1
 ---
 
-#### Toolbar component (ons-toolbar, ons-bottom-toolbar)
+### Toolbar component (ons-toolbar, ons-bottom-toolbar)
 
 A toolbar is defined as a [`<ons-toolbar>`](/v2/reference/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/reference/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
 

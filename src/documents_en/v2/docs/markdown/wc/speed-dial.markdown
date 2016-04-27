@@ -4,8 +4,7 @@ component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
 ---
 
-
-### Speed Dial (ons-speed-dial, ons-speed-dial-item)
+## Speed Dial (ons-speed-dial, ons-speed-dial-item)
 
 `<ons-speed-dial>` is another Material Design component to display the selections.
 
