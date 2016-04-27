@@ -19,14 +19,16 @@ layout: 'default.html.eco'
     <% end %>
   </section>
 
-  <% if @doc.example: %>
+  <% if @doc.examples: %>
+    <% for example in @doc.examples: %>
     <section>
       <h3 id="usage">
         <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
         <a href="#usage" class="reference-loop-anchor">#</a>
       </h3>
-      <pre><code class="xml"><%= @doc.example %></code></pre>
+      <pre><code class="xml"><%= example %></code></pre>
     </section>
+    <% end %>
   <% end %>
 
   <% if @doc.note: %>
