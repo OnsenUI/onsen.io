@@ -12,7 +12,7 @@ Both components will automically alter their style based on the platform in orde
 
 #### Showing and hiding
 
-To show or hide the dialog the `isShown` prop is used. The following example illustrates a simple usage.
+To show or hide the dialog the `isOpen` prop is used. The following example illustrates a simple usage.
 
 ```
 class MyPage extends React.Component {
@@ -20,19 +20,19 @@ class MyPage extends React.Component {
     super(props);
 
     this.state = {
-      isShown: false;
+      isOpen: false;
     };
   }
 
   show() {
     this.setState({
-      isShown: true
+      isOpen: true
     });
   }
 
   hide() {
     this.setState({
-      isShown: false
+      isOpen: false
     });
   }
 
@@ -45,7 +45,7 @@ class MyPage extends React.Component {
         </Button>
 
         <Dialog
-          isShown={this.state.isShown}>
+          isOpen={this.state.isOpen}>
 
           <p>This is a dialog!</p>
 
@@ -59,7 +59,7 @@ class MyPage extends React.Component {
 }
 ```
 
-This will show a dialog when the button in the `Page` component is pressed by changing the `isShown` state variable since this variable is bound to the `isShown` prop. Likewise the button inside the dialog while hide the dialog by setting the state variable to false.
+This will show a dialog when the button in the `Page` component is pressed by changing the `isOpen` state variable since this variable is bound to the `isOpen` prop. Likewise the button inside the dialog while hide the dialog by setting the state variable to false.
 
 #### Customizing animation
 
@@ -83,13 +83,13 @@ It is necessary to handle this event so it should be used with the `onCancel` pr
 
 ```
 <Dialog
-  isShown={this.state.isShown}
+  isOpen={this.state.isOpen}
 	cancelable
 	onCancel={this.handleCancel.bind(this)}>
 </Dialog>
 ```
 
-Often the `handleCancel` method would set the `isShown` state variable to `false` in order to make the state correctly reflect the visibility of the dialog.
+Often the `handleCancel` method would set the `isOpen` state variable to `false` in order to make the state correctly reflect the visibility of the dialog.
 
 #### Alert dialog
 

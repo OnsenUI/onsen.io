@@ -23,7 +23,7 @@ A toolbar is displayed on the screen by return the `Toolbar` component in the `r
 />
 ```
 
-The three sections are layed out using flexbox in order to ensure good behavior across different screen sizes and platforms.
+The three sections are using flexbox in order to ensure good behavior across different screen sizes and platforms.
 
 #### Toolbar buttons
 
