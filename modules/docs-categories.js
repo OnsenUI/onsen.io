@@ -46,7 +46,7 @@ module.exports = function(lang) {
     var promises = [];
 
     for (var path in files) {
-      if (path.indexOf('v2/docs/categories') !== -1) {
+      if (path.indexOf('v2/docs/markdown') !== -1) {
         var file = files[path];
         var category = nodePath.basename(path, ".markdown");
         var components = file.component.split(",");

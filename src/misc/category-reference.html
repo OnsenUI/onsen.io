@@ -16,10 +16,12 @@ layout: 'default.html.eco'
   <h3>Related Components</h3>
 
   <ul>
-  <% for file in @componentCategories[@framework][@componentCategory].files: %>
-    <li>
-      <a href="<%=file.name%>.html"><%=file.title%></a>
-    </li>
+  <% if @componentCategories[@framework][@componentCategory].files: %>
+    <% for file in @componentCategories[@framework][@componentCategory].files: %>
+      <li>
+        <a href="<%=file.name%>.html"><%=file.title%></a>
+      </li>
+    <% end %>
   <% end %>
   </ul>
 </div></div>
