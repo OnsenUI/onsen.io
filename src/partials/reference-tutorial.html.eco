@@ -11,7 +11,7 @@
   <div class="js-index-category">
     <h4 class="js-index-header">
       <%- docs.title || @titlize category %>
-      <img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16">
+      <!--<img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16">-->
       <div class="js-index-guide">
         <% if docs.index: %>
           <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Usage Guide</a></span>
@@ -19,14 +19,22 @@
       </div>
     </h4>
 
-    <ul class="js-index-list">
-      <% for doc in docs.files: %>
-        <li class="js-index-list-item
-          js-index-list-item-<%=doc.icon%>">
-          <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link"><%= doc.name %></a>
-        </li>
-      <% end %>
-    </ul>
+    <% if docs.files: %>
+      <ul class="js-index-list">
+        <% for doc in docs.files: %>
+          <li class="js-index-list-item
+            js-index-list-item-<%=doc.icon%>">
+            <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
+              <% if @framework == "react": %>
+                &lt;<%= doc.name %> /&gt;
+              <% else: %>
+                <%= doc.name %>
+              <% end %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   </div>
   <% end %>
 </div>
