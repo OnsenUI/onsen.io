@@ -1,10 +1,10 @@
-<div class="top-bar">
-  <div class="wrapper">
-    <a href="/"><img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI"></a>
-    <h1><%- @h1 || @title %></h1>
+<% if @topbar != false: %>
+  <div class="top-bar">
+    <div class="wrapper">
+      <h1><%- @h1 || @title %></h1>
+    </div>
   </div>
-</div>
-
+<% end %>
 <% if @actionbar != false: %>
   <div class="actions-bar">
     <div class="wrapper">

@@ -1,0 +1,167 @@
+---
+page: 'onsenui2-landing'
+title: 'Hybrid App Framework Onsen UI 2.0 Beta Announcement'
+layout: 'default.html.eco'
+header: false
+description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
+---
+
+<div class="first-view"><div class="first-view-inner">
+  <div class="first-view-logo"><img src="/images/2/onsen-mark.png" alt=""></div>
+
+  <h1 class="first-view-title">Announcing Onsen UI 2.0 Beta</h1>
+
+  <div class="first-view-tagline">More components with pure JavaScript implementation</div>
+
+  <div class="first-view-social">
+    <div class="first-view-social-twitter">
+      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://onsen.io/2/" data-text="Joining Onsen UI 2.0 beta! I'm ready for future-proof and framework agnostic hybrid app development" data-via="Onsen_UI">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+    <div class="first-view-social-facebook">
+      <div class="fb-share-button" data-href="http://onsen.io/2/" data-layout="button_count"></div>
+    </div>
+    <div class="first-view-social-gplus">
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <g:plusone size="small"></g:plusone>
+    </div>
+  </div>
+
+  <div class="first-view-quickstart">
+    <div class="first-view-quickstart-header">Quickstart</div><pre class="first-view-quickstart-code"><code class="nohighlight" style="padding: 0;"><span class="first-view-quickstart-prompt"></span>git clone http://github.com/OnsenUI/onsenui2-quickstart
+<span class="first-view-quickstart-prompt"></span>cd onsenui2-quickstart
+<span class="first-view-quickstart-prompt"></span>npm install &amp;&amp; gulp serve</code></pre>
+  </div>
+
+</div></div>
+
+<div class="ref-links">
+  <a href="./reference/javascript.html" class="ref-link">JavaScript Components Reference</a>
+  &nbsp;
+  <a href="./reference/css.html" class="ref-link">CSS Reference</a>
+  &nbsp;
+  <a href="http://components2.onsen.io/" class="ref-link">Theme Roller</a>
+</div>
+
+<section class="content">
+
+  <article class="content-article content-summary">
+    <p>Welcome to the new generation of UI Component Library.</p>
+
+    <p>Onsen UI 2.0 is almost here. It brings more components, native look &amp; feel, delivered as Web Components, implemented in pure ES6. Also, it works well with AngularJS, React, jQuery and a bunch of other app frameworks.</p>
+
+    <p>We can't wait to see your awesome apps!</p>
+  </article>
+
+  <article class="content-article">
+    <h2 class="content-article-header2">About Onsen UI 2.0</h2>
+
+    <p>Onsen UI is an open source front-end framework for hybrid mobile apps and Websites with native look and feel. It is a part of <a href="http://monaca.io">Monaca Cloud platform</a>, a collection of development tools, including a debugger and remote build service.</p>
+
+    <p>Onsen UI 2 will bring all the fancy features of Onsen UI 1, but we are making fundamental update to it. To make Web application more easier to develop, we thought we should not stick to a specific framework, but more to a framework agnostic attitude so that everyone can use our framework combined with their favorite application frameworks out there. Onsen UI 2 is future proof, framework agnostic, and designed to adapt the latest design trend.</p>
+
+    <h3 class="content-article-header3">Friendly with Angular 1 & 2, React and All Others</h3>
+
+    <p class="content-article-eyecatch"><img src="/images/2/fully-independent.png"></p>
+
+    <p>Onsen UI is fully independent; You can easily plug the Onsen UI components into any project, regardless of JavaScript framework. AngularJS users, we keep full support with all ng-* directives implemented as a binding.</p>
+
+    <h3 class="content-article-header3">Adapts Latest Design Trends for iOS and Android</h3>
+
+    <p class="content-article-eyecatch"><img src="/images/2/material-design.png"></p>
+
+    <p>Onsen UI 2.0 finally brings Android Material design in addition to the iOS flat design. Not only do the components have both styles, we also added many unique components to make your apps more materialized.</p>
+
+    <h3 class="content-article-header3">Responsive with New Splitter Component</h3>
+
+    <p class="content-article-eyecatch"><img src="/images/2/ipad-ons-splitter.png"></p>
+
+    <p>New <ons-splitter> is a swiss-army knife for layouting your app. Your app can easily transition between sliding menu or a column-based view based on the user's device.</p>
+
+    <h3 class="content-article-header3">Future Proof and Compact with ES 6 and Web Components</h3>
+
+    <p class="content-article-eyecatch"><img src="/images/2/es6-webcomponents.png"></p>
+
+    <p>All Onsen UI codes are re-written from scratch using the latest Web standard technologies. That enabled non-dependant framework implemented in pure JavaScript.</p>
+
+  </article>
+
+
+  <article class="content-article">
+    <h2 class="content-article-header2">Migration from Onsen UI 1.x</h2>
+
+    <p>Although Onsen UI 2.0 is no longer AngularJS dependent, we provide AngularJS binding to supplement AnuglarJS cool features. To include ng-* bindings, please include “angular-onsenui.js" after loading onsenui.js.</p>
+
+    <pre><code class="html">&lt;script src="onsenui.js"&gt;&lt;/script&gt;
+&lt;script src="angular.js"&gt;&lt;/script&gt;
+&lt;script src="angular-onsenui.js"&gt;&lt;/script&gt;</code></pre>
+  </article>
+
+
+  <article class="content-article">
+    <h2 class="content-article-header2">Getting Started</h2>
+
+    <h3 class="content-article-header3">1. Quickstart</h3>
+
+    <p>We have created a quickstart repository for you to get up and running instantly. The repository contains the latest beta version, with some Cordova based templates.</p>
+
+    <p>To get started, simply clone and serve the project.</p>
+
+    <pre><code class="bash">$ git clone http://github.com/OnsenUI/onsenui2-quickstart
+$ cd onsenui2-quickstart
+$ npm install
+$ gulp serve</code></pre>
+
+    <h3 class="content-article-header3">2. Get Onsen UI 2.0 beta</h3>
+
+    <p>With bower:</p>
+
+    <pre><code class="bash">$ bower install onsenui#2.0.0-beta</code></pre>
+
+    <p>With npm:</p>
+
+    <pre><code class="bash">$ npm install onsenui@2.0.0-beta</code></pre>
+
+    Onsen UI 2.0 can be used with browserify:
+
+    <pre><code class="bash">var onsen = require('onsenui/js/onsenui');
+
+onsen.ready(function() {
+  onsen.notification.alert({message: 'Onsen UI works with browserify!'});
+});</code></pre>
+
+    <h3 class="content-article-header3">3. Develop Your App</h3>
+
+    <p>You can use Cordova CLI, PhoneGap or any other tools for Web or hybrid app development. However, <a href="http://monaca.io/" target="_blank">Monaca</a> makes you even easier to debug and build Onsen UI hybrid apps! Register your account on <a href="http://monaca.io">Monaca Cloud (free)</a> and you can start developing right away.</p>
+
+    <p><strong>Develop on browser using Monaca Cloud IDE:</strong></p>
+
+    <p>With Monaca Cloud IDE, all debugging &amp; remote build can be done online. To create a Onsen UI 2.0 project, please find "Onsen 2 Quick Start" template.</p>
+
+    <p><strong>Develop on command line using Monaca CLI:</strong></p>
+
+    <pre><code class="bash">$ npm install -g monaca
+$ monaca create myproject # And find template named "Onsen 2 Quick Start"</code></pre>
+
+    <p>Documentation for Onsen 2.0 is still ongoing. Meanwhile, please take a look at our <a href="./reference/javascript.html">API reference</a> or <a href="#contactus">contact us</a> if you have any questions!</p>
+
+    <h3 class="content-article-header3">4. Submit Your Feedback!</h3>
+
+    <p>Help improve Onsen UI! We would love to hear what you honestly think of Onsen 2.0. You can find our contact details below.</p>
+  </article>
+
+
+  <article class="content-article" id="contactus">
+    <h2 class="content-article-header2">Contact us</h2>
+
+    <p>Any questions? Need help? Please reach out to us using your most convenient method.</p>
+
+    <ul>
+      <li><a href="https://community.onsen.io/">Community Forum</a>: Talk about Onsen UI 2.0 and ask questions.</li>
+      <li>Bug Report: <a href="http://github.com/OnsenUI/OnsenUI/issues">GitHub Issues</a></li>
+      <li><a href="https://gitter.im/OnsenUI/OnsenUI">Gitter</a>: Chat with the team!</li>
+      <li><a href="http://stackoverflow.com/search?q=onsen-ui">Stack Overflow</a>: Get the problem solved by the community.</li>
+      <li>Team: Send your feedback directly to <a href="mailto:team@monaca.io">team@monaca.io</a></li>
+    </ul>
+  </article>
+</section>

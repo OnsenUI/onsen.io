@@ -30,18 +30,25 @@ module.exports = function(lang) {
           if (error) {
             throw error;
           }
+          var icon = null;
 
           if (minimatch(path, '**/directive/*.html')) {
             path = 'v1/reference/' + nodePath.basename(path);
+            icon = "element";
           } else if (minimatch(path, '**/object/*.html')) {
             path = 'v1/reference/' + nodePath.basename(path);
+            icon = "object";
           } else if (minimatch(path, '**/overview/*.html')) {
             path = 'v1/reference/' + nodePath.basename(path);
+            icon = "object";
           } else {
             console.log(path);
           }
 
           files[path] = file;
+          files[path].version = "v1";
+          files[path].icon = icon;
+              
           done();
         });
       }, done);

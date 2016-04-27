@@ -5,6 +5,7 @@ var fs = require('fs');
 var nodePath = require('path');
 var basePath = nodePath.resolve(__dirname + '/../');
 var jsdoc = require('jsdoc-api')
+var mkdirp = require('mkdirp');
 
 function glob(src) {
   return new Promise(function(resolve, reject) {
@@ -70,6 +71,13 @@ function parseDocComment(componentName, doc) {
 }
 
 function generateAPIDocument(metalsmith, docPath, extension) {
+
+  var cacheDir = metalsmith.path('.reactdoc');
+  if (!fs.existsSync(cacheDir)) {
+    mkdirp.sync(cacheDir);
+    console.log("Generating React doc cache at: " + cacheDir);
+  }
+
   return new Promise(function(resolve, reject) {
     metalsmith.readFile(getTemplatePath(docPath), function(error, file) {
       if (error) {
@@ -78,7 +86,13 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       
       var componentName = nodePath.basename(docPath, nodePath.extname(docPath))
       try {
-        var doc = parseDocComment(componentName, JSON.parse(fs.readFileSync(docPath)));
+        var cacheFile = cacheDir + '/' + componentName;
+        if (fs.existsSync(cacheFile)) {
+          var doc = JSON.parse(fs.readFileSync(cacheFile));
+        } else {
+          var doc = parseDocComment(componentName, JSON.parse(fs.readFileSync(docPath)));
+          fs.writeFileSync(cacheFile, JSON.stringify(doc));
+        }
       } catch (e) {
         return reject();
       }
@@ -111,6 +125,7 @@ if (componentName == "Navigator") {
       file.componentCategory = doc.category;
       file.is2 = true;
       file.extension = "react";
+      file.version = "v2";
 
       resolve({doc: doc, file: file});
     });
@@ -125,7 +140,7 @@ module.exports = function(lang) {
     ]).then(function(paths) {
       return Promise.all(paths.map(function(path) {
         return generateAPIDocument(metalsmith, path).then(function(result) {
-          files['v2/reference/react/' + result.file.name + '.html'] = result.file;
+          files['v2/docs/react/' + result.file.name + '.html'] = result.file;
         });
       }));
     }).then(function() {

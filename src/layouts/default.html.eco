@@ -58,9 +58,11 @@
 </head>
 
 <body id="<%- @page %>" class="design-2016">
-
-  <%- @partial('main-nav.html.eco') %>
-  <%- @partial('header.html.eco') if @header != false %>
+  
+  <% if @main_nav != false: %>
+    <%- @partial('main-nav.html.eco') %>
+  <% end %>
+  <%- @partial('header.html.eco') %>
 
   <section id="main-container">
 
@@ -74,9 +76,11 @@
         <%- @partial('need_help.html.eco') if @needHelp %>
       </div>
     <% else if @reference: %>
-      <aside class="content-info content-info-page">
-        <%- @partial('reference-toc.html.eco') %>
-      </aside>
+      <% if @version != "v1": %>
+        <aside class="content-info content-info-page">
+          <%- @partial('reference-toc.html.eco') %>
+        </aside>
+      <% end %>
       <div class="content">
         <%- @contents %>
         <%- @partial('need_help.html.eco') if @needHelp %>

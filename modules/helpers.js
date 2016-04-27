@@ -84,6 +84,14 @@ module.exports = function() {
         return result;
       },
 
+      markd: function(string) {
+        try {
+          return marked(string.toString());
+        } catch(e) {
+          return e.toString();
+        }
+      },
+
       markdown: function(capture) {
         try {
           return marked(capture().toString());
@@ -151,8 +159,7 @@ module.exports = function() {
       },
 
       getPreparedTitle: function() {
-        var title = this.pageTitle || this.title || this.site.title;
-        return 'Onsen: ' + title;
+        return this.pageTitle || this.title || this.site.title;
       },
 
       getPreparedDescription: function() {

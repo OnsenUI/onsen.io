@@ -18,7 +18,6 @@ var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 var tags = require('metalsmith-tags');
 var wordcloud = require('metalsmith-wordcloud');
-var sortObject = require('sort-object');
 var currentPath = require('./current-path');
 var nodePath = require('path');
 var crypto = require('crypto');
@@ -50,58 +49,17 @@ module.exports = function(lang, isStaging) {
             sortBy: 'name'
           }
         }))
-        .use(function(files, metalsmith, done) {
-          setImmediate(done);
-
-          var dictV1 = {}, dictWc = {}, dictReact = {};
-          for (var path in files) {
-            var file = files[path];
-
-            if (file.componentCategory && !file.is2) {
-              // v1 file
-              file.componentCategory.split(/, */).forEach(function(category) {
-                if (!dictV1[category]) {
-                  dictV1[category] = [];
-                }
-                dictV1[category].push(file);
-              });
-            } else if (file.componentCategory) {
-              switch (file.extension) {
-                case "react":
-                  file.doc.originalDoc = files["v2/reference/js/" + file.doc.original + ".html"].doc;
-                  file.componentCategory.split(/, */).forEach(function(category) {
-                    if (!dictReact[category]) {
-                      dictReact[category] = [];
-                    }
-                    dictReact[category].push(file);
-                  });
-
-                  break;
-                case "angular1":
-                case "js":
-                  file.componentCategory.split(/, */).forEach(function(category) {
-                    if (!dictWc[category]) {
-                      dictWc[category] = [];
-                    }
-                    dictWc[category].push(file);
-                  });
-                  break;
-              }
-            }
-          }
-
-          metalsmith.metadata().componentCategoryV1 = sortObject(dictV1);
-          metalsmith.metadata().componentCategoryWc = sortObject(dictWc);
-          metalsmith.metadata().componentCategoryReact = sortObject(dictReact);
-        })
+        .use(require('./docs-categories.js')(lang))
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
         .use(function(files, metalsmith, done) {
           setImmediate(done);
 
-          var cssFile = files['v2' + nodePath.sep + 'reference' + nodePath.sep + 'css.html'];
-          var cssToc = cssFile.toc;
-          delete cssFile.toc;
+          var cssFile = files['v2' + nodePath.sep + 'docs' + nodePath.sep + 'css.html'];
+          if (cssFile && cssFile.toc) {
+            var cssToc = cssFile.toc;
+            delete cssFile.toc;
+          }
 
           metalsmith.metadata().cssToc = cssToc;
         })
@@ -117,10 +75,6 @@ module.exports = function(lang, isStaging) {
         .use(assets({source: './dist/v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
         .use(assets({source: './dist/v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
         .use(require('./css-transform')(lang))
-        .use(redirect({
-          '/components.html' : '/reference/javascript.html',
-          '/guide/components.html' : '/reference/javascript.html'
-        }))
         .use(branch('*.html').use(currentPath()))
         .use(function(files, metalsmith, done) {
           setImmediate(done);

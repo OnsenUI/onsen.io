@@ -2,7 +2,8 @@
 page: 'landing-new'
 title: 'Hybrid App Framework Onsen UI 2.0'
 layout: 'default.html.eco'
-header: false
+topbar: false
+actionbar: false
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
 ---
 
@@ -12,57 +13,42 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
       <h1>
         <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
       </h1>
-      <p>HTML5 Hybrid Mobile App Framework<br>and UI components<br>for PhoneGap &amp; Cordova.</p>
+      <h2>HTML5 Hybrid Mobile App Framework and UI components for PhoneGap &amp; Cordova.</h2>
+      <a href="/getting-started.html" class="keybutton">Get Started with Onsen UI</a>
+      <div class="v2announce">Interested in Material Design and React support?<br>Check out <a href="/v2/docs/js.html">Version 2 RC</a>!</div>
       <nav class="actions">
         <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
         <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
       </nav>
       <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
     </div>
-    <%- @partial('demo.html.eco') %>
+    <img src="/images/index/keyvisual.png" alt="Onsen UI Key Visual">
   </div>
 </div>
 <div id="features">
   <div class="feature">
-    <h2>Lets Get Started!</h2>
-    <p>Onsen UI is framework agnostic, meaning it pairs nicely with awesome front-end frameworks that you love or with the plain Javascript which you're used to.</p>
-    <ul class="row">
-      <li><a href="v2/getting-started/index.html"><img src="/images/landing/logo_plainjs.png">Plain JS</a></li>
-      <li><a href="v2/getting-started/angular1.html"><img src="/images/landing/logo_angular1.png">Angular</a></li>
-      <li><a href="v2/getting-started/react.html"><img src="/images/landing/logo_react.png">React</a></li>
-      <li><img src="/images/landing/logo_angular2.png">Angular 2<br>(Coming Soon)</li>
-    </ul>
+    <h2>Super Performance</h2>
+    <p>Onsen UI framework is designed and implemented to deliver unprecedented user experience for your hybrid apps. Frustrated with the lack of native-like performance? Try Onsen UI and you’ll feel the difference right away.</p>
   </div>
 
   <div class="feature">
-    <h2>Beautifully made with Android and iOS components</h2>
-    <p>More than <a href="#">100 components</a> are specially made for Material and Flat design</p>
-    <iframe id="showcase-carousel" src="http://onsenui.github.io/showcase-carousel"></iframe>
+    <h2>PhoneGap / Cordova Friendly</h2>
+    <p>Onsen UI is a perfect solution for developing hybrid apps. That's because our priority is performance and ease of use. Onsen UI is fully open source, and never locks you in. It also provides the option of deploying your apps to the server to use as a tool to build a high performance website.</p>
+    <img src="/images/index/feature-phonegap-cordova-friendly.png">
   </div>
 
   <div class="feature">
-    <h2>Develop and build flawlessly</h2>
-    <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
-    <nav class="row icons">
-      <a href="#" class="icon debug">Debug</a>
-      <a href="#" class="icon build">Remote build</a>
-      <a href="#" class="icon push">Push</a>
-      <a href="#" class="icon user">User</a>
-      <a href="#" class="icon onlineide">Online IDE</a>
-      <a href="#" class="icon inappupdater">In-App update</a>
-      <a href="#" class="icon lock">Encryption</a>
-    </nav>
+    <h2>Simple to Use</h2>
+    <p>Onsen UI is inspired by Web Components. All UI components are tags making it as easy as adding a period.</p>
+    <img src="/images/index/feature-custom-elements.png" alt="Custom Elements">
   </div>
 
   <div class="feature">
-    <h2>Trusted by awesome developers like you</h2>
-    <ul class="row apps">
-      <li><img src="/images/landing/app-1.png" alt="app-img-1"></li>
-      <li><img src="/images/landing/app-2.png" alt="app-img-2"></li>
-      <li><img src="/images/landing/app-1.png" alt="app-img-1"></li>
-      <li><img src="/images/landing/app-2.png" alt="app-img-2"></li>
-    </ul>
+    <h2>Works with jQuery and AngularJS</h2>
+    <p>Utilize the power of AngularJS framework with Onsen UI. jQuery users can also take advantage of Onsen UI’s great UI library.</p>
+    <img src="/images/index/feature-with-angular-or-jquery.png">
   </div>
+
 </div>
 
 <script>

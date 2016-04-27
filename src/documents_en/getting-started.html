@@ -1,14 +1,14 @@
 ---
 page: 'getting_started'
 title: 'Hybrid App Framework Onsen UI 2.0'
-h1: 'Getting started with Onsen UI using <a class="dropdown">Pure JavaScript</a>'
+h1: 'Getting started with Onsen UI'
 layout: 'default.html.eco'
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
 ---
 
 <div id="features">
   <div class="feature">
-    <h2>Start building amazing apps with Onsen UI with <a class="dropdown">Pure JavaScript</a></h2>
+    <h2>Start building amazing apps with Onsen UI!</h2>
     <nav class="tabs">
       <a href="#cli" class="action terminal selected">Develop with Monaca CLI</a>
       <a href="#cloud" class="action cloud">Use Monaca Cloud IDE</a>
@@ -27,28 +27,22 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
             <span class="info">Trouble setting up your environment? See <a href="#">Getting Started with Monaca Cloud IDE</a> to start writing code right away!</span>
           </li>
           <li>
-            <h3>Create a project</h3>
-            <p>Create Onsen UI app from various templates and examples.</p>
-            <pre><code class="bash">monaca create helloworld --framework="react"</code></pre>
+            <h3>Sign up and create a project</h3>
+            <p>Create Onsen UI app from starter kit. You need to create a free Monaca account to get started.</p>
+            <pre><code class="bash">
+              monaca signup
+              monaca create helloworld
+            </code></pre>
           </li>
           <li>
             <h3>Run on your device</h3>
             <p>monaca debug command will install the debugger on your device and run your app right away.</p>
             <pre><code class="bash">
               cd helloworld
-              npm install
               monaca preview # Preview on the browser
               monaca debug # Run on the device in debugger
               monaca remote build # Build the app
             </code></pre>
-          </li>
-          <li>
-            <h3>Visit Onsen UI Tutorial or read guide</h3>
-            <p>Visit our interactive tutorial to learn more about Onsen UI!</p>
-            <div class="row">
-              <a class="button guide" href="/v2/guide/js.html">Read Guide</a>
-              <a class="button" href="//tutorial.onsen.io">Try Interactive Tutorial</a>
-            </div>
           </li>
         </ol>
       </div>
@@ -87,7 +81,7 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
             <p>You can install the package using the following commands.</p>
             <pre><code class="bash">npm install onsenui</code></pre>
             <p>Onsen UI supports both CommonJS and AMD, so you can use Browserify, RequireJS or Webpack to include in your code.</p>
-            <span class="info">React package is distributed separately. Please see <a href="#">Getting started with React</a> instruction for details.</span>
+            <span class="info">React extension is distributed separately as <code>react-onsenui</code>. Please see <a href="/v2/guide/react.html">Onsen UI for React Guide</a> for more details.</span>
           </li>
           <li>
             <h3>Download using Bower</h3>
@@ -113,8 +107,8 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
   <div class="feature">
     <h2>What's next?</h2>
     <nav class="visit row">
-      <a class="icon reference" href="/v2/reference/js.html">See API &amp; Component Reference</a>
-      <a class="icon react" href="/v2/guide/js.html">Read guide</a>
+      <a class="icon reference" href="/v2/reference/js.html">Read Docs</a>
+      <a class="icon reference" href="http://tutorial.onsen.io">Interactive Tutorial</a>
       <a class="icon forum" href="https://community.onsen.io">Check our forum</a>
       <a class="icon blog" href="/blog">Visit blog</a>
     </nav>

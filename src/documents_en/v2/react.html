@@ -1,8 +1,10 @@
 ---
 page: 'react-landing'
-title: 'Hybrid App Framework Onsen UI 2.0 With React'
+title: 'Hybrid App Framework Onsen UI 2 With React'
 layout: 'default.html.eco'
-header: false
+topbar: false
+actionbar: false
+version: v2
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS. Features bindings for React.js.'
 ---
 
@@ -11,18 +13,14 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
     <div class="wrapper">
       <div id="intro">
         <h1>
-          <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
-          for
-          <img src="/images/design_2016/logo_react.png" alt="React">
+          Onsen UI React Components
         </h1>
-        <nav>
-          Onsen UI with <a class="dropdown">React Extensions</a>
-        </nav>
-        <p>Cross-platform UI framework for React<br> driven hybrid (Cordove/PhoneGap) apps.</p>
+        <p>Cross-platform UI framework for React driven hybrid (Cordove/PhoneGap) apps.</p>
         <nav class="actions">
           <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
           <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
         </nav>
+        <!--
         <div class="newsletter-signup newsletter-form">
           <form>
             <input type="email" placeholder="Input email address to receive updates" name="email">
@@ -30,8 +28,9 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
           </form>
           <div class="newsletter-thankyou">Thank you!</div>
         </div>
+        -->
 
-        <button id="getting-started">Getting Started with Onsen UI for React</button>
+        <button id="getting-started" onclick="location.href='/v2/docs/guide/react/'" style="cursor: pointer;">Getting Started with Onsen UI for React</button>
 
         <p class="small" id="release-info" data-framework="react">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
       </div>

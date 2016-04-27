@@ -46,7 +46,8 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.is2 = true;
       file.componentCategory = doc.category;
       file.extension = extension;
-      file.docCategory = extension;
+      file.framework = extension;
+      file.version = "v2";
 
       if (docPath.indexOf("/element/") > -1) {
         file.icon = "element";
@@ -74,7 +75,7 @@ module.exports = function(lang, extension) {
           
           // Only allow to include JavaScript or that target extension version
           if ([ 'js', extension ].indexOf(targetExtension) > -1) {
-            files['v2/reference/' + extension + '/' + result.doc.name + '.html'] = result.file;
+            files['v2/docs/' + extension + '/' + result.doc.name + '.html'] = result.file;
           }
         });
       }));

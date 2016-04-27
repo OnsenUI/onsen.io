@@ -277,38 +277,24 @@
 
 
 .js-index {
+  margin-top: 15px;
 
   &-inner {
-    column-gap: 0px;
-    column-fill: auto;
-
-    .desktop-query({
-      column-count: 3;
-    });
-
-    .tablet-query({
-      column-count: 2;
-    });
-
-    .mobile-query({
-      column-count: auto;
-    });
+    display: flex;
+    flex-wrap: wrap;
   }
 
   &-category {
-    column-break-inside: avoid;
-
-    /* We have autoprefixer, but this is needed. */
-    -webkit-column-break-inside: avoid;
-    -moz-column-break-inside: avoid;
-
-    width: 220px;
+    width: 345px;
     box-sizing: border-box;
-    padding-left: 6px;
+    padding: 10px 0;
+    margin: 0 10px;
 
     .desktop-query({
       display: inline-block;
     });
+
+    border-bottom: 1px solid #ccc;
   }
 
   &-extension-name {
@@ -319,11 +305,15 @@
     padding: 0px 2px;
   }
 
-  &-header {
-    margin: 0 0 6px 0;
+  h4&-header {
+    line-height: 1.3em;
     padding: 0;
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 15px;
+    margin: 0;
+
+    > img {
+      vertical-align: text-bottom;
+    }
 
     .lang-ja & {
       font-size: 14px;
@@ -333,7 +323,8 @@
 
   &-list {
     margin: 0;
-    padding: 0 0 18px 0;
+    padding: 5px 0 18px 0;
+    font-size: 12px;
 
     .lang-ja & {
       padding: 0 0 22px 0;
@@ -341,7 +332,8 @@
   }
 
   &-list-item {
-    margin: 0 0 0 0;
+    float: left;
+    margin: 0 10px 0 0;
     padding: 0 0 0 22px;
     list-style: none;
     background-position: left center;
@@ -358,6 +350,21 @@
 
     &-element {
       background-image: url(/images/common/element-icon.png);
+    }
+  }
+
+  &-guide {
+    float: right;
+    line-height: 01;
+
+    a {
+      font-size: 12px;
+      font-weight: 400;
+      color: #4183c4;
+      padding-left: 12px;
+    }
+    a:hover {
+      text-decoration: underline;
     }
   }
 

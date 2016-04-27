@@ -1,0 +1,25 @@
+---
+page: 'reference-detail'
+reference: true
+layout: 'default.html.eco'
+---
+
+<div class="content"><div class="reference-container">
+  <div><a href="/v2/docs/<%=@framework%>.html">&lt; All Components</a></div>
+
+  <%-@markd @categoryFile.contents %>
+
+  <h3>Tutorial</h3>
+
+  Put Tutorial here...
+
+  <h3>Related Components</h3>
+
+  <ul>
+  <% for file in @componentCategories[@framework][@componentCategory].files: %>
+    <li>
+      <a href="<%=file.name%>.html"><%=file.title%></a>
+    </li>
+  <% end %>
+  </ul>
+</div></div>
