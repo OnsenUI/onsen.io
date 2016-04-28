@@ -6,13 +6,13 @@ framework: react
 
 ## Lazy list
 
-The `LazyList` component enables displaying an infinite list. This is very useful when displaying large amounts of data. The `LazyList` will only render the list items that are currently in view which is a lot more performant than rendering thousands of elements.
+The `LazyList` component enables displaying an infinite list. This is very useful when displaying large amounts of data. It will only render the list items that are currently in view which is a lot more performant than rendering thousands of elements.
 
 Under the hood it will add elements before they come into view and remove them when they disappear from view.
 
 #### Basic usage
 
-The `LazyList` requires two props, `length` and `renderRow`. The `length` prop should be set to the number of items in the list and the `renderRow` prop is a function that returns a list item for a specific index.
+The `LazyList` requires two properties, `length` and `renderRow`. The `length` property should be set to the number of items in the list and the `renderRow` property is a function that returns a list item for a specific index.
 
 ```
 class MyPage extends React.Component {
@@ -45,7 +45,7 @@ class MyPage extends React.Component {
 }
 ```
 
-The list in the example above may have thousands of items but only a handful will be rendered at the same time. The number of items that are rendered depends on the screen size.
+The list in the example above may have thousands of items, but only a handful will be rendered at the same time. The number of items that are rendered depends on the screen size.
 
 #### Variable height
 
