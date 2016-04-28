@@ -6,7 +6,7 @@ framework: react
 
 ## Speed dial
 
-A *speed dial* is a Material Design component that displays a floating action button that expands into a menu when tapped. It's useful for situations where there are several actions available in a page that are equally important.
+The *speed dial* component is a Material Design component that displays a floating action button that expands into a menu when tapped. It's useful for situations where there are several actions needs to be displayed that are of equal importance.
 
 To display a normal floating action button the [`Fab`](Fab.html) component can be used.
 
@@ -14,7 +14,7 @@ To display a normal floating action button the [`Fab`](Fab.html) component can b
 
 The menu items of the `SpeedDial` component are defined using the `SpeedDialItem` component. It also requires a `Fab` component which represents the main button.
 
-To define the position of the component the `position` prop is used. Normally it is placed in the bottom right corner which is achieved by setting the prop to the literal string `"bottom right"`.
+To define the position of the component the `position` property is used. By default it is placed in the bottom right corner which can also be achieved by setting the property to the literal string `"bottom right"`.
 
 ```
 <Page>
