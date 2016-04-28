@@ -96,7 +96,7 @@
           <% if @tags and @tags.length: %>
           <div class="article-tags">
             <% for tag in @tags: %>
-            <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+            <a href="/blog/tags/<%- tag.replace(/\s/g, '-') %>.html"><%- tag %></a>
             <% end %>
           </div>
           <% end %>
@@ -156,7 +156,7 @@
 
         <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
         <a
-          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
+          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(/\s/g, '-') %>.html">
           <span class="tag-cloud-name">
             <%- tag.ctg %>
           </span>

@@ -10,14 +10,14 @@ version: v1
 <h2 class="doc-page-header doc-page-header-guide">Onsen UI Guide for Version 1.x</h2>
 
 <div class="info">
-Onsen UI 2 contains a lot of additional features including Material Design components, React and Angular 2 support, and many new components. Currently under release candidate, if you are looking for documents for Onsen UI Version 2, please visit <a href="/v2/docs/js.htm"l>Version 2 Docs</a> page.
+Onsen UI 2 contains a lot of additional features including Material Design components, React and Angular 2 support, and many new components. Currently under release candidate, if you are looking for documents for Onsen UI Version 2, please visit <a href="/v2/docs/js.html">Version 2 Docs</a> page.
 </div>
 
 <%- @markdown => %>
 
 <h3 id="LoadingOnsenUIinYourProject">Loading Onsen UI in Your Project</h3>
 
-Note: For faster instructions to use Onsen UI in your project, please refer to [Getting Started](/v1/getting_started.html).
+Note: For faster instructions to use Onsen UI in your project, please refer to [Getting Started](/getting-started.html).
 
 Even though Onsen UI uses AngularJS to provide custom elements, it is *not required* to understand AngularJS. Onsen UI can be used with any JS frameworks including jQuery or Backbone.js, or with AngularJS to have a tighter integration.
 
@@ -588,7 +588,7 @@ By default, the specified page will be reloaded when the user taps on a tab. Usi
 
 <h4 id="Tabbarmethods">Managing tab items</h4>
 
-Tab bar have some JavaScript APIs for fine-grain control over the page management. To call them, you should use a `var` attribute as described in the [Calling Component APIs from JavaScript](overview.html#CallingComponentAPIsfromJavaScript) section.
+Tab bar have some JavaScript APIs for fine-grain control over the page management. To call them, you should use a `var` attribute as described in the [Calling Component APIs from JavaScript](#CallingComponentAPIsfromJavaScript) section.
 
 <h5 id="Settingactivetab">Setting active tab</h5>
 
@@ -981,7 +981,7 @@ Also, [`<ons-dialog>`](/v1/reference/ons-dialog.html) and [`<ons-alert-dialog>`]
 
 Carousel provides a container to display multiple items in the element. It can be used as a full screen component, or inside another element.
 
-[`<ons-carousel>`](/v1/reference/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/v1/reference/ons-carousel-item.html) components. Each `<ons-carousel-item>` represents items in the carousel.
+[`<ons-carousel>`](/v1/reference/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/v1/reference/ons-carousel.html) components. Each `<ons-carousel-item>` represents items in the carousel.
 
 <h4 id="ShowingFullScreenCarousel">Showing full screen carousel</h4>
 
@@ -1672,17 +1672,6 @@ Following gestures are supported.
 <h3 id="KeyboardHandling">Soft Keyboard Support</h3>
 
 Sometimes, you want to do a certain action, or change appearance based on the software keyboard status. Onsen UI provides a way to handle keyboard events when your app is plugged in with [Cordova Keybord Plugin](https://github.com/apache/cordova-plugins/tree/master/keyboard) or [Ionic Keyboard Plugin](https://github.com/driftyco/ionic-plugins-keyboard).
-
-If you use [`<ons-keyboard-active>`](/v1/reference/ons-keyboard-active.html) or [`<ons-keyboard-inactive>`](/v1/reference/ons-keyboard-inactive.html) attribute, you could configure the appearance based on the keyboard status.
-
-```html
-<div ons-keyboard-active>
-  This content will be shown when the keyboard is active.
-</div>
-<div ons-keyboard-inactive>
-  This content will be hidden when the keyboard is active.
-</div>
-```
 
 To catch keyboard events in JavaScript, you can use `ons.softwareKeyboard` API.
 
