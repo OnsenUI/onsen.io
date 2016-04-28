@@ -18,8 +18,9 @@
 <% if @version == "v2": %>
   <nav id="main-nav">
     <div class="wrapper">
+      <div class="switch-version-1"><a href="/">&lt; Back to Onsen UI Version 1</a></div>
       <div class="logo">
-        <a href="/"><img src="/images/design_2016/logo_onsenui_header_v2.png" alt="Onsen UI Version 2"></a>
+        <a href="/v2/"><img src="/images/design_2016/logo_onsenui_header_v2.png" alt="Onsen UI Version 2"></a>
       </div>
       <ul>
         <li class="dropdown">
@@ -52,7 +53,7 @@
       </div>
       <ul>
         <li class="onsen-switch">
-          <a href="/v2/docs/js.html">2.0RC Released!</a>
+          <a href="/v2/">2.0RC Released!</a>
         </li>
         <li>
           <a href="/getting-started.html">Getting Started</a>

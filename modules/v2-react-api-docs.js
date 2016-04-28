@@ -118,9 +118,9 @@ if (componentName == "Navigator") {
 */
 
       file.doc = doc;
-      file.name = componentName;
-      file.title = file.name;
-      file.name = file.name;
+      file.name = '<' + componentName + ' />';
+      file.title = file.name + " React Component - Onsen UI Framework";
+      file.h1 = "<strong>" + file.name + "</strong> React Component";
       file.original = doc.original;
       file.componentCategory = doc.category;
       file.is2 = true;

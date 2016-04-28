@@ -1,13 +1,14 @@
-<div class="toc-title">Guide</div>    
-<ul class="toc toc-1">
-  <li class="toc-item toc-1-item"><a href="/v2/docs/guide/js/" class="toc-link toc-1-link">Guide for JavaScript</a></li>
-  <li class="toc-item toc-1-item"><a href="/v2/docs/guide/react/" class="toc-link toc-1-link">Guide for React</a></li>
-  <li class="toc-item toc-1-item"><a href="/v2/docs/guide/angular1/" class="toc-link toc-1-link">Guide for Angular 1</a></li>
-</ul>
+<% if @page != "guide": %>
+  <div class="toc-title">Guide</div>    
+  <ul class="toc toc-1">
+    <li class="toc-item toc-1-item"><a href="/v2/docs/guide/js/" class="toc-link toc-1-link">Guide for JavaScript</a></li>
+    <li class="toc-item toc-1-item"><a href="/v2/docs/guide/react/" class="toc-link toc-1-link">Guide for React</a></li>
+    <li class="toc-item toc-1-item"><a href="/v2/docs/guide/angular1/" class="toc-link toc-1-link">Guide for Angular 1</a></li>
+  </ul>
+<% end %>
 
-<% renderToc = (categories, framework, categoryTitle) => %>
-
-  <div class="toc-title<% if @framework == framework: %> toc-title-active<% end %>"><a href="/v2/docs/<%=framework%>.html"><%=categoryTitle%></a></div>
+<% renderToc = (categories, framework) => %>
+  <div class="toc-title<% if @framework == framework: %> toc-title-active<% end %>"><a href="/v2/docs/<%=framework%>.html"><%=@frameworkName framework%></a></div>
 
   <ul class="toc toc-1" <% if @framework != framework: %>style="display: none"<% end %>>
     <% for category, docs of categories: %>
@@ -15,12 +16,13 @@
       <% if docs.index: %>
         <a href="/v2/docs/<%=framework%>/<%=category%>.html" class="toc-link toc-1-link <%="current" if @componentIndex == true && @componentCategory == category %>"><%- docs.title || @titlize category %></a>
       <% else: %>
-        <%- docs.title || @titlize category %>
+        <% doc = docs.files[0] %>
+        <a href="/v2/docs/<%=framework%>/<%=doc.name%>.html" class="toc-link toc-1-link <%="current" if @name == doc.name %>"><%= docs.title || @titlize category %></a>
       <% end %>
       <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
       <% for doc in docs.files: %>
         <li class="toc-item toc-2-item">
-          <a href="/v2/docs/<%=framework%>/<%= doc.name %>.html" class="toc-link toc-2-link <%="current" if @name == doc.name %>"><%- doc.name %></a>
+          <a href="/v2/docs/<%=framework%>/<%= doc.name %>.html" class="toc-link toc-2-link <%="current" if @name == doc.name %>"><%= doc.name %></a>
         </li>
       <% end %>
       </ul>
@@ -30,6 +32,10 @@
 
 <% end %>
 
-<%= renderToc @componentCategories.js, "js", "Web Components" %>
-<%= renderToc @componentCategories.react, "react", "React" %>
-<%= renderToc @componentCategories.angular1, "angular1", "Angular 1" %>
+<% if @page != "guide": %>
+  <%= renderToc @componentCategories.js, "js" %>
+  <%= renderToc @componentCategories.react, "react" %>
+  <%= renderToc @componentCategories.angular1, "angular1" %>
+<% else: %>
+  <%= renderToc @componentCategories[@framework], @framework %>
+<% end %>

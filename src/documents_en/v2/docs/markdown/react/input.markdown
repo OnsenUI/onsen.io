@@ -4,7 +4,7 @@ framework: react
 component: react/Input
 ---
 
-#### Input
+### Input
 
 The input components are used to get information from the user. Onsen UI provides the `Input` component which can be used to display text input, checkbox or a radio button. There is also `Switch` which displays a toggleable switch.
 

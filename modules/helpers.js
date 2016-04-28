@@ -165,7 +165,9 @@ module.exports = function() {
       },
 
       getPreparedTitle: function() {
-        return this.pageTitle || this.title || this.site.title;
+        var title = this.pageTitle || this.title || this.site.title;
+        title = title.replace(/<(?:.|\n)*?>/gm, '');
+        return title;
       },
 
       getPreparedDescription: function() {

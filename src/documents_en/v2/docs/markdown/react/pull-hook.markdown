@@ -1,10 +1,10 @@
 ---
-title: PullHook
+title: Pull Hook
 component: react/PullHook
 framework: react
 ---
 
-### Pull hook
+## Pull hook
 
 The `PullHook` component is used to add *pull to refresh* functionality to a page. It can let the user refresh a page or load the latest data.
 

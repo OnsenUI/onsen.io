@@ -4,7 +4,7 @@ framework: react
 component: react/Tabbar
 ---
 
-#### Tabbar
+## Tabbar
 
 The `Tabbar` component is used to add tab navigation to an app. It is a very common navigation pattern in mobile apps.
 

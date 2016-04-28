@@ -4,7 +4,7 @@ component: react/Navigator
 framework: react
 ---
 
-### Navigator
+## Navigator
 
 The `Navigator` is a component that provides stack based navigation. It is a very common navigation pattern in mobile apps.
 

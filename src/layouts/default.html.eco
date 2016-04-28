@@ -77,12 +77,9 @@
       </div>
     <% else if @reference: %>
       <% if @version == "v1": %>
-
         <aside class="content-info content-info-page">
           <%- @partial('reference-toc-v1.html.eco') %>
         </aside>
-
-
       <% else: %>
         <aside class="content-info content-info-page">
           <%- @partial('reference-toc.html.eco') %>

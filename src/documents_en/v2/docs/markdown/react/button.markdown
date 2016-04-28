@@ -4,7 +4,7 @@ component: react/Button
 framework: react
 ---
 
-### Button
+## Button
 
 The `Button` component is, as the name implies, used to display a button. To use it just put the tag in your page.
 

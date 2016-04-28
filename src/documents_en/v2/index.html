@@ -1,32 +1,32 @@
 ---
 page: 'landing-new'
-title: 'Introducing Onsen UI 2.0'
+title: 'Onsen UI 2 - Next-Gen Hybrid Mobile App UI Framework'
 layout: 'default.html.eco'
 header: false
+actionbar: false
+topbar: false
+version: v2
 description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
 ---
 
 <div id="start">
   <div class="wrapper">
     <div id="intro">
-      <h1>
-        <img src="/images/design_2016/logo_onsenui.png" alt="Onsen UI">
-      </h1>
-      <h2>Onsen UI 2 - Beautiful hybrid app framework and UI components for Cordova.</h2>
-      <a href="/v2/getting-started.html" class="keybutton">Get Started with Onsen UI 2</a>
+      <h1>Onsen UI 2<br>Rich UI components for beautiful hybrid mobile apps.</h1>
+      <a href="/v2/docs/js.html" class="keybutton">Get Started with Onsen UI 2.0</a>
       <nav class="actions">
         <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
         <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
       </nav>
-      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a>.<br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
     </div>
     <%- @partial('demo.html.eco') %>
   </div>
 </div>
 <div id="features">
   <div class="feature">
-    <h2>Friendly with Angular 1 &amp; 2, React and All Others</h2>
-    <p>Onsen UI is fully independent; You can easily plug the Onsen UI components into any project, regardless of JavaScript framework. AngularJS users, we keep full support with all ng-* directives implemented as a binding.</p>
+    <h2>Supporting React, Angular 1 &amp; 2 and Web Components Altogether</h2>
+    <p>Onsen UI is fully independent of frameworks - You can easily plug our components into any project, regardless of JavaScript framework. Visit <a href="/v2/guide/angular1/">Angular 1 Guide</a> and <a href="/v2/guide/react/">React Components Guide</a> for details. Angular 2 support is coming soon.</p>
     <img src="/images/2/fully-independent.png">
   </div>
 
@@ -37,14 +37,21 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
   </div>
 
   <div class="feature">
-    <h2>Develop and build flawlessly</h2>
-    <p>Monaca Platform provides additional extension to Onsen UI, with powerful debugging, remote build, backend services and an optional cloud-based editor.</p>
+    <h2>Power of CLI and Development Tools</h2>
+    <p>Monaca Platform provides additional extension to Onsen UI, with powerful debugging, remote build, backend services and an optional cloud-based editor. Complimentary access to Onsen UI users.</p>
+<pre><code class="html">$ monaca create helloworld
+Which project do you want to create?
+&gt; Onsen 2 with React
+<b style="color: red;">&gt; Onsen 2 with Angular 1</b>
+&gt; Onsen 2 with Angular 2 (Coming Soon)
+&gt; Onsen 2 with JavaScript
+</code></pre>
   </div>
 
   <div class="feature">
     <h2>Migration from Onsen UI 1.x</h2>
 
-    <p>Although Onsen UI 2.0 is no longer AngularJS dependent, we provide AngularJS binding to supplement AnuglarJS cool features. To include ng-* bindings, please include “angular-onsenui.js" after loading onsenui.js.</p>
+    <p>We provide AngularJS 1.x binding to supplement AnuglarJS cool features. Please include <code>angular-onsenui.js</code> after including <code>onsenui.js</code>.</p>
 
 <pre><code class="html">&lt;script src="onsenui.js"&gt;&lt;/script&gt;
 &lt;script src="angular.js"&gt;&lt;/script&gt;

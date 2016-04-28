@@ -4,7 +4,7 @@ component: react/List
 framework: react
 ---
 
-### List
+## List
 
 Lists is one of the most important components in mobile apps. They can be used to display data, settings pages, forms and much more.
 

@@ -4,7 +4,7 @@ component: react/Dialog
 framework: react
 ---
 
-### Dialog
+## Dialog
 
 Onsen UI provides two components to display dialogs, `Dialog` and `AlertDialog`. They implement the same API but while the `Dialog` is a general dialog that can be used to display any content the `AlertDialog` has some custom styles that makes it easy to add buttons and messages.
 

@@ -4,7 +4,7 @@ framework: react
 component: react/Splitter
 ---
 
-### Splitter
+## Splitter
 
 The `Splitter` is used to display a menu next to the main content. It can be configured to either display the menu as a column or as a swipeable menu. It is also possible to automatically switch between column layout and a layout with a swipeable menu based on the screen size. I some situations it can be useful to display a column layout on large devices and hide the menu on smaller screens.
 

@@ -4,7 +4,7 @@ component: react/Carousel
 framework: react
 ---
 
-### Carousel
+## Carousel
 
 A carousel is used to display a lot of content to the user in a small space. The user can browse through the items by swiping. This can be achieved with the `Carousel` component.
 

@@ -4,7 +4,7 @@ component: react/Ripple
 framework: react
 ---
 
-### Ripple
+## Ripple
 
 The `Ripple` component is used to add a Material Design ripple effect to an element. The ripple effect will expand from the point the user taps to cover the whole element.
 

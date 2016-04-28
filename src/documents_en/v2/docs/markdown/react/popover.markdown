@@ -4,7 +4,7 @@ component: react/Popover
 framework: react
 ---
 
-### Popover
+## Popover
 
 The `Popover` component displays a box next to a target component or element. It can be used to show a tooltip, information to the user or even for displaying a menu.
 

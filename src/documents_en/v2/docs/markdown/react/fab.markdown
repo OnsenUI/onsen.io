@@ -1,10 +1,10 @@
 ---
-title: Fab
+title: Floating Action Button
 component: react/Fab
 framework: react
 ---
 
-### Floating action button
+## Floating action button
 
 The floating action button, abbreviated as *fab*, is a component in Material Design. It is a circular button often placed in the lower right corner of the screen. It stands out more than other buttons and is supposed to represent the primary action of an app.
 

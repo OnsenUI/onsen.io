@@ -1,10 +1,10 @@
 ---
-title: LazyList
+title: Lazy List (or Infinite Scrolling)
 component: react/LazyList
 framework: react
 ---
 
-### Lazy list
+## Lazy list
 
 The `LazyList` component enables displaying an infinite list. This is very useful when displaying large amounts of data. The `LazyList` will only render the list items that are currently in view which is a lot more performant than rendering thousands of elements.
 

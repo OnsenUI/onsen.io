@@ -1,6 +1,8 @@
 ---
 page: 'reference-detail'
 needHelp: true
+title: Specified in v2-react-docs.js
+h1: Specified in v2-react-docs.js
 reference: true
 framework: react
 layout: 'default.html.eco'
@@ -16,15 +18,15 @@ actionbar: false
       <% else: %>
         <%=@componentCategories[@framework][@doc.category].title%> &gt;
       <% end %>
-      <%=@doc.name%>
+      <%=@name%> Component
     <% else: %>
       <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
       <a href="/v2/docs/<%=@framework%>/<%=@doc.category%>.html"><%=@titlize @doc.category%></a> &gt;
-      <%=@doc.name%>
+      <%=@name%>
     <% end %>
   </div>
 
-  <h2><%= @doc.name %> React Component</h2>
+  <h2><%= @name %></h2>
 
   <section class="reference-description">
     <p><%- @markd @translate @doc.description %></p>

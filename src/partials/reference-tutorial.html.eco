@@ -29,11 +29,7 @@
           <li class="js-index-list-item
             js-index-list-item-<%=doc.icon%>">
             <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
-              <% if @framework == "react": %>
-                &lt;<%= doc.name %> /&gt;
-              <% else: %>
-                <%= doc.name %>
-              <% end %>
+              <%= doc.name %>
             </a>
           </li>
         <% end %>

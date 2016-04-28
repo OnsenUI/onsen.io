@@ -4,7 +4,7 @@ component: react/Page
 framework: react
 ---
 
-### Page
+## Page
 
 The `Page` component serves as the root of a screen in an app. Its children will be displayed on the screen. It supports adding a navigation bar to the top of the page using the `renderToolbar` prop.
 
