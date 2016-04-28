@@ -6,13 +6,13 @@ framework: react
 
 ## Dialog
 
-Onsen UI provides two components to display dialogs, `Dialog` and `AlertDialog`. They implement the same API but while the `Dialog` is a general dialog that can be used to display any content the `AlertDialog` has some custom styles that makes it easy to add buttons and messages.
+Onsen UI provides two components to display dialogs, `Dialog` and `AlertDialog`. Although they implement the same API,  the `Dialog` component is a general dialog that can be used to display any content, while the `AlertDialog` component has some custom styles that makes it easy to add buttons and messages.
 
-Both components will automically alter their style based on the platform in order to look like the native equivalent. In Android a Material Design dialog is displayed while on iOS you get a flat dialog.
+Both components will automically alter their style based on the platform in order to adjust its appearance to the native equivalent. In Android a Material Design dialog will be displayed while on iOS a flat dialog will be provided.
 
 #### Showing and hiding
 
-To show or hide the dialog the `isOpen` prop is used. The following example illustrates a simple usage.
+To show or hide the dialog the `isOpen` property is used. The following example illustrates a simple use case:
 
 ```
 class MyPage extends React.Component {
@@ -59,13 +59,13 @@ class MyPage extends React.Component {
 }
 ```
 
-This will show a dialog when the button in the `Page` component is pressed by changing the `isOpen` state variable since this variable is bound to the `isOpen` prop. Likewise the button inside the dialog while hide the dialog by setting the state variable to false.
+When the button in the `Page` component is pressed, the state variable `isOpen` will be changed and a rerender of the component with the new state will be triggerd. Since the `isOpen` state variable is bound to the `isOpen` property of the `Dialog` component, the dialog will show. Likewise the button inside the dialog while hide the dialog by setting the state variable to false.
 
 #### Customizing animation
 
-By default the dialog is revealed using an animation that is based on the platform. To change the animation the `animation` prop can be used. There are three animations available: `slide`, `fade` or `none`. The `none` option will simply display the dialog without any animation at all which might be good if the app should run on older devices.
+By default the dialog is revealed using an animation that is based on the platform. To change the animation the `animation` property can be used. There are three animations available: `slide`, `fade` or `none`. The `none` option will simply display the dialog without any animation at all which might be suitable if the app should run on older devices.
 
-It is also possible to customize the duration, delay and timing function of the animation using the `animationOptions` prop. The prop accepts an object.
+It is also possible to customize the duration, delay and timing function of the animation using the `animationOptions` property:
 
 ```
 <Dialog
@@ -77,9 +77,9 @@ It is also possible to customize the duration, delay and timing function of the 
 
 #### Cancelable dialogs
 
-To enable hiding the dialog when the user clicks the background the `cancelable` prop can be used. This also enables hiding the dialog when the user presses the back button on Android devices.
+To enable hiding the dialog when the user clicks on the background,  the `cancelable` property can be used. This also enables hiding the dialog when the user presses the back button on Android devices.
 
-It is necessary to handle this event so it should be used with the `onCancel` prop.
+It is necessary to handle this event so it should be used with the `onCancel` property.
 
 ```
 <Dialog
@@ -119,6 +119,6 @@ The Onsen UI core library contains some utility functions to display alert dialo
 The methods are `ons.notification.alert`, `ons.notification.confirm` and `ons.notification.prompt`. The following code displays a simple message when a button is tapped.
 
 ```
-<Button onClick={ons.notification.alert('Ouch!')}>Click me!</Button>
+<Button onClick={ons.notification.alert('clicked!')}>Click me!</Button>
 ```
 
