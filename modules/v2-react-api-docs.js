@@ -39,29 +39,30 @@ function parseDocComment(componentName, doc) {
             '*/',
             'function dummy(){}'
           ].join("\n");
-          var docgen = jsdoc.explainSync({ source: src })[0]
 
-/*
-if (componentName == "Navigator") {
-  console.log(componentName + "\n\n")
-  console.log(JSON.stringify(docgen, null, "  "))
-}
-*/
-          // Parse tags
-          if (docgen.tags && docgen.tags.length > 0) {
-            for (var i = 0; i < docgen.tags.length; i++) {
-              ret[docgen.tags[i].title] = docgen.tags[i].value;
+          try {
+            var docgen = jsdoc.explainSync({ source: src })[0]
+
+            // Parse tags
+            if (docgen.tags && docgen.tags.length > 0) {
+              for (var i = 0; i < docgen.tags.length; i++) {
+                ret[docgen.tags[i].title] = docgen.tags[i].value;
+              }
             }
-          }
 
-          // Parse others
-          ret["description"] = docgen.description;
-          ret["examples"] = docgen.examples;
-          ret["name"] = docgen.name == "dummy" ? null : docgen.name;
-          ret["type"] = docgen.type;
-          ret["defaultValue"] = docgen.defaultValue;
-          ret["returns"] = docgen.returns;
-          ret["params"] = docgen.params;
+            // Parse others
+            ret["description"] = docgen.description;
+            ret["examples"] = docgen.examples;
+            ret["name"] = docgen.name == "dummy" ? null : docgen.name;
+            ret["type"] = docgen.type;
+            ret["defaultValue"] = docgen.defaultValue;
+            ret["returns"] = docgen.returns;
+            ret["params"] = docgen.params;
+          } catch (e) {
+            console.error("Error parsing " + componentName);
+            console.error(e);
+            ret[key] = doc[key];
+          }
 
           break;
         default:
@@ -99,7 +100,8 @@ function generateAPIDocument(metalsmith, docPath, extension) {
           fs.writeFileSync(cacheFile, JSON.stringify(doc));
         }
       } catch (e) {
-        return reject();
+        console.log("Error parsing file: " + docPath);
+        console.log(e)
       }
 
       // Remove unnecessary methods
