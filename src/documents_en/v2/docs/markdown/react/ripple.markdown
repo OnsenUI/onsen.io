@@ -6,7 +6,7 @@ framework: react
 
 ## Ripple
 
-The `Ripple` component is used to add a Material Design ripple effect to an element. The ripple effect will expand from the point the user taps to cover the whole element.
+The `Ripple` component is used to add a Material Design ripple effect to an element. This effect will expand from the location point the user taps until it covers the whole element.
 
 #### Basic usage
 
@@ -18,7 +18,7 @@ To add a ripple effect to an element the `Ripple` component should be placed as 
 </div>
 ```
 
-The color of the ripple effect defaults to gray but it can be customized with the `color` prop. It is also possible to customize the background color with the `background` prop.
+The color of the ripple effect defaults to gray. It can be customized using the `color` property. It is also possible to customize the background color with the `background` property.
 
 ```
 <Ripple color='red' background='blue' />
@@ -26,7 +26,7 @@ The color of the ripple effect defaults to gray but it can be customized with th
 
 #### The `ripple` prop
 
-There are some components that support the ripple effect using a `ripple` prop. The [`Button`](Button.html) is one of those. So in this case instead of using the `Ripple` component the correct way to add a ripple effect to a button is this:
+There are some components that support the ripple effect using a `ripple` property. The [`Button`](Button.html) is one of those. In this case,  instead of using the `Ripple` component only the property `ripple` needs to be added:
 
 ```
 <Button ripple>
@@ -34,4 +34,4 @@ There are some components that support the ripple effect using a `ripple` prop. 
 </Button>
 ```
 
-Other components that support this prop are: [`ListItem`](ListItem.html), [`Fab`](Fab.html), [`SpeedDial`](SpeedDial.html) and [`Tab`](Tab.html).
+Other components that support the `ripple` property are: [`ListItem`](ListItem.html), [`Fab`](Fab.html), [`SpeedDial`](SpeedDial.html) and [`Tab`](Tab.html).
