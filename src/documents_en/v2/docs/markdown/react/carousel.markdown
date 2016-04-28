@@ -82,7 +82,7 @@ The `onOverscroll` prop could be used to load new items when the user reaches th
 
 ```
 <Carousel
-  index={this.state.index}
+  index={this.state.index} swipeable
   onPostChange={(event) => this.setState({index: event.activeIndex})}>
   ...
 </Carousel>
