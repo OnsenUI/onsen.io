@@ -40,7 +40,13 @@ function parseDocComment(componentName, doc) {
             'function dummy(){}'
           ].join("\n");
           var docgen = jsdoc.explainSync({ source: src })[0]
-          
+
+/*
+if (componentName == "Navigator") {
+  console.log(componentName + "\n\n")
+  console.log(JSON.stringify(docgen, null, "  "))
+}
+*/
           // Parse tags
           if (docgen.tags && docgen.tags.length > 0) {
             for (var i = 0; i < docgen.tags.length; i++) {
@@ -52,7 +58,6 @@ function parseDocComment(componentName, doc) {
           ret["description"] = docgen.description;
           ret["examples"] = docgen.examples;
           ret["name"] = docgen.name == "dummy" ? null : docgen.name;
-          ret["required"] = docgen.name == "dummy" ? null : docgen.name;
           ret["type"] = docgen.type;
           ret["defaultValue"] = docgen.defaultValue;
           ret["returns"] = docgen.returns;
@@ -118,7 +123,7 @@ if (componentName == "Navigator") {
 */
 
       file.doc = doc;
-      file.name = '<' + componentName + ' />';
+      file.name = componentName;
       file.title = file.name + " React Component - Onsen UI Framework";
       file.h1 = "<strong>" + file.name + "</strong> React Component";
       file.original = doc.original;
@@ -141,6 +146,10 @@ module.exports = function(lang) {
       return Promise.all(paths.map(function(path) {
         return generateAPIDocument(metalsmith, path).then(function(result) {
           files['v2/docs/react/' + result.file.name + '.html'] = result.file;
+          if (result.doc.original) {
+            files['v2/docs/react/' + result.file.name + '.html'].originalFile = files['v2/docs/js/' + result.doc.original + '.html'];
+          }
+
         });
       }));
     }).then(function() {

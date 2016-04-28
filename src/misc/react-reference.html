@@ -8,9 +8,8 @@ framework: react
 layout: 'default.html.eco'
 actionbar: false
 ---
-
 <div class="content"><div class="reference-container">
-  <div>
+  <div class="breadcrumb">
     <% if @componentCategories[@framework][@doc.category]: %>
       <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
       <% if @componentCategories[@framework][@doc.category].index: %>
@@ -26,7 +25,7 @@ actionbar: false
     <% end %>
   </div>
 
-  <h2><%= @name %></h2>
+  <h2>&lt;<%= @name %> /&gt;</h2>
 
   <section class="reference-description">
     <p><%- @markd @translate @doc.description %></p>
@@ -92,10 +91,10 @@ actionbar: false
             <td>
               <%- @markd @translate prop.description %>
 
-              <% if prop.required == prop.name: %>
-              <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
+              <% if prop.required == "true": %>
+                <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
               <% else: %>
-              <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
+                <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
               <% end %>
 
               <% if prop.deprecated: %>
@@ -110,8 +109,40 @@ actionbar: false
   <% end %>
   <!-- end props -->
 
+  <!-- modifiers -->
+  <% if @original && @originalFile && @originalFile.doc.modifiers && @originalFile.doc.modifiers.length > 0: %>
+  <section>
+    <h3 id="modifiers">
+      <% if @lang == "en": %>Preset Modifiers<% else: %>プリセットのmodifier<% end %>
+      <a href="#modifiers" class="reference-loop-anchor">#</a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Modifier</th>
+          <th>Description</th>
+          <% else: %>
+          <th>Modifier名</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for modifier in @originalFile.doc.modifiers: %>
+        <tr>
+          <td class="modifier-name" id="<%= @doc.name %>-<%= modifier.name %>"><%= modifier.name %></td>
+          <td><%- @markd @translate modifier.description %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end modifiers -->
+
   <!-- methods summary -->
-  <% if @doc.methods: %>
+  <% if @doc.methods.length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
@@ -147,7 +178,7 @@ actionbar: false
   <!-- end methods summary -->
 
   <!-- methods details -->
-  <% if @doc.methods: %>
+  <% if @doc.methods.length > 0: %>
   <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
   <% for key, method of @doc.methods: %>
     <section class="method-detail">
