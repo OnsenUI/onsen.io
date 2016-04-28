@@ -6,15 +6,15 @@ framework: react
 
 ## Floating action button
 
-The floating action button, abbreviated as *fab*, is a component in Material Design. It is a circular button often placed in the lower right corner of the screen. It stands out more than other buttons and is supposed to represent the primary action of an app.
+The floating action button, abbreviated as *fab*, is a component in Material Design. It is a circular button usually placed in the lower right corner of the screen. This button stands out more than other buttons and is supposed to represent the primary action of an app.
 
 Onsen UI also provides a component called [`SpeedDial`](SpeedDial.html) which is a floating action button that expands into a menu when tapped.
 
 #### Basic usage
 
-To add a floating action button in an app it is simply put as a child of a `Page` component. The `position` prop is used to define its position. To put it in the bottom right of the screen this prop should be set to the literal string `"bottom right"`.
+To add a floating action button in an app simply put it as a child of a `Page` component. The `position` property is used to define its position. For example, to put the button in the bottom right of the screen this property one needs to set the property to `"bottom right"`.
 
-Often an icon is put inside the button which can be achieved with the [`Icon`](Icon.html) component.
+It is also possible to put an  icon inside the button using [`Icon`](Icon.html) component:
 
 ```
 <Page>
@@ -28,7 +28,7 @@ Often an icon is put inside the button which can be achieved with the [`Icon`](I
 
 #### Ripple effect
 
-To get a ripple effect that expands from the point where the user taps, the `ripple` prop is used. This prop takes no value.
+To get a ripple effect that expands from the point where the user taps, the `ripple` property is used.
 
 ```
 <Fab ripple />
@@ -36,7 +36,7 @@ To get a ripple effect that expands from the point where the user taps, the `rip
 
 #### Mini fab button
 
-The appearance of the button can be changed with the `modifier` prop. The floating action button only has one modifier, `mini`, which makes it smaller.
+The appearance of the button can be changed with the `modifier` property. The floating action button only has one modifier, `mini`, which makes it smaller.
 
 ```
 <Fab modifier='mini' />

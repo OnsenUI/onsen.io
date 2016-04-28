@@ -8,13 +8,13 @@ component: react/Input
 
 The input components are used to get information from the user. Onsen UI provides the `Input` component which can be used to display text input, checkbox or a radio button. There is also `Switch` which displays a toggleable switch.
 
-The `Input` element is very similar to the native HTML `<input>` tag and supports similar props. The `type` prop is used to switch between different types of inputs.
+The `Input` element is very similar to the native HTML `<input>` tag and supports similar props. The `type` property is used to switch between different types of inputs.
 
-Both the `Switch` and `Input` components will automatically change style based on platform. They will be displayed as Material Design inputs on Android devices.
+Both the `Switch` and `Input` components will automatically change style based on the platform. They will be displayed as Material Design inputs on Android devices.
 
 #### Basic usage
 
-To create a simple text input the `Input` element is used. The `value` prop is used to set the value of the input. The `onChange` prop is fired when the value changes.
+To create a simple text input the `Input` element is used. The `value` property can be used to set the value of the input. The `onChange` property will be called when the value changes.
 
 ```
 class MyPage extends React.Component {
@@ -38,13 +38,13 @@ class MyPage extends React.Component {
 }
 ```
 
-To disable the input the `disabled` prop is used.
+To disable the input the `disabled` property can be used.
 
 #### Floating label
 
-In Material Design input elements has a floating label. When the input is empty the label serves as a placeholder but it will transform into a label with a floating animation when the user types something into the input.
+In Material Design input elements have a floating label. When the input is empty the label serves as a placeholder, but it will transform into a label with a floating animation when the user types something into the input.
 
-To set the content of the label the `placeholder` prop is used and to activate the floating animation the `float` prop is used.
+To set the content of this label the `placeholder` property is used and to activate it the `float` prop needs to be used:
 
 ```
 <Input
@@ -56,9 +56,9 @@ To set the content of the label the `placeholder` prop is used and to activate t
 
 #### Checkboxes and radio buttons
 
-To display checkboxes and radio buttons the `type` prop is used. The values are the same as for normal `<input>` tags: `checkbox` and `radio`.
+To display check boxes and radio buttons the `type` prop can be used. The values are the same as for normal `<input>` tags: `checkbox` and `radio`.
 
-The `checked` prop controls if the component is toggled or not.
+The `checked` property controls if the component is toggled or not.
 
 ```
 <Input type='checkbox' checked={this.state.isChecked} />
@@ -85,6 +85,17 @@ Just like the `Input` component it implements the `checked`, `onChange` and `dis
 ```
 <Switch
   checked={this.state.isChecked}
+  onChange={this.handleChange.bind(this)}
+/>
+```
+
+#### Range
+
+The `Range` component is used to display a range slider. It can be used to let the user input a numerical value by dragging the slider.
+
+```
+<Range
+  value={this.state.value}
   onChange={this.handleChange.bind(this)}
 />
 ```
