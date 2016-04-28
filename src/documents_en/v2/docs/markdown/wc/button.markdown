@@ -6,4 +6,4 @@ framework: js,angular1
 
 ## Button (ons-button)
 
-[`<ons-button>`](/v2/reference/js/ons-button.html) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.
+[`<ons-button>`](/v2/docs/js/ons-button.html) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.

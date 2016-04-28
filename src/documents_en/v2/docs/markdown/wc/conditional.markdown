@@ -6,7 +6,7 @@ framework: js,angular1
 
 ## Conditional (ons-if)
 
-[`<ons-if>`](/v2/reference/js/ons-if.html) element can conditionally display content depending on the platform or the screen orientation. Currently, there is `orientation` and `platform` attribute.
+[`<ons-if>`](/v2/docs/js/ons-if.html) element can conditionally display content depending on the platform or the screen orientation. Currently, there is `orientation` and `platform` attribute.
 
 ```html
 <ons-if orientation="landscape">

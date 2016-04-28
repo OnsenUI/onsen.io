@@ -8,8 +8,8 @@ framework: js,angular1
 
 Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
 
-The layout can be performed by combining [`<ons-row>`](/v2/reference/js/ons-row.html) and [`<ons-col>`](/v2/reference/js/ons-col.html) components. The width and height can be adjusted in a flexible way.
+The layout can be performed by combining [`<ons-row>`](/v2/docs/js/ons-row.html) and [`<ons-col>`](/v2/docs/js/ons-col.html) components. The width and height can be adjusted in a flexible way.
 
-By default, all [`<ons-col>`](/v2/reference/js/ons-col.html) inside a [`<ons-row>`](/v2/reference/js/ons-row.html) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
+By default, all [`<ons-col>`](/v2/docs/js/ons-col.html) inside a [`<ons-row>`](/v2/docs/js/ons-row.html) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
 
-[`<ons-row>`](/v2/reference/js/ons-row.html) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
+[`<ons-row>`](/v2/docs/js/ons-row.html) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.

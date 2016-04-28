@@ -9,7 +9,7 @@ tutorial: vanilla/Reference/progress
 
 `<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
 
-[`<ons-page>`](/v2/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+[`<ons-page>`](/v2/docs/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
 
 * `init` event is fired after `<ons-page>` is attached to DOM.
 * `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.

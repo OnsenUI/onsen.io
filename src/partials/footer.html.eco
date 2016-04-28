@@ -8,7 +8,7 @@
         <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
         <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
         <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
-        <li><a target="_blank" href="http://monaca.mobi/en/page/company">ABOUT US</a></li>
+        <li><a target="_blank" href="https://monaca.io/about-us.html">ABOUT US</a></li>
         <li><a href="http://ja.onsen.io/">JAPANESE</a></li>
       <% else: %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <p class="copyright">Copyright &copy; 2013-2016 Asial Corporation. All rights reserved. <a href="http://monaca.mobi/en/page/policy">Privacy Policy</a></p>
+    <p class="copyright">Copyright &copy; 2013-2016 Asial Corporation. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a></p>
   </div>
 </footer>
 

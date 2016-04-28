@@ -7,9 +7,9 @@ tutorial: vanilla/Reference/pull-hook
 
 ## Pull Hook (ons-pull-hook)
 
-The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/v2/reference/js/ons-page.html) element. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
+The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/v2/docs/js/ons-page.html) element. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
 
-[`<ons-pull-hook>`](/v2/reference/js/ons-pull-hook.html) tag is used to create and display a new Pull Hook component. By default, Pull Hook will drag down all the content of the page when pulling it. The attribute `fixed-content` will prevent the page content to be dragged along with the Pull Hook.
+[`<ons-pull-hook>`](/v2/docs/js/ons-pull-hook.html) tag is used to create and display a new Pull Hook component. By default, Pull Hook will drag down all the content of the page when pulling it. The attribute `fixed-content` will prevent the page content to be dragged along with the Pull Hook.
 
 ``` html
 <ons-page>
@@ -37,7 +37,7 @@ You can also get the state by `changestate` event. Each one associated with a cu
 
 #### Pull Hook height parameters
 
-[`<ons-pull-hook>`](/v2/reference/js/ons-pull-hook.html) component's height attributes are very important, since they define when a state transition should occur. The two attributes are:
+[`<ons-pull-hook>`](/v2/docs/js/ons-pull-hook.html) component's height attributes are very important, since they define when a state transition should occur. The two attributes are:
 
 * `height`: specifies the height of the component. When pulled down further than this value it will switch to the "preaction" state. The default value is "64px".
 

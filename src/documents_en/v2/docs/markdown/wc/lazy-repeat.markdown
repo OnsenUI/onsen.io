@@ -7,7 +7,7 @@ tutorial: vanilla/Reference/lazy-repeat
 
 ## Lazy List (or Infinite Scrolling, ons-lazy-repeat)
 
-With [`ons-lazy-repeat`](/v2/reference/js/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty. Here is the example of a simple list having 100,000,000 records.
+With [`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty. Here is the example of a simple list having 100,000,000 records.
 
 ``` html
 <script>

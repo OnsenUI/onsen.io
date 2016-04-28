@@ -13,9 +13,9 @@ Some components require you to specify another HTML page. For instance, a `<ons-
 </ons-sliding-menu>
 ```
 
-Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/v2/reference/js/ons-template.html) tag.
+Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/v2/docs/js/ons-template.html) tag.
 
-An [`<ons-template>`](/v2/reference/js/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
+An [`<ons-template>`](/v2/docs/js/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
 
 ```html
 <ons-template id="main.html">
