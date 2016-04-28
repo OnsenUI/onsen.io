@@ -7,11 +7,11 @@ tutorial: vanilla/Reference/navigator
 
 ## Navigation
 
-In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/v2/reference/js/ons-navigator.html). `<ons-navigator>` is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/v2/reference/js/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
+In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/v2/docs/js/ons-navigator.html). `<ons-navigator>` is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
 
-[`<ons-navigator>`](/v2/reference/js/ons-navigator.html) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](/v2/reference/js/ons-page.html) elements; therefore only [`<ons-page>`](/v2/reference/js/ons-page.html) components can be placed directly under a [`<ons-navigator>`](/v2/reference/js/ons-navigator.html) element.
+[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](/v2/docs/js/ons-page.html) elements; therefore only [`<ons-page>`](/v2/docs/js/ons-page.html) components can be placed directly under a [`<ons-navigator>`](/v2/docs/js/ons-navigator.html) element.
 
-A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](/v2/reference/js/ons-toolbar.html) component is commonly placed under [`<ons-page>`](/v2/reference/js/ons-page.html) element to provide a back button support and the page title.
+A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) component is commonly placed under [`<ons-page>`](/v2/docs/js/ons-page.html) element to provide a back button support and the page title.
 
 #### Display a new page (pushPage)
 
@@ -94,7 +94,7 @@ If the app is running on an Android device and using Cordova, pressing the back 
 
 Another way, especially when using iOS, is to use `<ons-back-button>` component. It can be added to the left side of the toolbar and renders as an arrow. It will automatically find the Navigator element and trigger a popPage() call so there is no need to attach any click handlers to it.
 
-If you additionally want to only show a back button from iOS devices, [`<ons-if>`](/v2/reference/js/ons-if.html) is the way.
+If you additionally want to only show a back button from iOS devices, [`<ons-if>`](/v2/docs/js/ons-if.html) is the way.
 
 ```html
 <ons-toolbar>
@@ -105,7 +105,7 @@ If you additionally want to only show a back button from iOS devices, [`<ons-if>
 
 #### Navigation events
 
-[`<ons-navigator>`](/v2/reference/js/ons-navigator.html) has several events defined: `prepush`, `postpush`, `prepop`, `postpop`. They are called before or after the `pushPage` or `popPage` action.
+[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) has several events defined: `prepush`, `postpush`, `prepop`, `postpop`. They are called before or after the `pushPage` or `popPage` action.
 
 Also, event object for `prepush` and `prepop` have `cancel()` function, which you can cancel the operation.
 
@@ -142,11 +142,11 @@ myNavigator.addEventListener('prepush', function(event) {
 
 ### Button (ons-button)
 
-[`<ons-button>`](/v2/reference/js/ons-button.html) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.
+[`<ons-button>`](/v2/docs/js/ons-button.html) renders a button with different face types. You can change the appearance by using `modifier`, `should-spin`, `animation` and `disabled` attributes. `modifier` attribute provides several predefined values to change the appearance.
 
 ### Switch (ons-switch)
 
-[`<ons-switch>`](/v2/reference/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/reference/js/ons-switch.html#method-isChecked) method.
+[`<ons-switch>`](/v2/docs/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/docs/js/ons-switch.html#method-isChecked) method.
 
 ```html
 <script>
@@ -223,17 +223,17 @@ This component adds a Material Design `ripple` effect to an element.
 
 Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
 
-The layout can be performed by combining [`<ons-row>`](/v2/reference/js/ons-row.html) and [`<ons-col>`](/v2/reference/js/ons-col.html) components. The width and height can be adjusted in a flexible way.
+The layout can be performed by combining [`<ons-row>`](/v2/docs/js/ons-row.html) and [`<ons-col>`](/v2/docs/js/ons-col.html) components. The width and height can be adjusted in a flexible way.
 
-By default, all [`<ons-col>`](/v2/reference/js/ons-col.html) inside a [`<ons-row>`](/v2/reference/js/ons-row.html) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
+By default, all [`<ons-col>`](/v2/docs/js/ons-col.html) inside a [`<ons-row>`](/v2/docs/js/ons-row.html) will have the same width. You can specify any `<ons-col>` elements to have a specific width and let others take the remaining width in a `<ons-row>`.
 
-[`<ons-row>`](/v2/reference/js/ons-row.html) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
+[`<ons-row>`](/v2/docs/js/ons-row.html) has `align` attribute, and `<ons-col>` has `align`, `size`, and `offset` attributes. For the `size` attribute, you can specify either in `px` or `%`.
 
 ### Icons (ons-icon)
 
 Onsen UI offers over 400 icons provided by [Font Awesome](http://fontawesome.github.io/) and over 500 icons by [Ionicons](http://ionicons.com/).
 
-When displaying an icon, a [`<ons-icon>`](/v2/reference/js/ons-icon.html) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
+When displaying an icon, a [`<ons-icon>`](/v2/docs/js/ons-icon.html) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
 
 #### Using Font Awesome
 
@@ -292,7 +292,7 @@ Adding `indeterminate` attribute will tell components to loop forever. In this c
 
 `<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
 
-[`<ons-page>`](/v2/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+[`<ons-page>`](/v2/docs/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
 
 * `init` event is fired after `<ons-page>` is attached to DOM.
 * `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
@@ -318,7 +318,7 @@ document.addEventListener("init", function(event) {
 
 ### Finger Gestures (ons-gesture-detector)
 
-Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/v2/reference/js/ons-gesture-detector.html) component. The following code does a swipe-left detection for a specific element.
+Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) component. The following code does a swipe-left detection for a specific element.
 
 ```html
 <ons-gesture-detector>
@@ -347,7 +347,7 @@ Following gestures are supported.
 
 ### Conditional (ons-if)
 
-[`<ons-if>`](/v2/reference/js/ons-if.html) element can conditionally display content depending on the platform or the screen orientation. Currently, there is `orientation` and `platform` attribute.
+[`<ons-if>`](/v2/docs/js/ons-if.html) element can conditionally display content depending on the platform or the screen orientation. Currently, there is `orientation` and `platform` attribute.
 
 ```html
 <ons-if orientation="landscape">
@@ -370,9 +370,9 @@ Some components require you to specify another HTML page. For instance, a `<ons-
 </ons-sliding-menu>
 ```
 
-Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/v2/reference/js/ons-template.html) tag.
+Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/v2/docs/js/ons-template.html) tag.
 
-An [`<ons-template>`](/v2/reference/js/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
+An [`<ons-template>`](/v2/docs/js/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
 
 ```html
 <ons-template id="main.html">
@@ -405,7 +405,7 @@ ons.ready(function() {
 
 As of iOS 7, a status bar can be rendered above a WebView. Onsen UI automatically detects and adds the necessary margin on the top. However in some occations, it is necessary to disable this feature, when using Cordova [StatusBar plugin](https://github.com/apache/cordova-plugin-statusbar) for instance.
 
-To manage the top margin for iOS devices, Onsen UI provides [`ons.enableAutoStatusBarFill()`](/v2/reference/js/ons.html#method-enableAutoStatusBarFill) function and [`ons.disableAutoStatusBarFill()`](/v2/reference/js/ons.html#method-disableAutoStatusBarFill) function. This feature is enabled by default, and needs to call the function before Onsen UI initialization complete (before `ons.ready()` event).
+To manage the top margin for iOS devices, Onsen UI provides [`ons.enableAutoStatusBarFill()`](/v2/docs/js/ons.html#method-enableAutoStatusBarFill) function and [`ons.disableAutoStatusBarFill()`](/v2/docs/js/ons.html#method-disableAutoStatusBarFill) function. This feature is enabled by default, and needs to call the function before Onsen UI initialization complete (before `ons.ready()` event).
 
 ```javascript
 /**
@@ -446,7 +446,7 @@ For testing purposes, `ons.platform.select(platform)` provides a way to select a
 
 ### Back Button Support
 
-Android has a hardware back button. To support device back button, use `setDeviceBackButtonHandler` method in [`<ons-page>`](/v2/reference/js/ons-page.html).
+Android has a hardware back button. To support device back button, use `setDeviceBackButtonHandler` method in [`<ons-page>`](/v2/docs/js/ons-page.html).
 
 ```html
 <ons-page id="myPage">...</ons-page>

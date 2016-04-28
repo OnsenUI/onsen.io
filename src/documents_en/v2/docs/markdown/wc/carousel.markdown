@@ -9,11 +9,11 @@ tutorial: vanilla/Reference/carousel
 
 Carousel provides a container to display multiple items in the element. It can be used as a full screen component, or inside another element.
 
-[`<ons-carousel>`](/v2/reference/js/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/v2/reference/js/ons-carousel-item.html) components. Each `<ons-carousel-item>` represents items in the carousel.
+[`<ons-carousel>`](/v2/docs/js/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/v2/docs/js/ons-carousel-item.html) components. Each `<ons-carousel-item>` represents items in the carousel.
 
 #### Showing full screen carousel
 
-A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<ons-carousel>`](/v2/reference/js/ons-carousel.html) component.
+A full-screen carousel can be shown by specifying `fullscreen` attribute to [`<ons-carousel>`](/v2/docs/js/ons-carousel.html) component.
 
 ```html
 <ons-carousel fullscreen swipeable overscrollable auto-scroll>

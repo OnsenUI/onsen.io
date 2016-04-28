@@ -7,7 +7,7 @@ tutorial: vanilla/Reference/switch
 
 ## Switch (ons-switch)
 
-[`<ons-switch>`](/v2/reference/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/reference/js/ons-switch.html#method-isChecked) method.
+[`<ons-switch>`](/v2/docs/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/docs/js/ons-switch.html#method-isChecked) method.
 
 ```html
 <script>
@@ -26,7 +26,7 @@ title: Tab Bar (ons-tabbar, ons-tab)
 
 ### Switch (ons-switch)
 
-[`<ons-switch>`](/v2/reference/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/reference/js/ons-switch.html#method-isChecked) method.
+[`<ons-switch>`](/v2/docs/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`isChecked()`](/v2/docs/js/ons-switch.html#method-isChecked) method.
 
 ```html
 <script>
