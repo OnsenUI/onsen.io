@@ -6,15 +6,13 @@ framework: react
 
 ## Carousel
 
-A carousel is used to display a lot of content to the user in a small space. The user can browse through the items by swiping. This can be achieved with the `Carousel` component.
+The `Carousel` component can be used to display a lot of content to the user in a small space. The user can browse through the items by swiping.
 
 #### Basic usage
 
-`Carousel` is the parent of the `CarouselItem` component. Several props are available to alter its behavior.
+The children of the `Carousel` component should be `CarouselItem` components. Many properties are available to alter the default behaviour of the `Carousel`. For example, to enable user swiping the `swipeable` property should be used. Without setting this property the items cannot be moved by swiping.
 
-To enable user swiping the `swipeable` prop must be defined. Without this prop the items can not be moved by swiping.
-
-The following code will create a swipeable carousel.
+The following code will create a swipeable carousel:
 
 ```
 <Carousel swipeable>
@@ -27,7 +25,7 @@ The following code will create a swipeable carousel.
 
 #### Controlling the carousel
 
-In addition to letting the user control the carousel using the `swipeable` prop it is also possible to programmatically change the current item using the `index` prop. By changing this prop the carousel will show another item.
+In addition to letting the user control the carousel using the `swipeable` prop, it is also possible to programmatically change the current item using the `index` property. By changing this property the carousel will show another item.
 
 ```
 <Carousel index={this.state.carouselItemIndex}>
@@ -37,7 +35,7 @@ In addition to letting the user control the carousel using the `swipeable` prop 
 
 #### Autoscrolling
 
-By default the user will be able to drag the carousel freely. The `autoScroll` prop will make it automatically bounce to item edges when released. To modify the bouncing behavior the `autoScrollRatio` prop can be used. The ratio can be set to a value between `0` and `1` which defines how much it must be swiped in order to snap to the next item.
+By default the user will be able to drag the carousel freely. The `autoScroll` property will make it automatically bounce to item edges when released. To modify the bouncing behavior the `autoScrollRatio` property can be used. The ratio can be set to a value between `0` and `1`. This value indicates how much it must be swiped in order to snap to the next item.
 
 ```
 <Carousel swipeable autoScroll autoScrollRatio={0.2}>
@@ -47,7 +45,7 @@ By default the user will be able to drag the carousel freely. The `autoScroll` p
 
 #### Vertical carousel
 
-The carousel scrolls horizontally by default but it also supports vertical scrolling. To enable this the `direction` prop must be set to `'vertical'`.
+The carousel scrolls horizontally by default,  but it also supports vertical scrolling. To enable this feature the `direction` property must be set to `'vertical'`.
 
 ```
 <Carousel direction='vertical'>
@@ -57,7 +55,7 @@ The carousel scrolls horizontally by default but it also supports vertical scrol
 
 #### Customizing the animation
 
-When using the `index` prop the carousel will show a new item using an animation. To customize this animation the `animationOptions` prop can be used. It takes an object with `duration`, `delay` and `timing` properties.
+When using the `index` property the carousel will show a new item using an animation. To customize this animation the `animationOptions` property can be used. It takes an object with `duration`, `delay` and `timing` properties.
 
 ```
 <Carousel
@@ -75,9 +73,18 @@ Some other props available are:
 
 #### Event handling
 
-The carousel has the following props to handle events:
+The carousel has the following properties to handle events:
 
-* `onPostChange` - Fired when the current item changes.
-* `onOverscroll` - Fired when the user scrolls past the first or last items.
+* `onPostChange` - Called when the current item changes.
+* `onOverscroll` - Called when the user scrolls past the first or last items.
 
-The `onOverscroll` prop could be used to load new items when the user reaches the end.
+The `onOverscroll` prop could be used to load new items when the user reaches the end. The `onPostChange` can be used to synchronize the values of `index`, if a user swipes.
+
+```
+<Carousel
+  index={this.state.index} swipeable
+  onPostChange={(event) => this.setState({index: event.activeIndex})}>
+  ...
+</Carousel>
+```
+
