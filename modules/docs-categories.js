@@ -16,7 +16,18 @@ function generateDocument(metalsmith, categoryFile) {
       file.version = "v2";
       file.categoryFile = categoryFile.file;
       file.componentIndex = true;
-      file.title = categoryFile.file.title;
+      categoryFile.file.name = categoryFile.file.title;
+      switch (file.framework) {
+        case "react":
+          file.h1 = categoryFile.file.title + " Guide <strong>for React Component</strong>"; break;
+        case "js":
+          file.h1 = categoryFile.file.title + " Guide <strong>for JavaScript</strong>"; break;
+        case "angular1":
+          file.h1 = categoryFile.file.title + " Guide <strong>for Angular 1</strong>"; break;
+        case "angular2":
+          file.h1 = categoryFile.file.title + " Guide <strong>for Angular 2</strong>"; break;
+      }
+      file.title = file.h1 + " - Onsen UI Framework";
 
       resolve({file: file});
     });
@@ -60,6 +71,7 @@ module.exports = function(lang) {
             categories[framework][category] = {};
           }
           categories[framework][category].title = file.title;
+          categories[framework][category].name= file.name;
           categories[framework][category].index = file;
 
           promises.push(generateDocument(metalsmith, { file: file, category: category, framework: framework }).then(function(result) {

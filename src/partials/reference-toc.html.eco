@@ -22,7 +22,13 @@
       <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
       <% for doc in docs.files: %>
         <li class="toc-item toc-2-item">
-          <a href="/v2/docs/<%=framework%>/<%= doc.name %>.html" class="toc-link toc-2-link <%="current" if @name == doc.name %>"><%= doc.name %></a>
+          <a href="/v2/docs/<%=framework%>/<%= doc.name %>.html" class="toc-link toc-2-link <%="current" if @name == doc.name %>">
+            <% if @framework == "react": %>
+              &lt;<%= doc.name %> /&gt;
+            <% else: %>
+              <%= doc.name %>
+            <% end %>
+          </a>
         </li>
       <% end %>
       </ul>

@@ -86,6 +86,7 @@ module.exports = function() {
 
       markd: function(string) {
         try {
+          string = string.trim();
           if (string.indexOf("\n") == -1) {
             // Inline
             var str = marked(string.toString());
