@@ -3,7 +3,8 @@ title: Toolbar
 component: react/Toolbar
 framework: react
 ---
-## Toolbar
+
+### Toolbar
 
 The `Toolbar` component displays a navigation bar on the top of a [`Page`](Page.html) component. It is separated into three sections (left, center and right) in order to help layout buttons and title in a beautiful way.
 
