@@ -8,15 +8,15 @@ framework: react
 
 The `Navigator` is a component that provides stack based navigation. It is a very common navigation pattern in mobile apps.
 
-When a page is pushed on top of the stack it is revealed with a transition animation. When the user returns to the previous page the top page will be popped from the top of the stack and hidden with an opposite transition animation.
+After pushing a page to the top of the stack it will be displayed using transition animation. When the user goes back to the previous page the top page will be popped from the top of the stack and hidden with an corresponding transition animation.
 
 #### Basic usage
 
-The `Navigator` maintains a stack of *route* objects. These objects can take any form and are rendered into pages with the `renderPage` prop. The `renderPage` prop must be set to a function that returns a `Page` component.
+The `Navigator` maintains a stack of *route* objects. These objects can be arbitrary objects and are rendered into pages with the `renderPage` property. The `renderPage` property must be set to a function that returns a `Page` component.
 
-To push a new page on top of the stack the `pushPage(route)` method is used. Similarly a page is popped from the stack with the `popPage()` method.
+To push a new page on top of the stack, the `pushPage(route)` method is used. Similarly, a page is popped from the stack with the `popPage()` method.
 
-The stack must be initialized with either the `initialRoute` prop or if the stack needs to be initialized with more than one page the `initialRouteStack` can be used.
+The stack must be initialized with either the `initialRoute` or `initialRouteStack`, depending on whether the the stack needs to be initialized with one or more pages.
 
 ```
 class App extends React.Component {
@@ -30,19 +30,15 @@ class App extends React.Component {
         <Button onClick={() => {
           navigator.pushPage({
             title: 'Another page',
-            backButton: true
+            backButton: <Button onClick={() => navigator.popPage()}>
+              Pop page
+            </Button>
+
           });
         }}>
           Push page
         </Button>
-
-        {
-          route.backButton
-            ? <Button onClick={() => navigator.popPage()}>
-                Pop page
-              </Button>
-            : null
-        }
+        {route.backButton}
       </Page>
     );
   }
@@ -50,7 +46,7 @@ class App extends React.Component {
   render() {
     return (
       <Navigator
-        initialRoute={{title: 'First page', backButton: false}}
+        initialRoute={{title: 'First page'}}
         renderPage={this.renderPage.bind(this)}
       />
     );
@@ -58,7 +54,7 @@ class App extends React.Component {
 }
 ```
 
-This simple app will initialize with a page containing a button. Pressing the button will push another page that contains a button that when pressed will return to the previous page.
+This simple app will render initially with a page containing a button. Pressing the button will push another page. At this page one will be able to push another page or go pop the current page from the page stack.
 
 #### The back button
 
@@ -77,9 +73,9 @@ The `BackButton` component can be used to put a back button in the navigation ba
 
 #### Customizing the animation
 
-There are several animations available for the `Navigator` component. To change the animation the `animation` prop is used. Available animations are `slide`, `lift` and `fade`. Setting the prop to `none` will make the transition instant.
+There are several animations available for the `Navigator` component. To change the animation the `animation` property is used. Available animations are `slide`, `lift` and `fade`. Setting the property to `none` will make the transition instantly.
 
-It is also possible to customize the duration, delay and timing function of the animation using the `animationOptions` prop.
+It is also possible to customize the duration, delay and timing function of the animation using the `animationOptions` property.
 
 ```
 <Navigator
