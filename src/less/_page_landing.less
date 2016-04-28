@@ -5,8 +5,26 @@
     &.white-back {
       background: linear-gradient(190deg, #EFEFEF, #FFFFFF);
 
-      #intro, h1, a, p {
+      h1 {
         color: #D64135;
+        font-size: 44px;
+        line-height: 1.1;
+        > span {
+          color: #333;
+          font-size: 36px;
+        }
+      }
+      a.keybutton {
+        color: #fff;
+        background-color: #ff4d36;
+        opacity: 1;
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+
+      #intro, p, a {
+        color: #666;
       }
     }
   }
