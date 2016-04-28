@@ -5,12 +5,12 @@ needHelp: true
 framework: 'js'
 autotoc: true
 actionbar: false
-tocTitle: 'Main Guide'
+tocTitle: 'JavaScript Guide'
 version: v2
 ---
 
 <nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action selected js">Main Guide</a>
+  <a href="/v2/docs/guide/js/" class="action selected js">JavaScript Guide</a>
   <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
   <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
   <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
@@ -18,13 +18,59 @@ version: v2
 
 <%- @markdown => %>
 
-This document is based on the latest version of Onsen UI. To see the difference between the versions, please refer to the [Changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com)) apps. It also is equipped with popular JS frameworks support, including [Angular 1](/guide/angular1), Angular 2 and [React](/guide/react). Although they are using the same core, we are optimizing the APIs for each framework.
 
-Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap]()) apps. It also is equipped with popular JS frameworks support, including Angular 1, Angular 2 and React. Although they are using the same core, we are optimizing the APIs for each framework.
+### Starting Project
+
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca signup # Free sign up
+$ monaca create helloworld # Choose template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm or bower
+
+```bash
+$ npm install onsenui
+$ bower install onsenui
+```
 
 ### Hello World! (ons-page, ons-tabbar and ons object)
 
 This section describes some of the basic elements that compose a normal page.
+
+#### Loading Onsen UI
+
+To load Onsen UI in your project, please load `onsen.js` and CSS files for styling.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.ready(function() {
+        // Init code here
+      });
+    </script>
+  </head>
+  <body>
+    <ons-navigator>
+      <ons-page>
+        Page 1
+      </ons-page>
+    </ons-navigator>
+  </body>
+</html>
+```
 
 #### Page component (ons-page)
 
