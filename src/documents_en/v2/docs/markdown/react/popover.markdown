@@ -6,13 +6,13 @@ framework: react
 
 ## Popover
 
-The `Popover` component displays a box next to a target component or element. It can be used to show a tooltip, information to the user or even for displaying a menu.
+The `Popover` component displays a box next to a target component or element. It can be used to show a tooltip, an info box or even for displaying a menu.
 
 The popover will automatically alter its style based on the platform. On Android it will be displayed as a Material Design component.
 
 #### Showing and hiding
 
-To show or hide a popover the `isOpen` prop is used. To determine which component it should appear next to, the `getTarget` prop must be defined and set to a function that returns either a component reference or a DOM element.
+To show or hide a popover the `isOpen` property is used. To determine which component it should visually point to, the `getTarget` property must be set to a function that returns a reference either to an React component or a DOM element.
 
 ```
 class MyPage extends React.Component {
@@ -53,13 +53,13 @@ class MyPage extends React.Component {
 }
 ```
 
-This will show the popover when the button is pressed and it will point at the button since the `getTarget` prop returns a reference to the `Button` component.
+When this component is rendered it will show the popover when the button is pressed. The popover will point to the button since the `getTarget` property returns a reference to the `Button` component.
 
 #### Changing direction
 
-The `Popover` component has a `direction` prop that can be used to specify at which side of the target it will be displayed.
+The `Popover` component has a `direction` property that can be used to specify at which side of the target it will be displayed.
 
-Setting the prop to `left` will make it always be displayed from the left. If the prop is omitted the popover will be displayed at the side with the most space.
+Setting the property to `left` will make it always be displayed to the left. If the property is omitted the popover will be displayed at the side with the most space.
 
 ```
 <Popover
@@ -72,7 +72,7 @@ Setting the prop to `left` will make it always be displayed from the left. If th
 
 #### Customizing animation
 
-The popover will be revealed with a fade animation. The duretion, delay and timing function can be customized using the `animationOptions` prop. The prop accepts an object.
+The popover will be revealed with a fade animation. The duration, delay and timing function can be customized using the `animationOptions` property:
 
 ```
 <Popover

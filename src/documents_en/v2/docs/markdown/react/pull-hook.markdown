@@ -6,15 +6,15 @@ framework: react
 
 ## Pull hook
 
-The `PullHook` component is used to add *pull to refresh* functionality to a page. It can let the user refresh a page or load the latest data.
+The `PullHook` component is used to add a *pull to refresh* functionality to a page. It can let the user refresh a page or load the latest data.
 
 #### States
 
-The `PullHook` component has three different states, `initial`, `preaction` and `action`. It starts in the `initial` state. When it's pulled down below its height it will transition into the `preaction` state. If it's released in `initial` state it will just bounce back while if it's released in the `preaction` state it will go into `action` state.
+The `PullHook` component has three different states: `initial`, `preaction` and `action`. It starts in the `initial` state. When it's pulled down below its height it will transition into the `preaction` state. If it's released in `initial` state it will just bounce back. If it's released in the `preaction` state,  it will go into `action` state.
 
-Every time the state changes the `onChange` prop will be fired.
+Every time the state changes the `onChange` property will be called.
 
-When the component transitions into the `action` state it will execute the `onLoad` prop with a `done` function as an argument. Calling the `done` callback will cause it to return to the `initial` state.
+When the component transitions into the `action` state, it will call the `onLoad` property with a `done` callback as an argument. Calling this function will cause it to return to the `initial` state.
 
 #### Basic usage
 
@@ -67,7 +67,7 @@ class MyPage extends React.Component {
 
 #### Changing the height
 
-The component has a default height but it can be customized with the `height` prop. There is also a prop called `thresholdHeight` which can be used to make it automatically call the `onLoad` prop without the user releasing.
+The component has a default height, but it can be customized using the `height` property. There is also a property called `thresholdHeight` which can be used to make it automatically call the `onLoad` property without the user releasing.
 
 ```
 <PullHook

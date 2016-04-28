@@ -6,27 +6,29 @@ component: react/Splitter
 
 ## Splitter
 
-The `Splitter` is used to display a menu next to the main content. It can be configured to either display as a column layout or as a swipeable menu. It is also possible to automatically switch between column layout and a layout with a swipeable menu based on the screen size or some other condition. In some situations it can be useful to display a column layout on large devices and hide the menu on smaller screens.
+The `Splitter` is used to display a menu next to the main content. It can be configured to either display in column layout or as a swipeable menu. It is also possible to automatically switch between column layout and a layout with a swipeable menu based on the screen size or any arbitrary condition. In some situations it can be useful to display a column layout on large devices and hide the menu on smaller screens.
 
 #### Main content
 
 The main content of the screen is put inside the `SplitterContent` component. A `Page` component should be put as a child of this component.
 
 ```
-<SplitterContent>
-  <Page>
-    Main content
-  </Page>
-</SplitterContent
+<Splitter>
+  <SplitterContent>
+    <Page>
+      Main content
+    </Page>
+  </SplitterContent
+</Splitter>
 ```
 
 #### Menu
 
-The menu is defined using the `SplitterSide` component. As mentioned earlier it can either be displayed as a column next to the main content or as a swipeable menu. This behavior is controlled using the `isCollapsed` prop.
+The menu is defined using the `SplitterSide` component.  This component can either be displayed as a column next to the main content or as a swipeable menu. This behavior is controlled using the `isCollapsed` property.
 
-To enable opening and closing the menu by swiping the `isSwipeable` prop must be defined. The `side` prop is used to specify on which side of the screen the menu is displayed.
+To enable opening and closing the menu by swiping the `isSwipeable` property must be defined. The `side` property is used to specify on which side of the screen the menu is displayed.
 
-To create a collapsed menu on the left side of the screen that can be opened by swiping the following code can be used.
+The following examples shows how to create a collapsed menu on the left side of the screen,  that can be opened by swiping:
 
 ```
 class App extends React.Component {
@@ -54,9 +56,9 @@ class App extends React.Component {
 
 #### Opening and closing the menu
 
-The menu can be opened and closed using the `isOpen` prop. This prop only works when the menu is collapsed since in column layout it is always visible.
+The menu can be opened and closed using the `isOpen` property. This property only works when the menu is collapsed, since in column layout it is always visible.
 
-In the following example the menu is opened when the user presses a button. The `onClose` prop is called when the menu is closed and is used to control the state.
+In the following example the menu is opened,  when the user presses a button. The `onClose` property is called when the menu is closed and is used to control the state.
 
 ```
 class App extends React.Component {
@@ -106,7 +108,7 @@ class App extends React.Component {
 
 #### Other customization options
 
-The open and close animation of the `SplitterSide` component can be customized with the `animationOptions` prop. It accepts and object that can be used to change the duration, delay and timing function of the animation.
+The open and close animation of the `SplitterSide` component can be customized with the `animationOptions` property. It accepts and object that can be used to change the duration, delay and timing function of the animation.
 
 ```
 <SplitterSide
@@ -115,6 +117,6 @@ The open and close animation of the `SplitterSide` component can be customized w
 </SplitterSide>
 ```
 
-The width of the menu can be changed with the `width` prop. There is also a prop called `openThreshold` which is used to define how must the user needs to swipe the menu in order for it to open when it's released.
+The width of the menu can be changed with the `width` prop. There is also a property called `openThreshold`, which takes a number between `0` and `1` and specifies how much the user needs to swipe the menu in order for it to open when it's released.
 
-By default the menu can be opened by swiping anywhere on the screen. In some cases this is not the desired behavior. The `swipeTargetWidth` can be used to make the menu only open when the user swipes at the edge of the screen.
+By default the menu can be opened by swiping anywhere on the screen. In some cases this is not the desired behavior. The `swipeTargetWidth` can be set to zero in order to make the menu only open when the user swipes at the edge of the screen.
