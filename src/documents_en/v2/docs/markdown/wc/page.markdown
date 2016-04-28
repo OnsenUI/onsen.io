@@ -2,6 +2,7 @@
 title: Page
 component: js/ons-page,angular1/ons-page
 framework: js,angular1
+tutorial: vanilla/Reference/page
 ---
 
 ## Page (ons-page)

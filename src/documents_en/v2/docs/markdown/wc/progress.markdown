@@ -2,6 +2,7 @@
 title: Progress
 component: js/ons-progress-bar,js/ons-progress-circular,angular1/ons-progress-bar,angular1/ons-progress-circular
 framework: js,angular1
+tutorial: vanilla/Reference/progress
 ---
 
 ## Page (ons-page)

@@ -2,6 +2,7 @@
 title: Lazy Repeat (or Infinite Scrolling)
 component: js/ons-lazy-repeat,angular1/ons-lazy-repeat
 framework: js,angular1
+tutorial: vanilla/Reference/lazy-repeat
 ---
 
 ## Lazy List (or Infinite Scrolling, ons-lazy-repeat)

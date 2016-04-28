@@ -2,6 +2,7 @@
 title: List
 component: js/ons-list,js/ons-list-item,js/ons-list-header,angular1/ons-list,angular1/ons-list-item,angular1/ons-list-header
 framework: js,angular1
+tutorial: vanilla/Reference/list
 ---
 
 ## List (ons-list)

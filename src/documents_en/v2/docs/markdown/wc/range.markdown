@@ -2,6 +2,7 @@
 title: Range
 component: js/ons-range,angular1/ons-range
 framework: js,angular1
+tutorial: vanilla/Reference/range
 ---
 
 ## Range (ons-range)

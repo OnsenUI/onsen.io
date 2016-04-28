@@ -2,6 +2,7 @@
 title: Navigator
 component: js/ons-navigator,angular1/ons-navigator
 framework: js,angular1
+tutorial: vanilla/Reference/navigator
 ---
 
 ## Navigation
