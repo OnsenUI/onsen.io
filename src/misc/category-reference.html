@@ -3,12 +3,14 @@ page: 'reference-detail'
 reference: true
 layout: 'default.html.eco'
 actionbar: false
+title: Specified in v2-react-docs.js
+h1: Specified in v2-react-docs.js
 ---
 
 <div class="content"><div class="reference-container">
-  <div>
+  <div class="breadcrumb">
     <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
-    <%=@title%>
+    <%=@categoryFile.name%>
   </div>
 
   <%-@markd @categoryFile.contents %>
