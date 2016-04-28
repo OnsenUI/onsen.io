@@ -12,7 +12,7 @@ The `Tabbar` component is used to add tab navigation to an app. It is a very com
 
 Every tab is defined by one `Page` component and one `Tab` component. The `Tab` component displays the actual tab and the `Page` component will be displayed when the tab is tapped.
 
-The `Tabbar` component has a `initialIndex` prop which is used to specify the page that is visible initially. There is also a `renderTabs` prop that should be set to a function that returns an array of objects with the following structure:
+The `Tabbar` component has a `initialIndex` property which is used to specify the page that is visible initially. There is also a `renderTabs` property that should be set to a function that returns an array of objects with the keys `content` and `tab`:
 
 ```
 {
@@ -21,7 +21,7 @@ The `Tabbar` component has a `initialIndex` prop which is used to specify the pa
 }
 ```
 
-So to create a simple app with two tabs the following code can be used.
+For example, to create a simple app with two tabs the following code can be used:
 
 ```
 class App extends React.Component {

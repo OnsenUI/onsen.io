@@ -6,15 +6,15 @@ framework: react
 
 ### Toolbar
 
-The `Toolbar` component displays a navigation bar on the top of a [`Page`](Page.html) component. It is separated into three sections (left, center and right) in order to help layout buttons and title in a beautiful way.
+The `Toolbar` component displays a navigation bar on the top of a [`Page`](Page.html) component. It is separated into three sections (left, center and right) in order to let the buttons and title be layouted a beautiful way.
 
 #### Rendering a toolbar
 
-A toolbar is displayed on the screen by return the `Toolbar` component in the `renderToolbar` prop of the `Page` element. To layout the content the `left`, `center` and `right` classes are used.
+A toolbar is displayed on the screen by return the `Toolbar` component in the `renderToolbar` property of the `Page` element. To layout the content the `left`, `center` and `right` classes are used.
 
 ```
 <Page
-  renderToolbar={
+  renderToolbar={ () =>
     <Toolbar>
       <div className='left'>Left</div>
       <div className='center'>Center</div>
@@ -24,7 +24,7 @@ A toolbar is displayed on the screen by return the `Toolbar` component in the `r
 />
 ```
 
-The three sections are using flexbox in order to ensure good behavior across different screen sizes and platforms.
+The three sections are using flexbox [https://css-tricks.com/snippets/css/a-guide-to-flexbox/] in order to ensure good behavior across different screen sizes and platforms.
 
 #### Toolbar buttons
 
@@ -55,8 +55,8 @@ The `BackButton` component provides an easy way to put a back button in the navi
 </Toolbar>
 ```
 
-It renders as an arrow facing left. By default the content of the back button is only displayed on iOS but not in Material Design to emulator native behavior. See the [`Navigator` guide](navigator.html) for a more complete example using the `BackButton` component.
+It renders as an arrow facing left. By default the content of the back button is only displayed on iOS,  but not in Material Design to emulator native behavior. See the [`Navigator` guide](navigator.html) for a more complete example using the `BackButton` component.
 
 #### Bottom toolbar
 
-There is also a a component called `BottomToolbar` which displays a toolbar on the bottom of the page. This component serves as a simple container so it does not support the `left`, `center` and `right` classes.
+There is also a a component called `BottomToolbar`,  which displays a toolbar on the bottom of the page. This component serves as a simple container without supportng the `left`, `center` and `right` classes.
