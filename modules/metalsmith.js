@@ -88,6 +88,7 @@ module.exports = function(lang, isStaging) {
         .use(branch('robots.txt').use(templates({
           inPlace: true, engine: 'eco'
         })))
+        .use(redirect(require("./redirect_rule.json")))
         .use(sitemap({
           ignoreFiles: [/\.gitignore/],
           output: 'sitemap.xml',
