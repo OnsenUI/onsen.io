@@ -86,13 +86,13 @@ module.exports = function() {
 
       markd: function(string) {
         try {
-          string = string.trim();
+          string = string.toString().trim();
           if (string.indexOf("\n") == -1) {
             // Inline
-            var str = marked(string.toString());
+            var str = marked(string);
             return str.replace(new RegExp("^<p>"), '').replace(new RegExp("</p>\n$"), '');
           } else {
-            return marked(string.toString());
+            return marked(string);
           }
         } catch(e) {
           return e.toString();
