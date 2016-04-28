@@ -88,3 +88,14 @@ Just like the `Input` component it implements the `checked`, `onChange` and `dis
   onChange={this.handleChange.bind(this)}
 />
 ```
+
+#### Range
+
+The `Range` component is used to display a range slider. It can be used to let the user input a numerical value by dragging the slider.
+
+```
+<Range
+  value={this.state.value}
+  onChange={this.handleChange.bind(this)}
+/>
+```
