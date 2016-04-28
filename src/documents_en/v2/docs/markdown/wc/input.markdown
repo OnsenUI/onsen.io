@@ -2,6 +2,7 @@
 title: Input
 component: js/ons-input,angular1/ons-input
 framework: js,angular1
+tutorial: vanilla/Reference/input
 ---
 
 ## Text input (ons-input)

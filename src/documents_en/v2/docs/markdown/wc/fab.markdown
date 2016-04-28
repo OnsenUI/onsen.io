@@ -2,6 +2,7 @@
 title: Floating Action Button
 component: js/ons-tabbar,js/ons-tab,angular1/ons-tabbar,angular1/ons-tab
 framework: js,angular1
+tutorial: vanilla/Reference/fab
 ---
 
 

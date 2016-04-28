@@ -2,6 +2,7 @@
 title: Icon
 component: js/ons-icon,angular1/ons-icon
 framework: js,angular1
+tutorial: vanilla/Reference/icon
 ---
 
 ## Icons (ons-icon)

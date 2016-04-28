@@ -84,6 +84,14 @@ module.exports = function() {
         return result;
       },
 
+      getTutorialUrl: function(page, string) {
+        //"vanilla/Reference/carousel"
+        var tutorial_url = function(match, p1, p2, p3) {
+          return 'http://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3;
+        };
+        return string.replace(/(.+)\/(.+)\/(.+)/, tutorial_url);
+      },
+
       markd: function(string) {
         try {
           string = string.toString().trim();

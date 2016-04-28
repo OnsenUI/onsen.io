@@ -2,6 +2,7 @@
 title: Dialog
 component: js/ons-dialog,js/ons-alert-dialog,angular1/ons-dialog,angular1/ons-alert-dialog
 framework: js,angular1
+tutorial: vanilla/Reference/dialog
 ---
 
 ## Dialogs (ons-dialog, ons-alert-dialog)
