@@ -6,9 +6,7 @@ framework: react
 
 ## Button
 
-The `Button` component is, as the name implies, used to display a button. To use it just put the tag in your page.
-
-The button will automatically change style based on the platform. On iOS it will display as a flat button and on Android it will be a Material Design button.
+The `Button` component is, as the name implies, used to display a button. The button will automatically change style based on the platform. On iOS it will display as a flat button, while on Android it will be a Material Design button.
 
 ```
 <Page>
@@ -18,7 +16,7 @@ The button will automatically change style based on the platform. On iOS it will
 
 #### Handling taps
 
-A button isn't much use if it doesn't do anything. To handle when the user taps the button, the `onClick` prop is used.
+A button isn't much use if it doesn't do anything. To handle user taps, the `onClick` prop can be used.
 
 ```
 class MyComponent extends React.Component {
@@ -27,14 +25,15 @@ class MyComponent extends React.Component {
   }
 
   render() {
-    ...
+    return (
+      <Button onClick={this.handleClick.bind(this)}>Tap me!</Button>
+    );
   }
 }
 
-<Button onClick={this.handleClick.bind(this)}>Tap me!</Button>
 ```
 
-This code calls the `ons.notification.alert(message)` API when the button is pressed to display a message to the user.
+Ones the button is pressed, a notification will be displayed using `ons.notifaction.alert`.
 
 #### Ripple effect
 
@@ -46,7 +45,7 @@ To display a Material Design ripple effect when the button is tapped the `ripple
 
 #### Types of buttons
 
-To change the style of the button the `modifier` prop is used. For the button the following modifiers are available:
+To change the default style of the button the `modifier` property can be used. For the button the following predefined modifiers are available:
 
 * `large` - Large button that covers the width of the container.
 * `cta` - Call to action button that stands out more than the default style.
@@ -54,7 +53,7 @@ To change the style of the button the `modifier` prop is used. For the button th
 * `outline` Button with an outline but no background.
 * `material` - Used to display a Material Design button on iOS.
 
-So to display a large button the following code can be used.
+In order to display a large button one can simply write:
 
 ```
 <Button modifier='large'>A very laaarge button</Button>
@@ -64,10 +63,10 @@ So to display a large button the following code can be used.
 
 It is possible to use icons instead of text in buttons. To do this the [`Icon` component](Icon.html) is used.
 
-To create a button with a star use the following code:
+To create a button with a star inside we can use the following code:
 
 ```
 <Button><Icon icon='md-star-outline' /></Button>
 ```
 
-Of course you can combine text and icons as well.
+Of course text and icons can be combined as well.
