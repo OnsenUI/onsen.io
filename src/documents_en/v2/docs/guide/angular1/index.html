@@ -10,7 +10,7 @@ version: v2
 ---
 
 <nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action js">Main Guide</a>
+  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
   <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
   <a href="/v2/docs/guide/angular1/" class="action selected angular1">Guide for Angular 1</a>
   <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
@@ -20,9 +20,28 @@ version: v2
 
 This guide describes using Onsen UI with Angular 1.x. Click here to access to core Onsen UI guide.
 
-### Loading Onsen UI with AngularJS
+### Starting Project
 
-Note: For faster instructions to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca signup # Free sign up
+$ monaca create helloworld # Choose template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm or bower
+
+```bash
+# Angular 1 binding is included in onsenui component
+$ npm install onsenui
+$ bower install onsenui
+```
+
+### Loading Onsen UI with AngularJS
 
 Angular 1.x binding for Onsen UI is separated from the core. To load in your project, please load `onsen.js` and `angular-onsenui.js`. After loading `angular-onsenui.js`, the `onsen` AngularJS module is ready to use.
 

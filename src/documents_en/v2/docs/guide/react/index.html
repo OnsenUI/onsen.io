@@ -10,7 +10,7 @@ version: v2
 ---
 
 <nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action js">Main Guide</a>
+  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
   <a href="/v2/docs/guide/react/" class="action selected react">Guide for React</a>
   <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
   <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
@@ -19,6 +19,65 @@ version: v2
 <%- @markdown => %>
 
 Note: We are using ES6 + JSX and transpile using Browserify and Babel in the following examples. You might want to read through [React document]() for more details.
+
+### Starting Project
+
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca signup # Free sign up
+$ monaca create helloworld # Choose template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm
+
+```bash
+# In addition to onsenui, require react-onsenui module
+$ npm install onsenui react-onsenui
+```
+
+##### Use Kithensink Code
+
+[Onsen UI React Components Kitchensink](https://github.com/OnsenUI/react-onsenui-kitchensink) contains almost all components in Onsen UI as one application package. [Link to Kitchensink Demo](http://onsenui.github.io/react-onsenui-kitchensink/demo.html).
+
+### Loading Onsen UI for React
+
+Onsen UI for React is an extension to Onsen UI core, a Web components based UI framework. You need to load the following two JavaScript modules.
+
+- Onsen UI Core ([GitHub](https://github.com/onsenui/onsen.io))
+- Onsen UI for React Extension ([GitHub](https://github.com/onsenui/react-onsenui))
+
+You can load with a normal `<script>` tag as follows:
+
+``` html
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="onsen.js"></script>
+<script src="react-onsen.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+```
+
+Or, you can use React and Onsen UI from npm with CommonJS module system like Browserify or Webpack. In this case, use the `onsenui` and `react-onsenui` packages, in addition to `react` and `react-dom` npm packages. In the example below `ons` contains Onsen UI core instance, and `Ons` contains React components.
+
+```
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ons = require('onsen');
+var Ons = require('react-onsen');
+```
+
+Alternatively, you can also use `import()` to specify the modules you want to use in `react-onsen` pacakge.
+
+```
+import {Page, Toolbar, Button} from 'react-onsenui';
+```
+
+To see the instructions and more details, please visit [Introduction to Onsen UI with React](#TODO).
+
 
 ### Onsen UI HelloWorld with React
 
@@ -85,40 +144,6 @@ As you can see in this example, all `<Ons.*>` components are React Components, a
 Putting together, when index.html is loaded into the browser, it will compile JSX code, inject into the body, and renders the content.
 
 This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read their official [React Tutorial](#TODO).
-
-### Loading Onsen UI for React
-
-Onsen UI for React is an extension to Onsen UI core, a Web components based UI framework. You need to load the following two JavaScript modules.
-
-- Onsen UI Core ([GitHub](https://github.com/onsenui/onsen.io))
-- Onsen UI for React Extension ([GitHub](https://github.com/onsenui/react-onsenui))
-
-You can load with a normal `<script>` tag as follows:
-
-``` html
-<script src="react.js"></script>
-<script src="react-dom.js"></script>
-<script src="onsen.js"></script>
-<script src="react-onsen.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
-```
-
-Or, you can use React and Onsen UI from npm with CommonJS module system like Browserify or Webpack. In this case, use the `onsenui` and `react-onsenui` packages, in addition to `react` and `react-dom` npm packages. In the example below `ons` contains Onsen UI core instance, and `Ons` contains React components.
-
-```
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ons = require('onsen');
-var Ons = require('react-onsen');
-```
-
-Alternatively, you can also use `import()` to specify the modules you want to use in `react-onsen` pacakge.
-
-```
-import {Page, Toolbar, Button} from 'react-onsenui';
-```
-
-To see the instructions and more details, please visit [Introduction to Onsen UI with React](#TODO).
 
 ### Event Handling
 
