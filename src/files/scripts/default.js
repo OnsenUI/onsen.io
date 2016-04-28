@@ -254,3 +254,9 @@ function getCookie(c_name) {
   }
   return '';
 }
+
+$(function() {
+  $(".phone.ios iframe").load(function() {
+    $(".phone-placeholder").css('opacity', 0);
+  });
+});
