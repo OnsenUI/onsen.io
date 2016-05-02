@@ -60,10 +60,19 @@
     margin-right: 4%;
     margin-bottom: 15px;
 
+    @media @smallscreen {
+      width: 100%;
+    }
+
     & + pre {
       width: 43%;
       box-sizing: border-box;
       margin: 0 0 0 -5px;
+
+      @media @smallscreen {
+        width: 100%;
+        margin: 0;
+      }
     }
   }
   code {
@@ -152,6 +161,10 @@
       font-size: 20px;
       color: #666;
       width: 180px;
+
+      @media @smallscreen {
+        font-size: 14px;
+      }
     }
 
     .icon:before {

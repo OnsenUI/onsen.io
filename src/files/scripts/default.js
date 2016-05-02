@@ -155,6 +155,9 @@ $(function() {
     $('.header-navi', header).toggleClass('header-navi-open');
     $('.blog-header-navi', header).toggleClass('blog-header-navi-open');
   });
+  $('.main-nav-icon').click(function() {
+    $('#main-nav ul').toggleClass('open');
+  });
 
   // for language switch dialog
   $('.language-dialog-button.close').click(function() {

@@ -1,13 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
 
-  // Dropdown
-  var dropdown = $('.dropdown:not(#main-nav .dropdown)');
-  var extensions = ['JavaScript', 'Angular 1', 'Angular 2', 'React'].filter(function(e) {
-    return e != dropdown.html();
-  });
-  dropdown.append('<ul>' + extensions.map(function(e) { return '<li><a>' + e + '</a></li>'; }).join('') + '</ul>');
-
-
   // tabs and navigation
   var tabs = $('.tabs a');
   tabs.click(function(e){

@@ -33,11 +33,24 @@
     order: 2;
     flex-grow: 1;
     padding-left: 80px;
+    clear: both;
+    @media @smallscreen {
+      padding-left: 10px;
+    }
+  }
+  .keyvisual {
+    @media @smallscreen {
+      display: none;
+    }
   }
 
   #demo {
     order: 1;
     flex-grow: 0;
+
+    @media @smallscreen {
+      display: none;
+    }
   }
 
   .apps {

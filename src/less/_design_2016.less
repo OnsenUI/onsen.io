@@ -1,6 +1,4 @@
 .design-2016 {
-  min-width: 1000px;
-
 
   /***** General *****/
   h1 {
@@ -11,13 +9,26 @@
   #main-container {
     max-width: 100%;
     margin: auto;
+
+    @media @smallscreen {
+      //padding-top: 50px;
+    }
   }
 
   #start {
     background: linear-gradient(190deg, #E54738, #C13932, #9A292C);
     padding-top: 80px;
-    height: 470px;
     display: flex;
+    @media @smallscreen {
+      padding-top: 10px;
+    }
+
+    .actions .action.demo {
+      display: none;
+      @media @smallscreen {
+        display: inline-block;
+      }
+    }
   }
 
   #start, #start a, #start h1 {
@@ -102,8 +113,31 @@
     font-size: 14px;
     text-align: right;
 
+    @media @smallscreen {
+      background-color: #fff;
+      text-align: left;
+    }
+
     > .wrapper {
       width: 970px;
+
+      > .main-nav-icon {
+        display: none;
+        
+        @media @smallscreen {
+          display: block;
+          position: absolute;
+          top: 0px;
+          right: 18px;
+
+          img {
+            width: 32px;
+            height: 32px;
+            opacity: .3;
+            cursor: pointer;
+          }
+        }
+      }
 
       > .switch-version-1 {
         color: white;
@@ -123,15 +157,53 @@
 
       > .logo {
         position: absolute;
+        @media @smallscreen {
+          position: inherit;
+        }
 
         > a {
           padding-top: 8px;
         }
-
+        .onsen-switch-logo a {
+          display: none;
+          @media @smallscreen {
+            display: inline-block;
+            position: absolute;
+            color: #fff;
+            background-color: #E24637;
+            border-radius: 15px;
+            margin-top: 6px;
+            padding: 4px 10px 2px 10px;
+            height: 31px;
+          }
+        }
       }
 
       > ul {
         margin: 0;
+        @media @smallscreen {
+          display: none;
+        }
+        &.open {
+          display: block;
+          padding-top: 50px;
+          @media @smallscreen {
+            padding-top: 0;
+          }
+        }
+        > li {
+          &.onsen-switch {
+            @media @smallscreen {
+              display: none;
+            }
+          }
+          @media @smallscreen {
+            display: block;
+            width: 100%;
+            line-height: 48px;
+            height: 48px;
+            padding: 0 12px;          }
+        }
       }
 
     }
@@ -152,16 +224,18 @@
       color: #666;
       text-align: left;
       position: relative;
+
+      &.onsen-switch a {
+        color: #fff;
+        background-color: #E24637;
+        border-radius: 15px;
+        margin-top: 6px;
+        padding: 4px 10px 2px 10px;
+        height: 31px;
+      }
+
     }
 
-    li.onsen-switch a {
-      color: #fff;
-      background-color: #E24637;
-      border-radius: 15px;
-      margin-top: 6px;
-      padding: 4px 10px 2px 10px;
-      height: 31px;
-    }
 
     li:hover {
       opacity: 1;
@@ -220,6 +294,10 @@
       pointer-events: none;
       position: absolute;
       background-color: #fff;
+
+      @media @smallscreen {
+        left: 0;
+      }
     }
   }
 
@@ -234,6 +312,12 @@
     border-top: 1px solid #ddd;
     background-color: #F6F6F6;
     padding: 25px 0;
+
+    @media @smallscreen {
+      padding: 0;
+      padding: 10px;
+      margin: 10px 0 10px 0;
+    }
 
     > .wrapper {
       width: 970px;
@@ -255,6 +339,10 @@
   .actions-bar {
     background: #D75256;
     z-index: 8;
+
+    @media @smallscreen {
+      display: none;
+    }
 
     .wrapper {
       display: flex;
@@ -314,6 +402,10 @@
     line-height: 1.3;
     color: white;
     font-weight: 300;
+
+    @media @smallscreen {
+      margin: 20px 0;
+    }
   }
 
   #intro a.keybutton {
@@ -323,6 +415,10 @@
     line-height: 50px;
     text-decoration: none;
     text-align: center;
+
+    @media @smallscreen {
+      padding: 10px;
+    }
   }
   #intro .v2announce {
     font-size: 16px;
@@ -413,8 +509,6 @@
     position: absolute;
     bottom: 0px;
     margin: 0;
-  }
-  #release-info {
     color: #ccc;
     font-size: 14px;
     line-height: 14px;
@@ -422,6 +516,11 @@
     a {
       color: #ccc;
     }
+
+    @media @smallscreen {
+      display: none;
+    }
+
   }
 
 
@@ -582,6 +681,11 @@
     width: 1000px;
     max-width: 1000px;
     margin: 0 -20px;
+
+    @media @smallscreen {
+      width: 100%;
+      max-width: 100%;
+    }
   }
 
   /***** Code explanation *****/
