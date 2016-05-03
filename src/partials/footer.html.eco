@@ -2,10 +2,10 @@
   <ul class="footer-navi">
 
     <% if @lang == "en": %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">DOCS</a></li>
-        <li class=><a href="https://community.onsen.io/">FORUM</a></li>
-        <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
+        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/getting_started.html">GETTING STARTED</a></li>
+        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/v1/guide.html">DOCS</a></li>
+        <li><a href="https://community.onsen.io/">FORUM</a></li>
+        <li><a href="http://tutorial.onsen.io/">TUTORIAL</a></li>
         <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
         <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
         <li><a target="_blank" href="https://monaca.io/about-us.html">ABOUT US</a></li>
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <p class="copyright">Copyright &copy; 2013-2016 Asial Corporation. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a></p>
+    <p class="copyright">Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca</a> Team. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a></p>
   </div>
 </footer>
 
