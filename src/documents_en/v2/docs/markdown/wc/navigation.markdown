@@ -231,7 +231,7 @@ By default, all [`<ons-col>`](/v2/docs/js/ons-col.html) inside a [`<ons-row>`](/
 
 ### Icons (ons-icon)
 
-Onsen UI offers over 400 icons provided by [Font Awesome](http://fontawesome.github.io/) and over 500 icons by [Ionicons](http://ionicons.com/).
+Onsen UI offers over 400 icons provided by [Font Awesome](https://fortawesome.github.io/Font-Awesome/) and over 500 icons by [Ionicons](http://ionicons.com/).
 
 When displaying an icon, a [`<ons-icon>`](/v2/docs/js/ons-icon.html) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
 
