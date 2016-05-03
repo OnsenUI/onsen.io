@@ -5,30 +5,28 @@ framework: js,angular1
 tutorial: vanilla/Reference/progress
 ---
 
-## Page (ons-page)
+## Progress (ons-progress)
 
-`<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
+Onsen UI provide two different progress element: `<ons-progress-bar>` and `<ons-progress-circular>`.
 
-[`<ons-page>`](/v2/docs/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+These elements takes two different values in value and secondary-value attributes. indeterminate attribute is also available.
 
-* `init` event is fired after `<ons-page>` is attached to DOM.
-* `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
-* `show` event is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up.
-* `hide` event is fired every time `<ons-page>` disappear from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack.
+```html
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Progress</div>
+  </ons-toolbar>
 
-Page lifecycle events will be propagated to the page's descendants so they are correspondingly shown, hidden or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator's top page) and `destroy` event for every page in navigator's page stack.
+  <ons-progress-bar value="10"></ons-progress-bar>
 
-``` html
-<script>
-document.addEventListener("init", function(event) {
-  if (event.target.id == "my-page") {
-    document.getElementById("my-content").innerHTML = "I am fine!";
-  }
-}, false);
-</script>
+  <div style="margin: 20px auto; width: 320px;">
+    <p>Loading stuff...</p>
+    <ons-progress-bar value="20" secondary-value="50"></ons-progress-bar>
+  </div>
 
-<ons-page id="my-page">
-  <div>Hello, how are you?</div>
-  <div id="my-content">This content will be replaced.</div>
+  <ons-progress-bar indeterminate></ons-progress-bar>
+  <ons-progress-circular value="10"></ons-progress-circular>
+  <ons-progress-circular value="20" secondary-value="50"></ons-progress-circular>
+  <ons-progress-circular indeterminate></ons-progress-circular>
 </ons-page>
 ```
