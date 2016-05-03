@@ -34,11 +34,9 @@ deployment:
       - npm install -g gulp
       - ./scripts/deploy_staging.sh
       - AWS_BUCKET=${AWS_BUCKET_EN} gulp deploy --lang=en
-      - #AWS_BUCKET=${AWS_BUCKET_JA} gulp deploy --lang=ja
   production:
     branch: production
     commands:
       - npm install -g gulp
       - AWS_BUCKET=${AWS_BUCKET_EN} gulp deploy --lang=en --production
-      - #AWS_BUCKET=${AWS_BUCKET_JA} gulp deploy --lang=ja --production
 
