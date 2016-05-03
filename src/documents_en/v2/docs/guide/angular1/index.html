@@ -1,0 +1,273 @@
+---
+title: 'Onsen UI 2 Guide for Angular 1 - Onsen UI Framework'
+page: 'guide'
+needHelp: true
+framework: 'angular1'
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for Angular 1'
+version: v2
+---
+
+<nav class="tabs framework">
+  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
+  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
+  <a href="/v2/docs/guide/angular1/" class="action selected angular1">Guide for Angular 1</a>
+  <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
+</nav>
+
+<%- @markdown => %>
+
+This guide describes using Onsen UI with Angular 1.x. Click here to access to core Onsen UI guide.
+
+### Starting Project
+
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca signup # Free sign up
+$ monaca create helloworld # Choose template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm or bower
+
+```bash
+# Angular 1 binding is included in onsenui component
+$ npm install onsenui
+$ bower install onsenui
+```
+
+### Loading Onsen UI with AngularJS
+
+Angular 1.x binding for Onsen UI is separated from the core. To load in your project, please load `onsen.js` and `angular-onsenui.js`. After loading `angular-onsenui.js`, the `onsen` AngularJS module is ready to use.
+
+```html
+<!doctype html>
+<html lang="en" ng-app="my-app">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
+    <script src="lib/onsen/js/angular/angular.js"></script>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script src="lib/onsen/js/angular-onsenui.js"></script>
+    <script>
+      var app = angular.module('my-app', ['onsen']);
+      module.controller('AppController', function($scope) { });
+      module.controller('PageController', function($scope) {
+        ons.ready(function() {
+          // Init code here
+        });
+      });
+    </script>
+  </head>
+  <body ng-controller="AppController">
+    <ons-navigator var="navigator">
+      <ons-page ng-controller="PageController">
+        <!-- Page content -->
+      </ons-page>
+    </ons-navigator>
+  </body>
+</html>
+```
+
+### Using Components
+
+Using Onsen UI into your app is simple. Simply include each element in your HTML. You can also use the standard `ng-` attribute.
+
+```html
+<ons-input ng-bind="myName" placeholder="Your Name" float></ons-input>
+<ons-button ng-click="clickHandler">Say Hello</ons-button>
+<script>
+// In the controller
+$scope.myName = "";
+$scope.clickHandler = function(e) {
+  ons.notification.alert({ message: "Hello " + $scope.myName });
+}
+</script>
+```
+
+Some components has methods and properties. In that case, use `var` attribute to access. The following `<ons-navigator var='myNavigator`'>` can be accessed via `myNavigator` variable which exists in the current `$scope` object.
+
+```html
+<ons-navigator animation="slide" var="myNavigator">
+  <ons-page>
+    <ons-button modifier="light" ng-click="myNavigator.pushPage('page.html');">Push</ons-button>
+  </ons-page>
+</ons-navigator>
+<ons-template id="page.html">
+  <ons-page>
+    <ons-button modifier="light" ng-click="myNavigator.popPage();">Pop</ons-button>
+  </ons-page>
+</ons-template>
+```
+
+### Event Handling
+
+Some components supports events. By using those events, you can hook your code to a specific action in the component and customize the behavior. For a list of events that a component supports, please see the component page. The `<ons-navigator>` emits [these events](/reference/ons-navigator.html#events-summary).
+
+To add a handler to a event, use `on()`, `off()` and `once()` method of the target component. Therefore, you need to define a variable of the component, as described in the previous section.
+
+```html
+<script>
+myNavigator.on("prepush", function() {
+  // Add a handler for prepush event
+});
+</script>
+
+Component event handlers can also be added using attributes. These attributes are all prefixed with `ons-` followed by the event name. To catch the `prepop` event emitted by the `<ons-navigator>` the `ons-prepop` attributes is used:
+
+```html
+<ons-navigator ons-prepop="doSomething()">
+  ...
+</ons-navigator>
+```
+
+The value of the attribute should be an Angular expression, so in the case where you are not using AngularJS these attributes can't be used.
+
+#### DOM events
+
+Onsen UI components also throw DOM events. For instance, [`<ons-page>`](/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+
+* `init` event is fired after `<ons-page>` is attached to DOM.
+* `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
+* `show` event is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up.
+* `hide` event is fired every time `<ons-page>` disappear from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack.
+
+Page lifecycle events will be propagated to the page's descendants so they are correspondingly shown, hidden or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator's top page) and `destroy` event for every page in navigator's page stack.
+
+```html
+<script>
+document.addEventListener("init", function(event) {
+  if (event.target.id == "my-page") {
+    document.getElementById("my-content").innerHTML = "I am fine!";
+  }
+}, false);
+</script>
+
+<ons-page id="my-page">
+  <div>Hello, how are you?</div>
+  <div id="my-content">This content will be replaced.</div>
+</ons-page>
+```
+
+### Templating
+
+Some components require another HTML page. For instance, a `<ons-splitter-menu>` needs to specify a start up page in following format.
+
+```html
+<ons-splitter-menu page="menu.html"></ons-splitter-menu>
+```
+
+Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/reference/ons-template.html) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
+
+#### Use &lt;ons-template&gt; tag to define a template
+
+An [`<ons-template>`](/reference/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
+
+```html
+<ons-template id="main.html">
+  <!-- Here, we define the HTML content for main.html -->
+  <div>
+    Hello, this is the content of main.html
+  </div>
+</ons-template>
+```
+
+#### Use &lt;script&gt; tag to define a template
+
+Alternatively, a `<script>` tag can also be used to define a template. In this case, you need to set the `type` to `text/ons-template`.
+
+```html
+<script type="text/ons-template" id="main.html">
+  <!-- Here, we define the HTML content for main.html -->
+  <div>
+    Hello, this is the content of main.html
+  </div>
+</script>
+```
+
+#### Using $templateCache from AngularJS
+
+The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
+
+### Delegate object for ons-lazy-repeat
+
+Some components like [`ons-lazy-repeat`](/v2/docs/angular1/ons-lazy-repeat.html) need to specify a delegate object. The `delegate` object should be attached to the scope of the same controller as the item list, so it is accessible from the view.
+
+```html
+<ons-page ng-controller="MyCtrl">
+  <ons-list>
+    <ons-list-item ons-lazy-repeat="MyDelegate">
+      {{item.name}}
+    </ons-list-item>
+  </ons-list>
+</ons-page>
+```
+
+```javascript
+$scope.MyDelegate = {
+  configureItemScope: function(index, itemScope) {
+    console.log("Created item #" + index);
+    itemScope.item = {
+      name: 'Item #' + (index + 1)
+    };
+  },
+  calculateItemHeight: function(index) {
+    return 40;
+  },
+  countItems: function() {
+    return 10000000;
+  },
+  destroyItemScope: function(index, scope) {
+    console.log("Destroyed item #" + index);
+  }
+};
+```
+
+### Utility Functions
+
+Aside from utility functions described in the [Core Guide](#TODO), you can use some functions that are specific to Angular 1 binding. 
+
+#### ons.bootstrap
+
+`ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
+
+For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter. `ons.bootstrap()` will return the AngularJS module object which can be used to add services from now on.
+
+```html
+<script>
+  var module = ons.bootstrap(['ngAnimate']); // Optionally loading ngAnimate module
+  module.controller("TopController", function($scope){ });
+</script>
+```
+
+You can also specify the module name when calling `ons.bootstrap()`.
+
+```html
+<script>
+  ons.bootstrap('myApp', ['ngAnimate']); // Optionally loading ngAnimate module
+  angular.module('myApp').controller("TopController", function($scope){ });
+</script>
+```
+
+#### ons.compile()
+
+`ons.compile()` function is used to compile the DOM elements that have Onsen UI components. Typical usage of the function is to manually add a snippet of HTML and render it.
+
+Note that `ons.compile()` must specify a `HTMLElement` object to its argument. Also, the element must be appended to the DOM tree before calling `ons.compile()`. Please see the example below.
+
+```javascript
+ons.ready(function() {
+  var elm = $("<ons-button>New Button</ons-button>");
+  elm.appendTo($("body")); // Insert to the DOM first
+  ons.compile(elm[0]); // The argument must be a HTMLElement object
+});
+```
+
+<!-- End of markdown -->
+<% end %>

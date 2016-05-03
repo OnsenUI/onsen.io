@@ -1,126 +1,26 @@
-<div id="header-monaca">
-  <div id="header-monaca-inner">
-    <a href="http://monaca.io"><img src="/images/header/monaca_logo.png" alt="Monaca logo" title="Monaca"></a>
-
-    <% if @lang == 'en': %>
-    <ul id="header-monaca-navi">
-      <li><a href="#">Other Products</a>
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="https://monaca.io/cloud.html">Monaca Cloud</a></li>
-          <li><a href="https://monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
-          <li><a href="https://monaca.io/debugger.html">Monaca Debugger</a></li>
-          <li><a href="https://monaca.io/localkit.html">Monaca Localkit</a></li>
-          <li><a href="https://monaca.io/enterprise.html">Monaca Enterprise</a></li>
-          <li><a href="http://www.kidozen.com">KidoZen</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="http://monaca.mobi/en/page/company">About Us</a>
-      </li>
-      <li>
-        <a href="http://monaca.mobi/en/showcase">Showcase</a>
-      </li>
-    </ul>
-  
-    <% else: %>
-    <ul id="header-monaca-navi">
-      <li><a href="#">製品</a>
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="https://ja.monaca.io/cloud.html">Monacaクラウド</a></li>
-          <li><a href="https://ja.monaca.io/visualstudio.html">Monaca for Visual Studio</a></li>
-          <li><a href="https://ja.monaca.io/debugger.html">Monacaデバッガー</a></li>
-          <li><a href="https://ja.monaca.io/localkit.html">Monaca Localkit</a></li>
-          <li><a href="http://monaca.mobi/ja/academic/">Monacaアカデミックプラン</a></li>
-          <li><a href="https://ja.monaca.io/enterprise.html">Monacaエンタープライズ</a></li>
-          <li><a href="https://ja.monaca.io/kidozen.html">KidoZen</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">パートナー</a>
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="http://monaca.mobi/ja/partner">開発パートナー制度</a></li>
-          <li><a href="http://monaca.mobi/ja/partner/index">開発パートナー企業紹介</a></li>
-          <li><a href="http://monaca.mobi/ja/productsPartner">プロダクトパートナー</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">サポート・サービス</a>
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="https://ja.monaca.io/support.html">サポート・サービス概要</a></li>
-          <li><a href="http://monaca.mobi/ja/training/index">トレーニング</a></li>
-          <li><a href="http://monaca.mobi/ja/support/index">サポート受付</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">活用事例</a>
-        <ul class="header-monaca-navi-sub-menu">
-          <li><a href="http://monaca.mobi/ja/showcase">アプリ事例</a></li>
-        </ul>
-      </li>
-    </ul>
-    <% end %>
-
-  </div>
-</div>
-
-<header class="header">
-  <div class="header-inner">       
-    <a href="/" class="header-logo"><img src="/images/header/onsen_logo.png" alt="Onsen UI" class="header-logo-image"></a>
-
-    <% if @lang == 'en': %>
-    <div class="header-news"><a class="header-news-link" href="/2/" target="_blank">v2.0 Beta Released!</a></div>
-    <% end %>
-    
-    <div class="gnav-icon"><a href="#"><img src="/images/common/menu-icon.svg" alt="Menu hamburger icon" title="Menu"></a></div>
-
-    <ul class="header-navi">
-      <% if @lang == "en": %>
-        <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="header-navi-item <%- if @page is 'docs' or @reference then 'current' %>">
-          <a href="/docs.html">DOCS</a>
-          <ul class="header-navi-sub">
-            <li class="header-navi-sub-item"><a href="/guide/overview.html">Onsen UI Guide</a></li>
-            <li class="header-navi-sub-item"><a href="/reference/css.html">CSS</a></li>
-            <li class="header-navi-sub-item"><a href="/reference/javascript.html">JavaScript</a></li>
-            <li class="header-navi-sub-item"><a href="/patterns.html">Page Patterns</a></li>
-            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a></a></li>
-          </ul>
-        </li>
-        <li class="header-navi-item <%- if @page is 'monaca' then 'current' %>"><a href="/monaca.html">DEVELOP</a></li>
-        <li class="header-navi-item header-navi-item-new"><a href="https://community.onsen.io/">FORUM</a></li>
-        <li class="header-navi-item <%- if @page is 'blog' or @isBlogArticle then 'current' %>"><a href="/blog/">BLOG</a></li>
-        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="Jump icon" title="External link" height="12"></a></li>
-        <li class="header-navi-item"><a href="http://ja.onsen.io/">JAPANESE</a></li>
-      <% else: %>
-        <li class="header-navi-item <%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="header-navi-item <%- if @page is 'docs' or @reference then 'current' %>">
-          <a href="/docs.html">DOCS</a>
-          <ul class="header-navi-sub">
-            <li class="header-navi-sub-item"><a href="/guide/overview.html">Onsen UI Guide</a></li>
-            <li class="header-navi-sub-item"><a href="/reference/css.html">CSS</a></li>
-            <li class="header-navi-sub-item"><a href="/reference/javascript.html">JavaScript</a></li>
-            <li class="header-navi-sub-item"><a href="/patterns.html">Page Patterns</a></li>
-            <li class="header-navi-sub-item"><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a></a></li>
-          </ul>
-        </li>
-        <li class="header-navi-item <%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
-        <li class="header-navi-item <%- if @page is 'blog' or @isBlogArticle then 'current' %>"><a href="/blog/">BLOG</a></li>
-        <li class="header-navi-item"><a href="http://github.com/OnsenUI/OnsenUI" target="_blank">GITHUB <img src="/images/common/jump.png" alt="Jump icon" title="External link" height="12"></a></li>
-        <li class="header-navi-item"><a href="http://onsen.io/">ENGLISH</a></li>
-      <% end %>
-    </ul>
-  </div>
-
-</header>
-
-<% if @lang == 'en': %>
-  <div class="language-dialog-mask" style="display: none"></div>
-  <div class="language-dialog" style="display: none">
-    <h1 class="language-dialog-header">You are looking at the English Website.</h1>
-    <div class="language-dialog-footer">
-      <a class="language-dialog-button close">Continue</a>
-      <a class="language-dialog-button japanese-version" href="//ja.onsen.io/">日本語版を表示</a>
+<% if @topbar != false: %>
+  <div class="top-bar">
+    <div class="wrapper">
+      <h1><%- @h1 || @title %></h1>
     </div>
   </div>
 <% end %>
+<% if @actionbar != false: %>
+  <div class="actions-bar">
+    <div class="wrapper">
+      <nav>
+        <!-- <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a> -->
+        <a class="action ask" href="https://community.onsen.io" target="_blank">Ask in our Forum</a>
+        <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
+      </nav>
 
+      <div class="newsletter-signup newsletter-form">
+        <form>
+          <input type="email" placeholder="Input email address to receive updates" name="email">
+          <button>Sign up</button>
+        </form>
+        <div class="newsletter-thankyou">Thank you!</div>
+      </div>
+    </div>
+  </div>
+<% end %>

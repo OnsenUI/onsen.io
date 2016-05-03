@@ -84,6 +84,29 @@ module.exports = function() {
         return result;
       },
 
+      getTutorialUrl: function(page, string) {
+        //"vanilla/Reference/carousel"
+        var tutorial_url = function(match, p1, p2, p3) {
+          return 'http://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3;
+        };
+        return string.replace(/(.+)\/(.+)\/(.+)/, tutorial_url);
+      },
+
+      markd: function(string) {
+        try {
+          string = string.toString().trim();
+          if (string.indexOf("\n") == -1) {
+            // Inline
+            var str = marked(string);
+            return str.replace(new RegExp("^<p>"), '').replace(new RegExp("</p>\n$"), '');
+          } else {
+            return marked(string);
+          }
+        } catch(e) {
+          return e.toString();
+        }
+      },
+
       markdown: function(capture) {
         try {
           return marked(capture().toString());
@@ -152,7 +175,8 @@ module.exports = function() {
 
       getPreparedTitle: function() {
         var title = this.pageTitle || this.title || this.site.title;
-        return 'Onsen: ' + title;
+        title = title.replace(/<(?:.|\n)*?>/gm, '');
+        return title;
       },
 
       getPreparedBlogTitle: function() {
@@ -229,6 +253,15 @@ module.exports = function() {
 
       getAlternateLang: function() {
         return this.lang === 'en' ? 'ja' : 'en';
+      },
+
+      frameworkName: function(framework) {
+        switch (framework) {
+          case "js": return "JavaScript";
+          case "angular1": return "Angular 1";
+          case "angular2": return "Angular 2";
+          case "react": return "React";
+        }
       },
 
       translate: function(message) {

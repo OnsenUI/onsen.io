@@ -1,0 +1,118 @@
+---
+page: 'getting_started'
+title: 'Getting Started with Onsen UI - Onsen UI Framework'
+h1: 'Getting started with Onsen UI'
+layout: 'default.html.eco'
+description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
+---
+
+<div id="features">
+  <div class="feature">
+    <h2>Start building amazing apps with Onsen UI!</h2>
+    <nav class="tabs">
+      <a href="#cli" class="action terminal selected">Develop with Monaca CLI</a>
+      <a href="#cloud" class="action cloud">Use Monaca Cloud IDE</a>
+      <a href="#npm" class="action tool">Install via NPM or Bower</a>
+      <a href="#download" class="action download">Download Everything</a>
+    </nav>
+    <div class="tab-contents">
+      <!-- Develop with Monaca CLI -->
+      <div id="cli" class="selected">
+        <p>This instruction describes how to setup a local environment for developing Cordova hybrid app. Monaca provides a remote build capability, but you can <a href="">also use Cordova CLI together with Monaca CLI</a>.</p>
+        <ol>
+          <li>
+            <h3>Install Monaca CLI, an Onsen UI toolkit</h3>
+            <p>First install <a href="//nodejs.org/">Node.js</a>. Then, install Monaca CLI via npm, which provides command-line interface for Onsen UI development. Or, if you prefer GUI, download and install <a href="https://monaca.io/localkit.html">Monaca Localkit</a> desktop app for Windows and OS X.</p>
+            <pre><code class="bash">npm install -g monaca</code></pre>
+            <span class="info">Trouble setting up your environment? See <a href="#">Getting Started with Monaca Cloud IDE</a> to start writing code right away!</span>
+          </li>
+          <li>
+            <h3>Sign up and create a project</h3>
+            <p>Create Onsen UI app from starter kit. You need to create a free Monaca account to get started.</p>
+            <pre><code class="bash">
+              monaca signup
+              monaca create helloworld
+            </code></pre>
+          </li>
+          <li>
+            <h3>Run on your device</h3>
+            <p>monaca debug command will install the debugger on your device and run your app right away.</p>
+            <pre><code class="bash">
+              cd helloworld
+              monaca preview # Preview on the browser
+              monaca debug # Run on the device in debugger
+              monaca remote build # Build the app
+            </code></pre>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Use Monaca Cloud IDE -->
+      <div id="cloud">
+        <p>Monaca Cloud IDE provides a cloud-based development environment with debug and remote build capability.</p>
+        <ol>
+          <li>
+            <h3>Sign up for Monaca</h3>
+            <p>Create your Monaca account and get access to Monaca dashboard.</p>
+            <p><a href="https://monaca.mobi/en/register/start">Sign Up to Monaca (free)</a></p>
+          </li>
+          <li>
+            <h3>Create a new project</h3>
+            <p>Click <strong>Create Project</strong> and choose a Onsen UI 2.0 template to start with.</p>
+          </li>
+          <li>
+            <h3>Open in Cloud IDE</h3>
+            <p>Simply click <strong>Open</strong> and start editing the code.</p>
+          </li>
+          <li>
+            <h3>Run project on the debugger &amp; build the code!</h3>
+            <p>You can download and install Monaca Debugger to run the project instantly on the device.</p>
+            <p>You can also build for Android, iOS and Windows packages using our remote build service.</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Install via NPM or Bower -->
+      <div id="npm">
+        <p>Onsen UI is distributed as a npm package or Bower package.</p>
+        <ul>
+          <li>
+            <h3>Download using NPM</h3>
+            <p>You can install the package using the following commands.</p>
+            <pre><code class="bash">npm install onsenui</code></pre>
+            <p>Onsen UI supports both CommonJS and AMD, so you can use Browserify, RequireJS or Webpack to include in your code.</p>
+            <span class="info">React extension is distributed separately as <code>react-onsenui</code>. Please see <a href="/v2/docs/guide/react/index.html">Onsen UI for React Guide</a> for more details.</span>
+          </li>
+          <li>
+            <h3>Download using Bower</h3>
+            <p>You can use <a href="http://bower.io/" target="_blank">bower</a> to install our distribution package.</p>
+            <pre><code class="bash">bower install onsenui</code></pre>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Download Everything -->
+      <div id="download">
+        <ol>
+          <li>
+            <h3>Full source code</h3>
+            <p>Source code and the build instructions are avilable at our <a href="https://github.com/onsenui/onsenui">GitHub repository</a>.</p>
+            <p><a href="https://github.com/OnsenUI/project-templates/archive/master.zip">Download the latest master branch</a></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature">
+    <h2>What's next?</h2>
+    <nav class="visit row">
+      <a class="icon reference" href="/v1/reference/javascript.html">Read Docs</a>
+      <a class="icon reference" href="http://tutorial.onsen.io">Interactive Tutorial</a>
+      <a class="icon forum" href="https://community.onsen.io">Check our forum</a>
+      <a class="icon blog" href="/blog">Visit blog</a>
+    </nav>
+  </div>
+</div>
+
+<script src="/scripts/started.js"></script>

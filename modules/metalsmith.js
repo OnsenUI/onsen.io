@@ -18,7 +18,6 @@ var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
 var tags = require('metalsmith-tags');
 var wordcloud = require('metalsmith-wordcloud');
-var sortObject = require('sort-object');
 var currentPath = require('./current-path');
 var nodePath = require('path');
 var crypto = require('crypto');
@@ -34,9 +33,11 @@ module.exports = function(lang, isStaging) {
         .metadata(require('../config.js')(lang, isStaging))
         .use(draft())
         .use(require('./helpers')())
-        .use(require('./import-api-docs')(lang))
-        .use(require('./2-api-docs')(lang))
-        .use(require('./patterns-collection')(lang))
+        .use(require('./v1-api-docs')(lang))
+        .use(require('./v2-wc-api-docs')(lang, 'js'))
+        .use(require('./v2-wc-api-docs')(lang, 'angular1'))
+        .use(require('./v2-react-api-docs')(lang))
+        .use(require('./patterns-collection')(lang, __dirname + '/../dist/v2/OnsenUI/css-components/www/patterns'))
         .use(collections({
           components: {
             sortBy: 'name'
@@ -48,35 +49,17 @@ module.exports = function(lang, isStaging) {
             sortBy: 'name'
           }
         }))
-        .use(function(files, metalsmith, done) {
-          setImmediate(done);
-
-          var dict = {};
-          var dict2 = {};
-          for (var path in files) {
-            var file = files[path];
-            if (file.componentCategory) {
-              var currentDict = file.is2 ? dict2 : dict;
-              file.componentCategory.split(/, */).forEach(function(category) {
-                if (!currentDict[category]) {
-                  currentDict[category] = [];
-                }
-                currentDict[category].push(file);
-              });
-            }
-          }
-
-          metalsmith.metadata().componentCategoryDict = sortObject(dict);
-          metalsmith.metadata().componentCategoryIndex2 = sortObject(dict2);
-        })
+        .use(require('./docs-categories.js')(lang))
         .use(templates({engine: 'eco', inPlace: true}))
         .use(require('./autotoc')())
         .use(function(files, metalsmith, done) {
           setImmediate(done);
 
-          var cssFile = files['reference' + nodePath.sep + 'css.html'];
-          var cssToc = cssFile.toc;
-          delete cssFile.toc;
+          var cssFile = files['v2' + nodePath.sep + 'docs' + nodePath.sep + 'css.html'];
+          if (cssFile && cssFile.toc) {
+            var cssToc = cssFile.toc;
+            delete cssFile.toc;
+          }
 
           metalsmith.metadata().cssToc = cssToc;
         })
@@ -89,11 +72,9 @@ module.exports = function(lang, isStaging) {
           }))
         )
         .use(assets({source: './src/files'}))
+        .use(assets({source: './dist/v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
+        .use(assets({source: './dist/v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
         .use(require('./css-transform')(lang))
-        .use(redirect({
-          '/components.html' : '/reference/javascript.html',
-          '/guide/components.html' : '/reference/javascript.html'
-        }))
         .use(branch('*.html').use(currentPath()))
         .use(function(files, metalsmith, done) {
           setImmediate(done);
@@ -107,6 +88,7 @@ module.exports = function(lang, isStaging) {
         .use(branch('robots.txt').use(templates({
           inPlace: true, engine: 'eco'
         })))
+        .use(redirect(require("./redirect_rule.json")))
         .use(sitemap({
           ignoreFiles: [/\.gitignore/],
           output: 'sitemap.xml',

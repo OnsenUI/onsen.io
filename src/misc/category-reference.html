@@ -1,0 +1,35 @@
+---
+page: 'reference-detail'
+reference: true
+layout: 'default.html.eco'
+actionbar: false
+title: Specified in v2-react-docs.js
+h1: Specified in v2-react-docs.js
+---
+
+<div class="content"><div class="reference-container">
+  <div class="breadcrumb">
+    <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
+    <%=@categoryFile.name%>
+  </div>
+
+  <%-@markd @categoryFile.contents %>
+
+  <% if @categoryFile.tutorial: %>
+    <h3>Tutorial</h3>
+    <p><a href="<%- @getTutorialUrl "index", @categoryFile.tutorial %>" target="_blank">Open in a new window</a></p>
+    <iframe width="350" height="450" src="<%- @getTutorialUrl "embed", @categoryFile.tutorial %>"></iframe>
+  <% end %>
+
+  <h3>Related Components</h3>
+
+  <ul>
+  <% if @componentCategories[@framework][@componentCategory].files: %>
+    <% for file in @componentCategories[@framework][@componentCategory].files: %>
+      <li>
+        <a href="<%=file.name%>.html"><%=file.title%></a>
+      </li>
+    <% end %>
+  <% end %>
+  </ul>
+</div></div>

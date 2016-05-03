@@ -1,0 +1,171 @@
+---
+title: 'Onsen UI 2 Guide for React - Onsen UI Framework'
+page: 'guide'
+framework: 'react'
+needHelp: true
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for React'
+version: v2
+---
+
+<nav class="tabs framework">
+  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
+  <a href="/v2/docs/guide/react/" class="action selected react">Guide for React</a>
+  <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
+  <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
+</nav>
+
+<%- @markdown => %>
+
+Note: We are using ES6 + JSX and transpile using Browserify and Babel in the following examples. You might want to read through [React document]() for more details.
+
+### Starting Project
+
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca signup # Free sign up
+$ monaca create helloworld # Choose template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm
+
+```bash
+# In addition to onsenui, require react-onsenui module
+$ npm install onsenui react-onsenui
+```
+
+##### Use Kithensink Code
+
+[Onsen UI React Components Kitchensink](https://github.com/OnsenUI/react-onsenui-kitchensink) contains almost all components in Onsen UI as one application package. [Link to Kitchensink Demo](http://onsenui.github.io/react-onsenui-kitchensink/demo.html).
+
+### Loading Onsen UI for React
+
+Onsen UI for React is an extension to Onsen UI core, a Web components based UI framework. You need to load the following two JavaScript modules.
+
+- Onsen UI Core ([GitHub](https://github.com/onsenui/onsen.io))
+- Onsen UI for React Extension ([GitHub](https://github.com/onsenui/react-onsenui))
+
+You can load with a normal `<script>` tag as follows:
+
+``` html
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="onsen.js"></script>
+<script src="react-onsen.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+```
+
+Or, you can use React and Onsen UI from npm with CommonJS module system like Browserify or Webpack. In this case, use the `onsenui` and `react-onsenui` packages, in addition to `react` and `react-dom` npm packages. In the example below `ons` contains Onsen UI core instance, and `Ons` contains React components.
+
+```
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ons = require('onsen');
+var Ons = require('react-onsen');
+```
+
+Alternatively, you can also use `import()` to specify the modules you want to use in `react-onsen` pacakge.
+
+```
+import {Page, Toolbar, Button} from 'react-onsenui';
+```
+
+To see the instructions and more details, please visit [Introduction to Onsen UI with React](#TODO).
+
+
+### Onsen UI HelloWorld with React
+
+To get started, let's create a simple Hello World application. The following sample code is a React version of Onsen UI HelloWorld.
+
+``` html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/onsenui.css">
+    <link rel="stylesheet" href="css/onsen-css-components.css">
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    var App = React.createClass({
+      render: function() {
+        return (
+          <Ons.Page>
+            <div>Hello World!</div>
+            <Ons.Button />
+          </Ons.Page>
+        );
+      }
+    });
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+</html>
+```
+
+This example is loading the following JS libraries, react.js, react-dom.js, onsen.js and react-onsen.js. For stylesheets, it is loading onsenui.css and onsen-css-components.css which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](#TODO) document.
+
+```
+<link rel="stylesheet" href="css/onsenui.css">
+<link rel="stylesheet" href="css/onsen-css-components.css">
+```
+
+In `<body>` tag, there is only a `<div>` tag having `app` id. This is where React will render the content into, and you can see it in the very bottom of JS code.
+
+Also notice `<script>` tag has `jsx`(#TODO) type. This means this script is not a pure JavaScript that browser supports (most commonly [EcmaScript 5](#TODO)), but is a EcmaScript 6 with JSX format #TODO. [Babel](#TODO) will transpile this code into EcmaScript 5 in the browser. To get better performance, we can use node.js to transpile the code. Please read [Setup node.js to transpile React app](#TODO) for details.
+
+``` js
+var App = React.createClass({
+  render: function() {
+  }
+});
+```
+
+Inside the script, `React.createClass()` function defines a React Class (#Not a component?) called `App`. It has one property called `render`, and this is the function that is called when the app is rendered. The returning object is described in [JSX](#TODO), which is a XML like language to represent React Virtual DOM(#correct?). In this case, it is returning `<Ons.Page>` component that has `<div>` and `<Ons.Button`> component.
+
+``` js
+return (
+  <Ons.Page>
+    <div>Hello World!</div>
+    <Ons.Button />
+  </Ons.Page>
+);
+```
+
+As you can see in this example, all `<Ons.*>` components are React Components, and they are loaded by react-onsenui.js. Click here to see our full [Onsen UI React Components Reference](#TODO#).
+
+Putting together, when index.html is loaded into the browser, it will compile JSX code, inject into the body, and renders the content.
+
+This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read their official [React Tutorial](#TODO).
+
+### Event Handling
+
+Onsen UI components are capable of handling React [SyntheticEvent](https://facebook.github.io/react/docs/events.html) events. For instance, you can catch a tap event by using `onClick` event handler, or the text box change by `onChange` event handler.
+
+The following example describes how to get events that are native to React.
+
+``` javascript
+class MyPage extends React.Component {
+  handleClick() {
+    ons.notification.alert('Hello, world!');
+  }
+  render() {
+    return() (
+      <Page>
+         <Button onClick={this.handleClick}>Click me!</Button>
+      </Page>
+    );
+  }
+}
+```
+
+
+<!-- End of markdown -->
+<% end %>

@@ -29,7 +29,7 @@
     <% if @article.tags: %>
       <div class="article-tags">
         <% for tag in @article.tags: %>
-          <a href="<%= @rootUrl %>blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+          <a href="<%= @rootUrl %>blog/tags/<%- tag.replace(/\s/g, '-') %>.html"><%- tag %></a>
         <% end %>
       </div>
     <% end %>

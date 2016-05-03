@@ -1,0 +1,21 @@
+<div class="toc-title">Guide</div>    
+<ul class="toc toc-1">
+  <li class="toc-item toc-1-item"><a href="/v1/guide.html" class="toc-link toc-1-link">Guide for Version 1.x</a></li>
+</ul>
+
+<div class="toc-title toc-title-active"><a href="/v1/reference/javascript.html">Components</a></div>
+
+<ul class="toc toc-1">
+  <% for category, docs of @componentCategories.v1: %>
+  <li class="toc-item toc-1-item">
+    <a href="/v1/reference/<%=docs.files[0].name%>.html" class="toc-link toc-1-link"><%- docs.title || @titlize category %></a>
+    <ul class="toc toc-2"<% if @componentCategory and @componentCategory.indexOf(category) != -1 : %> style="display: block;"<% end %>>
+    <% for doc in docs.files: %>
+      <li class="toc-item toc-2-item">
+        <a href="/v1/reference/<%= doc.name %>.html" class="toc-link toc-2-link <%="current" if @name == doc.name %>"><%- doc.name %></a>
+      </li>
+    <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>

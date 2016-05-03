@@ -1,0 +1,200 @@
+---
+title: 'Onsen UI 2 Guide for JavaScript - Onsen UI Framework'
+page: 'guide'
+needHelp: true
+framework: 'js'
+autotoc: true
+actionbar: false
+tocTitle: 'JavaScript Guide'
+version: v2
+---
+
+<nav class="tabs framework">
+  <a href="/v2/docs/guide/js/" class="action selected js">JavaScript Guide</a>
+  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
+  <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
+  <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
+</nav>
+
+<%- @markdown => %>
+
+Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com)) apps. It also is equipped with popular JS frameworks support, including [Angular 1](/v2/docs/guide/angular1/), Angular 2 and [React](/v2/docs/guide/react/). Although they are using the same core, we are optimizing the APIs for each framework.
+
+### Starting Project
+
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca signup # Free sign up
+$ monaca create helloworld # Choose template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm or bower
+
+```bash
+$ npm install onsenui
+$ bower install onsenui
+```
+
+### Hello World! (ons-page, ons-tabbar and ons object)
+
+This section describes some of the basic elements that compose a normal page.
+
+#### Loading Onsen UI
+
+To load Onsen UI in your project, please load `onsen.js` and CSS files for styling.
+
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
+    <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
+    <script src="lib/onsen/js/onsenui.js"></script>
+    <script>
+      ons.ready(function() {
+        // Init code here
+      });
+    </script>
+  </head>
+  <body>
+    <ons-navigator>
+      <ons-page>
+        Page 1
+      </ons-page>
+    </ons-navigator>
+  </body>
+</html>
+```
+
+#### Page component (ons-page)
+
+The root of a page is created using the `<ons-page>` element. It covers the whole screen and is used as a container for the other elements. To receive when a new page is initiated, use `init` event.
+
+```html
+<ons-page id="page1">This is a blank page</ons-page>
+<script>
+document.addEventListener("init", function(e) {
+  if (e.target.matches("#page1")) {
+    ons.notification.alert({
+      message: "Page 1 is initiated."
+    })
+  }
+})
+</script>
+```
+
+#### Toolbar component (ons-toolbar, ons-bottom-toolbar)
+
+A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
+
+```html
+<ons-toolbar>
+  <div class="left">
+    <ons-back-button>Back</ons-back-button>
+  </div>
+  <div class="center">Title</div>
+  <div class="right">
+    <ons-toolbar-button>
+      <ons-icon icon="fa-bars">
+    </ons-toolbar-button>
+  </div>
+ </ons-toolbar>
+```
+
+The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
+
+
+#### The `ons` object
+
+Onsen UI not only provides custom elements, it also provides an object called ons with a lot of useful functions attached to it. 
+
+The following example uses `ons.ready(fn)` which waits until the page is completely loaded before executing a callback function. Inside the callback, it is calling `ons.notification.alert()` to display a alert dialog.
+
+``` javascript
+ons.ready(function() {
+  // Onsen UI is now initialized
+  ons.notification.alert({message: 'Welcome to Onsen UI!'});
+});
+```
+
+#### Attributes, methods, properties and events
+
+All Onsen UI are custom elements which tag names are starting with `<ons->`. They have attributes, methods, properties and events just like the normal HTML elements (DOM Elements).
+
+The source code below illustrates a basic usage of `<ons-navigator>` component. Note how component methods are called and events are attached.
+
+``` javascript:
+<!-- You can place and mix-up with other elements -->
+<ons-navigator animation="slide" id="my-navigator">
+  <ons-page><span>This is the first page.</span></ons-page>
+</ons-navigator>
+<script>
+  // Get component instance
+  var myNavigator = document.querySelector("#my-navigator"); // or use getElementById("my-navigator")
+  
+  // Add event listener
+  myNavigator.addEventListener("postpush", function(e) {
+    console.log("This function is called after a new page is pushed.")
+  });
+  
+  // Call component method
+  myNavigator.pushPage("page2.html");
+  
+  // Access to component property
+  console.log(myNavigator.pages)
+</script>
+```
+
+### Using Modifier
+
+Modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a `modifier`, it will have a separate class namespace so that you can apply custom styles to the component. Also, some components have several preset modifiers to change the appearance.
+
+For example, each of the following buttons have different look. To change modifiers dynamically, please manipulate `modifier` attribute from JavaScript.
+
+```html
+<ons-button modifier="quiet">Quiet</ons-button>
+<ons-button modifier="light">Light</ons-button>
+<ons-button modifier="large">Large</ons-button>
+<ons-button modifier="cta">CTA</ons-button>
+```
+
+### CSS Definitions
+
+Onsen UI styles are defined in `onsenui.css` and `onsen-css-components.css`. They are written in the [Stylus](http://stylus-lang.com/) format.
+
+`onsenui.css` is a core CSS module that defines styles for the custom elements. The source code exists under `core/css` directory. `onsen-css-components.css` contains CSS definitions for CSS components. The source code exists in `css-components/components-src/stylus`.
+
+You can also use [Onsen CSS Components](http://components.onsen.io/) to customize pre-defined colors. After the customization, you can download and replace to the existing `onsenui-css-components.css` to reflect the changes.
+
+#### Overriding CSS style
+
+If you want to apply a different style to a specific component, you can use `modifier` attribute to override its style definition.
+
+For example, if you want to apply a thick border only to a specific button, you can define like the one below.
+
+```html
+<ons-button modifier="thick">Thick Button</ons-button>
+```
+
+Then, write the appropriate style code under the style tag or in the css file.
+
+```html
+<style>
+.button--thick {
+  border: 10px;
+}
+</style>
+```
+
+### Under the hood of Custom Elements
+
+If you need to customize the underlying HTML code, you can access to our core Custom Element definitions. The source code for each components are located under `core/src/elements` directory.
+
+<!-- End of markdown -->
+<% end %>

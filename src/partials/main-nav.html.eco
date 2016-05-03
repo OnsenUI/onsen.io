@@ -1,0 +1,88 @@
+<div id="monaca-bar">
+  <div class="wrapper">
+    <ul>
+      <li class="dropdown">
+        <a href="https://monaca.io/">Monaca Toolkit</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<% if @version == "v2": %>
+  <nav id="main-nav">
+    <div class="wrapper">
+      <div class="switch-version-1"><a href="/">&lt; Back to Onsen UI Version 1</a></div>
+      <div class="logo">
+        <a href="/v2/"><img src="/images/design_2016/logo_onsenui_header_v2.png" alt="Onsen UI Version 2"></a>
+      </div>
+      <div class="main-nav-icon">
+        <a href="#"><img src="/images/common/menu-icon.svg" alt="Onsen UI Menu" title="Menu"></a>
+      </div>
+      <ul>
+        <li class="dropdown">
+          <a href="/v2/docs/js.html">Docs &amp; Reference</a>
+        </li>
+        <li class="dropdown">
+          <a href="http://tutorial.onsen.io/" target="_blank">Tutorial</a>
+        </li>
+        <li class="dropdown">
+          <a href="#">Community</a>
+          <ul>
+            <li><a href="https://community.onsen.io">Forum</a></li>
+            <li><a href="https://monaca.io/great-apps.html">Showcase</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+        <li>
+          <a href="https://monaca.io/about-us.html" target="_blank">About Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<% else: %>
+  <nav id="main-nav">
+    <div class="wrapper">
+      <div class="logo">
+        <a href="/"><img src="/images/design_2016/logo_onsenui_header.png" alt="Onsen UI"></a>
+        <span class="onsen-switch-logo">
+          <a href="/v2/">2.0RC Released!</a>
+        </span>
+      </div>
+      <div class="main-nav-icon">
+        <a href="#"><img src="/images/common/menu-icon.svg" alt="Onsen UI Menu" title="Menu"></a>
+      </div>
+      <ul>
+        <li class="onsen-switch">
+          <a href="/v2/">2.0RC Released!</a>
+        </li>
+        <li>
+          <a href="/getting-started.html">Getting Started</a>
+        </li>
+        <li class="dropdown">
+          <a href="#">Learn</a>
+          <ul>
+            <li><a href="/v1/guide.html">Guide</a></li>
+            <li><a href="/v1/reference/javascript.html">Reference</a></li>
+            <li><a href="http://tutorial.onsen.io/" target="_blank">Tutorial</a></li>
+            <li><a target="_blank" href="http://components.onsen.io/">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#">Community</a>
+          <ul>
+            <li><a href="https://community.onsen.io">Forum</a></li>
+            <li><a href="https://monaca.io/great-apps.html">Showcase</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="/blog">Blog</a>
+        </li>
+        <li>
+          <a href="https://monaca.io/about-us.html" target="_blank">About Us</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+<% end %>

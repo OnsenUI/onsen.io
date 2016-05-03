@@ -7,10 +7,10 @@
   <title><%= @getPreparedBlogTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
   <meta name="date" content="<%= @renderBlogDateShort @date %> 12:00" scheme="YYYY-MM-DD" />
-      
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="<%= @rootUrl %>css/style.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>css/blog.css">
   <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
 
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
@@ -96,7 +96,7 @@
           <% if @tags and @tags.length: %>
           <div class="article-tags">
             <% for tag in @tags: %>
-            <a href="/blog/tags/<%- tag.replace(' ', '-') %>.html"><%- tag %></a>
+            <a href="/blog/tags/<%- tag.replace(/\s/g, '-') %>.html"><%- tag %></a>
             <% end %>
           </div>
           <% end %>
@@ -156,7 +156,7 @@
 
         <% for tag in @cloud.sort((a, b) -> b.wght - a.wght): %>
         <a
-          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(' ', '-') %>.html">
+          href="<%= @rootUrl %>blog/tags/<%- tag.ctg.replace(/\s/g, '-') %>.html">
           <span class="tag-cloud-name">
             <%- tag.ctg %>
           </span>

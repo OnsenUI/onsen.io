@@ -2,12 +2,26 @@
 page: 'reference-detail'
 needHelp: true
 reference: true
-docCategory: 'js'
-layout: '2.html.eco'
+layout: 'default.html.eco'
+actionbar: false
 ---
 
 <div class="content"><div class="reference-container">
-  <div><a href="/2/reference/javascript.html">&lt; Back</a></div>
+  <div class="breadcrumb">
+    <% if @componentCategories[@framework][@doc.category]: %>
+      <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
+      <% if @componentCategories[@framework][@doc.category].index: %>
+        <a href="/v2/docs/<%=@framework%>/<%=@doc.category%>.html"><%=@componentCategories[@framework][@doc.category].title%></a> &gt;
+      <% else: %>
+        <%=@componentCategories[@framework][@doc.category].title%> &gt;
+      <% end %>
+      <%=@doc.name%>
+    <% else: %>
+      <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
+      <a href="/v2/docs/<%=@framework%>/<%=@doc.category%>.html"><%=@titlize @doc.category%></a> &gt;
+      <%=@doc.name%>
+    <% end %>
+  </div>
 
   <h2><%= @doc.name %></h2>
 
@@ -18,7 +32,7 @@ layout: '2.html.eco'
   <% end %>
 
   <section class="reference-description">
-    <p><%= @translate @doc.description %></p>
+    <p><%- @markd @translate @doc.description %></p>
 
     <% if @doc.deprecated: %>
     <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
@@ -73,7 +87,7 @@ layout: '2.html.eco'
 
   <% if @doc.note: %>
   <section class="reference-note">
-    <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%= @translate @doc.note %></p>
+    <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%- @markd @translate @doc.note %></p>
   </section>
   <% end %>
 
@@ -105,10 +119,10 @@ layout: '2.html.eco'
 
   <ul class="seealso">
     <% for guide in @doc.guides: %>
-      <li class="guide"><a href="/guide/overview.html#<%= guide.name %>"><%= @translate guide.description %></a></li>
+      <li class="guide"><a href="/guide/overview.html#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
     <% end %>
     <% for seealso in @doc.seealsos: %>
-      <li class="seealso"><a href="<%= seealso.name %>.html"><%= @translate seealso.description %></a></li>
+      <li class="seealso"><a href="<%= seealso.name.trim() %>.html"><%- @markd @translate seealso.description %></a></li>
     <% end %>
   </ul>
   <% end %>
@@ -136,39 +150,41 @@ layout: '2.html.eco'
       </thead>
       <tbody>
         <% for attribute in @doc.attributes: %>
-        <tr>
-          <td class="attribute-name" id="<%= @doc.name %>-<%= attribute.name %>">
-            <%= attribute.name %>
-            <% if attribute.extensionOf: %>
-            <span class="reference-extension-name"><%= attribute.extensionOf %></span>
-            <% end %>
-          </td>
-          <td>
-            <% if attribute.type: %>
-            <span class="value-type"><%= attribute.type %></span>
-            <% end %>
-            <% if attribute.default: %>
-            <br><span class="default-value" style="color: green"><%= attribute.default %></span>
-            <% end %>
-          </td>
-          <td>
-            <%= @translate attribute.description %>
+          <% if [ 'js', @extension ].indexOf(attribute.extensionOf || 'js') > -1: %>
+          <tr>
+            <td class="attribute-name" id="<%= @doc.name %>-<%= attribute.name %>">
+              <%= attribute.name %>
+              <% if attribute.extensionOf: %>
+              <span class="reference-extension-name"><%= attribute.extensionOf %></span>
+              <% end %>
+            </td>
+            <td>
+              <% if attribute.type: %>
+              <span class="value-type"><%= attribute.type %></span>
+              <% end %>
+              <% if attribute.default: %>
+              <br><span class="default-value" style="color: green"><%= attribute.default %></span>
+              <% end %>
+            </td>
+            <td>
+              <%- @markd @translate attribute.description %>
 
-            <% if attribute.required: %>
-            <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
-            <% else: %>
-            <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
-            <% end %>
+              <% if attribute.required: %>
+              <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
+              <% else: %>
+              <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
+              <% end %>
 
-            <% if attribute.initonly: %>
-            <span style="font-size: 12px;"><%= @translate '[en]Works only during initialization.[/en][ja]初期化時のみ有効[/ja]' %></span>
-            <% end %>
+              <% if attribute.initonly: %>
+              <span style="font-size: 12px;"><%= @translate '[en]Works only during initialization.[/en][ja]初期化時のみ有効[/ja]' %></span>
+              <% end %>
 
-            <% if attribute.deprecated: %>
-            <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
-            <% end %>
-          </td>
-        </tr>
+              <% if attribute.deprecated: %>
+              <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -201,7 +217,7 @@ layout: '2.html.eco'
           <td class="attribute-name">
             <%= property.name %>
           </td>
-          <td><%= @translate property.description %>
+          <td><%- @markd @translate property.description %>
             <% if property.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
           </td>
         </tr>
@@ -235,7 +251,7 @@ layout: '2.html.eco'
         <% for modifier in @doc.modifiers: %>
         <tr>
           <td class="modifier-name" id="<%= @doc.name %>-<%= modifier.name %>"><%= modifier.name %></td>
-          <td><%= @translate modifier.description %></td>
+          <td><%- @markd @translate modifier.description %></td>
         </tr>
         <% end %>
       </tbody>
@@ -265,18 +281,20 @@ layout: '2.html.eco'
       </thead>
       <tbody>
         <% for method in @doc.methods: %>
-        <tr>
-          <td>
-            <a href="#method-<%= method.name %>"><%= method.signature %></a>
+          <% if [ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1: %>
+          <tr>
+            <td>
+              <a href="#method-<%= method.name %>"><%= method.signature %></a>
 
-            <% if method.extensionOf: %>
-            <span class="reference-extension-name"><%= method.extensionOf %></span>
-            <% end %>
-          </td>
-          <td><%= @translate method.description %>
-            <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-          </td>
-        </tr>
+              <% if method.extensionOf: %>
+              <span class="reference-extension-name"><%= method.extensionOf %></span>
+              <% end %>
+            </td>
+            <td><%- @markd @translate method.description %>
+              <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+            </td>
+          </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -305,16 +323,18 @@ layout: '2.html.eco'
       </thead>
       <tbody>
         <% for event in @doc.events: %>
-        <tr>
-          <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
-          <td><%= @translate event.description %>
-            <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+          <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
+          <tr>
+            <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
+            <td><%- @markd @translate event.description %>
+              <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
-            <% if event.extensionOf: %>
-            <span class="reference-extension-name"><%= event.extensionOf %></span>
-            <% end %>
-          </td>
-        </tr>
+              <% if event.extensionOf: %>
+              <span class="reference-extension-name"><%= event.extensionOf %></span>
+              <% end %>
+            </td>
+          </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -327,56 +347,58 @@ layout: '2.html.eco'
   <% if @doc.methods.length > 0: %>
   <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
   <% for method in @doc.methods: %>
-  <section class="method-detail">
-    <h4 id="method-<%= method.name %>">
-      <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.type %></span><% end %>
+    <% if [ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1: %>
+    <section class="method-detail">
+      <h4 id="method-<%= method.name %>">
+        <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.type %></span><% end %>
 
-      <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
-    </h4>
+        <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
+      </h4>
 
-    <p><%= @translate method.description %></p>
+      <p><%- @markd @translate method.description %></p>
 
-    <% if method.extensionOf: %>
-    <span class="reference-extension-name"><%= method.extensionOf %></span>
-    <% end %>
+      <% if method.extensionOf: %>
+      <span class="reference-extension-name"><%= method.extensionOf %></span>
+      <% end %>
 
-    <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+      <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
-    <% if method.returns and method.returns.description.length > 0: %>
-    <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%= @translate method.returns.description %></p>
-    <% end %>
+      <% if method.returns and method.returns.description.length > 0: %>
+      <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%- @markd @translate method.returns.description %></p>
+      <% end %>
 
-    <% if method.params.length > 0: %>
-    <!-- method parameter -->
-    <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+      <% if method.params.length > 0: %>
+      <!-- method parameter -->
+      <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
 
-    <table>
-      <thead>
-        <tr>
-          <% if @lang == "en": %>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <% else: %>
-          <th>名前</th>
-          <th>型</th>
-          <th>概要</th>
+      <table>
+        <thead>
+          <tr>
+            <% if @lang == "en": %>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <% else: %>
+            <th>名前</th>
+            <th>型</th>
+            <th>概要</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% for param in method.params: %>
+          <tr>
+            <td><span class="parameter-name"><%= param.name %></span></td>
+            <td class="value-type"><%= param.type %></td>
+            <td><%- @markd @translate param.description %></td>
+          </tr>
           <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% for param in method.params: %>
-        <tr>
-          <td><span class="parameter-name"><%= param.name %></span></td>
-          <td class="value-type"><%= param.type %></td>
-          <td><%= @translate param.description %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <!-- end method parameter -->
+        </tbody>
+      </table>
+      <!-- end method parameter -->
+      <% end %>
+    </section>
     <% end %>
-  </section>
 
   <% end %>
 
@@ -388,47 +410,49 @@ layout: '2.html.eco'
   <% if @doc.events.length > 0: %>
   <h3><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
   <% for event in @doc.events: %>
-  <section class="event-detail">
-    <h4 id="event-<%= event.name %>">
-      <%= event.name %>
-      <a href="#event-<%= event.name %>" class="reference-loop-anchor">#</a>
-    </h4>
+    <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
+    <section class="event-detail">
+      <h4 id="event-<%= event.name %>">
+        <%= event.name %>
+        <a href="#event-<%= event.name %>" class="reference-loop-anchor">#</a>
+      </h4>
 
-    <p><%= @translate event.description %></p>
+      <p><%- @markd @translate event.description %></p>
 
-    <% if event.extensionOf: %>
-    <span class="reference-extension-name"><%= event.extensionOf %></span>
-    <% end %>
+      <% if event.extensionOf: %>
+      <span class="reference-extension-name"><%= event.extensionOf %></span>
+      <% end %>
 
-    <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+      <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
-    <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+      <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
 
-    <table>
-      <thead>
-        <tr>
-          <% if @lang == "en": %>
-          <th>Name</th>
-          <th>Type</th>
-          <th>Description</th>
-          <% else: %>
-          <th>名前</th>
-          <th>型</th>
-          <th>概要</th>
+      <table>
+        <thead>
+          <tr>
+            <% if @lang == "en": %>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <% else: %>
+            <th>名前</th>
+            <th>型</th>
+            <th>概要</th>
+            <% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% for param in event.params: %>
+          <tr>
+            <td><span class="parameter-name"><%= param.name %></span></td>
+            <td class="value-type"><%= param.type %></td>
+            <td><%- @markd @translate param.description %></td>
+          </tr>
           <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% for param in event.params: %>
-        <tr>
-          <td><span class="parameter-name"><%= param.name %></span></td>
-          <td class="value-type"><%= param.type %></td>
-          <td><%= @translate param.description %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </section>
+        </tbody>
+      </table>
+    </section>
+    <% end %>
   <% end %>
   <% end %>
   <!-- end events -->

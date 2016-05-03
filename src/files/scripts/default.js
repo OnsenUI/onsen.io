@@ -26,7 +26,7 @@ $(function() {
   var footerHeight = $('.footer-container').height();
 
   $(window).scroll(update);
-  
+
   function update() {
     var scrollTop = $(window).scrollTop(),
       windowHeight = $(window).height(),
@@ -43,7 +43,7 @@ $(function() {
         sticked.removeClass('content-info-bottom');
         sticked.addClass('content-info-fixed');
         sticked.attr('style', '');
-      } 
+      }
     } else {
       sticked.removeClass('content-info-bottom content-info-fixed');
       sticked.attr('style', '');
@@ -99,7 +99,7 @@ $(function() {
       } else {
         var position = section.offset().top;
       }
-      
+
       if (scrolled > position) {
         var id = '#' + section.attr('id');
         links.removeClass('current');
@@ -132,21 +132,18 @@ $(function() {
 
 // footer newsletter
 $(function() {
-  $('.newsletter-signup form').submit(function() {
-    var email = $('input[name=email]', this).val();
+  $('.newsletter-signup form').submit(function(e) {
+    e.preventDefault();
+    var data = {email: $('input[name=email]', this).val()};
 
-    $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', {email: email})
-      .success(function(data) {
-        var ret = JSON.parse(data);
-
-        if (ret.status !== undefined && ret.status === 'success') {
-          $('.newsletter-signup form').hide();
-          $('.newsletter-signup-thankyou').show();
-        } else {
-          alert('Something wrong with the request. Sorry.');
-        }
-      });
-    return false;
+    $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', data, function(data) {
+      if (JSON.parse(data).status === 'success') {
+        $('.newsletter-signup form').hide();
+        $('.newsletter-thankyou').show();
+      } else {
+        alert('Something wrong with the request. Sorry.');
+      }
+    });
   });
 });
 
@@ -158,6 +155,9 @@ $(function() {
     $('.header-navi', header).toggleClass('header-navi-open');
     $('.blog-header-navi', header).toggleClass('blog-header-navi-open');
   });
+  $('.main-nav-icon').click(function() {
+    $('#main-nav ul').toggleClass('open');
+  });
 
   // for language switch dialog
   $('.language-dialog-button.close').click(function() {
@@ -167,12 +167,12 @@ $(function() {
 
     return false;
   });
- 
+
   (function($el) {
     if ($el.length) {
       $el.attr('href', $el.attr('href').replace(/\/$/, "") + window.location.pathname);
     }
-  })($('.language-dialog-button.japanese-version'));    
+  })($('.language-dialog-button.japanese-version'));
 
   if (window.SITE_ENV.lang == 'en' && window.SITE_ENV.hasAlternateLangPage) {
     if (browserLanguage() == 'ja' && !getCookie('language_dialog_accepted')) {
@@ -181,6 +181,27 @@ $(function() {
     }
   }
 });
+
+
+// footer newsletter
+$(function() {
+  var info = $('#release-info');
+  if (info.length) {
+    var framework = info.data('framework');
+    $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/tags', function(data) {
+      var latest = data.filter(function(e) {
+        return framework ? e.name.indexOf(framework) : !e.name.match(/angular|react/);
+      })[0];
+
+      $('.version', info).html(latest.name);
+
+      $.get(latest.commit.url, function(data) {
+        $('time', info).html(moment(new Date(data.commit.committer.date)).fromNow());
+      });
+    });
+  }
+});
+
 
 var trackOutboundLink = function(url) {
   ga('send', 'event', 'outbound', 'click', url, {
@@ -218,7 +239,7 @@ function setCookie(c_name, value, expiredays) {
     s += '; ';
   }
   document.cookie=s;
-} 
+}
 
 function getCookie(c_name) {
   var st = '';
@@ -236,3 +257,9 @@ function getCookie(c_name) {
   }
   return '';
 }
+
+$(function() {
+  $(".phone.ios iframe").load(function() {
+    $(".phone-placeholder").css('opacity', 0);
+  });
+});

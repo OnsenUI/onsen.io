@@ -1,0 +1,44 @@
+<h2>Reference &amp; Usage</h2>
+<nav class="tabs framework">
+  <a href="js.html" class="js action <%="selected" if @framework=="js"%>">JavaScript</a>
+  <a href="react.html" class="react action <%="selected" if @framework=="react"%>">React</a>
+  <a href="angular1.html" class="angular1 action <%="selected" if @framework=="angular1"%>">Angular 1</a>
+  <a class="angular2 action"><span title="Coming soon" style="color: #ccc;">Angular 2</span></a>
+</nav>
+
+<div class="js-index"><div class="js-index-inner">
+  <% for category, docs of @componentCategories[@framework]: %>
+  <div class="js-index-category">
+    <h4 class="js-index-header">
+      <% if docs.index: %>
+        <a href="/v2/docs/<%=@framework%>/<%=category%>.html"><%- docs.title || @titlize category %></a>
+      <% else: %>
+        <%- docs.title || @titlize category %>
+      <% end %>
+      <!-- <img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16"> -->
+      <div class="js-index-guide">
+        <% if docs.index: %>
+          <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Guide</a></span>
+        <% end %>
+      </div>
+    </h4>
+
+    <% if docs.files: %>
+      <ul class="js-index-list">
+        <% for doc in docs.files: %>
+          <li class="js-index-list-item
+            js-index-list-item-<%=doc.icon%>">
+            <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
+              <% if @framework == "react": %>
+                &lt;<%= doc.name %> /&gt;
+              <% else: %>
+                <%= doc.name %>
+              <% end %>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  <% end %>
+</div>
