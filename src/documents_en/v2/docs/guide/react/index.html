@@ -18,7 +18,7 @@ version: v2
 
 <%- @markdown => %>
 
-Note: We are using ES6 + JSX and transpile using Browserify and Babel in the following examples. You might want to read through [React document]() for more details.
+Note: We are using ES6 + JSX and transpile using [Babel](https://babeljs.io/) in the following examples. You might want to read through [React docs](https://facebook.github.io/react/docs/getting-started.html) for more details.
 
 ### Starting Project
 
@@ -36,13 +36,15 @@ $ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your 
 ##### Download via npm
 
 ```bash
-# In addition to onsenui, require react-onsenui module
-$ npm install onsenui react-onsenui
+# The "react-onsenui" library requires the "onsenui" library.
+$ npm install --save-dev onsenui react-onsenui
 ```
 
 ##### Use Kithensink Code
 
 [Onsen UI React Components Kitchensink](https://github.com/OnsenUI/react-onsenui-kitchensink) contains almost all components in Onsen UI as one application package. [Link to Kitchensink Demo](http://onsenui.github.io/react-onsenui-kitchensink/demo.html).
+
+The code in this example is transpiled using Babel and bundled with [Browserify](http://browserify.org/).
 
 ### Loading Onsen UI for React
 
@@ -56,8 +58,8 @@ You can load with a normal `<script>` tag as follows:
 ``` html
 <script src="react.js"></script>
 <script src="react-dom.js"></script>
-<script src="onsen.js"></script>
-<script src="react-onsen.js"></script>
+<script src="onsenui.js"></script>
+<script src="react-onsenui.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
 ```
 
@@ -66,18 +68,15 @@ Or, you can use React and Onsen UI from npm with CommonJS module system like Bro
 ```
 var React = require('react');
 var ReactDOM = require('react-dom');
-var ons = require('onsen');
-var Ons = require('react-onsen');
+var ons = require('onsenui');
+var Ons = require('react-onsenui');
 ```
 
-Alternatively, you can also use `import()` to specify the modules you want to use in `react-onsen` pacakge.
+Alternatively, you can also use [*ES6 imports*](https://developer.mozilla.org/en/docs/web/javascript/reference/statements/import) to specify the modules you want to use in `react-onsen` package.
 
 ```
 import {Page, Toolbar, Button} from 'react-onsenui';
 ```
-
-To see the instructions and more details, please visit [Introduction to Onsen UI with React](#TODO).
-
 
 ### Onsen UI HelloWorld with React
 
@@ -90,17 +89,25 @@ To get started, let's create a simple Hello World application. The following sam
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/onsenui.css">
     <link rel="stylesheet" href="css/onsen-css-components.css">
+    <script src="react.js"></script>
+    <script src="react-dom.js"></script>
+    <script src="onsenui.js"></script>
+    <script src="react-onsenui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
   </head>
   <body>
     <div id="app"></div>
   </body>
-  <script>
+  <script type="text/babel">
     var App = React.createClass({
+      handleClick: function() {
+        ons.notification.alert('Hello world!');
+      },
+
       render: function() {
         return (
           <Ons.Page>
-            <div>Hello World!</div>
-            <Ons.Button />
+            <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
           </Ons.Page>
         );
       }
@@ -110,7 +117,7 @@ To get started, let's create a simple Hello World application. The following sam
 </html>
 ```
 
-This example is loading the following JS libraries, react.js, react-dom.js, onsen.js and react-onsen.js. For stylesheets, it is loading onsenui.css and onsen-css-components.css which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](#TODO) document.
+This example is loading the following JS libraries, `react.js`, `react-dom.js`, `onsenui.js` and `react-onsenui.js`. For stylesheets, it is loading `onsenui.css` and `onsen-css-components.css` which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](/v2/docs/guide/js/#css-definitions) document.
 
 ```
 <link rel="stylesheet" href="css/onsenui.css">
@@ -119,37 +126,27 @@ This example is loading the following JS libraries, react.js, react-dom.js, onse
 
 In `<body>` tag, there is only a `<div>` tag having `app` id. This is where React will render the content into, and you can see it in the very bottom of JS code.
 
-Also notice `<script>` tag has `jsx`(#TODO) type. This means this script is not a pure JavaScript that browser supports (most commonly [EcmaScript 5](#TODO)), but is a EcmaScript 6 with JSX format #TODO. [Babel](#TODO) will transpile this code into EcmaScript 5 in the browser. To get better performance, we can use node.js to transpile the code. Please read [Setup node.js to transpile React app](#TODO) for details.
+Also notice `<script>` tag has `text/babel` type. This means this script is not a pure JavaScript that browser supports (most commonly ECMAScript5), but is a ECMAScript6 (ES2015) with JSX format. [Babel](https://babeljs.io/) will transpile this code into ES5 in the browser. To get better performance, we can use node.js to transpile the code.
 
-``` js
-var App = React.createClass({
-  render: function() {
-  }
-});
-```
-
-Inside the script, `React.createClass()` function defines a React Class (#Not a component?) called `App`. It has one property called `render`, and this is the function that is called when the app is rendered. The returning object is described in [JSX](#TODO), which is a XML like language to represent React Virtual DOM(#correct?). In this case, it is returning `<Ons.Page>` component that has `<div>` and `<Ons.Button`> component.
+Inside the script, `React.createClass()` function defines a React Component called `App`. It has one method called `render`, and this is the function that is called when the app is rendered. The returning object is described in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html), which is a XML like language that extends JavaScript. In this case, it is returning `<Ons.Page>` component that has an `<Ons.Button>` component. The `onClick` prop is used to call the `handleClick` method when the user taps the button.
 
 ``` js
 return (
   <Ons.Page>
-    <div>Hello World!</div>
-    <Ons.Button />
+    <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
   </Ons.Page>
 );
 ```
 
-As you can see in this example, all `<Ons.*>` components are React Components, and they are loaded by react-onsenui.js. Click here to see our full [Onsen UI React Components Reference](#TODO#).
+As you can see in this example, all `<Ons.*>` components are React Components, and they are loaded by `react-onsenui.js`. Click here to see our full [Onsen UI React Components Reference](/v2/docs/react.html).
 
-Putting together, when index.html is loaded into the browser, it will compile JSX code, inject into the body, and renders the content.
+Putting together, when `index.html` is loaded into the browser, it will compile JSX code, inject into the body, and render the content.
 
-This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read their official [React Tutorial](#TODO).
+This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read the official [React docs](https://facebook.github.io/react/docs/getting-started.html).
 
 ### Event Handling
 
-Onsen UI components are capable of handling React [SyntheticEvent](https://facebook.github.io/react/docs/events.html) events. For instance, you can catch a tap event by using `onClick` event handler, or the text box change by `onChange` event handler.
-
-The following example describes how to get events that are native to React.
+Onsen UI components are capable of handling events. For instance, you can catch a tap event by using the `onClick` prop, or text input change with the `onChange` prop.
 
 ``` javascript
 class MyPage extends React.Component {
@@ -165,7 +162,6 @@ class MyPage extends React.Component {
   }
 }
 ```
-
 
 <!-- End of markdown -->
 <% end %>
