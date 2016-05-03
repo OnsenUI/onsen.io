@@ -2,7 +2,7 @@
   <ul class="footer-navi">
 
     <% if @lang == "en": %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/getting_started.html">GETTING STARTED</a></li>
+        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
         <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/v1/guide.html">DOCS</a></li>
         <li><a href="https://community.onsen.io/">FORUM</a></li>
         <li><a href="http://tutorial.onsen.io/">TUTORIAL</a></li>
