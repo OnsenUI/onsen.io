@@ -19,6 +19,7 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
         <nav class="actions">
           <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
           <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
+          <a class="action demo" href="http://onsenui.github.io/react-onsenui-kitchensink/demo.html">See Demo</a>
         </nav>
         <!--
         <div class="newsletter-signup newsletter-form">
@@ -34,14 +35,16 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
 
         <p class="small" id="release-info" data-framework="react">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='/download.html'>all versions</a><br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
       </div>
-      <%- @partial('demo.html.eco') %>
+      <%- @partial('demo_react.html.eco') %>
     </div>
   </div>
   <div id="features">
     <div class="feature">
       <h2>Beautifully made with Android and iOS components</h2>
       <p>More than <a href="#">100 components</a> are specially made for Material and Flat design, with <a href="#">automatic platform detection</a></p>
-      <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
+      <div id="showcase-carousel-wrapper">
+        <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
+      </div>
     </div>
     <div class="feature">
       <h2>Tailored for React Developers</h2>
@@ -147,19 +150,19 @@ description: 'Make beautiful high performance hybrid mobile apps using HTML5, CS
         </div>
       </div>
     </div>
-    <div class="feature">
-      <h2>Develop and build flawlessly</h2>
-      <p><a href="#">Monaca Platform</a> provides additional extension to Onsen UI, with powerful <a href="#">debugging</a>, <a href="#">remote build</a>, <a href="#">backend services</a> and an optional <a href="#">cloud-based editor</a></p>
-      <nav class="row icons">
-        <a href="#" class="icon debug">Debug</a>
-        <a href="#" class="icon build">Remote build</a>
-        <a href="#" class="icon push">Push</a>
-        <a href="#" class="icon user">User</a>
-        <a href="#" class="icon onlineide">Online IDE</a>
-        <a href="#" class="icon inappupdater">In-App update</a>
-        <a href="#" class="icon lock">Encryption</a>
-      </nav>
-    </div>
+
+  <div class="feature">
+    <h2>Power of CLI and Development Tools</h2>
+    <p>Monaca Platform provides additional extension to Onsen UI, with powerful debugging, remote build, backend services and an optional cloud-based editor. Complimentary access to Onsen UI users.</p>
+<pre><code class="html">$ <strong style="font-weight: bold">monaca create helloworld</strong>
+Which project do you want to create?
+<b style="color: red;">&gt; Onsen 2 with React</b>
+&gt; Onsen 2 with Angular 1
+&gt; Onsen 2 with Angular 2 (Coming Soon)
+&gt; Onsen 2 with JavaScript
+</code></pre>
+  </div>
+
   </div>
 </div>
 

@@ -20,7 +20,7 @@
     padding-top: 80px;
     display: flex;
     @media @smallscreen {
-      padding-top: 10px;
+      padding: 10px 0;
     }
 
     .actions .action.demo {
@@ -37,6 +37,10 @@
 
   #start .wrapper {
     display: flex;
+
+    @media @smallscreen {
+      padding: 10px;
+    }
   }
 
   p, li {
@@ -496,9 +500,8 @@
   }
 
   #getting-started {
-    width: 420px;
     font-size: 20px;
-    padding: 12px 0;
+    padding: 12px;
     border: 0;
     color: #A72E2E;
     background: #fff;
@@ -529,6 +532,10 @@
     top: -50px;
     flex-grow: 1;
     text-align: right;
+
+    @media @smallscreen {
+      display: none;
+    }
 
     .phones, .actions {
       display: inline-block;
@@ -784,6 +791,10 @@
   .platform-buttons {
     position: relative;
 
+    @media @smallscreen {
+      display: none;
+    }
+
     .ios, .android {
       width: 60px;
       height: 60px;
@@ -1036,5 +1047,23 @@
   .framework .action.angular2:before {
     background-image: url(/images/common/icon-angular2.svg);
   }
+
+
+  #showcase-carousel-wrapper {
+    margin: auto;
+    @media (min-width: 250px) {
+      width: 250px;
+    }
+    @media (min-width: 500px) {
+      width: 500px;
+    }
+    @media (min-width: 750px) {
+      width: 750px;
+    }
+    @media (min-width: 1000px) {
+      width: 1000px;
+    }
+  }
+
 
 }
