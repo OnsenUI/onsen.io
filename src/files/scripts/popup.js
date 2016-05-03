@@ -69,6 +69,7 @@
           var popupName = popup[i];
           if (canUpdateStorage(popupName, now)) {
             showPopup(popupName, now);
+            document.addEventListener("touchstart", checkClickOnPopup);
             document.addEventListener("click", checkClickOnPopup);
             return;
           }
@@ -82,6 +83,7 @@
 
     if (target === container || target.classList.contains("pop-button-close")) {
       hidePopup();
+      document.removeEventListener("touchstart", checkClickOnPopup);
       document.removeEventListener("click", checkClickOnPopup);
     }
   }
