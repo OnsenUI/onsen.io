@@ -9,6 +9,8 @@ tags: onsen ui, react
 
 ![React Onsen UI](/blog/content/images/2015/Sep/react_onsenui.png)
 
+**We just released docs for the React components: [Check them out!](/v2/react.html)**
+
 As seen in [the previous blog post](/blog/react-onsen-ui-preview/) we have just announced a [React](https://facebook.github.io/react/) extension for [Onsen UI 2.0](https://onsen.io/). It will provide all the Onsen UI custom elements in the form of React components.
 
 In this article we will take a look at how some of the more complex components are used. Since this extension is still in development we would like to get all the feedback we can so we can refine the APIs and iron out all the creases.
@@ -62,7 +64,7 @@ People who are familiar with Onsen UI knows that we have an element called `<ons
 
 Traditionally one would have to use the `<ons-template>` element to define the content of a page before using the `pushPage()` method. However, React doesn't use templates so it wouldn't make sense for us to expose this kind of API in React. Instead we have taken a look at the [Navigator](https://facebook.github.io/react-native/docs/navigator.html) component in React Native. It provides a very powerful API that gives the developer a lot of freedom in managing their page stack.
 
-The component has a method called `pushPage(route)` which pushes a `route` object to an internal stack. The `route` object can be anything. To render the `route` object into a view the Navigator requires a `renderScene` function which returns the rendered view.
+The component has a method called `pushPage(route)` which pushes a `route` object to an internal stack. The `route` object can be anything. To render the `route` object into a view the Navigator requires a `renderPage` function which returns the rendered view. The function must return something that renders into a `Page` component.
 
 #### Demo
 
@@ -81,16 +83,16 @@ The component provides a number of methods to control the page stack:
 
 * `initialRoute` - Define the first `route` in the stack.
 * `initialRoutes` - Initialize the Navigator with a stack of routes.
-* `renderScene` - Function that takes two arguments:
+* `renderPage` - Function that takes two arguments:
 ```javascript
 (route, navigator) => <MyComponent title={route.title} data={route.data} />
 ```
 
-The component requires one of either `initialRoute` or `initialRoutes` to be specified to initialize the stack. It also requires the `renderScene` prop so the route objects can be rendered.
+The component requires one of either `initialRoute` or `initialRoutes` to be specified to initialize the stack. It also requires the `renderPage` prop so the route objects can be rendered.
 
 #### Usage
 
-This is the code that is used in the example above. In this code the `renderScene` function returns the page inline, but you can of course create a component that renders the page to make the function smaller.
+This is the code that is used in the example above. In this code the `renderPage` function returns the page inline, but you can of course create a component that renders the page to make the function smaller.
 
 ```javascript
 import React from 'react';
@@ -143,7 +145,7 @@ class SecondPage extends React.Component {
 }
 
 export default class extends React.Component {
-  renderScene(route, navigator) {
+  renderPage(route, navigator) {
     const props = route.props || {};
     props.navigator = navigator;
 
@@ -154,7 +156,7 @@ export default class extends React.Component {
     return (
       <Navigator
         initialRoute={{component: MainPage}}
-        renderScene={this.renderScene}
+        renderPage={this.renderPage}
       />
     );
   }
@@ -352,7 +354,7 @@ class SecondPage extends React.Component {
 }
 
 export default class extends React.Component {
-  renderScene(route, navigator) {
+  renderPage(route, navigator) {
     const props = route.props || {};
     props.navigator = navigator;
 
@@ -363,7 +365,7 @@ export default class extends React.Component {
     return (
       <Navigator
         initialRoute={{component: MainPage, props: {key: 'main'}}}
-        renderScene={this.renderScene}
+        renderPage={this.renderPage}
       />
     );
   }
