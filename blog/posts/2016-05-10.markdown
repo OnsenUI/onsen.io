@@ -1,46 +1,43 @@
 ---
 author: moongift
-date: 2016-03-02
+date: 2016-05-10
 id: creating-monaca-applications-with-es6
 title: "Creating Monaca Applications With ES6"
 product: monaca
 category: development
-tags: monaca, javascript, es6
+tags: monaca, javascript, es6, ECMAScript6, gulp
 ---
 
-The current version of ECMAScript5 certainly lacks some pretty basic language features everyone desires.
-As a result, JavaScript alternative languages like CoffeeScript or TypeScript are preferred by many.
-In case you don't know, both TypeScript and CoffeeScript provide syntactic sugar on top of ES5.
+![ES6 main](/blog/content/images/2016/May/es6-main.png)
 
-To solve this problem, ECMAScript6 (ES6) will tackle many of the core language shortcomings addressed, and it is a huge improvement over ES5.
-As you may remember that we've discussed how we can use ES6 using Babel in [this blog post](https://onsen.io/blog/trying-out-javascript-es6-using-babel/), today we will be creating a Monaca application with ES6.
+As many of you have probably already noticed, ECMAScript5 certainly lacks some pretty basic language features required during the development process. As a result, JavaScript alternative languages like CoffeeScript or TypeScript are being preferred by many developers as they both provide syntactic sugar on top of ES5.
+
+To solve this problem, [ECMAScript6](http://es6-features.org/#Constants) (ES6) brings a huge improvement over ES5, tackling many of the other core languages.
+As you may remember, we have already discussed how we can use ES6 using Babel in [this blog post](https://onsen.io/blog/trying-out-javascript-es6-using-babel/), today we will go deeper by creating a Monaca application with ES6.
 
 <!-- more -->
 
 ### Creating A Project
 
-As always, we will first create a Monaca project.
-In this blog, we will simply use [Hello World App](https://github.com/monaca/project-templates/tree/master/0-helloworld).
-If you create the project, your folder directory should look like this.
+As always, we will first create a Monaca project. In this tutorial, we will simply use [Hello World App](https://github.com/monaca/project-templates/tree/master/0-helloworld).
+Once the project has been created, your folder directory should look like this.
 
 
-![Monaca LocalKit Project](/blog/content/images/2016/Mar/monaca-coffeescript-1.png)
+![Monaca LocalKit Project](/blog/content/images/2016/May/monaca-coffeescript-1.png)
 
 
 ### Installing Gulp
 
-Gulp is a javascript task runner design to automate tasks.
-Let Gulp automate our transpiling work.
-When working with Babel, Gulp is a great tool to have.
+[Gulp](http://gulpjs.com/) is a JavaScript task runner designed to automate tasks, that's why we are going to use it in order to automate our transpiling work.
+When working with Babel, Gulp is a great tool to include in your workflow: we suggest you to give it a try!
 
-Let's install gulp and some other libraries.
-To start, run following code:
+Let's install Gulp and some other libraries. To start, run the following command:
 
 ```
 npm init
 ```
 
-Next, we will install libraries.
+Next, we will install some required libraries:
 
 ```
 npm install --save-dev gulp gulp-babel \
@@ -48,7 +45,7 @@ npm install --save-dev gulp gulp-babel \
                        gulp-concat
 ```
 
-These are the list of plugins we are installing:
+This is the list of plugins we are installing:
 
  - gulp : JavaScript task runner for Node.js
  - gulp-babel : Gulp plugin for Babel
@@ -57,10 +54,10 @@ These are the list of plugins we are installing:
  - gulp-concat : Concatenates transpiled JavaScript files
 
 
-### Creating Gulp tasks
+### Creating a Gulp tasks
 
-Since we are focusing on ECMAScript6 in this tutorial, we will also be writing gulpfile in ES6.
-In order to that, we first need to write following in `package.json` to enable es2015 preset.
+Since we are focusing on ECMAScript6 in this tutorial, we will also be writing a Gulpfile in ES6.
+In order to that, we first need to include the following content in `package.json` to enable es2015 preset.
 
 ```
 "babel": {
@@ -68,8 +65,8 @@ In order to that, we first need to write following in `package.json` to enable e
 }
 ```
 
-We then need to instruct gulp to use Babel by renaming the `gulpfile.js` to `gulpfile.babel.js`.
-We are now able to use ES6 in our gulpfile.
+Then, we need to instruct Gulp to use Babel by renaming the `gulpfile.js` to `gulpfile.babel.js`.
+We are now able to use ES6 in our gulpfile!
 
 ```
 import gulp       from 'gulp'
@@ -98,7 +95,7 @@ gulp.task('build', ['js']);
 gulp.task('default', ['build', 'watch']);
 ```
 
-You may notice that here we have utilized ES6 import and arrow functions.
+As you can notice, we have used ES6 import and arrow functions.
 
 
 ### Creating JavaScript files
@@ -125,10 +122,10 @@ var event = typeof cordova === 'undefined' ? 'DOMContentLoaded' : 'deviceready';
 document.addEventListener(event, onDeviceReady, false);
 ```
 
-In our gulpfile, we instruct gulp to concatenate and output all of our ES6 JavaScript files in a single file.
-To confirm this, we trigger our gulp process and you'll see `all.js` under `www/js/` directory.
+In our gulpfile, we will instruct Gulp to concatenate and output all our ES6 JavaScript files into a single file.
+To make this happen, we need to execute our Gulp task and `all.js` will be generated under `www/js/` directory.
 
-In our application side, we can simply load that file like:
+The file is now ready to be loaded into our application:
 
 ```
 <script src="js/all.js"></script>
@@ -136,21 +133,17 @@ In our application side, we can simply load that file like:
 
 ### Conclusion
 
-We have now setup our first Monaca hybrid mobile app with ES6, and Gulp environment.
-When we see our application, you'll notice that our transpiled JavaScript outputs our log successfully.
+We have learned how to setup our first Monaca hybrid mobile app with ES6 and used Gulp to automate our tasks.
+Taking a look at the application, you'll notice that our transpiled JavaScript is successfully displayed in the Console.
 
 
-![Application Preview With Babel](/blog/content/images/2016/Mar/monaca-babel-2.png)
+![Application Preview With Babel](/blog/content/images/2016/May/monaca-babel-2.png)
 
 
-We've also included Source Maps into our project so that we can add breakpoints for debugging.
+We've also included Source Maps into our project in order to have the possibility to add breakpoints for debugging.
 
 
-![Preview With Breakpoint](/blog/content/images/2016/Mar/monaca-babel-3.png)
+![Preview With Breakpoint](/blog/content/images/2016/May/monaca-babel-3.png)
 
-The next generation of javascript will bring us a simpler and friendlier syntax.
-Babel will allow you to write ES6+ features today and have it work across different browsers on the client side.
-It is certainly a great tool and help you speed up your production time when working with Monaca applications.
-
-
-[Monaca Localkit - HTML5 Mobile App Framework](https://monaca.io/localkit.html)
+The newest version of ECMAScript delivers a simpler and friendlier syntax while Babel allows us to write ES6+ features ready to work across different browsers on the client side.
+It is certainly a great tool and will for sure help you to speed up your development while working with Monaca applications with local tools like [Monaca Localkit](https://monaca.io/localkit.html) and [CLI](https://github.com/monaca/monaca-cli).
