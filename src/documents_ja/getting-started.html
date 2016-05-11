@@ -1,0 +1,122 @@
+---
+page: 'getting_started'
+title: 'Onsen UIをはじめよう - Onsen UIフレームワーク'
+h1: 'Onsen UIをはじめよう！'
+layout: 'default.html.eco'
+description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
+actionbar: false
+---
+
+<div id="features">
+  <div class="feature">
+    <h2>Onsen UIで美しいHTML5モバイルアプリを開発しよう!</h2>
+    <nav class="tabs">
+      <a href="#cli" class="action terminal selected">Monaca CLIを使う</a>
+      <a href="#cloud" class="action cloud">MonacaクラウドIDEを使う</a>
+      <a href="#npm" class="action tool">NPM・Bowerパッケージ</a>
+      <a href="#download" class="action download">すべてダウンロード</a>
+    </nav>
+    <div class="tab-contents">
+      <!-- Develop with Monaca CLI -->
+      <div id="cli" class="selected">
+        <p>ローカル環境でCordovaハイブリッドアプリをセットアップするには、Monaca CLIを利用すると便利です。Monacaを使うと、リモートビルドやデバッグ機能がクラウドを通じて提供されます。必要に応じて<a href="https://cordova.apache.org/docs/en/latest/guide/cli/">Cordova CLI</a>を使うこともできます。</p>
+        <ol>
+          <li>
+            <h3>Monaca CLIをインストールする</h3>
+            <p>まずは<a href="//nodejs.org/">Node.js</a>をインストールしてください。次に、Onsen UIアプリの開発のために、npmを通じてMonaca CLIをインストールします。GUI版デスクトップアプリは、WindowsとMac OS Xに対応した<a href="https://monaca.io/localkit.html">Monaca Localkit</a>をご利用ください。</p>
+            <pre><code class="bash">npm install -g monaca</code></pre>
+            <span class="info">セットアップで問題が発生する場合は、より手軽な<a href="#cloud">MonacaクラウドIDE</a>をご利用ください。</span>
+          </li>
+          <li>
+            <h3>テンプレートからプロジェクトを作成</h3>
+            <p>テンプレートからOnsen UIアプリを作成します。利用するフレームワークやOnsen UIのバージョンを選択できます。</p>
+            <pre><code class="bash">
+              monaca create helloworld
+            </code></pre>
+          </li>
+          <li>
+            <h3>実機上ですぐに確認</h3>
+            <p>ブラウザー上で確認するには、monaca previewを利用します。端末上にインストールしたデバッガー上で動かすには、monaca debugコマンドが便利です。</p>
+            <pre><code class="bash">
+              cd helloworld
+              monaca preview # ブラウザー上でプレビュー
+              monaca debug # 実機デバッガー上で動作確認
+              monaca remote build # アプリのビルド
+            </code></pre>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Use Monaca Cloud IDE -->
+      <div id="cloud">
+        <p>MonacaクラウドIDEは、デバッグやリモートビルド機能を兼ね揃えたクラウドベースの開発環境です。</p>
+        <ol>
+          <li>
+            <h3>Monacaにサインアップ</h3>
+            <p>Monacaアカウントを作成し、ダッシュボードにアクセスしてください。</p>
+            <p><a href="https://monaca.mobi/ja/register/start">Monacaにサインアップ (無料)</a></p>
+          </li>
+          <li>
+            <h3>新しいプロジェクトを作成</h3>
+            <p><strong>新しいプロジェクト</strong>をクリックし、Onsen UIテンプレートを選択してください。</p>
+          </li>
+          <li>
+            <h3>Cloud IDEを開く</h3>
+            <p>ダッシュボードから<strong>開く</strong>をクリックすると、クラウドIDEが立ち上がり、開発をスタートできます。</p>
+          </li>
+          <li>
+            <h3>デバッガー実行やビルドを行う</h3>
+            <p>Monaca Debuggerを使うと、実機上で簡単に動作確認を行えます。</p>
+            <p>リモートビルドを用いて、Android、iOS、Windows向けネイティブアプリ形式のパッケージを作成できます。</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Install via NPM or Bower -->
+      <div id="npm">
+        <p>Onsen UIはnpmとBowerを通じて配信をしています。</p>
+        <ul>
+          <li>
+            <h3>NPMを用いたダウンロード</h3>
+            <p>下記のようにして、npmを用いてインストールできます。</p>
+            <pre><code class="bash">npm install onsenui</code></pre>
+            <p>Onsen UIはCommonJSとAMDの両方のフォーマットに対応しています。Browserify、RequireJSやWebpackを用いてアプリに組み込んでください。</p>
+            <span class="info">Reactエクステンションは<code>react-onsenui</code>パッケージとして提供されています。詳細については<a href="https://onsen.io/v2/docs/guide/react/index.html">Reactガイド（英語）</a>を参照してください。</span>
+          </li>
+          <li>
+            <h3>Bowerを用いたダウンロード</h3>
+            <p><a href="http://bower.io/" target="_blank">bower</a>を用いて配布パッケージをインストールできます。</p>
+            <pre><code class="bash">bower install onsenui</code></pre>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Download Everything -->
+      <div id="download">
+        <ol>
+          <li>
+            <h3>配布パッケージ（リリースビルド）</h3>
+            <p>すべてのリリースビルドは<a href="https://github.com/OnsenUI/OnsenUI-dist/releases">OnsenUI Distribution Releases</a>にてダウンロードできます。</p>
+          </li>
+          <li>
+            <h3>ソースコード</h3>
+            <p>ソースコードの入手と、ビルドを行う方法については、<a href="https://github.com/onsenui/onsenui">GitHubレポジトリ</a>を参照してください。</p>
+            <p><a href="https://github.com/OnsenUI/project-templates/archive/master.zip">最新のmasterブランチをダウンロード</a></p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="feature">
+    <h2>準備はできましたか？</h2>
+    <nav class="visit row">
+      <a class="icon reference" href="/v1/guide.html">ドキュメント</a>
+      <a class="icon reference" href="http://tutorial.onsen.io">チュートリアル</a>
+      <a class="icon forum" href="http://ja.stackoverflow.com/questions/tagged/onsen-ui">StackOverflow</a>
+      <a class="icon blog" href="/blog">チームのブログ</a>
+    </nav>
+  </div>
+</div>
+
+<script src="/scripts/started.js"></script>

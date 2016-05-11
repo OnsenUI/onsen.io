@@ -153,16 +153,15 @@
       }
 
       h1 {
-        font-family: @en-header-font-family;
         font-size: 40px;
         line-height: 44px;
         padding-left: 26px;
         margin-bottom: 14px;
         margin-top: 7px;
-      }
 
-      .lang-en & {
-        font-family: @en-header-font-family;
+        .lang-en & {
+          font-family: @en-header-font-family;
+        }
       }
 
       a, a:link, a:visited, a:hover {
@@ -343,9 +342,12 @@
   border-bottom: 1px solid #bcbcbc;
 
   text-align: center;
-  font-family: @en-header-font-family !important;
   font-size: 18px;
   line-height: 69px;
+
+  .lang-en & {
+    font-family: @en-header-font-family !important;
+  }
 
   &-older {
     position: absolute;
@@ -372,7 +374,6 @@
   height: 69px;
   line-height: 69px;
   text-transform: uppercase;
-  font-family: @en-header-font-family !important;
   font-size: 18px !important;
 
   border-bottom: 1px solid #bcbcbc;
@@ -380,6 +381,10 @@
   text-align: center;
   font-size: 18px;
   font-weight: 200;
+
+  .lang-en & {
+    font-family: @en-header-font-family !important;
+  }
 }
 
 .tag-cloud {

@@ -10,12 +10,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <% if @page == 'css': %>
-  <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/ionicons/css/ionicons.min.css">
-  <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/font_awesome/css/font-awesome.min.css">
-  <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
 
-  <link rel="stylesheet" href="<%= @rootUrl %>v2/reference/onsen-css-components.css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300italic,300,100italic,400italic,500,700,500italic,700italic,900,900italic" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/reference/onsen-css-components.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300italic,300,100italic,400italic,500,700,500italic,700italic,900,900italic" rel="stylesheet" type="text/css">
   <% end %>
 
   <link rel="stylesheet" href="<%= @rootUrl %>css/main.css">
@@ -30,7 +30,7 @@
   <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
 
   <% if @hasAlternateLangPage(): %>
-  <link rel="alternate" href="<%= @getAlternateLangPage() %>" hreflang="<%= @getAlternateLang() %>" />
+    <link rel="alternate" href="<%= @getAlternateLangPage() %>" hreflang="<%= @getAlternateLang() %>" />
   <% end %>
 
   <script defer src="/vendor/jquery.js"></script>
@@ -60,9 +60,9 @@
 <body id="<%- @page %>" class="design-2016">
   
   <% if @main_nav != false: %>
-    <%- @partial('main-nav.html.eco') %>
+    <%- @partial(if @lang=='en' then 'main-nav.html.eco' else 'main-nav.ja.html.eco') %>
   <% end %>
-  <%- @partial('header.html.eco') %>
+  <%- @partial(if @lang=='en' then 'header.html.eco' else 'header.ja.html.eco') %>
 
   <section id="main-container">
 
