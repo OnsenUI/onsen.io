@@ -69,6 +69,9 @@ module.exports = function(language, isStaging) {
     },
     atsushi: {
       name: '中津川篤司',
+    },
+    ryoichi: {
+      name: 'Ryoichi Tsukada',
     }
   };
 
