@@ -1,187 +1,50 @@
 ---
-page: 'home'
-title: 'HTML5モバイルアプリをもっと速く、もっと美しく'
-sitemap:
-  priority: 1.0
+page: 'landing-new'
+title: 'Onsen UI: HTML5モバイルアプリをもっと速く、もっと美しく'
+layout: 'default.html.eco'
+topbar: false
+actionbar: false
+description: '最高に速くて最高に美しいHTML5ハイブリッドアプリ向けUIフレームワーク。Androidマテリアルデザインと、iOSフラットデザインの両方をサポートしています。'
 ---
 
-<div class="keyvisual">
-  <div class="keyvisual-content">
-    <div class="keyvisual-main">
-      <h1><img src="/images/index/keyvisual-header-text-ja.png" alt="HTML5モバイルアプリをもっと速く、もっと美しく" height="90"></h1>
-      <h2><img src="/images/index/keyvisual-subheader-text-ja.png" alt="Custom Elements対応のUIフレームワーク" height="100%"></h2>
-      <img src="/images/index/keyvisual-small-ja.png" class="keyvisual-small">
-      <a class="getting-started" href="/guide/getting_started.html">今すぐ始める</a><!--
-      --><a class="download" href="/download.html">ダウンロード(v<%- @framework.version %>)</a>
+<div id="start" class="white-back">
+  <div class="wrapper">
+    <div id="intro">
+      <h1>HTML5ハイブリッドアプリ向け<span>モバイルUIフレームワーク</span></h1>
+      <a href="/getting-started.html" class="keybutton">Onsen UIを始めよう</a>
+      <div class="v2announce">Material DesignやReact、Web Componentsに対応した<br><a href="https://onsen.io/v2/" style="color: #ff4d36">バージョン 2 RC</a>をチェック! <span style="font-size: 80%">(日本語版も公開予定)</span></div>
+      <nav class="actions">
+        <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
+        <a class="action github" href="https://github.com/OnsenUI/OnsenUI">GitHub Star</a>
+      </nav>
+      <p class="small" id="release-info">最新バージョン <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> (リリース: <time></time>) <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>すべてのバージョン</a><br>オープンソース（Apache 2ライセンス）で<a href="https://github.com/OnsenUI/OnsenUI">GitHub</a>にて公開中。</p>
     </div>
-
-    <div class="social">
-      <img src="/images/index/github-icon-mini.png" class="github-icon-mini">
-      <a class="github-star" href="https://github.com/OnsenUI/OnsenUI/stargazers">
-        <strong></strong> Stars
-      </a>
-
-      <img src="/images/index/twitter-icon-mini.png" class="twitter-icon-mini">
-      <a class="twitter-follower" href="https://twitter.com/Onsen_UI">
-        <strong></strong> Followers
-      </a>
-    </div>
-
+    <div class="keyvisual"><img src="/images/index/keyvisual.png" alt="Onsen UIキービジュアル"></div>
   </div>
 </div>
-
-<div class="taglines">
-  <ul>
-    <li>PhoneGap / Cordovaアプリに最適なJavaScript、CSSフレームワーク</li>
-    <li>アプリ開発プラットフォームMonacaに標準搭載</li>
-    <li>豊富なUIコンポーネントが提供</li>
-    <li>スマホもタブレットも！レスポンシブデザインで同時対応</li>
-  </ul>
-
-  <div class="newsletter newsletter-signup">
-    <div class="newsletter-inner">
-      <form>
-        <input type="text" placeholder="Onsen UIニュースを購読する" name="email">
-        <input type="submit" value="Send">
-      </form>
-      <div class="newsletter-thankyou newsletter-signup-thankyou">ありがとうございました!</div>
-    </div>
-  </div>
-</div>
-
-<div class="main-features">
-
-  <div class="feature super-performance">
-    <h2><img src="/images/index/feature-fast-header-ja.png" alt="HTML5なのに驚きの速さ"></h2>
-
-    <p>
-      Onsen UIを使うと、あなたのHTML5アプリのパフォーマンスが格段に向上。
-      ネイティブ開発と見間違う程のスピードを、是非実感してみてください。
-    </p>
+<div id="features">
+  <div class="feature">
+    <h2>HTML5なのに驚きの速さ</h2>
+    <p>Onsen UIを使うと、あなたのHTML5アプリのパフォーマンスが格段に向上。ネイティブ開発と見間違う程のスピードを、是非実感してみてください。</p>
   </div>
 
-  <div class="feature multi-screen">
-    <h2><img src="/images/index/feature-multi-screen-header-ja.png" alt="マルチスクリーン対応"></h2>
-
-    <p>
-      Onsen UIはレスポンシブデザインに対応しています。画面のサイズに併せて自動的にビューが調整されます。
-      <br>また、スプリットビュータグを使えば、タブレットとスマートフォンで表示の切り替えも自動的に行われます。
-    </p>
+  <div class="feature">
+    <h2>PhoneGap / Cordovaに最適</h2>
+    <p>Onsen UIはPhoneGap / Cordovaに代表されるHTML5ハイブリッドアプリ開発に最適なソリューションです。Onsen UIを使えば、多くのPhoneGap / Cordovaアプリ開発者が抱えていた、アプリのパフォーマンスの問題とUI開発の難しさが一発で解決できます。<br>
+      また、Onsen UIは完全なオープンソース製品なので、開発者はロックインされることはまったくありません。Onsen UIはモバイル対応版のWebアプリの開発にもご利用頂けます。</p>
+    <img src="/images/index/feature-phonegap-cordova-friendly.png">
   </div>
 
-  <div class="feature cordova-friendly">
-    <h2><img src="/images/index/feature-phonegap-cordova-header-ja.png" alt="PhoneGap / Cordovaに最適"></h2>
-
-    <p>
-      Onsen UIはPhoneGap / Cordovaに代表されるHTML5ハイブリッドアプリ開発に最適なソリューションです。Onsen UIを使えば、多くのPhoneGap / Cordovaアプリ開発者が抱えていた、アプリのパフォーマンスの問題とUI開発の難しさが一発で解決できます<br>
-      また、Onsen UIは完全なオープンソース製品なので、開発者はロックインされることは全くありません。Onsen UIはモバイル対応版のWebアプリの開発にもご利用頂けます。
-    </p>
+  <div class="feature">
+    <h2>驚きの簡単さ</h2>
+    <p>Onsen UIはWebコンポーネント形式で提供され、HTMLタグとして利用できます。ナビゲーションやサイドメニューといった高度なコンポーネントも提供されます。</p>
+    <img src="/images/index/feature-custom-elements.png" alt="Custom Elements">
   </div>
 
-  <div class="feature monaca">
-    <h2><img src="/images/index/feature-monaca-header-ja.png" alt="Monacaに標準搭載"></h2>
-
-    <p>
-      Onsen UIはアプリ開発プラットフォームMonacaに標準搭載されています。Onsen UIが組み込まれたテンプレートを選ぶだけで、Monaca上でOnsen UIを使ったアプリケーション開発が始められます。
-    </p>
-  </div>
-
-  <div class="feature custom-elements">
-    <h2><img src="/images/index/feature-simple-to-use-header-ja.png" alt="シンプルで使いやすい"></h2>
-
-    <p>
-      Onsen UIはWebコンポーネント形式です。すべてのUIコンポーネントはタグになっているので、使い方を理解するのがとても簡単です。
-    </p>
-
-    <p style="text-align: center; margin-top: 20px;">
-      <img src="/images/index/feature-custom-elements.png">
-    </p>
-  </div>
-
-  <div class="feature with-jquery-or-angular">
-    <h2><img src="/images/index/feature-jquery-angular-header-ja.png" alt="jQueryでも、AngularJSでも"></h2>
-
-    <p>
-      AngularJSユーザーであれば、その強力なフレームワーク機能をOnsenUIで使う事ができます。一方で、jQueryユーザーもOnsen UIのUIコンポーネントを活用して、美しいUIを作る事が可能です。
-    </p>
+  <div class="feature">
+    <h2>AngularJSを使って、より高度な開発を</h2>
+    <p>AngularJSユーザーであれば、その強力なフレームワーク機能をOnsen UIで使う事ができます。一方でAngularJSを使わない場合でも、Onsen UIのUIコンポーネントを活用して、美しいUIを作る事が可能です。</p>
+    <img src="/images/index/feature-with-angular-or-jquery.png">
   </div>
 
 </div>
-
-<div class="other-features">
-  <h2><img src="/images/index/other-features-header-ja.png" alt="まだあるOnsen UIの特徴"></h2>
-
-  <div class="sub-feature free-and-opensource">
-    <h3>オープンソースなので無料</h3>
-
-    <p>
-      Onsen UIはApache Licenceの元に提供されており、Githubにレポジトリーがあります。商用利用などの制限も一切ありません。
-    </p>
-  </div>
-
-  <div class="sub-feature font-awesome">
-    <h3>Font Awesomeを同梱</h3>
-
-    <p>
-      <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">Font Awesome</a>が同梱されているので、3000種類以上の豊富なアイコンをすぐに使う事ができます。
-    </p>
-  </div>
-
-  <div class="sub-feature selectable-theme">
-    <h3>テーマローラーで簡単カスタマイズ</h3>
-
-    <p>
-      <a href="http://components.onsen.io/" target="_blank">Onsen Theme Roller</a>を使う事で、各UIコンポーネントのカスタマイズを簡単に行う事ができます。
-    </p>
-  </div>
-
-  <div class="sub-feature customizable">
-    <h3>高いカスタマイズ性</h3>
-
-    <p>
-      HTML5とCSSの高い表現力を活用し、アプリのデザインニーズに対応した最適なルック&amp;フィールにカスタマイズすることができます。
-    </p>
-  </div>
-
-  <div class="sub-feature screen-transition">
-    <h3>アニメーション機能</h3>
-
-    <p>Onsen UIではネイティブアプリの様なユーザーエクスペリエンスを提供するため、画面操作時にスムーズなアニメーションが備わっています。もちろんマルチプラットフォームで動作します。</p>
-  </div>
-
-  <div class="sub-feature gui-tool">
-    <h3>GUIツールも登場予定</h3>
-
-    <p>
-      ドラッグ&ドラッグ機能などでアプリのUI開発を行うためGUIツールを提供予定。UI開発のハードルは劇的に下がります。
-    </p>
-  </div>
-</div>
-
-<div class="getstarted"><a class="getstarted-button" href="/getting_started/">今すぐ始める</a></div>
-
-<div class="github-widget">
-
-  <div class="github-widget-header">
-    <div class="github-widget-header-info">
-      <img src="/images/index/github-widget-star.png"> <a href="https://github.com/OnsenUI/OnsenUI/stargazers" target="_blank" class="github-widget-header-num"></a> stars
-      &nbsp;&nbsp; <img src="/images/index/github-widget-fork.png"> <a href="https://github.com/OnsenUI/OnsenUI/network" target="_blank" class="github-widget-header-num"></a> forks
-    </div>
-
-    <img src="/images/index/github-widget-octcat.png"> Latest Commits to <a href="https://github.com/OnsenUI/OnsenUI" target="_blank" class="github-widget-project-name">OnsenUI/OnsenUI</a>
-  </div>
-
-  <div class="github-widget-commit">
-    <a href=""><img src="" class="github-widget-commiter-image" width="54" height="54"></a>
-    <div class="github-widget-commit-message"></div>
-    <div class="github-widget-commit-info">
-      by
-      <span class="github-widget-commit-author"></span>
-      <a href="" target="_blank"></a>
-    </div>
-  </div>
-
-</div>
-
-<script defer src="<%= @rootUrl %>vendor/moment.min.js"></script>
-<script defer src="<%= @rootUrl %>scripts/github_commits.js"></script>

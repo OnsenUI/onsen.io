@@ -56,7 +56,7 @@ Angular 1.x binding for Onsen UI is separated from the core. To load in your pro
     <script src="lib/onsen/js/onsenui.js"></script>
     <script src="lib/onsen/js/angular-onsenui.js"></script>
     <script>
-      var app = angular.module('my-app', ['onsen']);
+      var module = angular.module('my-app', ['onsen']);
       module.controller('AppController', function($scope) { });
       module.controller('PageController', function($scope) {
         ons.ready(function() {
