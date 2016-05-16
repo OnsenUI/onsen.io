@@ -1,7 +1,7 @@
 ---
 author: atsushi
-date: 2016-05-12
-id: monaca-app-secutiry-tips
+date: 2016-05-16
+id: monaca-riotjs 
 title: "MonacaでRiot.jsを使ってみよう"
 product: monaca
 tags: Riot.js,HTML5,JavaScript,React
@@ -18,7 +18,7 @@ category: 技術情報
 
 Riot.jsはBowerに対応していますので、MonacaのJS/CSSコンポーネントの追加と削除よりインストールできます。
 
-![](../content/images/2016/Apr/monaca-riot.js-6.png)
+![](/blog/content/images/2016/Apr/monaca-riot.js-6.png)
 
 コンポーネントとしてRiot.jsを指定し、ローダーはriot+compiler.min.jsを選択してください。これはRiotの書式を解釈するためのコンパイラが含まれています。
 
@@ -49,7 +49,7 @@ Riot.jsはBowerに対応していますので、MonacaのJS/CSSコンポーネ�
 </body>
 ```
 
-![](../content/images/2016/Apr/monaca-riot.js-3.png)
+![](/blog/content/images/2016/Apr/monaca-riot.js-3.png)
 
 内容を見ると分かりますが、todo.tagというファイルを読み込んでいます。これはRiot.jsの提唱するウィジェットという機能で、これがHTML/JavaScriptを一つにパックしたものになります。デザインのベースになるCSSだけは別ファイルになっていますが、tagファイルとCSSファイルによって機能がまとまって提供されます。Web Componentsに近い概念となっていますが、Riot.jsではよりシンプルに実現できるようになっています。
 
@@ -120,7 +120,7 @@ todo.tagの内容ですが、次のようになります。殆どHTMLと変わ�
 
 実際に動かすと次のようになります。HTMLがテンプレート変数に埋め込まれた状態で表示され、かつJavaScriptのイベントが実行されます。Todo管理するという機能がこのtodo.tagの中にまとまった状態です。
 
-![](../content/images/2016/Apr/monaca-riot.js-1.gif)
+![](/blog/content/images/2016/Apr/monaca-riot.js-1.gif)
 
 ### Riot.jsの特徴
 
