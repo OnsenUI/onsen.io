@@ -54,7 +54,6 @@ module.exports = function(lang, isStaging) {
         .use(require('./autotoc')())
         .use(function(files, metalsmith, done) {
           setImmediate(done);
-
           var cssFile = files['v2' + nodePath.sep + 'docs' + nodePath.sep + 'css.html'];
           if (cssFile && cssFile.toc) {
             var cssToc = cssFile.toc;
@@ -88,7 +87,7 @@ module.exports = function(lang, isStaging) {
         .use(branch('robots.txt').use(templates({
           inPlace: true, engine: 'eco'
         })))
-        .use(redirect(require("./redirect_rule.json")))
+        .use(redirect(require("./redirect_rule.json")[lang]))
         .use(sitemap({
           ignoreFiles: [/\.gitignore/],
           output: 'sitemap.xml',

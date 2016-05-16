@@ -12,9 +12,9 @@
         <li><a href="http://ja.onsen.io/">JAPANESE</a></li>
       <% else: %>
         <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/docs.html">DOCS</a></li>
-        <li class="<%- if @page is 'forum' then 'current' %>"><a href="/forum.html">SUPPORT</a></li>
-        <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
+        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/v1/guide.html">ガイド</a></li>
+        <li><a href="http://tutorial.onsen.io/">チュートリアル</a></li>
+        <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">ブログ</a></li>
         <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
         <li><a href="http://onsen.io/">ENGLISH</a></li>
     <% end %>

@@ -290,7 +290,7 @@
       padding: 6px 16px;
       box-sizing: border-box;
       border: 1px solid #ddd;
-      z-index: 2;
+      z-index: 3;
       opacity: 0;
       box-shadow: 0 2px 4px rgba(0,0,0,.1);
       top: 43px;
@@ -398,18 +398,48 @@
   /***** Top part *****/
   #intro {
     width: 400px;
-  }
 
-  #intro h1 {
-    margin: 30px 0;
-    font-size: 33px;
-    line-height: 1.3;
-    color: white;
-    font-weight: 300;
+    .keymessage {
+      > h1 {
+        display: inline;
+        margin: 30px 0;
+        font-size: 33px;
+        line-height: 1.3;
+        color: white;
+        font-weight: 300;
 
-    @media @smallscreen {
-      margin: 20px 0;
+        @media @smallscreen {
+          margin: 20px 0;
+        }
+      }
+
+      > .framework-extensions {
+        display: inline;
+        > span {
+          display: inline-block;
+          border: 1px solid #F56155;
+          border-radius: 3px;
+          font-size: 80%;
+          margin-left: 10px;
+          padding: 1px 3px;
+          vertical-align: middle;
+
+          &:hover {
+            background-color: #fff;
+            > a {
+              color: #D84235;
+            }
+          }
+
+          > a {
+            text-decoration: none;
+          }
+        }
+      }
+
+
     }
+
   }
 
   #intro a.keybutton {
