@@ -142,7 +142,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods summary -->
-  <% if @doc.methods.length > 0: %>
+  <% if Object.keys(@doc.methods).length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
@@ -178,7 +178,7 @@ actionbar: false
   <!-- end methods summary -->
 
   <!-- methods details -->
-  <% if @doc.methods.length > 0: %>
+  <% if Object.keys(@doc.methods).length > 0: %>
   <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
   <% for key, method of @doc.methods: %>
     <section class="method-detail">
