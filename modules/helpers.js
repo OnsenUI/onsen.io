@@ -247,7 +247,7 @@ module.exports = function() {
       },
 
       getAlternateLangPage: function() {
-        var url = this.lang === 'en' ? 'http://ja.onsen.io' : 'http://onsen.io';
+        var url = this.lang === 'en' ? 'https://ja.onsen.io' : 'https://onsen.io';
         return url + '/' + this.origPath;
       },
 
