@@ -1,0 +1,39 @@
+---
+author: patrick
+date: 2016-05-20
+id: onsen-ui-environment-news
+title: "Getting Started with React Components for Onsen UI using Cordova"
+category: tutorial
+tags: onsen ui, monaca cli, interactive tutorial
+---
+
+<!-- ![onsen_env](/blog/content/images/2016/May/onsenui_env.PNG) " -->
+
+The new [React Components for Onsen UI](https://onsen.io/v2/react.html) in combination with the [Monaca CLI](https://monaca.io/debugger.html) make it easy to build React hybrid apps with Cordova.
+In this tutorial we will guide you through the entire process from setting up the environment to running the apps on your phone.
+<!-- more -->
+
+
+### Getting started
+
+To get started we first need to install the [Monaca CLI](https://monaca.io/debugger.html), which will be used to create/build and preview the project.
+
+```
+$ npm install -g monaca
+```
+
+Now we will  create a simple sample app by typing `monaca create sample` and choose react and the navigation example.
+
+![cli steps](/blog/content/images/2016/May/cli_create.png)
+
+To run the project you need to simply run:
+
+```
+$ cd sample;
+$ monaca preview
+```
+
+
+### Conclusion
+
+We are decided to improve Onsen UI environment and focus on the whole development stack. Monaca IDE, Visual Studio and Localkit users were already enjoying these tools and services and now with the improved Monaca CLI every Onsen UI developer will also have this possibility. If you are as excited as us about the incoming Onsen UI 2.0, you can [join our community](https://community.onsen.io/), star us on [Github](https://github.com/OnsenUI/OnsenUI) and spread the word on [Twitter](https://twitter.com/Onsen_UI). Happy coding!
