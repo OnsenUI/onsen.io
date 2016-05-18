@@ -45,7 +45,7 @@ actionbar: false
     <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.codepens.length > 0: %>
+    <% if @doc.tutorial: %>
     <li><a href="#example"><%= @translate '[en]Live Example[/en][ja]実例[/ja]' %></a></li>
     <% end %>
 
@@ -80,23 +80,13 @@ actionbar: false
   </section>
   <% end %>
 
-  <% if @doc.codepens[0]: %>
+  <% if @doc.tutorial: %>
   <h3 id="example">
     <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
     <a href="#example" class="reference-loop-anchor">#</a>
   </h3>
 
-  <% if @doc.codepens[0].isWide: %>
-  <div style="height: 480px; width: 100%;" class="codepen-wrapper">
-  <% else: %>
-  <div style="height: 480px; width: 320px;" class="codepen-wrapper">
-  <% end %>
-    <p data-height="480" data-theme-id="11531" data-slug-hash="<%= @doc.codepens[0].id %>" data-default-tab="result" data-user="onsen" class='codepen'>See the Pen <a href='http://codepen.io/onsen/pen/<%= @doc.codepens[0].id %>/'>Alert, confirm and prompt dialogs</a> by Onsen & Monaca (<a href='http://codepen.io/onsen'>@onsen</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-    <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-  </div>
-
-  <div class="codepen-open-link-wrapper"><a href="http://codepen.io/onsen/full/<%= @doc.codepens[0].id %>/" target="_blank"><i class="fa fa-external-link"></i>Open in New Window</a></div>
+  <iframe width="350" height="450" src="<%- @getTutorialUrl "embed", @doc.tutorial %>"></iframe>
   <% end %>
 
 
