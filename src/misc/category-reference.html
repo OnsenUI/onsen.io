@@ -18,7 +18,7 @@ h1: Specified in v2-react-docs.js
   <% if @categoryFile.tutorial: %>
     <h3>Tutorial</h3>
     <p><a href="<%- @getTutorialUrl "index", @categoryFile.tutorial %>" target="_blank">Open in a new window</a></p>
-    <iframe width="320" height="568" src="<%- @getTutorialUrl "embed", @categoryFile.tutorial %>"></iframe>
+    <iframe class="tutorial-embed" width="320" height="568" src="<%- @getTutorialUrl "embed", @categoryFile.tutorial %>"></iframe>
   <% end %>
 
   <h3>Related Components</h3>
