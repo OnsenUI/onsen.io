@@ -73,6 +73,7 @@ module.exports = function(lang, isStaging) {
         .use(assets({source: './src/files'}))
         .use(assets({source: './dist/v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
         .use(assets({source: './dist/v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
+        .use(assets({source: './dist/tutorial', destination: 'tutorial'}))
         .use(require('./css-transform')(lang))
         .use(branch('*.html').use(currentPath()))
         .use(function(files, metalsmith, done) {
