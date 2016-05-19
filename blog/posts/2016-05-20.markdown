@@ -2,19 +2,101 @@
 author: patrick
 date: 2016-05-20
 id: onsen-ui-environment-news
-title: "Getting Started with React Components for Onsen UI using Cordova"
+title: "Building Cordova apps with d with React Components for Onsen UI"
 category: tutorial
 tags: onsen ui, monaca cli, interactive tutorial
 ---
 
 <!-- ![onsen_env](/blog/content/images/2016/May/onsenui_env.PNG) " -->
 
-The new [React Components for Onsen UI](https://onsen.io/v2/react.html) in combination with the [Monaca CLI](https://monaca.io/debugger.html) make it easy to build React hybrid apps with Cordova.
-In this tutorial we will guide you through the entire process from setting up the environment to running the apps on your phone.
+<!--
+ -  INTRO: Add a basic description of Onsen UI and Monaca (for people who are visiting the site for the 1st time and don't know anything about it)
+   - If you use TODO app > simplify it or describe some sections in detail, displaying the simplicity of development
+
+TARGET AUDIENCE:
+- Cordova users who are not familiar with React
+- New coders looking for simple tools
+
+Add screenshots (explanatory images)
+
+Take care of keywords (SEO), but I can help you with edits at the end
+-->
+
+With Cordova it is easy to build functional hybrid apps for all the major mobile platforms, including Android, iOS and Windows phone. Making the apps look good, is a much harder tasks. With the help of the  [Monaca CLI](https://monaca.io/debugger.html) and [React Components for Onsen UI](https://onsen.io/v2/react.html) this now gets much easier. In this blog post we are going to look at some aspects of why it might be a good idea to use these technologies.
+
 <!-- more -->
 
 
-### Getting started
+### What is React?
+
+React is a library that help developers to structure and manage their Javascript applications in a structured way. It is also highly performant. An React applications consists of components that render into html. Lets look at a small example:
+
+```
+var Example = React.createClass({
+  render: function() {
+    return (
+       <div> Our first react example</div>
+    );;
+  }
+});
+
+ReactDOM.render(<Example />, document.getElementById('content'));
+
+```
+
+All this code does is to look at our `html` file and put the html `<div> Our first react example </div>` in the element with the id `content`.  The syntax might look a little bit strange at first, but the so called JSX enables us to describe html elements in javascript with a more readable syntax.
+
+React Components have two important thing: Properties and States. Let us look at properties first. A property enables us to make the conent of a component configurable. For example we could make the content dynamic:
+
+
+```
+var Example = React.createClass({
+  render: function() {
+    return (
+       <div> {this.props.text} </div>
+    );;
+  }
+});
+
+ReactDOM.render(
+  <div>
+    <Example text='first'/>
+    <Example text='secont'/>
+  </div>,
+  document.getElementById('content')
+);
+
+```
+This will produce a simple html with two divs one containing 'first' and the other containt 'second'. These is nice for capsulating code, but the power of react relies in the state Managment. A state of an component is some information that could change over time. Imagine a simple counter component that contains text and a button. The text contains initially 0 and every time the button is pressed the counter is increased. In react, this is quite simple to do:
+
+```
+var Counter = React.createClass({
+  getInitialState: function() {
+    return {counter : 0};
+  },
+  increaseCounter: function() {
+    this.setState({
+      counter: this.state.counter + 1
+    });
+  }
+  render: function() {
+    return (
+    <div>
+      <div> {this.state.counter} </div>
+      <button onClick={this.increaseCounter}> Add </button>
+    </div>
+  }
+})
+```
+
+A small demonstration can be found here. One might thing it actually would be slow, that every time we change the state of an application to re render. However, the nice thing about react is that it can determine what it needs to rerender and what not. React does so by a simple level by level diff algorithm.
+
+### What is Onsen UI
+React is pretty great and fast and helps to organize the application, but it does not provide any UI components. That is where Onsen UI comes in. We have created many components that look good naturally like Navigation, Tabbar, Splitter (Sliding Menu) and tons of other componets.
+
+If you want to see what is possible check out the todo app!
+
+### Monaca
 
 To get started we first need to install the [Monaca CLI](https://monaca.io/debugger.html), which will be used to create/build and preview the project.
 
@@ -35,5 +117,6 @@ $ monaca preview
 
 
 ### Conclusion
+k
 
-We are decided to improve Onsen UI environment and focus on the whole development stack. Monaca IDE, Visual Studio and Localkit users were already enjoying these tools and services and now with the improved Monaca CLI every Onsen UI developer will also have this possibility. If you are as excited as us about the incoming Onsen UI 2.0, you can [join our community](https://community.onsen.io/), star us on [Github](https://github.com/OnsenUI/OnsenUI) and spread the word on [Twitter](https://twitter.com/Onsen_UI). Happy coding!
+### Further resources
