@@ -29,7 +29,7 @@ With Cordova it is easy to build functional hybrid apps for all the major mobile
 
 ### What is React?
 
-React is a library that help developers to structure and manage their Javascript applications in a structured way. It is also highly performant. An React applications consists of components that render into html. Lets look at a small example:
+React is a library that help developers to structure and manage their Javascript applications. It is also highly performant. A React applications consists of components that have a so called render functions. Lets look at a small example:
 
 ```
 var Example = React.createClass({
@@ -44,9 +44,9 @@ ReactDOM.render(<Example />, document.getElementById('content'));
 
 ```
 
-All this code does is to look at our `html` file and put the html `<div> Our first react example </div>` in the element with the id `content`.  The syntax might look a little bit strange at first, but the so called JSX enables us to describe html elements in javascript with a more readable syntax.
+All this code does is to look at our `html` file and put the html `<div> Our first react example </div>` in the element with the id `content`. The syntax is called JSX and is an extension of Javascript that enables us to create React components and html elements in a more readable way.
 
-React Components have two important thing: Properties and States. Let us look at properties first. A property enables us to make the conent of a component configurable. For example we could make the content dynamic:
+What makes React Components very unique is that they have so called `properties` and `states`. Let us look at properties first. A property enables us to make the rendering of a component configurable. For example,  we could make the text dependent on a property:
 
 
 ```
@@ -67,34 +67,153 @@ ReactDOM.render(
 );
 
 ```
-This will produce a simple html with two divs one containing 'first' and the other containt 'second'. These is nice for capsulating code, but the power of react relies in the state Managment. A state of an component is some information that could change over time. Imagine a simple counter component that contains text and a button. The text contains initially 0 and every time the button is pressed the counter is increased. In react, this is quite simple to do:
+This will produce a simple html with two divs one containing 'first' and the other containt 'second'. These is nice for capsulating code, but the power of React relies in the state Managment. A state of an component is some information that could change over time. Imagine a simple counter component that contains text and a button. The text contains initially 0 and every time the button is pressed the counter is increased. The code is quite simple:
 
 ```
 var Counter = React.createClass({
   getInitialState: function() {
-    return {counter : 0};
+    return {counter: 0};
   },
   increaseCounter: function() {
     this.setState({
       counter: this.state.counter + 1
     });
-  }
+  },
   render: function() {
     return (
-    <div>
-      <div> {this.state.counter} </div>
-      <button onClick={this.increaseCounter}> Add </button>
-    </div>
+      <div>
+        <div> {this.state.counter} </div>
+        <button onClick={this.increaseCounter}> Add </button>
+      </div>
+    );
   }
-})
+});
 ```
 
-A small demonstration can be found here. One might thing it actually would be slow, that every time we change the state of an application to re render. However, the nice thing about react is that it can determine what it needs to rerender and what not. React does so by a simple level by level diff algorithm.
+Here is what the example looks like:
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://philolo1.github.io/react-simple-counter/composition.html"></iframe>
+
+Every time the state changes, React rerenders. This might sound like a slow process, but actually it is quite fast, since react uses the concepts of [Virtual DOM](https://facebook.github.io/react/docs/glossary.html). With this concept react is able to determine what changes have been made to the dom and rerender only what is necessary.
 
 ### What is Onsen UI
-React is pretty great and fast and helps to organize the application, but it does not provide any UI components. That is where Onsen UI comes in. We have created many components that look good naturally like Navigation, Tabbar, Splitter (Sliding Menu) and tons of other componets.
+React is pretty great and fast and helps to organize the application, but it does not provide any UI components. That is where Onsen UI comes in. We have created many components that with a mobile feel like Navigation, Tabbar, Splitter (Sliding Menu) and tons of other componets. These components integrate flawlessly with React.
 
-If you want to see what is possible check out the todo app!
+Lets look at a simple login Page:
+
+
+
+For example to create a simple login Page:
+
+```
+<style>
+  #login ons-input {
+    margin-top: 10px;
+    width: 100%;
+  }
+  #login ons-input[modifier~=material] {
+    margin-top: 17px;
+  }
+  #login ons-button {
+    margin-top: 7px;
+  }
+  #login .page__content {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto 0;
+  }
+</style>
+```
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import {
+  Page,
+  Button,
+  Toolbar,
+  Icon,
+  Input,
+  ToolbarButton,
+  Row
+} from 'react-onsenui';
+
+// load Onsen UI library
+import ons from 'onsenui';
+
+var LoginPage = React.createClass({
+  getInitialState: function() {
+    return {
+      email: '',
+      password: ''
+    };
+  },
+
+  signIn: function() {
+    ons.notification.alert({
+      message: `You entered '${this.state.email}' & '${this.state.password}' `
+    });
+  },
+
+  forgotPassword: function() {
+    ons.notification.prompt({
+      message: 'What is your email?',
+      callback: function(email) {
+        ons.notification.alert({
+          message: 'The new password will be send to ' + email
+        });
+      }
+    });
+  },
+
+  emailChange: function(event) {
+    this.setState({
+      email: event.target.value
+    });
+  },
+
+  passwordChange: function(event) {
+    this.setState({
+      password: event.target.value
+    });
+  },
+
+  render: function() {
+    return (
+       <div class="tile">
+         <Page id="login"
+           renderToolbar={() =>
+             <Toolbar>
+               <div className="center">Login</div>
+               <div className="right">
+                 <ToolbarButton onClick={this.signIn}>
+                   <Icon icon={{default: 'ion-log-in', material: 'md-sign-in'}} />
+                 </ToolbarButton>
+               </div>
+             </Toolbar>
+             }>
+
+           <Input value={this.state.email} onChange={this.emailChange} placeholder="Email" type="text" modifier="underbar" float />
+           <Input value={this.state.password} onChange={this.passwordChange} placeholder="Password" type="password" modifier="underbar" float />
+           <Button onClick={this.signIn} modifier="large">Sign In</Button>
+           <Button onClick={this.forgotPassword} modifier="quiet">Forgot password?</Button>
+          </Page>
+        </div>
+    );
+  }
+});
+
+ReactDOM.render(<LoginPage />, document.getElementById('app'));
+```
+
+The result will look like this
+
+<iframe src="http://philolo1.github.io/OnsenUI-React-Login-Sample-Screen/www/index.html' >
+</iframe>
+
+
+// Mention todo app?
+
 
 ### Monaca
 
@@ -116,7 +235,16 @@ $ monaca preview
 ```
 
 
+// refrence to tutorial???
+
 ### Conclusion
-k
+
+React is a great framework and worth to know it. With Onsen UI and Monaca one can build a great framework. Give it a try and tell us about what you feel. We have a great community and
+
 
 ### Further resources
+
+link to react
+link to community
+
+
