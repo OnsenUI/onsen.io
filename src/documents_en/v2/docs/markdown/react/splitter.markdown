@@ -2,6 +2,7 @@
 title: Splitter
 framework: react
 component: react/Splitter
+tutorial: react/Reference/splitter
 ---
 
 ## Splitter

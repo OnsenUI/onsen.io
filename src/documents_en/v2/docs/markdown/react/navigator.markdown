@@ -2,6 +2,7 @@
 title: Navigator
 component: react/Navigator
 framework: react
+tutorial: react/Reference/navigator
 ---
 
 ## Navigator

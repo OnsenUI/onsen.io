@@ -2,6 +2,7 @@
 title: Tabbar
 framework: react
 component: react/Tabbar
+tutorial: react/Reference/tabbar
 ---
 
 ## Tabbar
