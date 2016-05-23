@@ -2,6 +2,7 @@
 title: Ripple
 component: react/Ripple
 framework: react
+tutorial: react/Reference/ripple
 ---
 
 ## Ripple

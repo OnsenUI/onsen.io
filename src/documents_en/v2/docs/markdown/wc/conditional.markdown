@@ -2,6 +2,7 @@
 title: Conditional
 component: js/ons-if,angular1/ons-if
 framework: js,angular1
+tutorial: vanilla/Reference/if
 ---
 
 ## Conditional (ons-if)

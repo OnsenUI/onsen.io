@@ -2,6 +2,7 @@
 title: Pull Hook
 component: react/PullHook
 framework: react
+tutorial: react/Reference/pull-hook
 ---
 
 ## Pull hook

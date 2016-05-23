@@ -2,6 +2,7 @@
 title: Lazy List (or Infinite Scrolling)
 component: react/LazyList
 framework: react
+tutorial: react/Reference/lazy-list 
 ---
 
 ## Lazy list
