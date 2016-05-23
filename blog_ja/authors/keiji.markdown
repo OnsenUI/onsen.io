@@ -1,5 +1,4 @@
 ---
 id: keiji
-name: “Keiji Odagawa”
-gravatar: 
+name: "Keiji Odagawa"
 ---
