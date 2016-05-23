@@ -102,33 +102,16 @@ The fact that React rerenders every time the state changes, might sound like a s
 To learn more about React, we recommend to have a look at the [website] (https://facebook.github.io/react/).
 
 ### What is Onsen UI?
-React is pretty great and fast and helps to organize the application, but it does not provide any UI components. That is where Onsen UI comes in. We have created many components that with a mobile feel like Navigation, Tabbar, Splitter (Sliding Menu) and tons of other componets. These components integrate flawlessly with React.
+React is pretty great library to write structured and efficient code, but it does not provide any UI components. That is where Onsen UI comes in. We have created many components with a mobile feel like Navigation, Tabbar, Splitter (Sliding Menu) and tons of other componets. These components style [automatically depending on the platform](https://onsen.io/blog/auto-style-app-onsen/).  These components integrate flawlessly with React.
 
-Lets look at a simple login Page:
+We will build a simple login app, that will look like this:
 
 
+<div style="display: flex; justify-content: center;">
+<iframe src="https://philolo1.github.io/frame-auto-style/?platform=ios&src=https://philolo1.github.io/OnsenUI-React-Login-Sample-Screen/www/index.html" scrolling="no" style="border: 0; width: 400px; height: 800px;"></iframe>
+</div>
 
-For example to create a simple login Page:
-
-```
-<style>
-  #login ons-input {
-    margin-top: 10px;
-    width: 100%;
-  }
-  #login ons-input[modifier~=material] {
-    margin-top: 17px;
-  }
-  #login ons-button {
-    margin-top: 7px;
-  }
-  #login .page__content {
-    text-align: center;
-    width: 90%;
-    margin: 0 auto 0;
-  }
-</style>
-```
+Lets first look at the Javascript/React code first:
 
 ```
 import React from 'react';
@@ -184,6 +167,13 @@ var LoginPage = React.createClass({
   },
 
   render: function() {
+    let toolbarButton;
+
+    if (!ons.platform.isAndroid()) {
+      toolbarButton = <ToolbarButton onClick={this.signIn}>
+        <Icon icon={{default: 'ion-log-in'}} />
+      </ToolbarButton>;
+    }
     return (
        <div class="tile">
          <Page id="login"
@@ -191,17 +181,20 @@ var LoginPage = React.createClass({
              <Toolbar>
                <div className="center">Login</div>
                <div className="right">
-                 <ToolbarButton onClick={this.signIn}>
-                   <Icon icon={{default: 'ion-log-in', material: 'md-sign-in'}} />
-                 </ToolbarButton>
+                 {toolbarButton}
                </div>
              </Toolbar>
              }>
 
+             <img id='logo' src='img/logo_react.png' />
+             <div id='logoTitle'>
+               <img src='img/logo_title.png' />
+             </div>
+
            <Input value={this.state.email} onChange={this.emailChange} placeholder="Email" type="text" modifier="underbar" float />
            <Input value={this.state.password} onChange={this.passwordChange} placeholder="Password" type="password" modifier="underbar" float />
-           <Button onClick={this.signIn} modifier="large">Sign In</Button>
-           <Button onClick={this.forgotPassword} modifier="quiet">Forgot password?</Button>
+           <Button id='signIn' onClick={this.signIn} modifier="large">Sign In</Button>
+           <Button id='forgetBtn'  onClick={this.forgotPassword} modifier="quiet">FORGOT PASSWORD?</Button>
           </Page>
         </div>
     );
@@ -211,45 +204,88 @@ var LoginPage = React.createClass({
 ReactDOM.render(<LoginPage />, document.getElementById('app'));
 ```
 
-The result will look like this
+The page contains two input fields, one for the email and one for the password. In the internal state the password and email is saved. Furthermore, there is a login button. When the login button is clicked, the onClick property is called, which is bound to the classes signIn function. We use [ons.notification](https://onsen.io/v2/docs/js/ons.notification.html) to show a simple information dialog after showing the page.
 
-<iframe src="http://philolo1.github.io/OnsenUI-React-Login-Sample-Screen/www/index.html' >
-</iframe>
+To make the app look good, we add some CSS:
 
+```css
+<style>
+    .text-input--material__label {
+      color: #05c1e3;
+    }
+       .navigation-bar--material {
+      background:  #05c1e3;
+    }
 
+    .navigation-bar--material  {
+      color: '#05c1e3';
+    }
+
+    #logoTitle {
+      margin-bottom: 20px;
+    }
+
+    #login ons-icon {
+      color: #05c1e3;
+    }
+
+    #logo {
+      margin-top: 28px;
+    }
+    #login ons-input {
+      height: 42px;
+      width: 100%;
+    }
+
+    #signIn {
+      margin-top: 20px;
+      background: #05c1e3;
+    }
+
+    #forgetBtn {
+      color: #05c1e3;
+      margin-top: 28px;
+      font-size: 14px;
+      line-height: 12px;
+    }
+    #login .page__content {
+      text-align: center;
+      width: 80%;
+      margin: 0 auto 0;
+    }
+    .text-input--material:focus {
+      background-image: -webkit-linear-gradient(#05c1e3, #05c1e3), -webkit-linear-gradient(bottom, transparent 1px, #afafaf 1px);
+    }
+
+</style>
+```
+
+And this is it. The app is ready and now only needs to be build build and published.
 // Mention todo app?
 
+### What is Monaca?
 
-### Monaca
+To help speeding up the bulid and publish process, the [Monaca CLI](https://monaca.io/debugger.html) can be used.  Monaca is a toolset that whole hybrid app development progress from setting up the the project to deploting the app on the phone.
 
-To get started we first need to install the [Monaca CLI](https://monaca.io/debugger.html), which will be used to create/build and preview the project.
+To get started we first need to install the [Monaca CLI](https://monaca.io/debugger.html), which will be used to create/build and preview the corva project.
 
 ```
 $ npm install -g monaca
 ```
 
-Now we will  create a simple sample app by typing `monaca create sample` and choose react and the navigation example.
+Now we will create a simple sample app by typing `monaca create sample` and choose react and the navigation example.
 
 ![cli steps](/blog/content/images/2016/May/cli_create.png)
 
-To run the project you need to simply run:
+To run the project in the end we can simply run the following commands:
 
 ```
 $ cd sample;
 $ monaca preview
 ```
 
-
-// refrence to tutorial???
+In additon to the monaca provides many other services and tools like a fully functional cloud IDE. Check out [the website](https://monaca.io).
 
 ### Conclusion
 
-React is a great framework and worth to know it. With Onsen UI and Monaca one can build a great framework. Give it a try and tell us about what you feel. We have a great community and
-
-
-### Further resources
-
-link to react
-link to community
-
-
+React is a great framework for building fast and structured Javascript applications. The usage of Onsen UI and Monaca can improve the experience of Cordova development. Give it a try and tell us about what you you thingk. We have a great [community](https://community.onsen.io/), that is eager to help you with all the questions you might have. Its also worth to check out our open source repo for [Onsen UI](https://github.com/OnsenUI/OnsenUI) and the [React Components](https://github.com/OnsenUI/react-onsenui).
