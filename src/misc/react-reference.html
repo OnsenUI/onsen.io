@@ -47,6 +47,15 @@ actionbar: false
     <% end %>
   <% end %>
 
+  <% if @doc.tutorial: %>
+  <h3 id="example">
+    <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <iframe class="tutorial-embed" width="320" height="568" src="<%- @getTutorialUrl "embed", @doc.tutorial %>"></iframe>
+  <% end %>
+
   <% if @doc.note: %>
   <section class="reference-note">
     <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%- @markd @translate @doc.note %></p>
