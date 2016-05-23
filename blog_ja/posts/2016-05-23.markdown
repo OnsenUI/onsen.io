@@ -23,9 +23,9 @@ Cordovaプラグインを組み込んだ場合は、JavaScriptからネイティ
 | 3   | deviceready | JavaScriptからネイティブ機能へアクセスが可能になった時に発生します。 |
 | 4   | ons.ready | Onsen UIコンポーネントの読み込みが完了し、devicereadyイベントの後に発生します。 |
 
-Monacaで開発するアプリでCordivaプラグインやOnsen UIを使用する場合は、このように発生するイベントの順番を意識する必要があります。
+Monacaで開発するアプリでCordovaプラグインやOnsen UIを使用する場合は、このように発生するイベントの順番を意識する必要があります。
 
-イベントの発生順序は、次のHTML内の\<script\>タグで確認できます。
+イベントの発生順序は、次のHTML内の`<script>`タグで確認できます。
 注意点として、MonacaクラウドIDEのプレビューでは、実機での発生順序とは異なった動きになります。
 テストをする場合は、実機をお使いください。
 
@@ -48,7 +48,7 @@ Monacaで開発するアプリでCordivaプラグインやOnsen UIを使用す�
     // Onsen UIを使用している場合
     ons.bootstrap();
     ons.ready(function() {
-        alert(‘Onsen UI ready’);
+        alert('Onsen UI ready');
     });
 
 </script>
