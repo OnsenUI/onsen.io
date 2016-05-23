@@ -2,6 +2,7 @@
 title: Progress
 component: react/ProgressBar
 framework: react
+tutorial: react/Reference/progress
 ---
 
 ### Progress

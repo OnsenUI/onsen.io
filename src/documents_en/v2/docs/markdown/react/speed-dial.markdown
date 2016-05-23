@@ -2,6 +2,7 @@
 title: Speed Dial
 component: react/SpeedDial
 framework: react
+tutorial: react/Reference/speed-dial
 ---
 
 ## Speed dial

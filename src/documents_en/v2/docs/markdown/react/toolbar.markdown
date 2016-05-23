@@ -2,6 +2,7 @@
 title: Toolbar
 component: react/Toolbar
 framework: react
+tutorial: react/Reference/toolbar
 ---
 
 ### Toolbar

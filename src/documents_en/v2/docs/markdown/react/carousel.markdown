@@ -2,6 +2,7 @@
 title: Carousel
 component: react/Carousel
 framework: react
+tutorial: react/Reference/carousel
 ---
 
 ## Carousel

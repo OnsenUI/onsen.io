@@ -2,6 +2,7 @@
 title: Page
 component: react/Page
 framework: react
+tutorial: react/Reference/page
 ---
 
 ## Page

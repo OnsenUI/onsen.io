@@ -2,6 +2,7 @@
 title: Input
 framework: react
 component: react/Input
+tutorial: react/Reference/input
 ---
 
 ### Input
