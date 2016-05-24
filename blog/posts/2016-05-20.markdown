@@ -192,6 +192,8 @@ ReactDOM.render(<LoginPage />, document.getElementById('app'));
 
 The page contains two input fields: one for the email and one for the password. The internal state consists of the password and email. Furthermore, there is a login button. When the login button is clicked, the onClick property is called, which is bound to the classes to the *signIn* function. We use [ons.notification](https://onsen.io/v2/docs/js/ons.notification.html) to show a simple information dialog after showing the page.  To make the app look good, we also added some CSS, all the code of the app can be found in our [repository] (https://github.com/philolo1/OnsenUI-React-Login-Sample-Screen).
 
+To learn more we highly recommend our [tutorials](http://tutorial.onsen.io/?framework=react&category=Getting%20started&module=Using%20the%20components).
+
 ### What is Monaca?
 
 Monaca is a toolset that whole hybrid app development progress from setting up the the project to deploting the app on the phone.
