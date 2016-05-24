@@ -1,0 +1,50 @@
+---
+author: una
+date: 2016-05-24
+id: diro-ditalia-2016-official-app
+title: "giro-d'italia-2016-app"
+category: showcase
+tags: onsen ui, giro d'italia, showcase, app,  
+---
+
+![Giro D'Italia official Mobile App](/blog/content/images/2016/May/app_giro.jpg)
+
+[Giro D'Italia](http://www.giroditalia.it/eng/), one of the world's biggest bicycle races, is in full swing! While cyclists are restlessly hoping for the big win on May 29th, our team celebrates a win on our own; We were very honored to learn that the makers of the official Giro D'Italia app chose Onsen UI for creating the marvelous official Giro D'Italia app.
+
+<!-- more -->
+
+![Giro D'Italia Tour](/blog/content/images/2016/May/Giro-dItalia-2016.jpg)
+
+We decided to improve Onsen UI's development environment and community tools and few months ago we released [Onsen UI x Monaca Community Forum](https://community.onsen.io/). This forum has so far gathered, together with the already existing [Gitter Chat](https://gitter.im/OnsenUI/OnsenUI), a bunch of developers who can quickly solve their issues. We invite you to join if you haven't yet.
+
+### Interactive Tutorial
+
+Now we want to introduce a new tool that you'll hopefully love: [Onsen UI Interactive Tutorial](http://tutorial.onsen.io/).
+
+![tutorial](/blog/content/images/2016/May/tutorial_capture.PNG)
+
+It's self-explanatory. You have access to a -increasing- number of Onsen UI samples with a proper explanation about how it works, HTML & JS code and a preview that supports both iOS and Android views. We want to collect here all our examples in order to have an updated index where our users can easily learn and bootstrap their apps. These tutorials are separated depending on the framework they are developed with (for now Angular1, Angular2, React and Vanilla JS - no framework). Thus, you can choose the framework your prefer and learn how to integrate Onsen UI with it.
+
+Also, you can modify and test these samples within this app to later export and save them in Codepen or even generate a Cordova project from them.
+
+In case you find any error or you want to submit your own tuts, please open issues or send PRs to the [interactive tutorial repo](https://github.com/OnsenUI/tutorial). We will be updating this tool and adding more tutorials in the upcoming weeks.
+
+
+### $> Onsen CLI ?
+
+Almost. As you may already know, Onsen UI is part of the [Monaca Toolkit](https://monaca.io/), a set of tools that provides a seamless hybrid mobile app development including user interface, debugger, remote build, back-end and more. In this section we'd like to focus on one of those tools: **Monaca CLI**.
+
+Monaca CLI has been drastically improved and released under version 2.0 to accompany our beloved Onsen UI 2.0. This tool may well be called Onsen CLI since its tightly integrated with it, allowing you to generate apps much faster starting from prepared templates. Some of the new features include signing up from the CLI itself and creating Cordova projects directly with Angular1, Angular2 (coming soon) or React frameworks:
+
+![cli](/blog/content/images/2016/May/cli_capture.PNG)
+
+Monaca CLI will automatically add the required libraries and external tools for your project to run. For example, if you choose a React template, you'll get Babel and the necessary tools for transpiling and bundling the code. It will watch for your files and auto generate the bundle so you can easily preview your app in browser, emulator and devices.
+
+Moreover, since we believe [**Monaca Debugger**](https://monaca.io/debugger.html) is a very useful tool for all Onsen UI developers, we made it now fully accessible from Monaca CLI. Yes, even **for free** licenses. Just run `monaca debug` and you'll get your code transpiled + bundled (if necessary) and synchronized with all your connected devices through Monaca Debugger.
+
+After you are done with the debugger, just run `monaca remote build` to get your app built in the cloud for you. Check our [getting started](https://onsen.io/getting-started.html) page for more information and alternatives.
+
+
+### Conclusion
+
+We are decided to improve Onsen UI environment and focus on the whole development stack. Monaca IDE, Visual Studio and Localkit users were already enjoying these tools and services and now with the improved Monaca CLI every Onsen UI developer will also have this possibility. If you are as excited as us about the incoming Onsen UI 2.0, you can [join our community](https://community.onsen.io/), star us on [Github](https://github.com/OnsenUI/OnsenUI) and spread the word on [Twitter](https://twitter.com/Onsen_UI). Happy coding!
