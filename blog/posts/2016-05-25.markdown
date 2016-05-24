@@ -170,12 +170,12 @@ var LoginPage = React.createClass({
                  {toolbarButton}
                </div>
              </Toolbar>
-             }>
+           }>
 
-             <img id='logo' src='img/logo_react.png' />
-             <div id='logoTitle'>
-               <img src='img/logo_title.png' />
-             </div>
+           <img id='logo' src='img/logo_react.png' />
+           <div id='logoTitle'>
+             <img src='img/logo_title.png' />
+           </div>
 
            <Input value={this.state.email} onChange={this.emailChange} placeholder="Email" type="text" modifier="underbar" float />
            <Input value={this.state.password} onChange={this.passwordChange} placeholder="Password" type="password" modifier="underbar" float />
@@ -211,7 +211,7 @@ Now we will create a simple sample app by typing `monaca create sample` and choo
 To run the project in the end we can simply run the following commands:
 
 ```
-$ cd sample;
+$ cd sample
 $ monaca preview
 ```
 
