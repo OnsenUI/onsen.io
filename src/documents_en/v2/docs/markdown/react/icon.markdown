@@ -2,6 +2,7 @@
 title: Icon
 framework: react
 component: react/Icon
+tutorial: react/Reference/icon
 ---
 
 ### Icon

@@ -1,221 +1,46 @@
 ---
-author: patrick
+author: una
 date: 2016-05-25
-id: onsen-ui-cordova-react
-title: "Building Cordova apps with with React Components for Onsen UI"
-category: tutorial
-tags: onsen ui, monaca cli, interactive tutorial, react, autostyling
+id: "giro-ditalia-2016-official-app-most-downloaded-app-in-the-app-stores-created-with-onsen-ui"
+title: "Giro d'Italia 2016 Official App - Most Downloaded App in the App Stores Created with Onsen UI"
+category: showcase
+tags: onsen ui, giro d'italia, showcase, app, cycling
 ---
 
-![Onsen UI environment](/blog/content/images/2016/May/cordova_picture.png)
+![Giro D'Italia official Mobile App](/blog/content/images/2016/May/app_giro.jpg)
 
-With [Cordova](https://cordova.apache.org/) it is easy to build functional hybrid apps for all the major mobile platforms, including Android, iOS and Windows Phone. However, making the apps look good is a much harder task. Luckily, with the help of the [Monaca CLI](https://monaca.io/debugger.html) and [React Components for Onsen UI](https://onsen.io/v2/react.html) this became much easier. In this blog post we are going to look at some benefits of using these technologies.
+[Giro D'Italia](http://www.giroditalia.it/eng/), one of the world's biggest bicycle races, is in full swing! While cyclists are restlessly hoping for the big win on May 29th, our team celebrates a win on our own: We were very honored to learn that the makers of the official Giro D'Italia app chose [Onsen UI](https://onsen.io) for creating this marvelous project.
 
 <!-- more -->
 
-### What is React?
+### Giro D'Italia - one of the most prestigious Cycling Contests in the World
 
-React is a library that help developers to structure and manage their JavaScript applications. A React application consists of classes called *components*.  Every component needs to implement a *render* function. Here is a small example of how this might look like:
+![Giro D'Italia Tour](/blog/content/images/2016/May/Giro-dItalia-2016.jpg)
 
-```jsx
-var Example = React.createClass({
-  render: function() {
-    return (
-       <div>Our first React example</div>
-    );
-  }
-});
+Along with the Tour de France and Vuelta a España, the Giro makes up one of the cycling's prestigious three-week-long Grand Tours. Giro d'Italia's tour changes each year, but each race consists of least two time trials, and a passage through the mountains of the Alps, including the Dolomites. Cyclists' durance is put to test throughout a 23-day period that includes 2 rest days.
 
-ReactDOM.render(<Example />, document.getElementById('content'));
-```
+### Onsen UI behind the official Giro d'Italia app's beautiful interface
 
-What this code does is that is searches for the element with the id `content` in our html DOM tree and renders the React component inside it. In our example the component will render to `<div> Our first react example </div>`. React uses a special syntax, called [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html). JSX is basically an extension of JavaScript that enables us to create React components and HTML elements in a more readable way.
+![Giro D'Italia official Mobile App](/blog/content/images/2016/May/app_giro.jpg)
 
-Every React component has so called *properties* (props) and *states*. Let us look at properties first. A property enables us to make the rendering of a component configurable. For example, we could make the text content of a component dependent on a property:
+Logicweb, the Italian software company behind the Giro d'Italia app commissioned by Havas Sports&Entertainment, shared their success story with us, after choosing [Onsen UI](https://onsen.io) as their preferred tool. Since they were already experienced with Cordova, they researched [Onsen UI](https://onsen.io), [Ionic](http://ionicframework.com/) and [Framework 7](http://framework7.io/), looking for a light, yet complete framework. As they wanted to integrate some previously created (mainly jQuery) components from the Giro D'Italia website easily, [Onsen UI](https://onsen.io) was their first and only choice.
 
-```jsx
-var Example = React.createClass({
-  render: function() {
-    return (
-       <div>{this.props.text}</div>
-    );
-  }
-});
+[Onsen UI](https://onsen.io)'s Sliding Menu, along with the Navigator concept brought the perfect solution they were looking for, and the work was easily distributed among the team members.
 
-ReactDOM.render(
-  <div>
-    <Example text='first' />
-    <Example text='secont' />
-  </div>,
-  document.getElementById('content')
-);
+### Technology behind the most downloaded app in the App Stores
 
-```
-With this code, a `div` with two internal `div`s will be rendered into the DOM. The first `div` will contain the text "first" while the other `div` will contain the text "second". These properties make it easy to reuse components and save a lot of code.
+In the past, Logicweb used Framework 7 and a proprietary framework for what concerns Cordova app development. For the Giro d’Italia app, they have used Angular 1.5.3, jQuery 2.2.2, and [Signals](https://github.com/photonstorm/typescript-signals) for the events management.
+All their projects are made with Typescript and for the Android version of their apps, they use Crosswalk.
 
-What makes React so powerful is the called `state`. One can think of the state as a class variable that influences the rendering: Every time the state changes, the component is rerendered.
+![Giro D'Italia official Mobile App](/blog/content/images/2016/May/Giro_2016.jpg)
 
-Lets have a look at an example. Imagine we want to build a simple counter component. This component should consist of a text and a button. The state of the application is the counter number. Initially it is 0 and every time the button is pressed, it is increased by one. Each time the button is pressed, the counter is increased. The counter number will be displayed as the text. The corresponding code is quite simple:
 
-```jsx
-var Counter = React.createClass({
-  getInitialState: function() {
-    return {counter: 0};
-  },
-  increaseCounter: function() {
-    this.setState({
-      counter: this.state.counter + 1
-    });
-  },
-  render: function() {
-    return (
-      <div>
-        <div> {this.state.counter} </div>
-        <button onClick={this.increaseCounter}> Add </button>
-      </div>
-    );
-  }
-});
-```
+### Giro d'Italia race stats, news, interviews, and selfies
 
-Here is what the example looks like:
+As the race slowly approaches its peak this weekend, do not miss any of the excitement! The official Giro d'Italia app brings mind blowing Dolomites scenery and great racing straight to your smartphone! It covers the latest breaking news, team details, and information about all champions. The Logicweb team added a new "LIVE" section that keeps cycling fans up-to-date with every stage, race results, standings, interviews and highlights.
 
-<iframe width="320" height="60" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://philolo1.github.io/react-simple-counter/"></iframe>
+And it's not all about cycling. Giro d'Italia app lets you discover Italy and all other locations included in the Giro. The app is not limited to sports, as it helps you find the best places to wine&dine while providing all interesting historical information about places passed by the cyclists. Most eager app users can share their experience and create a monumental personalized selfie. There's still time to enjoy the race and become the Giro Face!
 
-The fact that React re-renders every time the state changes, might sound like a slow process, but actually it is quite fast. This is because React does not re-render everything, but only those elements whose properties have changed. React uses the concepts of so called [Virtual DOM](https://facebook.github.io/react/docs/glossary.html) and and an [advanced diff algorithm](http://calendar.perfplanet.com/2013/diff/) to determine which elements have changed and only renders those. With this concept, React is able to determine what changes have been made to the DOM and rerender only what is necessary.
-
-To learn more about React, we recommend to have a look at the [official website](https://facebook.github.io/react/).
-
-### What is Onsen UI?
-
-React is a pretty great library to write structured and efficient code, but it does not provide any UI components. This is where Onsen UI comes in. We have created many components with mobile feel like Navigation, Tabbar, Splitter (Side Menu) and tons of other componets. These components styles [are automatically dependant on the platform](https://onsen.io/blog/auto-style-app-onsen/). These components integrate flawlessly with React.
-
-With just a few hundred lines of code we can build a simple login sample app, that will look like this:
-
-<div style="display: flex; justify-content: center;">
-<iframe src="https://philolo1.github.io/frame-auto-style/?platform=ios&src=https://philolo1.github.io/OnsenUI-React-Login-Sample-Screen/www/index.html" scrolling="no" style="border: 0; width: 400px; height: 800px;"></iframe>
-</div>
-
-Here is the entire Javascript/React source code:
-
-```jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {
-  Page,
-  Button,
-  Toolbar,
-  Icon,
-  Input,
-  ToolbarButton,
-  Row
-} from 'react-onsenui';
-
-// load Onsen UI library
-import ons from 'onsenui';
-
-var LoginPage = React.createClass({
-  getInitialState: function() {
-    return {
-      email: '',
-      password: ''
-    };
-  },
-
-  signIn: function() {
-    ons.notification.alert({
-      message: `You entered '${this.state.email}' & '${this.state.password}' `
-    });
-  },
-
-  forgotPassword: function() {
-    ons.notification.prompt({
-      message: 'What is your email?',
-      callback: function(email) {
-        ons.notification.alert({
-          message: 'The new password will be send to ' + email
-        });
-      }
-    });
-  },
-
-  emailChange: function(event) {
-    this.setState({
-      email: event.target.value
-    });
-  },
-
-  passwordChange: function(event) {
-    this.setState({
-      password: event.target.value
-    });
-  },
-
-  render: function() {
-    let toolbarButton;
-
-    if (!ons.platform.isAndroid()) {
-      toolbarButton = <ToolbarButton onClick={this.signIn}>
-        <Icon icon={{default: 'ion-log-in'}} />
-      </ToolbarButton>;
-    }
-    return (
-       <div class="tile">
-         <Page id="login"
-           renderToolbar={() =>
-             <Toolbar>
-               <div className="center">Login</div>
-               <div className="right">
-                 {toolbarButton}
-               </div>
-             </Toolbar>
-           }>
-
-           <img id='logo' src='img/logo_react.png' />
-           <div id='logoTitle'>
-             <img src='img/logo_title.png' />
-           </div>
-
-           <Input value={this.state.email} onChange={this.emailChange} placeholder="Email" type="text" modifier="underbar" float />
-           <Input value={this.state.password} onChange={this.passwordChange} placeholder="Password" type="password" modifier="underbar" float />
-           <Button id='signIn' onClick={this.signIn} modifier="large">Sign In</Button>
-           <Button id='forgetBtn'  onClick={this.forgotPassword} modifier="quiet">FORGOT PASSWORD?</Button>
-          </Page>
-        </div>
-    );
-  }
-});
-
-ReactDOM.render(<LoginPage />, document.getElementById('app'));
-```
-
-The page contains two input fields: one for the email and one for the password. The internal state consists of the password and email. Furthermore, there is a login button. When the login button is clicked, the onClick property is called, which is bound to the classes with the *signIn* function. We use [ons.notification](https://onsen.io/v2/docs/js/ons.notification.html) to show a simple information dialog after showing the page. To make the app look good, we also added some CSS, and the full code of the app can be found in our [repository](https://github.com/philolo1/OnsenUI-React-Login-Sample-Screen).
-
-To learn more we highly recommend our [tutorials](http://tutorial.onsen.io/?framework=react&category=Getting%20started&module=Using%20the%20components).
-
-### What is Monaca?
-
-Monaca is a toolset that enables the entire hybrid app development progress from setting up the the project to deploying the app on the device.
-
-To get started we first need to install the [Monaca CLI](https://monaca.io/debugger.html), which will be used to create/build and preview the Cordova project.
-
-```
-$ npm install -g monaca
-```
-
-Now we will create a simple sample app by typing `monaca create sample` and choose React and the *Navigation example*.
-
-![cli steps](/blog/content/images/2016/May/cli_create.png)
-
-To run the project in the end we can simply run the following commands:
-
-```
-$ cd sample
-$ monaca preview
-```
-
-Monaca CLI has many more tools and options. To see all of them type `monaca --help`.  In additon to the command line interface, Monaca provides many other services and tools like a fully functional cloud based IDE. Check out [the website](https://monaca.io) for more info.
-
-### Conclusion
-
-React is a great framework for building fast and structured Javascript applications. The usage of Onsen UI and Monaca can improve the development experience of Cordova development. Give it a try and tell us what you think. We have a great [community](https://community.onsen.io/) that is eager to help you with all the questions you might have. Its also worth to check out our open source repo for [Onsen UI](https://github.com/OnsenUI/OnsenUI) and the [React Components](https://github.com/OnsenUI/react-onsenui).
+We're slowly approaching the end of the Giro d'Italia race, therefore, download your app immediately:
+[Giro d'Italia app in the Google Play Store](https://play.google.com/store/apps/details?id=com.gazetta.it.giro&hl=en)
+[Giro d'Italia app in the Apple App Store](https://itunes.apple.com/gb/app/giro-ditalia/id522688460?mt=8)

@@ -2,6 +2,7 @@
 title: Ripple
 component: js/ons-ripple,angular1/ons-ripple
 framework: js,angular1
+tutorial: vanilla/Reference/ripple
 ---
 
 ## Ripple Effect (ons-ripple)

@@ -2,6 +2,7 @@
 title: List
 component: react/List
 framework: react
+tutorial: react/Reference/list
 ---
 
 ## List

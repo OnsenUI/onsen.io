@@ -2,6 +2,7 @@
 title: Floating Action Button
 component: react/Fab
 framework: react
+tutorial: react/Reference/fab
 ---
 
 ## Floating action button

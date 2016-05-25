@@ -2,6 +2,7 @@
 title: Toolbar
 component: js/ons-toolbar,angular1/ons-toolbar
 framework: js,angular1
+tutorial: vanilla/Reference/button
 ---
 
 ### Toolbar component (ons-toolbar, ons-bottom-toolbar)
