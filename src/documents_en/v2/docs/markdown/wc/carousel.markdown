@@ -81,9 +81,9 @@ Following methods are provided to scroll items in the carousel.
 
   Scroll to the first or last item.
 
-- `setActiveCarouselItemIndex(index, options)`
+- `setActiveIndex(index, options)`
 
-  Show the item specified by the `index`. The current active index can be obtained by calling `getActiveCarouselItemIndex()` function.
+  Show the item specified by the `index`. The current active index can be obtained by calling `getActiveIndex()` function.
 
 All of those methods returns a `Promise`, which resolves when the action is complete.
 
@@ -95,7 +95,7 @@ myCarousel.next({
 });
 ```
 
-When you added or removed `<ons-carousel-item>` element into a `<ons-carousel>`, you must call `refresh()` function to update the layout.
+When you added or removed `<ons-carousel-item>` element into a `<ons-carousel>`, you must call `refresh()` function to update the layout. However, by adding the `auto-refresh` attribute this is not necessary.
 
 #### Using carousel events
 
