@@ -1,18 +1,40 @@
 <footer class="footer-container">
   <div class="footer-cont">
     <% if @lang == 'en': %>
-      <div class="footer-newsletter newsletter-signup">
-        <div class="footer-newsletter-inner">
-          <form>
-            <input class="footer-newsletter-input" type="text" placeholder="Enter email for Onsen UI updates" name="email">
-            <input type="submit" class="footer-newsletter-submit" value="Sign up">
-          </form>
-          <div class="footer-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
-        </div>
+      <div class="newsletter newsletter-footer newsletter-signup">
+        <form>
+          <input type="text" placeholder="Enter email for Onsen UI updates" name="email">
+          <input type="submit" value="Send">
+        </form>
+        <div class="newsletter-thankyou">Thank you!</div>
       </div>
+    <% else: %>
+      <br>
     <% end %>
 
-    <p class="copyright">Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a></p>
+    <div class="footer-cont-share">
+      <div class="footer-cont-share-twitter">
+        <iframe
+        src="//platform.twitter.com/widgets/follow_button.html?screen_name=Onsen_UI"
+        style="width: 300px; height: 20px;"
+        allowtransparency="true"
+        frameborder="0"
+        scrolling="no">
+        </iframe>
+      </div>
+      <div class="footer-cont-share-github">
+        <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-count-href="/OnsenUI/OnsenUI/stargazers" data-count-api="/repos/OnsenUI/OnsenUI#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+      </div>
+    </div>
+    <br>
+    <p class="copyright">Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca Team</a>. All rights reserved.
+      <% if @lang == 'en': %>
+        <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
+      <% else if @lang == 'ja': %>
+        <a href="https://ja.monaca.io/terms-of-service/policy.html">Privacy Policy</a>
+      <% end %>
+    </p>
   </div>
 </footer>
 

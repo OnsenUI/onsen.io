@@ -12,7 +12,7 @@ framework: js,angular1
 
 ``` html
 <ons-modal id="myModal">
-Modal content
+  Modal content
 </ons-modal>
 <script>
   document.querySelector("#myModal").toggle();
