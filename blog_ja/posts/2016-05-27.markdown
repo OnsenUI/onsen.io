@@ -1,0 +1,105 @@
+---
+author: atsushi
+date: 2016-05-27
+id: background-fetch-with-monaca
+title: "Monacaでバックグラウンド処理を実行する"
+product: monaca
+tags: バックグラウンド,iOS
+category: 技術情報
+---
+
+最近のiOSではアプリがバックグラウンドに入った時にも処理が実行できるようになっています。しかし通常のMonaca/Cordovaアプリではそういった処理はサポートされていません。
+
+アプリがバックグラウンドに入ってしまっても処理を継続したい、さらに定期的に処理を呼び出したいといった時に使えるのが[BackgroundFetch - christocracy/cordova-plugin-background-fetch](https://github.com/christocracy/cordova-plugin-background-fetch)です。
+
+### BackgroundFetchのインストール
+
+インストールは設定メニューのCordovaプラグインの管理から行います。[christocracy/cordova-plugin-background-fetch](https://github.com/christocracy/cordova-plugin-background-fetch)のZipファイルのURLを指定するか、Zipファイルをアップロードするのが良いようです。
+
+![](../content/images/2016/May/monaca-background-2.png)
+
+インストールが終わったら処理を書くのですが、基本的な構成は次のようになります。
+
+```
+function onDeviceReady() {
+    var Fetcher = window.BackgroundFetch;
+    var fetchCallback = function() {
+      // バックグラウンド処理
+    }
+    var failureCallback = function() {
+      // 処理失敗した場合
+    };
+    
+    // 関数を登録
+    Fetcher.configure(fetchCallback, failureCallback, {
+        stopOnTerminate: false
+    });
+}
+document.addEventListener("deviceready", onDeviceReady, false);
+```
+
+バックグラウンド処理ではありますが、プラグインが読み込まれていないといけないのでdevicereadyのイベント内で設定する必要があります。
+
+### サンプル
+
+バックグラウンド処理ではよくありがちな、デバイスの位置情報を取得するというのを書いてみます。今回は[筆者がエヴァンジェリストをつとめるニフティクラウド mobile backend](http://mb.cloud.nifty.com)にデータを登録するようにしてみました。
+
+なお、プラグインを使っていますのでアプリをビルドした上で試してください。
+
+```
+function onDeviceReady() {
+    
+    var Fetcher = window.BackgroundFetch;
+    var application_key = "d28...c0";
+    var client_key = "f94...1cc";
+    var ncmb = new NCMB(application_key, client_key);
+    var Loc = ncmb.DataStore("Loc");
+    
+    function AddData(location, msg) {
+      // 位置情報データの作成
+      var data = new Loc;
+      var geoPoint = new ncmb.GeoPoint(location.coords.latitude, location.coords.longitude);
+      data.set("position", msg);
+      data.set("loc", geoPoint);
+      
+      // 保存処理実行
+      data.save()
+        .then(function() {
+          // 成功
+          alert("Data saved.")
+        })
+        .error(function() {
+          // 失敗
+        });
+    }
+    
+    // ここはフォアグラウンド
+    navigator.geolocation.getCurrentPosition(function(location) {
+      AddData(location, "foreground");
+    });
+    
+    // バックグラウンド
+    var fetchCallback = function() {
+      navigator.geolocation.getCurrentPosition(function(location) {
+        AddData(location, "background");
+      });
+    }
+    var failureCallback = function() {
+      console.log('- BackgroundFetch failed');
+    };
+    Fetcher.configure(fetchCallback, failureCallback, {
+      stopOnTerminate: false
+    });
+}
+document.addEventListener("deviceready", onDeviceReady, false);
+```
+
+アプリが前面にある場合はアラートが出ますが、バックグラウンドで処理されている時にはもちろん出ません。
+
+![](../content/images/2016/May/monaca-background-1.png)
+
+実行してみると、だいたい10分くらい置きに、20分間実行されていたようです。この辺りは仕様はきっちりと決まっているものではなく、だいたいとして割り切る必要があるようです。
+
+BackgroundFetchはiOS限定になってしまいますが、通常のMonacaアプリでは実現できないバックグラウンド処理を実現できます。ぜひ試してみてください。
+
+[BackgroundFetch - christocracy/cordova-plugin-background-fetch](https://github.com/christocracy/cordova-plugin-background-fetch)
