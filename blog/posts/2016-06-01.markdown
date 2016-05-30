@@ -1,0 +1,171 @@
+---
+author: patrick
+date: 2016-06-01
+id: "webpack-hot-reloading"
+title: "Introduction to react Development with webpack and hot reloading"
+category: tutorial
+tags: tutorial, webpack, react, hot-reloading
+---
+
+One of the great things about the [React](http:://reactjs.com) framework is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux) which allows to make code changes to your application during development without loosing its state. In this tutorial we will build a small application step by step to demonstrate the the power of webpack and redux.
+
+<!-- more -->
+
+### Setting up the Environment
+
+We will start with a blanck Node project.
+
+```
+npm init -f
+```
+
+This creates an empty project. If you get an error, make sure you have `node` and `npm` installed. A small [guide] can be found here `https://github.com/OnsenUI/OnsenUI/issues`. After initializing the project its time to install the dependencies. We will need the following packages:
+
+* [React](https://facebook.github.io/react/): React is the libarary, which we will use for writing our javascript applications.
+* [Babel](https://babeljs.io/): Babel transforms javascript and jsx files to javascript that can be executed in all browsers.
+* [Webpack](https://webpack.github.io//): Webpack is a bundler, that puts all your javascript files into one big file. It also comes with many tools like the Development Server that support module reloading.
+* [React Hot Reloader Plugin](https://github.com/gaearon/react-hot-loader): This is the plugin for webpack that allows to do hot reloading in react, so that after a file changes, the state of the components will still remain.
+
+These plugins can all be installed with one command:
+
+```
+npm install --save  react react-dom babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-2 react-hot-loader webpack webpack-dev-server```
+
+### Configuring Webpack
+
+Now that we have installed all the dependencies we need to configure [Webpack](https://webpack.github.io/). Webpack works like this: It first looks for a main javascript files and then searches through all the `require` and `import` statements and puts them together. To configure this process, webpack supports custom `loaders` and `plugins`.
+
+A loader in webpack is a programm that transforms a file encountered by webpack to a javascript file that can be processed by webpack. With the power of loaders Webpack can import `json`, `css` and any kind of file type as long as there is a loader for it. For our purposes we will use the `babel-loader` to transform `jsx` to `js`.
+
+A plugin is a program that allows to alter the inner processes of webpack. An example for this is the [HotModuleReplacementPlugin], that allows webpack to replace files during runtime. The list of plugins available can be found [here](https://github.com/webpack/docs/wiki/list-of-plugins).
+
+Lets create our config file now:
+
+```
+var webpack = require('webpack');
+
+module.exports = {
+  devtool: 'eval-source-map',
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:9000',
+    'webpack/hot/only-dev-server',
+    './entry.js'
+  ],
+
+  output: {
+    path: __dirname,
+    filename: "bundle.js"
+  },
+
+  devServer: {
+    colors: true,
+    historyApiFallback: true,
+    inline: false,
+    port: 9000,
+    hot: true
+  },
+
+  module: {
+    loaders: [
+      // javascript jsx loader
+      { test: /\.js$|\.jsx$/,
+        exclude: /node_modules/,
+        loaders: [
+          'react-hot',
+          'babel?' + JSON.stringify({presets: ['stage-2', 'es2015', 'react']})
+        ]
+      }
+    ]
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
+};
+```
+
+TODO explain config
+
+Now we need to add a script to start our server: In the package.json we replace the `script` value with.
+  "scripts": {
+    "start": "webpack-dev-server --progress",
+  },
+```
+
+# Our first example
+
+This will allow us to start the server with `npm run`. However we need to first create a simple entry file.
+Lets creat a simple html file:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Webpack Hot Reloading React</title>
+  </head>
+  <body>
+    <div id='root'>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>
+```
+
+We first create the entry file `entry.js`:
+
+```
+import React from 'react';
+import {render} from 'react-dom';
+import App from './App.jsx';
+
+render(<App />, document.getElementById('root'));
+```
+
+And a add simple react example `App.jsx`.
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <div>
+      React test example.
+      </div>
+    );
+  }
+}
+```
+
+Now we can start the server and see it in action. We first need to run `npm start` and the we can change for example the text and add a new button, see the changes live here:
+
+
+![Demonstration React reloader](/blog/content/images/2016/Jun/reloader.gif)
+
+
+Here is what the end result looks like.
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <div style={{fontSize: 20}}>
+      React test example with hot reloading and font changes.
+      </div>
+    );
+  }
+}
+
+```
+
+# More advanced example
+
+These changes are already nice, but the hot reloader can do much more.
+In the following example we will have a two input fields and a counter.
+
+
+# Further reading
