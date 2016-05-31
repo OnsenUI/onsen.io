@@ -4,10 +4,10 @@ date: 2016-06-01
 id: "webpack-hot-reloading"
 title: "Introduction to react Development with webpack and hot reloading"
 category: tutorial
-tags: tutorial, webpack, react, hot-reloading
+tags: tutorial, webpack, react, hot-reloading, onsenui
 ---
 
-One of the great things about the [React](http:://reactjs.com) framework is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux) which allows to make code changes to your application during development without loosing its state. In this tutorial we will build a small application step by step to demonstrate the the power of webpack and redux.
+One of the great things about the [React](http:://reactjs.com) framework is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux). The React Hot Reloader enables the developer to make code changes and apply these changes to the application without loosing its state. In this tutorial we will build a small application step by step to demonstrate the the power of webpack and react and also show how OnsenUI users can benefit from it.
 
 <!-- more -->
 
@@ -162,10 +162,12 @@ export default class App extends React.Component {
 
 ```
 
-# More advanced example
+# Hot reloading in Navigation
 
-These changes are already nice, but the hot reloader can do much more.
-In the following example we will have a two input fields and a counter.
+These changes are already nice, but the hot reloader can do much more. To demonstrate this, let us build a small mobile app using the [React Components for OnsenUI](https://onsen.io/v2/react.html). First we will install OnsenUI.
 
+```
+npm install onsenui react-onsenui
+```
 
 # Further reading
