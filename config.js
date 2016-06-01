@@ -134,7 +134,7 @@ module.exports = function(language, isStaging) {
 
     en: {
       url: 'https://onsen.io',
-      title: 'The Answer to PhoneGap UI Development | Onsen UI',
+      title: 'Onsen UI: Beautiful HTML5 Hybrid Mobile App Framework',
       description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
       keywords: '',
       twitter: 'Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.'
