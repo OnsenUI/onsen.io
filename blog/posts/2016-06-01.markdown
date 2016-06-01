@@ -7,7 +7,10 @@ category: tutorial
 tags: tutorial, webpack, react, hot-reloading, onsenui
 ---
 
-One of the great things about the [React](http:://reactjs.com) framework is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux). The React Hot Reloader enables the developer to make code changes and apply these changes to the application without loosing its state. In this tutorial we will build a small application step by step to demonstrate the the power of webpack and react and also show how OnsenUI users can benefit from it.
+
+![OnsenUI Hot Reloading](/blog/content/images/2016/Jun/hot_reloader_title.png)
+
+One of the great things about the [React](http:://reactjs.com) framework is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux). The React Hot Reloader enables developer to make code changes and apply these changes without the application loosing its state. In this tutorial we will build a small application step by step to demonstrate the power of webpack and react and also show how OnsenUI users can benefit from it.
 
 <!-- more -->
 
@@ -19,12 +22,12 @@ We will start with a blanck Node project.
 npm init -f
 ```
 
-This creates an empty project. If you get an error, make sure you have `node` and `npm` installed. A small [guide] can be found here `https://github.com/OnsenUI/OnsenUI/issues`. After initializing the project its time to install the dependencies. We will need the following packages:
+This creates an empty project. If you get an error, make sure you have `node` and `npm` installed. A small guide can be found [here](https://nodejs.org/en/download/package-manager/). After initializing the project it is time to install the dependencies. We will need the following packages:
 
-* [React](https://facebook.github.io/react/): React is the libarary, which we will use for writing our javascript applications.
-* [Babel](https://babeljs.io/): Babel transforms javascript and jsx files to javascript that can be executed in all browsers.
-* [Webpack](https://webpack.github.io//): Webpack is a bundler, that puts all your javascript files into one big file. It also comes with many tools like the Development Server that support module reloading.
-* [React Hot Reloader Plugin](https://github.com/gaearon/react-hot-loader): This is the plugin for webpack that allows to do hot reloading in react, so that after a file changes, the state of the components will still remain.
+* [React](https://facebook.github.io/react/): React is the library, which we will use for writing our JavaScript applications.
+* [Babel](https://babeljs.io/): Babel transforms JavaScript and jsx files to JavaScript in such a way that it can be easily executed by any modern browser.
+* [Webpack](https://webpack.github.io//): Webpack is a bundler, that puts all your JavaScript files together into one big file. It also comes with many tools like the Development Server that support module reloading.
+* [React Hot Reloader Plugin](https://github.com/gaearon/react-hot-loader): This is the plugin for babel and webpack that allows to do hot reloading in react, such that after a file changes, the state of the components will still remain.
 * [OnsenUI](https://onsen.io): OnsenUI is a UI library for mobile hybrid applications that provide many components like Navigators and Tabbar out of the box. It also has a nice [autostyling feature](https://onsen.io/blog/auto-style-app-onsen/.).
 
 These plugins can all be installed with one command:
@@ -38,13 +41,13 @@ As a side node we use the beta version of React Reloader 3.0, since it is very s
 
 ### Configuring Webpack
 
-Now that we have installed all the dependencies we need to configure [Webpack](https://webpack.github.io/). Webpack works like this: It first looks for a main javascript files and then searches through all the `require` and `import` statements and puts them together. To configure this process, webpack supports custom `loaders` and `plugins`.
+Now that we have installed all the dependencies we need to configure [Webpack](https://webpack.github.io/). Webpack works like this: It first looks for a main JavaScript file and then searches through for all depencies indicated by `require` and `import` statements and puts them all together in one file. To configure this process, webpack supports custom `loaders` and `plugins`.
 
-A loader in webpack is a programm that transforms a file encountered by webpack to a javascript file that can be processed by webpack. With the power of loaders Webpack can import `json`, `css` and any kind of file type as long as there is a loader for it. For our purposes we will use the `babel-loader` to transform `jsx` to `js`.
+A loader in webpack is a program that transforms a file encountered by webpack to a JavaScript file that can be processed by webpack. With the power of loaders Webpack can import `json`, `css` and any kind of file type as long as there is a loader for it. For our purposes we will use the `babel-loader` to transform React applications using jsx to `js`.
 
 A plugin is a program that allows to alter the inner processes of webpack. An example for this is the [HotModuleReplacementPlugin], that allows webpack to replace files during runtime. The list of plugins available can be found [here](https://github.com/webpack/docs/wiki/list-of-plugins).
 
-Lets create our config file now:
+Lets create our configuration file now:
 
 ```
 var path = require('path');
@@ -89,20 +92,20 @@ module.exports = {
 };
 ```
 
-The configuration file in webpack is a javascript file that exports a configuration. We configure things like the starting point of where webpack should start to bundle, the output file, the plugins, the general paramter configuration and the loaders. The most important part is the `babel` loader that uses the react-hot reloading plugin.
+The configuration file in webpack is a JavaScript file that exports a configuration object. We can configure things like the entry JavaScript file of where webpack should start processing the files, the output file, the plugins, the loaders and much more. The most important part is the `babel` loader that uses the react-hot reloading plugin. For further information, check the [website] (https://webpack.github.io/).
 
-Now we need to add a script to start our server: In the package.json we replace the `script` value with.
+After doing this, we need to add a script to start our server: In the `package.json`, we can replace the `script` value with:
+```
   "scripts": {
     "start": "webpack-dev-server --progress"
   },
 ```
 
-That is all for our webpack configration, now we can start coding.
+That is all for our webpack configuration: We can start coding now.
 
 # Our first example
 
-This will allow us to start the server with `npm run`. However we need to first create a simple entry file.
-Lets creat a simple html file:
+This will allow us to start the server with `npm run`. However, we need to first create a simple entry file. Let us first create a simple html file:
 
 ```html
 <!doctype html>
@@ -120,7 +123,7 @@ Lets creat a simple html file:
 </html>
 ```
 
-We first create the entry file `src/index.js`:
+This file includes the OnsenUI CSS styles provided by the node package. and our `root` entry component.
 
 ```
 import { AppContainer } from 'react-hot-loader';
@@ -148,7 +151,8 @@ if (module.hot) {
   });
 }
 ```
-This might look a little bit overwhelming at first, but its a general pattern that we do not need to change. All the elements need to be wrapped in the AppContaineer and we write down the logic what should happen if hot reloading happens.
+
+This might look a little bit overwhelming at first, but its a general pattern that is the same for all applications. All the elements need to be wrapped in the AppContaineer and we write down the logic what should happen if hot reloading happens.
 
 Now we can write our first simple application `App.js`.
 
@@ -168,13 +172,12 @@ export default class App extends React.Component {
 ```
 
 This example contains nothing more than a simple text.
-Now we can start the server and see it in action. We first need to run `npm start` and open the browser at `http://localhost:3000/. We can change for example the text and add a new button, see the changes live here:
-
+Now we can start the server and see it in action. First we need to run `npm start` and open the browser at `http://localhost:3000/`. We can change for example the text and change the font. Here is a live example:
 
 ![Demonstration React reloader](/blog/content/images/2016/Jun/reloader.gif)
 
 
-Here is what the end result looks like.
+The resulting code looks like this:
 
 ```
 import React from 'react';
@@ -191,11 +194,11 @@ export default class App extends React.Component {
 }
 ```
 
-All the code for this example can be found [here](https://github.com/philolo1/webpack-react-hot-reloading-sample).
+All the code for this example can be found in this [github repository](https://github.com/philolo1/webpack-react-hot-reloading-sample).
 
-# Hot reloading in Navigation
+# Hot reloading with OnsenUI
 
-These changes are already nice, but the hot reloader can do much more. To demonstrate this, let us build a small mobile app using the [React Components for OnsenUI](https://onsen.io/v2/react.html).
+These changes are already nice, but the hot reloader is much more powerful. To demonstrate this, let us build a small mobile app using the [React Components for OnsenUI](https://onsen.io/v2/react.html).
 
 We will create a simple App with two screen: The first screen will have a simple Input box and output the text written in that input. The second screen will just be some text. We put those screens together using the Navigator.
 
@@ -237,8 +240,6 @@ class PageOne extends React.Component {
     );
   }
 };
-
-
 
 class PageTwo extends React.Component {
   constructor(props) {
@@ -284,6 +285,7 @@ export default class App extends React.Component {
 ```
 
 To demonstrate hot reloading we will enter some text in the first page. Push the second Page and then add a pop button and save the file:
+
 ```
 class PageTwo extends React.Component {
   constructor(props) {
@@ -299,7 +301,6 @@ class PageTwo extends React.Component {
           <Button onClick={this.pushPage.bind(this)}> Push page </Button>
         </div>
       </Page>
-
     );
   }
 }
@@ -311,9 +312,9 @@ Just with saving the file we will be able to use the pop button and still see th
 ![Demonstration React reloader](/blog/content/images/2016/Jun/hot_reloader2.gif)
 
 
-Again, the source code can be found at [here](https://github.com/philolo1/OnsenUI-Webpack-React-Hot-Reloading-Sample) to play with:
+Again, the source code can be found at [a github repository](https://github.com/philolo1/OnsenUI-Webpack-React-Hot-Reloading-Sample) to play with:
 
 # Conclusion and reference
 
-Hot Reloading is a very nice feature that can speed up the development process of your app. In the future, we plan to add the hot-reloader to the [Monaca CLI](https://monaca.io/debugger.html).
-For those who want to learn more, we highly recommend the  [talk] (https://www.youtube.com/watch?v=xsSnOQynTHs) by Dan Abramov, the creator of this plugin and also of Redux, to get a general feeling about the development process. If any questions arise, we will be glad to answer your questions in our [Community](https://community.onsen.io/).
+Hot Reloading is a very nice feature that can speed up the application development process. In the future, we plan to add the hot reloading to the [Monaca CLI](https://monaca.io/debugger.html).
+For those who want to learn more, we highly recommend the [talk] (https://www.youtube.com/watch?v=xsSnOQynTHs) by Dan Abramov, the creator of this plugin and also of Redux. Its also worth checking out the [official website](http://gaearon.github.io/react-hot-loader/).  If any questions arise, we will be glad to answer them in our [Community](https://community.onsen.io/).
