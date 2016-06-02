@@ -75,6 +75,54 @@
     }
   }
 
+  &-search {
+    display: inline-block;
+    height: 17px;
+    //margin-left: 50px;
+
+    &-container {
+      &-hidden {
+        visibility: hidden;
+        display: none;
+      }
+
+      &-visible {
+        visibility: visible;
+        display: inline;
+        position: absolute;
+        left: 320px;
+        z-index: 10000;
+        width: 220px;
+        text-align: right;
+      }
+    }
+
+    &-bar {
+    transition: width 1s ease-in-out;
+      &-hidden {
+        width: 0px;
+        visibility: hidden;
+        transition: width 1s ease-in-out;
+      }
+
+      &-visible {
+        &[type="text"] {
+          display: inline;
+          visibility: visible;
+          width: 212px;
+          appearance: searchfield !important;
+
+          /*
+          &:focus {
+            width: 0px;
+            margin-left: 50px;
+          }
+          */
+        }
+      }
+    }
+  }
+
   &-newsletter {
     position: absolute;
     right: 0px;
