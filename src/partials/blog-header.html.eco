@@ -60,6 +60,10 @@
       <% for category of @env.categories: %>
         <li class="blog-header-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
       <% end %>
+      <div class="blog-header-search-container-visible">
+        <input class="blog-header-search-bar-hidden" style="transition: width 1s ease-in-out !important" type="text" name="search" placeholder="Search..">
+      </div>
+      <li class="blog-header-search"><img src="/images/blog/blog_search_icon.png" /></li>
     </ul>
 
     <div class="blog-header-newsletter newsletter-signup">
