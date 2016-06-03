@@ -78,46 +78,41 @@
   &-search {
     display: inline-block;
     height: 17px;
-    //margin-left: 50px;
 
     &-container {
+      position: absolute;
+      left: 320px;
+      z-index: 10000;
+      width: 220px;
+      text-align: right;
+      display: inline;
+      transition: visibility 0.1s ease-in-out 1s, display 0.1s ease-in-out 1s;
+
       &-hidden {
         visibility: hidden;
-        display: none;
       }
 
       &-visible {
         visibility: visible;
-        display: inline;
-        position: absolute;
-        left: 320px;
-        z-index: 10000;
-        width: 220px;
-        text-align: right;
+        transition: visibility 0.1s ease-in-out, display 0.1s ease-in-out;
       }
     }
 
     &-bar {
-    transition: width 1s ease-in-out;
+      display: inline-block !important;
+      appearance: searchfield !important;
+      transition: width 1s ease-in-out, visibility .1s ease-in-out 0.9s;
+
       &-hidden {
         width: 0px;
         visibility: hidden;
-        transition: width 1s ease-in-out;
       }
 
       &-visible {
         &[type="text"] {
-          display: inline;
           visibility: visible;
-          width: 212px;
-          appearance: searchfield !important;
-
-          /*
-          &:focus {
-            width: 0px;
-            margin-left: 50px;
-          }
-          */
+          width: 212px !important;
+          transition: width 1s ease-in-out !important;
         }
       }
     }
