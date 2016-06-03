@@ -1,16 +1,15 @@
 ---
 author: patrick
 date: 2016-06-03
-id: "react-webpack-hot-module-replacement-onsenui"
-title: "Improving Your Development Workflow with Webpack and the React Components for OnsenUI"
+id: "react-webpack-hot-loader-onsenui"
+title: "Improving Your Development Workflow with Webpack, React Hot Loader and Onsen UI"
 category: tutorial
 tags: tutorial, webpack, react, hot-reloading, onsenui
 ---
 
+![Onsen UI Hot Reloading](/blog/content/images/2016/Jun/hot_reloader_title.png)
 
-![OnsenUI Hot Reloading](/blog/content/images/2016/Jun/hot_reloader_title.png)
-
-One of the great things about [React](http:://reactjs.com) is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux). The React Hot Reloader enables developers to make code changes and apply these changes without the application losing its state. In this tutorial we will build a small application step by step to demonstrate the power of Webpack and React and also show how OnsenUI users can benefit from it.
+One of the great things about [React](https://facebook.github.io/react/) is that there are a lot of tools and libraries available. One of the most popular is the [React Hot Reloader](https://github.com/gaearon/react-hot-loader) by Dan Abramov, who also created [Redux](https://github.com/reactjs/redux). The React Hot Reloader enables developers to make code changes and apply these changes without the application losing its state. In this tutorial we will build a small application step by step to demonstrate the power of Webpack and React and also show how OnsenUI users can benefit from it.
 
 <!-- more -->
 
@@ -25,7 +24,7 @@ npm init -f
 This creates an empty project. If you get an error, make sure you have `node` and `npm` installed. A small guide can be found [here](https://nodejs.org/en/download/package-manager/). After initializing the project it is time to install the dependencies. We will need the following packages:
 
 * [React](https://facebook.github.io/react/): React is the library, which we will use for writing our JavaScript applications.
-* [Babel](https://babeljs.io/): Babel transforms JavaScript and JSX files to JavaScript in such a way that it can be easily executed by any modern browser.
+* [Babel](https://babeljs.io/): Babel transforms ES2015 and JSX files to JavaScript in such a way that it can be easily executed by any modern browser.
 * [Webpack](https://webpack.github.io//): Webpack is a bundler, that puts all your JavaScript files together into one big file. It also comes with many tools like the Development Server that support module reloading.
 * [React Hot Reloader Plugin](https://github.com/gaearon/react-hot-loader): This is the plugin for Babel and Webpack that enables hot reloading in React, such that after a file changes, the state of the components will still remain.
 * [OnsenUI](https://onsen.io): OnsenUI is a UI library for mobile hybrid applications that provide many components like Navigators and Tabbar out of the box. It also has a nice [autostyling feature](https://onsen.io/blog/auto-style-app-onsen/).
@@ -33,7 +32,7 @@ This creates an empty project. If you get an error, make sure you have `node` an
 These plugins can all be installed with one command:
 
 ```
-npm install --save babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-0 react-hot-loader@3.0.0-beta.1 webpack webpack-dev-server onsenui react react-dom react-onsenui
+npm install --save-dev babel-core babel-loader babel-preset-es2015 babel-preset-react babel-preset-stage-0 react-hot-loader@3.0.0-beta.1 webpack webpack-dev-server onsenui react react-dom react-onsenui
 ```
 
 As a side node we use the beta version of React Reloader 3.0, since it is very stable and fixes a lot of issues that the previous version has.
@@ -42,9 +41,9 @@ As a side node we use the beta version of React Reloader 3.0, since it is very s
 
 Now that we have installed all the dependencies we need to configure [Webpack](https://webpack.github.io/). Webpack works like this: It first looks for a main JavaScript file and then searches through for all dependencies indicated by `require` and `import` statements and puts them all together in one file. To configure this process, Webpack supports custom `loaders` and `plugins`.
 
-A loader in webpack is a program that transforms a file encountered by webpack to a JavaScript file that can be processed by webpack. With the power of loaders Webpack can import `json`, `css` and any kind of file type as long as there is a loader for it. For our purposes we will use the `babel-loader` to transform React applications using JSX to `js`.
+A loader is a program that transforms a file encountered by Webpack to a JavaScript file that can be processed by Webpack. With the power of loaders Webpack can import `json`, `css` and any kind of file type as long as there is a loader for it. For our purposes we will use the `babel-loader` to transform React applications using JSX to JavaScript.
 
-A plugin is a program that allows to alter the inner processes of webpack. An example for this is the *HotModuleReplacementPlugin*, that allows webpack to replace files during runtime. The list of plugins available can be found [here](https://github.com/webpack/docs/wiki/list-of-plugins).
+A plugin is a program that allows altering the inner processes of webpack. An example for this is the *HotModuleReplacementPlugin*, that allows webpack to replace files during runtime. The list of plugins available can be found [here](https://github.com/webpack/docs/wiki/list-of-plugins).
 
 Lets create our configuration file now:
 
@@ -173,8 +172,7 @@ export default class App extends React.Component {
 This example contains nothing more than a simple text.
 Now we can start the server and see it in action. First we need to run `npm start` and open the browser at `http://localhost:3000/`. We can change for example the text and change the font. Here is a live example:
 
-![Demonstration React reloader](/blog/content/images/2016/Jun/reloader.gif)
-
+![Demonstration React Hot Reloader](/blog/content/images/2016/Jun/reloader.gif)
 
 The resulting code looks like this:
 
@@ -186,7 +184,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div style={{fontSize: 20}}>
-      React test example with hot reloading and font changes.
+        React test example with hot reloading and font changes.
       </div>
     );
   }
@@ -306,7 +304,7 @@ class PageTwo extends React.Component {
 
 ```
 
-Just with saving the file we will be able to use the pop button and still see the text that we had originally entered, the state of the application stays the same. Here is a life demonstration:
+Just with saving the file we will be able to use the pop button and still see the text that we had originally entered, the state of the application stays the same. Here is a live demonstration:
 
 ![Demonstration React reloader](/blog/content/images/2016/Jun/hot_reloader2.gif)
 
