@@ -1,0 +1,671 @@
+---
+author: andreas
+date: 2016-06-08
+id: "react-state-management-redux"
+title: "Managing your React state with Redux"
+category: tutorial
+tags: tutorial, webpack, react, redux
+---
+
+![Redux Dev Tools](/blog/content/images/2016/Jun/redux_dev_tools.png)
+
+In this post we will take a look at using Redux for managing the state in React apps. Redux is a very simple library that enables predictable atomic state changes. While the API is tiny and easy to learn it gives you a lot of power and solves a lot of problems when handling the application state and sharing data between components.
+
+<!-- more -->
+
+The fact that the Redux state changes predictably opens up a lot of debugging possibilities. Using *time travel* makes it possible to travel back and forth between different states instead of having to reload the whole app in order to get back to the same place. We will take a closer look at time travel in the next blog post.
+
+The code for this article is available in [this GitHub repo](https://github.com/argelius/react-redux-timetravel). It's simple drawing application where the user can toggle cells in a grid by clicking on them.
+
+You can play with it here:
+
+<iframe style="width: 100%; height: 350px" src="https://argelius.github.io/react-redux-timetravel/"></iframe>
+
+The bar on the right is the [Redux DevTools](https://github.com/gaearon/redux-devtools) which enables simple debugging inside the app itself. It is also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd).
+
+I have also created a larger example that uses React and Redux with Onsen UI. It's a simple weather forecast application. The code for that application can be found [here](https://github.com/argelius/react-onsenui-redux-weather) and there is also a [demo](http://argelius.github.io/react-onsenui-redux-weather/demo.html) available. We will take a look at how this app is built in a coming blog post.
+
+## What is Redux?
+
+Patrick already wrote a great [article on Redux](/blog/building-a-calculator-app-with-redux-and-onsenui/) so I will keep this short. [Redux](https://github.com/reactjs/redux) is a state container for JavaScript apps, often called a Redux *store*. It stores the whole state of the app in an object tree.
+
+The state can only be changed by emitting an *action*. The state tree is never mutated directly instead you use pure functions called *reducers*. A reducer takes the current state tree and an action as arguments and returns the resulting state tree.
+
+The following is an example of a simple reducer:
+
+```
+import {createStore} from 'redux';
+
+/**
+ * A reducer takes two arguments, the current state and an action.
+ */
+const quotes = (state = [], action) => {
+  switch (action.type) {
+    case 'ADD_QUOTE':
+      /**
+       * Returns a new array instead of
+       * mutating the original array.
+       */
+      return [
+        /**
+         * A copy of the original array.
+         */
+        ...state,
+        /**
+         * A new quote.
+         */
+        {
+          text: action.text,
+          person: action.person
+        }
+      ];
+    default:
+      return state;
+  }
+};
+
+/**
+ * Create a Redux store that holds the app state.
+ */
+const store = createStore(quotes);
+
+/**
+ * Subscribing to the store makes it possible to
+ * execute some code every time the state is updated.
+ */
+store.subscribe(() => {
+  console.log(store.getState());
+});
+
+store.dispatch({
+  type: 'ADD_QUOTE',
+  text: 'If debugging is the process of removing software bugs, then programming must be the process of putting them in.',
+  person: 'Edsger Dijkstra'
+});
+// [ { text: 'If debugging is the process of removing software bugs, then programming must be the process of putting them in.', person: 'Edsger Dijkstra' } ]
+```
+
+I am using the [rest operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator) in the code. This basically makes it possible to copy an array by doing:
+
+```
+const copy = [...original];
+```
+
+This is important because we want the reducer to be a *pure* function that doesn't mutate the state directly. So instead of pushing a new element to the array we create a brand new array containing all the previous state in addition to the new element.
+
+As seen in the code above, Redux is a very simple library but because it's deterministic (the current state is only dependent on the previous actions) it makes the behaviour of the app very predictable and less prone to bugs. It also enables time travel which is an efficient way of finding and solving bugs should they occur.
+
+In the example above there is only one reducer with a single action acting on the state tree but adding new actions and combining several reducers is a relatively simple task. Redux scales very well for larger applications given that the code is structured in a good way.
+
+## Redux with React
+
+Redux is in itself not written specifically for React. It can be used with other frameworks such as Angular, Ember or Vue.js. However, Redux was written with React in mind and they work very well together.
+
+The easiest way to use Redux with React is the official [React Redux binding library](https://github.com/reactjs/react-redux). With this library it's easy to bind the Redux state and actions to props.
+
+I have created a simple drawing application to illustrate how it can be used. The code is available in [this repo on GitHub](https://github.com/argelius/react-redux-timetravel).
+
+The Redux part of the code is separated into two parts, *action creators* and *reducers*. The reducers have already been explained. An action creator is a simple function that returns the object that should be dispatched in order to execute an action. As an example an action creator for the `ADD_QUOTE` action in the example above can be written like this:
+
+```
+export const ADD_QUOTE = 'ADD_QUOTE';
+
+export const addQuote = (text, person) => ({
+	type: ADD_QUOTE,
+	text,
+	person
+});
+```
+
+The syntax `{text, person}` is shorthand for `{text: text, person: person}` introduced in ES2016.
+
+To dispatch the action we can now do:
+
+```
+store.dispatch(addQuote('I shook up the world!', 'Muhammad Ali'));
+```
+
+Let's take a look at the code of `index.js`, the entry point of the app. It contains a lot of boilerplate code to enable hot reloading of components and to initialize the Redux DevTools. We will discuss the DevTools in the next blog post so I will not go into the details.
+
+The important part is the `Provider` component which makes the Redux store available to all its descendants. Without this component you would have to pass the store as a prop to all the components that need it.
+
+I have put some comments to clarify what the code does.
+
+```
+import React from 'react';
+import {render} from 'react-dom';
+
+/*
+ * The Provider component provides
+ * the React store to all its child
+ * components so we don't need to pass
+ * it explicitly to all the components.
+ */
+import {Provider} from 'react-redux';
+
+import {createStore, applyMiddleware, compose} from 'redux';
+import createLogger from 'redux-logger';
+import {AppContainer} from 'react-hot-loader';
+
+import grid from './reducers/grid';
+import App from './components/App';
+import DevTools from './containers/DevTools';
+
+const logger = createLogger();
+
+/*
+ * The initial state of the app.
+ *
+ * This describes a 10x10 picture
+ * of a smiley face. :)
+ */
+const initialState = {
+  width: 10,
+  height: 10,
+  cells: [
+    0, 0, 0, 1, 1, 1, 1, 0, 0, 0,
+    0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+    0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
+    1, 0, 0, 1, 0, 0, 1, 0, 0, 1,
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
+    1, 0, 0, 1, 1, 1, 1, 0, 0, 1,
+    0, 1, 0, 0, 0, 0, 0, 0, 1, 0,
+    0, 0, 1, 0, 0, 0, 0, 1, 0, 0,
+    0, 0, 0, 1, 1, 1, 1, 0, 0, 0
+  ]
+};
+
+/*
+ * The enhancer are passed when
+ * creating the Redux store to
+ * add some extra functionality.
+ *
+ * In this case we add a logger
+ * middleware that write some debug
+ * information every time the
+ * state is changed.
+ *
+ * We also add the Redux DevTools
+ * so we can easily debug the state.
+ */
+const enhancer = compose(
+  applyMiddleware(logger),
+  DevTools.instrument()
+);
+
+/*
+ * This creates the store so we
+ * can listen to changes and
+ * dispatch actions.
+ */
+const store = createStore(grid, initialState, enhancer);
+
+const rootElement = document.getElementById('root');
+
+render(
+  <AppContainer>
+    <Provider store={store}>
+      <div>
+        <App />
+        <DevTools />
+      </div>
+    </Provider>
+  </AppContainer>,
+  rootElement
+);
+
+/**
+ * This is for hot reloading so the
+ * app updates every time the code of
+ * the components change.
+ */
+if (module.hot) {
+  module.hot.accept('./components/App', () => {
+    const NextApp = require('./components/App').default;
+    render(
+      <AppContainer>
+        <Provider store={store}>
+          <div>
+            <NextApp />
+            <DevTools />
+          </div>
+        </Provider>
+      </AppContainer>,
+      rootElement
+    );
+  });
+}
+```
+
+### Action creators
+
+An action creator is a function that returns an object representing an action. In this app we have two actions:
+
+* `SET_GRID_SIZE` - Change the size of the grid.
+* `TOGGLE_CELL` - Toggle if a cell is filled or not.
+
+```
+export const SET_GRID_SIZE = 'SET_GRID_SIZE';
+export const TOGGLE_CELL = 'TOGGLE_CELL';
+
+export const setGridSize = ({width, height}) => ({
+  type: SET_GRID_SIZE,
+  width,
+  height
+});
+
+export const toggleCell = ({x, y}) => ({
+  type: TOGGLE_CELL,
+  x,
+  y
+});
+```
+
+These objects become arguments to the reducer when dispatched.
+
+### Reducers
+
+This map only has one reducer, called `grid`. The state has the following form:
+
+```
+{
+  width: 10
+  height: 10,
+  cells: [1, 0, 1, 1, ...]
+}
+```
+
+The `width` and `height` parameters are self-explanatory. The `cells` array is a list of 1s and 0s that represent if a cell is filled or not.
+
+The implementation is pretty straightforward. When changing the size of the grid we need to be careful so the previous picture is copied correctly onto the new grid since the dimensions change.
+
+As mentioned before, the reducer needs to be a pure function which means that we need to copy the cell array before returning the next state.
+
+```
+import {
+  SET_GRID_SIZE,
+  TOGGLE_CELL
+} from '../actions';
+
+const grid = (state, action) => {
+  switch (action.type) {
+    case SET_GRID_SIZE:
+      /**
+       * Create a new array.
+       */
+      const newCells = new Array(action.width * action.height).fill(0);
+
+      /**
+       * Copy previous picture.
+       */
+      for (let y = 0; y < state.height; y++) {
+        for (let x = 0; x < state.width; x++) {
+          newCells[y * action.width + x] = state.cells[y * state.width + x];
+        }
+      }
+
+      /**
+       * Return new state.
+       */
+      return {
+        ...state,
+        width: action.width,
+        height: action.height,
+        cells: newCells
+      };
+    case TOGGLE_CELL:
+      /**
+       * Copy cells.
+       */
+      const cells = [...state.cells];
+      const {x, y} = action;
+
+      const val = cells[y * state.width + x];
+
+      /**
+       * Toggle the value.
+       */
+      cells[y * state.width + x] = val === 1 ? 0 : 1;
+
+      /**
+       * Return the next state.
+       */
+      return {
+        ...state,
+        cells
+      };
+    default:
+      return state;
+  }
+};
+
+export default grid;
+```
+
+### Components and containers
+
+In apps using React Redux the components are often separated into two categories, *components* and *containers*. This is to distinguish components that use the state tree and dispatch actions from *dumb* components that are only used for presentation.
+
+This app has three *dumb* components:
+
+* `App` - The root of the app.
+* `Row` - A row in the grid.
+* `Cell` - A grid cell.
+
+Since these components are only used for presentation the implementation is pretty simple. This is one of the strengths of Redux, by separating the state from the graphical presentation we can make tiny reusable components.
+
+The app also has two containers (actually three but we will discuss the `DevTools` container in the next blog post).
+
+The two containers are:
+
+* `Grid` - Renders a grid of `Row` and `Cell` components based on the state and dispatches actions when the cells are clicked.
+* `SetSize` - Renders two input elements that can be used to changed the size of the grid.
+
+#### App component
+
+The `App` component just renders two child components: `Grid` which is the clickable grid and `SetSize` which is used to set the size of the grid.
+
+```
+import React from 'react';
+
+import Grid from '../containers/Grid';
+import SetSize from '../containers/SetSize';
+
+const App = () => (
+  <div>
+    <Grid />
+    <SetSize />
+  </div>
+);
+
+export default App;
+```
+
+#### Row component
+
+The `Row` component is very simple and basically just contains the flexbox layout to make the cells align horizontally and stop them from wrapping.
+
+```
+import React from 'react';
+
+const style = {
+  display: 'flex',
+  flexDirection: 'row',
+  flexWrap: 'nowrap'
+};
+
+const Row = ({children}) => <div style={style}>{children}</div>;
+
+export default Row;
+```
+
+#### Cell component
+
+The `Cell` component is a clickable cell and it has a black or white background based on the value of the `filled` prop.
+
+```
+import React from 'react';
+
+const style = {
+  width: '24px',
+  height: '24px',
+  border: '1px solid black'
+};
+
+const Cell = ({children, filled = false, onClick}) => (
+  <div
+    onClick={onClick}
+    style={{
+      ...style,
+      backgroundColor: filled ? '#000' : '#fff'
+    }}
+  >
+    {children}
+  </div>
+);
+
+export default Cell;
+```
+
+### Connecting components to Redux
+
+We will now take a look at the containers but first we need to understand the `connect()` method of the Redux React library.
+
+The `connect()` method takes two arguments: `mapStateToProps` and `mapDispatchToProps` and returns a function that can be used to connect the Redux store with a component.
+
+Let's take a look at how this can work with an example:
+
+```
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+/**
+ * Import all actions as an object.
+ */
+import * as Actions from '../actions';
+
+/**
+ * The component receives the state and actions
+ * as props.
+ */
+const MyComponent = ({state, actions}) => (
+	<div onClick={() => actions.doSomething()}>
+		{state.someStateVariable}
+	</div>
+);
+
+/**
+ * This function maps the state to a
+ * prop called `state`.
+ *
+ * In larger apps it is often good
+ * to be more selective and only
+ * map the part of the state tree
+ * that is necessary.
+ */
+const mapStateToProps = (state) => ({
+	state: state
+});
+
+/**
+ * This function maps actions to props
+ * and binds them so they can be called
+ * directly.
+ *
+ * In this case all actions are mapped
+ * to the `actions` prop.
+ */
+const mapDispatchToProps = (dispatch) => ({
+	actions: bindActionCreators(Actions, dispatch)
+})
+
+/**
+ * Finally the Redux store is connected
+ * to the component with the `connect()`
+ * function.
+ */
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(MyComponent);
+```
+
+#### Grid container
+
+Given this we can now take a look at the `Grid` container and understand how it works. To render the grid it loops through all the cells and renders them either black or white depending on the state:
+
+```
+import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import Row from '../components/Row';
+import Cell from '../components/Cell';
+import * as Actions from '../actions';
+
+/**
+ * The `width`, `height` and `cells`
+ * props are all mapped directly from
+ * the Redux store.
+ *
+ * The `actions` prop contains all the
+ * available actions.
+ */
+const Grid = ({width, height, cells, actions}) => {
+  let rows = [];
+
+  /**
+   * Loop through all the cells.
+   */
+  for (let y = 0; y < height; y++) {
+    const row = [];
+
+    for (let x = 0; x < width; x++) {
+      /**
+       * Add a `Cell` component for every
+       * column in the row.
+       */
+      row.push(
+        <Cell
+          key={x}
+          /**
+           * Dispatch a TOGGLE_CELL action
+           * when a cell is clicked.
+           */
+          onClick={() => actions.toggleCell({x, y})}
+          /**
+           * Fill the cell if the value is 1.
+           */
+          filled={cells[y * width + x] === 1}
+        />
+      );
+    }
+
+    /**
+     * Create a `Row` component for every
+     * row in the grid.
+     */
+    rows.push(<Row key={y}>{row}</Row>);
+  }
+
+	/**
+   * Return the finished grid.
+   */
+  return <div>{rows}</div>;
+};
+
+/**
+ * Map the state to props.
+ */
+const mapStateToProps = (state) => ({
+  ...state
+});
+
+/**
+ * Map the actions to props.
+ */
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
+
+/**
+ * Connect the component to
+ * the Redux store.
+ */
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Grid);
+```
+
+#### SetSize container
+
+```
+import React from 'react';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
+import * as Actions from '../actions';
+
+const style = {
+  margin: '10px 0'
+};
+
+const SetSize = ({width, height, actions}) => {
+  const handleWidthChange = (e) => {
+    /**
+     * Set a new grid size.
+     */
+    actions.setGridSize({
+      width: parseInt(e.target.value),
+      height
+    });
+  };
+
+  const handleHeightChange = (e) => {
+    actions.setGridSize({
+      width,
+      height: parseInt(e.target.value)
+    });
+  };
+
+  return (
+    <div style={style}>
+      <label>
+        Width&nbsp;
+        <input
+          /**
+           * Execute a function when the
+           * cell is clicked.
+           */
+          onChange={handleWidthChange}
+          value={width}
+          type='number'
+          min='0'
+          max='20' />
+      </label>
+      <label>
+        Height&nbsp;
+        <input
+          onChange={handleHeightChange}
+          value={height}
+          type='number'
+          min='0'
+          max='20' />
+      </label>
+    </div>
+  );
+};
+
+/**
+ * Map the state to props.
+ */
+const mapStateToProps = (state) => ({
+  ...state
+});
+
+/**
+ * Map the actions to props.
+ */
+const mapDispatchToProps = (dispatch) => ({
+  actions: bindActionCreators(Actions, dispatch)
+});
+
+/**
+ * Connect the component to
+ * the Redux Store.
+ */
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SetSize);
+```
+
+## Conclusion
+
+Redux is a great library for managing the state of React apps. Storing the whole state in a single tree is very useful since it avoids having multiple sources of truth.
+
+In the coming days we will release a couple of blog posts about the Redux DevTools and a tutorial on how to create a more complex app using React Redux and Onsen UI. You can check out the app [here](http://argelius.github.io/react-onsenui-redux-weather/demo.html).
+
+We hope the article has been interesting and if you have any questions don't hesitate to ask in the comments below. If you are a hybrid app developer or thinking about getting into mobile app development, please check out our [Onsen UI](https://github.com/OnsenUI/OnsenUI) library and give us a star if you like it. :)
