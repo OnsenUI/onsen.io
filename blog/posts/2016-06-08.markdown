@@ -7,7 +7,7 @@ category: tutorial
 tags: tutorial, webpack, react, redux
 ---
 
-![Redux Dev Tools](/blog/content/images/2016/Jun/redux_dev_tools.png)
+![React Redux](/blog/content/images/2016/Jun/react_redux.png)
 
 In this post we will take a look at using [Redux](https://github.com/reactjs/redux) for managing the state in [React](https://facebook.github.io/react/) apps. Redux is a very simple library that enables predictable atomic state changes. While the API is tiny and easy to learn, it gives you a lot of power and solves many of the problems when handling the application state and sharing data between components.
 
@@ -21,13 +21,43 @@ You can play with it here:
 
 <iframe style="width: 100%; height: 350px" src="https://argelius.github.io/react-redux-timetravel/"></iframe>
 
-The bar on the right is the [Redux DevTools](https://github.com/gaearon/redux-devtools) which enables simple debugging inside the app itself. It is also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd).
+The bar on the right is the [Redux DevTools](https://github.com/gaearon/redux-devtools) which enables simple debugging inside the app itself. It is also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd). We will show how to integrate the DevTools in the next blog post.
 
 I have also created a larger example that uses React and Redux with Onsen UI. It's a simple weather forecast application. The code for that application can be found [here](https://github.com/argelius/react-onsenui-redux-weather) and there is also a [demo](http://argelius.github.io/react-onsenui-redux-weather/demo.html) available. We will take a look at how this app is built in a coming blog post.
 
 ## What is Redux?
 
-Patrick already wrote a great [article on Redux](/blog/building-a-calculator-app-with-redux-and-onsenui/) so I will keep this short. [Redux](https://github.com/reactjs/redux) is a state container for JavaScript apps, often called a Redux *store*. It stores the whole state of the app in an object tree.
+Patrick already wrote a great [article on Redux](/blog/building-a-calculator-app-with-redux-and-onsenui/) so I will keep this short. [Redux](https://github.com/reactjs/redux) is a state container for JavaScript apps, often called a Redux *store*. It stores the whole state of the app in an immutable object tree.
+
+To create a store the `createStore(reducer, [initialState], [enhancer])` function is used to create a new store. It takes three arguments:
+
+* `reducer` - A reducing function. We will describe it below.
+* `initialState` - The initial state of the store.
+* `enhancer` - Can be used to enhance the Redux store and add third-party libraries and middleware for logging, persistant storage, etc.
+
+In the app described below we use the `redux-logger` library to add console logs when the state changes. This is done with the `applyMiddleware` function:
+
+```
+import {createStore, applyMiddleware} from 'redux';
+import createLogger from 'redux-logger';
+
+import reducer from './reducer';
+
+/**
+ * Create a logger.
+ */
+const logger = createLogger();
+const initialState = {};
+
+const store = createStore(reducer, initialState, applyMiddleware(logger));
+```
+
+The Redux store API is tiny and has only four methods:
+
+* `store.getState()` - Returns the current state object tree.
+* `store.dispatch(action)` - Dispatch an action to change the state.
+* `store.subscribe(listener)` - Listen to changes in the state tree.
+* `store.replaceReducer(nextReducer)` - Replaces the current reducer with another. This method is used in advanced use cases such as [code splitting](https://webpack.github.io/docs/code-splitting.html).
 
 The state can only be changed by emitting an *action*. The state tree is never mutated directly instead you use pure functions called *reducers*. A reducer takes the current state tree and an action as arguments and returns the resulting state tree.
 
@@ -99,17 +129,20 @@ In the example above there is only one reducer with a single action acting on th
 
 ## Redux with React
 
-Redux is in itself not written specifically for React. It can be used with other frameworks such as Angular, Ember or Vue.js. However, Redux was written with React in mind and they work very well together.
+Redux is in itself not written specifically for React. It can be used with other frameworks such as Angular, Ember or Vue.js. However, Redux was written with React in mind and they work very well together. For a guide on how to use Redux with Angular2, please take a look at [this article](http://blog.scottlogic.com/2016/01/25/angular2-time-travel-with-redux.html).
 
 The easiest way to use Redux with React is the official [React Redux binding library](https://github.com/reactjs/react-redux). With this library it's easy to bind the Redux state and actions to props.
 
-I have created a simple drawing application to illustrate how it can be used. The code is available in [this repo on GitHub](https://github.com/argelius/react-redux-timetravel).
+I have created a simple drawing application to illustrate how it can be used. The code is available in [this repo on GitHub](https://github.com/argelius/react-redux-timetravel). I have used a project structure where I split reducers and action creators into different directories. This is a common way to structure the code and it's what used in the official Redux examples. However, there are other options available such as [Ducks](https://github.com/erikras/ducks-modular-redux) where the reducers and action creators are bundled together.
 
 The Redux part of the code is separated into two parts, *action creators* and *reducers*. The reducers have already been explained. An action creator is a simple function that returns the object that should be dispatched in order to execute an action. As an example an action creator for the `ADD_QUOTE` action in the example above can be written like this:
 
 ```
 export const ADD_QUOTE = 'ADD_QUOTE';
 
+/**
+ * This is an action creator.
+ */
 export const addQuote = (text, person) => ({
 	type: ADD_QUOTE,
 	text,
@@ -240,7 +273,7 @@ if (module.hot) {
 
 ### Action creators
 
-An action creator is a function that returns an object representing an action. In this app we have two actions:
+An action creator is a function that returns an object representing an action that can be dispatched to the Redux store. In this app we have two actions:
 
 * `SET_GRID_SIZE` - Change the size of the grid.
 * `TOGGLE_CELL` - Toggle if a cell is filled or not.
@@ -266,7 +299,7 @@ These objects become arguments to the reducer when dispatched.
 
 ### Reducers
 
-This map only has one reducer, called `grid`. The state has the following form:
+This app only has one reducer, called `grid`. The state has the following form:
 
 ```
 {
@@ -278,9 +311,9 @@ This map only has one reducer, called `grid`. The state has the following form:
 
 The `width` and `height` parameters are self-explanatory. The `cells` array is a list of 1s and 0s that represent if a cell is filled or not.
 
-The implementation is pretty straightforward. When changing the size of the grid we need to be careful so the previous picture is copied correctly onto the new grid since the dimensions change.
+The implementation is pretty straightforward. However, when changing the size of the grid we need to be careful so the previous picture is copied correctly onto the new grid since the dimensions changes.
 
-As mentioned before, the reducer needs to be a pure function which means that we need to copy the cell array before returning the next state.
+As mentioned before, the reducer should be a pure function which means that we need to copy the cell array before returning the next state.
 
 ```
 import {
