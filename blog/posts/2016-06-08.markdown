@@ -9,11 +9,11 @@ tags: tutorial, webpack, react, redux
 
 ![Redux Dev Tools](/blog/content/images/2016/Jun/redux_dev_tools.png)
 
-In this post we will take a look at using Redux for managing the state in React apps. Redux is a very simple library that enables predictable atomic state changes. While the API is tiny and easy to learn it gives you a lot of power and solves a lot of problems when handling the application state and sharing data between components.
+In this post we will take a look at using [Redux](https://github.com/reactjs/redux) for managing the state in [React](https://facebook.github.io/react/) apps. Redux is a very simple library that enables predictable atomic state changes. While the API is tiny and easy to learn, it gives you a lot of power and solves many of the problems when handling the application state and sharing data between components.
 
 <!-- more -->
 
-The fact that the Redux state changes predictably opens up a lot of debugging possibilities. Using *time travel* makes it possible to travel back and forth between different states instead of having to reload the whole app in order to get back to the same place. We will take a closer look at time travel in the next blog post.
+The fact that the Redux state changes predictably opens up a lot of debugging possibilities. For example, using *time travel* makes it possible to travel back and forth between different states instead of having to reload the whole app in order to get back to the same place. We will take a closer look at time travel in the next blog post.
 
 The code for this article is available in [this GitHub repo](https://github.com/argelius/react-redux-timetravel). It's simple drawing application where the user can toggle cells in a grid by clicking on them.
 
@@ -85,7 +85,7 @@ store.dispatch({
 // [ { text: 'If debugging is the process of removing software bugs, then programming must be the process of putting them in.', person: 'Edsger Dijkstra' } ]
 ```
 
-I am using the [rest operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator) in the code. This basically makes it possible to copy an array by doing:
+I am using the [spread operator](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator) in the code. This basically makes it possible to copy an array by doing:
 
 ```
 const copy = [...original];
@@ -270,7 +270,7 @@ This map only has one reducer, called `grid`. The state has the following form:
 
 ```
 {
-  width: 10
+  width: 10,
   height: 10,
   cells: [1, 0, 1, 1, ...]
 }
