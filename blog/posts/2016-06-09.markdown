@@ -135,6 +135,17 @@ The easiest way to use Redux with React is the official [React Redux binding lib
 
 I have created a simple drawing application to illustrate how it can be used. The code is available in [this repo on GitHub](https://github.com/argelius/react-redux-timetravel). I have used a project structure where I split reducers and action creators into different directories. This is a common way to structure the code and it's what used in the official Redux examples. However, there are other options available such as [Ducks](https://github.com/erikras/ducks-modular-redux) where the reducers and action creators are bundled together.
 
+In this project Webpack is used to create the `bundle.js` file. The Webpack config is available [here](https://github.com/argelius/react-redux-timetravel/blob/master/webpack.config.js). Webpack is not the only bundler out there, the code below could just as well be bundled using [Browserify](http://browserify.org/) or [Rollup](https://github.com/rollup/rollup).
+
+Running the example is as easy as doing:
+
+```bash
+git clone git@github.com:argelius/react-redux-timetravel.git
+cd react-redux-timetravel
+npm install
+npm start # This will start a server at http://0.0.0.0:9000/
+```
+
 The Redux part of the code is separated into two parts, *action creators* and *reducers*. The reducers have already been explained. An action creator is a simple function that returns the object that should be dispatched in order to execute an action. As an example an action creator for the `ADD_QUOTE` action in the example above can be written like this:
 
 ```
