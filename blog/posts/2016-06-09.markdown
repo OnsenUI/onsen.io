@@ -13,7 +13,11 @@ In this post we will take a look at using [Redux](https://github.com/reactjs/red
 
 <!-- more -->
 
-The fact that the Redux state changes predictably opens up a lot of debugging possibilities. For example, using *time travel* makes it possible to travel back and forth between different states instead of having to reload the whole app in order to get back to the same place. We will take a closer look at time travel in the next blog post.
+The fact that the Redux state changes predictably opens up a lot of debugging possibilities. For example, using *time travel* makes it possible to travel back and forth between different states instead of having to reload the whole app in order to get back to the same place.
+
+To learn how to integrate the Redux DevTools in your app to enable time travel, please take a look at this article:
+
+* [Time Travel in React Redux apps using Redux DevTools](/blog/react-redux-devtools-with-time-travel/)
 
 The code for this article is available in [this GitHub repo](https://github.com/argelius/react-redux-timetravel). It's simple drawing application where the user can toggle cells in a grid by clicking on them.
 
@@ -21,7 +25,7 @@ You can play with it here:
 
 <iframe style="width: 100%; height: 350px" src="https://argelius.github.io/react-redux-timetravel/"></iframe>
 
-The bar on the right is the [Redux DevTools](https://github.com/gaearon/redux-devtools) which enables simple debugging inside the app itself. It is also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd). We will show how to integrate the DevTools in the next blog post.
+The bar on the right is the [Redux DevTools](https://github.com/gaearon/redux-devtools) which enables simple debugging inside the app itself. It is also available as an [extension for Google Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd). To learn how to integrate the DevTools, please [click here](/blog/react-redux-devtools-with-time-travel/).
 
 I have also created a larger example that uses React and Redux with Onsen UI. It's a simple weather forecast application. The code for that application can be found [here](https://github.com/argelius/react-onsenui-redux-weather) and there is also a [demo](http://argelius.github.io/react-onsenui-redux-weather/demo.html) available. We will take a look at how this app is built in a coming blog post.
 
