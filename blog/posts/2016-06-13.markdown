@@ -1,6 +1,6 @@
 ---
 author: andreas
-date: 2016-06-10
+date: 2016-06-13
 id: "react-redux-devtools-with-time-travel"
 title: "Time Travel in React Redux apps using the Redux DevTools"
 category: tutorial
@@ -11,7 +11,7 @@ tags: tutorial, webpack, react, time-travel, redux, onsenui
 
 In the [previous article](/blog/react-state-management-redux-store/) we showed how to create a simple drawing application with React and manage the state of the app with a Redux store. Now we will talk about how to integrate the [Redux DevTools](https://github.com/gaearon/redux-devtools) to enable easy debugging and time travel.
 
-The Redux DevTools records all dispatched actions and the state of the Redux store at every point in time. This makes it possible to inspect the state and travel back in time to a previous application state without reloading the page or restarting the app.
+The Redux DevTools records dispatched actions and the state of the Redux store at every point in time. This makes it possible to inspect the state and travel back in time to a previous application state without reloading the page or restarting the app.
 
 <!-- more -->
 
@@ -64,7 +64,7 @@ The animation below shows the time travel in action:
 
 ![Redux DevTools time travel animation](/blog/content/images/2016/Jun/react_redux_devtools_time_travel.gif)
 
-## Embedding the Redux DevTools
+## Tutorial: Embedding the Redux DevTools
 
 Now we will take a look at how to embed the Redux DevTools in an application. As mentioned earlier the DevTools is a React component.
 
@@ -73,7 +73,7 @@ The DevTools is very modular and there are several different *monitors* availabl
 * [`DockMonitor`](https://github.com/gaearon/redux-devtools-dock-monitor) - A resizable and moveable dock.
 * [`LogMonitor`](https://github.com/gaearon/redux-devtools-log-monitor) - A log of states and actions which allows changing the history to enable time travel.
 
-Take a look at [this page](https://github.com/gaearon/redux-devtools#custom-monitors) for a list of other available monitors. It is of course also possible to create custom monitors to suite your own needs.
+Take a look at [this page](https://github.com/gaearon/redux-devtools#custom-monitors) for a list of other available monitors. It is of course also possible to create custom monitors to suit your own needs.
 
 So before we get started we need to install some packages. I assume that you already have a React project with a Redux store. Otherwise, please take a look at [this article](/blog/react-state-management-redux-store/).
 
@@ -96,7 +96,13 @@ import DockMonitor from 'redux-devtools-dock-monitor';
  */
 export default createDevTools(
   <DockMonitor
+    /**
+     * Hide or show the dock with "ctrl-h".
+     */
     toggleVisibilityKey='ctrl-h'
+    /**
+     * Change the position of the dock with "ctrl-q".
+     */
     changePositionKey='ctrl-q'
     defaultIsVisible={true}
   >
@@ -107,12 +113,12 @@ export default createDevTools(
 
 I put this file in `./containers/DevTools.js` so it can be imported from the main program.
 
-#### DevTools store enhancer
+### DevTools store enhancer
 
 To hook up the DevTools component with your Redux store you need to use the `DevTools.instrument()` function that returns a *store enhancer*. A store enhancer can be passed to the `createStore` function to, as the name implies, enhance the Redux store.
 
 ```javascript
-import {crateStore} from 'redux';
+import {createStore} from 'redux';
 import DevTools from './containers/DevTool';
 import rootReducer from './reducers';
 
@@ -164,9 +170,15 @@ import DevTools from './containers/DevTools';
 const logger = createLogger();
 const initialState = {};
 
+/**
+ * This variable is "true" if the application
+ * is running in production.
+ */
+const isProduction = process.env.NODE_ENV === 'production';
+
 let store;
 
-if (process.env.NODE_ENV === 'production') {
+if (isProduction) {
   store = createStore(rootReducer, initialState);
 }
 else {
@@ -192,15 +204,56 @@ render(
        * Embed the DevTools component only
        * when in development.
        */
-      {
-        process.env.NODE_ENV !== 'production'
-          ? <DevTools />
-          : null
-       }
+      {!isProduction && <DevTools />}
     </div>
   </Provider>,
   rootElement
 );
 ```
 
-## Using the Redux DevTools Chrome Extension
+In the code above we use the `process.env.NODE_ENV` environment variable to determine whether the application is running in production or not. This variable is not available in the browser so it needs to be defined in the Webpack config. To do that we use the `webpack.DefinePlugin` function to create a custom plugin that defines this variable when running in production. To do that we put the following lines in the [`webpack.config.prod.js`](https://github.com/argelius/react-redux-timetravel/blob/master/webpack.config.prod.js) file:
+
+```
+plugins: [
+  new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': JSON.stringify('production')
+    }
+  })
+]
+```
+
+## Tutorial: Using the Redux DevTools Chrome Extension
+
+If you want to get started quickly with the Redux DevTools, another option is to use the [Redux DevTools Chrome Extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en). By installing this you will get a new tab labelled "Redux" in the Chrome DevTools as you can see in the image below.
+
+![Redux DevTools Chrome Extension](/blog/content/images/2016/Jun/react_redux_devtools_chrome_extension.png)
+
+However, this is not enough to start debugging Redux driven applications. Just like in the case where we use the React component directly we need to add an enhancer to the `createStore()` call. Thankfully the Chrome Extension exposes a variable called `window.devToolsExtension` when the extension is installed so all we have to do is pass that to the `createStore()` function:
+
+```
+const store = createStore(
+  rootReducer,
+  initialState,
+  compose(
+    applyMiddleware(logger),
+    /**
+     * Conditionally add the Redux DevTools extension enhancer
+     * if it is installed.
+     */
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);
+```
+
+If you have the Redux DevTools Chrome Extension installed you can try it out with the [Weather App Demo](http://argelius.github.io/react-onsenui-redux-weather/) since that app will use the DevTools if they are installed.
+
+Apart from being very easy to use, another great thing about the Chrome Extension is that it doesn't require React. If you are writing Angular 2 apps with Redux to store your state, using the Chrome Extension is a lot easier than embedding the React component since that would add another dependency to the app.
+
+## Conclusion
+
+In this article we have seen how easy it is to install the Redux DevTools to enable powerful debugging and time travel in Redux driven applications. In an upcoming article we will take a look at how to create a more complex app with Redux and React with the Onsen UI React components. Please stay tuned!
+
+Redux is definitely the most popular option for state management in React lately. However, there are lots of other options available. Patrick will show how to use [MobX](https://github.com/mobxjs/mobx) in his next article.
+
+If you haven't already, we recommend you to check out the [Onsen UI React Components](https://onsen.io/react). It provides a large collection of UI components for creating hybrid mobile apps. We love getting stars on [GitHub](https://github.com/OnsenUI/OnsenUI)!
