@@ -52,6 +52,7 @@ module.exports = function(lang) {
       v1: {},
       js: {},
       angular1: {},
+      angular2: {},
       react: {}
     };
     var promises = [];
@@ -96,6 +97,9 @@ module.exports = function(lang) {
             break;
           case "angular1":
             addCategory(file, categories.angular1);
+            break;
+          case "angular2":
+            addCategory(file, categories.angular2);
             break;
           case "js":
             addCategory(file, categories.js);
