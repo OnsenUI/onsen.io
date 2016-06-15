@@ -1,18 +1,25 @@
-#Onsen UI Angular 2 Bindings released!
+---
+author: ilia
+date: 2016-06-14
+id: "onsenui-angular2-bindings-released"
+title: "Onsen UI Angular 2 Bindings released!"
+category: announcement
+tags: announcement, tutorial, angular2, components, typescript, webpack, onsenui
+---
 
+![Onsen UI bindings](/blog/content/images/2016/Jun/angular2_release_completed_cycle.png)
 ## The cycle is complete
-<img>
 
-Onsen 1 was based on Angular 1, limiting our options. With Onsen 2 we decided to take a different approach. We separated the core logic, so that it can be used in any project, but then decided to add wrappers, so that it can be used in a more natural way in the most popular frameworks.
+Onsen 1.x was based on Angular 1, limiting our options. With Onsen 2 we decided to take a different approach. We separated the core logic, so that it can be used in any project. We also started working wrappers, so that it can be used in a more natural way in the most popular frameworks.
 
-Vanilla javascript and Angular 1 have been supported for quite some time already. Recently we released [React Components]() and now it's time for the long awaited Angular 2.
+Vanilla JavaScript and Angular 1 have been supported for quite some time already. Recently we released [React Components](/v2/react.html) and now it's time for the long awaited Angular 2.
 
 ## Seamless integration between Angular 2 and Onsen UI
-<img>?
+![NG2 Onsen]()
 
 We personally think that UI components should not be limited to a specific framework, but when used in one they should feel natural to use.
 
-That is why when using Angular 2 Onsen UI provides it's components as if they were written entirely in Angular 2.
+That is why when using Angular 2 Onsen UI components they will behave as if they were written entirely in Angular 2.
 
 Using the directives is as easy as:
 
@@ -28,51 +35,76 @@ And in the template you can use all of them naturally:
 
 ```
 <ons-page>
-	<ons-toolbar>
-		<div class="center">My Page</div>
-	</ons-toolbar>
+  <ons-toolbar>
+    <div class="center">My Page</div>
+  </ons-toolbar>
 
-	<ons-list>
-		<ons-list-header>My Items</ons-list-header>
-		<ons-list-item *ngFor="let item of items">
-			{{item}}
-		</ons-list-item>
-	</ons-list>
+  <ons-list>
+    <ons-list-header>My Items</ons-list-header>
+    <ons-list-item *ngFor="let item of items">
+      {{item}}
+    </ons-list-item>
+  </ons-list>
 </ons-page>
 ```
 
 
-Some of our components also have some methods associated with them. The docs for the Angular 2 componens can be found [here](//onsen.io/v2/angular2).
+Some of our components also have some methods associated with them. The docs for the Angular 2 componens can be found [here](/v2/angular2).
 
 ```
 <ons-modal #modal>
-	<h2> I am a modal </h2>
-	<ons-button (click)="modal.hide()"> Close me <ons-button>
+  <h2> I am a modal </h2>
+  <ons-button (click)="modal.hide()"> Close me <ons-button>
 </ons-modal>
 
 <ons-button (click)="modal.show()"> Show a modal </ons-button>
 ```
 
 ## But why Angular 2?
-<img>?
+![Why NG2]()
 
-Angular 1 was a big hit and a lot of people really liked some ideas which it brought to the table. One of the big downsides of Angular 1 was it's performance. The developers claim that the new version has significant progress in that regard.
+Angular 1 was a big hit and a lot of people really liked some ideas which it brought to the table. One of the big downsides of Angular 1 was it's performance. The developers claim that the new version has significant improvement in that regard.
 
 Since it's a major version they also had the ability to improve the API in a way which would encourage the best practices. While in Angular 1 controllers, views, directives were all scattered now the components are self-sufficient entities.
 
-Also for better or worse it seems that a large part of the community is heading towards using TypeScript in their projects. You can still use pure Javascript (or Dart), so it's more of a matter preference rather than a requirement.
+Also for better or worse it seems that a large part of the community is heading towards using TypeScript in their projects. You can still use pure JavaScript (or Dart), so it's more of a matter preference rather than a requirement.
 
 So if we try it out then what does typescript actually give us? Well in 3 words - types, decorators and autocomplete, at least when comparing to ES2015. While it may be more complex than that lets just leave it at that for now. In terms of Angular 2 the decorators (or annotations) are probably the most necessary feature, as they do increase the readability quite a bit.
 
 As for module loaders - while in the [Angular 2 Tutorial](https://angular.io/docs/ts/latest/quickstart.html) they are using [System.JS](https://github.com/systemjs/systemjs), [webpack](https://webpack.github.io/) is also [supported](https://angular.io/docs/ts/latest/guide/webpack.html).
 
-The Onsen UI Team is currently using webpack, but you can choose whatever you prefer.
+## Onsen UI Team's choice - webpack
+![Webpack]()
 
-// prob needs work
+Webpack allows us to import various files and formats, while still remaining simple to use.
+
+In it's simplest form it can be:
+
+`webpack ./main.js dist.js`
+
+And when our parameters become more complex we can just create a `webpack.config.js` and call `webpack`. Here is an example config showing a case where we are including `.ts` and even `.css` files:
+
+```
+module.exports = {
+  entry: './main.js',
+  output: {
+    path: __dirname,
+    filename: 'dist.js'
+  },
+  module: {
+    loaders: [
+      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.ts$/, loader: 'awesome-typescript-loader' },
+    ]
+  }
+};
+```
+
+But this `awesome-typescript-...` thing seems strange, right? What is that?
+
+Well it's one of the loaders for typescript. There is currently a large number of already [existing loaders](https://github.com/webpack/webpack#loaders) for various file types. You can even make your own loader easily if your project requires something unusual.
 
 ## Ok, so how can we start?
-
-// Technically the simple setup has some steps which we may want to eliminate.
 
 Luckily since creating an Angular 2 project from scratch can be a tedios task we have prepared a simple command in our cli tool to help you with that:
 
@@ -91,5 +123,9 @@ And you're good to go.
 
 Afterwards the `monaca preview` command will start a server and take care of everything, but at that point you could also manage by yourself.
 
-// Add some more Onsen related stuff?
-// Should we mention some future post?
+## Some final notes
+
+Angular 2 seems to be bringing a lot of changes to the table. This post was merely an introduction to some of those changes. In a future post we will try to explain in more detail the process of creating an app with Onsen UI and Angular 2.
+
+Until then feel free to [try out](/angular2-onsenui-kitchensink/#/home)
+or clone our [Kitchen Sink App](https://github.com/OnsenUI/angular2-onsenui-kitchensink).
