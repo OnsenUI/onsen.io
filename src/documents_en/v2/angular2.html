@@ -1,0 +1,206 @@
+---
+page: 'angular2-landing'
+title: 'Angular 2 Components by Onsen UI Hybrid Mobile App Framework'
+layout: 'default.html.eco'
+topbar: false
+actionbar: false
+version: v2
+description: 'Angular 2 developers can easily create beautiful high-performance hybrid mobile apps, just using HTML5, CSS and JavaScript. Includes both Material and iOS Design.'
+---
+
+<div class="design-2016">
+  <div class="angular2" id="start">
+    <div class="wrapper">
+      <div id="intro">
+        <h1>
+          Onsen UI for Angular 2
+        </h1>
+        <p id="description">Framework agnostic Onsen UI 2 is now available for Angular 2. Create beautiful high-performance mobile apps with the framework of your choice.</p>
+        <nav class="actions">
+          <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
+          <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
+          <a class="action demo" href="http://onsenui.github.io/react-onsenui-kitchensink/demo.html">See Demo</a>
+        </nav>
+        <!--
+        <div class="newsletter-signup newsletter-form">
+          <form>
+            <input type="email" placeholder="Input email address to receive updates" name="email">
+            <button>Sign up</button>
+          </form>
+          <div class="newsletter-thankyou">Thank you!</div>
+        </div>
+        -->
+
+        <button id="getting-started" onclick="location.href='/v2/docs/guide/angular2/'" style="cursor: pointer;">Get Started with Onsen UI for Angular 2</button>
+
+        <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>.<br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+      </div>
+      <%- @partial('demo_react.html.eco') %>
+    </div>
+  </div>
+  <div id="features">
+    <div class="feature">
+      <h2>A collection of beautiful Android and iOS components</h2>
+      <p>A rich variety of components and directives, specially designed for both Material and Flat design, with <a href="/blog/auto-style-app-onsen/">automatic platform detection</a>.</p>
+      <div id="showcase-carousel-wrapper">
+        <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
+      </div>
+    </div>
+    <div class="feature">
+      <h2>Tailored for Angular Developers</h2>
+      <p>Onsen UI provides components for tabs, side menu and stack navigation. The components also expose a simple but powerful API complete with TypeScript definitions.</p>
+      <div class="platform-buttons">
+        <div class="ios selected"></div>
+        <div class="android"></div>
+      </div>
+      <div class="code-explanation-container">
+        <div class="code-explanation ios selected">
+
+          <img src="/images/design_2016/app_ios.png" alt="angular2-app-ios">
+          <div class="arrow-container">
+            <div class="arrow a1"></div>
+            <div class="arrow a2"></div>
+            <div class="arrow a3"></div>
+            <div class="arrow a4"></div>
+            <div class="bracket"></div>
+          </div>
+          <div class="react-code">
+          <code>
+            &lt;ons-navigator&gt;
+              ...
+            &lt;/ons-navigator&gt;
+          </code>
+
+          <code>
+            &lt;ons-toolbar&gt;
+              &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
+              &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
+              &lt;div class=&quot;right&quot;&gt;...&lt;/div&gt;
+            &lt;/ons-toolbar&gt;
+          </code>
+
+          <code>
+            &lt;ons-list&gt;
+              &lt;ons-list-item
+                *ngFor="let item of items"&gt;
+                {{item}}
+              &lt;/ons-list-item&gt;
+            &lt;/ons-list&gt;
+          </code>
+
+          <code>
+            &lt;ons-tabbar&gt;
+              &lt;ons-tab label="Page1" icon="ion-home"&gt;&lt;/ons-tab&gt;
+              &lt;ons-tab label="Page2" icon="ion-help"&gt;&lt;/ons-tab&gt;
+              &lt;ons-tab label="Page3" icon="ion-stop"&gt;&lt;/ons-tab&gt;
+            &lt;/ons-tabbar&gt;
+          </code>
+          </div>
+        </div>
+
+
+        <div class="code-explanation android">
+
+          <img src="/images/design_2016/app_android.png" alt="angular2-app-android">
+          <div class="arrow-container">
+            <div class="arrow a1"></div>
+            <div class="arrow a2"></div>
+            <div class="arrow a3"></div>
+            <div class="arrow a4"></div>
+            <div class="arrow a5"></div>
+            <div class="bracket"></div>
+          </div>
+          <div class="react-code">
+            <code>
+              &lt;ons-navigator&gt;
+                ...
+              &lt;/ons-navigator&gt;
+            </code>
+
+            <code>
+              &lt;ons-toolbar&gt;
+                &lt;div class=&quot;center&quot;&gt;Contacts&lt;/div&gt;
+                &lt;div class=&quot;right&quot;&gt;...&lt;/div&gt;
+              &lt;/ons-toolbar&gt;
+            </code>
+
+            <code>
+              &lt;ons-tabbar&gt;
+                &lt;ons-tab label="Favorites"&gt;&lt;/ons-tab&gt;
+                &lt;ons-tab label="All contacts"&gt;&lt;/ons-tab&gt;
+              &lt;/ons-tabbar&gt;
+            </code>
+
+            <code>
+              &lt;ons-list&gt;
+                &lt;ons-list-item
+                  *ngFor="let item of items"&gt;
+                  {{item}}
+                &lt;/ons-list-item&gt;
+              &lt;/ons-list&gt;
+            </code>
+
+            <code>
+              &lt;ons-fab&gt;
+                &lt;ons-icon icon=&quot;md-edit&quot;&gt;&lt;/ons-icon&gt;
+              &lt;/ons-fab&gt;
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="feature">
+    <h2>Development Tools with a complimentary CLI</h2>
+    <p>Our development toolset, Monaca, provides everything you need to develop Angular 2 apps: powerful debugging, remote build, backend services through cloud-based IDE, desktop GUI tool, and CLI. The complimentary CLI makes it easy to create, debug and run apps directly from the command line and it inte. </p>
+<pre><code class="html">$ <strong style="font-weight: bold">monaca create helloworld</strong>
+Which project do you want to create?
+&gt; Onsen 2 with React
+&gt; Onsen 2 with Angular 1
+<b style="color: red;">&gt; Onsen 2 with Angular 2</b>
+&gt; Onsen 2 with JavaScript
+</code></pre>
+  </div>
+
+  </div>
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script>
+  var $ = document.querySelector.bind(document);
+  var $$ = document.querySelectorAll.bind(document);
+  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
+  var code = $$('code');
+  var arrows = $$('.arrow');
+  var height = $('.code-explanation').offsetHeight;
+
+  each(arrows, function (e, i) {
+    var lines = code[i].textContent.split(/\n/);
+    var indent = lines[1].match(/\s*/)[0].length;
+    code[i].textContent = lines.map(function(e) {
+      return e.slice(indent);
+    }).join('\n').trim();
+    hljs.highlightBlock(code[i]);
+    e.style.bottom = height - (code[i].offsetTop + code[i].offsetHeight / 2) + 'px';
+  });
+
+  var buttons = $('.platform-buttons').children;
+  var examples = $$('.code-explanation');
+  each(buttons, function(e, i) {
+    e.onclick = function () {
+      var j = (i + 1) % 2;
+      if (!this.classList.contains('selected')) {
+        buttons[i].classList.add('selected');
+        buttons[j].classList.remove('selected');
+        examples[i].classList.add('selected');
+        examples[j].classList.remove('selected');
+      }
+    }
+  });
+
+  var phones = $$('.phone');
+  $('.change-view').onclick = function (){
+    phones[0].classList.toggle('selected');
+    phones[1].classList.toggle('selected');
+  }
+</script>
