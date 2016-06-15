@@ -1,0 +1,72 @@
+---
+author: patrick
+date: 2016-06-13
+id: "react-redux-devtools-with-time-travel"
+title: "Building performant fast with mobx"
+category: tutorial
+tags: tutorial, react, mobx, webpack, react, redux, onsenui
+---
+
+![Time Travel with the Redux DevTools](/blog/content/images/2016/Jun/time_travel_redux_devtools.png)
+
+In [recent posts](TODO) we spoke a lot about developing React applications with [Redux](TODO): It enables the users to make a greatly testable and structured applications. However, writing a Redux applications produces a lot of boilerplate. One framework alternative is [MobX](Todo), which solves this problem by doing autmations using observables.
+
+<!-- more -->
+
+In this tutorial we are going to build a simple stop watch app step by step. The source code is available on [GitHub](TODO). Our endproduct will look like this.
+
+[Frame](TODO)
+
+# Why MobX
+
+The main author of MobX puts its best in this tweet:
+
+![Quote MobX](/blog/content/images/2016/Jun/mobx_quote.png)
+
+So basically MobX is a library that should make your life as a developer a little bit more easy. So how does MobX work? The main idea are observable: In the application one marks variables as observable and defines in a function called `autorun` what the observables have changed.
+
+# Counter Example
+
+Lets look at a simple counter example. We assume we  have a simple html page like this:
+
+```
+ <div>
+    <p> Counter : <span id='counter'></span>
+    <br />
+    <button onclick='plusClick();'> + </button>
+    <button onClick='minusClick();'> - </button>
+  </div>
+```
+
+The idea is to display in the span `0` at the beginning and increase/decrease the counter when the corresponding button is pressed. Here is the JavaScript code:
+
+```
+import {autorun, observable} from 'mobx';
+
+let CounterStore = observable({
+  counter: 0,
+});
+
+const render = () => {
+  document.getElementById('counter').innerHTML = CounterStore.counter;
+};
+
+autorun(render);
+
+window.plusClick = () => {
+  CounterStore.counter++;
+};
+
+window.minusClick = () => {
+  CounterStore.counter--;
+};
+```
+
+The code is simple: We save our counter in a Object called `CounterStore` and make it observable. We implement the render function so that it updates our display and tell mobX that when the observables change, it should run this function. The result can be seen here:
+
+[GitHub](TODO)
+
+The source code can be found at this [Github repo](https://github.com/philolo1/mobx-counter).
+
+# Implementation of a stopwatch
+
