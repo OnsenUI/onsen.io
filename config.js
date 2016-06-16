@@ -72,6 +72,9 @@ module.exports = function(language, isStaging) {
     },
     ryoichi: {
       name: 'Ryoichi Tsukada',
+    },
+    keiji: {
+      name: 'Keiji Odagawa',
     }
   };
 
@@ -131,8 +134,8 @@ module.exports = function(language, isStaging) {
 
     en: {
       url: 'https://onsen.io',
-      title: 'The Answer to PhoneGap UI Development | Onsen UI',
-      description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
+      title: 'Onsen UI: Beautiful HTML5 Hybrid Mobile App UI Framework',
+      description: 'Make beautiful hybrid mobile apps using HTML5, CSS and JavaScript. Works with React, Angular 1 &amp; 2 and Web Components. Both Material Design and Flat Design.',
       keywords: '',
       twitter: 'Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.'
     },

@@ -2,6 +2,7 @@
 title: Button
 component: react/Button
 framework: react
+tutorial: react/Reference/button
 ---
 
 ## Button

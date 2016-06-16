@@ -35,7 +35,7 @@ function parseDocComment(componentName, doc) {
           // Create a dummy function and parse
           var src = [
             '/**',
-            doc[key],
+            doc[key].replace(/@tutorial/, '@tut'),
             '*/',
             'function dummy(){}'
           ].join("\n");
@@ -53,6 +53,7 @@ function parseDocComment(componentName, doc) {
             // Parse others
             ret["description"] = docgen.description;
             ret["examples"] = docgen.examples;
+            ret["tutorial"] = ret.tut;
             ret["name"] = docgen.name == "dummy" ? null : docgen.name;
             ret["type"] = docgen.type;
             ret["defaultValue"] = docgen.defaultValue;

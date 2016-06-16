@@ -13,7 +13,7 @@ version: v2
   <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
   <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
   <a href="/v2/docs/guide/angular1/" class="action selected angular1">Guide for Angular 1</a>
-  <a class="action angular2"><span title="Coming soon" style="color: #ccc;">Guide for Angular 2</span></a>
+  <a href="/v2/docs/guide/angular2/" class="action angular2">Guide for Angular 2</a>
 </nav>
 
 <%- @markdown => %>
@@ -56,7 +56,7 @@ Angular 1.x binding for Onsen UI is separated from the core. To load in your pro
     <script src="lib/onsen/js/onsenui.js"></script>
     <script src="lib/onsen/js/angular-onsenui.js"></script>
     <script>
-      var app = angular.module('my-app', ['onsen']);
+      var module = angular.module('my-app', ['onsen']);
       module.controller('AppController', function($scope) { });
       module.controller('PageController', function($scope) {
         ons.ready(function() {

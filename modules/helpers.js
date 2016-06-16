@@ -87,7 +87,7 @@ module.exports = function() {
       getTutorialUrl: function(page, string) {
         //"vanilla/Reference/carousel"
         var tutorial_url = function(match, p1, p2, p3) {
-          return 'http://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3;
+          return '/tutorial/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3;
         };
         return string.replace(/(.+)\/(.+)\/(.+)/, tutorial_url);
       },
@@ -247,7 +247,7 @@ module.exports = function() {
       },
 
       getAlternateLangPage: function() {
-        var url = this.lang === 'en' ? 'http://ja.onsen.io' : 'http://onsen.io';
+        var url = this.lang === 'en' ? 'https://ja.onsen.io' : 'https://onsen.io';
         return url + '/' + this.origPath;
       },
 

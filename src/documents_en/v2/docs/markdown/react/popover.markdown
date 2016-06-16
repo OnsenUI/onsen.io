@@ -2,6 +2,7 @@
 title: Popover
 component: react/Popover
 framework: react
+tutorial: react/Reference/popover
 ---
 
 ## Popover

@@ -18,14 +18,13 @@ The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/v2
   </ons-pull-hook>
 </ons-page>
 <script>
-  var loadStuff = function(done) {
+  document.querySelector('ons-pull-hook').onAction = function(done) {
     setTimeout(done, 1000);
   };
-  document.querySelector('ons-pull-hook').setActionCallback(loadStuff);
 </script>
 ```
 
-The Pull Hook behavior is defined by the `setActionCallback` method. This method will be executed when the page is pulled down and released.
+The Pull Hook behavior is defined by the callback stored in `onAction` property. This callback will be executed when the page is pulled down and released.
 
 You can also get the state by `changestate` event. Each one associated with a customizable graphical representation:
 

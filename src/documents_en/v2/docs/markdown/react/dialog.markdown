@@ -2,6 +2,7 @@
 title: Dialog
 component: react/Dialog
 framework: react
+tutorial: react/Reference/dialog
 ---
 
 ## Dialog

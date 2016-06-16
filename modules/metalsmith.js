@@ -36,6 +36,7 @@ module.exports = function(lang, isStaging) {
         .use(require('./v1-api-docs')(lang))
         .use(require('./v2-wc-api-docs')(lang, 'js'))
         .use(require('./v2-wc-api-docs')(lang, 'angular1'))
+        .use(require('./v2-wc-api-docs')(lang, 'angular2'))
         .use(require('./v2-react-api-docs')(lang))
         .use(require('./patterns-collection')(lang, __dirname + '/../dist/v2/OnsenUI/css-components/www/patterns'))
         .use(collections({
@@ -73,6 +74,7 @@ module.exports = function(lang, isStaging) {
         .use(assets({source: './src/files'}))
         .use(assets({source: './dist/v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
         .use(assets({source: './dist/v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
+        .use(assets({source: './dist/tutorial', destination: 'tutorial'}))
         .use(require('./css-transform')(lang))
         .use(branch('*.html').use(currentPath()))
         .use(function(files, metalsmith, done) {

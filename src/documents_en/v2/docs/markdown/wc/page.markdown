@@ -35,45 +35,45 @@ document.addEventListener("init", function(event) {
 
 #### Back Button Support
 
-Android has a hardware back button. To support device back button, use `setDeviceBackButtonHandler` method in [`<ons-page>`](/v2/docs/js/ons-page.html).
+Android has a hardware back button. To support device back button, use `onDeviceBackButton` property in [`<ons-page>`](/v2/docs/js/ons-page.html).
 
 ```html
 <ons-page id="myPage">...</ons-page>
 <script>
   ons.ready(function() {
-    document.getElementById("myPage").setDeviceBackButtonHandler(function() {
-      console.log("Device back button is called.").
-    });
+    var myPage = document.getElementById("myPage");
 
-    // Get the back button handler and disable it
-    var handler = myPage.getDeviceBackButtonHandler();
-    handler.disable();
+    myPage.onDeviceBackButton = function() {
+      console.log("Device back button is called.").
+    };
+
+    // Disable the back button handler
+    myPage.onDeviceBackButton.disable();
   });
 </script>
 ```
 
-
 #### Overriding default back button handler
 
-Not only a `ons-page` component, a `ons-navigator` and a `ons-splitter` component also implement the default back button handlers. For instance, the `ons-navigator` handler triggers a `popPage()` when the back button is pressed. If you want to disable it, or change to the other behavior, you can use `getDeviceBackButtonHandler()` API.
+Not only a `ons-page` component, a `ons-navigator` and a `ons-splitter` component also implement the default back button handlers. For instance, the `ons-navigator` handler triggers a `popPage()` when the back button is pressed. If you want to disable it, or change to the other behavior, you can use `onDeviceBackButton` API.
 
 ```javascript
 // To disable a navigator back button handler
-navigator.getDeviceBackButtonHandler().disable();
+navigator.onDeviceBackButton.disable();
 
 // Or to change the behavior
-navigator.getDeviceBackButtonHandler().setListener(function(event) {});
+navigator.onDeviceBackButton.setListener(function(event) {});
 
 // Or to enable it again
-navigator.getDeviceBackButtonHandler().enable();
+navigator.onDeviceBackButton.enable();
 ```
 
-As you see in the code, `getDeviceBackButtonHandler()` API returns an object that has `disable()`, `enable()`, `isEnabled()` and `setListener(fn)` methods.
+As you see in the code, `onDeviceBackButton` API returns an object that has `disable()`, `enable()`, `isEnabled()` and `setListener(fn)` methods.
 
 If you want to call a parent event handler, `callParentHandler()` method will do the delegation. If the component's handler is undefined or set to be disabled, the parent event handler will be called automatically.
 
 ```javascript
-myPage.getDeviceBackButtonHandler().setListener(function(event) {
+myPage.onDeviceBackButton.setListener(function(event) {
   // Call parent handler
   event.callParentHandler();
 });

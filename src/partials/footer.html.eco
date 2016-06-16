@@ -47,7 +47,13 @@
       </div>
     </div>
 
-    <p class="copyright">Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca</a> Team. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a></p>
+    <p class="copyright">Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca Team</a>. All rights reserved.
+      <% if @lang == 'en': %>
+        <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
+      <% else if @lang == 'ja': %>
+        <a href="https://ja.monaca.io/terms-of-service/policy.html">Privacy Policy</a>
+      <% end %>
+    </p>
   </div>
 </footer>
 

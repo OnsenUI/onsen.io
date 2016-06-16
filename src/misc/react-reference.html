@@ -47,6 +47,15 @@ actionbar: false
     <% end %>
   <% end %>
 
+  <% if @doc.tutorial: %>
+  <h3 id="example">
+    <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
+    <a href="#example" class="reference-loop-anchor">#</a>
+  </h3>
+
+  <iframe class="tutorial-embed" width="320" height="568" src="<%- @getTutorialUrl "embed", @doc.tutorial %>"></iframe>
+  <% end %>
+
   <% if @doc.note: %>
   <section class="reference-note">
     <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%- @markd @translate @doc.note %></p>
@@ -142,7 +151,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods summary -->
-  <% if @doc.methods.length > 0: %>
+  <% if Object.keys(@doc.methods).length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
@@ -178,7 +187,7 @@ actionbar: false
   <!-- end methods summary -->
 
   <!-- methods details -->
-  <% if @doc.methods.length > 0: %>
+  <% if Object.keys(@doc.methods).length > 0: %>
   <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
   <% for key, method of @doc.methods: %>
     <section class="method-detail">
