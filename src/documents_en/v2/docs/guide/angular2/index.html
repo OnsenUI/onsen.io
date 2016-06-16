@@ -1,0 +1,87 @@
+---
+title: 'Onsen UI 2 Guide for Angular 2 - Onsen UI Framework'
+page: 'guide'
+needHelp: true
+framework: 'angular2'
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for Angular 2'
+version: v2
+---
+
+<nav class="tabs framework">
+  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
+  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
+  <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
+  <a href="/v2/docs/guide/angular2/" class="action selected angular2">Guide for Angular 2</a>
+</nav>
+
+<%- @markdown => %>
+
+Caution: This document is still in progress. Please send us feedbacks to improve the content.
+
+This guide describes using Onsen UI with Angular 2. The document is based on Angular 2 RC + Onsen UI 2 RC + Onsen 2 for Angular 2 Beta.
+
+### Starting Project
+
+Onsen UI for Angular 2 is delivered as NPM package ([`onsenui`](https://www.npmjs.com/package/onsenui) and [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui)). For easier installation, Monaca CLI will download all development & build dependencies including TypeScript compiler, Webpack and polyfills.
+
+##### Use Monaca CLI
+
+```bash
+$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
+$ monaca create helloworld # Choose Angular 2 template
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+##### Download via npm
+
+```bash
+# You need to install Onsen UI and Onsen UI for Angular 2
+$ npm install onsenui angular2-onsenui
+```
+
+### Loading Onsen UI in Angular 2
+
+You need to import `onsenui` and `angular2-onsenui` package as shown below. 
+
+```javascript
+// Angular 2 imports
+import '@angular/platform-browser-dynamic';
+import '@angular/platform-browser';
+import '@angular/core';
+import '@angular/http';
+import '@angular/router';
+
+// Onsen UI
+import 'onsenui'
+import {ONS_DIRECTIVES} from 'angular2-onsenui';
+```
+
+### Using Components
+
+Onsen UI components are Angular 2 directives, so just use them in the templates.
+
+```html
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Ons-button Component Example</div>
+  </ons-toolbar>
+  <div>
+    <div style="text-align: center; margin: 10px;">
+      <ons-button (click)="onClick()">MyButton</ons-button>
+    </div>
+  </div>
+</ons-page>
+```
+
+### Event Handling
+
+Just like other Angular 2 components, Onsen UI supports event bindings. To bind to user input events, please surround the DOM event name in parentheses and assign a quoted template statement to it.
+
+```
+<ons-button (click)="onClick()">MyButton</ons-button>
+```
+
+<!-- End of markdown -->
+<% end %>

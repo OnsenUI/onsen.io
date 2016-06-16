@@ -2,12 +2,15 @@
 
   /***** General *****/
   h1 {
+    margin: 0 0 10px 0;
     font-size: 22px;
     color: #eee;
   }
 
-  &#react-landing h1 {
+  &#react-landing h1,
+  &#angular2-landing h1, {
     font-size: 46px;
+    white-space: nowrap;
   }
 
   #main-container {
@@ -35,6 +38,10 @@
     }
   }
 
+  #start.angular2 {
+    background: url(/images/design_2016/icon_angular2.png) no-repeat 50% 50%, linear-gradient(190deg, #E54738, #C13932, #9A292C);
+  }
+
   #start, #start a, #start h1 {
     color: #fff;
   }
@@ -49,6 +56,7 @@
 
   p, li {
     font-size: 16px;
+    line-height: 1.6;
   }
 
   #main-nav > ul, .wrapper, #features {
@@ -506,7 +514,6 @@
       border: 0;
       font-size: 13px;
       padding: 15px 20px;
-      xbackground: #cD6A68;
       background: #B74744;
       color: #eee;
       width: 275px;
@@ -533,9 +540,14 @@
     }
   }
 
+  #description {
+    margin: 0 0 32px 0;
+  }
+
   #getting-started {
     font-size: 20px;
     padding: 12px;
+    margin: 42px 0;
     border: 0;
     color: #A72E2E;
     background: #fff;
@@ -547,7 +559,7 @@
     color: #ccc;
     font-size: 14px;
     line-height: 14px;
-    padding: 30px 0 35px;
+    padding: 0;
     a {
       color: #ccc;
     }
