@@ -4,20 +4,20 @@ date: 2016-06-14
 id: "angular2-components-on-the-way"
 title: "Onsen UI Angular 2 Components coming soon!"
 category: announcement
-tags: announcement, angular2, components, typescript, webpack, onsenui
+tags: announcement, angular2, components, typescript, webpack, react, onsenui
 ---
 
 ![Onsen UI bindings](/blog/content/images/2016/Jun/angular2_release_completed_cycle.png)
 
-Recently it may have looked like we've been focusing mainly on React, but we have also worked hard on bringing you components and directives for Angular 2.
+Recently it may have looked like we've been focusing mainly on React, but we have also worked hard on bringing you components and directives for Angular 2. Next week they will be available through both `npm` and `monaca cli`.
 
-Onsen 1.x was based on Angular 1, limiting our options. With Onsen 2 we decided to take a different approach. We separated the core logic and styles, so that it can be used with any framework. We also started working on wrappers, so that it can be used in a more natural way in the most popular frameworks.
+Onsen 1.x was based on Angular 1, but with Onsen 2 we decided to take a different approach. We separated the core logic and styles, so that it can be used with any framework. We also started working on wrappers, so that it can be used in a more natural way in the most popular frameworks.
 
 Vanilla JavaScript and Angular 1 have been supported for quite some time already. Recently we released [React Components](/react) and next week it's time for the long awaited Angular 2.
 
 ## Seamless integration between Angular 2 and Onsen UI
 
-![Angular 2 Onsen UI](/blog/content/images/2016/Jun/angular2_onsen.png)
+![Angular 2 and Onsen 2](/blog/content/images/2016/Jun/angular2_onsen.png)
 
 We personally think that UI components should not be limited to a specific framework, but when used in one they should feel natural to use.
 
@@ -57,7 +57,13 @@ So if we try it out then what does TypeScript actually give us? Well in 3 words 
 
 As for module loaders - while in the [Angular 2 Tutorial](https://angular.io/docs/ts/latest/quickstart.html) they are using [System.JS](https://github.com/systemjs/systemjs), [webpack](https://webpack.github.io/) is also [supported](https://angular.io/docs/ts/latest/guide/webpack.html).
 
+## So what does comes next?
 
-## Some final notes
+Next week we will release all the things you need in order to quickly start developing your first Onsen UI Angular 2 app.
+That includes:
+ - Guides on how to get started
+ - Documentation for all components and features
+ - Command Line Interface to get you up and running as fast as possible
+ - And of course the components themselves (as an `npm` package)
 
-Angular 2 seems to be bringing a lot of changes to the table. This post was merely an introduction to some of those changes. In a future post we will try to explain in more detail the process of creating an app with Onsen UI and Angular 2.
+When we release we will look more in depth into what Angular 2 is actually giving us, as well as show you a simple app, so please look forward to it!
