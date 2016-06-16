@@ -78,7 +78,7 @@ In the following example we are going to use the `strict mode`. The mobX react b
 * computed: This are variables can be derived from the observable state. For example contains the first name and the last name of a person, the computed value could be their full name.
 * actions: Actions will be used to group the code. Mainly we want to change the state only in actions.
 
-```
+```js
 import {observable, computed, action} from 'mobx';
 import {v4} from 'node-uuid';
 import moment from 'moment';
@@ -118,7 +118,7 @@ export class Timer {
 }
 ```
 
-```
+```js
 export class TimerStore {
 
   @observable isRunning;
