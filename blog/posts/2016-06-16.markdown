@@ -8,15 +8,15 @@ tags: announcement, angular2, components, typescript, webpack, onsenui
 ---
 
 ![Onsen UI bindings](/blog/content/images/2016/Jun/angular2_release_completed_cycle.png)
-## Silent but steady
 
-Recently it may have looked like we've been focusing mainly on react,
+Recently it may have looked like we've been focusing mainly on React, but we have also worked hard on bringing you components and directives for Angular 2.
 
-Onsen 1.x was based on Angular 1, limiting our options. With Onsen 2 we decided to take a different approach. We separated the core logic, so that it can be used in any project. We also started working wrappers, so that it can be used in a more natural way in the most popular frameworks.
+Onsen 1.x was based on Angular 1, limiting our options. With Onsen 2 we decided to take a different approach. We separated the core logic and styles, so that it can be used with any framework. We also started working on wrappers, so that it can be used in a more natural way in the most popular frameworks.
 
-Vanilla JavaScript and Angular 1 have been supported for quite some time already. Recently we released [React Components](/v2/react.html) and now it's time for the long awaited Angular 2.
+Vanilla JavaScript and Angular 1 have been supported for quite some time already. Recently we released [React Components](/react) and next week it's time for the long awaited Angular 2.
 
 ## Seamless integration between Angular 2 and Onsen UI
+
 ![NG2 Onsen]()
 
 We personally think that UI components should not be limited to a specific framework, but when used in one they should feel natural to use.
@@ -47,13 +47,13 @@ And in the template you can use all of them naturally:
 ## But why Angular 2?
 ![Why NG2]()
 
-Angular 1 was a big hit and a lot of people really liked some ideas which it brought to the table. One of the big downsides of Angular 1 was it's performance. The developers claim that the new version has significant improvement in that regard.
+Angular 1 was a big hit and a lot of people really liked some ideas which it brought to the table. One of the big downsides of Angular 1 was its performance. This issue has been addressed in the new version which is lightning fast.
 
 Since it's a major version they also had the ability to improve the API in a way which would encourage the best practices. While in Angular 1 controllers, views, directives were all scattered now the components are self-sufficient entities.
 
 Also for better or worse it seems that a large part of the community is heading towards using TypeScript in their projects. You can still use pure JavaScript (or Dart), so it's more of a matter preference rather than a requirement.
 
-So if we try it out then what does typescript actually give us? Well in 3 words - types, decorators and autocomplete, at least when comparing to ES2015. While it may be more complex than that lets just leave it at that for now. In terms of Angular 2 the decorators (or annotations) are probably the most necessary feature, as they do increase the readability quite a bit.
+So if we try it out then what does TypeScript actually give us? Well in 3 words - types, decorators and autocomplete, at least when comparing to ES2015. While it may be more complex than that lets just leave it at that for now. In terms of Angular 2 the decorators (or annotations) are probably the most necessary feature, as they do increase the readability quite a bit.
 
 As for module loaders - while in the [Angular 2 Tutorial](https://angular.io/docs/ts/latest/quickstart.html) they are using [System.JS](https://github.com/systemjs/systemjs), [webpack](https://webpack.github.io/) is also [supported](https://angular.io/docs/ts/latest/guide/webpack.html).
 
@@ -61,6 +61,3 @@ As for module loaders - while in the [Angular 2 Tutorial](https://angular.io/doc
 ## Some final notes
 
 Angular 2 seems to be bringing a lot of changes to the table. This post was merely an introduction to some of those changes. In a future post we will try to explain in more detail the process of creating an app with Onsen UI and Angular 2.
-
-Until then feel free to [try out](/angular2-onsenui-kitchensink/#/home)
-or clone our [Kitchen Sink App](https://github.com/OnsenUI/angular2-onsenui-kitchensink).
