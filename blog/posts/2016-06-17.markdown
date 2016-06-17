@@ -9,7 +9,7 @@ tags: tutorial, react, mobx, webpack, react, redux, performance
 
 ![MobX React Stopwatch](/blog/content/images/2016/Jun/mobx_react_stopwatch.png)
 
-In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) we spoke a lot about developing [React](https://facebook.github.io/react/) applications with [Redux](https://github.com/reactjs/redux): It enables the users to easily make testable and structured applications. However, writing a Redux applications produces a lot of boilerplate code. One framework alternative is [MobX](https://github.com/mobxjs/mobx), which solves this problem by doing automation using observables.
+In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) we spoke a lot about developing [React](https://facebook.github.io/react/) applications with [Redux](https://github.com/reactjs/redux): It enables the users to easily make testable and structured applications. However, writing a Redux application produces a lot of boilerplate code. One framework alternative is [MobX](https://github.com/mobxjs/mobx), which solves this problem by doing automation using observables.
 
 <!-- more -->
 
@@ -33,7 +33,7 @@ So basically MobX is a library that should make your life as a developer a littl
 
 # Counter Example
 
-Lets look at a simple counter example. We assume we  have a simple html page like this:
+Let's look at a simple counter example. We assume we  have a simple html page like this:
 
 ```
  <div>
@@ -76,7 +76,7 @@ The source code can be found in this [GitHub repository](https://github.com/phil
 
 # Implementation of a stop watch
 
-Now that we have learned the basics of MobX, lets have a look how to use it with React. First of all, we will need to install the bindings for React:
+Now that we have learned the basics of MobX, let's have a look how to use it with React. First of all, we will need to install the bindings for React:
 
 ```bash
 npm install --save-dev mobx-react
@@ -90,7 +90,7 @@ In the following example we are going to use the `strict mode`. In addition to `
 
 * actions: Actions will be used to group the code. In the strict mode, one can only change the values of the `observables` with calling an action. This makes the code more safe.
 
-Lets begin by creating a Timer class. The timer class will hold two values: The passed milliseconds since the timer started running and saved milliseconds for the combined time that has passed in previous runnings.
+Let's begin by creating a Timer class. The timer class will hold two values: The passed milliseconds since the timer started running and saved milliseconds for the combined time that has passed in previous runnings.
 
 ```js
 import {observable, computed, action} from 'mobx';
@@ -134,7 +134,7 @@ export class Timer {
 
 The code is pretty straight forward: We have the two actions `saveTime` and `reset` to manipulate the internal observable values. The computed values are `totalMilliSeconds` which adds the saved and the current time together and `display` which gives a formatted string.
 
-Its now time to write the Store class which manages the running state, the start time, the current timer and the saved laps:
+It's now time to write the Store class which manages the running state, the start time, the current timer and the saved laps:
 
 ```js
 export class TimerStore {
@@ -212,7 +212,7 @@ export class TimerStore {
 }
 ```
 
-One of the nice things about MobX here is that we don't have any difficulties of using asynchronous functions like `setTimeout`: MobX does only care that observables change and that we use action to change it. It will automatically react to those changes and rerender the necessary components. In our measure function we just check whether `isRunning` is set and update the milliseconds. Now its time to build our actual component.
+One of the nice things about MobX here is that we don't have any difficulties of using asynchronous functions like `setTimeout`: MobX does only care that observables change and that we use action to change it. It will automatically react to those changes and rerender the necessary components. In our measure function we just check whether `isRunning` is set and update the milliseconds. Now it's time to build our actual component.
 
 ```
 import React from 'react';
@@ -235,7 +235,7 @@ document.getElementById('app')
 
 ```
 
-As a side note this will be our only component that has a state. We pass the store down to all the children.  We create now a simple stateless Component that displays the `laps` with a left Text (Patch 1, Patch 2, ...) and on the right side the display:
+As a side note, this will be our only component that has a state. We pass the store down to all the children.  We create now a simple stateless Component that displays the `laps` with a left Text (Patch 1, Patch 2, ...) and on the right side the display:
 
 ```
 import React from 'react';
@@ -256,7 +256,7 @@ export const TimerDisplay = observer(({leftText, rightText}) => {
 });
 ```
 
-Lastly we create our main component: It will contains simple buttons. These buttons will display depending on the store. When clicked they will call an action of the store. MobX will automatically update the component that it needs if an observable is changed.
+Lastly, we create our main component: It will contains simple buttons. These buttons will display depending on the store. When clicked they will call an action of the store. MobX will automatically update the component that it needs if an observable is changed.
 
 ```
 /**
@@ -348,4 +348,4 @@ And now we are done with our simple application. For the curious the source code
 
 # Further reading
 
-MobX is great framework for building fast and performant apps. The choice between Redux and MobX comes down to how much control we want to have about the application and how much we let our frameworks do the job. To learn more about MobX we can highly recommend this [video](https://www.youtube.com/watch?v=XGwuM_u7UeQ) and the [GitHub repository](https://github.com/mobxjs/mobx). There is also an [interesting blog](https://medium.com/@mweststrate/3-reasons-why-i-stopped-using-react-setstate-ab73fc67a42e#.r1h8xbd69) post about why it might be a good idea to use the power of MobX to avoid `setState` in React.
+MobX is great framework for building fast and performant apps. The choice between Redux and MobX comes down to how much control we want to have about the application and how much we let our frameworks do the job. To learn more about MobX we highly recommend this [video](https://www.youtube.com/watch?v=XGwuM_u7UeQ) and the [GitHub repository](https://github.com/mobxjs/mobx). There is also an [interesting blog post](https://medium.com/@mweststrate/3-reasons-why-i-stopped-using-react-setstate-ab73fc67a42e#.r1h8xbd69) about why it might be a good idea to use the power of MobX to avoid `setState` in React.
