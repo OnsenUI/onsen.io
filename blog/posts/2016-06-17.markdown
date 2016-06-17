@@ -9,11 +9,11 @@ tags: tutorial, react, mobx, webpack, react, redux, performance
 
 ![MobX React Stopwatch](/blog/content/images/2016/Jun/mobx_react_stopwatch.png)
 
-In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) we spoke a lot about developing [React](https://facebook.github.io/react/) applications with [Redux](https://github.com/reactjs/redux): It enables the users to make a greatly testable and structured applications. However, writing a Redux applications produces a lot of boilerplate. One framework alternative is [MobX](https://github.com/mobxjs/mobx), which solves this problem by doing autmations using observables.
+In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) we spoke a lot about developing [React](https://facebook.github.io/react/) applications with [Redux](https://github.com/reactjs/redux): It enables the users to make a greatly testable and structured applications. However, writing a Redux applications produces a lot of boilerplate. One framework alternative is [MobX](https://github.com/mobxjs/mobx), which solves this problem by doing automations using observables.
 
 <!-- more -->
 
-In this tutorial we are going to build a simple stop watch app step by step. The source code is available on [GitHub](https://github.com/philolo1/MobX-Stopwatch). Our endproduct will look like this.
+In this tutorial we are going to build a simple stop watch App step by step. The source code is available on [GitHub](https://github.com/philolo1/MobX-Stopwatch). Our endproduct will look like this.
 
 
 <br />
@@ -133,9 +133,9 @@ export class Timer {
 }
 ```
 
-The code is pretty straighforward: We have the two actions `saveTime` and `reset` to manipulate the internal observable values. The computed values are `totalMilliSeconds` which adds the saved and the current time together and `display` which gives a formatted string.
+The code is pretty straight forward: We have the two actions `saveTime` and `reset` to manipulate the internal observable values. The computed values are `totalMilliSeconds` which adds the saved and the current time together and `display` which gives a formatted string.
 
-Its now time to write the Store class which manages the running state, the startTime, the current timer and the saved laps:
+Its now time to write the Store class which manages the running state, the start time, the current timer and the saved laps:
 
 ```js
 export class TimerStore {
@@ -213,7 +213,7 @@ export class TimerStore {
 }
 ```
 
-One of the nice things about MobX here is that we don't have any difficulties of using asynchronous functions like setTimeout: MobX does only care that observables change and that we use action to change it. It will automatically precompute. In our measure function we just check whether isRunning is set and update the miliseconds. Now its time to build our actual component.
+One of the nice things about MobX here is that we don't have any difficulties of using asynchronous functions like `setTimeout`: MobX does only care that observables change and that we use action to change it. It will automatically react to those changes and rerender the necessary components. In our measure function we just check whether isRunning is set and update the milliseconds. Now its time to build our actual component.
 
 ```
 import React from 'react';
@@ -236,9 +236,7 @@ document.getElementById('app')
 
 ```
 
-As a side note this will be our only component that has a state. We pass the store down to all the children.
-
-Lets first do a simple stateless Component that displays the `laps` with a left Text (Patch 1, Patch 2, ...) and on the right side the display:
+As a side note this will be our only component that has a state. We pass the store down to all the children.  We create now a simple stateless Component that displays the `laps` with a left Text (Patch 1, Patch 2, ...) and on the right side the display:
 
 ```
 import React from 'react';
@@ -347,8 +345,8 @@ const Main = observer(({timerStore}) => {
 export default Main;
 ```
 
-And now we are done with our simple application. The source code is available at this [GitHub repository](https://github.com/philolo1/MobX-Stopwatch).
+And now we are done with our simple application. For the curious the source code is available at this [GitHub repository](https://github.com/philolo1/MobX-Stopwatch).
 
 # Further reading
 
-MobX is great framework to build apps fast and performant. To learn more about MobX we can highly recommend this [video](https://www.youtube.com/watch?v=XGwuM_u7UeQ) and the [GitHub repository](https://github.com/mobxjs/mobx).
+MobX is great framework to build apps fast and performant. The choice between Redux and MobX comes down to how much control we want to have about the application and how much we let our frameworks do the job. To learn more about MobX we can highly recommend this [video](https://www.youtube.com/watch?v=XGwuM_u7UeQ) and the [GitHub repository](https://github.com/mobxjs/mobx).
