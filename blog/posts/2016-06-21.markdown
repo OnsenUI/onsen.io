@@ -1,13 +1,13 @@
 ---
 author: patrick
 date: 2016-06-17
-id: "mobx-stopwatch"
+id: "mobx-react-stopwatch"
 title: "Its all about time: Building a performant Stopwatch with MobX, fast"
 category: tutorial
 tags: tutorial, react, mobx, webpack, react, redux, performance
 ---
 
-![Time Travel with the Redux DevTools](/blog/content/images/2016/Jun/time_travel_redux_devtools.png)
+![MobX React Stopwatch](/blog/content/images/2016/Jun/mobx_react_stopwatch.png)
 
 In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) we spoke a lot about developing [React](https://facebook.github.io/react/) applications with [Redux](https://github.com/reactjs/redux): It enables the users to make a greatly testable and structured applications. However, writing a Redux applications produces a lot of boilerplate. One framework alternative is [MobX](https://github.com/mobxjs/mobx), which solves this problem by doing autmations using observables.
 
@@ -18,7 +18,14 @@ In this tutorial we are going to build a simple stop watch app step by step. The
 
 <br />
 
-<iframe style="width: 100%; height: 800px" src="http://philolo1.github.io/MobX-Stopwatch/build/index.html"></iframe>
+
+<div style="display: flex;" >
+<div style="flex-grow: 1;"> </div>
+<div style="background-image: url('/blog/content/images/2016/Feb/iphone6.png'); width: 401px; height: 806px; ">
+<iframe scrolling="yes" style=" margin-top: 92px; margin-left: 26px;" src="https://philolo1.github.io/MobX-Stopwatch/build/index.html" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
+</div>
+<div style="flex-grow: 1;"> </div>
+</div>
 
 
 <br />
