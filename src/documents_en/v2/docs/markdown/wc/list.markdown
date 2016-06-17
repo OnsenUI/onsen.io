@@ -30,13 +30,13 @@ Onsen UI list items provide a secondary syntax where the list item is divided in
 
 ``` html
 <ons-list-item>
-  <div class="list__item__left">
+  <div class="left">
     <ons-icon icon="md-face" class="list__item__icon"></ons-icon>
   </div>
-  <div class="list__item__center">
+  <div class="center">
     Icon and switch
   </div>
-  <div class="list__item__right">
+  <div class="right">
     <ons-switch></ons-switch>
   </div>
 </ons-list-item>
