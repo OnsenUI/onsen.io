@@ -9,13 +9,13 @@ tags: tutorial, react, mobx, webpack, react, redux, onsenui
 
 ![Time Travel with the Redux DevTools](/blog/content/images/2016/Jun/time_travel_redux_devtools.png)
 
-In [recent posts](TODO) we spoke a lot about developing React applications with [Redux](TODO): It enables the users to make a greatly testable and structured applications. However, writing a Redux applications produces a lot of boilerplate. One framework alternative is [MobX](Todo), which solves this problem by doing autmations using observables.
+In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) we spoke a lot about developing [React](https://facebook.github.io/react/) applications with [Redux](https://github.com/reactjs/redux): It enables the users to make a greatly testable and structured applications. However, writing a Redux applications produces a lot of boilerplate. One framework alternative is [MobX](https://github.com/mobxjs/mobx), which solves this problem by doing autmations using observables.
 
 <!-- more -->
 
-In this tutorial we are going to build a simple stop watch app step by step. The source code is available on [GitHub](TODO). Our endproduct will look like this.
+In this tutorial we are going to build a simple stop watch app step by step. The source code is available on [GitHub](https://github.com/philolo1/MobX-Stopwatch). Our endproduct will look like this.
 
-[Frame](TODO)
+<iframe style="width: 100%; height: 350px" src="http://philolo1.github.io/MobX-Stopwatch/build/index.html"></iframe>
 
 # Why MobX
 
@@ -64,20 +64,21 @@ window.minusClick = () => {
 
 The code is simple: We save our counter in a Object called `CounterStore` and make it observable. We implement the render function so that it updates our display and tell mobX that when the observables change, it should run this function. The result can be seen here:
 
-[GitHub](TODO)
+<iframe style="width: 100%; height: 100px" src="http://philolo1.github.io/mobx-counter/build/index.html"></iframe>
 
-The source code can be found at this [Github repo](https://github.com/philolo1/mobx-counter).
+The source code can be found at this [Github repository](https://github.com/philolo1/mobx-counter).
 
-# Implementation of a stop watch 
+# Implementation of a stop watch
 
-Now that we have learned the basics of MobX, lets have a look how to use it with react. First of all we  will need to install the binding for react called `mobx-react`. These bindings work with `decorators`, an es7 feature. You can read more about them [here](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.4hmxfx5y4).
+Now that we have learned the basics of MobX, lets have a look how to use it with React. First of all,  we will need to install the binding for react using `npm install mobx-react`. These bindings work with `decorators`, an es7 feature. You can read more about them [here](https://medium.com/google-developers/exploring-es7-decorators-76ecb65fb841#.4hmxfx5y4).
 
-In the following example we are going to use the `strict mode`. The mobX react binding consists of the following contexts:
+In the following example we are going to use the `strict mode`. In addition to `autorun` and observables, we will need to understand two more concepts:
 
-* observables
-* computed: This are variables can be derived from the observable state. For example contains the first name and the last name of a person, the computed value could be their full name.
-* actions: Actions will be used to group the code. Mainly we want to change the state only in actions.
+* computed values: These are values that can be derived from the observable state. For example, if the observable state contains the first name and the last name of a person, the computed value could be their full name. These computed values work as getters and are only updated if the dependent value changes.
 
+* actions: Actions will be used to group the code. In the strict mode, one can only change the values of the `observables` with calling an action. This makes the code more save.
+
+Lets begin with creating a Timer class. The timer class  will hold two values: The passed milliseconds since the timer started running and saved milliseconds for the combined time that has passed in previous runnings.
 ```js
 import {observable, computed, action} from 'mobx';
 import {v4} from 'node-uuid';
@@ -117,6 +118,10 @@ export class Timer {
   }
 }
 ```
+
+The code is pretty straighforward: We have the two actions `saveTime` and `reset` to manipulate the internal observable values. The computed values are `totalMilliSeconds` which adds the saved and the current time together and `display` which gives a formatted string.
+
+Its now time to write the Store class which manages the running state, the startTime, the current timer and the saved laps:
 
 ```js
 export class TimerStore {
@@ -194,6 +199,8 @@ export class TimerStore {
 }
 ```
 
+One of the nice things about MobX here is that we don't have any difficulties of using asynchronous functions like setTimeout: MobX does only care that observables change and that we use action to change it. It will automatically precompute. In our measure function we just check whether isRunning is set and update the miliseconds. Now its time to build our actual component.
+
 ```
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -215,6 +222,31 @@ document.getElementById('app')
 
 ```
 
+As a side note this will be our only component that has a state. We pass the store down to all the children.
+
+Lets first do a simple stateless Component that displays the `laps` with a left Text (Patch 1, Patch 2, ...) and on the right side the display:
+
+```
+import React from 'react';
+import {observer} from 'mobx-react';
+import {timerStyle} from './styles';
+
+export const TimerDisplay = observer(({leftText, rightText}) => {
+  return (
+    <div style={timerStyle.main} >
+      <div style={timerStyle.left} >
+        {leftText}
+      </div>
+      <div style={timerStyle.right} >
+        {rightText}
+      </div>
+    </div>
+  );
+});
+```
+
+Lastly we create our main component: It will contains simple buttons. These buttons will display depending on the store. When clicked they will call an action of the store. MobX will automatically update the component that it needs if an observable is changed.
+
 ```
 /**
  * In this file, we create a React component
@@ -223,52 +255,8 @@ document.getElementById('app')
 
 import React from 'react';
 import {observer} from 'mobx-react';
-
-const TimerDisplay = ({timer, text}) => {
-  return (
-    <div
-      style={{
-        borderBottom: '1px solid #d9dae0',
-        display: 'flex',
-      }}
-    >
-      <div
-        style={{fontSize: 30,
-          fontFamily: 'AvenirNext-UltraLight',
-          color: '#7f8083',
-          padding: 20,
-          flex: 1,
-        }}
-      >
-        {text}
-      </div>
-      <div
-        style={{fontSize: 30,
-          padding: 20,
-          fontFamily: 'AvenirNext-UltraLight',
-          color: '#7f8083',
-        }}
-      >
-        {timer.display}
-      </div>
-    </div>
-  );
-};
-
-const ButtonStyle = {
-  fontFamily: 'AvenirNext-UltraLight',
-  fontSize: 20,
-  width: 72,
-  height: 72,
-  margin: 24,
-  padding: 0,
-  cursor: 'pointer',
-  letterSpacing: 1,
-  border: 0,
-  borderRadius: '50%',
-  outline: 'none',
-  background: 'white',
-};
+import {TimerDisplay} from './TimerDisplay';
+import {buttonStyle, mainStyle} from './styles';
 
 const Main = observer(({timerStore}) => {
   let firstButton;
@@ -277,7 +265,7 @@ const Main = observer(({timerStore}) => {
   if (!timerStore.isRunning) {
     secondButton = (
       <button
-        style={{...ButtonStyle, color: '#4bd761'}}
+        style={{...buttonStyle, color: '#4bd761'}}
         onClick={() => timerStore.startTimer()}
       >
         start
@@ -286,7 +274,7 @@ const Main = observer(({timerStore}) => {
 
     firstButton = (
       <button
-        style={ButtonStyle}
+        style={buttonStyle}
         onClick={() => timerStore.resetTimer()}
       >
         reset
@@ -299,7 +287,7 @@ const Main = observer(({timerStore}) => {
   } else {
     secondButton = (
       <button
-        style={{...ButtonStyle, color: '#fd3d2a'}}
+        style={{...buttonStyle, color: '#fd3d2a'}}
         onClick={() => timerStore.stopTimer()}
       >
         stop
@@ -308,7 +296,7 @@ const Main = observer(({timerStore}) => {
 
     firstButton = (
       <button
-        style={ButtonStyle}
+        style={buttonStyle}
         onClick={() => timerStore.lapTimer()}
       >
         lap
@@ -319,20 +307,12 @@ const Main = observer(({timerStore}) => {
   return (
     <div style={{fontSize: 30}}>
       <div
-        style={{
-          background: 'white',
-          height: 120,
-          fontSize: 60,
-          fontFamily: 'AvenirNext-UltraLight',
-          border: 'solid #cecfd0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'}}
+        style={mainStyle.display}
       >
         {timerStore.mainDisplay}
       </div>
       <div>
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={mainStyle.buttons}>
           {firstButton}
           {secondButton}
         </div>
@@ -340,8 +320,8 @@ const Main = observer(({timerStore}) => {
           {timerStore.lapData.map((el) =>
             <TimerDisplay
               key={el.lap.id}
-              timer={el.lap}
-              text={el.text}
+              leftText={el.text}
+              rightText={el.lap.display}
             />
             )}
         </div>
@@ -353,5 +333,8 @@ const Main = observer(({timerStore}) => {
 export default Main;
 ```
 
-# Further references
-https://www.youtube.com/watch?v=XGwuM_u7UeQ
+And now we are done with our simple application. The source code is available at this [GitHub repository](https://github.com/philolo1/MobX-Stopwatch).
+
+# Further reading
+
+MobX is great framework to build apps fast and performant. To learn more about MobX we can highly recommend this [video] (https://www.youtube.com/watch?v=XGwuM_u7UeQ) and the [GitHub repository](https://github.com/mobxjs/mobx).
