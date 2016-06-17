@@ -15,9 +15,16 @@ In [recent posts](https://onsen.io/blog/react-redux-devtools-with-time-travel/) 
 
 In this tutorial we are going to build a simple stop watch app step by step. The source code is available on [GitHub](https://github.com/philolo1/MobX-Stopwatch). Our endproduct will look like this.
 
-<iframe style="width: 100%; height: 500px" src="http://philolo1.github.io/MobX-Stopwatch/build/index.html"></iframe>
 
-# Why MobX
+<br />
+
+<iframe style="width: 100%; height: 800px" src="http://philolo1.github.io/MobX-Stopwatch/build/index.html"></iframe>
+
+
+<br />
+
+
+# Why MobX?
 
 The main author of MobX puts its best in this tweet:
 
@@ -64,7 +71,7 @@ window.minusClick = () => {
 
 The code is simple: We save our counter in a Object called `CounterStore` and make it observable. We implement the render function so that it updates our display and tell mobX that when the observables change, it should run this function. The result can be seen here:
 
-<iframe style="width: 100%; height: 100px" src="http://philolo1.github.io/mobx-counter/build/index.html"></iframe>
+<iframe style="width: 100%; height: 200px" src="http://philolo1.github.io/mobx-counter/build/index.html"></iframe>
 
 The source code can be found at this [Github repository](https://github.com/philolo1/mobx-counter).
 
