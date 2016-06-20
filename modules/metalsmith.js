@@ -183,7 +183,12 @@ module.exports = function(lang, isStaging) {
               var doc = files[path];
               doc.markdownContents = doc.contents.toString('utf8');
               doc.numericId = crypto.createHash('md5').update(doc.id).digest('hex');
-              doc.cid = 7;
+              var cids = {
+                announcement: 5,
+                showcase: 13,
+                default: 7
+              };
+              doc.cid = cids[doc.category] || cids.default;
             }
 
             done();
