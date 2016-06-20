@@ -53,7 +53,6 @@ Android has a hardware back button. To support device back button, use `onDevice
 </script>
 ```
 
-
 #### Overriding default back button handler
 
 Not only a `ons-page` component, a `ons-navigator` and a `ons-splitter` component also implement the default back button handlers. For instance, the `ons-navigator` handler triggers a `popPage()` when the back button is pressed. If you want to disable it, or change to the other behavior, you can use `onDeviceBackButton` API.

@@ -3,7 +3,7 @@
   <a href="js.html" class="js action <%="selected" if @framework=="js"%>">JavaScript</a>
   <a href="react.html" class="react action <%="selected" if @framework=="react"%>">React</a>
   <a href="angular1.html" class="angular1 action <%="selected" if @framework=="angular1"%>">Angular 1</a>
-  <a class="angular2 action"><span title="Coming soon" style="color: #ccc;">Angular 2</span></a>
+  <a href="angular2.html" class="angular2 action <%="selected" if @framework=="angular2"%>">Angular 2</a>
 </nav>
 
 <div class="js-index"><div class="js-index-inner">
