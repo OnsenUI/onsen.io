@@ -25,15 +25,23 @@
     }
 
     &-get-started {
-      padding: 10px 0;
+      padding: 13px 0 10px 0;
       margin: 0 auto;
       width: 220px;
       border-radius: 3px;
       background-color: rgba(255, 255, 255, 0.8);
       color: #dd0031;
+      cursor: pointer;
+
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #001e4a;
+        color: #d9dcdf;
+      }
 
       &-title {
-        font-weight: 600px;
+        font-weight: 600;
         font-size: 24px;
         line-height: 24px;
       }
@@ -169,6 +177,8 @@
     }
 
     &-get-started {
+      font-family: @en-header-font-family;
+      font-weight: 600;
       display: block;
       width: 409px;
       margin: 80px auto;
