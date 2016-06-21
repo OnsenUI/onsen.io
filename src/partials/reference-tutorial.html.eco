@@ -31,6 +31,8 @@
             <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
               <% if @framework == "react": %>
                 &lt;<%= doc.name %> /&gt;
+              <% else if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
+                <%= doc.name %> (<%=extensionDoc.directive%> Directive)
               <% else: %>
                 <%= doc.name %>
               <% end %>
