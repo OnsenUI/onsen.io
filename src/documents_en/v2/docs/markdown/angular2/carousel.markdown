@@ -1,6 +1,6 @@
 ---
 title: Carousel
-component: angular2/ons-carousel
+component: angular2/ons-carousel-item,angular2/ons-carousel
 framework: angular2
 tutorial: vanilla/Reference/carousel
 ---
@@ -57,6 +57,4 @@ export class AppComponent {
     this._carousel.element.next();
   }
 }
-
-bootstrap(AppComponent);
 ```
