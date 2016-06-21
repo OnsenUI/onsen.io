@@ -28,7 +28,7 @@
   }
 
   function checkOuterClick(e) {
-    if(e.target != searchBar) {
+    if (e.target != searchBar) {
       hideSearchBar();
     }
   }
