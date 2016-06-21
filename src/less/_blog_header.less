@@ -78,15 +78,17 @@
   &-search {
     display: inline-block;
     height: 17px;
+    padding-left: 30px;
+    vertical-align: middle;
 
     &-container {
       position: absolute;
-      left: 320px;
+      left: 250px;
       z-index: 10000;
-      width: 220px;
+      width: 295px;
       text-align: right;
       display: inline;
-      transition: visibility 0.1s ease-in-out 1s, display 0.1s ease-in-out 1s;
+      transition: visibility 0.1s ease-in-out 0.5s, display 0.1s ease-in-out 0.5s;
 
       &-hidden {
         visibility: hidden;
@@ -98,10 +100,24 @@
       }
     }
 
+    &-mask {
+      width: 30px;
+      height: 38px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: -4px;
+      background-color: white;
+      opacity: 0.8;
+    }
+
     &-bar {
       display: inline-block !important;
-      appearance: searchfield !important;
-      transition: width 1s ease-in-out, visibility .1s ease-in-out 0.9s;
+      height: 36px;
+      border-radious: 2px;
+      padding-left: 10px;
+      border: 1px solid #ccc;
+      -webkit-font-smoothing: antialiased;
+      transition: width 0.5s ease-in-out, visibility 0.5s ease-in-out;
 
       &-hidden {
         width: 0px;
@@ -111,8 +127,7 @@
       &-visible {
         &[type="text"] {
           visibility: visible;
-          width: 212px !important;
-          transition: width 1s ease-in-out !important;
+          width: 252px !important;
         }
       }
     }
