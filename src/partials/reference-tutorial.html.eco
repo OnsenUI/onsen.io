@@ -17,8 +17,16 @@
       <% end %>
       <!-- <img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16"> -->
       <div class="js-index-guide">
-        <% if docs.index: %>
-          <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Guide</a></span>
+        <% if @framework == "angular2": %>
+          <% if docs.index: %>
+            <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+          <% else if @componentCategories["js"][category].index: %>
+            <span class="guide"><a href="/v2/docs/js/<%=category%>.html">Core JS Guide</a></span>
+          <% end %>
+        <% else: %>
+          <% if docs.index: %>
+            <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+          <% end %>
         <% end %>
       </div>
     </h4>
