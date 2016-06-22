@@ -15,13 +15,13 @@ Angular 2 has come a long way since it was released at ng-conf last year and is 
 
 <!-- more -->
 
-These components are based on Onsen UI 2.0, which is a complete rewrite and reimplementation of the original Onsen UI components. We can't wait to see what kind of amazing apps you will create!
+These components are based on Onsen UI 2.0, which is a complete framework agnostic rewrite and reimplementation of the original Onsen UI components. We can't wait to see what kind of amazing apps you will create!
 
-We have created a [new landing page](https://onsen.io/angular2) where you can learn more about the Angular 2 components. We also have added [new docs](https://onsen.io/v2/docs/guide/angular2/index.html) for the Angular 2 directives to make it easy for you to get started.
+We have created a [new landing page](https://onsen.io/angular2) where you can learn more about the Angular 2 components. We also added [new docs](https://onsen.io/v2/docs/guide/angular2/index.html) for the Angular 2 directives to make it easy for you to get started.
 
 ## Easy to use
 
-One focus of Onsen UI has always been simplicity and ease of use. We want it to be easy to create pages and add navigation. We've had simplicity in mind when creating the Angular 2 components as well.
+One focus of Onsen UI has always been simplicity and ease of use. We want it to be as easy as possible to create pages and add navigation. We've had simplicity in mind when creating the Angular 2 components as well.
 
 To use the Onsen UI directives in your Angular 2 app you just need to import the `ONS_DIRECTIVES` variable from the `angular2-onsenui` (available on [npm](https://www.npmjs.com/package/angular2-onsenui)) package. To install it you just need to do:
 
@@ -55,11 +55,11 @@ For people who have used Onsen UI 1 with AngularJS the tag names and attributes 
 
 ## What's new in Angular 2?
 
-If you come from an AngularJS 1.x background there are some new concepts that you need to learn before getting started with Onsen UI development using Angular 2. Even though you can create Angular 2 apps using normal JavaScript we recommend you to use TypeScript since it will make your life a lot easier with things like annotations and static typing.
+If you are coming from an AngularJS 1.x background there are some new concepts that you need to learn before getting started with Onsen UI development using Angular 2. Even though you can create Angular 2 apps using normal JavaScript we recommend you to use TypeScript since it will make your life a lot easier with things like annotations and static typing.
 
-TypeScript is probably the biggest hurdle to overcome when transitioning from AngularJS 1.x to Angular 2, especially if you are not used to statically typed languages. There are some other key differences as well. With Angular 2 everything is component based and things like controllers and the `$scope` variable are a thing of the past. We believe this is a good thing since it makes it a lot easier to structure and to reason about your app.
+[TypeScript](https://www.typescriptlang.org/) is probably the biggest hurdle to overcome when transitioning from AngularJS 1.x to Angular 2, especially if you are not used to statically typed languages. There are some other key differences as well. With Angular 2 everything is component based and things like controllers and the `$scope` variable are a thing of the past. We believe this is a good thing since it makes it a lot easier to structure and to reason about your app.
 
-A good place to get started is the [official Angular 2 tutorial](https://angular.io/docs/ts/latest/tutorial/) where you learn how to create a simple app. If you are migrating apps from AngularJS 1.x to Angular 2 we also recommend you to take a look at the [migration guide](https://angular.io/docs/ts/latest/guide/upgrade.html). 
+A good place to get started is the [official Angular 2 tutorial](https://angular.io/docs/ts/latest/tutorial/) where you learn how to create a simple app. If you are migrating apps from AngularJS 1.x to Angular 2 we also recommend you to take a look at the [migration guide](https://angular.io/docs/ts/latest/guide/upgrade.html).
 
 ## We love your feedback
 
