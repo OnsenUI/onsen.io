@@ -3,7 +3,7 @@ author: andreas
 date: 2016-06-22
 id: "angular-2-components-release"
 title: "Angular 2 Components for Onsen UI are here! 🚀"
-category: tutorial
+category: announcement
 tags: angular 2, components, onsenui, beta
 ---
 
@@ -18,6 +18,12 @@ Angular 2 has come a long way since it was released at ng-conf last year and is 
 These components are based on Onsen UI 2.0, which is a complete rewrite and reimplementation of the original Onsen UI components. We can't wait to see what kind of amazing apps you will create!
 
 We have created a [new landing page](https://onsen.io/angular2) where you can learn more about the Angular 2 components. We also have added [new docs](https://onsen.io/v2/docs/guide/angular2/index.html) for the Angular 2 directives to make it easy for you to get started.
+
+If you want to take a look at some code right away, we have an extensive [kitchen sink example](https://github.com/OnsenUI/angular2-onsenui-kitchensink) using Webpack. Feel free to use this project as a starting point for you own apps.
+
+<div style="display: flex; justify-content: center;">
+  <iframe src="https://onsenui.github.io/frame-auto-style/?platform=ios&src=https://onsenui.github.io/angular2-onsenui-kitchensink/" scrolling="no" style="border: 0; width: 400px; height: 800px;"></iframe>
+</div>
 
 ## Easy to use
 
@@ -57,7 +63,7 @@ For people who have used Onsen UI 1 with AngularJS the tag names and attributes 
 
 If you come from an AngularJS 1.x background there are some new concepts that you need to learn before getting started with Onsen UI development using Angular 2. Even though you can create Angular 2 apps using normal JavaScript we recommend you to use TypeScript since it will make your life a lot easier with things like annotations and static typing.
 
-TypeScript is probably the biggest hurdle to overcome when transitioning from AngularJS 1.x to Angular 2, especially if you are not used to statically typed languages. There are some other key differences as well. With Angular 2 everything is component based and things like controllers and the `$scope` variable are a thing of the past. We believe this is a good thing since it makes it a lot easier to structure and to reason about your app.
+TypeScript is probably the biggest challenge when transitioning from AngularJS 1.x to Angular 2, especially if you are not used to statically typed languages. There are some other key differences as well. With Angular 2 everything is component based and things like controllers and the `$scope` variable are a thing of the past. We believe this is a good thing since it makes it a lot easier to structure and to reason about your app.
 
 A good place to get started is the [official Angular 2 tutorial](https://angular.io/docs/ts/latest/tutorial/) where you learn how to create a simple app. If you are migrating apps from AngularJS 1.x to Angular 2 we also recommend you to take a look at the [migration guide](https://angular.io/docs/ts/latest/guide/upgrade.html). 
 
