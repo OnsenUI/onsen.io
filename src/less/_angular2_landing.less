@@ -2,17 +2,19 @@
   text-align: center;
 
   &-large-image {
-    .tablet-query({
+    max-width: 80%;
+
+    .mobile-query({
       display: none;
     });
   }
 
   &-small-image {
     display: none;
+    max-width: 80%;
 
-    .tablet-query({
+    .mobile-query({
       display: inline-block;
-      width: 80%;
     });
   }
 
