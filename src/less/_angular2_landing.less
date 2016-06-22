@@ -12,6 +12,7 @@
 
     .tablet-query({
       display: inline-block;
+      width: 80%;
     });
   }
 
@@ -19,13 +20,14 @@
     background: linear-gradient(0deg, #0273d4 0%, #0143a3 42%, #001e4a 100%);
     font-family: @en-header-font-family;
     color: #fff;
-    padding: 0 10px;
+    padding: 0 18px;
 
     &-title {
       padding: 50px 0 0 0;
       margin: 0;
       font-size: 50px;
       font-weight: 300;
+      line-height: 52px;
     }
 
     &-subtitle {
@@ -143,7 +145,12 @@
   }
 
   &-social {
-    margin: 20px 0;
+    margin: 20px 0 56px 0;
+
+    .tablet-query({
+      margin: 20px 0 40px 0;
+    });
+
     font-size: 14px;
     color: #4183c4;
     display: flex;
@@ -180,12 +187,17 @@
 
   &-content {
     max-width: 960px;
-    padding: 0 20px;
+    padding: 0 18px;
     margin: 0 auto;
 
     h2 {
       font-size: 31px;
+      line-height: 36px;
       color: #000;
+    }
+
+    hr {
+      margin: 42px 0 32px 0;
     }
 
     p {
@@ -203,12 +215,11 @@
       max-width: 90%;
       margin: 80px auto;
       background-color: #ff4d35;
-
+      padding: 14px 0;
       color: #fefefe;
       text-decoration: none;
-      line-height: 50px;
       font-size: 20px;
-
+      line-height: 22px;
     }
   }
 }
@@ -220,4 +231,8 @@ body:after {
   overflow: hidden;
   z-index: -1;
   content: url(/images/design_2016/logo_angular1_available_hover.png) url(/images/design_2016/logo_react_available_hover.png) url(/images/design_2016/logo_js_available_hover.png)
+}
+
+#showcase-carousel-wrapper {
+  height: 280px;
 }
