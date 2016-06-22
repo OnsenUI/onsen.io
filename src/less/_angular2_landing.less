@@ -1,10 +1,25 @@
 .design-2016 .angular2-landing {
   text-align: center;
 
+  &-large-image {
+    .tablet-query({
+      display: none;
+    });
+  }
+
+  &-small-image {
+    display: none;
+
+    .tablet-query({
+      display: inline-block;
+    });
+  }
+
   &-header {
     background: linear-gradient(0deg, #0273d4 0%, #0143a3 42%, #001e4a 100%);
     font-family: @en-header-font-family;
     color: #fff;
+    padding: 0 10px;
 
     &-title {
       padding: 50px 0 0 0;
@@ -165,6 +180,7 @@
 
   &-content {
     max-width: 960px;
+    padding: 0 20px;
     margin: 0 auto;
 
     h2 {
@@ -184,6 +200,7 @@
       font-weight: 600;
       display: block;
       width: 409px;
+      max-width: 90%;
       margin: 80px auto;
       background-color: #ff4d35;
 
