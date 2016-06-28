@@ -1,6 +1,6 @@
 ---
 author: atsushi
-date: 2016-06-21
+date: 2016-06-28
 id: getting-started-onsenui-with-react
 title: "React × Onsen UI をはじめてみよう"
 product: monaca
@@ -127,12 +127,12 @@ browserify www/app.js -o www/bundle.js -t [ babelify --presets [ es2015 react ] 
 
 では実際に動かしてみます。 monaca preview コマンドを打つとWebサーバが立ち上がるので、http://127.0.0.1:8000にアクセスします。
 
-![](../content/images/2016/Jun/monaca-react-2.png)
+![](/blog/content/images/2016/Jun/monaca-react-2.png)
 
 
 表示されたらボタンをタップします。そうするとOnsen UIのアラートが出るのが確認できるはずです。
 
-![](../content/images/2016/Jun/monaca-react-1.png)
+![](/blog/content/images/2016/Jun/monaca-react-1.png)
 
 ----
 
