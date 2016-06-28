@@ -264,6 +264,11 @@ module.exports = function() {
         }
       },
 
+      getExtensionDoc: function(file, framework) {
+        if (!file.doc.elements) return null;
+        return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
+      },
+
       translate: function(message) {
 
         var lang = this.lang;

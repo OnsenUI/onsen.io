@@ -3,7 +3,7 @@
   <a href="js.html" class="js action <%="selected" if @framework=="js"%>">JavaScript</a>
   <a href="react.html" class="react action <%="selected" if @framework=="react"%>">React</a>
   <a href="angular1.html" class="angular1 action <%="selected" if @framework=="angular1"%>">Angular 1</a>
-  <a class="angular2 action"><span title="Coming soon" style="color: #ccc;">Angular 2</span></a>
+  <a href="angular2.html" class="angular2 action <%="selected" if @framework=="angular2"%>">Angular 2</a>
 </nav>
 
 <div class="js-index"><div class="js-index-inner">
@@ -17,8 +17,16 @@
       <% end %>
       <!-- <img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16"> -->
       <div class="js-index-guide">
-        <% if docs.index: %>
-          <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Guide</a></span>
+        <% if @framework == "angular2": %>
+          <% if docs.index: %>
+            <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+          <% else if @componentCategories["js"][category].index: %>
+            <span class="guide"><a href="/v2/docs/js/<%=category%>.html">Core JS Guide</a></span>
+          <% end %>
+        <% else: %>
+          <% if docs.index: %>
+            <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+          <% end %>
         <% end %>
       </div>
     </h4>
@@ -31,6 +39,8 @@
             <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
               <% if @framework == "react": %>
                 &lt;<%= doc.name %> /&gt;
+              <% else if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
+                <%= doc.name %> (<%=extensionDoc.directive%> Directive)
               <% else: %>
                 <%= doc.name %>
               <% end %>

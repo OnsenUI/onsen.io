@@ -1,0 +1,371 @@
+---
+author: atsushi
+date: 2016-06-15
+id: react-onsen-ui-navigator-tabs
+title: "Onsen UI React拡張を使ったナビゲーションとタブの使い方"
+product: monaca
+tags: Onsen UI,React
+category: 技術情報
+---
+
+![React Onsen UI](https://onsen.io/blog/content/images/2015/Sep/react_onsenui.png)
+
+Onsen UI用のReactコンポーネントをリリースしました。[こちらをご覧ください](https://onsen.io/v2/react.html)！
+
+[前回のブログ記事](https://onsen.io/blog/react-onsen-ui-preview/)で、[Onsen UI 2.0](https://onsen.io/) 用の[React](https://facebook.github.io/react/) 機能拡張をアナウンスしました。これはOnsen UIのカスタムエレメントをReactコンポーネントの中で利用できるものです。
+
+こちらの記事ではより複雑なコンポーネントをどう使うかについて紹介します。現在、この機能拡張は開発中なので、ぜひフィードバックをお願いします。それがよりよいAPIや問題の解決につながるはずです。
+
+### 機能拡張の使い方
+
+このコンポーネントは [npm](https://www.npmjs.com/package/react-onsenui) 上で `react-onsenui` として提供しています。利用する場合には同じくnpmで配信されているOnsen UIやコアライブラリ、Reactも読み込む必要があります。
+
+プロジェクトへの追加方法は以下のようにコマンドを実行します。
+
+    npm install --save-dev onsenui react-onsenui
+
+ライブラリの読み込み方についてですが、browserifyが好きな方はGitHub上の [こちらのリポジトリ](https://github.com/argelius/react-onsenui-kitchensink) を見てください。これはbrowserifyを使ってライブラリを読み込み、かつBabelを使ってES6とJSXをブラウザ向けに変換しています。
+
+もう一つは `<script>` タグを使った方法です。この方法で大事なのは関連するすべてのライブラリを正しい順番で読み込むことです。`react-onsenui.js`はReactとOnsen UIライブラリ、そしてこの2つに依存するライブラリを読み込んだ後で読み込む必要があります。
+
+セットアップしたら、コンポーネントは以下のように簡単に使えます。
+
+
+    import React from 'react';
+    import ReactDOM from 'react-dom';
+    import ons from 'onsenui';
+    import {Page, Toolbar, Button} from 'react-onsenui';
+
+    class MyPage extends React.Component {
+      handleClick() {
+        ons.notification.alert('Hello, world!');
+      }
+
+      render() {
+        return() (
+          <Page>
+            <Toolbar>
+              <div className="center">My title</div>
+            </Toolbar>
+
+            <Button onClick={this.handleClick}>Click me!</Button>
+          </Page>
+        );
+      }
+    }
+
+ではここからは `Navigator` と `Tabbar` を使った高度なナビゲーションの追加方法を紹介します。
+
+Now we will take a look at how to add advanced navigation using the `Navigator` and `Tabbar` components.
+
+### Navigator
+
+Onsen UIを使ったことがある方であれば `<ons-navigator>` というタグを知っているでしょう。これはスタックベースのナビゲーション機能を提供します。`pushPage()` と `popPage()` メソッドを使ってビューの切り替えができます。
+
+従来、`pushPage()` を実行する前に `<ons-template>` を使ってページコンテンツを用意しなければなりませんでした。しかし Reactではテンプレートを使いませんので、このAPIを公開する意味がありません。代わりにReact Nativeで使われている[Navigator](https://facebook.github.io/react-native/docs/navigator.html) コンポーネントに注目しました。これは強力なAPIがあり、自由にページのスタックが管理できるようになっています。
+
+このコンポーネントには `pushPage(route)` と呼ばれるメソッドがあり、 `route` オブジェクトを内部のスタックに追加します。`route`オブジェクトは何でも構いません。 `route` オブジェクトを描画するNavigatorは レンダリングされたビューを返す `renderPage` 関数が必要です。この関数は `Page` コンポーネントの中にレンダリングする情報を返す必要があります。
+
+#### デモ
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/react-onsenui-blog-examples/navigator.html"></iframe>
+
+#### メソッド
+
+コンポーネントにはページのスタックを管理するための幾つかのメソッドがあります。
+
+*   `pushPage(route, options)` - `route` オブジェクトをスタックへプッシュし、画面遷移のアニメーションイベントを発生させます。`options` はアニメーションの制御に使います。
+*   `popPage(options)` - `route` オブジェクトをスタックの最上位から省きます。そして前のビューに遷移します。
+*   `resetPage(route, options)` - スタックを単独のルーティングにリセットします。
+*   `resetPageStack(routes, options)` - スタックを配列のルーティングにリセットします。
+
+#### プロパティ
+
+*   `initialRoute` - スタックの中の最初の `route` を定義します。
+*   `initialRoutes` - ルーティングとともにナビゲーションを初期化します。
+*   `renderPage` - 二つの引数を持った関数です。
+
+        (route, navigator) => <MyComponent title={route.title} data={route.data} />
+
+コンポーネントは `initialRoute` または `initialRoutes` を使ってスタックを初期化する必要があります。さらに `renderPage` もルートオブジェクトのレンダリングに必要です。
+
+#### 使い方
+
+以下はサンプルコードです。今回の例では `renderPage` はインラインページを返していますが、コンポーネントを作成して返すようにもできます。
+
+    import React from 'react';
+    import {Navigator, Page, Button, Toolbar, BackButton} from 'react-onsenui';
+
+    class MainPage extends React.Component {
+      pushPage() {
+        this.props.navigator.pushPage({component: SecondPage});
+      }
+
+      render() {
+        return (
+          <Page>
+            <Toolbar>
+              <div className="center">Navigator</div>
+            </Toolbar>
+
+            <p style={{textAlign: 'center'}}>
+              <Button onClick={this.pushPage.bind(this)}>Push page</Button>
+            </p>
+          </Page>
+        );
+      }
+    }
+
+    class SecondPage extends React.Component {
+      pushPage() {
+        this.props.navigator.pushPage({component: SecondPage});
+      }
+
+      popPage() {
+        this.props.navigator.popPage();
+      }
+
+      render() {
+        return (
+          <Page>
+            <Toolbar>
+              <div className="left"><BackButton>Back</BackButton></div>
+              <div className="center">Another page</div>
+            </Toolbar>
+
+            <p style={{textAlign: 'center'}}>
+              <Button onClick={this.pushPage.bind(this)}>Push page</Button>
+              <Button onClick={this.popPage.bind(this)}>Pop page</Button>
+            </p>
+          </Page>
+        );
+      }
+    }
+
+    export default class extends React.Component {
+      renderPage(route, navigator) {
+        const props = route.props || {};
+        props.navigator = navigator;
+
+        return React.createElement(route.component, props);
+      }
+
+      render() {
+        return (
+          <Navigator
+            initialRoute={{component: MainPage}}
+            renderPage={this.renderPage}
+          />
+        );
+      }
+    }
+
+### タブバー
+
+Onsen UIはページナビゲーションに使えるコンポーネントを複数用意しています。 `<ons-navigator>` に加えて、タブベースのナビゲーションを提供する `<ons-tabbar>` があります。`<ons-tabbar>`も`<ons-template>`と合わせて使うようになっていましたが、これもまたReactに合わせてテンプレートに依存しない形にしました。
+
+Navigatorと同様に、こちらも関数を作る必要があります。それは `renderTabs` というもので、以下のような構造になっています。
+
+    (activeIndex, tabbar) => [
+      {
+        content: <Home />,
+        tab: <Ons.Tab label="Home" />
+      },
+      {
+        content: <Comments />,
+        tab: <Ons.Tab label="Comments" />
+      },
+      ...
+    ]
+
+このコンポーネントは以下のような構造をもったオブジェクトを配列で返す必要があります。
+
+    {
+      content: <SomeComponent />,
+      tab: <Ons.Tab ... />
+    }
+
+#### デモ
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/react-onsenui-blog-examples/tabbar.html"></iframe>
+
+#### メソッド
+
+タブバーコンポーネントはアクティブなタブを変えたり、現在アクティブになっているタブのインデックスを取得するといったメソッドが用意されています。
+
+*   `setActiveTab(index, options)` - アクティブなタブを `index` に変更します。`options` は遷移するアニメーションを指定します。
+*   `getActiveTabIndex()` - アクティブなタブのインデックスを返します。
+
+#### プロパティ
+
+*   `initialIndex` - 最初に開くタブを指定します。
+*   `renderTabs` - タブとそこに含まれるコンテンツを配列で返します。
+
+#### 使い方
+
+    import React from 'react';
+    import {Tabbar, Tab, Page, Toolbar} from 'react-onsenui';
+
+    class TabPage extends React.Component {
+      render() {
+        return (
+          <Page>
+            <Toolbar>
+              <div className="center">{this.props.title}</div>
+            </Toolbar>
+
+            <p style={{padding: '0 15px'}}>
+              This is the <strong>{this.props.title}</strong> page!
+            </p>
+          </Page>
+        );
+      }
+    }
+
+    export default class extends React.Component {
+      renderTabs() {
+        const sections = [
+          'Home',
+          'Comments',
+          'Settings'
+        ];
+
+        return sections.map((section) => {
+          return {
+            content: <TabPage key={section} title={section} />,
+            tab: <Tab key={section} label={section} />
+          };
+        });
+      }
+
+      render() {
+        return (
+          <Tabbar
+            initialIndex={1}
+            renderTabs={this.renderTabs}
+          />
+        );
+      }
+    }
+
+### コンポーネントの組み合わせについて
+
+複雑な画面構成のアプリではタブとスタックベースのナビゲーションが結合していることがあります。例えば一つのタブの中だけでナビゲーションしたり、ページの中でタブバーを使いたいと言ったケースです。
+
+ナビゲーションおよびタブバーコンポーネントは組み合わせて使えるようになっていますので、複雑なナビゲーションも問題ありません。次のデモではタブバーの最初のページでナビゲーションを使えるようにしています。そしてタブバーに対してページをプッシュし、ナビゲーションしています。
+
+これはナビゲーターの中にタブバーを配置することで簡単に実現できます。
+
+#### デモ
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/react-onsenui-blog-examples/composition.html"></iframe>
+
+#### コード
+
+デモコードは少し長いですがシンプルなものです。
+
+    import React from 'react';
+    import {Navigator, Tabbar, Tab, Page, Button, Toolbar, BackButton} from 'react-onsenui';
+
+    class TabPage extends React.Component {
+      pushPage() {
+        this.props.navigator.pushPage({
+          component: SecondPage
+        });
+      }
+
+      render() {
+        return (
+          <Page>
+            <Toolbar>
+              <div className="center">{this.props.title}</div>
+            </Toolbar>
+
+            <p style={{textAlign: 'center'}}>
+              <Button onClick={this.pushPage.bind(this)}>Push page</Button>
+            </p>
+          </Page>
+        );
+      }
+    }
+
+    class MainPage extends React.Component {
+      renderTabs() {
+        const sections = [
+          'Home',
+          'Comments',
+          'Settings'
+        ];
+
+        return sections.map((section) => {
+          return {
+            content: <TabPage key={section} title={section} navigator={this.props.navigator} />,
+            tab: <Tab key={section} label={section} />
+          };
+        });
+      }
+
+      render() {
+        return (
+          <Page>
+            <Tabbar
+              initialIndex={0}
+              renderTabs={this.renderTabs.bind(this)}
+            />
+          </Page>
+        );
+      }
+    }
+
+    class SecondPage extends React.Component {
+      pushPage() {
+        this.props.navigator.pushPage({component: SecondPage});
+      }
+
+      popPage() {
+        this.props.navigator.popPage();
+      }
+
+      render() {
+        return (
+          <Page>
+            <Toolbar>
+              <div className="left"><BackButton>Back</BackButton></div>
+              <div className="center">Another page</div>
+            </Toolbar>
+
+            <p style={{textAlign: 'center'}}>
+              <Button onClick={this.pushPage.bind(this)}>Push page</Button>
+              <Button onClick={this.popPage.bind(this)}>Pop page</Button>
+            </p>
+          </Page>
+        );
+      }
+    }
+
+    export default class extends React.Component {
+      renderPage(route, navigator) {
+        const props = route.props || {};
+        props.navigator = navigator;
+
+        return React.createElement(route.component, props);
+      }
+
+      render() {
+        return (
+          <Navigator
+            initialRoute={{component: MainPage, props: {key: 'main'}}}
+            renderPage={this.renderPage}
+          />
+        );
+      }
+    }
+
+### まとめ
+
+皆さんがぜひこのReact拡張を使ってくれることを期待しています。また、最初に書いた通りこのインタフェースに関するフィードバックをお待ちします。コメントや感じたところを[フォーラム](https://community.onsen.io/)に書き込んでください。
+
+もしあなたが [Angular 2](https://angular.io/) の開発者であれば、今開発中のAngular 2向けのコンポーネントをお待ちください。もうすぐ見せられるはずです。
+
+もしOnsen UIが気に入ったならば、[GitHub](https://github.com/OnsenUI/OnsenUI)上でスターをお願いします！
+
