@@ -1,0 +1,141 @@
+---
+author: atsushi
+date: 2016-06-28
+id: getting-started-onsenui-with-react
+title: "React × Onsen UI をはじめてみよう"
+product: monaca
+tags: onsen-ui, react
+category: 技術情報
+---
+
+Onsen UIが2.0になり、AngularJSが必須ではなくなりました。その結果、他のフレームワークと組み合わせて使えるようになったのですが、その一つとして開発が進められているのがReact向けのOnsen UIです。
+
+Reactと言えばReact Nativeが有名ですが、あちらはネイティブアプリを開発するための技術になります。JavaScriptは使いますが、独自のルールがあります。React × Onsen UIの場合はWeb技術をそのままに、Reactのレンダリング技術を活かしたアプリ開発が可能になります。
+
+今回はその最初の一歩を紹介します。
+
+### 導入方法は2パターン
+
+イチからはじめる場合の導入方法は2通りあります。一つはMonaca CLIを使った方法です。
+
+インストールとサインアップは次のようになります。
+
+```
+$ npm install -g monaca
+$ monaca signup
+```
+
+そしてアプリケーションのベースを作るのですが、テンプレートとしてReactを使ったものが用意されています。
+
+```
+$ monaca create helloworld
+? Select an option: Templates
+? Choose a template category: Onsen UI and React
+? Which project template do you want to use? 
+  Onsen UI V2 React Tabbar 
+❯ Onsen UI V2 React Splitter 
+  Onsen UI V2 React Navigation 
+  Onsen UI V2 React Minimum 
+```
+
+その中から好きなテンプレートを選択してください。
+
+もう一つの導入方法はnpmを使った方法です。
+
+```
+$ npm install --save-dev onsenui react-onsenui
+```
+
+で任意のWebアプリケーションにOnsen UI×Reactが組み込めます。
+
+最後に、もう一つとして[Kitchen Sink](https://github.com/OnsenUI/react-onsenui-kitchensink)を使う方法もあります。こちらはそのまま開発に使えないと思いますが、コードの参考になるはずです。
+
+### Hello Worldを出してみる
+
+今回はテンプレートから試しています。作成したアプリのディレクトリに入ってコマンドを打ちます。
+
+```
+npm install cordova-common --save
+```
+
+さらにES2016で記述するために幾つかのライブラリを入れます。
+
+```
+npm install babel --save-dev
+npm install babelify --save-dev
+npm install babel-preset-es2015 babel-preset-react --save-dev
+```
+
+そして www/app.js として次のように記述します。
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ons from 'onsenui';
+import Ons from 'react-onsenui';
+
+var App = React.createClass({
+  handleClick: function() {
+    ons.notification.alert('Hello world!');
+  },
+
+  render: function() {
+    return (
+      <Ons.Page>
+        <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
+      </Ons.Page>
+    );
+  }
+});
+ReactDOM.render(<App />, document.getElementById('app'));
+```
+
+これ自体は #app に対してReactを反映するだけのシンプルなコードです。次にHTMLは次のようになります。
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.css">
+  <style>
+    .page__background {
+      background-color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script src="bundle.js"></script>
+</body>
+</html>
+```
+
+最後にapp.jsを通常のJavaScriptに変換します。
+
+```
+browserify www/app.js -o www/bundle.js -t [ babelify --presets [ es2015 react ] ]
+```
+
+この変換については慣れればgulpなどを使って自動的に行えば良いでしょう。
+
+### 動かしてみる
+
+では実際に動かしてみます。 monaca preview コマンドを打つとWebサーバが立ち上がるので、http://127.0.0.1:8000にアクセスします。
+
+![](/blog/content/images/2016/Jun/monaca-react-2.png)
+
+
+表示されたらボタンをタップします。そうするとOnsen UIのアラートが出るのが確認できるはずです。
+
+![](/blog/content/images/2016/Jun/monaca-react-1.png)
+
+----
+
+このようにReactの書き方に沿ってOnsen UIのUIライブラリ、さらにアラートなどのライブラリを組み合わせられるようになります。Reactを使ってスマートフォン向けのWebアプリケーションやハイブリッドアプリを開発する際にはぜひ使ってみてください。
+
+[React Components by Onsen UI Hybrid Mobile App Framework](https://onsen.io/v2/react.html)
