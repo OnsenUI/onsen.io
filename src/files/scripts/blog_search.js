@@ -10,7 +10,8 @@
     searchIcon.addEventListener("click", showSearchBar);
   }
 
-  function showSearchBar() {
+  function showSearchBar(e) {
+    e.stopPropagation();
     searchContainer = document.getElementsByClassName("blog-header-search-container-hidden")[0];
     searchContainer.className = "blog-header-search-container blog-header-search-container-visible";
 
@@ -22,10 +23,7 @@
     searchBar.addEventListener("keypress", performSearch);
     searchIcon.removeEventListener("click", showSearchBar);
     searchIcon.addEventListener("click", performSearch);
-
-    setTimeout(function() {
-      document.addEventListener("click", checkOuterClick);
-    }, 0);
+    document.addEventListener("click", checkOuterClick);
   }
 
   function checkOuterClick(e) {
