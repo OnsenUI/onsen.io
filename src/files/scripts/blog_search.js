@@ -16,25 +16,26 @@
 
     searchBar = document.getElementsByClassName("blog-header-search-bar-hidden")[0];
 
-    setTimeout(function() {
-      searchBar.classList.remove("blog-header-search-bar-hidden");
-      searchBar.classList.add("blog-header-search-bar-visible");
+    searchBar.classList.remove("blog-header-search-bar-hidden");
+    searchBar.classList.add("blog-header-search-bar-visible");
 
+    searchBar.addEventListener("keypress", performSearch);
+    searchIcon.removeEventListener("click", showSearchBar);
+    searchIcon.addEventListener("click", performSearch);
+
+    setTimeout(function() {
       document.addEventListener("click", checkOuterClick);
-      searchBar.addEventListener("keypress", performSearch);
-      searchIcon.removeEventListener("click", showSearchBar);
-      searchIcon.addEventListener("click", performSearch);
-    }, 100);
+    }, 0);
   }
 
   function checkOuterClick(e) {
-    if (e.target != searchBar) {
+    if (e.target !== searchBar) {
       hideSearchBar();
     }
   }
 
   function performSearch(e) {
-    if (searchBar.value != "" && (e.keyCode==13 || e.target == searchIcon)) {
+    if (searchBar.value !== "" && (e.keyCode === 13 || e.target === searchIcon)) {
         hideSearchBar();
 
         if (document.documentElement.classList.contains("lang-en")) {
