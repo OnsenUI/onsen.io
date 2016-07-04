@@ -1,21 +1,42 @@
 ---
 author: andreas
 date: 2016-07-04
-id: "cordova-app-with-react-redux"
-title: "Creating a Cordova app with React and Redux"
+id: "cordova-hybrid-app-with-react-redux-webpack"
+title: "Creating a Cordova Hybrid App with React, Redux and Webpack"
 category: tutorial
 tags: tutorial, onsenui, cordova, react, redux, webpack
 ---
 
 ![Cordova app using Onsen UI, React and Redux](/blog/content/images/2016/Jun/react_redux_onsen_weather.png)
 
-In this article we will take a look at how to create a Cordova app using [Onsen UI](https://onsen.io/) and React. We will create a full-fledged weather application that uses Redux to manage the state and Onsen UI to create a beautiful UI.
+In this article we will take a look at how to create a Cordova hybrid app using [Onsen UI](https://onsen.io/) and React. We will create a full-fledged weather application that uses Redux to manage the state and Onsen UI to create a beautiful UI.
 
 <!-- more -->
 
 In a [previous article](/blog/react-state-management-redux-store/) we learned how to use Redux to manage the React application state. We have also learned [how to use the Redux DevTools](/blog/react-redux-devtools-with-time-travel/) and [hot reloading](/blog/react-webpack-hot-loader-onsenui/) to easily debug React applications. This article will build on the things we learned in the previous articles so if you haven't already, please read those first.
 
 The source code for this example is available in [this GitHub repository](https://github.com/argelius/react-onsenui-redux-weather) and you can try out the [demo here](http://argelius.github.io/react-onsenui-redux-weather/demo.html).
+
+## Running the app with Cordova CLI
+
+The repository is a Cordova project so you can try running it on your device. There is a hook that runs the Webpack build every time `cordova prepare` is executed so there is no need to build manually every time you deploy.
+
+To run the app with Cordova you first need to clone the repo and install the dependencies.
+
+```
+git clone git@github.com:argelius/react-onsenui-redux-weather.git
+cd react-onsenui-redux-weather/
+npm install
+```
+
+Now, assuming that you have [Cordova installed](https://cordova.apache.org/docs/en/latest/guide/cli/), you can add a platform and run the app:
+
+```
+cordova platform add android
+cordova run android
+```
+
+You can of course also run the app on iOS or any other platform that Cordova supports.
 
 ## Code structure
 
@@ -25,8 +46,8 @@ The project will have the following directory structure:
 
 * `index.js` - The entry point of the app. Imports the root component and renders the app.
 * `reducers/` - Reducer functions. A reducer is a pure function that takes the current state and an action as arguments and returns the next state. This is the only way to update the Redux store.
-* `actions/` - Contains action creators. An action creator is a function that returns an action that can be dispatched to update the Redux store.
-* `api/` - This directory contains code that wraps the weather API. For this app I have used the [Open Weather Map API](http://openweathermap.org/api).
+* `actions/` - Contains action creators. An action creator is a function that returns an action that can be dispatched to update the Redux store state tree.
+* `api/` - This directory contains code that wraps the weather API. For this app I have used the [Open Weather Map API](http://openweathermap.org/api) which is a great free alternative.
 * `components/` - This directory contains *dumb* components. A dumb component is a component that is just renders props to a view but doesn't perform any particular actions.
 * `containers/` - A container is a component that is connected to the Redux store. It can dispatch actions and access the state.
 
@@ -34,7 +55,7 @@ I will not go into detail on what the difference between the components and cont
 
 As a build tool I am using [Webpack](https://webpack.github.io/). This is just my personal preference, this code will work with [Browserify](http://browserify.org/) as well.
 
-If you are interested you can take a look at the Webpack config used in the project by clicking [this link](https://github.com/argelius/react-onsenui-redux-weather/blob/master/webpack.config.js). This config includes [React Hot Loader](https://github.com/gaearon/react-hot-loader) which really helps development. I have also made a [Webpack configuration for production](https://github.com/argelius/react-onsenui-redux-weather/blob/master/webpack.config.prod.js) which is used when I deploy to GitHub pages.
+If you are interested you can take a look at the Webpack config used in the project by clicking [this link](https://github.com/argelius/react-onsenui-redux-weather/blob/master/webpack.config.js). This config includes [React Hot Loader](https://github.com/gaearon/react-hot-loader) which really helps speed up development. I have also made a [Webpack configuration for production](https://github.com/argelius/react-onsenui-redux-weather/blob/master/webpack.config.prod.js) which is used when I deploy to GitHub pages or build as a Cordova app.
 
 ## Action creators
 
@@ -60,7 +81,7 @@ const store = createStore(
 );
 ```
 
-This middleware enables action creators to return a function instead of an action. This can be used to delay dispatching an action. The obvious usecase is to delay an action until an asynchronous API call has been resolved (or rejected).
+This middleware enables action creators to return a function instead of an action. This can be used to delay dispatching an action. The obvious use case is to delay an action until an asynchronous API call has been resolved (or rejected if something went wrong).
 
 In this app there is an action creator called `fetchWeather` which uses the Thunk middleware:
 
@@ -96,6 +117,8 @@ export const fetchWeather = (id) => {
   };
 };
 ```
+
+As we can see the `fetchWeather` action creator runs the `queryWeather` function to fetch the current weather data from the Open Weather Map API.
 
 The rest of the action creators are very simple. This is the whole `actions/index.js` file that exports all action creators:
 
@@ -434,7 +457,7 @@ const App = () => (
 export default App;
 ```
 
-The Navigator component implements a very powerful API. It manages a stack of *route* objects which are rendered into pages using the `renderPage` prop. The *route* objects can be strucutred in any way the developer wants, in this case they have the following structure:
+The Navigator component implements a very powerful API. It manages a stack of *route* objects which are rendered into pages using the `renderPage` prop. The *route* objects can be structured in any way the developer wants, in this case they have the following structure:
 
 ```jsx
 {
@@ -670,10 +693,12 @@ I hope this article has been interesting. The goal was to show how a quite compl
 
 If you want to get started quickly using Onsen UI and React, I recommend you to try out our [new CLI tool](https://onsen.io/v2/docs/guide/react/). It uses Cordova and Webpack under the hood but hides a lot of the complexity so you can get started making hybrid apps in no time.
 
-Installing it is as easing as doing:
+Installing it is as easy as doing:
 
 ```bash
 [sudo] npm install -g monaca
 ```
+
+This is a new tool so we are really looking forward to your feedback!
 
 If you have any questions about using Onsen UI or any of our other tools, please feel free to [ask in the forum](https://community.onsen.io/). If you like Onsen UI, please give us a [star on GitHub](https://github.com/OnsenUI/OnsenUI).
