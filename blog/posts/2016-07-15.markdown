@@ -79,6 +79,527 @@ The nice part about this is, that the function in subscribe will be called every
 
 Amazingly, this is almost all the backend code we will need for our App! Now lets start building using MobX and the React Components for OnsenUI.
 
+# Building the components in OnsenUI
+
+Our application will contain two screens: The first one will be a simple login screen, where the user can enter the name of the chatromm and its user name. We will render everything in a component called App, that will contain the children:
+
+```
+import React from 'react';
+import {render} from 'react-dom';
+import AppState from './AppState';
+import App from './App';
+import Horizon from '@horizon/client';
+
+const horizon = Horizon({host: 'localhost:5000'});
+const appState = new AppState(horizon);
+
+
+horizon.onReady(() => {
+  console.log('horizon is ready');
+
+  render(
+    <App appState={appState} />,
+    document.getElementById('root')
+  );
+});
+
+console.log('connect horizon');
+horizon.connect();
+```
+
+
+AppState:
+
+```
+import {computed, observable, action} from 'mobx';
+
+class ChatRoom {
+  @observable name;
+  id;
+
+  constructor(data) {
+    this.name = data.name;
+    this.id = data.id;
+  }
+}
+
+export class Page2State {
+  @observable text = '';
+
+  @action setText(text) {
+    this.text = text;
+  }
+
+  @action resetText() {
+    this.text = '';
+  }
+}
+
+
+class AppState {
+  horizon;
+  @observable userName;
+  @observable roomName;
+  @observable chatRooms = [];
+  @observable loading = false;
+  @observable messages = [];
+  @observable newMessage = false;
+
+  constructor(horizon) {
+    this.horizon = horizon;
+    this.chatRooms = [];
+  }
+
+  @computed get lastAuthor() {
+    if (this.messages.length === 0) {
+      return '';
+    }
+
+    return this.messages[this.messages.length - 1].author;
+  }
+
+  @action setMessages(data) {
+    this.messages = data;
+  }
+
+  @action hideMessageNotification() {
+    this.newMessage = false;
+  }
+
+  @action showMessageNotification() {
+    if (this.newMessage) return;
+    this.newMessage = true;
+    setTimeout(() => this.newMessage = false, 2000);
+  }
+
+  @action setChatRoom(data) {
+    this.chatRooms = data.map((el) => new ChatRoom(el));
+  }
+}
+
+export default AppState;
+```
+
+
+
+```
+import React, {Component} from 'react';
+import {observer} from 'mobx-react';
+import {observable} from 'mobx';
+import DevTools from 'mobx-react-devtools';
+import ons from 'onsenui';
+import {Modal, Page, Col, Row, BottomToolbar, List, ListItem, Button, Navigator, Toolbar, Input} from 'react-onsenui';
+import _ from 'lodash';
+import Page2 from './Page2.jsx';
+import {Page2State} from './AppState.js'
+
+const UserInput = observer(({appState}) => {
+  return (
+    <div>
+      <Input
+        modifier='underbar'
+        style={{width: '100%'}}
+        onChange={(e) => appState.userName = e.target.value}
+        value={appState.userName}
+        placeholder='Name'
+        float
+      />
+    </div>
+  );
+});
+
+const RoomInput = observer(({appState}) => {
+  return (
+    <div style={{paddingTop: 10, paddingBottom: 10}}>
+      <Input
+        modifier='underbar'
+        fload
+        style={{width: '100%'}}
+        placeholder='Room'
+        onChange={(e) => appState.roomName = e.target.value}
+        value={appState.roomName}
+      />
+    </div>
+  );
+});
+
+
+@observer
+class Page1 extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false
+    };
+  }
+
+  componentDidMount() {
+    console.log('component mountes');
+    this.chatRooms = this.props.appState.horizon('chatRooms');
+  }
+
+  renderModal = () => {
+    console.log('render modal');
+    return (
+      <Modal isOpen={this.state.loading}>
+        <div>
+          <ons-icon icon='ion-load-c' spin='true'></ons-icon> <br /> <br />
+          <span>Loading ...</span>
+        </div>
+      </Modal>
+    )
+  }
+
+  renderToolbar = () => {
+    return (
+      <Toolbar>
+        <div className='center'> Chat App </div>
+      </Toolbar>
+    );
+  }
+  render() {
+    return (
+      <Page
+        renderModal={this.renderModal}
+      >
+        <div style={{paddingLeft: 60, paddingRight: 60, paddingTop: 40}}>
+          <Row style={{paddingBottom: 20}}>
+            <Col />
+            <Col>
+              <img style={{width: 200}} src={require('../www/onsen_chat.png')} />
+            </Col>
+            <Col />
+          </Row>
+          <UserInput appState={this.props.appState} />
+          <RoomInput appState={this.props.appState} />
+          <div style={{display: 'flex', justifyContent: 'center'}}>
+
+            <Row style={{paddingBottom: 20}}>
+              <Col />
+              <Col style={{display: 'flex', justifyContent: 'center'}}>
+                <Button onClick={this.joinRoom} modifier='large' style={styles.loginButton}> Join </Button>
+              </Col>
+              <Col />
+            </Row>
+
+          </div>
+        </div>
+      </Page>
+    );
+  }
+
+  joinRoom = () => {
+    var {userName, roomName} = this.props.appState;
+
+    if (!(userName != null && userName.length > 0)) {
+      ons.notification.alert('Please fill in a userName');
+      return;
+    }
+
+    if (!(roomName != null && roomName.length > 0)) {
+      ons.notification.alert('Please fill in a roomName');
+      return;
+    }
+
+
+    /* this.chatRooms
+      .watch().subscribe(
+        (arr) => {
+          arr = _.sortBy(arr, (el) => el.name.toLowerCase());
+          this.props.appState.setChatRoom(arr);
+          });
+          */
+
+    this.setState({loading: true});
+
+    this.chatRooms.find({name: roomName}).fetch().defaultIfEmpty().subscribe(room => {
+
+      this.setState({loading: true});
+      if (room == null) {
+        console.log('room does not exist');
+        this.chatRooms.store({
+          name: roomName
+        }).subscribe((el) => {
+
+          this.props.navigator.pushPage({
+            component: Page2,
+            props: {
+              appState: this.props.appState,
+              title: roomName,
+              roomID: el.id,
+              author: userName,
+              pageState: new Page2State()
+            }
+          });
+        });
+
+
+      } else {
+        console.log(room);
+
+        this.props.navigator.pushPage({
+          component: Page2,
+          props: {
+            appState: this.props.appState,
+            title: roomName,
+            roomID: room.id,
+            author: userName,
+            pageState: new Page2State()
+          }
+        });
+      }
+    });
+  }
+
+  onReset = () => {
+    this.props.appState.resetTimer();
+  }
+}
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.renderPage = this.renderPage.bind(this);
+  }
+  renderPage(route, navigator) {
+    const props = route.props || {};
+    props.navigator = navigator;
+    console.log('render');
+    return React.createElement(route.component, route.props);
+  }
+
+  render() {
+    return (
+      <div>
+        <Navigator
+          initialRoute={{component: Page1, props: {
+            appState: this.props.appState
+          }}}
+          renderPage={this.renderPage}
+        />
+        <DevTools />
+      </div>
+    );
+  }
+}
+
+const styles = {
+  loginButton: {
+    width: '100px',
+    height: 30,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 15,
+    marginTop: 10
+  }
+};
+
+export default App;
+```
+
+
+```
+import React, {Component} from 'react';
+import {observer} from 'mobx-react';
+import {observable} from 'mobx';
+import DevTools from 'mobx-react-devtools';
+import ons from 'onsenui';
+import {Modal, BackButton, Icon, Page, List, BottomToolbar, ListItem, Button, Row, Col, Navigator, Toolbar, Input} from 'react-onsenui';
+import _ from 'lodash';
+
+const Message = observer(({data, author}) => {
+
+  let messageStyle = {
+    padding: 10,
+    borderColor: '#9E9E9E',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 15,
+    backgroundColor: 'white',
+    color: '#535050'
+  };
+
+  if (author === data.author) {
+    return (
+      <div style={{paddingTop: 10, paddingLeft: 14}}>
+        <div style={{fontSize: 24 * 0.6, paddingLeft: 10, paddingBottom: 5, color: '#928585'}}> {data.author} </div>
+        <div style={{display: 'flex'}}>
+          <div style={messageStyle}> {data.message} </div>
+          <div style={{flex: 1, minWidth: '20%'}} />
+        </div>
+      </div>
+    );
+  }
+
+  messageStyle = {
+    padding: 10,
+    borderColor: '#9E9E9E',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderRadius: 15,
+    backgroundColor: 'white',
+    color: '#535050'
+  };
+
+  return (
+    <div style={{paddingTop: 10, paddingRight: 14}}>
+      <div style={{fontSize: 24 * 0.6, textAlign: 'right', paddingBottom: 5, paddingRight: 10, color: '#928585'}}> {data.author} </div>
+      <div style={{display: 'flex'}}>
+        <div style={{flex: 1, minWidth: '20%'}} />
+        <div style={messageStyle}> {data.message} </div>
+      </div>
+    </div>
+  );
+});
+
+const MessageBar = observer(({pageState, sendText}) => {
+
+  return (
+    <BottomToolbar>
+      <div style={{display: 'flex',
+        height: '100%',
+        alignItems: 'center'}}>
+        <Input placeholder='Type Message'
+
+          onKeyPress={(event) => {
+            var code = event.keyCode || event.which;
+            if (code === 13) {
+              sendText();
+            }
+          }}
+          onChange={({target}) => pageState.setText(target.value)}
+          value={pageState.text}
+          style={{
+            paddingLeft: 15,
+            flex: 1
+          }}
+        />
+        <span
+          style={{paddingLeft: 10, paddingRight: 15,
+            color: '#616161',
+            fontWeight: pageState.text.length > 0 ? 'bold' : 'normal'
+          }}
+          onClick={sendText}
+        >Send</span>
+      </div>
+    </BottomToolbar>
+  );
+});
+
+const NewMessage = observer(({show, onClick}) => {
+
+
+  if (show) {
+    return (
+      <div onClick={onClick} style={{height: 40, position: 'fixed', bottom: 44, width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey', color: '#616161'}}> new messages </div>
+    );
+  }
+
+  return <div />;
+});
+
+@observer
+export default class Page2 extends Component {
+
+  componentDidUpdate() {
+    console.log('mount', this.props.appState.lastAuthor);
+    if (this.props.appState.lastAuthor === this.props.author) {
+      this.scrollBottom();
+    }
+  }
+
+  scrollBottom = () => {
+    const page = document.getElementById('page2').querySelector('.page__content');
+    page.scrollTop = page.scrollHeight;
+  }
+
+  constructor(props) {
+    super(props);
+    this.initial = true;
+    this.state = {
+      typedText: '',
+      messages: []
+    };
+  }
+
+  get pageState() {
+    console.log('props', this.props);
+    return this.props.pageState;
+  }
+
+  componentDidMount() {
+    this.messages = this.props.appState.horizon('messages');
+
+    this.messages.findAll({roomID: this.props.roomID}).order('date').watch().subscribe((data) => {
+      if (data) {
+        this.props.appState.setMessages(data);
+        if (this.initial) {
+          this.initial = false;
+          this.scrollBottom();
+        } else if (this.props.appState.lastAuthor !== this.props.author) {
+          this.props.appState.showMessageNotification();
+        }
+      }
+    });
+  }
+
+  sendText = () => {
+    if (this.pageState.text.length === 0) {
+      return;
+    }
+    this.messages.store({
+      author: this.props.author,
+      date: new Date(),
+      message: this.pageState.text,
+      roomID: this.props.roomID
+    });
+
+    this.pageState.resetText();
+  }
+
+  render() {
+    return (
+      <Page
+        id='page2'
+        renderBottomToolbar={() =>
+          <MessageBar
+            sendText={this.sendText}
+            appState={this.props.appState}
+            pageState={this.pageState}
+          />
+        }
+        renderToolbar={() =>
+          <Toolbar>
+            <div className='left'><BackButton>Back</BackButton></div>
+            <div className='center'> {this.props.title} </div>
+          </Toolbar>
+        }
+      >
+        {this.props.appState.messages.map((data) => {
+          return (
+            <Message data={data} author={this.props.author} />
+          );
+        })}
+
+        <div style={{height: 15}} />
+
+        <NewMessage
+          onClick={() => { this.scrollBottom(); this.props.appState.hideMessageNotification(); }}
+          show={this.props.appState.newMessage}
+        />
+
+      </Page>
+    );
+  }
+}
+```
+
+
+
+
 
 
 
