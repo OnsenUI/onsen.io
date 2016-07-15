@@ -1,0 +1,96 @@
+---
+author: keiji
+date: 2016-07-20
+id: monaca-cordova-onsenui
+title: "MonacaでのCordovaプラグインとOnsen UIの利用について"
+product: monaca
+tags: Monaca
+category: 技術情報
+---
+
+Monacaでは、CordovaプラグインとOnsen UIを使用することができます。
+
+Monacaで開発しているアプリでCordovaプラグインやOnsen UIを利用する場合は、アプリ内でCordovaの準備およびOnsen UIの準備を確認する必要があります。Cordovaの準備およびOnsen UIの準備が完了する前に機能にアクセスしても、正しい結果を得ることはできません。
+
+# Cordovaの準備完了を確認する
+
+Cordovaの準備の完了を確認するには、「deviceready」イベントで確認することができます。
+index.html内での例です。
+
+```
+<script>
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        alert("onDeviceReady");
+    }
+</script>
+```
+
+document.addEventListenerに「deviceready」を設定することで、Cordovaの準備が完了したことを確認することができます。
+
+# Onsen UIの準備完了を確認する
+
+Onsen UIの準備の完了を確認するには、「ons.ready()」で確認することができます。
+index.html内での例です。
+
+```
+<script>
+    ons.ready(function() {
+        alert(“ons.ready”);
+    });
+</script>
+```
+
+# アプリでプッシュ通知を利用している場合
+
+プッシュ通知を利用しているアプリでは、プッシュ通知のsetHandler()内で、CordovaプラグインやOnsen UIの機能を利用する場合、
+
+```
+<script>
+    monaca.cloud.Push.setHandler(function(data) {
+        alert(“Cordovaプラグインの処理を記述します。”);
+        alert(“Onsen UIの処理を記述します。”);
+    });
+</script>
+```
+
+と記述した場合、CordovaプラグインやOnsen UIの準備ができていない場合は、処理が失敗してしまいます。CordovaプラグインやOnsen UIを利用している場合は、
+
+```
+<script>
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+        monaca.cloud.Push.setHandler(function(data) {
+            alert(“Cordovaプラグインの処理を記述します。”);
+        });
+    }
+</script>
+
+<script>
+    ons.ready(function() {
+        monaca.cloud.Push.setHandler(function(data) {
+            alert(“Onsen UIの処理を記述します。”);
+        });
+    });
+</script>
+```
+
+のように、CordovaプラグインやOnsen UIの準備が整った後に処理を記述する必要があります。
+
+ons.ready()は、Onsen UIコンポーネントの読み込みが完了し、devicereadyイベントの後に起動しますので、CordovaプラグインとOnsen UIを両方利用している場合は、下記のようにons.ready()内で処理をまとめることが可能です。
+
+```
+<script>
+    ons.ready(function() {
+        monaca.cloud.Push.setHandler(function(data) {
+            alert(“Cordovaプラグインの処理を記述します。”);
+            alert(“Onsen UIの処理を記述します。”);
+        });
+    });
+</script>
+```
+
+処理のタイミングを正しく把握することにより、Monacaでの効率の良いアプリ開発に役立ててください。
+
+Monacaのイベントの発生順序につきましては、下記も参考にしてください。
+[Monacaのイベント発生順序について](http://ja.onsen.io/blog/monaca-event-order)
