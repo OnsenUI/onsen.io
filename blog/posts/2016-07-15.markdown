@@ -9,15 +9,11 @@ tags: onsenui, horizon, rethinkdb, react, mobx, chat
 
 ![Onsen UI for Angular 2](/blog/content/images/2016/Jul/onsen_horizon.png)
 
-A lot of modern apps like Twitter or Facebook work in real time: They update themselves when new information is available without the user pulling to refresh. With modern real time database like [RethinkDB](http://rethinkdb.com) and the Javascript Framework [Horizon](http://horizon.io/) this task is as easy as writing any other Javascript Application. In this tutorial we will build a simple chat app with MobX and the React Components for OnsenUI.
-
-
-
+A lot of modern apps like Twitter or Facebook work in real time: They update themselves when new information is available without the user pulling to refresh. With modern real time database like [RethinkDB](http://rethinkdb.com) and the Javascript Framework [Horizon](http://horizon.io/) this task is as easy as writing any other JavaScript Application. In this tutorial we will build a simple chat app with [MobX](https://github.com/mobxjs/mobx) and the React Components for Onsen UI.
 
 <!-- more -->
 
 The entire source code of the app is available at [Github](https://github.com/philolo1/Horizon-MobX-OnsenUI). Our end result will look like this:
-
 
 <div style="display: flex; margin: 40px 0;" >
   <div style="flex-grow: 1;"> </div>
@@ -28,7 +24,6 @@ The entire source code of the app is available at [Github](https://github.com/ph
 </div>
 
 We will first have a look at RethinkDB and than later build our App.
-
 
 ## What is RethinkDB, Horizon.js?
 
