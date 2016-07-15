@@ -12,9 +12,23 @@ tags: onsenui, horizon, rethinkdb, react, mobx, chat
 A lot of modern apps like Twitter or Facebook work in real time: They update themselves when new information is available without the user pulling to refresh. With modern real time database like [RethinkDB](http://rethinkdb.com) and the Javascript Framework [Horizon](http://horizon.io/) this task is as easy as writing any other Javascript Application. In this tutorial we will build a simple chat app with MobX and the React Components for OnsenUI.
 
 
+
+
 <!-- more -->
 
-The entire source code of the app is available at [Github](https://github.com/philolo1/Horizon-MobX-OnsenUI). Let us first understand how we actually want
+The entire source code of the app is available at [Github](https://github.com/philolo1/Horizon-MobX-OnsenUI). Our end result will look like this:
+
+
+<div style="display: flex; margin: 40px 0;" >
+  <div style="flex-grow: 1;"> </div>
+  <div style="background-image: url('/blog/content/images/2016/Feb/iphone6.png'); width: 401px; height: 806px; ">
+    <iframe scrolling="yes" style="margin-top: 92px; margin-left: 26px;" src="http://192.81.214.88:8181/Horizon-MobX-OnsenUI/build/index.html" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
+  </div>
+  <div style="flex-grow: 1;"> </div>
+</div>
+
+We will first have a look at RethinkDB and than later build our App.
+
 
 ## What is RethinkDB, Horizon.js?
 
@@ -81,7 +95,7 @@ Amazingly, this is almost all the backend code we will need for our App! Now let
 
 # Building the components in OnsenUI
 
-Our application will contain two screens: The first one will be a simple login screen, where the user can enter the name of the chatromm and its user name. We will render everything in a component called App, that will contain the children:
+The React Components for OnsenUI make it very easy to build simple pages with Navigation without to much code.  Our application will contain two screens: The first one will be a simple login screen, where the user can enter the name of the chatromm and its user name. We will render everything in a component called App, that will contain the children:
 
 ```
 import React from 'react';
@@ -109,7 +123,7 @@ horizon.connect();
 
 Before we start lookint at the views, lets look at the application state first. The application state is managed via [MobX](https://github.com/mobxjs/mobx). MobX is a JavaScript library that uses observables to do certain actions automatically ones an observed variable changes. In the case of React, MobX calls setState if a variable changes which the state depends on. If you want to learn more about MobX, I highly recommend a look at our [recent tutorial](https://onsen.io/blog/mobx-tutorial-react-stopwatch/), that uses MobX to create a simple stopwatch.
 
-The following code defines the applicatino state: Mainly it will contain the current userName, chatroom, the database connection to horizon and some additional page-related information.
+The following code defines the application state: Mainly it will contain the current userName, chatroom, the database connection to horizon and some additional page-related information. In MobX we mark variables with `@observable` to indicate that MobX should observe it. If they change, the associated views will call a rerender automatically. Functions marked with `@action` are functions that change observable variables and `@computed` functions getters that depend on observables that will be only updated ones an associated variable is changed.
 
 ```
 import {computed, observable, action} from 'mobx';
@@ -124,7 +138,7 @@ class ChatRoom {
   }
 }
 
-export class Page2State {
+export class ChatRoomPageState {
   @observable text = '';
 
   @action setText(text) {
@@ -140,7 +154,7 @@ export class Page2State {
 class AppState {
   horizon;
   @observable userName;
-  @observable roomName;
+  @observable roomName = 'onsenui';
   @observable chatRooms = [];
   @observable loading = false;
   @observable messages = [];
@@ -149,6 +163,23 @@ class AppState {
   constructor(horizon) {
     this.horizon = horizon;
     this.chatRooms = [];
+  }
+
+  @computed get messageList() {
+    var list = this.messages.map((el) => el);
+    for (var i = 1; i < list.length; i++) {
+      if (list[i - 1].author === list[i].author) {
+        list[i].showAuthor = false;
+      } else {
+        list[i].showAuthor = true;
+      }
+    }
+
+    if (list.length > 0) {
+      list[0].showAuthor = true;
+    }
+
+    return list;
   }
 
   @computed get lastAuthor() {
@@ -181,20 +212,55 @@ class AppState {
 export default AppState;
 ```
 
+# The Login Screen
 
-The main/login page is pretty straightforward, it contains a simple two input field for the username and the chat room. Then it either creates the room or loads the initial data for it:
+In the following explaination we will only explain the structure and the basic interaction of the components, the curious reader can look the details up at [GitHub](https://github.com/philolo1/Horizon-MobX-OnsenUI).
+
+For the navigation we will use OnsenUI `Navigator`: We provide it an initial route which will contain a component we will render to. In our case this component will be `LoginPage`.
+
 
 ```
 import React, {Component} from 'react';
-import {observer} from 'mobx-react';
-import {observable} from 'mobx';
-import DevTools from 'mobx-react-devtools';
 import ons from 'onsenui';
 import {Modal, Page, Col, Row, BottomToolbar, List, ListItem, Button, Navigator, Toolbar, Input} from 'react-onsenui';
-import _ from 'lodash';
-import Page2 from './Page2.jsx';
-import {Page2State} from './AppState.js'
 
+// ... LoginPage definition omitted for simplicity
+// it would render to something like <Page> .. </Page>
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.renderPage = this.renderPage.bind(this);
+  }
+  renderPage(route, navigator) {
+    const props = route.props || {};
+    props.navigator = navigator;
+    return React.createElement(route.component, route.props);
+  }
+
+  render() {
+    return (
+      <Navigator
+        initialRoute={{component: LoginPage, props: {
+          appState: this.props.appState
+        }}}
+        renderPage={this.renderPage}
+      />
+    );
+  }
+}
+
+export default App;
+```
+
+The structure of the Login component will look something like this:
+
+![Login Page](/blog/content/images/2016/Jul/LoginPage.png)
+
+The LoginPage consits of an image, two inputs and a button. The application state is passed down to the component and updating is very simple, as can be seen on the UserInput:
+
+```
 const UserInput = observer(({appState}) => {
   return (
     <div>
@@ -209,89 +275,14 @@ const UserInput = observer(({appState}) => {
     </div>
   );
 });
+```
 
-const RoomInput = observer(({appState}) => {
-  return (
-    <div style={{paddingTop: 10, paddingBottom: 10}}>
-      <Input
-        modifier='underbar'
-        fload
-        style={{width: '100%'}}
-        placeholder='Room'
-        onChange={(e) => appState.roomName = e.target.value}
-        value={appState.roomName}
-      />
-    </div>
-  );
-});
+Ones the value changes, we just update the variable and MobX will automatically rerender the UserInput compoent and only this component, since the userName is only displayed there.
 
+Ones the user name and room name is entered, we will either create a room if it does not already exist or load the initial one:
 
-@observer
-class Page1 extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: false
-    };
-  }
-
-  componentDidMount() {
-    console.log('component mountes');
-    this.chatRooms = this.props.appState.horizon('chatRooms');
-  }
-
-  renderModal = () => {
-    console.log('render modal');
-    return (
-      <Modal isOpen={this.state.loading}>
-        <div>
-          <ons-icon icon='ion-load-c' spin='true'></ons-icon> <br /> <br />
-          <span>Loading ...</span>
-        </div>
-      </Modal>
-    )
-  }
-
-  renderToolbar = () => {
-    return (
-      <Toolbar>
-        <div className='center'> Chat App </div>
-      </Toolbar>
-    );
-  }
-  render() {
-    return (
-      <Page
-        renderModal={this.renderModal}
-      >
-        <div style={{paddingLeft: 60, paddingRight: 60, paddingTop: 40}}>
-          <Row style={{paddingBottom: 20}}>
-            <Col />
-            <Col>
-              <img style={{width: 200}} src={require('../www/onsen_chat.png')} />
-            </Col>
-            <Col />
-          </Row>
-          <UserInput appState={this.props.appState} />
-          <RoomInput appState={this.props.appState} />
-          <div style={{display: 'flex', justifyContent: 'center'}}>
-
-            <Row style={{paddingBottom: 20}}>
-              <Col />
-              <Col style={{display: 'flex', justifyContent: 'center'}}>
-                <Button onClick={this.joinRoom} modifier='large' style={styles.loginButton}> Join </Button>
-              </Col>
-              <Col />
-            </Row>
-
-          </div>
-        </div>
-      </Page>
-    );
-  }
-
-  joinRoom = () => {
+```
+joinRoom = () => {
     var {userName, roomName} = this.props.appState;
 
     if (!(userName != null && userName.length > 0)) {
@@ -308,7 +299,10 @@ class Page1 extends Component {
 
     this.chatRooms.find({name: roomName}).fetch().defaultIfEmpty().subscribe(room => {
 
+
+     // while loading the page, we will show a modal
       this.setState({loading: true});
+
       if (room == null) {
         console.log('room does not exist');
         this.chatRooms.store({
@@ -316,190 +310,47 @@ class Page1 extends Component {
         }).subscribe((el) => {
 
           this.props.navigator.pushPage({
-            component: Page2,
+            component: ChatRoomPage,
             props: {
               appState: this.props.appState,
               title: roomName,
               roomID: el.id,
               author: userName,
-              pageState: new Page2State()
+              pageState: new ChatRoomPageState()
             }
           });
         });
-
-
       } else {
-        console.log(room);
+        console.log('joining room ' + roomName);
 
         this.props.navigator.pushPage({
-          component: Page2,
+          component: ChatRoomPage,
           props: {
             appState: this.props.appState,
             title: roomName,
             roomID: room.id,
             author: userName,
-            pageState: new Page2State()
+            pageState: new ChatRoomPageState()
           }
         });
       }
     });
   }
-
-  onReset = () => {
-    this.props.appState.resetTimer();
-  }
-}
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-    this.renderPage = this.renderPage.bind(this);
-  }
-  renderPage(route, navigator) {
-    const props = route.props || {};
-    props.navigator = navigator;
-    console.log('render');
-    return React.createElement(route.component, route.props);
-  }
-
-  render() {
-    return (
-      <div>
-        <Navigator
-          initialRoute={{component: Page1, props: {
-            appState: this.props.appState
-          }}}
-          renderPage={this.renderPage}
-        />
-        <DevTools />
-      </div>
-    );
-  }
-}
-
-const styles = {
-  loginButton: {
-    width: '100px',
-    height: 30,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    fontSize: 15,
-    marginTop: 10
-  }
-};
-
-export default App;
 ```
 
-The second page will contain the main chat messages. Those message will be directly loaded from the server and using the horizon we almost need no code to update the state. There are some small features in the code, for example to show a new Message:
+# Chat Room Page
+
+The second page will contain the main chat messages. On the left side your messages will be presented, while on the right side other peoples messages will be shown.  Again, lets look at a small overview of the messages:
+
+
+![Login Page](/blog/content/images/2016/Jul/ChatRoomPage.png)
+
+The ChatRoomPage component consists a toolbar at the top, a bottom toolbar at the bottom and the messages in the middle. We will use rethinkdb and mobx to update the view: Whenever a new message is received that is written by oneself, the view will scroll down. When a message is written by somebody else, a small popup message will be shown that one can click to go to the bottom. The code of the main component looks like this:
 
 ```
-import React, {Component} from 'react';
-import {observer} from 'mobx-react';
-import {observable} from 'mobx';
-import DevTools from 'mobx-react-devtools';
-import ons from 'onsenui';
-import {Modal, BackButton, Icon, Page, List, BottomToolbar, ListItem, Button, Row, Col, Navigator, Toolbar, Input} from 'react-onsenui';
-import _ from 'lodash';
-
-const Message = observer(({data, author}) => {
-
-  let messageStyle = {
-    padding: 10,
-    borderColor: '#9E9E9E',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 15,
-    backgroundColor: 'white',
-    color: '#535050'
-  };
-
-  if (author === data.author) {
-    return (
-      <div style={{paddingTop: 10, paddingLeft: 14}}>
-        <div style={{fontSize: 24 * 0.6, paddingLeft: 10, paddingBottom: 5, color: '#928585'}}> {data.author} </div>
-        <div style={{display: 'flex'}}>
-          <div style={messageStyle}> {data.message} </div>
-          <div style={{flex: 1, minWidth: '20%'}} />
-        </div>
-      </div>
-    );
-  }
-
-  messageStyle = {
-    padding: 10,
-    borderColor: '#9E9E9E',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderRadius: 15,
-    backgroundColor: 'white',
-    color: '#535050'
-  };
-
-  return (
-    <div style={{paddingTop: 10, paddingRight: 14}}>
-      <div style={{fontSize: 24 * 0.6, textAlign: 'right', paddingBottom: 5, paddingRight: 10, color: '#928585'}}> {data.author} </div>
-      <div style={{display: 'flex'}}>
-        <div style={{flex: 1, minWidth: '20%'}} />
-        <div style={messageStyle}> {data.message} </div>
-      </div>
-    </div>
-  );
-});
-
-const MessageBar = observer(({pageState, sendText}) => {
-
-  return (
-    <BottomToolbar>
-      <div style={{display: 'flex',
-        height: '100%',
-        alignItems: 'center'}}>
-        <Input placeholder='Type Message'
-
-          onKeyPress={(event) => {
-            var code = event.keyCode || event.which;
-            if (code === 13) {
-              sendText();
-            }
-          }}
-          onChange={({target}) => pageState.setText(target.value)}
-          value={pageState.text}
-          style={{
-            paddingLeft: 15,
-            flex: 1
-          }}
-        />
-        <span
-          style={{paddingLeft: 10, paddingRight: 15,
-            color: '#616161',
-            fontWeight: pageState.text.length > 0 ? 'bold' : 'normal'
-          }}
-          onClick={sendText}
-        >Send</span>
-      </div>
-    </BottomToolbar>
-  );
-});
-
-const NewMessage = observer(({show, onClick}) => {
-
-
-  if (show) {
-    return (
-      <div onClick={onClick} style={{height: 40, position: 'fixed', bottom: 44, width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'lightgrey', color: '#616161'}}> new messages </div>
-    );
-  }
-
-  return <div />;
-});
-
-@observer
-export default class Page2 extends Component {
+export default class ChatRoomPage extends Component {
 
   componentDidUpdate() {
-    console.log('mount', this.props.appState.lastAuthor);
     if (this.props.appState.lastAuthor === this.props.author) {
       this.scrollBottom();
     }
@@ -520,16 +371,17 @@ export default class Page2 extends Component {
   }
 
   get pageState() {
-    console.log('props', this.props);
     return this.props.pageState;
   }
 
   componentDidMount() {
     this.messages = this.props.appState.horizon('messages');
 
-    this.messages.findAll({roomID: this.props.roomID}).order('date').watch().subscribe((data) => {
+    this.messages.findAll({roomID: this.props.roomID})
+        .watch().subscribe((data) => {
       if (data) {
-        this.props.appState.setMessages(data);
+        const newData = _.sortBy(data, (el) => el.date);
+        this.props.appState.setMessages(newData);
         if (this.initial) {
           this.initial = false;
           this.scrollBottom();
@@ -572,7 +424,7 @@ export default class Page2 extends Component {
           </Toolbar>
         }
       >
-        {this.props.appState.messages.map((data) => {
+        {this.props.appState.messageList.map((data) => {
           return (
             <Message data={data} author={this.props.author} />
           );
@@ -581,14 +433,19 @@ export default class Page2 extends Component {
         <div style={{height: 15}} />
 
         <NewMessage
-          onClick={() => { this.scrollBottom(); this.props.appState.hideMessageNotification(); }}
+          onClick={() => {
+            this.scrollBottom();
+            this.props.appState.hideMessageNotification();
+          }}
           show={this.props.appState.newMessage}
         />
-
       </Page>
     );
   }
 }
+
 ```
 
-This is all the code of the app. I hope you find it relativly simple to build a real-time app with the React Component of OnsenUI and Horizon. Ther are many resources and videos to learn more about rethinkdb. I highly recommend this [video](https://www.youtube.com/watch?v=3BPLsljZVIc) and their [website](http://www.rethinkdb.com/). If you have any questions or feedback feel free to ask in our [community](https://community.onsen.io/). We would also appreciate a 🌟 on our [github repo](https://github.com/OnsenUI/OnsenUI).
+# Conclusion
+
+Horizon with combination of OnsenUI makes it really simple and fast to build a real time chat application. There are many resources and videos to learn more about rethinkdb. I highly recommend this [video](https://www.youtube.com/watch?v=3BPLsljZVIc) and their [website](http://www.rethinkdb.com/). If you have any questions or feedback feel free to ask in our [community](https://community.onsen.io/). We would also appreciate a 🌟  on our [github repo](https://github.com/OnsenUI/OnsenUI).
