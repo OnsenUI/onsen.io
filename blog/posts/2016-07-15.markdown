@@ -18,7 +18,7 @@ The entire source code of the app is available at [Github](https://github.com/ph
 <div style="display: flex; margin: 40px 0;" >
   <div style="flex-grow: 1;"> </div>
   <div style="background-image: url('/blog/content/images/2016/Feb/iphone6.png'); width: 401px; height: 806px; ">
-    <iframe scrolling="yes" style="margin-top: 92px; margin-left: 26px;" src="http://192.81.214.88:8181/Horizon-MobX-OnsenUI/build/index.html" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
+    <iframe scrolling="yes" style="margin-top: 92px; margin-left: 26px;" src="https://onsenhorizon.herokuapp.com" width="349" height="617" scrolling="no" class="lazy-hidden"></iframe>
   </div>
   <div style="flex-grow: 1;"> </div>
 </div>
@@ -33,13 +33,13 @@ RethinkDB is a real time database. The difference to a traditional database is t
 $ npm install -g horizon
 ```
 
-To start a simple horizon server in development mode type the following command:
+With the following command one can start a simple horizon server in development mode on port 5000:
 
 ```
-$ hz serve --dev
+$ hz serve --dev --bind all -p 5000
 ```
 
-In development mode there is no user authentication and no security rule. For this tutorial we are not going to deal with authentication, if you are interested to learn about it, please check the [documentation](http://horizon.io/docs/auth/).
+The parameter `--bind all` makes it accessible throughout the entire network. In development mode there is no user authentication and no security rule. For this tutorial we are not going to deal with authentication, if you are interested to learn about it, please check the [documentation](http://horizon.io/docs/auth/).
 
 To start horizon in our application we will need to just use the connect function
 
