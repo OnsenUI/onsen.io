@@ -1,0 +1,45 @@
+---
+author: atsushi
+date: 2016-07-04
+id: moving-onsenui-v1-to-v2
+title: "Onsen UIをバージョン1から2へ移行するには"
+product: monaca
+tags: monaca, onsen-ui
+category: 技術情報
+---
+
+Onsen UIのバージョン2がリリースされます。これは従来のAngularJS必須だったものから自由に他のフレームワークが使えるようになったり、マテリアルデザインのサポートが行われていたりと大幅な変更がされています。
+
+今回は、これまでバージョン1を使っていたプロジェクトで、どうバージョン2に変更するかを紹介します。
+
+## バージョン2は後方互換性があります
+
+バージョン2は後方互換性が用意してありますので、基本的にはそのまま動きます。バージョン2の作法としては非標準ながらもget/set系メソッドも残してあります。
+
+## 移行してみる
+
+例えば既存のプロジェクトがあったとします。
+
+![](/blog/content/images/2016/Jun/onsenui-v1-to-v2-6.png)
+
+まずJS/CSSコンポーネントの追加と削除を選択します。
+
+![](/blog/content/images/2016/Jun/onsenui-v1-to-v2-5.png)
+
+ここで、ライブラリのバージョンアップはできませんので一旦削除します。今回はOnsen UI(Monaca Version)になります。
+
+削除後、再度Onsen UI(Monaca Version)を追加します。この時、執筆時点では1.3.14が最新になっているので、2.0.0-rc4などを選択します。
+
+![](/blog/content/images/2016/Jun/onsenui-v1-to-v2-4.png)
+
+必須ファイルは選択されていますので、既存プロジェクトの場合はAngularJSを使っていますので、angular.min.jsとangular-onsenui.min.jsを選択します。後はテーマを自由に選んでください。
+
+![](/blog/content/images/2016/Jun/onsenui-v1-to-v2-3.png)
+
+そうすることで既存のプロジェクトもそのまま動くようになります。
+
+![](/blog/content/images/2016/Jun/onsenui-v1-to-v2-1.png)
+
+----
+
+Onsen UIへはライブラリをバージョンアップしてもらうだけで動くようになります。しかし動かない、または何らかの不具合があった場合は[Home | Monaca & Onsen UI Community](https://community.onsen.io/)までコメントを寄せてください。

@@ -60,6 +60,11 @@
       <% for category of @env.categories: %>
         <li class="blog-header-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
       <% end %>
+      <div class="blog-header-search-container blog-header-search-container-hidden">
+        <div class="blog-header-search-mask"></div>
+        <input class="blog-header-search-bar blog-header-search-bar-hidden" type="text" name="search" placeholder="Search..">
+      </div>
+      <img class="blog-header-search" src="/images/blog/blog_search_icon.png" />
     </ul>
 
     <div class="blog-header-newsletter newsletter-signup">
@@ -79,6 +84,11 @@
       <% for category of @env.categories: %>
         <li class="blog-header-category-item"><a href="/blog/categories/<%= category %>.html"><%= @env.categories[category].name %></a></li>
       <% end %>
+      <div class="blog-header-search-container blog-header-search-container-hidden">
+        <div class="blog-header-search-mask"></div>
+        <input class="blog-header-search-bar blog-header-search-bar-hidden" type="text" name="search" placeholder="Search..">
+      </div>
+      <img class="blog-header-search" src="/images/blog/blog_search_icon.png" />
     </ul>
   </div>
 </div>

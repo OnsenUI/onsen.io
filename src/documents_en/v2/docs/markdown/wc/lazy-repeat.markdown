@@ -44,9 +44,17 @@ With [`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) only currently visibl
 As seen in the example, `<ons-lazy-repeat>` requires a delegate object attached to it's `delegate` property.
 
 * `createItemContent` creates the content of every list item given its index. It should returns an HTML element.
-* `calculateItemHeight` returns the height of an item. It could be different for every item.
+* `calculateItemHeight` returns the height of an item. It could be different for every item. This property is optional and if it's omitted the height of the first item will be calculated and used for all subsequent items.
 * `countItems` returns the total number of items in the list.
 * `destroyItem` is an optional method that will be triggered everytime an item is unloaded. This can be used to destroy elements and remove event listeners in order to avoid memory leaks.
+
+##### Refreshing the list
+
+If the data changes it is important to let the component know about it. This is done by calling the `refresh()` method.
+
+```
+document.querySelector('#list').refresh();
+```
 
 ##### Combining Ajax calls
 

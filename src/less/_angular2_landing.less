@@ -1,0 +1,254 @@
+.design-2016 .angular2-landing {
+  text-align: center;
+
+  &-large-image {
+    max-width: 80%;
+
+    .mobile-query({
+      display: none;
+    });
+  }
+
+  &-small-image {
+    display: none;
+    max-width: 80%;
+
+    .mobile-query({
+      display: inline-block;
+    });
+  }
+
+  &-header {
+    background: linear-gradient(0deg, #0273d4 0%, #0143a3 42%, #001e4a 100%);
+    font-family: @en-header-font-family;
+    color: #fff;
+    padding: 0 18px;
+
+    &-title {
+      padding: 50px 0 0 0;
+      margin: 0;
+      font-size: 60px;
+      font-weight: 300;
+      line-height: 72px;
+    }
+
+    &-beta {
+      white-space: nowrap;
+      position: relative;
+
+      &:before {
+        content: url(/images/design_2016/icn_beta_1.svg);
+        position: absolute;
+        right: -25px;
+        top: -35px;
+      }
+    }
+
+    &-subtitle {
+      margin: 10px 0 0 0;
+      color: #90a0c3;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 26px;
+      letter-spacing: 0.05em;
+    }
+
+    &-keyvisual {
+      margin: 30px auto;
+    }
+
+    &-get-started {
+      display: block;
+      text-decoration: none;
+      padding: 13px 0 10px 0;
+      margin: 0 auto;
+      width: 220px;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #dd0031;
+      cursor: pointer;
+
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #001e4a;
+        color: #d9dcdf;
+      }
+
+      &-title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 24px;
+      }
+
+      &-subtitle {
+        font-weight: 400px;
+        font-size: 13px;
+      }
+    }
+
+    &-available {
+      margin: 10px 0;
+      font-size: 14px;
+
+      &-frameworks {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 12px 0;
+
+        > a {
+          display: block;
+          width: 26px;
+          height: 26px;
+          margin: 0 10px;
+          cursor: pointer;
+          position: relative;
+
+          &:before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            position: absolute;
+            bottom: 1px;
+            right: -9px;
+            background: url('/images/design_2016/icn_link_blank.png');
+          }
+
+          &:hover:before {
+            background: url('/images/design_2016/icn_link_blank_hover.png');
+          }
+        }
+
+        &-angular1 {
+          background: url('/images/design_2016/logo_angular1_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_angular1_available_hover.png');
+          }
+        }
+
+        &-react {
+          background: url('/images/design_2016/logo_react_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_react_available_hover.png');
+          }
+        }
+        &-js {
+          background: url('/images/design_2016/logo_js_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_js_available_hover.png');
+          }
+        }
+      }
+    }
+
+    &-latest {
+      padding: 20px 0;
+
+      #release-info {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+        font-weight: 400;
+
+        a {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &-social {
+    margin: 20px 0 56px 0;
+
+    .tablet-query({
+      margin: 20px 0 40px 0;
+    });
+
+    font-size: 14px;
+    color: #4183c4;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: @en-header-font-family;
+
+    > a {
+      color: #4183c4;
+      margin: 0 20px;
+      font-weight: 600;
+      position: relative;
+
+      &:before {
+        display: inline-block;
+        content: '';
+        position: relative;
+        top: 2px;
+      }
+    }
+
+    &-twitter:before {
+      background: url(/images/design_2016/icon_twitter_2.png);
+      width: 16px;
+      height: 13px;
+    }
+
+    &-github:before {
+      background: url(/images/design_2016/icon_github_2.png);
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &-content {
+    max-width: 960px;
+    padding: 0 18px;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 31px;
+      line-height: 36px;
+      color: #000;
+    }
+
+    hr {
+      margin: 42px 0 32px 0;
+    }
+
+    p {
+      font-family: Helvetica;
+      color: #666666;
+      font-size: 18px;
+      margin: 16px 0;
+    }
+
+    &-get-started {
+      font-family: @en-header-font-family;
+      font-weight: 600;
+      display: block;
+      width: 409px;
+      max-width: 90%;
+      margin: 80px auto;
+      background-color: #ff4d35;
+      padding: 14px 0;
+      color: #fefefe;
+      text-decoration: none;
+      font-size: 20px;
+      line-height: 22px;
+    }
+  }
+}
+
+body:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url(/images/design_2016/logo_angular1_available_hover.png) url(/images/design_2016/logo_react_available_hover.png) url(/images/design_2016/logo_js_available_hover.png)
+}
+
+#showcase-carousel-wrapper {
+  height: 280px;
+}

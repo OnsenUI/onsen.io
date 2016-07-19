@@ -36,6 +36,7 @@ module.exports = function(lang, isStaging) {
         .use(require('./v1-api-docs')(lang))
         .use(require('./v2-wc-api-docs')(lang, 'js'))
         .use(require('./v2-wc-api-docs')(lang, 'angular1'))
+        .use(require('./v2-wc-api-docs')(lang, 'angular2'))
         .use(require('./v2-react-api-docs')(lang))
         .use(require('./patterns-collection')(lang, __dirname + '/../dist/v2/OnsenUI/css-components/www/patterns'))
         .use(collections({
@@ -163,8 +164,6 @@ module.exports = function(lang, isStaging) {
         .use(function(files, metalsmith, done) {
           setImmediate(done);
           metalsmith.metadata().isBlog = true;
-          var site = metalsmith.metadata().site;
-          site.url = site.url + '/blog/';
         })
         .use(draft())
         .use(require('./helpers')())
@@ -182,7 +181,12 @@ module.exports = function(lang, isStaging) {
               var doc = files[path];
               doc.markdownContents = doc.contents.toString('utf8');
               doc.numericId = crypto.createHash('md5').update(doc.id).digest('hex');
-              doc.cid = 7;
+              var cids = {
+                announcement: 5,
+                showcase: 13,
+                default: 7
+              };
+              doc.cid = cids[doc.category] || cids.default;
             }
 
             done();
