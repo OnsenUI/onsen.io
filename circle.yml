@@ -19,11 +19,10 @@ checkout:
 dependencies:
   override:
     - npm install
-    - npm install -g gulp
-    - cd dist/v1/OnsenUI/css-components && npm install && gulp build
-    - cd dist/v1/OnsenUI && npm install && gulp build && gulp build-docs
-    - cd dist/v2/OnsenUI/css-components && npm install && gulp build
-    - cd dist/v2/OnsenUI && npm install && gulp build && gulp build-docs
+    - cd dist/v1/OnsenUI/css-components && npm install && ./node_modules/.bin/gulp build
+    - cd dist/v1/OnsenUI && npm install && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
+    - cd dist/v2/OnsenUI/css-components && npm install && ./node_modules/.bin/gulp build
+    - cd dist/v2/OnsenUI && npm install && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
 test:
   override:
     - echo "Add tests!"

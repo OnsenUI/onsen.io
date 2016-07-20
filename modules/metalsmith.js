@@ -164,8 +164,6 @@ module.exports = function(lang, isStaging) {
         .use(function(files, metalsmith, done) {
           setImmediate(done);
           metalsmith.metadata().isBlog = true;
-          var site = metalsmith.metadata().site;
-          site.url = site.url + '/blog/';
         })
         .use(draft())
         .use(require('./helpers')())
