@@ -117,7 +117,7 @@ horizon.connect();
 
 Before we start looking at the views, let's look at the application state first. The application state is managed via [MobX](https://github.com/mobxjs/mobx). MobX is a JavaScript library that uses observables to do certain actions automatically once an observed variable changes. In the case of React, MobX calls `setState()` if a variable changes which the state depends on. If you want to learn more about MobX, I highly recommend a look at our [recent tutorial](https://onsen.io/blog/mobx-tutorial-react-stopwatch/) that uses MobX to create a simple stopwatch.
 
-The following code defines the application state: Mainly it will contain the current username, chatroom, the database connection to Horizon and some additional page-related information. In MobX we mark variables with `@observable` to indicate that MobX should observe it. If they change, the associated views will call a rerender automatically. Functions marked with `@action` are functions that change observable variables and `@computed` functions getters that depend on observables that will be only updated once an associated variable is changed.
+The following code defines the application state: Mainly it will contain the current username, chatroom, the database connection to Horizon and some additional page-related information. In MobX we mark variables with the decorator `@observable` to indicate that MobX should observe it. If they change, the associated views will call a rerender automatically. Functions marked with `@action` are functions that change observable variables and `@computed` functions getters that depend on observables that will be only updated once an associated variable is changed.
 
 ```
 import {computed, observable, action} from 'mobx';
