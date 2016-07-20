@@ -1,0 +1,216 @@
+---
+author: atsushi
+date: 2016-07-20
+id: monaca-with-wikitude
+title: "MonacaでWikitudeプラグインを使ってARアプリを作る"
+product: monaca
+tags: monaca, wikitude, ar
+category: 技術情報
+---
+
+最近Pokémon GOが爆発的に人気です。あの中で使われている技術の一つがAR（拡張現実）になります。スマートフォンのカメラを通してオブジェクトを認識し、その上に3Dオブジェクトや画像などを描画する技術です。Pokémon GOの場合は位置情報を使っているので、一昔前に話題になったセカイカメラと似た技術となっています。
+
+MonacaアプリでARアプリを作ろうと思った場合に使えるのが[Wikitude](http://wikitude.grapecity.com)というサービスになります。位置情報はもちろん、画像認識を使ったARコンテンツも利用できます。
+
+今回はMonacaアプリの中でWikitudeを使う方法について紹介します。
+
+### プラグインのインストール
+
+まず最初にプラグインをインストールします。[Wikitude/wikitude-cordova-plugin](https://github.com/Wikitude/wikitude-cordova-plugin)にてZipファイルでダウンロードし、Monacaの管理画面でアップロードします。
+
+注意点として、Cordovaのバージョンを6.2.0-beta（執筆時点）にアップデートしてください。
+
+![](/blog/content/images/2016/Jul/monaca-wikitude-1.png)
+
+### config.xmlの変更
+
+プロジェクトのルートにあるconfig.xmlを開いて編集します。SDKのバージョンを指定します。これがないとAndroidでビルドが失敗します。
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<widget xmlns="http://www.w3.org/ns/widgets" id="jp.moongift.wikitude.monaca" version="1.0.1">
+  <name>Minimum Template</name>
+    :
+    <!-- 追加ここから -->
+  <platform name="android">
+    <preference name="android-minSdkVersion" value="15"/>
+  </platform>
+  <!-- 追加ここまで -->
+</widget>
+```
+
+### Wikitudeプラグインの編集
+
+次に `plugins/com.wikitude.phonegap.WikitudePlugin/www/WikitudePlugin.js` を開きます。その上の方にある、
+
+```
+var WikitudePlugin = function() {
+    :
+  this._sdkKey = "YOUR LICENSE HERE";
+```
+
+となっているライセンスを編集します。[Wikitude（ウィキチュード）](http://wikitude.grapecity.com/)のサイトでトライアルのライセンスが取得できますのでライセンスを取得後、この文字列を置き換えてください。
+
+後、行末まで移動して、
+
+```
+var wikitudePlugin = new WikitudePlugin();
+window.wikitudePlugin = wikitudePlugin; // 追加
+module.exports = wikitudePlugin;
+```
+
+としてグローバルオブジェクトにしてください。
+
+### js/index.jsの作成
+
+ではまず最初にARを起動する部分を作ります。 js/index.jsを作成し、index.htmlで読み込んでください。
+
+js/index.jsは次のようになります。
+
+```
+var app = {
+  // 初期化
+  initialize: function() {
+    this.bindEvents();
+  },
+	// イベントの設定
+  bindEvents: function() {
+    document.addEventListener('deviceready', app.onDeviceReady, false);
+  },
+  
+  // 準備完了になったら呼ばれます
+  onDeviceReady: function() {
+    wikitudePlugin.isDeviceSupported(
+      app.onDeviceSupported,
+    	app.onDeviceNotSupported,
+    	[ "2d_tracking"]
+    );
+  },
+  
+  // ARをサポートしている場合に実行
+  onDeviceSupported: function() {
+    wikitudePlugin.loadARchitectWorld(
+      app.onARExperienceLoadedSuccessful, 
+      app.onARExperienceLoadError,
+      "www/ar.html",
+      [ "2d_tracking"],
+      {"camera_position": "back"}
+    );
+  },
+  
+  // デバイスがサポートしていない場合
+  onDeviceNotSupported: function(errorMessage) {
+    alert(errorMessage);
+  },
+  
+  // ARを読み込んだ場合のコールバック
+  onARExperienceLoadedSuccessful: function(loadedURL) {
+  },
+  
+  // ARを読み込めなかった場合のエラーコールバック
+  onARExperienceLoadError: function(errorMessage) {
+    alert('Loading AR web view failed: ' + errorMessage);
+  }
+};
+
+app.initialize();
+```
+
+実際、処理として大事なのは次の部分です。
+
+```
+wikitudePlugin.loadARchitectWorld(
+  app.onARExperienceLoadedSuccessful, 
+  app.onARExperienceLoadError,
+  "www/ar.html",
+  [ "2d_tracking"],
+  {"camera_position": "back"}
+);
+```
+
+今回は特にコールバックは設定しません。www/ar.htmlというファイルを読み込んでいるだけです。2d_trackingを有効にし、画像認識機能を使う指定をしています。
+
+### www/ar.htmlの作成
+
+次に `www/ar.html` を作成します。これはとても簡単です。
+
+```
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta content="width=device-width,initial-scale=1,maximum-scale=5,user-scalable=yes" name="viewport">
+
+	<title></title>
+
+	<script src="architect://architect.js"></script>
+	<script type="text/javascript" src="js/ade.js"></script>
+
+	<link rel="stylesheet" href="css/default.css">
+</head>
+
+<body>
+  <script type="text/javascript" src="js/ar.js"></script>
+</body>
+</html>
+```
+
+CSSと、ar.jsを読み込んでいます。 ade.jsはARオブジェクトを扱いやすくするライブラリで、[サンプルに収録されています](https://raw.githubusercontent.com/Wikitude/wikitude-cordova-plugin-samples/master/SampleAppResources/world/ade.js)。
+
+### js/ar.js の作成
+
+次にARを処理する `js/ar.js` を作成します。今回は次のようになります。
+
+```
+var World = {
+	loaded: false,
+  
+  // 初期化処理
+	init: function initFn() {
+		this.createOverlays();
+	},
+  
+  // オーバーレイ表示する指定
+	createOverlays: function createOverlaysFn() {
+		this.tracker = new AR.ClientTracker("assets/magazine.wtc");
+		var imgOne = new AR.ImageResource("assets/imageOne.png");
+		var overlayOne = new AR.ImageDrawable(imgOne, 1, {
+			offsetX: -0.15,
+			offsetY: 0
+		});
+		var pageOne = new AR.Trackable2DObject(this.tracker, "*", {
+			drawables: {
+				cam: overlayOne
+			}
+		});
+	}
+
+};
+
+World.init();
+```
+
+処理内容としては認識対象としての imageOne.pngの指定、そしてその際に描画する 3Dオブジェクト（magazine.wtc）の指定を行っているだけです。実際の表示は offsetX が -0.15となっているのでちょっと左側に表示します。
+
+ARコンテンツについては[サンプルにアップロードされている](https://github.com/Wikitude/wikitude-cordova-plugin-samples/tree/master/SampleAppResources/world/1_ClientRecognition_1_ImageOnTarget/assets)ものが利用できます。また、独自のARコンテンツも[Target Managerを使ってARコンテンツを試作してみる](http://wikitude.grapecity.com/topics/article-targetmanager)にあるTarget Managerを使うことでビジュアル的にWebブラウザ上で簡単に作成できるようになっています。
+
+AR用コンテンツはwww以下にassetsディレクトリを作成し、その中にアップロードしてください。[CSSファイルはこちら](https://github.com/Wikitude/wikitude-cordova-plugin-samples/tree/master/SampleAppResources/world/1_ClientRecognition_1_ImageOnTarget/css)が利用できます。cssディレクトリ内にアップロードしてください。
+
+### ビルドする
+
+これで準備ができました。Wikitudeプラグインを使っていますので、アプリとしてビルドしないと試せないので注意して下さい。
+
+### 試す
+
+では実際にアプリを起動してみます。起動するとすぐにAR表示に切り替わります。[こちらにあるPDF](http://www.wikitude.com/external/doc/documentation/4.0/glass/images/target_images_examples.pdf)のサーファーの写真にカメラを向けるとARコンテンツが表示されるはずです。
+
+![](/blog/content/images/2016/Jul/monaca-wikitude.png)
+
+----
+
+Wikitudeプラグインを使えばARアプリが簡単に実現できます。マーカー式だけでなく、普通の写真から認識することもできるのでポスターであったり、雑誌や教科書などもマーカーとして利用できます。QRコードなども認識できます。その他、Pokémon GOのように位置情報ベースのARコンテンツ表示も可能です。
+
+ぜひMonacaでARアプリを作ってみてください。
+
+[Wikitude（ウィキチュード）](http://wikitude.grapecity.com/)
