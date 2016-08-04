@@ -13,17 +13,19 @@ Onsen UI also provides a component called [`SpeedDial`](SpeedDial.html) which is
 
 #### Basic usage
 
-To add a floating action button in an app simply put it as a child of a `Page` component. The `position` property is used to define its position. For example, to put the button in the bottom right of the screen this property one needs to set the property to `"bottom right"`.
+To add a floating action button you can use the `renderFixed` prop of the `Page` component. The `position` property is used to define its position. For example, to put the button in the bottom right of the screen this property one needs to set the property to `"bottom right"`.
 
 It is also possible to put an  icon inside the button using [`Icon`](Icon.html) component:
 
-```
-<Page>
-  <Fab
-    position='bottom right'
-    onClick={this.handleClick.bind(this)}>
-    <Icon icon='md-plus' />
-  </Fab>
+```jsx
+<Page
+  renderFixed={() => (
+    <Fab
+      position='bottom right'
+      onClick={this.handleClick.bind(this)}>
+      <Icon icon='md-plus' />
+    </Fab>
+  )}>
 </Page>
 ```
 
@@ -31,7 +33,7 @@ It is also possible to put an  icon inside the button using [`Icon`](Icon.html) 
 
 To get a ripple effect that expands from the point where the user taps, the `ripple` property is used.
 
-```
+```jsx
 <Fab ripple />
 ```
 
@@ -39,6 +41,6 @@ To get a ripple effect that expands from the point where the user taps, the `rip
 
 The appearance of the button can be changed with the `modifier` property. The floating action button only has one modifier, `mini`, which makes it smaller.
 
-```
+```jsx
 <Fab modifier='mini' />
 ```

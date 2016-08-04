@@ -17,12 +17,16 @@ The menu items of the `SpeedDial` component are defined using the `SpeedDialItem
 
 To define the position of the component the `position` property is used. By default it is placed in the bottom right corner which can also be achieved by setting the property to the literal string `"bottom right"`.
 
+To place the speed dial component in a page you can use the `renderFixed` prop of the `Page` component.
+
 ```
-<Page>
-  <SpeedDial position='bottom right'>
-    <Fab>A</Fab>
-    <SpeedDialItem onClick={this.doSomething.bind(this)}>B</SpeedDialItem>
-    <SpeedDialItem onClick={this.doSomethingElse.bind(this)}>C</SpeedDialItem>
-  </SpeedDial>
+<Page
+  renderFixed={() => (
+    <SpeedDial position='bottom right'>
+      <Fab>A</Fab>
+      <SpeedDialItem onClick={this.doSomething.bind(this)}>B</SpeedDialItem>
+      <SpeedDialItem onClick={this.doSomethingElse.bind(this)}>C</SpeedDialItem>
+    </SpeedDial>
+  )}>
 </Page>
 ```
