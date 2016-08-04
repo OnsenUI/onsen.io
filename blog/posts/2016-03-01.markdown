@@ -1,0 +1,110 @@
+---
+author: moongift
+date: 2016-03-01
+id: develop-monaca-project-with-visual-studio-code
+title: "Develop Monaca Project with Visual Studio Code"
+product: monaca
+category: development
+tags: monaca, visual studio code, phonegap, cordova, tutorial
+---
+
+
+Visual Studio Code is an open source code editor developed by Microsoft. It is based on Electron, a framework allows creating desktop GUI applications using the Node.js. Visual Studio Code comes with tons of features like debugging, Git integration, syntax highlighting, IntelliSense and more. It is also highly customizable. On top of that, Microsoft recently announced [Cordova Tools](https://github.com/Microsoft/vscode-cordova) for Visual Studio Code. With Cordova Tools extension, you can build, debug and preview Cordova hybrid mobile apps on Visual Studio Code.
+
+With that in mind, in this blog post, we will quickly introduce how we can create a Monaca hybrid application using Microsoft's Visual Studio Code with Cordova Tools.
+
+
+<!-- more -->
+
+### Preparation
+
+First of all, make sure you have Node.js installed on your device.
+And, install Cordova using following code:
+
+```
+npm install -g cordova
+```
+
+If you are targeting iOS devices, install libraries using Homebrew.
+Note that iOS debugging is not supported in Windows.
+
+```
+brew install ideviceinstaller ios-webkit-debug-proxy
+```
+
+
+### installation
+
+If you don't have Visual Studio Code, download one from [here](https://code.visualstudio.com/
+).
+Once it's installed, start up Visual Studio Code.
+Let's install Cordova Tools extension.
+`CTRL+SHIFT+P` (`CMD+SHIFT+P` for Mac OSX) will open the Command Palette.
+Simply type `Install Extension` and hit enter.
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-1.png)
+
+Find Cordova Tools by, again, simply type `cordova`.
+Your command line should look something like this.
+Once you hit enter, Visual Studio Code will install the extension in a moment.
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-2.png)
+
+
+### Creating Project
+
+For this tutorial, we will be using our Monaca LocalKit.
+Create a Monaca project.
+After creating a project, please copy the separately created Cordova project's platforms/ios, or platforms/android, into the Monaca application's platforms directory.
+
+
+### Open Project in Visual Studio Code
+
+Open the Monaca hybrid mobile app project in Visual Studio Code.
+You can see your directory tree on the left side of the window.
+
+You can also set breakpoints in JavaScript files by clicking in the left margin.
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-3.png)
+
+
+Click on the debug icon in the sidebar or `CMD+SHIFT+D`.
+Then, click on the gear icon next to the debug button in the upper left.
+Select Cordova.
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-4.png)
+
+
+We can now run our hybrid mobile apps on an iOS/Android simulator, emulator, or actual device.
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-5.png)
+
+
+You can also run some JavaScript directly in Visual Studio Code's console.
+Below is a screenshot when we run following line:
+```
+alert(true);
+```
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-6.png)
+
+
+
+### Features of Visual Studio Code
+
+Today, we have quickly gone through how we use Visual Studio Code to create Monaca hybrid mobile apps.
+As I mentioned before, Visual Studio Code provides varieties of features out of the box.
+Keep in mind that Visual Studio Code is still in an early stage of development with some minor bugs.
+
+However, Built-in support for Git and debugging tool are great. Also, IntelliSense, snippets, code refactoring, and Extensions are exactly the type of features that will increase your productivity.
+It is a powerful and reliable tool to create Monaca and Cordova applications.
+
+
+![Visual Studio Code](/blog/content/images/2016/Mar/vscode-cordova-7.png)
+
+
+[Apache Cordova development lands on Visual Studio Code | The Visual Studio Blog](https://blogs.msdn.microsoft.com/visualstudio/2016/01/28/apache-cordova-development-lands-on-visual-studio-code/)
