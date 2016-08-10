@@ -23,10 +23,12 @@ The stack must be initialized with either the `initialRoute` or `initialRouteSta
 class App extends React.Component {
   renderPage(route, navigator) {
     return (
-      <Page>
-        <Toolbar>
-          <div className='center'>{route.title}</div>
-        </Toolbar>
+      <Page renderToolbar={() =>  {
+        return (
+          <Toolbar>
+            <div className='center'>{route.title}</div>
+          </Toolbar>
+        )}}>
 
         <Button onClick={() => {
           navigator.pushPage({
