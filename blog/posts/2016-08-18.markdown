@@ -12,9 +12,9 @@ tags: tutorial, angular2, cli
 
 We recently launched the beta of our [Angular2 components](https://onsen.io/angular2) for Onsen UI. Angular2 is a brand new framework and people are just starting to get familiar with it. We have decided to start a series of articles to help people get started with the framework. This article is the first in the series and will explain the very basics such as how to set up the environment and how to create and run a simple app.
 
-We will be using the newly released [Angular2 CLI tool](https://github.com/angular/angular-cli) since it makes it very easy to get started without having to fiddle with things like Webpack and setting up tests.
+We will be using the newly released [Angular2 CLI tool](https://github.com/angular/angular-cli) since it makes it very easy to get started without having to fiddle with things like Webpack and setting up the testing environment and linting.
 
-As a sample we will create a simple app that displays a list of Pokémon. The data is fetched from the public [pokeapi](https://pokeapi.co/). The current app is very simple, all you can do right now is see pictures of all the Pokemon and what their name and number is. We will expand this app in a later article to add more features such as routing and searching.
+Since this is the summer of Pokémon, I decided to create a simple sample app that displays a list of Pokémon. The data is fetched from the public [pokeapi](https://pokeapi.co/). The current app is very simple, all you can do right now is see pictures of all the Pokemon and what their name and number is. We will expand this app in a later article to add more features such as routing and searching.
 
 <!-- more -->
 
@@ -181,7 +181,7 @@ The service can now be accessed by using `this.pokedexService` in the class meth
 
 In the `app.module.ts` I also added code to import the `HttpModule` and add it in the `imports` field which gives us access to the HTTP service that Angular2 provides. We will use this in the Pokedex service to fetch data from the API.
 
-Let's add some functionality to the service. In this app we only need a method called `getPokemon(offset, limit)` which will return a Promise object which resolves to a list of Pokemon:
+Let's add some functionality to the service. In this app we only need a method called `getPokemon(offset, limit)` which will return a Promise object which resolves to a list of Pokémon. To fetch the data we use the `get(url)` method from the `Http` service:
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -467,4 +467,50 @@ It is very easy to catch DOM events in Angular2 templates. You simply add an att
 
 In our template we listen for the `load` event of the `<img>` tag so we can toggle the `imageLoaded` property.
 
+### Pipes
+
+A pipe is used in templates to filter or format data before it is rendered to the view. There are several built-in templates in AngularJS. If you want to convert a string to uppercase you can use the `uppercase` pipe:
+
+```
+<h1>
+	{{ 'Hello, world!' | uppercase }}
+</h1>
+```
+
+The names of the Pokémon returned from the API are lowercase so we want to write a pipe that converts something like "pikachu" to "Pikachu". Just like with classes and services, pipes can be generated using the CLI. This time we use the `ng g pipe` command:
+
+```bash
+ng g pipe capitalize
+```
+
+This will create two files:
+
+```
+installing pipe
+  create src/app/capitalize.pipe.spec.ts
+  create src/app/capitalize.pipe.ts
+```
+
+It will also automatically include the pipe in your `app.module.ts` file so there is no need to manually edit it.
+
+The implementation of the pipe is very simple:
+
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'capitalize'
+})
+export class CapitalizePipe implements PipeTransform {
+  transform(value: string): string {
+    return value.charAt(0).toUpperCase() + value.substr(1);
+  }
+}
+```
+
 ## Conclusion
+
+We have now completed our very simple app. As mentioned earlier we will keep adding content about Angular2 in the coming weeks. We will explore concepts such as components, services and routing in more depth in other articles. If there is anything in particular you are interested in, please let us know in the comments below.
+
+Onsen UI is an open source library used to create the UI of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
+
