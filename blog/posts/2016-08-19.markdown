@@ -78,7 +78,7 @@ cd pokedex
 ng serve
 ```
 
-The latest version is using Webpack to build the project while previously Broccoli was used. By default the development server will run at `http://localhost:4200` so open that page in your browser and you will see something like this:
+The latest version is using Webpack to build the project while previously Broccoli was used. By default, the development server will run at `http://localhost:4200` so open that page in your browser and you will see something like this:
 
 ![app works!](/blog/content/images/2016/Aug/angular2-app-works.png)
 
@@ -94,7 +94,7 @@ Apart from speeding up development, scaffolding will also enforce a strict proje
 
 ## Services
 
-A service is an object that can be shared among all your components. It is often used to fetch and store data. In our app we will create a service that fetches data from the Pokémon API.
+A service is an object that can be shared among all your components. It is often used to fetch and store data. In our app, we will create a service that fetches data from the Pokémon API.
 
 To create a new service called `PokedexService` you simply run:
 
@@ -110,7 +110,7 @@ installing service
   create src/app/pokedex.service.ts
 ```
 
-As you can see it not only creates the service but also a spec file for it where we can put our tests. For now let's ignore the spec file, we will talk about testing in a later article.
+As you can see it not only creates the service but also a spec file for it where we can put our tests. For now, let's ignore the spec file, we will talk about testing in a later article.
 
 The generated file will look like this:
 
@@ -181,7 +181,7 @@ The service can now be accessed by using `this.pokedexService` in the class meth
 
 In the `app.module.ts` I also added code to import the `HttpModule` and add it in the `imports` field which gives us access to the HTTP service that Angular2 provides. We will use this in the Pokedex service to fetch data from the API.
 
-Let's add some functionality to the service. In this app we only need a method called `getPokemon(offset, limit)` which will return a Promise object which resolves to a list of Pokémon. To fetch the data we use the `get(url)` method from the `Http` service:
+Let's add some functionality to the service. In this app, we only need a method called `getPokemon(offset, limit)` which will return a Promise object which resolves to a list of Pokémon. To fetch the data we use the `get(url)` method from the `Http` service:
 
 ```typescript
 import { Injectable } from '@angular/core';
@@ -242,7 +242,7 @@ We now have a service that we can use in our main app component.
 
 ## Representing data with classes
 
-Instead of using generic objects to describe our data we can create a `Pokemon` class. By doing this we can define the types of the fields. This is very useful since it gives us code completition so we don't have to memorize the structure of our data as well as helping us catch bugs.
+Instead of using generic objects to describe our data we can create a `Pokemon` class. By doing this we can define the types of the fields. This is very useful since it gives us code completion so we don't have to memorize the structure of our data as well as helping us catch bugs.
 
 Just like when creating the service we can use scaffolding to create the class:
 
@@ -270,11 +270,11 @@ export class Pokemon {
 
 ## Creating components
 
-You can use the CLI to create a new component with the `ng g component` command. However, in this app we will only use one component and the root component has already been created for us when we ran the `ng new` command.
+You can use the CLI to create a new component with the `ng g component` command. However, in this app, we will only use one component and the root component has already been created for us when we ran the `ng new` command.
 
 We will take a look at how to compose multiple components in the next article.
 
-A component in Angular2 generally consists of a HTML template that describes how it will be rendered as well as a class that contains the business logic.
+A component in Angular2 generally consists of an HTML template that describes how it will be rendered as well as a class that contains the business logic.
 
 The original component that was created simply displays the message "app works!" inside an `h1` tag. Let's see how it is implemented in the `app.component.ts` file:
 
@@ -293,7 +293,7 @@ export class AppComponent {
 
 As we can see a component is simply a JavaScript class, just like the service that we created earlier. The important part is the `@Component` decorator. It is used to define which template should be loaded as well as the selector which matches the component.
 
-In this case the selector matches all tags with the name `app-root` so to use the component in an app you simply do:
+In this case, the selector matches all tags with the name `app-root` so to use the component in an app you simply do:
 
 ```html
 <app-root></app-root>
@@ -301,7 +301,7 @@ In this case the selector matches all tags with the name `app-root` so to use th
 
 It is important to include a hyphen in the tag name since HTML5 doesn't allow custom tags without hyphens. This is to avoid collision with native HTML elements.
 
-The `templateUrl` parameter is used to load an external template. For simple components you can define the template inline using the `template` parameter. Stylesheets are loaded in the same way using the `styleUrls` parameter.
+The `templateUrl` parameter is used to load an external template. For simple components, you can define the template inline using the `template` parameter. Stylesheets are loaded in the same way using the `styleUrls` parameter.
 
 The template in `app.component.html` is very simple:
 
@@ -465,7 +465,7 @@ It is very easy to catch DOM events in Angular2 templates. You simply add an att
 <button (click)="handleClick()">Click me!</button>
 ```
 
-In our template we listen for the `load` event of the `<img>` tag so we can toggle the `imageLoaded` property.
+In our template, we listen for the `load` event of the `<img>` tag so we can toggle the `imageLoaded` property.
 
 ### Pipes
 
