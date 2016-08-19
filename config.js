@@ -78,6 +78,9 @@ module.exports = function(language, isStaging) {
     },
     ilia: {
       name: 'Ilia Yatchev'
+    },
+    kanako: {
+      name: '生形 可奈子'
     }
   };
 
