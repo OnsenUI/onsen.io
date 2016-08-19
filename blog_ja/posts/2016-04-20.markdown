@@ -8,8 +8,6 @@ tags: monaca, cordova, sqlite
 category: 技術情報
 ---
 
-
-
 アプリを作っていて、データを恒久的に残しておきたいと思うことは多々あります。Web技術だけでもlocalStrageやIndexedDBのようなストレージ技術もありますが、容量制限があったり、使い勝手が良くないケースもあるでしょう。
 
 そこで良く使われるのがSQLiteです。ローカルで使えるので重宝しますし、WebブラウザであってもWebSQLとしてHTML5標準ではないながらも多数のブラウザで実装された技術があります。そこで今回はSQLiteをMonacaアプリ上で手軽に使う方法を紹介します。
@@ -38,7 +36,7 @@ Cordovaプラグインのインポートを選択して、名前もしくはURL�
 
 persistence.jsはO/Rマッパーも兼ねているので、データベースをあまり意識せずに利用が可能です。
 
-インストールはJS/CSSコンポーネントの追加と削除にて、persistence.jsと検索してください。
+インストールはJS/CSSコンポーネントの追加と削除にて、persistencejsと検索してください。
 
 ![](/blog/content/images/2016/Apr/sqlite-4.png)
 
@@ -50,7 +48,7 @@ persistence.jsはO/Rマッパーも兼ねているので、データベースを
 
 実際の使い方ですが、まずデータベースを開きます。下記はWebSQL（プレビュー）での使い方です。
 
-```
+`
 persistence.store.websql.config(persistence, 'yourdbname', 'A database description', 5 * 1024 * 1024);
 ```
 
@@ -59,7 +57,7 @@ persistence.store.websql.config(persistence, 'yourdbname', 'A database descripti
 下記はMonacaアプリとしての実行です。iCloudと組み合わせることもできます。
 
 ```
-persistence.store.cordovasql.config(
+persistence.store.websql.config(
   persistence,
   'yourdbname',
   '0.0.1',                // DB version
@@ -129,32 +127,20 @@ category.tasks.add(task);
 persistence.add(category);
 ```
 
-### データのダンプ
-
-アプリデータをバックアップする際などに使えるのがダンプとリストアです。
-
-```
-// ダンプ
-persistence.dump(tx, [Task, Category], function(dump) {
-  console.log(dump);
-});
-
-// リストア
-persistence.load(tx, dumpObj, function() {
-  alert('Dump restored!');
-});
-```
-
 ### データの検索
 
 データはフィルタという機能によって検索します。メソッドチェーンを使うので分かりやすく書けます。
 
 ```
 var allTasks = Task.all()
-                     .filter("done", '=', true)
+                     .filter("done", '=', false)
                      .prefetch("category")
                      .order("name", false)
                      .limit(10);
+
+allTasks.list(null, function (results) {
+  console.log(JSON.stringify(results))
+});
 ```
 
 ----
