@@ -20,11 +20,11 @@ Cordova crypt file pluginはあくまでもコミュニティベース、かつC
 
 プラグインのインストールは Cordovaプラグインの管理にて cordova-plugin-crypt-file と指定してください。
 
-![](/images/2016/Aug/cordova-crypt-3.png)
+![](/blog/content/images/2016/Aug/cordova-crypt-3.png)
 
 もう一つ大事な点として、Cordovaのバージョンを6.2.0-beta（執筆時点）としてください。
 
-![](/images/2016/Aug/cordova-crypt-4.png)
+![](/blog/content/images/2016/Aug/cordova-crypt-4.png)
 
 これで完了です。
 
@@ -48,15 +48,15 @@ Cordova crypt file pluginの暗号化対象プラットフォームはiOS/Androi
 
 ビルドされたアプリは通常通り実行できるようになっています。画面も特に変わりません。
 
-![](/images/2016/Aug/cordova-crypt-5.png)
+![](/blog/content/images/2016/Aug/cordova-crypt-5.png)
 
 しかしビルドされたアプリの中身を見てみると、HTMLやJavaScript、CSSファイルの内容が暗号化されているのが分かります。なお、ファイルパスはそのままです。例えばHTMLは次のようになっていました。
 
-![](/images/2016/Aug/cordova-crypt-2.png)
+![](/blog/content/images/2016/Aug/cordova-crypt-2.png)
 
 cordova.jsも暗号化されています。
 
-![](/images/2016/Aug/cordova-crypt-1.png)
+![](/blog/content/images/2016/Aug/cordova-crypt-1.png)
 
 ----
 
