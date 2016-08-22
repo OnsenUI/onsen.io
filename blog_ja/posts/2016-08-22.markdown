@@ -1,0 +1,67 @@
+---
+author: atsushi
+date: 2016-08-22
+id: monaca-crypt-plugin-review
+title: "Monacaアプリのコードを暗号化。Cordova crypt file pluginを試す"
+product: monaca
+tags: monaca, cordova, crypt, secure
+category: 技術情報
+---
+
+Monacaアプリを使っている開発者の方が気にするのはソースコードの隠蔽ではないでしょうか。Monaca（というよりもCordova）は仕様上、HTML/JavaScript/CSSをアプリ内に保持しています。そして、これらのファイルはアプリをダウンロードした端末であればソースを確認することができました。
+
+アプリのコード中にセキュリティキーなどを書かなければならない場合、懸念点として挙げている開発者は多かったかと思います。そこでMonacaエンタープライズでは暗号化機能を提供しているのですが、今回はコミュニティベースで作られているCordova crypt file pluginを試してみたいと思います。
+
+**注意点**
+
+Cordova crypt file pluginはあくまでもコミュニティベース、かつCordova向けのプラグインになります。iOSやAndroidの端末やそのバージョンによっては動かない可能性もあります。また、プラグインの利用はゴールドプラン以上になります。
+
+### プラグインのインストール
+
+プラグインのインストールは Cordovaプラグインの管理にて cordova-plugin-crypt-file と指定してください。
+
+![](/blog/content/images/2016/Aug/cordova-crypt-3.png)
+
+もう一つ大事な点として、Cordovaのバージョンを6.2.0-beta（執筆時点）としてください。
+
+![](/blog/content/images/2016/Aug/cordova-crypt-4.png)
+
+これで完了です。
+
+### アプリを作る
+
+後はいつも通りアプリを作っていってください。特に設定などはいりません。
+
+### アプリをビルドする
+
+アプリのビルドもいつも通りです。ビルドの時点でファイルが暗号化されます。
+
+### 暗号化の対象について
+
+Cordova crypt file pluginはHTML/JavaScript/CSSが暗号化の対象になります。拡張子もそれに類するものになりますので、HTMLのテンプレートファイルなどを .template といった拡張子にしている場合は暗号化対象になりません。
+
+### 対象プラットフォーム
+
+Cordova crypt file pluginの暗号化対象プラットフォームはiOS/Android/Crosswalkになります。Windows、Chrome Appsは対象になりませんので注意してください。
+
+### ビルド結果
+
+ビルドされたアプリは通常通り実行できるようになっています。画面も特に変わりません。
+
+![](/blog/content/images/2016/Aug/cordova-crypt-5.png)
+
+しかしビルドされたアプリの中身を見てみると、HTMLやJavaScript、CSSファイルの内容が暗号化されているのが分かります。なお、ファイルパスはそのままです。例えばHTMLは次のようになっていました。
+
+![](/blog/content/images/2016/Aug/cordova-crypt-2.png)
+
+cordova.jsも暗号化されています。
+
+![](/blog/content/images/2016/Aug/cordova-crypt-1.png)
+
+----
+
+仕組みとしては暗号化キーをランダムな文字列で生成し、それを使ってAES256で暗号化しています。生成されたキーはプラグインのソースコード（iOSであればCDVCryptURLProtocol.m、AndroidであればDecryptResource.java）を直接書き換えた上でコンパイルするようになっています。この仕組みの場合、アプリをビルドする度にキーが変わるようになります。開発者が設定する訳ではないので、より安全に開発できるようになりそうです。
+
+このように暗号化されていることで、安心してキーなどのセキュアな情報が扱えるようになります。ぜひお試しください。
+
+[tkyaji/cordova-plugin-crypt-file: This plugin to encrypt/decrypt the source files.](https://github.com/tkyaji/cordova-plugin-crypt-file)

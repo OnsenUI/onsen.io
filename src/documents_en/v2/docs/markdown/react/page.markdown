@@ -41,6 +41,16 @@ It is also possible to use a toolbar inline using the `inline` property:
 </Page>
 ```
 
+#### Styling the content of the page
+
+To style the content of the page one can simply use the property `contentStyle`:
+
+```
+<Page contentStyle={{padding: 40}}>
+  Padded Content
+</Page>
+```
+
 #### Lifecycle events
 
 The `Page` component supports the following props to handle lifecycle events:
