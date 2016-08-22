@@ -28,6 +28,13 @@ function getTemplatePath(path, extension) {
       return nodePath.resolve(basePath + '/src/misc/object-reference.html');
     }
     break;
+  case "angular2":
+    if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
+      return nodePath.resolve(basePath + '/src/misc/angular2-component-reference.html');
+    } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
+      return nodePath.resolve(basePath + '/src/misc/object-reference.html');
+    }
+    break;
   }
   throw new Error('Invalid path: ' + path);
 }
@@ -48,6 +55,10 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.extension = extension;
       file.framework = extension;
       file.version = "v2";
+
+      if (extension != "js" && doc.elements) {
+        file.extensionDoc = doc.elements.filter(function(v) { return v.extensionOf == extension })[0] || {};
+      }
 
       if (docPath.indexOf("/element/") > -1) {
         file.icon = "element";

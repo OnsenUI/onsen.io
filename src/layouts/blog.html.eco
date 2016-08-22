@@ -19,11 +19,12 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" content="<%= @title %>" />
   <meta property="og:site_name" content="Onsen UI" />
-  <meta property="og:url" content="<%= @site.url %>/blog/<%= @path %>" />
-  <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
+  <meta property="og:url" content="<%= @site.url %><%= @path %>" />
+  <meta property="og:image" content="<%= @site.url %>../images/logo/onsen_with_text.png" />
   <meta property="og:description" content="<%= @renderArticleIntroAsText(@contents, 200) %>" />
 
   <script defer src="/vendor/jquery.js"></script>
+  <script src="/scripts/blog_search.js"></script>
 
   <script src="//use.typekit.net/bys8jdj.js"></script>
   <script>try{Typekit.load({ async: true });}catch(e){}</script>

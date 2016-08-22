@@ -1,0 +1,83 @@
+---
+author: atsushi
+date: 2016-07-19
+id: beginning-devops-with-monaca
+title: "MonacaアプリではじめるDevOps"
+product: monaca
+tags: monaca, github, vcs
+category: 技術情報
+---
+
+最近のシステム開発ではバージョン管理を使うのが当たり前になっています。今、一番人気のあるバージョン管理システムはGitであり、そのGitをクラウドで提供するGitHubを使っている人も多いのではないでしょうか。
+
+MonacaではGitHub連携によってGitリポジトリを簡単にプロジェクトに取り込んだり、修正したコードをGitリポジトリにコミットしたりできます。そしてGitHubと連携することによって、さらに外部のサービスと連携したDevOps的な使い方もできるようになっています。
+
+### GitHubアカウント連携をする
+
+まず設定メニューにいって、GitHubアカウント連携を行います。この時点ではまだ連携していませんので **連携する** ボタンをクリックします。
+
+![](/blog/content/images/2016/Jul/monaca-github-12.png)
+
+そしてGitHubでログインし、OAuth2連携します。
+
+![](/blog/content/images/2016/Jul/monaca-github-11.png)
+
+これで連携しました。
+
+![](/blog/content/images/2016/Jul/monaca-github-10.png)
+
+### プロジェクトを作成する
+
+次にダッシュボードでインポートプロジェクトを行います。そうすると、GitHubリポジトリからのインポートに項目が追加されています。この中から取り込みたいプロジェクトを指定します。
+
+![](/blog/content/images/2016/Jul/monaca-github-8.png)
+
+### Gitを使ってみる
+
+Gitリポジトリからインポートしていると、メニューのバージョン管理機能が使えるようになっています。ファイルを編集したらコミットします。
+
+![](/blog/content/images/2016/Jul/monaca-github-5.png)
+
+編集したファイル内容を確認し、コミットメッセージを記述しましょう。
+
+![](/blog/content/images/2016/Jul/monaca-github-4.png)
+
+コミットが成功した際のダイアログです。
+
+![](/blog/content/images/2016/Jul/monaca-github-3.png)
+
+コミットの履歴を確認できます。差分表示もあるので分かりやすいです。
+
+![](/blog/content/images/2016/Jul/monaca-github-2.png)
+
+設定画面です。リポジトリは変更できませんので注意してください。
+
+![](/blog/content/images/2016/Jul/monaca-github-1.png)
+
+### Slackと連携してみる
+
+DevOpsの基本とも言えるのが自動化です。今起こったイベントをリアルタイムに受け取ることで変化に強くなったり、即座に対応できるようになります。そのメッセージの集約場所として注目されているのがSlackでしょう。
+
+GitHubではPushしたタイミングでCIであったり、デプロイツールに飛ばしたりと言ったことができますが、今回はPushしたタイミングでSlackにメッセージを飛ばすようにしてみます。まずSlackのメニューにあるApps & Integrations を選択します。
+
+この検索ボックスでGitHubを指定します。
+
+![](/blog/content/images/2016/Jul/monaca-github-18.png)
+
+次にメッセージを受け取るチャンネルを指定します。
+
+![](/blog/content/images/2016/Jul/monaca-github-17.png)
+
+リポジトリはMonacaアプリでプッシュするものを指定します。ブランチも合わせてください。
+
+![](/blog/content/images/2016/Jul/monaca-github-15.png)
+
+後はMonaca IDEでプッシュすればSlackにメッセージが届くようになります。
+
+![](/blog/content/images/2016/Jul/monaca-github-14.png)
+
+----
+
+バージョン管理機能はβ版なので、GitHub Flowを使ったような複雑な運用にはまだ適さないかも知れません。個人のリポジトリでバージョン管理しながら開発を進めたいという時にはちょうど良いでしょう。
+
+GitHubと連携できるサービスは他にもたくさんあるのでぜひ開発が効率化するものを選定してください。

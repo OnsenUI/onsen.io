@@ -4,6 +4,8 @@
     <li class="toc-item toc-1-item"><a href="/v2/docs/guide/js/" class="toc-link toc-1-link">Guide for JavaScript</a></li>
     <li class="toc-item toc-1-item"><a href="/v2/docs/guide/react/" class="toc-link toc-1-link">Guide for React</a></li>
     <li class="toc-item toc-1-item"><a href="/v2/docs/guide/angular1/" class="toc-link toc-1-link">Guide for Angular 1</a></li>
+    <li class="toc-item toc-1-item"><a href="/v2/docs/guide/angular2/" class="toc-link toc-1-link">Guide for Angular 2</a></li>
+    <li class="toc-item toc-1-item"><a href="/v2/docs/guide/angular1/from-v1-to-v2.html" class="toc-link toc-1-link">Migration Guide to V2</a></li>
   </ul>
 <% end %>
 
@@ -42,6 +44,7 @@
   <%= renderToc @componentCategories.js, "js" %>
   <%= renderToc @componentCategories.react, "react" %>
   <%= renderToc @componentCategories.angular1, "angular1" %>
+  <%= renderToc @componentCategories.angular2, "angular2" %>
 <% else: %>
   <%= renderToc @componentCategories[@framework], @framework %>
 <% end %>

@@ -1,0 +1,518 @@
+---
+author: andreas
+date: 2016-08-19
+id: tutorial-how-to-create-pokemon-app-using-angular2-cli
+title: "Creating a Pokémon application using the Angular2 CLI"
+product: onsen
+category: tutorial
+tags: tutorial, angular2, cli
+---
+
+![Angular 2 Pokedex App](/blog/content/images/2016/Aug/angular2-pokedex-pikachu.png)
+
+We recently launched the beta of our [Angular2 components](https://onsen.io/angular2) for Onsen UI. Angular2 is a brand new framework and people are just starting to get familiar with it. We have decided to start a series of articles to help people get started with the framework. This article is the first in the series and will explain the very basics such as how to set up the environment and how to create and run a simple app.
+
+We will be using the newly released [Angular2 CLI tool](https://github.com/angular/angular-cli) since it makes it very easy to get started without having to fiddle with things like Webpack and setting up the testing environment and linting.
+
+Since this is the summer of Pokémon, I decided to create a simple sample app that displays a list of Pokémon. The data is fetched from the public [PokeAPI](https://pokeapi.co/). The API is open source and available [on GitHub](https://github.com/PokeAPI/pokeapi). Please give it a star if you like it! :)
+
+The current app is very simple, all you can do right now is see pictures of all the Pokémon and what their name and number is. We will expand this app in a later article to add more features such as routing and searching.
+
+<!-- more -->
+
+You can try out the app below:
+
+<iframe style="width: 100%; height: 300px" src="https://argelius.github.io/angular2-pokedex/"></iframe>
+
+The source code for the app is available on [GitHub](Angular://github.com/argelius/angular2-pokedex).
+
+In this article we will be using Angular RC5, which is the latest release candidate. It was released just over a week ago but there are some important changes such as the addition of the `NgModule` decorator.
+
+Angular2 apps are written using TypeScript which is an extension of the JavaScript language that adds static typing. It also introduces modern features like decorators and classes which have recently been added to Javascript or will be added in the future. If you are not already familiar with TypeScript or static typing you can find out more [here](https://www.typescriptlang.org/).
+
+TypeScript also makes it possible to import objects from other files which helps when structuring your code.
+
+## Installing the Angular2 CLI
+
+The first thing we need to do before getting started coding is to install the Angular2 CLI. To be able to install it you first need to make sure that you have NodeJS installed. If you haven't installed it already you can find instructions [here](https://nodejs.org/en/download/).
+
+When you have NodeJS installed you can use its package manager, `npm`, to install the Angular2 CLI:
+
+```bash
+[sudo] npm install -g angular-cli@1.0.0-beta.11-webpack.2
+```
+
+If the installation was successful you will now be able to run the `ng` program:
+
+```
+$ ng --version
+angular-cli: 1.0.0-beta.11-webpack.2
+node: 6.4.0
+os: linux x64
+```
+
+**NOTE:** The version number is important since the version you get by default is not compatible with Angular2 RC5 which was released just a week ago. I will update the article when a new stable version has been released.
+
+## Creating an application
+
+The Angular2 CLI makes it super easy to bootstrap a new project with the `ng new` command. It will set up the build and test environment for you as well as create a very simple app:
+
+```
+ng new [name]
+```
+
+Since I am creating a Pokédex application I decided to just call it `pokedex`:
+
+```
+ng new pokedex
+```
+
+This will create the directory structure for you as well as installing all dependencies. Installing the dependencies might take a couple of minutes depending on your connection so please be patient. The command will also create a git repository so to add an origin all you need to do is:
+
+```
+git remote add origin git@github.com:myusername/my-repo.git
+```
+
+When everything is installed you can navigate to the newly created directory and start the development server:
+
+```
+cd pokedex
+ng serve
+```
+
+The latest version is using Webpack to build the project while previously Broccoli was used. By default, the development server will run at `http://localhost:4200` so open that page in your browser and you will see something like this:
+
+![app works!](/blog/content/images/2016/Aug/angular2-app-works.png)
+
+I recommend that you always keep the development server and the browser window open while developing since it will automatically rebuild your project every time you change the source files.
+
+## What is scaffolding?
+
+The CLI tool has commands for scaffolding. This makes it possible to add things like new components, routes or services from the command line. People who have worked with frameworks such as Ruby on Rails or Ember will be familiar with this.
+
+To use scaffolding the `ng generate` or `ng g` command is used. Some of the things that can be added with scaffolding are components, routes, services, classes and pipes.
+
+Apart from speeding up development, scaffolding will also enforce a strict project structure. This helps when collaborating with other developers and makes it easier to navigate projects written by other people.
+
+## Services
+
+A service is an object that can be shared among all your components. It is often used to fetch and store data. In our app, we will create a service that fetches data from the Pokémon API.
+
+To create a new service called `PokedexService` you simply run:
+
+```bash
+ng g service pokedex
+```
+
+Which will create two files for you:
+
+```bash
+installing service
+  create src/app/pokedex.service.spec.ts
+  create src/app/pokedex.service.ts
+```
+
+As you can see it not only creates the service but also a spec file for it where we can put our tests. For now, let's ignore the spec file, we will talk about testing in a later article.
+
+The generated file will look like this:
+
+```typescript
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class PokedexService {
+
+    constructor() { }
+
+}
+```
+
+The `@Injectable` decorator makes it possible to inject the service in other parts of your projects. In addition to adding the decorator we must also register it as a provider in the `app.module.ts` file:
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from './app.component';
+
+/**
+ * The HTTP service is not added by default
+ * so we need to import it.
+ */
+import { HttpModule } from '@angular/http';
+
+/**
+ * Import the PokedexService
+ */
+import { PokedexService } from './pokedex.service';
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    CommonModule,
+    FormsModule,
+    /**
+     * Register the HTTP service.
+     */
+    HttpModule
+  ],
+  /**
+   * Register the service as a
+   * provider.
+   */
+  providers: [PokedexService],
+  entryComponents: [AppComponent],
+  bootstrap: [AppComponent]
+})
+export class AppModule {
+
+}
+```
+
+By doing this the service can now be injected into your classes in the constructor by doing:
+
+```
+constructor(private pokedexService: PokedexService) { }
+```
+
+The service can now be accessed by using `this.pokedexService` in the class methods.
+
+In the `app.module.ts` I also added code to import the `HttpModule` and add it in the `imports` field which gives us access to the HTTP service that Angular2 provides. We will use this in the Pokedex service to fetch data from the API.
+
+Let's add some functionality to the service. In this app, we only need a method called `getPokemon(offset, limit)` which will return a Promise object which resolves to a list of Pokémon. To fetch the data we use the `get(url)` method from the `Http` service:
+
+```typescript
+import { Injectable } from '@angular/core';
+
+/**
+ * Import the Http service
+ */
+import { Http } from '@angular/http';
+
+/**
+ * Adds the toPromise() method to
+ * convert an Observable to a Promise.
+ */
+import 'rxjs/add/operator/toPromise';
+
+@Injectable()
+export class PokedexService {
+  private baseUrl: string = 'https://pokeapi.co/api/v2/pokemon/';
+  private baseSpriteUrl: string = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/';
+
+  /**
+   * Inject the HTTP service.
+   */
+  constructor(private http: Http) { }
+
+  /**
+   * Method that fetches data from
+   * the Pokémon API.
+   */
+  getPokemon(offset: number, limit: number) {
+    return this.http.get(`${this.baseUrl}?offset=${offset}&limit=${limit}`)
+      /**
+       * The `get()` method returns
+       * an Observable but we convert
+       * it into a Promise.
+       */
+      .toPromise()
+      .then(response => response.json().results)
+      .then(items => items.map((item, idx) => {
+        /**
+         * Massage the data a bit to
+         * create objects with the correct
+         * structure.
+         */
+        const id: number = idx + offset + 1;
+
+        return {
+          name: item.name,
+          sprite: `${this.baseSpriteUrl}${id}.png`,
+          id
+        };
+      }));
+  }
+}
+```
+
+We now have a service that we can use in our main app component.
+
+## Representing data with classes
+
+Instead of using generic objects to describe our data we can create a `Pokemon` class. By doing this we can define the types of the fields. This is very useful since it gives us code completion so we don't have to memorize the structure of our data as well as helping us catch bugs.
+
+Just like when creating the service we can use scaffolding to create the class:
+
+```bash
+ng g class pokemon
+```
+
+Which will create two files for us:
+
+```
+installing class
+  create src/app/pokemon.spec.ts
+  create src/app/pokemon.ts
+```
+
+The structure of our Pokémon objects is very simple, they only need to contain the id, name and a link to an image. Let's add those fields to `pokemon.ts`:
+
+```typescript
+export class Pokemon {
+  id: number;
+  sprite: string;
+  name: string;
+}
+```
+
+## Creating components
+
+You can use the CLI to create a new component with the `ng g component` command. However, in this app, we will only use one component and the root component has already been created for us when we ran the `ng new` command.
+
+We will take a look at how to compose multiple components in the next article.
+
+A component in Angular2 generally consists of an HTML template that describes how it will be rendered as well as a class that contains the business logic.
+
+The original component that was created simply displays the message "app works!" inside an `h1` tag. Let's see how it is implemented in the `app.component.ts` file:
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css']
+})
+export class AppComponent {
+  title = 'app works!';
+}
+```
+
+As we can see a component is simply a JavaScript class, just like the service that we created earlier. The important part is the `@Component` decorator. It is used to define which template should be loaded as well as the selector which matches the component.
+
+In this case, the selector matches all tags with the name `app-root` so to use the component in an app you simply do:
+
+```html
+<app-root></app-root>
+```
+
+It is important to include a hyphen in the tag name since HTML5 doesn't allow custom tags without hyphens. This is to avoid collision with native HTML elements.
+
+The `templateUrl` parameter is used to load an external template. For simple components, you can define the template inline using the `template` parameter. Stylesheets are loaded in the same way using the `styleUrls` parameter.
+
+The template in `app.component.html` is very simple:
+
+```html
+<h1>
+  {{title}}
+</h1>
+```
+
+Let's update the component to use the `PokedexService` we created earlier:
+
+```typescript
+import { Component } from '@angular/core';
+
+/**
+ * Import the Pokedex service.
+ */
+import { PokedexService } from './pokedex.service';
+
+/**
+ * Import the Pokemon class
+ */
+import { Pokemon } from './pokemon';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.css']
+})
+export class AppComponent {
+  /**
+   * The component maintains
+   * a list of Pokemon objects
+   * that will be rendered.
+   *
+   * We initialize it to an empty
+   * list.
+   */
+  pokemon: Pokemon[] = [];
+
+  /**
+   * A boolean that represents
+   * if we are currently loading data.
+   */
+  isLoading: boolean = false;
+
+  /**
+   * This boolean will be set
+   * to true if an error occurred.
+   */
+  error: boolean = false;
+
+  /**
+   * Inject the Pokedex service.
+   */
+  constructor(private pokedexService: PokedexService) { }
+
+  /**
+   * A lifecycle method
+   * that is automatically
+   * envoked when the component
+   * is created.
+   */
+  ngOnInit() {
+    /**
+     * Load the initial data.
+     */
+    this.loadMore();
+  }
+
+  loadMore() {
+    this.isLoading = true;
+
+    /**
+     * Use the Pokedex service
+     * to load the next 9 Pokemon.
+     */
+    this.pokedexService.getPokemon(this.pokemon.length, 9)
+      .then(pokemon => {
+        pokemon = pokemon.map(p => {
+          p.imageLoaded = false;
+          return p;
+        });
+				/**
+         * If loading was successful
+         * we append the result to the list.
+         */
+        this.pokemon = this.pokemon.concat(pokemon);
+        this.isLoading = false;
+        this.error = false;
+      })
+      .catch(() => {
+        this.error = true;
+        this.isLoading = false;
+      });
+  }
+}
+```
+
+In the implementation above we define a method called `ngOnInit`. This is a lifecycle method that will automatically run when the component is first created. We use it to load the initial data by calling the `loadMore()` method.
+
+The implementation of the `loadMore()` method is pretty straightforward. It will load the next 9 Pokémon from the API as well as setting the `imageLoaded` field to `false`. This is just to be able to create a fade effect when the image has been loaded to avoid flickering.
+
+If you are familiar with AngularJS 1.x you might think that the code above is a bit strange since we append the new data inside an asynchronous callback. In the previous version of AngularJS you would need to use something like `$scope.evalAsync` or ` $scope.$apply` to trigger a new digest loop to rerender the view.
+
+Angular2 is using a technique called [Zones](http://blog.assaf.co/angular-2-change-detection-zones-and-an-example/) which makes it possible to hook into and detect changes inside asynchronous operations so the view will be rerendered automatically. This is a welcome change for a lot of Angular developers since having to manually trigger the digest loop was a source of a lot of frustration.
+
+## Component templates
+
+We also need to write a template for our component so let's edit the `app.component.html` file:
+
+```html
+<h1>Angular 2 Pokédex</h1>
+
+<span>This is a sample app using Angular 2 RC5. Check out the <a href="https://github.com/argelius/angular2-pokedex">source code here</a>.
+
+<hr>
+
+<div class="pokedex">
+  <div class="pokedex-pokemon" *ngFor="let p of pokemon">
+    <div class="pokedex-pokemon-id">
+      #{{ p.id }}
+    </div>
+    <img [ngClass]="{'hidden': !p.imageLoaded}" class="pokedex-pokemon-sprite" (load)="p.imageLoaded = true" [attr.src]="p.sprite">
+    <div class="pokedex-pokemon-name">
+      {{ p.name | capitalize }}
+    </div>
+  </div>
+</div>
+
+<button class="load-button" (click)="loadMore()" [disabled]="isLoading">
+  <span *ngIf="!error">
+    <span *ngIf="isLoading">Loading...</span>
+    <span *ngIf="!isLoading">Load more</span>
+  </span>
+  <span *ngIf="error">
+    Loading failed
+  </span>
+</button>
+```
+
+### Directives
+
+In Angular2 templates we use something called *directives* to render our data.
+
+The `ngFor` directives is used to render a list of objects. It will repeat the element for every item in a list:
+
+```
+<ul>
+  <li *ngFor="let item of items">{{ item }}</li>
+</ul>
+```
+
+To conditionally display an element the `ngIf` directive is used. In the template above we also use the `ngClass` directive to hide the image until it has been completely loaded.
+
+### Event handlers
+
+It is very easy to catch DOM events in Angular2 templates. You simply add an attribute with the same name as the event you want to catch surrounded by parentheses:
+
+```
+<button (click)="handleClick()">Click me!</button>
+```
+
+In our template, we listen for the `load` event of the `<img>` tag so we can toggle the `imageLoaded` property.
+
+### Pipes
+
+A pipe is used in templates to filter or format data before it is rendered to the view. There are several built-in templates in AngularJS. If you want to convert a string to uppercase you can use the `uppercase` pipe:
+
+```
+<h1>
+	{{ 'Hello, world!' | uppercase }}
+</h1>
+```
+
+The names of the Pokémon returned from the API are lowercase so we want to write a pipe that converts something like "pikachu" to "Pikachu". Just like with classes and services, pipes can be generated using the CLI. This time we use the `ng g pipe` command:
+
+```bash
+ng g pipe capitalize
+```
+
+This will create two files:
+
+```
+installing pipe
+  create src/app/capitalize.pipe.spec.ts
+  create src/app/capitalize.pipe.ts
+```
+
+It will also automatically include the pipe in your `app.module.ts` file so there is no need to manually edit it.
+
+The implementation of the pipe is very simple:
+
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'capitalize'
+})
+export class CapitalizePipe implements PipeTransform {
+  transform(value: string): string {
+    return value.charAt(0).toUpperCase() + value.substr(1);
+  }
+}
+```
+
+## Conclusion
+
+We have now completed our very simple app. As mentioned earlier we will keep adding content about Angular2 in the coming weeks. We will explore concepts such as components, services and routing in more depth in other articles. If there is anything in particular you are interested in, please let us know in the comments below.
+
+Onsen UI is an open source library used to create the UI of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
+

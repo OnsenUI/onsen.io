@@ -15,7 +15,7 @@ description: 'ReactJS developers can easily create beautiful high-performance hy
         <h1>
           Onsen UI for React
         </h1>
-        <p>Onsen UI Hybrid App Framework is now avaiable as React Components, enabling ReactJS developers to create beautiful mobile apps in no time.</p>
+        <p id="description">Onsen UI Hybrid App Framework is now available as React Components, enabling ReactJS developers to create beautiful mobile apps in no time.</p>
         <nav class="actions">
           <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
           <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
@@ -41,7 +41,7 @@ description: 'ReactJS developers can easily create beautiful high-performance hy
   <div id="features">
     <div class="feature">
       <h2>Beautifully made with Android and iOS components</h2>
-      <p>More than <a href="#">100 components</a> are specially made for Material and Flat design, with <a href="#">automatic platform detection</a></p>
+      <p>More than 100 components are specially made for Material and Flat design, with <a href="/blog/auto-style-app-onsen/">automatic platform detection</a></p>
       <div id="showcase-carousel-wrapper">
         <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
       </div>
@@ -66,22 +66,22 @@ description: 'ReactJS developers can easily create beautiful high-performance hy
           </div>
           <div class="react-code">
           <code>
-            &lt;Ons.Navigator
+            &lt;Navigator
               initialRoute={this.initialRoute}
               renderScene={this.renderScene}
             /&gt;
           </code>
 
           <code>
-            &lt;Ons.Toolbar&gt;
-              &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
-              &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
-              &lt;div class=&quot;right&quot;&gt;...&lt;/div&gt;
-            &lt;/Ons.Toolbar&gt;
+            &lt;Toolbar&gt;
+              &lt;div className=&quot;left&quot;&gt;...&lt;/div&gt;
+              &lt;div className=&quot;center&quot;&gt;Todo&lt;/div&gt;
+              &lt;div className=&quot;right&quot;&gt;...&lt;/div&gt;
+            &lt;/Toolbar&gt;
           </code>
 
           <code>
-            &lt;Ons.List
+            &lt;List
               dataSource={this.todos}
               renderRow={(todo) =&gt;
                 &lt;Todo data={todo} /&gt;
@@ -90,7 +90,7 @@ description: 'ReactJS developers can easily create beautiful high-performance hy
           </code>
 
           <code>
-            &lt;Ons.Tabbar
+            &lt;Tabbar
               initialIndex={0}
               renderTabs={this.renderTabs}
             /&gt;
@@ -112,39 +112,39 @@ description: 'ReactJS developers can easily create beautiful high-performance hy
           </div>
           <div class="react-code">
             <code>
-              &lt;Ons.Navigator
+              &lt;Navigator
                 initialRoute={this.initialRoute}
                 renderScene={this.renderScene}
               /&gt;
             </code>
 
             <code>
-              &lt;Ons.Toolbar&gt;
+              &lt;Toolbar&gt;
                 &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
-                &lt;div class=&quot;center&quot;&gt;Todo&lt;/div&gt;
-              &lt;/Ons.Toolbar&gt;
+                &lt;div class=&quot;center&quot;&gt;Contacts&lt;/div&gt;
+              &lt;/Toolbar&gt;
             </code>
 
             <code>
-              &lt;Ons.Tabbar
+              &lt;Tabbar
                 initialIndex={0}
                 renderTabs={this.renderTabs}
               /&gt;
             </code>
 
             <code>
-              &lt;Ons.List
-                dataSource={this.todos}
-                renderRow={(todo) =&gt;
-                  &lt;Todo data={todo} /&gt;
+              &lt;List
+                dataSource={this.contacts}
+                renderRow={(contact) =&gt;
+                  &lt;Contact data={contact} /&gt;
                 }
               /&gt;
             </code>
 
             <code>
-              &lt;Ons.Fab&gt;
-                &lt;Ons.Icon icon=&quot;md-edit&quot; /&gt;
-              &lt;/Ons.Fab&gt;
+              &lt;Fab&gt;
+                &lt;Icon icon=&quot;md-edit&quot; /&gt;
+              &lt;/Fab&gt;
             </code>
           </div>
         </div>
@@ -158,7 +158,7 @@ description: 'ReactJS developers can easily create beautiful high-performance hy
 Which project do you want to create?
 <b style="color: red;">&gt; Onsen 2 with React</b>
 &gt; Onsen 2 with Angular 1
-&gt; Onsen 2 with Angular 2 (Coming Soon)
+&gt; Onsen 2 with Angular 2
 &gt; Onsen 2 with JavaScript
 </code></pre>
   </div>
