@@ -1,0 +1,71 @@
+---
+author: fran
+date: 2016-08-23
+id: "meteor-mobile-app-onsenui"
+title: "Getting Started with Meteor and Onsen UI"
+category: tutorial
+tags: onsenui, meteor, react
+---
+
+![Onsen UI + Meteor](/blog/content/images/2016/Aug/onsenui-meteor.png)
+
+[Meteor](https://www.meteor.com/) is very well known as a full-stack framework that tremendously simplifies the creation of web apps. Thanks to [Cordova](https://cordova.apache.org/) we can also use Meteor for hybrid mobile apps and, after the last changes we made to our framework and bindings, we are excited to announce that you can find a robust Meteor Mobile UI framework in Onsen UI.
+
+In this post we show you how to easily combine Meteor with Onsen UI to create beautiful looking mobile apps.
+
+<!-- more -->
+
+## Why Meteor + Onsen UI?
+
+Meteor is a great technology for web apps. It offers a high development efficiency by abstracting many aspects behind its client-server connection. For instance, you won't need to worry about WebSockets, sending requests to modify your database or updating your local information. All of this is automatically handled by Meteor behind the scenes. It also supports several front-end frameworks, including [React](https://facebook.github.io/react/) and [AngularJS](https://angularjs.org/), so you can choose your preferred client flavor and develop your app with a reduced learning curve.
+
+This last characteristic is what makes it pluggable to Onsen UI. Being framework-agnostic, Onsen UI can easily play well with famous technologies such as Meteor. This way, we keep a quick learning curve as well as high efficiency since Onsen UI core is implemented in pure JavaScript. Moreover, it offers beautiful looking components that change style automatically depending on the platform (iOS flat design or Android's Material Design), making cross-development truly possible with little to no effort.
+
+
+## Onsen UI + Meteor Todo app
+
+As already mentioned, Meteor offers variety of frameworks for its front-end side. Two of them, React and AngularJS, are **already tested and play nicely with Onsen UI** since we released official components for them. Here we will show how easy is to integrate [React Components for Onsen UI](https://onsen.io/v2/react.html) with your Meteor application.
+
+We follow the Meteor's official tutorial to make a [React Todo app](https://www.meteor.com/tutorials/react/creating-an-app) and simply change the front end to use Onsen UI components. This app runs on [Heroku](https://onsenui-meteor-todos.herokuapp.com/).
+
+<div style="display: flex; justify-content: center;">
+<iframe src="https://frankdiox.github.io/frame-auto-style/?platform=ios&amp;src=https://onsenui-meteor-todos.herokuapp.com/" scrolling="no" style="border: 0; width: 400px; height: 800px;" class="lazy-hidden"></iframe>
+</div>
+
+The source code of this application is [on Github](https://github.com/frankdiox/OnsenUI-Meteor-ToDo).
+
+As a side note, if you are curious about the React syntax used in this app, you can find some information [here](https://facebook.github.io/react/docs/reusable-components.html#stateless-functions).
+
+### Troubleshooting
+
+There is only one tricky part we must understand to make Onsen UI work with Meteor. As of Meteor 1.4, we are able to import CSS from `node_modules` folder directly in a `.js` file:
+
+```javascript
+import ons from 'onsenui';
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+```
+
+However, we must consider this information from their docs:
+
+> When importing CSS from a JavaScript file, that CSS is not bundled with the rest of the CSS processed with the Meteor Build tool, but instead is put in your app's `<head>` tag inside `<style>...</style>` after the main concatenated CSS file.
+
+This actually means that **CSS `@import` lines within these files won't be resolved**. Fonts and icons won't be loaded in the app since Onsen UI imports those in `onsenui.css` file.
+
+A very simple fix is to copy the fonts CSS folders into Meteor's `public` directory. You could also make sure that Meteor processes these files in other way, but this would depend on your project configuration.
+
+After this is done, everything will be loaded in the app and you can continue as you'd normally do with Onsen UI and Meteor.
+
+## What about AngularJS?
+
+So far we have only faced a minor problem that can be easily fixed as well. Due to some timing issues in Meteor's `import`, we will need to include Onsen UI in our app using `require` instead, as follows:
+
+```javascript
+window.ons = require('onsenui');
+require('onsenui/js/angular-onsenui');
+
+```
+
+## Conclusion
+
+We hope Meteor users are happy to have an alternative such as Onsen UI for their mobile apps. If you have any doubt about this content or anything else, don't hesitate to leave a comment here or in [Twitter](https://twitter.com/Onsen_UI). And don't forget to 🌟 our [GitHub repo](https://github.com/OnsenUI/OnsenUI)!
