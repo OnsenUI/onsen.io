@@ -28,9 +28,11 @@ As already mentioned, Meteor offers variety of frameworks for its front-end side
 
 We follow the Meteor's official tutorial to make a [React Todo app](https://www.meteor.com/tutorials/react/creating-an-app) and simply change the front end to use Onsen UI components. This app runs on [Heroku](https://onsenui-meteor-todos.herokuapp.com/).
 
-<div style="display: flex; justify-content: center;">
-<iframe src="https://frankdiox.github.io/frame-auto-style/?platform=ios&amp;src=https://onsenui-meteor-todos.herokuapp.com/" scrolling="no" style="border: 0; width: 400px; height: 800px;" class="lazy-hidden"></iframe>
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <iframe src="https://onsenui-meteor-todos.herokuapp.com/" scrolling="no" style="width: 300px; height: 500px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-right: 10px" class="lazy-hidden"></iframe>
+  <iframe src="https://onsenui-meteor-todos.herokuapp.com/?platform=android" scrolling="no" style="width: 300px; height: 500px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-left: 10px" class="lazy-hidden"></iframe>
 </div>
+
 
 The source code of this application is [on Github](https://github.com/frankdiox/OnsenUI-Meteor-ToDo).
 
