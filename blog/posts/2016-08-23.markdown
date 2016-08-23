@@ -2,14 +2,14 @@
 author: fran
 date: 2016-08-23
 id: "meteor-mobile-app-onsenui"
-title: "Meteor Mobile UI framework powered by Onsen UI"
+title: "Getting Started with Meteor and Onsen UI"
 category: tutorial
 tags: onsenui, meteor, react
 ---
 
 ![Onsen UI + Meteor](/blog/content/images/2016/Aug/onsenui-meteor.png)
 
-[Meteor](https://www.meteor.com/) is very well known as a full-stack framework that tremendously simplifies the creation of web apps. Thanks to [Cordova](https://cordova.apache.org/) we can also use Meteor for mobile apps and, after the last changes we made to our framework and bindings, we are excited to announce that you can find a robust Meteor Mobile UI framework in Onsen UI.
+[Meteor](https://www.meteor.com/) is very well known as a full-stack framework that tremendously simplifies the creation of web apps. Thanks to [Cordova](https://cordova.apache.org/) we can also use Meteor for hybrid mobile apps and, after the last changes we made to our framework and bindings, we are excited to announce that you can find a robust Meteor Mobile UI framework in Onsen UI.
 
 In this post we show you how to easily combine Meteor with Onsen UI to create beautiful looking mobile apps.
 
@@ -19,14 +19,14 @@ In this post we show you how to easily combine Meteor with Onsen UI to create be
 
 Meteor is a great technology for web apps. It offers a high development efficiency by abstracting many aspects behind its client-server connection. For instance, you won't need to worry about WebSockets, sending requests to modify your database or updating your local information. All of this is automatically handled by Meteor behind the scenes. It also supports several front-end frameworks, including [React](https://facebook.github.io/react/) and [AngularJS](https://angularjs.org/), so you can choose your preferred client flavor and develop your app with a reduced learning curve.
 
-This last characteristic is what makes it pluggable to Onsen UI. Being framework-agnostic, Onsen UI is future proof and can easily play well with famous technologies such as Meteor. This way, we keep a quick learning curve as well as high efficiency since Onsen UI core is implemented in pure JavaScript. Moreover, it offers beautiful looking components that change style automatically depending on the platform (iOS flat design or Android's Material Design), making cross-development truly possible with little to no effort.
+This last characteristic is what makes it pluggable to Onsen UI. Being framework-agnostic, Onsen UI can easily play well with famous technologies such as Meteor. This way, we keep a quick learning curve as well as high efficiency since Onsen UI core is implemented in pure JavaScript. Moreover, it offers beautiful looking components that change style automatically depending on the platform (iOS flat design or Android's Material Design), making cross-development truly possible with little to no effort.
 
 
-## Onsen UI + Meteor ToDo app
+## Onsen UI + Meteor Todo app
 
 As already mentioned, Meteor offers variety of frameworks for its front-end side. Two of them, React and AngularJS, are already tested and play nicely with Onsen UI since we released official components for them. Here we will show how easy is to integrate [React Components for Onsen UI](https://onsen.io/v2/react.html) with your Meteor application.
 
-We follow the Meteor's official tutorial to make a [React ToDo app](https://www.meteor.com/tutorials/react/creating-an-app) and simply change the front end to use Onsen UI components. This app runs on [Heroku](https://onsenui-meteor-todos.herokuapp.com/).
+We follow the Meteor's official tutorial to make a [React Todo app](https://www.meteor.com/tutorials/react/creating-an-app) and simply change the front end to use Onsen UI components. This app runs on [Heroku](https://onsenui-meteor-todos.herokuapp.com/).
 
 <div style="display: flex; justify-content: center;">
 <iframe src="https://frankdiox.github.io/frame-auto-style/?platform=ios&amp;src=https://onsenui-meteor-todos.herokuapp.com/" scrolling="no" style="border: 0; width: 400px; height: 800px;" class="lazy-hidden"></iframe>
