@@ -48,7 +48,7 @@ persistence.jsはO/Rマッパーも兼ねているので、データベースを
 
 実際の使い方ですが、まずデータベースを開きます。下記はWebSQL（プレビュー）での使い方です。
 
-`
+```
 persistence.store.websql.config(persistence, 'yourdbname', 'A database description', 5 * 1024 * 1024);
 ```
 
