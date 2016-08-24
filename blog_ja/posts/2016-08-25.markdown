@@ -1,0 +1,81 @@
+---
+author: atsushi
+date: 2016-08-25
+id: monaca-custom_url_scheme
+title: "カスタムURLスキーマを実装する"
+product: monaca
+tags: monaca, cordova, plugin
+category: 技術情報
+---
+
+アプリには独自のURLスキーム（カスタムURLスキーム）を実装することで、他のアプリやWebブラウザからアプリを起動できるようになっています。今回はその実装方法を紹介します。
+
+利用するのは[EddyVerbruggen/Custom-URL-scheme: Launch your Cordova/PhoneGap app by a Custom URL scheme like mycoolapp://](https://github.com/EddyVerbruggen/Custom-URL-scheme)になります。プラグインを使うことでAndroid/iOS両方に対応したカスタムURLスキームが実現できます。
+
+なおサードパーティー製のCordovaプラグインについては動作保証はできません。筆者環境（iPhone 6S Plus/iOS9、Galaxy S6/Android 6.0.1）では動作しましたが端末やOSによっては動作しない可能性があります。
+
+## プラグインのインストール
+
+インストールはCordovaプラグインの管理より行います。cordova-plugin-customurlschemeを検索して追加します。
+
+さらにインストールしたプラグインの設定を開いて、指定したURLスキームを入力します。 **URL_SCHEME=coolapp** のような形で指定します（今回はcoolapp://で呼ばれる形で作っています）。
+
+![](/blog/content/images/2016/Aug/custom-url-scheme-5.png)
+
+この時の注意点としては
+
+- すでにあるURLスキームは指定してはいけません（fb、twitter、comgooglemapsなど）
+- 英語の小文字しか使えません
+- ダッシュ（-）は使えません
+- 空白は使えません
+
+## URLスキームの処理
+
+URLスキーム経由で開かれた場合には handleOpenURL という関数が呼ばれます（オプション）。URLが引数として入ってきます。実装は次のようになります。
+
+```
+function handleOpenURL(url) {
+  setTimeout(function() {
+    var strValue = url;
+    strValue = strValue.replace('coolapp://','');
+    // アラートで確認
+    alert(strValue);
+  }, 0);
+}
+```
+
+setTimeoutで囲むのがコツのようです。こうしないとiOSでうまくハンドリングできませんでした。
+
+## セキュリティの設定
+
+[javascript - Using handleOpenURL with Custom URL scheme in Cordova - Stack Overflow](http://stackoverflow.com/questions/34257097/using-handleopenurl-with-custom-url-scheme-in-cordova/34281420#34281420)によると、iOSではセキュリティ上の問題でうまく動かなくなっているとのことで、
+
+```
+<meta http-equiv="Content-Security-Policy" content="default-src * coolapp:; data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+```
+
+のようにURLスキーマを追加してあげる必要があるとのことです。
+
+## 試す
+
+後は通常のMonacaアプリと同様にビルドしてインストールするだけです。
+
+Safariから該当のURLスキームを呼び出すと、アラートが出ます。
+
+![](/blog/content/images/2016/Aug/custom-url-scheme-1.png)
+
+アプリ側でURLスキームとして指定したパラメータが取得できているのが確認できます。後はこのデータを使って画面を切り替えたり、外部からデータを取得したりするだけです。
+
+![](/blog/content/images/2016/Aug/custom-url-scheme-3.png)
+
+Androidの場合、WebブラウザからカスタムURLスキームは実行できません。そこで、[tomiyan.net URL scheme test tool](http://tomiyan.net/tools/urlscheme.html)を使ってリンクを生成するとテストできます。iOSと同じようにデータが取得できているのが分かります。
+
+![](/blog/content/images/2016/Aug/custom-url-scheme-4.png)
+
+----
+
+この処理はアプリが起動していても有効です。アプリのディープリンクを実現するのに役立つでしょう。例えばプッシュ通知から呼び出したリンクをディープリンクにすることでユーザビリティを高めて利用を促進できるようになります。カスタムURLスキームを使いこなしてください。
+
+なお、今回のプロジェクトは[moongift/monaca-custom-url-scheme](https://github.com/moongift/monaca-custom-url-scheme)にアップロードしてあります。実装する際の参考にしてください。
+
+[EddyVerbruggen/Custom-URL-scheme: Launch your Cordova/PhoneGap app by a Custom URL scheme like mycoolapp://](https://github.com/EddyVerbruggen/Custom-URL-scheme)
