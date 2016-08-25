@@ -51,7 +51,7 @@ setTimeoutで囲むのがコツのようです。こうしないとiOSでうま�
 [javascript - Using handleOpenURL with Custom URL scheme in Cordova - Stack Overflow](http://stackoverflow.com/questions/34257097/using-handleopenurl-with-custom-url-scheme-in-cordova/34281420#34281420)によると、iOSではセキュリティ上の問題でうまく動かなくなっているとのことで、
 
 ```
-<meta http-equiv="Content-Security-Policy" content="default-src * coolapp:; data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+<meta http-equiv="Content-Security-Policy" content="default-src * coolapp: data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 ```
 
 のようにURLスキーマを追加してあげる必要があるとのことです。
@@ -60,15 +60,15 @@ setTimeoutで囲むのがコツのようです。こうしないとiOSでうま�
 
 後は通常のMonacaアプリと同様にビルドしてインストールするだけです。
 
-Safariから該当のURLスキームを呼び出すと、アラートが出ます。
+Safariから該当のURLスキームを呼び出すと、アラートが出ます。これは coolapp://test で呼び出しています。
 
 ![](/blog/content/images/2016/Aug/custom-url-scheme-1.png)
 
-アプリ側でURLスキームとして指定したパラメータが取得できているのが確認できます。後はこのデータを使って画面を切り替えたり、外部からデータを取得したりするだけです。
+アプリ側でURLスキームとして指定したパラメータが取得できているのが確認できます。後はこのデータを使って画面を切り替えたり、外部からデータを取得したりするだけです。こちらは?を使って、coolapp://?user=monaca として呼び出しています。
 
 ![](/blog/content/images/2016/Aug/custom-url-scheme-3.png)
 
-Androidの場合、WebブラウザからカスタムURLスキームは実行できません。そこで、[tomiyan.net URL scheme test tool](http://tomiyan.net/tools/urlscheme.html)を使ってリンクを生成するとテストできます。iOSと同じようにデータが取得できているのが分かります。
+Androidの場合、WebブラウザからカスタムURLスキームは実行できません。そこで、[tomiyan.net URL scheme test tool](http://tomiyan.net/tools/urlscheme.html)を使ってリンクを生成するとテストできます。iOSと同じようにデータが取得できているのが分かります。以下は coolapp://hello で呼び出した例です。
 
 ![](/blog/content/images/2016/Aug/custom-url-scheme-4.png)
 
