@@ -1,0 +1,119 @@
+---
+author: atsushi
+date: 2016-08-26
+id: monaca-epub-reader
+title: "MonacaでePubリーダーアプリを作ってみる"
+product: monaca
+tags: monaca, cordova, epub
+category: 技術情報
+---
+
+日本でも電子書籍アプリがたくさん増えてきました。小説などはもちろん、マンガコンテンツを提供するものもたくさんあります。その中には明らかにハイブリッドアプリとして作られているものも数多くあります。機能はあまり多くなく、画像を表示するだけのものが多いのでハイブリッドアプリでもさくさくと動くことでしょう。
+
+今回はそんな電子書籍アプリをMonacaで作ってみたいと思います。デザイン上の改善点などは多いですが、基本的な動きは可能です。
+
+## 利用するライブラリ
+
+今回はJavaScriptのePubリーダー、[epub.js](https://github.com/futurepress/epub.js)を使います。JavaScriptなので、プラグインを使わずに動かせるようになっています。
+
+## ライブラリの設置
+
+必要なのは次のファイルです。ライブラリはwww/jsフォルダ以下に配置します。
+
+- [epub.js](https://github.com/futurepress/epub.js/blob/master/build/epub.min.js)
+- [zip.js](https://github.com/futurepress/epub.js/blob/master/build/libs/zip.min.js)
+
+zip.jsはその名の通り、Zip圧縮されたファイルを読むためのライブラリです。ePubファイルはコンテンツをZip圧縮したものなので、zip.jsを使って読み取ります。
+
+## ePubファイル
+
+今回は[白鯨のePubファイル](https://github.com/futurepress/books/blob/8d6c46ef23ca637d89e66b18b2146ccef93c1ac4/moby-dick.epub)を利用します。これは www/epubs フォルダ以下に配置します。
+
+## スタイルシート
+
+デザインは自由ですが、今回はごく基本的な[basic.css](https://github.com/futurepress/epub.js/blob/master/examples/basic.css)を使っています。これは www/css フォルダ以下に配置します。
+
+## HTML
+
+HTMLはまずepub.jsとzip.js、basic.cssを読み込みます。
+
+```
+<link rel="stylesheet" href="css/basic.css">
+<script src="js/zip.min.js"></script>
+<script src="js/epub.min.js"></script>
+```
+
+
+さらに追加のスタイルシートを指定します。
+
+```
+<style type="text/css">
+  body {
+    overflow: auto;
+    background: #eee;
+  }
+  #wrapper {
+    width: 320px;
+    height: 500px;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    padding: 10px 10px;
+    background: #fff;
+    border-radius: 0 5px 5px 0;
+    -moz-box-shadow:      inset 10px 0 20px rgba(0,0,0,.1);
+    -webkit-box-shadow:   inset 10px 0 20px rgba(0,0,0,.1);
+    box-shadow:           inset 10px 0 20px rgba(0,0,0,.1);
+  }
+  #area {
+    width: 270px;
+    height: 400px;
+    margin: 0 auto;
+  }
+</style>
+```
+
+bodyタグ内の内容はとてもシンプルです。
+
+```
+<div id="main">
+  <div id="prev" onclick="Book.prevPage();" class="arrow">‹</div>
+  <div id="wrapper">
+    <div id="area"></div>
+  </div>
+  <div id="next" onclick="Book.nextPage();" class="arrow">›</div>
+</div>
+```
+
+Book.prevPage(); および Book.nextPage(); はそれぞれ電子書籍の戻る、進むに相当します。
+
+最後にePubファイルを読み込んで、 #area へ電子書籍の内容を表示します。
+
+```
+<script>
+    "use strict";
+    var Book = ePub("epubs/moby-dick.epub", {
+      width: 280,
+      height: 600
+    });
+    Book.renderTo("area");
+</script>
+```
+
+これでePubファイルの表示ができます。実機で確認してみましょう（プレビューでも確認できます）。
+
+![](/blog/content/images/2016/Aug/epubjs-1.png)
+
+左右についている矢印でページが切り替わります。
+
+![](/blog/content/images/2016/Aug/epubjs-2.png)
+
+## 注意点など
+
+電子書籍の表示については改善できるところが多そうです。特に最近の縦長になっているスマートフォンにおいては上下に余白が生まれてしまうでしょう。また、今回は電子書籍の左右に矢印を出していますが、スワイプ操作を読み取ってページネーションすることも可能です。
+
+なお、epub.jsはDRMに対応していませんので注意してください。電子書籍はネットワークからダウンロードするか、暗号化した上で利用するのが良いでしょう。
+
+今回のソースコードは[GitHubリポジトリ](https://github.com/moongift/monaca-epub-reader)にアップロードしてあります。プラグインは使っていないので、Monacaシミュレータでも確認できます。
+
+電子書籍アプリを作る際の参考にしてください。
