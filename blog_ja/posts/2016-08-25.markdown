@@ -48,17 +48,11 @@ setTimeoutで囲むのがコツのようです。こうしないとiOSでうま�
 
 ## セキュリティの設定
 
-[javascript - Using handleOpenURL with Custom URL scheme in Cordova - Stack Overflow](http://stackoverflow.com/questions/34257097/using-handleopenurl-with-custom-url-scheme-in-cordova/34281420#34281420)によると、iOSではセキュリティ上の問題でうまく動かなくなっているとのことで、
+[javascript - Using handleOpenURL with Custom URL scheme in Cordova - Stack Overflow](http://stackoverflow.com/questions/34257097/using-handleopenurl-with-custom-url-scheme-in-cordova/34281420#34281420)によると、iOSではセキュリティ上の問題でうまく動かなくなっているとのことで、Monacaプロジェクトの<meta http-equiv="Content-Security-Policy"…で始まるタグを以下のように書き換えて下さい。
 
 ```
 <meta http-equiv="Content-Security-Policy" content="default-src * coolapp: data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 ```
-
-のようにURLスキーマを追加してあげる必要があるとのことです。
-
-## 試す
-
-後は通常のMonacaアプリと同様にビルドしてインストールするだけです。
 
 Safariから該当のURLスキームを呼び出すと、アラートが出ます。
 
