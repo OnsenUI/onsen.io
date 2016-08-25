@@ -60,9 +60,13 @@ setTimeoutで囲むのがコツのようです。こうしないとiOSでうま�
 
 後は通常のMonacaアプリと同様にビルドしてインストールするだけです。
 
-Safariから該当のURLスキームを呼び出すと、アラートが出ます。これは coolapp://test で呼び出しています。
+Safariから該当のURLスキームを呼び出すと、アラートが出ます。
 
 ![](/blog/content/images/2016/Aug/custom-url-scheme-1.png)
+
+そしてアプリが表示されます。これは coolapp://test で呼び出しています。
+
+![](/blog/content/images/2016/Aug/custom-url-scheme-2.png)
 
 アプリ側でURLスキームとして指定したパラメータが取得できているのが確認できます。後はこのデータを使って画面を切り替えたり、外部からデータを取得したりするだけです。こちらは?を使って、coolapp://?user=monaca として呼び出しています。
 
