@@ -46,7 +46,7 @@ HTMLはまずepub.jsとzip.js、basic.cssを読み込みます。
 Android 6.0.1にてエラーが発生するため、セキュリティポリシーを変更します。
 
 ```
-<meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval';img-src * blob:; font-src * blob:; style-src * blob: 'unsafe-inline';">
+<meta http-equiv="Content-Security-Policy" content="default-src * data:; script-src * 'unsafe-inline' 'unsafe-eval'; img-src * blob:; font-src * blob:; style-src * blob: 'unsafe-inline'">
 ```
 
 さらに追加のスタイルシートを指定します。
