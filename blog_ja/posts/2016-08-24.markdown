@@ -18,7 +18,7 @@ category: 技術情報
 
 インストールはMonaca IDEのCordovaプラグインの管理から行います。Cordovaプラグインのインポートにてcordova-plugin-x-socialsharingを指定してください。
 
-その後 [SocialSharing.js](https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin/blob/master/www/SocialSharing.js) をダウンロードして読み込む必要があるようです。
+準備はそれだけです。
 
 ## 使い方
 
@@ -62,7 +62,7 @@ category: 技術情報
 
 ## 特定のアプリケーションを指定して共有
 
-共有メニューを出す方法の他、特定のアプリケーションを指定することもできます。対応しているのは、
+共有メニューを出す方法の他、特定のアプリケーションを指定することもできます。対応しているのは以下のアプリケーションになります。
 
 - Twitter
 - Facebook
@@ -71,6 +71,12 @@ category: 技術情報
 - メール
 - Instagram
 - 写真（アルバム）
+
+例えばTwitterの場合は次のようになります。画像やリンクも同じように利用できます。
+
+```
+window.plugins.socialsharing.shareViaTwitter('Twitterへ投稿')
+```
 
 iOSの場合、TwitterやFacebookはアプリケーションがインストールされていなくともフローティングが表示されてシェアができます。Androidではインストール必須です。SMS、メールについてはデフォルトのものが立ち上がります。
 
