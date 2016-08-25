@@ -54,6 +54,10 @@ setTimeoutで囲むのがコツのようです。こうしないとiOSでうま�
 <meta http-equiv="Content-Security-Policy" content="default-src * coolapp: data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 ```
 
+## 試す
+
+後は通常のMonacaアプリと同様にビルドしてインストールするだけです。
+
 Safariから該当のURLスキームを呼び出すと、アラートが出ます。
 
 ![](/blog/content/images/2016/Aug/custom-url-scheme-1.png)
