@@ -1,0 +1,296 @@
+---
+author: andreas
+date: 2016-08-30
+id: "vue-cordova-hybrid-apps"
+title: "Releasing preview of Vue.js bindings for Onsen UI!"
+category: announcement
+tags: onsenui, vue.js
+---
+
+![Onsen UI and Vue.js](/blog/content/images/2016/Aug/onsen_vue.png)
+
+[Vue.js](https://vuejs.org/) is a frontend framework for creating reactive components. It provides a very simple but powerful API. Its simplicity makes it very easy to get started writing apps.
+
+Onsen UI is a collection of components for hybrid apps. With Onsen UI you can easily create beautiful mobile user interfaces. We have just released a preview version of our [binding library](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue) for Vue.js which makes it possible to integrate the Onsen UI components in Vue.js apps.
+
+<!-- more -->
+
+Onsen UI gives you access to a rich collection of components that you can use to build user interfaces in your hybrid apps. It supports Cordova/Phonegap and we also have a lot of tools to speed up your development such as the [Monaca CLI](https://github.com/monaca/monaca-cli) that helps you debug and build hybrid apps from the command line.
+
+All the components in Onsen UI come with both Material Design for Android and flat design for iOS so your apps will look and behave like native apps on both platforms.
+
+## What is Vue.js
+
+As mentioned Vue.js provides a very simple API for creating reactive components. Reactive means that the components will react to changes in the data or user input and instantly reflect the changes in the UI. Vue.js has some similarities with both AngularJS and React so I will describe Vue.js by contrasting it to those two.
+
+I have experience using both AngularJS and React but lately I have fallen in love with Vue.js and have been using it for most of my projects, both for web and mobile apps. The upcoming Vue 2 is also very exciting and it brings a lot of performance improvements but still staying true to its roots. We aim to have support for Vue 2 when it launches.
+
+### Templates
+
+Vue.js uses HTML templates with directives for DOM manipulations which makes the templates very similar to AngularJS templates. This is how you create a simple list in a Vue.js template:
+
+```
+<ul>
+  <li v-for="item in items">
+    {{ item | capitalize }}
+  </li>
+</ul>
+```
+
+In the code above `v-for` is a directive which works exactly like `ng-repeat` in AngularJS. There is also a filter called `capitalize`. Both the `capitalize` filter and the `v-for` directive are builtin but it is of course possible to create [custom directives](https://vuejs.org/guide/custom-directive.html) and [filters](https://vuejs.org/guide/custom-filter.html).
+
+### Components
+
+This is where the similarities with AngularJS ends. While AngularJS tries to provide everything that the developer might need through its numerous services, Vue.js is only made for creating components so there are no utilities for making AJAX requests and no builtin routing.
+
+The way you create components is very simple. A component is basically just a JavaScript object with some properties that describe the component. Let's make a simple click counter to see how it works.
+
+In the code below we use the `data` property to initialize the `counter` value to 0. In the `methods` field we put a method called `increase()` which increments the `counter` value. Everything that is put in `data` and `methods` are available in the lexical scope. Vue will detect that the `this.counter` value has changed since it wraps it in a setter function.
+
+```javascript
+new Vue({
+  el: '#app',
+  data: {
+    counter: 0
+  },
+  methods: {
+    increase() {
+      this.counter = this.counter + 1;
+    }
+  }
+});
+```
+
+The `el` property of the component above tells us which DOM element it should use. The HTML code looks like this:
+
+```html
+<div id="app">
+  <button @click="increase">Click me!</button>
+  <p>
+    You have clicked {{ counter }} times!
+  </p>
+</div>
+```
+
+And here we can see it in action:
+
+<p data-height="300" data-theme-id="13819" data-slug-hash="gwYPEX" data-default-tab="result" data-user="argelius" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/argelius/pen/gwYPEX/">Simple Vue.js example</a> by Andreas Argelius (<a href="http://codepen.io/argelius">@argelius</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+That's how easy it is to create a simple component. Of course there are a lot more to it than this but in this article we will just give you a simple introduction to the framework. Just like in AngularJS and React it is possible to compose several components and pass data down from parent to child.
+
+For more information please see the [official component guide](https://vuejs.org/guide/components.html).
+
+### `.vue` files
+
+If you use a module bundler such as [Browserify](http://browserify.org/) or [webpack](https://webpack.github.io/) there is a very nice way to write a component. Instead of separating your HTML and JS into several files you can put them in a `.vue` file and let the bundler convert it to code that is runnable in the browser. You can also add stylesheets to the `.vue` file which makes it possible to encapsulate the whole component in a single file.
+
+A simple `.vue` file can look like this:
+
+```
+<style>
+  .red {
+    color: #f00;
+  }
+</style>
+
+<template>
+  <h1 class="red">{{msg}}</h1>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {
+        msg: 'Hello world!'
+      }
+    }
+  }
+</script>
+```
+
+## Installing the bindings
+
+As mentioned earlier we have just released a preview of our Vue.js bindings for Onsen UI. They are [available on npm](https://www.npmjs.com/package/vue-onsenui). To use them you also need the core Onsen UI library:
+
+```
+npm install --save onsenui vue-onsenui
+```
+
+This will install the libraries into your project.
+
+## Using the bindings
+
+The bindings are distributed as a Vue.js plugin so you can use it like this:
+
+```javascript
+import Vue from 'vue';
+import 'onsenui';
+
+/**
+ * The stylesheets can be loaded with webpack
+ * or added with a script tag.
+ */
+import '../../../build/css/onsenui.css';
+import '../../../build/css/onsen-css-components.css';
+
+import {App, MainPage, SecondaryPage} from './components';
+
+import VueOnsen from 'vue-onsenui';
+
+/**
+ * Since it is a Vue plugin
+ * we initialize it like this.
+ */
+Vue.use(VueOnsen, {
+  components: {
+    /**
+     * Add components here
+     * for the pages in your
+     * app. They can be pushed
+     * to the top of the
+     * Navigator page stack or
+     * used as tab pages.
+     */
+    MainPage,
+    SecondaryPage
+  }
+});
+
+new Vue({
+  el: 'body',
+  components: {App}
+});
+```
+
+You can now use the components in your app:
+
+```
+<template>
+  <ons-switch
+    @change="onChange"
+    :checked="switchState"
+  >
+  <p>
+    Switch is {{ switchState ? 'on' : 'off' }}
+  </p>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        switchState: true
+      };
+    },
+
+    methods: {
+      onChange(event) {
+        this.switchState = event.target.checked;
+      }
+    }
+  };
+</script>
+```
+
+## Navigator example
+
+We have created a simple template that uses the `<ons-navigator>` component for stack navigation. Please take a look at the source code [here](https://github.com/argelius/vue-onsenui-navigator). This template was created using the [Vue CLI](https://github.com/vuejs/vue-cli) and you can use it as a starting point of your own apps.
+
+Most of the components are pretty straightforward to use since they work just like they do in the core library. However, to use the `<ons-navigator>` element two methods, `$push(component, options)` and `$pop(options)` have been added to the VM instance so they can be called from any component. They will send an event to the parent `<ons-navigator>` component to push a new component or pop the top component from the page stack.
+
+To be able to push a component to the stack it needs to be registered when the plugin is initialized like this:
+
+```javascript
+Vue.use(VueOnsen, {
+  components: {
+    MyPage,
+    SecondaryPage
+  }
+});
+```
+
+In the main app component you can put an `<ons-navigator>` element:
+
+```html
+<template>
+  <ons-navigator
+    initial-component="main-page"
+  >
+  </ons-navigator>
+</template>
+
+<script>
+  import {OnsNavigator} from 'vue-onsenui';
+
+  export default {
+    components: {
+      OnsNavigator
+    }
+  };
+</script>
+```
+
+And then you can push the secondary page by adding a call to `$push` in the `MainPage` template:
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">
+      Home
+    </div>
+  </ons-toolbar>
+
+  <p style="text-align: center;">
+    <ons-button
+      @click="$push({
+        component: 'second-page'
+      })"
+    >
+      Push page
+    </ons-button>
+  </p>
+</ons-page>
+```
+
+The template has been embedded below so you can see it in action:
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/vue-onsenui-navigator/"></iframe>
+
+## What about Vue 2?
+
+You might have heard that there is a new version of Vue coming up. This version makes a lot of improvements to the rendering but preserves most of the API from v1. We have run some tests using the new version and realized that we can support both v1 and v2 with almost the same code.
+
+We aim to support Vue 2 when the stable version is released.
+
+## We want your feedback
+
+These bindings are still WIP but we want to make them as good as we possibly can. If you have any feedback that you would like to share with us please do so either in the comments below or in [our forum](https://community.onsen.io/).
+
+We love getting contributions from the community. If you find any bugs or want to request a feature, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues) on our GitHub page. If you want to become a part of developing Onsen UI, feel free to make a Pull request and we will review it as quickly as we can.
+
+## Conclusion
+
+We hope you are as excited as we are about Vue.js support in Onsen UI. If you want updates about Onsen UI development, please [follow us on Twitter](https://twitter.com/Onsen_UI) or sign up to our newsletter on the bottom of [our website](https://onsen.io/).
+
+If you like Onsen UI, please don't forget to [give us a star](https://github.com/OnsenUI/OnsenUI/).
+
+Title: I want to include "preview", and also make it feel like it is as a big news.
+
+Contents:
+
+    Brief overview of Onsen UI
+        Especially mentioning the advantages compared to the competitors
+    What this product do
+        Create hybrid apps much quicker and easier then before
+        Even it is useful when creating mobile web apps
+    How to get started
+        I hope we can add a Vue.js preview template in Monaca CLI
+            No necessary to support Monaca Cloud IDE at the moment
+            This provides way quicker method to get started, and we can know how many people have chosen Vue template
+    Wishing for feedback & contribution
+        What are missing in our binding at this moment
+        Vue 2.0 support
+    What they can expect in the near future
+        State-of-the-art Vue.js based development stack for mobile apps
+        Dreaming a stress-free development with Vue
