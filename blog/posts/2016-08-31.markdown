@@ -19,7 +19,7 @@ Onsen UI gives you access to a rich collection of components that you can use to
 
 All the components in Onsen UI come with both Material Design for Android and flat design for iOS so your apps will look and behave like native apps on both platforms.
 
-## What is Vue.js
+## What is Vue.js?
 
 As mentioned Vue.js provides a very simple API for creating reactive components. Reactive means that the components will react to changes in the data or user input and instantly reflect the changes in the UI. Vue.js has some similarities with both AngularJS and React so I will describe Vue.js by contrasting it to those two.
 
@@ -109,6 +109,75 @@ You can now use the components in your app:
 </script>
 ```
 
+## "Hello world!" with Onsen UI
+
+Let's take a look at a simple app using these bindings. The app will just display a page with a toolbar and a button. When the button is pressed it will display a dialog with a message.
+
+The main JS file will look like this:
+
+```javascript
+import Vue from 'vue';
+import App from './App';
+
+import VueOnsen from 'vue-onsenui';
+import ons from 'onsenui';
+
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+Vue.use(VueOnsen);
+
+ons.ready(() => {
+  /* eslint-disable no-new */
+  new Vue({
+    el: 'body',
+    components: { App }
+  });
+});
+```
+
+The most important line is:
+
+```javascript
+Vue.use(VueOnsen);
+```
+
+This line initializes the plugin and exposes some useful functions. In this case we will use `$notification` which gives us a simple way to display messages to the user.
+
+The `App` component looks like this:
+
+```html
+<template>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Onsen UI</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button
+        @click="$notification.alert(message)"
+      >
+        Click me!
+      </ons-button>
+    </p>
+  </ons-page>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {message: 'Hello world!'};
+    }
+  };
+</script>
+```
+
+You can try the app yourself here:
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/vue-onsenui-helloworld/"></iframe>
+
+The source code for this template is available [here](https://github.com/argelius/vue-onsenui-helloworld).
+
 ## Navigator example
 
 We have created a simple template that uses the `<ons-navigator>` component for stack navigation. Please take a look at the source code [here](https://github.com/argelius/vue-onsenui-navigator). This template was created using the [Vue CLI](https://github.com/vuejs/vue-cli) and you can use it as a starting point of your own apps.
@@ -185,7 +254,7 @@ These bindings are still WIP but we want to make them as good as we possibly can
 
 We love getting contributions from the community. If you find any bugs or want to request a feature, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues) on our GitHub page. If you want to become a part of developing Onsen UI, feel free to make a Pull request and we will review it as quickly as we can.
 
-## Help us spread the word
+## Help us spread the word!
 
 We hope you are as excited as we are about Vue.js support in Onsen UI. If you want updates about Onsen UI development, please [follow us on Twitter](https://twitter.com/Onsen_UI) or sign up to our newsletter on the bottom of [our website](https://onsen.io/).
 
