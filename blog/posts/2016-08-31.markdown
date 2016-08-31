@@ -1,0 +1,261 @@
+---
+author: andreas
+date: 2016-08-31
+id: "preview-vue-support-onsen-ui"
+title: "Preview! Vue.js support for Onsen UI"
+category: announcement
+tags: onsenui, vue.js
+---
+
+![Onsen UI and Vue.js](/blog/content/images/2016/Aug/onsen_vue.png)
+
+[Vue.js](https://vuejs.org/) is a frontend framework for creating reactive components. It provides a very simple but powerful API. Its simplicity makes it very easy to get started writing apps.
+
+Onsen UI is a collection of components for hybrid apps. With Onsen UI you can easily create beautiful mobile user interfaces. We have just released a preview version of our [binding library](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue) for Vue.js which makes it possible to integrate the Onsen UI components in Vue.js apps.
+
+<!-- more -->
+
+Onsen UI gives you access to a rich collection of components that you can use to build user interfaces in your hybrid apps. It supports Cordova/Phonegap and we also have a lot of tools to speed up your development such as the [Monaca CLI](https://github.com/monaca/monaca-cli) that helps you debug and build hybrid apps from the command line.
+
+All the components in Onsen UI come with both Material Design for Android and flat design for iOS so your apps will look and behave like native apps on both platforms.
+
+## What is Vue.js?
+
+As mentioned Vue.js provides a very simple API for creating reactive components. Reactive means that the components will react to changes in the data or user input and instantly reflect the changes in the UI. Vue.js has some similarities with both AngularJS and React so I will describe Vue.js by contrasting it to those two.
+
+I have experience using both AngularJS and React but lately I have fallen in love with Vue.js and have been using it for most of my projects, both for web and mobile apps. The upcoming Vue 2 is also very exciting and it brings a lot of performance improvements but still staying true to its roots. We aim to have support for Vue 2 when it launches.
+
+## Installing the bindings
+
+As mentioned earlier we have just released a preview of our Vue.js bindings for Onsen UI. They are [available on npm](https://www.npmjs.com/package/vue-onsenui). To use them you also need the core Onsen UI library:
+
+```
+npm install --save onsenui vue-onsenui
+```
+
+This will install the libraries into your project.
+
+## Using the bindings
+
+The bindings are distributed as a Vue.js plugin so you can use it like this:
+
+```javascript
+import Vue from 'vue';
+import 'onsenui';
+
+/**
+ * The stylesheets can be loaded with webpack
+ * or added with a script tag.
+ */
+import '../../../build/css/onsenui.css';
+import '../../../build/css/onsen-css-components.css';
+
+import {App, MainPage, SecondaryPage} from './components';
+
+import VueOnsen from 'vue-onsenui';
+
+/**
+ * Since it is a Vue plugin
+ * we initialize it like this.
+ */
+Vue.use(VueOnsen, {
+  components: {
+    /**
+     * Add components here
+     * for the pages in your
+     * app. They can be pushed
+     * to the top of the
+     * Navigator page stack or
+     * used as tab pages.
+     */
+    MainPage,
+    SecondaryPage
+  }
+});
+
+new Vue({
+  el: 'body',
+  components: {App}
+});
+```
+
+You can now use the components in your app:
+
+```
+<template>
+  <ons-switch
+    @change="onChange"
+    :checked="switchState"
+  >
+  <p>
+    Switch is {{ switchState ? 'on' : 'off' }}
+  </p>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+        switchState: true
+      };
+    },
+
+    methods: {
+      onChange(event) {
+        this.switchState = event.target.checked;
+      }
+    }
+  };
+</script>
+```
+
+## "Hello world!" with Onsen UI
+
+Let's take a look at a simple app using these bindings. The app will just display a page with a toolbar and a button. When the button is pressed it will display a dialog with a message.
+
+The main JS file will look like this:
+
+```javascript
+import Vue from 'vue';
+import App from './App';
+
+import VueOnsen from 'vue-onsenui';
+import ons from 'onsenui';
+
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+Vue.use(VueOnsen);
+
+ons.ready(() => {
+  /* eslint-disable no-new */
+  new Vue({
+    el: 'body',
+    components: { App }
+  });
+});
+```
+
+The most important line is:
+
+```javascript
+Vue.use(VueOnsen);
+```
+
+This line initializes the plugin and exposes some useful functions. In this case we will use `$notification` which gives us a simple way to display messages to the user.
+
+The `App` component looks like this:
+
+```html
+<template>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Onsen UI</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button
+        @click="$notification.alert(message)"
+      >
+        Click me!
+      </ons-button>
+    </p>
+  </ons-page>
+</template>
+
+<script>
+  export default {
+    data () {
+      return {message: 'Hello world!'};
+    }
+  };
+</script>
+```
+
+You can try the app yourself here:
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/vue-onsenui-helloworld/"></iframe>
+
+The source code for this template is available [here](https://github.com/argelius/vue-onsenui-helloworld).
+
+## Navigator example
+
+We have created a simple template that uses the `<ons-navigator>` component for stack navigation. Please take a look at the source code [here](https://github.com/argelius/vue-onsenui-navigator). This template was created using the [Vue CLI](https://github.com/vuejs/vue-cli) and you can use it as a starting point of your own apps.
+
+Most of the components are pretty straightforward to use since they work just like they do in the core library. However, to use the `<ons-navigator>` element two methods, `$push(component, options)` and `$pop(options)` have been added to the VM instance so they can be called from any component. They will send an event to the parent `<ons-navigator>` component to push a new component or pop the top component from the page stack.
+
+To be able to push a component to the stack it needs to be registered when the plugin is initialized like this:
+
+```javascript
+Vue.use(VueOnsen, {
+  components: {
+    MyPage,
+    SecondaryPage
+  }
+});
+```
+
+In the main app component you can put an `<ons-navigator>` element:
+
+```html
+<template>
+  <ons-navigator
+    initial-component="main-page"
+  >
+  </ons-navigator>
+</template>
+
+<script>
+  import {OnsNavigator} from 'vue-onsenui';
+
+  export default {
+    components: {
+      OnsNavigator
+    }
+  };
+</script>
+```
+
+And then you can push the secondary page by adding a call to `$push` in the `MainPage` template:
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">
+      Home
+    </div>
+  </ons-toolbar>
+
+  <p style="text-align: center;">
+    <ons-button
+      @click="$push({
+        component: 'second-page'
+      })"
+    >
+      Push page
+    </ons-button>
+  </p>
+</ons-page>
+```
+
+The template has been embedded below so you can see it in action:
+
+<iframe width="320" height="568" style="box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/vue-onsenui-navigator/"></iframe>
+
+## What about Vue 2?
+
+You might have heard that there is a new version of Vue coming up. This version makes a lot of improvements to the rendering but preserves most of the API from v1. We have run some tests using the new version and realized that we can support both v1 and v2 with almost the same code.
+
+We aim to support Vue 2 when the stable version is released.
+
+## We want your feedback
+
+These bindings are still WIP but we want to make them as good as we possibly can. If you have any feedback that you would like to share with us please do so either in the comments below or in [our forum](https://community.onsen.io/).
+
+We love getting contributions from the community. If you find any bugs or want to request a feature, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues) on our GitHub page. If you want to become a part of developing Onsen UI, feel free to make a Pull request and we will review it as quickly as we can.
+
+## Help us spread the word!
+
+We hope you are as excited as we are about Vue.js support in Onsen UI. If you want updates about Onsen UI development, please [follow us on Twitter](https://twitter.com/Onsen_UI) or sign up to our newsletter on the bottom of [our website](https://onsen.io/).
+
+If you like Onsen UI, please don't forget to [give us a star](https://github.com/OnsenUI/OnsenUI/) and tell your developer friends about it!
