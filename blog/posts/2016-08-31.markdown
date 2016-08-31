@@ -1,8 +1,8 @@
 ---
 author: andreas
-date: 2016-08-30
-id: "vue-cordova-hybrid-apps"
-title: "Releasing preview of Vue.js bindings for Onsen UI!"
+date: 2016-08-31
+id: "preview-vue-support-onsen-ui"
+title: "Preview! Vue.js support for Onsen UI"
 category: announcement
 tags: onsenui, vue.js
 ---
@@ -24,90 +24,6 @@ All the components in Onsen UI come with both Material Design for Android and fl
 As mentioned Vue.js provides a very simple API for creating reactive components. Reactive means that the components will react to changes in the data or user input and instantly reflect the changes in the UI. Vue.js has some similarities with both AngularJS and React so I will describe Vue.js by contrasting it to those two.
 
 I have experience using both AngularJS and React but lately I have fallen in love with Vue.js and have been using it for most of my projects, both for web and mobile apps. The upcoming Vue 2 is also very exciting and it brings a lot of performance improvements but still staying true to its roots. We aim to have support for Vue 2 when it launches.
-
-### Templates
-
-Vue.js uses HTML templates with directives for DOM manipulations which makes the templates very similar to AngularJS templates. This is how you create a simple list in a Vue.js template:
-
-```
-<ul>
-  <li v-for="item in items">
-    {{ item | capitalize }}
-  </li>
-</ul>
-```
-
-In the code above `v-for` is a directive which works exactly like `ng-repeat` in AngularJS. There is also a filter called `capitalize`. Both the `capitalize` filter and the `v-for` directive are builtin but it is of course possible to create [custom directives](https://vuejs.org/guide/custom-directive.html) and [filters](https://vuejs.org/guide/custom-filter.html).
-
-### Components
-
-This is where the similarities with AngularJS ends. While AngularJS tries to provide everything that the developer might need through its numerous services, Vue.js is only made for creating components so there are no utilities for making AJAX requests and no builtin routing.
-
-The way you create components is very simple. A component is basically just a JavaScript object with some properties that describe the component. Let's make a simple click counter to see how it works.
-
-In the code below we use the `data` property to initialize the `counter` value to 0. In the `methods` field we put a method called `increase()` which increments the `counter` value. Everything that is put in `data` and `methods` are available in the lexical scope. Vue will detect that the `this.counter` value has changed since it wraps it in a setter function.
-
-```javascript
-new Vue({
-  el: '#app',
-  data: {
-    counter: 0
-  },
-  methods: {
-    increase() {
-      this.counter = this.counter + 1;
-    }
-  }
-});
-```
-
-The `el` property of the component above tells us which DOM element it should use. The HTML code looks like this:
-
-```html
-<div id="app">
-  <button @click="increase">Click me!</button>
-  <p>
-    You have clicked {{ counter }} times!
-  </p>
-</div>
-```
-
-And here we can see it in action:
-
-<p data-height="300" data-theme-id="13819" data-slug-hash="gwYPEX" data-default-tab="result" data-user="argelius" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/argelius/pen/gwYPEX/">Simple Vue.js example</a> by Andreas Argelius (<a href="http://codepen.io/argelius">@argelius</a>) on <a href="http://codepen.io">CodePen</a>.</p>
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-
-That's how easy it is to create a simple component. Of course there are a lot more to it than this but in this article we will just give you a simple introduction to the framework. Just like in AngularJS and React it is possible to compose several components and pass data down from parent to child.
-
-For more information please see the [official component guide](https://vuejs.org/guide/components.html).
-
-### `.vue` files
-
-If you use a module bundler such as [Browserify](http://browserify.org/) or [webpack](https://webpack.github.io/) there is a very nice way to write a component. Instead of separating your HTML and JS into several files you can put them in a `.vue` file and let the bundler convert it to code that is runnable in the browser. You can also add stylesheets to the `.vue` file which makes it possible to encapsulate the whole component in a single file.
-
-A simple `.vue` file can look like this:
-
-```
-<style>
-  .red {
-    color: #f00;
-  }
-</style>
-
-<template>
-  <h1 class="red">{{msg}}</h1>
-</template>
-
-<script>
-  export default {
-    data () {
-      return {
-        msg: 'Hello world!'
-      }
-    }
-  }
-</script>
-```
 
 ## Installing the bindings
 
@@ -269,8 +185,8 @@ These bindings are still WIP but we want to make them as good as we possibly can
 
 We love getting contributions from the community. If you find any bugs or want to request a feature, please [open an issue](https://github.com/OnsenUI/OnsenUI/issues) on our GitHub page. If you want to become a part of developing Onsen UI, feel free to make a Pull request and we will review it as quickly as we can.
 
-## Conclusion
+## Help us spread the word
 
 We hope you are as excited as we are about Vue.js support in Onsen UI. If you want updates about Onsen UI development, please [follow us on Twitter](https://twitter.com/Onsen_UI) or sign up to our newsletter on the bottom of [our website](https://onsen.io/).
 
-If you like Onsen UI, please don't forget to [give us a star](https://github.com/OnsenUI/OnsenUI/).
+If you like Onsen UI, please don't forget to [give us a star](https://github.com/OnsenUI/OnsenUI/) and tell your developer friends about it!
