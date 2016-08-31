@@ -78,15 +78,11 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    flex-grow: 1;
 
     &-column {
       display: flex;
       flex-direction: column;
-      margin: 0 60px 0 0;
-
-      &:last-child {
-        margin: 0;
-      }
     }
 
     &-header {
@@ -108,7 +104,8 @@
     flex-direction: column;
     flex-wrap: nowrap;
     flex-basis: 400px;
-    padding: 0 0 0 60px;
+    padding: 0 0 0 40px;
+    margin: 0 0 0 40px;
     border-left: 1px solid #9ca0a1;
 
     &-header {
