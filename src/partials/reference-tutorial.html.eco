@@ -1,11 +1,3 @@
-<h2>Reference &amp; Usage</h2>
-<nav class="tabs framework">
-  <a href="js.html" class="js action <%="selected" if @framework=="js"%>">JavaScript</a>
-  <a href="react.html" class="react action <%="selected" if @framework=="react"%>">React</a>
-  <a href="angular1.html" class="angular1 action <%="selected" if @framework=="angular1"%>">Angular 1</a>
-  <a href="angular2.html" class="angular2 action <%="selected" if @framework=="angular2"%>">Angular 2</a>
-</nav>
-
 <div class="js-index"><div class="js-index-inner">
   <% for category, docs of @componentCategories[@framework]: %>
   <div class="js-index-category">
@@ -37,9 +29,7 @@
           <li class="js-index-list-item
             js-index-list-item-<%=doc.icon%>">
             <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
-              <% if @framework == "react": %>
-                &lt;<%= doc.name %> /&gt;
-              <% else if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
+              <% if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
                 <%= doc.name %> (<%=extensionDoc.directive%> Directive)
               <% else: %>
                 <%= doc.name %>

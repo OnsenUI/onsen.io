@@ -57,8 +57,8 @@
   </script>
 </head>
 
-<body id="<%- @page %>" class="design-2016">
-  
+<body id="<%- @page %>">
+
   <% if @main_nav != false: %>
     <%- @partial(if @lang=='en' then 'main-nav.html.eco' else 'main-nav.ja.html.eco') %>
   <% end %>
@@ -79,10 +79,6 @@
       <% if @version == "v1": %>
         <aside class="content-info content-info-page">
           <%- @partial('reference-toc-v1.html.eco') %>
-        </aside>
-      <% else: %>
-        <aside class="content-info content-info-page">
-          <%- @partial('reference-toc.html.eco') %>
         </aside>
       <% end %>
       <div class="content">

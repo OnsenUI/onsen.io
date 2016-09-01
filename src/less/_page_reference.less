@@ -170,7 +170,13 @@
 }
 
 #javascript #main-container {
-  width: @width;
+  max-width: @width;
+  margin: auto;
+}
+
+.content {
+  width: inherit;
+  max-width: inherit;
 }
 
 #reference-detail #main-container {
@@ -291,17 +297,17 @@
   }
 
   &-category {
-    width: 345px;
+    width: 360px;
     box-sizing: border-box;
     padding: 10px 0;
-    margin: 0 10px;
+    margin: 0 auto;
     min-height: 90px;
 
     .desktop-query({
       display: inline-block;
     });
 
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
   }
 
   &-extension-name {
@@ -318,7 +324,7 @@
     font-size: 15px;
     margin: 0;
     font-weight: 700;
-    color: #777;
+    color: #333;
 
     > img {
       vertical-align: text-bottom;
