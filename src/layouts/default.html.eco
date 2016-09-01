@@ -57,12 +57,11 @@
   </script>
 </head>
 
-<body id="<%- @page %>" class="design-2016">
-  
+<body onload="document.body.setAttribute('class','loaded')" id="<%- @page %>">
+
   <% if @main_nav != false: %>
-    <%- @partial(if @lang=='en' then 'main-nav.html.eco' else 'main-nav.ja.html.eco') %>
+    <%- @partial('global-nav.html.eco') %>
   <% end %>
-  <%- @partial(if @lang=='en' then 'header.html.eco' else 'header.ja.html.eco') %>
 
   <section id="main-container">
 

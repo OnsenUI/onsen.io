@@ -1,0 +1,44 @@
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <div class="global-nav-logo">
+      <a href="/">
+        <img src="/images/header/logo_onsen_small.png"></img>
+      </a>
+    </div>
+
+    <ul class="global-nav-menu">
+      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'discover' %>">
+        <a href="#">Discover</a>
+
+        <div class="dropdown-container">
+          <ul class="dropdown-content">
+            <li class="dropdown-item">
+              <a href="/react">React</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/angular2">Angular 2</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
+        <a href="/getting-started.html">Get started</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="#">Samples</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="/tutorial">Tutorials</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="#">Docs</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="#">Community</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="/blog">Blog</a>
+      </li>
+    </ul>
+  </div>
+</nav>
