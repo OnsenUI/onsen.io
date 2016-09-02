@@ -2,13 +2,10 @@
   <% for category, docs of @componentCategories[@framework]: %>
   <div class="js-index-category">
     <h4 class="js-index-header">
-      <% if docs.index: %>
-        <a href="/v2/docs/<%=@framework%>/<%=category%>.html"><%- docs.title || @titlize category %></a>
-      <% else: %>
-        <%- docs.title || @titlize category %>
-      <% end %>
-      <!-- <img src="/images/common/icon-<%=@framework%>.svg" width="16" height="16"> -->
-      <div class="js-index-guide">
+      <a href="<%= if docs.index then '/v2/docs/'+@framework+'/'+category+'.html' else 'javaScript:void(0);'%>"><%- docs.title || @titlize category %></a>
+
+<!-- Old Guide/Directive link -->
+<!--       <div class="js-index-guide">
         <% if @framework == "angular2": %>
           <% if docs.index: %>
             <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
@@ -20,14 +17,15 @@
             <span class="guide"><a href="/v2/docs/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
           <% end %>
         <% end %>
-      </div>
+      </div> -->
+
     </h4>
 
     <% if docs.files: %>
       <ul class="js-index-list">
         <% for doc in docs.files: %>
           <li class="js-index-list-item
-            js-index-list-item-<%=doc.icon%>">
+            js-index-list-item-<%=doc.icon || 'element'%>">
             <a href="/v2/docs/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
               <% if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
                 <%= doc.name %> (<%=extensionDoc.directive%> Directive)
@@ -40,5 +38,8 @@
       </ul>
     <% end %>
   </div>
+  <% end %>
+  <% for i in [0...((6 - (Object.keys(@componentCategories[@framework]).length % 6 || 6)))]: %>
+    <div class="js-index-category-fill"></div>
   <% end %>
 </div>

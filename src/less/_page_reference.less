@@ -294,13 +294,15 @@
   &-inner {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-around;
   }
 
+  @category-width: 360px;
+
   &-category {
-    width: 360px;
+    width: @category-width;
     box-sizing: border-box;
     padding: 10px 0;
-    margin: 0 auto;
     min-height: 90px;
 
     .desktop-query({
@@ -308,6 +310,10 @@
     });
 
     border-top: 1px solid #ccc;
+  }
+
+  &-category-fill {
+    width: @category-width;
   }
 
   &-extension-name {
@@ -319,12 +325,33 @@
   }
 
   h4&-header {
-    line-height: 1.3em;
+    line-height: 1.2em;
     padding: 0;
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-weight: 700;
     color: #333;
+
+
+    > a {
+      line-height: inherit;
+      padding: inherit;
+      font-size: inherit;
+      margin: inherit;
+      font-weight: inherit;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+
+      &:hover:after {
+        display: inline-block;
+        background: url(/images/common/arrow-icon.png) no-repeat;
+        margin-left: 6px;
+        width: 16px;
+        height: 8px;
+        content: '';
+      }
+    }
 
     > img {
       vertical-align: text-bottom;
@@ -333,16 +360,6 @@
     .lang-ja & {
       font-size: 14px;
       font-weight: bold;
-    }
-
-    > a {
-      line-height: 1.3em;
-      padding: 0;
-      font-size: 15px;
-      margin: 0;
-      font-weight: 700;
-      color: #777;
-      text-decoration: none;
     }
   }
 
@@ -358,11 +375,16 @@
 
   &-list-item {
     float: left;
-    margin: 0 10px 0 0;
-    padding: 0 0 0 22px;
+    margin: 0 10px 0 0px;
+    padding: 0 0 0 26px;
     list-style: none;
     background-position: left center;
     background-repeat: no-repeat;
+
+    a:hover {
+      text-decoration: none;
+      color: #005580;
+    }
 
     .lang-ja & {
       line-height: 1.9;
@@ -370,26 +392,11 @@
 
     &-object {
       background-image: url(/images/common/object-icon.png);
-      background-position: 1px center;
+      background-position: 3px center;
     }
 
     &-element {
       background-image: url(/images/common/element-icon.png);
-    }
-  }
-
-  &-guide {
-    float: right;
-    line-height: 01;
-
-    a {
-      font-size: 12px;
-      font-weight: 400;
-      color: #4183c4;
-      padding-left: 12px;
-    }
-    a:hover {
-      text-decoration: underline;
     }
   }
 
