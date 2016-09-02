@@ -1,0 +1,74 @@
+<nav class="docs-nav">
+  <div class="docs-nav-inner">
+    <div class="docs-nav-left">
+      <div class="docs-nav-title">
+        <h1>
+          Onsen UI 2 Guide
+        </h1>
+      </div>
+      <label for="select-framework" class="docs-nav-framework">
+        <div class="docs-nav-framework-label">
+          Framework:
+        </div>
+        <div class="docs-nav-framework-select">
+          <div class="docs-nav-framework-icon">
+            <% if @framework == 'angular1': %>
+              <img src="/images/common/icn_angular1_1c.svg">
+            <% else if @framework == 'angular2': %>
+              <img src="/images/common/icn_angular2_1c.svg">
+            <% else if @framework == 'react': %>
+
+              <img src="/images/common/icn_react_1c.svg">
+            <% else if @framework == 'js': %>
+
+              <img src="/images/common/icn_something_1c.svg">
+            <% end %>
+          </div>
+          <div class="docs-nav-framework-name">
+            <% if @framework == 'angular1': %>
+              AngularJS
+            <% else if @framework == 'angular2': %>
+              Angular 2
+            <% else if @framework == 'react': %>
+              React
+            <% else if @framework == 'js': %>
+              Core
+            <% end %>
+          </div>
+        </label>
+
+
+        <input id="select-framework" type="checkbox" class="docs-nav-checkbox">
+
+        <label for="select-framework" class="docs-nav-mask"></label>
+
+        <div class="docs-nav-dropdown">
+          <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular1' %>">
+            <a href="/v2/docs/angular1.html">
+              <img src="/images/common/icn_angular1_4c.svg">
+              AngularJS
+            </a>
+          </div>
+          <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular2' %>">
+            <a href="/v2/docs/angular2.html">
+              <img src="/images/common/icn_angular2_4c.svg">
+              Angular 2
+            </a>
+          </div>
+          <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'react' %>">
+            <a href="/v2/docs/react.html">
+              <img src="/images/common/icn_react_4c.svg">
+							React
+            </a>
+          </div>
+          <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'js' %>">
+            <a href="/v2/docs/js.html">
+              <img src="/images/common/icn_something_4c.svg">
+							Core
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
