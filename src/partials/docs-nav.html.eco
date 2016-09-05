@@ -73,10 +73,10 @@
     </div>
     <div class="docs-nav-right">
       <ul class="docs-nav-menu">
-        <li class="docs-nav-menu-item">
+        <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if !@reference %>">
           <a href="/v2/docs/guide/<%- @framework %>">Guide</a>
         </li>
-        <li class="docs-nav-menu-item">
+        <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if @reference %>">
           <a href="/v2/docs/<%- @framework %>.html">Reference</a>
         </li>
       </ul>
