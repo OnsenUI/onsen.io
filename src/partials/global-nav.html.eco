@@ -30,8 +30,8 @@
       <li class="global-nav-menu-item">
         <a href="/tutorial">Tutorials</a>
       </li>
-      <li class="global-nav-menu-item">
-        <a href="#">Docs</a>
+      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
+        <a href="/v2/docs/js.html">Docs</a>
       </li>
       <li class="global-nav-menu-item">
         <a href="#">Community</a>

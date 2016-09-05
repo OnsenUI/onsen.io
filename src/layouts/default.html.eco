@@ -57,42 +57,10 @@
   </script>
 </head>
 
-<body onload="document.body.setAttribute('class','loaded')" id="<%- @page %>">
+<body id="<%- @page %>">
 
-  <% if @main_nav != false: %>
-    <%- @partial('global-nav.html.eco') %>
-  <% end %>
-
-  <section id="main-container">
-
-    <% if @autotoc: %>
-      <aside class="content-info content-info-page">
-        <div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
-        <%- @partial('toc.html.eco', {tocItems: @toc}) %>
-      </aside>
-      <div class="content">
-        <%- @contents %>
-        <%- @partial('need_help.html.eco') if @needHelp %>
-      </div>
-    <% else if @reference: %>
-      <% if @version == "v1": %>
-        <aside class="content-info content-info-page">
-          <%- @partial('reference-toc-v1.html.eco') %>
-        </aside>
-      <% else: %>
-        <aside class="content-info content-info-page">
-          <%- @partial('reference-toc.html.eco') %>
-        </aside>
-      <% end %>
-      <div class="content">
-        <%- @contents %>
-        <%- @partial('need_help.html.eco') if @needHelp %>
-      </div>
-    <% else: %>
-      <%- @contents %>
-      <%- @partial('need_help.html.eco') if @needHelp %>
-    <% end %>
-  </section>
+  <%- @contents %>
+  <%- @partial('need_help.html.eco') if @needHelp %>
 
   <%- @partial('footer.html.eco') %>
 
