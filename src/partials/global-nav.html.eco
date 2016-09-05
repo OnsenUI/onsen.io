@@ -30,8 +30,27 @@
       <li class="global-nav-menu-item">
         <a href="/tutorial">Tutorials</a>
       </li>
-      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
-        <a href="/v2/docs/js.html">Docs</a>
+      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
+        <a href="#">Docs</a>
+
+        <div class="dropdown-container">
+          <ul class="dropdown-content">
+            <li class="dropdown-item">
+              <a href="/v2/docs/guide/angular1">AngularJS</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v2/docs/guide/angular2">Angular 2</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="/v2/docs/guide/react">React</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v2/docs/guide/js">JavaScript</a>
+            </li>
+          </ul>
+        </div>
+
       </li>
       <li class="global-nav-menu-item">
         <a href="#">Community</a>
