@@ -170,7 +170,13 @@
 }
 
 #javascript #main-container {
-  width: @width;
+  max-width: @width;
+  margin: auto;
+}
+
+.content {
+  width: inherit;
+  max-width: inherit;
 }
 
 #reference-detail #main-container {
@@ -181,23 +187,6 @@
     margin-bottom: 5px;
   }
 
-}
-
-#css {
-  #main-container {
-    width: 1200px;
-  }
-  .content {
-    .desktop-query({
-      width: 580px;
-    });
-    max-width: 100%;
-    min-height: 980px;
-  }
-
-  pre code {
-    font-size: 12px;
-  }
 }
 
 .css-component {
@@ -283,25 +272,31 @@
 
 
 .js-index {
-  margin-top: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: @width + 30px;
+  margin: 0 auto;
+  padding: 40px 0 100px 0;
 
-  &-inner {
-    display: flex;
-    flex-wrap: wrap;
-  }
+  @category-width: 360px;
 
   &-category {
-    width: 345px;
+    width: @category-width;
     box-sizing: border-box;
     padding: 10px 0;
-    margin: 0 10px;
-    min-height: 90px;
+    margin: 0 15px;
+    min-height: 110px;
 
     .desktop-query({
       display: inline-block;
     });
 
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+  }
+
+  &-category-fill {
+    width: @category-width;
   }
 
   &-extension-name {
@@ -313,12 +308,36 @@
   }
 
   h4&-header {
-    line-height: 1.3em;
+    line-height: 1.2em;
     padding: 0;
-    font-size: 15px;
+    font-size: 14px;
     margin: 0;
     font-weight: 700;
-    color: #777;
+    color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+
+    > a {
+      line-height: inherit;
+      padding: inherit;
+      font-size: inherit;
+      margin: inherit;
+      font-weight: inherit;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+
+      &:hover:after {
+        display: inline-block;
+        background: url(/images/common/arrow-icon.png) no-repeat;
+        margin-left: 6px;
+        width: 16px;
+        height: 8px;
+        content: '';
+      }
+    }
 
     > img {
       vertical-align: text-bottom;
@@ -327,16 +346,6 @@
     .lang-ja & {
       font-size: 14px;
       font-weight: bold;
-    }
-
-    > a {
-      line-height: 1.3em;
-      padding: 0;
-      font-size: 15px;
-      margin: 0;
-      font-weight: 700;
-      color: #777;
-      text-decoration: none;
     }
   }
 
@@ -352,11 +361,16 @@
 
   &-list-item {
     float: left;
-    margin: 0 10px 0 0;
-    padding: 0 0 0 22px;
+    margin: 0 10px 0 0px;
+    padding: 0 0 0 26px;
     list-style: none;
     background-position: left center;
     background-repeat: no-repeat;
+
+    a:hover {
+      text-decoration: none;
+      color: #005580;
+    }
 
     .lang-ja & {
       line-height: 1.9;
@@ -364,26 +378,11 @@
 
     &-object {
       background-image: url(/images/common/object-icon.png);
-      background-position: 1px center;
+      background-position: 3px center;
     }
 
     &-element {
       background-image: url(/images/common/element-icon.png);
-    }
-  }
-
-  &-guide {
-    float: right;
-    line-height: 01;
-
-    a {
-      font-size: 12px;
-      font-weight: 400;
-      color: #4183c4;
-      padding-left: 12px;
-    }
-    a:hover {
-      text-decoration: underline;
     }
   }
 
@@ -405,31 +404,6 @@
       font-size: 13px;
     }
 
-  }
-}
-
-.getting-started-guide {
-  display: flex;
-  flex-wrap: wrap;
-
-  > li {
-    list-style: none;
-    /*border: 1px solid #ccc;*/
-    width: 140px;
-    text-align: center;
-    margin: 0 10px;
-    padding: 10px;
-
-    @media @smallscreen {
-      width: 100px;
-    }
-
-    div {
-      display: table-cell;
-      font-size: 14px;
-      vertical-align: middle;
-      height: 40px;
-    }
   }
 }
 

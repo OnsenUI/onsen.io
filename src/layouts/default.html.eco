@@ -60,7 +60,6 @@
 <body id="<%- @page %>">
 
   <%- @contents %>
-  <%- @partial('need_help.html.eco') if @needHelp %>
 
   <%- @partial('footer.html.eco') %>
 
