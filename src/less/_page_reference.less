@@ -272,13 +272,9 @@
 
 
 .js-index {
-  margin-top: 15px;
-
-  &-inner {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   @category-width: 360px;
 
@@ -286,7 +282,8 @@
     width: @category-width;
     box-sizing: border-box;
     padding: 10px 0;
-    min-height: 90px;
+    margin: 0 10px;
+    min-height: 110px;
 
     .desktop-query({
       display: inline-block;
@@ -314,6 +311,9 @@
     margin: 0;
     font-weight: 700;
     color: #333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
 
     > a {
