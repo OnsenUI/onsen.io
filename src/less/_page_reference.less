@@ -280,12 +280,13 @@
   padding: 40px 0 100px 0;
 
   @category-width: 360px;
+  @category-margin: 0 15px;
 
   &-category {
     width: @category-width;
     box-sizing: border-box;
     padding: 10px 0;
-    margin: 0 15px;
+    margin: @category-margin;
     min-height: 110px;
 
     .desktop-query({
@@ -297,6 +298,7 @@
 
   &-category-fill {
     width: @category-width;
+    margin: @category-margin;
   }
 
   &-extension-name {
