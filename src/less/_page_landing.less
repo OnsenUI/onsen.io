@@ -121,15 +121,12 @@
         flex-grow: 1;
         margin: auto 30px;
         width: @localWidth / 2 - 30;
-
-
       }
 
       &:first-child > div {
-        max-width: 630px;
-
         p {
-          margin: 0;
+          margin: 0 auto;
+          max-width: 630px;
         }
 
         & :not(p) {
@@ -139,6 +136,12 @@
 
       &:last-child > div {
         text-align: center;
+        margin: auto 0;
+
+        & > :not(div) {
+          margin-left: 30px;
+          margin-right: 30px;
+        }
       }
 
       &:nth-child(odd) {
@@ -149,6 +152,7 @@
 
     .frameworks {
         display: flex;
+        flex-wrap: wrap;
         justify-content: center;
         position: relative;
         padding-bottom: 10px;
@@ -263,8 +267,13 @@
 
     .samples {
       display: flex;
-      justify-content: space-between;
-      margin-top: 43px;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      & > div {
+        padding-top: 24px;
+        margin: 0 35px;
+      }
       
       &-image {
         position: relative;
@@ -275,6 +284,7 @@
         img:first-child {
           width: inherit;
           height: inherit;
+          display: block;
           background-color: #CCC;
           border-top-left-radius: 10%;
           border-top-right-radius: 10%;
@@ -321,7 +331,7 @@
           a {
             text-decoration: none;
 
-            &:last-child {
+            &:not(:first-child) {
               margin-left: 32px;
             }
           }
