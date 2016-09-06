@@ -8,27 +8,8 @@ autotoc: true
 actionbar: false
 tocTitle: 'Migration Guide from V1 to V2'
 version: v2
+layout: docs.html.eco
 ---
-
-<div class="header">
-   <%- @partial('global-nav.html.eco') %>
-   <%- @partial('docs-nav.html.eco') %>
-</div>
-
-<nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
-  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
-  <a href="/v2/docs/guide/angular1/" class="action selected angular1">Guide for Angular 1</a>
-  <a href="/v2/docs/guide/angular2/" class="action angular2">Guide for Angular 2</a>
-</nav>
-
-<br>
-
-<div class="breadcrumb">
-  <a href="/v2/docs/angular1.html">Angular 1 Guide</a>
-  &gt;
-  Migration Guide from Version 1 to Version 2
-</div>
 
 <%- @markdown => %>
 

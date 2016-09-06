@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title><%= @getPreparedTitle() %></title>
+  <meta name="description" content="<%= @getPreparedDescription() %>" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <% if @page == 'css': %>
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/material-design-iconic-font/css/material-design-iconic-font.min.css">
+
+    <link rel="stylesheet" href="<%= @rootUrl %>v2/reference/onsen-css-components.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,100,300italic,300,100italic,400italic,500,700,500italic,700italic,900,900italic" rel="stylesheet" type="text/css">
+  <% end %>
+
+  <link rel="stylesheet" href="<%= @rootUrl %>css/main.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
+
+  <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="<%= @title %>" />
+  <meta property="og:site_name" content="Onsen UI" />
+  <meta property="og:url" content="<%= @site.url %>/<%= @path %>" />
+  <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
+
+  <% if @hasAlternateLangPage(): %>
+    <link rel="alternate" href="<%= @getAlternateLangPage() %>" hreflang="<%= @getAlternateLang() %>" />
+  <% end %>
+
+  <script defer src="/vendor/jquery.js"></script>
+
+  <script src="//use.typekit.net/bys8jdj.js"></script>
+  <script>try{Typekit.load({ async: false });}catch(e){}</script>
+  <script src="/scripts/popup.js"></script>
+
+  <script>
+    window.SITE_ENV = {
+      lang: <% if @lang == 'en': %>'en'<% else: %>'ja'<% end %>,
+      hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
+    };
+  </script>
+  <script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:<% if @lang == 'en': %>100912<% else: %>100914<% end %>,hjsv:5};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'//static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+</head>
+
+<body id="<%- @page %>">
+
+  <div class="header">
+    <%- @partial('global-nav.html.eco') %>
+    <%- @partial('docs-nav.html.eco') %>
+  </div>
+
+  <div class="container">
+		<% if @autotoc: %>
+		<aside class="content-info content-info-page">
+			<div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
+			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
+		</aside>
+		<% end %>
+    <div class="container-content">
+      <%- @contents %>
+    </div>
+  </div>
+
+  <%- @partial('footer.html.eco') %>
+
+  <%- @partial('popup.html.eco') %>
+
+  <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
+  <script defer src="/scripts/default.js"></script>
+  <script src="/vendor/highlight.min.js"></script>
+  <script src="/vendor/moment.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+ </body>
+ </html>

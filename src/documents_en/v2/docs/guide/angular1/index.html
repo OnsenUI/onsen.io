@@ -1,4 +1,5 @@
 ---
+layout: docs.html.eco
 title: 'Onsen UI 2 Guide for Angular 1 - Onsen UI Framework'
 category: docs
 page: 'guide'
@@ -8,19 +9,8 @@ autotoc: true
 actionbar: false
 tocTitle: 'Guide for Angular 1'
 version: v2
+layout: docs.html.eco
 ---
-
-<div class="header">
-  <%- @partial('global-nav.html.eco') %>
-  <%- @partial('docs-nav.html.eco') %>
-</div>
-
-<nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
-  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
-  <a href="/v2/docs/guide/angular1/" class="action selected angular1">Guide for Angular 1</a>
-  <a href="/v2/docs/guide/angular2/" class="action angular2">Guide for Angular 2</a>
-</nav>
 
 <%- @markdown => %>
 
@@ -30,7 +20,7 @@ This guide describes using Onsen UI with Angular 1.x. We also have [Migration Gu
 
 Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
 
-##### Use Monaca CLI
+#### Use Monaca CLI
 
 ```bash
 $ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
@@ -39,7 +29,7 @@ $ monaca create helloworld # Choose template
 $ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
 ```
 
-##### Download via npm or bower
+#### Download via npm or bower
 
 ```bash
 # Angular 1 binding is included in onsenui component

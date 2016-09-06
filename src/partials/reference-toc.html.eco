@@ -10,7 +10,7 @@
 <% end %>
 
 <% renderToc = (categories, framework) => %>
-  <div class="toc-title<% if @framework == framework: %> toc-title-active<% end %>"><a href="/v2/docs/<%=framework%>.html"><span style="font-size: 90%"><%=@frameworkName framework%> Reference</span></a></div>
+  <div class="toc-title toc-title-no-toggle"><%=@frameworkName framework%> Reference</div>
 
   <ul class="toc toc-1" <% if @framework != framework: %>style="display: none"<% end %>>
     <% for category, docs of categories: %>
