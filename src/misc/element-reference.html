@@ -2,11 +2,11 @@
 page: 'reference-detail'
 needHelp: true
 reference: true
-layout: 'default.html.eco'
+layout: 'docs.html.eco'
 actionbar: false
 ---
 
-<div class="content"><div class="reference-container">
+<div class="reference-container">
   <div class="breadcrumb">
     <% if @componentCategories[@framework][@doc.category]: %>
       <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
@@ -448,4 +448,4 @@ actionbar: false
   <% end %>
   <!-- end events -->
 
-</div></div>
+</div>

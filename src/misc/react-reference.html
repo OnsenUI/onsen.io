@@ -5,10 +5,11 @@ title: Specified in v2-react-docs.js
 h1: Specified in v2-react-docs.js
 reference: true
 framework: react
-layout: 'default.html.eco'
+layout: 'docs.html.eco'
 actionbar: false
 ---
-<div class="content"><div class="reference-container">
+
+<div class="reference-container">
   <div class="breadcrumb">
     <% if @componentCategories[@framework][@doc.category]: %>
       <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
@@ -239,4 +240,4 @@ actionbar: false
   <% end %>
   <!-- end methods -->
 
-</div></div>
+</div>
