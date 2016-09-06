@@ -8,19 +8,8 @@ autotoc: true
 actionbar: false
 tocTitle: 'JavaScript Guide'
 version: v2
+layout: docs.html.eco
 ---
-
-<div class="header">
-  <%- @partial('global-nav.html.eco') %>
-  <%- @partial('docs-nav.html.eco') %>
-</div>
-
-<nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action selected js">JavaScript Guide</a>
-  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
-  <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
-  <a href="/v2/docs/guide/angular2/" class="action angular2">Guide for Angular 2</a>
-</nav>
 
 <%- @markdown => %>
 
@@ -30,7 +19,7 @@ Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cord
 
 Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
 
-##### Use Monaca CLI
+#### Use Monaca CLI
 
 ```bash
 $ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
@@ -39,7 +28,7 @@ $ monaca create helloworld # Choose template
 $ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
 ```
 
-##### Download via npm or bower
+#### Download via npm or bower
 
 ```bash
 $ npm install onsenui

@@ -8,19 +8,8 @@ autotoc: true
 actionbar: false
 tocTitle: 'Guide for React'
 version: v2
+layout: docs.html.eco
 ---
-
-<div class="header">
-  <%- @partial('global-nav.html.eco') %>
-  <%- @partial('docs-nav.html.eco') %>
-</div>
-
-<nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
-  <a href="/v2/docs/guide/react/" class="action selected react">Guide for React</a>
-  <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
-  <a href="/v2/docs/guide/angular2/" class="action angular2">Guide for Angular 2</a>
-</nav>
 
 <%- @markdown => %>
 
@@ -30,7 +19,7 @@ Note: We are using ES6 + JSX and transpile using [Babel](https://babeljs.io/) in
 
 Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
 
-##### Use Monaca CLI
+#### Use Monaca CLI
 
 ```bash
 $ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
@@ -39,14 +28,14 @@ $ monaca create helloworld # Choose template
 $ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
 ```
 
-##### Download via npm
+#### Download via npm
 
 ```bash
 # The "react-onsenui" library requires the "onsenui" library.
 $ npm install --save-dev onsenui react-onsenui
 ```
 
-##### Use Kitchensink Code
+#### Use Kitchensink Code
 
 [Onsen UI React Components Kitchensink](https://github.com/OnsenUI/react-onsenui-kitchensink) contains almost all components in Onsen UI as one application package. [Link to Kitchensink Demo](http://onsenui.github.io/react-onsenui-kitchensink/demo.html).
 
