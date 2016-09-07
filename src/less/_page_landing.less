@@ -151,19 +151,22 @@
     }
 
     .frameworks {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        position: relative;
-        padding-bottom: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      padding-bottom: 10px;
+
+      @transitionHover: all .15s ease-in-out;
 
       & > div {
         text-align: center;
         min-width: 110px;
-        transition: all .1s ease-in-out;
+        transition: @transitionHover;
         cursor: pointer;
         align-self: center;
         padding: 20px 10px;
+        position: relative;
 
         & > div:first-child {
           min-height: 50px;
@@ -173,7 +176,7 @@
 
         & > div:last-child {
           max-width: 100px;
-          margin: auto;
+          margin: 18px auto 0;
           color: #000;
           line-height: 16px;
           font-size: 16px;
@@ -184,18 +187,32 @@
           box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
         }
 
-        &:after {
+        &:before, &:after {
           display: inline-block;
-          background: url(/images/common/arrow-icon-r.png) no-repeat;
-          margin-left: 6px;
-          width: 19px;
-          height: 10px;
           content: '';
           position: absolute;
-          right: 5px;
           top: 50%;
-          transform: scale(0.9) translate3d(0, -50%, 0);
-          transition: opacity .1s ease-in-out;
+          transform: translate3d(0, -50%, 0);
+          transition: @transitionHover;
+        }
+
+        &:before {
+          background: url(/images/common/icn_arrow_r.svg) no-repeat;
+          width: 15px;
+          height: 8px;
+          right: 18px;
+          opacity: 1;
+        }
+
+        &:hover:before {
+          opacity: 0;
+        }
+
+        &:after {
+          background: url(/images/common/icn_arrow_r_hover.svg) no-repeat;
+          width: 19px;
+          height: 10px;
+          right: 16px;
           opacity: 0;
         }
 
@@ -206,7 +223,7 @@
 
       .angular1 {
         div:first-child {
-          background-image: url(/images/common/icn_angular1_4c.svg);
+          background-image: url(/images/common/icn_angular1_top.svg);
         }
 
         div:last-child:before {
@@ -216,7 +233,7 @@
 
       .angular2 {
         div:first-child {
-          background-image: url(/images/common/icn_angular2_4c.svg);
+          background-image: url(/images/common/icn_angular2_top.svg);
         }
 
         div:last-child:before {
@@ -226,7 +243,7 @@
 
       .react {
         div:first-child {
-          background-image: url(/images/common/icn_react_4c.svg);
+          background-image: url(/images/common/icn_react_top.svg);
         }
 
         div:last-child:before {
@@ -236,7 +253,7 @@
 
       .vue {
         div:first-child {
-          background-image: url(/images/common/icn_vue_js_4c.svg);
+          background-image: url(/images/common/icn_vuejs_top.svg);
         }
 
         div:last-child:before {
@@ -246,7 +263,7 @@
 
       .meteor {
         div:first-child {
-          background-image: url(/images/common/icn_meteor_4c.svg);
+          background-image: url(/images/common/icn_meteor_top.svg);
         }
 
         div:last-child:before {
@@ -256,7 +273,7 @@
 
       .something {
         div:first-child {
-          background-image: url(/images/common/icn_something_4c.svg);
+          background-image: url(/images/common/icn_something_top.svg);
         }
 
         div:last-child:before {
