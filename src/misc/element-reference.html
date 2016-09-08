@@ -8,19 +8,8 @@ actionbar: false
 
 <div class="reference-container">
   <div class="breadcrumb">
-    <% if @componentCategories[@framework][@doc.category]: %>
-      <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
-      <% if @componentCategories[@framework][@doc.category].index: %>
-        <a href="/v2/docs/<%=@framework%>/<%=@doc.category%>.html"><%=@componentCategories[@framework][@doc.category].title%></a> &gt;
-      <% else: %>
-        <%=@componentCategories[@framework][@doc.category].title%> &gt;
-      <% end %>
-      <%=@doc.name%>
-    <% else: %>
-      <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Docs</a> &gt;
-      <a href="/v2/docs/<%=@framework%>/<%=@doc.category%>.html"><%=@titlize @doc.category%></a> &gt;
-      <%=@doc.name%>
-    <% end %>
+    <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Reference</a> &gt;
+    <%=@doc.name%>
   </div>
 
   <h2><%= @doc.name %></h2>
@@ -48,15 +37,15 @@ actionbar: false
     <li><a href="#example"><%= @translate '[en]Live Example[/en][ja]実例[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.attributes.length > 0: %>
+    <% if @doc.attributes and @doc.attributes.length > 0: %>
     <li><a href="#attributes"><%= @translate '[en]Attributes[/en][ja]属性[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.properties.length > 0: %>
+    <% if @doc.properties and @doc.properties.length > 0: %>
     <li><a href="#properties"><%= @translate '[en]Properties[/en][ja]プロパティ[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.modifiers.length > 0: %>
+    <% if @doc.modifiers and @doc.modifiers.length > 0: %>
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
 
@@ -79,7 +68,7 @@ actionbar: false
     <section>
       <h3 id="usage">
         <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
-        <a href="#usage" class="reference-loop-anchor">#</a>
+        <a href="#usage" class="reference-loop-anchor"></a>
       </h3>
       <pre><code class="xml"><%= @doc.examples[0] %></code></pre>
     </section>
@@ -94,10 +83,10 @@ actionbar: false
   <% if @doc.tutorial: %>
   <h3 id="example">
     <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
-    <a href="#example" class="reference-loop-anchor">#</a>
+    <a href="#example" class="reference-loop-anchor"></a>
   </h3>
 
-  <iframe class="tutorial-embed" width="320" height="568" src="<%- @getTutorialUrl "embed", @doc.tutorial %>"></iframe>
+  <!--<iframe class="tutorial-embed" width="320" height="568" src="<%- @getTutorialUrl "embed", @doc.tutorial %>"></iframe>-->
 
   <% end %>
 
@@ -105,7 +94,7 @@ actionbar: false
   <% if @doc.guides.length > 0 or @doc.seealsos.length > 0: %>
   <h3 id="seealso">
     <% if @lang == "en": %>See also<% else: %>関連情報<% end %>
-    <a href="#seealso" class="reference-loop-anchor">#</a>
+    <a href="#seealso" class="reference-loop-anchor"></a>
   </h3>
 
   <ul class="seealso">
@@ -119,18 +108,18 @@ actionbar: false
   <% end %>
 
   <!-- attributes -->
-  <% if @doc.attributes.length > 0: %>
+  <% if @doc.attributes and @doc.attributes.length > 0: %>
   <section>
     <h3 id="attributes">
       <% if @lang == "en": %>Attributes<% else: %>属性<% end %>
-      <a href="#attributes" class="reference-loop-anchor">#</a>
+      <a href="#attributes" class="reference-loop-anchor"></a>
     </h3>
     <table>
       <thead>
         <tr>
           <% if @lang == "en": %>
           <th>Name</th>
-          <th>Type<br>Default Value</th>
+          <th>Type Default Value</th>
           <th>Description</th>
           <% else: %>
           <th>名前</th>
@@ -184,11 +173,11 @@ actionbar: false
   <!-- end attributes -->
 
   <!-- property -->
-  <% if @doc.properties.length > 0: %>
+  <% if @doc.properties and @doc.properties.length > 0: %>
   <section>
     <h3 id="properties">
       <% if @lang == "en": %>Properties<% else: %>プロパティ概要<% end %>
-      <a href="#properties" class="reference-loop-anchor">#</a>
+      <a href="#properties" class="reference-loop-anchor"></a>
     </h3>
     <table>
       <thead>
@@ -220,20 +209,20 @@ actionbar: false
   <!-- end properties -->
 
   <!-- modifiers -->
-  <% if @doc.modifiers.length > 0: %>
+  <% if @doc.modifiers and @doc.modifiers.length > 0: %>
   <section>
     <h3 id="modifiers">
       <% if @lang == "en": %>Preset Modifiers<% else: %>プリセットのmodifier<% end %>
-      <a href="#modifiers" class="reference-loop-anchor">#</a>
+      <a href="#modifiers" class="reference-loop-anchor"></a>
     </h3>
     <table>
       <thead>
         <tr>
           <% if @lang == "en": %>
-          <th>Modifier</th>
+          <th>Name</th>
           <th>Description</th>
           <% else: %>
-          <th>Modifier名</th>
+          <th>Name</th>
           <th>概要</th>
           <% end %>
         </tr>
@@ -256,7 +245,7 @@ actionbar: false
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
-      <a href="#methods-summary" class="reference-loop-anchor">#</a>
+      <a href="#methods-summary" class="reference-loop-anchor"></a>
     </h3>
     <table>
       <thead>
@@ -298,7 +287,7 @@ actionbar: false
   <section>
     <h3 id="events-summary">
       <% if @lang == "en": %>Events Summary<% else: %>イベント概要<% end %>
-      <a href="#events-summary" class="reference-loop-anchor">#</a>
+      <a href="#events-summary" class="reference-loop-anchor"></a>
     </h3>
     <table>
       <thead>
@@ -336,14 +325,14 @@ actionbar: false
 
   <!-- methods details -->
   <% if @doc.methods.length > 0: %>
-  <h3><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
+  <h3 id="methods"><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
   <% for method in @doc.methods: %>
     <% if [ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1: %>
     <section class="method-detail">
       <h4 id="method-<%= method.name %>">
         <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.type %></span><% end %>
 
-        <a href="#method-<%= method.name %>" class="reference-loop-anchor">#</a>
+        <a href="#method-<%= method.name %>" class="reference-loop-anchor"></a>
       </h4>
 
       <p><%- @markd @translate method.description %></p>
@@ -399,13 +388,13 @@ actionbar: false
 
   <!-- events -->
   <% if @doc.events.length > 0: %>
-  <h3><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
+  <h3 id="events"><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
   <% for event in @doc.events: %>
     <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
     <section class="event-detail">
       <h4 id="event-<%= event.name %>">
         <%= event.name %>
-        <a href="#event-<%= event.name %>" class="reference-loop-anchor">#</a>
+        <a href="#event-<%= event.name %>" class="reference-loop-anchor"></a>
       </h4>
 
       <p><%- @markd @translate event.description %></p>
@@ -448,4 +437,6 @@ actionbar: false
   <% end %>
   <!-- end events -->
 
+  <%- @partial('need_help.html.eco') %>
 </div>
+
