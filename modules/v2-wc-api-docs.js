@@ -13,30 +13,7 @@ function glob(src) {
 }
 
 function getTemplatePath(path, extension) {
-  switch (extension) {
-  case "js":
-    if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
-      return nodePath.resolve(basePath + '/src/misc/element-reference.html');
-    } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
-      return nodePath.resolve(basePath + '/src/misc/object-reference.html');
-    }
-    break;
-  case "angular1":
-    if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
-      return nodePath.resolve(basePath + '/src/misc/element-reference.html');
-    } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
-      return nodePath.resolve(basePath + '/src/misc/object-reference.html');
-    }
-    break;
-  case "angular2":
-    if (path.match(/element\/[-._a-zA-Z0-9]+?.json$/)) {
-      return nodePath.resolve(basePath + '/src/misc/angular2-component-reference.html');
-    } else if (path.match(/object\/[-._a-zA-Z0-9]+?.json$/)) {
-      return nodePath.resolve(basePath + '/src/misc/object-reference.html');
-    }
-    break;
-  }
-  throw new Error('Invalid path: ' + path);
+  return nodePath.resolve(basePath + '/src/misc/item-reference.html');
 }
 
 function generateAPIDocument(metalsmith, docPath, extension) {

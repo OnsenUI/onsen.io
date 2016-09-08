@@ -12,7 +12,13 @@ actionbar: false
     <%=@doc.name%>
   </div>
 
-  <h2><%= @doc.name %></h2>
+  <h2>
+    <% if @extensionDoc and @extensionDoc.directive: %>
+      <%= @extensionDoc.directive %> Directive (<%= @extensionDoc.selector %>)
+    <% else: %>
+      <%= @doc.name %>
+    <% end %>  
+  </h2>
 
   <% if @doc.extensionOf: %>
   <p class="reference-extension-note">
@@ -21,6 +27,7 @@ actionbar: false
   <% end %>
 
   <section class="reference-description">
+    <p><%- @markd @translate (@extensionDoc && @extensionDoc.description) || '' %></p>
     <p><%- @markd @translate @doc.description %></p>
 
     <% if @doc.deprecated: %>
@@ -261,10 +268,13 @@ actionbar: false
       </thead>
       <tbody>
         <% for method in @doc.methods: %>
-          <% if [ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1: %>
+          <% if @framework is 'js' then ownsMethod = ([ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1) %>
+          <% if @framework is 'angular2' then ownsMethod = (method.extensionOf and method.extensionOf.indexOf(@framework) > -1) %>
+
+          <% if ownsMethod: %>
           <tr>
             <td>
-              <a href="#method-<%= method.name %>"><%= method.signature %></a>
+              <a href="#method-<%= method.name %>"><%= method.signature %> </a>
 
               <% if method.extensionOf: %>
               <span class="reference-extension-name"><%= method.extensionOf %></span>
@@ -283,7 +293,7 @@ actionbar: false
   <!-- end methods summary -->
 
   <!-- events summary -->
-  <% if @doc.events.length > 0: %>
+  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events.length > 0: %>
   <section>
     <h3 id="events-summary">
       <% if @lang == "en": %>Events Summary<% else: %>イベント概要<% end %>
@@ -327,7 +337,10 @@ actionbar: false
   <% if @doc.methods.length > 0: %>
   <h3 id="methods"><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
   <% for method in @doc.methods: %>
-    <% if [ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1: %>
+    <% if @framework is 'js' then ownsMethod = ([ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1) %>
+    <% if @framework is 'angular2' then ownsMethod = (method.extensionOf and method.extensionOf.indexOf(@framework) > -1) %>
+
+    <% if ownsMethod: %>
     <section class="method-detail">
       <h4 id="method-<%= method.name %>">
         <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.type %></span><% end %>
@@ -387,7 +400,7 @@ actionbar: false
 
 
   <!-- events -->
-  <% if @doc.events.length > 0: %>
+  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events.length > 0: %>
   <h3 id="events"><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
   <% for event in @doc.events: %>
     <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
@@ -436,6 +449,76 @@ actionbar: false
   <% end %>
   <% end %>
   <!-- end events -->
+
+  <% if @framework is 'angular2': %>
+  <!-- inputs -->
+    <% if @extensionDoc and @extensionDoc.directive and @doc.inputs and @doc.inputs.length > 0: %>
+      <h3><% if @lang == "en": %>Inputs<% else: %>Inputs<% end %></h3>
+      <section class="input-detail">
+        <table>
+          <thead>
+            <tr>
+              <% if @lang == "en": %>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+              <% else: %>
+              <th>名前</th>
+              <th>型</th>
+              <th>概要</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for input in @doc.inputs: %>
+              <tr>
+                <td><%= input.name %></td>
+                <td><%= input.type %></td>
+                <td><%- @markd @translate input.description %>
+                  <% if input.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+    <% end %>
+    <!-- end inputs -->
+
+    <!-- outputs -->
+    <% if @extensionDoc and @extensionDoc.directive and @doc.outputs and @doc.outputs.length > 0: %>
+      <h3><% if @lang == "en": %>Outputs<% else: %>Outputs<% end %></h3>
+      <section class="output-detail">
+        <table>
+          <thead>
+            <tr>
+              <% if @lang == "en": %>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Description</th>
+              <% else: %>
+              <th>名前</th>
+              <th>型</th>
+              <th>概要</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+            <% for output in @doc.outputs: %>
+              <tr>
+                <td><%= output.name %></td>
+                <td><%= output.type %></td>
+                <td><%- @markd @translate output.description %>
+                  <% if output.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+    <% end %>
+    <!-- end outputs -->
+  <% end %>
 
   <%- @partial('need_help.html.eco') %>
 </div>
