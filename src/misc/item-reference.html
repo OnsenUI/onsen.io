@@ -9,7 +9,13 @@ actionbar: false
 <div class="reference-container">
   <div class="breadcrumb">
     <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Reference</a> &gt;
-    <%=@name%>
+
+    <% if @extensionDoc and @extensionDoc.directive: %>
+      <%= extensionDoc.directive %>
+    <% else: %>
+      <%=@name%>
+    <% end %>
+
     <% if @framework is 'react': %>
       <%= ' Component' %>
     <% end %>
@@ -22,7 +28,7 @@ actionbar: false
       <% if @framework is 'react': %>
         &lt;<%= @name %> /&gt;
       <% else: %>
-        <%= @name %>
+        <%= @doc.name %>
       <% end %>
     <% end %>  
   </h2>
@@ -67,7 +73,7 @@ actionbar: false
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.methods and @doc.methods.length > 0: %>
+    <% if @doc.methods and Object.keys(@doc.methods).length > 0: %>
     <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
     <% end %>
 
@@ -154,9 +160,6 @@ actionbar: false
           <tr>
             <td class="attribute-name" id="<%= @name %>-<%= attribute.name %>">
               <%= attribute.name %>
-              <% if attribute.extensionOf: %>
-              <span class="reference-extension-name"><%= attribute.extensionOf %></span>
-              <% end %>
             </td>
             <td>
               <% if attribute.type: %>
@@ -347,10 +350,6 @@ actionbar: false
           <tr>
             <td>
               <a href="#method-<%= method.name %>"><%= method.signature || method.name %> </a>
-
-              <% if method.extensionOf: %>
-              <span class="reference-extension-name"><%= method.extensionOf %></span>
-              <% end %>
             </td>
             <td><%- @markd @translate method.description %>
               <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
@@ -390,10 +389,6 @@ actionbar: false
             <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
             <td><%- @markd @translate event.description %>
               <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-
-              <% if event.extensionOf: %>
-              <span class="reference-extension-name"><%= event.extensionOf %></span>
-              <% end %>
             </td>
           </tr>
           <% end %>
@@ -422,10 +417,6 @@ actionbar: false
       </h4>
 
       <p><%- @markd @translate method.description %></p>
-
-      <% if method.extensionOf: %>
-      <span class="reference-extension-name"><%= method.extensionOf %></span>
-      <% end %>
 
       <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
@@ -484,10 +475,6 @@ actionbar: false
       </h4>
 
       <p><%- @markd @translate event.description %></p>
-
-      <% if event.extensionOf: %>
-      <span class="reference-extension-name"><%= event.extensionOf %></span>
-      <% end %>
 
       <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
