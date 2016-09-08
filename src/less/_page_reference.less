@@ -1,16 +1,170 @@
 .reference-container {
+  ul {
+    list-style-type: disc;
+  }
+
   .breadcrumb {
-    font-size: 12px;
+    //font-size: 12px;
     margin: 0 0 40px 0;
   }
 
   h2 {
     font-size: 36px;
+    color: #ff1a33;
+  }
+
+  h3 {
+    margin-bottom: 0;
+  }
+
+  h3, h4 {
+    &:hover .reference-loop-anchor:after {
+      content: '#';
+      display: inline-block;
+      color: #005580;
+    }
+  }
+
+  h5 {
+    color:  #333;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  pre {
+    margin-top: 0;
+  }
+
+  p, td, li {
+    > code {
+      margin: 8px 0;
+      white-space: nowrap;
+      font-family: 'Menlo', 'Menlo Regular', 'Consolas', monospace;
+      color: #10108F;
+    }
+  }
+
+  ul.seealso, .need-help ul {
+    margin: 0 0 0 16px;
+
+    li {
+      color: #333;
+    }
   }
 
   .reference-quick-navi {
-    list-style: none;
+    font-size: 14px;
+
+    li {
+      line-height: 2em;
+      list-style: none;
+      list-style-image: url(/images/common/icn_arrow_grey_down.png) no-repeat;
+
+      a {
+        text-decoration: none;
+        padding-left: 6px;
+
+        &:hover {
+          color: #005580;
+        }
+      }
+    }
+
+    li:hover {
+      list-style: none;
+      list-style-image: url(/images/common/icn_arrow_blue_down.png) no-repeat;
+    }
   }
+
+  //////// TABLES
+
+
+  table {
+    width: 100%;
+    border: 3px solid #d4d4d4;
+  }
+
+  tr {
+    border-left: 1px solid #ddd;
+    border-right: 0px solid #ddd;
+    border-top: 1px solid #ddd;
+    &:last-child {
+      border-bottom: 1px solid #ddd;
+    }
+
+    td:first-child {
+      color: #aa0d91;
+      font-weight: 400;
+      line-height: 17.5px;
+      font-family: 'Menlo', 'Menlo Regular', 'Consolas', monospace;
+    }
+  }
+
+  th {
+    padding: 15px;
+    padding-left: 20px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 17.5px;
+    color: #333;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 15px;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 24px;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  thead {
+    border: 1px solid #d4d4d4;
+    box-sizing: border-box;
+    background-color:  #f0f0f0;
+  }
+
+  .method-detail, .event-detail {
+    margin: 0px 0 36px 4px;
+    padding-left: 20px;
+    border-left: 2px solid #ddd;
+  }
+
+  h3 + section > h4 {
+    margin-top: 20px;
+  }
+
+  @methodColor: #585AD4;
+  #methods {
+    color: @methodColor;
+  }
+  .method-detail {
+    border-color: @methodColor;
+    & > h4 {
+      color: @methodColor;
+    }
+  }
+
+  @eventColor: #ff5722;
+  #events {
+    color: @eventColor;
+  }
+  .event-detail {
+    border-color: @eventColor;
+    > h4 {
+      color: @eventColor;
+    }
+  }
+
+  .value-type {
+    color: #999;
+    font-weight: 200;
+  }
+
 }
 
 #javascript .container {
@@ -158,7 +312,7 @@
 
       &:hover:after {
         display: inline-block;
-        background: url(/images/common/arrow-icon.png) no-repeat;
+        background: url(/images/common/icn_arrow_blue_right.svg) no-repeat;
         margin-left: 6px;
         width: 16px;
         height: 8px;
