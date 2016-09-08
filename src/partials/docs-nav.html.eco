@@ -44,25 +44,25 @@
 
           <div class="docs-nav-dropdown">
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular1' %>">
-              <a href="/v2/docs/guide/angular1">
+              <a href="/v2/docs/<%- if @reference then 'angular1.html' else 'guide/angular1' %>">
                 <img src="/images/common/icn_angular1_4c.svg">
                 AngularJS
               </a>
             </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular2' %>">
-              <a href="/v2/docs/guide/angular2">
+              <a href="/v2/docs/<%- if @reference then 'angular2.html' else 'guide/angular2' %>">
                 <img src="/images/common/icn_angular2_4c.svg">
                 Angular 2
               </a>
             </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'react' %>">
-              <a href="/v2/docs/guide/react">
+              <a href="/v2/docs/<%- if @reference then 'react.html' else 'guide/react' %>">
                 <img src="/images/common/icn_react_4c.svg">
                 React
               </a>
             </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'js' %>">
-              <a href="/v2/docs/guide/js">
+              <a href="/v2/docs/<%- if @reference then 'js.html' else 'guide/js' %>">
                 <img src="/images/common/icn_something_4c.svg">
                 Core
               </a>

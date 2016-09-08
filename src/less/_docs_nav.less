@@ -79,7 +79,9 @@
   }
 
   &-checkbox:checked ~ &-dropdown {
-		display: block;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: initial;
   }
 
 	&-checkbox:checked ~ &-mask {
@@ -99,7 +101,10 @@
 
   &-dropdown {
     z-index: 1;
-		display: none;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.08s ease-in-out;
+    transform: scale(1.05);
     border-radius: 2px;
     border: 1px solid #e6e6e6;
     box-sizing: border-box;
