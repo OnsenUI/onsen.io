@@ -38,7 +38,6 @@
   p, td, li {
     > code {
       margin: 8px 0;
-      white-space: nowrap;
       font-family: 'Menlo', 'Menlo Regular', 'Consolas', monospace;
       color: #10108F;
     }
@@ -54,6 +53,7 @@
 
   .reference-quick-navi {
     font-size: 14px;
+    width: 150px;
 
     li {
       line-height: 2em;
@@ -63,6 +63,8 @@
       a {
         text-decoration: none;
         padding-left: 6px;
+        display: block;
+        width: 100%;
 
         &:hover {
           color: #005580;
@@ -96,6 +98,7 @@
       color: #aa0d91;
       font-weight: 400;
       line-height: 17.5px;
+      min-width: 150px;
       font-family: 'Menlo', 'Menlo Regular', 'Consolas', monospace;
     }
   }
@@ -108,7 +111,6 @@
     line-height: 17.5px;
     color: #333;
     vertical-align: middle;
-    white-space: nowrap;
   }
 
   td {
