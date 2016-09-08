@@ -2,7 +2,7 @@
   <% for category, docs of @componentCategories[@framework]: %>
   <div class="js-index-category">
     <h4 class="js-index-header">
-      <a href="<%= if docs.index then '/v2/docs/'+@framework+'/'+category+'.html' else 'javaScript:void(0);'%>"><%- docs.title || @titlize category %></a>
+      <%- docs.title || @titlize category %>
 
 <!-- Old Guide/Directive link -->
 <!--       <div class="js-index-guide">
