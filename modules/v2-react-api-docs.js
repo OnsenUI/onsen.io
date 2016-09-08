@@ -16,7 +16,7 @@ function glob(src) {
 }
 
 function getTemplatePath(path) {
-  return nodePath.resolve(basePath + '/src/misc/react-reference.html');
+  return nodePath.resolve(basePath + '/src/misc/item-reference.html');
 }
 
 function parseDocComment(componentName, doc) {
@@ -133,6 +133,7 @@ if (componentName == "Navigator") {
       file.componentCategory = doc.category;
       file.is2 = true;
       file.extension = "react";
+      file.framework = "react";
       file.version = "v2";
 
       resolve({doc: doc, file: file});

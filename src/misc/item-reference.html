@@ -9,14 +9,21 @@ actionbar: false
 <div class="reference-container">
   <div class="breadcrumb">
     <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Reference</a> &gt;
-    <%=@doc.name%>
+    <%=@name%>
+    <% if @framework is 'react': %>
+      <%= ' Component' %>
+    <% end %>
   </div>
 
   <h2>
     <% if @extensionDoc and @extensionDoc.directive: %>
       <%= @extensionDoc.directive %> Directive (<%= @extensionDoc.selector %>)
     <% else: %>
-      <%= @doc.name %>
+      <% if @framework is 'react': %>
+        &lt;<%= @name %> /&gt;
+      <% else: %>
+        <%= @name %>
+      <% end %>
     <% end %>  
   </h2>
 
@@ -36,7 +43,7 @@ actionbar: false
   </section>
 
   <ul class="reference-quick-navi">
-    <% if @doc.examples.length > 0: %>
+    <% if @doc.examples and @doc.examples.length > 0: %>
     <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
     <% end %>
 
@@ -48,6 +55,10 @@ actionbar: false
     <li><a href="#attributes"><%= @translate '[en]Attributes[/en][ja]属性[/ja]' %></a></li>
     <% end %>
 
+    <% if @doc.props and Object.keys(@doc.props).length > 0: %>
+    <li><a href="#props"><%= @translate '[en]Props[/en][ja]Prop一覧[/ja]' %></a></li>
+    <% end %>
+
     <% if @doc.properties and @doc.properties.length > 0: %>
     <li><a href="#properties"><%= @translate '[en]Properties[/en][ja]プロパティ[/ja]' %></a></li>
     <% end %>
@@ -56,29 +67,31 @@ actionbar: false
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.methods.length > 0: %>
+    <% if @doc.methods and @doc.methods.length > 0: %>
     <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.events.length > 0: %>
+    <% if @doc.events and @doc.events.length > 0: %>
     <li><a href="#events-summary"><%= @translate '[en]Events[/en][ja]イベント[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.guides.length > 0 or @doc.seealsos.length > 0: %>
+    <% if (@doc.guides and @doc.guides.length > 0) or (@doc.seealsos and @doc.seealsos.length) > 0: %>
     <li><a href="#seealso"><%= @translate '[en]See Also[/en][ja]関連情報[/ja]' %></a></li>
     <% end %>
 
     <li><a href="#discussion"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
   </ul>
 
-  <% if @doc.examples[0]: %>
+  <% if @doc.examples: %>
+    <% for example in @doc.examples: %>
     <section>
       <h3 id="usage">
         <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
         <a href="#usage" class="reference-loop-anchor"></a>
       </h3>
-      <pre><code class="xml"><%= @doc.examples[0] %></code></pre>
+      <pre><code class="xml"><%= example %></code></pre>
     </section>
+    <% end %>
   <% end %>
 
   <% if @doc.note: %>
@@ -98,7 +111,7 @@ actionbar: false
   <% end %>
 
 
-  <% if @doc.guides.length > 0 or @doc.seealsos.length > 0: %>
+  <% if (@doc.guides and @doc.guides.length > 0) or (@doc.seealsos and @doc.seealsos.length > 0): %>
   <h3 id="seealso">
     <% if @lang == "en": %>See also<% else: %>関連情報<% end %>
     <a href="#seealso" class="reference-loop-anchor"></a>
@@ -139,7 +152,7 @@ actionbar: false
         <% for attribute in @doc.attributes: %>
           <% if [ 'js', @extension ].indexOf(attribute.extensionOf || 'js') > -1: %>
           <tr>
-            <td class="attribute-name" id="<%= @doc.name %>-<%= attribute.name %>">
+            <td class="attribute-name" id="<%= @name %>-<%= attribute.name %>">
               <%= attribute.name %>
               <% if attribute.extensionOf: %>
               <span class="reference-extension-name"><%= attribute.extensionOf %></span>
@@ -215,7 +228,65 @@ actionbar: false
   <% end %>
   <!-- end properties -->
 
+  <!-- react props -->
+  <% if @doc.props and Object.keys(@doc.props).length > 0: %>
+  <section>
+    <h3 id="props">
+      <% if @lang == "en": %>Props<% else: %>Prop一覧<% end %>
+      <a href="#props" class="reference-loop-anchor"></a>
+    </h3>
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Type Default Value</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>型 / デフォルト値</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for key, prop of @doc.props: %>
+          <tr>
+            <td class="attribute-name" id="<%= @doc.name %>-<%= prop.name %>">
+              <%= prop.name %>
+            </td>
+            <td>
+              <% if prop.type && prop.type.names: %>
+              <span class="value-type"><%= prop.type.names[0] %></span>
+              <% end %>
+              <% if prop.defaultValue: %>
+              <br><span class="default-value" style="color: green"><%= prop.defaultValue %></span>
+              <% end %>
+            </td>
+            <td>
+              <%- @markd @translate prop.description %>
+
+              <% if prop.required == "true": %>
+                <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
+              <% else: %>
+                <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
+              <% end %>
+
+              <% if prop.deprecated: %>
+              <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+  <% end %>
+  <!-- end props -->
+
   <!-- modifiers -->
+
+  <% if @framework is 'react' and @original and @originalFile then @doc.modifiers = @originalFile.doc.modifiers %>
   <% if @doc.modifiers and @doc.modifiers.length > 0: %>
   <section>
     <h3 id="modifiers">
@@ -248,7 +319,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods summary -->
-  <% if @doc.methods.length > 0: %>
+  <% if @doc.methods and Object.keys(@doc.methods).length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
@@ -267,14 +338,15 @@ actionbar: false
         </tr>
       </thead>
       <tbody>
-        <% for method in @doc.methods: %>
+        <% for key, method of @doc.methods: %>
+          <% ownsMethod = true %>
           <% if @framework is 'js' then ownsMethod = ([ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1) %>
           <% if @framework is 'angular2' then ownsMethod = (method.extensionOf and method.extensionOf.indexOf(@framework) > -1) %>
 
           <% if ownsMethod: %>
           <tr>
             <td>
-              <a href="#method-<%= method.name %>"><%= method.signature %> </a>
+              <a href="#method-<%= method.name %>"><%= method.signature || method.name %> </a>
 
               <% if method.extensionOf: %>
               <span class="reference-extension-name"><%= method.extensionOf %></span>
@@ -293,7 +365,7 @@ actionbar: false
   <!-- end methods summary -->
 
   <!-- events summary -->
-  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events.length > 0: %>
+  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events and @doc.events.length > 0: %>
   <section>
     <h3 id="events-summary">
       <% if @lang == "en": %>Events Summary<% else: %>イベント概要<% end %>
@@ -334,16 +406,17 @@ actionbar: false
 
 
   <!-- methods details -->
-  <% if @doc.methods.length > 0: %>
+  <% if @doc.methods and Object.keys(@doc.methods).length > 0: %>
   <h3 id="methods"><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
-  <% for method in @doc.methods: %>
+  <% for key, method of @doc.methods: %>
+    <% ownsMethod = true %>
     <% if @framework is 'js' then ownsMethod = ([ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1) %>
     <% if @framework is 'angular2' then ownsMethod = (method.extensionOf and method.extensionOf.indexOf(@framework) > -1) %>
 
     <% if ownsMethod: %>
     <section class="method-detail">
       <h4 id="method-<%= method.name %>">
-        <%= method.signature %><% if method.returns: %><span class="value-type">: <%= method.returns.type %></span><% end %>
+        <%= method.signature || method.name %><% if method.returns and method.returns.type : %><span class="value-type">: <%= method.returns.type.name || method.returns.type %></span><% end %>
 
         <a href="#method-<%= method.name %>" class="reference-loop-anchor"></a>
       </h4>
@@ -360,7 +433,7 @@ actionbar: false
       <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%- @markd @translate method.returns.description %></p>
       <% end %>
 
-      <% if method.params.length > 0: %>
+      <% if Object.keys(method.params).length > 0: %>
       <!-- method parameter -->
       <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
 
@@ -379,7 +452,7 @@ actionbar: false
           </tr>
         </thead>
         <tbody>
-          <% for param in method.params: %>
+          <% for key, param of method.params: %>
           <tr>
             <td><span class="parameter-name"><%= param.name %></span></td>
             <td class="value-type"><%= param.type %></td>
@@ -400,7 +473,7 @@ actionbar: false
 
 
   <!-- events -->
-  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events.length > 0: %>
+  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events and @doc.events.length > 0: %>
   <h3 id="events"><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
   <% for event in @doc.events: %>
     <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
