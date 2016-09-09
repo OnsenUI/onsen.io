@@ -9,18 +9,18 @@ tags: onsen ui, web components
 
 ![Onsen UI and Web Components](/blog/content/images/2016/Sep/onsen_wc.png)
 
-Onsen UI 2.0 final release is around the corner. It's been a long way since we started implementing this version and we want to explain you here what were our reasons and issues. This is a short article that breaks down Onsen UI and some of the technologies behind it.
+Onsen UI 2.0 final release is around the corner. We've come a long way since we started implementing this version and we want to explain you here what were our reasons and issues. This is a short article that breaks down Onsen UI and some of the technologies behind it.
 
 <!-- more -->
 
 ## From AngularJS directives to Web Components
 
 Onsen UI 1.x was built on top of AngularJS, a revolutionary framework for its time that is getting replaced nowadays by some more lightweight and newer ones.
-In AngularJS it is possible to define `directives`, markers on a DOM element (mostly as element names or attributes) that allows attaching a specified behavior to them. While this was great to make an HTML-Elements based framework, it carried a few drawbacks. Being built on top of AngularJS meant that every developer had to adapt to this framework in some way or another. Even if it was not used for the main part of the app, the dependency is still there running undercover and compiling everything. Also, AngularJS is a great framework but we all know it doesn't help too much with performance. Even though performance mostly depends on the app developer's skills, **dropping a few hundred milliseconds by removing dependencies is quite significant for hybrid apps**.
+In AngularJS it is possible to define `directives`, markers on a DOM element (mostly as element names or attributes) that allows attaching a specified behavior to them. While this was great to make an HTML-Elements based framework, it carried a few drawbacks. Being built on top of AngularJS meant that every developer had to adapt to this framework in some way or another. Even if it was not used for the main part of the app, the dependency is still there running under the hood and compiling everything. Also, AngularJS is a great framework but we all know it doesn't help too much with performance. Even though performance mostly depends on the app developer's skills, **dropping a few hundred milliseconds by removing dependencies is quite significant for hybrid apps**.
 
 Due to these and some other reasons we decided that Onsen UI 2.0 should move on and **divorce from opinionated frameworks**. At that time we found the [Web Components](https://developer.mozilla.org/en-US/docs/Web/Web_Components) project and in the team we all agreed it would be interesting to try it out. 
 
-With this technology are able to **create real and HTML reusable components** that behave in the way we want. As everything, this technology also has some minor drawbacks such as not being able to create custom attributes. That's the reason why we have now, for example, `<ons-lazy-repeat>` element instead of an attribute as we had before with the directives. However, over all of this, we thought the swap would still worth.
+With this technology are able to **create real and reusable HTML components** that behave in the way we want. As everything, this technology also has some minor drawbacks such as not being able to create custom attributes. That's the reason why we have now, for example, `<ons-lazy-repeat>` element instead of an attribute as we had before with the directives. However, over all of this, we thought the swap would still be worth it.
 
 ## Web Components standard
 
@@ -33,17 +33,17 @@ var newItem = document.createElement('ons-list-item');
 document.getElementById('my-list').appendChild(newItem);
 ```
 
-We believe **this makes Onsen UI super simple to use** as you are working with real HTML Elements that have attributes, properties and methods right as in normal HTML5. It can be used straight with only JavaScript and it feels simple and easy.
+We believe **this makes Onsen UI super simple to use** as you are working with real HTML Elements that have attributes, properties and methods just like in normal HTML5.They can be used with just pure JavaScript and it feels simple and easy.
 
 Custom Elements reached its version 1.0 quite recently, improving their API and finalising some extra features. If you are curious about this technology you can read further about it [here](https://developers.google.com/web/fundamentals/primers/customelements/).
 
-As a side note, Web Components is not the same as [Polymer](https://www.polymer-project.org/1.0/). This is just a project built on top of Web Components right as Onsen UI.
+As a side note, Web Components is not the same as [Polymer](https://www.polymer-project.org/1.0/). This is just a project built on top of Web Components just like Onsen UI.
 
 ## Not an easy change
 
 While all of this sounds very cool, truth is that it was not a smooth change. We faced many issues that have been gradually fixed. Some of them still persist until now and force us to make adjustments to the core library from time to time.
 
-At the beginning, Google Chrome was the only browser that natively supported Custom Elements and everything worked just right. However, other browsers without native implementation that were using the 0.x version of the polyfill presented several **timing issues**: Components were not loaded when they were supposed to be since they needed some extra cycles (remember that JavaScript is asynchronous). Fortunately, all of this was fixed with the version 1.0 of the polyfill and now every browser is consistent in terms of Web Components (cross browser CSS is a whole different topic).
+At the beginning, Google Chrome was the only browser that natively supported Custom Elements and everything worked just right. However, other browsers without native implementation that were using the 0.x version of the polyfill presented several **timing issues**: Components were not loaded when they were supposed to be since they needed some extra cycles (remember that JavaScript is asynchronous). Fortunately, all of this was fixed with the version 1.0 of the polyfill (the one made by ) and now every browser is consistent in terms of Web Components (cross browser CSS is a whole different topic).
 
 Moreover, the biggest issue we had is likely related to **DOM manipulations**. Some components need to create inner elements and move their content around in order to work properly. For example, when you create `<ons-page>` with some content, another `<div class="page__content">` is actually created internally and the content is moved there. This allows us to provide a simple API and a way to use our components but it comes with a high trade off. This is just fine if we only use Custom Elements with Vanilla JavaScript or libraries like jQuery. However, more complex frameworks such as React or Angular 2 want to manage the DOM tree by themselves. Therefore, making any modification to the inner structure from the element itself is not very advisable.
 
@@ -63,4 +63,4 @@ These are, however, changes that will come **after the final release** as we don
 
 We are very thankful for the feedback we get feedback in our forum and Github repo. This allows us to keep improving and expanding Onsen UI. We'd like Onsen UI developers to spread the word about our framework now that we are about to release the final version. Let's make this a big framework with a big community.
 
-You can leave comments and questions on [our forum](); issues and 🌟 [on Github](https://github.com/OnsenUI/OnsenUI). Happy coding!
+You can leave comments and questions on [our forum](https://community.onsen.io/); issues and 🌟 [on Github](https://github.com/OnsenUI/OnsenUI). Happy coding!
