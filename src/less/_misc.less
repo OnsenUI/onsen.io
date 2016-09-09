@@ -4,6 +4,10 @@
   display: block;
 }
 
+.noscroll {
+  overflow: hidden;
+}
+
 .desktop-query(@rules) {
   @media (min-width: @width) {
     & { @rules(); }

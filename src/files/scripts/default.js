@@ -170,7 +170,7 @@ $(function() {
 
   (function($el) {
     if ($el.length) {
-      $el.attr('href', $el.attr('href').replace(/\/$/, "") + window.location.pathname);
+      $el.attr('href', $el.attr('href').replace(/\/$/, '') + window.location.pathname);
     }
   })($('.language-dialog-button.japanese-version'));
 
@@ -259,7 +259,24 @@ function getCookie(c_name) {
 }
 
 $(function() {
-  $(".phone.ios iframe").load(function() {
-    $(".phone-placeholder").css('opacity', 0);
+  $('.phone.ios iframe').load(function() {
+    $('.phone-placeholder').css('opacity', 0);
+  });
+});
+
+$(function() {
+  $('.global-nav-checkbox').change(function(event) {
+    if (event.target.checked) {
+      document.body.scrollTop = 0;
+      document.body.classList.add('noscroll');
+    }
+    else {
+      document.body.classList.remove('noscroll');
+    }
+  });
+
+  $(window).on('resize', function() {
+    document.body.classList.remove('noscroll');
+    $('.global-nav-checkbox').prop('checked', false);
   });
 });
