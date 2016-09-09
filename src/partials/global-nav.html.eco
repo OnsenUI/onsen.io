@@ -6,6 +6,8 @@
       </a>
     </div>
 
+    <input id="toggle-menu" type="checkbox" class="global-nav-checkbox">
+
     <ul class="global-nav-menu">
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'discover' %>">
         <a href="#">Discover</a>
@@ -59,5 +61,10 @@
         <a href="/blog">Blog</a>
       </li>
     </ul>
+
+    <label for="toggle-menu" class="global-nav-toggle">
+      <img class="global-nav-toggle-open" src="/images/common/icn_menu_open.svg">
+      <img class="global-nav-toggle-close" src="/images/common/icn_menu_close.svg">
+    </label>
   </div>
 </nav>
