@@ -67,6 +67,12 @@
           transform: translate3d(-50%, 0, 0);
           bottom: -8px;
         }
+
+        @media @smallscreen {
+          > a {
+            color: #333333 !important;
+          }
+        }
       }
 
       &:last-child {
@@ -94,13 +100,16 @@
       }
 
       > li {
-        margin: 0;
+        margin: 0 auto;
+        width: ~"calc(100vw - 70px)";
+        max-width: 400px;
         display: block;
         border-bottom: 1px solid #cdd3d4;
         padding: 0 20px;
 
         &:last-child {
           border-bottom: none;
+          margin: 0 auto;
         }
 
         > a {
