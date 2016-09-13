@@ -1,3 +1,6 @@
+@smallscreen: ~"only screen and (max-width: 1000px)";
+@verysmallscreen: ~"only screen and (max-width: 700px)";
+
 .newsletter {
   width: 100%;
   text-align: center;
@@ -43,11 +46,20 @@
     margin: 0 auto;
     flex-wrap: wrap;
 
+    @media @smallscreen {
+      flex-direction: column;
+    }
+
     &-item {
       padding: 34px 54px 31px 120px;
       background-color: #e8edee;
       flex-basis: 390px;
       margin: 0 6px 40px 6px;
+
+      @media @smallscreen {
+        padding: 30px 20px;
+        flex-basis: initial;
+      }
 
       & > h3 {
         padding: 0;
@@ -107,6 +119,10 @@
       justify-content: space-between;
       flex-direction: row;
       flex-wrap: wrap;
+
+      @media @smallscreen {
+        flex-direction: column;
+      }
     }
   }
 
@@ -117,9 +133,22 @@
     justify-content: space-between;
     flex-grow: 1;
 
+    @media @smallscreen {
+      justify-content: flex-start;
+    }
+
     &-column {
       display: flex;
       flex-direction: column;
+
+      @media @smallscreen {
+        margin: 0 0 50px 0;
+        width: 24%;
+      }
+
+      @media @verysmallscreen {
+        width: 50%;
+      }
     }
 
     &-header {
@@ -145,6 +174,15 @@
     margin: 0 0 0 40px;
     border-left: 1px solid #9ca0a1;
 
+    @media @smallscreen {
+      max-width: 400px;
+      border-left: none;
+      border-top: 1px solid #9ca0a1;
+      margin: 0;
+      padding: 50px 0 0 0;
+      flex-basis: initial;
+    }
+
     &-header {
       text-transform: uppercase;
       margin: 0 0 10px 0;
@@ -169,6 +207,10 @@
         border: 1px solid #b3b3b3;
         box-sizing: border-box;
         margin: 0 10px 0 0;
+
+        @media @smallscreen {
+          width: 100%;
+        }
       }
 
       &-button {
