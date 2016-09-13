@@ -145,17 +145,27 @@
   }
 
   @media @smallscreen {
+    .global-nav-toggle {
+      height: 40px;
+      width: 40px;
+      text-align: center;
+    }
+
     .global-nav-checkbox:checked + .global-nav-menu {
       display: block;
     }
 
     .global-nav-checkbox:checked ~ .global-nav-toggle {
       .global-nav-toggle-open {
+        width: 40px;
+        height: 32px;
         display: none;
       }
 
       .global-nav-toggle-close {
-        display: block;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
       }
     }
   }
@@ -166,13 +176,22 @@
     border: 0;
     background: transparent;
     display: none;
+    position: relative;
 
     @media @smallscreen {
       display: block;
     }
 
+    &-open,
+    &-close {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+    }
+
     &-open {
-      display: block;
+      display: inline-block;
     }
 
     &-close {
