@@ -33,6 +33,10 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.framework = extension;
       file.version = "v2";
 
+      if (extension === 'angular1' && doc.tutorial) {
+        doc.tutorial = doc.tutorial.replace('vanilla', 'angular1');
+      }
+
       if (extension != "js" && doc.elements) {
         file.extensionDoc = doc.elements.filter(function(v) { return v.extensionOf == extension })[0] || {};
       }
