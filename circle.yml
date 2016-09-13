@@ -10,6 +10,8 @@ machine:
     version: 6.2.0
 checkout:
   post:
+    - echo $AWS_KEY
+    - echo $AWS_SECRET
     - git submodule sync
     - git submodule update --init --recursive
     - git submodule foreach git fetch --tags
@@ -44,5 +46,7 @@ deployment:
     branch: v2-design
     commands:
       - npm install -g gulp
+      - echo $AWS_SECRET
+      - echo $AWS_KEY
       - AWS_BUCKET=new.onsen.io gulp deploy --lang=en --production
 
