@@ -280,3 +280,12 @@ $(function() {
     $('.global-nav-checkbox').prop('checked', false);
   });
 });
+
+$(function() {
+  var events = 'animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd';
+
+  $('.keyvisual-image').on(events, function() {
+    console.log('HI');
+    $(this).css('visibility', 'visible');
+  });
+});
