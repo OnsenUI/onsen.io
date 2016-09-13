@@ -10,8 +10,6 @@ machine:
     version: 6.2.0
 checkout:
   post:
-    - echo $AWS_KEY
-    - echo $AWS_SECRET
     - git submodule sync
     - git submodule update --init --recursive
     - git submodule foreach git fetch --tags
