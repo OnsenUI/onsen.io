@@ -4,6 +4,7 @@ general:
       - master
       - staging
       - production
+      - v2-design
 machine:
   node:
     version: 6.2.0
@@ -39,4 +40,11 @@ deployment:
       - npm install -g gulp
       - AWS_BUCKET=${AWS_BUCKET_EN_PROD} gulp deploy --lang=en --production
       - AWS_BUCKET=${AWS_BUCKET_JA_PROD} gulp deploy --lang=ja --production
+  new:
+    branch: v2-design
+    commands:
+      - npm install -g gulp
+      - echo $AWS_SECRET
+      - echo $AWS_KEY
+      - AWS_BUCKET=new.onsen.io gulp deploy --lang=en --production
 
