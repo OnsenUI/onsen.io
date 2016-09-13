@@ -13,7 +13,7 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com)) apps. It also is equipped with popular JS frameworks support, including [Angular 1](/v2/docs/guide/angular1/), Angular 2 and [React](/v2/docs/guide/react/). Although they are using the same core, we are optimizing the APIs for each framework.
+Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com)) apps. It also is equipped with popular JS frameworks support, including [Angular 1](/v2/docs/guide/angular1/), [Angular 2](/v2/docs/guide/angular2/) and [React](/v2/docs/guide/react/). Although they are using the same core, we are optimizing the APIs for each framework.
 
 ### Starting Project
 
@@ -35,13 +35,9 @@ $ npm install onsenui
 $ bower install onsenui
 ```
 
-### Hello World! (ons-page, ons-tabbar and ons object)
+### Loading Onsen UI
 
-This section describes some of the basic elements that compose a normal page.
-
-#### Loading Onsen UI
-
-To load Onsen UI in your project, please load `onsen.js` and CSS files for styling.
+To load Onsen UI in your project simply include `onsenui.js` and CSS files for styling.
 
 ```html
 <!doctype html>
@@ -51,40 +47,34 @@ To load Onsen UI in your project, please load `onsen.js` and CSS files for styli
     <link rel="stylesheet" href="lib/onsen/css/onsenui.css"/>
     <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css"/>
     <script src="lib/onsen/js/onsenui.js"></script>
-    <script>
-      ons.ready(function() {
-        // Init code here
-      });
-    </script>
   </head>
+
   <body>
-    <ons-navigator>
-      <ons-page>
-        Page 1
-      </ons-page>
-    </ons-navigator>
+    ...
   </body>
 </html>
 ```
 
-#### Page component (ons-page)
+### Creating a page
 
-The root of a page is created using the `<ons-page>` element. It covers the whole screen and is used as a container for the other elements. To receive when a new page is initiated, use `init` event.
+The root of a page is created using the [`<ons-page>` element](/v2/docs/js/ons-page.html). It covers the whole screen and is used as a container for the other elements.
+
+This component fires different events depending on its life cycle. The correct place to initialise data and run code for pages in Onsen UI is the `init` event.
 
 ```html
 <ons-page id="page1">This is a blank page</ons-page>
 <script>
-document.addEventListener("init", function(e) {
-  if (e.target.matches("#page1")) {
+document.addEventListener('init', function(event) {
+  if (event.target.matches('#page1')) {
     ons.notification.alert({
-      message: "Page 1 is initiated."
+      message: 'Page 1 is initiated.'
     })
   }
 })
 </script>
 ```
 
-#### Toolbar component (ons-toolbar, ons-bottom-toolbar)
+#### Adding a toolbar
 
 A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
 
@@ -105,11 +95,11 @@ A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<
 The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
 
 
-#### The `ons` object
+### The `ons` object
 
-Onsen UI not only provides custom elements, it also provides an object called ons with a lot of useful functions attached to it. 
+Onsen UI not only provides custom elements, it also provides an object called [`ons`](/v2/docs/js/ons.html) with a lot of useful functions attached to it. 
 
-The following example uses `ons.ready(fn)` which waits until the page is completely loaded before executing a callback function. Inside the callback, it is calling `ons.notification.alert()` to display a alert dialog.
+The following example uses `ons.ready(fn)` which waits until the app is completely loaded before executing a callback function. Inside the callback, it is calling `ons.notification.alert()` to display a alert dialog.
 
 ``` javascript
 ons.ready(function() {
@@ -118,17 +108,18 @@ ons.ready(function() {
 });
 ```
 
-#### Attributes, methods, properties and events
+### Attributes, methods, properties and events
 
 All Onsen UI are custom elements which tag names are starting with `<ons->`. They have attributes, methods, properties and events just like the normal HTML elements (DOM Elements).
 
 The source code below illustrates a basic usage of `<ons-navigator>` component. Note how component methods are called and events are attached.
 
-``` javascript:
+```html
 <!-- You can place and mix-up with other elements -->
 <ons-navigator animation="slide" id="my-navigator">
   <ons-page><span>This is the first page.</span></ons-page>
 </ons-navigator>
+
 <script>
   // Get component instance
   var myNavigator = document.querySelector("#my-navigator"); // or use getElementById("my-navigator")
@@ -146,6 +137,104 @@ The source code below illustrates a basic usage of `<ons-navigator>` component. 
 </script>
 ```
 
+### Adding content to the page
+
+For a full list of components please check the [reference page](/v2/docs/js.html).
+
+#### Form elements
+
+Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2/docs/js/ons-button.html), perhaps the [`<ons-input>`](/v2/docs/js/ons-input.html) component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Form</div>
+  </ons-toolbar>
+
+  <div style="text-align: center; margin-top: 30px;">
+    <p>
+      <ons-input placeholder="Username" float></ons-input>
+    </p>
+    <p>
+      <ons-input type="password" placeholder="Password" float></ons-input>
+    </p>
+    <p style="margin-top: 30px;">
+      <ons-button onclick="login()">Sign in</ons-button>
+    </p>
+  </div>
+</ons-page>
+```
+
+#### Lists
+
+Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using [`<ons-list>`](/v2/docs/js/ons-list.html), [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) and [`<ons-list-header>`](/v2/docs/js/ons-list-header.html) you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<ons-toolbar>`, and some CSS classes are provided for default styles.
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">List</div>
+  </ons-toolbar>
+
+  <ons-list>
+    <ons-list-header>Header</ons-list-header>
+
+    <ons-list-item>
+      <div class="left">
+        <ons-icon icon="md-face" class="list__item__icon"></ons-icon>
+      </div>
+      <div class="center">
+        <span class="list__item__title">Title</span>
+        <span class="list__item__subtitle">Subtitle</span>
+      </div>
+      <div class="right">
+        <ons-switch></ons-switch>
+      </div>
+    </ons-list-item>
+
+    ...
+  </ons-list>
+</ons-page>
+```
+
+#### Layouting
+
+Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
+
+The layout can be performed by combining [`<ons-col>`](/v2/docs/js/ons-col.html) and [`<ons-row>`](/v2/docs/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
+
+### Dialogs
+
+There are multiple types of dialog components available in Onsen UI: [`<ons-dialog>`](/v2/docs/js/ons-dialog.html) for displaying a page inside a centered dialog; [`<ons-alert-dialog>`](/v2/docs/js/ons-alert-dialog.html) for displaying a simple message inside an alert style dialog; [`<ons-popover>`](/v2/docs/js/ons-popover.html) for showing some content next to a specified element; and [`<ons-modal>`](/v2/docs/js/ons-modal.html) for displaying a fullscreen dialog that forbids user interaction.
+
+Apart from that, [`ons.notification` object](/v2/docs/js/ons.notification.html) offers a more handy solution for simple dialogs:
+
+```javascript
+ons.notification.alert('Hello world!'); // Basic alert
+ons.notification.confirm('Are you ready?'); // OK - Cancel buttons
+ons.notification.prompt('What is your name?'); // Text input
+
+```
+
+### Multiple page navigation patterns
+
+In Onsen UI there are three navigation patterns based on three different components: [`<ons-navigator>`](/v2/docs/js/ons-navigator.html), [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) and [`<ons-splitter>`](/v2/docs/js/ons-splitter.html). These components supply "frames" able to change their inner content. The content of these frames will normally be `<ons-page>` components but it is also possible to nest navigation components in order to combine them.
+
+#### Navigator
+
+The main pattern uses [`<ons-navigator>`](/v2/docs/js/ons-navigator.html) component to provide a stack where you can push and pop pages with transition animations. This is the basic and most used navigation pattern and can be combined with the other two.
+
+Use this pattern when you have a sequential flow where a page depends on the previous one. Data can be optionally passed from one page to another.
+
+#### Tabbar
+
+In this case, by using [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) component a visible tabbar is displayed at the bottom or the top of the page with tabs associated to different pages. The component will load content depending on the selected tab ([`<ons-tab>`](/v2/docs/js/ons-tab.html)). This pattern is commonly used to sepparate different sections in the app.
+
+#### Menu
+
+A menu can be added using the [`<ons-splitter>`](/v2/docs/js/ons-splitter.html) component. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
+
+Splitter provides two frames that can load different content: [`<ons-splitter-side>`](/v2/docs/js/ons-splitter-side.html) and [`<ons-splitter-content>`](/v2/docs/js/ons-splitter-content.html). A common usecase is to show a list in the side menu where each item loads a different page in the content frame. Notice that loading new content in any of these frames will completely remove the previous loaded content. For more complex navigation consider nesting `<ons-navigator>` inside `<ons-splitter-content>`.
+
 ### Using Modifier
 
 Modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a `modifier`, it will have a separate class namespace so that you can apply custom styles to the component. Also, some components have several preset modifiers to change the appearance.
@@ -158,6 +247,45 @@ For example, each of the following buttons have different look. To change modifi
 <ons-button modifier="large">Large</ons-button>
 <ons-button modifier="cta">CTA</ons-button>
 ```
+
+### Cross platform styling
+
+Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views.
+
+Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-style` attribute in specific components that you don't want to auto style.
+
+Some tools are provided to give a more accurate customization.
+
+#### Platform utilities
+
+[`ons.platform` object](/v2/docs/js/ons.platform.html) is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
+
+You can set a platform with `ons.platform.select('android')`, for example, in order to display Material Design on every platform. This must be called before the app is initialized (right after including `onsenui.js`).
+
+#### Conditional element
+
+A conditional element called [`<ons-if>`](/v2/docs/js/ons-if.html) is available to filter content depending on the platform or orientation.
+
+```html
+  <ons-if platform="android">
+    This is Android
+  </ons-if>
+  <ons-if platform="ios other">
+    This is NOT Android
+  </ons-if>
+```
+
+With this, for example, you can display `<ons-fab>` for Material Design and other type of button for iOS flat design.
+
+#### Icons shortcut
+
+While it is possible to use the previous `<ons-if>` to select icons depending on the platform, a shortcut in [`<ons-icon>`](/v2/docs/js/ons-icon.html) component is provided to make it simpler:
+
+```
+<ons-icon icon="ion-navicon, material:md-menu" size="24px, material:20px"></ons-icon>
+```
+
+The second icon will be displayed when `material` modifier is present.
 
 ### CSS Definitions
 
