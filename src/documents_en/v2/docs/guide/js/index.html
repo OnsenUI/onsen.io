@@ -19,11 +19,10 @@ Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cord
 
 Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
 
-#### Use Monaca CLI
+#### Using Onsen UI toolkit - Monaca CLI
 
 ```bash
 $ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca signup # Free sign up
 $ monaca create helloworld # Choose template
 $ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
 ```
@@ -63,12 +62,12 @@ This component fires different events depending on its life cycle. The correct p
 
 ```html
 <ons-page id="page1">This is a blank page</ons-page>
+
 <script>
 document.addEventListener('init', function(event) {
+  // event.target is the <ons-page> element
   if (event.target.matches('#page1')) {
-    ons.notification.alert({
-      message: 'Page 1 is initiated.'
-    })
+    ons.notification.alert('Page 1 is initiated.');
   }
 })
 </script>
@@ -79,21 +78,24 @@ document.addEventListener('init', function(event) {
 A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
 
 ```html
-<ons-toolbar>
-  <div class="left">
-    <ons-back-button>Back</ons-back-button>
-  </div>
-  <div class="center">Title</div>
-  <div class="right">
-    <ons-toolbar-button>
-      <ons-icon icon="fa-bars">
-    </ons-toolbar-button>
-  </div>
- </ons-toolbar>
+<ons-page>
+  <ons-toolbar>
+    <div class="left">
+      <ons-back-button>Back</ons-back-button>
+    </div>
+    <div class="center">Title</div>
+    <div class="right">
+      <ons-toolbar-button>
+        <ons-icon icon="fa-bars"></ons-icon>
+      </ons-toolbar-button>
+    </div>
+  </ons-toolbar>
+
+  Some other content...
+</ons-page>
 ```
 
-The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
-
+The toolbar is divided into 3 sections that can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
 
 ### The `ons` object
 
@@ -104,13 +106,13 @@ The following example uses `ons.ready(fn)` which waits until the app is complete
 ``` javascript
 ons.ready(function() {
   // Onsen UI is now initialized
-  ons.notification.alert({message: 'Welcome to Onsen UI!'});
+  ons.notification.alert('Welcome to Onsen UI!');
 });
 ```
 
-### Attributes, methods, properties and events
+### Understanding elements
 
-All Onsen UI are custom elements which tag names are starting with `<ons->`. They have attributes, methods, properties and events just like the normal HTML elements (DOM Elements).
+All Onsen UI are custom elements which tag names are starting with `<ons->`. They have attributes, methods, properties and events just like the normal HTML elements (DOM Elements). This means they can be accessed by ID, tag name, class names or attributes and used directly as they are.
 
 The source code below illustrates a basic usage of `<ons-navigator>` component. Note how component methods are called and events are attached.
 
@@ -125,19 +127,22 @@ The source code below illustrates a basic usage of `<ons-navigator>` component. 
   var myNavigator = document.querySelector("#my-navigator"); // or use getElementById("my-navigator")
   
   // Add event listener
-  myNavigator.addEventListener("postpush", function(e) {
-    console.log("This function is called after a new page is pushed.")
+  myNavigator.addEventListener('postpush', function(event) {
+    console.log('This function is called after a new page is pushed.');
   });
   
   // Call component method
   myNavigator.pushPage("page2.html");
   
   // Access to component property
-  console.log(myNavigator.pages)
+  console.log(myNavigator.pages);
+
+  // Change component attribute
+  myNavigator.setAttribute('animation', 'fade');
 </script>
 ```
 
-### Adding content to the page
+### Adding page content
 
 For a full list of components please check the [reference page](/v2/docs/js.html).
 
@@ -215,7 +220,7 @@ ons.notification.prompt('What is your name?'); // Text input
 
 ```
 
-### Multiple page navigation patterns
+### Multiple page navigation
 
 In Onsen UI there are three navigation patterns based on three different components: [`<ons-navigator>`](/v2/docs/js/ons-navigator.html), [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) and [`<ons-splitter>`](/v2/docs/js/ons-splitter.html). These components supply "frames" able to change their inner content. The content of these frames will normally be `<ons-page>` components but it is also possible to nest navigation components in order to combine them.
 
@@ -235,6 +240,29 @@ A menu can be added using the [`<ons-splitter>`](/v2/docs/js/ons-splitter.html) 
 
 Splitter provides two frames that can load different content: [`<ons-splitter-side>`](/v2/docs/js/ons-splitter-side.html) and [`<ons-splitter-content>`](/v2/docs/js/ons-splitter-content.html). A common usecase is to show a list in the side menu where each item loads a different page in the content frame. Notice that loading new content in any of these frames will completely remove the previous loaded content. For more complex navigation consider nesting `<ons-navigator>` inside `<ons-splitter-content>`.
 
+### Templates
+
+Pages can be created in separate files and can be addressed by their path string. For example, `myNavigator.pushPage('path/to/my/page.html'); will load `page.html` in `path/to/my/` folder. The content of that file must contain a single `<ons-page>` component with some inner elements. 
+
+However, having multiple pages declared in the same file is sometimes more convenient. [`ons-template`](/v2docs/js/ons-template.html) component is the solution for this. You can create as many pages as you need in your `index.html` (there and only there) by using this component. 
+In this case, the template's `id` attribute replaces the path string of the page:
+
+```html
+<body>
+  <ons-navigator page="page1.html"></ons-navigator>
+
+  <ons-template id="page1.html">
+    <ons-page>First page</ons-page>
+  </ons-template>
+
+  <ons-template id="page2.html">
+    <ons-page>Second page</ons-page>
+  </ons-template>
+</body>
+```
+
+Notice that including `<script></script>` tags inside `<ons-template>` or separate files does not work. If you want to initialize a page, please check the `init` event in ["Creating a page" section](/v2/docs/guide/js/#creating-a-page).
+
 ### Using Modifier
 
 Modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a `modifier`, it will have a separate class namespace so that you can apply custom styles to the component. Also, some components have several preset modifiers to change the appearance.
@@ -245,14 +273,15 @@ For example, each of the following buttons have different look. To change modifi
 <ons-button modifier="quiet">Quiet</ons-button>
 <ons-button modifier="light">Light</ons-button>
 <ons-button modifier="large">Large</ons-button>
-<ons-button modifier="cta">CTA</ons-button>
+<ons-button modifier="cta">Call To Action</ons-button>
+<ons-button modifier="material">Material Design</ons-button>
 ```
 
 ### Cross platform styling
 
 Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views.
 
-Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-style` attribute in specific components that you don't want to auto style.
+Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-styling` attribute in specific components that you don't want to auto style.
 
 Some tools are provided to give a more accurate customization.
 
@@ -317,7 +346,7 @@ Then, write the appropriate style code under the style tag or in the css file.
 
 ### Under the hood of Custom Elements
 
-If you need to customize the underlying HTML code, you can access to our core Custom Element definitions. The source code for each components are located under `core/src/elements` directory.
+If you need to customize the underlying HTML code, you can access to our core Custom Element definitions. The source code for each components are located under [`core/src/elements` directory](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements).
 
 <!-- End of markdown -->
 <% end %>
