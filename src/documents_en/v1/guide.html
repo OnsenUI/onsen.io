@@ -743,67 +743,6 @@ In jQuery or pure Javascript, the content is generated in the `createItemContent
 </ons-list>
 ```
 
-<h4 id="LazyRepeatAsync">Another sample: asynchronous calls</h4>
-
-[`ons-lazy-repeat`](/v1/reference/ons-lazy-repeat.html) could also be useful when the items in the list are dynamically generated from asynchronous calls, such as HTTP or database requests. These requests will be made only when strictly needed, thus minimizing network traffic. It is important to remember to cancel the requests if an item is destroyed before the request is finished.
-
-<h5 id="AsynchSampleAngularJS">In AngularJS</h5>
-
-```javascript
-configureItemScope: function(index, itemScope) {
-  if (!itemScope.item) {
-    itemScope.canceler = $q.defer();
-    itemScope.item = {
-      title: 'Item #' + (index + 1),
-      label: '',
-      desc: '',
-      rand: Math.random()
-    };
-
-    $http.get('https://baconipsum.com/api/?type=meat-and-filler&sentences=1', {timeout: itemScope.canceler.promise})
-    .success(function(data) {
-      itemScope.item.desc = data[0];
-      itemScope.item.label = data[0].substr(0, data[0].indexOf(" ")) + 'bacon';
-    })
-    .error(function() {
-      itemScope.item.desc = 'No bacon lorem ipsum';
-      itemScope.item.label = 'No bacon';
-    });
-
-  }
-},
-destroyItemScope: function(index, itemScope) {
-  itemScope.canceler.resolve();
-}
-```
-
-<%- @partial('codepen.html.eco', { id: "gbzLQW" } ) %>
-
-<h5 id="AsynchSampleJQuery">In jQuery</h5>
-
-```javascript
-createItemContent: function(index, oldContent) {
-  if (oldContent) {
-    return oldContent;
-  }
-
-  var $element = $("<div><span style='opacity: 0.7;'><ons-icon icon='fa-spinner' spin='true'></ons-icon> Loading bacon...</span></div>");
-
-  var request = $.getJSON('https://baconipsum.com/api/?type=meat-and-filler&sentences=1&callback=?', function(data) {
-    $element.text(data[0]);
-  });
-
-  $element.data('request', request);
-  return $element[0];
-},
-destroyItemContent: function(index, element) {
-  var request = $element.data('request');
-  request.abort();
-}
-```
-
-<%- @partial('codepen.html.eco', { id: "YPLpBW" } ) %>
-
 <h3 id="UsingAlert">Using Alert Dialog</h3>
 
 Onsen UI provides three common alert dialogs with predefined style, or a custom designed dialog using [`<ons-alert-dialog>`](/v1/reference/ons-alert-dialog.html) component.
