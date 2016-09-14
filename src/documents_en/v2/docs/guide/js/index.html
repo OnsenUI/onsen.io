@@ -56,7 +56,7 @@ To load Onsen UI in your project simply include `onsenui.js` and CSS files for s
 
 ### Creating a page
 
-The root of a page is created using the [`<ons-page>` element](/v2/docs/js/ons-page.html). It covers the whole screen and is used as a container for the other elements.
+The root of a page is created using the [`<ons-page>`](/v2/docs/js/ons-page.html) element. It covers the whole screen and is used as a container for the other elements.
 
 This component fires different events depending on its life cycle. The correct place to initialise data and run code for pages in Onsen UI is the `init` event.
 
@@ -64,12 +64,12 @@ This component fires different events depending on its life cycle. The correct p
 <ons-page id="page1">This is a blank page</ons-page>
 
 <script>
-document.addEventListener('init', function(event) {
-  // event.target is the <ons-page> element
-  if (event.target.matches('#page1')) {
-    ons.notification.alert('Page 1 is initiated.');
-  }
-})
+  document.addEventListener('init', function(event) {
+    // event.target is the <ons-page> element
+    if (event.target.matches('#page1')) {
+      ons.notification.alert('Page 1 is initiated.');
+    }
+  });
 </script>
 ```
 
@@ -110,6 +110,8 @@ ons.ready(function() {
 });
 ```
 
+See also [`ons.platform`](/v2/docs/js/ons.platform.html), [`ons.notification`](/v2/docs/js/ons.notification.html) and [`ons.orientation`](/v2/docs/js/ons.orientation.html) for more utilities.
+
 ### Understanding elements
 
 All Onsen UI are custom elements which tag names are starting with `<ons->`. They have attributes, methods, properties and events just like the normal HTML elements (DOM Elements). This means they can be accessed by ID, tag name, class names or attributes and used directly as they are.
@@ -148,7 +150,7 @@ For a full list of components please check the [reference page](/v2/docs/js.html
 
 #### Form elements
 
-Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2/docs/js/ons-button.html), perhaps the [`<ons-input>`](/v2/docs/js/ons-input.html) component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
+Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2/docs/js/ons-button.html), [`<ons-switch>`](/v2/docs/js/ons-switch.html) and [`<ons-range>`](/v2/docs/js/ons-range.html), perhaps the [`<ons-input>`](/v2/docs/js/ons-input.html) component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
 
 ```
 <ons-page>
@@ -172,7 +174,7 @@ Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2
 
 #### Lists
 
-Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using [`<ons-list>`](/v2/docs/js/ons-list.html), [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) and [`<ons-list-header>`](/v2/docs/js/ons-list-header.html) you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<ons-toolbar>`, and some CSS classes are provided for default styles.
+Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using [`<ons-list>`](/v2/docs/js/ons-list.html), [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) and [`<ons-list-header>`](/v2/docs/js/ons-list-header.html) you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<ons-toolbar>`, and some CSS classes are provided for default styles (`list__item__icon`, `list__item__thumbnail`, `list__item__title` and `list__item__subtitle`).
 
 ```
 <ons-page>
@@ -191,9 +193,9 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
         <span class="list__item__title">Title</span>
         <span class="list__item__subtitle">Subtitle</span>
       </div>
-      <div class="right">
+      <label class="right">
         <ons-switch></ons-switch>
-      </div>
+      </label>
     </ons-list-item>
 
     ...
@@ -201,11 +203,63 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
 </ons-page>
 ```
 
+##### Infinite scroll
+
+Adding new items to the list whenever the user reaches the bottom of the list is a very common practice. To do this, [`<ons-page>`](/v2/docs/js/ons-page.html) component provides `onInfiniteScroll` property that is called every time the scroll is near the bottom.
+
+##### Lazy repeat
+
+For cases when the list can contain thousands of items, [`<ons-lazy-repeat>`](/v2/docs/js/ons-lazy-repeat.html) component will enhance the performance by loading and unloading items depending on the current scroll.
+
 #### Layouting
 
 Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
 
 The layout can be performed by combining [`<ons-col>`](/v2/docs/js/ons-col.html) and [`<ons-row>`](/v2/docs/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
+
+#### Control and visual components
+
+Other components from different categories are available to complete the developer needs.
+
+##### Carousel
+
+[`<ons-carousel`>](/v2/docs/js/ons-carousel.html) and [`<ons-carousel-item>`](/v2/docs/js/ons-carousel-item.html) components provide a simple carousel that can optionally be overscrollable and fullscreen.
+
+##### Pull-hook
+
+A very common way to check for updates in apps is given by the [`<ons-pull-hook>`](/v2/docs/js/ons-pull-hook.html) component, which enables a simple "pull to refresh" functionality.
+
+##### Speed-dial
+
+[`<ons-speed-dial>`](/v2/docs/js/ons-speed-dial.html) and [`<ons-speed-dial-item>`](/v2/docs/js/ons-speed-dial-item.html) are just a set of floating action buttons ([`<ons-fab>`](/v2/docs/js/ons-fab.html)) that can be shown or hidden by the user. This components are mainly used in Material Design.
+
+##### Progress
+
+[`<ons-progress-bar>`](/v2/docs/js/ons-progress-bar.html) and [`<ons-progress-circular>`](/v2/docs/js/ons-progress-circular.html) display the loading progress like it's done in Material Design. Two modes are supported: display the exact progress that is provided to the component or display an indeterminated progress.
+
+##### Icons
+
+Onsen UI bundles three icon packs to be used with [`<ons-icon>`](/v2/docs/js/ons-icon.html) component:
+
+  * [Font Awesome](https://fortawesome.github.io/Font-Awesome/) - Prefix `fa-`
+  * [Ionicons](http://ionicons.com/) - Prefix `ion-`
+  * [Material Icons](https://design.google.com/icons/) - Prefix `md-`
+
+In general, Ionicons are good for iOS apps while the Material Icons work best for apps using Material Design.
+
+#### Gesture detector
+
+It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection.
+
+[`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) component is used to wrap the target DOM element that should detect the fingers. The Gesture Detector class (Hammer.js) is also exposed in [`ons.GestureDetector`](/v2/docs/js/ons.GestureDetector.html) object.
+
+```
+var divGD = ons.GestureDetector(document.querySelector('#my-div'));
+divGD.on('dragup dragdown', function(event) {
+  console.log('drag Y axis');
+  divGD.dispose();
+});
+```
 
 ### Dialogs
 
@@ -242,7 +296,7 @@ Splitter provides two frames that can load different content: [`<ons-splitter-si
 
 ### Templates
 
-Pages can be created in separate files and can be addressed by their path string. For example, `myNavigator.pushPage('path/to/my/page.html'); will load `page.html` in `path/to/my/` folder. The content of that file must contain a single `<ons-page>` component with some inner elements. 
+Pages can be created in separate files and can be addressed by their path string. For example, `myNavigator.pushPage('path/to/my/page.html')`; will load `page.html` in `path/to/my/` folder. The content of that file must contain a single `<ons-page>` component with some inner elements. 
 
 However, having multiple pages declared in the same file is sometimes more convenient. [`ons-template`](/v2docs/js/ons-template.html) component is the solution for this. You can create as many pages as you need in your `index.html` (there and only there) by using this component. 
 In this case, the template's `id` attribute replaces the path string of the page:
