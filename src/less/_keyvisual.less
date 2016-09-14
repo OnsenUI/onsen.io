@@ -22,7 +22,7 @@
   &-image {
     width: 530px;
     height: 361px;
-    animation: reveal 0.8s 1 ease-in;
+    animation: reveal 0.8s 1 linear;
     animation-delay: 1s;
     visibility: hidden;
 
@@ -90,7 +90,7 @@
 @keyframes reveal {
   0% {
     opacity: 0;
-    transform: translate3d(0, 10%, 0);
+    transform: translate3d(0, 5%, 0);
   }
   100% {
     opacity: 1;
