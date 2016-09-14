@@ -7,23 +7,25 @@ category: announcement
 tags: onsen ui, react, angular
 ---
 
-It's been a little over four months since we released the first RC version of Onsen UI 2.0. Since then we have gone through several iterations, ironing out the creases in order to deliver a great UI solution for all hybrid apps developers out there.
+It's been a little over four months since we released the first RC version of Onsen UI 2.0. Since then we have gone through several iterations, ironing out the creases in order to deliver a great UI solution for all hybrid and mobile web app developers out there.
 
-Onsen UI is a library of UI components for mobile apps. It is designed to make it easy and efficient for developers to design apps. We aim to make the component easy to use while still giving the developer a lot of power to customize the behavior.
+Onsen UI is a library of UI components for mobile apps. It is designed to make it easy and efficient for developers to design apps. We aim to make the components easy to use while still giving the developer a lot of power to customize their behavior.
 
 <!-- more -->
 
 While Onsen UI 1.x was based on AngularJS, the new version has no library dependencies. This is the biggest change in Onsen UI 2.0. As well as increasing performance and making the file size smaller, it also makes it easy to include the components in any project, whether it's written in React, Angular, Vue.js, some other framework or even pure JavaScript. There are so many exciting libraries and frameworks coming out lately and we want to make it possible for anyone to use Onsen UI components in their apps!
 
-With this version we added Material Design components and we also added a feature that automatically styles components based on the platform so apps made with Onsen UI will look native on both iOS and Android.
+With this version we added Material Design components and we also added a feature that automatically styles components based on the platform so apps made with Onsen UI 2.0 will look native on both iOS and Android.
 
 With the new version we also released a [new website](https://onsen.io/). Apart from a new and cleaner design, we have also made an effort to improve the documentation and add more content to make it easier to get started with Onsen UI.
 
 ## Onsen UI is framework agnostic
 
-Onsen UI is implemented in pure JavaScript and not dependent on any other framework or library. All components are created using the [Custom Elements API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements). It's a simple API that is used to define custom tags and add custom behavior to them. Custom Elements is part of a larger concept called [Web Components](http://webcomponents.org/) that also includes Shadow DOM, HTML imports and the new `<template>` tag.
+Onsen UI is implemented in pure JavaScript and not dependent on any other framework or library. All components are created using the [Custom Elements API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements). It's a simple API that is used to define custom tags and add custom behavior to them. Think of it as a way to extend the HTML language. Custom Elements is part of a larger concept called [Web Components](http://webcomponents.org/) that also includes Shadow DOM, HTML imports and the new `<template>` tag.
 
-Custom Elements are very easy to use. They are used just like normal HTML tags and will be activated automatically when attached to the page. There is no compilation or bootstrapping required.
+![Onsen UI uses Web Components](/blog/content/images/2016/Sep/onsen_wc.png)
+
+Custom Elements are very easy to use. They are just like normal HTML tags and will be activated automatically when attached to the page. There is no compilation or bootstrapping required.
 
 The following code will render a simple switch:
 
@@ -51,10 +53,28 @@ For more information on our reasoning behind removing the Angular dependency and
 
 ## Designed for both iOS and Android
 
-## Onsen UI is based on Web Components
+The Onsen UI components have styles for both iOS and Android. When running on Android they will automatically display as Material Design while on iOS they will look like native iOS components.
+
+![Automatic styling in Onsen UI](/blog/content/images/2016/Jun/react_redux_onsen_weather.png)
+
+One of the challenges when developing hybrid apps is to make them look and feel like the native apps that the users are accustomed to. With automatic styling there is no need to spend a lot of time styling the components but we can instead let Onsen UI do it for us while we focus on the important part: creating the actual app.
 
 ## New and easier to navigate documentation
 
+We have received feedback that the documentation on the previous website was hard to navigate and that it was sometimes difficult to know where to look for information about the components. Our [new documentation](/v2/docs/guide/js/) has been simplified and we believe it is now a lot easier for users to find what they are looking for.
 
+We have of course also updated both the guide and reference with all the new components that were added in Onsen UI 2.0. Since the documentation is one of the most important resources for Onsen UI developers, we will keep improving it going forward!
+
+Another resource that we have added recently is the [interactive Onsen UI tutorial](/tutorial). This page lets you learn how to use all the components in Onsen UI and also how to use them with different frameworks an libraries such as AngularJS and React. You can also change the source code to play around with the components.
+
+## Join the Onsen UI community
+
+For questions about using Onsen UI we recommend you to check out [our community forum](https://community.onsen.io/). There are lots of knowledgable people, eager to help out.
+
+hat you want to request new features or if you have found a bug, please open an issue on our [GitHub page](http://github.com/OnsenUI/OnsenUI). We try to answer as quickly as possible.
 
 ## Spread the word!
+
+We hope you are as excited about this release as we are. If you like Onsen UI and would like support the project, please star us [on GitHub](http://github.com/OnsenUI/OnsenUI). Also, feel free to share the news about the release.
+
+Happy coding!
