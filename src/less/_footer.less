@@ -157,6 +157,12 @@
       margin: 0 0 5px 0;
       color: #666;
       font-size: 14px;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: none;
+        opacity: 0.8;
+      }
     }
   }
 
@@ -201,6 +207,7 @@
         border: 1px solid #b3b3b3;
         box-sizing: border-box;
         margin: 0 10px 0 0;
+        padding: 0 10px;
 
         @media @smallscreen {
           width: 100%;
@@ -213,6 +220,10 @@
         color: #fff;
         text-transform: uppercase;
         width: 110px;
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
   }
