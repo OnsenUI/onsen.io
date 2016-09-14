@@ -1,53 +1,149 @@
 ---
 page: 'landing-new'
-title: 'Onsen UI: Beautiful HTML5 Hybrid Mobile App Framework'
+title: 'Onsen UI 2 - Next-Gen Hybrid Mobile App UI Framework'
 layout: 'default.html.eco'
-topbar: false
+header: false
 actionbar: false
-description: 'Make beautiful high performance hybrid mobile apps using HTML5, CSS and JavaScript. Includes Material Design for Android and flat design for iOS.'
+topbar: false
+version: v2
+description: 'Make beautiful hybrid mobile apps using HTML5, CSS and JavaScript. Works with React, Angular 1 & 2 and Web Components. Both Material Design and Flat Design.'
 ---
 
 <div class="header">
-   <%- @partial('global-nav.html.eco') %>
+  <%- @partial('global-nav.html.eco') %>
+  <%- @partial('keyvisual.html.eco') %>
 </div>
 
-<div id="start" class="white-back">
-  <div class="wrapper">
-    <div id="intro">
-      <h1>HTML5 Hybrid Mobile App <span>Framework and UI Components for PhoneGap &amp; Cordova.</span></h1>
-      <a href="/getting-started.html" class="keybutton">Get Started with Onsen UI</a>
-      <div class="v2announce">Interested in Material Design, Angular 2 and React support?<br>Check out <a href="/v2/" style="color: #ff4d36">Version 2 RC</a> now!</div>
-      <nav class="actions">
-        <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
-        <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
-      </nav>
-      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>.<br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
-    </div>
-    <div class="keyvisual"><img src="/images/index/keyvisual.png" alt="HTML5 Hybrid App Framework Best Suited for Cordova UI Development"></div>
-  </div>
-</div>
 <div id="features">
   <div class="feature">
-    <h2>Super Performance</h2>
-    <p>Onsen UI framework is designed and implemented to deliver unprecedented user experience for your hybrid apps. Frustrated with the lack of native-like performance? Try Onsen UI and you’ll feel the difference right away.</p>
-  </div>
+    <div>
+      <h3>Common core with no framework dependencies lets you do wonders.<br>Choose and switch between your favorite frameworks:</h3>
+      <div class="frameworks">
+        <a href="/angularjs" class="angular1">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/angular2" class="angular2">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/react" class="react">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/vuejs" class="vue">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/meteor" class="meteor">
+          <div></div>
+          <div></div>
+        </a>
+      </div>
+      <p>Onsen UI is an UI framework & tools to create native mobile apps with HTML5 hybrid app technology. As performant as native widgets, and much easier by using JavaScript and comprehensive development cloud.</p>
+    </div>
+ </div>
 
   <div class="feature">
-    <h2>PhoneGap / Cordova Friendly</h2>
-    <p>Onsen UI is a perfect solution for developing hybrid apps. That's because our priority is performance and ease of use. Onsen UI is fully open source, and never locks you in. It also provides the option of deploying your apps to the server to use as a tool to build a high performance website.</p>
-    <img src="/images/index/feature-phonegap-cordova-friendly.png" alt="Mobile UI framework for PhoneGap & Cordova">
-  </div>
+    <div>
+      <h2>The fastest way to develop beautiful native apps</h2>
+      <p>Experience streamlined development with zero-time setup, with the skills you already have and in love with - JavaScript. With all the development stack provided on cloud, no more waste of time to maintain the platform SDKs which are always updating.</p>
+    </div>
+    <div>
+      <div class="placeholder"></div>
+    </div>
+ </div>
 
   <div class="feature">
-    <h2>Simple to Use</h2>
-    <p>All you need to know are HTML, CSS, and JavaScript, the web technologies you love. Onsen UI is inspired by Web Components. All UI components are tags making it as easy as adding a period.</p>
-    <img src="/images/index/feature-custom-elements.png" alt="Web Components based Onsen UI">
-  </div>
+    <div>
+      <div class="placeholder"></div>
+    </div>
+    <div>
+      <h2>All tools you need in the Cloud</h2>
+      <p>Powerful CLI (command-line tool) and desktop app (for Windows and macOS) simplifies complicated tasks. All integrated with debugging app with live-reload feature, remote-build and much more cloud services.</p>
+    </div>
+ </div>
 
   <div class="feature">
-    <h2>Supercharged with AngularJS</h2>
-    <p>Utilize the power of AngularJS framework with Onsen UI. jQuery users can also take advantage of Onsen UI’s great UI library.</p>
-    <img src="/images/index/feature-with-angular-or-jquery.png" alt="Onsen UI works with both AngularJS and jQuery">
-  </div>
+    <div>
+      <h2>Beautiful native look and feel with lots of ready to use components with automatic styling</h2>
+      <p>A rich variety of UI components specially designed for mobile apps. Rich components for tab, side menu and stack navigation. They all have iOS and Android Material design support, with automatic styling.</p>
+    </div>
+    <div>
+      <div class="placeholder"></div>
+    </div>
+ </div>
 
+  <div class="feature">
+    <div>
+      <div class="placeholder"></div>
+    </div>
+    <div>
+      <h2>Performance optimized for mobile</h2>
+      <p>A rich variety of Angular 2 components and directives specially designed for mobile apps. Rich components for tab, side menu and stack navigation. The components also expose a simple but powerful API complete with TypeScript definitions.</p>
+    </div>
+ </div>
+
+  <div class="feature">
+    <div>
+      <h2>Easy to learn</h2>
+      <p>We have community, tutorials, forum etc. All in the same common core.</p>
+    </div>
+    <div>
+      <div class="placeholder"></div>
+    </div>
+ </div>
+
+  <div class="feature">
+    <div>
+      <h2>Create wonders with Onsen UI</h2>
+      <p>Get inspired by wonderful apps created with Onsen UI that have already been published in Google Play and App store.</p>
+      <div class="samples">
+        <div>
+          <div class="samples-image">
+            <img>
+            <img>
+          </div>
+          <div class="samples-info">
+            <h4 class="samples-info-title">Giro D'Italia</h4>
+            <div class="samples-info-description">Using Angular 2</div>
+            <div class="samples-info-links">
+              <a href="#">Open</a>
+              <a href="#">View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="samples-image">
+            <img>
+            <img>
+          </div>
+          <div class="samples-info">
+            <h4 class="samples-info-title">Giro D'Italia 2</h4>
+            <div class="samples-info-description">Using React</div>
+            <div class="samples-info-links">
+              <a href="#">Open</a>
+              <a href="#">View Code</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="samples-image">
+            <img>
+            <img>
+          </div>
+          <div class="samples-info">
+            <h4 class="samples-info-title">Giro D'Italia 3</h4>
+            <div class="samples-info-description">Using Vanilla</div>
+            <div class="samples-info-links">
+              <a href="#">Open</a>
+              <a href="#">View Code</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div> 
 </div>
