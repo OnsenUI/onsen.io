@@ -1,0 +1,58 @@
+---
+author: andreas
+date: 2016-09-15
+id: onsen-ui-2-is-here
+title: "Onsen UI 2.0 is here"
+category: announcement
+tags: onsen ui, react, angular
+---
+
+It's been a little over four months since we released the first RC version of Onsen UI 2.0. Since then we have gone through several iterations, ironing out the creases in order to deliver a great UI solution for all hybrid apps developers out there.
+
+Onsen UI is a library of UI components for mobile apps. It is designed to make it easy and efficient for developers to design apps.
+
+<!-- more -->
+
+While Onsen UI 1.x was based on AngularJS, the new version has no library dependencies. This is the biggest change in Onsen UI 2.0. As well as increasing performance and making the file size smaller, it also makes it easy to include the components in any project, whether it's written in React, Angular, Vue.js, some other framework or even pure JavaScript. There are so many exciting libraries and frameworks coming out lately and we want to make it possible for anyone to use Onsen UI components in their apps!
+
+With this version we added Material Design components and we also added a feature that automatically styles components based on the platform so apps made with Onsen UI will look native on both iOS and Android.
+
+With the new version we also released a [new website](https://onsen.io/). Apart from a new and cleaner design, we have also made an effort to improve the documentation and add more content to make it easier to get started with Onsen UI.
+
+## Onsen UI is framework agnostic
+
+Onsen UI is implemented in pure JavaScript and not dependent on any other framework or library. All components are created using the [Custom Elements API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements). It's a simple API that is used to define custom tags and add custom behavior to them. Custom Elements is part of a larger concept called [Web Components](http://webcomponents.org/) that also includes Shadow DOM, HTML imports and the new `<template>` tag.
+
+Custom Elements are very easy to use. They are used just like normal HTML tags and will be activated automatically when attached to the page. There is no compilation or bootstrapping required.
+
+The following code will render a simple switch:
+
+```html
+<ons-switch checked></ons-switch>
+<p>Switch is <span id="state">on</span>.</p>
+```
+
+Custom Elements work just like the built-in elements so we can attach some behavior to it with JavaScript:
+
+```javascript
+var el = document.querySelector('ons-switch');
+el.addEventListener('change', function(event) {
+    var state = document.getElementById('state');
+      state.innerHTML = event.target.checked ? 'on' : 'off';
+});
+```
+
+<p data-height="300" data-theme-id="13819" data-slug-hash="bwEPVA" data-default-tab="js,result" data-user="argelius" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/argelius/pen/bwEPVA/">Switch example</a> by Andreas Argelius (<a href="http://codepen.io/argelius">@argelius</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+For more information on our reasoning behind removing the Angular dependency and going full Web Components, I recommend you read [this great article](/blog/onsen-ui-web-components/) written by [Fran Dios](https://twitter.com/frandiox) who is also a developer on Onsen UI.
+
+## Designed for both iOS and Android
+
+## Onsen UI is based on Web Components
+
+## New and easier to navigate documentation
+
+
+
+## Spread the word!
