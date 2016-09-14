@@ -39,4 +39,6 @@ deployment:
       - npm install -g gulp
       - AWS_BUCKET=${AWS_BUCKET_EN_PROD} gulp deploy --lang=en --production
       - AWS_BUCKET=${AWS_BUCKET_JA_PROD} gulp deploy --lang=ja --production
+      - wget https://api.keycdn.com/zones/purge/38820.json --user="${KEY_CDN_API_KEY}" --password='' -v
+      - wget https://api.keycdn.com/zones/purge/38819.json --user="${KEY_CDN_API_KEY}" --password='' -v
 
