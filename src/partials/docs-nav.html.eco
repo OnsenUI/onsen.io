@@ -12,7 +12,11 @@
         </div>
         <div class="docs-nav-framework-select">
           <div class="docs-nav-framework-icon">
-            <img src="/images/common/icn_<%=@framework%>_1c.svg">
+            <% if @framework == 'onsen1': %>
+              <img src="/images/common/icn_something_1c.svg">
+            <% else: %>
+              <img src="/images/common/icn_<%=@framework%>_1c.svg">
+            <% end %>
           </div>
           <div class="docs-nav-framework-name">
             <% if @framework == 'angular1': %>
@@ -23,6 +27,8 @@
               React
             <% else if @framework == 'js': %>
               JavaScript Core
+            <% else if @framework == 'onsen1': %>
+              Onsen UI v1
             <% end %>
           </div>
 
@@ -57,6 +63,13 @@
                 React
               </a>
             </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'onsen1' %>">
+              <a href="/v1/<%- if @reference then 'reference/javascript.html' else 'guide.html' %>">
+                <img src="/images/common/icn_something_4c.svg">
+                Onsen UI v1
+              </a>
+            </div>
+
           </div>
         </label>
       </div>
@@ -64,10 +77,18 @@
     <div class="docs-nav-right">
       <ul class="docs-nav-menu">
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if !@reference %>">
-          <a href="/v2/docs/guide/<%- @framework %>">Guide</a>
+          <% if @framework == 'onsen1': %>
+            <a href="/v1/guide.html">Guide</a>
+          <% else: %>
+            <a href="/v2/docs/guide/<%- @framework %>">Guide</a>
+          <% end %>
         </li>
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if @reference %>">
-          <a href="/v2/docs/<%- @framework %>.html">Reference</a>
+          <% if @framework == 'onsen1': %>
+            <a href="/v1/reference/javascript.html">Reference</a>
+          <% else: %>
+            <a href="/v2/docs/<%- @framework %>.html">Reference</a>
+          <% end %>
         </li>
       </ul>
     </div>
