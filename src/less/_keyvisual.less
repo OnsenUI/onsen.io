@@ -24,8 +24,12 @@
   &-image {
     width: 550px;
     height: 361px;
-    animation: reveal 0.8s 1 linear;
-    animation-delay: 1s;
+
+    body.loaded & {
+      animation: reveal 0.8s 1 linear;
+      animation-delay: 1s;
+    }
+
     visibility: hidden;
 
     > img {

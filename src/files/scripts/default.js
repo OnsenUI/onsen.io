@@ -281,3 +281,9 @@ $(function() {
     $(this).css('visibility', 'visible');
   });
 });
+
+$(function() {
+  setTimeout(function() {
+    $('body').addClass('loaded');
+  }, 500);
+});
