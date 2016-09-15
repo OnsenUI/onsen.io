@@ -190,10 +190,7 @@ $(function() {
     var framework = info.data('framework');
     $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases', function(data) {
       $('.version', info).html(data[0].name);
-
-      $.get(latest.commit.url, function(data) {
-        $('time', info).html(moment(new Date(data.commit.committer.date)).fromNow());
-      });
+      $('time', info).html(moment(new Date(data[0].published_at)).fromNow());
     });
   }
 });
