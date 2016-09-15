@@ -1,0 +1,443 @@
+.vue-landing > .global-nav {
+  background-color: #40b782;
+}
+
+.landing {
+  .react-landing & {
+    &-header {
+      background-color: #2d2d2d;
+
+      &-title {
+        color: #61dafb;
+        font-size: 60px;
+        font-weight: 300;
+      }
+
+      &-subtitle {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 26px;
+        color: #b3b3b3;
+      }
+    }
+  }
+
+  .vue-landing & {
+    &-header {
+      background: linear-gradient(0deg, #f5f5f5 0%, #ffffff 10%);
+      &-title {
+        color: #41b883;
+        font-size: 60px;
+        font-weight: 300;
+      }
+
+      &-subtitle {
+        color: #35495e;
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 26px;
+      }
+
+      &-available {
+        color: #35495e;
+      }
+    }
+  }
+
+  &-large-image {
+    max-width: 80%;
+
+    .mobile-query({
+      display: none;
+    });
+  }
+
+  &-small-image {
+    display: none;
+    max-width: 80%;
+
+    .mobile-query({
+      display: inline-block;
+    });
+  }
+
+  &-header {
+    font-family: @en-header-font-family;
+    color: #fff;
+    padding: 0 18px;
+
+    &-title {
+      padding: 50px 0 0 0;
+      margin: 0;
+      color: #fff;
+      font-size: 60px;
+      font-weight: 300 !important;
+      line-height: 72px;
+      text-align: center;
+    }
+
+    &-subtitle {
+      margin: 10px 0 0 0;
+      color: #90a0c3;
+      font-weight: 300;
+      font-size: 20px;
+      line-height: 26px;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    &-keyvisual {
+      margin: 30px auto;
+      display: block;
+    }
+
+    &-get-started {
+      display: block;
+      text-decoration: none;
+      padding: 13px 0 10px 0;
+      margin: 0 auto;
+      width: 220px;
+      border-radius: 3px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #dd0031;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: #001e4a;
+        color: #d9dcdf;
+        text-decoration: none;
+      }
+
+      &-title {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 24px;
+      }
+
+      &-subtitle {
+        font-weight: 400px;
+        font-size: 13px;
+      }
+    }
+
+    &-available {
+      margin: 10px 0;
+      font-size: 14px;
+      text-align: center;
+
+      &-frameworks {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 12px 0;
+
+        > a {
+          display: block;
+          width: 26px;
+          height: 26px;
+          margin: 0 10px;
+          cursor: pointer;
+          position: relative;
+
+          &:before {
+            content: '';
+            width: 9px;
+            height: 9px;
+            position: absolute;
+            bottom: 1px;
+            right: -9px;
+            background: url('/images/design_2016/icn_link_blank.png');
+          }
+
+          &:hover:before {
+            background: url('/images/design_2016/icn_link_blank_hover.png');
+          }
+        }
+
+        &-angular1 {
+          background: url('/images/design_2016/logo_angular1_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_angular1_available_hover.png');
+          }
+        }
+
+        &-angular2 {
+          background: url('/images/design_2016/logo_angular2_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_angular2_available_hover.png');
+          }
+        }
+
+
+        &-react {
+          background: url('/images/design_2016/logo_react_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_react_available_hover.png');
+          }
+        }
+        &-js {
+          background: url('/images/design_2016/logo_js_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_js_available_hover.png');
+          }
+        }
+      }
+    }
+
+    &-latest {
+      padding: 20px 0;
+      text-align: center;
+
+      #release-info {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+        font-weight: 400;
+
+        a {
+          cursor: pointer;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  &-social {
+    margin: 20px 0 56px 0;
+
+    .tablet-query({
+      margin: 20px 0 40px 0;
+    });
+
+    font-size: 14px;
+    color: #4183c4;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: @en-header-font-family;
+
+    > a {
+      color: #4183c4;
+      margin: 0 20px;
+      font-weight: 600;
+      position: relative;
+
+      &:before {
+        display: inline-block;
+        content: '';
+        position: relative;
+        top: 2px;
+      }
+    }
+
+    &-twitter:before {
+      background: url(/images/design_2016/icon_twitter_2.png);
+      width: 16px;
+      height: 13px;
+    }
+
+    &-github:before {
+      background: url(/images/design_2016/icon_github_2.png);
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &-content {
+    max-width: 960px;
+    padding: 0 18px;
+    margin: 0 auto;
+    text-align: center;
+
+    h2 {
+      font-size: 31px;
+      line-height: 36px;
+      color: #000;
+    }
+
+    hr {
+      margin: 42px 0 32px 0;
+    }
+
+    p {
+      font-family: Helvetica;
+      color: #666666;
+      font-size: 18px;
+      margin: 16px 0;
+    }
+
+    &-get-started {
+      font-family: @en-header-font-family;
+      font-weight: 600;
+      display: block;
+      width: 409px;
+      max-width: 90%;
+      margin: 80px auto;
+      background-color: #ff4d35;
+      padding: 14px 0;
+      color: #fefefe;
+      text-decoration: none;
+      font-size: 20px;
+      line-height: 22px;
+    }
+  }
+
+  #showcase-carousel {
+    height: 310px;
+    width: 1000px;
+    max-width: 1000px;
+    margin: 0 -20px;
+
+    @media @smallscreen {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .code-explanation-container {
+    height: 450px;
+    margin: 40px 0;
+  }
+
+  .code-explanation img {
+    width: 260px;
+    height: 450px;
+    display: inline-block;
+  }
+
+  .code-explanation {
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    margin-left: -350px;
+    width: 700px;
+    height: 450px;
+    opacity: 0;
+    transition: 0.5s opacity ease-in;
+  }
+
+  .code-explanation.selected {
+    z-index: 2;
+    opacity: 1;
+  }
+
+  .react-code {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 80px;
+    max-width: 400px;
+    text-align: left;
+  }
+
+  .code-explanation code {
+    display: block;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    width: 240px;
+    background: #F6F6F6;
+    white-space: pre;
+    font-size: 12px;
+  }
+
+  #react-app,.arrow-container,.react-code {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .arrow-container {
+    width: 75px;
+    position: absolute;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .arrow {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    position: absolute;
+    left: 40px;
+    right: 3px;
+  }
+
+  .arrow:before {
+    content: '';
+    border-top: 1px solid gray;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    width: 100px;
+    left: -100px;
+  }
+
+  .arrow:after {
+    content: '';
+    border: 3px solid transparent;
+    border-left-color: gray;
+    position: absolute;
+    bottom: -3px;
+    right: -6px;
+  }
+
+  .bracket {
+    position: absolute;
+    border: 1px solid gray;
+    top: 100px;
+    height: 280px;
+    width: 20px;
+    border-left-color: transparent;
+    background: white;
+  }
+
+  .platform-buttons {
+    position: relative;
+
+    @media @smallscreen {
+      display: none;
+    }
+
+    .ios, .android {
+      width: 60px;
+      height: 60px;
+      background: red;
+      position: absolute;
+      top: 200px;
+      opacity: 0.2;
+    }
+
+    .selected {
+      opacity: 1;
+    }
+
+    .ios {
+      left: 40px;
+      background: url(/images/design_2016/slide_icon_apple.png);
+    }
+
+    .android {
+      right: 40px;
+      background: url(/images/design_2016/slide_icon_android.png);
+    }
+  }
+
+  pre {
+    text-align: initial;
+  }
+}
+
+body:after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url(/images/design_2016/logo_angular1_available_hover.png) url(/images/design_2016/logo_react_available_hover.png) url(/images/design_2016/logo_js_available_hover.png) url(/images/design_2016/logo_angular2_available_hover.png) url(/images/design_2016/logo_js_available_hover.png) url(/images/index/contest/contest_banner_hover.png) url(/images/common/devices.png);
+}
+
+#showcase-carousel-wrapper {
+  height: 280px;
+}

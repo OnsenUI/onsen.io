@@ -20,7 +20,3 @@
 
 <% end %>
 <%= renderToc @tocItems, 1, @base %>
-
-<% if @version == 'v2' && @page == 'guide': %>
-  <%- @partial('reference-toc.html.eco') %>
-<% end %>

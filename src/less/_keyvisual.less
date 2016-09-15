@@ -1,0 +1,131 @@
+.keyvisual {
+  height: 320px;
+  background-image: url(/images/common/bg_keyvisual_framework.png);
+  background-position: bottom center;
+  background-repeat: no-repeat;
+
+  &-inner {
+    max-width: @width;
+    padding: 0 20px;
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+
+  &-left {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-right {
+  }
+
+  &-image {
+    width: 550px;
+    height: 361px;
+
+    body.loaded & {
+      animation: reveal 0.8s 1 linear;
+      animation-delay: 1s;
+    }
+
+    visibility: hidden;
+
+    > img {
+      width: 361px;
+      height: 361px;
+    }
+  }
+
+  &-title {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 28px;
+    margin: 24px 0 0 0;
+    max-width: 450px;
+  }
+
+  &-getstarted {
+    display: block;
+    width: 190px;
+    height: 56px;
+    background-color: #fff;
+    border-radius: 2px;
+    color: #ff1a33;
+    font-weight: 700;
+    line-height: 60px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 34px 0 0 0;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #D1041B;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  &-version {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.75);
+
+    #release-info {
+      > a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: underline;
+
+        &:hover {
+          cursor: pointer;
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+
+  &-contest {
+    width: 356px;
+    height: 156px;
+    position: absolute;
+    right: 0;
+    bottom: 42px;
+    background-image: url(/images/index/contest/contest_banner.png);
+    display: block;
+
+    @media @smallscreen {
+      display: none;
+    }
+
+    &:hover {
+      background-image: url(/images/index/contest/contest_banner_hover.png);
+    }
+  }
+}
+
+@media @smallscreen {
+  .keyvisual {
+    height: initial;
+    background-image: none;
+
+    &-image {
+      display: none;
+    }
+
+    &-title {
+      max-width: initial;
+    }
+  }
+}
+
+@keyframes reveal {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 5%, 0);
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+  }
+}

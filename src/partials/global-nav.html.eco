@@ -1,0 +1,79 @@
+<nav class="global-nav">
+  <div class="global-nav-inner">
+    <div class="global-nav-logo">
+      <a href="/">
+        <img src="/images/header/logo_onsen_small.png"></img>
+      </a>
+    </div>
+
+    <input id="toggle-menu" type="checkbox" class="global-nav-checkbox">
+
+    <ul class="global-nav-menu">
+      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'discover' %>">
+        <a href="#">Discover</a>
+
+        <div class="dropdown-container">
+          <ul class="dropdown-content">
+            <li class="dropdown-item">
+              <a href="/react">React</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/angular2">Angular 1</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/angular2">Angular 2</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/vue">Vue.js</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
+        <a href="/getting-started">Get started</a>
+      </li>
+      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'samples' %>">
+        <a href="/samples">Samples</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="/tutorial">Tutorials</a>
+      </li>
+      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
+        <a href="#">Docs</a>
+
+        <div class="dropdown-container">
+          <ul class="dropdown-content">
+            <li class="dropdown-item">
+              <a href="/docs/guide/angular1">AngularJS</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/docs/guide/angular2">Angular 2</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="/docs/guide/react">React</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/docs/guide/js">JavaScript</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v1/guide.html">Onsen UI v1</a>
+            </li>
+          </ul>
+        </div>
+
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="/community">Community</a>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="/blog">Blog</a>
+      </li>
+    </ul>
+
+    <label for="toggle-menu" class="global-nav-toggle">
+      <img class="global-nav-toggle-open" src="/images/common/icn_menu_open.svg">
+      <img class="global-nav-toggle-close" src="/images/common/icn_menu_close.svg">
+    </label>
+  </div>
+</nav>

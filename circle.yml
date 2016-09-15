@@ -4,6 +4,7 @@ general:
       - master
       - staging
       - production
+      - v2-design
 machine:
   node:
     version: 6.2.0
@@ -32,13 +33,15 @@ deployment:
     commands:
       - npm install -g gulp
       - AWS_BUCKET=${AWS_BUCKET_EN} gulp deploy --lang=en
-      - AWS_BUCKET=${AWS_BUCKET_JA} gulp deploy --lang=ja
   production:
     branch: production
     commands:
       - npm install -g gulp
       - AWS_BUCKET=${AWS_BUCKET_EN_PROD} gulp deploy --lang=en --production
-      - AWS_BUCKET=${AWS_BUCKET_JA_PROD} gulp deploy --lang=ja --production
       - wget https://api.keycdn.com/zones/purge/38820.json --user="${KEY_CDN_API_KEY}" --password='' -v
       - wget https://api.keycdn.com/zones/purge/38819.json --user="${KEY_CDN_API_KEY}" --password='' -v
-
+  new:
+    branch: v2-design
+    commands:
+      - npm install -g gulp
+      - AWS_BUCKET=new.onsen.io gulp deploy --lang=en --production

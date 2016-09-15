@@ -1,5 +1,6 @@
 ---
 title: 'Onsen UI 2 Guide for Angular 2 - Onsen UI Framework'
+category: docs
 page: 'guide'
 needHelp: true
 framework: 'angular2'
@@ -7,14 +8,8 @@ autotoc: true
 actionbar: false
 tocTitle: 'Guide for Angular 2'
 version: v2
+layout: docs.html.eco
 ---
-
-<nav class="tabs framework">
-  <a href="/v2/docs/guide/js/" class="action js">JavaScript Guide</a>
-  <a href="/v2/docs/guide/react/" class="action react">Guide for React</a>
-  <a href="/v2/docs/guide/angular1/" class="action angular1">Guide for Angular 1</a>
-  <a href="/v2/docs/guide/angular2/" class="action selected angular2">Guide for Angular 2</a>
-</nav>
 
 <%- @markdown => %>
 
@@ -26,7 +21,7 @@ This guide describes using Onsen UI with Angular 2. The document is based on Ang
 
 Onsen UI for Angular 2 is delivered as NPM package ([`onsenui`](https://www.npmjs.com/package/onsenui) and [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui)). For easier installation, Monaca CLI will download all development & build dependencies including TypeScript compiler, Webpack and polyfills.
 
-##### Use Monaca CLI
+#### Using Onsen UI toolkit - Monaca CLI
 
 ```bash
 $ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
@@ -34,14 +29,14 @@ $ monaca create helloworld # Choose Angular 2 template
 $ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
 ```
 
-##### Download via npm
+#### Download via npm
 
 ```bash
 # You need to install Onsen UI and Onsen UI for Angular 2
 $ npm install onsenui angular2-onsenui
 ```
 
-##### Use kitchensink app
+#### Use kitchensink app
 
 We have created a sample app with all Onsen UI for Angular 2 components, preconfigured with Angular 2, Babel and TypeScript. To download, please visit [GitHub Repository](https://github.com/OnsenUI/angular2-onsenui-kitchensink). See the <a href="https://onsenui.github.io/angular2-onsenui-kitchensink/demo.html" target="_blank">live app here</a>.
 

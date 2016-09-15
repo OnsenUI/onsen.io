@@ -1,59 +1,126 @@
 <footer class="footer-container">
-  <ul class="footer-navi">
-
-    <% if @lang == "en": %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/v1/guide.html">DOCS</a></li>
-        <li><a href="https://community.onsen.io/">FORUM</a></li>
-        <li><a href="http://tutorial.onsen.io/">TUTORIAL</a></li>
-        <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">BLOG</a></li>
-        <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
-        <li><a target="_blank" href="https://monaca.io/about-us.html">ABOUT US</a></li>
-        <li><a href="http://ja.onsen.io/">JAPANESE</a></li>
-      <% else: %>
-        <li class="<%- if @page is 'getting_started' then 'current' %>"><a href="/guide/getting_started.html">GETTING STARTED</a></li>
-        <li class="<%- if @page is 'docs-index' then 'current' %>"><a href="/v1/guide.html">ガイド</a></li>
-        <li><a href="http://tutorial.onsen.io/">チュートリアル</a></li>
-        <li class="<%- if @page is 'blog' then 'current' %>"><a href="/blog/">ブログ</a></li>
-        <li><a target="_blank" href="http://github.com/OnsenUI/OnsenUI">GITHUB</a></li>
-        <li><a href="http://onsen.io/">ENGLISH</a></li>
-    <% end %>
-  </ul>
-
-
-  <div class="footer-cont">
-
-    <div class="newsletter newsletter-footer newsletter-signup">
-      <form>
-        <input type="text" placeholder="Enter email for Onsen UI updates" name="email">
-        <input type="submit" value="Send">
-      </form>
-      <div class="newsletter-thankyou">Thank you!</div>
+  <div class="footer-container-info">
+    <div class="footer-container-info-item">
+      <img src="/images/common/icn_getting.svg">
+      <h3>Getting started</h3>
+      <p>
+        Start creating beautiful and performant hybrid apps using Onsen UI. In addition to the library we provide a powerful CLI tool that helps you create and build apps without any.
+      </p>
+      <a href="/getting-started/">Show detail &gt;</a>
+    </div>
+    <div class="footer-container-info-item">
+      <img src="/images/common/icn_docu.svg">
+      <h3>Documentation</h3>
+      <p>
+        Learn how to use the Onsen UI components. The documentation contains both a reference for every component and a comprehensive guide that explains the finer points of Onsen UI.
+      </p>
+      <a href="/docs/js.html">Show detail &gt;</a>
     </div>
 
-    <div class="footer-cont-share">
-      <div class="footer-cont-share-twitter">
-        <iframe
-        src="//platform.twitter.com/widgets/follow_button.html?screen_name=Onsen_UI"
-        style="width: 300px; height: 20px;"
-        allowtransparency="true"
-        frameborder="0"
-        scrolling="no">
-        </iframe>
+  </div>
+  <div class="footer-container-upper">
+    <div class="footer-container-upper-message">
+      You just discovered delightful and future-proof mobile app development! It's an experience worth sharing!
+    </div>
+
+    <div class="footer-container-upper-social">
+      <div class="footer-container-upper-social-twitter">
+        <a href="https://twitter.com/Onsen_UI" class="twitter-follow-button">Follow @Onsen_UI</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
       </div>
-      <div class="footer-cont-share-github">
+      <div class="footer-container-upper-social-github">
         <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-count-href="/OnsenUI/OnsenUI/stargazers" data-count-api="/repos/OnsenUI/OnsenUI#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
-        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
       </div>
     </div>
+  </div>
+  <div class="footer-container-lower">
+    <div class="footer-container-lower-inner">
+      <div class="footer-container-navigation">
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            Framework
+          </div>
+          <a href="/angular2" class="footer-container-navigation-link">
+            AngularJS
+          </a>
+          <a href="/angular2" class="footer-container-navigation-link">
+            Angular 2
+          </a>
+          <a href="/react" class="footer-container-navigation-link">
+            React
+          </a>
+          <a href="/vue" class="footer-container-navigation-link">
+            Vue.js
+          </a>
+          <a href="/meteor" class="footer-container-navigation-link">
+            Meteor
+          </a>
+        </div>
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            Get started
+          </div>
+          <a href="/getting-started/#cli" class="footer-container-navigation-link">
+            Develop with Monaca CLI
+          </a>
+          <a href="/getting-started/#cloud" class="footer-container-navigation-link">
+            Use Monaca Cloud IDE
+          </a>
+          <a href="/getting-started/#npm" class="footer-container-navigation-link">
+            Install via NPM or Bower
+          </a>
+          <a href="/getting-started/#download" class="footer-container-navigation-link">
+            Download Everything
+          </a>
+        </div>
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            Docs
+          </div>
+          <a href="/docs/guide/js/" class="footer-container-navigation-link">
+            Guide
+          </a>
+          <a href="/docs/js.html" class="footer-container-navigation-link">
+            Reference
+          </a>
+          <a href="/tutorial" class="footer-container-navigation-link">
+            Tutorials
+          </a>
+        </div>
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            More
+          </div>
+          <a href="/samples" class="footer-container-navigation-link">
+            Samples
+          </a>
+          <a href="/community" class="footer-container-navigation-link">
+            Community
+          </a>
+          <a href="/blog" class="footer-container-navigation-link">
+            Blog
+          </a>
+        </div>
 
-    <p class="copyright">Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca Team</a>. All rights reserved.
-      <% if @lang == 'en': %>
-        <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
-      <% else if @lang == 'ja': %>
-        <a href="https://ja.monaca.io/terms-of-service/policy.html">Privacy Policy</a>
-      <% end %>
-    </p>
+      </div>
+      <div class="footer-container-newsletter">
+        <div class="footer-container-newsletter-header">
+          Stay tuned for more!
+        </div>
+        <div class="footer-container-newsletter-message">
+          Receive the latest and greatest hybrid app development news. Monaca X Onsen UI Team will send you all the relevant updates once or twice per month.
+        </div>
+        <div class="footer-container-newsletter-form newsletter-signup">
+          <form>
+            <input class="footer-container-newsletter-form-input" type="text" placeholder="Enter email for Onsen UI updates" name="email">
+            <input type="submit" class="footer-container-newsletter-form-button" value="Subscribe">
+          </form>
+          <div class="footer-container-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-container-copyright">
+    Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
   </div>
 </footer>
 
@@ -65,23 +132,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
 ga('create', 'UA-526750-29', 'onsen.io');
 ga('send', 'pageview');
-
 </script>
 
-<script type="text/javascript">
-  (function() {
-   var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-   po.src = 'https://apis.google.com/js/platform.js';
-   var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-   })();
-</script>
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-var js, fjs = d.getElementsByTagName(s)[0];
-if (d.getElementById(id)) return;
-js = d.createElement(s); js.id = id;
-js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=744863512192634";
-fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
+<script async defer src="https://buttons.github.io/buttons.js"></script>
