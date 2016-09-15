@@ -8,6 +8,7 @@
     max-width: @width;
     padding: 0 20px;
     display: flex;
+    position: relative;
     margin: 0 auto;
     justify-content: space-between;
   }
@@ -21,7 +22,7 @@
   }
 
   &-image {
-    width: 530px;
+    width: 550px;
     height: 361px;
     animation: reveal 0.8s 1 linear;
     animation-delay: 1s;
@@ -69,6 +70,24 @@
           text-decoration: none;
         }
       }
+    }
+  }
+
+  &-contest {
+    width: 356px;
+    height: 156px;
+    position: absolute;
+    right: 0;
+    bottom: 42px;
+    background-image: url(/images/index/contest/contest_banner.png);
+    display: block;
+
+    @media @smallscreen {
+      display: none;
+    }
+
+    &:hover {
+      background-image: url(/images/index/contest/contest_banner_hover.png);
     }
   }
 }
