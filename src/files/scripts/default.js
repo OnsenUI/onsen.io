@@ -139,7 +139,7 @@ $(function() {
     $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', data, function(data) {
       if (JSON.parse(data).status === 'success') {
         $('.newsletter-signup form').hide();
-        $('.newsletter-thankyou').show();
+        $('.newsletter-signup-thankyou').show();
       } else {
         alert('Something wrong with the request. Sorry.');
       }

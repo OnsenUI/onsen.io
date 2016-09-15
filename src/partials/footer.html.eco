@@ -109,9 +109,12 @@
         <div class="footer-container-newsletter-message">
           Receive the latest and greatest hybrid app development news. Monaca X Onsen UI Team will send you all the relevant updates once or twice per month.
         </div>
-        <div class="footer-container-newsletter-form">
-          <input class="footer-container-newsletter-form-input">
-          <button class="footer-container-newsletter-form-button">Subscribe</button>
+        <div class="footer-container-newsletter-form newsletter-signup">
+          <form>
+            <input class="footer-container-newsletter-form-input" type="text" placeholder="Enter email for Onsen UI updates" name="email">
+            <input type="submit" class="footer-container-newsletter-form-button" value="Subscribe">
+          </form>
+          <div class="footer-container-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
         </div>
       </div>
     </div>
