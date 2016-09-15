@@ -48,33 +48,39 @@
     }
 
     &-get-started {
-      display: block;
-      text-decoration: none;
-      padding: 13px 0 10px 0;
-      margin: 5px auto;
-      width: 220px;
-      border-radius: 3px;
-      background-color: rgba(255, 255, 255, 0.8);
-      color: #dd0031;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease-in-out;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      &:hover {
-        background-color: #001e4a;
-        color: #d9dcdf;
+      &-button {
+        display: block;
         text-decoration: none;
-      }
+        padding: 13px 0 10px 0;
+        margin: 5px;
+        width: 220px;
+        border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #dd0031;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
 
-      &-title {
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 24px;
-      }
+        &:hover {
+          background-color: #001e4a;
+          color: #d9dcdf;
+          text-decoration: none;
+        }
 
-      &-subtitle {
-        font-weight: 400px;
-        font-size: 13px;
+        &-title {
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 24px;
+        }
+
+        &-subtitle {
+          font-weight: 400px;
+          font-size: 13px;
+        }
       }
     }
 
@@ -219,18 +225,24 @@
     }
 
     &-get-started {
-      font-family: @en-header-font-family;
-      font-weight: 600;
-      display: block;
-      width: 409px;
-      max-width: 90%;
-      margin: 80px auto;
-      background-color: #ff4d35;
-      padding: 14px 0;
-      color: #fefefe;
-      text-decoration: none;
-      font-size: 20px;
-      line-height: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-button {
+        font-family: @en-header-font-family;
+        font-weight: 600;
+        display: block;
+        width: 409px;
+        max-width: 90%;
+        margin: 80px 10px;
+        background-color: #ff4d35;
+        padding: 14px 0;
+        color: #fefefe;
+        text-decoration: none;
+        font-size: 20px;
+        line-height: 22px;
+      }
     }
   }
 
