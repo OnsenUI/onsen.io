@@ -89,15 +89,15 @@ actionbar: false
   </ul>
 
   <% if @doc.examples: %>
-    <% for example in @doc.examples: %>
     <section>
       <h3 id="usage">
         <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
         <a href="#usage" class="reference-loop-anchor"></a>
       </h3>
-      <pre><code class="xml"><%= example %></code></pre>
+      <% for example in @doc.examples: %>
+        <pre><code class="xml"><%= example %></code></pre>
+      <% end %>
     </section>
-    <% end %>
   <% end %>
 
   <% if @doc.note: %>
@@ -125,7 +125,7 @@ actionbar: false
 
   <ul class="seealso">
     <% for guide in @doc.guides: %>
-      <li class="guide"><a href="/guide/overview.html#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
+      <li class="guide"><a href="/v2/docs/guide/<%= @framework %>/#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
     <% end %>
     <% for seealso in @doc.seealsos: %>
       <li class="seealso"><a href="<%= seealso.name.trim() %>.html"><%- @markd @translate seealso.description %></a></li>
