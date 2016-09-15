@@ -1,5 +1,5 @@
 <div class="js-index">
-  <% for category, docs of @componentCategories[@framework]: %>
+  <% for category, docs of @componentCategories[@framework] when docs.files: %>
   <div class="js-index-category">
     <h4 class="js-index-header">
       <%- docs.title || @titlize category %>
@@ -39,7 +39,7 @@
     <% end %>
   </div>
   <% end %>
-  <% for i in [0...((6 - (Object.keys(@componentCategories[@framework]).length % 6 || 6)))]: %>
+  <% for i in [0...((6 - (Object.keys(@componentCategories[@framework]).filter((x) => @componentCategories[@framework][x].files).length % 6 || 6)))]: %>
     <div class="js-index-category-fill"></div>
   <% end %>
 </div>
