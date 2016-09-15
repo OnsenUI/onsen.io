@@ -84,10 +84,62 @@
     }
 
     .feature {
-      padding: 30px 0;    
+      padding: 30px 0;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+
+      & img {
+        margin: 0 auto;
+        display: block;
+      }
+
+      &-showcase {
+        width: 212px;
+        height: 420px;
+        position: relative;
+        margin: 0 auto;
+
+        &-android,
+        &-ios {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 212px;
+          height: 420px;
+
+          > iframe {
+            position: absolute;
+            top: 48px;
+            left: 16px;
+            width: 363px;
+            height: 645px;
+            transform-origin: 0 0;
+            transform: scale(0.5);
+            max-width: initial;
+          }
+        }
+
+        &-android {
+          background-image: url(/images/common/device_android.png);
+
+          > iframe {
+            top: 40px;
+            left: 9px;
+            width: 385px;
+            height: 684px;
+          }
+        }
+
+        &-ios {
+          background-image: url(/images/common/device_ios.png);
+          animation-name: fade;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+          animation-duration: 10s;
+          animation-direction: alternate;
+        }
+      }
 
       & h2 {
         color: #ff1a33;
@@ -278,7 +330,7 @@
         padding-top: 24px;
         margin: 0 35px;
       }
-      
+
       &-image {
         position: relative;
           width: 250px;
@@ -342,5 +394,21 @@
         }
       }
     }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity:1;
+  }
+  45% {
+    opacity:1;
+  }
+  55% {
+    opacity:0;
+  }
+  100% {
+    opacity:0;
+    pointer-events: none;
   }
 }
