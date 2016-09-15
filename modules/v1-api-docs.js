@@ -48,6 +48,7 @@ module.exports = function(lang) {
           files[path] = file;
           files[path].version = "v1";
           files[path].icon = icon;
+          files[path].layout = 'docs.html.eco';
           if (lang == "en") {
             files[path].title = files[path].title + " Reference - Onsen UI Framework";
             files[path].h1 = files[path].title + " Reference";

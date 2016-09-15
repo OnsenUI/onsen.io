@@ -1,180 +1,221 @@
 #getting_started {
-  .top-bar .dropdown ul, #features .dropdown ul{
-    list-style-type: none;
-    text-align: left;
-    background: rgba(185, 62, 66, 0.9);
-    z-index: 1;
-
-    li {
-      margin: 0;
-    }
+  .tabs {
+    display: flex;
+    box-shadow: 0 9px 5px -2px #eee;
 
     a {
-      font-size: 18px;
-      padding: 5px;
+      flex-grow: 1;
       text-decoration: none;
-      color: #fff;
-    }
-  }
-
-  #features .dropdown ul {
-    background: #fee;
-
-    a {
-      color: #000;
-    }
-  }
-
-  .feature:first-child h2 {
-    margin-bottom: 90px;
-  }
-
-  .feature:last-child {
-    margin-bottom: 70px;
-  }
-
-  h1 {
-    margin-bottom: 0px;
-  }
-
-  h1 + h2 {
-    color: #ddd;
-    font-size: 16px;
-  }
-
-  h3 {
-    color: #953535;
-    font-size: 24px;
-    margin: 40px 0 10px;
-  }
-
-  p, p + pre {
-    display: inline-block;
-    vertical-align: top;
-    color: #556;
-  }
-
-  li p {
-    width: 51%;
-    margin: 0;
-    margin-right: 4%;
-    margin-bottom: 15px;
-
-    @media @smallscreen {
-      width: 100%;
+      color: #666;
+      border-bottom: 3px solid transparent;
+      padding: 10px;
     }
 
-    & + pre {
-      width: 43%;
-      box-sizing: border-box;
-      margin: 0 0 0 -5px;
-
-      @media @smallscreen {
-        width: 100%;
-        margin: 0;
-      }
-    }
-  }
-  code {
-    font-size: 12px;
-    color: #666;
-  }
-
-  #main-nav {
-    top: 10px;
-  }
-
-  .button {
-    width: 300px;
-    flex-grow: 0;
-  }
-  .guide {
-    background: #FF4D35;
-    font-size: 18px;
-    box-sizing: border-box;
-    text-align: center;
-    margin: auto;
-    display: block;
-
-    &:hover {
-      background-color: #FFEDEB;
-      color: #FF4D35;
-    }
-  }
-
-  .dont-forget {
-    .github {
-      background: #000;
-    }
-
-    .newsletter {
-      background: #337AB7;
-    }
-
-    .twitter {
-      background: #55ACEE;
+    a.selected {
+      border-color: #ff1a33;
+      color: #953535;
     }
 
     .action {
-      font-size: 16px;
-      width: 220px;
-      margin: auto;
-      flex-grow: 0;
-    }
-
-    .action:before {
-      width: 26px;
-      height: 26px;
+      margin-bottom: 0;
     }
   }
 
-  .tabs a:before {
-    background-color: #999;
-  }
+  .tab-contents {
+    text-align: left;
+    padding-top: 6px;
+    padding-bottom: 20px;
 
-  .tabs a.selected:before {
-    background-color: #953535;
-  }
+    ol {
+      counter-reset: count;
+      list-style-type: none;
+    }
 
-  .tool:before {
-    mask: url(/images/getting_started/Icon_tool.svg);
-    -webkit-mask: url(/images/getting_started/Icon_tool.svg);
-  }
+    li {
+      margin-left: 60px;
+      list-style: none;
 
-  .terminal:before {
-    mask: url(/images/getting_started/Icon_terminal.svg);
-    -webkit-mask: url(/images/getting_started/Icon_terminal.svg);
-  }
-
-  .cloud:before {
-    mask: url(/images/getting_started/Icon_cloud.svg);
-    -webkit-mask: url(/images/getting_started/Icon_cloud.svg);
-  }
-
-  .download:before {
-    mask: url(/images/getting_started/Icon_download.svg);
-    -webkit-mask: url(/images/getting_started/Icon_download.svg);
-  }
-
-  .visit {
-    a {
-      font-size: 20px;
-      color: #666;
-      width: 180px;
-
-      @media @smallscreen {
-        font-size: 14px;
+      &:before {
+        content: '';
+        float: left;
+        margin-left: -60px;
       }
     }
 
-    .icon:before {
-      height: 60px;
-      margin-top: 30px;
+
+    ol li:before {
+      content: counter(count);
+      counter-increment: count;
+      color: white;
+      background: #ff1a33;
+      background-image: linear-gradient(to right,#ef2929,#f05429);
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      text-align: center;
+      font-size: 24px;
+      line-height: 45px;
     }
 
-    & + h3 {
-      margin: 80px 0 60px;
-      color: #000;
+    ul li:before {
+      margin-left: -45px;
+      border: 20px solid transparent;
+      border-left-color: #ff1a33;
+    }
+
+    > div:not(.selected) {
+      display: none;
     }
   }
+
+  #features {
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  #features pre {
+    text-align: left;
+  }
+
+  #features h2 {
+    font-size: 32px;
+    color: #111;
+    margin-bottom: 20px;
+  }
+
+  &#landing-new #features p {
+    font-size: 18px;
+    padding: 0 10%;
+  }
+
+  h2 + p {
+    margin-bottom: 50px;
+  }
+
+  .feature {
+    padding: 50px 0;
+  }
+
+  .feature + .feature {
+    border-top: 1px solid #D3D4D8;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+ #features {
+    text-align: center;
+    padding-top: 30px;
+  }
+
+  #features pre {
+    text-align: left;
+  }
+
+  #features h2 {
+    font-size: 32px;
+    color: #111;
+    margin-bottom: 20px;
+  }
+
+  &#landing-new #features p {
+    font-size: 18px;
+    padding: 0 10%;
+  }
+
+  h2 + p {
+    margin-bottom: 50px;
+  }
+
+  .feature {
+    padding: 50px 0;
+  }
+
+  .feature + .feature {
+    border-top: 1px solid #D3D4D8;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  .row {
+    display: flex;
+
+    > a, > li {
+      display: inline-block;
+      margin: auto;
+      width: 0;
+      flex-grow: 1;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+
+  .icons {
+    display: flex;
+  }
+
+  a.icon {
+    text-decoration: none;
+    color: #666;
+  }
+
+  .icon:before {
+    content: '';
+    display: block;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .icon.debug:before {
+    background-image: url(/images/design_2016/icon_debug.png);
+  }
+
+  .icon.build:before {
+    background-image: url(/images/design_2016/icon_build.png);
+  }
+
+  .icon.push:before {
+    background-image: url(/images/design_2016/icon_push.png);
+  }
+
+  .icon.user:before {
+    background-image: url(/images/design_2016/icon_user.png);
+  }
+
+  .icon.onlineide:before {
+    background-image: url(/images/design_2016/icon_onlineide.png);
+  }
+
+  .icon.inappupdater:before {
+    background-image: url(/images/design_2016/icon_inappupdater.png);
+  }
+
+  .icon.lock:before {
+    background-image: url(/images/design_2016/icon_lock.png);
+  }
+
+  .icon.blog:before {
+    background-image: url(/images/design_2016/icon_blog.png);
+  }
+
+  .icon.react:before {
+    background-image: url(/images/design_2016/icon_react.png);
+  }
+
+  .icon.forum:before {
+    background-image: url(/images/design_2016/icon_forum.png);
+  }
+
+  .icon.reference:before {
+    background-image: url(/images/design_2016/icon_reference.png);
+  }
+
+
 }

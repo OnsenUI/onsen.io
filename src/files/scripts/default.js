@@ -139,7 +139,7 @@ $(function() {
     $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', data, function(data) {
       if (JSON.parse(data).status === 'success') {
         $('.newsletter-signup form').hide();
-        $('.newsletter-thankyou').show();
+        $('.newsletter-signup-thankyou').show();
       } else {
         alert('Something wrong with the request. Sorry.');
       }
@@ -170,7 +170,7 @@ $(function() {
 
   (function($el) {
     if ($el.length) {
-      $el.attr('href', $el.attr('href').replace(/\/$/, "") + window.location.pathname);
+      $el.attr('href', $el.attr('href').replace(/\/$/, '') + window.location.pathname);
     }
   })($('.language-dialog-button.japanese-version'));
 
@@ -188,16 +188,9 @@ $(function() {
   var info = $('#release-info');
   if (info.length) {
     var framework = info.data('framework');
-    $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/tags', function(data) {
-      var latest = data.filter(function(e) {
-        return framework ? e.name.indexOf(framework) : !e.name.match(/angular|react/);
-      })[0];
-
-      $('.version', info).html(latest.name);
-
-      $.get(latest.commit.url, function(data) {
-        $('time', info).html(moment(new Date(data.commit.committer.date)).fromNow());
-      });
+    $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases', function(data) {
+      $('.version', info).html(data[0].name);
+      $('time', info).html(moment(new Date(data[0].published_at)).fromNow());
     });
   }
 });
@@ -259,7 +252,32 @@ function getCookie(c_name) {
 }
 
 $(function() {
-  $(".phone.ios iframe").load(function() {
-    $(".phone-placeholder").css('opacity', 0);
+  $('.phone.ios iframe').load(function() {
+    $('.phone-placeholder').css('opacity', 0);
+  });
+});
+
+$(function() {
+  $('.global-nav-checkbox').change(function(event) {
+    if (event.target.checked) {
+      document.body.scrollTop = 0;
+      document.body.classList.add('noscroll');
+    }
+    else {
+      document.body.classList.remove('noscroll');
+    }
+  });
+
+  $(window).on('resize', function() {
+    document.body.classList.remove('noscroll');
+    $('.global-nav-checkbox').prop('checked', false);
+  });
+});
+
+$(function() {
+  var events = 'animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd';
+
+  $('.keyvisual-image').on(events, function() {
+    $(this).css('visibility', 'visible');
   });
 });

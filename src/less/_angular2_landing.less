@@ -1,6 +1,4 @@
-.design-2016 .angular2-landing {
-  text-align: center;
-
+.angular2-landing {
   &-large-image {
     max-width: 80%;
 
@@ -27,69 +25,69 @@
     &-title {
       padding: 50px 0 0 0;
       margin: 0;
+      color: #fff;
       font-size: 60px;
-      font-weight: 300;
+      font-weight: 300 !important;
       line-height: 72px;
-    }
-
-    &-beta {
-      white-space: nowrap;
-      position: relative;
-
-      &:before {
-        content: url(/images/design_2016/icn_beta_1.svg);
-        position: absolute;
-        right: -25px;
-        top: -35px;
-      }
+      text-align: center;
     }
 
     &-subtitle {
       margin: 10px 0 0 0;
       color: #90a0c3;
-      font-weight: 600;
+      font-weight: 300;
       font-size: 20px;
       line-height: 26px;
       letter-spacing: 0.05em;
+      text-align: center;
     }
 
     &-keyvisual {
       margin: 30px auto;
+      display: block;
     }
 
     &-get-started {
-      display: block;
-      text-decoration: none;
-      padding: 13px 0 10px 0;
-      margin: 0 auto;
-      width: 220px;
-      border-radius: 3px;
-      background-color: rgba(255, 255, 255, 0.8);
-      color: #dd0031;
-      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
-      transition: all 0.2s ease-in-out;
+      &-button {
+        display: block;
+        text-decoration: none;
+        padding: 13px 0 10px 0;
+        margin: 5px;
+        width: 220px;
+        border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.8);
+        color: #dd0031;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
 
-      &:hover {
-        background-color: #001e4a;
-        color: #d9dcdf;
-      }
+        &:hover {
+          background-color: #001e4a;
+          color: #d9dcdf;
+          text-decoration: none;
+        }
 
-      &-title {
-        font-weight: 600;
-        font-size: 24px;
-        line-height: 24px;
-      }
+        &-title {
+          font-weight: 600;
+          font-size: 24px;
+          line-height: 24px;
+        }
 
-      &-subtitle {
-        font-weight: 400px;
-        font-size: 13px;
+        &-subtitle {
+          font-weight: 400px;
+          font-size: 13px;
+        }
       }
     }
 
     &-available {
       margin: 10px 0;
       font-size: 14px;
+      text-align: center;
 
       &-frameworks {
         display: flex;
@@ -147,6 +145,7 @@
 
     &-latest {
       padding: 20px 0;
+      text-align: center;
 
       #release-info {
         color: rgba(255, 255, 255, 0.6);
@@ -155,6 +154,7 @@
 
         a {
           cursor: pointer;
+          color: #fff;
         }
       }
     }
@@ -202,9 +202,10 @@
   }
 
   &-content {
-    max-width: 960px;
-    padding: 0 18px;
+    max-width: 1140px;
+    padding: 0 20px;
     margin: 0 auto;
+    text-align: center;
 
     h2 {
       font-size: 31px;
@@ -224,18 +225,36 @@
     }
 
     &-get-started {
-      font-family: @en-header-font-family;
-      font-weight: 600;
-      display: block;
-      width: 409px;
-      max-width: 90%;
-      margin: 80px auto;
-      background-color: #ff4d35;
-      padding: 14px 0;
-      color: #fefefe;
-      text-decoration: none;
-      font-size: 20px;
-      line-height: 22px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-button {
+        font-family: @en-header-font-family;
+        font-weight: 600;
+        display: block;
+        width: 409px;
+        max-width: 90%;
+        margin: 80px 10px;
+        background-color: #ff4d35;
+        padding: 14px 0;
+        color: #fefefe;
+        text-decoration: none;
+        font-size: 20px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  #showcase-carousel {
+    height: 310px;
+    width: 1000px;
+    max-width: 1000px;
+    margin: 0 -20px;
+
+    @media @smallscreen {
+      width: 100%;
+      max-width: 100%;
     }
   }
 }

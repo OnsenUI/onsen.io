@@ -9,6 +9,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" type="text/css" href="/vendor/MyFontsWebfontsKit.css"/>
+
   <% if @page == 'css': %>
     <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/ionicons/css/ionicons.min.css">
     <link rel="stylesheet" href="<%= @rootUrl %>v2/OnsenUI/css/font_awesome/css/font-awesome.min.css">
@@ -57,43 +59,8 @@
   </script>
 </head>
 
-<body id="<%- @page %>" class="design-2016">
-  
-  <% if @main_nav != false: %>
-    <%- @partial(if @lang=='en' then 'main-nav.html.eco' else 'main-nav.ja.html.eco') %>
-  <% end %>
-  <%- @partial(if @lang=='en' then 'header.html.eco' else 'header.ja.html.eco') %>
-
-  <section id="main-container">
-
-    <% if @autotoc: %>
-      <aside class="content-info content-info-page">
-        <div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
-        <%- @partial('toc.html.eco', {tocItems: @toc}) %>
-      </aside>
-      <div class="content">
-        <%- @contents %>
-        <%- @partial('need_help.html.eco') if @needHelp %>
-      </div>
-    <% else if @reference: %>
-      <% if @version == "v1": %>
-        <aside class="content-info content-info-page">
-          <%- @partial('reference-toc-v1.html.eco') %>
-        </aside>
-      <% else: %>
-        <aside class="content-info content-info-page">
-          <%- @partial('reference-toc.html.eco') %>
-        </aside>
-      <% end %>
-      <div class="content">
-        <%- @contents %>
-        <%- @partial('need_help.html.eco') if @needHelp %>
-      </div>
-    <% else: %>
-      <%- @contents %>
-      <%- @partial('need_help.html.eco') if @needHelp %>
-    <% end %>
-  </section>
+<body id="<%- @page %>">
+  <%- @contents %>
 
   <%- @partial('footer.html.eco') %>
 
