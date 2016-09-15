@@ -9,40 +9,52 @@ version: v2
 description: 'ReactJS developers can easily create high-performance hybrid mobile apps, using HTML5, CSS and JavaScript. Material and iOS design with automatic styling.'
 ---
 
-<div class="header">
-   <%- @partial('global-nav.html.eco') %>
-</div>
+<div class="landing react-landing">
+  <div class="landing-header">
+    <%- @partial('global-nav.html.eco') %>
+    <h1 class="landing-header-title">
+      Onsen UI for React
+    </h1>
+    <div class="landing-header-subtitle">
+      Create beautiful high-quality hybrid mobile apps the fastest way <br>with Angular 2 and Onsen UI Framework.
+    </div>
+    <img class="landing-header-keyvisual" src="/images/landing/keyvisual_react.png">
 
-<div class="design-2016">
-  <div id="start">
-    <div class="wrapper">
-      <div id="intro">
-        <h1>
-          Onsen UI for React
-        </h1>
-        <p id="description">Onsen UI Hybrid App Framework is now available as React Components, enabling ReactJS developers to create beautiful mobile apps in no time.</p>
-        <nav class="actions">
-          <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
-          <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
-          <a class="action demo" href="http://onsenui.github.io/react-onsenui-kitchensink/demo.html">See Demo</a>
-        </nav>
-        <!--
-        <div class="newsletter-signup newsletter-form">
-          <form>
-            <input type="email" placeholder="Input email address to receive updates" name="email">
-            <button>Sign up</button>
-          </form>
-          <div class="newsletter-thankyou">Thank you!</div>
-        </div>
-        -->
-
-        <button id="getting-started" onclick="location.href='/v2/docs/guide/react/'" style="cursor: pointer;">Getting Started with Onsen UI for React</button>
-
-        <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>.<br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+    <a href="/v2/docs/guide/react" class="landing-header-get-started">
+      <div class="landing-header-get-started-title">
+        Get Started
       </div>
-      <%- @partial('demo_react.html.eco') %>
+      <div class="landing-header-get-started-subtitle">
+        with Onsen UI for React
+      </div>
+    </a>
+
+    <div class="landing-header-available">
+      <span>
+        Also available for...
+      </span>
+      <div class="landing-header-available-frameworks">
+        <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
+        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
+      </div>
+    </div>
+
+    <div class="landing-header-latest">
+      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>. Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
     </div>
   </div>
+
+  <div class="landing-social">
+    <a href="https://twitter.com/Onsen_UI" target="_blank" class="landing-social-twitter">
+      Follow @Onsen_UI
+    </a>
+    <a href="https://github.com/OnsenUI/OnsenUI" target="_blank" class="landing-social-github">
+      Star on GitHub
+    </a>
+  </div>
+
+  <div class="landing-content">
   <div id="features">
     <div class="feature">
       <h2>Beautifully made with Android and iOS components</h2>
@@ -51,6 +63,9 @@ description: 'ReactJS developers can easily create high-performance hybrid mobil
         <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
       </div>
     </div>
+
+    <hr>
+
     <div class="feature">
       <h2>Tailored for React Developers</h2>
       <p>With our Onsen UI React bindings, Onsen UI React Components play nicely with Virtual DOM</p>
@@ -167,7 +182,7 @@ Which project do you want to create?
 &gt; Onsen 2 with JavaScript
 </code></pre>
   </div>
-
+  </div>
   </div>
 </div>
 
@@ -203,10 +218,4 @@ Which project do you want to create?
       }
     }
   });
-
-  var phones = $$('.phone');
-  $('.change-view').onclick = function (){
-    phones[0].classList.toggle('selected');
-    phones[1].classList.toggle('selected');
-  }
 </script>

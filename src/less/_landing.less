@@ -1,4 +1,23 @@
 .landing {
+  .react-landing & {
+    &-header {
+      background-color: #2d2d2d;
+
+      &-title {
+        color: #61dafb;
+        font-size: 60px;
+        font-weight: 300;
+      }
+
+      &-subtitle {
+        font-size: 20px;
+        font-weight: 300;
+        line-height: 26px;
+        color: #b3b3b3;
+      }
+    }
+  }
+
   &-large-image {
     max-width: 80%;
 
@@ -17,10 +36,10 @@
   }
 
   &-header {
-    background: linear-gradient(0deg, #0273d4 0%, #0143a3 42%, #001e4a 100%);
     font-family: @en-header-font-family;
     color: #fff;
     padding: 0 18px;
+    text-align: center;
 
     &-title {
       padding: 50px 0 0 0;
@@ -115,6 +134,15 @@
           }
         }
 
+        &-angular2 {
+          background: url('/images/design_2016/logo_angular2_available.png');
+
+          &:hover {
+            background: url('/images/design_2016/logo_angular2_available_hover.png');
+          }
+        }
+
+
         &-react {
           background: url('/images/design_2016/logo_react_available.png');
 
@@ -193,6 +221,7 @@
     max-width: 960px;
     padding: 0 18px;
     margin: 0 auto;
+    text-align: center;
 
     h2 {
       font-size: 31px;
@@ -225,6 +254,147 @@
       font-size: 20px;
       line-height: 22px;
     }
+  }
+
+  #showcase-carousel {
+    height: 310px;
+    width: 1000px;
+    max-width: 1000px;
+    margin: 0 -20px;
+
+    @media @smallscreen {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  .code-explanation-container {
+    height: 450px;
+    margin: 40px 0;
+  }
+
+  .code-explanation img {
+    width: 260px;
+    height: 450px;
+    display: inline-block;
+  }
+
+  .code-explanation {
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    margin-left: -350px;
+    width: 700px;
+    height: 450px;
+    opacity: 0;
+    transition: 0.5s opacity ease-in;
+  }
+
+  .code-explanation.selected {
+    z-index: 2;
+    opacity: 1;
+  }
+
+  .react-code {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 80px;
+    max-width: 400px;
+    text-align: left;
+  }
+
+  .code-explanation code {
+    display: block;
+    margin-bottom: 10px;
+    padding: 6px 10px;
+    width: 240px;
+    background: #F6F6F6;
+    white-space: pre;
+    font-size: 12px;
+  }
+
+  #react-app,.arrow-container,.react-code {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  .arrow-container {
+    width: 75px;
+    position: absolute;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+  .arrow {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    position: absolute;
+    left: 40px;
+    right: 3px;
+  }
+
+  .arrow:before {
+    content: '';
+    border-top: 1px solid gray;
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    width: 100px;
+    left: -100px;
+  }
+
+  .arrow:after {
+    content: '';
+    border: 3px solid transparent;
+    border-left-color: gray;
+    position: absolute;
+    bottom: -3px;
+    right: -6px;
+  }
+
+  .bracket {
+    position: absolute;
+    border: 1px solid gray;
+    top: 100px;
+    height: 280px;
+    width: 20px;
+    border-left-color: transparent;
+    background: white;
+  }
+
+  .platform-buttons {
+    position: relative;
+
+    @media @smallscreen {
+      display: none;
+    }
+
+    .ios, .android {
+      width: 60px;
+      height: 60px;
+      background: red;
+      position: absolute;
+      top: 200px;
+      opacity: 0.2;
+    }
+
+    .selected {
+      opacity: 1;
+    }
+
+    .ios {
+      left: 40px;
+      background: url(/images/design_2016/slide_icon_apple.png);
+    }
+
+    .android {
+      right: 40px;
+      background: url(/images/design_2016/slide_icon_android.png);
+    }
+  }
+
+  pre {
+    text-align: initial;
   }
 }
 
