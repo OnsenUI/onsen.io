@@ -41,3 +41,8 @@ deployment:
       - AWS_BUCKET=${AWS_BUCKET_JA_PROD} gulp deploy --lang=ja --production
       - wget https://api.keycdn.com/zones/purge/38820.json --user="${KEY_CDN_API_KEY}" --password='' -v
       - wget https://api.keycdn.com/zones/purge/38819.json --user="${KEY_CDN_API_KEY}" --password='' -v
+  new:
+    branch: v2-design
+    commands:
+      - npm install -g gulp
+      - AWS_BUCKET=new.onsen.io gulp deploy --lang=en --production
