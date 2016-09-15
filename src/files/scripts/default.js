@@ -189,12 +189,7 @@ $(function() {
   if (info.length) {
     var framework = info.data('framework');
     $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases', function(data) {
-      console.log(data);
-      var latest = data.filter(function(e) {
-        return framework ? e.name.indexOf(framework) : !e.name.match(/angular|react/);
-      })[0];
-
-      $('.version', info).html(latest.name);
+      $('.version', info).html(data[0].name);
 
       $.get(latest.commit.url, function(data) {
         $('time', info).html(moment(new Date(data.commit.committer.date)).fromNow());
