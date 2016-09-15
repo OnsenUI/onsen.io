@@ -188,7 +188,8 @@ $(function() {
   var info = $('#release-info');
   if (info.length) {
     var framework = info.data('framework');
-    $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/tags', function(data) {
+    $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases', function(data) {
+      console.log(data);
       var latest = data.filter(function(e) {
         return framework ? e.name.indexOf(framework) : !e.name.match(/angular|react/);
       })[0];
@@ -285,7 +286,6 @@ $(function() {
   var events = 'animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd';
 
   $('.keyvisual-image').on(events, function() {
-    console.log('HI');
     $(this).css('visibility', 'visible');
   });
 });
