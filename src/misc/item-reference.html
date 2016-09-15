@@ -11,7 +11,7 @@ actionbar: false
     <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Reference</a> &gt;
 
     <% if @extensionDoc and @extensionDoc.directive: %>
-      <%= extensionDoc.directive %>
+      <%= @extensionDoc.directive %>
     <% else: %>
       <%=@name%>
     <% end %>
