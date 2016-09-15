@@ -1,34 +1,31 @@
 ---
 page: 'vue-landing'
 category: 'discover'
-title: 'Vue.js UI components for mobile apps powered by Onsen UI'
+title: 'Vue.js components for creating hybrid mobile apps with Onsen UI'
 layout: 'default.html.eco'
 topbar: false
 actionbar: false
 version: v2
-description: 'Create beautiful hybrid and mobile apps using Vue.js and the Onsen UI components. Includes both Material and iOS Design.'
+description: 'Vue.js developers can easily create high-performance hybrid mobile apps, using HTML5, CSS and JavaScript. Material and iOS design with automatic styling.'
 ---
 
-<div class="header">
+<div class="landing vue-landing">
   <%- @partial('global-nav.html.eco') %>
-</div>
-
-<div class="landing">
   <div class="landing-header">
     <h1 class="landing-header-title">
       Onsen UI for Vue.js
     </h1>
     <div class="landing-header-subtitle">
-      Create beautiful and perfomant hybrid and mobile web apps <br>with Vue.js and Onsen UI
+      Preview version of binding library to help create hybrid apps with Onsen UI.
     </div>
-    <img class="landing-header-keyvisual" src="/images/design_2016/vue_landing_keyvisual.gif">
+    <img class="landing-header-keyvisual" src="/images/landing/keyvisual_gifanime.gif">
 
-    <a href="/v2/docs/guide/vue" class="landing-header-get-started">
+    <a href="https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue" class="landing-header-get-started">
       <div class="landing-header-get-started-title">
         Get Started
       </div>
       <div class="landing-header-get-started-subtitle">
-        with Onsen UI for Angular 2
+        with Onsen UI for Vue.js
       </div>
     </a>
 
@@ -38,7 +35,8 @@ description: 'Create beautiful hybrid and mobile apps using Vue.js and the Onsen
       </span>
       <div class="landing-header-available-frameworks">
         <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
-        <a href="/react" class="landing-header-available-frameworks-react"></a>
+        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/v2/docs/guide/react" class="landing-header-available-frameworks-react"></a>
         <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
       </div>
     </div>
@@ -56,43 +54,92 @@ description: 'Create beautiful hybrid and mobile apps using Vue.js and the Onsen
       Star on GitHub
     </a>
   </div>
-
-  <div class="landing-content">
-    <h2>Our development toolkit quickly runs mobile apps in a real devices</h2>
-
-    <p>
-      Experience streamlined Angular mobile development with zero-time setup. Powerful CLI (command-line tool) and desktop app (for Windows and macOS) simplifies complicated tasks. Our development stack includes TypeScript, WebPack and Cordova. All integrated with debugging app with live-reload, remote-build and many other cloud services.
-    </p>
-
-    <img class='landing-large-image' src="/images/design_2016/image_onsenui_vue_sp.png"></img>
-    <img class='landing-small-image' src="/images/design_2016/image_onsenui_vue_sp_small.png"></img>
-
-    <hr>
-
-    <h2>Beautiful Angular 2 Directives having Material and Flat appearance</h2>
-
-    <p>
-      Onsen UI for Angular 2 expose a simple but powerful API. All ui components can be easily plugged in to Angular mobile app. To see all Angular 2 ui components, please check <a href="/v2/docs/vue.html">Angular 2 Reference</a>.<br>Or, you can quickly try out the showcase below - all of them actually work!
-    </p>
-
-    <div id="showcase-carousel-wrapper">
-      <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
-    </div>
-
-    <hr>
-
-    <h2>Common core for AngularJS, Angular 2 and other frameworks</h2>
-
-    <p>
-      Onsen UI is compatible with both AngularJS and Angular 2 by sharing the same JavaScript and CSS core.
-      It even supports other libraries like React and jQuery.
-      Thus, you can easily switch between the libraries and frameworks and still feel at home.
-    </p>
-
-    <img src="/images/design_2016/image_rocket.png"></img>
-
-    <a href="/v2/docs/guide/vue/index.html" class="landing-content-get-started">
-      Get Started with Onsen UI for Angular 2
-    </a>
-  </div>
 </div>
+
+<div class="container">
+<%- @markdown => %>
+
+## Create hybrid and mobile apps with Onsen UI and Vue.js
+
+We have created a small set of bindings that make it easier to integrate Onsen UI into Vue apps. Onsen UI is a component library for creating hybrid apps built on top of **Web Components**. With this library we extend the Onsen UI components so they work well when used inside a Vue app.
+
+## Available on npm
+
+The bindings are [available on npm](https://www.npmjs.com/package/vue-onsenui). To use them you also need the core Onsen UI library.
+
+So to install the library in your app all you need to do is:
+
+```bash
+npm install --save onsenui vue-onsenui
+```
+
+## Easy to use
+
+The library is distributed as a Vue plugin so you can easily add it to your application:
+
+```javascript
+import Vue from 'vue';
+
+import VueOnsen from 'vue-onsenui';
+import ons from 'onsenui';
+
+Vue.use(VueOnsen);
+
+ons.ready(() => {
+  /* eslint-disable no-new */
+  new Vue({
+    el: 'body',
+    components: { App }
+  });
+});
+```
+
+This exposes some utility functions that make it easier to control the Onsen UI components.
+
+## Learn more
+
+We have published an article where you can learn how to use the library. We have also created an app that showcases most of the Onsen UI components.
+
+* [Preview! Vue.js support for Onsen UI](/blog/preview-vue-support-onsen-ui/)
+* [Kitchensink example](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+* [GitHub repository](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+
+This library is still an early preview but we are planning to add more features and also publish more documentation so everyone can start building mobile apps with Vue and Onsen UI!
+
+<% end %>
+</div>
+
+
+<script src="/vendor/highlight.min.js"></script>
+<script>
+  var $ = document.querySelector.bind(document);
+  var $$ = document.querySelectorAll.bind(document);
+  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
+  var code = $$('code');
+  var arrows = $$('.arrow');
+  var height = $('.code-explanation').offsetHeight;
+
+  each(arrows, function (e, i) {
+    var lines = code[i].textContent.split(/\n/);
+    var indent = lines[1].match(/\s*/)[0].length;
+    code[i].textContent = lines.map(function(e) {
+      return e.slice(indent);
+    }).join('\n').trim();
+    hljs.highlightBlock(code[i]);
+    e.style.bottom = height - (code[i].offsetTop + code[i].offsetHeight / 2) + 'px';
+  });
+
+  var buttons = $('.platform-buttons').children;
+  var examples = $$('.code-explanation');
+  each(buttons, function(e, i) {
+    e.onclick = function () {
+      var j = (i + 1) % 2;
+      if (!this.classList.contains('selected')) {
+        buttons[i].classList.add('selected');
+        buttons[j].classList.remove('selected');
+        examples[i].classList.add('selected');
+        examples[j].classList.remove('selected');
+      }
+    }
+  });
+</script>
