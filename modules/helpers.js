@@ -264,6 +264,15 @@ module.exports = function() {
         }
       },
 
+      frameworkTag: function(framework) {
+        switch (framework) {
+          case "js": return "js core";
+          case "angular1": return "angular 1";
+          case "angular2": return "angular 2";
+          case "react": return "react";
+        }
+      },
+
       getExtensionDoc: function(file, framework) {
         if (!file.doc.elements) return null;
         return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
@@ -296,6 +305,22 @@ module.exports = function() {
         }
 
         return message;
+      },
+
+      nl2ws: function(str) {
+        if (typeof str !== 'string') {
+          return str;
+        }
+
+        return str.trim().split(/[\r\n]+/).join(' ');
+      },
+
+      escape: function(str) {
+        if (typeof str !== 'string') {
+          return str;
+        }
+
+        return escape(str);
       }
     };
 
