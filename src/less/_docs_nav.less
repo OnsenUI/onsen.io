@@ -1,8 +1,6 @@
 .docs-nav {
-  @nav-height: 130px;
-
-  height: @nav-height;
   background: transparent;
+  padding: 0 0 17px 0;
 
   &-inner {
     max-width: 1140px;
@@ -10,11 +8,13 @@
     margin: 0 auto;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
   }
 
 	&-right {
 		align-self: flex-end;
+    margin: 14px 0 0 auto;
 	}
 
   &-title {
@@ -35,6 +35,7 @@
     align-items: center;
     margin: 5px 0 0 0;
     cursor: pointer;
+    flex-wrap: wrap;
 
     &-label {
       color:  #ffffff;
