@@ -16,6 +16,21 @@ function getTemplatePath(path, extension) {
   return nodePath.resolve(basePath + '/src/misc/item-reference.html');
 }
 
+function getOwnedItems(docsContent, framework) {
+  var ownedItems = [];
+
+  if (docsContent && docsContent.length > 0) {
+    for (var i = 0; i < docsContent.length; i++) {
+      if ((framework === 'angular2' && (docsContent[i].extensionOf && docsContent[i].extensionOf.indexOf(framework) > -1))
+        || (framework !== 'angular2' && ([ 'js', framework ].indexOf(docsContent[i].extensionOf || 'js') > -1))) {
+        ownedItems.push(docsContent[i]);
+      }
+    }
+  }
+
+  return ownedItems;
+}
+
 function generateAPIDocument(metalsmith, docPath, extension) {
   return new Promise(function(resolve, reject) {
     metalsmith.readFile(getTemplatePath(docPath, extension), function(error, file) {
@@ -36,6 +51,13 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       if (extension === 'angular1' && doc.tutorial) {
         doc.tutorial = doc.tutorial.replace('vanilla', 'angular1');
       }
+
+      // Docs of different frameworks are mixed in these arrays.
+      // This gets the items related to the current framework.
+      file.ownedAttributes = getOwnedItems(doc.attributes, extension);
+      file.ownedMethods = getOwnedItems(doc.methods, extension);
+      file.ownedEvents = getOwnedItems(doc.events, extension);
+
 
       if (extension != "js" && doc.elements) {
         file.extensionDoc = doc.elements.filter(function(v) { return v.extensionOf == extension })[0] || {};

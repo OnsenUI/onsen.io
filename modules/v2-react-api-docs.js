@@ -118,12 +118,6 @@ function generateAPIDocument(metalsmith, docPath, extension) {
         }
       }
 
-/*
-if (componentName == "Navigator") {
-  console.log(componentName + "\n\n")
-  console.log(JSON.stringify(doc, null, "  "))
-}
-*/
 
       file.doc = doc;
       file.name = componentName;
@@ -135,6 +129,10 @@ if (componentName == "Navigator") {
       file.extension = "react";
       file.framework = "react";
       file.version = "v2";
+
+      file.ownedMethods = doc.methods || [];
+      file.ownedAttributes = doc.attributes || [];
+      file.ownedEvents = doc.events || [];
 
       resolve({doc: doc, file: file});
     });

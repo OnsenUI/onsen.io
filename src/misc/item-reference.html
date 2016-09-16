@@ -57,7 +57,7 @@ actionbar: false
     <li><a href="#example"><%= @translate '[en]Live Example[/en][ja]実例[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.attributes and @doc.attributes.length > 0: %>
+    <% if @ownedAttributes.length > 0: %>
     <li><a href="#attributes"><%= @translate '[en]Attributes[/en][ja]属性[/ja]' %></a></li>
     <% end %>
 
@@ -73,11 +73,11 @@ actionbar: false
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.methods and Object.keys(@doc.methods).length > 0: %>
+    <% if @ownedMethods.length > 0: %>
     <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
     <% end %>
 
-    <% if @doc.events and @doc.events.length > 0: %>
+    <% if @ownedEvents.length > 0: %>
     <li><a href="#events-summary"><%= @translate '[en]Events[/en][ja]イベント[/ja]' %></a></li>
     <% end %>
 
@@ -134,7 +134,7 @@ actionbar: false
   <% end %>
 
   <!-- attributes -->
-  <% if @doc.attributes and @doc.attributes.length > 0: %>
+  <% if @ownedAttributes.length > 0: %>
   <section>
     <h3 id="attributes">
       <% if @lang == "en": %>Attributes<% else: %>属性<% end %>
@@ -155,8 +155,7 @@ actionbar: false
         </tr>
       </thead>
       <tbody>
-        <% for attribute in @doc.attributes: %>
-          <% if [ 'js', @extension ].indexOf(attribute.extensionOf || 'js') > -1: %>
+        <% for attribute in @ownedAttributes: %>
           <tr>
             <td class="attribute-name" id="<%= @name %>-<%= attribute.name %>">
               <%= attribute.name %>
@@ -187,7 +186,6 @@ actionbar: false
               <% end %>
             </td>
           </tr>
-          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -322,7 +320,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods summary -->
-  <% if @doc.methods and Object.keys(@doc.methods).length > 0: %>
+  <% if @ownedMethods.length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
@@ -341,12 +339,7 @@ actionbar: false
         </tr>
       </thead>
       <tbody>
-        <% for key, method of @doc.methods: %>
-          <% ownsMethod = true %>
-          <% if @framework is 'js' then ownsMethod = ([ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1) %>
-          <% if @framework is 'angular2' then ownsMethod = (method.extensionOf and method.extensionOf.indexOf(@framework) > -1) %>
-
-          <% if ownsMethod: %>
+        <% for key, method of @ownedMethods: %>
           <tr>
             <td>
               <a href="#method-<%= method.name %>"><%= method.signature || method.name %> </a>
@@ -355,7 +348,6 @@ actionbar: false
               <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
             </td>
           </tr>
-          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -364,7 +356,7 @@ actionbar: false
   <!-- end methods summary -->
 
   <!-- events summary -->
-  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events and @doc.events.length > 0: %>
+  <% if !(@extensionDoc and @extensionDoc.directive) and @ownedEvents.length > 0: %>
   <section>
     <h3 id="events-summary">
       <% if @lang == "en": %>Events Summary<% else: %>イベント概要<% end %>
@@ -383,15 +375,13 @@ actionbar: false
         </tr>
       </thead>
       <tbody>
-        <% for event in @doc.events: %>
-          <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
+        <% for event in @ownedEvents: %>
           <tr>
             <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
             <td><%- @markd @translate event.description %>
               <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
             </td>
           </tr>
-          <% end %>
         <% end %>
       </tbody>
     </table>
@@ -401,14 +391,9 @@ actionbar: false
 
 
   <!-- methods details -->
-  <% if @doc.methods and Object.keys(@doc.methods).length > 0: %>
+  <% if @ownedMethods.length > 0: %>
   <h3 id="methods"><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
-  <% for key, method of @doc.methods: %>
-    <% ownsMethod = true %>
-    <% if @framework is 'js' then ownsMethod = ([ 'js', @extension ].indexOf(method.extensionOf || 'js') > -1) %>
-    <% if @framework is 'angular2' then ownsMethod = (method.extensionOf and method.extensionOf.indexOf(@framework) > -1) %>
-
-    <% if ownsMethod: %>
+  <% for key, method of @ownedMethods: %>
     <section class="method-detail">
       <h4 id="method-<%= method.name %>">
         <%= method.signature || method.name %><% if method.returns and method.returns.type : %><span class="value-type">: <%= method.returns.type.name || method.returns.type %></span><% end %>
@@ -455,7 +440,6 @@ actionbar: false
       <!-- end method parameter -->
       <% end %>
     </section>
-    <% end %>
 
   <% end %>
 
@@ -464,10 +448,9 @@ actionbar: false
 
 
   <!-- events -->
-  <% if !(@extensionDoc and @extensionDoc.directive) and @doc.events and @doc.events.length > 0: %>
+  <% if !(@extensionDoc and @extensionDoc.directive) and @ownedEvents.length > 0: %>
   <h3 id="events"><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
-  <% for event in @doc.events: %>
-    <% if [ 'js', @extension ].indexOf(event.extensionOf || 'js') > -1: %>
+  <% for event in @ownedEvents: %>
     <section class="event-detail">
       <h4 id="event-<%= event.name %>">
         <%= event.name %>
@@ -505,7 +488,6 @@ actionbar: false
         </tbody>
       </table>
     </section>
-    <% end %>
   <% end %>
   <% end %>
   <!-- end events -->
