@@ -22,7 +22,7 @@ function getOwnedItems(docsContent, framework) {
   if (docsContent && docsContent.length > 0) {
     for (var i = 0; i < docsContent.length; i++) {
       if ((framework === 'angular2' && (docsContent[i].extensionOf && docsContent[i].extensionOf.indexOf(framework) > -1))
-        || (framework !== 'angular2' && ([ 'js', framework ].indexOf(docsContent[i].extensionOf || 'js') > -1))) {
+        || ([ 'js', framework ].indexOf(docsContent[i].extensionOf || 'js') > -1)) {
         ownedItems.push(docsContent[i]);
       }
     }
