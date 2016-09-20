@@ -75,6 +75,7 @@
 		<% end %>
     <div class="container-content">
       <%- @contents %>
+      <%- @partial('need_help.html.eco') if @needHelp %>
     </div>
   </div>
 

@@ -88,7 +88,7 @@ actionbar: false
     <li><a href="#discussion"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
   </ul>
 
-  <% if @doc.examples: %>
+  <% if @doc.examples and @doc.examples.length > 0: %>
     <section>
       <h3 id="usage">
         <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
@@ -563,7 +563,4 @@ actionbar: false
   <% end %>
 
   <%- @partial('nodebb.html.eco') %>
-
-  <%- @partial('need_help.html.eco') %>
 </div>
-
