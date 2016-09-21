@@ -15,9 +15,11 @@ layout: docs.html.eco
 
 Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com)) apps. It also is equipped with popular JS frameworks support, including [Angular 1](/v2/docs/guide/angular1/), [Angular 2](/v2/docs/guide/angular2/) and [React](/v2/docs/guide/react/). Although they are using the same core, we are optimizing the APIs for each framework.
 
+This guide provides the basic concepts of Onsen UI. For more information about specific components, please see the reference section. A live example is included in each reference page with extended examples and information.
+
 ### Starting Project
 
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/getting-started).
 
 #### Using Onsen UI toolkit - Monaca CLI
 
@@ -157,17 +159,10 @@ Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2
   <ons-toolbar>
     <div class="center">Form</div>
   </ons-toolbar>
-
   <div style="text-align: center; margin-top: 30px;">
-    <p>
-      <ons-input placeholder="Username" float></ons-input>
-    </p>
-    <p>
-      <ons-input type="password" placeholder="Password" float></ons-input>
-    </p>
-    <p style="margin-top: 30px;">
-      <ons-button onclick="login()">Sign in</ons-button>
-    </p>
+    <p><ons-input type="text" placeholder="Username" float></ons-input></p>
+    <p><ons-input type="password" placeholder="Password" float></ons-input></p>
+    <p><ons-button onclick="login()">Sign in</ons-button></p>
   </div>
 </ons-page>
 ```
@@ -178,13 +173,9 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
 
 ```
 <ons-page>
-  <ons-toolbar>
-    <div class="center">List</div>
-  </ons-toolbar>
-
+  ...
   <ons-list>
     <ons-list-header>Header</ons-list-header>
-
     <ons-list-item>
       <div class="left">
         <ons-icon icon="md-face" class="list__item__icon"></ons-icon>
@@ -197,7 +188,6 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
         <ons-switch></ons-switch>
       </label>
     </ons-list-item>
-
     ...
   </ons-list>
 </ons-page>
@@ -216,6 +206,8 @@ For cases when the list can contain thousands of items, [`<ons-lazy-repeat>`](/v
 Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
 
 The layout can be performed by combining [`<ons-col>`](/v2/docs/js/ons-col.html) and [`<ons-row>`](/v2/docs/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
+
+Grid is not necessary in general for list items. Special layout is provided for list items based on flat iOS and Material Design specification. See [list](#lists) section for more information.
 
 #### Control and visual components
 
@@ -263,7 +255,7 @@ divGD.on('dragup dragdown', function(event) {
 
 ### Dialogs
 
-There are multiple types of dialog components available in Onsen UI: [`<ons-dialog>`](/v2/docs/js/ons-dialog.html) for displaying a page inside a centered dialog; [`<ons-alert-dialog>`](/v2/docs/js/ons-alert-dialog.html) for displaying a simple message inside an alert style dialog; [`<ons-popover>`](/v2/docs/js/ons-popover.html) for showing some content next to a specified element; and [`<ons-modal>`](/v2/docs/js/ons-modal.html) for displaying a fullscreen dialog that forbids user interaction.
+There are multiple types of dialog components available in Onsen UI: [`<ons-dialog>`](/v2/docs/js/ons-dialog.html) for displaying a page inside a centered dialog; [`<ons-alert-dialog>`](/v2/docs/js/ons-alert-dialog.html) for displaying a simple message inside an alert style dialog; [`<ons-popover>`](/v2/docs/js/ons-popover.html) for showing some content next to a specified element or a context menu; and [`<ons-modal>`](/v2/docs/js/ons-modal.html) for displaying a fullscreen dialog that forbids user interaction.
 
 Apart from that, [`ons.notification` object](/v2/docs/js/ons.notification.html) offers a more handy solution for simple dialogs:
 
@@ -277,6 +269,8 @@ ons.notification.prompt('What is your name?'); // Text input
 ### Multiple page navigation
 
 In Onsen UI there are three navigation patterns based on three different components: [`<ons-navigator>`](/v2/docs/js/ons-navigator.html), [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) and [`<ons-splitter>`](/v2/docs/js/ons-splitter.html). These components supply "frames" able to change their inner content. The content of these frames will normally be `<ons-page>` components but it is also possible to nest navigation components in order to combine them.
+
+More information is provided in the "Docs" tab of the Live Example section of each component.
 
 #### Navigator
 
@@ -396,6 +390,53 @@ Then, write the appropriate style code under the style tag or in the css file.
   border: 10px;
 }
 </style>
+```
+
+### Device Back Button
+
+For Android devices, Cordova fires a `backbutton` event on hardware back button. It is important to understand that this event is **fired by Cordova** so it requires `cordova.js` file or similars (`loader.js` in Monaca) to be included in the app. Since it cannot be tested in browsers without Cordova, you can use [Monaca Debugger](https://monaca.io/debugger.html) for this purpose.
+
+Onsen UI sets handlers with default behavior for Android back button in certain elements:
+
+* Dialogs: Closes the dialog if it's cancelable.
+* Navigator: Pops a page if the page stack is not empty.
+* Splitter: Closes the menu if it's open.
+
+If the conditions are not met, these elements will call the parent element's handler. The final global handler closes the app.
+
+While this is probably the desired behavior for many apps, Onsen UI allows to modify these handlers for better customization. To modify the app global handler (closing the app), the [`ons`](/v2/docs/js/ons.html) object provides few methods:
+
+```javascript
+// Disable or enable
+ons.disableDeviceBackButtonHandler();
+ons.enableDeviceBackButtonHandler();
+
+// Set a new handler
+ons.setDefaultDeviceBackButtonListener(function(event) {
+  ons.notification.confirm('Do you want to close the app?') // Ask for confirmation
+    .then(function(index) {
+      if (index === 1) { // OK button
+        navigator.app.exitApp(); // Close the app
+      }
+    });
+  ));
+});
+```
+
+Apart from this, the mentioned elements together with `<ons-page>` element expose `onDeviceBackButton` property to modify their own handler:
+
+```javascript
+var myNavigator = document.getElementById('my-navigator');
+myNavigator.onDeviceBackButton.disable(); // Disables back button handler
+myNavigator.onDeviceBackButton.enable(); // Enables back button handler
+myNavigator.onDeviceBackButton.isEnabled(); // Returns true if enabled
+myNavigator.onDeviceBackButton.destroy(); // Destroys the current handler
+
+var page = myNavigator.topPage;
+page.onDeviceBackButton = function(event) {
+  console.log('Hardware back button!');
+  event.callParentHandler(); // Calls the parent handler (navigator handler in this case)
+};
 ```
 
 ### Under the hood of Custom Elements
