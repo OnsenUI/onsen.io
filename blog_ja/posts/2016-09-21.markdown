@@ -22,20 +22,20 @@ Onsen UI は、HTML5 ハイブリッドアプリの技術を使ってネイテ�
 <!-- more -->
 
 <!--While Onsen UI 1.x was based on AngularJS, the new version 2 has no library dependencies. This is the biggest change in Onsen UI 2.0. As well as increasing performance and making the file size smaller, it also makes it easy to include the components in any project, whether it's written in React, Angular, Vue.js, some other framework or even pure JavaScript. There are so many exciting libraries and frameworks coming out lately and we want to make it possible for anyone to use Onsen UI in their apps!-->
-Onsen UI 1.x は AngularJS をベースにしていましたが、Onsen UI 2.0 はどのライブラリにも依存していません。これが Onsen UI 2.0 での最も大きな変更となります。これにより、パフォーマンスの向上とファイルサイズの縮小に加えて、UI コンポーネントを任意のプロジェクトで利用可能にすることを実現しました。React、Angular、Vue.js などのフレームワークで記述されたプロジェクトはもちろん、純粋な JavaScript プロジェクトでも Onsen UI のコンポーネントを利用できます。素晴らしいライブラリやフレームワークが続々と出てきていますが、それらで記述されたプロジェクトでも Onsen UI を利用できるようにしようと思っています。
+Onsen UI 1.x は AngularJS をベースにしていましたが、Onsen UI 2.0 はどのライブラリにも依存していません。これが Onsen UI 2.0 での最も大きな変更となります。これにより、パフォーマンスの向上とファイルサイズの縮小に加えて、UI コンポーネントを任意のプロジェクトで利用可能にすることを実現しました。React、Angular、Vue.js などのフレームワークで記述されたプロジェクトはもちろん、純粋な JavaScript プロジェクトでも Onsen UI のコンポーネントを利用できます。その他にも素晴らしいライブラリやフレームワークが続々と出てきていますが、それらで記述されたプロジェクトでも Onsen UI を利用できるようにしようと思っています。
 
 <!--With this version, we added Material Design components and we also added a feature that automatically styles components based on the platform so that apps made with Onsen UI 2.0 will look native on both iOS and Android.-->
 また、Onsen UI 2.0 ではマテリアルデザインに対応したコンポーネントを追加し、さらにプラットフォームに応じてコンポーネントのスタイルを自動的に切り替える機能を追加しました。これにより Onsen UI 2.0 で作ったアプリは iOS と Android の両方でネイティブの見た目になります。
 
 <!--With the new version, we also released a [new website](https://onsen.io/). Apart from a new and cleaner design, we have also made an effort to improve the documentation and add more content to make it easier to get started with Onsen UI.-->
-Onsen UI 2.0 では[新 Web サイト](https://onsen.io/)もリリースしました。ただデザインを一新しただけでなく、Onsen UI をより使い始めやすくなるように、ドキュメントを改善・拡充しています。
+Onsen UI 2.0 では[新しい Web サイト](https://onsen.io/)もリリースしました。ただデザインを一新しただけでなく、Onsen UI をより使い始めやすくなるように、ドキュメントを改善・拡充しています。
 
 <!--## Onsen UI is framework agnostic-->
 ## Onsen UI はフレームワーク非依存です
 
 <!--Onsen UI is implemented in pure JavaScript and not dependent on any other framework or library. All components are created using the [Custom Elements API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements). It's a simple API that is used to define custom tags and add custom behavior to them. Think of it as a way to extend the HTML language. Custom Elements is part of a larger concept called [Web Components](http://webcomponents.org/) that also includes Shadow DOM, HTML imports and the new `<template>` tag. It also means Onsen UI is future proof since it is living on the Web standard technology.-->
 Onsen UI は純粋な JavaScript で実装されており、どのフレームワークやライブラリにも依存していません。全てのコンポーネントが [Custom Elements API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) で作られています。Custom Elements API は、独自のタグを定義し、それらのタグに独自の動作を紐付けることができるシンプルな API です。HTML 言語を拡張する一種の手段と思ってください。なお、Custom Elements はより大きな概念である [Web Components](http://webcomponents.org/) の一部です。
-Web Components は Custom Elements に加えて Shadow DOM や HTML imports、`template` タグを含みます。Onsen UI が Web 標準の Custom Elements で実装されているということは、Onsen UI が時間経過によって陳腐化しないことを意味します。
+Web Components は Custom Elements に加えて Shadow DOM、HTML imports、`template` タグを含みます。Onsen UI が Web 標準の Custom Elements で実装されているということは、Onsen UI が時間経過によって陳腐化しないことを意味します。
 
 <!--![Onsen UI uses Web Components](https://onsen.io/blog/content/images/2016/Sep/onsen_wc.png)-->
 ![Onsen UI は Web Components を使用しています](https://onsen.io/blog/content/images/2016/Sep/onsen_wc.png)
@@ -44,7 +44,7 @@ Web Components は Custom Elements に加えて Shadow DOM や HTML imports、`t
 Custom Elements は非常に簡単に使えます。Custom Elements で作られたタグは通常の HTML タグと同じく、ページに接続される（attached）と同時に自動的に動き始めます。コンパイルやブートストラップを行う必要はありません。
 
 <!--The following code will render a simple switch:-->
-以下のコードはシンプルなスイッチをレンダリングするコードです:
+以下のコードでシンプルなスイッチ（`ons-switch`）が描画されます:
 
 ```html
 <ons-switch checked></ons-switch>
@@ -52,7 +52,7 @@ Custom Elements は非常に簡単に使えます。Custom Elements で作られ
 ```
 
 <!--The Onsen UI elements work just like the built-in elements so we can attach some behavior to it with JavaScript:-->
-Onsen UI の要素はビルトイン要素と全く同じように動作します。動作は JavaScript で紐付けることができます。
+この要素（`ons-switch`）には、ビルトイン要素と同じく、JavaScript で動作を紐付けることができます。
 
 ```javascript
 var el = document.querySelector('ons-switch');
@@ -63,7 +63,7 @@ el.addEventListener('change', function(event) {
 ```
 
 <!--These few lines of code renders into this:-->
-上記の数行のコードで以下のようなレンダリングが実現できます:
+上記の数行のコードを動かすと以下のようになります:
 
 <p data-height="300" data-theme-id="13819" data-slug-hash="bwEPVA" data-default-tab="js,result" data-user="argelius" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/argelius/pen/bwEPVA/">Switch example</a> by Andreas Argelius (<a href="http://codepen.io/argelius">@argelius</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
@@ -87,7 +87,7 @@ Onsen UI のコンポーネントは iOS と Android 両方のスタイルを備
 ## 改善された新ドキュメント
 
 <!--We have received feedback that the documentation on the previous website was hard to navigate and that it was sometimes difficult to know where to look for information about the components. Our [new documentation](/v2/docs/guide/js/) has been simplified and we believe it is now a lot easier to find what you are looking for.-->
-以前の Web サイトに対しては、各コンポーネントの情報がどこにあるのか分かりにくいというフィードバックを頂いていました。そこで[新ドキュメント](/v2/docs/guide/js/)ではシンプルなデザインを採用しました。以前よりも情報が見つけやすくなっていると思います。
+以前の Web サイトに対しては、各コンポーネントの情報がどこにあるのか分かりにくいというフィードバックを頂いていました。そこで[新しいドキュメント](/v2/docs/guide/js/)ではシンプルなデザインを採用しました。以前よりも情報が見つけやすくなっていると思います。
 
 <!--We have of course also updated both the guide and reference with all the new components that were added in Onsen UI 2.0. Since the documentation is one of the most important resources for Onsen UI developers, we will keep improving it going forward!-->
 もちろん Onsen UI 2.0 で追加された全ての新コンポーネントについて、ガイドとリファレンスの両方をアップデート済みです。Onsen UI の利用者にとってドキュメントは最も重要な資料の一つですので、ドキュメントの改善は今後も継続していくつもりです。
