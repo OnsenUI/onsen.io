@@ -81,6 +81,9 @@ module.exports = function(language, isStaging) {
     },
     kanako: {
       name: '生形 可奈子'
+    },
+    naoki: {
+      name: 'Naoki Matagawa'
     }
   };
 
