@@ -8,10 +8,10 @@ tags: onsen-ui, react, angular
 category: 技術情報
 ---
 
-<!--![Onsen UI is here!](/blog/content/images/2016/Sep/onsen_release.png)-->
-![Onsen UI 正式リリース！](/blog/content/images/2016/Sep/onsen_release.png)
+<!--![Onsen UI is here!](https://onsen.io/blog/content/images/2016/Sep/onsen_release.png)-->
+![Onsen UI 正式リリース！](https://onsen.io/blog/content/images/2016/Sep/onsen_release.png)
 
-（この記事は Onsen UI チームの [Andreas Argelius](https://twitter.com/a_argelius) が英語版 Monaca x Onsen ブログに投稿した [Onsen UI 2.0 is here!](/blog/onsen-ui-2-is-here/) の翻訳です。）
+（この記事は Onsen UI チームの [Andreas Argelius](https://twitter.com/a_argelius) が英語版 Monaca x Onsen ブログに投稿した [Onsen UI 2.0 is here!](https://onsen.io/blog/onsen-ui-2-is-here/) の翻訳です。）
 
 <!--It's been a little over four months since we released the first RC version of Onsen UI 2.0. Since then we have gone through several iterations, ironing out the creases in order to deliver a great UI solution for all hybrid and mobile web app developers out there.-->
 Onsen UI 2.0 の最初の RC 版をリリースしてから4ヶ月と少しが経ちました。あれ以来私たちは、全てのハイブリッドモバイル Web アプリの開発者に最高の UI ソリューションをもたらすべく、改善を続けてきました。
@@ -37,8 +37,8 @@ Onsen UI 2.0 では[新 Web サイト](https://onsen.io/)もリリースしま�
 Onsen UI は純粋な JavaScript で実装されており、どのフレームワークやライブラリにも依存していません。全てのコンポーネントが [Custom Elements API](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) で作られています。Custom Elements API は、独自のタグを定義し、それらのタグに独自の動作を紐付けることができるシンプルな API です。HTML 言語を拡張する一種の手段と思ってください。なお、Custom Elements はより大きな概念である [Web Components](http://webcomponents.org/) の一部です。
 Web Components は Custom Elements に加えて Shadow DOM や HTML imports、`template` タグを含みます。Onsen UI が Web 標準の Custom Elements で実装されているということは、Onsen UI が時間経過によって陳腐化しないことを意味します。
 
-<!--![Onsen UI uses Web Components](/blog/content/images/2016/Sep/onsen_wc.png)-->
-![Onsen UI は Web Components を使用しています](/blog/content/images/2016/Sep/onsen_wc.png)
+<!--![Onsen UI uses Web Components](https://onsen.io/blog/content/images/2016/Sep/onsen_wc.png)-->
+![Onsen UI は Web Components を使用しています](https://onsen.io/blog/content/images/2016/Sep/onsen_wc.png)
 
 <!--Custom Elements are very easy to use. They are just like normal HTML tags and will be activated automatically when attached to the page. There is no compilation or bootstrapping required.-->
 Custom Elements は非常に簡単に使えます。Custom Elements で作られたタグは通常の HTML タグと同じく、ページに接続される（attached）と同時に自動的に動き始めます。コンパイルやブートストラップを行う必要はありません。
@@ -68,8 +68,8 @@ el.addEventListener('change', function(event) {
 <p data-height="300" data-theme-id="13819" data-slug-hash="bwEPVA" data-default-tab="js,result" data-user="argelius" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/argelius/pen/bwEPVA/">Switch example</a> by Andreas Argelius (<a href="http://codepen.io/argelius">@argelius</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
-<!--For more information on our reasoning behind removing the Angular dependency and going full Web Components, I recommend you read [this great article](/blog/onsen-ui-web-components/) written by [Fran Dios](https://twitter.com/frandiox), my fellow Onsen UI developer.-->
-私たちが Angular 依存をやめて Web Components に完全移行した詳しい理由については、私の同僚で同じく Onsen UI デベロッパーの [Fran Dios](https://twitter.com/frandiox) が書いた[素晴らしい記事](/blog/onsen-ui-web-components/)（英語記事）をご覧ください。
+<!--For more information on our reasoning behind removing the Angular dependency and going full Web Components, I recommend you read [this great article](https://onsen.io/blog/onsen-ui-web-components/) written by [Fran Dios](https://twitter.com/frandiox), my fellow Onsen UI developer.-->
+私たちが Angular 依存をやめて Web Components に完全移行した詳しい理由については、私の同僚で同じく Onsen UI デベロッパーの [Fran Dios](https://twitter.com/frandiox) が書いた[素晴らしい記事](https://onsen.io/blog/onsen-ui-web-components/)（英語記事）をご覧ください。
 
 <!--## Designed for both iOS and Android-->
 ## iOS と Android に両対応
@@ -77,8 +77,8 @@ el.addEventListener('change', function(event) {
 <!--The Onsen UI components have styles for both iOS and Android. When running on Android they will automatically display as Material Design while on iOS they will look like native iOS components. It also works well on Windows Phone (Microsoft Edge) that renders iOS style.-->
 Onsen UI のコンポーネントは iOS と Android 両方のスタイルを備えています。Android 端末で Onsen UI を動かすと自動的にマテリアルデザインで表示され、iOS 端末で Onsen UI を動かすと自動的にネイティブ iOS コンポーネントの見た目で表示されます。また、Windows Phone (Microsoft Edge) でも利用できます。Windows Phone では iOS のスタイルで表示されます。
 
-<!--![Automatic styling in Onsen UI](/blog/content/images/2016/Jun/react_redux_onsen_weather.png)-->
-![Onsen UI の機能: Automatic Styling](/blog/content/images/2016/Jun/react_redux_onsen_weather.png)
+<!--![Automatic styling in Onsen UI](https://onsen.io/blog/content/images/2016/Jun/react_redux_onsen_weather.png)-->
+![Onsen UI の機能: Automatic Styling](https://onsen.io/blog/content/images/2016/Jun/react_redux_onsen_weather.png)
 
 <!--One of the challenges when developing hybrid apps is to make them look and feel like the native apps that the users are accustomed to. With automatic styling there is no need to spend a lot of time styling the components. Instead, you can let Onsen UI do it for you while you focus on the important part: creating the actual app. See more details in our [docs](/v2/docs/guide/js/#cross-platform-styling).-->
 ハイブリッドアプリの開発で課題となるのは、ハイブリッドアプリを、ユーザが慣れ親しんでいる方のネイティブアプリと同じ見た目にすることです。しかし Automatic Styling があればそういったコンポーネントのスタイリングに時間を割く必要はなくなります。コンポーネントのスタイリングは Onsen UI にやらせておいて、代わりにそれよりも重要なアプリの根幹部分の実装に集中すれば良いのです。Automatic Styling の詳細については[ドキュメント](/v2/docs/guide/js/#cross-platform-styling)（英語）をご覧ください。
@@ -124,4 +124,4 @@ Onsen UI 2.0 をもう使っているという方は、是非 [Onsen UI 2.0 Tuto
 
 Happy coding!
 
-（この記事は Onsen UI チームの [Andreas Argelius](https://twitter.com/a_argelius) が英語版 Monaca x Onsen ブログに投稿した [Onsen UI 2.0 is here!](/blog/onsen-ui-2-is-here/) の翻訳です。）
+（この記事は Onsen UI チームの [Andreas Argelius](https://twitter.com/a_argelius) が英語版 Monaca x Onsen ブログに投稿した [Onsen UI 2.0 is here!](https://onsen.io/blog/onsen-ui-2-is-here/) の翻訳です。）
