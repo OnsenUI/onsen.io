@@ -1,3 +1,5 @@
+@wrapped: ~"only screen and (max-width: 974px)";
+
 #landing-new {
   #start {
     background: linear-gradient(#E54738, #D64135, #C13932, #9A292C);
@@ -89,7 +91,7 @@
       flex-wrap: wrap;
       justify-content: center;
 
-      @media only screen and (max-width: 974px) {
+      @media @wrapped {
         padding: 80px 0;
       }
 
@@ -151,6 +153,10 @@
         font-weight: 300;
         line-height: 30px;
         margin-bottom: 21px;
+
+        @media @wrapped {
+          text-align: center;
+        }
       }
 
       & h3 {
@@ -332,7 +338,7 @@
 
       & > div {
         padding-top: 24px;
-        margin: 0 35px;
+        margin: 0 35px 30px;
       }
 
       &-image {
