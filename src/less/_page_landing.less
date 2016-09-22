@@ -435,6 +435,119 @@
   }
 }
 
+.testimonials {
+  max-width: @width - 40px;
+  padding: 50px 20px;
+  border-top: 2px solid #e8edee;
+  border-bottom: 2px solid #e8edee;
+  margin: 0 auto 40px;
+
+  & > input {
+    display: none;
+  }
+
+  &-filler {
+    visibility: hidden;
+  }
+
+  &-quote {
+    font-size: 24px;
+    line-height: 1.5em;
+    font-family: Georgia, serif;
+    color: #666;
+    width: 900px;
+    margin: 0 auto 50px;
+    position: relative;
+    max-width: 80%;
+
+    #quote1,
+    #quote2 {
+      opacity: 0;
+      transition: opacity 0.4s linear;
+      position: absolute;
+    }
+
+    &:before {
+      content: url(/images/common/d_quote.png);
+      position: absolute;
+      top: 0;
+      left: -44px;
+    }
+  }
+
+  #radio-quote1:checked ~ .testimonials-quote #quote1 {
+    display: block;
+    opacity: 1;
+  }
+
+  #radio-quote2:checked ~ .testimonials-quote #quote2 {
+    display: block;
+    opacity: 1;
+  }
+
+  &-people {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  &-person {
+    display: flex;
+    flex-direction: row;
+    margin: 10px 0;
+    opacity: 0.4;
+    transition: opacity 0.4s linear;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:nth-child(1) &-icon {
+      background: url(/images/common/icn_testimonials_1.png);
+
+    }
+
+    #radio-quote1:checked ~ .testimonials-people > &:nth-child(1) {
+      opacity: 1;
+    }
+
+    #radio-quote2:checked ~ .testimonials-people > &:nth-child(2) {
+      opacity: 1;
+    }
+
+    &:nth-child(2) &-icon {
+      background: url(/images/common/icn_testimonials_2.png);
+    }
+
+    &-icon {
+      width: 60px;
+      height: 60px;
+    }
+
+    &-info {
+      margin: 0 0 0 14px;
+      width: 220px;
+      align-self: center;
+    }
+
+    &-name {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.2em;
+      margin-bottom: 2px;
+      color: #333;
+    }
+
+    &-desc {
+      font-size: 14px;
+      line-height: 1.2em;
+      color: #666;
+    }
+  }
+}
+
 @keyframes fade {
   0% {
     opacity:1;
