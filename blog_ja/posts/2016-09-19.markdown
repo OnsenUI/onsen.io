@@ -22,7 +22,7 @@ $ npm install monaca -g
 
 ## 利用場面について
 
-transpile はコードの変換を行うオプションです。具体的には React や Angular2 などJavaScriptで書かないプロジェクトに対して用いられます。
+transpile はコードの変換を行うオプションです。具体的には React や Angular2 などEcmaScript5で書かないプロジェクトに対して用いられます。
 
 例えば React プロジェクトの場合、Monaca CLIを使うと次のように開始されます。最初に出てくるカテゴリで `Onsen UI and React` を選択して、その後で React を使ったテンプレートを選択します。
 
@@ -53,18 +53,21 @@ src/
 1 directory, 5 files
 ```
 
-React アプリでよく見る jsx で書かれています。これらは JavaScript に変換しなければMonacaアプリとして利用できません。そこで使うのが transpile になります。
+React アプリでよく見る jsx で書かれています。これらは EcmaScript5 に変換しなければMonacaアプリとして利用できません。そこで使うのが transpile になります。
 
 ### transpile の使い方
 
-transpile を使うと言っても普段は気にすることはありません。monaca コマンドの中でも以下については transpileを同時に行ってくれます。
+以下のmonaca コマンドを実行すると、同時にtranspileが行われます。
 
 - monaca upload
 - monaca preview
+- monaca serve（monaca previewへのエイリアス）
 - monaca debug
 - monaca remote build
 
-つまりWebブラウザを立ち上げて開発を行うpreviewであればtranspileを行うことはありません。なお、単独で実行もできます。以下は実行例です。Web FontやJavaScript、スタイルシートがコンパイルされます。
+つまり、transpileを使うと言っても、monacaコマンドの中で自動的に実行されるので、普段の開発では特に意識する必要はありません。
+
+なお、transpileは単独で実行もできます。以下は実行例です。Web FontやJavaScript、スタイルシートがコンパイルされます。
 
 ```
 $ monaca transpile
