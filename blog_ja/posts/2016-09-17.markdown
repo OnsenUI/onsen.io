@@ -8,7 +8,7 @@ tags: monaca, sqlite
 category: 技術情報
 ---
 
-SQLiteプラグインを使うとMonacaアプリに簡易的なデータベース機能を追加できます。今回は[Monacaのテンプレートとして提供されているTodoアプリ](https://docs.monaca.io/ja/sampleapp/samples/todo/)にデータベース機能を追加してみたいと思います。
+SQLiteプラグインを使うと、Monacaアプリにローカルに保存される簡易的なデータベースを追加できます。今回は[Monacaのテンプレートとして提供されているTodoアプリ](https://docs.monaca.io/ja/sampleapp/samples/todo/)にデータベース機能を追加してみたいと思います。
 
 ### SQLiteプラグインについて
 
@@ -94,7 +94,7 @@ db.executeSql("SELECT * FROM Todo ORDER BY id desc", [], function(rs) {
 })
 ```
 
-SELECT文の場合、 `rs.rows.length` で結果の件数が取得できます。そして、 rs.rows.item(i) （iは行数のインデックス）で行のデータが取得できます。後はカラムがそのまま row.title のように指定して取得できます。
+SELECT文の場合、 `rs.rows.length` で結果の件数が取得できます。そして、 rs.rows.item(i) （iは行数のインデックス）で行のデータが取得できます。カラムは row.title のように指定して取得できます。
 
 アプリ起動時のコードは全体では次のようになります。
 
@@ -127,15 +127,15 @@ document.addEventListener('deviceready', function() {
     // プラグインテスト失敗
     alert(error.message);
   });
-});
+
 ```
 
 ### データの表示
 
 データを表示する部分は元々のTodoアプリから少し変更しています。具体的には次の通りです。
 
-- 画像表示の削除（画像はバイナリで今回は対応していません）
-- 既存データの表示とTodo追加時の処理があるので別メソッド化（showTodo）
+- 画像表示の削除（バイナリデータの保存は少し複雑になるので、今回は対応していません）
+- データの表示処理を関数化（showTodo）
 
 内容は次の通りです。タスクのタイトルと本文を表示しています。
 
@@ -170,7 +170,7 @@ function addTodo(camera_url) {
 
 INSERT文を実行する時にはSQLインジェクションに注意する必要があります。そのため、自分でエスケープ処理を書くのではなく引数を使って渡すようにした方が安全です。SQLが成功したらそのままアプリ起動時と同じように表示処理に渡しています。
 
-ここまでできあがるとアプリを起動してTodoを追加してみましょう。再読み込みしてもデータが消えずに表示されれば完成です。
+ここまでできあがったら、アプリを起動してTodoを追加してみましょう。再読み込みしてもデータが消えずに表示されれば完成です。
 
 ![](/blog/content/images/2016/Sep/monaca-sqlite-todo.png)
 
