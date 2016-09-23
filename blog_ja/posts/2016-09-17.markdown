@@ -18,19 +18,18 @@ SQLiteプラグインを使うと、Monacaアプリにローカルに保存さ�
 
 ### アプリ起動時の処理
 
-アプリ起動時の処理は次のようになります。
+アプリ起動時には次のような手順で処理を実行します。
 
 1. プラグインのテスト
 1. データベースを開く
 1. テーブル作成（テーブルがなければ）
 1. 既存データの取り出し
 
-まずはデータベースへの接続を行います。接続情報は多くのメソッドで使われることになりますのでグローバル変数としておくのが良いでしょう。
+#### 1. プラグインのテスト
+
+まずはプラグインが実行可能かどうかのテストを行います。
 
 ```
-var db = null;
-window.db = db;
-
 document.addEventListener('deviceready', function() {
   // プラグインのテスト
   sqlitePlugin.selfTest(function() {
@@ -41,22 +40,30 @@ document.addEventListener('deviceready', function() {
 });
 ```
 
-テストが失敗した時にはアラートを出すのが良いでしょう。テストが成功したら、データベースを開きます。
+プラグインのテストに失敗した時にはアラートを出すのが良いでしょう。テストが成功したら、データベースを開きます。
+
+#### 2. データベースを開く
+
+データベースへの接続を行います。接続情報は多くのメソッドで使われることになりますのでグローバル変数としておくのが良いでしょう。
 
 ```
+var db = null;
+
 // データベースを開く
 db = sqlitePlugin.openDatabase({name: 'todo.db', location: 'default'});
 ```
 
-次に、以下のような構造のテーブルを作成します。
+#### 3. テーブル作成（テーブルがなければ）
+
+以下のような構造のTodoテーブルを作成します。
 
 |カラム名|データ型|キー|
 |:---------|:---------|:---------|
-|Todo.key|integer|主キー|
-|Todo.title|text|-|
-|Todo.body|text|-|
+|key|integer|主キー|
+|title|text|-|
+|body|text|-|
 
-テーブル作成する命令は、次のような形式になっています。
+テーブルを作成する命令は、次のような形式になっています。
 
 ```
 db.executeSql("SQL文", "引数", "SQL実行成功時のコールバック", "SQL失敗時のコールバック");
@@ -76,7 +83,9 @@ db.executeSql("CREATE TABLE IF NOT EXISTS Todo (id integer primary key autoincre
 });
 ```
 
-最後に既存データの取り出しを行います。
+#### 4. 既存データの取り出し
+
+最後にTodoテーブルから既存データを取り出す処理を行います。
 
 ```
 // データ取得のSQL実行
@@ -94,9 +103,11 @@ db.executeSql("SELECT * FROM Todo ORDER BY id desc", [], function(rs) {
 
 SELECT文の場合、 `rs.rows.length` で結果の件数が取得できます。そして、 rs.rows.item(i) （iは行数のインデックス）で行のデータが取得できます。カラムは row.title のように指定して取得できます。
 
-アプリ起動時のコードは全体では次のようになります。
+アプリ起動時のコード全体は次のようになります。
 
 ```
+var db = null;
+
 document.addEventListener('deviceready', function() {
   // プラグインのテスト
   sqlitePlugin.selfTest(function() {
