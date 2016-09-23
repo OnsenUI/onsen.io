@@ -48,14 +48,25 @@ document.addEventListener('deviceready', function() {
 db = sqlitePlugin.openDatabase({name: 'todo.db', location: 'default'});
 ```
 
-次にテーブルを作成しますが、この時にはテーブルがなければ作成する IF NOT EXISTS を指定します。見やすく整形していますが、SQLは実際には1行で書きます。
+次に、以下のような構造のテーブルを作成します。
+
+|カラム名|データ型|キー|
+|:---------|:---------|:---------|
+|Todo.key|integer|主キー|
+|Todo.title|text|-|
+|Todo.body|text|-|
+
+テーブル作成する命令は、次のような形式になっています。
+
+```
+db.executeSql("SQL文", "引数", "SQL実行成功時のコールバック", "SQL失敗時のコールバック");
+```
+
+テーブルを作成するCREATE TABLE文を実行します。このときテーブルがなければ作成する IF NOT EXISTS を指定します。
 
 ```
 // テーブル作成のSQL実行
-db.executeSql("CREATE TABLE IF NOT EXISTS Todo 
-  (id integer primary key autoincrement, 
-   title text,
-   body text)", [], function(res) {
+db.executeSql("CREATE TABLE IF NOT EXISTS Todo (id integer primary key autoincrement, title text, body text)", [], function(res) {
      // テーブル作成成功
     }, function(error) {
       // テーブル作成失敗
@@ -64,19 +75,6 @@ db.executeSql("CREATE TABLE IF NOT EXISTS Todo
   });
 });
 ```
-
-SQLiteプラグインでは、次のような形式になっています。
-
-```
-db.executeSql("SQL文", "引数", "SQL実行成功時のコールバック", "SQL失敗時のコールバック");
-```
-
-テーブル構造、HTML構造は次のように相対します。Todo.keyは今回は使っていませんが、Todoの削除や更新処理を考えると必要でしょう。
-
-|テーブル構造|HTML構造|
-|:---------|:---------|
-|Todo.title|#todo-title|
-|Todo.body|#todo-body|
 
 最後に既存データの取り出しを行います。
 
@@ -170,15 +168,15 @@ function addTodo(camera_url) {
 
 INSERT文を実行する時にはSQLインジェクションに注意する必要があります。そのため、自分でエスケープ処理を書くのではなく引数を使って渡すようにした方が安全です。SQLが成功したらそのままアプリ起動時と同じように表示処理に渡しています。
 
-ここまでできあがったら、アプリを起動してTodoを追加してみましょう。再読み込みしてもデータが消えずに表示されれば完成です。
+なお、cordova-sqlite-storageはコールバック方式になっているのでネストが深くなる傾向があります。Promiseを使った方が見通しの良いコードになりそうです。
+
+ここまでできあがったら、アプリを実行します。サードパーティ製のプラグインを使っているので、アプリのビルドが必要です。ビルドができたらアプリを起動してTodoを追加してみましょう。再読み込みしてもデータが消えずに表示されれば完成です。
 
 ![](/blog/content/images/2016/Sep/monaca-sqlite-todo.png)
 
 ----
 
 今回のコードは[moongift/MonacaSQLiteDemo](https://github.com/moongift/MonacaSQLiteDemo)にアップロードされていますので参考にしてください。
-
-cordova-sqlite-storageはコールバック方式になっているのでネストが深くなる傾向があります。Promiseを使った方が見通しの良いコードになりそうです。
 
 なお、参考までにcordova-sqlite-storageはトランザクションやSQLバッチもサポートしています。
 
