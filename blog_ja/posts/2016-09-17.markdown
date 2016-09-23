@@ -75,8 +75,8 @@ db.executeSql("SQL文", "引数", "SQL実行成功時のコールバック", "SQ
 
 |テーブル構造|HTML構造|
 |:---------|:---------|
-|Todo.title|#title|
-|Todo.body|#body|
+|Todo.title|#todo-title|
+|Todo.body|#todo-body|
 
 最後に既存データの取り出しを行います。
 
