@@ -1,16 +1,20 @@
 ---
 page: 'javascript'
-title: 'バージョン1.xリファレンス - Onsen UIフレームワーク'
-h1: 'バージョン1.x向けコンポーネントリファレンス'
+framework: 'onsen1'
+title: 'Components Reference for Version 1.x - Onsen UI Framework'
 needHelp: true
 reference: true
 version: v1
+layout: docs.html.eco
 ---
 
-<h2 class="doc-page-header doc-page-header-js">Onsen UIコンポーネントの一覧</h2>
+<p>
+  <strong>
+    This is the reference for Onsen UI v1. You might want to take a look at the <a href="/v2/docs/angular1.html">Onsen UI v2</a> reference.
+  </strong>
+</p>
 
-<div class="js-index"><div class="js-index-inner">
-
+<div class="js-index">
   <% for category, docs of @componentCategories.v1: %>
   <div class="js-index-category">
     <h4 class="js-index-header"><%- @titlize(category) %></h4>
@@ -24,5 +28,7 @@ version: v1
     </ul>
   </div>
   <% end %>
-
-</div></div>
+  <% for i in [0...((6 - (Object.keys(@componentCategories.v1).length % 6 || 6)))]: %>
+    <div class="js-index-category-fill"></div>
+  <% end %>
+</div>
