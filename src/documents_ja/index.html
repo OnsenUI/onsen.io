@@ -1,50 +1,158 @@
 ---
 page: 'landing-new'
-title: 'Onsen UI: HTML5モバイルアプリをもっと速く、もっと美しく'
+title: 'Onsen UI 2: HTML5モバイルアプリを速く、美しく'
 layout: 'default.html.eco'
-topbar: false
+header: false
 actionbar: false
-description: '最高に速くて最高に美しいHTML5ハイブリッドアプリ向けUIフレームワーク。Androidマテリアルデザインと、iOSフラットデザインの両方をサポートしています。'
+topbar: false
+version: v2
+description: 'HTML5とJavaScriptで美しいハイブリッドアプリを開発。jQuery、Angular 1と2、React、Vue.jsなどのフレームワークに対応。iOSとAndroid向けクロスプラットフォーム開発。'
 ---
 
-<div id="start" class="white-back">
-  <div class="wrapper">
-    <div id="intro">
-      <h1>HTML5ハイブリッドアプリ向け<span>モバイルUIフレームワーク</span></h1>
-      <a href="/getting-started.html" class="keybutton">Onsen UIを始めよう</a>
-      <div class="v2announce">Material DesignやReact、Web Componentsに対応した<br><a href="https://onsen.io/v2/" style="color: #ff4d36">バージョン 2 RC</a>をチェック! <span style="font-size: 80%">(日本語版も公開予定)</span></div>
-      <nav class="actions">
-        <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a>
-        <a class="action github" href="https://github.com/OnsenUI/OnsenUI">GitHub Star</a>
-      </nav>
-      <p class="small" id="release-info">最新バージョン <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> (リリース: <time></time>) <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>すべてのバージョン</a><br>オープンソース（Apache 2ライセンス）で<a href="https://github.com/OnsenUI/OnsenUI">GitHub</a>にて公開中。</p>
-    </div>
-    <div class="keyvisual"><img src="/images/index/keyvisual.png" alt="Onsen UIキービジュアル"></div>
-  </div>
+<div class="header">
+  <%- @partial('global-nav.html.eco') %>
+  <%- @partial('keyvisual.html.eco') %>
 </div>
+
 <div id="features">
   <div class="feature">
-    <h2>HTML5なのに驚きの速さ</h2>
-    <p>Onsen UIを使うと、あなたのHTML5アプリのパフォーマンスが格段に向上。ネイティブ開発と見間違う程のスピードを、是非実感してみてください。</p>
-  </div>
+    <div>
+      <h3>Onsen UIはお好きなJavaScriptフレームワークでご利用いただけます。<br>組み合わせる製品をお選びください。</h3>
+      <div class="frameworks">
+        <a href="/angularjs" class="angular1">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/angular2" class="angular2">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/react" class="react">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/vue" class="vue">
+          <div></div>
+          <div></div>
+        </a>
+        <a href="/meteor" class="meteor">
+          <div></div>
+          <div></div>
+        </a>
+      </div>
+      <p>Onsen UIを使うとモバイル向けハイブリッド/Webアプリの開発が驚くほどスムーズに。Cordova（PhoneGap）を使ってネイティブアプリに変換することもできます。JavaScriptフレームワークに依存せず、モバイルのUIをスムーズに、美しく表現します。</p>
+    </div>
+ </div>
 
   <div class="feature">
-    <h2>PhoneGap / Cordovaに最適</h2>
-    <p>Onsen UIはPhoneGap / Cordovaに代表されるHTML5ハイブリッドアプリ開発に最適なソリューションです。Onsen UIを使えば、多くのPhoneGap / Cordovaアプリ開発者が抱えていた、アプリのパフォーマンスの問題とUI開発の難しさが一発で解決できます。<br>
-      また、Onsen UIは完全なオープンソース製品なので、開発者はロックインされることはまったくありません。Onsen UIはモバイル対応版のWebアプリの開発にもご利用頂けます。</p>
-    <img src="/images/index/feature-phonegap-cordova-friendly.png">
-  </div>
+    <div>
+      <h2>ハイブリッドとモバイルWebアプリ開発の決定版</h2>
+      <p>開発環境のセットアップを一切することなく、JavaScript・HTML・CSSを用いたモバイルアプリ開発を始めましょう。クラウド上の開発環境<a href="https://ja.monaca.io" target="_blank">Monaca</a>と組み合わせることで、あなたの開発環境は常に最新の状態に保たれます。</p>
+    </div>
+    <div>
+      <img src="/images/common/top_img_fastest_way.png">
+    </div>
+ </div>
 
   <div class="feature">
-    <h2>驚きの簡単さ</h2>
-    <p>Onsen UIはWebコンポーネント形式で提供され、HTMLタグとして利用できます。ナビゲーションやサイドメニューといった高度なコンポーネントも提供されます。</p>
-    <img src="/images/index/feature-custom-elements.png" alt="Custom Elements">
-  </div>
+    <div>
+      <img src="/images/common/img_cloud.png">
+    </div>
+    <div>
+      <h2>クラウド上にすべてのツールを</h2>
+      <p>強力なCLI（コマンドラインツール）やデスクトップ向けアプリ（WindowsとmacOSに対応）を通じて、Onsen UIアプリはとても簡単に制作できます。それ以外にも、<a href="https://ja.monaca.io" target="_blank">Monaca</a>が提供するライブリロード対応のデバッガーや、リモートビルド機能といったクラウドの機能にアクセスできます。</p>
+    </div>
+ </div>
 
   <div class="feature">
-    <h2>AngularJSを使って、より高度な開発を</h2>
-    <p>AngularJSユーザーであれば、その強力なフレームワーク機能をOnsen UIで使う事ができます。一方でAngularJSを使わない場合でも、Onsen UIのUIコンポーネントを活用して、美しいUIを作る事が可能です。</p>
-    <img src="/images/index/feature-with-angular-or-jquery.png">
-  </div>
+    <div>
+      <h2>美しいUIコンポーネントと自動スタイル</h2>
 
+      <p>モバイルアプリに特化した、ネイティブのようなパフォーマンスに優れたUIコンポーネントが自慢です。タブ、サイドメニュー、ナビゲーションといった共通デザインだけでなく、リストやフォームといった様々なデザインを網羅しています。すべてのコンポーネントでiOSとAndroidマテリアルデザインに対応し、実行する端末にあわせて自動的にスタイルを切り替えます。Onsen UIを使うことで、AndroidとiOS向けアプリのソースコードが遂に共通化されます。</p>
+    </div>
+    <div>
+      <div class="feature-showcase">
+        <div class="feature-showcase-android">
+          <iframe src="https://onsenui.github.io/showcase-todo/?platform=android"></iframe>
+        </div>
+
+        <div class="feature-showcase-ios">
+          <iframe src="https://onsenui.github.io/showcase-todo/"></iframe>
+        </div>
+      </div>
+    </div>
+ </div>
+
+  <div class="feature">
+    <div>
+      <img src="/images/common/img_performance.png">
+    </div>
+    <div>
+      <h2>モバイルに特化したパフォーマンス</h2>
+      <p>Onsen UIはモバイル端末向けにチューニングされ、高いパフォーマンスを出せるように最適化されています。Onsen UIを使うことで、古い端末においてもスムーズなアニメーションを実現します。</p>
+    </div>
+ </div>
+
+  <div class="feature">
+    <div>
+      <h2>シンプルに始めて、ノウハウを蓄積</h2>
+      <p>複雑なモバイルアプリの開発も、Onsen UIを使うとシンプルです。そして、フレームワークに依存しないため、Onsen UIのノウハウは将来的に活用できます。公式ドキュメントやチュートリアル、フォーラムや有償技術サポートなど、幅広くアプリ開発をサポートします。</p>
+    </div>
+    <div>
+      <img src="/images/common/img_easy.png">
+    </div>
+ </div>
+
+  <div class="feature">
+    <div>
+      <h2>Onsen UIでアプリに魔法をかけよう</h2>
+      <p>世界的に数多くのアプリがOnsen UIで作られ、アプリストアでリリースされています。<a href="/samples/">サンプルアプリもこちらから</a>確認いただけます。</p>
+      <div class="samples">
+        <div>
+          <div class="samples-image">
+            <img src="/images/common/top_img_app_giro.png">
+            <img src="/images/common/icn_app_giro.png">
+          </div>
+          <div class="samples-info">
+            <h4 class="samples-info-title">Giro D'Italia</h4>
+            <div class="samples-info-description">有名自転車レースの公式アプリ</div>
+            <div class="samples-info-links">
+              <a href="https://itunes.apple.com/en/app/giro-ditalia/id522688460?mt=8">開く</a>
+              <a href="https://onsen.io/blog/giro-ditalia-2016-official-app-most-downloaded-app-in-the-app-stores-created-with-onsen-ui/">詳細（英語）</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="samples-image">
+            <img src="/images/common/top_img_app_oha.png">
+            <img src="/images/common/icn_app_oha.png">
+          </div>
+          <div class="samples-info">
+            <h4 class="samples-info-title">オハログ</h4>
+            <div class="samples-info-description">寝ている時間を計測しよう</div>
+            <div class="samples-info-links">
+              <a href="https://itunes.apple.com/jp/app/unrogu-daietto-bian-mi-dui/id970484812?mt=8">開く</a>
+              <a href="https://onsen.io/blog/sleep-well-ohalog-onsenui/">詳細（英語）</a>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="samples-image">
+            <img src="/images/common/top_img_app_golf.png">
+            <img src="/images/common/icn_app_golf.png">
+          </div>
+          <div class="samples-info">
+            <h4 class="samples-info-title">Offcourse Golf</h4>
+            <div class="samples-info-description">ゴルフスコアをいつでも手元に</div>
+            <div class="samples-info-links">
+              <a href="https://itunes.apple.com/us/app/offcourse-golf-gps-scorecard/id666556081?mt=8">開く</a>
+              <a href="https://onsen.io/blog/offcourse-golf-ninja-app-contest-winner-onsen-ui-visual-update/">記事（英語）</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ </div>
 </div>

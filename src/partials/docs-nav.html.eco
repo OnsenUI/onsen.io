@@ -3,12 +3,12 @@
     <div class="docs-nav-left">
       <div class="docs-nav-title">
         <h1>
-          Onsen UI Documentation
+          <%=@translate("[en]Onsen UI Documentation[/en][ja]Onsen UIドキュメント[/ja]")%>
         </h1>
       </div>
       <label for="select-framework" class="docs-nav-framework">
         <div class="docs-nav-framework-label">
-          Framework:
+          <%=@translate("[en]Framework:[/en][ja]フレームワーク:[/ja]")%>
         </div>
         <div class="docs-nav-framework-select">
           <div class="docs-nav-framework-icon">
@@ -78,16 +78,16 @@
       <ul class="docs-nav-menu">
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if !@reference %>">
           <% if @framework == 'onsen1': %>
-            <a href="/v1/guide.html">Guide</a>
+            <a href="/v1/guide.html"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% else: %>
-            <a href="/v2/docs/guide/<%- @framework %>">Guide</a>
+            <a href="/v2/docs/guide/<%- @framework %>"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% end %>
         </li>
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if @reference %>">
           <% if @framework == 'onsen1': %>
-            <a href="/v1/reference/javascript.html">Reference</a>
+            <a href="/v1/reference/javascript.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
           <% else: %>
-            <a href="/v2/docs/<%- @framework %>.html">Reference</a>
+            <a href="/v2/docs/<%- @framework %>.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
           <% end %>
         </li>
       </ul>
