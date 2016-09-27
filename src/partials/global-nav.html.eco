@@ -33,7 +33,7 @@
         <a href="/samples"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
       </li>
       <li class="global-nav-menu-item">
-        <a href="/tutorial"><%=@translate("[en]Tutoials[/en][ja]チュートリアル[/ja]")%></a>
+        <a href="/tutorial"><%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%></a>
       </li>
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
         <a href="#"><%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%></a>
