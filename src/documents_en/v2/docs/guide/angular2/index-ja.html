@@ -1,0 +1,171 @@
+---
+title: 'Onsen UI 2 Guide for Angular 2 - Onsen UI Framework'
+category: docs
+page: 'guide'
+needHelp: true
+framework: 'angular2'
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for Angular 2'
+version: v2
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+このガイドでは、Angular 2とOnsen UIを組み合わせて利用する方法について説明します。このページで利用している各コンポーネントのバージョンは、Angular 2.0.0とOnsen UI 2.0.0とAngular 2バインディング1.0.0-rc.1です。
+
+### プロジェクトを始める
+
+Angular 2フレームワーク以下でOnsen UIを利用するには、Onsen UIとAngular2バインディングの2つのコンポーネントをインストールする必要があります。
+
+これらのコンポーネントは、([`onsenui`](https://www.npmjs.com/package/onsenui) と [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui))というNPMパッケージとして提供しています。 簡単にプロジェクトをセットアップしたいときには、このパッケージやTypeScriptやWebpackやPolyfilなどの依存を全てダウンロードし、プロジェクトをビルドしてくれるMonaca CLIを利用できます。
+
+#### Monaca CLIを使う
+
+```bash
+$ npm install -g monaca # Monaca CLIをインストールする
+$ monaca create helloworld # "Angular 2 template"を選択する
+$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+```
+
+#### npmからダウンロードする
+
+```bash
+# Onsen UIとAngular2バインディングをインストールする
+$ npm install onsenui angular2-onsenui
+```
+
+### Onsen UIとAngular 2を読み込む
+
+You need to import `onsenui` and `angular2-onsenui` package as shown below. 
+
+```javascript
+// Onsen UI
+import {OnsenModule} from 'angular2-onsenui';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+```
+
+### Onsen UI Directives and Web Components
+
+Angular2バインディングには、Onsen UIが提供しているWeb ComponentsをラップしたいくつかのAngular 2 ディレクティブがあります。これらのディレクティブは`OnsenModule`という名前の`NgModule`に含まれています。
+
+Angular 2アプリケーションを開始する場合には、OnsenModuleをアプリケーションのモジュールの依存先に設定してください。`@NgModule`の`imports`パラメータに`OnsenModule`を指定します。
+
+また、Angular 2アプリケーション以下でCustom Elementsを使うので`CUSTOM_ELEMENTS_SCHEMA`を指定することも忘れないでください。これを設定し忘れると、Custom Elementsの要素をテンプレート内で用いるとエラーが発生しますので注意してください。
+
+```
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+// モジュールを起動する
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
+
+### 動的に読み込むコンポーネントの宣言
+
+`OnsNavigator`や`OnsSplitterContent`や`OnsSplitterSide`ディレクティブは、動的に他のAngular 2コンポーネントを読み込みます。Angular2では動的に読み込むコンポーネントはNgModuleに登録しなければいけません。例えば、`MyComponent`というコンポーネントを`OnsNavigator`などで読み込む場合には、`@NgModule`の`declarations``と`entryComponents`
+
+```
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent, MyComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [MyComponent]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+```
+
+### Anglar2バインディングに含まれているディレクティブ
+
+In this case, we are using `OnsInput` and `OnsPage` directive, which represents `ons-input` and `ons-page` tag.
+
+You might noticed that `ons-button` is not specified in the directive. This is because this component is not a Angular 2 directive, but is a part of our JavaScript Core implemented as Web Components.
+
+Currently, the following components are made as Angular 2 directives.
+
+- `OnsNavigator` containing `<ons-navigator>`
+- `OnsCarousel` containing `<ons-carousel>`
+- `OnsTabbar` containing `<ons-tabbar>`
+- `OnsTab` containing `<ons-tab>`
+- `OnsAlertDialog` containing `<ons-alert-dialog>`
+- `OnsPopover` containing `<ons-popover>`
+- `OnsSwitch` containing `<ons-switch>`
+- `OnsRange` containing `<ons-range>`
+- `OnsInput` containing `<ons-input>`
+- `OnsPullHook` containing `<ons-pull-hook>`
+- `OnsLazyRepeat` containing `<ons-lazy-repeat>`
+- `OnsSplitterSide` containing `<ons-splitter-side>`
+- `OnsSplitterContent` containing `<ons-splitter-content>`
+
+### Defining a page
+
+In Onsen UI, pages are defined using `OnsPage (<ons-page>)` component. Unlike other framework bindings, you need to define extra `<div>` tags that represent page background and page content as below:
+
+```html
+<ons-page>
+  <ons-toolbar>
+    <div class="center">Ons-Page Component Example</div>
+  </ons-toolbar>
+  <div class="backgroud"></div>
+  <div class="content">
+    <div style="text-align: center; margin: 10px;">
+      <ons-button (click)="onClick()">MyButton</ons-button>
+    </div>
+  </div>
+</ons-page>
+```
+
+### イベントハンドリング
+
+他のAngular 2コンポーネントと同様に、Onsen UIではイベントバインディングをサポートしています。イベントをバインドするには、次のコードのようにイベント名を括弧でくくって、そのイベントが起きた時の振る舞いを属性値に記述してください。
+
+```
+<ons-input type="text" (change)="onChange()"></ons-input>
+```
+
+### Using components
+
+ディレクティブもWeb Componentsもメソッドを持ち、コンポーネントが初期化された後に呼び出せます。ディレクティブは呼び出し側のコンポーネントのコンストラクタではまだ定義されていないので、初期化時にディレクティブのコンポーネントを呼び出したいときには`ngAfterViewInit()`メソッドを使うのはひとつの方法です。
+
+```
+export class AppComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    this._navigator.pushComponent(component, { animation: 'fade' });
+  }
+
+```
+
+Web Componentsでは、メソッドはDOM要素に直接定義されています。例えば、`querySelector()`を使って要素を取得してメソッドを呼び出すことができます。
+
+Angular 2では、DOM要素を参照するのにテンプレートリファレンス変数(`#`を使う)を使うこともできます。詳細は[Angular 2 Guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars)を参照してください。
+
+### Components with child view
+
+`OnsNavigator`や`OnsSplitter`のようなコンポーネントは、child viewを持ちます。この場合、次のコードのように`@ViewChild`デコレータを使わなければいけません。
+
+```
+export class AppComponent {
+  @ViewChild(OnsNavigator) private _navigator: OnsNavigator;
+
+  push() {
+    this._navigator.pushComponent(PageComponent, {animation: 'none'}, {key: 'value'});
+  }
+}
+```
+
+### サンプルコード
+
+`angular2-onsenui`パッケージのリポジトリには、各コンポーネントをAngular 2で使う場合のサンプルコードが収められています。
+
+ * [https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples](Examples)
+
+<!-- End of markdown -->
+<% end %>
