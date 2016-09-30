@@ -17,9 +17,11 @@ layout: docs.html.eco
 
 ### プロジェクトを始める
 
-Angular 2フレームワーク以下でOnsen UIを利用するには、Onsen UIとAngular2バインディングの2つのコンポーネントをインストールする必要があります。
+Angular 2フレームワーク下でOnsen UIを利用するには、Onsen UIとAngular2バインディングの2つのコンポーネントをインストールする必要があります。
 
-これらのコンポーネントは、([`onsenui`](https://www.npmjs.com/package/onsenui) と [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui))というNPMパッケージとして提供しています。 簡単にプロジェクトをセットアップしたいときには、このパッケージやTypeScriptやWebpackやPolyfilなどの依存を全てダウンロードし、プロジェクトをビルドしてくれるMonaca CLIを利用できます。
+これらのコンポーネントは、([`onsenui`](https://www.npmjs.com/package/onsenui) と [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui))というNPMパッケージとして提供しています。
+
+簡単にプロジェクトをセットアップしたいときには、このパッケージやTypeScriptやWebpackやPolyfilなどの依存を全てダウンロードし、プロジェクトをビルドしてくれるMonaca CLIを利用できます。
 
 #### Monaca CLIを使う
 
@@ -38,11 +40,11 @@ $ npm install onsenui angular2-onsenui
 
 ### Onsen UI Directives and Web Components
 
-Angular 2バインディングには、Onsen UIが提供しているWeb ComponentsをラップしたいくつかのAngular 2 ディレクティブがあります。これらのディレクティブは`OnsenModule`という名前の`NgModule`に含まれています。`NgModule`についてはAngular 2のドキュメントの[https://angular.io/docs/ts/latest/guide/ngmodule.html](Angular Modules (NgModule) - ts)を参照してください。
+Angular 2バインディングには、Onsen UIが提供しているWeb ComponentsをラップしたいくつかのAngular 2 ディレクティブがあります。これらのディレクティブは`OnsenModule`という名前の`NgModule`に含まれています。`NgModule`についてはAngular 2のドキュメントの[Angular Modules (NgModule) - ts](https://angular.io/docs/ts/latest/guide/ngmodule.html)を参照してください。
 
 Angular 2アプリケーションを開始する場合には、`OnsenModule`をアプリケーションのモジュールにインポートしてください。`@NgModule`の`imports`パラメータに`OnsenModule`を指定します。これが無ければOnsen UIに関連するAngular 2 ディレクティブを利用したり、Onsen UIのコンポーネントを正しく扱うことができません。
 
-また、Angular 2アプリケーション以下でCustom Elementsを使うのでモジュールの`schemas`に`CUSTOM_ELEMENTS_SCHEMA`を指定することも忘れないでください。これを設定し忘れると、Custom Elementsの要素をテンプレート内で用いるとエラーが発生しますので注意してください。
+また、Angular 2アプリケーション下でCustom Elementsを使うのでモジュールの`schemas`に`CUSTOM_ELEMENTS_SCHEMA`を指定することも忘れないでください。これを設定し忘れると、Custom Elementsの要素をテンプレート内で用いるとエラーが発生しますので注意してください。
 
 ```
 import {OnsenModule} from 'angular2-onsenui';
@@ -63,7 +65,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 
 ### 動的に読み込むコンポーネントの宣言
 
-`OnsNavigator`や`OnsSplitterContent`や`OnsSplitterSide`ディレクティブは、動的に他のAngular 2コンポーネントを読み込みます。Angular2では動的に読み込むコンポーネントはNgModuleに登録しなければいけません。例えば、`MyComponent`というコンポーネントを`OnsNavigator`などで読み込む場合には、`@NgModule`の`declarations``と`entryComponents`にコンポーネントの定義を追加しておく必要があります。
+`OnsNavigator`や`OnsSplitterContent`や`OnsSplitterSide`ディレクティブは、動的に他のAngular 2コンポーネントを読み込みます。Angular2では動的に読み込むコンポーネントはNgModuleに登録しなければいけません。例えば、`MyComponent`というコンポーネントを`OnsNavigator`などで読み込む場合には、`@NgModule`の`declarations`と`entryComponents`にコンポーネントの定義を追加しておく必要があります。
 
 ```
 @NgModule({
@@ -76,7 +78,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 class AppModule { }
 ```
 
-### Anglar 2バインディングに含まれているディレクティブ
+### Angular 2バインディングに含まれているディレクティブ
 
 Angular 2バインディングにはOnsen UIの提供するWeb Componentsに対応するディレクティブが幾つか提供されています。例えば、`ons-navigator`には`OnsNavigator`ディレクティブ、`ons-switch`には`OnsSwitch`ディレクティブがあります。
 
@@ -104,10 +106,8 @@ Onsen UIでは、`ons-page`要素を使ってページを定義します。他�
 
 ```html
 <ons-page>
-  <ons-toolbar>
-    <div class="center">Ons-Page Component Example</div>
-  </ons-toolbar>
-  <div class="backgroud"></div>
+  <ons-toolbar> <div class="center">Ons-Page Component Example</div> </ons-toolbar>
+  <div class="background"></div>
   <div class="content">
     <div style="text-align: center; margin: 10px;">
       <ons-button (click)="onClick()">MyButton</ons-button>
@@ -117,12 +117,14 @@ Onsen UIでは、`ons-page`要素を使ってページを定義します。他�
 ```
 
 ### イベントハンドリング
+
 他のAngular 2コンポーネントと同様に、Onsen UIではイベントバインディングをサポートしています。イベントをバインドするには、次のコードのようにイベント名を括弧でくくって、そのイベントが起きた時の振る舞いを属性値に記述してください。 
+
 ```
 <ons-input type="text" (change)="onChange()"></ons-input>
 ```
 
-### Using components
+### 初期化時にコンポーネントを呼び出す
 
 ディレクティブもWeb Componentsもメソッドを持ち、コンポーネントが初期化された後に呼び出せます。ディレクティブは呼び出し側のコンポーネントのコンストラクタではまだ定義されていないので、初期化時にディレクティブのコンポーネントを呼び出したいときには`ngAfterViewInit()`メソッドを使うのはひとつの方法です。
 
@@ -131,7 +133,7 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this._navigator.pushComponent(component, { animation: 'fade' });
   }
-
+}
 ```
 
 Web Componentsでは、メソッドはDOM要素に直接定義されています。例えば、`querySelector()`を使って要素を取得してメソッドを呼び出すことができます。
@@ -140,9 +142,9 @@ Angular 2では、DOM要素を参照するのにテンプレートリファレ�
 
 ### サンプルコード
 
-`angular2-onsenui`パッケージのリポジトリには、各コンポーネントをAngular 2で使う場合のサンプルコードが収められています。各コンポーネントの詳細な例を知るにはれらのサンプルコードを参照してください。
+`angular2-onsenui`パッケージのリポジトリには、各コンポーネントをAngular 2で使う場合のサンプルコードが収められています。各コンポーネントの実際の例を知るにはこれらのサンプルコードを参照してください。
 
- * [https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples](Examples)
+ * [Examples](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples)
 
 <!-- End of markdown -->
 <% end %>
