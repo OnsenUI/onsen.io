@@ -60,7 +60,7 @@
     transition: all 0.2s ease-in-out;
 
     &:hover {
-      background-color: #D1041B;
+      background-color: #800d1a;
       color: #fff;
       text-decoration: none;
     }
@@ -92,6 +92,7 @@
     bottom: 42px;
     background-image: url(/images/index/contest/contest_banner.png);
     display: block;
+    cursor: pointer;
 
     @media @smallscreen {
       display: none;
@@ -108,8 +109,18 @@
     height: initial;
     background-image: none;
 
+    &-inner {
+      flex-direction: column;
+    }
+
     &-image {
-      display: none;
+      width: initial;
+      height: initial;
+
+      > img {
+        width: initial;
+        height: initial;
+      }
     }
 
     &-title {
