@@ -1,0 +1,182 @@
+---
+author: andreas
+date: 2016-10-04
+id: create-reusable-future-proof-ui-components-with-custom-elements-v1-web-components
+title: "Create reusable and future-proof UI components with Custom Elements v1 and Web Components"
+category: tutorial
+tags: onsen ui, web components, custom elements
+---
+
+Onsen UI is a UI component library built on top of Web Components. Web Components is an emerging standard that is designed to make it easy to create reusable UI components using APIs that are native to the browser. One clear advantage of this is that the components that you make are not tied to a single library or frontend framework.
+
+In this article we will take a look at the advantages of using Web Components and also at the Custom Elements v1 API that was recently finalized and is looking to become the de facto standard for registering and adding behavior to custom tags.
+
+Web Components is in my opinion not only a technology for writing encapsulated components that can be plugged into our apps, it is also a way to help us stop reinventing the wheel by having to implement the same component for every framework or library out there.
+
+<!-- more -->
+
+The Custom Elements v1 API is currently only supported in Chrome (from Chrome 54) but other browser vendors are working on it and we hope to see it supported natively in all major browsers soon. Even though it's only supported in Chrome, it is possible to add support to other browsers and earlier versions of Chrome using polyfills.
+
+## Why use Web Components?
+
+The JavaScript world is constantly changing with older frameworks and libraries being superseeded by newer ones. New concepts are introduced that make our developers lives easier and our apps more performant. It is often a good idea to stay on top and being open to learning new things, especially if you are a professional that needs to stay relevant. One issue this faces us with is that we often need to reinvent the wheel.
+
+Let's say that several years ago you were working on a project where you needed a date picker component and decided to create it yourself. Maybe you couldn't find one that met your needs or you wanted to challenge yourself. In the app you were using jQuery so it felt natural to create the component using jQuery UI. You spend some time making a great date picker component for you app and you feel very satisfied with your work.
+
+Let's fast forward a number of years and you find yourself working on another project, this time in AngularJS and once again you need to create a date picker. You are now faced with a dilemma. One option would be to use the component you created for that other project and wrap it as an AngularJS directive, but that forces you to add jQuery and jQuery UI as dependencies to your app. If we imagine that you only need to use jQuery UI for that single component this approach would just have added bloat to your app. A better option would maybe be to port the jQuery UI date picker into AngularJS so you buckle down and reimplement the component.
+
+A number of years go by and now you're working on a project in React where you once again need to add a date picker and... I think you get the picture by now. It's starting to get tedious and maybe you start thinking that there should be a better way to go about things. If the original date picker was written using only APIs that are native the the browser you would only need write it once and could use is just as well in your jQuery, AngularJS or React apps. This is where Web Components come in.
+
+## A simple component
+
+Let's create a simple component with the Custom Elements v1 API to get a feel for how it works. Web Components is an umbrella term that describes a collection of new four technologies that help making reusable components. This article will only touch on Custom Elements but for completeness the other three are:
+
+* The **`<template>` tag** that is used to define inert HTML that is not rendered to the page but can be used as, you guessed it, a template for components. It is often useful for components that need to render a complex inner structure. Instead of creating the DOM by hand the content of the template can be copied and inserted into the component.
+* The **Shadow DOM** which is a DOM subtree that is hidden from the rest of the document. CSS rules defined inside the Shadow DOM does not affect anything outside of the subtree and vice versa. This helps with issues where CSS rules would *leak* and alter nodes that were not intended to be styled.
+* HTML imports that enables bundling CSS, an HTML template and JavaScript code in a single file and import it just as we normally do with CSS and JavaScript files.
+
+The Custom Element API gives us the power to register new HTML tags and, in effect, extend the HTML language with new elements. `customElements.define(tagName, cls)`. Only tag names that contains a hyphen can be registered in order to avoid conflicts with future native HTML elements. Attempting to register a tag name without a hyphen will result in the following error in Chrome:
+
+```
+Uncaught DOMException: Failed to execute 'define' on 'CustomElementRegistry': "myelement" is not a valid custom element name(…)
+```
+
+Some other restrictions apply such as not being able to register tag names that start with a digit/hyphen or that contains special characters. I recommend using only hyphens and alphabetic characters in tag names but digits are allowed.
+
+The behavior of the element is defined using ES6 classes, so in order to support browsers where classes are not implemented it is necessary to transpile the code. It is of course possible to define custom elements without classes but I think classes makes for cleaner code.
+
+The class constructor must call the parent constructor and the class should extend `HTMLElement`:
+
+```
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+}
+
+customElements.define('my-element', MyElement);
+```
+
+This code is enough to create a completely useless custom element that doesn't do anything at all. In order to add custom behavior to the element three life-cycle callbacks are available:
+
+* `connectedCallback()` is called when the element is attached to the DOM.
+* `disconnectedCallback()` is called when the element is detached from the DOM. It is important to remove event listeners added in the `connectedCallback` and perform other types of teardown in order to avoid memory leaks.
+* `attributeChangedCallback(name, prevValue, newValue)` is called when an attribute has changed. However, it is only called for attributes that have been defined in a static getter called `observedAttributes`.
+
+With this knowledge we can add some custom behavior to our component. We will create a simple component that displays a happy face when the `happy` attribute is set and a sad face when the attribute isn't present. Not a very useful component but it shows how the life-cycle callbacks can be used in a few lines.
+
+```
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    this.style.cursor = 'pointer';
+    this.render();
+
+    this.addEventListener('click', this.onClick);
+  }
+
+  disconnectedCallback() {
+    this.removeEventListener('click', this.onClick);
+  }
+
+  /**
+   * Render the content. Will render a
+   * happy face if the `happy` attribute
+   * is set, sad otherwise.
+   */
+  render() {
+    this.innerHTML = this.happy ? ':-)' : ':-(';
+  }
+
+  /**
+   * Click handler. Toggles the `happy`
+   * property.
+   */
+  onClick() {
+    this.happy = !this.happy;
+  }
+
+  static get observedAttributes() {
+    return ['happy'];
+  }
+
+  attributeChangedCallback() {
+    this.render();
+  }
+
+  get happy() {
+    return this.hasAttribute('happy');
+  }
+
+  set happy(value) {
+    if (!!value) {
+      this.setAttribute('happy', '');
+    } else {
+      this.removeAttribute('happy');
+    }
+  }
+}
+
+customElements.define('my-element', MyElement);
+```
+
+When the element has been defined and registered, all that is needed to use it is to insert it into the DOM, just like any other HTML element.
+
+You can see it in action below:
+
+TODO: Codepen when I have internet connection.
+
+## Migration from v0 to v1
+
+For those who have created components using the v0 API, everything above will look very familiar with some small exceptions. The API has not changed much so migration should generally be an easy task. We recently migrated all components in Onsen UI to use v1 and the task could be almost entirely automated.
+
+I think it's important to upgrade to v1 since v0 will never be supported by any browser other than Chrome, there is no reason for the other browser vendors to implement it since it has already been deprecated. This means that components written in v0 will always depend on polyfills on Safari and Firefox in order to work and will never use the native implementation.
+
+Here is a list of important changes that I hope will help in migration:
+
+* `document.registerElement` has been replaced with `customElements.define` and it does not return an object as the previous version did.
+
+In v0 you could write like this:
+
+```
+class CoolWidget extends HTMLElement {
+  ...
+}
+
+var CoolWidgetElement = document.registerElement('cool-widget', CoolWidget);
+var el = new CoolWidgetElement();
+document.body.appendChild(el);
+```
+
+The `customElements.define()` function in v1 does not return a new object but instead upgrades the class in place so you can do:
+
+```
+class CoolWidgetElement extends HTMLElement {
+  ...
+}
+
+customElements.define('cool-widget', CoolWidgetElement);
+var el = new CoolWidgetElement();
+document.body.appendChild(el);
+```
+
+* `createdCallback` has been removed and replaced with the class `constructor()` method.
+
+This makes a lot more sense since we are using ES6 classes to define the elements and is consistent with how we use classes in other contexts. The parent constructor must be called by running `super()`.
+
+It is illegal to add children in the constructor, it will result in the following error on Chrome:
+
+```Uncaught DOMException: Failed to construct 'CustomElement': The result must not have children```
+
+* The static getter `observedAttributes()` has been added.
+
+The getter should return a list of the attributes that when changed will trigger the `attributeChangedCallback()` method. Also, the `attributeChangedCallback` is called automatically for every attribute if the element is created with the attributes set which was not the case in v0.
+
+* `attachedCallback` has been renamed to `connectedCallback` and `detachedCallback()` has been renamed to `disconnectedCallback` but they work just like before.
+
+## Polyfills
+
+As mentioned earlier, Custom Elements v1 is currently only supported in Chrome from version 54, so in order to use it in browsers that doesn't support it is necessary to use a polyfill. There are two major polyfills available right now. One is developed by the Polymer team and there is one that is created by TODO: Will add some more here when I have an internet connection.
