@@ -1,0 +1,143 @@
+---
+author: atsushi
+date: 2016-10-03
+id: chartjs-with-onsenui
+title: "業務アプリで役立つChart.jsをOnsen UIとともに使ってみる"
+product: monaca
+tags: monaca, chart
+category: 技術情報
+---
+
+ハイブリッドアプリは素早く開発、改善が求められる業務アプリでのニーズが強くあります。業務アプリでは速度よりも確実な実行と動作が求められるので、安定したWebベースの開発と相性が良いのでしょう。ネイティブコード部と切り離されてアプリケーションが実行されるので、ハイブリッドアプリの安定性は定評があります。
+
+そんな業務アプリにおいて求められるのがデータのビジュアル化、グラフです。今回は Onsen UI 2.x と有名なグラフライブラリ Chart.js を組み合わせて利用する方法を紹介します。
+
+### ベースになるテンプレート
+
+今回は Onsen UI 2.x のタブバーテンプレートを使っています。そしてタブを切り替えた際にグラフが表示されるようにします。
+
+
+### Chart.jsのインストール
+
+Chart.jsはMonaca IDEクラウドのJS/CSSコンポーネントの管理からインストールします。chartjsで検索して、バージョン○をインストールしました。ロードするコンポーネントは○を指定しています。
+
+### 使い方
+
+グラフを表示したい `<ons-page />` 内に `<canvas />` を記述します。`<canvas />` は複数記述可能です。
+
+```
+<ons-page id="page2">
+  <p style="text-align: center">
+    <div id="canvas-holder" style="width:100%">
+      <h1>Pie chart</h1>
+      <canvas id="pie-chart-area" width="300" height="300">
+      </canvas>
+      <h1>Bar chart</h1>
+      <canvas id="bar-chart-area" width="300" height="300">
+      </canvas>
+    </div>
+  </p>
+</ons-page>
+```
+
+そして、棒グラフを描く際には次のように実行します。 `randomScalingFactor` はランダムな数字を返すだけです。
+
+```
+function barChart() {
+  var barChartData = {
+      labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
+      datasets: [{
+          label: 'データセット1',
+          backgroundColor: "rgba(220,0,220,0.5)",
+          data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
+      }]
+  };
+  var ctx = document.getElementById("bar-chart-area").getContext("2d");
+  window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            elements: {
+                rectangle: {
+                    borderWidth: 4,
+                    borderColor: 'rgb(100, 0, 100)',
+                    borderSkipped: 'bottom'
+                }
+            },
+            responsive: true,
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Chart.js 棒グラフ'
+            }
+        }
+    });  
+}
+
+// ランダムな文字列を返します
+var randomScalingFactor = function() {
+  return Math.round(Math.random() * 100);
+};
+```
+
+データセットは複数適用できます。それによって複数系列のデータを一つのグラフ内に記述できます。 `barChartData` は棒グラフを表示するためのデータセットを定義しています。
+
+実際の表示は new Chart で行っています。その際に予め定義したデータセットとともに各種オプションをセットします。 `type` キーにて棒グラフ（bar）であることを指定しています。グラフをレスポンシブにする場合は `responsive` を true にします。
+
+グラフのラベルは日本語が利用できますので、分かりやすいグラフになるでしょう。
+
+円グラフの場合は次のようになります。`type` は pie になります。円グラフの場合もデータセットは複数指定できます。複数あると多重の円が絵が描かれます。数値を適当に指定すれば、後はChart.jsが割合を計算した上で表示してくれます。後は背景色と各データのラベルを指定するだけです。
+
+```
+function pieChart() {
+  var config = {
+      type: 'pie',
+      data: {
+          datasets: [{
+              data: [
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+                  randomScalingFactor(),
+              ],
+              backgroundColor: [
+                  "#F7464A",
+                  "#46BFBD",
+                  "#FDB45C",
+                  "#949FB1",
+                  "#4D5360",
+              ],
+          }],
+          labels: [
+              "赤",
+              "緑",
+              "黄",
+              "灰",
+              "黒"
+          ]
+      },
+      options: {
+          responsive: true
+      }
+  };
+  var ctx = document.getElementById("pie-chart-area").getContext("2d");
+  window.myPie = new Chart(ctx, config);
+}
+```
+
+### 表示について
+
+実際の表示は次のようになります。
+
+タップするとデータのラベルであったり、数字が確認できます。一部のデータを非表示することもできます。
+
+なお、一部のラベルをタップすると表示が乱れる場合がありますが、スクロールすると直ります。
+
+----
+
+Chart.jsは手軽に導入できるライブラリで、データ部はアプリ内部や外部のサーバから取得するようにすればあっという間に見栄えの良いグラフが描けます。Onsen UIと組み合わせるのも簡単なので、ぜひMonacaアプリの中で使ってみてください。
+
+今回のコードは○にアップロードしてあります。参考にしてください。
