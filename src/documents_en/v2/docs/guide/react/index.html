@@ -120,7 +120,7 @@ This example is loading the following JS libraries, `react.js`, `react-dom.js`, 
 
 In `<body>` tag, there is only a `<div>` tag having `app` id. This is where React will render the content into, and you can see it in the very bottom of JS code.
 
-Also notice `<script>` tag has `text/babel` type. This means this script is not a pure JavaScript that browser supports (most commonly ECMAScript5), but is a ECMAScript6 (ES2015) with JSX format. [Babel](https://babeljs.io/) will transpile this code into ES5 in the browser. To get better performance, we can use node.js to transpile the code.
+Also notice `<script></script>` tag has `text/babel` type. This means this script is not a pure JavaScript that browser supports (most commonly ECMAScript5), but is a ECMAScript6 (ES2015) with JSX format. [Babel](https://babeljs.io/) will transpile this code into ES5 in the browser. To get better performance, we can use node.js to transpile the code.
 
 Inside the script, `React.createClass()` function defines a React Component called `App`. It has one method called `render`, and this is the function that is called when the app is rendered. The returning object is described in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html), which is a XML like language that extends JavaScript. In this case, it is returning `<Ons.Page>` component that has an `<Ons.Button>` component. The `onClick` prop is used to call the `handleClick` method when the user taps the button.
 
@@ -137,6 +137,8 @@ As you can see in this example, all `<Ons.*>` components are React Components, a
 Putting together, when `index.html` is loaded into the browser, it will compile JSX code, inject into the body, and render the content.
 
 This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read the official [React docs](https://facebook.github.io/react/docs/getting-started.html).
+
+<%- @includeGuideSection('ons-object.md') %>
 
 ### Event Handling
 
@@ -156,6 +158,18 @@ class MyPage extends React.Component {
   }
 }
 ```
+
+<%- @includeGuideSection('dialogs.md') %>
+
+<%- @includeGuideSection('navigation.md') %>
+
+<%- @includeGuideSection('modifier.md') %>
+
+<%- @includeGuideSection('auto-styling.md') %>
+
+<%- @includeGuideSection('css-definitions.md') %>
+
+<%- @includeGuideSection('device-back-button.md') %>
 
 <!-- End of markdown -->
 <% end %>
