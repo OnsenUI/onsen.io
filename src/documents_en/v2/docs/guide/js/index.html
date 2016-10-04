@@ -56,63 +56,9 @@ To load Onsen UI in your project simply include `onsenui.js` and CSS files for s
 </html>
 ```
 
-### Creating a page
+<%- @includeGuideSection('creating-page.md') %>
 
-The root of a page is created using the [`<ons-page>`](/v2/docs/js/ons-page.html) element. It covers the whole screen and is used as a container for the other elements.
-
-This component fires different events depending on its life cycle. The correct place to initialise data and run code for pages in Onsen UI is the `init` event.
-
-```html
-<ons-page id="page1">This is a blank page</ons-page>
-
-<script>
-  document.addEventListener('init', function(event) {
-    // event.target is the <ons-page> element
-    if (event.target.matches('#page1')) {
-      ons.notification.alert('Page 1 is initiated.');
-    }
-  });
-</script>
-```
-
-#### Adding a toolbar
-
-A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
-
-```html
-<ons-page>
-  <ons-toolbar>
-    <div class="left">
-      <ons-back-button>Back</ons-back-button>
-    </div>
-    <div class="center">Title</div>
-    <div class="right">
-      <ons-toolbar-button>
-        <ons-icon icon="fa-bars"></ons-icon>
-      </ons-toolbar-button>
-    </div>
-  </ons-toolbar>
-
-  Some other content...
-</ons-page>
-```
-
-The toolbar is divided into 3 sections that can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
-
-### The `ons` object
-
-Onsen UI not only provides custom elements, it also provides an object called [`ons`](/v2/docs/js/ons.html) with a lot of useful functions attached to it. 
-
-The following example uses `ons.ready(fn)` which waits until the app is completely loaded before executing a callback function. Inside the callback, it is calling `ons.notification.alert()` to display a alert dialog.
-
-``` javascript
-ons.ready(function() {
-  // Onsen UI is now initialized
-  ons.notification.alert('Welcome to Onsen UI!');
-});
-```
-
-See also [`ons.platform`](/v2/docs/js/ons.platform.html), [`ons.notification`](/v2/docs/js/ons.notification.html) and [`ons.orientation`](/v2/docs/js/ons.orientation.html) for more utilities.
+<%- @includeGuideSection('ons-object.md') %>
 
 ### Understanding elements
 
@@ -253,191 +199,19 @@ divGD.on('dragup dragdown', function(event) {
 });
 ```
 
-### Dialogs
+<%- @includeGuideSection('dialogs.md') %>
 
-There are multiple types of dialog components available in Onsen UI: [`<ons-dialog>`](/v2/docs/js/ons-dialog.html) for displaying a page inside a centered dialog; [`<ons-alert-dialog>`](/v2/docs/js/ons-alert-dialog.html) for displaying a simple message inside an alert style dialog; [`<ons-popover>`](/v2/docs/js/ons-popover.html) for showing some content next to a specified element or a context menu; and [`<ons-modal>`](/v2/docs/js/ons-modal.html) for displaying a fullscreen dialog that forbids user interaction.
+<%- @includeGuideSection('navigation.md') %>
 
-Apart from that, [`ons.notification` object](/v2/docs/js/ons.notification.html) offers a more handy solution for simple dialogs:
+<%- @includeGuideSection('templating.md') %>
 
-```javascript
-ons.notification.alert('Hello world!'); // Basic alert
-ons.notification.confirm('Are you ready?'); // OK - Cancel buttons
-ons.notification.prompt('What is your name?'); // Text input
+<%- @includeGuideSection('modifier.md') %>
 
-```
+<%- @includeGuideSection('auto-styling.md') %>
 
-### Multiple page navigation
+<%- @includeGuideSection('css-definitions.md') %>
 
-In Onsen UI there are three navigation patterns based on three different components: [`<ons-navigator>`](/v2/docs/js/ons-navigator.html), [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) and [`<ons-splitter>`](/v2/docs/js/ons-splitter.html). These components supply "frames" able to change their inner content. The content of these frames will normally be `<ons-page>` components but it is also possible to nest navigation components in order to combine them.
-
-More information is provided in the "Docs" tab of the Live Example section of each component.
-
-#### Navigator
-
-The main pattern uses [`<ons-navigator>`](/v2/docs/js/ons-navigator.html) component to provide a stack where you can push and pop pages with transition animations. This is the basic and most used navigation pattern and can be combined with the other two.
-
-Use this pattern when you have a sequential flow where a page depends on the previous one. Data can be optionally passed from one page to another.
-
-#### Tabbar
-
-In this case, by using [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) component a visible tabbar is displayed at the bottom or the top of the page with tabs associated to different pages. The component will load content depending on the selected tab ([`<ons-tab>`](/v2/docs/js/ons-tab.html)). This pattern is commonly used to sepparate different sections in the app.
-
-#### Menu
-
-A menu can be added using the [`<ons-splitter>`](/v2/docs/js/ons-splitter.html) component. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
-
-Splitter provides two frames that can load different content: [`<ons-splitter-side>`](/v2/docs/js/ons-splitter-side.html) and [`<ons-splitter-content>`](/v2/docs/js/ons-splitter-content.html). A common usecase is to show a list in the side menu where each item loads a different page in the content frame. Notice that loading new content in any of these frames will completely remove the previous loaded content. For more complex navigation consider nesting `<ons-navigator>` inside `<ons-splitter-content>`.
-
-### Templates
-
-Pages can be created in separate files and can be addressed by their path string. For example, `myNavigator.pushPage('path/to/my/page.html')`; will load `page.html` in `path/to/my/` folder. The content of that file must contain a single `<ons-page>` component with some inner elements. 
-
-However, having multiple pages declared in the same file is sometimes more convenient. [`ons-template`](/v2/docs/js/ons-template.html) component is the solution for this. You can create as many pages as you need in your `index.html` (there and only there) by using this component. 
-In this case, the template's `id` attribute replaces the path string of the page:
-
-```html
-<body>
-  <ons-navigator page="page1.html"></ons-navigator>
-
-  <ons-template id="page1.html">
-    <ons-page>First page</ons-page>
-  </ons-template>
-
-  <ons-template id="page2.html">
-    <ons-page>Second page</ons-page>
-  </ons-template>
-</body>
-```
-
-Notice that including `<script></script>` tags inside `<ons-template>` or separate files does not work. If you want to initialize a page, please check the `init` event in ["Creating a page" section](/v2/docs/guide/js/#creating-a-page).
-
-### Using Modifier
-
-Modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a `modifier`, it will have a separate class namespace so that you can apply custom styles to the component. Also, some components have several preset modifiers to change the appearance.
-
-For example, each of the following buttons have different look. To change modifiers dynamically, please manipulate `modifier` attribute from JavaScript.
-
-```html
-<ons-button modifier="quiet">Quiet</ons-button>
-<ons-button modifier="light">Light</ons-button>
-<ons-button modifier="large">Large</ons-button>
-<ons-button modifier="cta">Call To Action</ons-button>
-<ons-button modifier="material">Material Design</ons-button>
-```
-
-### Cross platform styling
-
-Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views.
-
-Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-styling` attribute in specific components that you don't want to auto style.
-
-Some tools are provided to give a more accurate customization.
-
-#### Platform utilities
-
-[`ons.platform` object](/v2/docs/js/ons.platform.html) is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
-
-You can set a platform with `ons.platform.select('android')`, for example, in order to display Material Design on every platform. This must be called before the app is initialized (right after including `onsenui.js`).
-
-#### Conditional element
-
-A conditional element called [`<ons-if>`](/v2/docs/js/ons-if.html) is available to filter content depending on the platform or orientation.
-
-```html
-  <ons-if platform="android">
-    This is Android
-  </ons-if>
-  <ons-if platform="ios other">
-    This is NOT Android
-  </ons-if>
-```
-
-With this, for example, you can display `<ons-fab>` for Material Design and other type of button for iOS flat design.
-
-#### Icons shortcut
-
-While it is possible to use the previous `<ons-if>` to select icons depending on the platform, a shortcut in [`<ons-icon>`](/v2/docs/js/ons-icon.html) component is provided to make it simpler:
-
-```
-<ons-icon icon="ion-navicon, material:md-menu" size="24px, material:20px"></ons-icon>
-```
-
-The second icon will be displayed when `material` modifier is present.
-
-### CSS Definitions
-
-Onsen UI styles are defined in `onsenui.css` and `onsen-css-components.css`. They are written in the [Stylus](http://stylus-lang.com/) format.
-
-`onsenui.css` is a core CSS module that defines styles for the custom elements. The source code exists under `core/css` directory. `onsen-css-components.css` contains CSS definitions for CSS components. The source code exists in `css-components/components-src/stylus`.
-
-You can also use [Onsen CSS Components](http://components.onsen.io/) to customize pre-defined colors. After the customization, you can download and replace to the existing `onsenui-css-components.css` to reflect the changes.
-
-#### Overriding CSS style
-
-If you want to apply a different style to a specific component, you can use `modifier` attribute to override its style definition.
-
-For example, if you want to apply a thick border only to a specific button, you can define like the one below.
-
-```html
-<ons-button modifier="thick">Thick Button</ons-button>
-```
-
-Then, write the appropriate style code under the style tag or in the css file.
-
-```html
-<style>
-.button--thick {
-  border: 10px;
-}
-</style>
-```
-
-### Device Back Button
-
-For Android devices, Cordova fires a `backbutton` event on hardware back button. It is important to understand that this event is **fired by Cordova** so it requires `cordova.js` file or similars (`loader.js` in Monaca) to be included in the app. Since it cannot be tested in browsers without Cordova, you can use [Monaca Debugger](https://monaca.io/debugger.html) for this purpose.
-
-Onsen UI sets handlers with default behavior for Android back button in certain elements:
-
-* Dialogs: Closes the dialog if it's cancelable.
-* Navigator: Pops a page if the page stack is not empty.
-* Splitter: Closes the menu if it's open.
-
-If the conditions are not met, these elements will call the parent element's handler. The final global handler closes the app.
-
-While this is probably the desired behavior for many apps, Onsen UI allows to modify these handlers for better customization. To modify the app global handler (closing the app), the [`ons`](/v2/docs/js/ons.html) object provides few methods:
-
-```javascript
-// Disable or enable
-ons.disableDeviceBackButtonHandler();
-ons.enableDeviceBackButtonHandler();
-
-// Set a new handler
-ons.setDefaultDeviceBackButtonListener(function(event) {
-  ons.notification.confirm('Do you want to close the app?') // Ask for confirmation
-    .then(function(index) {
-      if (index === 1) { // OK button
-        navigator.app.exitApp(); // Close the app
-      }
-    });
-  ));
-});
-```
-
-Apart from this, the mentioned elements together with `<ons-page>` element expose `onDeviceBackButton` property to modify their own handler:
-
-```javascript
-var myNavigator = document.getElementById('my-navigator');
-myNavigator.onDeviceBackButton.disable(); // Disables back button handler
-myNavigator.onDeviceBackButton.enable(); // Enables back button handler
-myNavigator.onDeviceBackButton.isEnabled(); // Returns true if enabled
-myNavigator.onDeviceBackButton.destroy(); // Destroys the current handler
-
-var page = myNavigator.topPage;
-page.onDeviceBackButton = function(event) {
-  console.log('Hardware back button!');
-  event.callParentHandler(); // Calls the parent handler (navigator handler in this case)
-};
-```
+<%- @includeGuideSection('device-back-button.md') %>
 
 ### Under the hood of Custom Elements
 
