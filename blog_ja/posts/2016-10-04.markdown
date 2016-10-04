@@ -1,0 +1,127 @@
+---
+author: atsushi
+date: 2016-10-04
+id: "onsenui-with-jquery-wookmark"
+title: "Onsen UI × jQuery。グリッド表示のWookMarkを試す"
+product: monaca
+tags: monaca, jquery, onsenui
+category: 技術情報
+---
+
+Onsen UI 2.xはAngularJSと切り離されたので、好きなライブラリと組み合わせて使えるようになっています。もちろんjQueryと組み合わせて使うこともできます。
+
+今回はjQueryライブラリの一つ、グリッド表示を行うWookMarkと組み合わせて使ってみたいと思います。
+
+### WookMarkについて
+
+WookMarkはPinterestのように幅は固定、高さが異なるデータを綺麗に並べてグリッド表示できるライブラリです。なお、各グリッドが整然と並んだ状態であればOnsen UIだけでもできます。今回のように高さをずらした表示はファッション系、女性向けアプリで人気の表示法です。
+
+### 開発環境について
+
+今回はMonaca LocalKitを使っています。ライブラリのインストールはローカルのBowerを使っていますが、Monaca IDEの場合はJS/CSSコンポーネントの管理から行ってください。
+
+### テンプレートについて
+
+MonacaアプリのベースはOnsen UI 2.xの○を使っています。グリッド表示の場合は画面が細くなってしまうのでタブレットくらいの幅がある方が見栄えが良さそうです。もちろんWookMarkはスマートフォンでも利用できます。
+
+このテンプレートではハンバーガーアイコンをタップするとメニューが表示されます。今回は上から2番目のメニューをタップした際にグリッド表示を行うように作っていきます。
+
+### 必要なライブラリについて
+
+今回は以下のライブラリを使っています。
+
+- jQuery
+- WookMark
+
+どちらもBowerからインストールできます。デフォルトのインストール先（○）だとMonacaアプリから使うことができないので .bowerrc ファイルを作成してインストールパスを指定します。
+
+```
+{
+  "directory": "www/vendors/"
+}
+```
+
+この設定をした後、インストールを行います。
+
+```
+$ bower install jquery
+$ bower install wookmark
+```
+
+これで完了です。
+
+### www/index.htmlの修正
+
+まず `header` タグ内にて必要なライブラリを読み込みます。
+
+```
+<link rel="stylesheet" href="vendors/wookmark/css/main.css">
+<script src="vendors/jquery/dist/jquery.min.js"></script>
+<script src="vendors/wookmark/wookmark.js"></script>
+```
+
+次に表示されるページを特定するためにIDを割り当てておきます。
+
+```
+<ons-template id="settings.html">
+  <ons-page id="setting"> <!-- ここが修正部分 -->
+    :
+  </ons-page>
+</ons-template>
+```
+
+さらに表示するデータを設定します。これは `<ons-page />` 内に記述します（ `</ons-toolbar>` の下に記述してください）。高さを指定しなくても表示はできるようですが、計算処理が入る分表示が遅くなってしまうようです。なるべく高さを指定した方が良いでしょう。
+
+```
+<div class="center">
+  <ul class="tiles-wrap animated" id="wookmark">
+    <li><img src="http://placekitten.com/200/297" width="200" height="297"><p>16</p></li>
+    <li><img src="http://placekitten.com/200/200" width="200" height="200"><p>17</p></li>
+    <li><img src="http://placekitten.com/200/200" width="200" height="200"><p>18</p></li>
+    <li><img src="http://placekitten.com/200/398" width="200" height="398"><p>19</p></li>
+    <li><img src="http://placekitten.com/200/267" width="200" height="267"><p>20</p></li>
+    <li><img src="http://placekitten.com/200/283" width="200" height="283"><p>21</p></li>
+    <li><img src="http://placekitten.com/200/300" width="200" height="300"><p>22</p></li>
+    <li><img src="http://placekitten.com/200/252" width="200" height="252"><p>23</p></li>
+    <li><img src="http://placekitten.com/200/158" width="200" height="158"><p>24</p></li>
+    <li><img src="http://placekitten.com/200/300" width="200" height="300"><p>25</p></li>
+    <li><img src="http://placekitten.com/200/297" width="200" height="297"><p>26</p></li>
+    <li><img src="http://placekitten.com/200/200" width="200" height="200"><p>27</p></li>
+    <li><img src="http://placekitten.com/200/200" width="200" height="200"><p>28</p></li>
+    <li><img src="http://placekitten.com/200/398" width="200" height="398"><p>29</p></li>
+    <li><img src="http://placekitten.com/200/267" width="200" height="267"><p>30</p></li>
+  </ul>        
+</div>
+```
+
+### JavaScriptの実行
+
+JavaScriptも `www/index.html` 内に記述します。
+
+```
+window.fn.load = function(page) {
+  var content = document.getElementById('content');
+  var menu = document.getElementById('menu');
+  content.load(page).then(function(page) {
+    // 追加部
+    if ($(page).attr("id") === 'setting') {
+      $('#wookmark').wookmark();
+    }
+    menu.close();
+  });
+};
+```
+
+`id=setting` の場合だけ WookMark を実行します。ページが切り替わると描画内容が破棄されるので、ページが切り替わる度に実行する必要があります。
+
+### 試してみる
+
+ここまでできあがったらMonacaデバッガーで確認してみましょう。メニューをSettingに切り替えた際に猫の画像がたくさん表示されれば問題ありません。
+
+----
+
+Onsen UI 2.xはスマートフォン/タブレットアプリならではのUI/UXに特化しており、JavaScriptライブラリは自由に選べるようになっています。jQueryであればこれまでの資産がたくさんありますので、それらを使うことでリッチなUIのアプリケーションが簡単に作れるはずです。ぜひ試してください。
+
+今回のコードは○にアップロードしてあります。参考にしてください。
+
+
