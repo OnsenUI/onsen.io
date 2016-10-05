@@ -2,19 +2,21 @@
 author: atsushi
 date: 2016-10-04
 id: "onsenui-with-jquery-wookmark"
-title: "Onsen UI × jQuery。グリッド表示のWookMarkを試す"
+title: "Onsen UI × jQuery。グリッド表示のWookmarkを試す"
 product: monaca
 tags: monaca, jquery, onsenui
 category: 技術情報
 ---
 
-Onsen UI 2.xはAngularJSと切り離されたので、好きなライブラリと組み合わせて使えるようになっています。もちろんjQueryと組み合わせて使うこともできます。
+Onsen UI 2.xはAngularJSと切り離されたので、好きなJavaScriptライブラリと組み合わせて使えるようになっています。もちろんjQueryも利用できます。
 
-今回はjQueryライブラリの一つ、グリッド表示を行うWookMarkと組み合わせて使ってみたいと思います。
+今回はjQueryライブラリの一つ、グリッド表示を行う[Wookmark](http://www.wookmark.com/jquery-plugin)とOnsen UI組み合わせて使ってみたいと思います。
 
-### WookMarkについて
+### Wookmarkについて
 
-WookMarkはPinterestのように幅は固定、高さが異なるデータを綺麗に並べてグリッド表示できるライブラリです。なお、各グリッドが整然と並んだ状態であればOnsen UIだけでもできます。今回のように高さをずらした表示はファッション系、女性向けアプリで人気の表示法です。
+WookmarkはPinterestのように幅は固定、高さが異なるデータを綺麗に並べてグリッド表示できるライブラリです。なお、各グリッドが整然と並んだ状態であればOnsen UIだけでもできます。今回のように高さをずらした表示はファッション系、女性向けアプリで人気の表示法です。
+
+![](/blog/content/images/2016/Oct/wookmark-with-onsenui-1.png)
 
 ### 開発環境について
 
@@ -22,7 +24,7 @@ WookMarkはPinterestのように幅は固定、高さが異なるデータを綺
 
 ### テンプレートについて
 
-MonacaアプリのベースはOnsen UI 2.xの○を使っています。グリッド表示の場合は画面が細くなってしまうのでタブレットくらいの幅がある方が見栄えが良さそうです。もちろんWookMarkはスマートフォンでも利用できます。
+MonacaアプリのベースはOnsen UI 2.xのOnsen UI V2 JS Splitterを使っています。グリッド表示の場合は画面が細くなってしまうのでタブレットくらいの幅がある方が見栄えが良さそうです。もちろんWookmarkはスマートフォンでも利用できます。
 
 このテンプレートではハンバーガーアイコンをタップするとメニューが表示されます。今回は上から2番目のメニューをタップした際にグリッド表示を行うように作っていきます。
 
@@ -31,9 +33,9 @@ MonacaアプリのベースはOnsen UI 2.xの○を使っています。グリ�
 今回は以下のライブラリを使っています。
 
 - jQuery
-- WookMark
+- Wookmark
 
-どちらもBowerからインストールできます。デフォルトのインストール先（○）だとMonacaアプリから使うことができないので .bowerrc ファイルを作成してインストールパスを指定します。
+どちらもBowerからインストールできます。デフォルトのインストール先（bower_components）だとMonacaアプリから使うことができないのでプロジェクトルート以下に .bowerrc ファイルを作成してインストールパスを指定します。
 
 ```
 {
@@ -70,7 +72,7 @@ $ bower install wookmark
 </ons-template>
 ```
 
-さらに表示するデータを設定します。これは `<ons-page />` 内に記述します（ `</ons-toolbar>` の下に記述してください）。高さを指定しなくても表示はできるようですが、計算処理が入る分表示が遅くなってしまうようです。なるべく高さを指定した方が良いでしょう。
+さらに表示するデータを設定します。これは `<ons-page />` 内に記述します（ `</ons-toolbar>` の下に記述してください）。高さを指定しなくても表示はできるようですが、計算処理が入る分表示が遅くなってしまうようです。なるべく高さを指定した方が良いでしょう。今回はダミーの画像として猫の画像を表示してくれる [PlaceKitten](http://placekitten.com/) を利用しています。
 
 ```
 <div class="center">
@@ -112,16 +114,17 @@ window.fn.load = function(page) {
 };
 ```
 
-`id=setting` の場合だけ WookMark を実行します。ページが切り替わると描画内容が破棄されるので、ページが切り替わる度に実行する必要があります。
+`#setting` の場合だけ Wookmark を実行します。ページが切り替わると描画内容が破棄されるので、ページが切り替わる度に実行する必要があります。
 
 ### 試してみる
 
 ここまでできあがったらMonacaデバッガーで確認してみましょう。メニューをSettingに切り替えた際に猫の画像がたくさん表示されれば問題ありません。
 
+![](/blog/content/images/2016/Oct/wookmark-with-onsenui-5.png)
+
 ----
 
 Onsen UI 2.xはスマートフォン/タブレットアプリならではのUI/UXに特化しており、JavaScriptライブラリは自由に選べるようになっています。jQueryであればこれまでの資産がたくさんありますので、それらを使うことでリッチなUIのアプリケーションが簡単に作れるはずです。ぜひ試してください。
 
-今回のコードは○にアップロードしてあります。参考にしてください。
-
+今回のコードは[moongift/MonacaWookmark: Demo application of Monaca with Wookmark](https://github.com/moongift/MonacaWookmark)にアップロードしてあります。参考にしてください。
 
