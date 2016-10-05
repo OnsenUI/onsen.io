@@ -1,24 +1,29 @@
 ### Creating a page
 
 The root of a page is created using the <%- @componentLink('page') %> element. It covers the whole screen and is used as a container for the other elements.
+
 <% if @framework is 'angular2': %>
 Unlike other framework bindings, for Angular 2 you need to define extra `<div>` tags that represent page `background` and page `content` as below:
 <% end %>
 
-```<% if @framework is 'angular2': %>
+<% if @framework is 'angular2': %>
+```
 <ons-page>
   <div class="background"></div>
   <div class="content">
     Some content
   </div>
 </ons-page>
+```
 <% else if @framework in ['js', 'angular1']: %>
+```
 <body>
   <ons-page>
     Some content
   </ons-page>
 </body>
-<% end %>```
+```
+<% end %>
 
 #### Adding a toolbar
 
