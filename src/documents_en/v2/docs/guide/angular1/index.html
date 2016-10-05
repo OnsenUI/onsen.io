@@ -16,17 +16,7 @@ layout: docs.html.eco
 
 This guide provides the basic concepts of Onsen UI with AngularJS (1.x). For more information about specific components, please see the reference section. A live example is included in each reference page with extended examples and information. We also have [Migration Guide from V1 to V2](from-v1-to-v2.html).
 
-### Starting Project
-
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
-
-#### Using Onsen UI toolkit - Monaca CLI
-
-```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose Angular 1 template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
-```
+<%- @includeGuideSection('starting-project.md') %>
 
 #### Download via npm or bower
 
@@ -115,12 +105,6 @@ For example, both <%- @componentLink('page') %> and <%- @componentLink('navigato
 </script>
 ```
 
-<%- @includeGuideSection('templating.md') %>
-
-#### Using $templateCache from AngularJS
-
-The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
-
 <%- @includeGuideSection('ons-object.md') %>
 
 #### AngularJS utility functions
@@ -162,6 +146,26 @@ ons.ready(function() {
   ons.compile(elm[0]); // The argument must be a HTMLElement object
 });
 ```
+
+<%- @includeGuideSection('page-content.md') %>
+
+<%- @includeGuideSection('dialogs.md') %>
+
+<%- @includeGuideSection('navigation.md') %>
+
+<%- @includeGuideSection('templating.md') %>
+
+#### Using $templateCache from AngularJS
+
+The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
+
+<%- @includeGuideSection('modifier.md') %>
+
+<%- @includeGuideSection('auto-styling.md') %>
+
+<%- @includeGuideSection('css-definitions.md') %>
+
+<%- @includeGuideSection('device-back-button.md') %>
 
 <!-- End of markdown -->
 <% end %>

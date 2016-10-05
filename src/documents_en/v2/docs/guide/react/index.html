@@ -15,17 +15,7 @@ layout: docs.html.eco
 
 Note: We are using ES6 + JSX and transpile using [Babel](https://babeljs.io/) in the following examples. You might want to read through [React docs](https://facebook.github.io/react/docs/getting-started.html) for more details.
 
-### Starting Project
-
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
-
-#### Using Onsen UI toolkit - Monaca CLI
-
-```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose React template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
-```
+<%- @includeGuideSection('starting-project.md') %>
 
 #### Download via npm
 
@@ -138,7 +128,7 @@ Putting together, when `index.html` is loaded into the browser, it will compile 
 
 This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read the official [React docs](https://facebook.github.io/react/docs/getting-started.html).
 
-<%- @includeGuideSection('ons-object.md') %>
+<%- @includeGuideSection('creating-page.md') %>
 
 ### Event Handling
 
@@ -159,6 +149,19 @@ class MyPage extends React.Component {
 }
 ```
 
+<%- @includeGuideSection('ons-object.md') %>
+
+#### Importing `ons` object in React
+
+Simply use ES6 imports:
+
+```
+import ons from `onsenui`;
+import { platfrom, notification } from `onsenui`;
+```
+
+<%- @includeGuideSection('page-content.md') %>
+
 <%- @includeGuideSection('dialogs.md') %>
 
 <%- @includeGuideSection('navigation.md') %>
@@ -168,8 +171,6 @@ class MyPage extends React.Component {
 <%- @includeGuideSection('auto-styling.md') %>
 
 <%- @includeGuideSection('css-definitions.md') %>
-
-<%- @includeGuideSection('device-back-button.md') %>
 
 <!-- End of markdown -->
 <% end %>

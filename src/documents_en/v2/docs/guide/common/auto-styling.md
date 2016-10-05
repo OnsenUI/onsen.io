@@ -29,12 +29,22 @@ A conditional element called [`<ons-if>`](/v2/docs/js/ons-if.html) is available 
 
 With this, for example, you can display <%- @componentLink('fab') %> for Material Design and other type of button for iOS flat design.
 
+<% if @framework is 'angular1': %>
+AngularJS bindings also provide <%- @componentLink('if-platform') %> directive for this purpose:
+
+```
+<div ons-if-platform="android">
+  This is Android
+</div>
+```
+<% end %>
+
 #### Icons shortcut
 
-While it is possible to use the previous `<ons-if>` to select icons depending on the platform, a shortcut in <%- @componentLink('icon') %> component is provided to make it simpler:
+<%- @componentLink('icon') %> component provides a shortcut to make auto styling easier:
 
 ```
 <<%- @mapComponentName('icon') %> icon="ion-navicon, material:md-menu" size="24px, material:20px"<%- if @framework is 'react' then ' /' else '></ons-icon' %>>
 ```
 
-The second icon will be displayed when `material` modifier is present.
+The second icon will be displayed when `material` modifier is present (other modifiers can be used).

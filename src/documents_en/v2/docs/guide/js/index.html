@@ -17,17 +17,7 @@ Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cord
 
 This guide provides the basic concepts of Onsen UI. For more information about specific components, please see the reference section. A live example is included in each reference page with extended examples and information.
 
-### Starting Project
-
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/getting-started).
-
-#### Using Onsen UI toolkit - Monaca CLI
-
-```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
-```
+<%- @includeGuideSection('starting-project.md') %>
 
 #### Download via npm or bower
 
@@ -92,112 +82,7 @@ The source code below illustrates a basic usage of `<ons-navigator>` component. 
 </script>
 ```
 
-### Adding page content
-
-For a full list of components please check the [reference page](/v2/docs/js.html).
-
-#### Form elements
-
-Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2/docs/js/ons-button.html), [`<ons-switch>`](/v2/docs/js/ons-switch.html) and [`<ons-range>`](/v2/docs/js/ons-range.html), perhaps the [`<ons-input>`](/v2/docs/js/ons-input.html) component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
-
-```
-<ons-page>
-  <ons-toolbar>
-    <div class="center">Form</div>
-  </ons-toolbar>
-  <div style="text-align: center; margin-top: 30px;">
-    <p><ons-input type="text" placeholder="Username" float></ons-input></p>
-    <p><ons-input type="password" placeholder="Password" float></ons-input></p>
-    <p><ons-button onclick="login()">Sign in</ons-button></p>
-  </div>
-</ons-page>
-```
-
-#### Lists
-
-Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using [`<ons-list>`](/v2/docs/js/ons-list.html), [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) and [`<ons-list-header>`](/v2/docs/js/ons-list-header.html) you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<ons-toolbar>`, and some CSS classes are provided for default styles (`list__item__icon`, `list__item__thumbnail`, `list__item__title` and `list__item__subtitle`).
-
-```
-<ons-page>
-  ...
-  <ons-list>
-    <ons-list-header>Header</ons-list-header>
-    <ons-list-item>
-      <div class="left">
-        <ons-icon icon="md-face" class="list__item__icon"></ons-icon>
-      </div>
-      <div class="center">
-        <span class="list__item__title">Title</span>
-        <span class="list__item__subtitle">Subtitle</span>
-      </div>
-      <label class="right">
-        <ons-switch></ons-switch>
-      </label>
-    </ons-list-item>
-    ...
-  </ons-list>
-</ons-page>
-```
-
-##### Infinite scroll
-
-Adding new items to the list whenever the user reaches the bottom of the list is a very common practice. To do this, [`<ons-page>`](/v2/docs/js/ons-page.html) component provides `onInfiniteScroll` property that is called every time the scroll is near the bottom.
-
-##### Lazy repeat
-
-For cases when the list can contain thousands of items, [`<ons-lazy-repeat>`](/v2/docs/js/ons-lazy-repeat.html) component will enhance the performance by loading and unloading items depending on the current scroll.
-
-#### Layouting
-
-Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
-
-The layout can be performed by combining [`<ons-col>`](/v2/docs/js/ons-col.html) and [`<ons-row>`](/v2/docs/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
-
-Grid is not necessary in general for list items. Special layout is provided for list items based on flat iOS and Material Design specification. See [list](#lists) section for more information.
-
-#### Control and visual components
-
-Other components from different categories are available to complete the developer needs.
-
-##### Carousel
-
-[`<ons-carousel`>](/v2/docs/js/ons-carousel.html) and [`<ons-carousel-item>`](/v2/docs/js/ons-carousel-item.html) components provide a simple carousel that can optionally be overscrollable and fullscreen.
-
-##### Pull-hook
-
-A very common way to check for updates in apps is given by the [`<ons-pull-hook>`](/v2/docs/js/ons-pull-hook.html) component, which enables a simple "pull to refresh" functionality.
-
-##### Speed-dial
-
-[`<ons-speed-dial>`](/v2/docs/js/ons-speed-dial.html) and [`<ons-speed-dial-item>`](/v2/docs/js/ons-speed-dial-item.html) are just a set of floating action buttons ([`<ons-fab>`](/v2/docs/js/ons-fab.html)) that can be shown or hidden by the user. This components are mainly used in Material Design.
-
-##### Progress
-
-[`<ons-progress-bar>`](/v2/docs/js/ons-progress-bar.html) and [`<ons-progress-circular>`](/v2/docs/js/ons-progress-circular.html) display the loading progress like it's done in Material Design. Two modes are supported: display the exact progress that is provided to the component or display an indeterminated progress.
-
-##### Icons
-
-Onsen UI bundles three icon packs to be used with [`<ons-icon>`](/v2/docs/js/ons-icon.html) component:
-
-  * [Font Awesome](https://fortawesome.github.io/Font-Awesome/) - Prefix `fa-`
-  * [Ionicons](http://ionicons.com/) - Prefix `ion-`
-  * [Material Icons](https://design.google.com/icons/) - Prefix `md-`
-
-In general, Ionicons are good for iOS apps while the Material Icons work best for apps using Material Design.
-
-#### Gesture detector
-
-It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection.
-
-[`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) component is used to wrap the target DOM element that should detect the fingers. The Gesture Detector class (Hammer.js) is also exposed in [`ons.GestureDetector`](/v2/docs/js/ons.GestureDetector.html) object.
-
-```
-var divGD = ons.GestureDetector(document.querySelector('#my-div'));
-divGD.on('dragup dragdown', function(event) {
-  console.log('drag Y axis');
-  divGD.dispose();
-});
-```
+<%- @includeGuideSection('page-content.md') %>
 
 <%- @includeGuideSection('dialogs.md') %>
 

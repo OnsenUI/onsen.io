@@ -29,7 +29,7 @@ ons.setDefaultDeviceBackButtonListener(function(event) {
 });
 ```
 
-Apart from this, the mentioned elements together with `<ons-page>` element expose `onDeviceBackButton` property to modify their own handler:
+Apart from this, the mentioned elements together with `<%- @mapComponentName('page') %>` element expose `onDeviceBackButton` property to modify their own handler:
 
 ```javascript
 var myNavigator = document.getElementById('my-navigator');
