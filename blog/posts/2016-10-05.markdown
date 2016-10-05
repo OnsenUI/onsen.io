@@ -1,35 +1,37 @@
 ---
 author: andreas
-date: 2016-10-04
+date: 2016-10-05
 id: create-reusable-future-proof-ui-components-with-custom-elements-v1-web-components
 title: "Create reusable and future-proof UI components with Custom Elements v1 and Web Components"
 category: tutorial
 tags: onsen ui, web components, custom elements
 ---
 
-Onsen UI is a UI component library built on top of Web Components. Web Components is an emerging standard that is designed to make it easy to create reusable UI components using APIs that are native to the browser. One clear advantage of this is that the components that you make are not tied to a single library or frontend framework.
+![Custom Elements is a part of Web Components](/blog/content/images/2016/Oct/webcomponents_logo.svg)
+
+Onsen UI is a UI component library built on top of [Web Components](http://webcomponents.org/). Web Components is an emerging standard that is designed to make it easy to create reusable UI components using APIs that are native to the browser. One clear advantage of this is that the components that you make are not tied to a single library or frontend framework.
 
 In this article we will take a look at the advantages of using Web Components and also at the Custom Elements v1 API that was recently finalized and is looking to become the de facto standard for registering and adding behavior to custom tags.
 
-Web Components is in my opinion not only a technology for writing encapsulated components that can be plugged into our apps, it is also a way to help us stop reinventing the wheel by having to implement the same component for every framework or library out there.
+Web Components is in my opinion not only a technology for writing encapsulated components that can be plugged into our apps, it is also a way to help us stop reinventing the wheel and implement the same components for every framework or library out there.
 
 <!-- more -->
 
-The Custom Elements v1 API is currently only supported in Chrome (from Chrome 54) but other browser vendors are working on it and we hope to see it supported natively in all major browsers soon. Even though it's only supported in Chrome, it is possible to add support to other browsers and earlier versions of Chrome using polyfills.
+The Custom Elements v1 API is currently only supported in Chrome (from Chrome 54) but other browser vendors are working on it and we hope to see it supported natively in all major browsers soon. Even though it's only supported in Chrome, it is possible to add support to other browsers and earlier versions of Chrome using polyfills. More about that later.
 
 ## Why use Web Components?
 
-The JavaScript world is constantly changing with older frameworks and libraries being superseeded by newer ones. New concepts are introduced that make our developers lives easier and our apps more performant. It is often a good idea to stay on top and being open to learning new things, especially if you are a professional that needs to stay relevant. One issue this faces us with is that we often need to reinvent the wheel.
+The JavaScript world is constantly changing with older frameworks and libraries being superseded by newer ones. New concepts are introduced that make our developers lives easier and our apps more performant. It is often a good idea to stay on top and being open to learning new things, especially if you are a professional that needs to stay relevant. One issue this faces us with is that we often need to reinvent the wheel.
 
 Let's say that several years ago you were working on a project where you needed a date picker component and decided to create it yourself. Maybe you couldn't find one that met your needs or you wanted to challenge yourself. In the app you were using jQuery so it felt natural to create the component using jQuery UI. You spend some time making a great date picker component for you app and you feel very satisfied with your work.
 
-Let's fast forward a number of years and you find yourself working on another project, this time in AngularJS and once again you need to create a date picker. You are now faced with a dilemma. One option would be to use the component you created for that other project and wrap it as an AngularJS directive, but that forces you to add jQuery and jQuery UI as dependencies to your app. If we imagine that you only need to use jQuery UI for that single component this approach would just have added bloat to your app. A better option would maybe be to port the jQuery UI date picker into AngularJS so you buckle down and reimplement the component.
+Let's fast forward a couple of years and you find yourself working on another project, this time in AngularJS and once again you need to create a date picker. You are now faced with a dilemma. One option would be to use the component you created for that other project and wrap it as an AngularJS directive, but that forces you to add jQuery and jQuery UI as dependencies to your app. If we imagine that you only need to use jQuery UI for that single component this approach would just have added bloat to your app. A better option would maybe be to port the jQuery UI date picker into AngularJS so you buckle down and reimplement the component.
 
 A number of years go by and now you're working on a project in React where you once again need to add a date picker and... I think you get the picture by now. It's starting to get tedious and maybe you start thinking that there should be a better way to go about things. If the original date picker was written using only APIs that are native the the browser you would only need write it once and could use is just as well in your jQuery, AngularJS or React apps. This is where Web Components come in.
 
 ## A simple component
 
-Let's create a simple component with the Custom Elements v1 API to get a feel for how it works. Web Components is an umbrella term that describes a collection of new four technologies that help making reusable components. This article will only touch on Custom Elements but for completeness the other three are:
+Web Components is an umbrella term that describes a collection of new four technologies that help making reusable components. This article will only touch on Custom Elements but for completeness the other three are:
 
 * The **`<template>` tag** that is used to define inert HTML that is not rendered to the page but can be used as, you guessed it, a template for components. It is often useful for components that need to render a complex inner structure. Instead of creating the DOM by hand the content of the template can be copied and inserted into the component.
 * The **Shadow DOM** which is a DOM subtree that is hidden from the rest of the document. CSS rules defined inside the Shadow DOM does not affect anything outside of the subtree and vice versa. This helps with issues where CSS rules would *leak* and alter nodes that were not intended to be styled.
@@ -73,6 +75,7 @@ class MyElement extends HTMLElement {
 
   connectedCallback() {
     this.style.cursor = 'pointer';
+    this.style.userSelect = 'none';
     this.render();
 
     this.addEventListener('click', this.onClick);
@@ -88,7 +91,7 @@ class MyElement extends HTMLElement {
    * is set, sad otherwise.
    */
   render() {
-    this.innerHTML = this.happy ? ':-)' : ':-(';
+    this.innerHTML = this.happy ? '&#x1f603;' : '&#x1f620;';
   }
 
   /**
@@ -127,7 +130,8 @@ When the element has been defined and registered, all that is needed to use it i
 
 You can see it in action below:
 
-TODO: Codepen when I have internet connection.
+<p data-height="300" data-theme-id="13819" data-slug-hash="NRXqkx" data-default-tab="js,result" data-user="argelius" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/argelius/pen/NRXqkx/">Simple Web Component with Custom Elements v1</a> by Andreas Argelius (<a href="http://codepen.io/argelius">@argelius</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
 
 ## Migration from v0 to v1
 
@@ -179,4 +183,13 @@ The getter should return a list of the attributes that when changed will trigger
 
 ## Polyfills
 
-As mentioned earlier, Custom Elements v1 is currently only supported in Chrome from version 54, so in order to use it in browsers that doesn't support it is necessary to use a polyfill. There are two major polyfills available right now. One is developed by the Polymer team and there is one that is created by TODO: Will add some more here when I have an internet connection.
+As mentioned earlier, Custom Elements v1 is currently only supported in Chrome from version 54, so in order to use it in browsers that doesn't support it is necessary to use a polyfill. There are two major polyfills available right now:
+
+* [webcomponents.js](https://github.com/webcomponents/webcomponentsjs) is a suite of polyfills created by the [Polymer](https://www.polymer-project.org/1.0/) team. It has supported Custom Elements v0 for a long time and recently added v1 support.
+* [document-register-element](https://github.com/WebReflection/document-register-element) is made by [Andreas Giammarchi](https://github.com/WebReflection) and is what we use for Onsen UI. The reason why we chose to use this polyfill is that there were some timing issues with the Polymer polyfill that made it hard to use in our context.
+
+## Spread the word
+
+We believe that Web Components is a great way to create reusable components with the added benifit that they are not dependent on any framework or library. Custom Elements v1 is looking to become a standard that will be implemented by all browser vendors so even if we need to use polyfills today, in the near future we will be able to run the same code natively on all major browsers without polyfills.
+
+If you like Onsen UI and would like to support us, please give us a star on our [GitHub page](https://github.com/OnsenUI/OnsenUI)!
