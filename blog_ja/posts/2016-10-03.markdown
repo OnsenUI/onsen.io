@@ -2,7 +2,7 @@
 author: atsushi
 date: 2016-10-03
 id: chartjs-with-onsenui
-title: "業務アプリで役立つChart.jsをOnsen UIとともに使ってみる"
+title: "業務アプリで役立つChart.jsをOnsen UIと組み合わせる"
 product: monaca
 tags: monaca, chart
 category: 技術情報
@@ -16,10 +16,11 @@ category: 技術情報
 
 今回は Onsen UI 2.x のタブバーテンプレートを使っています。そしてタブを切り替えた際にグラフが表示されるようにします。
 
-
 ### Chart.jsのインストール
 
-Chart.jsはMonaca IDEクラウドのJS/CSSコンポーネントの管理からインストールします。chartjsで検索して、バージョン○をインストールしました。ロードするコンポーネントは○を指定しています。
+Chart.jsはMonaca IDEクラウドのJS/CSSコンポーネントの管理からインストールします。chartjsで検索して、バージョン2.3.0をインストールしました。ロードするコンポーネントはChart.min.jsを指定しています。
+
+![](/blog/content/images/2016/Oct/chartjs-4.png)
 
 ### 使い方
 
@@ -40,7 +41,7 @@ Chart.jsはMonaca IDEクラウドのJS/CSSコンポーネントの管理から�
 </ons-page>
 ```
 
-そして、棒グラフを描く際には次のように実行します。 `randomScalingFactor` はランダムな数字を返すだけです。
+そして、棒グラフを描く際には次のように実行します。 `randomScalingFactor` はランダムな数字を返すだけの関数です。
 
 ```
 function barChart() {
@@ -132,7 +133,15 @@ function pieChart() {
 
 実際の表示は次のようになります。
 
+![](/blog/content/images/2016/Oct/chartjs-1.png)
+
 タップするとデータのラベルであったり、数字が確認できます。一部のデータを非表示することもできます。
+
+![](/blog/content/images/2016/Oct/chartjs-2.png)
+
+棒グラフも同様にタップしてデータを確認できます。
+
+![](/blog/content/images/2016/Oct/chartjs-3.png)
 
 なお、一部のラベルをタップすると表示が乱れる場合がありますが、スクロールすると直ります。
 
@@ -140,4 +149,4 @@ function pieChart() {
 
 Chart.jsは手軽に導入できるライブラリで、データ部はアプリ内部や外部のサーバから取得するようにすればあっという間に見栄えの良いグラフが描けます。Onsen UIと組み合わせるのも簡単なので、ぜひMonacaアプリの中で使ってみてください。
 
-今回のコードは○にアップロードしてあります。参考にしてください。
+今回のコードは [moongift/monaca-chart-js: Monaca と Chart.jsを組み合わせたデモです。](https://github.com/moongift/monaca-chart-js) にアップロードしてあります。参考にしてください。
