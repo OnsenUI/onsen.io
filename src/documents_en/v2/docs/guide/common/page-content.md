@@ -15,7 +15,7 @@ Onsen UI provides a rich set of form components. Apart from <%- @componentLink('
   <div <%- if @framework isnt 'angular2' then 'style="text-align: center; margin-top: 30px;"' else 'class="content"' %>>
     <p><ons-input type="text" placeholder="Username" float></ons-input></p>
     <p><ons-input type="password" placeholder="Password" float></ons-input></p>
-    <p><ons-button onclick="login()">Sign in</ons-button></p>
+    <p><ons-button>Sign in</ons-button></p>
   </div>
 </ons-page>
 ```

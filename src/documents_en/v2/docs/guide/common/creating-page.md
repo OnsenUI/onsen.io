@@ -5,20 +5,20 @@ The root of a page is created using the <%- @componentLink('page') %> element. I
 Unlike other framework bindings, for Angular 2 you need to define extra `<div>` tags that represent page `background` and page `content` as below:
 <% end %>
 
-<% if @framework isnt 'react': %>
-```
+```<% if @framework is 'angular2': %>
+<ons-page>
+  <div class="background"></div>
+  <div class="content">
+    Some content
+  </div>
+</ons-page>
+<% else if @framework in ['js', 'angular1']: %>
 <body>
-  <ons-page><% if @framework is 'angular2': %>
-    <div class="background"></div>
-    <div class="content">
-      Static page app
-    </div><% else: %>
-    Static page app
-  <% end %>
+  <ons-page>
+    Some content
   </ons-page>
 </body>
-```
-<% end %>
+<% end %>```
 
 #### Adding a toolbar
 
@@ -33,7 +33,7 @@ A toolbar is defined as a <%- @componentLink('toolbar') %> or <%- @componentLink
     </div>
     <div class="center">Title</div>
     <div class="right">
-      <ons-toolbar-button<%- if @framework is 'angular2' then  ' (click)="openMenu()"' else '' %>>
+      <ons-toolbar-button>
         <ons-icon icon="md-menu"></ons-icon>
       </ons-toolbar-button>
     </div>
