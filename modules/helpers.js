@@ -30,6 +30,16 @@ var renderPatternName = function(name) {
   return name;
 };
 
+var renderFileContent = function(path, params) {
+  try {
+    var partialContents = require('fs').readFileSync(path);
+    var context = params ? extend({}, params, this) : extend({}, this);
+    return eco.render(partialContents.toString('utf8'), context);
+  } catch (e) {
+    return e.toString();
+  }
+};
+
 module.exports = function() {
   return function(files, metalsmith, done) {
 
@@ -39,14 +49,13 @@ module.exports = function() {
 
     var helpers = {
       partial: function(name, params) {
-        try {
-          var path = metalsmith.path('src/partials', name);
-          var partialContents = require('fs').readFileSync(path);
-          var context = params ? extend({}, params, this) : extend({}, this);
-          return eco.render(partialContents.toString('utf8'), context);
-        } catch (e) {
-          return e.toString();
-        }
+        var path = metalsmith.path('src/partials', name);
+        return renderFileContent.call(this, path, params);
+      },
+
+      includeGuideSection: function(name, params) {
+        var path = metalsmith.path('src/documents_' + this.lang + '/v2/docs/guide/common', name);
+        return renderFileContent.call(this, path, params);
       },
 
       renderPatternName: renderPatternName,
@@ -321,6 +330,18 @@ module.exports = function() {
         }
 
         return escape(str);
+      },
+
+      mapComponentName: function(component) {
+        if (this.framework === 'react') {
+          return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
+        }
+        return 'ons-' + component;
+      },
+
+      componentLink: function(component) {
+        component = this.mapComponentName(component);
+        return '[`<' + component + '>`](/v2/docs/' + this.framework + '/' + component + '.html)';
       }
     };
 

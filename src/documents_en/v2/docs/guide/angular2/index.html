@@ -15,21 +15,7 @@ layout: docs.html.eco
 
 This guide explains important notes when using Onsen UI with Angular 2.
 
-### Starting a project
-
-To use Onsen UI in Angular 2 apps, Onsen UI Core and Angular 2 Bindings should be installed to the project.
-
-These modules can be installed via NPM package: [`onsenui`](https://www.npmjs.com/package/onsenui) and [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui).
-
-To quickly setup the project, Monaca CLI will solve all dependencies including TypeScript, Webpack and Popyfills.
-
-#### Use Monaca CLI
-
-```bash
-$ npm install -g monaca # Install Monaca CLI
-$ monaca create helloworld # Choose "Angular 2 template"
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
-```
+<%- @includeGuideSection('starting-project.md') %>
 
 #### Download from npm
 
@@ -100,22 +86,7 @@ Currently the following components have Angular 2 directives.
 - `OnsSplitterSide` (`<ons-splitter-side>`)
 - `OnsSplitterContent` (`<ons-splitter-content>`)
 
-### Page definition
-
-In Onsen UI, pages are defined using `ons-page` element. Unlike other framework bindings, you need to define extra `<div>` tags that represent page background and page content as below:
-
-
-```html
-<ons-page>
-  <ons-toolbar> <div class="center">Ons-Page Component Example</div> </ons-toolbar>
-  <div class="background"></div>
-  <div class="content">
-    <div style="text-align: center; margin: 10px;">
-      <ons-button (click)="onClick()">MyButton</ons-button>
-    </div>
-  </div>
-</ons-page>
-```
+<%- @includeGuideSection('creating-page.md') %>
 
 ### Event handling
 
@@ -141,9 +112,25 @@ For Web Components, all methods are directly implemented in the DOM element. The
 
 Angular 2 also allows template reference variable (`#`) when referring DOM elements. Please read [Angular 2 Guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars) for more details.
 
+<%- @includeGuideSection('ons-object.md') %>
+
+<%- @includeGuideSection('page-content.md') %>
+
+<%- @includeGuideSection('dialogs.md') %>
+
+<%- @includeGuideSection('navigation.md') %>
+
+<%- @includeGuideSection('modifier.md') %>
+
+<%- @includeGuideSection('auto-styling.md') %>
+
+<%- @includeGuideSection('css-definitions.md') %>
+
+<%- @includeGuideSection('device-back-button.md') %>
+
 ### Sample codes
 
-Angular 2 sample codes are located in `angular2-onsenui` source repository. Please use the examples to understand how to call each components.
+Angular 2 sample codes are located in `/bindings/angular2` directory in Onsen UI repository. Please use the examples to understand how to call each components.
 
  * [Examples](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples)
 
