@@ -13,121 +13,80 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-Caution: This document is still in progress. Please send us feedbacks to improve the content.
+This guide explains important notes when using Onsen UI with Angular 2.
 
-This guide describes using Onsen UI with Angular 2. The document is based on Angular 2 RC + Onsen UI 2 RC + Onsen 2 for Angular 2 Beta.
+<%- @includeGuideSection('starting-project.md') %>
 
-### Starting Project
-
-Onsen UI for Angular 2 is delivered as NPM package ([`onsenui`](https://www.npmjs.com/package/onsenui) and [`angular2-onsenui`](https://www.npmjs.com/package/angular2-onsenui)). For easier installation, Monaca CLI will download all development & build dependencies including TypeScript compiler, Webpack and polyfills.
-
-#### Using Onsen UI toolkit - Monaca CLI
+#### Download from npm
 
 ```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose Angular 2 template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
-```
-
-#### Download via npm
-
-```bash
-# You need to install Onsen UI and Onsen UI for Angular 2
+# Install Onsen UI and Angular 2 bindings
 $ npm install onsenui angular2-onsenui
-```
-
-#### Use kitchensink app
-
-We have created a sample app with all Onsen UI for Angular 2 components, preconfigured with Angular 2, Babel and TypeScript. To download, please visit [GitHub Repository](https://github.com/OnsenUI/angular2-onsenui-kitchensink). See the <a href="https://onsenui.github.io/angular2-onsenui-kitchensink/demo.html" target="_blank">live app here</a>.
-
-### Loading Onsen UI in Angular 2
-
-You need to import `onsenui` and `angular2-onsenui` package as shown below. 
-
-```javascript
-// Angular 2 imports
-import '@angular/platform-browser-dynamic';
-import '@angular/platform-browser';
-import '@angular/core';
-import '@angular/http';
-import '@angular/router';
-
-// Onsen UI
-window['ons'] = require('onsenui/js/onsenui');
-import { ONS_DIRECTIVES, OnsNavigator } from 'angular2-onsenui';
 ```
 
 ### Onsen UI Directives and Web Components
 
-Onsen UI for Angular 2 components are Angular 2 Directives. You need to specify the directives to use at `directives` in `@Component` decorator like below:
+Onsen UI for Angular 2 provides Angular 2 directives which wraps Web Components. Those directives are included in Angular Module (`NgModule`) named `OnsenModule`. For details about `NgModule`, please refer to [Angular Modules (NgModule) - ts](https://angular.io/docs/ts/latest/guide/ngmodule.html).
+
+To use `OnsenModule`, please import it to the application's module by specifying at `import` parameter of `@NgModule`. Onsen UI components will not render properly if `OnsenModule` is not loaded.
+
+Also, please aware to specify `CUSTOM_ELEMENTS_SCHEMA` as module's `schema`, since Onsen UI is built of Custom Elements. Forgot to specify this will result in error when using Onsen UI custom elements in the template.
 
 ```
-import { OnsInput, OnsPage } from `angular2-onsenui`
+import {OnsenModule} from 'angular2-onsenui';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-// Example Component with Onsen UI for Angular 2
-@Component({
-  selector: 'app',
-  directives: [ OnsInput, OnsPage ],
-  template: `<ons-page><ons-input (change)="onChange()" type="text"></ons-input><ons-button>Click Me!</ons-button></ons-page>`
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppComponent {
-  // Application code should be written in here
-}
+class AppModule { }
+
+// Start module
+platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
-In this case, we are using `OnsInput` and `OnsPage` directive, which represents `ons-input` and `ons-page` tag.
+### Declaring dynamic load components
 
-You might noticed that `ons-button` is not specified in the directive. This is because this component is not a Angular 2 directive, but is a part of our JavaScript Core implemented as Web Components.
-
-Currently, the following components are made as Angular 2 directives.
-
-- `OnsNavigator` containing `<ons-navigator>`
-- `OnsCarousel` containing `<ons-carousel>`
-- `OnsTabbar` containing `<ons-tabbar>`
-- `OnsAlertDialog` containing `<ons-alert-dialog>`
-- `OnsPopover` containing `<ons-popover>`
-- `OnsSwitch` containing `<ons-switch>`
-- `OnsRange` containing `<ons-range>`
-- `OnsInput` containing `<ons-input>`
-- `OnsPullHook` containing `<ons-pull-hook>`
-- `OnsLazyRepeat` containing `<ons-lazy-repeat>`
-- `OnsSplitterSide` containing `<ons-splitter-side>`
-- `OnsSplitterContent` containing `<ons-splitter-content>`
-- `OnsPage` containing `<ons-page>`
-
-To solve the confusion, we have special constant `ONS_DIRECTIVES` which includes all Onsen UI directives. The easiest way to include our components is shown below:
+`OnsNavigator`, `OnsSplitterContent` and `OnsSplitterSide` directives will dynamically load other Angular 2 components. This requires declaring loading components in `@NgModule` `declarations` and `entryComponents` as follows.
 
 ```
-import { ONS_DIRECTIVES } from `angular2-onsenui`
-
-// Example Component with Onsen UI for Angular 2
-@Component({
-  selector: 'app',
-  directives: [ ONS_DIRECTIVES ],
-  template: `<ons-page><ons-input (change)="onChange()" type="text"></ons-input><ons-button>Click Me!</ons-button></ons-page>` // All Onsen UI components is available!
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent, MyComponent],
+  bootstrap: [AppComponent],
+  entryComponents: [MyComponent]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppComponent {
-  // Application code should be written in here
-}
+class AppModule { }
 ```
 
-### Defining a page
+### Directives included in Angular 2 bindings
 
-In Onsen UI, pages are defined using `OnsPage (<ons-page>)` component. Unlike other framework bindings, you need to define extra `<div>` tags that represent page background and page content as below:
+Angular 2 binding contains several directives that wraps Onsen UI Web Components. For instance, `OnsNavigator` directive is using `ons-navigator` element and `OnsSwitch` element is using `ons-switch` component.
 
-```html
-<ons-page>
-  <ons-toolbar>
-    <div class="center">Ons-Page Component Example</div>
-  </ons-toolbar>
-  <div class="page__backgroud"></div>
-  <div class="page__content">
-    <div style="text-align: center; margin: 10px;">
-      <ons-button (click)="onClick()">MyButton</ons-button>
-    </div>
-  </div>
-</ons-page>
-```
+However not all components have it's directive. For instance, `ons-button` element does not have directive, since the implementation is not necessary.
+
+Currently the following components have Angular 2 directives.
+
+- `OnsNavigator` (`<ons-navigator>`)
+- `OnsCarousel` (`<ons-carousel>`)
+- `OnsTabbar` (`<ons-tabbar>`)
+- `OnsTab` (`<ons-tab>`)
+- `OnsAlertDialog` (`<ons-alert-dialog>`)
+- `OnsPopover` (`<ons-popover>`)
+- `OnsSwitch` (`<ons-switch>`)
+- `OnsRange` (`<ons-range>`)
+- `OnsInput` (`<ons-input>`)
+- `OnsPullHook` (`<ons-pull-hook>`)
+- `OnsLazyRepeat` (`<ons-lazy-repeat>`)
+- `OnsSplitterSide` (`<ons-splitter-side>`)
+- `OnsSplitterContent` (`<ons-splitter-content>`)
+
+<%- @includeGuideSection('creating-page.md') %>
 
 ### Event handling
 
@@ -137,46 +96,43 @@ Just like other Angular 2 components, Onsen UI supports event bindings. To bind 
 <ons-input type="text" (change)="onChange()"></ons-input>
 ```
 
-### Modifier attribute and auto styling
+### Calling components during initialization
 
-Modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a modifier, it will have a separate class namespace so that you can apply custom styles to the component. Also, some components have several preset modifiers to change the appearance. All preset modifiers are described in the components' reference.
-
-```
-<ons-button modifier="quiet">Quiet</ons-button>
-<ons-button modifier="light">Light</ons-button>
-<ons-button modifier="large">Large</ons-button>
-<ons-button modifier="cta">CTA</ons-button>
-```
-
-### Using components
-
-Both Directives and Web Components have methods, which can be called from the program after the components are initialized. Directives will be still undefined in the caller's constructor, so one option is to use `ngAfterViewInit()` method.
+Both directives and Web Components have methods, which can be called after the components are initialized. Directives are undefined in the constructor of the callee component, and one way to avoid is by using `ngAfterViewInit()` method.
 
 ```
 export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this._navigator.pushComponent(component, { animation: 'fade' });
   }
-
-```
-
-For Web Components, the methods are directly attached to the DOM element. For instance, you can use the traditional `querySelector()` to query the element and call the method.
-
-For Angular 2, you can also use template reference variable (using `#` character) to refer to a DOM element. For details, please read [Angular 2 Guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars).
-
-### Components with child view
-
-Some components like `OnsNavigator` and `OnsSplitter` have child view. In this case, you must use `@ViewChild` decorator to define components like below.
-
-```
-export class AppComponent {
-  @ViewChild(OnsNavigator) private _navigator: OnsNavigator;
-
-  push() {
-    this._navigator.pushComponent(PageComponent, {animation: 'none'}, {key: 'value'});
-  }
 }
 ```
+
+For Web Components, all methods are directly implemented in the DOM element. Therefore, you can call methods by using `querySelector()` or other selector functions.
+
+Angular 2 also allows template reference variable (`#`) when referring DOM elements. Please read [Angular 2 Guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars) for more details.
+
+<%- @includeGuideSection('ons-object.md') %>
+
+<%- @includeGuideSection('page-content.md') %>
+
+<%- @includeGuideSection('dialogs.md') %>
+
+<%- @includeGuideSection('navigation.md') %>
+
+<%- @includeGuideSection('modifier.md') %>
+
+<%- @includeGuideSection('auto-styling.md') %>
+
+<%- @includeGuideSection('css-definitions.md') %>
+
+<%- @includeGuideSection('device-back-button.md') %>
+
+### Sample codes
+
+Angular 2 sample codes are located in `/bindings/angular2` directory in Onsen UI repository. Please use the examples to understand how to call each components.
+
+ * [Examples](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples)
 
 <!-- End of markdown -->
 <% end %>

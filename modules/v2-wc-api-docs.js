@@ -46,10 +46,10 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.componentCategory = doc.category;
       file.extension = extension;
       file.framework = extension;
-      file.version = "v2";
+      file.version = 'v2';
 
-      if (extension === 'angular1' && doc.tutorial) {
-        doc.tutorial = doc.tutorial.replace('vanilla', 'angular1');
+      if (extension !== 'js' && doc.tutorial) {
+        doc.tutorial = doc.tutorial.replace('vanilla', extension);
       }
 
       // Docs of different frameworks are mixed in these arrays.

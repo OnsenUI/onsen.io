@@ -1,1 +1,77 @@
-../documents_en/download.html
+---
+page: 'download'
+title: 'Download'
+reference: true
+needHelp: true
+---
+
+<p>To download Onsen UI as a .ZIP archive, please click this button:</p>
+
+<a class="site-button" href="/OnsenUI/build/onsenui.zip" data-track-event="download">Download v<%- @framework.version %></a>
+
+<p>You can also download Onsen UI using <a href="http://bower.io" target="_blank">bower</a>:</p>
+
+<pre><code>$ bower install onsenui</pre></code>
+
+<p>or with <a href="https://www.npmjs.com/" target="_blank">npm</a>:</p>
+
+<pre><code>$ npm install onsenui</pre></code>
+
+<h3 id="download-templates">Download a template</h3>
+
+<p>If you want to get started quickly you can chose one of the ready-made templates before. They are interactive so you can try playing around with them.<p>
+
+<p>Each of the templates implements a common design pattern in mobile apps.</p>
+
+<div class="templates-container">
+<div class="flex-item">
+  <div class="template-title">Master-Detail</div>
+  <a href="/project-templates/gen/master-detail/www/index.html" target="_blank" class="template-link">Open<a>
+  <div class="template-download"><a class="btn-download" href="/project-templates/gen/onsenui-master-detail.zip" onclick="trackOutboundLink('/project-templates/gen/onsenui-master-detail.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/project-templates/gen/master-detail/www/index.html" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-title">Sliding menu</div>
+  <a href="/project-templates/gen/sliding-menu/www/index.html" target="_blank" class="template-link">Open<a>
+  <div class="template-download"><a class="btn-download" href="/project-templates/gen/onsenui-sliding-menu.zip" onclick="trackOutboundLink('/project-templates/gen/onsenui-sliding-menu.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/project-templates/gen/sliding-menu/www/index.html" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item">
+  <div class="template-title">Tab bar</div>
+  <a href="/project-templates/gen/tab-bar/www/index.html" target="_blank" class="template-link">Open<a>
+  <div class="template-download"><a class="btn-download" href="/project-templates/gen/onsenui-tab-bar.zip" onclick="trackOutboundLink('/project-templates/gen/onsenui-tab-bar.zip')">Download</a></div>
+  <div class="template-iframe">
+    <iframe src="/project-templates/gen/tab-bar/www/index.html" width="320" height="570"></iframe>
+  </div>
+</div>
+
+<div class="flex-item center">
+  <div class="template-title">Split view</div>
+  <a href="/project-templates/gen/split-view/www/index.html" target="_blank" class="template-link">Open<a>
+  <div class="template-download"><a class="btn-download" href="/project-templates/gen/onsenui-split-view.zip" onclick="trackOutboundLink('/project-templates/gen/onsenui-split-view.zip')">Download</a></div>
+  <div class="template-iframe-landscape">
+    <iframe src="/project-templates/gen/split-view/www/index.html" width="570" height="320"></iframe>
+  </div>
+</div>
+</div>
+
+<h3 id="latest-build">Latest build</h3>
+
+<p>You can also get latest build version in development on the <a href="https://github.com/OnsenUI/OnsenUI">"master" branch</a>. Click the button below to download it. This package is generated every time a change is made so it should be used with caution!</p>
+
+<button class="site-button" id="get-latest-build">Get the latest build!</button>
+
+<div class="old-versions" style="display: none">
+  <h3>Old Versions</h3>
+
+  <ul class="old-versions-list">
+  </ul>
+</div>
+
+<script defer src="/scripts/download.js"></script>

@@ -1,0 +1,145 @@
+---
+page: 'vue-landing'
+category: 'discover'
+title: 'Onsen UI for Vue.js - ハイブリッドアプリ開発フレームワーク'
+layout: 'default.html.eco'
+topbar: false
+actionbar: false
+version: v2
+description: 'Vue.jsとOnsen UIを組み合わせると、高いパフォーマンスを持つハイブリッドアプリが簡単に開発できます。HTML5とJavaScriptで驚きのパフォーマンスを実現します。MaterialとiOSの両方にクロスプラットフォームに対応します。'
+---
+
+<div class="landing vue-landing">
+  <%- @partial('global-nav.html.eco') %>
+  <div class="landing-header">
+    <h1 class="landing-header-title">
+      Onsen UI for Vue.js
+    </h1>
+    <div class="landing-header-subtitle">
+      ハイブリッドアプリ開発を速く、シンプルに。現在プレビュー版を提供中。
+    </div>
+    <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
+
+    <a href="https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue" class="landing-header-get-started">
+      <div class="landing-header-get-started-title">
+        はじめよう
+      </div>
+      <div class="landing-header-get-started-subtitle">
+        Onsen UI for Vue.js
+      </div>
+    </a>
+
+    <div class="landing-header-available">
+      <span>
+        他のフレームワークでも...
+      </span>
+      <div class="landing-header-available-frameworks">
+        <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
+        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/v2/docs/guide/react" class="landing-header-available-frameworks-react"></a>
+        <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
+      </div>
+    </div>
+
+    <div class="landing-header-latest">
+      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>. Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+    </div>
+  </div>
+
+  <div class="landing-social">
+    <a href="https://twitter.com/Onsen_UI_ja" target="_blank" class="landing-social-twitter">
+      @Onsen_UI_jaをフォロー
+    </a>
+    <a href="https://github.com/OnsenUI/OnsenUI" target="_blank" class="landing-social-github">
+      GitHubスターをお願いします
+    </a>
+  </div>
+</div>
+
+<div class="container">
+<%- @markdown => %>
+
+## Onsen UIとVue.jsでハイブリッドアプリやモバイルWebアプリを開発しよう
+
+Onsen UIをVue.js内で使いやすくするためのバインディングを作成しました。Onsen UIは **Web Components** に準拠した、ハイブリッドアプリ開発のためのライブラリです。
+
+## npmからダウンロード
+
+このバインディングは [NPMにて公開](https://www.npmjs.com/package/vue-onsenui)されています。利用するためには、Onsen UIライブラリも必要です。
+
+アプリに組み込むには、下記のようにnpmコマンドを用いてプロジェクトに加えてください。
+
+```bash
+npm install --save onsenui vue-onsenui
+```
+
+## 簡単に利用できる
+
+ライブラリはVue向けのプラグインとして配布されているため、下記のように簡単にアプリで使用できます。
+
+```javascript
+import Vue from 'vue';
+
+import VueOnsen from 'vue-onsenui';
+import ons from 'onsenui';
+
+Vue.use(VueOnsen);
+
+ons.ready(() => {
+  /* eslint-disable no-new */
+  new Vue({
+    el: 'body',
+    components: { App }
+  });
+});
+```
+
+また、いくつかのユーティリティ関数も含まれており、Onsen UIコンポーネントを簡単に扱うことができます。
+
+## 詳細を知るには
+
+ライブラリの使い方は、下記のドキュメント（英語）に記述しています。また、多くのOnsen UIコンポーネントを組み込んだサンプルアプリも提供しています。
+
+* [Preview! Vue.js support for Onsen UI](/blog/preview-vue-support-onsen-ui/)
+* [Kitchensinkサンプル](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+* [GitHubレポジトリ](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+
+このライブラリはプレビュー段階のものですが、今後はドキュメントを増やたしたり、機能を追加していきます。Vue.jsを使ったモバイルアプリ開発を強力にサポートしていきます。
+
+<% end %>
+</div>
+
+
+<script src="/vendor/highlight.min.js"></script>
+<script>
+  var $ = document.querySelector.bind(document);
+  var $$ = document.querySelectorAll.bind(document);
+  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
+  var code = $$('code');
+  var arrows = $$('.arrow');
+  var height = $('.code-explanation').offsetHeight;
+
+  each(arrows, function (e, i) {
+    var lines = code[i].textContent.split(/\n/);
+    var indent = lines[1].match(/\s*/)[0].length;
+    code[i].textContent = lines.map(function(e) {
+      return e.slice(indent);
+    }).join('\n').trim();
+    hljs.highlightBlock(code[i]);
+    e.style.bottom = height - (code[i].offsetTop + code[i].offsetHeight / 2) + 'px';
+  });
+
+  var buttons = $('.platform-buttons').children;
+  var examples = $$('.code-explanation');
+  each(buttons, function(e, i) {
+    e.onclick = function () {
+      var j = (i + 1) % 2;
+      if (!this.classList.contains('selected')) {
+        buttons[i].classList.add('selected');
+        buttons[j].classList.remove('selected');
+        examples[i].classList.add('selected');
+        examples[j].classList.remove('selected');
+      }
+    }
+  });
+</script>
