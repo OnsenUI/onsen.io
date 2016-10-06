@@ -108,11 +108,25 @@ export class AppComponent implements AfterViewInit {
 }
 ```
 
-For Web Components, all methods are directly implemented in the DOM element. Therefore, you can call methods by using `querySelector()` or other selector functions.
+For Web Components, all methods are directly implemented in the DOM element. Therefore, you can call methods by using template reference variable (`#`) and `@ViewChild` decorator. Please read [Angular 2 Guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars) for more details.
 
-Angular 2 also allows template reference variable (`#`) when referring DOM elements. Please read [Angular 2 Guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars) for more details.
+```
+@ViewChild('carousel') carousel; // <ons-carousel #carousel>
+
+prev() {
+  this.carousel.nativeElement.prev();
+}
+```
 
 <%- @includeGuideSection('ons-object.md') %>
+
+For Angular 2, notification and platform objects are exported as `onsNotification` and `onsPlatform`.
+
+```
+import { onsNotification, onsPlatform } from 'angular2-onsenui';
+onsNotification.alert('Hello world!');
+```
+
 
 <%- @includeGuideSection('page-content.md') %>
 
