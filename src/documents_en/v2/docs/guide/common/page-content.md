@@ -130,25 +130,40 @@ In general, Ionicons are good for iOS apps while the Material Icons work best fo
 
 #### Gesture detector
 
-It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in [`ons.GestureDetector`](/v2/docs/<%- @framework %>/ons.GestureDetector.html) object.
+It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in [`ons.GestureDetector`](/v2/docs/<%- @framework %>/ons.GestureDetector.html) object.
 
+<% if @framework isnt 'angular2': %>
 ```
 var divGD = ons.GestureDetector(document.querySelector('#my-div'));
 divGD.on('dragup dragdown', function(event) {
   console.log('drag Y axis');
 });
 ```
+<% else: %>
+```
+@ViewChild('somediv') divGD; // <div #somediv>
+this.divGD.nativeElement.on('dragup dragdown', function(event) {
+  console.log('drag Y axis');
+});
+```
+<% end %>
 
 If you want to use another library for this purpose and have any conflict, Onsen UI gesture detectors can be disabled easily:
 
+<% if @framework isnt 'angular2': %>
 ```
 ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove event listeners from the menu
 ```
+<% else: %>
+```
+@ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>
+ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event listeners from the menu
+```
+<% end %>
+
 
 <% if @framework isnt 'react': %>
 Also, <%- @componentLink('gesture-detector') %> component can be used to wrap the target DOM element that should detect the fingers in a handy way. 
 <% end %>
-
-
 
 
