@@ -49,12 +49,8 @@ actionbar: false
   </section>
 
   <ul class="reference-quick-navi">
-    <% if @doc.examples and @doc.examples.length > 0: %>
-    <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
-    <% end %>
-
     <% if @doc.tutorial: %>
-    <li><a href="#example"><%= @translate '[en]Live Example[/en][ja]実例[/ja]' %></a></li>
+    <li><a href="#tutorial"><%= @translate '[en]Tutorial[/en][ja]実例[/ja]' %></a></li>
     <% end %>
 
     <% if @ownedAttributes.length > 0: %>
@@ -88,16 +84,14 @@ actionbar: false
     <li><a href="#discussion"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
   </ul>
 
-  <% if @doc.examples and @doc.examples.length > 0: %>
-    <section>
-      <h3 id="usage">
-        <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
-        <a href="#usage" class="reference-loop-anchor"></a>
-      </h3>
-      <% for example in @doc.examples: %>
-        <pre><code class="xml"><%= example %></code></pre>
-      <% end %>
-    </section>
+  <% if @doc.tutorial: %>
+  <h3 id="tutorial">
+    <% if @lang == "en": %>Tutorial<% else: %>実例<% end %>
+    <a href="#tutorial" class="reference-loop-anchor"></a>
+  </h3>
+
+  <iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", @doc.tutorial %>"></iframe>
+
   <% end %>
 
   <% if @doc.note: %>
@@ -105,17 +99,6 @@ actionbar: false
     <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%- @markd @translate @doc.note %></p>
   </section>
   <% end %>
-
-  <% if @doc.tutorial: %>
-  <h3 id="example">
-    <% if @lang == "en": %>Live Example<% else: %>実例<% end %>
-    <a href="#example" class="reference-loop-anchor"></a>
-  </h3>
-
-  <iframe class="tutorial-embed" width="320" height="568" src="<%- @getTutorialUrl "embed", @doc.tutorial %>"></iframe>
-
-  <% end %>
-
 
   <% if (@doc.guides and @doc.guides.length > 0) or (@doc.seealsos and @doc.seealsos.length > 0): %>
   <h3 id="seealso">
