@@ -83,7 +83,7 @@ actionbar: false
     <li><a href="#seealso"><%= @translate '[en]See Also[/en][ja]関連情報[/ja]' %></a></li>
     <% end %>
 
-    <% if @framework is 'angular2':>
+    <% if @framework is 'angular2': %>
       <% if @extensionDoc and @extensionDoc.directive and @doc.inputs and @doc.inputs.length > 0: %>
       <li><a href="#input-detail"><%= @translate '[en]Inputs[/en][ja]Inputs[/ja]' %></a></li>
       <% end %>
