@@ -507,8 +507,8 @@ actionbar: false
   <% if @framework is 'angular2': %>
   <!-- inputs -->
     <% if @extensionDoc and @extensionDoc.directive and @doc.inputs and @doc.inputs.length > 0: %>
-      <section class="input-detail">
-        <h3><% if @lang == "en": %>Inputs<% else: %>Inputs<% end %></h3>
+      <section>
+        <h3 id="input-detail"><% if @lang == "en": %>Inputs<% else: %>Inputs<% end %></h3>
         <table>
           <thead>
             <tr>
@@ -541,8 +541,8 @@ actionbar: false
 
     <!-- outputs -->
     <% if @extensionDoc and @extensionDoc.directive and @doc.outputs and @doc.outputs.length > 0: %>
-      <section class="output-detail">
-        <h3><% if @lang == "en": %>Outputs<% else: %>Outputs<% end %></h3>
+      <section>
+        <h3 id="output-detail"><% if @lang == "en": %>Outputs<% else: %>Outputs<% end %></h3>
         <table>
           <thead>
             <tr>
