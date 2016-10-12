@@ -103,7 +103,7 @@ Both directives and Web Components have methods, which can be called after the c
 ```
 export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
-    this._navigator.pushComponent(component, { animation: 'fade' });
+    this._navigator.element.pushPage(componentPage, { animation: 'fade' });
   }
 }
 ```
