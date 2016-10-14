@@ -8,142 +8,151 @@ tags: monaca, chart
 category: 技術情報
 ---
 
-ハイブリッドアプリは素早く開発、改善が求められる業務アプリでのニーズが強くあります。業務アプリでは速度よりも確実な実行と動作が求められるので、安定したWebベースの開発と相性が良いのでしょう。ネイティブコード部と切り離されてアプリケーションが実行されるので、ハイブリッドアプリの安定性は定評があります。
+ハイブリッドアプリは業務アプリでのニーズが強くあります。業務アプリは素早い改善と確実な動作が求められるので、手軽でかつ安定したWebベースの開発と相性が良いのでしょう。最近ではハイブリッドアプリ開発の実績とノウハウが積み重ねられてきたこともり、安定性には定評があります。
 
-そんな業務アプリにおいて求められるのがデータのビジュアル化、グラフです。今回は Onsen UI 2.x と有名なグラフライブラリ Chart.js を組み合わせて利用する方法を紹介します。
+そんな業務アプリにおいて求められるのがデータのビジュアル化、グラフです。今回は Onsen UI 2.x と有名なグラフライブラリ [Chart.js](http://www.chartjs.org/) を組み合わせて利用する方法を紹介します。
 
 ### ベースになるテンプレート
 
-今回は Onsen UI 2.x のタブバーテンプレートを使っています。そしてタブを切り替えた際にグラフが表示されるようにします。
+今回は Onsen UI 2.x の「Onsen UI V2 JS Tabbar」テンプレートを使っています。
 
 ### Chart.jsのインストール
 
-Chart.jsはMonaca IDEクラウドのJS/CSSコンポーネントの管理からインストールします。chartjsで検索して、バージョン2.3.0をインストールしました。ロードするコンポーネントはChart.min.jsを指定しています。
+Chart.jsはMonaca クラウドIDEのJS/CSSコンポーネントの管理からインストールします。chartjsで検索して、バージョン2.3.0をインストールしました。ロードするコンポーネントはChart.min.jsを指定しています。
 
 ![](/blog/content/images/2016/Oct/chartjs-4.png)
 
 ### 使い方
 
-グラフを表示したい `<ons-page />` 内に `<canvas />` を記述します。`<canvas />` は複数記述可能です。
+グラフを表示したい `<ons-page />` 内に `<canvas />` を記述します。今回は Tab1 に円グラフ、Tab2 に棒グラフを表示します。
 
 ```
-<ons-page id="page2">
-  <p style="text-align: center">
+<ons-template id="tab1.html">
+  <ons-toolbar>
+    <div class="center">Graph</div>
+  </ons-toolbar>
+  <ons-page id="page1">
     <div id="canvas-holder" style="width:100%">
       <h1>Pie chart</h1>
+      <!-- 円グラフの表示エリア -->
       <canvas id="pie-chart-area" width="300" height="300">
       </canvas>
+    </div>
+  </ons-page>
+</ons-template>
+
+<ons-template id="tab2.html">
+  <ons-toolbar>
+    <div class="center">Graph</div>
+  </ons-toolbar>
+  <ons-page id="page2">
+    <div id="canvas-holder" style="width:100%">
       <h1>Bar chart</h1>
+      <!-- 棒グラフの表示エリア -->
       <canvas id="bar-chart-area" width="300" height="300">
       </canvas>
     </div>
-  </p>
-</ons-page>
+  </ons-page>
+</ons-template>
 ```
 
-そして、棒グラフを描く際には次のように実行します。 `randomScalingFactor` はランダムな数字を返すだけの関数です。
-
-```
-function barChart() {
-  var barChartData = {
-      labels: ["1月", "2月", "3月", "4月", "5月", "6月", "7月"],
-      datasets: [{
-          label: 'データセット1',
-          backgroundColor: "rgba(220,0,220,0.5)",
-          data: [randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor(), randomScalingFactor()]
-      }]
-  };
-  var ctx = document.getElementById("bar-chart-area").getContext("2d");
-  window.myBar = new Chart(ctx, {
-        type: 'bar',
-        data: barChartData,
-        options: {
-            elements: {
-                rectangle: {
-                    borderWidth: 4,
-                    borderColor: 'rgb(100, 0, 100)',
-                    borderSkipped: 'bottom'
-                }
-            },
-            responsive: true,
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Chart.js 棒グラフ'
-            }
-        }
-    });  
-}
-
-// ランダムな文字列を返します
-var randomScalingFactor = function() {
-  return Math.round(Math.random() * 100);
-};
-```
-
-データセットは複数適用できます。それによって複数系列のデータを一つのグラフ内に記述できます。 `barChartData` は棒グラフを表示するためのデータセットを定義しています。
-
-実際の表示は new Chart で行っています。その際に予め定義したデータセットとともに各種オプションをセットします。 `type` キーにて棒グラフ（bar）であることを指定しています。グラフをレスポンシブにする場合は `responsive` を true にします。
-
-グラフのラベルは日本語が利用できますので、分かりやすいグラフになるでしょう。
-
-円グラフの場合は次のようになります。`type` は pie になります。円グラフの場合もデータセットは複数指定できます。複数あると多重の円が絵が描かれます。数値を適当に指定すれば、後はChart.jsが割合を計算した上で表示してくれます。後は背景色と各データのラベルを指定するだけです。
+グラフを描画する処理は、JavaScriptで実行します。円グラフを描く処理は次のようになります。
 
 ```
 function pieChart() {
   var config = {
-      type: 'pie',
-      data: {
-          datasets: [{
-              data: [
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-                  randomScalingFactor(),
-              ],
-              backgroundColor: [
-                  "#F7464A",
-                  "#46BFBD",
-                  "#FDB45C",
-                  "#949FB1",
-                  "#4D5360",
-              ],
-          }],
-          labels: [
-              "赤",
-              "緑",
-              "黄",
-              "灰",
-              "黒"
-          ]
-      },
-      options: {
-          responsive: true
-      }
+    type: 'pie',
+    data: {
+      datasets: [{
+        data: [35, 30, 20, 10, 5],
+        backgroundColor: ["#F7464A", "#46BFBD", "#FDB45C", "#949FB1", "#4D5360"]
+      }],
+      labels: ["赤", "緑", "黄", "灰", "黒"]
+    },
+    options: {
+      responsive: true
+    }
   };
   var ctx = document.getElementById("pie-chart-area").getContext("2d");
   window.myPie = new Chart(ctx, config);
 }
 ```
 
-### 表示について
+まずはグラフの設定を行います。
+`type` にグラフの種類、`data` にグラフを構成するデータ、`options` にグラフの詳細設定を指定します。
+設定値に関する詳しい説明は、Chart.jsの [ドキュメント](http://www.chartjs.org/docs/) を参照してください。
 
-実際の表示は次のようになります。
+そしてnew Chart() の引数に描画対象のキャンバスとグラフの設定を渡すことで、描画が行われます。
+
+
+棒グラフの場合は次のようになります。
+
+```
+function barChart() {
+  var config = {
+    type: 'bar',
+    data: {
+      labels: ["1月", "2月", "3月", "4月", "5月", "6月"],
+      datasets: [{
+        label: 'データセット1',
+        backgroundColor: "rgba(220,0,220,0.5)",
+        data: [50, 30, 60, 80, 20, 40]
+      }]
+    },
+    options: {
+      elements: {
+        rectangle: {
+          borderWidth: 4,
+          borderColor: 'rgb(100, 0, 100)',
+          borderSkipped: 'bottom'
+        }
+      },
+      responsive: true,
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Chart.js 棒グラフ'
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  };
+  var ctx = document.getElementById("bar-chart-area").getContext("2d");
+  window.myBar = new Chart(ctx, config);  
+}
+```
+
+これらの処理は起動時に1回実行すれば良いので、ons.ready()内で関数を呼び出します。
+
+```
+ons.ready(function(){
+  pieChart();
+  barChart();
+});
+```
+
+
+### 動作確認
+
+アプリを起動すると、次のように表示されます。
 
 ![](/blog/content/images/2016/Oct/chartjs-1.png)
 
-タップするとデータのラベルであったり、数字が確認できます。一部のデータを非表示することもできます。
+グラフをタップするとデータのラベルであったり、数字が確認できます。
 
 ![](/blog/content/images/2016/Oct/chartjs-2.png)
 
-棒グラフも同様にタップしてデータを確認できます。
+Tab2 には棒グラフが表示されます。
 
 ![](/blog/content/images/2016/Oct/chartjs-3.png)
 
-なお、一部のラベルをタップすると表示が乱れる場合がありますが、スクロールすると直ります。
 
 ----
 
