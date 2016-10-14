@@ -129,12 +129,15 @@ function barChart() {
 }
 ```
 
-これらの処理は起動時に1回実行すれば良いので、ons.ready()内で関数を呼び出します。
+あとは、タブバーの機能で各ページが表示されたタイミングで、対象の関数を呼び出すようにすれば完成です。
 
 ```
-ons.ready(function(){
-  pieChart();
-  barChart();
+document.addEventListener('init', function(event) {
+  if(event.target.id == 'page1') {
+    pieChart();
+  } else if(event.target.id == 'page2'){
+    barChart();
+  }
 });
 ```
 
