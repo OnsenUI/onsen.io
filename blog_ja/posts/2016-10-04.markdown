@@ -14,28 +14,30 @@ Onsen UI 2.xはAngularJSと切り離されたので、好きなJavaScriptライ�
 
 ### Wookmarkについて
 
-WookmarkはPinterestのように幅は固定、高さが異なるデータを綺麗に並べてグリッド表示できるライブラリです。なお、各グリッドが整然と並んだ状態であればOnsen UIだけでもできます。今回のように高さをずらした表示はファッション系、女性向けアプリで人気の表示法です。
+WookmarkはPinterestのように幅は固定、高さが異なるデータを隙間なく綺麗に並べてグリッド表示できるライブラリです。高さが異なるデータを敷き詰める表示方法は、ファッション系のアプリなどでしばしば用いられます。タブレットくらいの幅がある方が見栄えが良さそうです。
 
 ![](/blog/content/images/2016/Oct/wookmark-with-onsenui-1.png)
 
-### 開発環境について
+なお、幅・高さともに固定サイズのデータを整然と並べる場合はOnsen UIだけでもできます。
 
-今回はMonaca LocalKitを使っています。ライブラリのインストールはローカルのBowerを使っていますが、Monaca IDEの場合はJS/CSSコンポーネントの管理から行ってください。
 
-### テンプレートについて
+### Onsen UIテンプレートについて
 
-MonacaアプリのベースはOnsen UI 2.xのOnsen UI V2 JS Splitterを使っています。グリッド表示の場合は画面が細くなってしまうのでタブレットくらいの幅がある方が見栄えが良さそうです。もちろんWookmarkはスマートフォンでも利用できます。
+アプリのベースとなるテンプレートには、Onsen UI 2.xのOnsen UI V2 JS Splitterを使っています。
 
 このテンプレートではハンバーガーアイコンをタップするとメニューが表示されます。今回は上から2番目のメニューをタップした際にグリッド表示を行うように作っていきます。
 
-### 必要なライブラリについて
 
-今回は以下のライブラリを使っています。
+### 必要なライブラリのインストール
 
-- jQuery
-- Wookmark
+#### Monaca クラウドIDEを使う場合
 
-どちらもBowerからインストールできます。デフォルトのインストール先（bower_components）だとMonacaアプリから使うことができないのでプロジェクトルート以下に .bowerrc ファイルを作成してインストールパスを指定します。
+JS/CSSコンポーネントの管理から「jQuery」と「wookmark」をインストールして下さい。
+
+
+#### Monaca Localkitを使う場合
+
+ローカルのBowerを使ってインストールします。デフォルトのインストール先（bower_components）だとMonacaアプリから使うことができないのでプロジェクトルート以下に .bowerrc ファイルを作成してインストールパスを指定します。
 
 ```
 {
@@ -50,11 +52,7 @@ $ bower install jquery
 $ bower install wookmark
 ```
 
-これで完了です。
-
-### www/index.htmlの修正
-
-まず `header` タグ内にて必要なライブラリを読み込みます。
+インストールができたら、index.htmlの `<head>` タグ内にて必要なライブラリを読み込みます。
 
 ```
 <link rel="stylesheet" href="vendors/wookmark/css/main.css">
@@ -62,7 +60,13 @@ $ bower install wookmark
 <script src="vendors/wookmark/wookmark.js"></script>
 ```
 
-次に表示されるページを特定するためにIDを割り当てておきます。
+以上で準備は完了です。
+
+
+### index.htmlの編集
+
+まず、表示されるページを特定するためにIDを割り当てておきます。
+今回は上から2番目のメニュー（デフォルトでは `settings` というラベル）がタップされたときにグリッド表示を行います。
 
 ```
 <ons-template id="settings.html">
@@ -72,10 +76,10 @@ $ bower install wookmark
 </ons-template>
 ```
 
-さらに表示するデータを設定します。これは `<ons-page />` 内に記述します（ `</ons-toolbar>` の下に記述してください）。高さを指定しなくても表示はできるようですが、計算処理が入る分表示が遅くなってしまうようです。なるべく高さを指定した方が良いでしょう。今回はダミーの画像として猫の画像を表示してくれる [PlaceKitten](http://placekitten.com/) を利用しています。
+さらに表示するデータを設定します。これは `<ons-page>` 内に記述します（ `</ons-toolbar>` の下に記述してください）。height属性を指定しなくても表示はできるようですが、計算処理が入る分表示が遅くなってしまうようです。なるべくheight属性を指定した方が良いでしょう。今回はダミーの画像として猫の画像を表示してくれる [PlaceKitten](http://placekitten.com/) を利用しています。
 
 ```
-<div class="center">
+<div>
   <ul class="tiles-wrap animated" id="wookmark">
     <li><img src="http://placekitten.com/200/297" width="200" height="297"><p>16</p></li>
     <li><img src="http://placekitten.com/200/200" width="200" height="200"><p>17</p></li>
@@ -99,26 +103,26 @@ $ bower install wookmark
 ### JavaScriptの実行
 
 JavaScriptも `www/index.html` 内に記述します。
+テンプレートに含まれるソースコードの一部を、以下のように書き換えましょう。
 
 ```
 window.fn.load = function(page) {
   var content = document.getElementById('content');
   var menu = document.getElementById('menu');
+  // 以下を変更
   content.load(page).then(function(page) {
-    // 追加部
     if ($(page).attr("id") === 'setting') {
-      $('#wookmark').wookmark();
+      $('#wookmark').wookmark();  // Wookmarkの実行
     }
     menu.close();
   });
 };
 ```
-
-`#setting` の場合だけ Wookmark を実行します。ページが切り替わると描画内容が破棄されるので、ページが切り替わる度に実行する必要があります。
+`<ons-page>` のIDが `setting` の場合だけ Wookmark を実行します。ページが切り替わると描画内容が破棄されるので、ページ切り替えの度に実行する必要があります。
 
 ### 試してみる
 
-ここまでできあがったらMonacaデバッガーで確認してみましょう。メニューをSettingに切り替えた際に猫の画像がたくさん表示されれば問題ありません。
+ここまでできあがったらMonacaデバッガーで確認してみましょう。メニューをSettingに切り替えた際に猫の画像がたくさん表示されれば成功です。
 
 ![](/blog/content/images/2016/Oct/wookmark-with-onsenui-5.png)
 
