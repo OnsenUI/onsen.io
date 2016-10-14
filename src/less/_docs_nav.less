@@ -9,12 +9,15 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
   }
 
 	&-right {
 		align-self: flex-end;
-    margin: 14px 0 0 auto;
+		margin: 14px 0 0 20px;
+		@media @smallscreen {
+		  margin: 14px 0 0;
+		}
 	}
 
   &-title {
