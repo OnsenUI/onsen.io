@@ -59,7 +59,7 @@ The `tappable` attribute is used to give the user an indication when they tap a 
 To create an inset list you can use the `inset` modifier on the `<ons-list>` element.
 
 ``` html
-<ons-list modifier="insert">
+<ons-list modifier="inset">
   ...
 </ons-list>
 ```
