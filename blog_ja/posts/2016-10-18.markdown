@@ -1,0 +1,117 @@
+---
+author: atsushi
+date: 2016-10-18
+id: monaca-cli-transpile
+title: "Monaca CLIに新機能 transpile が追加されました"
+product: monaca
+tags: monaca, cli
+category: 技術情報
+---
+
+Monacaをローカルでスムーズに開発するためのコマンドラインツール、Monaca CLIに新しいオプションの transpile が追加されました。transpileは各種コードの変換オプションになります。環境整備が面倒なAngular2/React開発をサポートします。
+
+この記事ではtranspileオプションについて紹介します。
+
+## Monaca CLIのインストール
+
+Monaca CLIを利用するにはNode.jsのインストールが必要です。インストール後、コマンドプロンプトやターミナルでnpmコマンド（Node.jsのパッケージ管理）を実行します。
+
+```
+$ npm install monaca -g
+```
+
+## 利用場面について
+
+transpile はコードの変換を行うオプションです。具体的には React や Angular2 などEcmaScript5で書かないプロジェクトに対して用いられます。
+
+例えば React プロジェクトの場合、Monaca CLIを使うと次のように開始されます。最初に出てくるカテゴリで `Onsen UI and React` を選択して、その後で React を使ったテンプレートを選択します。
+
+```
+$ monaca create react_monaca
+? Choose a category: 
+  Onsen UI 
+  Onsen UI and Angular 1 
+  Onsen UI and Angular 2 
+❯ Onsen UI and React 
+  Ionic 
+  No Framework 
+  Sample Apps 
+```
+
+そして生成されたディレクトリを見ると、 src というディレクトリがあります。ここにReactアプリとしてのコードが入っています。
+
+```
+$ tree src/
+src/
+├── App.jsx
+├── HomePage.jsx
+├── SettingsPage.jsx
+├── main.jsx
+└── public
+    └── index.ejs
+
+1 directory, 5 files
+```
+
+React アプリでよく見る jsx で書かれています。これらは EcmaScript5 に変換しなければMonacaアプリとして利用できません。そこで使うのが transpile になります。
+
+### transpile の使い方
+
+以下のmonaca コマンドを実行すると、同時にtranspileが行われます。
+
+- monaca upload
+- monaca preview
+- monaca serve（monaca previewへのエイリアス）
+- monaca debug
+- monaca remote build
+
+つまり、transpileを使うと言っても、monacaコマンドの中で自動的に実行されるので、普段の開発では特に意識する必要はありません。
+
+なお、transpileは単独で実行もできます。以下は実行例です。Web FontやJavaScript、スタイルシートがコンパイルされます。
+
+```
+$ monaca transpile
+Running Transpiler...
+Build completed in 13.312s
+
+Time: 13314ms
+                                                                    Asset       Size  Chunks             Chunk Names
+                     assets/ionicons.aff28a207631f39ee0272d5cdde43ee7.svg     334 kB          [emitted]  
+          assets/fontawesome-webfont.25a32416abee198dd821b0b17a198a8f.eot    76.5 kB          [emitted]  
+         assets/fontawesome-webfont.c8ddf1e5e5bf3682bc7bebf30f394148.woff    90.4 kB          [emitted]  
+          assets/fontawesome-webfont.1dc35d25e61d819a9c357074014867ab.ttf     153 kB          [emitted]  
+          assets/fontawesome-webfont.d7c639084f684d66a1bc66855d193ed8.svg     392 kB          [emitted]  
+                     assets/ionicons.19e65b89cee273a249fba4c09b951b74.eot     121 kB          [emitted]  
+                     assets/ionicons.dd4781d1acc57ba4c4808d1b44301201.ttf     189 kB          [emitted]  
+                    assets/ionicons.2c159d0d05473040b53ec79df8797d32.woff    67.9 kB          [emitted]  
+        assets/fontawesome-webfont.e6cf7c6ec7c2d6f670ae9d762604cb0b.woff2    71.9 kB          [emitted]  
+assets/Material-Design-Iconic-Font.a4d31128b633bc0b1cc1f18a34fb3851.woff2    38.4 kB          [emitted]  
+ assets/Material-Design-Iconic-Font.d2a55d331bdd1a7ea97a8a1fbb3c569c.woff    50.3 kB          [emitted]  
+  assets/Material-Design-Iconic-Font.b351bd62abcd96e924d9f44a3da169a7.ttf    99.2 kB          [emitted]  
+                                                            app.bundle.js    88.1 kB       0  [emitted]  app
+                                                         vendor.bundle.js     454 kB       1  [emitted]  vendor
+                                                                  app.css     126 kB       0  [emitted]  app
+                                                               index.html  620 bytes          [emitted]  
+
+
+Transpiling finished for /path_to/react_monaca
+```
+
+これらの生成されたファイルは www ディレクトリ以下に配置されます。つまり生成されたファイルがMonacaアプリになります。
+
+www/index.htmlも生成されますが、これは次の通り簡単な内容で、生成されたJavaScript/CSSファイルを読み込んでいるだけです。
+
+```
+$ cat www/index.html 
+<!DOCTYPE html> <html> <head> <meta charset=utf-8> <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> <meta http-equiv=Content-Security-Policy content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'"> <script type=text/javascript src=components/loader.js></script> <link rel=stylesheet type=text/css href=components/loader.css> <link href=app.css rel=stylesheet></head> <body> <div id=app></div> <script type=text/javascript src=vendor.bundle.js></script><script type=text/javascript src=app.bundle.js></script></body> </html>
+```
+
+後はReactやAngular2アプリを作っていくだけでOKです。
+
+![](/blog/content/images/2016/Sep/monaca-react-preview.png)
+
+----
+
+transpile環境をgulpやWebPackで自作することもできますが、時間がかかってしまうでしょう。monacaコマンドを使えばすぐにReact/Angular2を使ったハイブリッドアプリ開発環境が整います。ぜひご利用ください。
+
+[Monaca CLI コマンド - Monaca Docs](https://docs.monaca.io/ja/manual/development/monaca_cli/cli_commands/#monaca-transpile)

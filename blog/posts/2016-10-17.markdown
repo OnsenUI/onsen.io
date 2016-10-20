@@ -1,0 +1,83 @@
+---
+author: fran
+date: 2016-10-17
+id: framework-comparison
+title: "Comparing frameworks: Hello World!"
+category: tutorial
+tags: onsen ui, angular 1, angular 2, react, vue, knockout
+---
+
+![Framework comparison](/blog/content/images/2016/Oct/framework_comparison.png)
+
+
+The fact that Onsen UI is [built on top of Web Components](/blog/create-reusable-future-proof-ui-components-with-custom-elements-v1-web-components/) makes us proud to be framework agnostic. However, there are so many options out there that we can feel overwhelmed when it comes to choosing a front-end framework to develop with. Especially for those who don't have a large background in web programming, deciding which framework works better for them could be a tedious task.
+
+Have you already chosen your framework to work with Onsen UI? For those who still don't have a preference, in this article we show how to make a simple Hello World app with some of the existing alternatives: **Vanilla JavaScript, AngularJS, Angular 2, React, Vue.js and Knockout.js**. 
+
+<!-- more -->
+
+## Hello World example
+
+The following are simple examples that show an alert when clicking on a button. The solely purpose of this is showing the syntax and complexity differences between the included frameworks for a simple example. We are using the [interactive tutorial app](https://tutorial.onsen.io/) to show the previews and code. If you didn't know about it go and check it out, you will find more examples there. Moreover, we invite you to play around with the code you see in the tuts and modify everything!
+
+### Vanilla JavaScript
+
+Since Onsen UI components behave like native DOM elements (Custom Elements) it's really simple to deal with them with **pure JavaScript or jQuery**. We just have events, DOM elements, attributes and properties. Good old and plain JavaScript.
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=vanilla&category=Reference&module=page&docs=false"></iframe>
+
+In Onsen UI the right place to initialize a page is in its `init` event. Simply set a listener and modify whatever you need. Follow [this link](https://tutorial.onsen.io/index.html?framework=vanilla&category=Reference&module=page) to see the main view of the interactive tutorial and find more examples with Vanilla JavaScript using other components.
+
+### AngularJS
+
+For this example we can set up an AngularJS controller linked to the main page. Our HTML behaves like a template accessing the scoped variables from the controller and thus displaying data. We use `ons.bootstrap()` shortcut syntax, what is equivalent to `angular.module('myApp', ['onsen'])` (having `ng-app="myApp"` set, of course).
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular1&category=Reference&module=page&docs=false"></iframe>
+
+[Here](https://tutorial.onsen.io/index.html?framework=angular1&category=Reference&module=page) you can find more AngularJS + Onsen UI samples.
+
+### Angular 2
+
+This is getting complex. We start using TypeScript now for Angular 2. Here we must import our shopping list: `platformBrowserDynamic`, `NgModule`, `OnsenModule`, etc. Once we get all the ingredients we can safely start to cook our typed components.
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular2&category=Reference&module=page&docs=false"></iframe>
+
+[This link](https://tutorial.onsen.io/index.html?framework=angular2&category=Reference&module=page) has more tuts using Angular 2 with Onsen UI.
+
+### React
+
+React has its own way to do things. We are using JSX in this example and Babel for transpiling it. Even thought it may seem complex, I personally like the React approach since it enforces modularity and, thanks to JSX, the "template" and the logic is directly connected.
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=react&category=Reference&module=page&docs=false"></iframe>
+
+More examples with React Components for Onsen UI [here](https://tutorial.onsen.io/index.html?framework=react&category=Reference&module=page).
+
+### Vue.js
+
+Vue is a very powerful framework that keeps things simple. Or at least simpler than the previous two, in my personal opinion. Notice that in the first two lines we are just including Vue.js framework and `vue-onsenui` bindings, but the rest is almost like Vanilla JavaScript. In Vue we have access to `$notification` instead of `ons.notification` object directly from the template.
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/vue_helloworld.html&docs=false"></iframe>
+
+Vue bindings are still a **work in progress**. From now on we want to prepare these bindings to fully support Vue 2. Stay tunned!
+
+### Knockout.js
+
+Another good option for simple (and maybe not so simple) apps. For basic Knockout.js usage **we don't even need a bindings package**, we can just define the bindings as we want. In this case we link a Knockout view model when a page is initialized directly in the `init` event based on the page's ID.
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/knockout_helloworld.html&docs=false"></iframe>
+
+Want more about Knockout.js + Onsen UI? Have a look at [this other example](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html). It's a bit more complex since it's using Navigator and Tabbar at the same time.
+
+## Conclusion
+
+We have seen how easy is to plug Onsen UI with some of the most common frameworks nowadays. Some of them are complex frameworks that need a lot of "bootstrap" code but become very handy when the app gets bigger and need a robust way to organise data and views. Other frameworks are quite straightforward with a gentle learning curve but possibly don't offer so much help for organization in complex apps. At the end of the day this is more a matter of opinion and every developer has his/her own preference. And you, what's your choice to work with Onsen UI?
+
+Stars on [Github](https://github.com/OnsenUI/OnsenUI), [tweets](https://twitter.com/Onsen_UI) and comments are very appreciated. Happy coding!
+
+<style>
+.local-iframe-style {
+  box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
+  width: 100%;
+  height: 540px;
+}
+</style>
