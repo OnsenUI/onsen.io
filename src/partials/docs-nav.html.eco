@@ -11,33 +11,7 @@
           <%=@translate("[en]Framework:[/en][ja]フレームワーク:[/ja]")%>
         </div>
         <div class="docs-nav-framework-select">
-          <div class="docs-nav-framework-icon">
-            <% if @framework == 'onsen1' or typeof @framework != 'string': %>
-              <img src="/images/common/icn_something_1c.svg">
-            <% else: %>
-              <img src="/images/common/icn_<%=@framework%>_1c.svg">
-            <% end %>
-          </div>
-          <div class="docs-nav-framework-name">
-            <% if @framework == 'angular1': %>
-              AngularJS
-            <% else if @framework == 'angular2': %>
-              Angular 2
-            <% else if @framework == 'react': %>
-              React
-            <% else if @framework == 'js': %>
-              JavaScript Core
-            <% else if @framework == 'onsen1' or typeof @framework != 'string': %>
-              Onsen UI v1
-            <% end %>
-          </div>
-
-          <div class="docs-nav-framework-caret"></div>
-
           <input id="select-framework" type="checkbox" class="docs-nav-checkbox">
-
-          <label for="select-framework" class="docs-nav-mask"></label>
-
           <div class="docs-nav-dropdown">
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'js' %>">
               <a href="/v2/docs/<%- if @reference then 'js.html' else 'guide/js' %>">
@@ -69,10 +43,32 @@
                 Onsen UI v1
               </a>
             </div>
-
           </div>
-        </label>
-      </div>
+
+          <div class="docs-nav-framework-icon">
+            <% if @framework == 'onsen1' or typeof @framework != 'string': %>
+              <img src="/images/common/icn_something_1c.svg">
+            <% else: %>
+              <img src="/images/common/icn_<%=@framework%>_1c.svg">
+            <% end %>
+          </div>
+          <div class="docs-nav-framework-name">
+            <% if @framework == 'angular1': %>
+              AngularJS
+            <% else if @framework == 'angular2': %>
+              Angular 2
+            <% else if @framework == 'react': %>
+              React
+            <% else if @framework == 'js': %>
+              JavaScript Core
+            <% else if @framework == 'onsen1' or typeof @framework != 'string': %>
+              Onsen UI v1
+            <% end %>
+          </div>
+          <div class="docs-nav-framework-caret"></div>
+          <label for="select-framework" class="docs-nav-mask"></label>
+        </div>
+      </label>
     </div>
     <div class="docs-nav-right">
       <ul class="docs-nav-menu">
