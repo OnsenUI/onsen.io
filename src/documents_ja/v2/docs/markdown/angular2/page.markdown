@@ -5,11 +5,11 @@ framework: angular2
 tutorial: vanilla/Reference/page
 ---
 
-## Page (ons-page)
+## ページのコンポーネント ( ons-page )
 
-`<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
+`<ons-page>` は、ページを構成する、ルートのコンポーネントとして使用されます。このコンポーネント内のコンテンツは、スクロール形式で表示できます。
 
-Please use the following scaffolding for defining a page, including two `div` tags with `page__background` and `page__content` class.
+ページ定義に使用できる ひな型を、次に記します。このページ上には、`div` タグを 2 つ置き、それぞれの class には、`page__background` と `page__content` を指定しています。
 
 ```
 @Component({

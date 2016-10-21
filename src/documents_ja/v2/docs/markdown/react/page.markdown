@@ -5,9 +5,9 @@ framework: react
 tutorial: react/Reference/page
 ---
 
-## Page
+## ページ ( Page )
 
-The `Page` component serves as the main view of a screen in an app. Its children will be displayed on the screen. It is possible to add a navigation bar to the top of the page using the `renderToolbar` property.
+`Page` コンポーネントは、他のコンポーネントを置くときの土台 ( ページを構成する、ルートのコンポーネント ) となります。`Page` コンポーネントの子コンポーネントなどが、画面上には表示されます。また、`renderToolbar` プロパティーを使用すれば、ページの上部にナビゲーションバーを置くことができます。
 
 ```
 <Page>
@@ -15,11 +15,11 @@ The `Page` component serves as the main view of a screen in an app. Its children
 </Page>
 ```
 
-This component can be used with the [`Navigator`](Navigator.html), [`Splitter`](Splitter.html) or [`Tabbar`](Tabbar.html) components to enable complex navigation.
+また、[`Navigator`](Navigator.html) コンポーネント、[`Splitter`](Splitter.html) コンポーネント、[`Tabbar`](Tabbar.html) コンポーネントと組み合わせれば、高度なページ操作もできます。
 
-#### Adding a toolbar
+#### ツールバーの追加
 
-To add a toolbar at the top of the page the `renderToolbar` property will be used. This property should be a function that renders to a [`Toolbar`](Toolbar.html) component.
+ページ上部にツールバーを置く場合には、`renderToolbar` プロパティーを使用します。このプロパティーは、[`Toolbar`](Toolbar.html) をレンダリングする関数です。
 
 ```jsx
 <Page
@@ -31,7 +31,7 @@ To add a toolbar at the top of the page the `renderToolbar` property will be use
 />
 ```
 
-It is also possible to use a toolbar inline using the `inline` property:
+また、ツールバーには、`inline` プロパティーを指定することもできます ( インライン要素として、ツールバーが表示されます。つまり、スクロールが領域にツールバーが置かれます )。
 
 ```
 <Page>
@@ -41,9 +41,9 @@ It is also possible to use a toolbar inline using the `inline` property:
 </Page>
 ```
 
-#### Styling the content of the page
+#### コンテンツのスタイル
 
-To style the content of the page one can simply use the property `contentStyle`:
+ページ上に表示されるコンテンツのスタイリングをする場合には、`contentStyle` プロパティーを使用します。
 
 ```
 <Page contentStyle={{padding: 40}}>
@@ -51,15 +51,15 @@ To style the content of the page one can simply use the property `contentStyle`:
 </Page>
 ```
 
-#### Lifecycle events
+#### イベントの処理
 
-The `Page` component supports the following props to handle lifecycle events:
+`Page` コンポーネントでは、イベントを処理するためのプロパティーを提供しています。
 
-* `onInit` is called when the page is created.
-* `onShow` is called when the page is displayed on the screen.
-* `onHide` is called when the page is hidden.
+* `onInit` : ページが作成されたときに呼び出されます。
+* `onShow` ： 画面上にページが表示されたときに呼び出されます。
+* `onHide` ： ページが非表示 ( Hide ) にされたときに呼び出されます。
 
-For example, when a page is pushed on top of the `Navigator` the `onInit` will first be called, followed by a call of the `onShow` property. The previous page will call the `onHide` prop since it is being covered by the new page.
+たとえば、ページが `Navigator` へ 「 プッシュ ( push ) 」 されたときに、`onInit` が呼ばれます。次に、`onShow` プロパティーが呼ばれます。そして、すでに表示されているページがあった場合、`onHide` プロパティーが呼ばれます ( `onShow` ですでに新しいページが表示されている状態 )。
 
 ```jsx
 <Page
@@ -68,9 +68,9 @@ For example, when a page is pushed on top of the `Navigator` the `onInit` will f
   onHide={() => console.log('hide')}
 />
 ```
-#### Rendering fixed content
+#### コンテンツを固定化して、レンダリングする
 
-The `Page` component renders scrolling content but sometimes you want to add components that are not scrolling with the rest of the page. To do this you can use the `renderFixed` prop. This prop is often used with the [`Fab`](Fab.html) and [`SpeedDial`](SpeedDial.html) components.
+`Page` コンポーネントを使用して、レンダリングすると、スクロール可能なコンテンツが表示されます。スクロールを不可とするコンテンツを使用したい場合には、`renderFixed` プロパティーを使用します。[`Fab`](Fab.html) コンポーネントと [`SpeedDial`](SpeedDial.html) コンポーネントを使用するときには、通常、このプロパティーを使用します。
 
 ```jsx
 <Page

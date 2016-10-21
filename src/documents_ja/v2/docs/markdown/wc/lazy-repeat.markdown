@@ -5,9 +5,9 @@ framework: js,angular1
 tutorial: vanilla/Reference/lazy-repeat
 ---
 
-## Lazy List (or Infinite Scrolling, ons-lazy-repeat)
+## LazyList ( 別名 「 無限スクロール 」、ons-lazy-repeat )
 
-With [`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty. Here is the example of a simple list having 100,000,000 records.
+[`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) では、現在表示されているアイテムのみ、DOM 上に読み込まれています。表示されていない要素は、DOM 上から自動で削除されます。`ons-lazy-repeat` を使用すれば、パフォーマンスをほぼ劣化させずに、数百万の要素をレンダリングできます。次のサンプルでは、100,000,000 個のレコードを保持している、簡単な一覧を表示しています。
 
 ``` html
 <script>
@@ -15,7 +15,7 @@ With [`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) only currently visibl
     var lazyRepeat = document.querySelector('#list');
     lazyRepeat.delegate = {
       calculateItemHeight: function(index) {
-       // Specify this if the height depends on the element.
+       // 高さ設定が要素に依存する場合、それに応じた設定をします。
        return 40;
      },
      createItemContent: function(index, template) {
@@ -24,11 +24,11 @@ With [`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) only currently visibl
        return dom;
      },
      countItems: function() {
-        // Return number of items.
+        // アイテム数を返します。
        return 100000000;
      },
      destroyItem: function(index, item) {
-       // Optional method that is called when an item is unloaded.
+       // アイテムが削除されたときに、こちらのメソッドを呼び出します。
        console.log('Destroyed item with index: ' + index);
      }
     };
@@ -41,24 +41,27 @@ With [`ons-lazy-repeat`](/v2/docs/js/ons-lazy-repeat.html) only currently visibl
 </ons-list>
 ```
 
-As seen in the example, `<ons-lazy-repeat>` requires a delegate object attached to it's `delegate` property.
+`<ons-lazy-repeat>` の使用時には、上記のように、デリゲートオブジェクト ( Delegate Object ) を作成して、`delegate` プロパティーにセットします。
 
-* `createItemContent` creates the content of every list item given its index. It should returns an HTML element.
-* `calculateItemHeight` returns the height of an item. It could be different for every item. This property is optional and if it's omitted the height of the first item will be calculated and used for all subsequent items.
-* `countItems` returns the total number of items in the list.
-* `destroyItem` is an optional method that will be triggered everytime an item is unloaded. This can be used to destroy elements and remove event listeners in order to avoid memory leaks.
+* `createItemContent` では、渡されたインデックを元に、一覧に表示するアイテムのコンテンツを作成していきます。HTML 要素を返します。
 
-##### Refreshing the list
+* `calculateItemHeight` は、アイテムの高さを返します。この設定は、アイテム毎に異なってきます。この設定は任意です。省略された場合。最初のアイテムの高さが自動で計算され、後続のアイテムにも同じ設定が適用されます。
 
-If the data changes it is important to let the component know about it. This is done by calling the `refresh()` method.
+* `countItems` は、一覧上にあるアイテムの総数を返します。
+
+* `destroyItem` は、任意のメソッドです。このメソッドは、アイテムが非表示 ( アンロード/Unload ) にされるたびに発火します。このメソッドを使用すれば、要素の破棄 ( destroy ) とイベントリスナーの登録解除 ( メモリーリークを回避するため ) をすることができます。
+
+##### 一覧に更新 ( Refresh )
+
+データに更新がある場合、コンポーネント側にそれを伝えることが必要となります。この場合、`refresh()` メソッドを呼び出します。
 
 ```
 document.querySelector('#list').refresh();
 ```
 
-##### Combining Ajax calls
+##### Ajax を使用したコンテンツの表示
 
-You can combine with `XMLHttpRequest` object to insert dynamic contents from the server. The following sample illustrates a sample code written with jQuery.
+動的なコンテンツをサーバーから取得して、表示することもできます ( `XMLHttpRequest` オブジェクトを使用 )。jQuery を使用した例を、次に示します。
 
 ```javascript
 createItemContent: function(index, oldContent) {

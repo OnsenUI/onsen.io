@@ -5,19 +5,19 @@ framework: react
 tutorial: react/Reference/speed-dial
 ---
 
-## Speed dial
+## スピードダイアル ( SpeedDial )
 
-The *speed dial* component is a Material Design component that displays a floating action button that expands into a menu when tapped. It's useful for situations where there are several actions needs to be displayed that are of equal importance.
+*SpeedDial* コンポーネントは、マテリアルデザインのコンポーネントです。フローティングアクションボタン ( fab ) をタップ時に、表示されるメニューです。重要度が等しいアイテム ( 選択肢 ) を、同メニューを使用して、表示する場合に有用です。
 
-To display a normal floating action button the [`Fab`](Fab.html) component can be used.
+通常のフローティングアクションボタンの表示には、[`Fab`](Fab.html) コンポーネントを使用します。
 
-#### Basic usage
+#### 基本的な使用方法
 
-The menu items of the `SpeedDial` component are defined using the `SpeedDialItem` component. It also requires a `Fab` component which represents the main button.
+`SpeedDial` コンポーネントで表示する各メニューアイテムは、`SpeedDialItem` コンポーネントを使用して定義します。また、`SpeedDial` コンポーネントを使用する場合には、`Fab` コンポーネントも必要になります。
 
-To define the position of the component the `position` property is used. By default it is placed in the bottom right corner which can also be achieved by setting the property to the literal string `"bottom right"`.
+`SpeedDial` コンポーネントの表示場所を指定する場合には、`position` プロパティーを使用します。デフォルトでは、画面右下に表示されますが、明示的に、`position` プロパティーを `"bottom right"` にしても、同じ結果が得られます。
 
-To place the speed dial component in a page you can use the `renderFixed` prop of the `Page` component.
+また、SpeedDial コンポーネントを置く `Page` コンポーネントには、`renderFixed` プロパティーを使用することもできます。
 
 ```
 <Page

@@ -5,19 +5,19 @@ framework: react
 tutorial: react/Reference/list
 ---
 
-## List
+## 一覧表示 ( List )
 
-Lists are one of the most important components in mobile apps. They can be used to display data, settings pages, forms and much more.
+「 一覧 」 は、モバイルアプリの開発において、最も重要な部品の 1 つです。一覧は、データの表示を中心に、設定、ページの表示、フォームの表示などにも使用されています。
 
-In Onsen UI lists are used with the `List` component.
+Onsen UI では、`List` コンポーネントを使用して、一覧を表示します。
 
-For lists with thousands of items or more we recommend to use the [`LazyList`](LazyList.html) component which is more performant.
+なお、数千のアイテムを一覧表示する場合には、[`LazyList`](LazyList.html) コンポーネントの使用を推奨します。
 
-#### Basic usage
+#### 基本的な使用方法
 
-To render a simple list the `renderRow` property is used. The property should be set to a function that renders a `ListItem` component.
+簡単な一覧のレンダリングには、`renderRow` プロパティーを使用します。`ListItem` コンポーネントをレンダリングする関数を定義して、その関数に対して、このプロパティーをセットします。
 
-The `dataSource` property should be set to an array with the data.
+データを入れた配列に対して、`dataSource` プロパティーをセットします。
 
 ```
 class MyPage extends React.Component {
@@ -42,9 +42,11 @@ class MyPage extends React.Component {
 }
 ```
 
-#### Headers
+#### 見出し ( ヘッダー/Header )
 
 To display a header at the top of the list the `renderHeader` property and the `ListHeader` component are used. Similar to the `renderRow` property the `renderHeader` property should be set to a function that returns a `ListHeader` component.
+
+一覧の上に置く見出し ( Header ) を表示する場合には、`renderHeader` プロパティーと `ListHeader` コンポーネントを使用します。`renderRow` プロパティーと同様に、`ListHeader` コンポーネントを返す関数を定義して、この関数に対して、`renderHeader` プロパティーをセットします。
 
 ```
 <List
@@ -54,11 +56,11 @@ To display a header at the top of the list the `renderHeader` property and the `
 />
 ```
 
-There is also a `renderFooter` property that can be used to display content at the bottom of the list.
+また、`renderFooter` プロパティーを使用すれば、一覧の下にコンテンツを表示することもできます。
 
-#### Tappable items
+#### タップ操作可能なアイテム
 
-In mobile apps it is common to trigger some action or navigate to a new page when an item is tapped. In those cases it's nice if the user gets some visual indication. By using the `tappable` property the item background color will change when tapped on iOS and show a ripple effect on Android.
+モバイルアプリでは、アイテムがタップされたときに、なんらかの処理を行ったり、新しいページを表示したりことがよくあります。そのような場合には、処理が行われることを、ユーザー側にも示す必要があります。`tappable` プロパティーを使用すると、アイテムのタップ時、iOS であれば、アイテムの背景色が変わり、Android であれば、リップル ( 波紋 ) 効果が適用されます。
 
 ```
 <ListItem tappable>
@@ -66,9 +68,9 @@ In mobile apps it is common to trigger some action or navigate to a new page whe
 </ListItem>
 ```
 
-#### Customizing the border
+#### 区切り線 ( divider ) のカスタマイズ
 
-By default the `ListItem` components will be separated by borders both on iOS and Android. This border can be customized with the `modifier` prop. The default border doesn't cover the whole width of the screen unless the `longdivider` modifier will be used.
+各 `ListItem` コンポーネントは、デフォルトでは、線で区切られ、表示されます ( iOS と Android 共通 )。`modifier` プロパティーを使用されば、この区切り線をカスタマイズできます。デフォルトの区切り線は、画面の端から端まで描画されませんが、modifer を `longdivider` に指定すれば、描画されます。
 
 ```
 <ListItem modifier='longdivider'>
@@ -76,7 +78,7 @@ By default the `ListItem` components will be separated by borders both on iOS an
 </ListItem>
 ```
 
-There is also a `nodivider` modifier that removes the border completely.
+また、区切り線を非表示にする場合には、modifier を `nodivider` に指定します。
 
 ```
 <ListItem modifier='nodivider'>
@@ -84,9 +86,9 @@ There is also a `nodivider` modifier that removes the border completely.
 </ListItem>
 ```
 
-#### Item structure
+#### アイテムの構造
 
-Every list item is separated into three sections. This makes it easy to add things like input components, thumbnails and icons to the items without writing any custom styles. The three sections are accessed using the classes `left`, `center` and `right`.
+一覧上の各アイテムは、3 つのセクションに分割されています。それぞれのセクションには、コンポーネント ( 「 入力 」 系のコンポーネントなど )、サムネイル、アイコンを置くことができます ( なお、スタイルのカスタムは不要 )。セクションにアクセスする場合には、class を使用して、セクションを指定 ( `left`、`center`、`right` ) します。
 
 ```
 <ListItem tappable>
@@ -99,4 +101,4 @@ Every list item is separated into three sections. This makes it easy to add thin
 </ListItem>
 ```
 
-The code above will display a list item with a radio button in the left section and some text in the center section. The `<label>` tags are used to toggle the checkbox if the user taps the text content.
+上記の例では、アイテムの left セクションには、チェックボックスを表示して、center セクションには、テキストを表示しています。また、ユーザーがテキストをタップしたときに、チェックボックスの切り替えを行うため、`<label>` タグも使用しています。

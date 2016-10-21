@@ -4,22 +4,22 @@ component: js/ons-template,angular1/ons-template
 framework: js,angular1
 ---
 
-## Multiple page definitions (ons-template)
+## 複数ページの定義 ( ons-template )
 
-Some components require you to specify another HTML page. For instance, a `<ons-splitter-side>` needs to specify a menu page in following format.
+コンポーネントによっては、別の HTML ページを読み込む設定をする必要があります。たとえば、`<ons-splitter-side>` では、次のような方法で、メニューのページを指定します。
 
 ```html
 <ons-splitter-side page="menu.html">
 </ons-sliding-menu>
 ```
 
-Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/v2/docs/js/ons-template.html) tag.
+別のファイルを使用して、menu.html 定義する代わりに、同一のページ上で、このページのコンテンツを定義することもできます。そのような場合には、[`ons-template`](/v2/docs/js/ons-template.html) タグを使用します。
 
-An [`<ons-template>`](/v2/docs/js/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
+[`<ons-template>`](/v2/docs/js/ons-template.html) タグで囲った部分が、template ( 1 ページ ) を構成します。次にサンプルでは、`main.html` と名付けた template を定義しています。
 
 ```html
 <ons-template id="main.html">
-  <!-- Here, we define the HTML content for main.html -->
+  <!-- ここに main.html の HTML コンテンツを記述します。 -->
   <div>
     Hello, this is the content of main.html
   </div>

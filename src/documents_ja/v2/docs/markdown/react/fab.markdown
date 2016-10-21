@@ -5,17 +5,17 @@ framework: react
 tutorial: react/Reference/fab
 ---
 
-## Floating action button
+## フローティングアクションボタン 
 
-The floating action button, abbreviated as *fab*, is a component in Material Design. It is a circular button usually placed in the lower right corner of the screen. This button stands out more than other buttons and is supposed to represent the primary action of an app.
+フローティングアクションボタン ( Floating Action Button/ *fab* ) とは、マテリアルデザインのコンポーネントです。丸型のボタンで、画面右下に、通常置かれます。このボタンは、他のボタンよりも存在感があり、ユーザー側に最もアピールしたい操作を示すために使用します。
 
-Onsen UI also provides a component called [`SpeedDial`](SpeedDial.html) which is a floating action button that expands into a menu when tapped.
+Onsen UI では、[`スピードダイアル/SpeedDial`](SpeedDial.html) と呼ばれるコンポーネントも提供しています。このコンポーネントは、fab がタップされたときに表示されるメニューです。
 
-#### Basic usage
+#### 基本的な使用方法
 
-To add a floating action button you can use the `renderFixed` prop of the `Page` component. The `position` property is used to define its position. For example, to put the button in the bottom right of the screen this property one needs to set the property to `"bottom right"`.
+フローティングアクションボタンを追加する場合には、`Page` コンポーネントの `renderFixed` プロパティーも使用します。置き場所の指定には、`position` プロパティーを使用します。たとえば、画面右下にボタンを置く場合には、このプロパティーに `"bottom right"` を指定します。
 
-It is also possible to put an  icon inside the button using [`Icon`](Icon.html) component:
+また、[`Icon`](Icon.html) コンポーネントを使用すれば、ボタンの上にアイコンを置くこともできます。
 
 ```jsx
 <Page
@@ -29,17 +29,17 @@ It is also possible to put an  icon inside the button using [`Icon`](Icon.html) 
 </Page>
 ```
 
-#### Ripple effect
+#### リップル ( Ripple/波紋 ) 効果
 
-To get a ripple effect that expands from the point where the user taps, the `ripple` property is used.
+リップル効果 ( タップ地点から波紋が広がります ) を適用する場合には、`ripple` プロパティーを使用します。
 
 ```jsx
 <Fab ripple />
 ```
 
-#### Mini fab button
+#### 小さめの fab
 
-The appearance of the button can be changed with the `modifier` property. The floating action button only has one modifier, `mini`, which makes it smaller.
+ボタンの外見は、`modifier` プロパティーを使用すれば変更できます。fab の modifier には、1 つだけ指定できる値があります。それは、`mini` です。ボタンのサイズを小さくするときに使用します。
 
 ```jsx
 <Fab modifier='mini' />

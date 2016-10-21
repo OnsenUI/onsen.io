@@ -13,13 +13,13 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-### Migration from Onsen UI 1.x
+### Onsen UI 1 系からの移行
 
-Onsen UI 1.x was dependent on AngularJS 1.x, while Onsen UI 2.x is built on top of Web Components and is framework agnostic. However, we do provide AngularJS bindings to support the cool features of this framework.
+Onsen UI 1.x は、AngularJS 1.x に依存していました。Onsen UI は、2.x 以降から、Web Component を基礎として構築され、他のフレームワークへの依存もなくなりました。ただし、AngularJS では役立つ機能も多々提供されているため、Onsen UI と AngularJS を連携させ、一部機能は継続してサポートしています。
 
-In this guide, we will briefly explain how to migrate the code of your apps from Onsen UI 1.x to Onsen UI 2.x + AngularJS bindings. If you rather want to use with [Angular 2](/v2/docs/angular2.html) or even [React](/v2/docs/react.html) and other frameworks, please take a look into [docs for each frameworks](/v2/docs/). They share the same core, which means you can still use the same knowledge, components and style definitions.
+ここでは、Onsen UI 1.x から 2.x ( AngularJS と連携 ) へのコードの移行方法を、簡単に解説します。なお、Onsen UI と他のフレームワーク ( [Angular 2](/v2/docs/angular2.html)、[React](/v2/docs/react.html) など ) の組み合わせに興味がある方は、[各フレームワーク向けのドキュメント](/v2/docs/) をご確認ください。Onsen UI のコア/中核となる中身 ( コンポーネント、スタイルなど ) は、どのフレームワークの組み合わせにおいても変わらないため、Onsen UI のコンポーネント、スタイルなどに関しては、同じ知識が使用できます。
 
-Within the provided Onsen UI 2 package, you will find `onsenui.js` as well as `angular-onsenui.js`, the latter standing for the mentioned bindings. It does not include AngularJS itself anymore. First of all, you need to update the included files in your `index.html` in the following way:
+配布用 Onsen UI 2 パッケージの中には、`onsenui.js` と `angular-onsenui.js` が置かれており、後者のファイルでは、ファイル名が示すとおり、前述の 連携処理を行っています。なお、AngularJS 本体の読み込みは、現在、行っていません ( 代わりに、「 連携処理 」 を行っています )。最初に行うことは、`index.html` 内で読み込んでいるファイルを、次のように更新します。
 
 ```
 <script src="path/to/onsenui.js"></script>
@@ -27,49 +27,44 @@ Within the provided Onsen UI 2 package, you will find `onsenui.js` as well as `a
 <script src="path/to/angular-onsenui.js"></script>
 ```
 
-That is the first and main change for the migration process. Now, if you try to run your app you will probably find some console errors due to inexistent methods and objects. The reason is that for Onsen UI 2 we have updated and improved the API to make it more comfortable for developers. Basically, in most of the cases all you will need to do is replacing some method names and use the newly introduced properties instead of old method calls.
+移行する上で、上記の変更が、最も大事で、最も初めに行う処理です。ただし、上記の更新後に、アプリを実行しても、コンソール上ではエラー ( メソッドの欠如/オブジェクトの欠如を示すエラー ) が出力されます。これは、Onsen UI 2 では、開発者に使いやすいように API が改良されているためです。エラーを解決するためには、別途、コード内で使用されているメソッドの名前を更新したり、または、新規に追加されたプロパティーを使用できるようにメソッドの定義を修正する必要があります。
 
-In the following we summarize a list of common changes that you will probably face. In case you have a different problem, please have a look at [Onsen UI 2 reference](https://onsen.io/v2/docs/angular1.html) and check the new names of the API. In case you cannot find an answer you can also ask in our [community forum](https://community.onsen.io/).
+次の項目では、開発者側で行う変更点をまとめています。変更後もなんらかの問題が生じる場合には、[Onsen UI 2 の ガイド](https://onsen.io/v2/docs/angular1.html) 上で API の詳細などを確認してください。それでも解決できない場合には、[コミュニティーのフォーラム](https://community.onsen.io/) を併せてご確認ください。
 
-##### General:
+##### 概要
 
-* Onsen UI 2.0 introduces the new Automatic Styling feature. This will make your Onsen UI iOS-like apps to be displayed with Material Design styles on Android platforms by default. To disable this just call `ons.disableAutoStyling();` right after including `onsenui.js` in your `index.html`.
-* Some CSS-only components have been changed. Perhaps you need to update your styles with the [new ones](http://components2.onsen.io/).
-* Every `component.setX(...)` or `component.isX()` method has been removed. Use `X` property instead (CamelCase). Example: `myCarousel.setDisabled(true);` => `myCarousel.disabled = true;`.
-* `getDeviceBackButtonHandler()`-like methods have been removed. Use `onDeviceBackButton` properties instead. Example: `myNavigator.onDeviceBackButton = function() {};`.
-
+* Onsen UI 2.0 では、「 スタイルの自動切り替え機能 」 を提供しています。この機能により、たとえば、Android プラットフォーム上であれば、マテリアルデザインのスタイルで、Onsen UI アプリが表示されます ( Onsen UI アプリの外見には、デフォルトでは、iOS のフラットデザインを使用しています )。この機能を無効にしたい場合には、`onsenui.js` ( `index.html` 上 ) を読み込んだ直後に、`ons.disableAutoStyling();` を呼び出します。
+* CSS 系のコンポーネントのいくつかが更新されています。[こちらのサイト](http://components2.onsen.io/) で新規のスタイルの確認とダウンロードができます。
+* `component.setXXX(...)` と `component.isXXX()` 系のメソッドのほとんどが廃止されました。なお、現在は、メソッド名の 「 XXX 」 部分をプロパティー名として使用します ( すべて小文字にします )。たとえば、`myCarousel.setDisabled(true);` => `myCarousel.disabled = true;` と変更します。
+* `getDeviceBackButtonHandler()` メソッドも廃止されました。代わりに、`onDeviceBackButton` プロパティーを使用します。たとえば、`myNavigator.onDeviceBackButton = function() {};` のように変更します。
 
 ##### [ons-navigator](https://onsen.io/v2/docs/angular1/ons-navigator.html)
 
-* `getCurrentPage` method has been removed. Use `topPage` (HTMLElement) property instead: `myNavigator.getCurrentPage();` => `myNavigator.topPage;`
-* `getPages()` method has been removed. Use `pages` property (HTMLCollection) instead: `myNavigator.getPages();` => `myNavigator.pages;`
-* `options.onTransitionEnd` has been renamed to `options.callback`.
+* `getCurrentPage` メソッドは廃止されました。代わりに、`topPage` プロパティー ( HTMLElement ) を使用します。たとえば、`myNavigator.getCurrentPage();` => `myNavigator.topPage;` のように変更します。
+* `getPages()` メソッドは廃止されました。代わりに、`pages` プロパティー (HTMLCollection) を使用します。たとえば、`myNavigator.getPages();` => `myNavigator.pages;` のように変更します。
+* `options.onTransitionEnd` の名前は、`options.callback` へと変更されました。
 
 ##### [ons-tabbar](https://onsen.io/v2/docs/angular1/tabbar.html)
 
-* Removed `persistent` and `no-reload` attributes for tabs. These behaviors are now always applied by default.
-
+* tab で使用されていた `persistent` 属性と `no-reload` 属性は廃止されました。これらの属性を使用していたときの挙動は、現在、デフォルトの挙動になっています。
 
 ##### [ons-list](https://onsen.io/v2/docs/angular1/list.html)
 
-* CSS for this component has been updated. It's recommended to check the new reference, especially the new `modifiers` (longdivider, nodivider, etc.).
-* Optionally, `ons-list-item` can be restructured with `left`, `center` and `right` elements instead of using `ons-col` and `ons-row` or custom CSS.
-
+* list 用のコンポーネントに適用する CSS を更新しました。ドキュメントの 「 リファレンス 」 で確認してください。新しく `modifiers` 属性 ( longdivider、nodivider などが設定可 ) が追加されました。
+* `ons-list-item` では、`ons-col`、`ons-row`、または、カスタム CSS を使用しなくとも、`left`、`center`、`right` 要素を指定すれば、一覧を構築できるようになりました。
 
 ##### [ons-carousel](https://onsen.io/v2/docs/angular1/ons-carousel.html)
 
-* `setActiveCarouselItemIndex()` method has been renamed to `setActiveIndex()`.
-* `getActiveCarouselItemIndex()` method has been renamed to `getActiveIndex()`.
-
+* `setActiveCarouselItemIndex()` メソッドの名前は、`setActiveIndex()` へと変更されました。
+* `getActiveCarouselItemIndex()` メソッドの名前は、`getActiveIndex()` へと変更されました。
 
 ##### [ons-button](https://onsen.io/v2/docs/angular1/ons-button.html)
 
-* Spinner related methods have been removed. This can be achieved by simple custom CSS.
-
+* スピナー関連のメソッドは廃止されました。代替として、カスタム CSS を適宜使用してください。
 
 ##### ons-scroller
 
-This directive has been removed. You can use a `div` element with simple CSS to achieve the same behavior:
+このディレクティブは廃止されました。現在は、次のような CSS と `div` 要素を使用して、同等の挙動を実現しています。
 
 ```
 .scroller {
@@ -82,16 +77,13 @@ This directive has been removed. You can use a `div` element with simple CSS to 
 }
 ```
 
-#### Removing AngularJS?
+#### AngularJS を取り除く方法
 
-In case you want to also remove AngularJS dependency from your project, you may need to do something else:
+プロジェクトから AngularJS を取り除く場合には、次の処理が必要となります。
 
-* `var` attribute works only for AngularJS. Use `id` instead and get the element with `getElementById` or `querySelector`. Example. `var myNavigator = document.getElementById('my-navigator'); myNavigator.pushPage(...);`
-* Listeners such as `ons-prepush` attributes work only for AngularJS. Use normal JavaScript event listeners instead. Example: `document.addEventListener('prepush', function(event) {});
-* `ons-sliding-menu` and `ons-split-view` directives work only for AngularJS. Use [`ons-splitter` component](https://onsen.io/v2/docs/angular1/splitter.html) instead.
-
-
-
+* `var` 属性は、AngularJS 用です。代わりに、`id` を使用します。そして、要素の取得には、`getElementById` または `querySelector` を使用します。たとえば、`var myNavigator = document.getElementById('my-navigator'); myNavigator.pushPage(...);` のように変更します。
+* `ons-prepush` などのイベントリスナー系の属性は、AngularJS 用です。代わりに、JavaScript で使用する、通常のイベントリスナーに変更します。たとえば、`document.addEventListener('prepush', function(event) {}); のように変更します。
+* `ons-sliding-menu` ディレクティブと `ons-split-view` ディレクティブは、AngularJS 用です。代わりに、[`ons-splitter` コンポーネント](https://onsen.io/v2/docs/angular1/splitter.html) を使用します。
 
 <!-- End of markdown -->
 <% end %>

@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/input
 ---
 
-## Text input (ons-input)
+## テキストの入力 ( ons-input )
 
-`<ons-input>` is an alternative to `<input>` tag, with Material Design floating label and animation effect. To enable floating label style, use `placeholder` attribute and `float` attribute together.
+`<ons-input>` は、`<input>` タグと同様の機能を提供してくれます。ただし、`<ons-input>` では、マテリアルデザインのフローティングラベルが使用され、加えて、アニメーション効果も付けられています。フローティングラベル スタイルの入力欄を使用する場合には、`placeholder` 属性と `float` 属性の両方を設定します。
 
 ```
 @Component({

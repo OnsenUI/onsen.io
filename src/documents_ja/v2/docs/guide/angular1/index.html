@@ -13,31 +13,31 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-This guide describes using Onsen UI with Angular 1.x. We also have [Migration Guide from V1 to V2](from-v1-to-v2.html).
+ここでは、Angular 1.X と Onsen UI を連携させて使用する方法を解説します。また、[Onsen UI 1 系からの移行](from-v1-to-v2.html) も併せてご確認ください。
 
-### Starting Project
+### プロジェクトを始める
 
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+Onsen UI を実際に使用する前に、「 [はじめよう](/guide/getting_started.html) 」 もご確認ください。
 
-#### Using Onsen UI toolkit - Monaca CLI
+#### Monaca CLI を使用する
 
 ```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose Angular 1 template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+$ npm install -g monaca # Monaca CLI をインストールする。
+$ monaca create helloworld # Angular 1 テンプレートを選択する。
+$ cd helloworld; monaca preview # プレビューを起動する。または、"monaca debug" コマンドを実行して、端末上でプロジェクトを実行する。
 ```
 
-#### Download via npm or bower
+#### npm または bower からダウンロードする
 
 ```bash
-# Angular 1 binding is included in onsenui component
+# Angular 1 との連携処理は、「 onsenui 」 コンポーネント内で行われます。
 $ npm install onsenui
 $ bower install onsenui
 ```
 
-### Loading Onsen UI with AngularJS
+### angular-onsenui ( AngularJS と Onsen UI の連携 ) を読み込む
 
-Angular 1.x binding for Onsen UI is separated from the core. To load in your project, please load `onsen.js` and `angular-onsenui.js`. After loading `angular-onsenui.js`, the `onsen` AngularJS module is ready to use.
+Angular 1.x と Onsen UI との連携処理は、Unsen UI の中核部分から切り離して、別のファイル内で行われています。よって、プロジェクトにロードする場合には、`onsen.js` と `angular-onsenui.js` の両方のファイルを読み込む必要があります。「 `onsen` 化 」 された AngularJS モジュールを使用できるのは、`angular-onsenui.js` を読み込んだ後になります。
 
 ```html
 <!doctype html>
@@ -54,7 +54,7 @@ Angular 1.x binding for Onsen UI is separated from the core. To load in your pro
       module.controller('AppController', function($scope) { });
       module.controller('PageController', function($scope) {
         ons.ready(function() {
-          // Init code here
+          // 初期化 ( Init ) 用のコードをここに置きます。
         });
       });
     </script>
@@ -62,22 +62,22 @@ Angular 1.x binding for Onsen UI is separated from the core. To load in your pro
   <body ng-controller="AppController">
     <ons-navigator var="navigator">
       <ons-page ng-controller="PageController">
-        <!-- Page content -->
+        <!-- ページのコンテンツ -->
       </ons-page>
     </ons-navigator>
   </body>
 </html>
 ```
 
-### Using Components
+### コンポーネントを使用する
 
-Using Onsen UI into your app is simple. Simply include each element in your HTML. You can also use the standard `ng-` attribute.
+次のように、HTML 上で各要素を読み込むだけで、Onsen UI をアプリ上で使用できます。また、通常の `ng-` 属性も使用することができます。
 
 ```html
 <ons-input ng-bind="myName" placeholder="Your Name" float></ons-input>
 <ons-button ng-click="clickHandler">Say Hello</ons-button>
 <script>
-// In the controller
+// コントローラー ( controller ) 内の処理
 $scope.myName = "";
 $scope.clickHandler = function(e) {
   ons.notification.alert({ message: "Hello " + $scope.myName });
@@ -85,7 +85,7 @@ $scope.clickHandler = function(e) {
 </script>
 ```
 
-Some components have methods and properties. In that case, use the `var` attribute to access. The following `<ons-navigator var='myNavigator'>` can be accessed via `myNavigator` variable which exists in the current `$scope` object.
+コンポーネントの中には、メソッドとプロパティーを提供しているものがあります。`var` 属性を使用すれば、これらにアクセスできます。たとえば、次のサンプルの `<ons-navigator var='myNavigator'>` へのアクセスには、変数 「 `myNavigator` 」 を使用します。この変数は、`$scope` オブジェクト内に格納されています。
 
 ```html
 <ons-navigator animation="slide" var="myNavigator">
@@ -100,21 +100,21 @@ Some components have methods and properties. In that case, use the `var` attribu
 </ons-template>
 ```
 
-### Event Handling
+### イベントの処理
 
-Some components supports events. By using those events, you can hook your code to a specific action in the component and customize the behavior. For a list of events that a component supports, please see the component page. The `<ons-navigator>` emits [these events](/reference/ons-navigator.html#events-summary).
+コンポーネントの中には、イベントをサポートしているものがあります。これらのイベントを使用して、コンポーネントの処理をフック ( hook )して、コンポーネントの挙動をカスタマイズすることもできます。コンポーネントがサポートするイベントの詳細は、「 リファレンス 」 をご確認ください。たとえば、`<ons-navigator>` では、[こちら](/reference/ons-navigator.html#events-summary) のイベントをサポートしています。
 
-To add a handler to a event, use `on()`, `off()` and `once()` method of the target component. Therefore, you need to define a variable of the component, as described in the previous section.
+イベントにハンドラーを登録または解除する場合には、対象とするコンポ―ネントが提供している `on()`、`off()`、`once()` を適宜使用します ( ここでは、`<ons-navigator>` を対象として、解説しています ) 。よって、前述のように、コンポーネントに変数を適宜定義しておく必要があります。
 
 ```html
 <script>
 myNavigator.on("prepush", function() {
-  // Add a handler for prepush event
+  // prepush イベントに対して、ハンドラーを設定し、処理を行います。
 });
 </script>
 ```
 
-Component event handlers can also be added using attributes. These attributes are all prefixed with `ons-` followed by the event name. To catch the `prepop` event emitted by the `<ons-navigator>` the `ons-prepop` attributes is used:
+イベントハンドラーの登録処理には、コンポーネント側で提供している属性を使用することもできます。これらの属性名には、先頭に `ons-` が付記され、そのあとには、イベントの名前が記載されています。たとえば、`<ons-navigator>` の場合、`ons-prepop` 属性を使用しても、`prepop` イベントを捕捉することができます。
 
 ```html
 <ons-navigator ons-prepop="doSomething()">
@@ -122,18 +122,19 @@ Component event handlers can also be added using attributes. These attributes ar
 </ons-navigator>
 ```
 
-The value of the attribute should be an Angular expression, so in the case where you are not using AngularJS these attributes can't be used.
+属性に指定する値には、Angular の記法を使用します。よって、AngularJS を使用していない場合、これらの属性は使用できません。
 
-#### DOM events
+#### DOM イベント
 
-Onsen UI components also throw DOM events. For instance, [`<ons-page>`](/reference/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+Onsen UI コンポーネントの中には、DOM イベントをサポートしているものもあります。たとえば、[`<ons-page>`](/reference/ons-page.html) では、複数の DOM イベントをサポートしています。これらのイベントには、それぞれ、実行されるタイミングあります。また、これらのイベントを利用して、各ページの挙動を変更できます。
 
-* `init` event is fired after `<ons-page>` is attached to DOM.
-* `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
-* `show` event is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up.
-* `hide` event is fired every time `<ons-page>` disappear from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack.
+* `<ons-page>` が DOM にアタッチされたときに、`init` イベントが発火します。
+* `<ons-page>` が破棄 ( destroy ) される前、加えて、DOM から削除される前に、`destroy` イベントが発火します。
+* `<ons-page>` が表示されるたびに、`show` イベントが発火します。つまり、新しいページが作成され、表示された直後に、または、既存のページが表示されたときに、発火します。
+* `<ons-page>` が非表示にされるたびに、`hide` が発火します。つまり、表示中のページが破棄 ( destroy ) されたとき、または、スタック上には置かれているが、表示されていないときに、発火します。
 
-Page lifecycle events will be propagated to the page's descendants so they are correspondingly shown, hidden or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator's top page) and `destroy` event for every page in navigator's page stack.
+ページの寿命に関わるイベントは、そのページと関連する子のページたちにも影響を与えます。親ページへの操作に応じて、子のページも、適宜、表示・非表示・破棄されます。
+たとえば、`<ons-navigator>` を破棄 ( destroy ) した場合、表示中のページ ( つまり、nagivator のトップに置かれたページ ) に対してのみ、`hide` イベントが発火され、navigator のスタックに置かれた他のページに対しては、`destroy` が発火します。
 
 ```html
 <script>
@@ -150,49 +151,49 @@ document.addEventListener("init", function(event) {
 </ons-page>
 ```
 
-### Templating
+### ページの定義 ( template )
 
-Some components require another HTML page. For instance, a `<ons-splitter-menu>` needs to specify a start up page in following format.
+コンポーネントによっては、メインのページを表示しているときでも、他の HTML ページを読み込む必要があります。たとえば、`<ons-splitter-side>` では、次のような方法で、最初に表示する、メニューのページを指定します。
 
 ```html
 <ons-splitter-menu page="menu.html"></ons-splitter-menu>
 ```
 
-Instead of creating menu.html in a separate file, you can also define the page content in the same page. This can be done by creating a [`<ons-template>`](/reference/ons-template.html) tag, or a `script` tag with `"text/ons-template"` type. It is very useful when you want to maintain smaller amount of files.
+別のファイルを使用して、menu.html を定義する代わりに、1 つのページ上に、複数ページのコンテンツをまとめて定義することもできます。そのような場合には、[`<ons-template>`](/reference/ons-template.html) タグを使用するか、または、type を `"text/ons-template"` に指定した `script` タグを使用します。ファイル数を増やしたくない場合に有用です。
 
-#### Use &lt;ons-template&gt; tag to define a template
+#### &lt;ons-template&gt; を使用して、template を定義する場合
 
-An [`<ons-template>`](/reference/ons-template.html) tag represents a template snippet. For example, following code defines a template called `main.html`.
+[`<ons-template>`](/reference/ons-template.html) タグが 1 つの template ( 1 つのページ ) となります。次の例では、`main.html` と名付けた template を定義しています。
 
 ```html
 <ons-template id="main.html">
-  <!-- Here, we define the HTML content for main.html -->
+  <!-- ここに、main.html の HTML コンテンツを記述します。 -->
   <div>
     Hello, this is the content of main.html
   </div>
 </ons-template>
 ```
 
-#### Use &lt;script&gt; tag to define a template
+####  &lt;script&gt; タグ を使用して、template を定義する場合
 
-Alternatively, a `<script>` tag can also be used to define a template. In this case, you need to set the `type` to `text/ons-template`.
+前述の方法以外にも、`<script>` タグを使用して、template を定義することができます。この場合、`type` には、`text/ons-template` を指定します。
 
 ```html
 <script type="text/ons-template" id="main.html">
-  <!-- Here, we define the HTML content for main.html -->
+  <!-- ここに、main.html の HTML コンテンツを記述します。 -->
   <div>
     Hello, this is the content of main.html
   </div>
 </script>
 ```
 
-#### Using $templateCache from AngularJS
+#### $templateCache の使用 ( AngularJS の機能 )
 
-The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
+上記のように定義した template は、AngularJS の template 機能と同じように取り扱うことができます。よって、`$templateCache` サービスを使用できます。詳細は、[`$templateCache` の解説 ( AngularJS の公式ドキュメント )](https://docs.angularjs.org/api/ng/service/$templateCache) をご確認ください。
 
-### Delegate object for ons-lazy-repeat
+### ons-lazy-repeat 使用時に必要となる デリゲートオブジェクト ( Delegate Object )
 
-Some components like [`ons-lazy-repeat`](/v2/docs/angular1/ons-lazy-repeat.html) need to specify a delegate object. The `delegate` object should be attached to the scope of the same controller as the item list, so it is accessible from the view.
+[`ons-lazy-repeat`](/v2/docs/angular1/ons-lazy-repeat.html) を含む、いくつかのコンポーネントでは、デリゲートオブジェクト ( Delegate Object ) が必要となります。アイテムの処理に使用するコントローラーのスコープに、この `デリゲートオブジェクト` を連結させます ( これで、ビューからアクセスできるようになります )。
 
 ```html
 <ons-page ng-controller="MyCtrl">
@@ -224,43 +225,45 @@ $scope.MyDelegate = {
 };
 ```
 
-### Utility Functions
+### ユーティリティ関数
 
-Aside from utility functions described in the [Core Guide](/v2/docs/guide/js/), you can use some functions that are specific to Angular 1 binding. 
+[Unsen UI ガイド ( JavaScript )](/v2/docs/guide/js/) に記載されているユーティリティ関数以外にも、Angular 1 との連携処理を行ってくれる関数が、Onsen UI では提供されています。
 
 #### ons.bootstrap
 
-`ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
+`ons.bootstrap()` 関数を使用すれば、Onsen UI の読み込みを、たった 1 行で行えます。この関数では、Onsen UI モジュールを AngularJS へ追加し
+、どのスコープからでも呼べるようにしています。この関数を実行する場合には、事前に、`onsenui.js` の読み込むを済ませておく必要があります。
 
-For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter. `ons.bootstrap()` will return the AngularJS module object which can be used to add services from now on.
+次の例では、`ngAnimate` モジュールを指定して、Onsen UI を読み込んでいます。このパラメーターには、モジュールを複数個、指定できます。`ons.bootstrap()` は、AngularJS モジュールのオブジェクトを返します。このオブジェクトを使用して、各種サービスを追加することができます。
 
 ```html
 <script>
-  var module = ons.bootstrap(['ngAnimate']); // Optionally loading ngAnimate module
+  var module = ons.bootstrap(['ngAnimate']); // 例として、ここでは、ngAnimate モジュールを読み込んでいます。
   module.controller("TopController", function($scope){ });
 </script>
 ```
 
-You can also specify the module name when calling `ons.bootstrap()`.
+または、`ons.bootstrap()` の使用時に、第一引数として、モジュール名を指定することもできます。
 
 ```html
 <script>
-  ons.bootstrap('myApp', ['ngAnimate']); // Optionally loading ngAnimate module
+  ons.bootstrap('myApp', ['ngAnimate']); // 例として、ここでは、ngAnimate モジュールを読み込んでいます。
   angular.module('myApp').controller("TopController", function($scope){ });
 </script>
 ```
 
 #### ons.compile()
 
-`ons.compile()` function is used to compile the DOM elements that have Onsen UI components. Typical usage of the function is to manually add a snippet of HTML and render it.
+Onsen UI コンポーネントを挿入した DOM 要素をコンパイルする場合には、`ons.compile()` 関数を使用します。典型的な使用方法は、対象の HTML を手動で挿入して、次に、レンダリングします。
 
-Note that `ons.compile()` must specify a `HTMLElement` object to its argument. Also, the element must be appended to the DOM tree before calling `ons.compile()`. Please see the example below.
+`ons.compile()` の引数には、`HTMLElement` オブジェクトを指定します。また、`ons.compile()` を呼び出す前に、DOM ツリーへ要素を追加する必要があります。
+次に例を記します。
 
 ```javascript
 ons.ready(function() {
   var elm = $("<ons-button>New Button</ons-button>");
-  elm.appendTo($("body")); // Insert to the DOM first
-  ons.compile(elm[0]); // The argument must be a HTMLElement object
+  elm.appendTo($("body")); // 最初に、DOM へ挿入します。
+  ons.compile(elm[0]); // 引数には、HTMLElement を指定します。
 });
 ```
 

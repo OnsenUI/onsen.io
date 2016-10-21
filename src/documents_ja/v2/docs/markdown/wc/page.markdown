@@ -5,18 +5,20 @@ framework: js,angular1
 tutorial: vanilla/Reference/page
 ---
 
-## Page (ons-page)
+## ページのコンポーネント ( ons-page )
 
-`<ons-page>` should be used for the root component of each page. The content inside page component is scrollable.
+`<ons-page>` は、ページを構成する、ルートのコンポーネントとして使用されます。このコンポーネント内のコンテンツは、スクロール形式で表示できます。
 
-[`<ons-page>`](/v2/docs/ons-page.html) provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
+[`<ons-page>`](/v2/docs/ons-page.html) では、複数の DOM イベントを提供しています。これらのイベントは、決められたタイミングでそれぞれ発火します。
+各ページの挙動を修正する場合には、これらのイベントを使用します。
 
-* `init` event is fired after `<ons-page>` is attached to DOM.
-* `destroy` event is fired before `<ons-page>` is destroyed and prior to DOM detachment.
-* `show` event is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up.
-* `hide` event is fired every time `<ons-page>` disappear from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack.
+* `init` イベントは、`<ons-page>` が DOM にアタッチされた後に、発火します。
+* `destroy` イベントは、`<ons-page>` が DOM にアタッチされる前に、加えて、`<ons-page>` が破棄される前に、発火します。
+* `show` イベントは、`<ons-page>` が表示されるたびに、発火します ( たとえば、新規のページが作成され、表示されたとき、または、既存のページが表示されたとき )。
+* `hide` イベントは、`<ons-page>` が表示されなくなるたびに、発火します [ たとえば、表示されていたページが破棄 ( Destroy ) されたとき、または、表示 ( Hide ) されなくなったが、スタック上には置かれているとき ]。
 
-Page lifecycle events will be propagated to the page's descendants so they are correspondingly shown, hidden or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator's top page) and `destroy` event for every page in navigator's page stack.
+ページの寿命に関わるイベントは、そのページと関連する子のページたちにも影響を与えます。親ページへの操作に応じて、子のページも、適宜、表示・非表示・破棄されます。
+たとえば、`<ons-navigator>` を破棄 ( destroy ) した場合、表示中のページ ( つまり、nagivator のトップに置かれたページ ) に対してのみ、`hide` イベントが発火され、navigator のスタックに置かれた他のページに対しては、`destroy` が発火します。
 
 ``` html
 <script>
@@ -33,9 +35,9 @@ document.addEventListener("init", function(event) {
 </ons-page>
 ```
 
-#### Back Button Support
+#### 戻るボタンのサポート
 
-Android has a hardware back button. To support device back button, use `onDeviceBackButton` property in [`<ons-page>`](/v2/docs/js/ons-page.html).
+Android では、端末側で戻るボタンを提供しています。端末側の戻るボタンを使用する場合には、[`<ons-page>`](/v2/docs/js/ons-page.html) の `onDeviceBackButton` プロパティーを使用します。
 
 ```html
 <ons-page id="myPage">...</ons-page>
@@ -53,59 +55,60 @@ Android has a hardware back button. To support device back button, use `onDevice
 </script>
 ```
 
-#### Overriding default back button handler
+#### デフォルトの戻るボタン用ハンドラーの挙動を上書きする
 
-Not only a `ons-page` component, a `ons-navigator` and a `ons-splitter` component also implement the default back button handlers. For instance, the `ons-navigator` handler triggers a `popPage()` when the back button is pressed. If you want to disable it, or change to the other behavior, you can use `onDeviceBackButton` API.
+`ons-page` コンポーネント以外にも、`ons-navigator` コンポーネントと `ons-splitter` コンポーネントでは、デフォルトの戻るボタン用のハンドラーが実装されています。
+たとえば、`ons-navigator` の場合、戻るボタンを押されたときには、`popPage()` が実行されます。この挙動を無効にする場合、または、挙動をカスタマイズする場合には、`onDeviceBackButton` API を使用することもできます。
 
 ```javascript
-// To disable a navigator back button handler
+// navigator 提供の戻るボタンのハンドラーを無効化する場合
 navigator.onDeviceBackButton.disable();
 
-// Or to change the behavior
+// または、デフォルトの挙動を変更する場合
 navigator.onDeviceBackButton.setListener(function(event) {});
 
-// Or to enable it again
+// または、再び、有効化する場合
 navigator.onDeviceBackButton.enable();
 ```
 
-As you see in the code, `onDeviceBackButton` API returns an object that has `disable()`, `enable()`, `isEnabled()` and `setListener(fn)` methods.
+上記のコードからもわかるように、`onDeviceBackButton` API では、`disable()` メソッド、`enable()` メソッド、`isEnabled()` メソッド、`setListener(fn)` メソッドを提供しています。
 
-If you want to call a parent event handler, `callParentHandler()` method will do the delegation. If the component's handler is undefined or set to be disabled, the parent event handler will be called automatically.
+親のイベントハンドラーを呼び出す場合には、`callParentHandler()` メソッドを使用します。なお、コンポーネントのハンドラーが未定義だったり、無効化されている場合には、親のイベントハンドラーが自動的に呼び出されます。
 
 ```javascript
 myPage.onDeviceBackButton.setListener(function(event) {
-  // Call parent handler
+  // 親のハンドラーを呼び出します。
   event.callParentHandler();
 });
 ```
 
-The default back button behavior of an Onsen UI app is to close the application. This is the same behavior as other Android applications.
+Onsen UI アプリにおける、戻るボタンのデフォルトの挙動は、アプリを終了させることです。これは、Android アプリ全般に適用される挙動です。
 
-To override the behavior, you can use `ons.setDefaultDeviceBackButtonListener` function. The following code confirms before closing the app (works for Cordova / PhoneGap only).
+この挙動を上書きする場合、`ons.setDefaultDeviceBackButtonListener` 関数を使用します。次のサンプルでは、アプリを終了させる前に、ユーザー側に確認しています ( 下記のコードは、Cordova/PhoneGap 専用です )。
 
 ```javascript
 ons.setDefaultDeviceBackButtonListener(function() {
   if (navigator.notification.confirm("Are you sure to close the app?",
     function(index) {
-      if (index === 1) { // OK button
-        navigator.app.exitApp(); // Close the app
+      if (index === 1) { // OK ボタンが押されたことを確認します。
+        navigator.app.exitApp(); // アプリを終了させます。
       }
     }
   ));
 });
 ```
 
-#### Completely disable back button handler
+#### 戻るボタン用のハンドラーを完全に無効化する
 
-If you want to disable Onsen UI back button handlers completely, use `ons.disableDeviceBackButtonHandler()` function. It is useful when you want to use Cordova / PhoneGap back button handler directly.
+Onsen UI 提供の戻るボタン用ハンドラーを完全に無効にする場合には、`ons.disableDeviceBackButtonHandler()` 関数を使用します。Cordova/PhoneGap 提供の戻るボタン用ハンドラーを直接使用したい場合には、有用です。
 
 ```javascript
 ons.ready(function() {
   ons.disableDeviceBackButtonHandler();
 
-  // Use Cordova handler
+  // Cordova のハンドラーを使用します。
   window.document.addEventListener('backbutton', function() {
-    // Handle backbutton event
+    // 戻るボタンイベントの処理を定義します。
   }, false);
 });
 ```

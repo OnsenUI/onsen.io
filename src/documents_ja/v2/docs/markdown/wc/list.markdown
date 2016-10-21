@@ -5,15 +5,15 @@ framework: js,angular1
 tutorial: vanilla/Reference/list
 ---
 
-## List (ons-list)
+## 一覧表示 ( ons-list )
 
-List is a very popular pattern to display a set of data in a scrollable view. Onsen UI supports scrollable lists by using [`<ons-list>`](/v2/docs/js/ons-list.html) and [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) tags. `<ons-lazy-repeat>` is also provided if you want a list with a large number of items.
+一覧表示は、スクロール形式で複数のデータを表示する場合に、頻繁に使用されます。Onsen UI では、[`<ons-list>`](/v2/docs/js/ons-list.html) タグと [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) タグを使用して、スクロール形式の一覧を表示することができます。加えて、一覧表示するアイテムが多いときのために、`<ons-lazy-repeat>` も提供しています。
 
-To create a list, place a [`<ons-list>`](/v2/docs/js/ons-list.html) tag and [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) tags. Also, [`<ons-list-header>`](/v2/docs/js/ons-list-header.html) can be used to represent grouped list items.
+一覧を作成する場合、[`<ons-list>`](/v2/docs/js/ons-list.html) タグを置き、その中に、[`<ons-list-item>`](/v2/docs/js/ons-list-item.html) を置いていきます。また、一覧が複数ある場合、それぞれの一覧をグループ分け ( 見出し付け ) するときには、[`<ons-list-header>`](/v2/docs/js/ons-list-header.html) を使用します。
 
-#### Basic list
+#### 基本的な一覧の表示
 
-Here is an example of a basic list having a header and three items.
+見出し ( header ） 付き一覧の例を、次に記します。ここでは、3 つのアイテムを表示しています。
 
 ``` html
 <ons-list>
@@ -24,9 +24,9 @@ Here is an example of a basic list having a header and three items.
 </ons-list>
 ```
 
-#### More complicated list
+#### 複雑な一覧の表示方法
 
-Onsen UI list items provide a secondary syntax where the list item is divided into three sections. This can be used to add icons, thumbnails or even form elements to your list items:
+Onsen UI の `<ons-list-item>` では、各アイテム内を、さらに 3 分割できます。分割されたそれぞれの場所には、アイコン、サムネイル、フォーム関連の要素 ( ボタンなど ) などを置くことができます。
 
 ``` html
 <ons-list-item>
@@ -42,33 +42,33 @@ Onsen UI list items provide a secondary syntax where the list item is divided in
 </ons-list-item>
 ```
 
-#### Tappable item
+#### タップできるアイテム
 
-The `tappable` attribute is used to give the user an indication when they tap a list item. In iOS the background color will change when tapped, and on Android it will display the Material Design ripple effect.
+`tappable` 属性を使用すれば、アイテムをタップしたときに、タップしたことをユーザー側に示せます。たとえば、iOS では、タップ時、アイテムの背景の色が変わります。Android では、マテリアルデザインのリップル ( Ripple/波紋 ) 効果が表示されます。
 
 ``` html
 <ons-list-item tappable>Tap me!</ons-list-item>
 ```
 
-#### Modifiers
+#### modifier
 
-`<ons-list>` and `<ons-list-item>` has several modifiers to customize the visual appearance. More than one modifiers can be added by separating them with spaces.
+`<ons-list>` と `<ons-list-item>` では、modifier を使用して、外見を変更できます。複数の modifier を設定することができます ( その場合、各 modifier 間には、スペースを挿入します )。
 
-##### Inset lists
+##### 角を丸くした効果付きの一覧 ( Inset/インセット )
 
-To create an inset list you can use the `inset` modifier on the `<ons-list>` element.
+一覧の上と下の角を取る場合には、`<ons-list>` 要素に、modifier="inset" を指定します。
 
 ``` html
-<ons-list modifier="insert">
+<ons-list modifier="inset">
   ...
 </ons-list>
 ```
 
-##### Changing the divider
+##### divider ( 区切り線 ) の変更
 
-The `longdivider` and `nodivider` modifiers can be used to change the length, or remove the divider (horizontal line) between list items completely. The default style for list items is a divider that doesn’t completely cover the whole screen. Instead it has some padding on the left to make it look more similar to native lists.
+`longdivider` または `nodivider` を modifier に 指定すれば、アイテムを分ける区切り線 ( 水平方向の線 ) の長さの調整、または、区切り線を非表示にすることができます。デフォルトでは、区切り線が表示されます ( なお、ネイティブの区切り線に近づけるため、画面左側には、線が表示されません )。
 
-By adding the nodivider modifier the divider can be removed.
+nodivider を指定すると、区切り線は表示させません。
 
 ``` html
 <ons-list>

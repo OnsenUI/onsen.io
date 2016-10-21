@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/lazy-repeat
 ---
 
-## Lazy List (or Infinite Scrolling, ons-lazy-repeat)
+## LazyList ( 別名 「 無限スクロール 」、ons-lazy-repeat )
 
-With [`ons-lazy-repeat`](/v2/docs/angular2/ons-lazy-repeat.html) only currently visible items are loaded into the DOM. Elements are removed automatically from the DOM when they are not visible anymore. `ons-lazy-repeat` permits millions of elements to be rendered with close to no performance penalty.
+[`ons-lazy-repeat`](/v2/docs/angular2/ons-lazy-repeat.html) では、現在表示されているアイテムのみ、DOM 上に読み込まれます。表示されていない要素は、DOM 上から自動で削除されます。`ons-lazy-repeat` では、パフォーマンスをほぼ劣化させずに、数百万の要素をレンダリングすることができます。
 
 ```
 @Component({

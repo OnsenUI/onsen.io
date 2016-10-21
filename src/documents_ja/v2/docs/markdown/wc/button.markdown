@@ -5,23 +5,23 @@ framework: js,angular1
 tutorial: vanilla/Reference/button
 ---
 
-## Button (ons-button)
+## ボタン ( ons-button )
 
-[`<ons-button>`](/v2/docs/js/ons-button.html) renders a button. You can change the appearance by using `modifier` to change the appearance of the button.
+[`<ons-button>`](/v2/docs/js/ons-button.html) は、ボタンを描画します。ボタンの外見を変更する場合には、`modifier` を使用します。
 
-The button will automatically change its appearance based on the platform. On Android it will be displayed as a Material Design button.
+ボタンの外見は、プラットフォームの種類に応じて、自動で変更されます。Android 上では、マテリアルデザインに準拠したボタンとなります。
 
-There are several modifiers available:
+modifier に設定できる値は、次のとおりです。
 
-* `outline` - Button with outline and transparent background
-* `light` - Button that doesn’t stand out
-* `quiet` - Button with no outline and no background
-* `cta` - A call to action button that really stands out
-* `large` - Button that extends the whole width of the screen or container
-* `large--quiet` - Large quiet button
-* `large--cta` - Large call to action button.
+* `outline` - ボタンの枠がアウトライン化され、背景は透明になります。
+* `light` - ボタンを目立ちにくくします。
+* `quiet` - ボタンの枠のアウトラインを消し、背景も消します。
+* `cta` - ボタンを目立たせ ( Call To Action/cta )、ユーザー側にアピールします。
+* `large` - 画面またはコンテナの端から端まで、ボタンを拡大します。
+* `large--quiet` - large と quiet を適用したボタンになります。
+* `large--cta` - large と cta を適用したボタンになります。
 
-To create a large button the following code can be used:
+大きなボタンを使用する場合、こードは次のようになります。
 
 ```html
 <ons-button modifier="large">
@@ -29,7 +29,7 @@ To create a large button the following code can be used:
 </ons-button>
 ```
 
-Just like a normal `<button>` element it supports the `disabled` attribute which will make the button unclickable:
+通常の `<button>` 要素と同様に、`disabled` 属性を指定することもできます。指定した場合、ボタンをクリックできません。
 
 ```html
 <ons-button disabled>

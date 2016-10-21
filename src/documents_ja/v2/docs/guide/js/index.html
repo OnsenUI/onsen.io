@@ -13,32 +13,32 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-Onsen UI is a complete Web Components driven UI framework for hybrid (aka. [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com)) apps. It also is equipped with popular JS frameworks support, including [Angular 1](/v2/docs/guide/angular1/), [Angular 2](/v2/docs/guide/angular2/) and [React](/v2/docs/guide/react/). Although they are using the same core, we are optimizing the APIs for each framework.
+Onsen UI は、ハイブリッドアプリ ( ここでは、「 [Cordova](http://cordova.io) / [PhoneGap](http://phonegap.com) アプリ 」 を指します ) 向けの UI フレームワークであり、Web Components を基盤としています。また、各種 JS フレームワーク ( [Angular 1](/v2/docs/guide/angular1/)、[Angular 2](/v2/docs/guide/angular2/)、[React](/v2/docs/guide/react/) ) のサポートもしています。Onsen UI のコア/中核となる中身は、どの JS フレームワークにおいても共通していますが、各 JS フレームワーク向けに、API を最適化しています。
 
-This guide provides the basic concepts of Onsen UI. For more information about specific components, please see the reference section. A live example is included in each reference page with extended examples and information.
+ここでは、Onsen UI の基礎的な概念に関して解説します。各コンポーネントの詳細に関しては、「 リファレンス 」 ページをご確認ください。「 リファレンス 」 ページでは、API の実例に加え、属性、関連情報などを確認できます。
 
-### Starting Project
+### プロジェクトを始める
 
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/getting-started).
+Onsen UI を実際に使用する前に、「 [はじめよう](/getting-started) 」 もご確認ください。
 
-#### Using Onsen UI toolkit - Monaca CLI
+#### Monaca CLI を使用する
 
 ```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+$ npm install -g monaca # Monaca CLI をインストールする。
+$ monaca create helloworld # テンプレートを選択する。
+$ cd helloworld; monaca preview # プレビューを起動する。または、"monaca debug" コマンドを実行して、端末上でプロジェクトを実行する。
 ```
 
-#### Download via npm or bower
+#### npm または bower からダウンロードする
 
 ```bash
 $ npm install onsenui
 $ bower install onsenui
 ```
 
-### Loading Onsen UI
+### Onsen UI を読み込む
 
-To load Onsen UI in your project simply include `onsenui.js` and CSS files for styling.
+次のように、`onsenui.js` と CSS ファイルを読み込むだけで、Onsen UI をプロジェクトで使用できます。
 
 ```html
 <!doctype html>
@@ -56,18 +56,18 @@ To load Onsen UI in your project simply include `onsenui.js` and CSS files for s
 </html>
 ```
 
-### Creating a page
+### ページを定義する
 
-The root of a page is created using the [`<ons-page>`](/v2/docs/js/ons-page.html) element. It covers the whole screen and is used as a container for the other elements.
+ページのルート要素 ( 最上位要素 ) には、[`<ons-page>`](/v2/docs/js/ons-page.html) 要素を使用します。この要素は、ページの構成部品 ( ルート要素以外の要素 ) を置くコンテナとして使用されます。
 
-This component fires different events depending on its life cycle. The correct place to initialise data and run code for pages in Onsen UI is the `init` event.
+このコンポーネント内では、さまざまイベントがそれぞれのタイミングで実行されるため、ページ上で使用する各種データの初期化および各種コードを実行する最も適した場所は、`init` イベント内になります。
 
 ```html
 <ons-page id="page1">This is a blank page</ons-page>
 
 <script>
   document.addEventListener('init', function(event) {
-    // event.target is the <ons-page> element
+    // event.target ＝ <ons-page> 要素
     if (event.target.matches('#page1')) {
       ons.notification.alert('Page 1 is initiated.');
     }
@@ -75,9 +75,9 @@ This component fires different events depending on its life cycle. The correct p
 </script>
 ```
 
-#### Adding a toolbar
+#### ツールバーを追加する
 
-A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
+ツールバーは、[`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) または [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) コンポーネントを使用して定義します。ツールバーの設定方法の例を、次に記します。
 
 ```html
 <ons-page>
@@ -93,66 +93,66 @@ A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<
     </div>
   </ons-toolbar>
 
-  Some other content...
+  他の処理...
 </ons-page>
 ```
 
-The toolbar is divided into 3 sections that can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
+ツールバーは、3 つに分割 ( 左、中央、右 ) されています。場所の指定には、class を使用します ( `left`、`center`、`right` のいずれかを指定 )。アイコンの表示には、[`<ons-icon>`](/v2/docs/js/ons-icon.html) を使用できます。また、ボタンの表示には、[`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) または [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) を使用できます。または、HTML コンテンツをセットすることもできます。
 
-### The `ons` object
+### オブジェクト 「 `ons` 」
 
-Onsen UI not only provides custom elements, it also provides an object called [`ons`](/v2/docs/js/ons.html) with a lot of useful functions attached to it. 
+Onsen UI では、カスタム要素 ( Custom Elements ) 以外にも、[`ons`](/v2/docs/js/ons.html) と呼ばれるオブジェクト ( 複数の関数も含む ) を提供しています 。
 
-The following example uses `ons.ready(fn)` which waits until the app is completely loaded before executing a callback function. Inside the callback, it is calling `ons.notification.alert()` to display a alert dialog.
+次の例では、`ons.ready(fn)` の使用方法を記しています。`ons.ready(fn)` は、アプリの読み込みが 「 完全に 」 完了するまで、そのコールバック関数が実行されないのが特徴です。コールバック関数内では、`ons.notification.alert()` を実行して、警告ダイアログを表示しています。
 
 ``` javascript
 ons.ready(function() {
-  // Onsen UI is now initialized
+  // Onsen UI の初期化完了
   ons.notification.alert('Welcome to Onsen UI!');
 });
 ```
 
-See also [`ons.platform`](/v2/docs/js/ons.platform.html), [`ons.notification`](/v2/docs/js/ons.notification.html) and [`ons.orientation`](/v2/docs/js/ons.orientation.html) for more utilities.
+他のユーティリティに関しては、[`ons.platform`](/v2/docs/js/ons.platform.html)、[`ons.notification`](/v2/docs/js/ons.notification.html)、[`ons.orientation`](/v2/docs/js/ons.orientation.html) をご確認ください。
 
-### Understanding elements
+### 要素を理解する
 
-All Onsen UI are custom elements which tag names are starting with `<ons->`. They have attributes, methods, properties and events just like the normal HTML elements (DOM Elements). This means they can be accessed by ID, tag name, class names or attributes and used directly as they are.
+Onsen UI が提供している要素のすべては、カスタム要素 ( Custom Elements ) であり、また、`<ons->` でタグ名が始まります。それぞれの要素には、属性、メソッド、プロパティー、イベントが用意されています。その点は、普通の HTML 要素 ( DOM 要素 ) と同じです。よって、ID、タグ名、class 名、属性を使用して操作できます ( そのままの状態で使用できます )。
 
-The source code below illustrates a basic usage of `<ons-navigator>` component. Note how component methods are called and events are attached.
+次の例では、`<ons-navigator>` の基本的な使用方法を記します。コンポーネントのメソッドの呼び出し方法とイベントの登録方法をご確認ください。
 
 ```html
-<!-- You can place and mix-up with other elements -->
+<!-- 他の要素と併用もできます。 -->
 <ons-navigator animation="slide" id="my-navigator">
   <ons-page><span>This is the first page.</span></ons-page>
 </ons-navigator>
 
 <script>
-  // Get component instance
-  var myNavigator = document.querySelector("#my-navigator"); // or use getElementById("my-navigator")
+  // コンポーネントのインスタンスを取得します。
+  var myNavigator = document.querySelector("#my-navigator"); // または、getElementById("my-navigator") も使用できます。
   
-  // Add event listener
+  // イベントリスナーを登録します。
   myNavigator.addEventListener('postpush', function(event) {
     console.log('This function is called after a new page is pushed.');
   });
   
-  // Call component method
+  // コンポーネントのメソッドを呼び出します。
   myNavigator.pushPage("page2.html");
   
-  // Access to component property
+  // コンポーネントのプロパティーへアクセスします。
   console.log(myNavigator.pages);
 
-  // Change component attribute
+  // コンポーネントの属性を変更します。
   myNavigator.setAttribute('animation', 'fade');
 </script>
 ```
 
-### Adding page content
+### コンポーネント ( ページの構成要素 ) を追加する
 
-For a full list of components please check the [reference page](/v2/docs/js.html).
+使用できるコンポーネントの詳細は、[リファレンス](/v2/docs/js.html) ページをご確認ください。
 
-#### Form elements
+#### フォーム関連の要素
 
-Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2/docs/js/ons-button.html), [`<ons-switch>`](/v2/docs/js/ons-switch.html) and [`<ons-range>`](/v2/docs/js/ons-range.html), perhaps the [`<ons-input>`](/v2/docs/js/ons-input.html) component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
+Onsen UI では、フォーム関連のコンポーネントを多数提供しています。[`<ons-button>`](/v2/docs/js/ons-button.html) コンポーネント、[`<ons-switch>`](/v2/docs/js/ons-switch.html) コンポーネント、[`<ons-range>`](/v2/docs/js/ons-range.html) コンポーネントは、よく使用される、フォームの構成要素です。また、[`<ons-input>`](/v2/docs/js/ons-input.html) コンポーネントも、最も頻繁に使用れる要素の 1 つです。このコンポーネントでは、`checkbox`、`radio`、`password` などをサポートしています。
 
 ```
 <ons-page>
@@ -167,9 +167,9 @@ Onsen UI provides a rich set of form components. Apart from [`<ons-button>`](/v2
 </ons-page>
 ```
 
-#### Lists
+#### 一覧表示
 
-Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using [`<ons-list>`](/v2/docs/js/ons-list.html), [`<ons-list-item>`](/v2/docs/js/ons-list-item.html) and [`<ons-list-header>`](/v2/docs/js/ons-list-header.html) you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<ons-toolbar>`, and some CSS classes are provided for default styles (`list__item__icon`, `list__item__thumbnail`, `list__item__title` and `list__item__subtitle`).
+一覧表示は、モバイルアプリで最もよく見る表示形式の 1 つです。Onsen UI でも、一覧表示を行うためのコンポーネントを提供しています。[`<ons-list>`](/v2/docs/js/ons-list.html) コンポーネント、[`<ons-list-item>`](/v2/docs/js/ons-list-item.html) コンポーネント、[`<ons-list-header>`](/v2/docs/js/ons-list-header.html) コンポーネントを使用すれば、簡単なものから複雑なものまで、用途に合った一覧を構築できます。一覧上に表示するアイテムの置き場所は、前述の `<ons-toolbar>` コンポーネントと同様 ( 左、中央、右 ) に指定できます。また、CSS を指定する class には、デフォルトで提供しているスタイル ( `list__item__icon`、`list__item__thumbnail`、`list__item__title`、`list__item__subtitle` ) を使用できます。
 
 ```
 <ons-page>
@@ -193,57 +193,58 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
 </ons-page>
 ```
 
-##### Infinite scroll
+##### 無限スクロール
 
-Adding new items to the list whenever the user reaches the bottom of the list is a very common practice. To do this, [`<ons-page>`](/v2/docs/js/ons-page.html) component provides `onInfiniteScroll` property that is called every time the scroll is near the bottom.
+一覧の最後のアイテムにユーザーが達したとき、アイテムが順次追加されていく処理を見かけるかと思いますが、Onsen UI でもこの処理を提供しています。この処理を行う場合、 [`<ons-page>`](/v2/docs/js/ons-page.html) コンポーネントの `onInfiniteScroll` プロパティーを使用します ( 一番下のアイテムにスクロールが近づくたびに、このプロパティーが呼び出されます )。
 
-##### Lazy repeat
+##### LazyRepeat コンポーネント
 
-For cases when the list can contain thousands of items, [`<ons-lazy-repeat>`](/v2/docs/js/ons-lazy-repeat.html) component will enhance the performance by loading and unloading items depending on the current scroll.
+不特定多数のアイテムを一覧上に表示する場合には、[`<ons-lazy-repeat>`](/v2/docs/js/ons-lazy-repeat.html) コンポーネントの使用を推奨します。このコンポーネントは、表示されるアイテムと表示されていないアイテムを区別して、必要なレンダリングのみ行い、よって、アプリのパフォーマンスを劣化させません。
 
-#### Layouting
+#### レイアウト関連の要素
 
-Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
+Onsen UI では、画面上に各要素を配置するときに、グリッドシステム ( Grid System ) を採用しています。グリッドシステムでは、スプレッドシートのように、画面を横列と縦列に分けます。各グリッドの横幅と縦幅は指定できます。
+また、2 個以上のグリッドを結合することもできます ( 横列と縦列ともに )。
 
-The layout can be performed by combining [`<ons-col>`](/v2/docs/js/ons-col.html) and [`<ons-row>`](/v2/docs/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
+レイアウトは、 [`<ons-col>`](/v2/docs/js/ons-col.html) コンポーネントと [`<ons-row>`](/v2/docs/js/ons-row.html) コンポーネントを組み合わせて構成します。横幅と縦幅は、属性、CSS などを使用して、柔軟に指定できます。
 
-Grid is not necessary in general for list items. Special layout is provided for list items based on flat iOS and Material Design specification. See [list](#lists) section for more information.
+なお、通常、一覧表示を行うときには、グリッド関連のコンポーネントは使用しません。また、Onsen UI では、一覧表示用の特別なレイアウト ( iOS のフラットデザインと Android のマテリアルデザインの仕様に準拠したレイアウト ) を提供しています。詳細は、[一覧表示](#lists) をご確認ください。
 
-#### Control and visual components
+#### 制御および視覚効果関連のコンポーネント
 
-Other components from different categories are available to complete the developer needs.
+ここでは、開発者のさまざまなニーズにも応えるコンポーネントを紹介します。
 
-##### Carousel
+##### カルーセル
 
-[`<ons-carousel`>](/v2/docs/js/ons-carousel.html) and [`<ons-carousel-item>`](/v2/docs/js/ons-carousel-item.html) components provide a simple carousel that can optionally be overscrollable and fullscreen.
+[`<ons-carousel`>](/v2/docs/js/ons-carousel.html) コンポーネントと [`<ons-carousel-item>`](/v2/docs/js/ons-carousel-item.html) コンポーネントを使用して、簡単なカルーセルを構築できます。カルーセルは、指定すれば、全画面表示、および、オーバースクロール ( OverScroll ) を適用することもできます。
 
-##### Pull-hook
+##### プルフック ( Pull-hook ) コンポーネント
 
-A very common way to check for updates in apps is given by the [`<ons-pull-hook>`](/v2/docs/js/ons-pull-hook.html) component, which enables a simple "pull to refresh" functionality.
+コンテンツの更新があるかをアプリ上で確認するときに、 [`<ons-pull-hook>`](/v2/docs/js/ons-pull-hook.html) コンポーネントを使用するのもよく見られる方法です。このコンポーネントを使用すると、「 ページを引っ張れば ( Pull/プル ) 」、更新処理が行われます。
 
-##### Speed-dial
+##### スピードダイアル ( Speed-dial ) コンポーネント
 
-[`<ons-speed-dial>`](/v2/docs/js/ons-speed-dial.html) and [`<ons-speed-dial-item>`](/v2/docs/js/ons-speed-dial-item.html) are just a set of floating action buttons ([`<ons-fab>`](/v2/docs/js/ons-fab.html)) that can be shown or hidden by the user. This components are mainly used in Material Design.
+[`<ons-speed-dial>`](/v2/docs/js/ons-speed-dial.html) と [`<ons-speed-dial-item>`](/v2/docs/js/ons-speed-dial-item.html) は、フローティングアクションボタン ( floating action button/ fab ) ([`<ons-fab>`](/v2/docs/js/ons-fab.html)) とともに使用します。フローティングアクションボタンを押して、スピードダイアルを表示 ( または非表示 ) させます。このコンポーネントは、主に、マテリアルデザイン向けです。
 
-##### Progress
+##### 進捗度 ( Progress ) を示すコンポーネント
 
-[`<ons-progress-bar>`](/v2/docs/js/ons-progress-bar.html) and [`<ons-progress-circular>`](/v2/docs/js/ons-progress-circular.html) display the loading progress like it's done in Material Design. Two modes are supported: display the exact progress that is provided to the component or display an indeterminated progress.
+[`<ons-progress-bar>`](/v2/docs/js/ons-progress-bar.html) または [`<ons-progress-circular>`](/v2/docs/js/ons-progress-circular.html) を使用して、読み込みの進捗度を表示できます ( マテリアルデザインの仕様に準拠 )。2 種類の表示パターンを選べます ( 実際の進捗度を示すパターン、進行中であることを示すパターン )。
 
-##### Icons
+##### アイコン
 
-Onsen UI bundles three icon packs to be used with [`<ons-icon>`](/v2/docs/js/ons-icon.html) component:
+Onsen UI の [`<ons-icon>`](/v2/docs/js/ons-icon.html) コンポーネントでは、次のアイコンパッケージを利用できます。
 
-  * [Font Awesome](https://fortawesome.github.io/Font-Awesome/) - Prefix `fa-`
-  * [Ionicons](http://ionicons.com/) - Prefix `ion-`
-  * [Material Icons](https://design.google.com/icons/) - Prefix `md-`
+  * [Font Awesome](https://fortawesome.github.io/Font-Awesome/) - 先頭に `fa-` を付記します。
+  * [Ionicons](http://ionicons.com/) - 先頭に `ion-` を付記します。
+  * [Material Icons](https://design.google.com/icons/) - 先頭に `md-` を付記します。
 
-In general, Ionicons are good for iOS apps while the Material Icons work best for apps using Material Design.
+Ionicons は iOS 向けです。Material Icons は、マテリアルデザインを使用しているアプリ向けです。
 
-#### Gesture detector
+#### ジェスチャー/指操作の検知 ( GestureDetector )
 
-It is a common case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection.
+指での操作を検知して、なんらかの処理を実行することは、モバイルアプリでは必須の機能です。Onsen UI では、[Hammer.js](https://hammerjs.github.io/) のカスタマイズ版を使用して、ジャスチャーの検知を行っています。
 
-[`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) component is used to wrap the target DOM element that should detect the fingers. The Gesture Detector class (Hammer.js) is also exposed in [`ons.GestureDetector`](/v2/docs/js/ons.GestureDetector.html) object.
+[`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) コンポーネントを使用して、対象の DOM 要素を囲い ( Wrap )、指操作を検知します。また、[`ons.GestureDetector`](/v2/docs/js/ons.GestureDetector.html) オブジェクト経由で、Gesture Detector クラス ( Hammer.js ) を使用することもできます。
 
 ```
 var divGD = ons.GestureDetector(document.querySelector('#my-div'));
@@ -253,47 +254,47 @@ divGD.on('dragup dragdown', function(event) {
 });
 ```
 
-### Dialogs
+### ダイアログ
 
-There are multiple types of dialog components available in Onsen UI: [`<ons-dialog>`](/v2/docs/js/ons-dialog.html) for displaying a page inside a centered dialog; [`<ons-alert-dialog>`](/v2/docs/js/ons-alert-dialog.html) for displaying a simple message inside an alert style dialog; [`<ons-popover>`](/v2/docs/js/ons-popover.html) for showing some content next to a specified element or a context menu; and [`<ons-modal>`](/v2/docs/js/ons-modal.html) for displaying a fullscreen dialog that forbids user interaction.
+Onsen UI では、数種類のダイアログ用コンポーネントを提供しています。ページ中央にダイアログを表示する場合には [`<ons-dialog>`](/v2/docs/js/ons-dialog.html)、警告メッセージ用のダイアログを表示する場合には [`<ons-alert-dialog>`](/v2/docs/js/ons-alert-dialog.html)、指定された要素またはコンテクストメニューの横に、指定されたコンテンツを表示する場合には [`<ons-popover>`](/v2/docs/js/ons-popover.html)、ユーザーの操作を禁止する、全画面表示のダイアログを表示する場合には [`<ons-modal>`](/v2/docs/js/ons-modal.html) を使用します。
 
-Apart from that, [`ons.notification` object](/v2/docs/js/ons.notification.html) offers a more handy solution for simple dialogs:
+上記のコンポーネント以外にも、[`ons.notification` オブジェクト](/v2/docs/js/ons.notification.html) を使用して、ダイアログ表示などを行えます。
 
 ```javascript
-ons.notification.alert('Hello world!'); // Basic alert
-ons.notification.confirm('Are you ready?'); // OK - Cancel buttons
-ons.notification.prompt('What is your name?'); // Text input
+ons.notification.alert('Hello world!'); // 通常の警告メッセージの場合
+ons.notification.confirm('Are you ready?'); // OK/Cancel ボタンを表示する場合
+ons.notification.prompt('What is your name?'); // 文字列を入力する場合
 
 ```
 
-### Multiple page navigation
+### ページのナビゲーション ( ページの遷移と操作 )
 
-In Onsen UI there are three navigation patterns based on three different components: [`<ons-navigator>`](/v2/docs/js/ons-navigator.html), [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) and [`<ons-splitter>`](/v2/docs/js/ons-splitter.html). These components supply "frames" able to change their inner content. The content of these frames will normally be `<ons-page>` components but it is also possible to nest navigation components in order to combine them.
+Onsen UI では、3 種類のコンポーネントを提供し、それぞれが異なる方法で、ページをナビしてくれます。これらのコンポーネントは、
+[`<ons-navigator>`](/v2/docs/js/ons-navigator.html)、[`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html)、[`<ons-splitter>`](/v2/docs/js/ons-splitter.html) です。ページナビの仕組みは、たとえるならば、コンポーネントが提供してくれる 「 枠 」 があり、この枠内に置かれたコンテンツの順番を、随時変更させていくようなイメージです。枠内のコンテンツは、通常、`<ons-page>` で指定しますが、他のナビ用コンポーネントを複数組み合わせる ( ネストする ) こともできます。
 
-More information is provided in the "Docs" tab of the Live Example section of each component.
+各コンポーネントの使用方法などは、Onsen UI ドキュメントのリファレンスの 「 実例 」 をご確認ください。
 
-#### Navigator
+#### ナビゲーター ( 基本のページ遷移方法 )
 
-The main pattern uses [`<ons-navigator>`](/v2/docs/js/ons-navigator.html) component to provide a stack where you can push and pop pages with transition animations. This is the basic and most used navigation pattern and can be combined with the other two.
+最も頻繁にナビに使用されるコンポーネントは、[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) です。このコンポーネントでは、「 スタック 」 ( 前述の 「 枠 」 ) を提供して、このスタックにページをプッシュ・ポップ ( Pop/出し、Push/入れ ) して、ページを表示します ( ページ遷移時には、アニメーション効果が付けられています )。このコンポーネントを使用したページ遷移が、基本であり、加えて、最も頻繁に使用されるはずです。また、他のコンポーネントと組み合わせることもできます。
 
-Use this pattern when you have a sequential flow where a page depends on the previous one. Data can be optionally passed from one page to another.
+遷移するページ間になんらかの関連性がある場合 ( たとえば、前のページから今のページに遷移してきたなど )、このコンポーネントを使用します。また、ページ間でのデータの受け渡しもできます。
 
-#### Tabbar
+#### タブバー
 
-In this case, by using [`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) component a visible tabbar is displayed at the bottom or the top of the page with tabs associated to different pages. The component will load content depending on the selected tab ([`<ons-tab>`](/v2/docs/js/ons-tab.html)). This pattern is commonly used to sepparate different sections in the app.
+タブバーを表示する場合、[`<ons-tabbar>`](/v2/docs/js/ons-tabbar.html) を使用します。タブバーは、ページの上または下に表示され、各タブをタップすると、紐づけされたページに遷移します。このコンポーネントでは、選択されたタブ ([`<ons-tab>`](/v2/docs/js/ons-tab.html)) に応じて、指定されたコンテンツを読み込みます。タブバーは、ページ上に置かれた構成部品 ( コンポーネント ) の中でも、ページ遷移のみを行う部品として、よく使用されます。
 
-#### Menu
+#### メニュー
 
-A menu can be added using the [`<ons-splitter>`](/v2/docs/js/ons-splitter.html) component. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
+メニューは、[`<ons-splitter>`](/v2/docs/js/ons-splitter.html) を使用して追加できます。また、自動的に、画面が小さい端末ではスワイプ式のメニューとなり、画面が大きい端末ではカラム式 ( 画面の片側に固定表示 ) のレイアウトとなります。
 
-Splitter provides two frames that can load different content: [`<ons-splitter-side>`](/v2/docs/js/ons-splitter-side.html) and [`<ons-splitter-content>`](/v2/docs/js/ons-splitter-content.html). A common usecase is to show a list in the side menu where each item loads a different page in the content frame. Notice that loading new content in any of these frames will completely remove the previous loaded content. For more complex navigation consider nesting `<ons-navigator>` inside `<ons-splitter-content>`.
+splitter ( 分割 ) 系のコンポーネント ( [`<ons-splitter-side>`](/v2/docs/js/ons-splitter-side.html) と [`<ons-splitter-content>`](/v2/docs/js/ons-splitter-content.html) ) では、「 枠 」 が 2 つ提供され、それぞれの枠には、異なるコンテンツを読み込むことができます。基本的な使用方法は、「 side 」 メニュー枠には、遷移先となるページを指定した 「 item 」 ( 通常、複数個置かれ、一覧形式で表示 ) を置き、「 content 」 枠には遷移先となるページを置くことになります。なお、これらの枠に新しいコンテンツを読み込んだ場合、既存のコンテンツは上書きされます。また、複雑な使用方法となりますが、`<ons-splitter-content>` 内に `<ons-navigator>` を置くこともできます。
 
-### Templates
+### template
 
-Pages can be created in separate files and can be addressed by their path string. For example, `myNavigator.pushPage('path/to/my/page.html')`; will load `page.html` in `path/to/my/` folder. The content of that file must contain a single `<ons-page>` component with some inner elements. 
+複数のページがある場合、それぞれのページ毎にファイルを作成し、それぞれのページへのパスを参照して、対象のページにアクセスできるのは周知のとおりです。たとえば、`myNavigator.pushPage('path/to/my/page.html')` と記述されている場合、`path/to/my/` フォルダーの `page.html` を読み込むことになります。なお、そのファイルには、`<ons-page>` が 1 つ記述されている必要があります ( 他の要素も含む )。
 
-However, having multiple pages declared in the same file is sometimes more convenient. [`ons-template`](/v2/docs/js/ons-template.html) component is the solution for this. You can create as many pages as you need in your `index.html` (there and only there) by using this component. 
-In this case, the template's `id` attribute replaces the path string of the page:
+一方、同一ファイル上に、複数のページをまとめて定義した方が、使い勝手が良い場合もあります。そのような場合には、[`ons-template`](/v2/docs/js/ons-template.html) コンポーネントを使用します。このコンポーネントを使用すると、`index.html` 上に複数のページを置けるようになります ( 置ける場所は、`index.html` のみです )。ページへのパスの代わりに、template の `id` 属性が使用されます。
 
 ```html
 <body>
@@ -309,13 +310,13 @@ In this case, the template's `id` attribute replaces the path string of the page
 </body>
 ```
 
-Notice that including `<script></script>` tags inside `<ons-template>` or separate files does not work. If you want to initialize a page, please check the `init` event in ["Creating a page" section](/v2/docs/guide/js/#creating-a-page).
+`<ons-template>` 内で、`<script></script>` を使用しても、または、他のファイル内を読み込んでも無視されます。また、ページの読み込み方法は、["ページを作成する" 項目](/v2/docs/guide/js/#creating-a-page) の `init` イベントをご確認ください。
 
-### Using Modifier
+### modifier を使用する
 
-Modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a `modifier`, it will have a separate class namespace so that you can apply custom styles to the component. Also, some components have several preset modifiers to change the appearance.
+modifier とは、Onsen UI コンポーネントをカスタマイズ ( クロスプラットフォームへの対応も含む ) するときに使用する属性です。`modifier` を定義した場合、コンポーネントの外見には、該当するクラスが適用されます ( 新規の値の場合には、クラスが追加されます。また、新規のクラスの場合には、適用するカスタムスタイルを、開発者自身で定義することができます )。また、コンポーネントによっては、定義済み ( プリセット/Preset ) の値が提供されているものもあります。
 
-For example, each of the following buttons have different look. To change modifiers dynamically, please manipulate `modifier` attribute from JavaScript.
+たとえば、次の例では、各ボタンには、異なる外見が設定されます。modifier を動的に変更する場合には、JavaScript から `modifier` 属性を操作します。
 
 ```html
 <ons-button modifier="quiet">Quiet</ons-button>
@@ -325,23 +326,23 @@ For example, each of the following buttons have different look. To change modifi
 <ons-button modifier="material">Material Design</ons-button>
 ```
 
-### Cross platform styling
+### クロスプラットフォーム向けのスタイル設定
 
-Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views.
+Onsen UI コンポーネントのスタイルは、プラットフォームの種類に応じて、動的に変更されます。DevTools を使用すれば、各プラットフォーム上のアプリの外見を確認できます ( Device 設定を iOS または Android に切り替えます )。
 
-Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-styling` attribute in specific components that you don't want to auto style.
+このスタイル自動設定では、`ons.platform.isAndroid()` が true のときに、`modifier="material"` を対象のコンポーネントに適用しています。この自動設定を無効にする場合には、`onsenui.js` の読み込み直後 ( アプリが初期化される前 ) に、`ons.disableAutoStyling()` を実行します。また、この自動設定を無効にした場合、マテリアルデザインにスタイルを変更するときには、手動で、`modifier="material"` を対象のコンポーネントに適用します。また、特定のコンポーネントに対してのみ、この自動設定を適用しない場合には、`disable-auto-styling` 属性を対象のコンポーネントに指定します。
 
-Some tools are provided to give a more accurate customization.
+なお、より精度の高いカスタマイズを希望する場合、他のツールをご利用ください。
 
-#### Platform utilities
+#### プラットフォームの指定・識別関連のユーティリティ
 
-[`ons.platform` object](/v2/docs/js/ons.platform.html) is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
+[`ons.platform` オブジェクト](/v2/docs/js/ons.platform.html) では、`ons.platform.isIOS()`、`ons.platform.isWebView()` などのメソッドを提供しています。
 
-You can set a platform with `ons.platform.select('android')`, for example, in order to display Material Design on every platform. This must be called before the app is initialized (right after including `onsenui.js`).
+`ons.platform.select('android')` を使用すれば、プラットフォームを指定できます。たとえば、プラットフォームを区別せずに、マテリアルデザインを使用したいときに便利です。なお、このメソッドは、アプリが初期化される前 ( `onsenui.js` の読み込み直後 ) に実行する必要があります。
 
-#### Conditional element
+#### 条件分岐に使用する要素
 
-A conditional element called [`<ons-if>`](/v2/docs/js/ons-if.html) is available to filter content depending on the platform or orientation.
+条件分岐時に使用できる要素として、 [`<ons-if>`](/v2/docs/js/ons-if.html) があります。この要素を使用すれば、プラットフォームまたは端末のオリエンテーションに応じて、コンテンツを変えることができます。
 
 ```html
   <ons-if platform="android">
@@ -352,37 +353,37 @@ A conditional element called [`<ons-if>`](/v2/docs/js/ons-if.html) is available 
   </ons-if>
 ```
 
-With this, for example, you can display `<ons-fab>` for Material Design and other type of button for iOS flat design.
+この要素を使用すれば、たとえば、マテリアルデザインの場合には `<ons-fab>`、iOS のフラットデザインの場合には他のボタンを表示できます。
 
-#### Icons shortcut
+#### アイコン用のショートカット
 
-While it is possible to use the previous `<ons-if>` to select icons depending on the platform, a shortcut in [`<ons-icon>`](/v2/docs/js/ons-icon.html) component is provided to make it simpler:
+前述の `<ons-if>` を使用して、プラットフォーム別に異なるアイコンを使用する場合、[`<ons-icon>`](/v2/docs/js/ons-icon.html) にショートカットを使用して、簡素に記述することもできます。
 
 ```
 <ons-icon icon="ion-navicon, material:md-menu" size="24px, material:20px"></ons-icon>
 ```
 
-The second icon will be displayed when `material` modifier is present.
+modifier が `material` に指定されていれば、2 番目に指定したアイコンが表示されます。
 
-### CSS Definitions
+### CSS の定義
 
-Onsen UI styles are defined in `onsenui.css` and `onsen-css-components.css`. They are written in the [Stylus](http://stylus-lang.com/) format.
+Onsen UI で使用するスタイルは、 `onsenui.css` と `onsen-css-components.css` 内で定義されています。スタイルは、[Stylus](http://stylus-lang.com/) 形式で記述されています。
 
-`onsenui.css` is a core CSS module that defines styles for the custom elements. The source code exists under `core/css` directory. `onsen-css-components.css` contains CSS definitions for CSS components. The source code exists in `css-components/components-src/stylus`.
+`onsenui.css` は、コアの CSS モジュールです。このファイルでは、Custom Elements 向けのスタイルが定義されています。ソースコードは、`core/css` ディレクトリー下に置かれています。一方、`onsen-css-components.css` には、CSS コンポーネント向けの CSS が定義されています。ソースコードは、`css-components/components-src/stylus` ディレクトリー下に置かれています。
 
-You can also use [Onsen CSS Components](http://components.onsen.io/) to customize pre-defined colors. After the customization, you can download and replace to the existing `onsenui-css-components.css` to reflect the changes.
+または、[Onsen UI 提供の CSS コンポーネント](http://components.onsen.io/) を使用して、定義済みのカラーをカスタマイズできます。カスタマイズ後は、テーマをダウンロードして、既存の `onsenui-css-components.css` を新しいファイルに置き換えます。
 
-#### Overriding CSS style
+#### CSS スタイルの上書き
 
-If you want to apply a different style to a specific component, you can use `modifier` attribute to override its style definition.
+特定のコンポーネントに対して、異なるスタイルを適用する場合、`modifier` 属性を使用すれば、対象のコンポーネントのスタイルを上書きできます。
 
-For example, if you want to apply a thick border only to a specific button, you can define like the one below.
+たとえば、特定のボタンを太字 ( thick ) にする場合、次のように指定します。
 
 ```html
 <ons-button modifier="thick">Thick Button</ons-button>
 ```
 
-Then, write the appropriate style code under the style tag or in the css file.
+次に、style タグ下、または、CSS ファイル内に、スタイルを適宜定義します。
 
 ```html
 <style>
@@ -392,56 +393,56 @@ Then, write the appropriate style code under the style tag or in the css file.
 </style>
 ```
 
-### Device Back Button
+### 端末側の戻るボタン
 
-For Android devices, Cordova fires a `backbutton` event on hardware back button. It is important to understand that this event is **fired by Cordova** so it requires `cordova.js` file or similars (`loader.js` in Monaca) to be included in the app. Since it cannot be tested in browsers without Cordova, you can use [Monaca Debugger](https://monaca.io/debugger.html) for this purpose.
+Android 端末では、ハードウェア側の戻るボタンが押されたときに、Cordova 側で `backbutton` イベントを発火させます ( **Cordova 側が、このイベントを発火させた** ことに注意が必要です )。このため、`cordova.js` ファイル、または、同等の処理を行うファイル ( Monaca であれば、`loader.js` ) をプロジェクト内で読み込む必要があります。ハードウェアの戻るボタンはブラウザー上では使用できませんが、[Monaca デバッガー](https://ja.monaca.io/debugger.html) を使用すれば、実際の端末上で検証できます。
 
-Onsen UI sets handlers with default behavior for Android back button in certain elements:
+Onsen UI では、端末側の戻るボタンが押されたときの挙動を、デフォルトで設定している要素もあります。
 
-* Dialogs: Closes the dialog if it's cancelable.
-* Navigator: Pops a page if the page stack is not empty.
-* Splitter: Closes the menu if it's open.
+* ダイアログ : cancelable 属性を指定している場合、ダイアログを閉じます。
+* ナビゲーター : ページスタック内にページが置かれている場合、そのページを表示します。
+* Splitter : メニューが開いている場合、メニューを閉じます。
 
-If the conditions are not met, these elements will call the parent element's handler. The final global handler closes the app.
+条件が満たされない場合、これらの要素は、親要素のハンドラを呼び出し、最終的には、最上位のハンドラ ( ここでは、「 グローバルハンドラ 」 と呼称します ) がアプリを終了させます。
 
-While this is probably the desired behavior for many apps, Onsen UI allows to modify these handlers for better customization. To modify the app global handler (closing the app), the [`ons`](/v2/docs/js/ons.html) object provides few methods:
+多くのアプリにおいて、上記の対応で十分かと思いますが、Onsen UI ではグローバルハンドラ ( 最終的に、アプリを閉じるハンドラ ) の挙動を、さらにカスタマイズできます。カスタマイズする場合には、[`ons`](/v2/docs/js/ons.html) オブジェクトが提供するメソッドを使用します。
 
 ```javascript
-// Disable or enable
+// 無効化、または、有効化
 ons.disableDeviceBackButtonHandler();
 ons.enableDeviceBackButtonHandler();
 
-// Set a new handler
+// 新規ハンドラの登録
 ons.setDefaultDeviceBackButtonListener(function(event) {
-  ons.notification.confirm('Do you want to close the app?') // Ask for confirmation
+  ons.notification.confirm('Do you want to close the app?') // ユーザー側に確認します。
     .then(function(index) {
-      if (index === 1) { // OK button
-        navigator.app.exitApp(); // Close the app
+      if (index === 1) { // OK が押された場合
+        navigator.app.exitApp(); // アプリを終了します。
       }
     });
   ));
 });
 ```
 
-Apart from this, the mentioned elements together with `<ons-page>` element expose `onDeviceBackButton` property to modify their own handler:
+これとは別に、前述の要素 ( dialog 系、navigator、splitter ) と `<ons-page>` 要素では、`onDeviceBackButton` プロパティーが提供されているので、このプロパティーを使用して、戻るボタンのハンドラの挙動を制御することもできます。
 
 ```javascript
 var myNavigator = document.getElementById('my-navigator');
-myNavigator.onDeviceBackButton.disable(); // Disables back button handler
-myNavigator.onDeviceBackButton.enable(); // Enables back button handler
-myNavigator.onDeviceBackButton.isEnabled(); // Returns true if enabled
-myNavigator.onDeviceBackButton.destroy(); // Destroys the current handler
+myNavigator.onDeviceBackButton.disable(); // バックボタン用のハンドラを無効にします。
+myNavigator.onDeviceBackButton.enable(); // バックボタン用のハンドラを有効にします。
+myNavigator.onDeviceBackButton.isEnabled(); // 有効化されている場合、true を返します。
+myNavigator.onDeviceBackButton.destroy(); // 現在のハンドラの登録を解除します。
 
 var page = myNavigator.topPage;
 page.onDeviceBackButton = function(event) {
   console.log('Hardware back button!');
-  event.callParentHandler(); // Calls the parent handler (navigator handler in this case)
+  event.callParentHandler(); // 親のハンドラを呼び出します ( この例では、navigator のハンドラとなります )。
 };
 ```
 
-### Under the hood of Custom Elements
+### Custom Elements のカスタマイズ
 
-If you need to customize the underlying HTML code, you can access to our core Custom Element definitions. The source code for each components are located under [`core/src/elements` directory](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements).
+HTML コードをカスタマイズする場合、Onsen UI が使用している Custom Element の定義ファイルにアクセスして、適宜、要素を追加または修正することもできます。各コンポーネントのソースコードは、[`core/src/elements` ディレクトリー](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements) 下に置かれています。
 
 <!-- End of markdown -->
 <% end %>

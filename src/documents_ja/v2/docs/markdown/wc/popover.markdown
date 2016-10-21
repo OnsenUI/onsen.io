@@ -5,11 +5,11 @@ framework: js,angular1
 tutorial: vanilla/Reference/popover
 ---
 
-## Popover (ons-popover)
+## ポップオーバー ( ons-popover )
 
-A popover can be used to give additional information about a component or add extra functionality.
+ポップオーバーは、コンポーネントに関する情報の追加表示、または、機能を追加するときに使用されます。
 
-The usage is very similar to that of `<ons-dialog>` and `<ons-alert-dialog>`. It is defined using the `<ons-popover>` tag.
+使用方法は、`<ons-dialog>` および `<ons-alert-dialog>` と似ています。`<ons-popover>` タグを使用して定義します。
 
 ``` html
 <ons-button id="popover-target">Popover Target</ons-button>
@@ -18,14 +18,14 @@ The usage is very similar to that of `<ons-dialog>` and `<ons-alert-dialog>`. It
 </ons-popover>
 ```
 
-To display the popover you need to get a reference to the element and execute the `show(target, options)` method. The `target` argument can be either a DOM element, a query selector string or an `Event` object.
+ポップオーバーを表示する場合には、要素へのリファレンスを取得して、`show(target, options)` メソッドを実行します。`target` 引数には、DOM 要素、クエリーセレクタ文字列 ( Query Selector String )、`Event` オブジェクトのいずれかを指定できます。
 
 ``` javascript
 var target = document.querySelector("#popover-target")
 document.querySelector("ons-popover").show(target)
 ```
 
-Just like the `<ons-dialog>` and `<ons-alert-dialog>` elements, the popover can be loaded from a template. It is done by using the `ons.createPopover(template)` utility function. It returns a `Promise` that resolves to the popover element.
+`<ons-dialog>` 要素および `<ons-alert-dialog>` 要素と同様に、ポップオーバーは、template から読み込むこともできます。その場合には、`ons.createPopover(template)` ユーティリティ関数を使用します。この関数では、`Promise` を使用して、ポップオーバーの要素を処理しています。
 
 ``` html
 <ons-template id="popover.html">
@@ -41,9 +41,9 @@ Just like the `<ons-dialog>` and `<ons-alert-dialog>` elements, the popover can 
 </script>
 ```
 
-#### The cancelable attribute
+#### cancelable 属性
 
-The `<ons-popover>` supports the `cancelable` attribute. This enables hiding the popover when the user taps outside of it or presses the back button on an Android device.
+`<ons-popover>` では、`cancelable` 属性が使用できます。この属性を指定した場合、ポップオーバー以外の場所をタップしたとき、または、端末 ( Android ) 側の戻るボタンを押したときでも、ポップオーバーを閉じることができます。
 
 ``` html
 <ons-popover cancelable>
@@ -51,22 +51,22 @@ The `<ons-popover>` supports the `cancelable` attribute. This enables hiding the
 </ons-popover>
 ```
 
-#### Opening directions
+#### ポップオーバーを表示する方向
 
-`direction` attribute can control the popover to open from what direction. It can be specified from `up`, `down`, `left`, or `right`, and furthermore be combined multiple directions separated by space characters. If the `direction` attribute is not specified, it will automatically detects the appropriate direction.
+`direction` 属性を使用して、ポップオーバーの表示方向を制御できます。指定できる値は、`up`、`down`、`left`、`right` のいずれかです。また、値を組み合わせて使用することもできます ( 各設定の間には、スペースを挿入 )。`direction` 属性を指定しない場合、適当な方向を自動で選択してくれます。
 
-#### Using popover events
+#### popover 提供のイベント
 
-`<ons-popover>` has following events.
+`<ons-popover>` では、次のイベントを用意しています。
 
 - `preshow`, `prehide`
 
-  Fired before showing or hiding the popover. The callback function provides an event object with following properties.
+ポップオーバーを表示する前、または、非表示 ( hide ) にする前に発火します。コールバック関数では、次のプロパティーを保持するイベントオブジェクトを使用できます。
 
-  - `popover`: Contains the popover object.
-  - `cancel`: Method to cancel the operation.
+  - `popover`: popover オブジェクトを格納しています。
+  - `cancel`: 処理を中止するためのメソッドです。
 
-  If you want to cancel opening the popover, you could write a program like the one below.
+ポップオーバーを表示する前に、これを中止したい場合には、次のようなコードになります。
 
   ```javascript
   myPopover.addEventListener('preshow', function(e) {
@@ -76,5 +76,4 @@ The `<ons-popover>` supports the `cancelable` attribute. This enables hiding the
 
 - `postshow`, `posthide`
 
-  Fired after showing or hiding the popover. The callback function provides an event object, which has `popover` property contains popover object.
-
+ポップオーバーを表示した後、または、非表示 ( hide ) にした後に発火します。コールバック関数では、イベントオブジェクトを使用できます。このオブジェクトは、`popover` プロパティーを持ち、このプロパティーには、popover オブジェクトが格納されます。

@@ -5,11 +5,11 @@ framework: angular2
 tutorial: vanilla/Reference/carousel
 ---
 
-## Carousel (ons-carousel)
+## カルーセル ( ons-carousel )
 
-Carousel provides a container to display multiple items in the element. It can be used as a full screen component, or inside another element.
+カルーセルでは、複数の表示アイテムを格納できる 「 コンテナ 」 を提供してくれます。全画面表示を行ったり、または、他の要素内に入れて使用できます。
 
-[`<ons-carousel>`](/v2/docs/angular2/ons-carousel.html) component is the container which can contain multiple [`<ons-carousel-item>`](/v2/docs/angular2/ons-carousel-item.html) components. Each `<ons-carousel-item>` represents items in the carousel.
+[`<ons-carousel>`](/v2/docs/angular2/ons-carousel.html) コンポーネントは、コンテナです。このコンポーネント内に、複数の [`<ons-carousel-item>`](/v2/docs/angular2/ons-carousel-item.html) コンポーネントを置くことができます。各 `<ons-carousel-item>` は、カルーセル上で表示するアイテムとなります。
 
 ```
 import {

@@ -13,41 +13,42 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-Note: We are using ES6 + JSX and transpile using [Babel](https://babeljs.io/) in the following examples. You might want to read through [React docs](https://facebook.github.io/react/docs/getting-started.html) for more details.
+この解説で使用されているサンプルコードには、ES6 の構文 + JSX が使用され、加えて、コード変換 ( トランスパイル/Transpile ) には、[Babel](https://babeljs.io/) が使用されています。
+React の詳細は、[React ドキュメント ( 英語サイト )](https://facebook.github.io/react/docs/getting-started.html) をご確認ください。
 
-### Starting Project
+### プロジェクトを始める
 
-Note: For more details to use Onsen UI in your project, please refer to [Getting Started](/guide/getting_started.html).
+Onsen UI を実際に使用する前に、「 [はじめよう](/getting-started) 」 もご確認ください。
 
-#### Using Onsen UI toolkit - Monaca CLI
+#### Monaca CLI を使用する
 
 ```bash
-$ npm install -g monaca # Install Monaca CLI - Onsen UI toolkit
-$ monaca create helloworld # Choose React template
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
+$ npm install -g monaca # Monaca CLI をインストールする。
+$ monaca create helloworld # React を使用しているテンプレートを選択する。
+$ cd helloworld; monaca preview # プレビューを起動する。または、"monaca debug" コマンドを実行して、端末上でプロジェクトを実行する。
 ```
 
-#### Download via npm
+#### npm からダウンロードする
 
 ```bash
-# The "react-onsenui" library requires the "onsenui" library.
+# "react-onsenui" ライブラリーを使用する場合、"onsenui" ライブラリーも必要となります。
 $ npm install --save-dev onsenui react-onsenui
 ```
 
-#### Use Kitchensink Code
+#### Kitchensink コードを使用する
 
-[Onsen UI React Components Kitchensink](https://github.com/OnsenUI/react-onsenui-kitchensink) contains almost all components in Onsen UI as one application package. [Link to Kitchensink Demo](http://onsenui.github.io/react-onsenui-kitchensink/demo.html).
+[Onsen UI React Components Kitchensink ( GitHub )](https://github.com/OnsenUI/react-onsenui-kitchensink) には、Onsen UI が提供している、ほぼすべてのコンポーネントがまとめて ( パッケージ形式で ) 置いてあります。Kitchensink を使用したサンプルアプリは、[こちらのページ](http://onsenui.github.io/react-onsenui-kitchensink/demo.html) をご確認ください。
 
-The code in this example is transpiled using Babel and bundled with [Browserify](http://browserify.org/).
+このサンプル内のコードでは、コード変換 ( トランスパイル ) には Babel を使用して、バンドル ( bundle/依存関係の解決 ) には [Browserify](http://browserify.org/) を使用しています。
 
-### Loading Onsen UI for React
+### react-onsenui を読み込む
 
-Onsen UI for React is an extension to Onsen UI core, a Web components based UI framework. You need to load the following two JavaScript modules.
+react-onsenui とは、React 向けに最適化された Onsen UI を指します ( Onsen UI のコア/中核部分を、React 向けに拡張したバージョンです。Onsen UI のコア/中核部分とは、Web Component を指します )。使用する場合には、次の 2 つの JavaScript モジュールを読み込む必要があります。なお、ここでは、React 向けの Onsen UI と通常の Onsen UI を区別するため、後者を 「 Onsen UI コア 」 と呼称します ( 実際のコードは、GitHub の /core 下に置かれています )。
 
-- Onsen UI Core ([GitHub](https://github.com/OnsenUI/OnsenUI))
-- Onsen UI for React Extension ([GitHub](https://github.com/onsenui/react-onsenui))
+- Onsen UI コア ([GitHub](https://github.com/OnsenUI/OnsenUI))
+- React 向け Onsen UI ([GitHub](https://github.com/onsenui/react-onsenui))
 
-You can load with a normal `<script>` tag as follows:
+通常の `<script>` タグを使用して、読み込むことができます。
 
 ``` html
 <script src="react.js"></script>
@@ -57,7 +58,7 @@ You can load with a normal `<script>` tag as follows:
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
 ```
 
-Or, you can use React and Onsen UI from npm with CommonJS module system like Browserify or Webpack. In this case, use the `onsenui` and `react-onsenui` packages, in addition to `react` and `react-dom` npm packages. In the example below `ons` contains Onsen UI core instance, and `Ons` contains React components.
+または、npm 経由でも、React と Onsen UI をインストールできます。この場合には、併せて、CommonJS スタイルのモジュール管理システム ( Browserify、Webpack など ) も使用します。また、コード内では、`react` と `react-dom` の npm パッケージに加えて、`onsenui` パッケージと `react-onsenui` パッケージも読み込む必要があります。次の例に記述されている、`ons` には Onsen UI コアのインスタンス、`Ons` には React コンポーネントが、それぞれ格納されています。
 
 ```
 var React = require('react');
@@ -66,15 +67,15 @@ var ons = require('onsenui');
 var Ons = require('react-onsenui');
 ```
 
-Alternatively, you can also use [*ES6 imports*](https://developer.mozilla.org/en/docs/web/javascript/reference/statements/import) to specify the modules you want to use in `react-onsenui` package.
+または、[*ES6 の import*](https://developer.mozilla.org/en/docs/web/javascript/reference/statements/import) を使用することもできます ( `react-onsenui` パッケージ内から、使用するモジュールを指定します )。
 
 ```
 import {Page, Toolbar, Button} from 'react-onsenui';
 ```
 
-### Onsen UI HelloWorld with React
+### HelloWorld を作成する ( React 向け Onsen UI を使用 )
 
-To get started, let's create a simple Hello World application. The following sample code is a React version of Onsen UI HelloWorld.
+手始めに、簡単な Hello World アプリを作成してみましょう。次のサンプルでは、React 向けの Onsen UI を使用しています。
 
 ``` html
 <!DOCTYPE html>
@@ -111,7 +112,7 @@ To get started, let's create a simple Hello World application. The following sam
 </html>
 ```
 
-This example is loading the following JS libraries, `react.js`, `react-dom.js`, `onsenui.js` and `react-onsenui.js`. For stylesheets, it is loading `onsenui.css` and `onsen-css-components.css` which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](/v2/docs/guide/js/#css-definitions) document.
+このサンプルでは、`react.js`、`react-dom.js`、`onsenui.js`、`react-onsenui.js` の JS ライブラリーを読み込んでいます。スタイルシートに関しては、`onsenui.css` と `onsen-css-components.css` を使用しています。こちらのスタイルシートは、Onsen UI の配布用パッケージ内に置かれています。Onsen UI のスタイルシートの詳細は、Onsen UI ドキュメント内の [CSS 定義](/v2/docs/guide/js/#css-definitions) をご確認ください。
 
 ```
 <link rel="stylesheet" href="css/onsenui.css">
@@ -120,9 +121,11 @@ This example is loading the following JS libraries, `react.js`, `react-dom.js`, 
 
 In `<body>` tag, there is only a `<div>` tag having `app` id. This is where React will render the content into, and you can see it in the very bottom of JS code.
 
-Also notice `<script>` tag has `text/babel` type. This means this script is not a pure JavaScript that browser supports (most commonly ECMAScript5), but is a ECMAScript6 (ES2015) with JSX format. [Babel](https://babeljs.io/) will transpile this code into ES5 in the browser. To get better performance, we can use node.js to transpile the code.
+`<body>` タグ内には、`<div>` タグが 1 つ置かれ、id には `app` が指定してあります。React は、コンテンツ情報を、ここにレンダリングします。同 JS コードの下部に、このレンダリングの処理が記述してあります。
 
-Inside the script, `React.createClass()` function defines a React Component called `App`. It has one method called `render`, and this is the function that is called when the app is rendered. The returning object is described in [JSX](https://facebook.github.io/react/docs/jsx-in-depth.html), which is a XML like language that extends JavaScript. In this case, it is returning `<Ons.Page>` component that has an `<Ons.Button>` component. The `onClick` prop is used to call the `handleClick` method when the user taps the button.
+また、`<script>` タグには、`text/babel` の type が指定されています。このスクリプトでは、通常の JavaScript ( 多くのブラウザーでは、ECMAScript5 に準拠している JS ) ではなく、JSX 形式の ECMAScript6 ( ES2015 ) を使用しているため、[Babel](https://babeljs.io/) を使用して、コードを ES5 に変換 ( トランスパイル ) していることを示しています。パフォーマンスを上げる場合には、コードを変換 ( トランスパイル ) するときに、node.js を使用することもできます。
+
+また、スクリプト内の `React.createClass()` 関数を使用して、`App` と呼ばれる React のコンポーネントを定義しています。このコンポーネントは、`render` と呼ばれるメソッドを持っています。また、この関数は、アプリのレンダリングが完了したときに呼び出されます。返されるオブジェクトの詳細は、[JSX](https://facebook.github.io/react/docs/jsx-in-depth.html) をご確認ください。 JSX は、JavaScript の拡張版であり、XML 構文に類似しています。このサンプルでは、`<Ons.Button>` コンポーネントを持つ `<Ons.Page>` コンポーネントを返します。また、ユーザーがボタンをタップしたときには、`onClick` と呼ばれるプロパティーを使用して、`handleClick` を呼び出しています。
 
 ``` js
 return (
@@ -132,15 +135,15 @@ return (
 );
 ```
 
-As you can see in this example, all `<Ons.*>` components are React Components, and they are loaded by `react-onsenui.js`. Click here to see our full [Onsen UI React Components Reference](/v2/docs/react.html).
+このサンプルで使用されている `<Ons.*>` が付記されたコンポーネントは、React コンポーネントです。これらのコンポーネントは、`react-onsenui.js` を使用して読み込まれます。React 向けの Onsen UI コンポーネントの詳細は、[こちらのガイド](/v2/docs/react.html) をご確認ください。
 
-Putting together, when `index.html` is loaded into the browser, it will compile JSX code, inject into the body, and render the content.
+最後に、`index.html` がブラウザー上に読み込まれたときに、JSX コードの変換 ( トランスパイル )  が開始され、次に、body に挿入され、そして、コンテンツがレンダリングされます。
 
-This is a basic introduction of how Onsen UI and React works together. If you want to further learn React, we recommend to read the official [React docs](https://facebook.github.io/react/docs/getting-started.html).
+このサンプルアプリでは、Onsen UI と React の基本的な連携方法を解説しました。React をより深く学習したい方は、[React のドキュメント](https://facebook.github.io/react/docs/getting-started.html) をご確認ください。
 
-### Event Handling
+### イベントの処理
 
-Onsen UI components are capable of handling events. For instance, you can catch a tap event by using the `onClick` prop, or text input change with the `onChange` prop.
+Onsen UI コンポーネントでも、各種イベントを処理できます。たとえば、 `onClick` プロパティーを使用して、タップイベントを捕捉することができます。他にも、`onChange` プロパティーを使用すれば、テキスト入力の形式に表示変更することもできます。
 
 ``` javascript
 class MyPage extends React.Component {

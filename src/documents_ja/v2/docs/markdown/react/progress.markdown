@@ -5,29 +5,28 @@ framework: react
 tutorial: react/Reference/progress
 ---
 
-### Progress
+### 進捗度の表示 ( Progress 系のコンポーネント )
 
-There are two components for indicating progress: `ProgressBar` and `ProgressCircular`. As the names imply, the `ProgressBar` displays a linear progress bar while the `ProgressCircular` displays a circular progress indicator.
+進捗度を示すコンポーネントは、2 種類 ( `ProgressBar` と `ProgressCircular` ) あります。名前が示すとおり、`ProgressBar` は線 ( linear ) 形式、`ProgressCircular` は円 ( circular ) 形式で、進捗度を表示します。
 
-They have the ability to show the current progress or a looping animation in cases where the current progress is not known.
+また、処理の進捗度を示す以外にも、処理が進行中であることを示すことができます ( 進捗度がわからない場合など、アニメーションを繰り返す必要があるときに便利です )。
 
-Both components implement the same properties.
+どちらのコンポーネントでも、同じプロパティーが使用されています。
 
-#### Basic usage
+#### 基本的な使用方法
 
-To change the progress the `value` property is used. It should be a value between `0` and `100`.
+進捗度を変更する場合には、`value` プロパティーを使用します。値は、`0` から `100` の間で指定します。
 
 ```
 <ProgressBar value={this.state.currentProgress} />
 <ProgressCircular value={this.state.currentProgress} />
 ```
 
+#### SecondaryValue
 
-#### Secondary value
+2 つの異なる進捗度を同時に表示することが必要な場合もあります。ストリーミング形式のビデオを表示するアプリが良い例です。このようなアプリでは、現在の上映経過時間とバッファリング状況を、同時に表示する必要があります。
 
-It is sometimes necessary to display two different values in the same progress indicator. An example could be an app that streams a video. The progress bar could show both how much of the video has elapsed in addition to how much of the video that has been buffered.
-
-To do this the `secondaryValue` property can be used.
+この場合、`secondaryValue` プロパティーを使用します。
 
 ```
 <ProgressBar
@@ -36,9 +35,9 @@ To do this the `secondaryValue` property can be used.
 />
 ```
 
-#### Indeterminate mode
+#### 処理中であることを示す場合 ( indeterminate )
 
-There is also an `indeterminate` property which makes the component ignore both the `value` and `secondaryValue` properties. Instead, it show a looping animation. This can be useful for cases where the total progress is unknown, e.g. when waiting for some data to arrive.
+`indeterminate` プロパティーを使用した場合、コンポーネントは、`value` プロパティーと `secondaryValue` プロパティーを無視します。代わりに、繰り返し表示されるアニメーションを使用します。進捗度がわからない場合などに有用です ( たとえば、データの受信を待機している場合など )。
 
 ```
 <ProgressBar indeterminate />

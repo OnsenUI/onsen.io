@@ -5,30 +5,32 @@ framework: js,angular1
 tutorial: vanilla/Reference/dialog
 ---
 
-## Dialogs (ons-dialog, ons-alert-dialog)
+## ダイアログ ( ons-dialog、ons-alert-dialog )
 
-Normal dialogs are defined using the `<ons-dialog>` tag. There is also an `<ons-alert-dialog>` tag that is used to display alert dialogs.
+通常のダイアログであれば、`<ons-dialog>` タグを使用して表示できます。また、警告用のダイアログであれば、`<ons-alert-dialog>` タグを使用して表示できます。
 
 ``` html
 <ons-dialog id="dialog-1">
   This is a dialog!
 </ons-dialog>
 ```
-To display a dialog, you need to get a reference to the element and execute the `show()` method.
+
+ダイアログを表示する場合、対象の要素へのリファレンスを取得して、`show()` メソッドを実行します。
 
 ``` javascript
 document.getElementById('dialog-1').show();
 ```
 
-To hide the dialog, call `hide()` method.
+ダイアログを非表示 ( Hide ) にする場合、`hide()` メソッドを実行します。
 
 ``` javascript
 document.getElementById('dialog-1').hide();
 ```
 
-#### Loading from a template
+#### template 機能を使用した、ダイアログの表示
 
-Another way to use dialogs is with the `ons.createDialog(template)` utility function. The dialog needs to be defined as a template and the function returns a `Promise` that resolves to the dialog element.
+前述のダイアログの表示方法以外にも、Onsen UI 提供のユーティリティ関数の 1 つである `ons.createDialog(template)` を使用すれば、ダイアログを表示できます。
+このとき、ダイアログは、template ( 1 つのページ ) として定義する必要があります。このユーティリティ関数は、`Promise` を使用して、ダイアログのインスタンスを生成し返します。
 
 ``` html
 <ons-template id="dialog.html">
@@ -44,9 +46,9 @@ Another way to use dialogs is with the `ons.createDialog(template)` utility func
 </script>
 ```
 
-#### Alert dialog
+#### 警告用のダイアログ
 
-Alert dialogs work exactly like normal dialogs but they require some additional markup. With this element you can create a beautifully styled dialog without any additional CSS.
+警告用ダイアログと通常のダイアログの挙動に差異はありませんが、警告用ダイアログでは、追加の設定が必要となります。ただし、警告ダイアログ用の要素を使用すれば、CSS を新たに追加せずとも、洗練された警告用ダイアログを作成できます。
 
 ``` html
 <ons-alert-dialog>
@@ -61,9 +63,9 @@ Alert dialogs work exactly like normal dialogs but they require some additional 
 </ons-alert-dialog>
 ```
 
-#### Show quickly with utility functions
+#### ユーティリティ関数を使用した、ダイアログの表示方法
 
-Another way to display dialogs is with the ons.notification methods:
+ons.notification では、ダイアログの表示に使用できるメソッドを提供しています。
 
 ``` javascript
 ons.notification.alert(options)
@@ -71,7 +73,7 @@ ons.notification.confirm(options)
 ons.notification.prompt(options)
 ```
 
-These methods all return a `Promise`. You can get the result as follows.
+これらのメソッドでは、`Promise` を使用しています。結果の処理は、次のように行われます。
 
 ```
 ons.notification.prompt({message: 'What is your name?'})

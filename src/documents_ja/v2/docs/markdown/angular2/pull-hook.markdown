@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/pull-hook
 ---
 
-## Pull Hook (ons-pull-hook)
+## プルフック ( PullHook、ons-pull-hook )
 
-The Pull Hook component adds "pull-to-refresh" behavior to an [`<ons-page>`](/v2/docs/angular2/ons-page.html) element. This feature is very convenient for manually fetching data from external sources (like a database, RSS feed or web API) into an application.
+pull-hook コンポーネントを使用すれば、[`<ons-page>`](/v2/docs/angular2/ons-page.html) 要素に、「 ページを引っ張って、更新 」 ( "pull-to-refresh" ) 機能を付け加えることができます。この機能は、外部の提供元 ( データベース、RSS フィード、Web API など ) から、手動でデータを取得するときに便利です。
 
 ```
 @Component({

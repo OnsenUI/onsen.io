@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/switch
 ---
 
-## Switch (ons-switch)
+## スイッチ/切り替えボタン ( ons-switch )
 
-[`<ons-switch>`](/v2/docs/angular2/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`checked`](/v2/docs/angular2/ons-switch.html) property.
+スイッチを表示する場合には、[`<ons-switch>`](/v2/docs/angular2/ons-switch.html) を使用します。スイッチには、"オン" と "オフ" の状態があります。この状態の確認には、[`checked`](/v2/docs/angular2/ons-switch.html) プロパティーを使用します。
 
 ```
 @Component({

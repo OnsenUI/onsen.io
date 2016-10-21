@@ -5,15 +5,15 @@ framework: react
 tutorial: react/Reference/lazy-list 
 ---
 
-## Lazy list
+## LazyList
 
-The `LazyList` component enables displaying an infinite list. This is very useful when displaying large amounts of data. It will only render the list items that are currently in view which is a lot more performant than rendering thousands of elements.
+`LazyList` コンポーネントを使用すれば、無限に続く、一覧表示ができます。大量のデータを表示する場合に有用です。この一覧では、表示されているアイテムのみが、レンダリングされています。数千の要素を、すべてレンダリングするよりも現実的です。
 
-Under the hood it will add elements before they come into view and remove them when they disappear from view.
+一覧の端までたどり着くと、表示する要素が追加され、一覧上で表示されなくなると、要素が削除されます。
 
-#### Basic usage
+#### 基本的な使用方法
 
-The `LazyList` requires two properties, `length` and `renderRow`. The `length` property should be set to the number of items in the list and the `renderRow` property is a function that returns a list item for a specific index.
+`LazyList` コンポーネントの使用時には、2 つのプロパティー ( `length`、`renderRow` ) を設定する必要があります。`length` プロパティーには、一覧のアイテム数を指定します。`renderRow` プロパティーは、関数であり、指定されたインデックスのアイテムを返します。
 
 ```
 class MyPage extends React.Component {
@@ -46,11 +46,11 @@ class MyPage extends React.Component {
 }
 ```
 
-The list in the example above may have thousands of items, but only a handful will be rendered at the same time. The number of items that are rendered depends on the screen size.
+上記の一覧では、数千のアイテムを表示することができますが、一度にレンダリングされるアイテムは数個です。レンダリングされるアイテムの数は、画面のサイズに依存します。
 
-#### Variable height
+#### 「 高さ 」 を指定する変数
 
-With the basic syntax above only lists where every element has the same height is supported. To support lists with variable height items the `calculateItemHeight` prop must be used. This prop should be set to a function that returns the height in pixel of the item. If this prop is omitted the height of the first item will be used for all subsequent items.
+前述の基本的な使用方法では、一覧で使用する要素には、同じ高さが適用されています。さまざま高さのアイテムを表示する場合、`calculateItemHeight` プロパティーを使用します。ピクセル単位でアイテムの高さを返す関数を定義して、このプロパティーを、その関数に対してセットします。このプロパティーを使用しない場合、最初のアイテムの高さが、残りのアイテムに対しても適用されます。
 
 ```
 <LazyList

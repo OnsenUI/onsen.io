@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/tabbar
 ---
 
-## Tab Bar (ons-tabbar, ons-tab)
+## タブバー ( ons-tabbar、ons-tab )
 
-A tab bar is composed of a [`<ons-tabbar>`](/v2/docs/angular2/ons-tabbar.html) component and [`<ons-tab>`](/v2/docs/angular2/ons-tab.html) components. Usually a tab bar has three to five items, and they are displayed with icons and labels. Each tab bar item is assigned to the different page.
+タブバーは、[`<ons-tabbar>`](/v2/docs/angular2/ons-tabbar.html) コンポーネントと [`<ons-tab>`](/v2/docs/angular2/ons-tab.html) コンポーネントから構築されています。通常、タブバー上には、3 ～ 5 つのアイテム ( アイコン、ラベルなど ) が置かれます。また、各タブには、異なるページが設定してあります。
 
 ```
 @Component({

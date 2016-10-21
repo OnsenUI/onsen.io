@@ -5,15 +5,15 @@ component: react/Tabbar
 tutorial: react/Reference/tabbar
 ---
 
-## Tabbar
+## タブバー ( Tabbar )
 
-The `Tabbar` component is used to add tab navigation to an app. It is a very common navigation pattern in mobile apps.
+タブバー ( ナビゲーションの 1 種 ) をアプリ上に配置する場合には、`Tabbar` コンポーネントを使用します。モバイルアプリの世界では、タブバーは、頻繁に使用されるナビゲーションの 1 つです。
 
-#### Basic usage
+#### 基本的な使用方法
 
-Every tab is defined by one `Page` component and one `Tab` component. The `Tab` component displays the actual tab and the `Page` component will be displayed when the tab is tapped.
+タブを定義する場合には、`Page` コンポーネントが 1 つ、`Tab` コンポーネントが 1 つ必要です。`Tab` コンポーネントが実際のタブを表示し、タブがタップされたときには、 `Page` コンポーネント ( ページ ) が表示されます。
 
-The `Tabbar` component has an `index` property which is used to specify the page that is highlighted. There is also a `renderTabs` property that should be set to a function that returns an array of objects with the keys `content` and `tab`:
+`Tabbar` コンポーネント上では、`index` プロパティーを使用して、有効にするページを指定できます。また、`renderTabs` と呼ばれるプロパティーもあります。`renderTabs` プロパティーを使用する場合には、`content` key と `tab` key を持つオブジェクト ( 群 ) を格納する配列を返す関数を定義して、この関数に対して、同プロパティーをセットします。
 
 ```
 {
@@ -22,7 +22,7 @@ The `Tabbar` component has an `index` property which is used to specify the page
 }
 ```
 
-To properly handle the tab change by a click, one should implement the handler function `onPreChange` and update the index. For example, to create a simple app with two tabs the following code can be used:
+タップされたタブの処理を適正に行うため、`onPreChange` と呼ばれるハンドラー ( 関数 ) を使用し、インデックスを更新します。たとえば、2 つのタブを持つアプリを作成する場合、コードは次のようになります。
 
 ```
 class App extends React.Component {
@@ -56,13 +56,13 @@ class App extends React.Component {
 }
 ```
 
-Both the `HomePage` and `SettingsPage` components need to render into a `Page` components for this to work correctly.
+なお、このコードを正常に動作させるためには、`HomePage` コンポーネントと `SettingsPage` コンポーネンの両方を、`Page` コンポーネント上にレンダリングする必要があります。
 
-#### Tab component
+####  タブ ( Tab ) コンポーネント
 
-There are two ways to define a tab. Either the tab label can be put as a child of the `Tab` component or the `label` and `icon` props can be used to specify its appearance.
+タブの外見の定義方法は、2 通りあります。`Tab` コンポーネントにラベルを付けるか ( 子として )、または、`label` もしくは `icon` プロパティーを使用して、外見を指定することができます。
 
-In the example above the props are used but the following usage is also possible:
+上記の例では、プロパティーを使用しましたが、次のように記述することもできます。
 
 ```
 <Tab>

@@ -5,15 +5,15 @@ framework: react
 tutorial: react/Reference/dialog
 ---
 
-## Dialog
+## ダイアログ ( Dialog )
 
-Onsen UI provides two components to display dialogs, `Dialog` and `AlertDialog`. Although they implement the same API,  the `Dialog` component is a general dialog that can be used to display any content, while the `AlertDialog` component has some custom styles that makes it easy to add buttons and messages.
+Onsen UI では、ダイアログの表示に使用できるコンポーネントを 2 つ ( `Dialog` と `AlertDialog` ) 提供しています。使用している API は同じですが、`Dialog` コンポーネントは、汎用的に使用されるダイアログであり、一方、`AlertDialog` コンポーネントでは、スタイルをカスタマイズ ( ボタン、メッセージなどの追加 ) したダイアログを表示できます。
 
-Both components will automically alter their style based on the platform in order to adjust its appearance to the native equivalent. In Android a Material Design dialog will be displayed while on iOS a flat dialog will be provided.
+また、どちらのコンポーネントも、プラットフォームの種類に応じて、スタイルを自動で変更してくれます。たとえば、Android であれば、マテリアルデザイン準拠のダイアログ、iOS であれば、フラットデザイン準拠のダイアログが表示されます。
 
-#### Showing and hiding
+#### 表示と非表示
 
-To show or hide the dialog the `isOpen` property is used. The following example illustrates a simple use case:
+ダイアログを表示または非表示にする場合には、`isOpen` プロパティーを使用します。使用方法を次に記します。
 
 ```
 class MyPage extends React.Component {
@@ -60,13 +60,13 @@ class MyPage extends React.Component {
 }
 ```
 
-When the button in the `Page` component is pressed, the state variable `isOpen` will be changed and a rerender of the component with the new state will be triggerd. Since the `isOpen` state variable is bound to the `isOpen` property of the `Dialog` component, the dialog will show. Likewise the button inside the dialog while hide the dialog by setting the state variable to false.
+`Page` コンポーネントに置いたボタンが押されたときに、state 変数 「 `isOpen` 」 が変更され、新しい state に応じて、コンポーネントが再度レンダリングされます。この例では、state 変数 「 `isOpen` 」 は、`Dialog` コンポーネントの `isOpen` プロパティーに紐づけされているため、ダイアログが表示されます。また、state 変数が false になった場合には、ダイアログは非表示になります ( ダイアログ上のボタンも、ダイアログの処理に随伴します )。
 
-#### Customizing animation
+#### アニメーション効果のカスタマイズ
 
-By default the dialog is revealed using an animation that is based on the platform. To change the animation the `animation` property can be used. There are three animations available: `slide`, `fade` or `none`. The `none` option will simply display the dialog without any animation at all which might be suitable if the app should run on older devices.
+ダイアログを表示するとき、デフォルトでは、プラットフォームに応じたアニメーション効果が適用されています。アニメーション効果を変更する場合には、`animation` プロパティーを使用します。3 つのアニメーション効果を提供しています ( `slide`、`fade`、`none` )。`none` を指定すると、アニメーション効果を使用せずに、ダイアログが表示されます。古い端末向けに、有効なオプションです。
 
-It is also possible to customize the duration, delay and timing function of the animation using the `animationOptions` property:
+また、`animationOptions` プロパティーを使用すれば、アニメーション効果の表示時間、遅延時間、タイミングもカスタマイズできます。
 
 ```
 <Dialog
@@ -76,11 +76,11 @@ It is also possible to customize the duration, delay and timing function of the 
 </Dialog>
 ```
 
-#### Cancelable dialogs
+#### ダイアログの操作 ( cancelable dialog )
 
-To enable hiding the dialog when the user clicks on the background,  the `cancelable` property can be used. This also enables hiding the dialog when the user presses the back button on Android devices.
+`cancelable` プロパティーを使用すれば、ダイアログが表示された状態で背景をタップしたときに、ダイアログを非表示にすることができます。また、Android 端末の場合には、端末側の戻るボタンを押したときに、ダイアログを非表示にすることができます。
 
-It is necessary to handle this event so it should be used with the `onCancel` property.
+イベントを処理する必要があるので、`onCancel` プロパティーも共に使用します。
 
 ```
 <Dialog
@@ -90,11 +90,11 @@ It is necessary to handle this event so it should be used with the `onCancel` pr
 </Dialog>
 ```
 
-Often the `handleCancel` method would set the `isOpen` state variable to `false` in order to make the state correctly reflect the visibility of the dialog.
+`handleCancel` メソッドを使用すると、state 変数 「 `isOpen`  」 は、ほとんどの場合、`false` にセットされます。これは、ダイアログの状態 ( 表示・非表示 ) を、state に正しく反映させる必要があるためです。
 
-#### Alert dialog
+#### 警告用のダイアログ
 
-The `AlertDialog` component works exactly like the `Dialog` component except that it supports some custom classes for the inner elements. To display an alert dialog with a message and buttons the following code can be used:
+`AlertDialog` コンポーネントと `Dialog` コンポーネントの挙動に差異はありませんが、`AlertDialog` コンポーネントでは、コンポーネント内の要素に対して、カスタムクラスを使用することができます。警告用ダイアログ上で、メッセージの表示、および、ボタンを使用する場合には、次のようにします。
 
 ```
 <AlertDialog>
@@ -113,11 +113,11 @@ The `AlertDialog` component works exactly like the `Dialog` component except tha
 </AlertDialog>
 ```
 
-#### Notification methods
+#### notification メソッド
 
-The Onsen UI core library contains some utility functions to display alert dialogs very easily. These functions are usable in React as well.
+Onsen UI の中核部分のライブラリーでは、警告用ダイアログを表示するためのユーティリティ関数 ( `ons.notification.alert`、`ons.notification.confirm`、`ons.notification.prompt` ) を提供しています。これらの関数は、React 上でも使用できます。
 
-The methods are `ons.notification.alert`, `ons.notification.confirm` and `ons.notification.prompt`. The following code displays a simple message when a button is tapped.
+ボタンがタップされたときに、メッセージを表示する例を、次に記します。
 
 ```
 <Button onClick={ons.notification.alert('clicked!')}>Click me!</Button>

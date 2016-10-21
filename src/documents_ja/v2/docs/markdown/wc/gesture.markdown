@@ -4,9 +4,9 @@ component: js/ons-gesture-detector,js/ons.GestureDetector,angular1/ons-gesture-d
 framework: js,angular1
 ---
 
-## Finger Gestures (ons-gesture-detector)
+## ジャスチャー/指操作 ( ons-gesture-detector )
 
-Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection. To detect a finger gesture, you must wrap the target DOM element using [`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) component. The following code does a swipe-left detection for a specific element.
+Onsen UI では、ジェスチャーの検知には、[Hammer.js](http://hammerjs.github.io/) を使用しています。ジャスチャーを検知するためには、[`<ons-gesture-detector>`](/v2/docs/js/ons-gesture-detector.html) コンポーネントを使用して、対象の DOM 要素をラップ ( Wrap ) します。次のようなコードで、指定した要素上で行われる、左方向へのスワイプを検知できます。
 
 ```html
 <ons-gesture-detector>
@@ -21,14 +21,13 @@ Onsen UI utilizes [Hammer.js](http://hammerjs.github.io/) for gesture detection.
 </script>
 ```
 
-#### Supported gestures
+#### サポート対象のジェスチャー/指操作
 
-Following gestures are supported.
+サポート対象のジェスチャーは、次のとおりです。
 
-  - Drag gestures: `drag`, `dragleft`, `dragright`, `dragup`, `dragdown`
-  - Hold gestures: `hold`, `release`
-  - Swipe gestures: `swipe`, `swipeleft`, `swiperight`, `swipeup`, `swipedown`
-  - Tap gestures: `tap`, `doubletap`
-  - Pinch gestures: `pinch`, `pinchin`, `pinchout`
-  - Other gestures: `touch`, `transform`, `rotate`
-
+  - ドラッグ関連のジャスチャー : `drag`、`dragleft`、`dragright`、`dragup`、`dragdown`
+  - ホールド ( 長押し ) 関連のジャスチャー : `hold`、`release`
+  - スワイプ関連のジャスチャー : `swipe`、`swipeleft`、`swiperight`、`swipeup`、`swipedown`
+  - タップ関連のジェスチャー : `tap`、`doubletap`
+  - ピンチ ( つまむような指操作 ) 関連のジェスチャー : `pinch`、`pinchin`、`pinchout`
+  - 他のジャスチャー : `touch`、`transform`、`rotate`

@@ -5,17 +5,17 @@ component: react/Input
 tutorial: react/Reference/input
 ---
 
-### Input
+### 入力 ( input )
 
-The input components are used to get information from the user. Onsen UI provides the `Input` component which can be used to display text input, checkbox or a radio button. There is also `Switch` which displays a toggleable switch.
+ユーザーから情報を入力してもらう場合には、「 入力 」 系のコンポーネントを使用します。Onsen UI では、テキストの入力欄、チェックボックス、ラジオボタンの表示に使用できる `Input` コンポーネントを提供しています。また、切り替えスイッチを表示する場合には、`Switch` コンポーネントも使用できます。
 
-The `Input` element is very similar to the native HTML `<input>` tag and supports similar props. The `type` property is used to switch between different types of inputs.
+Onsen UI 提供の `Input` 要素の挙動は、HTML の `<input>` タグと似ており、加えて、同じようなプロパティーをサポートしています。入力方法 ( テキスト入力、チェックボックス、ラジオボタンなど ) は、`type` プロパティーを使用すれば、切り替えることができます。
 
-Both the `Switch` and `Input` components will automatically change style based on the platform. They will be displayed as Material Design inputs on Android devices.
+`Switch` コンポーネントと `Input` コンポーネントは、プラットフォームの種類に応じて、スタイルを自動で変更してくれます。たとえば、Android 端末であれば、マテリアルデザインの入力欄が表示されます。
 
-#### Basic usage
+#### 基本的な使用方法
 
-To create a simple text input the `Input` element is used. The `value` property can be used to set the value of the input. The `onChange` property will be called when the value changes.
+`Input` 要素を使用して、簡単なテキスト入力欄を作成してみます。`value` プロパティーを使用して、入力値を取得します。value の値が変更されたときには、`onChange` プロパティーが呼び出されます。
 
 ```
 class MyPage extends React.Component {
@@ -39,13 +39,13 @@ class MyPage extends React.Component {
 }
 ```
 
-To disable the input the `disabled` property can be used.
+入力を拒否する場合には、`disabled` プロパティーを設定します。
 
-#### Floating label
+#### フローティングラベル ( Floating Label )
 
-In Material Design input elements have a floating label. When the input is empty the label serves as a placeholder, but it will transform into a label with a floating animation when the user types something into the input.
+マテリアルデザインでは、「 入力 」 系の要素に、フローティングラベルを適用しています。入力欄が空白のときは、ラベルが入力欄内に表示され、文字が入力されると、フローティングアニメーションとともに、ラベルが欄外 ( 「 項目名 」 として表示 ) に移動します。
 
-To set the content of this label the `placeholder` property is used and to activate it the `float` prop needs to be used:
+ラベルの表示、および、上記のような挙動にする場合には、`placeholder` プロパティー ( ラベルの表示用 ) と共に、`float` プロパティー ( 挙動制御用 ) を使用します。
 
 ```
 <Input
@@ -55,33 +55,33 @@ To set the content of this label the `placeholder` property is used and to activ
 />
 ```
 
-#### Checkboxes and radio buttons
+#### チェックボックスとラジオボタン
 
-To display check boxes and radio buttons the `type` prop can be used. The values are the same as for normal `<input>` tags: `checkbox` and `radio`.
+チェックボックスまたはラジオボタンを表示する場合には、`type` プロパティーを使用します。指定する値は、`<input>` タグと同じ、`checkbox` と `radio` です。
 
-The `checked` property controls if the component is toggled or not.
+コンポーネント上で操作が行われたか ( チェックされたか/切り替えられたか ) を確認する場合には、`checked` プロパティーを使用します。
 
 ```
 <Input type='checkbox' checked={this.state.isChecked} />
 <Input type='' checked={this.state.isChecked} />
 ```
 
-#### Using labels
+#### label の使用
 
-The component renders into an element that has an `<input>` tag as an inner element. To set the `id` attribute of the inner input element the `inputId` prop is used. This enables using a label that is not a parent of the input.
+ある要素内において、子要素として、`<input>` タグを指定している場合、コンポーネントをその要素内にレンダリングすることができます。子要素である input 要素に `id` 属性を設定する場合には、`inputId` プロパティーを使用します。この方法であれば、同レベルにラベルを設定 ( 一対として紐づけ ) することもできます。
 
 ```
 <label htmlFor='input'>Password</label>
 <Input type='password' inputId='input' />
 ```
 
-In the example above, clicking the label will focus the input.
+上記の例では、ラベルをタップすると、入力欄に焦点があたります。
 
 #### Switch
 
-The `Switch` component displays a toggleable switch. The switch can be toggled both by dragging and tapping.
+`Switch` コンポーネントを使用して、切り替えスイッチを表示します。スイッチの切り替えは、ドラッグ操作・タップ操作で行えます。
 
-Just like the `Input` component it implements the `checked`, `onChange` and `disabled` props.
+`Input` コンポーネントと同様に、`checked` プロパティー、`onChange` プロパティー、`disabled` プロパティーを使用できます。
 
 ```
 <Switch
@@ -90,9 +90,9 @@ Just like the `Input` component it implements the `checked`, `onChange` and `dis
 />
 ```
 
-#### Range
+#### Range/範囲 ( 量、程度など ) 
 
-The `Range` component is used to display a range slider. It can be used to let the user input a numerical value by dragging the slider.
+`Range` コンポーネントを使用して、レンジスライダー ( range slider/範囲の指定に使用するスライダー ) を表示します。スライダーを動かすことにより、数値を入力することができます。
 
 ```
 <Range

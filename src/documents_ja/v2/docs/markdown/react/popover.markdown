@@ -5,15 +5,15 @@ framework: react
 tutorial: react/Reference/popover
 ---
 
-## Popover
+## ポップオーバー ( Popover ) 
 
-The `Popover` component displays a box next to a target component or element. It can be used to show a tooltip, an info box or even for displaying a menu.
+`Popover` コンポーネントを使用して、対象とするコンポーネントまたは要素の横にボックスを表示します。ツールチップ ( tooltip )、通知の表示、メニューの表示などに使用できます。
 
-The popover will automatically alter its style based on the platform. On Android it will be displayed as a Material Design component.
+ポップオーバーは、プラットフォームの種類に応じて、スタイルを自動で変更します。たとえば、Android であれば、マテリアルデザイン準拠のコンポーネントになります。
 
-#### Showing and hiding
+#### 表示と非表示 ( Hide )
 
-To show or hide a popover the `isOpen` property is used. To determine which component it should visually point to, the `getTarget` property must be set to a function that returns a reference either to an React component or a DOM element.
+ポップオーバーを表示または非表示する場合には、`isOpen` プロパティーを使用します。ポップオーバーが指すコンポーネント ( 表示時に、ポップオーバーが付いているコンポーネント ) を確認する場合には、React コンポーネントまたは DOM 要素へのリファレンスを返す関数を定義して、その関数に対して、`getTarget` プロパティーをセットします。
 
 ```
 class MyPage extends React.Component {
@@ -54,13 +54,13 @@ class MyPage extends React.Component {
 }
 ```
 
-When this component is rendered it will show the popover when the button is pressed. The popover will point to the button since the `getTarget` property returns a reference to the `Button` component.
+このコンポーネントがレンダリングされると、ボタンを押したときに、ポップオーバーが表示されます。このサンプルでは、`Button` コンポーネントへのリファレンスが、`getTarget` プロパティーに返されているので、ポップオーバーとボタンがくっついて表示されることがわかります。
 
-#### Changing direction
+#### 表示場所の変更
 
-The `Popover` component has a `direction` property that can be used to specify at which side of the target it will be displayed.
+`Popover` コンポーネントの `direction` プロパティーを使用して、対象のコンポーネント ( または、DOM 要素 ) のどちら側に、ポップオーバーを表示するか指定できます。
 
-Setting the property to `left` will make it always be displayed to the left. If the property is omitted the popover will be displayed at the side with the most space.
+このプロパティーを `left` に指定した場合、左側に表示されます。このプロパティーを指定しない場合、ポップオーバーは、スペースが広い方に表示されます。
 
 ```
 <Popover
@@ -71,9 +71,9 @@ Setting the property to `left` will make it always be displayed to the left. If 
 </Popover>
 ```
 
-#### Customizing animation
+#### アニメーション効果のカスタマイズ
 
-The popover will be revealed with a fade animation. The duration, delay and timing function can be customized using the `animationOptions` property:
+ポップオーバーの表示時には、フェード ( fade ) のアニメーション効果が適用されます。また、`animationOptions` プロパティーを使用すれば、表示時間、遅延時間、タイミングを指定できます。
 
 ```
 <Popover

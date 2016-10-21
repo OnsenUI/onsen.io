@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/popover
 ---
 
-## Popover (ons-popover)
+## ポップオーバー ( ons-popover )
 
-A popover can be used to give additional information about a component or add extra functionality.
+ポップオーバーは、コンポーネントに関する情報の表示、または、機能を追加するときに使用されます。
 
 ```
 @Component({
@@ -26,7 +26,7 @@ A popover can be used to give additional information about a component or add ex
 })
 class MyPopoverComponent {
 
-  // TODO: fix undefined
+  // undefined を修正します。
   @ViewChild(OnsPopover) private _popover: OnsPopover;
 
   constructor() {

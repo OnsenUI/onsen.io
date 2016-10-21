@@ -5,17 +5,17 @@ framework: js,angular1
 tutorial: vanilla/Reference/navigator
 ---
 
-## Navigation
+## ナビゲーター
 
-In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/v2/docs/js/ons-navigator.html). `<ons-navigator>` is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
+Onsen UI では、[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) を使用して、ページのナビゲーション ( 画面遷移 ) を行います。`<ons-navigator>` 自体は、ナビゲーションのコントローラーとして動作するので、表示するコンテンツの操作には、他のコンポーネントを使用します [ `<ons-navigator>` は、画面遷移 ( アニメーション効果付き ) の制御を行ってくれます。また、親子関係を設定したい場合にも使用されます ]。よって、通常は、[`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) を使用して、ページの上部にツールバーを別途設置します。
 
-[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) is a page stack manager + transition animator. A new page added to the stack will have screen transition with animation. All pages in the stacks are the form of [`<ons-page>`](/v2/docs/js/ons-page.html) elements; therefore only [`<ons-page>`](/v2/docs/js/ons-page.html) components can be placed directly under a [`<ons-navigator>`](/v2/docs/js/ons-navigator.html) element.
+[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) は、ページのスタックマネージャー兼アニメーターです ( つまり、画面遷移の制御とアニメーション効果の付与をしてくれます )。スタック ( ページの一時的な置き場所 ) に新しいページが追加されると、アニメーション効果付きの画面遷移が行われます。スタック内に置くページは、[`<ons-page>`](/v2/docs/js/ons-page.html) 要素を使用して設定します。つまり、[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) 下に、[`<ons-page>`](/v2/docs/js/ons-page.html)を直接置くことができます。
 
-A page usually have a toolbar on top of the page. Therefore, [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) component is commonly placed under [`<ons-page>`](/v2/docs/js/ons-page.html) element to provide a back button support and the page title.
+通常、ページの上部には、ツールバーが置かれます。プロジェクト側では、[`<ons-page>`](/v2/docs/js/ons-page.html) 要素下に、[`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) コンポーネントを置くことになります。ツールバーには、戻るボタン、ページの見出しなどを設定できます。
 
-#### Display a new page (pushPage)
+#### ページを新しく表示する (pushPage)
 
-To add a new page to the stack, use `pushPage()` method in the navigator object. Additional pages can be defined using `<ons-template>` element using `id` attribute.
+スタックにページを新しく追加する場合には、navigator オブジェクトの `pushPage()` メソッドを使用します。ページを追加する場合には、`<ons-template>` 要素を使用します ( `id` 属性を指定すること )。
 
 ```html
 <ons-navigator id="myNavigator"></ons-navigator>
@@ -24,7 +24,7 @@ To add a new page to the stack, use `pushPage()` method in the navigator object.
 </ons-template>
 <script>
 var options = {
-  animation: 'slide', // What animation to use
+  animation: 'slide', // 使用するアニメーション効果を指定します。
 };
 var myNavigator = document.querySelector("#myNavigator");
 myNavigator
@@ -35,7 +35,7 @@ myNavigator
 </script>
 ```
 
-When calling `pushPage()` method, you can specify additional parameters so that they can be taken from the new page.
+`pushPage()` メソッドの呼び出し時に、オプションのパラメーターを指定すれば、パラメーターの受け渡しもできます。
 
 ``` javascript
 myNavigator
@@ -50,9 +50,9 @@ myNavigator
   })
 ```
 
-#### Returning from a page (popPage)
+#### 前のページに戻る ( popPage )
 
-Similarly, use `popPage()` method to remove the current foreground page from the stack.
+`popPage()` メソッドを使用すれば、現在表示されいてるページをスタックから削除できます。
 
 ``` javascript
 myNavigator
@@ -62,39 +62,39 @@ myNavigator
   })
 ```
 
-#### Transition animation
+#### ページ遷移時のアニメーション効果
 
-`pushPage()` and `popPage()` method can specify the following animation patterns: `slide`, `lift`, `fade` and `none`. The animation effect changes by the device platform, so for fixed animations, add "-ios" or "-md" suffix to the animation name.
+`pushPage()` メソッドと `popPage()` メソッドでは、アニメーション効果 ( `slide`、`lift`、`fade`、`none` のいずれか )を設定できます。デフォルトでは、アニメーション効果は、プラットフォームの種類に応じて異なります。よって、アニメーションを指定する場合には、アニメーション名に "-ios" または "-md" を接頭辞として付記します。
 
 ```javascript
-// Always apply iOS style lift animation
+// 常に、iOS スタイルの lift アニメーションを適用します。
 myNavigator.pushPage("page2.html", { animation: "lift-ios" }):
 ```
 
-Transition animation can be customized by creating a new animation object to the `animation` parameter. For more details, please see `NavigatorTransitionAnimator` class located in `core/src/elements/ons-navigator/animator.js`.
+遷移用のアニメーションをカスタマイズする場合には、`animation` パラメーターに、アニメーション用のオブジェクトを新規に格納します。詳細は、`core/src/elements/ons-navigator/animator.js` 下に置かれた `NavigatorTransitionAnimator` クラスの内容をご確認ください。
 
-#### Getting pages
+#### ページ情報を取得する
 
-You can get the current page by `topPage` property.
+現在表示されいているページの情報は、`topPage` プロパティーを使用して、確認できます。
 
 ```javascript
-// Get the passed parameters
+// 指定したパラメーターの内容を表示します。
 console.log(myNavigator.topPage.data);
 ```
 
-If you want to get all pages in the page stack, use `pages` property.
+スタックに置かれているすべてのページの情報を取得する場合には、`pages` プロパティーを使用します。
 
-#### Insert page at any level
+#### ページを挿入する ( ページの挟み込み )
 
-`navigator.insertPage()` adds a page into any level in the stack by specifying the `index` parameter. If specified as `0`, it will add the page to the bottom of the page stack. If specified a negative value, it will be counted from the top level. Therefore, specifying `-1` will result in adding the page to the 2nd level from the top. The `page` and `options` parameters works the same as `pushPage()` API.
+スタック内のインデックス ( `index` パラメーター ) を指定して、`navigator.insertPage()` を実行すれば、指定した場所に、ページを挿入できます。`0` に指定した場合、スタックの最下部にページが挿入されます。負の数値を指定した場合、最上部を基準にしてカウントされます。たとえば、`-1` を指定した場合、上から 2 番目に、ページが挿入されます。`page` パラメーターと `options` パラメーターは、`pushPage()` API のそれと同じように使用できます。
 
-#### Back button component (ons-back-button)
+#### 戻るボタンのコンポーネント ( ons-back-button )
 
-If the app is running on an Android device and using Cordova, pressing the back button will trigger a navigator's `popPage()` method.
+Android 端末上でアプリが実行され、加えて、アプリが Cordova を使用している場合、端末側の戻るボタンを押すと navigator オブジェクトの `popPage()` メソッドが実行されます。
 
-Another way, especially when using iOS, is to use `<ons-back-button>` component. It can be added to the left side of the toolbar and renders as an arrow. It will automatically find the Navigator element and trigger a popPage() call so there is no need to attach any click handlers to it.
+または、`<ons-back-button>` コンポーネントを使用することもできます ( 特に、iOS の場合 )。ボタンの配置場所は、ツールバーの左側になり、矢印が描画されます。 `<ons-back-button>` では、navigator 要素を自動的に見つけ、popPage() を実行するので、クリック用のイベントハンドラーを登録する必要もありません。
 
-If you additionally want to only show a back button from iOS devices, [`<ons-if>`](/v2/docs/js/ons-if.html) is the way.
+iOS 端末だけに戻るボタンを表示させる場合には、[`<ons-if>`](/v2/docs/js/ons-if.html) を使用します。
 
 ```html
 <ons-toolbar>
@@ -103,11 +103,11 @@ If you additionally want to only show a back button from iOS devices, [`<ons-if>
 </ons-toolbar>
 ```
 
-#### Navigation events
+#### イベント
 
-[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) has several events defined: `prepush`, `postpush`, `prepop`, `postpop`. They are called before or after the `pushPage` or `popPage` action.
+[`<ons-navigator>`](/v2/docs/js/ons-navigator.html) には、`prepush`、`postpush`、`prepop`、`postpop` のイベントが用意されています。これらのイベントは、`pushPage` または `popPage` の前または後に呼び出されます。
 
-Also, event object for `prepush` and `prepop` have `cancel()` function, which you can cancel the operation.
+また、`prepush` と `prepop` のイベントオブジェックトには、`cancel()` 関数が用意されています。この関数を使用すれば、処理を中止できます。
 
 ```javascript
 myNavigator.addEventListener('prepush', function(event) {

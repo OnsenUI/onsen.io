@@ -5,9 +5,9 @@ framework: js,angular1
 tutorial: vanilla/Reference/button
 ---
 
-### Toolbar component (ons-toolbar, ons-bottom-toolbar)
+### ツールバーのコンポーネント ( ons-toolbar、ons-bottom-toolbar )
 
-A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) component. Here is the typical example of a toolbar.
+ [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) コンポーネントまたは [`<ons-bottom-toolbar>`](/v2/docs/js/ons-bottom-toolbar.html) コンポーネントを使用して、ツールバーを定義します。ツールバーの典型例を、次に記します。
 
 ```html
 <ons-toolbar>
@@ -23,4 +23,5 @@ A toolbar is defined as a [`<ons-toolbar>`](/v2/docs/js/ons-toolbar.html) or [`<
  </ons-toolbar>
 ```
 
-The toolbar is divided into 3 sections (left, center, and right), and they can be specified as class names (`left`, `center`, and `right`). You can use [`<ons-icon>`](/v2/docs/js/ons-icon.html) to display an icon, [`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) or [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) to place an button, or insert any HTML content.
+ツールバーは、3 つに分割 ( 左、中央、右 ) されています。場所の指定には、class を使用します ( `left`、`center`、`right` のいずれかを指定 )。アイコンの表示には、[`<ons-icon>`](/v2/docs/js/ons-icon.html) を使用できます。また、ボタンの表示には、[`<ons-toolbar-button>`](/v2/docs/js/ons-toolbar-button.html) または [`<ons-back-button>`](/v2/docs/js/ons-back-button.html) を使用できます。または、HTML コンテンツをセットすることもできます。
+

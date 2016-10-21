@@ -5,33 +5,33 @@ framework: js,angular1
 tutorial: vanilla/Reference/icon
 ---
 
-## Icons (ons-icon)
+## アイコン ( ons-icon )
 
-Onsen UI offers over 400 icons provided by [Font Awesome](https://fortawesome.github.io/Font-Awesome/), over 500 icons by [Ionicons](http://ionicons.com/) and over 700 [Material Design Icons](http://zavoloklom.github.io/material-design-iconic-font/icons.html).
+Onsen UI では、多数のアイコンを提供しています ( [Font Awesome](https://fortawesome.github.io/Font-Awesome/) から 400 個以上のアイコン、[Ionicons](http://ionicons.com/) から 500 個以上のアイコン、[Material Design Icons](http://zavoloklom.github.io/material-design-iconic-font/icons.html) から 700 個以上のアイコンが利用できます。 )。
 
-When displaying an icon, a [`<ons-icon>`](/v2/docs/js/ons-icon.html) component can be used. You can specify which icon to display by specifying to the `icon` attribute.
+アイコンの表示には、[`<ons-icon>`](/v2/docs/js/ons-icon.html) を使用できます。表示するアイコンを指定する場合には、`icon` 属性を使用します。
 
-#### Platform based styling
+#### プラットフォームの種類に応じたスタイル変更
 
-Often it is necessary to display different icons depending on the platform. On Android you might want to display a Material Design icon but another icon on iOS. Onsen UI provides the following syntax:
+プラットフォームの種類に応じて、アイコンを変える場合があります。たとえば、Android では、マテリアルデザインに対応したボタンを表示し、iOS では、他の種類のアイコンを表示するというように、スタイルの変更が必要な場合があります。Onsen UI では、次のようにして、スタイルの変更を行えます。
 
 ```
 <ons icon="ion-navicon, material:md-menu"></ons-icon>
 ```
 
-This will display a Material Design `md-menu` icon on Android and an `ion-navicon` icon on other platforms.
+この記述で、Android の場合には、マテリアルデザインに対応した `md-menu` アイコンが表示され、他のプラットフォームの場合には、`ion-navicon` アイコンが表示されます。
 
-#### Using Font Awesome
+#### Font Awesome を使用する場合
 
-If the value of `icon` attribute starts with `fa-`, appropriate Font Awesome icon is used. The list of available icons can be found on the [Font Awesome Website](http://fortawesome.github.io/Font-Awesome/icons/). If `icon` attribute has no prefix, Font Awesome collection will be used.
+`icon` 属性に指定する値に `fa-` が付記されている場合、Font Awesome 提供のアイコンが適宜使用されます。利用可能なアイコンの詳細は、[Font Awesome の Web サイト](http://fortawesome.github.io/Font-Awesome/icons/) をご確認ください。`icon` 属性に指定する値に接頭辞が付記されていない場合、Font Awesome Collection が使用されます。
 
-#### Using Ionicons
+#### Ionicons を使用する場合
 
-If the value of `icon` attribute starts with `ion-`, appropriate Ionicons icon is used. The list of available icons can be found on the [Ionicons Website](http://ionicons.com/).
+`icon` 属性に指定する値に `ion-` が付記されている場合、Ionicons 提供のアイコンが適宜使用されます。利用可能なアイコンの詳細は、[Ionicons Website](http://ionicons.com/) をご確認ください。
 
-#### Using Material Icons
+#### Material Icons を使用する場合
 
-For Material Design icons the `md-` prefix is used. A list of available icons can be found [here](http://zavoloklom.github.io/material-design-iconic-font/icons.html).
+マテリアルデザインのアイコンには、接頭辞として、`md-` が付記されています。利用可能なアイコンの詳細は、[こちらのページ](http://zavoloklom.github.io/material-design-iconic-font/icons.html) をご確認ください。
 
 ```html
 <ons-icon icon="fa-angle-left"></ons-icon>
@@ -40,19 +40,19 @@ For Material Design icons the `md-` prefix is used. A list of available icons ca
 <ons-icon icon="fa-angle-left" spin="true"></ons-icon>
 ```
 
-Also, you can specify the icon size to display by using size attribute.
+size 属性を使用すれば、アイコンのサイズを指定できます。
 
 ```html
 <ons-icon icon="fa-angle-left" size="40px">
 ```
 
-Furthermore, you can rotate the icon.
+また、rotate 属性を使用して、アイコンを回転させることもできます
 
 ```html
 <ons-icon icon="fa-angle-left" size="40px" rotate="90deg">
 ```
 
-Icon can have an animation effect with the `spin` attribute. This is useful for displaying spinners.
+また、`spin` 属性を使用すれば、アイコンにアニメーション効果を付けることもできます。スピナーの表示などに使用できます。
 
 ```html
 <ons-icon icon="fa-angle-left" spin>

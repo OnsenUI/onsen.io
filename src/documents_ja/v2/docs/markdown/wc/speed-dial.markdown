@@ -5,9 +5,9 @@ framework: js,angular1
 tutorial: vanilla/Reference/speed-dial
 ---
 
-## Speed Dial (ons-speed-dial, ons-speed-dial-item)
+## スピードダイアル ( Speed Dial。ons-speed-dial、ons-speed-dial-item )
 
-`<ons-speed-dial>` is used to display a Material Design floating action button that shows a menu when tapped.
+`<ons-speed-dial>` とは、フローティングアクションボタン ( マテリアルデザイン ) をタップしたときに表示されるメニューです。
 
 ``` html
 <ons-speed-dial position="left bottom">
@@ -25,4 +25,4 @@ tutorial: vanilla/Reference/speed-dial
 </ons-speed-dial>
 ```
 
-The menu can be open and closed programatically with the `showItems()` and `hideItems()` methods.
+メニューの表示・非表示は、`showItems()` と `hideItems()` メソッドを使用すれば、プログラム側で制御できます。

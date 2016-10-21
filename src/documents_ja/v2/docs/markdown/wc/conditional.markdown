@@ -5,9 +5,9 @@ framework: js,angular1
 tutorial: vanilla/Reference/if
 ---
 
-## Conditional (ons-if)
+## 条件分岐 ( ons-if )
 
-[`<ons-if>`](/v2/docs/js/ons-if.html) element can conditionally display content depending on the platform or the screen orientation. Currently, there is `orientation` and `platform` attribute.
+[`<ons-if>`](/v2/docs/js/ons-if.html) 要素を使用すれば、プラットフォームの種類または画面のオリエンテーションに応じて、異なるコンテンツを表示できます。現在、`orientation` 属性と `platform` 属性を指定できます。
 
 ```html
 <ons-if orientation="landscape">

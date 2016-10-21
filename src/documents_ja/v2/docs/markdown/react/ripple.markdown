@@ -5,13 +5,13 @@ framework: react
 tutorial: react/Reference/ripple
 ---
 
-## Ripple
+## リップル ( Ripple/波紋 ) 効果
 
-The `Ripple` component is used to add a Material Design ripple effect to an element. This effect will expand from the location point the user taps until it covers the whole element.
+`Ripple` コンポーネントを使用すれば、マテリアルデザインのリップル効果を要素に適用することができます。リップル効果とは、ある要素をユーザーがタップしたときに、タップされた地点から波紋状のアニメーション効果が、要素全体に広がることを指します。
 
-#### Basic usage
+#### 基本的な使用方法
 
-To add a ripple effect to an element the `Ripple` component should be placed as a child.
+リップル効果を要素に適用する場合には、子として、`Ripple` コンポーネントを対象の要素下に置きます。
 
 ```
 <div style={{width: 100, height: 100, backgroundColor: 'grey'}}>
@@ -19,15 +19,15 @@ To add a ripple effect to an element the `Ripple` component should be placed as 
 </div>
 ```
 
-The color of the ripple effect defaults to gray. It can be customized using the `color` property. It is also possible to customize the background color with the `background` property.
+リップル効果時の色は、デフォルトでは灰色です。カスタマイズする場合には、`color` プロパティーを使用します。また、`background` プロパティーを使用すれば、背景色もカスタマイズできます。
 
 ```
 <Ripple color='red' background='blue' />
 ```
 
-#### The `ripple` prop
+#### `ripple` プロパティー
 
-There are some components that support the ripple effect using a `ripple` property. The [`Button`](Button.html) is one of those. In this case,  instead of using the `Ripple` component only the property `ripple` needs to be added:
+`ripple` プロパティーをサポートしているコンポーネントであれば、このプロパティーを使用しても、リップル効果を適用できます。たとえば、サポートしているコンポーネントの中には、[`Button`](Button.html) コンポーネントがあります。このようなコンポーネントに関しては、`Ripple`  コンポーネントではなく、`ripple` プロパティーを設定すれば、リップル効果を適用できます。
 
 ```
 <Button ripple>
@@ -35,4 +35,4 @@ There are some components that support the ripple effect using a `ripple` proper
 </Button>
 ```
 
-Other components that support the `ripple` property are: [`ListItem`](ListItem.html), [`Fab`](Fab.html), [`SpeedDial`](SpeedDial.html) and [`Tab`](Tab.html).
+`ripple` プロパティーをサポートしているコンポーネントは、[`Button`](Button.html)、[`ListItem`](ListItem.html)、[`Fab`](Fab.html)、[`SpeedDial`](SpeedDial.html)、[`Tab`](Tab.html) です。

@@ -5,13 +5,13 @@ framework: js,angular1
 tutorial: vanilla/Reference/progress
 ---
 
-## Progress (ons-progress)
+## 進捗度の表示 ( ons-progress )
 
-Onsen UI provide two different progress element: `<ons-progress-bar>` and `<ons-progress-circular>`. As the names imply they are used to display a linear progress bar or a circular progress indicator.
+Onsen UI では、進捗度を示す、2 つの要素 ( `<ons-progress-bar>` と `<ons-progress-circular>` ) を提供しています。名前が示すとおり、前者は線 ( linear ) 形式、後者は円 ( circular ) 形式で、進捗度を表示します。
 
-These elements takes two different values in `value` and `secondary-value` attributes. They accept a value between 0 and 100. The secondary value can be used in case there are two different operations going on at the same time. One example could be a streaming video player where the primary value is the current elapsed time while the secondary value is used to show how much has been already buffered.
+これらの要素には、`value` 属性と `secondary-value` 属性を使用することができます。これらの属性には、0 から 100 の間で値を指定します。`secondary-value` は、2 つの異なる処理が同時に実行される場合に使用します。たとえば、ストリーミング形式のビデオプレーヤーを起動している場合、`value` は、現在の上映経過時間に、`secondary-value` は、バッファリング状況に使用します。
 
-There is also an `indeterminate` attribute that is used to show an animating that is looping indefinitely which is useful in situations where the current progress is unknown.
+また、`indeterminate` 属性は、処理が進行中であることを示すのに役立ちます ( 進捗度がわからない場合に、アニメーションを繰り返すときに便利です )
 
 ```html
 <ons-page>

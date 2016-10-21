@@ -5,19 +5,19 @@ framework: react
 tutorial: react/Reference/navigator
 ---
 
-## Navigator
+## ナビゲーター ( Navigator )
 
-The `Navigator` is a component that provides stack based navigation. It is a very common navigation pattern in mobile apps.
+`Navigator` コンポーネントでは、スタックを使用した、ページ遷移機能を提供しています。スタックを使用したページ遷移は、モバイルアプリの世界では、標準になりつつあります。
 
-After pushing a page to the top of the stack it will be displayed using transition animation. When the user goes back to the previous page the top page will be popped from the top of the stack and hidden with an corresponding transition animation.
+スタックの最上部にページをプッシュ ( push ) すると、ページ遷移用のアニメーション効果とともに、そのページが表示されます。前のページに戻る場合 には、スタックの上から現在のページがポップ ( pop ) され、アニメーション効果とともに非表示にされ、前のページが表示されます。
 
-#### Basic usage
+#### 基本的な使用方法
 
-The `Navigator` maintains a stack of *route* objects. These objects can be arbitrary objects and are rendered into pages with the `renderPage` property. The `renderPage` property must be set to a function that returns a `Page` component.
+`Navigator` は、*route* オブジェクトが複数置かれたスタックを保持します ( route オブジェクトの内容は、任意に定義できます )。これらのオブジェクトをページへレンダリングするときには、`renderPage` プロパティーを使用します。その場合には、`Page` コンポーネントを返す関数を定義して、この関数に対して、 `renderPage` プロパティーをセットします。
 
-To push a new page on top of the stack, the `pushPage(route)` method is used. Similarly, a page is popped from the stack with the `popPage()` method.
+スタックの最上部に新しいページをプッシュする場合には、`pushPage(route)` メソッドを使用します。また、ページをポップする場合には、`popPage()` メソッドを使用します。
 
-The stack must be initialized with either the `initialRoute` or `initialRouteStack`, depending on whether the the stack needs to be initialized with one or more pages.
+スタックの初期化には、 `initialRoute` または `initialRouteStack` を使用します。どちらを使用するかは、初期化時のページ数 ( 1 ページまたは複数ページ ) により異なってきます。
 
 ```
 class App extends React.Component {
@@ -57,11 +57,11 @@ class App extends React.Component {
 }
 ```
 
-This simple app will render initially with a page containing a button. Pressing the button will push another page. At this page one will be able to push another page or go pop the current page from the page stack.
+上記の例では、ページを 1 つ使用して、レンダリングを開始します ( ページには、ボタンを 1 つ置きます )。ボタンを押すと、別のページ ( Another Page ) をプッシュします ( この時点で、この 「 別のページ 」 がスタックにプッシュされます。前のページに戻る場合には、現在のページがスタックからポップされます )。
 
-#### The back button
+#### 戻るボタン
 
-The `BackButton` component can be used to put a back button in the navigation bar. The component will automatically find the `Navigator` component and pop a page when pressed.
+ナビゲーションバーに戻るボタンを置く場合には、`BackButton` コンポーネントを使用します。戻るボタンが押されたとき、`BackButton` コンポーネントは、`Navigator` コンポーネントを自動で見つけ出し、次に、表示されているページをポップします。
 
 ```
 <Toolbar>
@@ -74,11 +74,12 @@ The `BackButton` component can be used to put a back button in the navigation ba
 </Toolbar>
 ```
 
-#### Customizing the animation
+#### アニメーション効果のカスタマイズ
 
-There are several animations available for the `Navigator` component. To change the animation the `animation` property is used. Available animations are `slide`, `lift` and `fade`. Setting the property to `none` will make the transition instantly.
+`Navigator` コンポーネントでは、複数のアニメーション効果を提供しています。アニメーション効果を変更する場合には、`animation` プロパティーを使用します。
+使用できるアニメーション効果は、`slide`、`lift`、`fade` です。`none` に指定した場合には、アニメーション効果を適用せずに、ページが即座に遷移します。
 
-It is also possible to customize the duration, delay and timing function of the animation using the `animationOptions` property.
+また、`animationOptions` プロパティーを使用すれば、アニメーション効果の表示時間、遅延時間、タイミングを指定できます。
 
 ```
 <Navigator

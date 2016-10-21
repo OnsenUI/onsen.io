@@ -5,11 +5,11 @@ framework: angular2
 tutorial: vanilla/Reference/splitter
 ---
 
-## Splitter Side Menu (ons-splitter)
+## splitter を使用したサイドメニュー ( ons-splitter )
 
-A menu can be added using the `<ons-splitter>`. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
+メニューは、[`<ons-splitter>`](/v2/docs/js/ons-splitter.html) を使用して追加できます。また、画面が小さい端末ではスワイプ式のメニューとなり、画面が大きい端末では自動的にカラム式 ( 画面の片側に固定表示 ) のレイアウトとなります。
 
-You need to add `<ons-splitter-content>` and `<ons-splitter-side>` elements as children. The `<ons-splitter-content>` contains the main content and the `<ons-splitter-side>` is used for the menu.
+また、子要素として、`<ons-splitter-content>` 要素と `<ons-splitter-side>` 要素も追加する必要があります。 `<ons-splitter-content>` には、メインのコンテンツを指定し、`<ons-splitter-side>` には、メニューとそのコンテンツを指定します。
 
 ```
 @Component({

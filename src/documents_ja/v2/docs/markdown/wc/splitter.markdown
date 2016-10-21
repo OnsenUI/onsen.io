@@ -5,13 +5,13 @@ framework: js,angular1
 tutorial: vanilla/Reference/splitter
 ---
 
-## Splitter Side Menu (ons-splitter)
+## splitter を使用したサイドメニュー ( ons-splitter )
 
-A menu can be added using the `<ons-splitter>`. For small devices it can be used to create a swipeable menu, but for larger screens it can automatically display a column layout.
+メニューは、[`<ons-splitter>`](/v2/docs/js/ons-splitter.html) を使用して追加できます。また、画面が小さい端末ではスワイプ式のメニューに、画面が大きい端末ではカラム式 ( 画面の片側に固定表示 ) のレイアウトに、自動でなります。
 
-You need to add `<ons-splitter-content>` and `<ons-splitter-side>` elements as children. The `<ons-splitter-content>` contains the main content and the `<ons-splitter-side>` is used for the menu.
+また、メニューを追加する場合には、子要素として、`<ons-splitter-content>` 要素と `<ons-splitter-side>` 要素を追加する必要があります。 `<ons-splitter-content>` には、メインのコンテンツを指定し、`<ons-splitter-side>` には、メニューを指定します。
 
-The following example has a side page and a content page. It is using `page` attribute to specify a external HTML file. Instead, you can write the content inside `<ons-splitter-side>` and `<ons-splitter-content>` tags.
+次の例では、メニューとして使用する side ページと、メインのコンテンツとして使用する page ページを指定します。`page` 属性を使用して、外部の HTML ファイルを指定することもできます。または、`<ons-splitter-side>` タグと `<ons-splitter-content>` タグ の中に、直接コンテンツを記述することもできます。
 
 ``` html
 <ons-template id="side.html">
@@ -26,30 +26,30 @@ The following example has a side page and a content page. It is using `page` att
 </ons-splitter>
 ```
 
-#### Changing content page
+#### メインのコンテンツページの変更
 
-To change the content of the `<ons-splitter-content>`, you can use the `load(page, options)` method. Normally this method will be called when the user clicks on one of the items in the menu.
+`<ons-splitter-content>` に指定したコンテンツを変更する場合には、`load(page, options)` メソッドを使用できます。このメソッドは、通常、ユーザーがメニュー上のアイテムをクリックしたときに呼ばれます。
 
 ``` javascript
 var content = document.querySelector('ons-splitter-content');
 
-// Switch to the Settings page.
+// settings ページへ移動します。
 content.load('settings.html');
 ```
 
-#### Configuring side menu
+#### サイドメニューの設定
 
-The `<ons-splitter-side>` supports several attributes that control the behavior of the menu.
+`<ons-splitter-side>` では、メニューの挙動制御に使用できる、複数の属性を提供します。
 
-For instance, when setting `swipeable` attribute, Splitter enables opening and closing the menu by swiping. 
+たとえば、`swipeable` 属性を設定すると、スワイプ操作で、メニューの表示・非表示ができます。
 
-`collapse` attribute specifies the collapse behavior. The menu supports two modes: `collapse` and `split` mode. When the menu is collapsed, it will be hidden from view and only visible if the user swipes or the `open()` method is called. In `split` mode the menu is displayed as a column on the side of the `<ons-splitter-content>` element.
+メニューには、2 つの表示モード ( `collapse` と `split` ) があります。たとえば、`collapse` 属性を設定した場合、指定された条件を満たすと、メニューが collapse 状態になります。メニューが collapse 状態になると、メニューは画面からは隠され、ユーザーが再びスワイプするか、または、`open()` メソッドが呼び出されるまで、そのまま非表示になります。`split` モードでは、`<ons-splitter-content>` 要素の横に、カラム形式でメニューが表示されます。
 
-The value of the collapse attribute defines when it should be in either mode conditionally. If you set the value to `portrait` it will be collapsed when the device is in portrait mode. It also supports a media query.
+collapse 属性に値を指定すれば、モードが切り替わる条件を設定できます。たとえば、`portrait` に値を指定した場合、端末のオリエンテーションが portrait になった場合に、スワイプ ( collapse ) 形式になります。また、メディアクエリーも使用できます。
 
-The `side` attribute defines which side the menu is attached to. It supports the values `left` and `right`. Therefore, It’s possible to define one menu on each side of the screen.
+`side` 属性を使用して、メニューを表示する 「 側 ( side ) 」 を指定します。指定できる値は、`left` と `right` です。よって、画面片側のどちらかを指定できます。
 
-##### Always collapse
+##### 常に collapse
 
 ``` html
 <ons-splitter-side side="left" width="30%" swipable collapse>
@@ -57,7 +57,7 @@ The `side` attribute defines which side the menu is attached to. It supports the
 </ons-splitter-side>
 ```
 
-##### Collapse if the screen is in landscape
+##### オリエンテーションが landscape の場合には、collapse
 
 ``` html
 <ons-splitter-side side="left" width="30%" collapse='landscape'>
@@ -65,16 +65,16 @@ The `side` attribute defines which side the menu is attached to. It supports the
 </ons-splitter-side>
 ```
 
-#### Splitter events
+#### ons-splitter-side 提供のイベント
 
-`<ons-splitter-side>` has 5 events: `modechange`, `preopen`, `postopen`, `preclose` and `postclose`. The following example listens to the event and it will always cancel opening side menu.
+`<ons-splitter-side>` では、5 つのイベント ( `modechange`、`preopen`、`postopen`、`preclose`、`postclose` ) を提供しています。次の例では、イベントにリスナーを登録し、サイドメニューの表示を都度キャンセルしています。
 
 ```html
 <script>
 ons.ready(function() {
   document.querySelector("ons-splitter-side")
     .addEventListener('preopen', function(e) {
-      e.cancel(); // Calling cancel() function will cancel opening menu
+      e.cancel(); // cancel() 関数を呼び出し、メニューの表示をキャンセルします。
     })
 });
 </script>

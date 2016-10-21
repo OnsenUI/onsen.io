@@ -5,21 +5,21 @@ framework: react
 tutorial: react/Reference/pull-hook
 ---
 
-## Pull hook
+## プルフック ( PullHook )
 
-The `PullHook` component is used to add a *pull to refresh* functionality to a page. It can let the user refresh a page or load the latest data.
+`PullHook` コンポーネントを使用すれば、「 ページを引っ張って、更新 」 ( *pull to refresh* ) 機能を付け加えることができます。ページの更新、または、最新データの読み込み時に使用できます。
 
-#### States
+#### コンポーネントの状態
 
-The `PullHook` component has three different states: `initial`, `preaction` and `action`. It starts in the `initial` state. When it's pulled down below its height it will transition into the `preaction` state. If it's released in `initial` state it will just bounce back. If it's released in the `preaction` state,  it will go into `action` state.
+`PullHook` コンポーネントには、コンポーネントの状態を示す 3 つの値 ( `initial`、`preaction`、`action` ) があります。初期の状態は、`initial` です。引っ張られ、height 関連のパラメーターで指定した値 ( しきい値 ) を超えると、`preaction` 状態に移行します。height 関連のパラメーターで指定した値を超えない状態で ( `initial` 状態のまま )、引っ張っていた指を離すと、バウンスしながら、元の状態に戻ります。`preaction` 状態に移行すると、次に、`action` 状態に移行します。
 
-Every time the state changes the `onChange` property will be called.
+状態が移り変わるたびに、`onChange` プロパティーが呼び出されます。
 
-When the component transitions into the `action` state, it will call the `onLoad` property with a `done` callback as an argument. Calling this function will cause it to return to the `initial` state.
+コンポーネントの状態が `action` に移行した場合、`done` コールバックを引数として使用して、`onLoad` プロパティーが呼び出されます。この関数が呼ばれると、コンポーネントは、`initial` 状態に戻ります。
 
-#### Basic usage
+#### 基本的な使用方法
 
-The state changes can be used to show information to the user. In the `action` state new data can be loaded.
+このような状態の移り変わりを利用して、状態が変わるたびに、ユーザー側に情報を表示することもできます。たとえば、`action` 状態の場合であれば、新しいデータを読み込みます。
 
 ```
 class MyPage extends React.Component {
@@ -66,9 +66,9 @@ class MyPage extends React.Component {
 }
 ```
 
-#### Changing the height
+#### しきい値 ( height ) の変更
 
-The component has a default height, but it can be customized using the `height` property. There is also a property called `thresholdHeight` which can be used to make it automatically call the `onLoad` property without the user releasing.
+状態の移行を行うときに使用する しきい値 は、コンポーネント側でデフォルトで指定されています。`height` プロパティーを使用すれば、この しきい値 を変更できます。また、`thresholdHeight` プロパティーと呼ばれる しきい値 もあります。こちらの しきい値 より、遠くに引っ張られた場合、`onLoad` プロパティーが自動的に呼び出されます。
 
 ```
 <PullHook

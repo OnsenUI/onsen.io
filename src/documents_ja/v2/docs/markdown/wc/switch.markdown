@@ -5,9 +5,9 @@ framework: js,angular1
 tutorial: vanilla/Reference/switch
 ---
 
-## Switch (ons-switch)
+## スイッチ/切り替えボタン ( ons-switch )
 
-[`<ons-switch>`](/v2/docs/js/ons-switch.html) is used to display a switch. A switch has an "on" and an "off" state. The state can be accessed by the [`checked`](/v2/docs/js/ons-switch.html) property.
+スイッチを表示する場合には、[`<ons-switch>`](/v2/docs/js/ons-switch.html) を使用します。スイッチには、"オン" と "オフ" の状態があります。[`checked`](/v2/docs/js/ons-switch.html) プロパティーを使用して、スイッチの状態を確認できます。
 
 ```html
 <script>
@@ -18,4 +18,4 @@ function changed() {
 <ons-switch onchange="changed()" id="mySwitch"></ons-switch>
 ```
 
-Inside the switch is a `<input type="checkbox">` element. You can get the inner input by the `checkbox` property.
+switch の中には、`<input type="checkbox">` 要素を置きます。スイッチに対して行われた操作 ( 入力値 ) の確認には、`checkbox` プロパティーを使用します。

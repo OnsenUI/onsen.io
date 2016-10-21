@@ -5,9 +5,9 @@ framework: angular2
 tutorial: vanilla/Reference/navigator
 ---
 
-## Navigation
+## ナビゲーション ( navigation ) 
 
-In Onsen UI, a page navigation is done by the [`<ons-navigator>`](/v2/docs/angular2/ons-navigator.html). `<ons-navigator>` is a navigation controller that does not have displayed content. Therefore, you usually use a [`<ons-toolbar>`](/v2/docs/angular2/ons-toolbar.html) and add a toolbar on top of the page. Navigator provides screen transitions with smooth animation, and is used to create a parent-child relationship.
+Onsen UI では、[`<ons-navigator>`](/v2/docs/angular2/ons-navigator.html) を使用して、ページのナビゲーション ( 画面遷移 ) を行います。`<ons-navigator>` 自体は、ナビゲーションのコントローラーとして動作するので、表示するコンテンツ自体は、他のコンポーネントを使用して表示します [ `<ons-navigator>` は、画面遷移 ( アニメーション効果付き ) 関連の制御を行ってくれます。また、他の要素と親子関係を設定したい場合にも使用されます ]。よって、通常は、[`<ons-toolbar>`](/v2/docs/angular2/ons-toolbar.html) を使用して、ページの上部にツールバーを別途設置します。
 
 ```
 @Component({
