@@ -1,0 +1,176 @@
+---
+author: atsushi
+date: 2016-10-26
+id: ble-with-local-notification
+title: "MonacaアプリにBLE×ローカル通知を組み込む"
+product: monaca
+tags: monaca, ble, local notification
+category: 技術情報
+---
+
+iOS7から登場し、最近iBeacon（ビーコン）を使った事例が増えつつあります。今回はMonacaアプリにBLE機能を組み込みつつ、ローカル通知を使ってビーコンの検知をお知らせする機能を作ってみます。
+
+### 対象OS
+
+今回は iOS9、Android 6.0.1 に対して行っています。Cordovaのバージョンは6.2です。
+
+### 事前に必要なもの
+
+BLE信号を発信する、いわゆるビーコンデバイスを用意してください。[Beacon入門](https://itunes.apple.com/jp/app/beacon-ru-men/id1088591228?mt=8)のようなアプリを使うとiOSデバイスでビーコンの発信ができるようになります。
+
+### プラグイン
+
+今回はCordovaプラグインとして以下の2つを使っています。
+
+- [petermetz/cordova-plugin-ibeacon](https://github.com/petermetz/cordova-plugin-ibeacon)
+- [katzer/cordova-plugin-local-notifications](https://github.com/katzer/cordova-plugin-local-notifications/)
+
+Zipファイルでダウンロードして、Corodvaプラグインの管理にてインポートしてください。
+
+### js/app.js の作成
+
+js/app.js を作成して index.html にて読み込んでください。まずベースになるコードは次のようになります。
+
+```
+function onDeviceReady() {
+	// 必要な権限を取得
+	
+	// delegateの作成と設定
+	
+	// 監視するビーコンの作成
+	
+	// 監視の開始
+	
+}
+
+document.addEventListener('deviceready', onDeviceReady, false);
+```
+
+#### 必要な権限を取得
+
+今回必要なのはローカルのプッシュ通知とBLEを通じた位置情報の取得です。アプリを起動中だけでなく、バックグラウンドでも取得するようにします。
+
+```
+// 必要な権限を取得
+// 通知の権限
+cordova.plugins.notification.local.registerPermission(function() {
+	console.log("Permitted.")
+});
+// 位置情報を取得。常に取得とします。
+cordova.plugins.locationManager.requestAlwaysAuthorization();
+```
+
+iOSでは2種類のアラートが出ます。
+
+![](/blog/content/images/2016/Oct/monaca-with-ble-4.png)
+
+![](/blog/content/images/2016/Oct/monaca-with-ble-6.png)
+
+Androidでも位置情報に関する許諾を求めるアラートが出ます。
+
+![](/blog/content/images/2016/Oct/monaca-with-ble-2.png)
+
+#### delegateの作成と設定
+
+次にdelegateを作成します。アクションが起きた際にこの変数で定義されているメソッドが呼ばれます。
+
+```
+var delegate = new cordova.plugins.locationManager.Delegate();
+delegate.didDetermineStateForRegion = function(pluginResult) {
+	console.log('didDetermineStateForRegion', pluginResult);
+}
+delegate.didStartMonitoringForRegion = function(pluginResult) {
+	console.log('didDetermineStateForRegion', pluginResult);
+}
+
+delegate.didRangeBeaconsInRegion = function(pluginResult) {
+	if (document.getElementById("log").value == '') {
+		document.getElementById("log").value = JSON.stringify(pluginResult);
+	}
+}
+
+delegate.didEnterRegion = function(pluginResult) {
+	cordova.plugins.notification.local.add({
+		title: "Welcome",
+		text: "Tap to launch app"
+	});
+}
+delegate.didExitRegion = function(pluginResult) {
+	cordova.plugins.notification.local.add({
+		id: 30244234234,
+		title: "Good By!",
+		text: "Hope to see you again."
+	});
+}
+```
+
+今回は BLE を感知したタイミングで didEnterRegion が、範囲外になったタイミングで didExitRegion が呼ばれます。ビーコンを感知していると didRangeBeaconsInRegion が継続的に呼ばれ続けます。次のようなJSONになっていますので、proximityの値を見てビーコンとデバイスの距離がどれくらいであるかを予測できるようになっています。ProximityFarは遠いです。近いと ProximityNear、さらに近いと ProximityImmediate になります。
+
+```
+{
+    "beacons": [
+        {
+            "accuracy": 4.3, 
+            "major": 1, 
+            "minor": 1, 
+            "proximity": "ProximityFar", 
+            "rssi": -68, 
+            "uuid": "82765E7C-92DC-1801-88C1-001C4D9AC0EB"
+        }
+    ], 
+    "eventType": "didRangeBeaconsInRegion", 
+    "region": {
+        "identifier": "estimote", 
+        "typeName": "BeaconRegion", 
+        "uuid": "82765E7C-92DC-1801-88C1-001C4D9AC0EB"
+    }
+}
+```
+
+最後に delegate を登録します。
+
+```
+cordova.plugins.locationManager.setDelegate(delegate);
+```
+
+#### 監視するビーコンの作成
+
+次に監視するビーコンを作成します。今回はUUIDだけですが、さらにmajor、minorといった二つの数値を付け加えることもできます。これにより、店舗や店舗内の場所など細かくビーコンの位置を決められるようになります。
+
+```
+var uuid = '000000-0000-0000-0000-0000000000'; // ビーコンのUUID
+var identifier = '何かID';
+var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid);
+beaconRegion.notifyEntryStateOnDisplay = true;
+```
+
+#### 監視の開始
+
+最後にビーコンの監視を開始します。一つが監視の開始、一つが通知受信の開始になります。
+
+```
+cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
+	.fail(console.error);
+	.done();
+cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+	.fail(function(e) { console.error(e); })
+	.done();
+```
+
+ここまでで完了です。
+
+----
+
+後はアプリがバックグラウンドになっていても（ロック状態でも）ビーコンの範囲に入るとローカル通知が表示されるようになります。時間制限もなさそうで、数十分ロックした状態のままのiOSデバイスでもちゃんとローカル通知が表示されました。
+
+![](/blog/content/images/2016/Oct/monaca-with-ble-5.png)
+
+Androidでも使えます。
+
+![](/blog/content/images/2016/Oct/monaca-with-ble-3.png)
+
+ただし、アプリをタスクから消してしまうとプッシュ通知がこないようなので注意してください。
+
+ビーコンを使った通知機能はO2Oマーケティングの他、企業内でも入退室管理に使われることもあります。アプリを立ち上げてさえおけば良いので、様々な使い方が考えられるのではないでしょうか。
+
+今回のコードは[moongift/MonacaBeacon](https://github.com/moongift/MonacaBeacon)にアップロードしてあります。不明点があれば参考にしてください。
