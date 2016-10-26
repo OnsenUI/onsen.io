@@ -73,14 +73,14 @@
     <div class="docs-nav-right">
       <ul class="docs-nav-menu">
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if !@reference %>">
-          <% if @framework == 'onsen1': %>
+          <% if @framework == 'onsen1' or typeof @framework != 'string': %>
             <a href="/v1/guide.html"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% else: %>
             <a href="/v2/docs/guide/<%- @framework %>"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% end %>
         </li>
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if @reference %>">
-          <% if @framework == 'onsen1': %>
+          <% if @framework == 'onsen1' or typeof @framework != 'string': %>
             <a href="/v1/reference/javascript.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
           <% else: %>
             <a href="/v2/docs/<%- @framework %>.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
