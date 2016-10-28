@@ -121,6 +121,10 @@
             <a href="/community" class="footer-container-navigation-link">
               Community
             </a>
+          <% else if @lang == "ja": %>
+            <a href="https://teratail.com/tags/Onsen+UI" class="footer-container-navigation-link">
+              コミュニティ
+            </a>
           <% end %>
           <a href="/blog" class="footer-container-navigation-link">
             <%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%>
