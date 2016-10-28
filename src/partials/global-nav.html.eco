@@ -64,6 +64,10 @@
         <li class="global-nav-menu-item">
           <a href="/community">Community</a>
         </li>
+      <% else if @lang == "ja": %>
+        <li class="global-nav-menu-item">
+          <a href="https://teratail.com/tags/Onsen+UI">コミュニティ</a>
+        </li>
       <% end %>
       <li class="global-nav-menu-item">
         <a href="/blog"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
