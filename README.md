@@ -16,15 +16,24 @@ $ git clone https://github.com/OnsenUI/onsen.io.git
 $ cd onsen.io
 $ npm install gulp -g
 $ npm install
+$ 
+$ # Checkout submodules
 $ git submodule init
 $ git submodule update
-$ cd OnsenUI
+$ 
+$ # Checkout and build the latest revision of Onsen UI 1
+$ pushd dist/v1/OnsenUI/
+$ git checkout 1.3.19
 $ npm install
 $ gulp build
-$ cd ../2/OnsenUI
+$ popd
+$ 
+$ # Checkout and build the latest revision of Onsen UI 2
+$ pushd dist/v2/OnsenUI/
+$ git checkout 2.0.3
 $ npm install
 $ gulp build
-$ cd ..
+$ popd
 ```
 
 How to Build
