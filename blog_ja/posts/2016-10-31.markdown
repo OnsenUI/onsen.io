@@ -40,9 +40,11 @@ JS/CSSコンポーネントの管理から「wookmark」で検索してインス
 - components/jquery/dist/jquery.min.js
 
 
-#### Monaca Localkitを使う場合
+#### Monaca Localkitを使う場合／Onsen UIのみを使う場合
 
-ローカルのBowerを使ってインストールします。デフォルトのインストール先（bower_components）だとMonacaアプリから使うことができないのでプロジェクトルート以下に .bowerrc ファイルを作成してインストールパスを指定します。
+ローカルのBowerを使ってインストールします。
+
+Monaca Localkitを使う場合は、デフォルトのインストール先（bower_components）を `www/vendors/` に変更します。プロジェクトルート以下に .bowerrc ファイルを作成してインストールパスを指定します。
 
 ```
 {
@@ -50,7 +52,7 @@ JS/CSSコンポーネントの管理から「wookmark」で検索してインス
 }
 ```
 
-この設定をした後、インストールを行います。
+以下のコマンドを実行して、インストールを行います。
 
 ```
 $ bower install jquery
