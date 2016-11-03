@@ -1,110 +1,144 @@
 ---
-author: ryoichi
+author: atsushi
 date: 2016-11-02
-id: html5-mobile-app-day
-title: "11月14日（月）秋葉原UDXにて「HTML5モバイルアプリDAY」開催"
-tags: monaca,onsenui,ワークショップ
-category: イベント情報
+id: monaca-3d-touch
+title: "Monacaアプリで3D Touchを実現するcordova-plugin-3dtouchの紹介"
+product: monaca
+tags: monaca, 3dtouch,ios
+category: 技術情報
 ---
 
-## Monaca関連ソリューションが秋葉原に集結
+iPhone 6 Plus以降から導入されている3D Touchという機能があります。画面を強くタップすると発動するPeek & Popというイベントで、若干トリッキーです。それもあって、使いこなしているという人はあまり多くありません。とは言え、例えばLINEのメッセージを長押しすると既読が付かずに内容が読めると言ったそのアプリをよく使っている人にとっては便利な機能が3D Touchで実現されたりします。
 
-アシアルの塚田です。
+今回はそんな3D TouchをMonacaアプリで実現するための[cordova-plugin-3dtouch](https://github.com/EddyVerbruggen/cordova-plugin-3dtouch)を紹介します。
 
-Monacaニュースレターなどで既にご案内していますが、11月14日（月）に秋葉原UDXにて「[HTMLモバイルアプリDAY](http://techwave.jp/html5appsday?from-asial)」が開催されます。
+### インストール
 
-「[HTMLモバイルアプリDAY](http://techwave.jp/html5appsday?from-asial)」は、国内初のMonaca/Cordova関連の総合展示交流イベントで、40ブースを超える関連製品やサービスの展示ブース、セミナー、ワークショップが開催されます。
+cordova-plugin-3dtouchのインストールはMonaca IDEのCordovaプラグインの管理から行います。cordova-plugin-3dtouchを検索してインストールしてください。
 
-基調講演として、HTML5 Experts.jp 初代編集長であり「html5j」ファウンダーの白石俊平氏とアシアルの田中正裕がHTML5モバイルアプリの関連技術トレンドについて対談いたします。
+### サンプルコード
 
-MonacaおよびOnsen UIの開発チームのメンバーも、ブースでお待ちしております。
+3D Touchでは主に3つの機能が利用できます。
 
-11月14日に秋葉原で皆さんにお会いできることを楽しみにしています！
+- 3D Touchイベントの監視（Force Touch）
+- Peek & Pop
+- クイックアクション
 
-なお、無料チケットの配布数は各時間枠によって限りがございますので、お早めにお申し込みください。
+それぞれの実装方法を紹介します。
 
-#### 無料入場チケットのお申し込みは[こちら](http://peatix.com/event/205988)から！
+#### 対応しているかチェック
 
+まず最初に 3D Touch に対応した機種かどうかをチェックしなければなりません。それは ThreeDeeTouch.isAvailable を使います。
 
-<img src="/blog/content/images/2016/Nov/HTML5_MobileAppDay_flyer_03_2.png" width="320px">
+```
+ThreeDeeTouch.isAvailable(function(avail) {
+  alert("avail? " + avail)}
+);
+```
 
+#### 3D Touchの監視
 
+3D Touchのイベント（Force Touch）を監視するには次のように行います。これはForce Touchのイベントが行われた際に呼ばれます。
 
-### 「HTML5モバイルアプリDAY」開催概要
-- 日時：2016年11月14日（月曜日） 11:00～19:00
-- 場所：秋葉原UDX 4F ギャラリー（東京・秋葉原）
-- 主催：TechWave
-- 共同パートナー：アシアル株式会社
-- スポンサー
-  - NCデザイン&コンサルティング株式会社
-  - ニフティ株式会社
-  - 日本マイクロソフト株式会社
-  - レッドハット株式会社
-- 参加費用：事前配布チケットは無料（当日チケットは1,000円）
-- チケット入手方法：[Peatix](http://peatix.com/event/205988/view)にて無料チケットを配布
-- イベント最新情報
-セミナー等の最新情報は[HTML5モバイルアプリDAY公式サイト](http://techwave.jp/html5appsday)をご覧ください。
+```
+function watchForceTouches() {
+  ThreeDeeTouch.watchForceTouches(function(result) {
+    console.log("force touch % " + result.force);
+    console.log("force touch timestamp " + result.timestamp);
+    console.log("force touch x coordinate " + result.x);
+    console.log("force touch y coordinate " + result.y);
+  });
+}
+```
 
+結果は次のように返ってきます。これはタップしただけでは呼ばれないイベントです。強さやForce Touchした位置、タイムスタンプが返ってきます。
 
+```
+force touch % 82
+force touch y coordinate 331
+force touch x coordinate 273
+force touch timestamp 1478070258.324255
+```
 
-### 出展社一覧（掲載順は順不同）
+#### Peek & Pop
 
-|出展社名|展示サービス名|
-|:---------|:---------|
-|株式会社リックテレコム|[書籍『初めてのWatson』](http://www.ric.co.jp/book/contents/book_1052.html)|
-|株式会社カサレアル|[HTML5　JavaScript研修の紹介](http://www.casareal.co.jp/training/html5js-training.html)|
-|NCデザイン＆コンサルティング株式会社|[企業向けバックエンドサービスAppPot](http://apppot.jp/)|
-|株式会社神戸デジタル・ラボ|[SmartPleasure](http://smartpleasure.jp/)|
-|グレープシティ株式会社|[Wikitude](https://wikitude.grapecity.com/)|
-|Repro株式会社|[Repro](https://repro.io/)|
-|ソニーデジタルネットワークアプリケーションズ株式会社|[Secure Coding Checker](http://www.sonydna.com/sdna/solution/scc.html)|
-|株式会社KDDIウェブコミュニケーションズ|[Twilio for KDDI Web Communications](http://twilio.kddi-web.com/)|
-|株式会社エンタップ|[受託開発サービス](https://www.entap.co.jp/)|
-|株式会社マイクロアド|[MicroAd ENGAGE および MicroAd COMPASS](http://ma-engage.com/)|
-|ピープルソフトウェア株式会社|[BaaS@rakuza](http://www.raku-za.jp/baas/)|
-|株式会社ヘッドウォータース|[Sotaコントローラ](https://utage.headwaters.co.jp/blog/?p=5735)|
-|株式会社ヘッドウォータース|[WebVRアプリ開発](http://www.headwaters.co.jp/service/webvr.html)|
-|NCデザイン&コンサルティング株式会社|[バックエンドサービスAppPot](http://apppot.jp/)|
-|株式会社KADOKAWA|[RPGツクールMV](https://tkool.jp/mv/)|
-|株式会社ジェーエムエーシステムズ|[Beacapp](https://www.jmas.co.jp/)|
-|株式会社Live2D|[Live2D](http://www.live2d.com/ja/about)|
-|株式会社クアッドシステム|[無料通話アプリ「SkyPhone」](http://www.skyphone.jp)|
-|特定非営利活動法人エルピーアイジャパン|[HTML5プロフェッショナル認定試験](http://html5exam.jp/)|
-|株式会社ヒューマンインタラクティブテクノロジー|Python Frameworkによる企業向けモバイルアプリ開発サービス|
-|株式会社ニューフォリア|[アプリカン](http://www.applican.com/)|
-|サイボウズ株式会社|[kintone](https://kintone.cybozu.com/jp/)|
-|ドリームビジョン株式会社|[アプリ受託開発](http://www.dream-v.co.jp/)|
-|株式会社翔泳社|[翔泳社書籍販売](http://www.shoeisha.co.jp/book)|
-|株式会社アイキューブドシステムズ|[CLOMO](http://www.i3-systems.com/clomo.html)|
-|コガソフトウェア株式会社|[Dr.Chat](https://drchat.pw/)|
-|株式会社ケアリッツ・アンド・パートナーズ|[Ｓｗｉｔｃｈ](http://switch.bz/lp/landing/)|
-|学校法人電子学園　日本電子専門学校|[Webデザイン科](http://www.jec.ac.jp/)|
-|レバレジーズ株式会社|[teratail](https://teratail.com/)|
-|株式会社エムディエヌコーポレーション|[関連書籍の出版](http://www.mdn.co.jp/)|
-|日本アイ・ビー・エム株式会社|[IBM Bluemix](https://new-console.ng.bluemix.net/mobile/getting-started/)|
+Peek & Popを使うと、外部リンクをPeek & Popで表示するようになります。そのためにはまずPeek & Popを有効にする必要があります。
 
+```
+// 有効にする
+ThreeDeeTouch.enableLinkPreview();
+// 無効にする
+ThreeDeeTouch.disableLinkPreview();
+```
 
+後はリンクを深く押すとプレビューで表示されるようになります。
 
-### ワークショップ情報
+![](/blog/content/images/2016/Nov/monaca-3dtouch-1.gif)
 
-「HTML5モバイルアプリ」の会場では、事前予約制のMonaca関連ワークショップが開催されます。各回定員がございますのでお早めにお申し込みください。
-（先着順のお申し込みになりますが、複数のお申し込みいただいた場合には参加セッション数の調整をお願いすることがございます）
+### クイックアクション
 
-- 11:30～12:30 はじめてのOnsen UIワークショップ（アシアル）
-- 13:00～14:00 Monacaで簡単IoTハンズオンセミナー「クラウドでデータ管理のできる歩数計アプリを作ろう」（ニフティクラウド mobile backend ）
-- 14:30～15:30 「初めてのWatson」ハンズオンセミナー　Monacaで始める人工知能アプリ（リックテレコム）
-- 16:00～17:00 Monacaで簡単IoTハンズオンセミナー「クラウドでデータ管理のできる歩数計アプリを作ろう」（ニフティクラウド mobile backend ）
-- 17:30～18:30 はじめてのOnsen UIワークショップ（アシアル）
+クイックアクションはアプリのホーム画面でアプリアイコンをForce Touchするとショートカットメニューが表示される機能です。これはアプリ起動時に設定をします。
 
-各ワークショップのお申し込みについては[HTML5モバイルアプリDAY公式サイト](http://techwave.jp/html5appsday)にて、随時ご案内する予定です。お申し込み開始までしばらくお待ちください。
+```
+ThreeDeeTouch.configureQuickActions([
+  {
+    type: 'checkin',  // 種別（システム用）
+    title: 'チェックイン',  // タイトル
+    subtitle: '素早くチェックイン',  // 説明
+    iconType: 'compose' // アイコン
+  },
+  {
+    type: 'share',
+    title: '共有',
+    subtitle: 'みんなと共有しましょう',
+    iconType: 'Share'
+  },
+  {
+    type: 'search',
+    title: '検索',
+    iconType: 'Search'
+  },
+  {
+    title: 'お気に入り表示',
+    iconTemplate: 'HeartTemplate'
+  }
+]);
+```
 
+このように設定をすると、Force Touch時に次のように表示されます。
 
+![](/blog/content/images/2016/Nov/monaca-3dtouch-2.png)
 
-### 会場の様子
-過去に同じスタイルで開催された「アプリ博」の会場の様子です。
+##### アプリの起動
 
-<img src="/blog/content/images/2016/Nov/DSC_3947.jpg" width="640px">
+クイックアクションをタップするとアプリが起動して、 ThreeDeeTouch.onHomeIconPressed イベントが呼ばれます。 payload.type を使って先ほどのtypeキーで指定した文字列と一致した場合にそれぞれ処理分けをすれば良いでしょう。
 
-<img src="/blog/content/images/2016/Nov/DSC_3944.jpg" width="640px">
+```
+document.addEventListener('deviceready', function() {
+  ThreeDeeTouch.onHomeIconPressed = function(payload) {
+    if (payload.type == 'checkin') {
+      document.location = 'checkin.html';
+    } else if (payload.type == 'share') {
+      document.location = 'share.html';
+    } else {
+      setTimeout(function() {
+        alert(JSON.stringify(payload));
+      }, 500);
+    }
+  }
+}, false);
+```
 
-#### 無料入場チケットのお申し込みは[こちら](http://peatix.com/event/205988)から！
+### 注意点
+
+Monacaアプリをデバッガーとしてビルドした場合、 ThreeDeeTouch.onHomeIconPressed が呼ばれないので注意してください。デバッグビルドなどであれば問題ありません。
+
+Peek & Popを有効にするとすべてのリンクがPeek & Pop対応になります。
+
+----
+
+いかがでしょうか。3D Touch自体はUXが分かりづらいため、あまり広まっていないイメージがありますが、アプリを使いこなしているハードユーザにとってはクイックアクションなどは便利な機能のようです。アプリのアクティビティを高めるための施策として使ってみると良さそうです。
+
+今回のソースコードは [moongift/monaca-3dtouch](https://github.com/moongift/monaca-3dtouch) にアップロードしてあります。実装時の参考にしてください。
+
+[EddyVerbruggen/cordova-plugin-3dtouch: Quick Home Icon Actions and Link Previews](https://github.com/EddyVerbruggen/cordova-plugin-3dtouch)
