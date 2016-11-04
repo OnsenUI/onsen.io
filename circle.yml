@@ -1,4 +1,4 @@
-general:
+eneral:
   branches:
     only:
       - master
@@ -19,11 +19,12 @@ checkout:
     - cd dist/tutorial; git fetch origin; git checkout master; git pull; cd ../..;
 dependencies:
   override:
-    - npm install
+    - curl -o- -L https://yarnpkg.com/install.sh | bash
+    - yarn
     - cd dist/v1/OnsenUI/css-components && npm install && ./node_modules/.bin/gulp build
     - cd dist/v1/OnsenUI && npm install && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
-    - cd dist/v2/OnsenUI/css-components && npm install && ./node_modules/.bin/gulp build
-    - cd dist/v2/OnsenUI && npm install && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
+    - cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build
+    - cd dist/v2/OnsenUI && yarn && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
 test:
   override:
     - echo "Add tests!"
