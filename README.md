@@ -11,42 +11,51 @@ Please Visit [Onsen UI](https://github.com/OnsenUI/OnsenUI) if you need access t
 Installation
 ----
 
-```
-$ git clone https://github.com/OnsenUI/onsen.io.git
-$ cd onsen.io
-$ npm install gulp -g
-$ npm install
-$ git submodule init
-$ git submodule update
-$ cd OnsenUI
-$ npm install
-$ gulp build
-$ cd ../2/OnsenUI
-$ npm install
-$ gulp build
-$ cd ..
+```bash
+git clone https://github.com/OnsenUI/onsen.io.git
+cd onsen.io
+npm install gulp -g
+npm install
+
+# Checkout submodules
+git submodule init
+git submodule update
+
+# Checkout and build the latest revision of Onsen UI 1
+pushd dist/v1/OnsenUI/
+git checkout 1.3.19
+npm install
+gulp build
+popd
+
+# Checkout and build the latest revision of Onsen UI 2
+pushd dist/v2/OnsenUI/
+git checkout 2.0.3
+npm install
+gulp build
+popd
 ```
 
 How to Build
 ----
 
-```
-$ gulp generate --lang en
-$ gulp generate --lang ja
+```bash
+gulp generate --lang en
+gulp generate --lang ja
 ```
 
 Edit & Serve
 ------------
 
-```
-$ gulp serve --lang en
+```bash
+gulp serve --lang en
 ```
 
 Deploying the Onsen UI Website to S3
 ------------------------------------
 
 ```bash
-$ gulp deploy --lang en
+gulp deploy --lang en
 ```
 
 To deploy to S3 a `aws_en.json` file must be created with the following structure:
@@ -63,7 +72,7 @@ To deploy to S3 a `aws_en.json` file must be created with the following structur
 To deploy to production server use the `--production` flag:
 
 ```bash
-$ gulp deploy --leng en --production
+gulp deploy --leng en --production
 ```
 
 This time it will read a file called `aws_en_prod.json`.
