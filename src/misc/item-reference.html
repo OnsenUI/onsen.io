@@ -71,7 +71,7 @@ actionbar: false
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
 
-    <% if @ownedMethods.length > 0: %>
+    <% if @ownedMethods.length > 0 or Object.keys(@ownedMethods).length > 0: %>
     <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
     <% end %>
 
@@ -330,7 +330,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods summary -->
-  <% if @ownedMethods.length > 0: %>
+  <% if @ownedMethods.length > 0 or Object.keys(@ownedMethods).length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
