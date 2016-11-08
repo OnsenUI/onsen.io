@@ -374,13 +374,13 @@
     top: 50%;
     transition: top 1s ease, visibility 1s ease;
     z-index: 1001;
+    padding: 18px 10px 36px;
 
     p {
       margin: auto;
     }
 
     @media (max-width: @mobile-width) {
-      height: 250px;
       width: 300px;
 
       .input-email-popup-newsletter {
@@ -388,7 +388,6 @@
       }
     }
 
-    height: 210px;
     width: 500px;
   }
 
@@ -408,10 +407,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+
   &-middle {
-    left: 50%;
-    position: fixed;
-    transform: translate(-50%, -50%);
     white-space: nowrap;
   }
 
