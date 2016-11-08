@@ -271,7 +271,9 @@ actionbar: false
               <span class="value-type"><%= prop.type.names[0] %></span>
               <% end %>
               <% if prop.defaultValue: %>
-              <br><span class="default-value" style="color: green"><%= prop.defaultValue %></span>
+              <br><span class="default-value" style="color: green">
+                <%= prop.defaultValue.value %>
+              </span>
               <% end %>
             </td>
             <td>
