@@ -1,0 +1,89 @@
+---
+author: onsen
+date: 2016-11-15
+id: framework-comparison
+title: "Hello World! による各フレームワークの比較"
+product: onsen-ui
+tags: onsen ui, angular 1, angular 2, react, vue, knockout
+category: 技術情報
+---
+
+（この記事は Onsen UI チームの [Fran Dios](https://twitter.com/frandiox) が英語版 Monaca x Onsen ブログに投稿した [Comparing frameworks: Hello World!](https://onsen.io/blog/framework-comparison/) の翻訳です。）
+
+![Hello World! による各フレームワークの比較](https://onsen.io/blog/content/images/2016/Oct/framework_comparison.png)
+
+
+Onsen UI は [Web Components をベースに作られている](https://onsen.io/blog/create-reusable-future-proof-ui-components-with-custom-elements-v1-web-components/)ので、どのフレームワークとも一緒に使うことができます。
+しかし、開発用にフロントエンドフレームワークを選ぶとなると、選択肢の多さに圧倒されてしまいます。特に Web プログラミングの経験が少ない人にとっては、自分に合ったフレームワークを選ぶ作業はうんざりするほど大変です。
+
+あなたは、Onsen UIでコーディングするときにどのフレームワークを使うか決めていますか？決まっていない人のために、この記事では **Vanilla JavaScript**、**AngularJS**、**Angular 2**、**React**、**Vue.js** 、それから **Knockout.js** を使った「Hello World」アプリの作り方を紹介します。
+
+<!-- more -->
+
+## Hello World サンプル
+
+これから紹介するのは、ボタンをクリックするとアラートを表示する簡単なサンプルプログラムです。それらのプログラムを通して、各フレームワークによって構文がどう違うのか、また、どのくらい難易度が違うのかを説明します。サンプルプログラムのプレビューには[対話的チュートリアル](https://tutorial.onsen.io/) を使用します。対話的チュートリアルには、この記事で紹介するもの以外にもたくさんのサンプルプログラムを用意しています。対話的チュートリアルでは、サンプルプログラムを見るだけでなく、サンプルプログラムを自由に編集して実行することができます。
+
+### Vanilla JavaScript
+
+Onsen UI のコンポーネントはネイティブの DOM 要素のように振る舞うため（Custom Elements）、**純粋な JavaScript** や **jQuery** でも使うことができます。必要なのは、イベント、DOM 要素、属性、プロパティを使ったオーソドックスでシンプルな JavaScript だけです。
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=vanilla&category=Reference&module=page&docs=false"></iframe>
+
+Onsen UI でページの初期化を行うには、`init` イベントを使います。リスナーをセットして、あとはそこに初期化処理を書くだけです。他のコンポーネントでのサンプルを見るには、[このリンク](https://tutorial.onsen.io/index.html?framework=vanilla&category=Reference&module=page)から対話的チュートリアルのメイン画面を開いてください。
+
+### AngularJS
+
+このサンプルでは、メインページに AngularJS のコントローラをリンクさせています。このサンプルの HTML は AngularJS のテンプレートとして機能しており、そのテンプレートがコントローラ内の変数にアクセスすることでデータが表示されています。ここでは `angular.module('myApp', ['onsen'])` の短縮記法である `ons.bootstrap()` を使っています。（もちろん、前者のように書く場合は `ng-app="myApp"` が必要です）。
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular1&category=Reference&module=page&docs=false"></iframe>
+
+AngularJS を使った Onsen UI のサンプルプログラムをもっと見たい方は、[このリンク](https://tutorial.onsen.io/index.html?framework=angular1&category=Reference&module=page) からご覧ください。
+
+### Angular 2
+
+これは少々複雑です。Angular 2 を利用するには TypeScript を使います。まずは、 `platformBrowserDynamic`、`NgModule`、`OnsenModule` などの必要モジュールのインポートが必要です。これらのモジュールにより、型付けされた Onsen UI コンポーネントが使えるようになります。
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular2&category=Reference&module=page&docs=false"></iframe>
+
+[このリンク](https://tutorial.onsen.io/index.html?framework=angular2&category=Reference&module=page)からさらに、Onsen UI を使った Angular 2 のチュートリアルにアクセスできます。
+
+### React
+
+React の使い方は独特です。このサンプルでは JSX を使い、トランスパイラとして Babel を利用しています。一見複雑なようにも見えますが、個人的には React のアプローチが好きです。なぜなら、モジュール化を強制し、さらに JSX により「テンプレート」とロジックを直接結び付けているからです。
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=react&category=Reference&module=page&docs=false"></iframe>
+
+さらに Onsen UI のための React コンポーネントサンプルが欲しい方は、[こちら](https://tutorial.onsen.io/index.html?framework=react&category=Reference&module=page)からどうぞ。
+
+### Vue.js
+
+Vue は、物事をシンプルにしてくれる強力なフレームワークです。少なくとも前の2つよりはシンプルです。実際このサンプルでは、最初の2行で Vue.js フレームワークと vue-onsenui バインディングをインクルードしているだけで、残りはほとんど Vanilla JavaScript のようなものです。また、Vue では、`ons.notification` を使わなくても、テンプレートから直接`$notification` にアクセスできます。
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/vue_helloworld.html&docs=false"></iframe>
+
+Vue のバインディングはまだ**開発中**ですが、Vue 2 を完全にサポートするために、これからバインディングを準備していきたいと思っています。ご期待ください!
+
+### Knockout.js
+
+シンプルな（といってもそんなにシンプルでない）アプリを作るための選択肢として、もう1つ良いフレームワークがあります。Knockout.js なら、通常の使い方では **バインディングパッケージすら要らず**、好きなようにバインディングが定義できます。このサンプルでは、ページが初期化されたタイミングで、`init` イベントの中で直接 Knockout のビューモデルを紐づけています（ページの ID を使っています）。
+
+<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/knockout_helloworld.html&docs=false"></iframe>
+
+Knockout.js と Onsen UI の組み合わせ方についてもっと知りたければ、もう1つ[このサンプル](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html)をどうぞ。このサンプルは同時にナビゲーターとタブバーを使っているため、もう少し複雑です。
+
+## まとめ
+
+最近の主要なフレームワークへの Onsen UI の組み込みがいかに簡単か、おわかりいただけたと思います。中には、「ブートストラップ」コードを多用する複雑なフレームワークもありますが、それらのフレームワークも、アプリの規模が大きくなってデータとビューを堅実に管理する必要が出てきた時にはとても便利です。学習曲線が緩やかで単純明快なフレームワークでは、複雑なアプリには対応できません。しかし最終的にこれは考え方の問題でもあり、各開発者の好みにもよるでしょう。あなたはどうでしょうか？ Onsen UI 用にどれを選びますか？
+
+
+[Github](https://github.com/OnsenUI/OnsenUI)でのスターや、[ツイート](https://twitter.com/Onsen_UI_ja)、コメントなどいただけるとうれしいです。では楽しいコーディングを!
+<style>
+.local-iframe-style {
+  box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
+  width: 100%;
+  height: 540px;
+}
+</style>
+
+（この記事は Onsen UI チームの [Fran Dios](https://twitter.com/frandiox) が英語版 Monaca x Onsen ブログに投稿した [Comparing frameworks: Hello World!](https://onsen.io/blog/framework-comparison/) の翻訳です。）
