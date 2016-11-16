@@ -24,7 +24,9 @@ The following are simple examples that show an alert when clicking on a button. 
 
 Since Onsen UI components behave like native DOM elements (Custom Elements) it's really simple to deal with them with **pure JavaScript or jQuery**. We just have events, DOM elements, attributes and properties. Good old and plain JavaScript.
 
-<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=vanilla&category=Reference&module=page&docs=false"></iframe>
+<div class="local-iframe-wrapper-style">
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=vanilla&category=Reference&module=page&docs=false"></iframe>
+</div>
 
 In Onsen UI the right place to initialize a page is in its `init` event. Simply set a listener and modify whatever you need. Follow [this link](https://tutorial.onsen.io/index.html?framework=vanilla&category=Reference&module=page) to see the main view of the interactive tutorial and find more examples with Vanilla JavaScript using other components.
 
@@ -32,7 +34,9 @@ In Onsen UI the right place to initialize a page is in its `init` event. Simply 
 
 For this example we can set up an AngularJS controller linked to the main page. Our HTML behaves like a template accessing the scoped variables from the controller and thus displaying data. We use `ons.bootstrap()` shortcut syntax, what is equivalent to `angular.module('myApp', ['onsen'])` (having `ng-app="myApp"` set, of course).
 
-<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular1&category=Reference&module=page&docs=false"></iframe>
+<div class="local-iframe-wrapper-style">
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular1&category=Reference&module=page&docs=false"></iframe>
+</div>
 
 [Here](https://tutorial.onsen.io/index.html?framework=angular1&category=Reference&module=page) you can find more AngularJS + Onsen UI samples.
 
@@ -40,7 +44,9 @@ For this example we can set up an AngularJS controller linked to the main page. 
 
 This is getting complex. We start using TypeScript now for Angular 2. Here we must import our shopping list: `platformBrowserDynamic`, `NgModule`, `OnsenModule`, etc. Once we get all the ingredients we can safely start to cook our typed components.
 
-<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular2&category=Reference&module=page&docs=false"></iframe>
+<div class="local-iframe-wrapper-style">
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=angular2&category=Reference&module=page&docs=false"></iframe>
+</div>
 
 [This link](https://tutorial.onsen.io/index.html?framework=angular2&category=Reference&module=page) has more tuts using Angular 2 with Onsen UI.
 
@@ -48,7 +54,9 @@ This is getting complex. We start using TypeScript now for Angular 2. Here we mu
 
 React has its own way to do things. We are using JSX in this example and Babel for transpiling it. Even thought it may seem complex, I personally like the React approach since it enforces modularity and, thanks to JSX, the "template" and the logic is directly connected.
 
-<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=react&category=Reference&module=page&docs=false"></iframe>
+<div class="local-iframe-wrapper-style">
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=react&category=Reference&module=page&docs=false"></iframe>
+</div>
 
 More examples with React Components for Onsen UI [here](https://tutorial.onsen.io/index.html?framework=react&category=Reference&module=page).
 
@@ -56,7 +64,9 @@ More examples with React Components for Onsen UI [here](https://tutorial.onsen.i
 
 Vue is a very powerful framework that keeps things simple. Or at least simpler than the previous two, in my personal opinion. Notice that in the first two lines we are just including Vue.js framework and `vue-onsenui` bindings, but the rest is almost like Vanilla JavaScript. In Vue we have access to `$notification` instead of `ons.notification` object directly from the template.
 
-<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/vue_helloworld.html&docs=false"></iframe>
+<div class="local-iframe-wrapper-style">
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/vue_helloworld.html&docs=false"></iframe>
+</div>
 
 Vue bindings are still a **work in progress**. From now on we want to prepare these bindings to fully support Vue 2. Stay tunned!
 
@@ -64,7 +74,9 @@ Vue bindings are still a **work in progress**. From now on we want to prepare th
 
 Another good option for simple (and maybe not so simple) apps. For basic Knockout.js usage **we don't even need a bindings package**, we can just define the bindings as we want. In this case we link a Knockout view model when a page is initialized directly in the `init` event based on the page's ID.
 
-<iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/knockout_helloworld.html&docs=false"></iframe>
+<div class="local-iframe-wrapper-style">
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/knockout_helloworld.html&docs=false"></iframe>
+</div>
 
 Want more about Knockout.js + Onsen UI? Have a look at [this other example](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html). It's a bit more complex since it's using Navigator and Tabbar at the same time.
 
@@ -75,9 +87,15 @@ We have seen how easy is to plug Onsen UI with some of the most common framework
 Stars on [Github](https://github.com/OnsenUI/OnsenUI), [tweets](https://twitter.com/Onsen_UI) and comments are very appreciated. Happy coding!
 
 <style>
-.local-iframe-style {
+.local-iframe-wrapper-style {
   box-shadow: 0 3px 6px rgba(0,0,0,.16),0 3px 6px rgba(0,0,0,.23);
   width: 100%;
   height: 540px;
+  overflow: hidden;
+}
+
+.local-iframe-style {
+  width: 100%;
+  height: 100%;
 }
 </style>
