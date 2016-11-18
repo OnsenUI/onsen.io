@@ -287,9 +287,11 @@ module.exports = function() {
         return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
       },
 
-      translate: function(message) {
+      translate: function(message, lang) {
 
-        var lang = this.lang;
+        if (!lang){
+          lang = this.lang;
+        }
 
         if (typeof message !== 'string') {
           return message;
