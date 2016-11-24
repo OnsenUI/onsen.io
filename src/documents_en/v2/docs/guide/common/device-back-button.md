@@ -25,7 +25,6 @@ ons.setDefaultDeviceBackButtonListener(function(event) {
         navigator.app.exitApp(); // Close the app
       }
     });
-  ));
 });
 ```
 
