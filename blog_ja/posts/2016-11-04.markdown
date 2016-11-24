@@ -1,16 +1,16 @@
 ---
 author: atsushi
 date: 2016-11-04
-id: 
+id: monaca-cordova-background-geolocation-lt
 title: "バックグラウンドで位置情報を取得するcordova-background-geolocation-ltを試す"
 tags: monaca,background,geolocation
 product: monaca
 category: 技術情報
 ---
 
-Monacaアプリはハイブリッドアプリという特性上、バックグラウンドになると処理ができなくなったり、様々な制約が生じます。そんな問題を乗り越えるために幾つかのプラグインが存在します。
+Monacaアプリはハイブリッドアプリという特性上、バックグラウンドでは処理が実行できなくなるという制約が生じます。そんな問題を乗り越えるために幾つかのプラグインが存在します。
 
-今回はバックグラウンドでも位置情報を取得し続けられる[transistorsoft/cordova-background-geolocation-lt](https://github.com/transistorsoft/cordova-background-geolocation-lt)を紹介します。なお、Androidは有料なプラグインのようです。そのため今回はiOS向けに試しています。
+今回はバックグラウンドでも位置情報を取得し続けられる[transistorsoft/cordova-background-geolocation-lt](https://github.com/transistorsoft/cordova-background-geolocation-lt)を紹介します。なお、Android版のプラグインは有料のようです。そのため今回のサンプルはiOSで試しています。
 
 ### インストール
 
@@ -83,7 +83,7 @@ bgGeo.configure({
 
 #### データ取得時のコールバック設定
 
-データを取得した際のコールバックには位置情報とタスクIDが送られます。必ず最後には bgGeo.finish(taskId); を実行します。
+データを取得した際のコールバックには位置情報とタスクIDが送られます。必ず最後には bgGeo.finish(タスクID); を実行します。
 
 ```
 var callbackFn = function(location, taskId) {
@@ -271,7 +271,7 @@ if (navigator.geolocation) {
 
 ![](/blog/content/images/2016/Nov/monaca-bg-geo-3.png)
 
-バックグラウンド実行に対応しているのでアプリが前面にある必要はありません。持ち歩いているだけでデータの収集が行われています。逆にデータをクラウドに保存する仕組みにしていると勝手に通信が行われ続けてしまいますので注意してください（ bgGeo.stop() で停止できます）。
+バックグラウンド実行に対応しているのでアプリが前面にある必要はありません。持ち歩いているだけでデータの収集が行われています。データをクラウドに保存する仕組みにしていると勝手に通信が行われ続けてしまいますので注意してください（ bgGeo.stop() で停止できます）。
 
 ----
 
