@@ -15,6 +15,7 @@ category: 技術情報
 ### Ad Generationの利用について
 
 Ad Generationへのユーザ登録は無料で行えます。今回はデモの広告使ってアプリ内に表示してみたいと思います。なお、本当の広告を表示する際にはアプリ毎に審査が行われます。審査を通っていない状態では広告配信が行われませんので注意してください。
+なお、動画広告やローテーションを設定した広告は、Monacaでは利用出来ません。
 
 ### 広告表示の準備
 
@@ -90,26 +91,24 @@ function makeADGLink(arr){
 これを index.html など広告を表示したいHTMLファイル内で読み込みます。
 
 ```
-<script src="/js/ad.js"></script>
+<script src="js/ad.js"></script>
 ```
 
 後は広告を表示したい場所に対して HTMLタグを記述します。このHTMLタグはスタイルシートを使って自由に変更できます。
 
 ```
-<div id="adg_1"></div>
+<div id="adg"></div>
 ```
 
 ### 広告を表示する
 
-今回はデモなので[表示確認用テストID一覧 · AdGeneration/sdk Wiki](https://github.com/AdGeneration/sdk/wiki/%E8%A1%A8%E7%A4%BA%E7%A2%BA%E8%AA%8D%E7%94%A8%E3%83%86%E3%82%B9%E3%83%88ID%E4%B8%80%E8%A6%A7)に公開されているIDを使ってみます。
-
 onDeviceReadyなど、デバイスの準備ができた段階のコールバックを受けて、次のようにJavaScriptを実行します。
 
 ```
-makeADGTag(26492, 'adg_1');
+makeADGTag(10722, 'adg');
 ```
 
-この 26492 という広告IDがデモ用のIDになります。
+この 10722 という広告IDがデモ用のIDになります。
 
 問題なければアプリの中に広告が表示されます。
 
