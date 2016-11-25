@@ -5,16 +5,16 @@ id: monaca-cli-transpile
 title: "New function added to Monaca CLI "transpile""
 product: monaca
 tags: monaca, cli
-category: monaca cli
+category: tutorial
 ---
 
-Monaca CLI is a command-line tool which makes local development of Monaca App easier. Recently, a new function called "transpile" has been added to Monaca CLI. transpile currently supports Angular2/React App.
+Monaca CLI is a command-line tool which makes local development of Monaca apps easier. Recently, a new function called "transpile" has been added to Monaca CLI. It can be used to transpile code for React/Angular 2 apps.
 
-We will explain in details about transpile option.
+We will explain in details about the `transpile` option.
 
 ## Installation of Monaca CLI
 
-To use Monaca CLI, Node.js is required. After installing Node.js, use "npm" command in the command prompt to install Monaca as following.
+To use Monaca CLI, Node.js is required. After installing Node.js, use `npm` (or yarn) in the command prompt to install Monaca as follows:
 
 ```
 $ npm install monaca -g
@@ -22,7 +22,7 @@ $ npm install monaca -g
 
 ## Usage
 
-transpile is an option which has been used to switch between codes. Basically, it is being used in React or Angular2 project which is not written in EcmaScript5. An example for React project, select the category 'Onsen UI and React' and then choose the desired template as following:
+Transpilation is used to convert languages like JSX (React) or Typescript (Angular 2) into something that can be executed by the browser.  If you want to create a project with React, select the category 'Onsen UI and React' and then choose the desired template as following:
 
 ```
 $ monaca create react_monaca
@@ -36,7 +36,7 @@ $ monaca create react_monaca
   Sample Apps
 ```
 
-"src" directory has been created. The React app source code has been stored in this directory.
+A directory called `src` has been created. The React app source code has been stored in this directory.
 
 ```
 $ tree src/
@@ -51,11 +51,11 @@ src/
 1 directory, 5 files
 ```
 
-It is written as jsx as above. This could not be used as Monaca App without transcripting into EcmaScript5; therefore, transpile is applied below.
+It is written as JSX as above. This could not be used as Monaca app without transpiling into ES5. Therefore, transpile is applied below.
 
-### transpile usage
+### How to transpile
 
-Running the following monaca command will make transpile executed at the same time.
+Running the following monaca command will transpile the code.
 
 - monaca upload
 - monaca preview
@@ -63,7 +63,7 @@ Running the following monaca command will make transpile executed at the same ti
 - monaca debug
 - monaca remote build
 
-transpile is being executed automatically in monaca command. To execute transpile alone, follow the command below. However, Web Font and Javascript, stylesheet will be compacted.
+Transpilation is performed automatically in Monaca CLI. To execute transpile alone, use the command below. Fonts, JS and stylesheet will be minified.
 
 ```
 $ monaca transpile
@@ -93,14 +93,7 @@ assets/Material-Design-Iconic-Font.a4d31128b633bc0b1cc1f18a34fb3851.woff2    38.
 Transpiling finished for /path_to/react_monaca
 ```
 
-If command is successfully executed, these files will be placed under www directory. This means files are being generated to be used as Monaca App.
-
-www/index.html will also be generated with the following simple code which includes Javascript/CSS file into the page.
-
-```
-$ cat www/index.html 
-<!DOCTYPE html> <html> <head> <meta charset=utf-8> <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"> <meta http-equiv=Content-Security-Policy content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'"> <script type=text/javascript src=components/loader.js></script> <link rel=stylesheet type=text/css href=components/loader.css> <link href=app.css rel=stylesheet></head> <body> <div id=app></div> <script type=text/javascript src=vendor.bundle.js></script><script type=text/javascript src=app.bundle.js></script></body> </html>
-```
+If the command is successfully executed, these files will be placed in the `www` directory. This means files are being generated to be used as a Monaca app.
 
 Next, all you need to do is to create React or Angular2 App.
 
@@ -108,8 +101,6 @@ Next, all you need to do is to create React or Angular2 App.
 
 ----
 
-gulp or WebPack could also be used as transpile environment; however, it consumes a lot of time. In this case, we recommend using Monaca to create the hybrid app easily.
-
-※ In order to use Monaca CLI, please subscribe to a valid plan.
+Gulp could also be used to transpile; however, it consumes a lot of time. In this case, we recommend using Monaca to create the hybrid app easily.
 
 [Monaca CLI command - Monaca Docs](https://docs.monaca.io/en/manual/development/monaca_cli/cli_commands/#monaca-transpile)
