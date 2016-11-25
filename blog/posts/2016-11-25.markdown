@@ -46,7 +46,7 @@ src/
 ├── SettingsPage.jsx
 ├── main.jsx
 └── public
-    └── index.ejs
+    └── index.html.ejs
 
 1 directory, 5 files
 ```
@@ -59,7 +59,6 @@ Running the following monaca command will transpile the code.
 
 - monaca upload
 - monaca preview
-- monaca serve
 - monaca debug
 - monaca remote build
 
@@ -93,7 +92,7 @@ assets/Material-Design-Iconic-Font.a4d31128b633bc0b1cc1f18a34fb3851.woff2    38.
 Transpiling finished for /path_to/react_monaca
 ```
 
-If the command is successfully executed, these files will be placed in the `www` directory. This means files are being generated to be used as a Monaca app.
+If the command is successfully executed, these files will be placed in the `www` directory. This means files are being generated to be used as a Monaca app. The only exception is `monaca preview`, which keeps the result in memory (instead of `www` directory) in order to speed up the development process.
 
 Next, all you need to do is to create React or Angular2 App.
 
