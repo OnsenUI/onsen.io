@@ -8,7 +8,7 @@ tags: monaca, 3dtouch,ios
 category: 技術情報
 ---
 
-iPhone 6 Plus以降から導入されている3D Touchという機能があります。画面を強くタップすると発動するPeek & Popというイベントで、若干トリッキーです。それもあって、使いこなしているという人はあまり多くありません。とは言え、例えばLINEのメッセージを長押しすると既読が付かずに内容が読めると言ったそのアプリをよく使っている人にとっては便利な機能が3D Touchで実現されたりします。
+iPhone 6s以降から導入されている3D Touchという機能があります。画面を強くタップすると発動するPeek & Popというイベントで、若干トリッキーです。それもあって、使いこなしているという人はあまり多くありません。とは言え、例えばLINEのメッセージを長押しすると既読が付かずに内容が読めると言ったそのアプリをよく使っている人にとっては便利な機能が3D Touchで実現されたりします。
 
 今回はそんな3D TouchをMonacaアプリで実現するための[cordova-plugin-3dtouch](https://github.com/EddyVerbruggen/cordova-plugin-3dtouch)を紹介します。
 
@@ -131,7 +131,7 @@ document.addEventListener('deviceready', function() {
 
 ### 注意点
 
-Monacaアプリをデバッガーとしてビルドした場合、 ThreeDeeTouch.onHomeIconPressed が呼ばれないので注意してください。デバッグビルドなどであれば問題ありません。
+カスタムビルド版デバッガーの場合、 ThreeDeeTouch.onHomeIconPressed が呼ばれないので注意してください。デバッグビルド/アドホックビルド/リリースビルドであれば問題ありません。
 
 Peek & Popを有効にするとすべてのリンクがPeek & Pop対応になります。
 
