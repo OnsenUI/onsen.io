@@ -99,8 +99,8 @@ ThreeDeeTouch.configureQuickActions([
     iconType: 'Search'
   },
   {
-    title: 'お気に入り表示',
-    iconTemplate: 'HeartTemplate'
+    type: 'favorite',
+    title: 'お気に入り表示'
   }
 ]);
 ```
@@ -116,15 +116,9 @@ ThreeDeeTouch.configureQuickActions([
 ```
 document.addEventListener('deviceready', function() {
   ThreeDeeTouch.onHomeIconPressed = function(payload) {
-    if (payload.type == 'checkin') {
-      document.location = 'checkin.html';
-    } else if (payload.type == 'share') {
-      document.location = 'share.html';
-    } else {
-      setTimeout(function() {
-        alert(JSON.stringify(payload));
-      }, 500);
-    }
+    setTimeout(function() {
+      alert("Type: " + payload.type + ". Title: " + payload.title + ".");
+    }, 500);
   }
 }, false);
 ```
