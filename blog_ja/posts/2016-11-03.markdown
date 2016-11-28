@@ -8,7 +8,7 @@ tags: monaca, 3dtouch,ios
 category: 技術情報
 ---
 
-iPhone 6s以降から導入されている3D Touchという機能があります。画面を強くタップすると発動するPeek & Popというイベントで、若干トリッキーです。それもあって、使いこなしているという人はあまり多くありません。とは言え、例えばLINEのメッセージを長押しすると既読が付かずに内容が読めると言ったそのアプリをよく使っている人にとっては便利な機能が3D Touchで実現されたりします。
+iPhone 6s以降から導入されている3D Touchという機能があります。画面を強くタップすると発動するPeek & Popというイベントで、若干トリッキーです。それもあって、使いこなしているという人はあまり多くありません。とはいえ、例えばLINEのメッセージを長押しすると既読が付かずに内容が読めると言ったそのアプリをよく使っている人にとっては便利な機能が3D Touchで実現されたりします。
 
 今回はそんな3D TouchをMonacaアプリで実現するための[cordova-plugin-3dtouch](https://github.com/EddyVerbruggen/cordova-plugin-3dtouch)を紹介します。
 
@@ -60,9 +60,9 @@ force touch x coordinate 273
 force touch timestamp 1478070258.324255
 ```
 
-#### Peek & Pop
+#### Peek & Pop（リンクプレビュー）
 
-Peek & Popを使うと、外部リンクをPeek & Popで表示するようになります。そのためにはまずPeek & Popを有効にする必要があります。
+Peek & Popを使うと、外部リンクをプレビュー表示するようになります。そのためにはまずPeek & Popを有効にする必要があります。
 
 ```
 // 有効にする
@@ -71,13 +71,13 @@ ThreeDeeTouch.enableLinkPreview();
 ThreeDeeTouch.disableLinkPreview();
 ```
 
-後はリンクを深く押すとプレビューで表示されるようになります。
+有効にした後はリンクを強く押すとプレビューで表示されるようになります。
 
 ![](/blog/content/images/2016/Nov/monaca-3dtouch-1.gif)
 
-### クイックアクション
+### クイックアクション（ホームアイコンから特定の機能にアクセス）
 
-クイックアクションはアプリのホーム画面でアプリアイコンをForce Touchするとショートカットメニューが表示される機能です。これはアプリ起動時に設定をします。
+クイックアクションはアプリのホーム画面でアプリアイコンをForce Touchする（強く押す）とショートカットメニューが表示される機能です。これはアプリ起動時に設定をします。
 
 ```
 ThreeDeeTouch.configureQuickActions([
@@ -131,6 +131,7 @@ document.addEventListener('deviceready', function() {
 
 ### 注意点
 
+サードパーティ製プラグインを利用しているため、アプリのビルドが必要です。
 カスタムビルド版デバッガーの場合、 ThreeDeeTouch.onHomeIconPressed が呼ばれないので注意してください。デバッグビルド/アドホックビルド/リリースビルドであれば問題ありません。
 
 Peek & Popを有効にするとすべてのリンクがPeek & Pop対応になります。
