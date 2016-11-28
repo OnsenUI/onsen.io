@@ -8,7 +8,7 @@ tags: monaca, ble, local notification
 category: 技術情報
 ---
 
-iOS7から登場し、最近iBeacon（ビーコン）を使った事例が増えつつあります。今回はMonacaアプリにBLE機能を組み込みつつ、ローカル通知を使ってビーコンの検知をお知らせする機能を作ってみます。
+iOS7からiBeacon（ビーコン）が利用できるようになり、話題になったことは記憶に新しいと思います。最近ではビーコンを使った事例が着々と増えつつあります。今回はMonacaアプリにBLE機能を組み込み、ローカル通知を使ってビーコンの検知をお知らせする機能を作ってみます。
 
 ### 対象OS
 
@@ -139,11 +139,11 @@ cordova.plugins.locationManager.setDelegate(delegate);
 
 #### 監視するビーコンの作成
 
-次に監視するビーコンを作成します。今回はUUIDだけですが、さらにmajor、minorといった二つの数値を付け加えることもできます。これにより、店舗や店舗内の場所など細かくビーコンの位置を決められるようになります。
+次に監視するビーコンを作成します。手持ちのビーコン端末の設定情報を参照して、UUIDを確認してください。今回指定しているのはUUIDだけですが、さらにmajor、minorといった二つの数値を付け加えることもできます。これにより、店舗や店舗内の場所など細かくビーコンの位置を決められるようになります。
 
 ```
 var uuid = '000000-0000-0000-0000-0000000000'; // ビーコンのUUID
-var identifier = '何かID';
+var identifier = '任意のID';
 var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid);
 beaconRegion.notifyEntryStateOnDisplay = true;
 ```
@@ -161,11 +161,13 @@ cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
 	.done();
 ```
 
-ここまでで完了です。
+ここまででソースコードは完成です。
 
 ----
 
-後はアプリがバックグラウンドになっていても（ロック状態でも）ビーコンの範囲に入るとローカル通知が表示されるようになります。時間制限もなさそうで、数十分ロックした状態のままのiOSデバイスでもちゃんとローカル通知が表示されました。
+サードパーティ製のプラグインを2つ使っているので、アプリのビルド、またはカスタムデバッガーを作成した上で実行してみてください。
+
+アプリがバックグラウンドになっていても（ロック状態でも）ビーコンの範囲に入るとローカル通知が表示されるようになります。時間制限もなさそうで、数十分ロックした状態のままのiOSデバイスでもちゃんとローカル通知が表示されました。
 
 ![](/blog/content/images/2016/Oct/monaca-with-ble-5.png)
 
