@@ -108,7 +108,7 @@ delegate.didExitRegion = function(pluginResult) {
 }
 ```
 
-今回は BLE を感知したタイミングで didEnterRegion が、範囲外になったタイミングで didExitRegion が呼ばれます。ビーコンを感知していると didRangeBeaconsInRegion が継続的に呼ばれ続けます。次のようなJSONになっていますので、proximityの値を見てビーコンとデバイスの距離がどれくらいであるかを予測できるようになっています。ProximityFarは遠いです。近いと ProximityNear、さらに近いと ProximityImmediate になります。
+今回は BLE を感知したタイミングで didEnterRegion が、範囲外になったタイミングで didExitRegion が呼ばれます。ビーコンを感知していると didRangeBeaconsInRegion が継続的に呼ばれ続けます。pluginResult の値は以下のようなJSONになっていますので、proximityの値を見てビーコンとデバイスの距離がどれくらいであるかを予測できるようになっています。ProximityFarは遠いです。近いと ProximityNear、さらに近いと ProximityImmediate になります。
 
 ```
 {
@@ -166,8 +166,9 @@ cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
 ----
 
 サードパーティ製のプラグインを2つ使っているので、アプリのビルド、またはカスタムデバッガーを作成した上で実行してみてください。
+あらかじめモバイルデバイス側のBluetoothをONに設定しておく必要があります。
 
-アプリがバックグラウンドになっていても（ロック状態でも）ビーコンの範囲に入るとローカル通知が表示されるようになります。時間制限もなさそうで、数十分ロックした状態のままのiOSデバイスでもちゃんとローカル通知が表示されました。
+一度起動すると、アプリがバックグラウンドになっていても（ロック状態でも）ビーコンの範囲に入るとローカル通知が表示されるようになります。時間制限もなさそうで、数十分ロックした状態のままのiOSデバイスでもちゃんとローカル通知が表示されました。
 
 ![](/blog/content/images/2016/Oct/monaca-with-ble-5.png)
 
