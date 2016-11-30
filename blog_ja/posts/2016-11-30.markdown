@@ -79,6 +79,7 @@ Androidでも位置情報に関する許諾を求めるアラートが出ます�
 次にdelegateを作成します。アクションが起きた際にこの変数で定義されているメソッドが呼ばれます。
 
 ```
+// delegateの作成と設定
 var delegate = new cordova.plugins.locationManager.Delegate();
 delegate.didDetermineStateForRegion = function(pluginResult) {
 	console.log('didDetermineStateForRegion', pluginResult);
@@ -88,22 +89,20 @@ delegate.didStartMonitoringForRegion = function(pluginResult) {
 }
 
 delegate.didRangeBeaconsInRegion = function(pluginResult) {
-	if (document.getElementById("log").value == '') {
-		document.getElementById("log").value = JSON.stringify(pluginResult);
-	}
+	document.getElementById("log").value = JSON.stringify(pluginResult);
 }
 
 delegate.didEnterRegion = function(pluginResult) {
 	cordova.plugins.notification.local.add({
-		title: "Welcome",
-		text: "Tap to launch app"
+		title: "いらっしゃいませ",
+    	        text: "アプリを立ち上げてクーポンをゲットしてください"
 	});
 }
 delegate.didExitRegion = function(pluginResult) {
 	cordova.plugins.notification.local.add({
-		id: 30244234234,
-		title: "Good By!",
-		text: "Hope to see you again."
+		id: 100,
+                title: "ご来店ありがとうございました",
+    	        text: "またのお越しを楽しみにしております。"
 	});
 }
 ```
@@ -142,7 +141,8 @@ cordova.plugins.locationManager.setDelegate(delegate);
 次に監視するビーコンを作成します。手持ちのビーコン端末の設定情報を参照して、UUIDを確認してください。今回指定しているのはUUIDだけですが、さらにmajor、minorといった二つの数値を付け加えることもできます。これにより、店舗や店舗内の場所など細かくビーコンの位置を決められるようになります。
 
 ```
-var uuid = '000000-0000-0000-0000-0000000000'; // ビーコンのUUID
+// 監視するビーコンの作成
+var uuid = '00000000-0000-0000-0000-000000000000'; // ビーコンのUUID
 var identifier = '任意のID';
 var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid);
 beaconRegion.notifyEntryStateOnDisplay = true;
@@ -153,8 +153,9 @@ beaconRegion.notifyEntryStateOnDisplay = true;
 最後にビーコンの監視を開始します。一つが監視の開始、一つが通知受信の開始になります。
 
 ```
+// 監視の開始
 cordova.plugins.locationManager.startRangingBeaconsInRegion(beaconRegion)
-	.fail(console.error);
+	.fail(console.error)
 	.done();
 cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
 	.fail(function(e) { console.error(e); })
