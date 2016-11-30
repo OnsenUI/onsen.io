@@ -143,7 +143,7 @@ module.exports = function(lang) {
 
   return function(files, metalsmith, done) {
     glob([
-      basePath + '/dist/v2/react-onsenui/docs/*.json'
+      basePath + '/dist/v2/OnsenUI/bindings/react/docs/*.json'
     ]).then(function(paths) {
       return Promise.all(paths.map(function(path) {
         return generateAPIDocument(metalsmith, path).then(function(result) {
