@@ -2,13 +2,13 @@
 author: atsushi
 date: 2016-11-30
 id: ble-with-local-notification
-title: "MonacaアプリにBLE×ローカル通知を組み込む"
+title: "ビーコンを検知して通知を送るMonacaアプリを作る"
 product: monaca
 tags: monaca, ble, local notification
 category: 技術情報
 ---
 
-iOS7からiBeacon（ビーコン）が利用できるようになり、話題になったことは記憶に新しいと思います。最近ではビーコンを使った事例が着々と増えつつあります。今回はMonacaアプリにBLE機能を組み込み、ローカル通知を使ってビーコンの検知をお知らせする機能を作ってみます。
+iOS7からiBeacon（ビーコン）が利用できるようになり、話題になったことは記憶に新しいと思います。最近ではビーコンを使った事例が着々と増えつつあります。今回はMonacaアプリにビーコン連携機能を組み込み、ローカル通知を使ってビーコンの検知をお知らせする機能を作ってみます。
 
 ### 対象OS
 
@@ -26,8 +26,8 @@ BLE信号を発信する、いわゆるビーコンデバイスを用意して�
 
 今回はCordovaプラグインとして以下の2つを使っています。
 
-- [petermetz/cordova-plugin-ibeacon](https://github.com/petermetz/cordova-plugin-ibeacon)
-- [katzer/cordova-plugin-local-notifications](https://github.com/katzer/cordova-plugin-local-notifications/)
+- [petermetz/cordova-plugin-ibeacon](https://github.com/petermetz/cordova-plugin-ibeacon)　（ビーコン連携プラグイン）
+- [katzer/cordova-plugin-local-notifications](https://github.com/katzer/cordova-plugin-local-notifications/)　（ローカル通知プラグイン）
 
 Zipファイルでダウンロードして、Corodvaプラグインの管理にてインポートしてください。
 
@@ -52,7 +52,7 @@ document.addEventListener('deviceready', onDeviceReady, false);
 
 #### 必要な権限を取得
 
-今回必要なのはローカルのプッシュ通知とBLEを通じた位置情報の取得です。アプリを起動中だけでなく、バックグラウンドでも取得するようにします。
+今回必要なのはローカル通知とBLEを通じた位置情報の取得です。アプリを起動中だけでなく、バックグラウンドでも取得するようにします。
 
 ```
 // 必要な権限を取得
@@ -107,7 +107,7 @@ delegate.didExitRegion = function(pluginResult) {
 }
 ```
 
-今回は BLE を感知したタイミングで didEnterRegion が、範囲外になったタイミングで didExitRegion が呼ばれます。ビーコンを感知していると didRangeBeaconsInRegion が継続的に呼ばれ続けます。pluginResult の値は以下のようなJSONになっていますので、proximityの値を見てビーコンとデバイスの距離がどれくらいであるかを予測できるようになっています。ProximityFarは遠いです。近いと ProximityNear、さらに近いと ProximityImmediate になります。
+今回はビーコンを感知したタイミングで didEnterRegion が、範囲外になったタイミングで didExitRegion が呼ばれます。ビーコンを感知していると didRangeBeaconsInRegion が継続的に呼ばれ続けます。pluginResult の値は以下のようなJSONになっていますので、proximityの値を見てビーコンとデバイスの距離がどれくらいであるかを予測できるようになっています。ProximityFarは遠いです。近いと ProximityNear、さらに近いと ProximityImmediate になります。
 
 ```
 {
@@ -136,9 +136,9 @@ delegate.didExitRegion = function(pluginResult) {
 cordova.plugins.locationManager.setDelegate(delegate);
 ```
 
-#### 監視するビーコンの作成
+#### 監視するビーコンの設定
 
-次に監視するビーコンを作成します。手持ちのビーコン端末の設定情報を参照して、UUIDを確認してください。今回指定しているのはUUIDだけですが、さらにmajor、minorといった二つの数値を付け加えることもできます。これにより、店舗や店舗内の場所など細かくビーコンの位置を決められるようになります。
+次に監視するビーコンを設定します。手持ちのビーコン端末の設定情報を参照して、UUIDを確認してください。今回指定しているのはUUIDだけですが、さらにmajor、minorといった二つの数値を付け加えることもできます。これにより、店舗や店舗内の場所など細かくビーコンの位置を決められるようになります。
 
 ```
 // 監視するビーコンの作成
@@ -177,7 +177,7 @@ Androidでも使えます。
 
 ![](/blog/content/images/2016/Oct/monaca-with-ble-3.png)
 
-ただし、アプリをタスクから消してしまうとプッシュ通知がこないようなので注意してください。
+ただし、アプリをタスクから消してしまうとローカル通知がこないようなので注意してください。
 
 ビーコンを使った通知機能はO2Oマーケティングの他、企業内でも入退室管理に使われることもあります。アプリを立ち上げてさえおけば良いので、様々な使い方が考えられるのではないでしょうか。
 
