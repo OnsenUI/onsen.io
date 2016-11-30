@@ -95,14 +95,14 @@ delegate.didRangeBeaconsInRegion = function(pluginResult) {
 delegate.didEnterRegion = function(pluginResult) {
 	cordova.plugins.notification.local.add({
 		title: "いらっしゃいませ",
-    	        text: "アプリを立ち上げてクーポンをゲットしてください"
+		text: "アプリを立ち上げてクーポンをゲットしてください"
 	});
 }
 delegate.didExitRegion = function(pluginResult) {
 	cordova.plugins.notification.local.add({
 		id: 100,
-                title: "ご来店ありがとうございました",
-    	        text: "またのお越しを楽しみにしております。"
+		title: "ご来店ありがとうございました",
+		text: "またのお越しを楽しみにしております。"
 	});
 }
 ```
