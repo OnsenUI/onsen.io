@@ -29,8 +29,7 @@ Monacaアプリはハイブリッドアプリという特性上、バックグ�
 
 #### 初期設定
 
-まず最初にオブジェクトを作ります。
-
+まず最初にオブジェクトを作ります。（devicereadyイベント発生後に実行するようにしてください）
 ```
 var bgGeo = window.BackgroundGeolocation;
 ```
@@ -38,7 +37,7 @@ var bgGeo = window.BackgroundGeolocation;
 次に設定を行います。
 
 ```
-// BackgroundGeoLocation is highly configurable.
+// 初期設定
 bgGeo.configure({
     // 位置情報に関する設定
     desiredAccuracy: 0,
@@ -47,7 +46,7 @@ bgGeo.configure({
     locationUpdateInterval: 1000,
     fastestLocationUpdateInterval: 5000,
 
-    アクティビティ認識の初期設定
+    // アクティビティ認識の初期設定
     activityType: 'AutomotiveNavigation',
     activityRecognitionInterval: 5000,
     stopTimeout: 5,
@@ -55,19 +54,7 @@ bgGeo.configure({
     // アプリケーションの設定
     debug: true,
     stopOnTerminate: false,
-    startOnBoot: true,
-
-    // データの保存先に関する設定
-    url: 'http://posttestserver.com/post.php?dir=cordova-background-geolocation',
-    method: 'POST',
-    autoSync: true,
-    maxDaysToPersist: 1,
-    headers: {
-        "X-FOO": "bar"
-    },
-    params: {
-        "auth_token": "maybe_your_server_authenticates_via_token_YES?"
-    }
+    startOnBoot: true
 }, function(state) {
     // 設定完了時のコールバック
     console.log('BackgroundGeolocation ready: ', state);
@@ -81,9 +68,9 @@ bgGeo.configure({
 
 データ保存先については設定で指定することもできますし、データ取得時のコールバックで設定もできます。
 
-#### データ取得時のコールバック設定
+#### データ取得時のコールバック関数
 
-データを取得した際のコールバックには位置情報とタスクIDが送られます。必ず最後には bgGeo.finish(タスクID); を実行します。
+データを取得した際のコールバック関数には位置情報とタスクIDが送られます。必ず最後には bgGeo.finish(タスクID); を実行します。
 
 ```
 var callbackFn = function(location, taskId) {
@@ -120,9 +107,9 @@ locationには位置情報データが入ってきます。バッテリー情報
 }
 ```
 
-#### データ取得失敗時のコールバック設定
+#### データ取得失敗時のコールバック関数
 
-データの取得に失敗した時のコールバックはエラーメッセージを出すなどになるかと思います。
+データの取得に失敗した時のコールバック関数ではエラーメッセージを出すなどの処理を行うことになるかと思います。
 
 ```
 var failureFn = function(errorCode) {
@@ -138,7 +125,7 @@ var failureFn = function(errorCode) {
 bgGeo.on('location', callbackFn, failureFn);
 ```
 
-これで準備完了です。アプリを起動して、近くを歩き回ると自動的に位置情報が取得され続けるようになります。なお、初回実行時には位置情報の取得とモーションとフィットネスのアクティビティへのアクセス権限が求められます。デバッグ時にはさらにプッシュ通知（ローカルプッシュ）のアクセス権限も必要です。
+これで準備完了です。アプリを起動して、近くを歩き回ると自動的に位置情報が取得され続けるようになります。なお、初回実行時には位置情報の取得とモーションとフィットネスのアクティビティへのアクセス権限が求められます。初期設定で `debug: true` に設定している場合はさらにプッシュ通知（ローカルプッシュ）のアクセス権限も必要です。
 
 ![](/blog/content/images/2016/Nov/monaca-bg-geo-1.png)
 
@@ -163,10 +150,10 @@ var ncmb  = new NCMB(application_key, client_key);
 
 #### コールバック時にデータを登録する
 
-次に位置情報を取得した際のコールバックでデータをニフティクラウド mobile backendへ登録するようにします。詳細は次のコードを参考にしてください。
+次に位置情報データをニフティクラウド mobile backendへ登録するようにします。先ほど作成したデータ取得時のコールバック関数内に以下のコードを追記してください。
 
 ```
-位置情報を取得
+// 位置情報を取得
 var coords = location.coords;
 var lat    = coords.latitude;
 var lng    = coords.longitude;
@@ -234,8 +221,7 @@ if (navigator.geolocation) {
       zoom: 15
     });
     // 位置情報検索用のデータを作成
-    var geoObject = new ncmb.GeoP
-    oint(lat, lng);
+    var geoObject = new ncmb.GeoPoint(lat, lng);
     // 検索する場所（データベースで言うテーブル相当）を指定
     var GeoData = ncmb.DataStore("GeoData");
     
@@ -249,7 +235,7 @@ if (navigator.geolocation) {
       .limit(1000)
       .fetchAll()
       .then(function(ary) {
-        // 取れたデータを gmaps.js 用に整形
+        // 取得したデータを gmaps.js 用に整形
         var paths = [];
         for (var i in ary) {
           var geoData = ary[i];
@@ -271,10 +257,10 @@ if (navigator.geolocation) {
 
 ![](/blog/content/images/2016/Nov/monaca-bg-geo-3.png)
 
-バックグラウンド実行に対応しているのでアプリが前面にある必要はありません。持ち歩いているだけでデータの収集が行われています。今回のようにデータをクラウドに保存する仕組みにしていると勝手に通信が行われ続ける点に注意してください（ bgGeo.stop() で停止できます）。
+バックグラウンド実行に対応しているのでアプリが前面にある必要はありません。持ち歩いているだけでデータの収集が行われています。今回のようにデータをクラウドに保存する仕組みにしていると常時通信が行われ続ける点に注意してください（ bgGeo.stop() で停止できます）。
 
 ----
 
-例えばジョギングアプリなどはバックグラウンドでの位置情報取得ができるようになっていたり、外出先で使う系統のアプリでは位置情報が便利に活用できます。個人で使うだけならデータの蓄積はSQLite上に行っても良さそうですし、クラウドに保存すればよりバックアップやマルチデバイスで活用するといった方法ができるでしょう。
+今回ご紹介した機能は、ジョギングアプリなどの外出先で使う系統のアプリで特に有効です。個人のデータを蓄積するだけであればローカルのSQLite上に保存しても良さそうですし、クラウドに保存すればバックアップ用途やマルチデバイス利用シーンで活用できるでしょう。
 
 今回のコードは[moongift/MonacaWithBackgroundGeo](https://github.com/moongift/MonacaWithBackgroundGeo)にアップしてあります。不明点があれば参考にしてください。
