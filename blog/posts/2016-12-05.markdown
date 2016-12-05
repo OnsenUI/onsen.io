@@ -1,6 +1,6 @@
 ---
 author: andreas
-date: 2016-11-29
+date: 2016-12-05
 id: creating-pokemon-hybrid-app-angular-2-onsen-ui-2
 title: "Creating a Pokémon hybrid app with Angular 2 and Onsen UI"
 product: onsen
@@ -12,17 +12,17 @@ tags: tutorial, angular2, cli, onsen ui
 
 A couple of months ago we published an article on [how to create a Pokedex application](/blog/tutorial-how-to-create-pokemon-app-using-angular2-cli/) using Angular 2. Since then, the stable version of Angular 2 has been released and we have released the RC version of our [Angular 2 bindings](/angular2/).
 
-In this article we will use Onsen UI 2 and Angular 2 to create a simple mobile Pokedex app. We will use some of the code from the previous article, but we will integrate it with Onsen UI. We will also take a look at the [Monaca CLI](https://www.npmjs.com/package/monaca), which is a great tool to create, debug and develop apps with Angular 2 and Onsen UI.
+In this article we will use Onsen UI 2 and Angular 2 to create a simple mobile Pokedex app. We will use some of the code from the previous article, but we will integrate it with Onsen UI. We will also take a look at the [Monaca CLI](https://www.npmjs.com/package/monaca), which is a great tool for creating, debugging, and developing apps with Angular 2 and Onsen UI.
 
 <!-- more -->
 
-With the Monaca CLI you get access to several templates that can serve as starting points for your apps. The CLI is using Webpack to build and package your app so you don't have to set it up yourself. The Monaca CLI also integrates with the [Monaca Debugger](https://monaca.io/debugger.html) so you can test and debug your apps in real devices.
+With the Monaca CLI you get access to several templates that can serve as starting points for your own apps. The CLI is using Webpack to build and package your app so you don't have to set it up yourself. The Monaca CLI also integrates with the [Monaca Debugger](https://monaca.io/debugger.html) so you can test and debug your apps in real devices.
 
-This app is using the great [Pokéapi](https://pokeapi.co/). The API contains all the necessary information to create a complete Pokedex app, with information from all the Pokemon games. Since this is just a sample app, we will only use a small part of the information available.
+This app is using the great [PokéAPI](https://pokeapi.co/). The API contains all the necessary information to create a complete Pokedex app, with information from all the Pokemon games. Since this is just a sample app, we will only use a small part of the information available.
 
 You can try out the app below:
 
-<iframe style="width: 320px; height: 568px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);" src="https://argelius.github.io/angular2-onsenui-pokedex/"></iframe>
+<iframe style="width: 320px; height: 568px; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); margin: 0 auto; display: block" src="https://argelius.github.io/angular2-onsenui-pokedex/"></iframe>
 
 The source code for the app is available in this [GitHub repo](https://github.com/argelius/angular2-onsenui-pokedex).
 
@@ -99,72 +99,42 @@ This will start a web server. The app will be automatically rebuilt every time a
 
 ## Creating the app
 
-We will put all our code in the `src/app` folder. This is where the Angular 2 components, services, etc. is located.
+We will put all our code in the `src/app` folder. This is where the Angular 2 components, services, etc. are located.
 
-The Monaca CLI has created a very simple app for us where we can push and pop pages from the stack. This stack navigation is made possible with the `<ons-navigator>` component which is rendered by the `MyApp` component in the `app.ts` file. The only change we make to this file is that we import a component called `MasterPage` and set it as the intial page in the navigator.
+The Monaca CLI has created a very simple app for us where we can push and pop pages from the stack. This stack navigation is made possible with the `<ons-navigator>` component which is rendered by the `MyApp` component in the `app.ts` file.
+
+We need to add some behavior to this component. This component will render the master page of the app which contains a list of Pokemon fetched from the PokeAPI. When a Pokemon is clicked we will push a new component called `DetailPage` to the page stack that displays some additional information about the Pokemon.
+
+The `ngOnInit` method is called when the component is initialized and we use it to load the first 20 Pokemon from the API using the `loadMore()` method. This method is also called when the user clicks a button at the bottom of the list.
+
+In the `constructor` method two services are injected. The `PokedexService` is used to fetch information from the Pokemon API and the `CaughtPokemonService` is a simple service that keeps track of the Pokemon that have been caught using a `Set` object.
+
+To push a page to the stack the `ViewChild` decorator is used to get a reference to the `OnsNavigator` directive.
 
 ```ts
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-import {MasterPage} from './master';
+import {OnsNavigator} from 'angular2-onsenui';
+import {PokedexService} from './pokedex.service';
+import {CaughtPokemonService} from './caught-pokemon.service';
+import {Pokemon} from './pokemon';
+import {DetailPage} from './detail';
 
 @Component({
   selector: 'app',
   template: require('./app.html'),
   styles: [require('./app.css')]
 })
-export class MyApp {
-  page = MasterPage;
-}
-```
-
-The template in `app.html` looks like this:
-
-```
-<ons-navigator [page]="page"></ons-navigator>
-```
-
-What this does is that it will render the `MasterPage` component as the first page in the navigator stack.
-
-## Components
-
-In this app we create two components that will serve as pages in the navigator. The first page, `MasterPage` has already been mentioned. It will display a list of Pokemon loaded from the API. It will initially load the first 20 Pokemon but the user can load more by clicking a button.
-
-The second component is called `DetailPage` and it will, as the name implies, display information about a Pokemon. It will also contain a checkbox that the user can check if the Pokemon has been caught.
-
-### The `MasterPage` component
-
-The code for the master page is quite simple. In the `ngOnInit` callback it will call the `loadMore()` method which fetches a list of 20 Pokemon from the API.
-
-There is also a method called `push` which will push the `DetailPage` component to the navigator stack. It will also pass a `Pokemon` object as a parameter so the details page will know which Pokemon it should display information about.
-
-In the `constructor` method a number of services are injected. The `OnsNavigator` service is part of the Angular 2 bindings for Onsen UI and allows us to push and pop stages. The `PokedexService` is used to fetch information from the Pokemon API and the `CaughtPokemonService` is a simple service that keeps track of the Pokemon that have been caught using a `Set`.
-
-The code for this component is in the `master.ts` file:
-
-```
-import {Component, OnInit} from '@angular/core';
-import {OnsNavigator} from 'angular2-onsenui';
-
-import {PokedexService} from './pokedex.service';
-import {CaughtPokemonService} from './caught-pokemon.service';
-
-import {Pokemon} from './pokemon';
-import {DetailPage} from './detail';
-
-@Component({
-  selector: 'ons-page[page]',
-  template: require('./master.html'),
-  styles: [require('./master.css')]
-})
-export class MasterPage implements OnInit {
+export class MyApp implements OnInit {
   counter: number;
   pokemon: Pokemon[] = [];
   isLoading: boolean = false;
   error: boolean = false;
 
+  @ViewChild('navi')
+  private navi;
+
   constructor(
-    private navi: OnsNavigator,
     private pokedexService: PokedexService,
     private caughtPokemon: CaughtPokemonService
   ) {
@@ -198,7 +168,7 @@ export class MasterPage implements OnInit {
       pokemon
     };
 
-    this.navi.element.pushPage(
+    this.navi.nativeElement.pushPage(
       DetailPage,
       {data}
     );
@@ -206,58 +176,59 @@ export class MasterPage implements OnInit {
 }
 ```
 
-In the template we use the `<ons-toolbar>` component to display the navigation bar at the top. We also have a `<ons-bottom-toolbar>` where we display how many Pokemon have been caught.
+The template in `app.html` looks like this:
 
-The list of Pokemon is displayed in a `<ons-list>` component and we use the `*ngFor` directive to render one `<ons-list-item>` component for every Pokemon in the list. The template is in the `master.html` file. There is also some styles in the `master.css` file.
-
-```html
-<ons-toolbar>
-  <div class="center">Pokedex</div>
-</ons-toolbar>
-
-<ons-list>
-  <ons-list-item
-    tappable
-    modifier="chevron"
-    *ngFor="let p of pokemon"
-    (click)="push(p)"
-  >
-    <div class="left">
-      <img class="pokemon-icon" src="/images/pokemon/icons/{{ p.id }}.png">
-    </div>
-    <div class="center">
-      #{{ p.id }}
-      {{ p.name | capitalize }}
-    </div>
-    <div class="right">
-      <img
-        class="pokeball"
-        src="/images/pokemon/pokeball.png"
-        *ngIf="caughtPokemon.has(p.id)"
-      >
-    </div>
-  </ons-list-item>
-</ons-list>
-
-<ons-button
-  modifier="large quiet"
-  (disabled)="isLoading"
-  (click)="loadMore()"
->
-  <span [hidden]="isLoading">
-    Load more
-  </span>
-  <span [hidden]="!isLoading">
-    Loading...
-  </span>
-</ons-button>
-
-<ons-bottom-toolbar>
-  <div class="caught">
-    {{ caughtPokemon.count }} Pokémon caught
-  </div>
-</ons-bottom-toolbar>
 ```
+<ons-navigator #navi>
+  <ons-page>
+    <ons-toolbar>
+      <div class="center">Pokedex</div>
+    </ons-toolbar>
+
+    <div class="page__background"></div>
+    <div class="page__content">
+      <ons-list>
+        <ons-list-item
+          tappable
+          modifier="chevron"
+          *ngFor="let p of pokemon"
+          (click)="push(p)"
+        >
+          <div class="left">
+            <img class="pokemon-icon" src="/images/pokemon/icons/{{ p.id }}.png">
+          </div>
+          <div class="center">
+            #{{ p.id }}
+            {{ p.name | capitalize }}
+          </div>
+          <div class="right">
+            <img
+              class="pokeball"
+              src="/images/pokemon/pokeball.png"
+              *ngIf="caughtPokemon.has(p.id)"
+            >
+          </div>
+        </ons-list-item>
+      </ons-list>
+
+      <ons-button
+        modifier="large quiet"
+        (disabled)="isLoading"
+        (click)="loadMore()"
+      >
+        <span [hidden]="isLoading">
+          Load more
+        </span>
+        <span [hidden]="!isLoading">
+          Loading...
+        </span>
+      </ons-button>
+    </div>
+  </ons-page>
+</ons-navigator>
+```
+
+What this does is that it will render the `MasterPage` component as the first page in the navigator stack.
 
 ### The `DetailPage` component
 
