@@ -1,0 +1,47 @@
+---
+author: fran
+date: 2016-11-24
+id: onsen-youtube-sample
+title: "Onsen UI YouTube Jukebox with AngularJS"
+tags: onsen ui, angular, youtube
+category: development
+---
+
+![Onsen UI YT Jukebox](/blog/content/images/2015/Jul/onsenui-yt.png)
+
+The YouTube Jukebox app has been updated to Onsen UI 2.0 + AngularJS and now includes
+a Material Design version. This app uses the YouTube Data API v3 to fetch
+videos and display them in our hybrid apps. Learn more about the
+included changes here.
+
+<!-- more -->
+
+YouTube Jukebox sample app was released some time ago for Onsen UI 1. It has
+a tutorial about how to use the YouTube Data API v3 with AngularJS in Onsen UI that is
+still completely valid for Onsen UI 2. You can [check it
+out](/blog/onsen-ui-youtube-api-v3/) for more details.
+
+## YouTube Jukebox
+
+The source code of this application is [on
+Github](https://github.com/frankdiox/OnsenUI-YouTube).
+
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <iframe src="https://frankdiox.github.io/OnsenUI-YouTube/" scrolling="no" style="width: 300px; height: 500px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-right: 10px" class="lazy-hidden"></iframe>
+  <iframe
+  src="https://frankdiox.github.io/OnsenUI-YouTube/?platform=android"
+  scrolling="no" style="width: 400px; height: 500px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-left: 10px" class="lazy-hidden"></iframe>
+</div>
+
+After the latest changes it now includes a Material Design version that will
+be displayed in Android devices. This version contains a modal that overlays a new
+`ons-toolbar` which includes a search input. This behavior is quite common in
+Material Design apps.
+
+Another interesting change is that it now loads new videos when the scroll
+reaches the bottom of the page using [`onInfiniteScroll`](/v2/docs/angular1/ons-page.html#attributes) functionality instead
+of a "Load more" manual button.
+
+This app is included in our [samples page](/samples) along with other useful
+samples. If you have any doubt about this app, please leave a comment or open
+an issue on Github.

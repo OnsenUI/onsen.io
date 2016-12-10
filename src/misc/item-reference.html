@@ -71,7 +71,7 @@ actionbar: false
     <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
     <% end %>
 
-    <% if @ownedMethods.length > 0: %>
+    <% if Object.keys(@ownedMethods).length > 0: %>
     <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
     <% end %>
 
@@ -179,7 +179,18 @@ actionbar: false
               <% end %>
             </td>
             <td>
+              <% if @lang == "en": %>
               <%- @markd @translate attribute.description %>
+              <% else: %>
+              <% if @translate(attribute.description).length != 0: %>
+              <%- @markd @translate attribute.description %>
+              <% else: %>
+              <span style="opacity: 0.6;">
+                <%- @markd @translate(attribute.description, "en") %>
+                <span style="color: red;">（翻訳中）</span>
+              </span>
+              <% end %>
+              <% end %>
 
               <% if attribute.required: %>
               <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
@@ -228,7 +239,19 @@ actionbar: false
           <td class="attribute-name">
             <%= property.name %>
           </td>
-          <td><%- @markd @translate property.description %>
+          <td>
+            <% if @lang == "en": %>
+            <%- @markd @translate property.description %>
+            <% else: %>
+            <% if @translate(property.description).length != 0: %>
+            <%- @markd @translate property.description %>
+            <% else: %>
+            <span style="opacity: 0.6;">
+              <%- @markd @translate(property.description, "en") %>
+              <span style="color: red;">（翻訳中）</span>
+            </span>
+            <% end %>
+            <% end %>
             <% if property.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
           </td>
         </tr>
@@ -271,11 +294,24 @@ actionbar: false
               <span class="value-type"><%= prop.type.names[0] %></span>
               <% end %>
               <% if prop.defaultValue: %>
-              <br><span class="default-value" style="color: green"><%= prop.defaultValue %></span>
+              <br><span class="default-value" style="color: green">
+                <%= prop.defaultValue.value %>
+              </span>
               <% end %>
             </td>
             <td>
+              <% if @lang == "en": %>
               <%- @markd @translate prop.description %>
+              <% else: %>
+              <% if @translate(prop.description).length != 0: %>
+              <%- @markd @translate prop.description %>
+              <% else: %>
+              <span style="opacity: 0.6;">
+                <%- @markd @translate(prop.description, "en") %>
+                <span style="color: red;">（翻訳中）</span>
+              </span>
+              <% end %>
+              <% end %>
 
               <% if prop.required == "true": %>
                 <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
@@ -320,7 +356,20 @@ actionbar: false
         <% for modifier in @doc.modifiers: %>
         <tr>
           <td class="modifier-name" id="<%= @doc.name %>-<%= modifier.name %>"><%= modifier.name %></td>
-          <td><%- @markd @translate modifier.description %></td>
+          <td>
+            <% if @lang == "en": %>
+            <%- @markd @translate modifier.description %>
+            <% else: %>
+            <% if @translate(modifier.description).length != 0: %>
+            <%- @markd @translate modifier.description %>
+            <% else: %>
+            <span style="opacity: 0.6;">
+              <%- @markd @translate(modifier.description, "en") %>
+              <span style="color: red;">（翻訳中）</span>
+            </span>
+            <% end %>
+            <% end %>
+          </td>
         </tr>
         <% end %>
       </tbody>
@@ -330,7 +379,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods summary -->
-  <% if @ownedMethods.length > 0: %>
+  <% if Object.keys(@ownedMethods).length > 0: %>
   <section>
     <h3 id="methods-summary">
       <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
@@ -354,7 +403,19 @@ actionbar: false
             <td>
               <a href="#method-<%= method.name %>"><%= method.signature || method.name %> </a>
             </td>
-            <td><%- @markd @translate method.description %>
+            <td>
+              <% if @lang == "en": %>
+              <%- @markd @translate method.description %>
+              <% else: %>
+              <% if @translate(method.description).length != 0: %>
+              <%- @markd @translate method.description %>
+              <% else: %>
+              <span style="opacity: 0.6;">
+                <%- @markd @translate(method.description, "en") %>
+                <span style="color: red;">（翻訳中）</span>
+              </span>
+              <% end %>
+              <% end %>
               <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
             </td>
           </tr>
@@ -388,7 +449,19 @@ actionbar: false
         <% for event in @ownedEvents: %>
           <tr>
             <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
-            <td><%- @markd @translate event.description %>
+            <td>
+              <% if @lang == "en": %>
+              <%- @markd @translate event.description %>
+              <% else: %>
+              <% if @translate(event.description).length != 0: %>
+              <%- @markd @translate event.description %>
+              <% else: %>
+              <span style="opacity: 0.6;">
+                <%- @markd @translate(event.description, "en") %>
+                <span style="color: red;">（翻訳中）</span>
+              </span>
+              <% end %>
+              <% end %>
               <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
             </td>
           </tr>
@@ -412,7 +485,20 @@ actionbar: false
           <a href="#method-<%= method.name %>" class="reference-loop-anchor"></a>
         </h4>
 
-        <p><%- @markd @translate method.description %></p>
+        <p>
+          <% if @lang == "en": %>
+          <%- @markd @translate method.description %>
+          <% else: %>
+          <% if @translate(method.description).length != 0: %>
+          <%- @markd @translate method.description %>
+          <% else: %>
+          <span style="opacity: 0.6;">
+            <%- @markd @translate(method.description, "en") %>
+            <span style="color: red;">（翻訳中）</span>
+          </span>
+          <% end %>
+          <% end %>
+        </p>
 
         <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
@@ -443,7 +529,20 @@ actionbar: false
             <tr>
               <td><span class="parameter-name"><%= param.name %></span></td>
               <td class="value-type"><%= param.type %></td>
-              <td><%- @markd @translate param.description %></td>
+              <td>
+                <% if @lang == "en": %>
+                <%- @markd @translate param.description %>
+                <% else: %>
+                <% if @translate(param.description).length != 0: %>
+                <%- @markd @translate param.description %>
+                <% else: %>
+                <span style="opacity: 0.6;">
+                  <%- @markd @translate(param.description, "en") %>
+                  <span style="color: red;">（翻訳中）</span>
+                </span>
+                <% end %>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>
@@ -468,7 +567,20 @@ actionbar: false
           <a href="#event-<%= event.name %>" class="reference-loop-anchor"></a>
         </h4>
 
-        <p><%- @markd @translate event.description %></p>
+        <p>
+          <% if @lang == "en": %>
+          <%- @markd @translate event.description %>
+          <% else: %>
+          <% if @translate(event.description).length != 0: %>
+          <%- @markd @translate event.description %>
+          <% else: %>
+          <span style="opacity: 0.6;">
+            <%- @markd @translate(event.description, "en") %>
+            <span style="color: red;">（翻訳中）</span>
+          </span>
+          <% end %>
+          <% end %>
+        </p>
 
         <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
@@ -493,7 +605,20 @@ actionbar: false
             <tr>
               <td><span class="parameter-name"><%= param.name %></span></td>
               <td class="value-type"><%= param.type %></td>
-              <td><%- @markd @translate param.description %></td>
+              <td>
+                <% if @lang == "en": %>
+                <%- @markd @translate param.description %>
+                <% else: %>
+                <% if @translate(param.description).length != 0: %>
+                <%- @markd @translate param.description %>
+                <% else: %>
+                <span style="opacity: 0.6;">
+                  <%- @markd @translate(param.description, "en") %>
+                  <span style="color: red;">（翻訳中）</span>
+                </span>
+                <% end %>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>
@@ -528,7 +653,19 @@ actionbar: false
               <tr>
                 <td><%= input.name %></td>
                 <td><%= input.type %></td>
-                <td><%- @markd @translate input.description %>
+                <td>
+                  <% if @lang == "en": %>
+                  <%- @markd @translate input.description %>
+                  <% else: %>
+                  <% if @translate(input.description).length != 0: %>
+                  <%- @markd @translate input.description %>
+                  <% else: %>
+                  <span style="opacity: 0.6;">
+                    <%- @markd @translate(input.description, "en") %>
+                    <span style="color: red;">（翻訳中）</span>
+                  </span>
+                  <% end %>
+                  <% end %>
                   <% if input.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
                 </td>
               </tr>
@@ -562,7 +699,19 @@ actionbar: false
               <tr>
                 <td><%= output.name %></td>
                 <td><%= output.type %></td>
-                <td><%- @markd @translate output.description %>
+                <td>
+                  <% if @lang == "en": %>
+                  <%- @markd @translate output.description %>
+                  <% else: %>
+                  <% if @translate(output.description).length != 0: %>
+                  <%- @markd @translate output.description %>
+                  <% else: %>
+                  <span style="opacity: 0.6;">
+                    <%- @markd @translate(output.description, "en") %>
+                    <span style="color: red;">（翻訳中）</span>
+                  </span>
+                  <% end %>
+                  <% end %>
                   <% if output.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
                 </td>
               </tr>
