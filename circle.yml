@@ -15,7 +15,6 @@ checkout:
     - git submodule foreach git fetch --tags
     - cd dist/v1/OnsenUI; git fetch --tags; git checkout `git tag | grep "^1." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 1.x
     - cd dist/v2/OnsenUI; git fetch --tags; git checkout `git tag | grep -v "-" | grep "^2\." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 2.x
-    - cd dist/v2/react-onsenui; git fetch --tags; git checkout `git tag | sort --version-sort | tail -n 1`; cd ../../..;
     - cd dist/tutorial; git fetch origin; git checkout master; git pull; cd ../..;
 dependencies:
   override:
