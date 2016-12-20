@@ -8,9 +8,9 @@ tags: monaca, voice, google, web api
 category: 技術情報
 ---
 
-音声はキーボード、マウスに続く入力インタフェースとして注目されています。SiriやGoogle Assistantのようにスマートフォンにもボイスアシスタント機能が組み込まれていますが、自分で開発するアプリから自由に使える訳ではありません。
+音声はキーボード、マウスに続く入力インタフェースとして注目されています。スマートフォンにはSiriやGoogle Assistantといったボイスアシスタント機能が組み込まれていますが、自分で開発するアプリから自由に使える訳ではありません。
 
-今回はGoogleが提供している音声認識APIであるGoogle Cloud Speech APIを使ってMonacaアプリで音声認識を実現してみたいと思います。
+そこで今回はGoogleが提供している音声認識APIであるGoogle Cloud Speech APIを使ってMonacaアプリで音声認識を実現してみたいと思います。
 
 ### Google Cloud Speech APIとは？
 
@@ -32,7 +32,7 @@ $ curl -s -k -H "Content-Type: application/json" https://speech.googleapis.com/v
 }
 ```
 
-見て分かりますが、テキストに変換されたtranscriptが返ってきます。confidenceは信頼性ですが、1に近いほど近いデータと言うことになります。プライベートAPIとして公開されているGoogle Speech APIの場合、このalternativesが複数返り、信頼性がそれぞれ異なります。Google Cloud Speech APIの場合は筆者が試した限りでは常に一つしか返ってこないので、気にする必要はなさそうです。
+見て分かりますが、テキストに変換されたtranscriptが返ってきます。confidenceは信頼性を表し、1に近いほど認識精度の高いデータと言うことになります。プライベートAPIとして公開されているGoogle Speech APIの場合、このalternativesが複数返却され、信頼性がそれぞれ異なります。Google Cloud Speech APIの場合は筆者が試した限りでは常に一つしか返ってこないので、気にする必要はなさそうです。
 
 ### Google Cloud Speech APIの設定
 
@@ -78,7 +78,7 @@ Google Cloud Speech APIを設定するには[Google Cloud Platform](https://cons
 
 #### JavaScriptを作る
 
-では実際に処理です。まずボタンを押した際にキャプチャを実行します。
+では具体的な処理を見ていきます。まずボタンを押した際にキャプチャを実行します。
 
 ```
 $("#capture").on("click", function() {
@@ -88,7 +88,7 @@ $("#capture").on("click", function() {
 
 一つ目の引数が処理成功時のコールバック、次が失敗時のコールバック、最後はキャプチャ設定です。Google Cloud Speech APIには音声ファイルは1分までという制限があります。あまり長いデータは処理に時間がかかりますので注意してください。
 
-では処理を行うappを書きます。全体像は次のようになります。
+次にキャプチャ完了後の処理を行うappオブジェクトを定義します。全体像は次のようになります。
 
 ```
 // Google Cloud Speech APIで使うAPIキー
@@ -147,7 +147,8 @@ success: function(files) {
 
 #### ファイル読み込み完了時の処理
 
-FileReaderで読み込むと app.load_file がコールバックされます。元々readAsDataURLで指定していますので、Base64の文字列で取得できます。なお、注意点としてsample_rateが44100になっていますが、これはデバイスによって変わる可能性があります。iPhone 7 Plusの場合は44100となっています。language_codeは日本語を指定してください。
+FileReader の readAsDataURL() で読み込むと app.load_file がコールバックされ、音声データがBase64の文字列で取得できます。
+なお、注意点として sample_rate に 44100 を指定していますが、これはデバイスによって変わる可能性があります。iPhone 7 Plusの場合は 44100 となっています。language_code は日本語を解析するために ja_JP を指定してください。
 
 ```
 load_file: function() {
@@ -170,11 +171,11 @@ load_file: function() {
 },
 ```
 
-encodingはWavの場合はLINEAR16になります。この他に指定できるフォーマットとして、FLAC/MULAW/AMR/AMR_WBがあります。
+encoding はWavの場合 LINEAR16 になります。この他に指定できるフォーマットとして、FLAC/MULAW/AMR/AMR_WB があります。
 
 #### 音声認識処理を実行する
 
-後はAjaxでPOSTメソッドを使ってデータを送るだけです。JSONで送って、結果をテキストエリア内に表示しています。今回は音声ファイルを送っているのでsyncrecognizeを使っていますが、ストリーミングによる認識にも対応しているようです。
+後はAjaxを使ってPOSTメソッドでデータを送るだけです。JSON形式でデータを送って、返却された結果をテキストエリア内に表示しています。今回は音声ファイルを送っているので syncrecognize を指定して同期処理していますが、ストリーミングによる認識にも対応しているようです。
 
 ```
 voice_recognition: function(json) {
@@ -192,7 +193,7 @@ voice_recognition: function(json) {
 },
 ```
 
-実際に試すと喋った日本語が高い精度でテキスト化されます。ここで見て欲しいのはmonacaとちゃんと英語のスペルになっている点です。
+実際に試すと喋った日本語が高い精度でテキスト化されます。ここで見て欲しいのはmonacaがちゃんと英語のスペルになっている点です。
 
 ![](monaca-voice-recognition-2.jpg)
 
