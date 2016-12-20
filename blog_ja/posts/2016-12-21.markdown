@@ -97,7 +97,7 @@ $("#capture").on("click", function() {
 });
 ```
 
-一つ目の引数が処理成功時のコールバック、次が失敗時のコールバック、最後はキャプチャ設定です。Google Cloud Speech APIには音声ファイルは1分までという制限があります。あまり長いデータは処理に時間がかかりますので注意してください。
+一つ目の引数が処理成功時のコールバック、次が失敗時のコールバック、最後はキャプチャ設定です。Google Cloud Speech APIには、音声ファイルの長さは1分までという制限があります。あまり長いデータは処理に時間がかかりますので注意してください。
 
 次にキャプチャ完了後の処理を行うappオブジェクトを定義します。全体像は次のようになります。
 
@@ -150,6 +150,7 @@ success: function(files) {
     file.lastModifiedDate,
     file.size
   );
+  
   // ファイルを読み込みます（Base64で取得できます）
   app.reader.readAsDataURL(audioFile);
 },
@@ -216,10 +217,10 @@ voice_recognition: function(json) {
       dataType:'json',
       contentType: 'application/json'
   }).done(function(data) {
-    // 処理結果をテキストエリアに表示
-    $("#result").val(data.results[0].alternatives[0].transcript);
+      // 処理結果をテキストエリアに表示
+      $("#result").val(data.results[0].alternatives[0].transcript);
   }).fail(function(error) {
-    alert("Speech API Error:" + JSON.stringify(error)); 
+      alert("Speech API Error:" + JSON.stringify(error)); 
   });
 },
 ```
