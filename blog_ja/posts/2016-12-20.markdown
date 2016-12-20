@@ -12,6 +12,21 @@ category: 技術情報
 
 そこで今回はGoogleが提供している音声認識APIであるGoogle Cloud Speech APIを使ってMonacaアプリで音声認識を実現してみたいと思います。
 
+### 前提条件
+今回作るアプリではマイクを使って録音し、そのデータを音声認識APIに渡します。デバイスやOSのバージョン、使用するアプリの種類によって録音データ音声フォーマットや周波数が異なるため、検証環境を以下に示します。異なる環境では後述する音声フォーマットと周波数の変更が必要になる場合があります。
+
+- iOS
+iPhone 7 Plus / iOS 10.2
+
+- Android
+Nexus 5 / Android 6.0.1
+
+※ なお、ピュアAndroidにはプリインストールされている録音アプリがないため、以下のアプリをインストールしています。
+
+[音声レコーダー](https://play.google.com/store/apps/details?id=com.sonymobile.androidapp.audiorecorder&hl=ja)
+
+この他のアプリでは、今回作成するアプリからの呼び出しができない可能性があります。
+
 ### Google Cloud Speech APIとは？
 
 Google Cloud Speech APIは音声認識技術をAPI化したものです。音声ファイルをアップロードすると、各国語のテキストに変換してくれます。もちろん日本語にも対応しています。例えば適当な音声をAPIに投げると、次のようなレスポンスが返ってきます。keyは後述する管理画面で取得できるキーに書き換えます。
@@ -103,8 +118,8 @@ ons.ready(function() {
     success: function(files) {
     },
     
-    // ファイルを読み込むと呼ばれるコールバック
-    load_file: function() {
+    // ファイルを読み込むと呼ばれるコールバックです
+    load_file: function() {
     },
     
     // Google Cloud Speech APIをコールします
@@ -113,8 +128,7 @@ ons.ready(function() {
     
     // キャプチャ失敗時のコールバックです
     error: function(error) {
-      alert(error);
-      console.log(error);
+      alert("Capture Error:" + error);
     }
   };
 });
@@ -122,7 +136,7 @@ ons.ready(function() {
 
 #### キャプチャ成功時の処理
 
-キャプチャが成功したら、FileReaderを使って音声ファイルを読み込みます。音声フォーマットはWavです。今回は audio タグに対してパスを設定することで、その場で再生できるようにしてあります。
+キャプチャが成功したら、FileReaderを使って音声ファイルを読み込みます。今回は audio タグに対してパスを設定することで、その場で再生できるようにしてあります。
 
 ```
 success: function(files) {
@@ -148,30 +162,49 @@ success: function(files) {
 #### ファイル読み込み完了時の処理
 
 FileReader の readAsDataURL() で読み込むと app.load_file がコールバックされ、音声データがBase64の文字列で取得できます。
-なお、注意点として sample_rate に 44100 を指定していますが、これはデバイスによって変わる可能性があります。iPhone 7 Plusの場合は 44100 となっています。language_code は日本語を解析するために ja_JP を指定してください。
+iPhone 7 Plus / iOS 10.2 の場合は、音声フォーマットが WAV、周波数が44100になります。
+Nexus 5 / Android 6.0.1 で[音声レコーダー](https://play.google.com/store/apps/details?id=com.sonymobile.androidapp.audiorecorder&hl=ja)アプリを呼び出して録音した場合は、音声フォーマットがAMR、周波数が8000になります。そのため、取得した音声フォーマットに応じて Speech APIに渡すJSONの設定を変更しています。
+language_code は日本語を解析するために ja_JP を指定してください。
 
 ```
 load_file: function() {
-  // audio/wav;base64,aaa... といった形式で取得
+  // base64文字列を取得
+  var result = app.reader.result;
+  var encoding;
+  var sample_rate;
+  
+  if(result.indexOf("data:audio/amr;") === 0) {
+    // 音声データがamrの場合
+    encoding = "AMR";
+    sample_rate = 8000;
+  } else {
+    // 音声データがwavの場合
+    encoding = "LINEAR16";
+    sample_rate = 44100;
+  }
+  
+  // data:audio/wav;base64,aaa... といった形式で取得
   // されるので、,以降だけにします
-  var ary = app.reader.result.split(",");
+  var ary = result.split(",");
+  
   // Google Cloud Speech APIに投げるデータフォーマットを作成
   var json = {
     "config": {
-        "encoding":"LINEAR16",
-        "sample_rate": 44100,
-        "language_code": "ja_JP"
-      },
-      "audio": {
-        "content": ary[1]
-      }
+      "encoding": encoding,
+      "sample_rate": sample_rate,
+      "language_code": "ja_JP"
+    },
+    "audio": {
+      "content": ary[1]
+    }
   };
+  
   // 音声認識処理を実行します
   app.voice_recognition(json);
 },
 ```
 
-encoding はWavの場合 LINEAR16 になります。この他に指定できるフォーマットとして、FLAC/MULAW/AMR/AMR_WB があります。
+encodingには、上記の他に FLAC/MULAW/AMR_WB を指定することができます。
 
 #### 音声認識処理を実行する
 
@@ -189,6 +222,8 @@ voice_recognition: function(json) {
   }).done(function(data) {
     // 処理結果をテキストエリアに表示
     $("#result").val(data.results[0].alternatives[0].transcript);
+  }).fail(function(error) {
+    alert("Speech API Error:" + JSON.stringify(error)); 
   });
 },
 ```
