@@ -13,19 +13,15 @@ category: 技術情報
 そこで今回はGoogleが提供している音声認識APIであるGoogle Cloud Speech APIを使ってMonacaアプリで音声認識を実現してみたいと思います。
 
 ### 前提条件
-今回作るアプリではマイクを使って録音し、そのデータを音声認識APIに渡します。デバイスやOSのバージョン、使用するアプリの種類によって録音データ音声フォーマットや周波数が異なるため、検証環境を以下に示します。異なる環境では後述する音声フォーマットと周波数の変更が必要になる場合があります。
+今回作るアプリではマイクを使って録音し、そのデータを音声認識APIに渡します。デバイスやOSのバージョン、使用するアプリの種類によって録音データの音声フォーマットや周波数が異なるため、検証環境を以下に示します。異なる環境では後述する「ファイル読み込み完了時の処理」の変更が必要になる場合があります。
 
-- iOS
-iPhone 7 Plus / iOS 10.2
-
-- Android
-Nexus 5 / Android 6.0.1
-
-※ なお、ピュアAndroidにはプリインストールされている録音アプリがないため、以下のアプリをインストールしています。
-
-[音声レコーダー](https://play.google.com/store/apps/details?id=com.sonymobile.androidapp.audiorecorder&hl=ja)
-
-この他のアプリでは、今回作成するアプリからの呼び出しができない可能性があります。
+||iOS|Android|
+|:--|:--|:--|
+|デバイス|iPhone 7 Plus|Nexus 5|
+|OS|iOS 10.2|Android 6.0.1|
+|録音アプリ|プリインストールされた録音アプリ|[音声レコーダー](https://play.google.com/store/apps/details?id=com.sonymobile.androidapp.audiorecorder&hl=ja)|
+※ ピュアAndroidにはプリインストールされている録音アプリがないため、ストアからアプリをインストールしています。
+※ 上記以外のアプリでは、今回作成するアプリからの呼び出しができない可能性があります。
 
 ### Google Cloud Speech APIとは？
 
