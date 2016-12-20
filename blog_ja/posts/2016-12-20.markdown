@@ -1,0 +1,205 @@
+---
+author: atsushi
+date: 2016-12-20
+id: monaca-voice-recognization
+title: "音声操作にも。MonacaアプリとGoogle Cloud Speech APIで音声認識を実現しよう"
+product: monaca
+tags: monaca, voice, google, web api
+category: 技術情報
+---
+
+音声はキーボード、マウスに続く入力インタフェースとして注目されています。SiriやGoogle Assistantのようにスマートフォンにもボイスアシスタント機能が組み込まれていますが、自分で開発するアプリから自由に使える訳ではありません。
+
+今回はGoogleが提供している音声認識APIであるGoogle Cloud Speech APIを使ってMonacaアプリで音声認識を実現してみたいと思います。
+
+### Google Cloud Speech APIとは？
+
+Google Cloud Speech APIは音声認識技術をAPI化したものです。音声ファイルをアップロードすると、各国語のテキストに変換してくれます。もちろん日本語にも対応しています。例えば適当な音声をAPIに投げると、次のようなレスポンスが返ってきます。keyは後述する管理画面で取得できるキーに書き換えます。
+
+```
+$ curl -s -k -H "Content-Type: application/json" https://speech.googleapis.com/v1beta1/speech:syncrecognize?key=APIキー -d @wav.json
+{
+  "results": [
+    {
+      "alternatives": [
+        {
+          "transcript": "本日は晴天なり",
+          "confidence": 0.8484849
+        }
+      ]
+    }
+  ]
+}
+```
+
+見て分かりますが、テキストに変換されたtranscriptが返ってきます。confidenceは信頼性ですが、1に近いほど近いデータと言うことになります。プライベートAPIとして公開されているGoogle Speech APIの場合、このalternativesが複数返り、信頼性がそれぞれ異なります。Google Cloud Speech APIの場合は筆者が試した限りでは常に一つしか返ってこないので、気にする必要はなさそうです。
+
+### Google Cloud Speech APIの設定
+
+Google Cloud Speech APIを設定するには[Google Cloud Platform](https://console.cloud.google.com/home/dashboard)にてプロジェクトを作成し、Google Cloud Speech APIを有効にします。
+
+![](monaca-voice-recognition-3.png)
+
+その後Credentialsへ移動してAPI Keyを作成します。必要に応じてアクセス制限を設けてください。
+
+![](monaca-voice-recognition-5.png)
+
+### Monacaアプリを作る
+
+今回はOnsen UI V2 JS Minimumをベースにします。プロジェクトを作ったら、Cordovaプラグインとしてcordova-plugin-media-captureをインストールします。これはアプリでマイクを使った音声キャプチャを実現するためのプラグインです。
+
+![](monaca-voice-recognition-6.png)
+
+また、Ajaxを実行する関係上、JS/CSSコンポーネントの追加と削除よりjQueryをインストールしておきます。
+
+#### HTMLを作る
+
+今回のHTMLは次のようになります。キャプチャした音声をそのまま聴けるように audio タグを追加しています。
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">音声認識</div>
+  </ons-toolbar>
+
+  <section style="padding: 8px">
+    <p></p><br><br>
+    <ons-button id="capture" modifier="large">音声キャプチャ</ons-button>
+    <p></p>
+    <p><audio id="audio" controls></audio></p>
+    <textarea id="result" class="textarea"></textarea>
+  </section>
+</ons-page>
+```
+
+実際の画面は次のようになります。ボタンを押してキャプチャしたら、テキストエリアに結果が返ってくるようにします。
+
+![](monaca-voice-recognition-7.png)
+
+#### JavaScriptを作る
+
+では実際に処理です。まずボタンを押した際にキャプチャを実行します。
+
+```
+$("#capture").on("click", function() {
+  navigator.device.capture.captureAudio(app.success, app.error, {limit:15});
+});
+```
+
+一つ目の引数が処理成功時のコールバック、次が失敗時のコールバック、最後はキャプチャ設定です。Google Cloud Speech APIには音声ファイルは1分までという制限があります。あまり長いデータは処理に時間がかかりますので注意してください。
+
+では処理を行うappを書きます。全体像は次のようになります。
+
+```
+// Google Cloud Speech APIで使うAPIキー
+var key = "";
+
+ons.ready(function() {
+  var app = {
+    // ファイルを読み込むためのオブジェクトです
+    reader: new FileReader(),
+    
+    // キャプチャ成功時のコールバックです
+    success: function(files) {
+    },
+    
+    // ファイルを読み込むと呼ばれるコールバック
+    load_file: function() {
+    },
+    
+    // Google Cloud Speech APIをコールします
+    voice_recognition: function(json) {
+    },
+    
+    // キャプチャ失敗時のコールバックです
+    error: function(error) {
+      alert(error);
+      console.log(error);
+    }
+  };
+});
+```
+
+#### キャプチャ成功時の処理
+
+キャプチャが成功したら、FileReaderを使って音声ファイルを読み込みます。音声フォーマットはWavです。今回は audio タグに対してパスを設定することで、その場で再生できるようにしてあります。
+
+```
+success: function(files) {
+  var file = files[0];
+  $("#audio").attr("src", file.fullPath);
+  
+  // ファイルを読み込んだ時のコールバックを指定
+  app.reader.onloadend = app.load_file;
+  
+  // Fileオブジェクトを作成します
+  audioFile = new window.File(
+    file.name, 
+    file.localURL,
+    file.type,
+    file.lastModifiedDate,
+    file.size
+  );
+  // ファイルを読み込みます（Base64で取得できます）
+  app.reader.readAsDataURL(audioFile);
+},
+```
+
+#### ファイル読み込み完了時の処理
+
+FileReaderで読み込むと app.load_file がコールバックされます。元々readAsDataURLで指定していますので、Base64の文字列で取得できます。なお、注意点としてsample_rateが44100になっていますが、これはデバイスによって変わる可能性があります。iPhone 7 Plusの場合は44100となっています。language_codeは日本語を指定してください。
+
+```
+load_file: function() {
+  // audio/wav;base64,aaa... といった形式で取得
+  // されるので、,以降だけにします
+  var ary = app.reader.result.split(",");
+  // Google Cloud Speech APIに投げるデータフォーマットを作成
+  var json = {
+    "config": {
+        "encoding":"LINEAR16",
+        "sample_rate": 44100,
+        "language_code": "ja_JP"
+      },
+      "audio": {
+        "content": ary[1]
+      }
+  };
+  // 音声認識処理を実行します
+  app.voice_recognition(json);
+},
+```
+
+encodingはWavの場合はLINEAR16になります。この他に指定できるフォーマットとして、FLAC/MULAW/AMR/AMR_WBがあります。
+
+#### 音声認識処理を実行する
+
+後はAjaxでPOSTメソッドを使ってデータを送るだけです。JSONで送って、結果をテキストエリア内に表示しています。今回は音声ファイルを送っているのでsyncrecognizeを使っていますが、ストリーミングによる認識にも対応しているようです。
+
+```
+voice_recognition: function(json) {
+  // AjaxでPOST処理
+  $.ajax({
+      type: 'POST',
+      url: 'https://speech.googleapis.com/v1beta1/speech:syncrecognize?key=' + key,
+      data: JSON.stringify(json),
+      dataType:'json',
+      contentType: 'application/json'
+  }).done(function(data) {
+    // 処理結果をテキストエリアに表示
+    $("#result").val(data.results[0].alternatives[0].transcript);
+  });
+},
+```
+
+実際に試すと喋った日本語が高い精度でテキスト化されます。ここで見て欲しいのはmonacaとちゃんと英語のスペルになっている点です。
+
+![](monaca-voice-recognition-2.jpg)
+
+食べ物で認識されるとカタカナのモナカになります。文脈を理解した上でテキスト化されているのが分かります。
+
+![](monaca-voice-recognition-1.jpg)
+
+----
+
+Google Cloud Speech APIを使えば音声入力によってアプリを操作したり、入力を代行するのが簡単になります。ぜひ皆さんのアプリにも組み込んでみてください。今回のコードは[moongift/monaca_voice_recognition](https://github.com/moongift/monaca_voice_recognition)にアップしてありますので、実装の参考にしてください。
