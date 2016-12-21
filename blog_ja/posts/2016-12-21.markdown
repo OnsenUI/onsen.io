@@ -49,17 +49,17 @@ $ curl -s -k -H "Content-Type: application/json" https://speech.googleapis.com/v
 
 Google Cloud Speech APIを設定するには[Google Cloud Platform](https://console.cloud.google.com/home/dashboard)にてプロジェクトを作成し、Google Cloud Speech APIを有効にします。
 
-![](monaca-voice-recognition-3.png)
+![](/blog/content/images/2016/Dec/monaca-voice-recognition-3.png)
 
 その後Credentialsへ移動してAPI Keyを作成します。必要に応じてアクセス制限を設けてください。
 
-![](monaca-voice-recognition-5.png)
+![](/blog/content/images/2016/Dec/monaca-voice-recognition-5.png)
 
 ### Monacaアプリを作る
 
 今回はOnsen UI V2 JS Minimumをベースにします。プロジェクトを作ったら、Cordovaプラグインとしてcordova-plugin-media-captureをインストールします。これはアプリでマイクを使った音声キャプチャを実現するためのプラグインです。
 
-![](monaca-voice-recognition-6.png)
+![](/blog/content/images/2016/Dec/monaca-voice-recognition-6.png)
 
 また、Ajaxを実行する関係上、JS/CSSコンポーネントの追加と削除よりjQueryをインストールしておきます。
 
@@ -85,7 +85,7 @@ Google Cloud Speech APIを設定するには[Google Cloud Platform](https://cons
 
 実際の画面は次のようになります。ボタンを押してキャプチャしたら、テキストエリアに結果が返ってくるようにします。
 
-![](monaca-voice-recognition-7.png)
+![](/blog/content/images/2016/Dec/monaca-voice-recognition-7.png)
 
 #### JavaScriptを作る
 
@@ -227,11 +227,11 @@ voice_recognition: function(json) {
 
 実際に試すと喋った日本語が高い精度でテキスト化されます。ここで見て欲しいのはmonacaがちゃんと英語のスペルになっている点です。
 
-![](monaca-voice-recognition-2.jpg)
+![](/blog/content/images/2016/Dec/monaca-voice-recognition-2.jpg)
 
 食べ物で認識されるとカタカナのモナカになります。文脈を理解した上でテキスト化されているのが分かります。
 
-![](monaca-voice-recognition-1.jpg)
+![](/blog/content/images/2016/Dec/monaca-voice-recognition-1.jpg)
 
 ----
 
