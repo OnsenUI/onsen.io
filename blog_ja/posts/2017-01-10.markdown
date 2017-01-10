@@ -11,7 +11,7 @@ category: 技術情報
 Monacaでファイルのアップロードやダウンロードを行う場合は、File Transferプラグインを利用します。
 File Transferプラグインは、Monacaの基本Cordovaプラグインに含まれており、Basicプランから利用することができます。
 
-#File Transferプラグインの使い方
+# File Transferプラグインの使い方
 
 まず初めに、対象のプロジェクトの「Cordovaプラグインの管理」から、File Transferプラグインを有効にします。
 プロジェクトでFile Transferプラグインが利用できるのは、devicereadyイベント発行後になります。
@@ -25,7 +25,7 @@ function onDeviceReady() {
 </script>
 ```
 
-#ファイルのダウンロード
+# ファイルのダウンロード
 
 Monacaのホームページにある画像をアプリケーションのサンドボックス内の一時フォルダーにダウンロードしてみたいと思います。
 コードは、下記になります。
@@ -71,7 +71,7 @@ download()に設定するurlは、encodeURI()を使用してエンコードす�
 ファイルの移動やコピーについては、[Fileプラグインについて](https://ja.onsen.io/blog/monaca-file-plugin/)を参照してください。
 
 
-#ファイルのアップロード
+# ファイルのアップロード
 
 ファイルのダウンロードの例でダウンロードした画像ファイルをサーバーへアップロードしてみたいと思います。
 コードは、下記になります。
@@ -134,6 +134,7 @@ download()に設定するurlは、encodeURI()を使用してエンコードす�
 </script>
 ```
 
+### サーバーサイドのプログラム
 ```php:uploader.php
 <?php
 $uploaddir = '/uploads/';
