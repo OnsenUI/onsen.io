@@ -1,0 +1,157 @@
+---
+author: keiji
+date: 2017-01-10
+id: monaca-file-transfer-plugin
+title: "[Monaca] File Transferプラグインについて"
+product: monaca
+tags: Monaca
+category: 技術情報
+---
+
+Monacaでファイルのアップロードやダウンロードを行う場合は、File Transferプラグインを利用します。
+File Transferプラグインは、Monacaの基本Cordovaプラグインに含まれており、Basicプランから利用することができます。
+
+#File Transferプラグインの使い方
+
+まず初めに、対象のプロジェクトの「Cordovaプラグインの管理」から、File Transferプラグインを有効にします。
+プロジェクトでFile Transferプラグインが利用できるのは、devicereadyイベント発行後になります。
+
+```html
+<script>
+document.addEventListener("deviceready", onDeviceReady, false);
+function onDeviceReady() {
+    alert("File Transferプラグインが利用できます。");
+}
+</script>
+```
+
+#ファイルのダウンロード
+
+Monacaのホームページにある画像をアプリケーションのサンドボックス内の一時フォルダーにダウンロードしてみたいと思います。
+コードは、下記になります。
+
+```html
+<script>
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+
+        // ダウンロード元
+        var uri = encodeURI("https://ja.monaca.io/img/index/img_1.jpg");
+        // ダウンロード先
+        var fileURL = "cdvfile://localhost/temporary/img_1.jpg";
+
+        // ファイルのダウンロード
+        var fileTransfer = new FileTransfer();
+        fileTransfer.download(
+            uri,
+            fileURL,
+            function(fileSyatem) {
+                console.log("toURL=" + fileSyatem.toURL());
+                console.log("nativeURL=" + fileSyatem.nativeURL);
+                console.log("toInternalURL=" + fileSyatem.toInternalURL());
+            },
+            function(error) {
+                console.log("download error source " + error.source);
+                console.log("download error target " + error.target);
+                console.log("download error code " + error.code);
+            },
+            false,
+            {}
+        );
+
+    }
+</script>
+```
+
+download()に設定するurlは、encodeURI()を使用してエンコードする必要があります。
+ダウンロードが成功すると、ダウンロードしたファイルのFileSyatemを取得することができます。このFileSyatemのtoInternalURL()で、ダウンロード時に設定したダウンロード先を確認することができます。
+
+このtoInternalURL()で取得した値は、FileプラグインのresolveLocalFileSystemURIに設定することで、ダウンロードしたファイルの移動やコピー等といった操作が可能になります。
+
+ファイルの移動やコピーについては、[Fileプラグインについて](https://ja.onsen.io/blog/monaca-file-plugin/)を参照してください。
+
+
+#ファイルのアップロード
+
+ファイルのダウンロードの例でダウンロードした画像ファイルをサーバーへアップロードしてみたいと思います。
+コードは、下記になります。
+
+```html
+<script>
+    document.addEventListener("deviceready", onDeviceReady, false);
+    function onDeviceReady() {
+
+        // ダウンロード元
+        var uri = encodeURI("https://ja.monaca.io/img/index/img_1.jpg");
+        // ダウンロード先
+        var fileURL = "cdvfile://localhost/temporary/img_1.jpg";
+
+        // ファイルのダウンロード
+        var fileTransfer = new FileTransfer();
+        fileTransfer.download(
+            uri,
+            fileURL,
+            function(fileSyatem) {
+                // ファイルのアップロード
+                uploadFile(fileSyatem.toInternalURL());
+            },
+            function(error) {
+                console.log("download error");
+            },
+            false,
+            {}
+        );
+
+    }
+
+    // ファイルのアップロード
+    function uploadFile(uploadFileURL) {
+        var options = new FileUploadOptions();
+        options.fileKey = "file";
+        options.fileName = "img_1.jpg";
+        options.mimeType = "image/jpeg";
+
+        var params = {};
+        params.value1 = "test";
+        params.value2 = "param";
+
+        options.params = params;
+
+        var fileTransfer = new FileTransfer();
+        fileTransfer.upload(uploadFileURL, encodeURI("http://サーバードメイン/uploader.php"), onUploadSuccess, onUploadFail, options);
+        function onUploadSuccess(result) {
+            console.log("Code = " + result.responseCode);
+            console.log("Response = " + result.response);
+            console.log("Sent = " + result.bytesSent);
+        }
+
+        function onUploadFail(error) {
+            console.log("An error has occurred: Code = " + error.code);
+            console.log("upload error source " + error.source);
+            console.log("upload error target " + error.target);
+        }
+    }
+</script>
+```
+
+```php:uploader.php
+<?php
+$uploaddir = '/uploads/';
+$uploadfile = $uploaddir . basename($_FILES['file']['name']);
+
+echo '<pre>';
+if (move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile)) {
+    echo 'File is valid, and was successfully uploaded.\n';
+} else {
+    echo 'Possible file upload attack!\n';
+}
+
+echo 'Here is some more debugging info:';
+print_r($_FILES);
+
+echo '</pre>';
+
+?>
+```
+
+File Transferプラグインを利用することにより、ファイルのダウンロードやアップロードが可能になります。File Transferプラグインを活用して、アプリケーション開発に役立ててください。
