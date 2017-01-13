@@ -1,0 +1,266 @@
+---
+author: atsushi
+date: 2016-11-04
+id: monaca-cordova-background-geolocation-lt
+title: "バックグラウンドで位置情報を取得するcordova-background-geolocation-ltを試す"
+tags: monaca,background,geolocation
+product: monaca
+category: 技術情報
+---
+
+Monacaアプリはハイブリッドアプリという特性上、バックグラウンドでは処理が実行できなくなるという制約が生じます。そんな問題を乗り越えるために幾つかのプラグインが存在します。
+
+今回はバックグラウンドでも位置情報を取得し続けられる[transistorsoft/cordova-background-geolocation-lt](https://github.com/transistorsoft/cordova-background-geolocation-lt)を紹介します。なお、Android版のプラグインは有料のようです。そのため今回のサンプルはiOSで試しています。
+
+### インストール
+
+プラグインのインストールはMonaca IDEのCordovaプラグインの管理にて行います。 cordova-background-geolocation-lt を指定してインストールします。
+
+### 基本的な使い方
+
+ごく基本的な使い方は次のようになります。
+
+- 初期設定
+- データ取得時のコールバック設定
+- データ取得失敗時のコールバック設定
+- 各コールバックを設定
+
+それぞれについて紹介します。
+
+#### 初期設定
+
+まず最初にオブジェクトを作ります。（devicereadyイベント発生後に実行するようにしてください）
+```
+var bgGeo = window.BackgroundGeolocation;
+```
+
+次に設定を行います。
+
+```
+// 初期設定
+bgGeo.configure({
+    // 位置情報に関する設定
+    desiredAccuracy: 0,
+    distanceFilter: 10,
+    stationaryRadius: 50,
+    locationUpdateInterval: 1000,
+    fastestLocationUpdateInterval: 5000,
+
+    // アクティビティ認識の初期設定
+    activityType: 'AutomotiveNavigation',
+    activityRecognitionInterval: 5000,
+    stopTimeout: 5,
+
+    // アプリケーションの設定
+    debug: true,
+    stopOnTerminate: false,
+    startOnBoot: true
+}, function(state) {
+    // 設定完了時のコールバック
+    console.log('BackgroundGeolocation ready: ', state);
+    
+    // 設定が終わったら起動します
+    if (!state.enabled) {
+        bgGeo.start();
+    }
+});
+```
+
+データ保存先については設定で指定することもできますし、データ取得時のコールバックで設定もできます。
+
+#### データ取得時のコールバック関数
+
+データを取得した際のコールバック関数には位置情報とタスクIDが送られます。必ず最後には bgGeo.finish(タスクID); を実行します。
+
+```
+var callbackFn = function(location, taskId) {
+  bgGeo.finish(taskId);
+});
+```
+
+locationには位置情報データが入ってきます。バッテリー情報や、アクティビティの状態（徒歩、車、電車など）も取得できます。
+
+```
+{
+    "activity": {
+        "confidence": 100, 
+        "type": "on_foot"
+    }, 
+    "battery": {
+        "is_charging": false, 
+        "level": 0.72
+    }, 
+    "coords": {
+        "accuracy": 65, 
+        "altitude": 46.460000000000, 
+        "altitudeAccuracy": 10, 
+        "heading": -1, 
+        "latitude": 35.50000000000000, 
+        "longitude": 139.500000000000, 
+        "speed": -1
+    }, 
+    "is_heartbeat": false, 
+    "is_moving": true, 
+    "odometer": 1382.299999999999, 
+    "timestamp": "2016-11-04T08:28:52.988Z", 
+    "uuid": "AFBF6293-8A43-40AB-9041-6896D1415CA2"
+}
+```
+
+#### データ取得失敗時のコールバック関数
+
+データの取得に失敗した時のコールバック関数ではエラーメッセージを出すなどの処理を行うことになるかと思います。
+
+```
+var failureFn = function(errorCode) {
+    console.warn('- BackgroundGeoLocation error: ', errorCode);
+}
+```
+
+#### 各コールバックを設定
+
+最後に各コールバックを設定します。
+
+```
+bgGeo.on('location', callbackFn, failureFn);
+```
+
+これで準備完了です。アプリを起動して、近くを歩き回ると自動的に位置情報が取得され続けるようになります。なお、初回実行時には位置情報の取得とモーションとフィットネスのアクティビティへのアクセス権限が求められます。初期設定で `debug: true` に設定している場合はさらにプッシュ通知（ローカルプッシュ）のアクセス権限も必要です。
+
+![](/blog/content/images/2016/Nov/monaca-bg-geo-1.png)
+
+![](/blog/content/images/2016/Nov/monaca-bg-geo-2.png)
+
+### データをニフティクラウド mobile backendへ保存する
+
+データを取得するだけでは面白みがありませんので、可視化してみたいと思います。まず取得されるデータを[ニフティクラウド mobile backend](http://mb.cloud.nifty.com) へ保存してみたいと思います。ニフティクラウド mobile backendはmBaaS（mobile Backend As a Service）と呼ばれるサービスで、アプリ開発で必要になるバックグラウンド系（サーバ系）のサービスを提供してくれます。今回はその一機能である位置情報検索を利用します。
+
+ニフティクラウド mobile backendにユーザ登録すればアプリケーションキーとクライアントキーが得られますので、それを使います。また、JavaScript SDKをMonaca IDEのJS/CSSコンポーネントの追加と削除から追加します。検索時に ncmb を指定してください。
+
+![](/blog/content/images/2016/Nov/monaca-bg-geo-4.png)
+
+まず ncmb オブジェクトを初期化します。アプリケーションキー（application_key）とクライアントキー（client_key）はそれぞれニフティクラウド mobile backendへ登録した際に取得できるものと置き換えてください。
+
+```
+var application_key = "d4c...dca";
+var client_key = "891...8a0";
+    
+var ncmb  = new NCMB(application_key, client_key);
+```
+
+#### コールバック時にデータを登録する
+
+次に位置情報データをニフティクラウド mobile backendへ登録するようにします。先ほど作成したデータ取得時のコールバック関数内に以下のコードを追記してください。
+
+```
+// 位置情報を取得
+var coords = location.coords;
+var lat    = coords.latitude;
+var lng    = coords.longitude;
+
+// 位置情報を保存するためのデータを設定
+var geoObject = new ncmb.GeoPoint(lat, lng);
+
+// データの保存場所を作成/指定（データベースで言うところのテーブル相当）
+var GeoData = ncmb.DataStore("GeoData");
+
+// データを作成（データベースで言うところの行相当）
+var geo = new GeoData;
+
+// 先ほど作成した位置情報を保存するためのデータを設定
+geo.set("location",geoObject);
+
+// 保存実行
+geo.save()
+  .then(function(obj) {
+    // 保存成功
+  })
+  .catch(function(err) {
+    // 保存失敗
+    console.log('error', err);
+  });
+```
+
+これでデータがクラウド上に保存されます。歩いてみた印象では10〜30秒に一回くらいのペースで記録されているようです。
+
+#### データを可視化する
+
+次にデータを可視化するのですが、今回はGoogleマップに表示を行います。JavaScriptの[gmaps.js](http://hpneo.github.io/gmaps/)というライブラリを使ったので、JS/CSSコンポーネントの追加と削除にてgmapsと検索してライブラリを追加します。ローダーに追加するのは components/gmaps/gmaps.min.js です。
+
+また、Googleマップを使う際にはAPIキーが必要なので [ウェブ向け Google Maps API  |  Google Developers](https://developers.google.com/maps/web/) より取得します。取得したら次のようにHTML側で読み込みます。
+
+```
+<script src="http://maps.google.com/maps/api/js?key=取得したキー"></script>
+<style type="text/css">
+  #map {
+    width: 400px;
+    height: 800px;
+  }
+</style>
+  :
+<div class="app">
+  <div id="map"></div>
+</div>
+```
+
+そして、アプリを起動した際に位置情報を取得して、その位置情報を中心点としてニフティクラウド mobile backendの検索と地図表示を行います。検索した結果得られたデータは、地図上に線でつないで描写していきます。
+
+
+```
+if (navigator.geolocation) {
+  // 位置情報を取得
+  navigator.geolocation.getCurrentPosition(function(location) {
+    var coords = location.coords;
+    var lat    = coords.latitude;
+    var lng    = coords.longitude;
+    // 地図を表示
+    var map = new GMaps({
+      el: '#map',
+      lat: lat,
+      lng: lng,
+      zoom: 15
+    });
+    // 位置情報検索用のデータを作成
+    var geoObject = new ncmb.GeoPoint(lat, lng);
+    // 検索する場所（データベースで言うテーブル相当）を指定
+    var GeoData = ncmb.DataStore("GeoData");
+    
+    // 検索条件指定
+    GeoData
+      // 指定した位置情報の2km以内を指定
+      .withinKilometers("location", geoObject, 2)
+      // 登録順に並び替え
+      .order('createDate')
+      // 1000件取得
+      .limit(1000)
+      .fetchAll()
+      .then(function(ary) {
+        // 取得したデータを gmaps.js 用に整形
+        var paths = [];
+        for (var i in ary) {
+          var geoData = ary[i];
+          paths.push([geoData.location.latitude, geoData.location.longitude]);
+        }
+        // 薄い赤色で描画
+        map.drawPolyline({
+          path: paths,
+          strokeColor: '#ee8888',
+          strokeOpacity: 0.6,
+          strokeWeight: 6
+        });
+      });
+  });
+}
+```
+
+これを実行すると、次のように線が表示されます。細かく、正確にデータを収集しているのが分かるかと思います。
+
+![](/blog/content/images/2016/Nov/monaca-bg-geo-3.png)
+
+バックグラウンド実行に対応しているのでアプリが前面にある必要はありません。持ち歩いているだけでデータの収集が行われています。今回のようにデータをクラウドに保存する仕組みにしていると常時通信が行われ続ける点に注意してください（ bgGeo.stop() で停止できます）。
+
+----
+
+今回ご紹介した機能は、ジョギングアプリなどの外出先で使う系統のアプリで特に有効です。個人のデータを蓄積するだけであればローカルのSQLite上に保存しても良さそうですし、クラウドに保存すればバックアップ用途やマルチデバイス利用シーンで活用できるでしょう。
+
+今回のコードは[moongift/MonacaWithBackgroundGeo](https://github.com/moongift/MonacaWithBackgroundGeo)にアップしてあります。不明点があれば参考にしてください。
