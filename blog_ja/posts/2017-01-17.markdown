@@ -8,3 +8,72 @@ product: onsen-ui
 category: 技術情報
 ---
 
+![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
+
+[前回の記事](https://onsen.io/blog/onsen-ui-vue-2/)では Onsen UI の要素を Vue.js 2 から直接利用する方法について解説しました。
+
+現在私達は Onsen UI の Vue.js バインディングである `vue-onsenui` の Vue.js 2 対応を進めています。
+この記事ではそのリリーススケジュールと開発状況をお知らせします。
+
+<!-- more -->
+
+## リリーススケジュール
+
+Vue.js 2 対応の `vue-onsenui` はまだ npm に公開していません。
+現時点では Onsen UI の GitHub リポジトリの[`vue2` ブランチ](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue)からのみ入手可能です。
+
+npm への公開は以下のスケジュールで行うことを予定しています:
+
+|フェーズ|バージョン|備考|初期バージョンリリース時期|
+|-|-|-|-|
+|α 版|`2.0.0-alpha.0` -|このフェーズでは最低限の機能の実装を行います。**破壊的変更を積極的に行います。**|近日|
+|β 版|`2.0.0-beta.0` -|このフェーズでは付加機能の実装と API のブラッシュアップを行います。**破壊的変更を必要に応じて行います。**|2017/02 中|
+|RC 版|`2.0.0-rc.0` -|このフェーズでは不具合の修正を行います。破壊的変更は行いません。|未定|
+|正式版|`2.0.0` -|破壊的変更は行いません。|未定|
+
+各バージョンのリリースの際は、このブログや私達の Twitter アカウントで告知します。
+
+ぜひ [RSS フィード](https://onsen.io/blog/rss.xml) の購読や [@Onsen_UI](https://twitter.com/Onsen_UI) のフォローをお願いいたします。
+
+## `v-ons-*` コンポーネント
+
+`vue-onsenui` は `v-ons-*` という名前の Vue コンポーネントを提供します。
+`v-ons-*` コンポーネントは `ons-*` 要素をラップします。
+`v-ons-*` コンポーネントを使うと、直接 `ons-*` 要素を使うよりも便利に Vue.js アプリを記述することができるようになります。
+
+## 実装状況
+
+2017/01/17 時点での `vue-onsenui` の実装状況は以下の通りです。
+
+|種類|名前|ステータス|備考|
+|-|-|-|-|
+|ページ|Page|未実装||
+|ページマネージャ|Navigator|`v-ons-navigator` として実装済み|`pages` 等の prop は未実装|
+|ページマネージャ|Splitter|未実装||
+|ページマネージャ|Tabbar|`v-ons-tabbar`, `v-ons-tab` として実装済み|`tabs`, `index` 等の prop は未実装|
+|モーダルウィンドウ|Modal|未実装||
+|通知|Dialog|未実装||
+|通知|Alert Dialog|未実装||
+|通知|Popover|未実装||
+|ウィジェット|Pull Hook|未実装||
+|ウィジェット|Carousel|`v-ons-carousel` として実装済み|`items`, `index` 等の prop は未実装|
+|ウィジェット|List|未実装||
+|ウィジェット|Lazy Repeat|未実装||
+|ウィジェット|Input|`v-ons-input` として実装済み|一部の `type` で `v-model` ディレクティブに対応|
+|ウィジェット|Button|`v-ons-button` として実装済み||
+|ウィジェット|Range|`v-ons-range` として実装済み||
+|ウィジェット|Switch|`v-ons-switch` として実装済み||
+|ウィジェット|FAB|未実装||
+|ウィジェット|Progress|未実装||
+|視覚効果|Ripple|未実装||
+|アイコン|Icon|`v-ons-icon` として実装済み|||
+
+## 開発にご協力ください
+
+私達は `vue-onsenui` を使いやすいものにしたいと思っています。
+皆さんからのフィードバックを歓迎します。
+
+`vue-onsenui` のソースコードは [`vue2` ブランチ](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue)の `src` ディレクトリ内にあります。
+
+何かお気付きの点があれば、この記事のコメント欄や [GitHub リポジトリ](https://onsen.io/blog/)の Issues / Pull Requests、また Twitter 等でお気軽にご指摘ください。
+
