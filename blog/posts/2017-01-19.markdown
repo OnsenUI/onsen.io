@@ -1,0 +1,78 @@
+---
+author: onsen
+date: 2017-01-19
+id: vue2-support-status-jan-2017
+title: "Status of Vue 2 migration and release schedule"
+product: onsen
+category: announcement
+tags: onsen ui, vue
+---
+
+![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
+
+In [a previous article](https://onsen.io/blog/onsen-ui-vue-2/) we introduced how to use the Onsen UI components directly from Vue.js 2.
+
+We are now updating a Vue.js binding for Onsen UI called `vue-onsenui` in order to support Vue.js 2.
+In this article we announce its release schedule and the development status.
+
+<!-- more -->
+
+## Release schedule
+
+The Vue.js 2 compatible version of `vue-onsenui` has not yet been published on npm.
+For the time being it is available only from the [`vue2` branch](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue) of our GitHub repository.
+
+Publications on npm are scheduled as follows:
+
+|Phase|Version|Detail|Release date of initial version|
+|-|-|-|-|
+|Alpha|`2.0.0-alpha.0`|In this phase, we implement minimum features. **We will make many breaking changes.**|Soon|
+|Beta|`2.0.0-beta.0`|In this phase, we implement optional features and brush up the API. **We will make some breaking changes.**|In February|
+|RC|`2.0.0-rc.0`|In this phase, we mainly fix bugs. We will not make any breaking changes.|TBD|
+|Stable|`2.0.0`|We will not make any breaking changes.|TBD|
+
+Any time we publish a new version we will announce it in this blog, in our Twitter account and remaining channels.
+
+We recommend that you subscribe to our [Blog RSS Feed](https://onsen.io/blog/rss.xml) and follow us at [@Onsen_UI](https://twitter.com/Onsen_UI).
+
+## `v-ons-*` components
+
+`vue-onsenui` is going to provide Vue components named `v-ons-*`, each of which wraps the corresponding `ons-*` element.
+
+With `v-ons-*` components you can write your Vue.js app even more easily than using the `ons-*` elements directly.
+
+## Development status
+
+As of January 19 we have the following components in `vue-onsenui`:
+
+|Name|Type|Status|Detail|
+|-|-|-|-|
+|**Page**|Page|Implemented as `v-ons-page`, `v-ons-toolbar`, `v-ons-bottom-toolbar`, `v-ons-toolbar-button`||
+|**Navigator**|Page Manager|Implemented as `v-ons-navigator`| Props like `pages` are not yet implemented |
+|**Splitter**|Page Manager|Implemented as `v-ons-spiltter`, `v-ons-spiltter-side`, `v-ons-spiltter-content`||
+|**Tabbar**|Page Manager|Implemented as `v-ons-tabbar`, `v-ons-tab`| Props like `tabs` or `index` are not yet implemented |
+|**Modal**|Modal Window|(Not yet implemented)||
+|**Dialog**|Notification|(Not yet implemented)||
+|**Alert Dialog**|Notification|(Not yet implemented)||
+|**Popover**|Notification|(Not yet implemented)||
+|**Pull Hook**|Widget|Implemented as `v-ons-pull-hook`|`v-model` can be used|
+|**Carousel**|Widget|Implemented as `v-ons-carousel`, `v-ons-carousel-item`| Props like `items` or `index` are not yet implemented |
+|**List**|Widget|Implemented as `v-ons-list`, `v-ons-list-header`, `v-ons-list-item`||
+|**Lazy Repeat**|Widget|(Not yet implemented)||
+|**Input**|Widget|Implemented as `v-ons-input`| `v-model` cannot yet be used in some `type`s |
+|**Button**|Widget|Implemented as `v-ons-button`||
+|**Range**|Widget|Implemented as `v-ons-range`||
+|**Switch**|Widget|Implemented as `v-ons-switch`||
+|**FAB**|Widget|Implemented as `v-ons-fab`, `v-ons-speed-dial`, `v-ons-speed-dial-item`||
+|**Progress**|Widget|(Not yet implemented)||
+|**Ripple**|Visual|(Not yet implemented)||
+|**Icon**|Icon|Implemented as `v-ons-icon`|||
+
+## Help our development
+
+We want to make the use of `vue-onsenui` something that comes easier and easier.
+That way we welcome all the feedback you can give us.
+
+The source code of `vue-onsenui` is located in the `src` directory of the [`vue2` branch](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue) of our GitHub repository.
+
+Please feel free to comment on this post, create issues or pull requests on [our GitHub repository](https://github.com/OnsenUI/OnsenUI) or ask us any questions you might have at [@Onsen_UI](https://twitter.com/Onsen_UI).
