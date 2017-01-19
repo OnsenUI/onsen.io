@@ -43,27 +43,27 @@ With `v-ons-*` components you can write your Vue.js app even more easily than us
 
 ## Development status
 
-As of January 17 we have the following components in `vue-onsenui`:
+As of January 19 we have the following components in `vue-onsenui`:
 
 |Name|Type|Status|Detail|
 |-|-|-|-|
-|**Page**|Page|(Not yet implemented)||
+|**Page**|Page|Implemented as `v-ons-page`, `v-ons-toolbar`, `v-ons-bottom-toolbar`, `v-ons-toolbar-button`||
 |**Navigator**|Page Manager|Implemented as `v-ons-navigator`| Props like `pages` are not yet implemented |
-|**Splitter**|Page Manager|(Not yet implemented)||
+|**Splitter**|Page Manager|Implemented as `v-ons-spiltter`, `v-ons-spiltter-side`, `v-ons-spiltter-content`||
 |**Tabbar**|Page Manager|Implemented as `v-ons-tabbar`, `v-ons-tab`| Props like `tabs` or `index` are not yet implemented |
 |**Modal**|Modal Window|(Not yet implemented)||
 |**Dialog**|Notification|(Not yet implemented)||
 |**Alert Dialog**|Notification|(Not yet implemented)||
 |**Popover**|Notification|(Not yet implemented)||
-|**Pull Hook**|Widget|(Not yet implemented)||
-|**Carousel**|Widget|Implemented as `v-ons-carousel`| Props like `items` or `index` are not yet implemented |
-|**List**|Widget|(Not yet implemented)||
+|**Pull Hook**|Widget|Implemented as `v-ons-pull-hook`|`v-model` can be used|
+|**Carousel**|Widget|Implemented as `v-ons-carousel`, `v-ons-carousel-item`| Props like `items` or `index` are not yet implemented |
+|**List**|Widget|Implemented as `v-ons-list`, `v-ons-list-header`, `v-ons-list-item`||
 |**Lazy Repeat**|Widget|(Not yet implemented)||
 |**Input**|Widget|Implemented as `v-ons-input`| `v-model` cannot yet be used in some `type`s |
 |**Button**|Widget|Implemented as `v-ons-button`||
 |**Range**|Widget|Implemented as `v-ons-range`||
 |**Switch**|Widget|Implemented as `v-ons-switch`||
-|**FAB**|Widget|(Not yet implemented)||
+|**FAB**|Widget|Implemented as `v-ons-fab`, `v-ons-speed-dial`, `v-ons-speed-dial-item`||
 |**Progress**|Widget|(Not yet implemented)||
 |**Ripple**|Visual|(Not yet implemented)||
 |**Icon**|Icon|Implemented as `v-ons-icon`|||
