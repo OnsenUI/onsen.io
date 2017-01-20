@@ -1,0 +1,25 @@
+# Monaca: The New Build Has Arrived
+
+
+I know I know, Monaca Team has been pretty quiet. Sorry about the lack of communication. We’ll try to be better. Lots going on!
+
+One of the things we’ve been working on is to improve your **build** experience. And we are happy to release an update today. Woo hoo!
+
+Let’s go over the changes, shall we?
+
+![alt text](https:// "Monaca's New Build UI")
+
+First thing you will notice is that the interface is revamped. Now there is a dedicated and streamlined page rather than bunch of popups and this interface is the same for IDE and the Localkit. No more confusion there.
+
+Of course it is not just the look that changed. To build iOS apps, you can now manage secret key, certificate and provisioning files right inside Monaca.
+
+The best part is that you can manage **multiple** iOS certificates and provisioning files. This allows you to specify which provisioning file to use for each project and for each build type. Localkit users can do this too.
+ 
+You can also see build log in real time right there. Good to know what’s going on, right?
+
+
+We hope this update makes the build much easier and more pleasant for you. Let us know what you think - we are always looking for your feedback. 
+Be sure to let us know if you have any issue, request or whatever comment about Monaca.
+
+Happy coding!
+
