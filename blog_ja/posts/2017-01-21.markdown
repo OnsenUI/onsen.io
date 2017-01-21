@@ -1,0 +1,184 @@
+---
+author: atsushi
+date: 2017-01-21
+id: text-to-speech-with-monaca
+title: "Monacaアプリでテキストスピーチを実現する"
+product: monaca
+tags: monaca, text, speech
+category: 技術情報
+---
+
+最近ではコンピュータが音声を使って説明や案内をしてくれる事例が増えてきました。カーナビもそうですし、Pepperのようなロボットも音声を使って情報を発信しています。今後、音声認識と音声発信は情報コミュニケーションにおいて大きな役割を担うことでしょう。
+
+今回はそんな音声発信をMonacaアプリで実現する試みです。利用するAPIは [VoiceText Web API](https://cloud.voicetext.jp/webapi) になります。他にもWatson APIの中にText to Speech APIがあるのですが、生成されるWavファイルがiPhoneのSafariではうまく再生されないフォーマットであったため（さらにその変換もうまくいかなかったため）VoiceText Web APIを使っています。
+
+## VoiceText Web APIの使い方
+
+VoiceText Web APIはまずユーザ登録（無料）をします。そうするとAPIキーが得られます。このAPIを使って、次のようにコマンドを入力すると、test.wavというファイルが生成されます。
+
+```
+curl "https://api.voicetext.jp/v1/tts" \
+     -o "test.wav" \
+     -u "YOUR_API_KEY:" \
+     -d "text=おはようございます" \
+     -d "speaker=hikari"
+```
+
+これを見て分かる通り、YOUR_API_KEYの部分はBasic認証のユーザ名にあたります。後は -d オプションを与えていますので、フォーム送信として text および speaker パラメータを与えてあげればOKです。返ってきた音声データ（バイナリ）をaudioタグに当てはめれば再生できます。
+
+## 画面について
+
+まずHTMLでの表示を紹介します。
+
+```
+<ons-page>
+  <ons-toolbar>
+    <div class="center">テキストを音声変換</div>
+  </ons-toolbar>
+
+  <section style="padding: 8px">
+    <p>
+      <textarea id="text" class="textarea">こんにちは</textarea>
+    </p>
+    <br>
+    <ons-button id="tts" modifier="large">音声に変換</ons-button>
+    <p></p>
+    <p><audio id="audio" controls></audio></p>
+  </section>
+</ons-page>
+```
+
+表示はOnsen UIを使っています。テキストエリアに入力された文字を音声に変換してaudioタグに適用することとします。
+
+![](/blog/content/images/2017/Jan/monaca-tts.png)
+
+## JavaScriptでの実装
+
+まずコメントで全体像を紹介します。なお、今回はjQueryもライブラリとして追加してあります。
+
+```
+// パラメータ
+
+// 初期表示
+
+// 音声に変換ボタンを押した時のイベント
+  
+  // テキスト取得
+  
+  // XMLHttpRequestの準備
+    // アクセスが返ってきたらここ
+  
+  // パラメータをフォーム送信用にエンコーディング
+  
+  // XMLHttpRequestを使ってアクセス
+```
+
+### パラメータ
+
+最初にテキスト読み上げで使うパラメータを定義しておきます。YOUR_USER_NAMEはVoiceText Web APIで取得したAPIキーを指定してください。
+
+```
+var userName = "YOUR_USER_NAME";
+var url  = "https://api.voicetext.jp/v1/tts";
+var params   = {
+  speaker: "hikari",
+  text: ""
+};
+```
+
+### 初期表示
+
+データが何もありませんので、最初はaudioタグを隠しておきます。残りの処理も ons.ready 内に記述していきます。
+
+```
+ons.ready(function() {
+  // 初期表示
+  var audio = $("#audio");
+  audio.hide();
+}
+```
+
+### 音声に変換ボタンを押した時のイベント
+
+ボタンを押した時のハンドリングはjQueryで行っています。2度目の変換を想定して、また audio タグを消しておきます。
+
+```
+$("#tts").on("click", function() {
+  audio.hide();
+  
+});
+```
+
+### テキスト取得
+
+テキストの取得はjQueryを使って行います。
+
+```
+params.text = $("#text").val();
+```
+
+### XMLHttpRequestの準備
+
+今回はバイナリを扱うのでjQueryではなく素のXMLHttpRequestを使います。コンテンツが取得できた際の処理は後ほど記述します。
+
+```
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function(){
+  // アクセスが返ってきたらここ
+}
+```
+
+### パラメータをフォーム送信用にエンコーディング
+
+送信するパラメータをエンコードします。これは各キーと値をencodeURIComponentを使ってエンコードしていくだけです。
+
+```
+var data = [];
+for (var key in params) {
+  var value = encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+  data.push(value);
+}
+var serialize = data.join('&').replace(/%20/g, '+');
+```
+
+### XMLHttpRequestを使ってアクセス
+
+後は認証データを付けて送信をするのですが、他の方式でBasic認証がうまく行えなかったため、直接ヘッダーにBase64した文字列を設定しています。返り値の形式はblobを指定します。バイナリの場合、arraybufferもありますが、今回の目的ではblobがうまくいきます。
+
+```
+var basicBase64 = btoa(unescape(encodeURIComponent(userName + ":")));
+xhr.open('POST', url);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.setRequestHeader("Authorization", "Basic " + basicBase64);
+xhr.responseType = 'blob';
+xhr.send(serialize);
+```
+
+### アクセスが返ってきた際の処理
+
+最後にデータが取得できた際の処理です。これはaudioタグのsrcの中にレスポンスから動的に作ったObjectURLを指定します。最後にaudioタグを表示します。
+
+```
+if (this.readyState == 4 && this.status == 200){
+  audio.attr("src", window.URL.createObjectURL(this.response));
+  audio.show();
+}
+```
+
+これでJavaScriptは完成です。
+
+## コンテンツセキュリティポリシーの変更
+
+Androidの場合、media-srcをコンテンツセキュリティポリシーに指定する必要があります。 `media-src * blob:` がそうです。
+
+```
+<meta http-equiv="Content-Security-Policy" content="default-src * data:; media-src * blob:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+```
+
+----
+
+これで任意のテキストを喋らせることができるようになります。なお、Safariではaudioタグの自動再生がサポートされていません。そのため、必ず再生ボタンを押してあげる必要があります。
+
+チャットやニュースの読み上げ機能など、アクセシビリティを向上させる上でテキスト読み上げは使いどころが多そうです。ぜひ皆さんのアプリでも活用してください。
+
+今回のソースコードは[moongift/tts-with-monaca](https://github.com/moongift/tts-with-monaca)にアップロードされています。実装される際の参考にしてください。
