@@ -41,7 +41,7 @@ module.exports = function(language, isStaging) {
     },
     monaca: {
       name: 'Monaca Team',
-      gravatar: 'e4a413addecfe28314db5018c6598ff3', // used only in article page
+      url: 'https://monaca.io',
     },
     moongift: {
       name: 'Atsushi Nakatsugawa',
