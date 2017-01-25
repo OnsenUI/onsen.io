@@ -17,18 +17,18 @@ module.exports = function(language, isStaging) {
       name: 'Masa Tanaka',
       email: 'masahiro@asial.co.jp',
       url: 'http://www.asial.co.jp/en/',
-      gravator: '0b0ed6f4c5962b764d9bdb0ade4aa7ae'
+      gravatar: '0b0ed6f4c5962b764d9bdb0ade4aa7ae' // used only in article page
     },
     fran: {
       name: 'Fran Dios',
       email: 'fran@asial.co.jp',
       url: 'http://frandiox.com/en/',
-      image: '/blog/content/images/2015/Feb/yo2.jpg'
+      image: '/blog/content/images/2015/Feb/yo2.jpg' // used only in article page
     },
     andi: {
       name: 'Andi Pavllo',
       email: 'andi@asial.co.jp',
-      image: '/blog/content/images/2015/Feb/1423814226357.jpg'
+      image: '/blog/content/images/2015/Feb/1423814226357.jpg' // used only in article page
     },
     kruy: {
       name: 'Kruy Vanna',
@@ -37,7 +37,7 @@ module.exports = function(language, isStaging) {
     onsen: {
       name: 'Onsen UI Team',
       url: 'https://onsen.io',
-      gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
+      gravatar: 'e7c2e1cc42c38f0fe0685749d172e8ab' // used only in article page
     },
     monaca: {
       name: 'Monaca Team',
@@ -45,15 +45,15 @@ module.exports = function(language, isStaging) {
     },
     moongift: {
       name: 'Atsushi Nakatsugawa',
-      gravator: '4cafe6a1c6287d64d7252279eeeffa94'
+      gravatar: '4cafe6a1c6287d64d7252279eeeffa94' // used only in article page
     },
     takuya: {
       name: 'Takuya Watanabe',
-      gravator: '7ff040f6fd196a1dbffaea6572095969'
+      gravatar: '7ff040f6fd196a1dbffaea6572095969' // used only in article page
     },
     hosoi: {
       name: 'Kazuho Hosoi',
-      gravatar: 'a963b1289748255706b7d630b5e6514f'
+      gravatar: 'a963b1289748255706b7d630b5e6514f' // used only in article page
     },
     una: {
       name: 'Una Softic',
@@ -65,11 +65,11 @@ module.exports = function(language, isStaging) {
     },
     bryan: {
       name: 'Bryan Ellis',
-      gravator: '12e050bf226a74ef0c65fe0a637f6a31'
+      gravatar: '12e050bf226a74ef0c65fe0a637f6a31' // used only in article page
     },
     konstantin: {
       name: 'Konstantin Dinev',
-      gravator: '31893df4323fac99458ed86784e25a77'
+      gravatar: '31893df4323fac99458ed86784e25a77' // used only in article page
     },
     atsushi: {
       name: '中津川篤司',
@@ -92,14 +92,14 @@ module.exports = function(language, isStaging) {
     junio: {
       name: 'Júnio Silva',
       email: 'junio@asial.co.jp',
-      gravatar: 'e0bf2e415d1174b8a479ade0c5cc671d',
+      gravatar: 'e0bf2e415d1174b8a479ade0c5cc671d', // used only in article page
       url: 'https://github.com/misterjunio'
     }
   };
 
   for (author in authors) {
-    if (authors[author].email && (!authors[author].gravator || !authors[author].image)) {
-      authors[author].gravator = md5(authors[author].email.toLowerCase());
+    if (authors[author].email && (!authors[author].gravatar || !authors[author].image)) {
+      authors[author].gravatar = md5(authors[author].email.toLowerCase());
     }
 
     authors[author].id = author;
