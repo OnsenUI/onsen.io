@@ -39,6 +39,10 @@ module.exports = function(language, isStaging) {
       url: 'https://onsen.io',
       gravator: 'e7c2e1cc42c38f0fe0685749d172e8ab'
     },
+    monaca: {
+      name: 'Monaca Team',
+      url: 'https://monaca.io',
+    },
     moongift: {
       name: 'Atsushi Nakatsugawa',
       gravator: '4cafe6a1c6287d64d7252279eeeffa94'
