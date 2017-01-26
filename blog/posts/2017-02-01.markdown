@@ -1,35 +1,49 @@
 ---
 author: junio
 date: 2017-02-01
-id: to-be-defined
-title: "To Be Defined"
+id: vuejs-2-binding-alpha-version-is-here
+title: "VueJS 2 binding alpha version is here!"
 product: onsen
-category: tutorial
-tags: tutorial, vue2, onsen ui
+category: announcement
+tags: vue, onsen ui
 ---
 
-![Title](/blog/content/images/2017/Feb/star.png)
+![Title](/blog/content/images/2017/Feb/vue-onsenui-alpha.png)
 
-A couple of months ago we published an article on [how to create a Pokedex application](/blog/tutorial-how-to-create-pokemon-app-using-angular2-cli/) using Angular 2. Since then, the stable version of Angular 2 has been released and we have released the RC version of our [Angular 2 bindings](/angular2/).
+Hi everyone. I’m [Júnio](https://onsen.io/blog/junio/ "Júnio"), the most recent intern working with the Onsen UI team. Following our [last blog post](https://onsen.io/blog/vue2-support-status-jan-2017/ "Previous Onsen UI blog post") we’ve been focusing on updating the binding for Vue2 in order to accomplish our established deadlines (and all your wildest dreams).
 
-In this article we will use Onsen UI 2 and Angular 2 to create a simple mobile Pokedex app. We will use some of the code from the previous article, but we will integrate it with Onsen UI. We will also take a look at the [Monaca CLI](https://www.npmjs.com/package/monaca), which is a great tool for creating, debugging, and developing apps with Angular 2 and Onsen UI.
+We are happy to announce that we (are finally ready to release / have finally released / whatever status we’re in by Wednesday) its alpha version. Keep reading for details.
 
 <!-- more -->
 
-## Stuff
+### Call for feedback
 
-About stuff...
+Taking the risk of boring you, before going through some of the new stuff on this version we’d like to summon a “call to arms” for you awesome VueJS developers. If you could take the release for a test drive and let us known of any issues, ideas you might have to improve it, thoughts on the API or simply a (hopefully positive) comment, we would greatly appreciate it.
 
-```
-Highlighted code stuff
-```
+Best way to do that is by directly chatting with us on our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI "Gitter channel"). Otherwise you can place a question on our [Community Forum](https://community.onsen.io/category/2/onsen-ui "Community Forum") or on [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow") with the **onsen-ui** tag. You can even open an issue on our [Github repo](https://github.com/OnsenUI/OnsenUI "Github repo") (where you can also find the source code). Plenty of ways to share your thoughts, huh? :)
 
-```js
-Highlighted Javascript code stuff
-```
+As we mentioned before (and well, because that's generally the point of an alpha) we will probably be making some breaking changes before transitioning to beta so now is the perfect time to let us know.
 
-## Conclusion
+### What's new
 
-In this article we have created a very simple Pokedex app using Angular 2 and Onsen UI 2. Even if this Pokedex app doesn't display a lot of information, we hope you can see how it could be expanded into a more complete app by adding more pages to the navigator and adding more information from the PokeAPI. The Angular 2 bindings for Onsen UI are currently in RC stage but we are getting closer to a stable version.
+Referring to the list on our [previous blog post](https://onsen.io/blog/vue2-support-status-jan-2017/ "Previous Onsen UI blog post"), all components (except *Lazy Repeat*) are implemented. The components from the Onsen UI core were wrapped so that you can still use the regular API.
 
-Onsen UI is an open source library used to create the UI of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
+However, we wanted to provide a more tailored way of doing things. Hence we decided to reserve extra space in our API for *Vue*-specific capabilities that we thought would suit your needs. The connection of *Vue*-like syntax to our core components demanded some tweeking and workarounding here and there but in general we are pleased with the solutions we found.
+
+One of them is the use of `v-ons-model` with `v-ons-input`. Due to the way in which *Vue* treats elements such as checkboxes or radio buttons, we came up with our own directive `v-ons-model` to emulate the behaviour of the regular `v-model`. Same for `v-ons-index` in *Carousel*, for example.
+
+For these and other implementation details we (are preparing / have prepared) some documentation that comes in handy if you have some doubts. You can check it out by following this [link](wwww.google.com "Documentation").
+
+To start using the new release right away you can simply install the dependency in your project with `npm install vue-onsenui` or integrate it manually from `Github`. Happy coding.
+
+### TL;DR
+
+- Alpha version is out and can be installed with `npm install vue-onsenui` (source code on our [Github repo](https://github.com/OnsenUI/OnsenUI "Github repo"));
+
+- Use our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI "Gitter channel"), our [Community Forum](https://community.onsen.io/category/2/onsen-ui "Community Forum") or even [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow") to reach out to us with any issue or contribution;
+
+Stay tuned and *let's make Vue-OnsenUI great again*.
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
