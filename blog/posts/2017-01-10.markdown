@@ -2,45 +2,44 @@
 author: keiji
 date: 2017-01-10
 id: monaca-file-transfer-plugin
-title: "[Monaca] File Transferプラグインについて"
+title: "[Monaca] File Transfer Plugin"
 product: monaca
 tags: Monaca
-category: 技術情報
+category: monaca
 ---
 
-Monacaでファイルのアップロードやダウンロードを行う場合は、File Transferプラグインを利用します。
-File Transferプラグインは、Monacaの基本Cordovaプラグインに含まれており、Basicプランから利用することができます。
+You can now use Monaca File Transfer Plugin when uploading or downloading files with Monaca.
+The File Transfer Plugin is included in Monaca's basic Cordova Plug-in and can be used at least with Basic plan.
 
-# File Transferプラグインの使い方
+# File Transfer Plugin's usage
 
-まず初めに、対象のプロジェクトの「Cordovaプラグインの管理」から、File Transferプラグインを有効にします。
-プロジェクトでFile Transferプラグインが利用できるのは、devicereadyイベント発行後になります。
+First, you should enable the File Transfer Plugin from "Cordova Plugin Management". The File Transfer Plugin 
+is used after the deviceready event.
 
 ```html
 <script>
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
-    alert("File Transferプラグインが利用できます。");
+    alert("File Transfer is now ready.");
 }
 </script>
 ```
 
-# ファイルのダウンロード
+# File Download
 
-Monacaのホームページにある画像をアプリケーションのサンドボックス内の一時フォルダーにダウンロードしてみたいと思います。
-コードは、下記になります。
+Here's the example of how to download images from Monaca project into temporary folder.
 
 ```html
 <script>
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
 
-        // ダウンロード元
+        // Source
         var uri = encodeURI("https://ja.monaca.io/img/index/img_1.jpg");
-        // ダウンロード先
+        // Target
         var fileURL = "cdvfile://localhost/temporary/img_1.jpg";
 
-        // ファイルのダウンロード
+        // File download
         var fileTransfer = new FileTransfer();
         fileTransfer.download(
             uri,
@@ -63,36 +62,33 @@ Monacaのホームページにある画像をアプリケーションのサン�
 </script>
 ```
 
-download()に設定するurlは、encodeURI()を使用してエンコードする必要があります。
-ダウンロードが成功すると、ダウンロードしたファイルのFileSystemを取得することができます。このFileSystemのtoInternalURL()で、ダウンロード時に設定したダウンロード先を確認することができます。
+The url set in download() must be encoded using encodeURI() function. Once the download is successful, you can retrieve the FileSystem of the downloaded file. With this, you are able to track down the download destination being set at the download.
 
-このtoInternalURL()で取得した値は、FileプラグインのresolveLocalFileSystemURIに設定することで、ダウンロードしたファイルの移動やコピー等といった操作が可能になります。
+When you set the value obtained by toInternalURL() to resolveLocalFileSystemURI, this will enable you to move or copy the downloaded files.
 
-ファイルの移動やコピーについては、[Fileプラグインについて](https://ja.onsen.io/blog/monaca-file-plugin/)を参照してください。
+For information on copy or move file, you can refer to [Fileプラグインについて](https://ja.onsen.io/blog/monaca-file-plugin/).
 
+# File Upload
 
-# ファイルのアップロード
-
-ファイルのダウンロードの例でダウンロードした画像ファイルをサーバーへアップロードしてみたいと思います。
-コードは、下記になります。
+Using the previous FileDownload example to perform image upload back to server as following:
 
 ```html
 <script>
     document.addEventListener("deviceready", onDeviceReady, false);
     function onDeviceReady() {
 
-        // ダウンロード元
+        // Source
         var uri = encodeURI("https://ja.monaca.io/img/index/img_1.jpg");
-        // ダウンロード先
+        // Target
         var fileURL = "cdvfile://localhost/temporary/img_1.jpg";
 
-        // ファイルのダウンロード
+        // File Download
         var fileTransfer = new FileTransfer();
         fileTransfer.download(
             uri,
             fileURL,
             function(fileSystem) {
-                // ファイルのアップロード
+                // File Upload
                 uploadFile(fileSystem.toInternalURL());
             },
             function(error) {
@@ -104,7 +100,7 @@ download()に設定するurlは、encodeURI()を使用してエンコードす�
 
     }
 
-    // ファイルのアップロード
+    // File Upload
     function uploadFile(uploadFileURL) {
         var options = new FileUploadOptions();
         options.fileKey = "file";
@@ -118,7 +114,7 @@ download()に設定するurlは、encodeURI()を使用してエンコードす�
         options.params = params;
 
         var fileTransfer = new FileTransfer();
-        fileTransfer.upload(uploadFileURL, encodeURI("http://サーバードメイン/uploader.php"), onUploadSuccess, onUploadFail, options);
+        fileTransfer.upload(uploadFileURL, encodeURI("http://server_domain/uploader.php"), onUploadSuccess, onUploadFail, options);
         function onUploadSuccess(result) {
             console.log("Code = " + result.responseCode);
             console.log("Response = " + result.response);
@@ -134,7 +130,7 @@ download()に設定するurlは、encodeURI()を使用してエンコードす�
 </script>
 ```
 
-### サーバーサイドのプログラム
+### Server-side script
 ```php:uploader.php
 <?php
 $uploaddir = '/uploads/';
@@ -155,4 +151,4 @@ echo '</pre>';
 ?>
 ```
 
-File Transferプラグインを利用することにより、ファイルのダウンロードやアップロードが可能になります。File Transferプラグインを活用して、アプリケーション開発に役立ててください。
+File Transfer Plugin can be used for download and upload files. This could be helpful for application development.
