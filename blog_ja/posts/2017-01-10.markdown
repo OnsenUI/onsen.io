@@ -45,10 +45,10 @@ Monacaのホームページにある画像をアプリケーションのサン�
         fileTransfer.download(
             uri,
             fileURL,
-            function(fileSyatem) {
-                console.log("toURL=" + fileSyatem.toURL());
-                console.log("nativeURL=" + fileSyatem.nativeURL);
-                console.log("toInternalURL=" + fileSyatem.toInternalURL());
+            function(fileSystem) {
+                console.log("toURL=" + fileSystem.toURL());
+                console.log("nativeURL=" + fileSystem.nativeURL);
+                console.log("toInternalURL=" + fileSystem.toInternalURL());
             },
             function(error) {
                 console.log("download error source " + error.source);
@@ -64,7 +64,7 @@ Monacaのホームページにある画像をアプリケーションのサン�
 ```
 
 download()に設定するurlは、encodeURI()を使用してエンコードする必要があります。
-ダウンロードが成功すると、ダウンロードしたファイルのFileSyatemを取得することができます。このFileSyatemのtoInternalURL()で、ダウンロード時に設定したダウンロード先を確認することができます。
+ダウンロードが成功すると、ダウンロードしたファイルのFileSystemを取得することができます。このFileSystemのtoInternalURL()で、ダウンロード時に設定したダウンロード先を確認することができます。
 
 このtoInternalURL()で取得した値は、FileプラグインのresolveLocalFileSystemURIに設定することで、ダウンロードしたファイルの移動やコピー等といった操作が可能になります。
 
@@ -91,9 +91,9 @@ download()に設定するurlは、encodeURI()を使用してエンコードす�
         fileTransfer.download(
             uri,
             fileURL,
-            function(fileSyatem) {
+            function(fileSystem) {
                 // ファイルのアップロード
-                uploadFile(fileSyatem.toInternalURL());
+                uploadFile(fileSystem.toInternalURL());
             },
             function(error) {
                 console.log("download error");
