@@ -1,0 +1,66 @@
+---
+author: atsushi
+date: 2017-01-27
+id: monaca-with-formstone
+title: "画像のスムーズなズーム機能をFormstoneで実現する"
+product: monaca
+tags: Monaca
+category: 技術情報
+---
+
+スマートフォンで扱う画像のサイズは年々大きくなっています。解像度が増え、幅も高さも増えていますが、スマートフォンのサイズ自体には限度があるので細かいところまで見るにはズームしなければなりません。
+
+とは言え、ピンチ操作で写真を拡大するとそれ以外のコンテンツも含めて拡大されてしまいますし、アプリっぽい動作とは言えません。そこで使ってみたいのがFormstoneです。[Formstone](https://formstone.it)はフロントエンドのコンポーネント集といったソフトウェアで、たくさんの機能が備わっています。その一つに画像のズーム機能があります。
+
+## Formstoneのインストール
+
+Formstoneを使う際には機能毎に用意されているJavaScript/スタイルシートファイルを読み込む方法と、全体をまとめてJavaScriptを扱う方法の2種類があります。今回は全部まとめた[site.js](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/js/site.js)/[site.css](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/css/site.css)を使います。FormstoneにはjQueryが必須ですが、site.jsの中に含まれています。
+
+ファイルをダウンロードしたら、Monaca IDEのアップロード機能を使ってアップロードします。アップロードしたら、scriptタグとlinkタグでファイルを読み込みます。
+
+```
+<script src="js/site.js"></script>
+<link rel="stylesheet" href="css/site.css">
+```
+
+## Formstonenの使い方
+
+実際の使い方ですが、例えば次のようにHTMLを記述します。
+
+```
+<div id="images">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/IPhone_5S_Home_Button.jpg" />
+  <img src="https://static.pexels.com/photos/6438/apple-iphone-technology-white.jpg" />
+</div>
+```
+
+画像はアプリ内部であっても、外部のサイトでも問題ありません。
+
+後はアプリの準備が完了したタイミング（Onsen UIであれば ons.ready 、jQueryであれば $(function() {}) ）で、viewerメソッドを実行します。
+
+```
+ons.ready(function() {
+  console.log("Onsen UI is ready!");
+  $('#images').viewer();
+});
+```
+
+そうすると次のように画像の下に拡大、縮小ボタンが表示されます。
+
+![](/blog/content/images/2017/Jan/zoomer-1.png)
+
+左右の矢印は画像の切り替え用で、複数の画像を指定した場合に表示されます。
+
+## Viewerの操作
+
+操作は簡単で、プラスアイコンをタップすれば画像がズームされ、マイナスアイコンでパンします。押し続けるとスムーズにズームまたはパンします。ズームした後は写真をドラッグして動かせるようになっていますので、自分が見たい部分にフォーカスするのも簡単です。左右の矢印ボタンを押すと、画像が切り替わります。
+
+![](/blog/content/images/2017/Jan/zoomer.gif)
+
+----
+
+画像自体は元のものをそのまま使いますので、高画質な画像を使うのが良さそうです。わざわざ低画質版を用意したり、高画質版を切り出しておくような手間が不要なのですぐに使えるでしょう。インターネットにアクセスするようなものの場合、帯域が気になりますが、アプリのローカルデータとして入れてしまっておければ読み込みは高速なので問題ないでしょう。
+
+Formstoneはビューワーだけに限らず、カルーセルやドロップダウン、ページネーション、Lightboxなどの多数の機能が揃っています。アプリのUI/UXを向上するのに便利な機能が多いので、ぜひ使ってみてください。
+
+今回のコードは[monaca-with-formstone/site.css at master · moongift/monaca-with-formstone](https://github.com/moongift/monaca-with-formstone)にアップしてあります。実装時の参考にしてください。
