@@ -13,7 +13,6 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-This guide explains important notes when using Onsen UI with Vue.
 **Important note**: Since the status of VueOnsenui is alpha, this guide will be updated frequently to reflect API changes and add more information about the bindings.
 
 ### Starting Project
@@ -46,12 +45,12 @@ You can load with normal `<script></script>` and `<link>` tags as follows:
 <script src="vue-onsenui.js"></script>
 ```
 
-Or, you can use VueOnsenui ufrom npm with CommonJS module system like Webpack. In this case, use the `onsenui` and `vue-onsenui` packages.
+Or, you can use VueOnsenui from npm with a module bundler like Webpack. In this case, use the `onsenui` and `vue-onsenui` packages.
 
 ```javascript
 // Webpack CSS import
-import 'path/to/onsenui.css';
-import 'path/to/onsen-css-components.css';
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 
 // JS import
 import Vue from 'vue';
@@ -61,7 +60,7 @@ import VueOnsen from 'vue-onsenui';
 Vue.use(VueOnsen);
 ```
 
-Notice how VueOnsen is used as a plugin for Vue in the last line. Alternatively, you can use `require` instead of ES6 imports.
+Notice how VueOnsen is used as a plugin for Vue in the last line (this is already done automatically if `window.Vue` exists). Alternatively, you can use `require` instead of ES6 imports.
 
 ### Onsen UI HelloWorld with Vue
 
@@ -100,12 +99,227 @@ To get started, let's create a simple Hello World application. The following sam
 
 This example is loading the following JS libraries, `vue.js`, `onsenui.js` and `vue-onsenui.js`. For stylesheets, it is loading `onsenui.css` and `onsen-css-components.css` which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](/v2/docs/guide/js/#css-definitions) document.
 
-```
-<link rel="stylesheet" href="css/onsenui.css">
-<link rel="stylesheet" href="css/onsen-css-components.css">
+```html
+<link rel="stylesheet" href="path/to/onsenui.css">
+<link rel="stylesheet" href="path/to/onsen-css-components.css">
 ```
 
-In `<body>` tag, there is only a `<div>` tag having `app` id. This is where Vue will render the content into (`el` property in the constructor).
+In `<body></body>` tag, there is only a `<div></div>` tag having `app` id. This is where Vue will render the content into (`el` property in the constructor).
+
+
+### Components API
+
+There are basically two different APIs in the alpha version. The first one is similar to the core API. This is, calling methods and properties from components. The second API is more similar to a proper Vue API and it's based on props and directives. While the first one works well, the latter probably needs some improvements and that's what we want to do during alpha and beta stages. Both of the APIs work for every component but they **should not be mixed**, stick to one of them and please **send us feedback** about your preference.
+
+#### Methods API
+
+*Note: This API could be restricted in future versions in favor of the Props API.*
+
+Every component in Vue bindings implement the core API. They expose the same methods, attributes and properties as the WebComponents directly in the Vue instance. Therefore, they can be accessed with `$refs`. An example would be:
+
+```
+<v-ons-navigator ref="myNavigator">
+  <page1 :some-prop="true"></page1>
+</v-ons-navigator>
+...
+
+$refs.myNavigator.pushPage(pageComponent);
+```
+
+While this works for every component, the routing components like `v-ons-navigator`, `v-ons-tabbar` and `v-ons-splitter` can be accessed from any children with the computed properties `navigator`, `tabbar` and `splitter`, respectively (assuming it has those 3 parents), that exist in every Vue instance (thanks to VueOnsenui plugin):
+
+```javascript
+const page1 = { // Child page
+  template: '<v-ons-page>...</v-ons-page>',
+  methods: {
+    push() {
+      this.navigator.pushPage(page2, {data: { something: true }});
+      // In page2 we can access to `this.data.something`.
+    },
+    changeTab() {
+      this.tabbar.setActiveTab(3);
+    },
+    openMenu() {
+      this.splitter.content.load(page4);
+    },
+    props: ['someProp']
+  }
+};
+```
+
+In the core normally these methods require a string `page` parameter (a template ID). In this case, we can pass directly Vue instances with `v-ons-page` component as the root. For the navigator, passing `options.data` parameter will modify the next page and include `data` as a property of the instance (this.data).
+
+Also, like it happens in the core library, these components can get a `page` prop with their initial component:
+
+```html
+<v-ons-splitter-side :page="menuPage"></v-ons-splitter-side>
+
+<v-ons-navigator :page="page1" :some-prop="true"></v-ons-navigator>
+
+<v-ons-tabbar :some-prop="true">
+  <v-ons-tab :page="page1"></v-ons-tab>
+  <v-ons-tab :page="page2"></v-ons-tab>
+</v-ons-tabbar>
+```
+
+Since the Methods API makes a bit hard to pass down props to the pages, there is a feature where the required props of each page is inherited from the parent automatically (if the parent has it). In the previous code, `page1` gets `this.someProp === true` from its parent. Note that these inherited props are not reactive for now, they must be used only as initial values.
+
+
+#### Props API
+
+This API allows a better integration with Vue and is open to different combinations. For almost every custom element property from the core, there is a prop for its correspondent Vue component. Let's check the components one by one.
+
+##### Navigator
+
+Vue can detect changes on components' children and only update those that were modified. Thanks to this, we can push or pop pages directly to the Navigator's children array:
+
+```
+<template>
+  <v-ons-navigator :options="{}">
+    <div :is="page" v-for="page in pageStack" :page-stack="pageStack"></div>
+  </v-ons-navigator>
+</template>
+<script>
+  import { page1, page2 } from '...';
+  export default {
+    data() {
+      return {
+        pageStack: [page1, page2]
+      }
+    }
+  };
+</script>
+```
+
+Notice that in this example we pass `pageStack` prop down to the pages. You can also pass down methods to modify it from the parent context or, even better, use Vuex to store the stack.
+
+```
+<template>
+  <v-ons-page>
+    <v-ons-toolbar>
+      <div class="left">
+        <v-ons-back-button :on-click="pop">Back</v-ons-back-button>
+      </div>
+      <div class="center">Title</div>
+    </v-ons-toolbar>
+
+    Content
+    <v-ons-button @click="push">Push</v-ons-button>
+    <v-ons-button @click="replace">Replace</v-ons-button>
+  </v-ons-page>
+</template>
+<script>
+  export const page2 = {
+    methods: {
+      push() {
+        this.pageStack.push(page3);
+      },
+      pop() {
+        this.pageStack.pop();
+      },
+      replace() {
+        this.pageStack.pop();
+        this.pageStack.push(page3);
+        // Or use this.pageStack.splice(...)
+      }
+    },
+    props: ['pageStack']
+  };
+</script>
+```
+
+Vue detects modifications in this array through methods like `push`, `pop`, `splice`, etc. It also works by directly assigning a new array, although this is not possible if we pass the whole `pageStack` as a prop since they are not modificable.
+
+The Navigator will notice the changes and run the appropriate animation whenever possible. Notice that for modifying the page stack properly, every page should include an [unique `key` prop](https://vuejs.org/v2/guide/list.html#key). This will let Vue know that some of the pages did not change. If the key is not provided, Vue might consider that the whole stack is dirty and recreate all the pages. In this case, the Navigator could perform a wrong animation. Providing the `key` prop allows to safely modify any index of the page stack with, for example, `pageStack.shift()` or even `pageStack.splice(0, pageStack.length - 2)` without performing any animation (since the top page does not change). However, without `key` prop the top page will be considered as a new component, thus triggering a "pop" animation.
+
+##### Splitter
+
+Loading new pages in both `v-ons-splitter-content` and `v-ons-splitter-side` should be quite straightforward for Vue users. Simply swap the inner component as you want. You can even use `keep-alive` if you want to cache your components:
+
+```html
+<v-ons-splitter>
+  <v-ons-splitter-side v-ons-open="sideOpen">
+    <menu-page></menu-page>
+  </v-ons-splitter-side>
+
+  <v-ons-splitter-content>
+    <keep-alive>
+      <div :is="pageContent1"></div>
+    </keep-alive>
+  </v-ons-splitter-content>
+</v-ons-splitter>
+```
+
+For opening or closing the menu, however, we must use a custom directive called `v-ons-open`, which is basically a `v-model` for `v-ons-splitter-side`. Now you can modify the boolean `sideOpen` variable and the splitter will ~~react~~ vue consequently.
+
+##### Tabbar
+
+For the Tabbar we make use of Vue's named slots.
+
+```html
+<v-ons-tabbar v-ons-index="tabbarIndex">
+  <template slot="pages">
+    <page1></page1>
+    <page2></page2>
+  </template>
+
+  <v-ons-tab icon="md-home" label="Home"></v-ons-tab>
+  <v-ons-tab :icon="iconT2" :label="labelT2"></v-ons-tab>
+</v-ons-tabbar>
+```
+
+Every `v-ons-tab` sets the page component that corresponds to its index on click. Optionally, `v-ons-index` custom directive can be used to assign the active index to the Tabbar. This might be helpful if you want to switch pages from JavaScript or any other way apart from Tab click. If this directive is not used, you can set `active` attribute in the initial tab.
+
+Moreover, we can also use Vue's power to delay the creation of some pages and also cache them if we want. In order to do this, we need to overwrite the Tab's `onClick` prop:
+
+```
+<v-ons-tabbar>
+  <template slot="pages">
+    <keep-alive>
+      <div :is="currentPage"></div>
+    </keep-alive>
+  </template>
+
+  <v-ons-tab :on-click="() => currentPage = 'home'" :active="currentPage === 'home'"></v-ons-tab>
+  <v-ons-tab :on-click="() => currentPage = 'settings'" :active="currentPage === 'settings'"></v-ons-tab>
+</v-ons-tabbar>
+```
+
+##### Carousel
+
+The Carousel can also use `v-ons-index` custom directive to set its position.
+
+```
+<v-ons-carousel v-ons-index="carouselIndex" :swipeable="sw" overscrollable>
+  <v-ons-carousel-item v-for="item in items"><v-ons-carousel-item>
+<v-ons-carousel>
+```
+
+##### Forms
+
+VOnsInput, VOnsSwitch, VOnsRange and VOnsSelect work like the corresponding core elements. A custom directive `v-ons-model` has been created to imitate the behavior of `v-model` in native inputs. This is, Array binding for checkboxes, groups for radio buttons, etc.
+
+##### Floating action buttons
+
+VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles their visibility. VOnsSpeedDial also implements `open` prop to toggle items' visibility. `onClick` prop can be used to overwrite the default behavior (this should be used if `open` prop is present).
+
+```
+<v-ons-speed-dial :visible="isVisible" :open="isOpen" :on-click="isOpen = !isOpen">
+  <v-ons-fab :visible="isVisible">+</v-ons-fab>
+  <v-ons-speed-dial-item>A</v-ons-speed-dial-item>
+  <v-ons-speed-dial-item>B</v-ons-speed-dial-item>
+</v-ons-speed-dial>
+```
+
+##### Dialogs
+
+
+##### Pull Hook
+
+
+##### Other components
+
+The rest of the components are similar to core's elements except for the `v-*` prefix.
 
 
 <!-- End of markdown -->
