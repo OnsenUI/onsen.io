@@ -1,0 +1,112 @@
+---
+title: 'Onsen UI 2 Guide for Vue (v2) - Onsen UI Framework'
+category: docs
+page: 'guide'
+framework: 'vue'
+needHelp: true
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for Vue'
+version: v2
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+This guide explains important notes when using Onsen UI with Vue.
+**Important note**: Since the status of VueOnsenui is alpha, this guide will be updated frequently to reflect API changes and add more information about the bindings.
+
+### Starting Project
+
+#### Download via npm
+
+```bash
+$ npm install onsenui vue-onsenui --save
+```
+
+#### Direct download
+
+Get `onsenui.js`, `onsenui.css` and `onsenui-css-components.css` from the [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases). You will also need `vue-onsenui.js` file from [this CDN link](https://unpkg.com/vue-onsenui).
+
+#### Loading Onsen UI
+
+Vue bindings for Onsen UI provide Vue components and directives that wrap the core Web Components and expose a Vue-like API to interact with them. You need to load the following two JavaScript modules:
+
+- Onsen UI Core ([GitHub](https://github.com/OnsenUI/OnsenUI))
+- Onsen UI for Vue ([GitHub](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue))
+
+You can load with normal `<script></script>` and `<link>` tags as follows:
+
+```html
+<link rel="stylesheet" href="onsenui.css">
+<link rel="stylesheet" href="onsen-css-components.css">
+
+<script src="vue.js"></script>
+<script src="onsenui.js"></script>
+<script src="vue-onsenui.js"></script>
+```
+
+Or, you can use VueOnsenui ufrom npm with CommonJS module system like Webpack. In this case, use the `onsenui` and `vue-onsenui` packages.
+
+```javascript
+// Webpack CSS import
+import 'path/to/onsenui.css';
+import 'path/to/onsen-css-components.css';
+
+// JS import
+import Vue from 'vue';
+import 'onsenui';
+import VueOnsen from 'vue-onsenui';
+
+Vue.use(VueOnsen);
+```
+
+Notice how VueOnsen is used as a plugin for Vue in the last line. Alternatively, you can use `require` instead of ES6 imports.
+
+### Onsen UI HelloWorld with Vue
+
+To get started, let's create a simple Hello World application. The following sample code is a Vue version of Onsen UI HelloWorld.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="onsenui.css">
+    <link rel="stylesheet" href="onsen-css-components.css">
+    <script src="vue.js"></script>
+    <script src="onsenui.js"></script>
+    <script src="vue-onsenui.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      template:
+      '<v-ons-page>\
+        <v-ons-toolbar>\
+          <div class="center"> Title </div>\
+        </v-ons-toolbar>\
+        <p style="text-align: center">\
+          <v-ons-button @click="$notification.alert(\'Hello World!\')">Click</v-ons-button>\
+        </p>\
+      </v-ons-page>'
+    });
+  </script>
+</html>
+```
+
+This example is loading the following JS libraries, `vue.js`, `onsenui.js` and `vue-onsenui.js`. For stylesheets, it is loading `onsenui.css` and `onsen-css-components.css` which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](/v2/docs/guide/js/#css-definitions) document.
+
+```
+<link rel="stylesheet" href="css/onsenui.css">
+<link rel="stylesheet" href="css/onsen-css-components.css">
+```
+
+In `<body>` tag, there is only a `<div>` tag having `app` id. This is where Vue will render the content into (`el` property in the constructor).
+
+
+<!-- End of markdown -->
+<% end %>
