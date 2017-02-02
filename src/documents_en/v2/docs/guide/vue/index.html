@@ -274,7 +274,7 @@ Every `v-ons-tab` sets the page component that corresponds to its index on click
 
 Moreover, we can also use Vue's power to delay the creation of some pages and also cache them if we want. In order to do this, we need to overwrite the Tab's `onClick` prop:
 
-```
+```html
 <v-ons-tabbar>
   <template slot="pages">
     <keep-alive>
@@ -291,7 +291,7 @@ Moreover, we can also use Vue's power to delay the creation of some pages and al
 
 The Carousel can also use `v-ons-index` custom directive to set its position.
 
-```
+```html
 <v-ons-carousel v-ons-index="carouselIndex" :swipeable="sw" overscrollable>
   <v-ons-carousel-item v-for="item in items"><v-ons-carousel-item>
 <v-ons-carousel>
@@ -305,7 +305,7 @@ VOnsInput, VOnsSwitch, VOnsRange and VOnsSelect work like the corresponding core
 
 VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles their visibility. VOnsSpeedDial also implements `open` prop to toggle items' visibility. `onClick` prop can be used to overwrite the default behavior (this should be used if `open` prop is present).
 
-```
+```html
 <v-ons-speed-dial :visible="isVisible" :open="isOpen" :on-click="isOpen = !isOpen">
   <v-ons-fab :visible="isVisible">+</v-ons-fab>
   <v-ons-speed-dial-item>A</v-ons-speed-dial-item>
@@ -319,7 +319,7 @@ VOnsDialog, VOnsAlertDialog, VOnsPopover and VOnsModal implement a `visible` pro
 
 - Simple dialogs
 
-```
+```html
 <v-ons-dialog :visible="dialogVisible" @mask="dialogVisible = false">
   Content here
 </v-ons-dialog>
@@ -337,7 +337,7 @@ $notification.prompt('What\'s your name?').then(input => { ... });
 
 In case you need to customize more your alert dialog, you can use the VOnsAlertDialog component:
 
-```
+```html
 <v-ons-alert-dialog modifier="rowfooter"
   :visible="alertVisible"
   @mask="alertVisible = false"
@@ -353,7 +353,7 @@ In case you need to customize more your alert dialog, you can use the VOnsAlertD
 
 Another API version of this component which makes use of props instead of slots is also provided:
 
-```
+```html
   <v-ons-alert-dialog modifier="rowfooter"
     :title="'Title props'"
     :footer="{Ok: () => alertVisible = false, Cancel: () => alertVisible = false}"
@@ -368,7 +368,7 @@ Another API version of this component which makes use of props instead of slots 
 
 This component gets a `target` prop that can be any value supported by the core (DOM query, HTMLElement, Event object) or directly a Vue component reference.
 
-```
+```html
 <v-ons-popover
   :target="$refs.myToolbarButton"
   :options="{}"
@@ -381,7 +381,7 @@ This component gets a `target` prop that can be any value supported by the core 
 
 - Modal
 
-```
+```html
 <v-ons-modal :visible="modalVisible">
   Content here
 </v-ons-modal>
