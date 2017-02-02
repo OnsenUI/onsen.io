@@ -107,15 +107,16 @@ This example is loading the following JS libraries, `vue.js`, `onsenui.js` and `
 In `<body></body>` tag, there is only a `<div></div>` tag having `app` id. This is where Vue will render the content into (`el` property in the constructor).
 
 
-### Components API
+### Alpha/Beta Components API
 
-It is recommended to check out the guide for JavaScript Core, since most of the attributes and properties are applicable to these Vue Components.
 
 There are basically two different APIs in the alpha version. The first one is similar to the core API. This is, calling methods and properties from components. The second API is more similar to a proper Vue API and it's based on props and directives. While the first one works well, the latter probably needs some improvements and that's what we want to do during alpha and beta stages. Both of the APIs work for every component but they **should not be mixed**, stick to one of them and please **send us feedback** about your preference.
 
-#### Methods API
+### Methods API
 
 *Note: This API could be restricted in future versions in favor of the Props API.*
+
+It is recommended to check out the guide for JavaScript Core, since most of the attributes and properties are applicable to these Vue Components.
 
 Every component in Vue bindings implement the core API. They expose the same methods, attributes and properties as the WebComponents directly in the Vue instance. Therefore, they can be accessed with `$refs`. An example would be:
 
@@ -167,11 +168,13 @@ Also, similar to the core library, these components can also get a `page` prop w
 Since the Methods API makes a bit hard to pass down props to the pages, there is a feature where the required props of each page are inherited from the parent automatically (if the parent has it). In the previous code, `page1` gets `this.someProp === true` from its parent. Note that these inherited props are not reactive for now, they must be used only as initial values.
 
 
-#### Props API
+### Props API - Components Overview
+
+It is recommended to check out the guide for JavaScript Core, since most of the attributes and properties are applicable to these Vue Components.
 
 This API allows a better integration with Vue and is open to different combinations. For almost every custom element property from the core, there is a prop for its correspondent Vue component. Let's check the components one by one.
 
-##### Navigator
+#### Navigator
 
 Vue can detect changes on components' children and only update those that were modified. Thanks to this, we can push or pop pages directly to the Navigator's children array:
 
@@ -234,7 +237,7 @@ Vue detects modifications in this array through methods like `push`, `pop`, `spl
 
 The Navigator will notice the changes and run the appropriate animation whenever possible. Notice that in order to modify the page stack properly, every page should include a [unique `key` prop](https://vuejs.org/v2/guide/list.html#key). This will let Vue know that some of the pages did not change. If the key is not provided, Vue might consider that the whole stack is dirty and recreate all the pages. In this case, the Navigator could perform a wrong animation. Providing the `key` prop allows to safely modify any index of the page stack with, for example, `pageStack.shift()` or even `pageStack.splice(0, pageStack.length - 2)` without performing any animation (since the top page does not change). However, without `key` prop the top page will be considered as a new component, thus triggering a "pop" animation.
 
-##### Splitter
+#### Splitter
 
 Loading new pages in both `v-ons-splitter-content` and `v-ons-splitter-side` should be quite straightforward for Vue users. Simply swap the inner component as you want. You can even use `keep-alive` if you want to cache your components:
 
@@ -254,7 +257,7 @@ Loading new pages in both `v-ons-splitter-content` and `v-ons-splitter-side` sho
 
 For opening or closing the menu, however, we must use a custom directive called `v-ons-open`, which is basically a `v-model` for `v-ons-splitter-side`. Now you can modify the boolean `sideOpen` variable and the splitter will ~~react~~ vue consequently.
 
-##### Tabbar
+#### Tabbar
 
 For the Tabbar we make use of Vue's named slots.
 
@@ -287,7 +290,7 @@ Moreover, we can also use Vue's power to delay the creation of some pages and al
 </v-ons-tabbar>
 ```
 
-##### Carousel
+#### Carousel
 
 The Carousel can also use `v-ons-index` custom directive to set its position.
 
@@ -297,11 +300,11 @@ The Carousel can also use `v-ons-index` custom directive to set its position.
 <v-ons-carousel>
 ```
 
-##### Forms
+#### Forms
 
 VOnsInput, VOnsSwitch, VOnsRange and VOnsSelect work like the corresponding core elements. A custom directive `v-ons-model` has been created to imitate the behavior of `v-model` in native inputs. This is, Array binding for checkboxes, groups for radio buttons, etc.
 
-##### Floating action buttons
+#### Floating action buttons
 
 VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles their visibility. VOnsSpeedDial also implements `open` prop to toggle items' visibility. `onClick` prop can be used to overwrite the default behavior (this should be used if `open` prop is present).
 
@@ -313,7 +316,7 @@ VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles the
 </v-ons-speed-dial>
 ```
 
-##### Dialogs
+#### Dialogs
 
 VOnsDialog, VOnsAlertDialog, VOnsPopover and VOnsModal implement a `visible` prop to change whether they are shown or not. For those with a background mask element (all except VOnsModal, which is always fullscreen), a `mask` event is fired every time the mask is clicked. Use this event to "cancel" the dialog instead of the core "cancelable" attribute.
 
@@ -402,6 +405,13 @@ VOnsPullHook emits events when its state changes:
 </v-ons-pull-hook>
 ```
 
+##### Conditional component
+
+Instead of `<v-ons-if platform="android">...</v-ons-if>`, we can use Vue's `v-if` or `v-show` directives as follows:
+
+```html
+<div v-if="$platform.isAndroid()"> ... </div>
+```
 
 ##### Other components
 
