@@ -149,9 +149,9 @@ const page1 = { // Child page
 };
 ```
 
-In the core normally these methods require a string `page` parameter (a template ID). In this case, we can pass directly Vue instances with `v-ons-page` component as the root. For the navigator, passing `options.data` parameter will modify the next page and include `data` as a property of the instance (this.data).
+In the core normally these methods require a string `page` parameter (a template ID). In this case, we can pass directly Vue instances with `v-ons-page` component as the root. For the navigator, passing `options.data` parameter will modify the next page and include `data` as a property of the instance (`this.data`).
 
-Also, like it happens in the core library, these components can get a `page` prop with their initial component:
+Also, similar to the core library, these components can also get a `page` prop with their initial component instead of nesting it:
 
 ```html
 <v-ons-splitter-side :page="menuPage"></v-ons-splitter-side>
@@ -164,7 +164,7 @@ Also, like it happens in the core library, these components can get a `page` pro
 </v-ons-tabbar>
 ```
 
-Since the Methods API makes a bit hard to pass down props to the pages, there is a feature where the required props of each page is inherited from the parent automatically (if the parent has it). In the previous code, `page1` gets `this.someProp === true` from its parent. Note that these inherited props are not reactive for now, they must be used only as initial values.
+Since the Methods API makes a bit hard to pass down props to the pages, there is a feature where the required props of each page are inherited from the parent automatically (if the parent has it). In the previous code, `page1` gets `this.someProp === true` from its parent. Note that these inherited props are not reactive for now, they must be used only as initial values.
 
 
 #### Props API
@@ -193,7 +193,7 @@ Vue can detect changes on components' children and only update those that were m
 </script>
 ```
 
-Notice that in this example we pass `pageStack` prop down to the pages. You can also pass down methods to modify it from the parent context or, even better, use Vuex to store the stack.
+Notice that in this example we pass `pageStack` prop down to the pages. We can also pass down methods to modify it from the parent context or, even better, use Vuex to store the stack.
 
 ```
 <template>
@@ -232,7 +232,7 @@ Notice that in this example we pass `pageStack` prop down to the pages. You can 
 
 Vue detects modifications in this array through methods like `push`, `pop`, `splice`, etc. It also works by directly assigning a new array, although this is not possible if we pass the whole `pageStack` as a prop since they are not modificable.
 
-The Navigator will notice the changes and run the appropriate animation whenever possible. Notice that for modifying the page stack properly, every page should include an [unique `key` prop](https://vuejs.org/v2/guide/list.html#key). This will let Vue know that some of the pages did not change. If the key is not provided, Vue might consider that the whole stack is dirty and recreate all the pages. In this case, the Navigator could perform a wrong animation. Providing the `key` prop allows to safely modify any index of the page stack with, for example, `pageStack.shift()` or even `pageStack.splice(0, pageStack.length - 2)` without performing any animation (since the top page does not change). However, without `key` prop the top page will be considered as a new component, thus triggering a "pop" animation.
+The Navigator will notice the changes and run the appropriate animation whenever possible. Notice that in order to modify the page stack properly, every page should include a [unique `key` prop](https://vuejs.org/v2/guide/list.html#key). This will let Vue know that some of the pages did not change. If the key is not provided, Vue might consider that the whole stack is dirty and recreate all the pages. In this case, the Navigator could perform a wrong animation. Providing the `key` prop allows to safely modify any index of the page stack with, for example, `pageStack.shift()` or even `pageStack.splice(0, pageStack.length - 2)` without performing any animation (since the top page does not change). However, without `key` prop the top page will be considered as a new component, thus triggering a "pop" animation.
 
 ##### Splitter
 
@@ -361,7 +361,6 @@ Another API version of this component which makes use of props instead of slots 
     @mask="alertVisible = false"
   >
     Content here
-    <div @click="alertVisible= !alertVisible">toggle</div>
   </v-ons-alert-dialog>
 ```
 
