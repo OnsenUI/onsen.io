@@ -23,7 +23,7 @@ function generateDocument(metalsmith, categoryFile) {
         case "js":
           file.h1 = categoryFile.file.title + " Guide <strong>for JavaScript</strong>"; break;
         case "vue":
-          file.h1 = categoryFile.file.title + " Guide <strong>for Vue</strong>"; break;
+          file.h1 = categoryFile.file.title + " Guide <strong>for Vue 2</strong>"; break;
         case "angular1":
           file.h1 = categoryFile.file.title + " Guide <strong>for Angular 1</strong>"; break;
         case "angular2":
