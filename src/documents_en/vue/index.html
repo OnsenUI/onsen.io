@@ -82,10 +82,10 @@ The library is distributed as a Vue plugin so you can easily add it to your appl
 ```javascript
 /**
  * The stylesheets can be loaded with Webpack
- * or added with script tags.
+ * or added with link tags.
  */
-import 'path/to/onsenui.css';
-import 'path/to/onsen-css-components.css';
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 
 // Import Vue
 import Vue from 'vue';
@@ -97,8 +97,9 @@ import VueOnsen from 'vue-onsenui';
 // And just plug the bindings
 Vue.use(VueOnsen);
 
-const vm = new Vue({
-  el: 'body',
+new Vue({
+  el: '#app',
+  template: '<App/>',
   components: { App }
 });
 ```
