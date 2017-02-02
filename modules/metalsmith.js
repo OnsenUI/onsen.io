@@ -35,6 +35,7 @@ module.exports = function(lang, isStaging) {
         .use(require('./helpers')())
         .use(require('./v1-api-docs')(lang))
         .use(require('./v2-wc-api-docs')(lang, 'js'))
+        .use(require('./v2-wc-api-docs')(lang, 'vue'))
         .use(require('./v2-wc-api-docs')(lang, 'angular1'))
         .use(require('./v2-wc-api-docs')(lang, 'angular2'))
         .use(require('./v2-react-api-docs')(lang))
