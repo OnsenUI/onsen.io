@@ -1,6 +1,6 @@
 ---
 author: junio
-date: 2017-02-01
+date: 2017-02-02
 id: vuejs-2-binding-alpha-version-is-here
 title: "VueJS 2 binding alpha version is here!"
 product: onsen
@@ -18,13 +18,13 @@ We are happy to announce that we have finally released its alpha version. Keep r
 
 ### Getting started
 
-To start using the new release right away you can simply install the dependency in your project with `npm install vue-onsenui` or integrate it manually from [GitHub](https://github.com/OnsenUI/OnsenUI/tree/vue2 "Vue2 binding repo").
+To start using the new release right away you can simply install the dependency in your project with `npm install vue-onsenui` (you can also use *Yarn*) or integrate it manually from [GitHub](https://github.com/OnsenUI/OnsenUI/tree/vue2 "Vue2 binding repo").
 
 After that import it in your code with `import VueOnsen from 'vue-onsenui';` and then add the plugin to *Vue* through `Vue.use(VueOnsen);`.
 
 This is assuming you already have both [*Vue*](https://vuejs.org/v2/guide/installation.html "VueJS installation") and [*Onsen UI*](https://onsen.io/getting-started/#npm "Onsen UI installation") set up. If you don't please follow the instructions on the respective pages.
 
-Also, for more detailed info please follow this [link](https://github.com/OnsenUI/OnsenUI/blob/vue2/bindings/vue/README.md "More detailed info").
+Also, for more detailed info please follow this [ README link](https://github.com/OnsenUI/OnsenUI/blob/vue2/bindings/vue/README.md "More detailed info") or check our [official page](https://onsen.io/vue/ "Official page").
 
 ### Call for feedback
 
@@ -42,13 +42,13 @@ However, we wanted to provide a more tailored way of doing things. Hence we deci
 
 One of them is the use of `v-ons-model` with `v-ons-input`. Due to the way in which *Vue* treats elements such as checkboxes or radio buttons internally, we came up with our own directive `v-ons-model` to emulate the behaviour of the regular `v-model`. Same for `v-ons-index` in *Carousel* or *Tabbar*, for example.
 
-For these and other implementation details we are preparing some timely documentation that will come in handy if you have doubts. We will share the link once it is ready, hopefully within the next few days.
+For these and other implementation details we are preparing some timely documentation that will come in handy if you have doubts. It will be up on Onsen UI's website hopefully within the next few days.
 
 Happy coding.
 
 ### TL;DR
 
-- Alpha version is out and can be installed with `npm install vue-onsenui` (source code on our [GitHub repo](https://github.com/OnsenUI/OnsenUI "GitHub repo"));
+- Alpha version is out and can be installed via *NPM* or *Yarn* (source code on our [GitHub repo](https://github.com/OnsenUI/OnsenUI "GitHub repo"));
 
 - Use our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI "Gitter channel"), our [Community Forum](https://community.onsen.io/category/2/onsen-ui "Community Forum") or even [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow") to reach out to us with any issue or contribution.
 
