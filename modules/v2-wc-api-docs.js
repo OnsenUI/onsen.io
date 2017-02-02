@@ -48,6 +48,15 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.framework = extension;
       file.version = 'v2';
 
+      // TODO This is only a temporal fix for Vue Reference.
+      // This should come from doc generator in Vue src.
+      if (extension === 'vue') {
+        if (['ons-if', 'ons-lazy-repeat', 'ons-template', 'ons-gesture-detector', 'ons.GestureDetector', 'ons.orientation'].indexOf(doc.name) !== -1) {
+          file.extension = 'not vue';
+        }
+        file.name = doc.name = doc.name.replace(/^ons-/, 'v-ons-').replace(/^ons\./, '$');
+      }
+
       if (extension !== 'js' && doc.tutorial) {
         doc.tutorial = doc.tutorial.replace('vanilla', extension);
       }
