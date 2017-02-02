@@ -109,6 +109,8 @@ In `<body></body>` tag, there is only a `<div></div>` tag having `app` id. This 
 
 ### Components API
 
+It is recommended to check out the guide for JavaScript Core, since most of the attributes and properties are applicable to these Vue Components.
+
 There are basically two different APIs in the alpha version. The first one is similar to the core API. This is, calling methods and properties from components. The second API is more similar to a proper Vue API and it's based on props and directives. While the first one works well, the latter probably needs some improvements and that's what we want to do during alpha and beta stages. Both of the APIs work for every component but they **should not be mixed**, stick to one of them and please **send us feedback** about your preference.
 
 #### Methods API
@@ -313,8 +315,93 @@ VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles the
 
 ##### Dialogs
 
+VOnsDialog, VOnsAlertDialog, VOnsPopover and VOnsModal implement a `visible` prop to change whether they are shown or not. For those with a background mask element (all except VOnsModal, which is always fullscreen), a `mask` event is fired every time the mask is clicked. Use this event to "cancel" the dialog instead of the core "cancelable" attribute.
+
+- Simple dialogs
+
+```
+<v-ons-dialog :visible="dialogVisible" @mask="dialogVisible = false">
+  Content here
+</v-ons-dialog>
+```
+
+- Alert dialogs
+
+For quick alerts and prompts, `$notification` object is exposed in Vue prototype, so either `Vue.$notification` or `this.$notification` can be used. This works exactly as the core `ons.notification`:
+
+```javascript
+$notification.alert('Hello world!');
+$notification.confirm('Do you want to close the app?').then(index => { ... })
+$notification.prompt('What\'s your name?').then(input => { ... });
+```
+
+In case you need to customize more your alert dialog, you can use the VOnsAlertDialog component:
+
+```
+<v-ons-alert-dialog modifier="rowfooter"
+  :visible="alertVisible"
+  @mask="alertVisible = false"
+>
+  <span slot="title">Title</span>
+  Content here
+  <template slot="footer">
+    <div @click="alertVisible = false">Ok</div>
+    <div @click="alertVisible = false">Cancel</div>
+  </template>
+</v-ons-alert-dialog>
+```
+
+Another API version of this component which makes use of props instead of slots is also provided:
+
+```
+  <v-ons-alert-dialog modifier="rowfooter"
+    :title="'Title props'"
+    :footer="{Ok: () => alertVisible = false, Cancel: () => alertVisible = false}"
+    :visible="alertVisible"
+    @mask="alertVisible = false"
+  >
+    Content here
+    <div @click="alertVisible= !alertVisible">toggle</div>
+  </v-ons-alert-dialog>
+```
+
+- Popover
+
+This component gets a `target` prop that can be any value supported by the core (DOM query, HTMLElement, Event object) or directly a Vue component reference.
+
+```
+<v-ons-popover
+  :target="$refs.myToolbarButton"
+  :options="{}"
+  :visible="popoverVisible"
+  @mask="popoverVisible = false"
+>
+  Content here
+</v-ons-popover>
+```
+
+- Modal
+
+```
+<v-ons-modal :visible="modalVisible">
+  Content here
+</v-ons-modal>
+```
 
 ##### Pull Hook
+
+VOnsPullHook emits events when its state changes:
+
+```
+<v-ons-pull-hook
+  @action="done => { doSomething(); done(); }"
+  @changestate="state = $event.state"
+>
+  <span v-show="state === 'initial'"> Pull to refresh </span>
+  <span v-show="state === 'preaction'"> Release </span>
+  <span v-show="state === 'action'"> Loading...  </span>
+</v-ons-pull-hook>
+```
 
 
 ##### Other components
