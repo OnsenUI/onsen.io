@@ -168,8 +168,8 @@ module.exports = function() {
         var wrapStart = '';
         var wrapEnd = '';
         if (options.wrapPage) {
-          wrapStart = '<div class="page" style="border: 1px solid #ddd; overflow: hidden;">';
-          wrapEnd = '</div>';
+          wrapStart = '<div class="page"><div class="page__content">';
+          wrapEnd = '</div></div>';
         }
 
         try {

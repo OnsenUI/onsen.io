@@ -18,159 +18,40 @@ version: v2
   <aside class="content-info content-info-page">
     <div class="toc-title toc-title-no-toggle">CSS Components</div>
     <ul class="toc toc-1">
-    <% for css in @cssReference: %>
-      <li class="toc-1-item toc-item"><a href="#"><%= css.annotation.name %></a></li>
-    <% end %>
+      <% for category in @cssComponentCategories: %>
+      <li class="toc-1-item toc-item"><a href="#<%= category.id %>-category"><%= category.name %></a></li>
+      <% end %>
     </ul>
   </aside>
 
   <div class="container-content">
 
-    <% for css in @cssReference: %>
+    <% for category in @cssComponentCategories: %>
     <div class="css-component">
-      <h2><%= css.annotation.name %></h2>
+      <h3 id="<%= category.id %>-category"><%= category.name %></h3>
 
-      <%- @cssExample -> %>
-        <%- css.annotation.markup %>
+      <% for component in category.components: %>
+
+      <div class="css-component">
+        <h4><%= component.annotation.name %></h4>
+
+        <%- @cssExample {wrapPage: true, minHeight: 200}, -> %>
+          <%- component.annotation.markup %>
+        <% end %>
+
+        <% if component.annotation.elements: %>
+        <div>Corresponding elements: 
+          <% for elementName in component.annotation.elements: %>
+          <a href="/v2/docs/js/<%= elementName %>.html"><%= elementName %></a>
+          <% end %>
+        </div>
+        <% end %>
+
+      </div>
+
       <% end %>
     </div>
     <% end %>
-
-    <div class="css-component">
-      <h2>Material Switch</h2>
-
-
-      <%- @cssExample -> %>
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input">
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" checked>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" disabled>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-      <% end %>
-    </div>
-
-    <div class="css-component">
-      <h2>Material Switch</h2>
-
-      <%- @cssExample -> %>
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input">
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" checked>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" disabled>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-      <% end %>
-    </div>
-
-    <div class="css-component">
-      <h2>Material Switch</h2>
-
-      <%- @cssExample -> %>
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input">
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" checked>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" disabled>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-      <% end %>
-    </div>
-
-    <div class="css-component">
-      <h2>Material Switch</h2>
-
-      <%- @cssExample -> %>
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input">
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" checked>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" disabled>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-      <% end %>
-    </div>
-
-    <div class="css-component">
-      <h2>Material Switch</h2>
-
-      <%- @cssExample -> %>
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input">
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" checked>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-
-      <label class="switch switch--material">
-        <input type="checkbox" class="switch__input switch--material__input" disabled>
-        <div class="switch__toggle switch--material__toggle">
-          <div class="switch__handle switch--material__handle"></div>
-        </div>
-      </label>
-      <% end %>
-    </div>
 
   </div>
 
