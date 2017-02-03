@@ -13,28 +13,30 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-**重要**: ガイドは現在翻訳中です（2017/02/02）。また、現時点での Vue 2 バインディングは α 版 のため、このガイドの内容は API 変更や機能追加に伴い頻繁に変更されます。ご注意ください。
+**重要**: ガイドの一部は現在翻訳中です。また、現時点での Vue 2 バインディングは α 版 のため、このガイドの内容は API 変更や機能追加に伴い頻繁に変更されます。ご注意ください（2017/02/03）。
 
-### Starting Project
+### プロジェクトを始める
 
-#### Download via npm
+#### NPM からダウンロード
 
 ```bash
 $ npm install onsenui vue-onsenui --save
 ```
 
-#### Direct download
+#### 直接ダウンロード
 
 Get `onsenui.js`, `onsenui.css` and `onsenui-css-components.css` from the [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases). You will also need `vue-onsenui.js` file from [this CDN link](https://unpkg.com/vue-onsenui).
 
-#### Loading Onsen UI
+まず、`onsenui.js`、 `onsenui.css`、 `onsenui-css-components.css` を [最新の Onsen UI Core](https://github.com/OnsenUI/OnsenUI-dist/releases) から取り出してください。次に、最新の `vue-onsenui.js` を [こちら](https://unpkg.com/vue-onsenui) からダウンロードしてください。
 
-Vue bindings for Onsen UI (VueOnsen) provide Vue 2 components and directives that wrap the core Web Components and expose a Vue-like API to interact with them. You need to load the following two JavaScript modules:
+#### Onsen UI と Vue 2 バインディングの読み込み
+
+Vue 2 バインディングは Vue 2 コンポーネントとディレクティブを提供します。Vue 2 バインディングは Web Components をラップし、Vue 2 ライクな API を提供します。利用するには2つのパッケージを読み込む必要があります:
 
 - Onsen UI Core ([GitHub](https://github.com/OnsenUI/OnsenUI))
-- Onsen UI for Vue ([GitHub](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue))
+- Onsen UI for Vue 2 ([GitHub](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue))
 
-You can load with normal `<script></script>` and `<link>` tags as follows:
+Onsen UI と Vue 2 バインディングの読み込みには `<link>` と `<script></script>` を使用します:
 
 ```html
 <link rel="stylesheet" href="onsenui.css">
@@ -45,7 +47,7 @@ You can load with normal `<script></script>` and `<link>` tags as follows:
 <script src="vue-onsenui.js"></script>
 ```
 
-Or, you can use VueOnsen from npm with a module bundler like Webpack. In this case, use the `onsenui` and `vue-onsenui` packages.
+また、webpack 等のモジュールバンドラーを使って読み込むこともできます。その場合は、以下のように `onsenui` パッケージと `vue-onsenui` パッケージを読み込みます。
 
 ```javascript
 // Webpack CSS import
@@ -60,15 +62,16 @@ import VueOnsen from 'vue-onsenui';
 Vue.use(VueOnsen);
 ```
 
-Notice how VueOnsen is used as a plugin for Vue in the last line (this is already done automatically if `window.Vue` exists). Alternatively, you can use `require` instead of ES6 imports.
+最後の行で Vue 2 バインディングを Vue プラグインとして読み込んでいることに注意してください（`window.Vue` が存在する場合は、この作業は自動的に行われます）。
+また、ES6 の `import` の代わりに CommonJS の `require` を使うこともできます。
 
-### Onsen UI HelloWorld with Vue
+### Hello World
 
-To get started, let's create a simple Hello World application. The following sample code is a Vue version of Onsen UI HelloWorld.
+まずは Hello World アプリを作ってみましょう。以下のサンプルコードは Vue 2 バインディングによる Hello World です。
 
 ```html
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="onsenui.css">
@@ -97,28 +100,32 @@ To get started, let's create a simple Hello World application. The following sam
 </html>
 ```
 
-This example is loading the following JS libraries, `vue.js`, `onsenui.js` and `vue-onsenui.js`. For stylesheets, it is loading `onsenui.css` and `onsen-css-components.css` which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](/v2/docs/guide/js/#css-definitions) document.
+このサンプルコードでは `vue.js`、`onsenui.js`、 `vue-onsenui.js` の3つの JavaScript ライブラリを読み込んでいます。またスタイルシートについては Onsen UI Core に含まれる `onsenui.css` と `onsen-css-components.css` を読み込んでいます。Onsen UI のスタイルシートの詳細については [スタイルシートガイド](/v2/docs/guide/js/#css-definitions) を参照してください。
 
 ```html
 <link rel="stylesheet" href="path/to/onsenui.css">
 <link rel="stylesheet" href="path/to/onsen-css-components.css">
 ```
 
-In `<body></body>` tag, there is only a `<div></div>` tag having `app` id. This is where Vue will render the content into (`el` property in the constructor).
+`<body></body>` タグの中には id 属性に `app` を指定した `<div></div>` タグのみを配置します。Vue はその `<div></div>` の中（`Vue` コンストラクタの `el` プロパティで指定した要素の中）にコンテンツを描画します。
 
 
-### Alpha/Beta Components API
+### α版におけるコンポーネント API
 
+α 版では2つの異なる API を用意しています。
+1つ目は Onsen UI Core のものに似た API で、コンポーネントのメソッドを直接呼び出すことによってコンポーネントを操作します。
+2つ目は Vue ライクな API で、プロパティとディレクティブによってコンポーネントを操作します。
+前者の API は問題なく動作しますが、後者の API は現時点では改善と修正が必要な状況です。α版とβ版では主にそれらの改善と修正を予定しています。
+どちらの API も全てのコンポーネントで利用できますが、 **混在させないようご注意ください** 。
+また、**どちらの API が好ましいかについてフィードバックをお寄せください** 。
 
-There are basically two different APIs in the alpha version. The first one is similar to the core API. This is, calling methods and properties from components. The second API is more similar to a proper Vue API and it's based on props and directives. While the first one works well, the latter probably needs some improvements and that's what we want to do during alpha and beta stages. Both of the APIs work for every component but they **should not be mixed**, stick to one of them and please **send us feedback** about your preference.
+### メソッド API
 
-### Methods API
+*注意: この API は今後のバージョンでプロパティ API に置き換えられる可能性があります。*
 
-*Note: This API could be restricted in future versions in favor of the Props API.*
+Vue 2 バインディングで提供している Vue コンポーネントでは、Onsen UI Core が提供しているほとんどのメソッド、属性、プロパティを同じ名前で利用できます（Web Components を直接 Vue インスタンスに変換しているため）。そのため[Onsen UI Core のガイド](/v2/docs/guide/js/)を参照することをお勧めします。
 
-It is recommended to check out the guide for JavaScript Core, since most of the attributes and properties are applicable to these Vue Components.
-
-Every component in Vue bindings implement the core API. They expose the same methods, attributes and properties as the WebComponents directly in the Vue instance. Therefore, they can be accessed with `$refs`. An example would be:
+Vue 2 バインディングの Vue コンポーネントが持つメソッドとプロパティにアクセスするには `ref` および `$refs` を使用します:
 
 ```
 <v-ons-navigator ref="myNavigator">
@@ -129,15 +136,15 @@ Every component in Vue bindings implement the core API. They expose the same met
 $refs.myNavigator.pushPage(pageComponent);
 ```
 
-While this works for every component, the routing components like `v-ons-navigator`, `v-ons-tabbar` and `v-ons-splitter` can be accessed from any children with the computed properties `navigator`, `tabbar` and `splitter`, respectively (assuming it has those 3 parents), that exist in every Vue instance (thanks to VueOnsenui plugin):
+ただし、`v-ons-navigator`、`v-ons-tabbar`、`v-ons-splitter` のようなルーティングに関するコンポーネントにアクセスする際は、より簡便な方法があります。Vue 2 バインディングは全ての Vue インスタンスに対して `navigator`、`tabbar`、`splitter` の3つの算出プロパティ（computed property）を挿入します。これらの算出プロパティは、`this` から見て親の位置にある `v-ons-navigator`、`v-ons-tabbar`、`v-ons-splitter` を自動的に探索して返します:
 
 ```javascript
-const page1 = { // Child page
+const page1 = { // 子ページ
   template: '<v-ons-page>...</v-ons-page>',
   methods: {
     push() {
       this.navigator.pushPage(page2, {data: { something: true }});
-      // In page2 we can access to `this.data.something`.
+      // ここで指定したパラメータは page2 内で this.data.something と書くことで参照できます
     },
     changeTab() {
       this.tabbar.setActiveTab(3);
@@ -150,9 +157,12 @@ const page1 = { // Child page
 };
 ```
 
-In the core normally these methods require a string `page` parameter (a template ID). In this case, we can pass directly Vue instances with `v-ons-page` component as the root. For the navigator, passing `options.data` parameter will modify the next page and include `data` as a property of the instance (`this.data`).
+Onsen UI Core ではこれらのメソッドの `page` 引数には文字列（テンプレート ID）を渡す必要がありました。
+しかし Vue 2 バインディングでは `v-ons-page` を root に持つ Vue インスタンスを直接渡すことができます。
 
-Also, similar to the core library, these components can also get a `page` prop with their initial component instead of nesting it:
+上記の `this.navigator.pushPage` の例では、遷移先ページ `page2` に `data` を渡すことで遷移先ページ `page2` の Vue インスタンスの `this.data` を書き換えています。
+
+また、Onsen UI Core と同じく、`v-ons-navigator`、`v-ons-tabbar`、`v-ons-splitter` のようなコンポーネントは、`page` プロパティに Vue インスタンスを渡すことで初期ページを定義することができます。`v-ons-navigator`、`v-ons-tabbar`、`v-ons-splitter` の中に要素を挿入する必要はありません。
 
 ```html
 <v-ons-splitter-side :page="menuPage"></v-ons-splitter-side>
@@ -165,18 +175,17 @@ Also, similar to the core library, these components can also get a `page` prop w
 </v-ons-tabbar>
 ```
 
-Since the Methods API makes a bit hard to pass down props to the pages, there is a feature where the required props of each page are inherited from the parent automatically (if the parent has it). In the previous code, `page1` gets `this.someProp === true` from its parent. Note that these inherited props are not reactive for now, they must be used only as initial values.
+メソッド API を使うと `v-ons-navigator` 等のコンポーネントの管理下にあるページにプロパティを渡す（pass down）のが難しくなるため、Vue 2 バインディングでは、各ページに必要なプロパティを親コンポーネントから自動的に引き継ぐ機能を用意しています。例えば上記のコードでは、`page1` は `this.someProp === true` を親の `v-ons-navigator` から引き継ぎます。なお、この機能により引き継がれたプロパティはリアクティブではなく、初期値を渡す用途にしか使えないためご注意ください。
 
+### プロパティ API - コンポーネント概要
 
-### Props API - Components Overview
+Vue 2 バインディングで提供している Vue コンポーネントでは、Onsen UI Core が提供しているほとんどの属性、プロパティを同じ名前で利用できます（Web Components を直接 Vue インスタンスに変換しているため）。そのため[Onsen UI Core のガイド](/v2/docs/guide/js/)を参照することをお勧めします。
 
-It is recommended to check out the guide for JavaScript Core, since most of the attributes and properties are applicable to these Vue Components.
-
-This API allows a better integration with Vue and is open to different combinations. For almost every custom element property from the core, there is a prop for its correspondent Vue component. Let's check the components one by one.
+プロパティ API は Vue 2 と高い親和性を持ちます。では、各コンポーネントごとのプロパティ API を1つ1つ見ていきましょう。
 
 #### Navigator
 
-Vue can detect changes on components' children and only update those that were modified. Thanks to this, we can push or pop pages directly to the Navigator's children array:
+Vue 2 はコンポーネントの子の変化を検知して、変化した分だけを更新することができます。この機能により、私達は Navigator の子を操作するだけでページの push、pop を行うことができます:
 
 ```
 <template>
@@ -196,7 +205,7 @@ Vue can detect changes on components' children and only update those that were m
 </script>
 ```
 
-Notice that in this example we pass `pageStack` prop down to the pages. We can also pass down methods to modify it from the parent context or, even better, use Vuex to store the stack.
+このサンプルコードにおいて、`pageStack` プロパティを各ページに渡している（pass down）ことに注意してください。`pageStack` を親コンテキストから操作するメソッドを各ページに渡すというような実装も可能です。さらに良い実装としては、Vuex を使ってページスタックを store するという実装があります。
 
 ```
 <template>
@@ -225,7 +234,7 @@ Notice that in this example we pass `pageStack` prop down to the pages. We can a
       replace() {
         this.pageStack.pop();
         this.pageStack.push(page3);
-        // Or use this.pageStack.splice(...)
+        // または this.pageStack.splice(...) など
       }
     },
     props: ['pageStack']
@@ -233,13 +242,13 @@ Notice that in this example we pass `pageStack` prop down to the pages. We can a
 </script>
 ```
 
-Vue detects modifications in this array through methods like `push`, `pop`, `splice`, etc. It also works by directly assigning a new array, although this is not possible if we pass the whole `pageStack` as a prop since they are not modificable.
+Vue 2 は `push`、`pop`、`splice` 等による配列の変更を検知します。配列を変更する代わりに新しい配列を代入することでも動作しますが、Vue 2 では親から受け取ったプロパティを書き換えることができないため、実質不可能であることに注意してください。
 
-The Navigator will notice the changes and run the appropriate animation whenever possible. Notice that in order to modify the page stack properly, every page should include a [unique `key` prop](https://vuejs.org/v2/guide/list.html#key). This will let Vue know that some of the pages did not change. If the key is not provided, Vue might consider that the whole stack is dirty and recreate all the pages. In this case, the Navigator could perform a wrong animation. Providing the `key` prop allows to safely modify any index of the page stack with, for example, `pageStack.shift()` or even `pageStack.splice(0, pageStack.length - 2)` without performing any animation (since the top page does not change). However, without `key` prop the top page will be considered as a new component, thus triggering a "pop" animation.
+Navigator は変更を検知し適切なアニメーションを可能な限り実行します。ページスタックを正常に変更するには、各ページが[一意な `key` プロパティ](https://vuejs.org/v2/guide/list.html#key)を持っている必要があることに注意してください。`key` プロパティは Vue 2 にいくつかのページが変更されなかったことを伝える役割を持ちます。`key` プロパティが指定されていないと、Vue 2 は全てのページが変更されたと判断し、全てのページを再生成してしまいます。Navigator の場合、それにより誤ったアニメーションが実行される可能性があります。ページスタックの各インデックスは `key`　プロパティを指定することで初めて安全に変更することができます。例えば、`pageStack.shift()` や `pageStack.splice(0, pageStack.length - 2)` はトップページを変更しないのでアニメーションが発生しないのが正しい動作ですが、`key` プロパティが指定されていない場合、トップページが新しいコンポーネントと誤認され、pop アニメーションが発生してしまいます。
 
 #### Splitter
 
-Loading new pages in both `v-ons-splitter-content` and `v-ons-splitter-side` should be quite straightforward for Vue users. Simply swap the inner component as you want. You can even use `keep-alive` if you want to cache your components:
+`v-ons-splitter-content` や `v-ons-splitter-side` は、内部のコンポーネントを差し替えることで新しいページを読み込むことができます。また、`keep-alive` を使用するとコンポーネントをキャッシュすることができます:
 
 ```html
 <v-ons-splitter>
@@ -255,11 +264,11 @@ Loading new pages in both `v-ons-splitter-content` and `v-ons-splitter-side` sho
 </v-ons-splitter>
 ```
 
-For opening or closing the menu, however, we must use a custom directive called `v-ons-open`, which is basically a `v-model` for `v-ons-splitter-side`. Now you can modify the boolean `sideOpen` variable and the splitter will ~~react~~ vue consequently.
+メニューを開いたり閉じたりするには、`v-ons-open` というカスタムディレクティブを使用する必要があります。これは `v-ons-splitter-side` 用の `v-model` のようなものです。上記のサンプルコードでは、`sideOpen` に真偽値を代入すると、その値に応じて ~~リアクティブに~~ メニューが開閉します。
 
 #### Tabbar
 
-For the Tabbar we make use of Vue's named slots.
+Tabbar を利用するには Vue 2 が提供している名前付きスロット（named slot）を使用します。
 
 ```html
 <v-ons-tabbar v-ons-index="tabbarIndex">
@@ -273,9 +282,9 @@ For the Tabbar we make use of Vue's named slots.
 </v-ons-tabbar>
 ```
 
-Every `v-ons-tab` sets the page component that corresponds to its index on click. Optionally, `v-ons-index` custom directive can be used to assign the active index to the Tabbar. This might be helpful if you want to switch pages from JavaScript or any other way apart from Tab click. If this directive is not used, you can set `active` attribute in the initial tab.
+上記の例では、`template` 要素内のページコンポーネント2つと `v-ons-tab` 要素2つがそれぞれ対応しています。`v-ons-index` カスタムディレクティブを使うと、指定したインデックスのタブをアクティブにすることができます。`v-ons-index` を使わない場合、`v-ons-tab` に `active` 属性を付けることでそのタブを初期のアクティブタブに指定することができます。
 
-Moreover, we can also use Vue's power to delay the creation of some pages and also cache them if we want. In order to do this, we need to overwrite the Tab's `onClick` prop:
+また、Vue 2 の機能を活用することで、各ページを遅延生成したり、キャッシュしたりするというような使い方もできます。それを実現するには、以下のようにタブの `onClick` プロパティを上書きします:
 
 ```html
 <v-ons-tabbar>
@@ -292,7 +301,7 @@ Moreover, we can also use Vue's power to delay the creation of some pages and al
 
 #### Carousel
 
-The Carousel can also use `v-ons-index` custom directive to set its position.
+カルーセルについても、`v-ons-index` カスタムディレクティブを利用して position を制御することができます。
 
 ```html
 <v-ons-carousel v-ons-index="carouselIndex" :swipeable="sw" overscrollable>
@@ -302,7 +311,7 @@ The Carousel can also use `v-ons-index` custom directive to set its position.
 
 #### Forms
 
-VOnsInput, VOnsSwitch, VOnsRange and VOnsSelect work like the corresponding core elements. A custom directive `v-ons-model` has been created to imitate the behavior of `v-model` in native inputs. This is, Array binding for checkboxes, groups for radio buttons, etc.
+`v-ons-input`、`v-ons-switch`、`v-ons-range`、`v-ons-select` は対応する Onsen UI Core のコンポーネントと同じように動作します。これらのコンポーネントに対しては `v-ons-model` カスタムディレクティブを使用します。`v-ons-model` は、コンポーネントではなくネイティブ要素に対して `v-model` ディレクティブを使用した時の動作を模倣したものです。
 
 #### Floating action buttons
 
