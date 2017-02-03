@@ -43,7 +43,7 @@ module.exports = function(language, isStaging) {
       name: 'Monaca Team',
       url: 'https://monaca.io',
     },
-    moongift: {
+    atsushi: {
       name: 'Atsushi Nakatsugawa',
       gravator: '4cafe6a1c6287d64d7252279eeeffa94'
     },
@@ -70,9 +70,6 @@ module.exports = function(language, isStaging) {
     konstantin: {
       name: 'Konstantin Dinev',
       gravator: '31893df4323fac99458ed86784e25a77'
-    },
-    atsushi: {
-      name: '中津川篤司',
     },
     ryoichi: {
       name: 'Ryoichi Tsukada',
