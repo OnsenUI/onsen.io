@@ -1,19 +1,19 @@
 ---
-title: 'Vue (v2)向けOnsen UI 2ガイド - Onsen UIフレームワーク'
+title: 'Vue 2向けOnsen UI 2ガイド - Onsen UIフレームワーク'
 category: docs
 page: 'guide'
 needHelp: true
 framework: 'vue'
 autotoc: true
 actionbar: false
-tocTitle: 'Vue向けガイド'
+tocTitle: 'Vue 2向けガイド'
 version: v2
 layout: docs.html.eco
 ---
 
 <%- @markdown => %>
 
-**重要**: ガイドは現在翻訳中です（2017/02/02）。また、現時点での `vue-onsenui` は α 版 のため、このガイドの内容は API 変更や機能追加に伴い頻繁に変更されます。ご注意ください。
+**重要**: ガイドは現在翻訳中です（2017/02/02）。また、現時点での Vue 2 バインディングは α 版 のため、このガイドの内容は API 変更や機能追加に伴い頻繁に変更されます。ご注意ください。
 
 ### Starting Project
 
@@ -29,7 +29,7 @@ Get `onsenui.js`, `onsenui.css` and `onsenui-css-components.css` from the [lates
 
 #### Loading Onsen UI
 
-Vue bindings for Onsen UI provide Vue components and directives that wrap the core Web Components and expose a Vue-like API to interact with them. You need to load the following two JavaScript modules:
+Vue bindings for Onsen UI (VueOnsen) provide Vue 2 components and directives that wrap the core Web Components and expose a Vue-like API to interact with them. You need to load the following two JavaScript modules:
 
 - Onsen UI Core ([GitHub](https://github.com/OnsenUI/OnsenUI))
 - Onsen UI for Vue ([GitHub](https://github.com/OnsenUI/OnsenUI/tree/vue2/bindings/vue))
@@ -45,7 +45,7 @@ You can load with normal `<script></script>` and `<link>` tags as follows:
 <script src="vue-onsenui.js"></script>
 ```
 
-Or, you can use VueOnsenui from npm with a module bundler like Webpack. In this case, use the `onsenui` and `vue-onsenui` packages.
+Or, you can use VueOnsen from npm with a module bundler like Webpack. In this case, use the `onsenui` and `vue-onsenui` packages.
 
 ```javascript
 // Webpack CSS import
