@@ -19,7 +19,7 @@ category: ニュース
 
 <!-- more -->
 
-### 導入方法
+### 使い方
 
 Onsen UI for Vue 2 は `npm install vue-onsenui` でインストールできます（Yarn でも構いません）。また、[GitHub](https://github.com/OnsenUI/OnsenUI "Vue 2 バインディング リポジトリ") から直接入手することもできます。
 
@@ -30,12 +30,12 @@ Onsen UI for Vue 2 は `npm install vue-onsenui` でインストールできま�
 より詳しい解説については、GitHub リポジトリにある [README（英語）](https://github.com/OnsenUI/OnsenUI/blob/vue2/bindings/vue/README.md "より詳しい解説") および
 [公式サイト（日本語）](https://ja.onsen.io/vue/ "公式サイト") をご確認ください。
 
-### フィードバック
+### フィードバックのお願い
 
 α 版での新機能の紹介の前に、素晴らしい Vue デベロッパーである皆さんに一つお願いをさせてください。
 もし α 版をお試し頂けるなら、不具合報告や、機能改善のアイディア、API に対するご意見、コメント等を頂けると非常に幸いです。
 
-そのための一番良い方法は、[Gitter チャンネル（英語）](https://gitter.im/OnsenUI/OnsenUI "Gitter チャンネル") で直接私たちとお話しして頂くことです。その他にも、[コミュニティフォーラム（英語）](https://community.onsen.io/category/2/onsen-ui "コミュニティフォーラム") または [Stack Overflow（英語）](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow（英語）") の **onsen-ui** タグでご質問いただけます<span style="opacity: 0.4;">（訳者注: 日本では [Twitter: @Onsen_UI_ja](https://twitter.com/Onsen_UI_ja) にて開発チームへのご意見を、[teratail の Onsen UI タグ](https://teratail.com/tags/Onsen+UI) にてご質問を受け付けております）</span>。また、[GitHub レポジトリ（英語）](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ（英語）")に Issue を立てていただくこともできます。皆さんからご意見を頂くために、窓口をたくさん用意しています :)
+そのための一番良い方法は、[Gitter チャンネル（英語）](https://gitter.im/OnsenUI/OnsenUI "Gitter チャンネル") で直接私たちとお話しして頂くことです。その他にも、[コミュニティフォーラム（英語）](https://community.onsen.io/category/2/onsen-ui "コミュニティフォーラム") または [Stack Overflow（英語）](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow（英語）") の **onsen-ui** タグでご質問いただけます<span style="font-size: small; color: #ff8000; opacity: 0.6;">（訳者注: 日本では [Twitter: @Onsen_UI_ja](https://twitter.com/Onsen_UI_ja) にて開発チームへのご意見を、[teratail の Onsen UI タグ](https://teratail.com/tags/Onsen+UI) にてご質問を受け付けております）</span>。また、[GitHub レポジトリ（英語）](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ（英語）")に Issue を立てていただくこともできます。皆さんからご意見を頂くために、窓口をたくさん用意しています :)
 
 先日の記事でお伝えしたように（また、α 版であるゆえに）、私たちは β 版までにいくらかの破壊的変更を行うことができます。そのため、もし何かご提案いただけるなら、今が完璧なタイミングです。
 
@@ -50,15 +50,15 @@ Onsen UI for Vue 2 は `npm install vue-onsenui` でインストールできま�
 
 例えば、`v-ons-input` コンポーネントへの `v-ons-model` カスタムディレクティブの導入があります。*Vue* はチェックボックスやラジオボタンに対して特殊な処理を行うため、私たちは `v-model` ディレクティブを模した `v-ons-model` カスタムディレクティブを導入せざるを得ませんでした。*Carousel* や *Tabbar* に対する `v-ons-index` カスタムディレクティブにも同じことが言えます。
 
-以上の件に関して、また他の実装に関して、現在私たちはドキュメントを準備中です。数日中には Onsen UI の Web サイトに公開できると思います<span style="opacity: 0.4;">（訳者注: 現在英語サイト・日本語サイトともに既に[ドキュメント](https://ja.onsen.io/vue/)を公開済みです）</span>。
+以上の件に関して、また他の実装に関して、現在私たちはドキュメントを準備中です。数日中には Onsen UI の Web サイトに公開できると思います<span style="font-size: small; color: #ff8000; opacity: 0.6;">（訳者注: 現在英語サイト・日本語サイトともに既に[ドキュメント](https://ja.onsen.io/vue/)を公開済みです）</span>。
 
 Happy coding.
 
-### TL;DR
+### まとめ
 
 - α 版をリリースしました。*NPM* または *Yarn* でインストールできます。（ソースコードは [GitHub レポジトリ](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ") に置いてあります）
 
-- 不具合報告やその他コントリビューションは [Gitter チャンネル（英語）](https://gitter.im/OnsenUI/OnsenUI "Gitter チャンネル（英語）")、[コミュニティフォーラム（英語）](https://community.onsen.io/category/2/onsen-ui "コミュニティフォーラム（英語）")、[Stack Overflow（英語）](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow（英語）") にお願いいたします<span style="opacity: 0.4;">（訳者注: 日本では [Twitter: @Onsen_UI_ja](https://twitter.com/Onsen_UI_ja) にて開発チームへのご意見を、[teratail の Onsen UI タグ](https://teratail.com/tags/Onsen+UI) にてご質問を受け付けております）</span>。
+- 不具合報告やその他コントリビューションは [Gitter チャンネル（英語）](https://gitter.im/OnsenUI/OnsenUI "Gitter チャンネル（英語）")、[コミュニティフォーラム（英語）](https://community.onsen.io/category/2/onsen-ui "コミュニティフォーラム（英語）")、[Stack Overflow（英語）](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow（英語）") にお願いいたします<span style="font-size: small; color: #ff8000; opacity: 0.6;">（訳者注: 日本では [Twitter: @Onsen_UI_ja](https://twitter.com/Onsen_UI_ja) にて開発チームへのご意見を、[teratail の Onsen UI タグ](https://teratail.com/tags/Onsen+UI) にてご質問を受け付けております）</span>。
 
 Onsen UI for Vue 2 の今後にご期待ください。**Let's make Vue-OnsenUI great again.**
 
