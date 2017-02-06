@@ -242,7 +242,7 @@ Vue 2 はコンポーネントの子の変化を検知して、変化した分�
 
 Vue 2 は `push`、`pop`、`splice` 等による配列の変更を検知します。配列を変更する代わりに新しい配列を代入することでも動作しますが、Vue 2 では親から受け取ったプロパティを書き換えることができないため、実質不可能であることに注意してください。
 
-Navigator は変更を検知し適切なアニメーションを可能な限り実行します。ページスタックを正常に変更するには、各ページが[一意な `key` プロパティ](https://vuejs.org/v2/guide/list.html#key)を持っている必要があることに注意してください。`key` プロパティは Vue 2 にいくつかのページが変更されなかったことを伝える役割を持ちます。`key` プロパティが指定されていないと、Vue 2 は全てのページが変更されたと判断し、全てのページを再生成してしまいます。Navigator の場合、それにより誤ったアニメーションが実行される可能性があります。ページスタックの各インデックスは `key`　プロパティを指定することで初めて安全に変更することができます。例えば、`pageStack.shift()` や `pageStack.splice(0, pageStack.length - 2)` はトップページを変更しないのでアニメーションが発生しないのが正しい動作ですが、`key` プロパティが指定されていない場合、トップページが新しいコンポーネントと誤認され、pop アニメーションが発生してしまいます。
+Navigator は変更を検知し適切なアニメーションを可能な限り実行します。ページスタックを正常に変更するには、各ページが[一意な `key` プロパティ](https://jp.vuejs.org/v2/guide/list.html#key)を持っている必要があることに注意してください。`key` プロパティはいくつかのページが変更されなかったことを Vue 2 に伝える役割を持ちます。`key` プロパティが指定されていないと、Vue 2 は全てのページが変更されたと判断し、全てのページを再生成してしまいます。Navigator の場合、それにより誤ったアニメーションが実行される可能性があります。ページスタックの各インデックスは `key` プロパティを指定することで初めて安全に変更することができます。例えば、`pageStack.shift()` や `pageStack.splice(0, pageStack.length - 2)` はトップページを変更しないのでアニメーションが発生しないのが正しい動作ですが、`key` プロパティが指定されていない場合、トップページが新しいコンポーネントと誤認され、pop アニメーションが発生してしまいます。
 
 #### Splitter
 
@@ -313,7 +313,7 @@ Tabbar を利用するには Vue 2 が提供している名前付きスロット
 
 #### Floating action buttons
 
-VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles their visibility. VOnsSpeedDial also implements `open` prop to toggle items' visibility. `onClick` prop can be used to overwrite the default behavior (this should be used if `open` prop is present).
+`v-ons-fab` コンポーネントと `v-ons-speed-dial` コンポーネントは `visible` プロパティを持っており、このプロパティを操作することで表示状態をトグルすることができます。`v-ons-speed-dial` は `visible` プロパティに加えて、アイテムの表示状態をトグルするための `open` プロパティを持っています。また、クリック時の処理を上書きするには `onClick` プロパティを使用します（このプロパティを使う際は `open` プロパティも一緒に使うことをお勧めします）。
 
 ```html
 <v-ons-speed-dial :visible="isVisible" :open="isOpen" :on-click="isOpen = !isOpen">
@@ -325,9 +325,10 @@ VOnsFab and VOnsSpeedDial components implement a `visible` prop that toggles the
 
 #### Dialogs
 
-VOnsDialog, VOnsAlertDialog, VOnsPopover and VOnsModal implement a `visible` prop to change whether they are shown or not. For those with a background mask element (all except VOnsModal, which is always fullscreen), a `mask` event is fired every time the mask is clicked. Use this event to "cancel" the dialog instead of the core "cancelable" attribute.
+`v-ons-dialog`、`v-ons-alert-dialog`、`v-ons-popover`、`v-ons-modal` は `visible` プロパティを持ち、このプロパティにより表示状態を操作することができます。バックグラウンドマスク要素を持つコンポーネント（`v-ons-modal` 以外の全て。`v-ons-modal` は常にフルスクリーンで表示されるためバックグラウンドマスク要素が存在しません）は、バックグラウンドマスク要素がクリックされると `mask` イベントを発火します。
+バックグラウンドマスク要素がクリックされた時にダイアログをキャンセルするには、Onsen UI Core の `cancelable` 属性の代わりにこの `mask` イベントを使用してください。
 
-- Simple dialogs
+- シンプルなダイアログ
 
 ```html
 <v-ons-dialog :visible="dialogVisible" @mask="dialogVisible = false">
@@ -335,9 +336,9 @@ VOnsDialog, VOnsAlertDialog, VOnsPopover and VOnsModal implement a `visible` pro
 </v-ons-dialog>
 ```
 
-- Alert dialogs
+- アラートダイアログ
 
-For quick alerts and prompts, `$notification` object is exposed in Vue prototype, so either `Vue.$notification` or `this.$notification` can be used. This works exactly as the core `ons.notification`:
+Vue プロトタイプに公開している `$notification` オブジェクトを使うと、簡単にアラートやプロンプトを出すことができます。`Vue.$notification` または `this.$notification` でアクセスできます。動作の内容は Onsen UI Core で提供している `ons.notification` と全く同じです。
 
 ```javascript
 $notification.alert('Hello world!');
@@ -345,7 +346,7 @@ $notification.confirm('Do you want to close the app?').then(index => { ... })
 $notification.prompt('What\'s your name?').then(input => { ... });
 ```
 
-In case you need to customize more your alert dialog, you can use the VOnsAlertDialog component:
+アラートダイアログをカスタマイズしたい場合は `v-ons-alert-dialog` コンポーネントを使用してください:
 
 ```html
 <v-ons-alert-dialog modifier="rowfooter"
@@ -361,7 +362,7 @@ In case you need to customize more your alert dialog, you can use the VOnsAlertD
 </v-ons-alert-dialog>
 ```
 
-Another API version of this component which makes use of props instead of slots is also provided:
+スロットの代わりにプロパティを使うこともできます:
 
 ```html
   <v-ons-alert-dialog modifier="rowfooter"
@@ -376,7 +377,7 @@ Another API version of this component which makes use of props instead of slots 
 
 - Popover
 
-This component gets a `target` prop that can be any value supported by the core (DOM query, HTMLElement, Event object) or directly a Vue component reference.
+このコンポーネントを使用するには `target` プロパティを指定する必要があります。`target` プロパティには Onsen UI Core でサポートしている任意の値（DOM クエリ, HTML 要素, イベントオブジェクト）に加え、Vue の参照（`$refs`）を指定することもできます。
 
 ```html
 <v-ons-popover
@@ -399,7 +400,7 @@ This component gets a `target` prop that can be any value supported by the core 
 
 ##### Pull Hook
 
-VOnsPullHook emits events when its state changes:
+`v-ons-pull-hook` は状態変化時にイベントを発火します:
 
 ```
 <v-ons-pull-hook
@@ -412,17 +413,17 @@ VOnsPullHook emits events when its state changes:
 </v-ons-pull-hook>
 ```
 
-##### Conditional component
+##### 条件つき描画
 
-Instead of `<v-ons-if platform="android">...</v-ons-if>`, we can use Vue's `v-if` or `v-show` directives as follows:
+`v-if` ディレクティブや `v-show` ディレクティブを使用することで条件つき描画を行うことができます。`<v-ons-if platform="android">...</v-ons-if>` 等とは書かないようにしてください:
 
 ```html
 <div v-if="$platform.isAndroid()"> ... </div>
 ```
 
-##### Other components
+##### 他のコンポーネント
 
-The rest of the components are similar to core's elements except for the `v-*` prefix.
+残りのコンポーネントは `v-*` 接尾辞を持つ以外は Onsen UI Core の要素と同じように動作します。
 
 
 <!-- End of markdown -->
