@@ -1,32 +1,50 @@
 ---
-author: adam
+author: andi
 date: 2017-02-08
 id: localkit-new-release
-title: "Monaca LocalKit release of version 2.2"
+title: "Monaca LocalKit 2.2.0 release"
 product: monaca
 category: announcement
 tags: monaca, localkit
 ---
 
 
-Monaca Team is happy to announce the release of the Monaca LocalKit version 2.2.0.  For who has never heard about it, Monaca LocalKit is a tool that allows the development and the management of  Monaca projects on the local environment. In this version, we are giving more control over the synchronization between the local and the cloud environment, providing direct download and upload functionality and giving the ability to review the changes. Let's get deeper on the latest updates that LocalKit brings: 
+Monaca Team is happy to announce the release of the Monaca LocalKit version 2.2.0.  For who has never heard about it, Monaca LocalKit is a tool that allows the development and  management of Monaca projects locally. In this version, we are giving more control over the synchronization between the local and the cloud environment, providing direct download and upload functionality and giving the ability to review the project changes. Let's get deeper on the latest updates that LocalKit brings:
 
-###  Downloading and uploading Monaca project
+### Direct Upload and Download Functionality
 
-As previously mentioned,now we provide the ability to direclty upload local project changes to the Monaca Cloud environment or download changes from the Monaca Cloud environment to the local machine. 
+As previously mentioned, now we provide the ability to directly upload local changes to the Monaca Cloud environment, or download the latest version of the project from Cloud.
 
 ![](/blog/content/images/2017/Feb/Upload_Download.png)
 
-###  Reviewing modified and deleted files before uploading it on the Monaca Cloud
+### Review Change Functionality
 
-In order to prevent the user from uploading unwanted changes on the Monaca Cloud, Monaca LocalKit ask user to review all files that were modified and deleted since the last synchronization before performing the upload action. This change also affects the Remote Build functionality and user will be asked to review the changes before performing this action.
+To avoid unwanted files from being uploaded to the Cloud, Monaca LocalKit now provides a list of changes for review and requests for a confirmation before uploading. This allows developers to choose if approve or abort the upload operation. This functionality has been integrated into the Upload and Remote Build functionalities and it’s ready to be used out of the box.
 
 ![](/blog/content/images/2017/Feb/Review_Window.png)
 
-###  Build Settings change to Settings
+### Project Settings Management
 
-To make the user interface more consistent we renamed Build Settings button to Settings. All functionalities that the user could access before via Build Settings he can now access via Settings.
+In order to reflect the latest updates implemented on Monaca Cloud IDE, it's now possible to access the whole project configuration from the Cloud. This means that from now on it will be possible to perform actions like Build Configuration and Cordova Plugins configuration directly from Monaca LocalKit.
 
 ![](/blog/content/images/2017/Feb/Settings.png)
 
-We hope you like our changes and we are looking forward to your feedback.
+### Pairing Issues Fix
+
+Various pairing issues, affecting mainly iOS 10 on macOS, have been fixed. These fixes are also related to the remote debugging functionality.
+
+### Allowed Localkit Project Access on IDE
+
+From now on, the projects created with Localkit will be accessible for editing on Cloud IDE. This will allow the developers to have the ability to choose the prefered development platform, allowing easy jumps between Cloud and Local development.
+
+### Enchanched Cordova Project Support
+
+We removed some limitations on pure Cordova Project imports on LocalKit. This will allow an easier integration between Cordova and Monaca.
+
+### Core Update
+
+The core of LocalKit has been updated to the latest version of Electron. This should bring better rendering performance and security, allowing to create a solid base for the future updates.
+
+### Conclusion
+
+Along with other minor fixes, these are the biggest changes introduced in LocalKit 2.2.0. We hope you will enjoy them and we are looking forward for your feedback.
