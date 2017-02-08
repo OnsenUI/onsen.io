@@ -91,7 +91,7 @@ module.exports = function(language, isStaging) {
       email: 'junio@asial.co.jp',
       gravatar: 'e0bf2e415d1174b8a479ade0c5cc671d',
       url: 'https://github.com/misterjunio'
-    }
+    },
     adam: {
       name: 'Adam Kozuch',
       email: 'adam@asial.co.jp',
