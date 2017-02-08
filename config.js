@@ -92,6 +92,11 @@ module.exports = function(language, isStaging) {
       gravatar: 'e0bf2e415d1174b8a479ade0c5cc671d',
       url: 'https://github.com/misterjunio'
     }
+    adam: {
+      name: 'Adam Kozuch',
+      email: 'adam@asial.co.jp',
+      url: 'https://github.com/adamkozuch'
+    }
   };
 
   for (author in authors) {
