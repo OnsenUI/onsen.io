@@ -1,0 +1,32 @@
+---
+author: monaca
+date: 2017-02-08
+id: localkit-new-release
+title: "Monaca LocalKit release of version 2.2"
+product: monaca
+category: announcement
+tags: monaca, localkit
+---
+
+
+Monaca Team is happy to announce the release of the Monaca LocalKit version 2.2.0.  For who has never heard about it, Monaca LocalKit is a tool that allows the development and the management of  Monaca projects on the local environment. In this version, we are giving more control over the synchronization between the local and the cloud environment, providing direct download and upload functionality and giving the ability to review the changes. Let's get deeper on the latest updates that LocalKit brings: 
+
+###  Downloading and uploading Monaca project
+
+As previously mentioned,now we provide the ability to direclty upload local project changes to the Monaca Cloud environment or download changes from the Monaca Cloud environment to the local machine. 
+
+![](/blog/content/images/2017/Feb/Upload_Download.png)
+
+###  Reviewing modified and deleted files before uploading it on the Monaca Cloud
+
+In order to prevent the user from uploading unwanted changes on the Monaca Cloud, Monaca LocalKit ask user to review all files that were modified and deleted since the last synchronization before performing the upload action. This change also affects the Remote Build functionality and user will be asked to review the changes before performing this action.
+
+![](/blog/content/images/2017/Feb/Review_Window.png)
+
+###  Build Settings change to Settings
+
+To make the user interface more consistent we renamed Build Settings button to Settings. All functionalities that the user could access before via Build Settings he can now access via Settings.
+
+![](/blog/content/images/2017/Feb/Settings.png)
+
+We hope you like our changes and we are looking forward to your feedback.
