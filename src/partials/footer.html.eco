@@ -45,7 +45,7 @@
         </div>
       </div>
     <% else: %>
-      <div class="footer-container-upper-social">
+      <div class="footer-container-upper-social-ja">
         <div class="footer-container-upper-social-twitter">
           <a href="https://twitter.com/Onsen_UI_ja" class="twitter-follow-button">@Onsen_UI_jaをフォロー</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
@@ -151,9 +151,9 @@
   </div>
   <div class="footer-container-copyright">
     <% if @lang == "en": %>
-    Copyright &copy; 2013-2016 <a href="https://monaca.io/">Monaca x Onsen UI Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
+    Copyright &copy; 2013-2017 <a href="https://monaca.io/">Monaca x Onsen UI Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
     <% else: %>
-    Copyright &copy; 2013-2016 <a href="https://ja.monaca.io/">アシアル株式会社</a>. All rights reserved. <a href="https://ja.monaca.io/terms-of-service/policy.html">プライバシーポリシー</a>
+    Copyright &copy; 2013-2017 <a href="https://ja.monaca.io/">アシアル株式会社</a>. All rights reserved. <a href="https://ja.monaca.io/terms-of-service/policy.html">プライバシーポリシー</a>
     <% end %>
   </div>
 </footer>
