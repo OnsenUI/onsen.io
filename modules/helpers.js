@@ -93,6 +93,10 @@ module.exports = function() {
         return result;
       },
 
+      renderCurrentYear: function() {
+        return new Date().getFullYear();
+      },
+
       getTutorialUrl: function(page, string) {
         //"vanilla/Reference/carousel"
         var tutorial_url = function(match, p1, p2, p3) {
