@@ -1,0 +1,59 @@
+---
+author: junio
+date: 2017-02-02
+id: vuejs-2-binding-alpha-version-is-here
+title: "Vue 2 binding alpha version is here!"
+product: onsen
+category: announcement
+tags: vue, onsen ui
+---
+
+![Title](/blog/content/images/2017/Feb/vue-onsenui-alpha.png)
+
+Hi everyone. I’m [Júnio](https://onsen.io/blog/junio/ "Júnio"), the most recent intern working with the Onsen UI team. Following our [last blog post](https://onsen.io/blog/vue2-support-status-jan-2017/ "Previous Onsen UI blog post") we’ve been focusing on updating the binding for *Vue2* in order to accomplish our established deadlines (and all your wildest dreams).
+
+We are happy to announce that we have finally released its alpha version. Keep reading for details.
+
+<!-- more -->
+
+### Getting started
+
+To start using the new release right away you can simply install the dependency in your project with `npm install vue-onsenui` (you can also use *Yarn*) or integrate it manually from [GitHub](https://github.com/OnsenUI/OnsenUI "Vue2 binding repo").
+
+After that import it in your code with `import VueOnsen from 'vue-onsenui';` and then add the plugin to *Vue* through `Vue.use(VueOnsen);`.
+
+This is assuming you already have both [*Vue*](https://vuejs.org/v2/guide/installation.html "Vue 2 installation") and [*Onsen UI*](https://onsen.io/getting-started/#npm "Onsen UI installation") set up. If you don't please follow the instructions on the respective pages.
+
+Also, for more detailed info please follow this [ README link](https://github.com/OnsenUI/OnsenUI/blob/vue2/bindings/vue/README.md "More detailed info") or check our [official page](https://onsen.io/vue/ "Official page").
+
+### Call for feedback
+
+Taking the risk of boring you, before going through some of the new stuff on this version we’d like to summon a “call to arms” for you awesome Vue 2 developers. If you could take the release for a test drive and let us known of any issues, ideas you might have to improve it, thoughts on the API or simply a (hopefully positive) comment, we would greatly appreciate it.
+
+Best way to do that is by directly chatting with us on our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI "Gitter channel"). Otherwise you can place a question on our [Community Forum](https://community.onsen.io/category/2/onsen-ui "Community Forum") or on [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow") with the **onsen-ui** tag. You can even open an issue on our [GitHub repo](https://github.com/OnsenUI/OnsenUI "GitHub repo") (where you can also find the source code). Plenty of ways to share your thoughts, huh? :)
+
+As we mentioned before (and well, because that's generally the point of an alpha) we will probably be making some breaking changes before transitioning to beta so now is the perfect time to let us know.
+
+### What's new
+
+Referring to the list on our [previous blog post](https://onsen.io/blog/vue2-support-status-jan-2017/ "Previous Onsen UI blog post"), at this point all components (except *Lazy Repeat*) are implemented. The components from the Onsen UI core were wrapped so that you can still use the regular API.
+
+However, we wanted to provide a more tailored way of doing things. Hence we decided to reserve extra space in our API for *Vue*-specific capabilities that we thought would suit your needs. The connection of *Vue*-like syntax to our core components demanded some tweeking and workarounding here and there but in general we are pleased with the solutions we found.
+
+One of them is the use of `v-ons-model` with `v-ons-input`. Due to the way in which *Vue* treats elements such as checkboxes or radio buttons internally, we came up with our own directive `v-ons-model` to emulate the behaviour of the regular `v-model`. Same for `v-ons-index` in *Carousel* or *Tabbar*, for example.
+
+For these and other implementation details we are preparing some timely documentation that will come in handy if you have doubts. It will be up on Onsen UI's website hopefully within the next few days.
+
+Happy coding.
+
+### TL;DR
+
+- Alpha version is out and can be installed via *NPM* or *Yarn* (source code on our [GitHub repo](https://github.com/OnsenUI/OnsenUI "GitHub repo"));
+
+- Use our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI "Gitter channel"), our [Community Forum](https://community.onsen.io/category/2/onsen-ui "Community Forum") or even [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow") to reach out to us with any issue or contribution.
+
+Stay tuned and **let's make Vue-OnsenUI great again**.
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★

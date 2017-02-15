@@ -22,6 +22,8 @@ function generateDocument(metalsmith, categoryFile) {
           file.h1 = categoryFile.file.title + " Guide <strong>for React Component</strong>"; break;
         case "js":
           file.h1 = categoryFile.file.title + " Guide <strong>for JavaScript</strong>"; break;
+        case "vue":
+          file.h1 = categoryFile.file.title + " Guide <strong>for Vue 2</strong>"; break;
         case "angular1":
           file.h1 = categoryFile.file.title + " Guide <strong>for Angular 1</strong>"; break;
         case "angular2":
@@ -53,7 +55,8 @@ module.exports = function(lang) {
       js: {},
       angular1: {},
       angular2: {},
-      react: {}
+      react: {},
+      vue: {}
     };
     var promises = [];
 
@@ -100,6 +103,9 @@ module.exports = function(lang) {
             break;
           case "angular2":
             addCategory(file, categories.angular2);
+            break;
+          case "vue":
+            addCategory(file, categories.vue);
             break;
           case "js":
             addCategory(file, categories.js);

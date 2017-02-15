@@ -93,6 +93,10 @@ module.exports = function() {
         return result;
       },
 
+      renderCurrentYear: function() {
+        return new Date().getFullYear();
+      },
+
       getTutorialUrl: function(page, string) {
         //"vanilla/Reference/carousel"
         var tutorial_url = function(match, p1, p2, p3) {
@@ -269,6 +273,7 @@ module.exports = function() {
           case "js": return "JavaScript";
           case "angular1": return "Angular 1";
           case "angular2": return "Angular 2";
+          case "vue": return "Vue 2";
           case "react": return "React";
         }
       },
@@ -278,6 +283,7 @@ module.exports = function() {
           case "js": return "js core";
           case "angular1": return "angular 1";
           case "angular2": return "angular 2";
+          case "vue": return "vue";
           case "react": return "react";
         }
       },
@@ -338,6 +344,10 @@ module.exports = function() {
         if (this.framework === 'react') {
           return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
         }
+        if (this.framework === 'vue') {
+          return 'v-ons-' + component;
+        }
+
         return 'ons-' + component;
       },
 
