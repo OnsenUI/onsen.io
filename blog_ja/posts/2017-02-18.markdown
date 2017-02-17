@@ -1,0 +1,133 @@
+---
+author: atsushi
+date: 2017-02-18
+id: monaca-with-firebase-realtime
+title: "MonacaでFirebaseのリアルタイムデータベースを試す"
+tags: onsen ui, vue, firebase
+product: monaca
+category: 技術情報
+---
+
+FirebaseはGoogleの提供するモバイル関連サービスのプラットフォームです。前回は認証について紹介しましたが、今回はリアルタイムデータベースを使ってみます。というのもデータは権限を付けて保存されるべきとのFirebaseの推奨があるので、前回の認証を踏まえた上で実装していきたいと思います。
+
+先に完成品を紹介します。Firebaseの管理画面（コンソール）とアプリ側でデータの同期を行っています。スマートフォン側（プレビュー版）でボタンを押すと、現在時刻でデータが登録されます。そして管理画面側でデータを削除すると、それがスマートフォン側に反映されます。
+
+![](/images/2017/Feb/monaca-firebase-realtimedb.gif)
+
+今回もOnsen UIとVueを組み合わせて作っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
+
+## HTML側の実装
+
+HTML側ではリストを表示するようにします。また、ボタンを押すとデータを追加するためのイベントを追加します。
+
+```
+<section style="margin: 10px;">
+  <!-- データ追加ボタンを追加 -->
+	<ons-button @click="add">データ追加</ons-button>
+	<ons-button @click="logout">ログアウト</ons-button>
+</section>
+<!-- データを表示するリストを追加 -->
+<section style="margin: 10px;">
+	<ons-list>
+		<ons-list-header>リスト</ons-list-header>
+		<ons-list-item v-for="item in times">
+			<div class="center">{{ item.time }}</div>
+		</ons-list-item>
+	</ons-list>
+</section>
+```
+
+## JavaScript側の実装
+
+### 変数の初期化
+
+JavaScript側ではまず最初に times という変数（配列）を初期化します。
+
+```
+// Vueの処理 
+var vm = new Vue({
+	el: '#app',
+	// 初期データの設定
+	data: {
+		user: {
+			isLoggedIn: false,
+			mailAddress: "",
+			password: ""
+		},
+		times: []  // 追加
+	},
+	:
+```
+
+### データの追加処理
+
+Firebaseにデータを追加する処理はとても簡単です。
+
+```
+add: function() {
+	// 登録するメッセージを作成
+	var d = new Date;
+	var message = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+	
+	firebase.database().ref('times/').push({
+		time: message
+	})
+	.catch(function(error) {
+		alert(error.message)
+	})
+},
+```
+
+`firebase.database().ref('times/')` という指定でデータを保存する名称（今回はtimes）を指定します。データの保存はpushで行います。
+
+### データの取得
+
+データの取得は二種類あります。一つは初期表示、もう一つはデータの追加をしたタイミングです。
+
+#### 初期表示
+
+データの初期表示を行うのは次のようにします。先ほどの `firebase.database().ref('times/')` に対して value というイベントを使います。このイベントはVueの構築が終わったタイミング（created内）で行います。
+
+```
+var data = firebase.database().ref('times/');
+data.on('value', function(times) {
+	me.times = [];
+	times.forEach(function(time) {
+		me.times.push({
+			key: time.key,
+			time: time.val().time
+		})
+	});
+});
+```
+
+データは配列で返ってきますので、変数timesを一旦初期化して入れ直します。データは val() メソッドでJSONオブジェクトとして返ってきます。このvalueイベントは外部でデータを削除した場合にも呼ばれます。
+
+#### データの追加
+
+データを追加した際には child_added というイベントが通知されます。つまり次のように実装します。この処理の中では、すでに同じキーの要素が入っていないかチェックしておきます。
+
+```
+data.on('child_added', function(time) {
+	var result = me.times.filter(function(item) {
+		return item.key == time.key;
+	})
+	if (result) {
+		return;
+	}
+	me.times.push({
+		key: time.key,
+		time: time.val().time
+	})
+});
+```
+
+----
+
+Firebaseのリアルタイムデータベースではデータの追加処理と、そのイベント通知が分かれているので実装がシンプルになります。チャットや複数端末でのデータ同期などに使うのが良さそうです。
+
+なお、通信にはWebSocketを使っています。特に気にすることはありませんが、WebSocket接続が切れてしまっているとデータが反映されないので注意してください。
+
+今回のコードは[moongift/monaca_firebase_realtimedb](https://github.com/moongift/monaca_firebase_realtimedb)にアップロードしてあります。実装時の参考にしてください。
+
+[Firebase](https://firebase.google.com/)
