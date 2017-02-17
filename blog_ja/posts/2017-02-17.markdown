@@ -209,11 +209,11 @@ template: `
   <section v-else style="margin: 10px;">
     <p>メールアドレス</p>
     <p>
-      <v-ons-input modifier="underbar" v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+      <v-ons-input v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
     </p>
     <p>パスワード</p>
     <p>
-      <v-ons-input modifier="underbar" v-ons-model="user.password" placeholder="password" type="password"></v-ons-input>
+      <v-ons-input v-ons-model="user.password" placeholder="パスワード" type="password"></v-ons-input>
     </p>
     <ons-button @click="register">新規登録</ons-button>
     <ons-button @click="login">ログイン</ons-button>
@@ -301,7 +301,7 @@ ons.ready(function() {
 	  },
 	  // テンプレート
 	  template: `
-	  <v-ons-page>
+    <v-ons-page>
 	    <v-ons-toolbar>
 	      <div class="center"> Firebase認証 </div>
 	    </v-ons-toolbar>
@@ -314,11 +314,11 @@ ons.ready(function() {
 			<section v-else style="margin: 10px;">
 	      <p>メールアドレス</p>
 	      <p>
-	        <v-ons-input modifier="underbar" v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+	        <v-ons-input v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
 	      </p>
 	      <p>パスワード</p>
 	      <p>
-	        <v-ons-input modifier="underbar" v-ons-model="user.password" placeholder="password" type="password"></v-ons-input>
+	        <v-ons-input v-ons-model="user.password" placeholder="パスワード" type="password"></v-ons-input>
 	      </p>
 	      <ons-button @click="register">新規登録</ons-button>
 	      <ons-button @click="login">ログイン</ons-button>
