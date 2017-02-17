@@ -14,8 +14,8 @@ Installation
 ```bash
 git clone https://github.com/OnsenUI/onsen.io.git
 cd onsen.io
-npm install gulp -g
-npm install
+yarn global add gulp
+yarn install
 
 # Checkout submodules
 git submodule init
@@ -23,15 +23,15 @@ git submodule update
 
 # Checkout and build the latest revision of Onsen UI 1
 pushd dist/v1/OnsenUI/
-git checkout 1.3.19
-npm install
+git checkout 1.3.19 # change this
+yarn install
 gulp build
 popd
 
 # Checkout and build the latest revision of Onsen UI 2
 pushd dist/v2/OnsenUI/
-git checkout 2.0.3
-npm install
+git checkout 2.0.3 # change this
+yarn install
 gulp build
 popd
 ```

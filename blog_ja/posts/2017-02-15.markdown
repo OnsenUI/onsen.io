@@ -1,0 +1,248 @@
+---
+author: kanako
+date: 2017-02-15
+id: monaca-jins-meme
+title: "JINS MEME SDK for Monaca リリースのお知らせ"
+product: monaca
+tags: monaca, jinsmeme, html5
+category: 技術情報
+---
+
+本日、JINS MEME SDK for Monacaがリリースされました。JINS MEMEとは、眼鏡ブランドのJINSが提供している眼鏡型のウェアラブルデバイスです。健康状態を管理することを目的として、体の傾きやまばたきの状態などを計測する機能が搭載されています。
+
+[JINS MEME 公式サイト](https://jins-meme.com/ja/)
+
+ウェアラブルデバイスというと特徴的な見た目をイメージするかもしれませんが、JIMS MEMEは普通の眼鏡と変わらないデザインで、日常的に使っていても違和感がありません。
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-0.jpg)
+
+今回リリースされたJINS MEME SDK for Monacaを利用することで、JINS MEMEと連携したモバイルアプリをMonacaで開発することが可能となります。
+本SDKは無料プランからご利用いただけます。
+
+# JINS MEME DEVELOPERSへの登録
+
+まずは以下のサイトで新規会員登録を行い、アプリ登録に進んでください。
+
+[JINS MEME DEVELOPERS](https://developers.jins.com/ja/apps/)
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-1.png)
+
+アプリ名、アプリの説明、プラットフォーム、開発者、アイコンを設定します。
+Monacaでアプリを作成する場合、プラットフォームは「Android」と「iOS」のどちらを選択しても構いません。
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-2.png)
+
+作成が完了すると、「アプリID」と「アプリSecret」が表示されます。
+この値は後ほどソースコードにペーストします。
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-3.png)
+
+# JINS MEME SDK for Monacaの導入方法
+
+IDEの設定メニューから「外部サービス連携」を選択し、「JINS MEME SDK for Monaca」の「詳細を見る」ボタンをクリックします。
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-4.png)
+
+「インストール」ボタンを押すと、プロジェクトにJINS MEME SDK for Monaca（Cordovaプラグイン）が追加されます。
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-5.png)
+
+
+# アプリの実装
+
+JINS MEME SDK for Monacaは、以下の手順で実装します。
+
+1. アプリID、アプリSecretの設定
+2. 近くにあるJINS MEMEデバイスをスキャン
+3. アプリとJINS MEMEデバイスの接続（ペアリング）
+4. 計測の開始
+
+今回は、まばたきを検出する機能と、体の傾きを可視化する機能を実装します。
+アプリの完成イメージは以下のようになります。
+
+- まばたき未検出時
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-6.png)
+
+- まばたき検出時
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-7.png)
+
+- 体の傾き
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-8.png)
+
+### 1. アプリID、アプリSecretの設定
+
+まずはアプリの起動時に発生するdevicereadyイベント内で、アプリIDとアプリSecretを設定します。
+
+```
+// 起動時のイベント
+document.addEventListener('deviceready', function() {
+    // アプリの初期化処理
+    cordova.plugins.JinsMemePlugin.setAppClientID(
+        'アプリID',
+        'アプリSecret',
+        function() {
+            // デバイスのスキャンを実行
+            restartScan();
+        },
+        function() {
+            console.log('Error: setAppClientID');
+        }
+    );
+});
+```
+
+`cordova.plugins.JinsMemePlugin.setAppClientID()` は、アプリIDとアプリSecretを元にアプリの認証を行います。
+第三引数には認証完了後に実行する処理、第四引数には認証失敗時に実行する処理を指定します。
+
+### 2. 近くにあるJINS MEMEデバイスをスキャン
+
+つづいて `cordova.plugins.JinsMemePlugin.startScan()` でスキャンを開始します。
+第一引数にデバイスが見つかった時の処理、第二引数にスキャンに失敗したときの処理を指定します。
+
+ただし、前回起動時にJINS MEMEデバイスとの接続を既に実行している場合は、
+`cordova.plugins.JinsMemePlugin.startScan()` を実行する前に切断処理を実行しないとエラーが発生する場合があります。
+そこで restartScan() という関数内であらかじめ計測の停止、デバイスとの切断、スキャンの停止を行っています。
+
+JINS MEME側は、フレームにある電源ボタンを2秒ほど長押しして接続待ちの状態にします。
+電源ボタンの上のLEDが青く点滅していれば接続待ちになっています。
+
+```
+// デバイスのスキャン開始
+function startScan() {
+    // デバイス選択ダイアログを表示
+    var deviceList = document.getElementById('deviceList');
+    deviceList.innerHTML = '<ons-list-header>デバイスを選択</ons-list-header>';
+    document.getElementById('selectDeviceDialog').show();
+    
+    cordova.plugins.JinsMemePlugin.startScan(function(device) {
+        // ダイアログにデバイスを追加（タップされたらペアリング実行）
+        deviceList.innerHTML += `<ons-list-item tappable onclick="connect('${device}')">${device}</ons-list-item>`;
+    }, function() {
+        console.log('Error: startScan');
+    });
+}
+
+// デバイスのスキャン再開
+function restartScan() {
+    // 一旦デバイスと切断した後に、再接続
+    stopDataReport();
+    disconnect();
+    stopScan(startScan);
+}
+
+// 計測停止
+function stopDataReport() {
+    cordova.plugins.JinsMemePlugin.stopDataReport(function() {}, function() {
+        console.log('Error: stopDataReport');
+    });
+}
+
+// アプリとデバイスの切断
+function disconnect() {
+    cordova.plugins.JinsMemePlugin.disconnect(function() {}, function() {
+        console.log('Error: disconnect');
+    });
+}
+
+// デバイスのスキャン停止
+function stopScan(successCallback) {
+    cordova.plugins.JinsMemePlugin.stopScan(function() {
+        if(successCallback) successCallback();
+    }, function() {
+        console.log('Error: stopScan');
+    });
+}
+```
+
+今回はOnsen UIで以下のようなデバイス選択ダイアログをあらかじめ用意しておき、見つかったデバイス情報をダイアログ内に追加する作りにしています。
+
+```
+<!-- デバイス選択ダイアログ -->
+<ons-dialog id="selectDeviceDialog">
+  <ons-list id="deviceList">
+  </ons-list>
+</ons-dialog>
+```
+
+近くにあるデバイスが見つかると、以下のように表示されます。
+
+![](/blog/content/images/2017/Feb/monaca-jins-meme-9.png)
+
+### 3. アプリとJINS MEMEデバイスの接続（ペアリング）
+
+デバイス選択ダイアログでデバイスが選択されたら、`cordova.plugins.JinsMemePlugin.connect()` でデバイスとの接続を実行します。
+第一引数に接続完了時の処理、第二引数にデバイスが切断されたときの処理（デバイスの電源が切れた場合やアプリとデバイスが物理的に遠く離れた場合など）、第三引数に接続失敗時の処理を指定します。
+
+```
+// アプリとデバイスの接続
+function connect(device) {
+    // スキャン停止
+    stopScan();
+    // ダイアログを閉じる
+    document.getElementById('selectDeviceDialog').hide();
+            
+    // 選択されたデバイスに接続
+    cordova.plugins.JinsMemePlugin.connect(device, function() {
+        // 計測開始
+        startDataReport();
+    }, function() {
+        console.log('Disconnect');
+    }, function() {
+        console.log('Error: connect');
+    });
+}
+```
+
+### 4. 計測の開始
+
+ペアリングが完了したら、`cordova.plugins.JinsMemePlugin.startDataReport()` で計測を開始します。
+第一引数には計測データを取得したタイミングで実行される処理を指定します。この処理は計測が停止されるまでの間、定期的（数十ミリ秒間隔）に実行されます。
+第二引数には、計測の開始に失敗したときの処理を指定します。
+
+```
+// 計測開始
+function startDataReport() {
+    cordova.plugins.JinsMemePlugin.startDataReport(draw, function() {
+        console.log('Error: startDataReport');
+    });
+}
+
+// 計測結果を描画する
+function draw(data) {
+    var tabIndex = document.getElementById('tabbar').getActiveTabIndex();
+    if (tabIndex === 0) {
+        // まばたきされたらアイコンを変更する
+        if(data.blinkSpeed > 0 || data.blinkStrength > 0) {
+            document.getElementById('icon-eye').setAttribute('icon', 'eye-slash');
+        } else {
+            document.getElementById('icon-eye').setAttribute('icon', 'eye');
+        }
+    } else if(tabIndex === 1) {
+        // 姿勢角Rollに合わせてアイコンを傾ける
+        var deg = data.roll * -1;
+        document.getElementById('icon-body').style['transform'] = `rotate(${deg}deg)`;
+    }
+}
+```
+
+体の傾きは、アイコン画像をアニメーションつきで傾けて表現しています。
+以下のようにCSSを指定して実現しています。
+
+```
+#icon-body {
+    transition-property: transform;
+    transition-duration: 0.1s;
+}
+```
+
+----
+
+今回作成したアプリは、単純に計測したデータを表示するだけのサンプルでしたが、視線の動きでページ遷移させるといった機能を盛り込むことも可能です。アイデア次第で革新的なアプリを産み出すことができるでしょう。
+JINS MEMEは、[JINS MEME Flagship Store 原宿](https://jins-meme.com/ja/locations/)などの店舗で体験・購入して頂けます。ぜひお試しください。
+
+今回のソースコード全文は[kanakoubukata/monaca_jins_meme](https://github.com/kanakoubukata/monaca_jins_meme)にアップロードしてあります。実装する際の参考にしてください。
+
+

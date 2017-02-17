@@ -31,10 +31,12 @@ module.exports = function(lang, isStaging) {
         .clean(false)
         .source('./src/documents_' + lang)
         .metadata(require('../config.js')(lang, isStaging))
+        .use(ignore(['**/.DS_Store']))
         .use(draft())
         .use(require('./helpers')())
         .use(require('./v1-api-docs')(lang))
         .use(require('./v2-wc-api-docs')(lang, 'js'))
+        .use(require('./v2-wc-api-docs')(lang, 'vue'))
         .use(require('./v2-wc-api-docs')(lang, 'angular1'))
         .use(require('./v2-wc-api-docs')(lang, 'angular2'))
         .use(require('./v2-react-api-docs')(lang))
@@ -120,6 +122,7 @@ module.exports = function(lang, isStaging) {
         .source(lang === 'ja' ? './blog_ja/authors/' : './blog/authors/')
         .metadata(require('../config.js')(lang, isStaging))
         .destination(lang === 'ja' ? './out_ja/blog/' : './out_en/blog/')
+        .use(ignore(['**/.DS_Store']))
         .use(require('./helpers')())
         .use(branch('*.markdown')
           .use(markdown({
@@ -168,6 +171,7 @@ module.exports = function(lang, isStaging) {
           site.url = site.url + '/blog/';
         })
         .use(draft())
+        .use(ignore(['**/.DS_Store']))
         .use(require('./helpers')())
         .use(collections({
           articles: {
