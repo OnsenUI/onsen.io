@@ -1,0 +1,253 @@
+---
+author: atsushi
+date: 2017-02-17
+id: monaca-firebase-storage
+title: "MonacaアプリでFirebase Storageを試す"
+tags: onsen ui, vue, firebase
+product: monaca
+category: 技術情報
+---
+
+この記事では以下の技術を組み合わせています。
+
+- Monaca
+- Onsen UI
+- Vue2
+- Firebase
+
+FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。さらに最近リリースしたOnsen UIのVue2実装を使っています。
+
+![](/images/2017/Feb/monaca-firebase-auth-14.png)
+
+## Firebaseの始め方
+
+FirebaseはGoogleアカウントがあればすぐにはじめられます。まずプロジェクトを作ります。
+
+![](/images/2017/Feb/monaca-firebase-auth-13.png)
+
+できあがったら、Webアプリケーション向けの実装を選択します。
+
+![](/images/2017/Feb/monaca-firebase-auth-12.png)
+
+JavaScriptのコードが生成されるので、これをコピーします。
+
+![](/images/2017/Feb/monaca-firebase-auth-5.png)
+
+## 匿名によるファイルアップロードの許可
+
+Firebaseのストレージはデフォルトでは認証済みのユーザしかファイルアップロードできなくなっています。これは不特定多数のユーザにファイルをアップロードされるのを防止するためです。
+
+今回は認証しなくてもファイルアップロードできるようにするため、下記のようにルールを書き換えます。
+
+```
+service firebase.storage {
+  match /b/xxxxxxxxx.appspot.com/o {
+    match /{allPaths=**} {
+      allow read, write;
+    }
+  }
+}
+```
+
+![](/images/2017/Feb/monaca-firebase-storage-3.png)
+
+## Monacaアプリの準備
+
+今回はOnsen UIを使っています。Onsen UI V2 JS Minimumをベースとしています。これはOnsen UIの最低限の実装だけがされているテンプレートです。
+
+アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
+
+```
+<script src="js/app.js"></script>
+```
+
+さらに先ほど生成したFirebaseのコードの内、Firebase.jsを読み込むタグを追加します。
+
+```
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+```
+
+次にJS/CSSコンポーネントの追加と削除を選択して、vueをインストールします。最新版を選択しますが、今回は2.1.10となっています。読み込むファイルは components/vue/dist/vue.min.js になります。
+
+## Onsen UI for Vueの準備
+
+VueとOnsen UIの準備が終わったので、Onsen UI for Vueをセットアップします。これはJavaScriptを追加するだけです。
+
+```
+<script src="https://unpkg.com/vue-onsenui"></script>
+```
+
+最後に body タグ内を次のように書き換えます。
+
+```
+<div id="app"></div>
+```
+
+全体のHTMLファイルは次の通りです。
+
+```
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+  <script src="https://unpkg.com/vue-onsenui"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>
+```
+
+## js/app.jsの修正
+
+ではJavaScriptの実装に入ります。まずコメントで紹介します。
+
+```
+ons.ready(function() {
+  // Firebaseの初期化
+  
+  // Vueの処理 
+	  // 初期データの設定
+	  
+	  // テンプレート
+
+    // イベント処理
+	  	// ファイルを指定した時の処理
+
+	  	// 画像アップロード処理
+});
+```
+
+### Firebaseの初期化
+
+Firebaseの初期化は先ほどコピーしたコードをそのまま使います。APIキーなどはコピーしたものをそのまま使ってください。
+
+```
+var config = {
+  apiKey: "API_KEY",
+  authDomain: "AUTH_DOMAIN",
+  databaseURL: "DATABASE_URL",
+  storageBucket: "STORAGE_BUCKET",
+  messagingSenderId: "MESSAGING_SENDER_ID"
+};
+firebase.initializeApp(config);
+```
+
+### Vueの処理
+
+Vueの基本形は次のようになります。
+
+```
+// Vueの処理
+var vm = new Vue({
+  el: '#app',  // マウントするDOM
+  // 初期データの設定
+  data: {},
+    
+  // テンプレート
+  template: ``,
+  // イベント処理
+  methods: {
+  	// ファイルを指定した時の処理
+  	// 画像アップロード処理
+  }
+});
+```
+
+#### 初期データの設定
+
+初期データはファイルオブジェクトを入れるphoto、アップロード完了後にファイルのURLを入れるphoto_urlになります。
+
+```
+data: {
+  photo: null,
+  photo_url: null
+},
+```
+
+#### テンプレート
+
+テンプレートは次のようになります。ファイル選択とファイルアップロードボタンになります。
+
+```
+// テンプレート
+template: `
+<v-ons-page>
+  <v-ons-toolbar>
+    <div class="center"> Firebaseストレージ </div>
+  </v-ons-toolbar>
+  <section style="margin: 10px;">
+    <ons-input type="file" name="photo" @change="fileChange" accept="image/*" />
+    <ons-button @click="upload">アップロード</ons-button>
+    <div v-if="photo_url">
+      <div class="center">
+        <img :src="photo_url" width="80%" />
+      </div>
+    </div>
+  </section>
+</v-ons-page>`,
+```
+
+![](/images/2017/Feb/monaca-firebase-storage-1.png)
+
+#### イベント処理
+
+イベントはファイルを選択した時とアップロード処理の2つがあります。
+
+##### ファイルを選択した時の処理
+
+ファイルを選択した時には 変数 photo にデータを入れておきます。
+
+```
+fileChange: function(e) {
+  this.photo = e.target.files[0];
+},
+```
+
+##### 画像アップロード処理
+
+ここでFirebaseを使います。最初にストレージオブジェクトを作り、ファイルのパスを指定します。このパスは自由ですが、今回は元々のファイル名を使います。そして `mountainsRef.put(this.photo)` でアップロード処理が開始します。この時、ステータスを監視するタスクが返ってきます。このタスクのイベント state_changed を使うことでファイルアップロードの進捗やエラー、そして完了時のURLが取得できるようになります。
+
+```
+// 画像アップロード処理
+upload: function() {
+  var me = this;
+  // ストレージオブジェクト作成
+  var storageRef = firebase.storage().ref();
+  // ファイルのパスを設定
+  var mountainsRef = storageRef.child(`images/${this.photo.name}`);
+  // ファイルを適用してファイルアップロード開始
+  var uploadTask = mountainsRef.put(this.photo);
+  // ステータスを監視
+  uploadTask.on('state_changed', function(snapshot){
+  }, function(err) {
+    console.log(err);
+  }, function() {
+    // アップロード完了したら画像のURLを取得
+    me.photo_url = uploadTask.snapshot.downloadURL;
+  })
+}
+```
+
+アップロードが完了するとURLが取得できますので、それを表示します。
+
+![](/images/2017/Feb/monaca-firebase-storage-2.png)
+
+----
+
+Firebaseを使えばサーバを用意せずにファイルアップロード機能が使えるようになります。ぜひ試してみてください。
+
+今回のコードは[moongift/monaca_firebase_storage](https://github.com/moongift/monaca_firebase_storage)にアップロードしてあります。実装時の参考にしてください。
+
+[Firebase](https://firebase.google.com/)
