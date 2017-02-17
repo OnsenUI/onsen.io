@@ -325,7 +325,7 @@ ons.ready(function() {
 	    </section>
 	  </v-ons-page>`,
 	  // イベント処理
-	  methods: {
+    methods: {
 	  	// 登録処理
 	  	register: function() {
 	  		firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
@@ -366,5 +366,7 @@ ons.ready(function() {
 ----
 
 Firebase Authenticationを使うとサーバ側の用意をせず、簡単にアプリへ認証機能を実現できます。Firebaseには他にもたくさんの機能が用意されていますので試してみてください。
+
+今回のコードは[moongift/monaca_firebase_auth](https://github.com/moongift/monaca_firebase_auth)にアップロードしてあります。実装時の参考にしてください。
 
 [Firebase](https://firebase.google.com/)
