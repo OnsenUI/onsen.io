@@ -1,0 +1,370 @@
+---
+author: atsushi
+date: 2017-02-17
+id: monaca-firebase-auth
+title: "MonacaアプリでFirebase Authenticationを試す"
+tags: onsen ui, vue, firebase
+product: monaca
+category: 技術情報
+---
+
+この記事では以下の技術を組み合わせています。
+
+- Monaca
+- Onsen UI
+- Vue2
+- Firebase
+
+FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。さらに最近リリースしたOnsen UIのVue2実装を使っています。
+
+![](/images/2017/Feb/monaca-firebase-auth-14.png)
+
+## Firebaseの始め方
+
+FirebaseはGoogleアカウントがあればすぐにはじめられます。まずプロジェクトを作ります。
+
+![](/images/2017/Feb/monaca-firebase-auth-13.png)
+
+できあがったら、Webアプリケーション向けの実装を選択します。
+
+![](/images/2017/Feb/monaca-firebase-auth-12.png)
+
+JavaScriptのコードが生成されるので、これをコピーします。
+
+![](/images/2017/Feb/monaca-firebase-auth-5.png)
+
+また、認証機能を使うのでAuthenticationの中のEmail/Passwordを有効にします。
+
+![](/images/2017/Feb/monaca-firebase-auth-7.png)
+
+## Monacaアプリの準備
+
+今回はOnsen UIを使っています。Onsen UI V2 JS Minimumをベースとしています。これはOnsen UIの最低限の実装だけがされているテンプレートです。
+
+アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
+
+```
+<script src="js/app.js"></script>
+```
+
+さらに先ほど生成したFirebaseのコードの内、Firebase.jsを読み込むタグを追加します。
+
+```
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+```
+
+次にJS/CSSコンポーネントの追加と削除を選択して、vueをインストールします。最新版を選択しますが、今回は2.1.10となっています。読み込むファイルは components/vue/dist/vue.min.js になります。
+
+## Onsen UI for Vueの準備
+
+VueとOnsen UIの準備が終わったので、Onsen UI for Vueをセットアップします。これはJavaScriptを追加するだけです。
+
+```
+<script src="https://unpkg.com/vue-onsenui"></script>
+```
+
+最後に body タグ内を次のように書き換えます。
+
+```
+<div id="app"></div>
+```
+
+全体のHTMLファイルは次の通りです。
+
+```
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+  <script src="https://unpkg.com/vue-onsenui"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+</body>
+</html>
+```
+
+## js/app.jsの修正
+
+ではJavaScriptの実装に入ります。まずコメントで紹介します。
+
+```
+ons.ready(function() {
+  // Firebaseの初期化
+  
+  // Vueの処理 
+	  // 初期データの設定
+    
+	  // デプロイ完了時のイベント
+    
+	  // テンプレート
+    
+	  // イベント処理
+	  	// 登録処理
+	  	// ログイン処理
+	  	// ログアウト処理
+});
+```
+
+### Firebaseの初期化
+
+Firebaseの初期化は先ほどコピーしたコードをそのまま使います。APIキーなどはコピーしたものをそのまま使ってください。
+
+```
+var config = {
+  apiKey: "API_KEY",
+  authDomain: "AUTH_DOMAIN",
+  databaseURL: "DATABASE_URL",
+  storageBucket: "STORAGE_BUCKET",
+  messagingSenderId: "MESSAGING_SENDER_ID"
+};
+firebase.initializeApp(config);
+```
+
+### Vueの処理
+
+Vueの基本形は次のようになります。
+
+```
+// Vueの処理
+var vm = new Vue({
+  el: '#app',  // マウントするDOM
+  // 初期データの設定
+  data: {},
+    
+  // デプロイ完了時のイベント
+  created: function() {},
+    
+  // テンプレート
+  template: ``,
+  // イベント処理
+  methods: {
+    // 登録処理
+    // ログイン処理
+    // ログアウト処理
+  }
+});
+```
+
+#### 初期データの設定
+
+初期データは dataキーの中にオブジェクトで定義します。最初はログインしていませんので、isLoggedInをfalseとしています。
+
+```
+// 初期データの設定
+data: {
+  user: {
+    isLoggedIn: false,
+    mailAddress: "",
+    password: ""
+  }
+},
+```
+
+#### デプロイ完了時のイベント
+
+VueによるDOMの生成が完了するとcreatedが呼ばれます。ここではFirebaseの認証状態の変化を通知してくれるイベントを定義します。
+
+```
+// デプロイ完了時のイベント
+created: function() {
+  // ユーザのステータスが変わったら通知
+  var me = this;
+  firebase.auth().onAuthStateChanged(function(user) {
+    me.user.isLoggedIn = (user !== null);
+  });
+},
+```
+
+ログイン状態によって isLoggedIn を変化させます。
+
+#### テンプレート
+
+テンプレートは次のようになります。VueのタグとOnsen UI for Vueのタグが定義されます。
+
+```
+// テンプレート
+template: `
+<v-ons-page>
+  <v-ons-toolbar>
+    <div class="center"> Firebase認証 </div>
+  </v-ons-toolbar>
+  <section style="margin: 10px;" v-if="user.isLoggedIn">
+    <p>{{ user.mailAddress }}</p>
+    <section style="margin: 10px;">
+      <ons-button @click="logout">ログアウト</ons-button>
+    </section>
+  </section>
+  <section v-else style="margin: 10px;">
+    <p>メールアドレス</p>
+    <p>
+      <v-ons-input modifier="underbar" v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+    </p>
+    <p>パスワード</p>
+    <p>
+      <v-ons-input modifier="underbar" v-ons-model="user.password" placeholder="password" type="password"></v-ons-input>
+    </p>
+    <ons-button @click="register">新規登録</ons-button>
+    <ons-button @click="login">ログイン</ons-button>
+  </section>
+</v-ons-page>`,
+```
+
+#### イベント処理
+
+イベントはテンプレートにおいて @click で定義されている箇所になります。
+
+##### 登録処理
+
+ユーザ登録は入力されたメールアドレスとパスワードをFirebaseに送信します。ログインすると firebase.auth().onAuthStateChanged が呼ばれますので特に何か処理する必要はありません。
+
+```
+// 登録処理
+register: function() {
+  firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
+    .catch(function(error) {
+      alert(error.message);
+    });
+},
+```
+
+##### ログイン処理
+
+ログイン処理もユーザ登録処理とほぼ同じです。
+
+```
+// ログイン処理
+login: function() {
+  firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
+    .catch(function(error) {
+      alert(error.message);
+    });
+},
+```
+
+##### ログアウト処理
+
+ログアウト処理も実行すると自動的に通知が飛びます。
+
+```
+// ログアウト処理
+logout: function() {
+  firebase.auth().signOut();
+}
+```
+
+## JavaScriptの実装内容
+
+全体の実装は次のようになります。
+
+```
+ons.ready(function() {
+  // Firebaseの初期化
+  var config = {
+    apiKey: "API_KEY",
+    authDomain: "AUTH_DOMAIN",
+    databaseURL: "DATABASE_URL",
+    storageBucket: "STORAGE_BUCKET",
+    messagingSenderId: "MESSAGING_SENDER_ID"
+  };
+  firebase.initializeApp(config);
+  
+  // Vueの処理 
+	var vm = new Vue({
+	  el: '#app',
+	  // 初期データの設定
+	  data: {
+	  	user: {
+	  		isLoggedIn: false,
+	  		mailAddress: "test@moongift.jp",
+	  		password: "testtest"
+	  	}
+	  },
+	  // デプロイ完了時のイベント
+	  created: function() {
+	  	// ユーザのステータスが変わったら通知
+	  	var me = this;
+	  	firebase.auth().onAuthStateChanged(function(user) {
+	  		me.user.isLoggedIn = (user !== null);
+	  	});
+	  },
+	  // テンプレート
+	  template: `
+	  <v-ons-page>
+	    <v-ons-toolbar>
+	      <div class="center"> Firebase認証 </div>
+	    </v-ons-toolbar>
+	    <section style="margin: 10px;" v-if="user.isLoggedIn">
+	    	<p>{{ user.mailAddress }}</p>
+		    <section style="margin: 10px;">
+		      <ons-button @click="logout">ログアウト</ons-button>
+		    </section>
+	    </section>
+			<section v-else style="margin: 10px;">
+	      <p>メールアドレス</p>
+	      <p>
+	        <v-ons-input modifier="underbar" v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+	      </p>
+	      <p>パスワード</p>
+	      <p>
+	        <v-ons-input modifier="underbar" v-ons-model="user.password" placeholder="password" type="password"></v-ons-input>
+	      </p>
+	      <ons-button @click="register">新規登録</ons-button>
+	      <ons-button @click="login">ログイン</ons-button>
+	    </section>
+	  </v-ons-page>`,
+	  // イベント処理
+	  methods: {
+	  	// 登録処理
+	  	register: function() {
+	  		firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
+	  			.catch(function(error) {
+        		alert(error.message);
+	      	});
+	  	},
+	  	// ログイン処理
+	  	login: function() {
+	  		firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
+	  			.catch(function(error) {
+	  				alert(error.message);
+	      	});
+	  	},
+	  	// ログアウト処理
+	  	logout: function() {
+	  		firebase.auth().signOut();
+	  	}
+	  }
+	});
+});
+```
+
+## アプリの動作
+
+では実際に動かしてみます。
+
+![](/images/2017/Feb/monaca-firebase-auth-3.png)
+
+まずユーザ登録処理を行うと、Firebase consoleのユーザタブにてユーザ登録されるのが確認できます。
+
+![](/images/2017/Feb/monaca-firebase-auth-1.png)
+
+ログインするとユーザ名が表示され、ログアウトボタンも出ます。ログアウトすれば最初の表示に戻ります。
+
+![](/images/2017/Feb/monaca-firebase-auth-2.png)
+
+----
+
+Firebase Authenticationを使うとサーバ側の用意をせず、簡単にアプリへ認証機能を実現できます。Firebaseには他にもたくさんの機能が用意されていますので試してみてください。
+
+[Firebase](https://firebase.google.com/)
