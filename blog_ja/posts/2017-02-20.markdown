@@ -3,7 +3,7 @@ author: atsushi
 date: 2017-02-20
 id: monaca-with-firebase-anonymouse-auth
 title: "MonacaでFirebaseの匿名認証を試す"
-tags: onsen ui, vue, firebase
+tags: vue, firebase
 product: monaca
 category: 技術情報
 ---
@@ -14,20 +14,21 @@ FirebaseはGoogleの提供するモバイル関連サービスのプラットフ
 
 ![](/images/2017/Feb/monaca-firebase-anonymouse-auth.gif)
 
-今回もOnsen UIとVueを組み合わせて作っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
+今回もVueを使っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
 
-## HTML側の実装
+## JavaScriptの実装
 
-HTML側ではまず匿名ユーザになるためのボタンを設置します。
+Vueのテンプレートで、まず匿名ユーザになるためのボタンを設置します。
 
 ```
-<ons-button @click="anonymouse">匿名ユーザ</ons-button>
+<button @click="anonymouse">匿名ユーザ</button>
 ```
 
 匿名ユーザでログインした場合、メールアドレスがありません。そのためログインユーザの表示を変更します。匿名ユーザであることを表す user.isAnonymous （コードは後述）がtrueであれば匿名ユーザと表示します。
 
 ```
-<p>{{ user.isAnonymous ? "匿名ユーザ" : user.mailAddress}}</p>
+<p v-if="user.isAnonymous">匿名ユーザ</p>
+<p v-else>{{user.mailAddress}}</p>
 ```
 
 最後に匿名ユーザの場合はメールアドレスとパスワードを入力して一般ユーザになるためのフォームを用意します。
@@ -37,23 +38,19 @@ HTML側ではまず匿名ユーザになるためのボタンを設置します�
   <div class="center">ユーザ化する</div>
   <p>メールアドレス</p>
   <p>
-    <v-ons-input v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+    <input v-model="user.mailAddress" placeholder="メールアドレス" />
   </p>
   <p>パスワード</p>
   <p>
-    <v-ons-input v-ons-model="user.password" placeholder="パスワード" type="password"></v-ons-input>
+    <input v-model="user.password" placeholder="パスワード" type="password" />
   </p>
   <section style="margin: 10px;">
-    <ons-button @click="anony_register">ユーザ登録</ons-button>
+    <button @click="anony_register">ユーザ登録</button>
   </section>
 </section>
 ```
 
-これで完了です。
-
-## JavaScriptの実装
-
-まずデータの初期化についてです。匿名ユーザであることを表す isAnonymous を追加します。
+次にデータの初期化についてです。匿名ユーザであることを表す isAnonymous を追加します。
 
 ```
 var vm = new Vue({
@@ -74,14 +71,16 @@ isAnonymousはユーザのステータスが変わった際にチェックする
 ```
 // デプロイ完了時のイベント
 created: function() {
-  // ユーザのステータスが変わったら通知
-  var me = this;
-  firebase.auth().onAuthStateChanged(function(user) {
-    // 匿名ユーザチェック
-    if (user)
-      me.user.isAnonymous = user.isAnonymous;
-    me.user.isLoggedIn = (user !== null);
-  });
+	// ユーザのステータスが変わったら通知
+	var me = this;
+	firebase.auth().onAuthStateChanged(function(user) {
+		// 匿名ユーザチェック
+		if (user) {
+			me.user.isAnonymous = user.isAnonymous;
+			me.user.mailAddress = user.email;
+		}
+		me.user.isLoggedIn = (user !== null);
+	});
 },
 ```
 
