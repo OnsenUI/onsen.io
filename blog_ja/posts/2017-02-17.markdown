@@ -3,7 +3,7 @@ author: atsushi
 date: 2017-02-17
 id: monaca-firebase-auth
 title: "MonacaアプリでFirebase Authenticationを試す"
-tags: onsen ui, vue, firebase
+tags: vue, firebase
 product: monaca
 category: 技術情報
 ---
@@ -11,11 +11,10 @@ category: 技術情報
 この記事では以下の技術を組み合わせています。
 
 - Monaca
-- Onsen UI
 - Vue2
 - Firebase
 
-FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。さらに最近リリースしたOnsen UIのVue2実装を使っています。
+FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。
 
 ![](/images/2017/Feb/monaca-firebase-auth-14.png)
 
@@ -39,9 +38,7 @@ JavaScriptのコードが生成されるので、これをコピーします。
 
 ## Monacaアプリの準備
 
-今回はOnsen UIを使っています。Onsen UI V2 JS Minimumをベースとしています。これはOnsen UIの最低限の実装だけがされているテンプレートです。
-
-アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
+今回はOnsen UIを使っています。最小限のテンプレートをベースとしています。アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
 
 ```
 <script src="js/app.js"></script>
@@ -55,44 +52,12 @@ JavaScriptのコードが生成されるので、これをコピーします。
 
 次にJS/CSSコンポーネントの追加と削除を選択して、vueをインストールします。最新版を選択しますが、今回は2.1.10となっています。読み込むファイルは components/vue/dist/vue.min.js になります。
 
-## Onsen UI for Vueの準備
+## HTMLの作成
 
-VueとOnsen UIの準備が終わったので、Onsen UI for Vueをセットアップします。これはJavaScriptを追加するだけです。
-
-```
-<script src="https://unpkg.com/vue-onsenui"></script>
-```
-
-最後に body タグ内を次のように書き換えます。
+body タグ内を次のように書き換えます。
 
 ```
 <div id="app"></div>
-```
-
-全体のHTMLファイルは次の通りです。
-
-```
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <script src="components/loader.js"></script>
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
-
-  <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-  <script src="https://unpkg.com/vue-onsenui"></script>
-  <script src="js/app.js"></script>
-</head>
-<body>
-	<div id="app"></div>
-</body>
-</html>
 ```
 
 ## js/app.jsの修正
@@ -100,7 +65,7 @@ VueとOnsen UIの準備が終わったので、Onsen UI for Vueをセットア�
 ではJavaScriptの実装に入ります。まずコメントで紹介します。
 
 ```
-ons.ready(function() {
+var onDeviceReady = function() {
   // Firebaseの初期化
   
   // Vueの処理 
@@ -114,7 +79,9 @@ ons.ready(function() {
 	  	// 登録処理
 	  	// ログイン処理
 	  	// ログアウト処理
-});
+};
+
+document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
 
 ### Firebaseの初期化
@@ -203,20 +170,20 @@ template: `
   <section style="margin: 10px;" v-if="user.isLoggedIn">
     <p>{{ user.mailAddress }}</p>
     <section style="margin: 10px;">
-      <ons-button @click="logout">ログアウト</ons-button>
+      <button @click="logout">ログアウト</button>
     </section>
   </section>
   <section v-else style="margin: 10px;">
     <p>メールアドレス</p>
     <p>
-      <v-ons-input v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+      <input v-model="user.mailAddress" placeholder="メールアドレス" />
     </p>
     <p>パスワード</p>
     <p>
-      <v-ons-input v-ons-model="user.password" placeholder="パスワード" type="password"></v-ons-input>
+      <input v-model="user.password" placeholder="パスワード" type="password" />
     </p>
-    <ons-button @click="register">新規登録</ons-button>
-    <ons-button @click="login">ログイン</ons-button>
+    <button @click="register">新規登録</button>
+    <button @click="login">ログイン</button>
   </section>
 </v-ons-page>`,
 ```
@@ -269,7 +236,7 @@ logout: function() {
 全体の実装は次のようになります。
 
 ```
-ons.ready(function() {
+var onDeviceReady = function() {
   // Firebaseの初期化
   var config = {
     apiKey: "API_KEY",
@@ -282,18 +249,17 @@ ons.ready(function() {
   
   // Vueの処理 
 	var vm = new Vue({
-	  el: '#app',
+	  el: '#app',  // マウントするDOM
 	  // 初期データの設定
 	  data: {
 	  	user: {
 	  		isLoggedIn: false,
-	  		mailAddress: "test@moongift.jp",
-	  		password: "testtest"
+	  		mailAddress: "",
+	  		password: ""
 	  	}
 	  },
 	  // デプロイ完了時のイベント
 	  created: function() {
-	  	// ユーザのステータスが変わったら通知
 	  	var me = this;
 	  	firebase.auth().onAuthStateChanged(function(user) {
 	  		me.user.isLoggedIn = (user !== null);
@@ -308,20 +274,20 @@ ons.ready(function() {
 	    <section style="margin: 10px;" v-if="user.isLoggedIn">
 	    	<p>{{ user.mailAddress }}</p>
 		    <section style="margin: 10px;">
-		      <ons-button @click="logout">ログアウト</ons-button>
+		      <button @click="logout">ログアウト</button>
 		    </section>
 	    </section>
 			<section v-else style="margin: 10px;">
 	      <p>メールアドレス</p>
 	      <p>
-	        <v-ons-input v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+	        <input v-model="user.mailAddress" placeholder="メールアドレス" />
 	      </p>
 	      <p>パスワード</p>
 	      <p>
-	        <v-ons-input v-ons-model="user.password" placeholder="パスワード" type="password"></v-ons-input>
+	        <input v-model="user.password" placeholder="パスワード" type="password" />
 	      </p>
-	      <ons-button @click="register">新規登録</ons-button>
-	      <ons-button @click="login">ログイン</ons-button>
+	      <button @click="register">新規登録</button>
+	      <button @click="login">ログイン</button>
 	    </section>
 	  </v-ons-page>`,
 	  // イベント処理
@@ -346,7 +312,9 @@ ons.ready(function() {
 	  	}
 	  }
 	});
-});
+};
+
+document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
 
 ## アプリの動作
@@ -360,8 +328,6 @@ ons.ready(function() {
 ![](/images/2017/Feb/monaca-firebase-auth-1.png)
 
 ログインするとユーザ名が表示され、ログアウトボタンも出ます。ログアウトすれば最初の表示に戻ります。
-
-![](/images/2017/Feb/monaca-firebase-auth-2.png)
 
 ----
 
