@@ -1,0 +1,138 @@
+---
+author: atsushi
+date: 2017-02-20
+id: monaca-with-firebase-anonymouse-auth
+title: "MonacaでFirebaseの匿名認証を試す"
+tags: onsen ui, vue, firebase
+product: monaca
+category: 技術情報
+---
+
+FirebaseはGoogleの提供するモバイル関連サービスのプラットフォームです。前回は認証について紹介しましたが、今回はそれをベースに匿名認証を使ってみたいと思います。これはIDやパスワードの設定が必要ない、簡易的な認証です。
+
+先に完成品を紹介します。匿名ユーザとしてログインした後、新しいメールアドレスとパスワードを指定して通常ユーザに変更しています。
+
+![](/images/2017/Feb/monaca-firebase-anonymouse-auth.gif)
+
+今回もOnsen UIとVueを組み合わせて作っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
+
+## HTML側の実装
+
+HTML側ではまず匿名ユーザになるためのボタンを設置します。
+
+```
+<ons-button @click="anonymouse">匿名ユーザ</ons-button>
+```
+
+匿名ユーザでログインした場合、メールアドレスがありません。そのためログインユーザの表示を変更します。匿名ユーザであることを表す user.isAnonymous （コードは後述）がtrueであれば匿名ユーザと表示します。
+
+```
+<p>{{ user.isAnonymous ? "匿名ユーザ" : user.mailAddress}}</p>
+```
+
+最後に匿名ユーザの場合はメールアドレスとパスワードを入力して一般ユーザになるためのフォームを用意します。
+
+```
+<section style="margin: 10px;" v-if="user.isAnonymous">
+  <div class="center">ユーザ化する</div>
+  <p>メールアドレス</p>
+  <p>
+    <v-ons-input v-ons-model="user.mailAddress" placeholder="メールアドレス"></v-ons-input>
+  </p>
+  <p>パスワード</p>
+  <p>
+    <v-ons-input v-ons-model="user.password" placeholder="パスワード" type="password"></v-ons-input>
+  </p>
+  <section style="margin: 10px;">
+    <ons-button @click="anony_register">ユーザ登録</ons-button>
+  </section>
+</section>
+```
+
+これで完了です。
+
+## JavaScriptの実装
+
+まずデータの初期化についてです。匿名ユーザであることを表す isAnonymous を追加します。
+
+```
+var vm = new Vue({
+  el: '#app',
+  // 初期データの設定
+  data: {
+    user: {
+      isLoggedIn: false,
+      mailAddress: "",
+      password: "",
+      isAnonymous: false // 追加
+    }
+  },
+```
+
+isAnonymousはユーザのステータスが変わった際にチェックするようにします。Firebaseから返ってくるuserオブジェクトのisAnonymousで調べられますので、そのままVueのデータとして適用します。ログアウト時は変数userがnullになりますので注意してください。
+
+```
+// デプロイ完了時のイベント
+created: function() {
+  // ユーザのステータスが変わったら通知
+  var me = this;
+  firebase.auth().onAuthStateChanged(function(user) {
+    // 匿名ユーザチェック
+    if (user)
+      me.user.isAnonymous = user.isAnonymous;
+    me.user.isLoggedIn = (user !== null);
+  });
+},
+```
+
+### 匿名認証を行う
+
+匿名認証を行うにはFirebaseに用意されている `firebase.auth().signInAnonymously()` を実行するだけです。
+
+```
+// 匿名認証を行う
+anonymouse: function() {
+  firebase.auth().signInAnonymously()
+    .catch(function(error) {
+      alert(error.message);
+    });
+},
+```
+
+認証が完了すると認証ステータスが変化して、上記 `firebase.auth().onAuthStateChanged` が実行されます。
+
+ここまでで匿名認証が完了です。
+
+### 一般ユーザ化する
+
+次に匿名ユーザを一般ユーザ化します。これはまずメールアドレスとパスワードを使って認証情報を作成します。その後、現在のログイン情報（匿名ユーザ）に対して認証情報をリンクさせるという方法になります。
+
+```
+// 匿名ユーザを一般ユーザ化する
+anony_register: function() {
+  var me = this;
+  // 認証情報作成（新規ユーザ）
+  var credential = firebase.auth.EmailAuthProvider.credential(this.user.mailAddress, this.user.password);
+  // リンクさせる
+  firebase.auth().currentUser.link(credential)
+    .then(function(user) {
+      // ステータス通知が行われないので注意
+      me.user.isAnonymous = false;
+      me.user.isLoggedIn = true;
+    }, function(error) {
+      console.log("エラー", error);
+    });
+}
+```
+
+この時の注意点として、ステータス通知が行われないという問題があります。そのため、ユーザ名を変更するなどといった場合には注意してください。
+
+----
+
+今回のコードは[moongift/monaca_firebase_anonymouse_auth](https://github.com/moongift/monaca_firebase_anonymouse_auth)にアップロードしてあります。実装時の参考にしてください。
+
+なお、macOSのSafariでは匿名ユーザの情報がうまく消せないのか `firebase.auth().onAuthStateChanged` が何度もコールされてしまうという不具合がありました（執筆時点のバージョン3.6.9において）。iOSのSafariやmacOSのGoogle Chromeでは問題ありませんでしたが、開発時にはご注意ください。
+
+匿名ユーザは利用者のイベントがなくとも使えますので、ユーザ登録の仕組みはなくともデータをセキュアに保ったり、不特定多数にデータを使われたりするのを防止する効果はあるでしょう。ぜひご利用ください。
+
+[Firebase](https://firebase.google.com/)
