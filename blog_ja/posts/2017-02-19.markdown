@@ -3,7 +3,7 @@ author: atsushi
 date: 2017-02-17
 id: monaca-firebase-storage
 title: "MonacaアプリでFirebase Storageを試す"
-tags: onsen ui, vue, firebase
+tags: vue, firebase
 product: monaca
 category: 技術情報
 ---
@@ -11,11 +11,10 @@ category: 技術情報
 この記事では以下の技術を組み合わせています。
 
 - Monaca
-- Onsen UI
 - Vue2
 - Firebase
 
-FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。さらに最近リリースしたOnsen UIのVue2実装を使っています。
+FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回はファイルストレージを使ってみたいと思います。
 
 ![](/images/2017/Feb/monaca-firebase-auth-14.png)
 
@@ -53,9 +52,7 @@ service firebase.storage {
 
 ## Monacaアプリの準備
 
-今回はOnsen UIを使っています。Onsen UI V2 JS Minimumをベースとしています。これはOnsen UIの最低限の実装だけがされているテンプレートです。
-
-アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
+今回はOnsen UIを使っています。最小限のテンプレートをベースとしています。アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
 
 ```
 <script src="js/app.js"></script>
@@ -69,44 +66,12 @@ service firebase.storage {
 
 次にJS/CSSコンポーネントの追加と削除を選択して、vueをインストールします。最新版を選択しますが、今回は2.1.10となっています。読み込むファイルは components/vue/dist/vue.min.js になります。
 
-## Onsen UI for Vueの準備
+## HTMLの準備
 
-VueとOnsen UIの準備が終わったので、Onsen UI for Vueをセットアップします。これはJavaScriptを追加するだけです。
-
-```
-<script src="https://unpkg.com/vue-onsenui"></script>
-```
-
-最後に body タグ内を次のように書き換えます。
+body タグ内を次のように書き換えます。
 
 ```
 <div id="app"></div>
-```
-
-全体のHTMLファイルは次の通りです。
-
-```
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <script src="components/loader.js"></script>
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
-
-  <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
-  <script src="https://unpkg.com/vue-onsenui"></script>
-  <script src="js/app.js"></script>
-</head>
-<body>
-	<div id="app"></div>
-</body>
-</html>
 ```
 
 ## js/app.jsの修正
@@ -114,7 +79,7 @@ VueとOnsen UIの準備が終わったので、Onsen UI for Vueをセットア�
 ではJavaScriptの実装に入ります。まずコメントで紹介します。
 
 ```
-ons.ready(function() {
+var onDeviceReady = function() {
   // Firebaseの初期化
   
   // Vueの処理 
@@ -126,7 +91,8 @@ ons.ready(function() {
 	  	// ファイルを指定した時の処理
 
 	  	// 画像アップロード処理
-});
+};
+document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
 
 ### Firebaseの初期化
@@ -183,20 +149,18 @@ data: {
 ```
 // テンプレート
 template: `
-<v-ons-page>
-  <v-ons-toolbar>
-    <div class="center"> Firebaseストレージ </div>
-  </v-ons-toolbar>
-  <section style="margin: 10px;">
-    <ons-input type="file" name="photo" @change="fileChange" accept="image/*" />
-    <ons-button @click="upload">アップロード</ons-button>
-    <div v-if="photo_url">
-      <div class="center">
-        <img :src="photo_url" width="80%" />
-      </div>
-    </div>
-  </section>
-</v-ons-page>`,
+	  <div>
+      <div class="center"> Firebaseストレージ </div>
+	    <section style="margin: 10px;">
+	    	<input type="file" name="photo" @change="fileChange" accept="image/*" />
+	    	<button @click="upload">アップロード</button>
+	    	<div v-if="photo_url">
+	    		<div class="center">
+		    		<img :src="photo_url" width="80%" />
+		    	</div>
+	    	</div>
+	    </section>
+	  </div>`,
 ```
 
 ![](/images/2017/Feb/monaca-firebase-storage-1.png)
