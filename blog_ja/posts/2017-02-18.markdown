@@ -22,18 +22,15 @@ HTML側ではリストを表示するようにします。また、ボタンを�
 
 ```
 <section style="margin: 10px;">
-  <!-- データ追加ボタンを追加 -->
-	<ons-button @click="add">データ追加</ons-button>
-	<ons-button @click="logout">ログアウト</ons-button>
+	<button @click="add">データ追加</button>
+	<button @click="logout">ログアウト</button>
 </section>
 <!-- データを表示するリストを追加 -->
 <section style="margin: 10px;">
-	<ons-list>
-		<ons-list-header>リスト</ons-list-header>
-		<ons-list-item v-for="item in times">
-			<div class="center">{{ item.time }}</div>
-		</ons-list-item>
-	</ons-list>
+	<div>リスト</div>
+	<ul v-for="item in times">
+		<li>{{ item.time }}</li>
+	</ul>
 </section>
 ```
 
