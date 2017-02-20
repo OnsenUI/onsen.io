@@ -10,7 +10,7 @@
           Onsen UIを使って、美しく、パフォーマンスに優れたハイブリッドアプリを開発しましょう。Monacaのツールと組み合わせることで、アプリの開発からビルドまで簡単に行うことができます。
         <% end %>
       </p>
-      <a href="/getting-started/"><%-@translate("[en]Show detail &gt;[/en][ja]詳細を見る &gt;[/ja]")%></a>
+      <a href="/v2/guide/"><%-@translate("[en]Show detail &gt;[/en][ja]詳細を見る &gt;[/ja]")%></a>
     </div>
     <div class="footer-container-info-item">
       <img src="/images/common/icn_docu.svg">
@@ -81,23 +81,6 @@
         </div>
         <div class="footer-container-navigation-column">
           <div class="footer-container-navigation-header">
-            <%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%>
-          </div>
-          <a href="/getting-started/#cli" class="footer-container-navigation-link">
-            <%=@translate("[en]Develop with Monaca CLI[/en][ja]Monaca CLIで開発する[/ja]")%>
-          </a>
-          <a href="/getting-started/#cloud" class="footer-container-navigation-link">
-            <%=@translate("[en]Use Monaca Cloud IDE[/en][ja]MonacaクラウドIDEを使う[/ja]")%>
-          </a>
-          <a href="/getting-started/#npm" class="footer-container-navigation-link">
-            <%=@translate("[en]Install via NPM or Bower[/en][ja]NPMやBowerでインストール[/ja]")%>
-          </a>
-          <a href="/getting-started/#download" class="footer-container-navigation-link">
-            <%=@translate("[en]Download Everything[/en][ja]ダウンロード[/ja]")%>
-          </a>
-        </div>
-        <div class="footer-container-navigation-column">
-          <div class="footer-container-navigation-header">
             <%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%>
           </div>
           <a href="/docs/guide/js/" class="footer-container-navigation-link">
@@ -114,9 +97,6 @@
           <div class="footer-container-navigation-header">
             <%=@translate("[en]More[/en][ja]他にも...[/ja]")%>
           </div>
-          <a href="/samples" class="footer-container-navigation-link">
-            <%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%>
-          </a>
           <% if @lang == "en": %>
             <a href="/community" class="footer-container-navigation-link">
               Community
