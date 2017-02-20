@@ -44,7 +44,7 @@
               </a>
             </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'onsen1' %>">
-              <a href="/v1/<%- if @reference then 'reference/javascript.html' else 'guide.html' %>">
+              <a href="/v1/<%- if @reference then 'reference/javascript.html' else 'guide/' %>">
                 <img src="/images/common/icn_something_4c.svg">
                 Onsen UI v1
               </a>
@@ -82,7 +82,7 @@
       <ul class="docs-nav-menu">
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if !@reference %>">
           <% if @framework == 'onsen1' or typeof @framework != 'string': %>
-            <a href="/v1/guide.html"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
+            <a href="/v1/guide/"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% else: %>
             <a href="/v2/guide/<%- @framework %>"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% end %>
