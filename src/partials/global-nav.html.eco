@@ -34,7 +34,27 @@
             </li>
           </ul>
         </div>
+      </li>
+      <li class="global-nav-menu-item">
+        <a href="#">API</a>
+      </li>
+      <li class="global-nav-menu-item dropdown">
+        <a href="#"><%=@translate("[en]Ecosystem[/en][ja]エコシステム[/ja]")%></a>
 
+        <div class="dropdown-container">
+          <ul class="dropdown-content">
+            <li class="dropdown-item">
+              <a href="/blog"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
+            </li>
+            <li class="dropdown-item">
+              <% if @lang == "en": %>
+                <a href="/community">Community</a>
+              <% else if @lang == "ja": %>
+                <a href="https://teratail.com/tags/Onsen+UI">コミュニティ</a>
+              <% end %>
+            </li>
+          </ul>
+        </div>
       </li>
     </ul>
 
