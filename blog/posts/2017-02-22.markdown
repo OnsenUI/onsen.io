@@ -1,18 +1,18 @@
 ---
 author: junio
 date: 2017-02-22
-id: cordova-plugins-in-angular2
-title: "Cordova plugins in Angular2"
+id: cordova-plugins-in-angular
+title: "Cordova plugins in Angular"
 product: onsen
 category: development
 tags: angular2, onsen ui, monaca
 ---
 
-![Title](/blog/content/images/2017/Feb/angular2-onsenui-monaca.jpeg)
+![Title](/blog/content/images/2017/Feb/angular2-cordova.jpeg)
 
-Hey you Angular2 developers. Even though Monaca is still to support Angular2 development in its Cloud IDE, there are some good news. Just about a month ago Cordova added type definitions (from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped "DefinitelyTyped GitHub repo")) to their core plugin repositories. So although that's not released yet, you can already add those plugins to your Angular2 app.
+Hey you Angular developers. Even though Monaca is still to support Angular development in its Cloud IDE, there are some good news. Just about a month ago Cordova added type definitions (from [DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped "DefinitelyTyped GitHub repo")) to their core plugin repositories. So although that's not released yet, you can already add those plugins to your Angular app.
 
-This post shows you how to do that by means of a very simple example app. It assumes you've been using Monaca either through the *command line (CLI)* or the *LocalKit*.
+This post shows you how to do that by means of a very simple example app. It assumes you've been using Monaca either through the *command line (CLI)* or the *Localkit*.
 
 <!-- more -->
 
@@ -20,15 +20,15 @@ This post shows you how to do that by means of a very simple example app. It ass
 
 The Monaca *CLI* allows you to add plugins to your app via the handy `monaca plugin add [plugin]` command, where *plugin* is either the name of the plugin (e.g. "org.apache.cordova.camera"), its id (e.g. "cordova-plugin-camera") or the URL of its GitHub repository (e.g. "https://<span></span>github.com/apache/cordova-plugin-camera.git". Since we want to get code that is merged but not released yet, the trick here is to make use of the last option.
 
-So just navigate in your browser to the GitHub repo of the Cordova plugin you want to add and copy the URL. Before you leave notice the recently added `types` folder, which is what will allow the plugin to work with Angular2's *TypeScript*.
+So just navigate in your browser to the GitHub repo of the Cordova plugin you want to add and copy the URL. Before you leave notice the recently added `types` folder, which is what will allow the plugin to work with Angular's *TypeScript*.
 
 In order to do so just use the above line `monaca plugin add ` + the link you just copied, on your main directory. This should be all you need. Skip the next section to see an example with Cordova's `globalization` plugin.
 
-### LocalKit
+### Localkit
 
-If you are using Monaca's *LocalKit* the process is a bit trickier and requires the help of the Monaca Cloud. You need first to upload your project there, even if you can't edit or see your code.
+If you are using Monaca's *Localkit* the process is a bit trickier and requires the help of the Monaca Cloud. You need first to upload your project there, even if you can't edit or see your code.
 
-Next go on the browser to the GitHub repository of the plugin you want to add, click "Clone or download" and then "Download ZIP". Save it in a location of your choice. Before you leave notice the recently added `types` folder, which is what will allow the plugin to work with Angular2's *TypeScript*.
+Next go on the browser to the GitHub repository of the plugin you want to add, click "Clone or download" and then "Download ZIP". Save it in a location of your choice. Before you leave notice the recently added `types` folder, which is what will allow the plugin to work with Angular's *TypeScript*.
 
 Now open your project on the Monaca Cloud. Go on the following link:
 
@@ -36,13 +36,13 @@ Now open your project on the Monaca Cloud. Go on the following link:
 
 Then choose "Import Cordova Plugin", "Choose File", select the ZIP file you downloaded previously and press "OK". You should be able to see the plugin in the "Enabled Plugins" list (might take a refresh) with the latest version and a "-dev" tag. Although you can't tell, if all went well the plugin files have at this point been added to your project.
 
-The Cloud can be used to directly build or debug your app but you most likely want to put the newly installed plugin to work. Thus go back to the *LocalKit* and download the updated project. You may get a message saying that both versions are not synchronized but choose to continue the download anyway. You should be ready to use the plugin now. Slide on to the next section to see a usage example.
+The Cloud can be used to directly build or debug your app but you most likely want to put the newly installed plugin to work. Thus go back to the *Localkit* and download the updated project. You may get a message saying that both versions are not synchronized but choose to continue the download anyway. You should be ready to use the plugin now. Slide on to the next section to see a usage example.
 
 ### Example App
 
 In this example I will show you a basic usage of the `globalization` Cordova core plugin.
 
-I started by simply creating a fresh app named `local-test` with `monaca create local-test` on the command line and opting by `Onsen UI and Angular 2` and the `Minimum` template (could have done the same in *LocalKit*), which created a single page app with a button that triggers an `alert()` function. Then I edited that function to use one of the methods of the `globalization` plugin:
+I started by simply creating a fresh app named `local-test` with `monaca create local-test` on the command line and opting by `Onsen UI and Angular 2` and the `Minimum` template (could have done the same in *Localkit*), which created a single page app with a button that triggers an `alert()` function. Then I edited that function to use one of the methods of the `globalization` plugin:
 
 ``` typescript
 alert() {
