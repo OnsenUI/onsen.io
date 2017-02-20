@@ -7,170 +7,173 @@ actionbar: false
 description: 'Starting with Onsen UI is easy. Imagine what you can build with it from these samples.'
 ---
 
-<div class="header">
-   <%- @partial('global-nav.html.eco') %>
-   <%- @partial('header-title.html.eco', {name: 'Samples'}) %>
-</div>
+<div class="global-nav-container">
 
-<div class="feature">
-	<div class="feature-container">
-		<p>Onsen UI provides UI framework and tools for creating fast and beautiful HTML5 hybrid mobile apps based on PhoneGap / Cordova. Having common core with no framework dependencies, app development with Onsen UI is easy with any of the ever-changing JavaScript frameworks.</p>
-		<a href="/getting-started" class="keyvisual-getstarted">Get started</a>
-    </div>
-</div>
-
-<div class="samples">
-  <div class="samples-container">
-
-    <div class="sample">
-      <div class="sample-image">
-        <img src="/images/samples/todo.png">
-        <div class="sample-mask">
-          <a href="https://frankdiox.github.io/OnsenUI-Todo-App/" class="sample-run">
-            Run
-          </a>
-        </div>
-      </div>
-
-      <h2 class="sample-name">Onsen Todo</h2>
-
-      <div class="sample-description">
-        Todo app written in pure JavaScript
-      </div>
-
-      <div class="sample-links">
-        <a href="https://frankdiox.github.io/OnsenUI-Todo-App/">Run</a>
-        <a href="https://github.com/frankdiox/OnsenUI-Todo-App">Source</a>
-        <a href="/blog/auto-style-app-onsen/">Tutorial</a>
-      </div>
-    </div>
-
-    <div class="sample">
-      <div class="sample-image">
-        <img src="/images/samples/youtube.png">
-        <div class="sample-mask">
-          <a href="https://frankdiox.github.io/OnsenUI-YouTube" class="sample-run">
-            Run
-          </a>
-        </div>
-      </div>
-
-      <h2 class="sample-name">Onsen Jukebox</h2>
-
-      <div class="sample-description">
-        YouTube Jukebox with AngularJS
-      </div>
-
-      <div class="sample-links">
-        <a href="https://github.com/frankdiox/OnsenUI-YouTube">Source</a>
-        <a href="https://onsen.io/blog/onsen-youtube-sample/">Tutorial</a>
-      </div>
-    </div>
-
-    <div class="sample">
-      <div class="sample-image">
-        <img src="/images/samples/pokedex-pikachu.png">
-        <div class="sample-mask">
-          <a href="https://argelius.github.io/angular2-onsenui-pokedex/" class="sample-run">
-            Run
-          </a>
-        </div>
-      </div>
-
-      <h2 class="sample-name">Onsen Pokedex</h2>
-
-      <div class="sample-description">
-        Pokédex app with Angular 2
-      </div>
-
-      <div class="sample-links">
-        <a href="https://github.com/argelius/angular2-onsenui-pokedex">Source</a>
-        <a href="https://onsen.io/blog/creating-pokemon-hybrid-app-angular-2-onsen-ui-2/">Tutorial</a>
-      </div>
-    </div>
-
-    <div class="sample">
-      <div class="sample-image">
-        <img src="/images/samples/react-redux-weather.png">
-        <div class="sample-mask">
-          <a href="http://argelius.github.io/react-onsenui-redux-weather/demo.html" class="sample-run">
-            Run
-          </a>
-        </div>
-      </div>
-
-      <h2 class="sample-name">Onsen weather</h2>
-
-      <div class="sample-description">
-        Weather app with React+Redux
-      </div>
-
-      <div class="sample-links">
-        <a href="http://argelius.github.io/react-onsenui-redux-weather/demo.html">Run</a>
-        <a href="https://github.com/argelius/react-onsenui-redux-weather">Source</a>
-        <a href="/blog/cordova-hybrid-app-with-react-redux-webpack/">Tutorial</a>
-      </div>
-    </div>
-
-    <div class="sample">
-      <div class="sample-image">
-        <img src="/images/samples/horizon-chat.png">
-      </div>
-
-      <h2 class="sample-name">Onsen chat</h2>
-
-      <div class="sample-description">
-        Real-time chat app using RethinkDB
-      </div>
-
-      <div class="sample-links">
-        <a href="https://github.com/philolo1/Horizon-Chat-MobX-OnsenUI">Source</a>
-        <a href="/blog/onsenui-horizon-rethinkdb-chat/">Tutorial</a>
-      </div>
-    </div>
-
-    <!--<div class="sample">
-    </div>-->
-
+  <div class="header fixed">
+    <%- @partial('global-nav.html.eco') %>
   </div>
-</div>
 
-<div class="feature more-link">
-	<div class="feature-container">
-		<div>
-			<h2>CSS Components</h2>
-			<div class="feature-description">
-				<p>By using our Theme Roller, you can learn about the components included in Onsen UI. Also, it's useful for creating a personal theme for you project.</p>
-				<a href="http://components.onsen.io/" target="_blank">
-					See CSS Components &gt;
-				</a>
-			</div>
-			<div class="feature-image">
-				<img src="/images/samples/components.png" alt="CSS Components">
-				<div class="feature-mask">
-					<a href="http://components.onsen.io/" target="_blank" class="feature-run">
-					See CSS Components
-					</a>
-				</div>
-			</div>
-		</div>
+  <div class="feature">
+    <div class="feature-container">
+      <p>Onsen UI provides UI framework and tools for creating fast and beautiful HTML5 hybrid mobile apps based on PhoneGap / Cordova. Having common core with no framework dependencies, app development with Onsen UI is easy with any of the ever-changing JavaScript frameworks.</p>
+      <a href="/getting-started" class="keyvisual-getstarted">Get started</a>
+      </div>
+  </div>
 
-		<div>
-			<h2>Tutorials</h2>
-			<div class="feature-description">
-				<p>The interactive tutorial makes i possible to learn Onsen UI while using it. It's packed with tutorials for AngularJS, Angular 2, React and pure JavaScript.</p>
-				<a href="https://tutorial.onsen.io/" target="_blank">
-					See Tutorials &gt;
-				</a>
-			</div>
-			<div class="feature-image">
-				<img src="/images/samples/tutorial.png" alt="Tutorial">
-				<div class="feature-mask">
-					<a href="https://tutorial.onsen.io/" target="_blank" class="feature-run">
-					See Tutorials
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="samples">
+    <div class="samples-container">
+
+      <div class="sample">
+        <div class="sample-image">
+          <img src="/images/samples/todo.png">
+          <div class="sample-mask">
+            <a href="https://frankdiox.github.io/OnsenUI-Todo-App/" class="sample-run">
+              Run
+            </a>
+          </div>
+        </div>
+
+        <h2 class="sample-name">Onsen Todo</h2>
+
+        <div class="sample-description">
+          Todo app written in pure JavaScript
+        </div>
+
+        <div class="sample-links">
+          <a href="https://frankdiox.github.io/OnsenUI-Todo-App/">Run</a>
+          <a href="https://github.com/frankdiox/OnsenUI-Todo-App">Source</a>
+          <a href="/blog/auto-style-app-onsen/">Tutorial</a>
+        </div>
+      </div>
+
+      <div class="sample">
+        <div class="sample-image">
+          <img src="/images/samples/youtube.png">
+          <div class="sample-mask">
+            <a href="https://frankdiox.github.io/OnsenUI-YouTube" class="sample-run">
+              Run
+            </a>
+          </div>
+        </div>
+
+        <h2 class="sample-name">Onsen Jukebox</h2>
+
+        <div class="sample-description">
+          YouTube Jukebox with AngularJS
+        </div>
+
+        <div class="sample-links">
+          <a href="https://github.com/frankdiox/OnsenUI-YouTube">Source</a>
+          <a href="https://onsen.io/blog/onsen-youtube-sample/">Tutorial</a>
+        </div>
+      </div>
+
+      <div class="sample">
+        <div class="sample-image">
+          <img src="/images/samples/pokedex-pikachu.png">
+          <div class="sample-mask">
+            <a href="https://argelius.github.io/angular2-onsenui-pokedex/" class="sample-run">
+              Run
+            </a>
+          </div>
+        </div>
+
+        <h2 class="sample-name">Onsen Pokedex</h2>
+
+        <div class="sample-description">
+          Pokédex app with Angular 2
+        </div>
+
+        <div class="sample-links">
+          <a href="https://github.com/argelius/angular2-onsenui-pokedex">Source</a>
+          <a href="https://onsen.io/blog/creating-pokemon-hybrid-app-angular-2-onsen-ui-2/">Tutorial</a>
+        </div>
+      </div>
+
+      <div class="sample">
+        <div class="sample-image">
+          <img src="/images/samples/react-redux-weather.png">
+          <div class="sample-mask">
+            <a href="http://argelius.github.io/react-onsenui-redux-weather/demo.html" class="sample-run">
+              Run
+            </a>
+          </div>
+        </div>
+
+        <h2 class="sample-name">Onsen weather</h2>
+
+        <div class="sample-description">
+          Weather app with React+Redux
+        </div>
+
+        <div class="sample-links">
+          <a href="http://argelius.github.io/react-onsenui-redux-weather/demo.html">Run</a>
+          <a href="https://github.com/argelius/react-onsenui-redux-weather">Source</a>
+          <a href="/blog/cordova-hybrid-app-with-react-redux-webpack/">Tutorial</a>
+        </div>
+      </div>
+
+      <div class="sample">
+        <div class="sample-image">
+          <img src="/images/samples/horizon-chat.png">
+        </div>
+
+        <h2 class="sample-name">Onsen chat</h2>
+
+        <div class="sample-description">
+          Real-time chat app using RethinkDB
+        </div>
+
+        <div class="sample-links">
+          <a href="https://github.com/philolo1/Horizon-Chat-MobX-OnsenUI">Source</a>
+          <a href="/blog/onsenui-horizon-rethinkdb-chat/">Tutorial</a>
+        </div>
+      </div>
+
+      <!--<div class="sample">
+      </div>-->
+
+    </div>
+  </div>
+
+  <div class="feature more-link">
+    <div class="feature-container">
+      <div>
+        <h2>CSS Components</h2>
+        <div class="feature-description">
+          <p>By using our Theme Roller, you can learn about the components included in Onsen UI. Also, it's useful for creating a personal theme for you project.</p>
+          <a href="http://components.onsen.io/" target="_blank">
+            See CSS Components &gt;
+          </a>
+        </div>
+        <div class="feature-image">
+          <img src="/images/samples/components.png" alt="CSS Components">
+          <div class="feature-mask">
+            <a href="http://components.onsen.io/" target="_blank" class="feature-run">
+            See CSS Components
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h2>Tutorials</h2>
+        <div class="feature-description">
+          <p>The interactive tutorial makes i possible to learn Onsen UI while using it. It's packed with tutorials for AngularJS, Angular 2, React and pure JavaScript.</p>
+          <a href="https://tutorial.onsen.io/" target="_blank">
+            See Tutorials &gt;
+          </a>
+        </div>
+        <div class="feature-image">
+          <img src="/images/samples/tutorial.png" alt="Tutorial">
+          <div class="feature-mask">
+            <a href="https://tutorial.onsen.io/" target="_blank" class="feature-run">
+            See Tutorials
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

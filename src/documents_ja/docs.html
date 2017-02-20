@@ -6,69 +6,73 @@ reference: true
 description: 'Find all the tutorials, docs, theme roller, CSS components you need for Onsen UI HTML5 hybrid app framework.'
 ---
 
-<div class="header">
- <%- @partial('global-nav.html.eco') %>
+<div class="global-nav-container">
+
+  <div class="header fixed">
+    <%- @partial('global-nav.html.eco') %>
+  </div>
+
+  <h2>Onsen UI Docs & Tutorials</h2>
+
+  <h3>Contents</h3>
+
+  <div class="docs-table clearfix">
+    <div class="docs-section">
+      <div class="docs-section-icon-wrapper">
+        <a href="/guide/getting_started.html"><img class="docs-section-icon" src="/images/common/docs-getting-started-icon.png" alt=""></a>
+      </div>
+      <a class="docs-section-title" href="/guide/getting_started.html">Getting Started</a>
+      <p class="docs-section-desc">A few easy steps to get<br>you up and running.</p>
+    </div>
+
+    <div class="docs-section">
+      <div class="docs-section-icon-wrapper">
+        <a href="/guide/overview.html"><img class="docs-section-icon" src="/images/common/docs-guide-icon.png" alt=""></a>
+      </div>
+      <a class="docs-section-title" href="/guide/overview.html">Onsen UI Guide</a>
+      <p class="docs-section-desc">Learn how to use the<br>Onsen UI framework.</p>
+    </div>
+
+    <div class="docs-section">
+      <div class="docs-section-icon-wrapper">
+        <a href="/reference/css.html"><img class="docs-section-icon" src="/images/common/docs-css-components-icon.png" alt=""></a>
+      </div>
+      <a class="docs-section-title" href="/reference/css.html">CSS</a>
+      <p class="docs-section-desc">A collection of CSS components,<br>perfect for mobile devices.</p>
+    </div>
+
+    <div class="docs-section">
+      <div class="docs-section-icon-wrapper">
+        <a href="/reference/javascript.html"><img class="docs-section-icon" src="/images/common/docs-js-icon.png" alt=""></a>
+      </div>
+      <a class="docs-section-title" href="/reference/javascript.html">JavaScript</a>
+      <p class="docs-section-desc">An in-depth reference for all the<br> custom elements in Onsen UI.</p>
+    </div>
+
+    <div class="docs-section">
+      <div class="docs-section-icon-wrapper">
+        <a href="/patterns.html"><img class="docs-section-icon" src="/images/common/docs-patterns-icon.png" alt=""></a>
+      </div>
+      <a class="docs-section-title" href="/patterns.html">Page Patterns</a>
+      <p class="docs-section-desc">Beautiful examples showing<br>common design patterns</p>
+    </div>
+
+    <div class="docs-section">
+      <div class="docs-section-icon-wrapper">
+        <a href="http://components.onsen.io" target="_blank"><img class="docs-section-icon" src="/images/common/docs-theme-roller-icon.png" alt=""></a>
+      </div>
+      <a class="docs-section-title" href="http://components.onsen.io" target="_blank">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a>
+      <p class="docs-section-desc">Customize your Onsen UI theme to<br>give your app a personal touch.</p>
+    </div>
+
+  </div>
+
+  <h3>Other Resources</h3>
+
+  <ul>
+    <li><a href="/download.html">Download Onsen UI</a></li>
+    <li><a href="http://docs.angularjs.org" target="_blank">AngularJS Docs</a></li>
+    <li><a href="http://codepen.io/onsen/public-list/" target="_blank">Onsen UI & Monaca CodePen Samples</a></li>
+  </ul>
+
 </div>
-
-<h2>Onsen UI Docs & Tutorials</h2>
-
-<h3>Contents</h3>
-
-<div class="docs-table clearfix">
-  <div class="docs-section">
-    <div class="docs-section-icon-wrapper">
-      <a href="/guide/getting_started.html"><img class="docs-section-icon" src="/images/common/docs-getting-started-icon.png" alt=""></a>
-    </div>
-    <a class="docs-section-title" href="/guide/getting_started.html">Getting Started</a>
-    <p class="docs-section-desc">A few easy steps to get<br>you up and running.</p>
-  </div>
-
-  <div class="docs-section">
-    <div class="docs-section-icon-wrapper">
-      <a href="/guide/overview.html"><img class="docs-section-icon" src="/images/common/docs-guide-icon.png" alt=""></a>
-    </div>
-    <a class="docs-section-title" href="/guide/overview.html">Onsen UI Guide</a>
-    <p class="docs-section-desc">Learn how to use the<br>Onsen UI framework.</p>
-  </div>
-
-  <div class="docs-section">
-    <div class="docs-section-icon-wrapper">
-      <a href="/reference/css.html"><img class="docs-section-icon" src="/images/common/docs-css-components-icon.png" alt=""></a>
-    </div>
-    <a class="docs-section-title" href="/reference/css.html">CSS</a>
-    <p class="docs-section-desc">A collection of CSS components,<br>perfect for mobile devices.</p>
-  </div>
-
-  <div class="docs-section">
-    <div class="docs-section-icon-wrapper">
-      <a href="/reference/javascript.html"><img class="docs-section-icon" src="/images/common/docs-js-icon.png" alt=""></a>
-    </div>
-    <a class="docs-section-title" href="/reference/javascript.html">JavaScript</a>
-    <p class="docs-section-desc">An in-depth reference for all the<br> custom elements in Onsen UI.</p>
-  </div>
-
-  <div class="docs-section">
-    <div class="docs-section-icon-wrapper">
-      <a href="/patterns.html"><img class="docs-section-icon" src="/images/common/docs-patterns-icon.png" alt=""></a>
-    </div>
-    <a class="docs-section-title" href="/patterns.html">Page Patterns</a>
-    <p class="docs-section-desc">Beautiful examples showing<br>common design patterns</p>
-  </div>
-
-  <div class="docs-section">
-    <div class="docs-section-icon-wrapper">
-      <a href="http://components.onsen.io" target="_blank"><img class="docs-section-icon" src="/images/common/docs-theme-roller-icon.png" alt=""></a>
-    </div>
-    <a class="docs-section-title" href="http://components.onsen.io" target="_blank">Onsen Theme Roller <img src="/images/common/jump.png" alt="Jump icon" title="External link"></a>
-    <p class="docs-section-desc">Customize your Onsen UI theme to<br>give your app a personal touch.</p>
-  </div>
-
-</div>
-
-<h3>Other Resources</h3>
-
-<ul>
-  <li><a href="/download.html">Download Onsen UI</a></li>
-  <li><a href="http://docs.angularjs.org" target="_blank">AngularJS Docs</a></li>
-  <li><a href="http://codepen.io/onsen/public-list/" target="_blank">Onsen UI & Monaca CodePen Samples</a></li>
-</ul>

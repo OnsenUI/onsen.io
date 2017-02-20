@@ -61,27 +61,30 @@
 
 <body id="<%- @page %>">
 
-  <div class="header">
-    <%- @partial('global-nav.html.eco') %>
-    <%- @partial('docs-nav.html.eco') %>
-  </div>
+  <div class="global-nav-container">
 
-  <div class="container">
-		<% if @autotoc: %>
-		<aside class="content-info content-info-page">
-			<div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
-			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
-		</aside>
-		<% end %>
-    <div class="container-content">
-      <%- @contents %>
-      <%- @partial('need_help.html.eco') if @needHelp %>
+    <div class="header fixed">
+      <%- @partial('global-nav.html.eco') %>
     </div>
+
+    <div class="container">
+      <% if @autotoc: %>
+      <aside class="content-info content-info-page">
+        <div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
+        <%- @partial('toc.html.eco', {tocItems: @toc}) %>
+      </aside>
+      <% end %>
+      <div class="container-content">
+        <%- @contents %>
+        <%- @partial('need_help.html.eco') if @needHelp %>
+      </div>
+    </div>
+
+    <%- @partial('footer.html.eco') %>
+
+    <%- @partial('popup.html.eco') %>
+
   </div>
-
-  <%- @partial('footer.html.eco') %>
-
-  <%- @partial('popup.html.eco') %>
 
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
   <script defer src="/scripts/default.js"></script>
