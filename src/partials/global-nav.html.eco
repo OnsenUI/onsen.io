@@ -35,8 +35,31 @@
           </ul>
         </div>
       </li>
-      <li class="global-nav-menu-item">
+      <li class="global-nav-menu-item dropdown">
         <a href="#">API</a>
+
+        <div class="dropdown-container">
+          <ul class="dropdown-content">
+            <li class="dropdown-item">
+              <a href="/v2/docs/js.html">JavaScript</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v2/docs/angular1.html">AngularJS</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v2/docs/angular2.html">Angular 2</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v2/docs/react.html">React</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v2/docs/vue.html">Vue 2</a>
+            </li>
+            <li class="dropdown-item">
+              <a href="/v1/reference/javascript.html">Onsen UI v1</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <span class="global-nav-menu-arrow"></span>
       <li class="global-nav-menu-item">
