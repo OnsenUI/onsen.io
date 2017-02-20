@@ -54,7 +54,7 @@ module.exports = function() {
       },
 
       includeGuideSection: function(name, params) {
-        var path = metalsmith.path('src/documents_' + this.lang + '/v2/docs/guide/common', name);
+        var path = metalsmith.path('src/documents_' + this.lang + '/v2/guide/common', name);
         return renderFileContent.call(this, path, params);
       },
 

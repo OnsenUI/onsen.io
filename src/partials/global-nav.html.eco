@@ -10,7 +10,7 @@
 
     <ul class="global-nav-menu">
       <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
-        <a href="/v2/docs/guide/js"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
+        <a href="/v2/guide/"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
       </li>
       <li class="global-nav-menu-item dropdown">
         <a href="#">API</a>

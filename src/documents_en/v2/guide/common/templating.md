@@ -19,4 +19,4 @@ In this case, the template's `id` attribute replaces the path string of the page
 </body>
 ```
 
-Notice that including `<script></script>` tags inside `<ons-template>` or separate files does not work. If you want to initialize a page, please check the `init` event in ["Creating a page" section](/v2/docs/guide/js/#creating-a-page).
+Notice that including `<script></script>` tags inside `<ons-template>` or separate files does not work. If you want to initialize a page, please check the `init` event in ["Creating a page" section](/v2/guide/js/#creating-a-page).

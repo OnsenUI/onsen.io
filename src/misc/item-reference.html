@@ -134,7 +134,7 @@ actionbar: false
 
     <ul class="seealso">
       <% for guide in @doc.guides: %>
-        <li class="guide"><a href="/v2/docs/guide/<%= @framework %>/#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
+        <li class="guide"><a href="/v2/guide/<%= @framework %>/#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
       <% end %>
       <% for seealso in @doc.seealsos: %>
         <li class="seealso"><a href="<%= seealso.name.trim() %>.html"><%- @markd @translate seealso.description %></a></li>
