@@ -80,12 +80,11 @@
 }
 
 .container {
-  max-width: @width;
-  padding: 0 20px 100px 20px;
-  margin: 0 auto;
+  padding: 0;
+  margin: 0;
 
   &-content {
-    padding: 70px 0 0 0;
+    padding: 0;
 
     > :first-child {
       margin-top: 0;
@@ -231,34 +230,46 @@
 }
 
 .content-info {
-  position: absolute;
+  position: fixed;
+  top: @global-nav-height;
+  bottom: 0;
   width: @aside-width;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
   box-sizing: border-box;
-  padding: 70px 0 0 0;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &-fixed {
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    height: 100%;
-  }
-
-  &-bottom {
-    position: absolute;
-    bottom: 0px;
-    height: 100%;
-  }
+  padding: 0;
 }
+
+// disabled together with sticky menu since 2017/02 
+//
+// .content-info {
+//   position: absolute;
+//   width: @aside-width;
+//   overflow: auto;
+//   box-sizing: border-box;
+//   padding: 70px 0 0 0;
+//
+//   &::-webkit-scrollbar {
+//     display: none;
+//   }
+//
+//   &-fixed {
+//     position: fixed;
+//     top: 0px;
+//     bottom: 0px;
+//     height: 100%;
+//   }
+//
+//   &-bottom {
+//     position: absolute;
+//     bottom: 0px;
+//     height: 100%;
+//   }
+// }
 
 // only if .content-info exists
 .content-info + .container-content {
-  max-width: 100%;
-  margin-left: @aside-width + 40px;
+  margin-left: @aside-width;
 
   > h2:first-child {
     text-align: left;

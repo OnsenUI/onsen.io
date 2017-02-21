@@ -77,12 +77,10 @@
       <div class="container-content">
         <%- @contents %>
         <%- @partial('need_help.html.eco') if @needHelp %>
+        <%- @partial('footer.html.eco') %>
+        <%- @partial('popup.html.eco') %>
       </div>
     </div>
-
-    <%- @partial('footer.html.eco') %>
-
-    <%- @partial('popup.html.eco') %>
 
   </div>
 
