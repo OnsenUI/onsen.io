@@ -8,13 +8,12 @@ tags: Monaca
 category: 技術情報
 ---
 
-スマートフォンで扱う画像のサイズは年々大きくなっています。解像度が増え、幅も高さも増えていますが、スマートフォンのサイズ自体には限度があるので細かいところまで見るにはズームしなければなりません。
-
-とは言え、ピンチ操作で写真を拡大するとそれ以外のコンテンツも含めて拡大されてしまいますし、アプリっぽい動作とは言えません。そこで使ってみたいのがFormstoneです。[Formstone](https://formstone.it)はフロントエンドのコンポーネント集といったソフトウェアで、たくさんの機能が備わっています。その一つに画像のズーム機能があります。
+スマートフォンで扱う画像のサイズや解像度は年々大きくなっています。しかしスマートフォン自体のサイズには限度があるので、細かいところまで見るにはズームしなければなりません。
+とはいえピンチ操作で写真を拡大するとそれ以外のコンテンツも含めて拡大されてしまいますし、アプリっぽい動作とは言えません。そこで使ってみたいのがFormstoneです。[Formstone](https://formstone.it)はフロントエンドのコンポーネント集で、たくさんの機能が備わっています。その一つに画像のズーム機能があります。
 
 ## Formstoneのインストール
 
-Formstoneを使う際には機能毎に用意されているJavaScript/スタイルシートファイルを読み込む方法と、全体をまとめてJavaScriptを扱う方法の2種類があります。今回は全部まとめた[site.js](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/js/site.js)/[site.css](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/css/site.css)を使います。FormstoneにはjQueryが必須ですが、site.jsの中に含まれています。
+Formstoneを使う際には機能毎に用意されているjs/cssファイルを読み込む方法と、全体をまとめたjs/cssファイルを読み込む方法の2種類があります。今回は全部がまとまっている[site.js](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/js/site.js)と[site.css](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/css/site.css)を使います。FormstoneにはjQueryが必須ですが、site.jsの中に含まれています。
 
 ファイルをダウンロードしたら、Monaca IDEのアップロード機能を使ってアップロードします。アップロードしたら、scriptタグとlinkタグでファイルを読み込みます。
 
@@ -59,8 +58,10 @@ ons.ready(function() {
 
 ----
 
-画像自体は元のものをそのまま使いますので、高画質な画像を使うのが良さそうです。わざわざ低画質版を用意したり、高画質版を切り出しておくような手間が不要なのですぐに使えるでしょう。インターネットにアクセスするようなものの場合、帯域が気になりますが、アプリのローカルデータとして入れてしまっておければ読み込みは高速なので問題ないでしょう。
+画像自体は元のものをそのまま使いますので、高画質な画像を使うのが良さそうです。わざわざ低画質版を用意したり、高画質版を切り出しておくような手間が不要なのですぐに使えるでしょう。インターネット上から画像を取得する場合は帯域が気になりますが、アプリのローカルデータとして入れておけば読み込みは高速なので問題ないでしょう。
 
 Formstoneはビューワーだけに限らず、カルーセルやドロップダウン、ページネーション、Lightboxなどの多数の機能が揃っています。アプリのUI/UXを向上するのに便利な機能が多いので、ぜひ使ってみてください。
+
+なお、FormstoneはGNU GPL v3ライセンスで公開されており、商用アプリに利用する場合は商用ライセンスの購入が必要となりますのでご注意ください。
 
 今回のコードは[monaca-with-formstone/site.css at master · moongift/monaca-with-formstone](https://github.com/moongift/monaca-with-formstone)にアップしてあります。実装時の参考にしてください。
