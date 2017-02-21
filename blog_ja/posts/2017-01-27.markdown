@@ -14,7 +14,17 @@ category: 技術情報
 
 ## Formstoneのインストール
 
-Formstoneを使う際には機能毎に用意されているJavaScript/スタイルシートファイルを読み込む方法と、全体をまとめてJavaScriptを扱う方法の2種類があります。今回は全部まとめた[site.js](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/js/site.js)/[site.css](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/css/site.css)を使います。FormstoneにはjQueryが必須ですが、site.jsの中に含まれています。
+Formstoneを使う際には機能毎に用意されているJavaScript/スタイルシートファイルを読み込む方法と、全体をまとめてJavaScriptを扱う方法の2種類があります。今回は全部まとめた[site.js](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/js/site.js)/[site.css](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/css/site.css)を使います。FormstoneにはjQueryが必須ですが、site.jsの中に含まれています。site.jsはデフォルトでは用意されておらず、Formstoneのリポジトリを取得して自分でビルドする必要があります。その際には[bower](https://bower.io)や[Grunt](http://gruntjs.com)といったソフトウェアも必要です。
+
+```
+git clone git@github.com:Formstone/Formstone.git
+cd Formstone
+npm i
+bower i
+grunt demo
+```
+
+上記手順を実行すると、demo/js/site.jsとdemo/css/site.css が生成されます。面倒な場合は[site.js](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/js/site.js)/[site.css](https://raw.githubusercontent.com/moongift/monaca-with-formstone/master/www/css/site.css)をダウンロードして使ってください。
 
 ファイルをダウンロードしたら、Monaca IDEのアップロード機能を使ってアップロードします。アップロードしたら、scriptタグとlinkタグでファイルを読み込みます。
 
