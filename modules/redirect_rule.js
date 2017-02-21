@@ -97,12 +97,12 @@ var redirectRules = [
   { langs: ['en', 'ja'], from: '/docs/guide/angular2/', to: '/v2/docs/guide/angular2/' },
   { langs: ['en', 'ja'], from: '/docs/guide/js/', to: '/v2/docs/guide/js/' },
   { langs: ['en', 'ja'], from: '/docs/guide/react/', to: '/v2/docs/guide/react/' },
-  { langs: ['ja'], from: '/docs/guide/vue/', to: '/v2/docs/guide/vue/' },
+  { langs: ['en', 'ja'], from: '/docs/guide/vue/', to: '/v2/docs/guide/vue/' },
   { langs: ['en', 'ja'], from: '/docs/angular1.html', to: '/v2/docs/angular1.html' },
   { langs: ['en', 'ja'], from: '/docs/angular2.html', to: '/v2/docs/angular2.html' },
   { langs: ['en', 'ja'], from: '/docs/js.html', to: '/v2/docs/js.html' },
   { langs: ['en', 'ja'], from: '/docs/react.html', to: '/v2/docs/react.html' },
-  { langs: ['ja'], from: '/docs/vue.html', to: '/v2/docs/vue.html' },
+  { langs: ['en', 'ja'], from: '/docs/vue.html', to: '/v2/docs/vue.html' },
 
   // Old Onsen UI docs URLs (Used in ~2017/02)
   { langs: ['en', 'ja'], from: '/v1/guide.html', to: '/v1/guide/' },
@@ -116,7 +116,7 @@ var redirectRules = [
   // Old landing page URLs
   { langs: ['en', 'ja'], from: '/angularjs', to: '/angular2' }, // ~2016/09
   { langs: ['en', 'ja'], from: '/v2/angular2.html', to: '/angular2' }, // ~2016/09
-  { langs: ['en'], from: '/v2/react.html', to: '/react' }, // ~2016/10
+  { langs: ['en', 'ja'], from: '/v2/react.html', to: '/react' }, // ~2016/10
 
   // Old campaign page URLs
   { langs: ['en', 'ja'], from: '/ReactEurope', to: '/react' }, // ~2016/05
@@ -124,12 +124,12 @@ var redirectRules = [
   // Old subdirectories
   { langs: ['en', 'ja'], from: '/community', to: 'https://community.onsen.io/' }, // ~2016/05
   { langs: ['en', 'ja'], from: '/forum', to: 'https://community.onsen.io/' }, // ~2016/05
-  { langs: ['en'], from: '/tutorial', to: 'https://tutorial.onsen.io/' }, // ~2016/10
+  { langs: ['en', 'ja'], from: '/tutorial', to: 'https://tutorial.onsen.io/' }, // ~2016/10
   { langs: ['en', 'ja'], from: '/getting-started', to: '/v2/guide/' }, // ~2017/02
   { langs: ['en', 'ja'], from: '/samples', to: '/v2/guide/features.html' }, // ~2017/02
 
   // Invalid paths
-  { langs: ['en'], from: '/v2/', to: '/' },
+  { langs: ['en', 'ja'], from: '/v2/', to: '/' },
 
 ];
 
