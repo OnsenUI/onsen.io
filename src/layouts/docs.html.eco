@@ -68,11 +68,73 @@
     </div>
 
     <div class="container">
+      <aside class="content-info">
+        <h2>BASICS</h2>
+        <h3><a href="/v2/guide/">Introduction</a></h3>
+        <ul>
+          <li>What is Onsen UI?</li>
+          <li>Interactive Tutorials</li>
+          <li>Getting Started</li>
+        </ul>
+
+        <h3><a href="/v2/guide/features.html">Features</a></h3>
+        <ul>
+          <li>Navigator</li>
+          <li>Splitter</li>
+          <li>Tabbar</li>
+        </ul>
+
+        <h3><a href="https://monaca.io/great-apps.html" target="_blank">Showcase↗</a></h3>
+
+        <h2>DEVELOPERS GUIDE</h2>
+
+        <h3><a href="/v2/guide/installation.html">Installation</a></h3>
+        <ul>
+          <li>Download</li>
+          <li>
+            Setup
+            <ul>
+              <li>CSS</li>
+              <li>CSS + JS</li>
+              <li>CSS + JS + FW</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h3><a href="https://tutorial.onsen.io/" target="_blank">Tutorials↗</a></h3>
+
+        <h3><a href="/v2/guide/creating-spa.html">Creating SPA</a></h3>
+
+        <h3><a href="/v2/guide/vue2.html">Vue 2</a></h3>
+        <ul>
+          <li>Setup</li>
+        </ul>
+
+        <h3><a href="/v2/guide/react.html">React</a></h3>
+        <ul>
+          <li>Setup</li>
+        </ul>
+
+        <h3><a href="/v2/guide/angular.html">Angular</a></h3>
+        <ul>
+          <li>Setup</li>
+        </ul>
+
+        <h3><a href="/v2/guide/angularjs.html">AngularJS</a></h3>
+        <ul>
+          <li>Setup</li>
+        </ul>
+
+
+        <h2>ADVANCED</h2>
+      </aside>
+      <% if false: %>
       <% if @autotoc: %>
       <aside class="content-info">
         <div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
         <%- @partial('toc.html.eco', {tocItems: @toc}) %>
       </aside>
+      <% end %>
       <% end %>
       <div class="container-content">
         <%- @contents %>

@@ -237,7 +237,34 @@
   overflow-x: hidden;
   overflow-y: scroll;
   box-sizing: border-box;
-  padding: 0;
+  padding: 40px 0 0 20px;
+
+  & h2 {
+    font-size: 18px;
+    opacity: 0.3;
+  }
+
+  & h3 {
+    margin-top: 20px;
+    margin-bottom: 0;
+    margin-left: 9px;
+
+    font-size: 15px;
+
+    & a {
+      color: #333333;
+      font-weight: 600;
+    }
+  }
+
+  & ul, ol {
+    margin: 0;
+  }
+
+  & li {
+    list-style-type: none;
+    font-size: 14px;
+  }
 }
 
 // disabled together with sticky menu since 2017/02 
