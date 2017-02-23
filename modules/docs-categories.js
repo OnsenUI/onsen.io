@@ -13,7 +13,6 @@ function generateDocument(metalsmith, categoryFile) {
       file.componentCategory = categoryFile.category;
       file.extension = categoryFile.framework;
       file.framework = categoryFile.framework;
-      file.version = "v2";
       file.categoryFile = categoryFile.file;
       file.componentIndex = true;
       categoryFile.file.name = categoryFile.file.title;

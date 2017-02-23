@@ -46,7 +46,6 @@ module.exports = function(lang) {
           }
 
           files[path] = file;
-          files[path].version = "v1";
           files[path].icon = icon;
           files[path].layout = 'docs.html.eco';
           if (lang == "en") {

@@ -128,7 +128,6 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.is2 = true;
       file.extension = "react";
       file.framework = "react";
-      file.version = "v2";
 
       file.ownedMethods = doc.methods || [];
       file.ownedAttributes = doc.attributes || [];

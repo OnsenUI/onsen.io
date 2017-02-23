@@ -46,7 +46,6 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.componentCategory = doc.category;
       file.extension = extension;
       file.framework = extension;
-      file.version = 'v2';
 
       // TODO This is only a temporal fix for Vue Reference.
       // This should come from doc generator in Vue src.
