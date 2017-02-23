@@ -9,7 +9,7 @@
     <input id="toggle-menu" type="checkbox" class="global-nav-checkbox">
 
     <ul class="global-nav-menu">
-      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
+      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @correspondingMenuItem == 'docs' %>">
         <a href="/v2/guide/"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
       </li>
       <li class="global-nav-menu-item dropdown">
