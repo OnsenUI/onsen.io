@@ -1,0 +1,70 @@
+---
+author: atsushi
+date: 2017-02-27
+id: text-to-speech-with-monaca
+title: "Monacaでテキスト読み上げ機能を実現するcordova-plugin-ttsの紹介"
+product: monaca
+tags: monaca, texttospeech
+category: 技術情報
+---
+
+近年、カーナビやロボットなど、コンピュータが音声を使って説明や案内をしてくれる事例が増えてきました。今後、音声認識と音声発信は情報コミュニケーションにおいて大きな役割を担うことでしょう。
+
+そこで今回はTTS（Text to Speech）と呼ばれるテキスト読み上げ機能をMonacaで実装してみます。使用するCordovaプラグインは、[vilic/cordova-plugin-tts](https://github.com/vilic/cordova-plugin-tts)です。
+
+
+## インストール
+
+Monaca IDEの「Cordovaプラグインの管理」画面で、[vilic/cordova-plugin-tts](https://github.com/vilic/cordova-plugin-tts)をインポートして下さい。
+
+## サンプルコード
+
+#### HTML
+
+以下のような、ボタンが押されたらテキストエリアに入力された文字列を読み上げるアプリを作成します。
+
+![](/blog/content/images/2017/Jan/monaca-tts.png)
+
+UIはOnsen UIで実装しています。
+
+```
+<ons-page>
+    <ons-toolbar>
+        <div class="center">テキストを音声変換</div>
+    </ons-toolbar>
+
+    <section style="padding: 8px">
+        <p><textarea id="text" class="textarea">こんにちは</textarea></p>
+        <ons-button id="tts" modifier="large">音声に変換</ons-button>
+    </section>
+</ons-page>
+```
+
+#### JavaScript
+
+```
+ons.ready(function() {
+    // 音声に変換ボタンを押した時のイベント
+    document.getElementById("tts").addEventListener("click", function() {
+        var text = document.getElementById("text").value;
+        TTS.speak({
+            text: text,
+            locale: 'ja-JP'
+        }, function () {
+            console.log('success');
+        }, function (reason) {
+            console.log(reason);
+        });
+    });
+});
+```
+
+cordova-plugin-tts の利用方法は非常に簡単です。  
+`TTS.speak()` というAPIで読み上げを実行します。第一引数には読み上げる文字列とロケールを指定し、第二、第三引数には成功時、失敗時のコールバック関数をそれぞれ指定します。
+
+----
+
+これで任意のテキストを喋らせることができるようになります。  
+チャットやニュースの読み上げなど、アクセシビリティを向上させるうえでTTSは使いどころが多そうです。ぜひ皆さんのアプリでも活用してみてください。
+
+今回のソースコードは[moongift/tts-with-monaca](https://github.com/moongift/tts-with-monaca)にアップロードされています。実装される際の参考にしてください。
