@@ -33,6 +33,7 @@ module.exports = function(lang, isStaging) {
         .metadata(require('../config.js')(lang, isStaging))
         .use(ignore(['**/.DS_Store']))
         .use(draft())
+        .use(require('./validators/file-metadata-validator.js')())
         .use(require('./helpers')())
         .use(require('./v1-api-docs')(lang))
         .use(require('./v2-wc-api-docs')(lang, 'js'))
