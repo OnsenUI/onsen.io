@@ -10,22 +10,20 @@ category: 技術情報
 
 近年、カーナビやロボットなど、コンピュータが音声を使って説明や案内をしてくれる事例が増えてきました。今後、音声認識と音声発信は情報コミュニケーションにおいて大きな役割を担うことでしょう。
 
-そこで今回はTTS（Text to Speech）と呼ばれるテキスト読み上げ機能をMonacaで実装してみます。使用するCordovaプラグインは、[vilic/cordova-plugin-tts](https://github.com/vilic/cordova-plugin-tts)です。
+そこで今回はTTS（Text to Speech）と呼ばれるテキスト読み上げ機能をMonacaで実装してみます。使用するCordovaプラグインは [vilic/cordova-plugin-tts](https://github.com/vilic/cordova-plugin-tts) です。
 
 
 ## インストール
 
-Monaca IDEの「Cordovaプラグインの管理」画面で、[vilic/cordova-plugin-tts](https://github.com/vilic/cordova-plugin-tts)をインポートして下さい。
+Monaca IDEの「Cordovaプラグインの管理」画面で、[vilic/cordova-plugin-tts](https://github.com/vilic/cordova-plugin-tts) をインポートして下さい。
 
 ## サンプルコード
 
-#### HTML
-
-以下のような、ボタンが押されたらテキストエリアに入力された文字列を読み上げるアプリを作成します。
+以下のような、ボタンが押されたらテキストエリアに入力された文字列を読み上げるアプリを作成します。UIはOnsen UIで実装しています。
 
 ![](/blog/content/images/2017/Jan/monaca-tts.png)
 
-UIはOnsen UIで実装しています。
+#### HTML
 
 ```
 <ons-page>
