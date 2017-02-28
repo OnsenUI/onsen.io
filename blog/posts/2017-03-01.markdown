@@ -39,7 +39,7 @@ this.$refs.myNavigator.pushPage(page2);
 
 <!--しかし、上記の `$refs` を用いた書き方は、Vue.js のしきたりに沿うものではなく好ましくありません。
 そのため、**`2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します。**-->
-Since use of `$refs` is not preferred since it does not follow the convension of Vue.js, we decided to **obsolete all the methods** in 2.0.0-alpha.1 or later.
+Since use of `$refs` is not preferred since it does not follow the convention of Vue.js, we decided to **obsolete all the methods** in 2.0.0-alpha.1 or later.
 
 <!--`2.0.0-alpha.1` 以降では、代わりに**プロパティ、イベント、スロット**を使用して Vue コンポーネントを読み出し・操作します。
 例えば `v-ons-navigator` 要素の場合は[スロット](http://)を使用します。-->
