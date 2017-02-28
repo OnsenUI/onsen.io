@@ -1,0 +1,159 @@
+---
+author: onsen
+date: 2017-03-01
+id: vue2-support-status-mar-2017
+title: "Status of Vue 2 binding alpha and roadmap for beta"
+product: onsen
+category: announcement
+tags: vue, onsen ui
+---
+
+![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
+
+<!--[Onsen UI for Vue 2](https://ja.onsen.io/vue/) の最初の α 版（`2.0.0-alpha.0`）を[リリース](/blog/vuejs-2-binding-alpha-version-is-here/)してから4週間ほどが経ちました。
+Onsen UI for Vue 2 をお使いの皆さん向けに、最近のニュースをお知らせします。-->
+
+It has been 4 weeks since `2.0.0-alpha.0` was released.
+We'd like to give some latest news to you Vue developers.
+
+<!--## `2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します-->
+## Obsolete all methods of our Vue components in `2.0.0-alpha.1` or later
+
+<!--`2.0.0-alpha.0` では、Vue コンポーネントを読み出し・操作するための API として、
+プロパティ、イベント、スロットに加えて、メソッドを提供していました。-->
+`2.0.0-alpha.0` has provided methods as well as props, events and slots as API for reading and controlling our Vue components.
+
+<!--例えば `v-ons-navigator` 要素はメソッドを利用して以下のように使うことができました。-->
+For example, we could use `v-ons-navigator` component using methods in the following way:
+
+<!-- more -->
+
+```html
+<!-- メソッドを利用した書き方 （2.0.0-alpha.1 以降にて廃止予定） -->
+<!-- Using methods （which will be obsoleted in 2.0.0-alpha.1 or leter） -->
+<v-ons-navigator ref="myNavigator" :page="page1"></v-ons-navigator>
+...
+
+this.$refs.myNavigator.pushPage(page2);
+```
+
+<!--しかし、上記の `$refs` を用いた書き方は、Vue.js のしきたりに沿うものではなく好ましくありません。
+そのため、**`2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します。**-->
+Since use of `$refs` is not preferred since it does not follow the convension of Vue.js, we decided to **obsolete all the methods** in 2.0.0-alpha.1 or later.
+
+<!--`2.0.0-alpha.1` 以降では、代わりに**プロパティ、イベント、スロット**を使用して Vue コンポーネントを読み出し・操作します。
+例えば `v-ons-navigator` 要素の場合は[スロット](http://)を使用します。-->
+In `2.0.0-alpha.1` or later, you have to use **properties, events and slots** instead for reading and controlling our Vue components.
+For example, `v-ons-navigator` provide some slots:
+
+```html
+<!-- スロットを利用した書き方 （pageStack の初期値は [page1] とする） -->
+<!-- Using slots (The initial value of pageStack is [page1]) -->
+<v-ons-navigator>
+  <div :is="page" v-for="page in pageStack"></div>
+</v-ons-navigator>
+...
+
+pageStack.push(page2);
+```
+
+<!--スロットを使うと、`v-ons-navigator` 要素のプロパティを操作しなくても、
+`v-ons-navigator` の子要素を操作するだけでページの push と pop を行うことができます。-->
+Thanks to the slots, we can push or pop pages directly to the Navigator’s children array.
+
+<!--なお、上記の例における `div` 要素は、`is` 属性によって[動的コンポーネント](https://jp.vuejs.org/v2/guide/components.html#動的コンポーネント) となっていることにご注意ください。-->
+Note that the `div` element in the example above is a [Dynamic Component](https://vuejs.org/v2/guide/components.html#Dynamic-Components) which is controlled by `is` attribute.
+
+<!--このように、`2.0.0-alpha.1` 以降ではプロパティ、イベント、スロットのみを使用して UI を構築する必要があることに注意してください。-->
+Also note that `2.0.0-alpha.1` requires you to use only properties, events and slots to construct user interface of your app.
+
+<!--## `2.0.0-alpha.1` 以降にて、カスタムディレクティブ `v-ons-open`, `v-ons-index` を廃止します-->
+## Obsolete custom directives `v-ons-open`, `v-ons-index` in `2.0.0-alpha.1` or later
+
+<!--`2.0.0-alpha.0` では、
+`v-ons-splitter-side` 要素などのために `v-ons-open` ディレクティブを、
+`v-ons-carousel` 要素などのために `v-ons-index` ディレクティブを提供していました。-->
+`2.0.0-alpha.0` has provided `v-ons-open` directive for `v-ons-splitter-side` component (and some components), and `v-ons-index` directive for `v-ons-carousel` component.
+
+<!--例えば `v-ons-open` ディレクティブを使うと、以下のように `carouselIndex` の値と `v-ons-carousel` 要素の状態を同期することができました。-->
+For example, we could synchronize a value of `carouselIndex` with the state of a `v-ons-carousel` component.
+
+```html
+<v-ons-carousel v-ons-index="carouselIndex">
+  ...
+</v-ons-carousel>
+```
+
+<!--しかし Vue.js のメイン開発者である [Evan You](https://github.com/yyx990803) 氏からのフィードバックを受けて、
+`v-ons-open` のような一部のカスタムディレクティブは廃止すべきであるとの結論に至りました。-->
+But according to feedbacks from [Evan You](https://github.com/yyx990803) who is the main developer of Vue.js, we concluded that we should obsolete some custom directives such as `v-ons-open`.
+
+<!--今後は以下のようにプロパティやイベントを用いて `carouselIndex` の値と `v-ons-carousel` 要素の状態を同期します。-->
+From now, you have to synchronize them with properties, events or something.
+
+```html
+<v-ons-carousel :index="carouselIndex" @postchange="carouselIndex = $event.activeIndex">
+  ...
+</v-ons-carousel>
+```
+
+<!--## バグ修正を行っています-->
+## Fixing bugs
+
+<!--`2.0.0-alpha.0` リリースの後、私達はいくつかのバグを発見しました。
+また、ユーザの皆さんからもいくつかのバグ報告をいただきました。
+具体的には以下のようなバグがありました。-->
+After releasing `2.0.0-alpha.0`, we found there are some bugs in the binding and received some bug reports from some users.
+Notable bugs are:
+
+<!--- `v-ons-tabbar` 要素の `pages` スロットに入れる Vue コンポーネントにおいて `props` を使用するとエラーが出る
+- Onsen UI for Vue 2 内部で使用している `Array.prototype.includes` がエラーを出す
+- `visibilityToggle` ミックスインがエラーを出す
+- Vue 2.2.0 以降で使用するとエラーが出る-->
+- `props` in page components which included in slots of `v-ons-tabbar` component emits an error
+- `Array.prototype.includes` used inside of the Vue 2 binding emits an error
+- `visibilityToggle` mixin emits an error
+- Vue 2 binding with Vue 2.2.0 emits an error
+
+<!--そのため、API のブラッシュアップに並行して、これらのようなバグの修正も行っています。-->
+Therefore we are fixing those errors in parallel with brushing up the API. 
+
+<!--## 今後の予定 — `2.0.0-beta.0` に向けて-->
+## Roadmap for `2.0.0-beta.0`
+
+<!--[以前の記事](/blog/vue2-support-status-jan-2017/)でお伝えしたように、最低限の機能が実装でき次第、α 版は β 版に移行します。
+β 版への移行は、当初は2月中を予定していましたが、現在は3月中となる見込みです。-->
+As we told you in [a previous post](/blog/vue2-support-status-jan-2017/), the Vue 2 binding will be switched from alpha to beta once minimal features are ready.
+We previously scheduled the release date of beta to February 2016, but now it was changed to March 2016.
+
+<!--β 版までの作業としては以下のものを予定しています:-->
+What we need to do before relesing the beta are:
+
+<!--- Vue コンポーネントの API （プロパティ、イベント、スロット）をより改善します
+- LazyRepeat を実装します
+- Onsen UI Core の `ons` オブジェクトのラッパーを実装します
+- Vue 2.2 に対応します
+- サンプルアプリを実装します-->
+- Improve API for Vue components (properties, events and slots)
+- Implement LazyRepeat
+- Implement a wrapper for `ons` object in Onsen UI Core
+- Support the latest minor version of Vue (2.2)
+- Implement an example app
+
+<!--## 開発にご協力ください-->
+## Help our development
+
+<!--私達は Onsen UI for Vue 2 を使いやすいものにしたいと思っています。
+皆さんからのフィードバックを歓迎します。-->
+We want to make the use of Onsen UI for Vue 2 something that comes easier and easier.
+That way we welcome all the feedback you can give us.
+
+<!--何かお気付きの点があれば、この記事のコメント欄や GitHub レポジトリの [Issues](https://github.com/OnsenUI/OnsenUI/issues)、また [Twitter](https://twitter.com/Onsen_UI) 等でお気軽にご指摘ください。-->
+
+Please feel free to comment on this post, create issues or pull requests on [our GitHub repository](https://github.com/OnsenUI/OnsenUI) or ask us any questions you might have at [@Onsen_UI](https://twitter.com/Onsen_UI).
+
+---
+
+<!--Onsen UI はハイブリッドアプリの UI 構築などに使えるオープンソースのライブラリです。詳しくは [GitHub レポジトリ](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ") をご覧ください。Onsen UI が好きな方は、GitHub スターをつけるのをお忘れなく！★★★★★-->
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
