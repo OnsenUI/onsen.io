@@ -34,7 +34,7 @@ this.$refs.myNavigator.pushPage(page2);
 そのため、**`2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します。**
 
 `2.0.0-alpha.1` 以降では、代わりに**プロパティ、イベント、スロット**を使用して Vue コンポーネントを読み出し・操作します。
-例えば `v-ons-navigator` コンポーネントの場合は[スロット](http://)を使用します。
+例えば `v-ons-navigator` コンポーネントの場合は[スロット](https://jp.vuejs.org/v2/guide/components.html#スロットによるコンテンツ配信)を使用します。
 
 ```html
 <!-- スロットを利用した書き方 （pageStack の初期値は [page1] とする） -->
