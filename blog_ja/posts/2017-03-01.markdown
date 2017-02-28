@@ -1,0 +1,115 @@
+---
+author: naoki
+date: 2017-03-01
+id: vue2-support-status-mar-2017
+title: "Onsen UI for Vue 2 の開発状況（2017年3月版）"
+product: onsen-ui
+tags: onsen ui, vue
+category: 技術情報
+---
+
+![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
+
+[Onsen UI for Vue 2](https://ja.onsen.io/vue/) の最初の α 版（`2.0.0-alpha.0`）を[リリース](/blog/vuejs-2-binding-alpha-version-is-here/)してから4週間ほどが経ちました。
+Onsen UI for Vue 2 をお使いの皆さん向けに、最近のニュースをお知らせします。
+
+## `2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します
+
+`2.0.0-alpha.0` では、Vue コンポーネントを読み出し・操作するための API として、
+プロパティ、イベント、スロットに加えて、メソッドを提供していました。
+
+例えば `v-ons-navigator` 要素はメソッドを利用して以下のように使うことができました。
+
+<!-- more -->
+
+```html
+<!-- メソッドを利用した書き方 （2.0.0-alpha.1 以降にて廃止予定） -->
+<v-ons-navigator ref="myNavigator" :page="page1"></v-ons-navigator>
+...
+
+this.$refs.myNavigator.pushPage(page2);
+```
+
+しかし、上記の `$refs` を用いた書き方は、Vue.js のしきたりに沿うものではなく好ましくありません。
+そのため、**`2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します。**
+
+`2.0.0-alpha.1` 以降では、代わりに**プロパティ、イベント、スロット**を使用して Vue コンポーネントを読み出し・操作します。
+例えば `v-ons-navigator` 要素の場合は[スロット](http://)を使用します。
+
+```html
+<!-- スロットを利用した書き方 （pageStack の初期値は [page1] とする） -->
+<v-ons-navigator>
+  <div :is="page" v-for="page in pageStack"></div>
+</v-ons-navigator>
+...
+
+pageStack.push(page2);
+```
+
+スロットを使うと、`v-ons-navigator` 要素のプロパティを操作しなくても、
+`v-ons-navigator` の子要素を操作するだけでページの push と pop を行うことができます。
+
+なお、上記の例における `div` 要素は、`is` 属性によって[動的コンポーネント](https://jp.vuejs.org/v2/guide/components.html#動的コンポーネント) となっていることにご注意ください。
+
+このように、`2.0.0-alpha.1` 以降ではプロパティ、イベント、スロットのみを使用して UI を構築する必要があることに注意してください。
+
+## `2.0.0-alpha.1` 以降にて、カスタムディレクティブ `v-ons-open`, `v-ons-index` を廃止します
+
+`2.0.0-alpha.0` では、
+`v-ons-splitter-side` 要素などのために `v-ons-open` ディレクティブを、
+`v-ons-carousel` 要素などのために `v-ons-index` ディレクティブを提供していました。
+
+例えば `v-ons-open` ディレクティブを使うと、以下のように `carouselIndex` の値と `v-ons-carousel` 要素の状態を同期することができました。
+
+```html
+<v-ons-carousel v-ons-index="carouselIndex">
+  ...
+</v-ons-carousel>
+```
+
+しかし Vue.js のメイン開発者である [Evan You](https://github.com/yyx990803) 氏からのフィードバックを受けて、
+`v-ons-open` のような一部のカスタムディレクティブは廃止すべきであるとの結論に至りました。
+
+今後は以下のようにプロパティやイベントを用いて `carouselIndex` の値と `v-ons-carousel` 要素の状態を同期します。
+
+```html
+<v-ons-carousel :index="carouselIndex" @postchange="carouselIndex = $event.activeIndex">
+  ...
+</v-ons-carousel>
+```
+
+## バグ修正を行っています
+
+`2.0.0-alpha.0` リリースの後、私達はいくつかのバグを発見しました。
+また、ユーザの皆さんからもいくつかのバグ報告をいただきました。
+具体的には以下のようなバグがありました。
+
+- `v-ons-tabbar` 要素の `pages` スロットに入れる Vue コンポーネントにおいて `props` を使用するとエラーが出る
+- Onsen UI for Vue 2 内部で使用している `Array.prototype.includes` がエラーを出す
+- `visibilityToggle` ミックスインがエラーを出す
+- Vue 2.2.0 以降で使用するとエラーが出る
+
+そのため、API のブラッシュアップに並行して、これらのようなバグの修正も行っています。
+
+## 今後の予定 — `2.0.0-beta.0` に向けて
+
+[以前の記事](/blog/vue2-support-status-jan-2017/)でお伝えしたように、最低限の機能が実装でき次第、α 版は β 版に移行します。
+β 版への移行は、当初は2月中を予定していましたが、現在は3月中となる見込みです。
+
+β 版までの作業としては以下のものを予定しています:
+
+- Vue コンポーネントの API （プロパティ、イベント、スロット）をより改善します
+- LazyRepeat を実装します
+- Onsen UI Core の `ons` オブジェクトのラッパーを実装します
+- Vue 2.2 に対応します
+
+## 開発にご協力ください
+
+私達は Onsen UI for Vue 2 を使いやすいものにしたいと思っています。
+皆さんからのフィードバックを歓迎します。
+
+何かお気付きの点があれば、この記事のコメント欄や GitHub リポジトリの [Issues](https://github.com/OnsenUI/OnsenUI/issues)、また [Twitter](https://twitter.com/Onsen_UI) 等でお気軽にご指摘ください。
+
+---
+
+Onsen UI はハイブリッドアプリの UI 構築などに使えるオープンソースのライブラリです。詳しくは [GitHub レポジトリ](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ") をご覧ください。Onsen UI が好きな方は、GitHub スターをつけるのをお忘れなく！★★★★★
