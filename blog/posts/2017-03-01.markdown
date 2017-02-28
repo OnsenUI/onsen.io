@@ -16,59 +16,35 @@ In this post we give you Vue developers the latest news regarding just that.
 
 ## Obsolete methods of our Vue components in `2.0.0-alpha.1` and later
 
-In `2.0.0-alpha.0` we provided not only props, events and slots but also methods as an API for intracting with and controlling our Vue components.
+In `2.0.0-alpha.0` we provided not only props, events and slots but also methods as an API for interacting with and controlling our Vue components.
 
-For example, you could use the `v-ons-navigator` component through methods in the following way:
-
-<!-- more -->
-
-```html
-<!-- Using methods （which will be obsoleted in 2.0.0-alpha.1 and later） -->
-<v-ons-navigator ref="myNavigator" :page="page1"></v-ons-navigator>
-...
-
-this.$refs.myNavigator.pushPage(page2);
-```
-
-Since the use of `$refs` does not come naturally since it does not follow the convention of Vue.js, we decided to **obsolete the methods API** in `2.0.0-alpha.1` and later.
+But since the use of methods does not come naturally because it does not follow the convention of Vue.js, we decided to **obsolete the methods API** in `2.0.0-alpha.1` and later.
 
 In `2.0.0-alpha.1` and later you will have to use **properties, events and slots** instead for handling our Vue components.
-For example, `v-ons-navigator` provides a [slot](https://vuejs.org/v2/guide/components.html#Content-Distribution-with-Slots) as follows:
+For example, `v-ons-navigator` provides a property `page-stack` as follows:
 
 ```html
-<!-- Using slots (The initial value of pageStack is [page1]) -->
-<v-ons-navigator>
-  <div :is="page" v-for="page in pageStack"></div>
-</v-ons-navigator>
+<!-- Using properties (The initial value of pageStack is [page1]) -->
+<v-ons-navigator :page-stack="pageStack"></v-ons-navigator>
 ...
 
 this.pageStack.push(page2);
 ```
 
-Thanks to the slot, we can push or pop pages directly to the Navigator’s children array.
-
-Note that the `div` element in the example above is a [Dynamic Component](https://vuejs.org/v2/guide/components.html#Dynamic-Components) which is controlled by the `is` attribute.
-
-Also note that `2.0.0-alpha.1` requires you to use only properties, events and slots to construct the UI of your app.
+Note that `2.0.0-alpha.1` requires you to use only properties, events and slots to construct the UI of your app.
 
 ## Obsolete custom directives `v-ons-open`, `v-ons-index` in `2.0.0-alpha.1` and later
 
 `2.0.0-alpha.0` provided a `v-ons-open` directive for the `v-ons-splitter-side` component, and a `v-ons-index` directive for the `v-ons-carousel` component.
 
-For example, you could synchronize a value of `carouselIndex` with the state of a `v-ons-carousel` component.
-
-```html
-<v-ons-carousel v-ons-index="carouselIndex">
-  ...
-</v-ons-carousel>
-```
-
 But according to feedback from [Evan You](https://github.com/yyx990803) (main developer of Vue.js) we concluded that we should obsolete these custom directives.
 
-From now on you will have to synchronize them with properties and events.
+From now on you will have to use properties and events to synchronize a value with the state of a component.
+For example, you have to use an `index` property and a `swipe` event for `v-ons-carousel` component as follows:
 
 ```html
-<v-ons-carousel :index="carouselIndex" @postchange="carouselIndex = $event.activeIndex">
+<!-- Using properties and events -->
+<v-ons-carousel :index="carouselIndex" @swipe="carouselIndex = $event">
   ...
 </v-ons-carousel>
 ```
@@ -97,6 +73,7 @@ What's left for us to do before relesing the beta is:
 - Implement a wrapper for `ons` object in Onsen UI Core
 - Support the latest minor version of Vue (2.2)
 - Implement an example app
+- Implement more E2E test cases
 
 ## Help our development
 

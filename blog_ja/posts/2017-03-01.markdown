@@ -18,38 +18,19 @@ Onsen UI for Vue 2 をお使いの皆さん向けに、最近のニュースを�
 `2.0.0-alpha.0` では、Vue コンポーネントを読み出し・操作するための API として、
 プロパティ、イベント、スロットに加えて、メソッドを提供していました。
 
-例えば `v-ons-navigator` コンポーネントはメソッドを利用して以下のように使うことができました。
-
-<!-- more -->
-
-```html
-<!-- メソッドを利用した書き方 （2.0.0-alpha.1 以降にて廃止予定） -->
-<v-ons-navigator ref="myNavigator" :page="page1"></v-ons-navigator>
-...
-
-this.$refs.myNavigator.pushPage(page2);
-```
-
-しかし、上記の `$refs` を用いた書き方は、Vue.js のしきたりに沿うものではなく好ましくありません。
+しかし、メソッドを用いた書き方は、Vue.js のしきたりに沿うものではなく好ましくありません。
 そのため、**`2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します。**
 
 `2.0.0-alpha.1` 以降では、代わりに**プロパティ、イベント、スロット**を使用して Vue コンポーネントを読み出し・操作します。
-例えば `v-ons-navigator` コンポーネントの場合は[スロット](https://jp.vuejs.org/v2/guide/components.html#スロットによるコンテンツ配信)を使用します。
+例えば `v-ons-navigator` コンポーネントの場合は `page-stack` プロパティを使用します。
 
 ```html
-<!-- スロットを利用した書き方 （pageStack の初期値は [page1] とする） -->
-<v-ons-navigator>
-  <div :is="page" v-for="page in pageStack"></div>
-</v-ons-navigator>
+<!-- プロパティを利用 （pageStack の初期値は [page1] とする） -->
+<v-ons-navigator :page-stack="pageStack"></v-ons-navigator>
 ...
 
-pageStack.push(page2);
+this.pageStack.push(page2);
 ```
-
-スロットを使うと、`v-ons-navigator` コンポーネントのプロパティを操作しなくても、
-`v-ons-navigator` の子要素を操作するだけでページの push と pop を行うことができます。
-
-なお、上記の例における `div` 要素は、`is` 属性によって[動的コンポーネント](https://jp.vuejs.org/v2/guide/components.html#動的コンポーネント) となっていることにご注意ください。
 
 このように、`2.0.0-alpha.1` 以降ではプロパティ、イベント、スロットのみを使用して UI を構築する必要があることに注意してください。
 
@@ -59,21 +40,15 @@ pageStack.push(page2);
 `v-ons-splitter-side` コンポーネントなどのために `v-ons-open` ディレクティブを、
 `v-ons-carousel` コンポーネントなどのために `v-ons-index` ディレクティブを提供していました。
 
-例えば `v-ons-open` ディレクティブを使うと、以下のように `carouselIndex` の値と `v-ons-carousel` コンポーネントの状態を同期することができました。
-
-```html
-<v-ons-carousel v-ons-index="carouselIndex">
-  ...
-</v-ons-carousel>
-```
-
 しかし Vue.js のメイン開発者である [Evan You](https://github.com/yyx990803) 氏からのフィードバックを受けて、
 `v-ons-open` のような一部のカスタムディレクティブは廃止すべきであるとの結論に至りました。
 
-今後は以下のようにプロパティやイベントを用いて `carouselIndex` の値と `v-ons-carousel` コンポーネントの状態を同期します。
+今後はプロパティやイベントを用いて、変数値とコンポーネントの状態を同期します。
+例えば `v-ons-carousel` コンポーネントでは `index` プロパティと `swipe` イベントを使用します:
 
 ```html
-<v-ons-carousel :index="carouselIndex" @postchange="carouselIndex = $event.activeIndex">
+<!-- プロパティとイベントを利用 -->
+<v-ons-carousel :index="carouselIndex" @swipe="carouselIndex = $event">
   ...
 </v-ons-carousel>
 ```
@@ -103,6 +78,7 @@ pageStack.push(page2);
 - Onsen UI Core の `ons` オブジェクトのラッパーを実装します
 - Vue 2.2 に対応します
 - サンプルアプリを実装します
+- E2E テストを拡充します
 
 ## 開発にご協力ください
 
