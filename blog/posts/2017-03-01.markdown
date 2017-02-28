@@ -20,6 +20,8 @@ In `2.0.0-alpha.0` we provided not only props, events and slots but also methods
 
 But since the use of methods does not come naturally because it does not follow the convention of Vue.js, we decided to **obsolete the methods API** in `2.0.0-alpha.1` and later.
 
+<!-- more -->
+
 In `2.0.0-alpha.1` and later you will have to use **properties, events and slots** instead for handling our Vue components.
 For example, `v-ons-navigator` provides a property `page-stack` as follows:
 
