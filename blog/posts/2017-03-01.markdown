@@ -43,7 +43,7 @@ For example, `v-ons-navigator` provides a [slot](https://vuejs.org/v2/guide/comp
 </v-ons-navigator>
 ...
 
-pageStack.push(page2);
+this.pageStack.push(page2);
 ```
 
 Thanks to the slot, we can push or pop pages directly to the Navigator’s children array.
