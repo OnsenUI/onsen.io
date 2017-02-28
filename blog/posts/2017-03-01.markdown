@@ -13,18 +13,19 @@ tags: vue, onsen ui
 <!--[Onsen UI for Vue 2](https://ja.onsen.io/vue/) の最初の α 版（`2.0.0-alpha.0`）を[リリース](/blog/vuejs-2-binding-alpha-version-is-here/)してから4週間ほどが経ちました。
 Onsen UI for Vue 2 をお使いの皆さん向けに、最近のニュースをお知らせします。-->
 
-It has been 4 weeks since `2.0.0-alpha.0` was released.
-We'd like to give some latest news to you Vue developers.
+It has been 4 weeks since we released `2.0.0-alpha.0`. We know, we know, alpha is a scary tag. That's why we're looking to move on from it as fast as possible.
+
+In this post we give you Vue developers the latest news regarding just that.
 
 <!--## `2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します-->
-## Obsolete all methods of our Vue components in `2.0.0-alpha.1` or later
+## Obsolete methods of our Vue components in `2.0.0-alpha.1` and later
 
 <!--`2.0.0-alpha.0` では、Vue コンポーネントを読み出し・操作するための API として、
 プロパティ、イベント、スロットに加えて、メソッドを提供していました。-->
-`2.0.0-alpha.0` has provided methods as well as props, events and slots as API for reading and controlling our Vue components.
+In `2.0.0-alpha.0` we provided not only props but also methods, events and slots as an API for intracting with and controlling our Vue components.
 
 <!--例えば `v-ons-navigator` 要素はメソッドを利用して以下のように使うことができました。-->
-For example, we could use `v-ons-navigator` component using methods in the following way:
+For example, you could use the `v-ons-navigator` component through methods in the following way:
 
 <!-- more -->
 
@@ -39,12 +40,12 @@ this.$refs.myNavigator.pushPage(page2);
 
 <!--しかし、上記の `$refs` を用いた書き方は、Vue.js のしきたりに沿うものではなく好ましくありません。
 そのため、**`2.0.0-alpha.1` 以降にて、全てのメソッドを廃止します。**-->
-Since use of `$refs` is not preferred since it does not follow the convention of Vue.js, we decided to **obsolete all the methods** in 2.0.0-alpha.1 or later.
+Since the use of `$refs` does not come naturally since it does not follow the convention of Vue.js, we decided to **obsolete the methods API** in 2.0.0-alpha.1 and later.
 
 <!--`2.0.0-alpha.1` 以降では、代わりに**プロパティ、イベント、スロット**を使用して Vue コンポーネントを読み出し・操作します。
 例えば `v-ons-navigator` 要素の場合は[スロット](http://)を使用します。-->
-In `2.0.0-alpha.1` or later, you have to use **properties, events and slots** instead for reading and controlling our Vue components.
-For example, `v-ons-navigator` provide some slots:
+In `2.0.0-alpha.1` and later you will have to use **properties, events and slots** instead for handling our Vue components.
+For example, `v-ons-navigator` provides some slots as follows:
 
 ```html
 <!-- スロットを利用した書き方 （pageStack の初期値は [page1] とする） -->
@@ -62,21 +63,21 @@ pageStack.push(page2);
 Thanks to the slots, we can push or pop pages directly to the Navigator’s children array.
 
 <!--なお、上記の例における `div` 要素は、`is` 属性によって[動的コンポーネント](https://jp.vuejs.org/v2/guide/components.html#動的コンポーネント) となっていることにご注意ください。-->
-Note that the `div` element in the example above is a [Dynamic Component](https://vuejs.org/v2/guide/components.html#Dynamic-Components) which is controlled by `is` attribute.
+Note that the `div` element in the example above is a [Dynamic Component](https://vuejs.org/v2/guide/components.html#Dynamic-Components) which is controlled by the `is` attribute.
 
 <!--このように、`2.0.0-alpha.1` 以降ではプロパティ、イベント、スロットのみを使用して UI を構築する必要があることに注意してください。-->
-Also note that `2.0.0-alpha.1` requires you to use only properties, events and slots to construct user interface of your app.
+Also note that `2.0.0-alpha.1` requires you to use only properties, events and slots to construct the UI of your app.
 
 <!--## `2.0.0-alpha.1` 以降にて、カスタムディレクティブ `v-ons-open`, `v-ons-index` を廃止します-->
-## Obsolete custom directives `v-ons-open`, `v-ons-index` in `2.0.0-alpha.1` or later
+## Obsolete custom directives `v-ons-open`, `v-ons-index` in `2.0.0-alpha.1` and later
 
 <!--`2.0.0-alpha.0` では、
 `v-ons-splitter-side` 要素などのために `v-ons-open` ディレクティブを、
 `v-ons-carousel` 要素などのために `v-ons-index` ディレクティブを提供していました。-->
-`2.0.0-alpha.0` has provided `v-ons-open` directive for `v-ons-splitter-side` component (and some components), and `v-ons-index` directive for `v-ons-carousel` component.
+`2.0.0-alpha.0` provided a `v-ons-open` directive for the `v-ons-splitter-side` component (*and some components*), and a `v-ons-index` directive for the `v-ons-carousel` component.
 
 <!--例えば `v-ons-open` ディレクティブを使うと、以下のように `carouselIndex` の値と `v-ons-carousel` 要素の状態を同期することができました。-->
-For example, we could synchronize a value of `carouselIndex` with the state of a `v-ons-carousel` component.
+For example, you could synchronize a value of `carouselIndex` with the state of a `v-ons-carousel` component.
 
 ```html
 <v-ons-carousel v-ons-index="carouselIndex">
@@ -86,10 +87,10 @@ For example, we could synchronize a value of `carouselIndex` with the state of a
 
 <!--しかし Vue.js のメイン開発者である [Evan You](https://github.com/yyx990803) 氏からのフィードバックを受けて、
 `v-ons-open` のような一部のカスタムディレクティブは廃止すべきであるとの結論に至りました。-->
-But according to feedbacks from [Evan You](https://github.com/yyx990803) who is the main developer of Vue.js, we concluded that we should obsolete some custom directives such as `v-ons-open`.
+But according to feedback from [Evan You](https://github.com/yyx990803) (main developer of Vue.js) we concluded that we should obsolete these custom directives.
 
 <!--今後は以下のようにプロパティやイベントを用いて `carouselIndex` の値と `v-ons-carousel` 要素の状態を同期します。-->
-From now, you have to synchronize them with properties, events or something.
+From now on you will have to synchronize them with properties, events or *something*.
 
 ```html
 <v-ons-carousel :index="carouselIndex" @postchange="carouselIndex = $event.activeIndex">
@@ -103,20 +104,20 @@ From now, you have to synchronize them with properties, events or something.
 <!--`2.0.0-alpha.0` リリースの後、私達はいくつかのバグを発見しました。
 また、ユーザの皆さんからもいくつかのバグ報告をいただきました。
 具体的には以下のようなバグがありました。-->
-After releasing `2.0.0-alpha.0`, we found there are some bugs in the binding and received some bug reports from some users.
-Notable bugs are:
+After releasing `2.0.0-alpha.0` we found out that there were some bugs in the binding and received some bug reports from some users.
+Notable ones are:
 
 <!--- `v-ons-tabbar` 要素の `pages` スロットに入れる Vue コンポーネントにおいて `props` を使用するとエラーが出る
 - Onsen UI for Vue 2 内部で使用している `Array.prototype.includes` がエラーを出す
 - `visibilityToggle` ミックスインがエラーを出す
 - Vue 2.2.0 以降で使用するとエラーが出る-->
-- `props` in page components which included in slots of `v-ons-tabbar` component emits an error
+- `props` in page components which included slots of `v-ons-tabbar` component emits an error
 - `Array.prototype.includes` used inside of the Vue 2 binding emits an error
 - `visibilityToggle` mixin emits an error
 - Vue 2 binding with Vue 2.2.0 emits an error
 
 <!--そのため、API のブラッシュアップに並行して、これらのようなバグの修正も行っています。-->
-Therefore we are fixing those errors in parallel with brushing up the API. 
+Therefore we are fixing these errors in parallel with brushing up the API.
 
 <!--## 今後の予定 — `2.0.0-beta.0` に向けて-->
 ## Roadmap for `2.0.0-beta.0`
@@ -124,10 +125,10 @@ Therefore we are fixing those errors in parallel with brushing up the API.
 <!--[以前の記事](/blog/vue2-support-status-jan-2017/)でお伝えしたように、最低限の機能が実装でき次第、α 版は β 版に移行します。
 β 版への移行は、当初は2月中を予定していましたが、現在は3月中となる見込みです。-->
 As we told you in [a previous post](/blog/vue2-support-status-jan-2017/), the Vue 2 binding will be switched from alpha to beta once minimal features are ready.
-We previously scheduled the release date of beta to February 2016, but now it was changed to March 2016.
+We know, we previously predicted the release date of beta to happen in February. You can expect it before the end of March.
 
 <!--β 版までの作業としては以下のものを予定しています:-->
-What we need to do before relesing the beta are:
+What's left for us to do before relesing the beta is:
 
 <!--- Vue コンポーネントの API （プロパティ、イベント、スロット）をより改善します
 - LazyRepeat を実装します
