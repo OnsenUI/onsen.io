@@ -1,0 +1,91 @@
+---
+author: onsen
+date: 2017-03-01
+id: vue2-support-status-mar-2017
+title: "Status of Vue 2 binding alpha and roadmap for beta"
+product: onsen
+category: announcement
+tags: vue, onsen ui
+---
+
+![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
+
+It has been 4 weeks since [we released `2.0.0-alpha.0`](/blog/vuejs-2-binding-alpha-version-is-here/). We know, we know, alpha is a scary tag. That's why we're looking to move on from it as fast as possible.
+
+In this post we give you Vue developers the latest news regarding just that.
+
+## Obsolete methods of our Vue components in `2.0.0-alpha.1` and later
+
+In `2.0.0-alpha.0` we provided not only props, events and slots but also methods as an API for interacting with and controlling our Vue components.
+
+But since the use of methods does not come naturally because it does not follow the convention of Vue.js, we decided to **obsolete the methods API** in `2.0.0-alpha.1` and later.
+
+<!-- more -->
+
+In `2.0.0-alpha.1` and later you will have to use **properties, events and slots** instead for handling our Vue components.
+For example, `v-ons-navigator` provides a property `page-stack` as follows:
+
+```html
+<!-- Using properties (The initial value of pageStack is [page1]) -->
+<v-ons-navigator :page-stack="pageStack"></v-ons-navigator>
+...
+
+this.pageStack.push(page2);
+```
+
+Note that `2.0.0-alpha.1` requires you to use only properties, events and slots to construct the UI of your app.
+
+## Obsolete custom directives `v-ons-open`, `v-ons-index` in `2.0.0-alpha.1` and later
+
+`2.0.0-alpha.0` provided a `v-ons-open` directive for the `v-ons-splitter-side` component, and a `v-ons-index` directive for the `v-ons-carousel` component.
+
+But according to feedback from [Evan You](https://github.com/yyx990803) (main developer of Vue.js) we concluded that we should obsolete these custom directives.
+
+From now on you will have to use properties and events to synchronize a value with the state of a component.
+For example, you have to use an `index` property and a `swipe` event for `v-ons-carousel` component as follows:
+
+```html
+<!-- Using properties and events -->
+<v-ons-carousel :index="carouselIndex" @swipe="carouselIndex = $event">
+  ...
+</v-ons-carousel>
+```
+
+## Fixing bugs
+
+After releasing `2.0.0-alpha.0` we found out that there were some bugs in the binding and received some bug reports from users.
+Notable ones are:
+
+- When using `props` in Vue components included in slots of `v-ons-tabbar` component, it emits an error
+- `Array.prototype.includes` used inside of the Vue 2 binding emits an error
+- `visibilityToggle` mixin emits an error
+- Vue 2 binding with Vue 2.2.0 emits an error
+
+Therefore we are fixing these errors in parallel with brushing up the API.
+
+## Roadmap for `2.0.0-beta.0`
+
+As we told you in [a previous post](/blog/vue2-support-status-jan-2017/), the Vue 2 binding will be switched from alpha to beta once minimal features are ready.
+We know, we previously predicted the release date of beta to happen in February. You can expect it before the end of March.
+
+What's left for us to do before relesing the beta is:
+
+- Improve API for Vue components (properties, events and slots)
+- Implement LazyRepeat
+- Implement a wrapper for `ons` object in Onsen UI Core
+- Support the latest minor version of Vue (2.2)
+- Implement an example app
+- Implement more E2E test cases
+
+## Help our development
+
+We want to make the use of Onsen UI for Vue 2 something that comes easier and easier.
+That way we welcome all the feedback you can give us.
+
+Please feel free to comment on this post, create issues or pull requests on [our GitHub repository](https://github.com/OnsenUI/OnsenUI) or ask us any questions you might have at [@Onsen_UI](https://twitter.com/Onsen_UI).
+
+You can also use our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI "Gitter channel"), our [Community Forum](https://community.onsen.io/category/2/onsen-ui "Community Forum") or even [Stack Overflow](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow") to reach out to us with any issue or contribution.
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
