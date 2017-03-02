@@ -162,7 +162,7 @@ module.exports = function(language, isStaging) {
     },
 
     ja: {
-      url: 'http://ja.onsen.io',
+      url: 'https://ja.onsen.io',
       title: 'HTML5モバイルアプリをもっと速く、もっと美しく Onsen UI',
       description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
       keywords: '',
