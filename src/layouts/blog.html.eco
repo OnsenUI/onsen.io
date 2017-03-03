@@ -16,12 +16,21 @@
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/rss.xml"/>
 
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="<%= @getPreparedOg().type %>" />
   <meta property="og:title" content="<%= @title %>" />
-  <meta property="og:site_name" content="Onsen UI" />
+  <meta property="og:site_name" content="<%= @getPreparedOg().site_name %>" />
   <meta property="og:url" content="<%= @site.url %><%= @path %>" />
-  <meta property="og:image" content="<%= @site.url %>../images/logo/onsen_with_text.png" />
+  <meta property="og:image" content="<%= @getPreparedOg().image %>" />
   <meta property="og:description" content="<%= @renderArticleIntroAsText(@contents, 200) %>" />
+
+  <meta property="fb:admins" content="597508315" >
+
+  <meta name="twitter:card" content="<%= @getPreparedOg().twitter.card %>">
+  <meta name="twitter:site" content="<%= @getPreparedOg().twitter.site %>">
+  <meta name="twitter:creator" content="<%= @getPreparedOg().twitter.creator %>">
+  <meta name="twitter:title" content="<%= @title %>">
+  <meta name="twitter:description" content="<%= @renderArticleIntroAsText(@contents, 200) %>">
+  <meta name="twitter:image" content="<%= @getPreparedOg().image %>">
 
   <script defer src="/vendor/jquery.js"></script>
   <script src="/scripts/blog_search.js"></script>

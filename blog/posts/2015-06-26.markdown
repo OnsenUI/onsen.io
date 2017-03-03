@@ -19,9 +19,9 @@ Onsen UI uses its own route system and was not meant to be used with an external
 
 In this tutorial, we will combine three different Onsen UI patterns in order to make it useful for everyone. The main element of our app will be the Tabbar pattern and it will have two child tabs: a Navigator in the first one (MasterDetail) and a Sliding Menu in the second. In addition, since this routing is based on states we will be able to make a transition to a deep route in the Navigator from, for example, the main page of the Sliding Menu.
 
-As usual, all the code of this example is [available to download on Github](https://github.com/frankdiox/OnsenUI-router). You can check here the final result as well before explaining how it is done:
+As usual, all the code of this example is [available to download on Github](https://github.com/frandiox/OnsenUI-router). You can check here the final result as well before explaining how it is done:
 
-<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frankdiox.github.io/OnsenUI-router/" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
+<iframe style="background-image: url('/blog/content/images/2015/Feb/nexus5-1.png'); padding: 65px 9px 58px 11px;  display:block; margin:auto;margin-top:30px; border:none;" src="https://frandiox.github.io/OnsenUI-router/" width="359" height="640" scrolling="no" class="lazy-hidden"></iframe>
 
 Looks like a normal Onsen UI app but it really uses *ui-router* for the state transitions behind the scenes. And the good news is that it is not hard at all once you understand the basic rules.
 
