@@ -16,7 +16,7 @@ FirebaseはGoogleの提供するモバイル関連サービスのプラットフ
 
 今回もVueを使っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
 
-## JavaScriptの実装
+## テンプレートの修正
 
 Vueのテンプレートで、まず匿名ユーザになるためのボタンを設置します。
 
@@ -49,6 +49,51 @@ Vueのテンプレートで、まず匿名ユーザになるためのボタン�
   </section>
 </section>
 ```
+
+テンプレートは次のようになります。
+
+```
+<div>
+  <div class="center"> Firebase認証 </div>
+  <section style="margin: 10px;" v-if="user.isLoggedIn">
+    <p v-if="user.isAnonymous">匿名ユーザ</p>
+    <p v-else>{{user.mailAddress}}</p>
+    
+    <section style="margin: 10px;">
+      <button @click="logout">ログアウト</button>
+    </section>
+    <section style="margin: 10px;" v-if="user.isAnonymous">
+      <div class="center">ユーザ化する</div>
+      <p>メールアドレス</p>
+      <p>
+        <input v-model="user.mailAddress" placeholder="メールアドレス" />
+      </p>
+      <p>パスワード</p>
+      <p>
+        <input v-model="user.password" placeholder="パスワード" type="password" />
+      </p>
+      <section style="margin: 10px;">
+        <button @click="anony_register">ユーザ登録</button>
+      </section>
+    </section>
+  </section>
+  <section v-else style="margin: 10px;">
+    <p>メールアドレス</p>
+    <p>
+      <input v-model="user.mailAddress" placeholder="メールアドレス" />
+    </p>
+    <p>パスワード</p>
+    <p>
+      <input v-model="user.password" placeholder="パスワード" type="password" />
+    </p>
+    <button @click="register">新規登録</button>
+    <button @click="login">ログイン</button>
+    <button @click="anonymouse">匿名ユーザ</button>
+  </section>
+</div>
+```
+
+### JavaScriptの処理
 
 次にデータの初期化についてです。匿名ユーザであることを表す isAnonymous を追加します。
 
@@ -121,7 +166,7 @@ anony_register: function() {
     }, function(error) {
       console.log("エラー", error);
     });
-}
+},
 ```
 
 この時の注意点として、ステータス通知が行われないという問題があります。そのため、ユーザ名を変更するなどといった場合には注意してください。
