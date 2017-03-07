@@ -3,7 +3,7 @@ author: atsushi
 date: 2017-02-18
 id: monaca-with-firebase-realtime
 title: "MonacaでFirebaseのリアルタイムデータベースを試す"
-tags: onsen ui, vue, firebase
+tags: vue, firebase
 product: monaca
 category: 技術情報
 ---
@@ -14,11 +14,21 @@ FirebaseはGoogleの提供するモバイル関連サービスのプラットフ
 
 ![](/images/2017/Feb/monaca-firebase-realtimedb.gif)
 
-今回もOnsen UIとVueを組み合わせて作っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
+今回もVueを使います。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
 
-## HTML側の実装
+## HTMLの変更
 
-HTML側ではリストを表示するようにします。また、ボタンを押すとデータを追加するためのイベントを追加します。
+データの取得に際してFirebaseに接続しますので、セキュリティポリシーを変更します。具体的には `connect-src *;` を追加します。
+
+```
+<meta http-equiv="Content-Security-Policy" 
+  content="default-src * data:; connect-src *; style-src * 
+  'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+```
+
+## Vueテンプレートの変更
+
+HTML側（Vueテンプレート）ではリストを表示するようにします。また、ボタンを押すとデータを追加するためのイベントを追加します。
 
 ```
 <section style="margin: 10px;">
