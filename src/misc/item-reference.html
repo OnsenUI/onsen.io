@@ -262,7 +262,7 @@ actionbar: false
   <% end %>
   <!-- end properties -->
 
-  <!-- react props -->
+  <!-- react/vue props -->
   <% if @doc.props and Object.keys(@doc.props).length > 0: %>
   <section>
     <h3 id="props">
@@ -313,7 +313,7 @@ actionbar: false
               <% end %>
               <% end %>
 
-              <% if prop.required == "true": %>
+              <% if prop.required == true || prop.required == "true": %>
                 <span style="font-size: 12px;"><% if @lang == "en": %>Required.<% else: %>必須<% end %></span>
               <% else: %>
                 <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
