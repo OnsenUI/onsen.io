@@ -311,6 +311,18 @@ module.exports = function() {
         return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
       },
 
+      mapKeywords: function(message) {
+        if (this.framework === 'vue') {
+          return message
+            .replace(/(^|<\/?)(ons-)/gm, '$1v-$2')
+            .replace(/(^|`|\s)(ons(\.|$))/gm, '$1$$$2')
+            .replace(/ element/img, ' component')
+          ;
+        }
+
+        return message;
+      },
+
       translate: function(message, lang) {
 
         if (!lang){

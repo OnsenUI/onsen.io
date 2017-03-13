@@ -41,7 +41,7 @@ actionbar: false
 
   <section class="reference-description">
     <p><%- @markd @translate (@extensionDoc && @extensionDoc.description) || '' %></p>
-    <p><%- @markd @translate @doc.description %></p>
+    <p><%- @markd @mapKeywords @translate @doc.description %></p>
 
     <% if @doc.deprecated: %>
     <div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div>
@@ -114,14 +114,14 @@ actionbar: false
       <a href="#usage" class="reference-loop-anchor"></a>
     </h3>
     <% for example in @doc.examples: %>
-      <pre><code class="xml"><%= example %></code></pre>
+      <pre><code class="xml"><%= @mapKeywords example %></code></pre>
     <% end %>
   </section>
   <% end %>
 
   <% if @doc.note: %>
   <section class="reference-note">
-    <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%- @markd @translate @doc.note %></p>
+    <p><% if @lang == "en": %>Note<% else: %>注意<% end %>: <%- @markd @mapKeywords @translate @doc.note %></p>
   </section>
   <% end %>
 
@@ -137,7 +137,7 @@ actionbar: false
         <li class="guide"><a href="/v2/docs/guide/<%= @framework %>/#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
       <% end %>
       <% for seealso in @doc.seealsos: %>
-        <li class="seealso"><a href="<%= seealso.name.trim() %>.html"><%- @markd @translate seealso.description %></a></li>
+        <li class="seealso"><a href="<%= @mapKeywords seealso.name.trim() %>.html"><%- @markd @mapKeywords @translate seealso.description %></a></li>
       <% end %>
     </ul>
   </section>
@@ -301,13 +301,13 @@ actionbar: false
             </td>
             <td>
               <% if @lang == "en": %>
-              <%- @markd @translate prop.description %>
+              <%- @markd @mapKeywords @translate prop.description %>
               <% else: %>
               <% if @translate(prop.description).length != 0: %>
-              <%- @markd @translate prop.description %>
+              <%- @markd @mapKeywords @translate prop.description %>
               <% else: %>
               <span style="opacity: 0.6;">
-                <%- @markd @translate(prop.description, "en") %>
+                <%- @markd @mapKeywords @translate(prop.description, "en") %>
                 <span style="color: red;">（翻訳中）</span>
               </span>
               <% end %>
@@ -405,13 +405,13 @@ actionbar: false
             </td>
             <td>
               <% if @lang == "en": %>
-              <%- @markd @translate method.description %>
+              <%- @markd @mapKeywords @translate method.description %>
               <% else: %>
               <% if @translate(method.description).length != 0: %>
-              <%- @markd @translate method.description %>
+              <%- @markd @mapKeywords @translate method.description %>
               <% else: %>
               <span style="opacity: 0.6;">
-                <%- @markd @translate(method.description, "en") %>
+                <%- @markd @mapKeywords @translate(method.description, "en") %>
                 <span style="color: red;">（翻訳中）</span>
               </span>
               <% end %>
@@ -451,13 +451,13 @@ actionbar: false
             <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
             <td>
               <% if @lang == "en": %>
-              <%- @markd @translate event.description %>
+              <%- @markd @mapKeywords @translate event.description %>
               <% else: %>
               <% if @translate(event.description).length != 0: %>
-              <%- @markd @translate event.description %>
+              <%- @markd @mapKeywords @translate event.description %>
               <% else: %>
               <span style="opacity: 0.6;">
-                <%- @markd @translate(event.description, "en") %>
+                <%- @markd @mapKeywords @translate(event.description, "en") %>
                 <span style="color: red;">（翻訳中）</span>
               </span>
               <% end %>
@@ -487,13 +487,13 @@ actionbar: false
 
         <p>
           <% if @lang == "en": %>
-          <%- @markd @translate method.description %>
+          <%- @markd @mapKeywords @translate method.description %>
           <% else: %>
           <% if @translate(method.description).length != 0: %>
-          <%- @markd @translate method.description %>
+          <%- @markd @mapKeywords @translate method.description %>
           <% else: %>
           <span style="opacity: 0.6;">
-            <%- @markd @translate(method.description, "en") %>
+            <%- @markd @mapKeywords @translate(method.description, "en") %>
             <span style="color: red;">（翻訳中）</span>
           </span>
           <% end %>
@@ -503,7 +503,7 @@ actionbar: false
         <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
         <% if method.returns and method.returns.description.length > 0: %>
-        <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%- @markd @translate method.returns.description %></p>
+        <p><% if @lang == "en": %>Returns<% else: %>返り値<% end %>: <%- @markd @mapKeywords @translate method.returns.description %></p>
         <% end %>
 
         <% if Object.keys(method.params).length > 0: %>
@@ -531,13 +531,13 @@ actionbar: false
               <td class="value-type"><%= param.type %></td>
               <td>
                 <% if @lang == "en": %>
-                <%- @markd @translate param.description %>
+                <%- @markd @mapKeywords @translate param.description %>
                 <% else: %>
                 <% if @translate(param.description).length != 0: %>
-                <%- @markd @translate param.description %>
+                <%- @markd @mapKeywords @translate param.description %>
                 <% else: %>
                 <span style="opacity: 0.6;">
-                  <%- @markd @translate(param.description, "en") %>
+                  <%- @markd @mapKeywords @translate(param.description, "en") %>
                   <span style="color: red;">（翻訳中）</span>
                 </span>
                 <% end %>
@@ -569,13 +569,13 @@ actionbar: false
 
         <p>
           <% if @lang == "en": %>
-          <%- @markd @translate event.description %>
+          <%- @markd @mapKeywords @translate event.description %>
           <% else: %>
           <% if @translate(event.description).length != 0: %>
-          <%- @markd @translate event.description %>
+          <%- @markd @mapKeywords @translate event.description %>
           <% else: %>
           <span style="opacity: 0.6;">
-            <%- @markd @translate(event.description, "en") %>
+            <%- @markd @mapKeywords @translate(event.description, "en") %>
             <span style="color: red;">（翻訳中）</span>
           </span>
           <% end %>
@@ -607,10 +607,10 @@ actionbar: false
               <td class="value-type"><%= param.type %></td>
               <td>
                 <% if @lang == "en": %>
-                <%- @markd @translate param.description %>
+                <%- @markd @mapKeywords @translate param.description %>
                 <% else: %>
                 <% if @translate(param.description).length != 0: %>
-                <%- @markd @translate param.description %>
+                <%- @markd @mapKeywords @translate param.description %>
                 <% else: %>
                 <span style="opacity: 0.6;">
                   <%- @markd @translate(param.description, "en") %>
