@@ -91,6 +91,14 @@ function generateAPIDocument(metalsmith, docPath, extension) {
 
       if (extension != "js" && doc.elements) {
         file.extensionDoc = doc.elements.filter(function(v) { return v.extensionOf == extension })[0] || {};
+
+        if (file.extensionDoc.overwrite) {
+          file.extensionDoc.overwrite.split(/\s+/)
+            .forEach(function(key) {
+              file.doc[key] = file.extensionDoc[key];
+              delete file.extensionDoc[key];
+            });
+        }
       }
 
       if (docPath.indexOf("/element/") > -1) {
