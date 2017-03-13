@@ -33,7 +33,7 @@ Onsen UI provides a rich set of form components. Apart from <%- @componentLink('
 
 #### Lists
 
-Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using <%- @componentLink('list') %>, <%- @componentLink('list-item') %> and <%- @componentLink('list-header') %> you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<<%- @mapComponentName('toolbar') %>>`, and some CSS classes are provided for default styles (`list__item__icon`, `list__item__thumbnail`, `list__item__title` and `list__item__subtitle`).
+Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using <%- @componentLink('list') %>, <%- @componentLink('list-item') %> and <%- @componentLink('list-header') %> you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<<%- @mapComponentName('toolbar') %>>`, and some CSS classes are provided for default styles (`list-item__icon`, `list-item__thumbnail`, `list-item__title` and `list-item__subtitle`).
 
 <% if @framework isnt 'react': %>
 ```
@@ -41,11 +41,11 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
   <ons-list-header>Header</ons-list-header>
   <ons-list-item>
     <div class="left">
-      <ons-icon icon="md-face" class="list__item__icon"></ons-icon>
+      <ons-icon icon="md-face" class="list-item__icon"></ons-icon>
     </div>
     <div class="center">
-      <span class="list__item__title">Title</span>
-      <span class="list__item__subtitle">Subtitle</span>
+      <span class="list-item__title">Title</span>
+      <span class="list-item__subtitle">Subtitle</span>
     </div>
     <label class="right">
       <ons-switch></ons-switch>
@@ -61,11 +61,11 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
   renderRow={(row, idx) => (
     <ListItem modifier={idx === this.state.data.length - 1 ? 'longdivider' : null}>
       <div className="left">
-        <Icon icon="md-face" className="list__item__icon" />
+        <Icon icon="md-face" className="list-item__icon" />
       </div>
       <div className="center">
-        <span className="list__item__title">{row}</span>
-        <span className="list__item__subtitle">Subtitle</span>
+        <span className="list-item__title">{row}</span>
+        <span className="list-item__subtitle">Subtitle</span>
       </div>
       <label className="right">
         <Switch />
@@ -79,11 +79,14 @@ Lists are a very common pattern in mobile apps and thus Onsen UI provides abstra
 <% if @framework isnt 'react': %>
 ##### Infinite scroll
 
-Adding new items to the list whenever the user reaches the bottom of the list is a very common practice. To do this, <%- @componentLink('page') %> component provides `onInfiniteScroll` property that is called every time the scroll is near the bottom.
+Adding new items to the list whenever the user reaches the bottom of the list is a very common practice. This use case is covered in <%- @componentLink('page') %> component.
 
-<% if @framework is 'angular1': %>
+<%if @framework is 'vue': %>
+An `infiniteScroll` prop can be specified in order to pass a function handler.
+<% else if @framework is 'angular1': %>
 For AngularJS, `ng-infinite-scroll` attribute allows to use scoped variables.
-<% end %>
+<% else: %>
+This component provides a `onInfiniteScroll` property that is called every time the scroll is near the bottom.
 <% end %>
 
 ##### Lazy repeat
@@ -108,7 +111,7 @@ Other components from different categories are available to complete the develop
 
 ##### Pull-hook
 
-A very common way to check for updates in apps is given by the <%- @componentLink('pull-hook') %> component, which enables a simple "pull to refresh" functionality.
+A very common way to check to get updates in apps is given by the <%- @componentLink('pull-hook') %> component, which enables a simple "pull to refresh" functionality.
 
 ##### Speed-dial
 
@@ -130,7 +133,7 @@ In general, Ionicons are good for iOS apps while the Material Icons work best fo
 
 #### Gesture detector
 
-It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in [`ons.GestureDetector`](/v2/docs/<%- @framework %>/ons.GestureDetector.html) object.
+It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in <%- @componentLink('ons.GestureDetector') %> object.
 
 <% if @framework isnt 'angular2': %>
 ```

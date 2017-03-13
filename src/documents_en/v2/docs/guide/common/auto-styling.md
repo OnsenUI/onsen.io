@@ -8,14 +8,14 @@ Some tools are provided to give a more accurate customization.
 
 #### Platform utilities
 
-[`ons.platform`](/v2/docs/js/ons.platform.html) object is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
+<%- @componentLink('ons.platform')%> object is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
 
 You can set a platform with `ons.platform.select('android')`, for example, in order to display Material Design on every platform. This must be called before the app is initialized (right after including `onsenui.js`).
 
-<% if @framework != 'react': %>
+<% if @framework not in ['react', 'vue']: %>
 #### Conditional element
 
-A conditional element called [`<ons-if>`](/v2/docs/js/ons-if.html) is available to filter content depending on the platform or orientation.
+A conditional element called <%- @componentLink('if') %> is available to filter content depending on the platform or orientation.
 
 ```html
   <ons-if platform="android">
