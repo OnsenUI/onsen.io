@@ -311,6 +311,18 @@ module.exports = function() {
         return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
       },
 
+      mapKeywords: function(message) {
+        if (this.framework === 'vue') {
+          return message
+            .replace(/(^|<\/?|\/)(ons-)/gm, '$1v-$2')
+            .replace(/(^|`|\s|\/)(ons(\.|$|`|\s))/gm, '$1$$$2')
+            .replace(/ element/img, ' component')
+          ;
+        }
+
+        return message;
+      },
+
       translate: function(message, lang) {
 
         if (!lang){
@@ -363,15 +375,16 @@ module.exports = function() {
           return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
         }
         if (this.framework === 'vue') {
-          return 'v-ons-' + component;
+          return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;
         }
 
         return 'ons-' + component;
       },
 
       componentLink: function(component) {
-        component = this.mapComponentName(component);
-        return '[`<' + component + '>`](/v2/docs/' + this.framework + '/' + component + '.html)';
+        var linkName = this.mapComponentName(component);
+        var componentName = (/^ons($|\.)/.test(component) ? linkName : ('`<' + linkName + '>`'));
+        return '[' + componentName + '](/v2/docs/' + this.framework + '/' + linkName + '.html)';
       }
     };
 

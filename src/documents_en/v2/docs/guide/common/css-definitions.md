@@ -1,10 +1,10 @@
 ### CSS Definitions
 
-Onsen UI styles are defined in `onsenui.css` and `onsen-css-components.css`. They are written in the [Stylus](http://stylus-lang.com/) format.
+Onsen UI styles are defined in `onsenui.css` and `onsen-css-components.css`. They are written in pure CSS using some extra features provided by [cssnext](http://cssnext.io/).
 
-`onsenui.css` is a core CSS module that defines styles for the custom elements. The source code exists under `core/css` directory. `onsen-css-components.css` contains CSS definitions for CSS components. The source code exists in `css-components/components-src/stylus`.
+`onsenui.css` is a core CSS module that defines styles for the custom elements. The source code exists under [`core/css` directory](https://github.com/OnsenUI/OnsenUI/tree/master/core/css). `onsen-css-components.css` contains CSS definitions for CSS components. The source code exists in [`css-components/src`](https://github.com/OnsenUI/OnsenUI/tree/master/css-components/src).
 
-You can also use [Onsen CSS Components](http://components.onsen.io/) to customize pre-defined colors. After the customization, you can download and replace to the existing `onsenui-css-components.css` to reflect the changes.
+A local tool is included in Onsen UI core (`onsenui`) for previewing changes in Onsen CSS Component. This tool, located under [onsenui/css-components-src/](https://github.com/OnsenUI/OnsenUI-dist/tree/2.2.0/css-components-src) directory in a local instalation, is also able to generate a new `onsenui-css-components.css` file that must be imported in the project.
 
 #### Overriding CSS style
 

@@ -75,7 +75,7 @@ A toolbar is defined as a <%- @componentLink('toolbar') %> or <%- @componentLink
 
 The toolbar is divided into 3 sections that can be specified as class names (`left`, `center`, and `right`). You can use <%- @componentLink('icon') %> to display an icon, <%- @componentLink('toolbar-button') %> or <%- @componentLink('back-button') %> to place an button, or insert any HTML content.
 
-<% if @framework not in ['react', 'angular2']: %>
+<% if @framework not in ['react', 'angular2', 'vue']: %>
 #### Page lifecycle
 
 <%- @componentLink('page') %> provides a set of DOM events that will be fired in different moments of its life cycle. Use these events to alter the behavior on each page.
