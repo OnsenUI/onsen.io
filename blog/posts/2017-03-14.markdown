@@ -17,7 +17,7 @@ og:
 
 ![Onsen UI and Vue.js](/blog/content/images/2017/Mar/onsen_cssnext_postcss.png)
 
-In a few days, a new version 2.2.0 of Onsen UI will be released. It comes with new features, some breaking changes and many bug fixes not only for the core, but for Angular, React and Vue bindings as well.
+Onsen UI 2.2.0 has been released! It comes with new features, some breaking changes and many bug fixes not only for the core, but for Angular, React and Vue bindings as well.
 
 Together with Onsen UI, new versions of Monaca CLI and LocalKit will be released to support the latest changes.
 
@@ -33,7 +33,7 @@ We [recently mentioned it](/blog/onsen-news-roadmap-after-210/) but there are so
 
 ![Local theme roller](/blog/content/images/2017/Mar/local-theme-roller.png)
 
-The new components come bundled with a `css-components-src` directory that can be modified in order to create custom themes. **A local tool is included** in this directory for previewing all the changes. The old Theme Roller will not be updated anymore but it will keep working for previous versions (up to 2.1.0).
+The new components come bundled with a [`css-components-src` directory](https://github.com/OnsenUI/OnsenUI-dist/tree/2.2.0/css-components-src) that can be modified in order to create custom themes. **A local tool is included** in this directory for previewing all the changes. The old Theme Roller will not be updated anymore but it will keep working for previous versions (up to 2.1.0).
 
 Part of the CSS components have also been updated, so you can also expect a nice **visual change**.
 
@@ -45,9 +45,9 @@ The component has been deeply modified. Therefore, you might notice some behavio
 
 #### Bindings update.
 
-We will release new versions of the bindings after Onsen UI 2.2.0 is out. This includes support for `ons-select` and the new `ons-lazy-repeat` as well as many fixes: Device Back Button support for `react-onsenui`, new API for `vue-onsenui` (`alpha.1`), etc.
+New versions for the bindings have also been released. This includes support for `ons-select` and the new `ons-lazy-repeat` as well as many fixes: Device Back Button support for `react-onsenui`, new API for `vue-onsenui` (`alpha.1`), etc.
 
-For a full list of changes, please have a look at the [changelog](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md).
+For a full list of changes, please have a look at the changelogs: [`onsenui` & `angular-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md), [`react-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/react/CHANGELOG.md), [`angular2-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/angular2/CHANGELOG.md), [`vue-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/vue/CHANGELOG.md).
 
 
 ## Monaca CLI and LocalKit Updates
