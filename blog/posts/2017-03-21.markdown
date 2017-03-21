@@ -1,0 +1,39 @@
+---
+author: adam
+date: 2017-03-21
+id: vue-template-release
+title: "Monaca LocalKit and CLI support for Onsen UI 2.2.0 and Vue 2 binding"
+product: monaca
+category: announcement
+tags: monaca, onsen ui, vue
+---
+
+This week we have two news to announce. First of all, following the recent release of Onsen UI 2.2.0 now we also provide support for it in Monaca LocalKit and CLI. 
+Therefore, you can use transpirable frameworks Angular2 and React with new Onsen UI and cssnext. 
+Moreover, from now on you can create Vue 2 project in LocalKit/CLI based on our standard templates: Minimum, Navigation, Splitter and Tabbar. 
+New Vue 2 templates support `2.0.0-alpha.1` version of Vue binding and newest Onsen UI. 
+Below we prepared short tutorial that shows how to create Vue 2 project in Monaca LocalKit and CLI.
+
+## Vue project in CLI 
+If you are the user of Monaca CLI you can just use standard `monaca create projectName` command. In the list of available frameworks, you should see Vue 2.
+
+![]()
+Now just choose the type of template that fits your needs and after few moments project will be accessible in your local environment.
+
+![]()
+Feel free to test it in your browser by using  `monaca preview` command. 
+
+![]()
+
+## Monaca LocalKit implementation
+In Monaca LocalKit click `+` and `create` and then choose Vue2 from available categories. 
+
+![]()
+
+Now you can test it by using `Preview` functionality.
+
+## Cssnext support
+Following changes in Onsen UI 2.2.0 now all webpacks(Angular2, React and Vue 2) support cssnext.
+
+We would like to strongly encourage you to try not only Vue 2, but also other transpirable projects. We hope our changes will make your work 
+easier and more enjoyable. We are looking forward to feedback from you.  
