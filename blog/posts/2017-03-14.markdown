@@ -1,0 +1,62 @@
+---
+author: fran
+date: 2017-03-14
+id: 220-release
+title: "Onsen UI 2.2.0 Release: CSS Upgrade"
+product: onsen
+category: announcement
+tags: onsen ui
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://onsen.io/blog/content/images/2017/Mar/onsen_cssnext_postcss.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+![Onsen UI and Vue.js](/blog/content/images/2017/Mar/onsen_cssnext_postcss.png)
+
+Onsen UI 2.2.0 has been released! It comes with new features, some breaking changes and many bug fixes not only for the core, but for Angular, React and Vue bindings as well.
+
+Together with Onsen UI, new versions of Monaca CLI and LocalKit will be released to support the latest changes.
+
+<!-- more -->
+
+## Major and  Breaking Changes in 2.2.0
+
+First things first. Most of the developers will not have any issue with this, but for some of you who modify Onsen UI guts and styles, here are some changes:
+
+#### Stylus has been dropped. Long live to CSS.
+
+We [recently mentioned it](/blog/onsen-news-roadmap-after-210/) but there are some more news. In the end, we won't have *Less Components*, but *Next Components* instead. We were already using [Postcss](http://postcss.org/) for autoprefixes and now we just added [cssnext](http://cssnext.io/) to it. Our CSS components will remain as such, CSS components, but with some future features like variables (already [supported in Chrome/Safari](http://caniuse.com/#feat=css-variables)), apply rule and imports.
+
+![Local theme roller](/blog/content/images/2017/Mar/local-theme-roller.png)
+
+The new components come bundled with a [`css-components-src` directory](https://github.com/OnsenUI/OnsenUI-dist/tree/2.2.0/css-components-src) that can be modified in order to create custom themes. **A local tool is included** in this directory for previewing all the changes. The old Theme Roller will not be updated anymore but it will keep working for previous versions (up to 2.1.0).
+
+Part of the CSS components have also been updated, so you can also expect a nice **visual change**.
+
+#### Lazy Repeat supports dynamic heights.
+
+The API did not change so it should not affect in most cases. From now on, it is not compulsory to provide the height of every item since Lazy Repeat will measure it instead. However, it is still possible to provide a "hint" in order to enhance calculations and scrolling.
+
+The component has been deeply modified. Therefore, you might notice some behavioral changes. Please, do provide feedback if you face any issue.
+
+#### Bindings update.
+
+New versions for the bindings have also been released. This includes support for `ons-select` and the new `ons-lazy-repeat` as well as many fixes: Device Back Button support for `react-onsenui`, new API for `vue-onsenui` (`alpha.1`), etc.
+
+For a full list of changes, please have a look at the changelogs: [`onsenui` & `angular-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/CHANGELOG.md), [`react-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/react/CHANGELOG.md), [`angular2-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/angular2/CHANGELOG.md), [`vue-onsenui`](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/vue/CHANGELOG.md).
+
+
+## Monaca CLI and LocalKit Updates
+
+New versions for Onsen UI local tooling will also be released to support the latest changes. Templates for `vue-onsenui` are not ready yet but will land quite soon.
+
+Some bug fixes are included as well. Localkit synchronization with Monaca Cloud has improved and should now detect deleted projects correctly. Make sure to update your local tools before starting new projects or updating dependencies!
+
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★

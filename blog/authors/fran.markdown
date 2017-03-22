@@ -2,7 +2,7 @@
 id: fran
 name: "Fran Dios"
 gravatar: 05bab7dec90e8320c91d48bd52aba0f4
-url: http://frandiox.com/en/
+url: http://frandiox.com/
 ---
 
 After finalising his studies of Computer Engineering in Spain and Finland, Fran joined a student exchange program and Onsen UI team as an intern in Tokyo. This experience exceeded all expectations, therefore he decided to keep his hybrid Tokyoite lifestyle and coding projects.
