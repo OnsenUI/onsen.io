@@ -1,42 +1,35 @@
 ---
 author: adam
-date: 2017-03-21
+date: 2017-03-27
 id: vue-template-release
-title: "Monaca Localkit and CLI support for Onsen UI 2.2.0 and Vue 2 binding"
+title: "Monaca CLI support for Onsen UI 2.2.0 and Vue 2 binding"
 product: monaca
 category: announcement
 tags: monaca, onsen ui, vue
 ---
 
-This week we have two news to announce. First of all, following the recent release of Onsen UI 2.2.0 now we also provide support for it in Monaca Localkit and CLI. 
+This week we have two news to announce. First of all, following the recent release of Onsen UI 2.2.0 now we also provide support for it in Monaca CLI version 2.1.8. 
 Therefore, you can use transpirable frameworks Angular 2+ and React with the new Onsen UI and cssnext.
-Moreover, from now on, you can create Vue 2 project in Localkit/CLI based on our standard templates: Minimum, Navigation, Splitter and Tabbar.
+Moreover, from now on, you can create Vue 2 project in CLI based on our standard templates: Minimum, Navigation, Splitter and Tabbar.
 The new Vue 2 templates support the `2.0.0-alpha.1` version of the Vue binding and the newest Onsen UI.
-Below we prepared a short tutorial that shows how to create a Vue 2 project in Monaca Localkit and CLI.
+Below we prepared a short tutorial that shows how to create a Vue 2 project in Monaca CLI.
 
 ## Vue project in CLI
 If you are the user of Monaca CLI you can just use the standard `monaca create projectName` command. In the list of available frameworks, you should see Vue 2.
 
-![]()
+![CLI Category Vue](/blog/content/images/2017/Mar/cli-vue-category.png)
 
 Now just choose the type of template that fits your needs and after a few moments the project will be accessible in your local environment.
 
-![]()
+![CLI Vue Templates](/blog/content/images/2017/Mar/cli-vue-templates.png)
 
 Feel free to test it in your browser by using the `monaca preview` command.
 
-![]()
-
-## Monaca Localkit implementation
-In Monaca Localkit click `+` and `create` and then choose Vue2 from the available categories.
-
-![]()
-
-Now you can test it by using the `Preview` functionality.
+![CLI Vue Example](/blog/content/images/2017/Mar/cli-vue-example.png)
 
 ## Changes in webpack
 Following changes in Onsen UI 2.2.0 now all webpacks(Angular 2+, React and Vue 2) support cssnext.
 Also, we plan to update the currently used webpack 1 to the webpack 2. You can expect to hear about it soon.
 
-We would like to strongly encourage you to try not only Vue 2, but also other transpirable projects. We hope our changes will make your work
-easier and more enjoyable. We are looking forward to your feedback.
+Localkit will support mentioned changes in following week. We would like to strongly encourage you to try not only Vue 2, but also other transpirable projects.
+We hope our changes will make your work easier and more enjoyable. We are looking forward to your feedback.
