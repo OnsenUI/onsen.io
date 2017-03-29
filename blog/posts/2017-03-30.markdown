@@ -1,0 +1,91 @@
+---
+author: fran
+date: 2017-03-30
+id: 220-release
+title: "Start your Vue Mobile App Now. Onsen UI for Vue 2 Beta Release."
+product: onsen
+category: announcement
+tags: onsen ui, vue, vuex
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
+
+We are excited to announce that the beta of the Vue Components for Onsen UI is finally out. `vue-onsenui@2.0.0-beta.0` is now available on NPM and you can start creating Vue mobile apps with the power of Onsen UI. Vue UI for mobile devices made easy.
+
+In this article we also show how to create a kitchen sink app that includes most of the components with and without Vuex.
+
+<!-- more -->
+
+## Some Background First
+
+In case you are a Vue developer willing to create mobile apps and didn't hear about Onsen UI yet, here's a brief introduction.
+
+Onsen UI is an open source library used to create the user interface of hybrid apps with a focus on simplicity and ease of use. It is built on top of Custom Elements ([Web Components standard](https://www.w3.org/standards/techs/components#w3c_all)) but provides wrappers to support multiple JS frameworks such as Vue. Even though we are releasing Vue support now, we've been here for a while supporting other frameworks and letting many developers bootstrap their mobile apps.
+
+Onsen UI apps are made with the [Cordova](https://cordova.apache.org/) framework, which provides an API to use native features in hybrid apps via plugins. Onsen UI belongs to the [Monaca Platform](https://monaca.io/), a set of tools that eases everything related to Cordova development. Mobile debugger, CLI, templates, backend solutions, push notifications and direct publication in app stores are some of the available features. Onsen UI is the open source UI framework used to create apps in Monaca although, of course, it can be used separately for Cordova apps or mobile sites as well.
+
+## Beta News
+
+During alpha version we changed the API a couple of times to make it feel better for Vue developers. During the beta we don't expect to make big changes to the API itself. In general, updates to new beta versions or release candidate should be quick and easy since we expect most of the changes to be bug fixes and new features.
+
+In fact, the API has not changed since `alpha.1`, so if you are updating from this version you don't need to change your code. This new version just includes bug fixes and some extra features to enhance Vuex support.
+
+## Starting New Apps with Monaca CLI
+
+As mentioned in the last blog post, [Monaca CLI](https://monaca.io/cli.html) has been updated to include Vue templates. This gives you a Cordova App template prepared to work with Onsen UI and Vue. Making Vue hybrid apps will become very easy with [Onsen UI & Monaca Toolkit](https://onsen.io/getting-started/). Furthermore, it will be soon updated to support Webpack v2 (stay tunned!).
+
+## Kitchen Sink App with Vue CLI
+
+Since the previous templates use Webpack v1, this app has been created with [Vue CLI](https://github.com/vuejs/vue-cli), which already supports Webpack v2. Unlike the previous ones, the project won't have a Cordova-like structure but it can be enough for this example. It is based on [`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) template and modified afterward to support Onsen UI.
+
+Before starting with this app, it is highly recommended having a look at the [docs overview](https://onsen.io/v2/docs/guide/vue/) in order to understand the basics of Onsen UI, its components and how everything is connected to Vue.
+
+#### Preview
+
+First of all, let's see a working version of this app so you can get an idea of what we are doing. [Here](https://frandiox.github.io/vue-onsenui-kitchensink/) is the main view.
+
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <iframe src="https://frandiox.github.io/vue-onsenui-kitchensink/" scrolling="no" style="width: 345px; height: 600px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-right: 10px" class="lazy-hidden"></iframe>
+  <iframe src="https://frandiox.github.io/vue-onsenui-kitchensink/?platform=android" scrolling="no" style="width: 345px; height: 600px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-left: 10px" class="lazy-hidden"></iframe>
+</div>
+
+These two frames share the same source code, but the optional Onsen UI **autostyling** feature is changing the effects and styles according to the platform.
+
+#### The Code
+
+There are two versions of this app. The first one uses **[Vuex](https://vuex.vuejs.org/en/)** to manage the app states and can be found [here](https://github.com/frandiox/vue-onsenui-kitchensink). If you don't want Vuex in your app, check out [this branch](https://github.com/frandiox/vue-onsenui-kitchensink/tree/no-vuex) for an example where the state is simply passed down as props to other components.
+
+#### Webpack 2 Configuration
+
+The Webpack configuration file that comes in the `webpack-simple` template has been slightly modified to fit our needs. Apart from including a couple of plugins, the most important change is related to CSS loader. Onsen UI bundles `css/onsen-css-components.css`, which contains the processed CSS components including browser prefixes, etc. However, in case we want to modify the theme, the source `css-components-src/src/onsen-css-components.css` is also included. It might be a bit confusing since both files have a `.css` extension, but the source requires some processing before it is usable in every browser. Specifically, we need `postcss-loader` and `postcss-cssnext`. This will process the CSS source, transpile features and add the necessary prefixes. The full configuration is located [here](https://github.com/frandiox/vue-onsenui-kitchensink/blob/master/webpack.config.js).
+
+#### Choosing Components Order
+
+There are 3 main navigation components for handling multiple pages in Onsen UI: `VOnsNavigator`, `VOnsTabbar` and `VOnsSplitter`. These components are meant to have children and manage them. Therefore, we get different behavior depending on the order that we choose for them (if we ever need to combine them). The rest of the components can be considered as, in general, mere "leaves" in the DOM tree.
+
+In this app we want to have a `VOnsTabbar` that separates different sections (home, forms and animations). We also want to have a side menu common to all of these sections showing some links. In order to achieve this behavior, we set `VOnsSplitter` as the parent of `VOnsTabbar`. This way, we can change `VOnsTabbar`'s inner pages while the `VOnsSplitter` is not affected. Note that, if we change `VOnsSplitter`'s content in this scenario, the `VOnsTabbar` would disappear.
+
+After that, we also want show some extra pages featuring other components. In this new pages we don't need to change between sections with the `VOnsTabbar` or show the menu, we just want to see the current component. Therefore, we can set a `VOnsNavigator` as the parent of the previous two components for this purpose. It will push pages over the other components and hide them until we pop the page.
+
+#### Vuex
+
+Since multiple navigation components are combined in this app, Vuex becomes quite handy to manipulate a component from anywhere in the app. For example, changing a `VOnsTabbar` section directly from `VOnsSplitter`. It is not required, though, and the same functionality can be achieved without it.
+
+#### What about Vue Router?
+
+Onsen UI already provides components for simple and yet powerful routing based on push/pop. It is possible to have multiple page stacks and combine them, thus making an extra router not very necessary. Even though it is not a priority, we will try to support Vue Router for those developers who prefer it. We'll have some updates soon regarding this topic.
+
+## Conclusion
+
+We hope you are as excited as us about this news and give `vue-onsenui` a try for your Vue hybrid apps. `vue-onsenui` development is quite open and you can contribute with issue reports, pull requests or by simply commenting on what you like or don't. We'd like to improve and tailor it for Vue developers. Help us make the best Vue UI framework for mobile apps!
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
