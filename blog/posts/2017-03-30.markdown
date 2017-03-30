@@ -35,13 +35,13 @@ Onsen UI apps are made with the [Cordova](https://cordova.apache.org/) framework
 
 During alpha version we changed the API a couple of times to make it feel better for Vue developers. During the beta, the API itself is not expected to be significantly modified. In general, only new features and fixes are likely to happen so updating to new versions should be quick and easy. In fact, the API has not changed since `alpha.1`.
 
-## Starting New Apps with Monaca CLI
+## New Apps with Monaca CLI/Localkit
 
-As mentioned in the last blog post, [Monaca CLI](https://monaca.io/cli.html) has been updated to include Vue templates. This gives you a Cordova App template prepared to work with Onsen UI and Vue. Making Vue hybrid apps will become very easy with [Onsen UI & Monaca Toolkit](https://onsen.io/getting-started/). Furthermore, it will be soon updated to support Webpack v2 (stay tunned!).
+Vue hybrid apps are now possible with [Onsen UI & Monaca Toolkit](https://onsen.io/getting-started/). As mentioned in the [last blog post](/blog/vue-template-release/), Monaca CLI & Localkit have been updated to include Vue templates. This gives you a Cordova app template prepared to work with Onsen UI and Vue. Furthermore, it will be soon updated to support Webpack v2 (stay tunned!).
 
 ## Kitchen Sink App with Vue CLI
 
-Since the previous templates use Webpack v1, this app has been created with [Vue CLI](https://github.com/vuejs/vue-cli), which already supports Webpack v2. Unlike the previous ones, the project will not have a Cordova-like structure but it can be enough for this example. It is based on [`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) template and modified afterward to support Onsen UI.
+Since the previous templates use Webpack v1, this example has been created with [Vue CLI](https://github.com/vuejs/vue-cli), which already supports Webpack v2. Unlike the previous ones, the project will not have a Cordova-like structure but it can be enough for this example. It is based on [`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) template and modified afterward to support Onsen UI.
 
 Before starting with this app, it is highly recommended having a look at the [docs overview](https://onsen.io/v2/docs/guide/vue/) in order to understand the basics of Onsen UI, its components and how everything is connected to Vue.
 
@@ -164,9 +164,7 @@ computed: {
       this.$store.state.switchOn;
     },
     set(newValue) {
-      if (newValue !== this.$store.state.switchOn) {
-        this.$store.commit('switch', newValue);
-      }
+      this.$store.commit('switch', newValue);
     }
   }
 }
