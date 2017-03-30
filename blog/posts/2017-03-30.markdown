@@ -25,9 +25,9 @@ In this article we also show how to create a kitchen sink app that includes most
 
 ## Some Background First
 
-In case you are a Vue developer willing to create mobile apps and did not hear about Onsen UI yet, here is a brief introduction.
+In case you are a [Vue](https://vuejs.org) developer willing to create mobile apps and did not hear about Onsen UI yet, here is a brief introduction.
 
-Onsen UI is an open source library used to create the user interface of hybrid apps with a focus on simplicity and ease of use. It is built on top of Custom Elements ([Web Components standard](https://www.w3.org/standards/techs/components#w3c_all)) but provides wrappers to support multiple JS frameworks such as Vue. Even though we are releasing Vue support now, we have been here for a while supporting other frameworks and letting many developers bootstrap their mobile apps.
+[Onsen UI](/) is an open source library used to create the user interface of hybrid apps with a focus on simplicity and ease of use. It is built on top of Custom Elements ([Web Components standard](https://www.w3.org/standards/techs/components#w3c_all)) but provides wrappers to support multiple JS frameworks such as Vue. Even though we are releasing Vue support now, we have been here for a while supporting other frameworks and letting many developers bootstrap their mobile apps.
 
 Onsen UI apps are made with the [Cordova](https://cordova.apache.org/) framework, which provides an API to use native features in hybrid apps via plugins. Onsen UI belongs to the [Monaca Platform](https://monaca.io/), a set of tools that eases everything related to Cordova development. Mobile debugger, CLI, templates, backend solutions, push notifications and direct publication in app stores are some of the available features. Onsen UI is the open source UI framework used to create apps in Monaca although, of course, it can be used separately for Cordova apps or mobile sites as well.
 
@@ -43,9 +43,9 @@ Vue hybrid apps are now possible with [Onsen UI & Monaca Toolkit](https://onsen.
 
 Since the previous templates use Webpack v1, this example has been created with [Vue CLI](https://github.com/vuejs/vue-cli), which already supports Webpack v2. Unlike the previous ones, the project will not have a Cordova-like structure but it can be enough for this example. It is based on [`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) template and modified afterward to support Onsen UI.
 
-Before starting with this app, it is highly recommended having a look at the [docs overview](https://onsen.io/v2/docs/guide/vue/) in order to understand the basics of Onsen UI, its components and how everything is connected to Vue.
+Before starting with this app, it is highly recommended having a look at the [docs overview](https://onsen.io/v2/docs/guide/vue/) (or [tutorial app](https://tutorial.onsen.io)) in order to understand the basics of Onsen UI, its components and how everything is connected to Vue.
 
-#### Preview
+#### Prevue
 
 First of all, let's see a working version of this app so you can get an idea of what we are doing. [Here](https://frandiox.github.io/vue-onsenui-kitchensink/) is the main view.
 
