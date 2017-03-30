@@ -57,6 +57,8 @@ Cordovaとの組み合わせについては情報は少ないけれど、問題�
 
 ## WEBエンジニアの可能性を広げるJINS MEMEのアプリ開発　by（株）ジェイアイエヌ システム企画室　リーダー 佐藤 拓磨 さん
 
+![](/blog/content/images/2017/Mar/cordovaug-10-15.jpg)
+
 今回はJINSのプロダクト、MEMEを紹介します。JINS MEMEは世界初の自分を見るアイウェアです。目は口ほどにものを言うという慣用句があるくらい、瞬きや目の動きにはその人の心理状態や体の状態が表れます。
 
 眼電位がコア技術で、東北大学の川島隆太先生と一緒に研究開発をしています。具体的には三点式眼電位センサー（EOG）を備えています。眼が動くと電位差が発生し、その電位差を鼻パットとブリッジで読み取る仕組みです。これは元々医療世界では知られていたものですが、昔は専用の器具を使って測定しないといけませんでした。また、従来の四点式から三点式に変更し、MEMEという形にしました。EOGで取れるデータは上下左右の眼球の動きと瞬きの強度になります。
@@ -124,6 +126,9 @@ MEMEはテクノロジーの塊ではありますが、何よりも普通の眼�
 今回のプロジェクトを解析した結果ですが、TypeScriptが2.3万行、SASSが6,027行、HTMLは1,072行となっています。使ったオープンソース・ソフトウェアは34種類、プラグインが16種類、JavaScriptライブラリは18種類です。さらにメンテナンス容易性指数はOSSよりも良い傾向が出ています。バグ見積もり、可読性はソース規模に対してずれていない結果となりました。今回紹介した作戦が功を奏したかは分かりませんが、間違ってはいなかったかなと考えています。
 
 最後にまとめです。ハイブリッドアプリ開発はちゃんと準備して望めば結果はついてくると感じています。技術面で詰まったことはありませんでした。なので、マルチプラットフォーム対応するなら十分に選択肢の一つになると思います。コンシューマ向けアプリ開発はソフトウェアエンジニアにとっては花形だと思います。今回の情報が皆さんのお役に立てば幸いです。
+
+※ 本セッションの資料は以下になります。
+<iframe src="//www.slideshare.net/slideshow/embed_code/key/ol1WJe3PFuUgzS" width="595" height="485" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe> <div style="margin-bottom:5px"> <strong> <a href="//www.slideshare.net/ShinOgata1/cordova-73839153" title="Cordova を使って本気で商用ハイブリッドアプリ開発をやってみた" target="_blank">Cordova を使って本気で商用ハイブリッドアプリ開発をやってみた</a> </strong> from <strong><a target="_blank" href="//www.slideshare.net/ShinOgata1">Shin Ogata</a></strong> </div>
 
 ------
 
