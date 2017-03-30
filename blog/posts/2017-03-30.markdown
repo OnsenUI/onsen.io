@@ -2,7 +2,7 @@
 author: fran
 date: 2017-03-30
 id: vue-2-onseui-beta-release
-title: "Start your Vue Mobile App Now. Onsen UI for Vue 2 Beta Release."
+title: "Start your Vue Mobile App Now. Onsen UI for Vue 2 Beta Release"
 product: onsen
 category: announcement
 tags: onsen ui, vue, vuex
@@ -17,7 +17,7 @@ og:
 
 ![Onsen UI and Vue.js](https://onsen.io/blog/content/images/2016/Aug/onsen_vue.png)
 
-We are excited to announce that the beta of the Vue Components for Onsen UI is finally out. `vue-onsenui@2.0.0-beta.0` is now available on NPM and you can start creating Vue mobile apps with the power of Onsen UI. Vue UI for mobile devices made easy.
+We are excited to announce that the Vue Components for Onsen UI beta version is finally out. `vue-onsenui@2.0.0-beta.0` is now available on NPM and you can start creating Vue mobile apps with the power of Onsen UI. Vue UI for mobile devices made easy.
 
 In this article we also show how to create a kitchen sink app that includes most of the components with and without Vuex.
 
@@ -25,17 +25,15 @@ In this article we also show how to create a kitchen sink app that includes most
 
 ## Some Background First
 
-In case you are a Vue developer willing to create mobile apps and didn't hear about Onsen UI yet, here's a brief introduction.
+In case you are a Vue developer willing to create mobile apps and did not hear about Onsen UI yet, here is a brief introduction.
 
-Onsen UI is an open source library used to create the user interface of hybrid apps with a focus on simplicity and ease of use. It is built on top of Custom Elements ([Web Components standard](https://www.w3.org/standards/techs/components#w3c_all)) but provides wrappers to support multiple JS frameworks such as Vue. Even though we are releasing Vue support now, we've been here for a while supporting other frameworks and letting many developers bootstrap their mobile apps.
+Onsen UI is an open source library used to create the user interface of hybrid apps with a focus on simplicity and ease of use. It is built on top of Custom Elements ([Web Components standard](https://www.w3.org/standards/techs/components#w3c_all)) but provides wrappers to support multiple JS frameworks such as Vue. Even though we are releasing Vue support now, we have been here for a while supporting other frameworks and letting many developers bootstrap their mobile apps.
 
 Onsen UI apps are made with the [Cordova](https://cordova.apache.org/) framework, which provides an API to use native features in hybrid apps via plugins. Onsen UI belongs to the [Monaca Platform](https://monaca.io/), a set of tools that eases everything related to Cordova development. Mobile debugger, CLI, templates, backend solutions, push notifications and direct publication in app stores are some of the available features. Onsen UI is the open source UI framework used to create apps in Monaca although, of course, it can be used separately for Cordova apps or mobile sites as well.
 
 ## Beta News
 
-During alpha version we changed the API a couple of times to make it feel better for Vue developers. During the beta we don't expect to make big changes to the API itself. In general, updates to new beta versions or release candidate should be quick and easy since we expect most of the changes to be bug fixes and new features.
-
-In fact, the API has not changed since `alpha.1`, so if you are updating from this version you don't need to change your code. This new version just includes bug fixes and some extra features to enhance Vuex support.
+During alpha version we changed the API a couple of times to make it feel better for Vue developers. During the beta, the API itself is not expected to be significantly modified. In general, only new features and fixes are likely to happen so updating to new versions should be quick and easy. In fact, the API has not changed since `alpha.1`.
 
 ## Starting New Apps with Monaca CLI
 
@@ -43,7 +41,7 @@ As mentioned in the last blog post, [Monaca CLI](https://monaca.io/cli.html) has
 
 ## Kitchen Sink App with Vue CLI
 
-Since the previous templates use Webpack v1, this app has been created with [Vue CLI](https://github.com/vuejs/vue-cli), which already supports Webpack v2. Unlike the previous ones, the project won't have a Cordova-like structure but it can be enough for this example. It is based on [`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) template and modified afterward to support Onsen UI.
+Since the previous templates use Webpack v1, this app has been created with [Vue CLI](https://github.com/vuejs/vue-cli), which already supports Webpack v2. Unlike the previous ones, the project will not have a Cordova-like structure but it can be enough for this example. It is based on [`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) template and modified afterward to support Onsen UI.
 
 Before starting with this app, it is highly recommended having a look at the [docs overview](https://onsen.io/v2/docs/guide/vue/) in order to understand the basics of Onsen UI, its components and how everything is connected to Vue.
 
@@ -56,15 +54,13 @@ First of all, let's see a working version of this app so you can get an idea of 
   <iframe src="https://frandiox.github.io/vue-onsenui-kitchensink/?platform=android" scrolling="no" style="width: 345px; height: 600px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-left: 10px" class="lazy-hidden"></iframe>
 </div>
 
-These two frames share the same source code, but the optional Onsen UI **autostyling** feature is changing the effects and styles according to the platform.
+These two frames share the same source code, but the optional **Onsen UI autostyling** feature is changing the effects and styles according to the platform.
 
-#### The Code
-
-There are two versions of this app. The first one uses **[Vuex](https://vuex.vuejs.org/en/)** to manage the app states and can be found [here](https://github.com/frandiox/vue-onsenui-kitchensink). If you don't want Vuex in your app, check out [this branch](https://github.com/frandiox/vue-onsenui-kitchensink/tree/no-vuex) for an example where the state is simply passed down as props to other components.
+There are two versions of this app. The first one uses **[Vuex](https://vuex.vuejs.org/en/)** to manage the app state and can be found [here](https://github.com/frandiox/vue-onsenui-kitchensink). If you do not want Vuex in your app, check out [this branch](https://github.com/frandiox/vue-onsenui-kitchensink/tree/no-vuex) for an example where the state is simply passed down as props to other components.
 
 #### Webpack 2 Configuration
 
-The Webpack configuration file that comes in the `webpack-simple` template has been slightly modified to fit our needs. Apart from including a couple of plugins, the most important change is related to CSS loader. Onsen UI bundles `css/onsen-css-components.css`, which contains the processed CSS components including browser prefixes, etc. However, in case we want to modify the theme, the source `css-components-src/src/onsen-css-components.css` is also included. It might be a bit confusing since both files have a `.css` extension, but the source requires some processing before it is usable in every browser. Specifically, we need `postcss-loader` and `postcss-cssnext`. This will process the CSS source, transpile features and add the necessary prefixes. The full configuration is located [here](https://github.com/frandiox/vue-onsenui-kitchensink/blob/master/webpack.config.js).
+The Webpack configuration file that comes in the `webpack-simple` template has been slightly modified to fit our needs. Apart from including a couple of plugins, the most important change is related to CSS loader. Onsen UI bundles `css/onsen-css-components.css`, which contains the transpiled CSS components including browser prefixes and everything else to work right away. However, in case we want to modify the theme colors, the source `css-components-src/src/onsen-css-components.css` is also included and can be modified. It might be a bit confusing since both files have a `.css` extension, but the source uses some new CSS features that are not yet native in some browser (variables, apply, etc.), thus requiring some processing. Specifically, we need `postcss-loader` and `postcss-cssnext`. The full configuration is located [here](https://github.com/frandiox/vue-onsenui-kitchensink/blob/master/webpack.config.js).
 
 #### Choosing Components Order
 
@@ -74,9 +70,113 @@ In this app we want to have a `VOnsTabbar` that separates different sections (ho
 
 After that, we also want show some extra pages featuring other components. In this new pages we don't need to change between sections with the `VOnsTabbar` or show the menu, we just want to see the current component. Therefore, we can set a `VOnsNavigator` as the parent of the previous two components for this purpose. It will push pages over the other components and hide them until we pop the page.
 
+#### Code Highlights
+
+* Custom Toolbar
+
+Onsen UI provides customizable components that can be wrapped in other components depending on our needs. Here we will need a `VOnsBackButton` most of the times with a custom label, title and some optional button on the right side. Therefore, we can create an extra `CustomToolbar` wrapping `VOnsToolbar`:
+
+```html
+<template>
+  <v-ons-toolbar>
+    <div class="left">
+      <slot name="left">
+        <v-ons-back-button v-if="backLabel">
+          {{ backLabel }}
+        </v-ons-back-button>
+      </slot>
+    </div>
+    <div class="center"><slot>{{ title }}</slot></div>
+    <div class="right"><slot name="right"></slot></div>
+  </v-ons-toolbar>
+</template>
+```
+
+This allows us to add a toolbar in 1 single line:
+
+```html
+<custom-toolbar back-label="Back">Title</custom-toolbar>
+```
+
+* Navigator
+
+By default, `VOnsNavigator` runs `this.pageStack.pop()` when `VOnsBackButton` is tapped or a device back button fires. As usual, we can prevent the default behavior with `@click.prevent="..."` and `@deviceBackButton.prevent="..."`, respectively, but there is a handier way for situations where we want to change all of them. Use the new `popPage` prop to override the way `VOnsNavigator` pops a page:
+
+```html
+<v-ons-navigator
+  :page-stack="$store.state.navigator.stack"
+  :options="$store.state.navigator.options"
+  :pop-page="() => this.$store.commit('navigator/pop')"
+></v-ons-navigator>
+```
+
+Additionally, we can pass `options` prop to change the transition animations.
+
+* Tabbar
+
+On iOS, tabs usually contain an icon, unlike on Android (Material Design) where most of the times contain just a label. We can choose to display icons only on iOS for `VOnsTab`. In order to do this, simply pass a `null` value to the `icon` prop for Android:
+
+```javascript
+{
+  label: 'Home',
+  icon: this.$ons.platform.isAndroid() ? null : 'ion-home',
+  page: Home
+}
+```
+
+Something similar for the titles. In Material Design usually the title is fixed when changing between tabs:
+
+```javascript
+computed: {
+  title() {
+    return this.$ons.platform.isAndroid()
+      ? 'Kitchen Sink'
+      : this.tabs[this.index].label
+    ;
+  }
+}
+```
+
+* Pull Hook
+
+Making a Twitter-like pull to refresh icon is quite simple:
+
+```html
+<v-ons-icon
+  :spin="state === 'action'"
+  :icon="state === 'action' ? 'fa-spinner' : 'fa-arrow-down'"
+  :rotate="state === 'preaction' && 180"
+></v-ons-icon>
+```
+
+Do not forget to add a transition for the icon: `transition: transform .2s ease-in-out`.
+
+* Forms
+
+In this app we are not sharing input values with other components so it is not saved in the store. However, it can be easily connected by using `VOnsModel` directive and computed props:
+
+```javascript
+<v-ons-switch v-ons-model="switchOn" />
+...
+computed: {
+  switchOn: {
+    get() {
+      this.$store.state.switchOn;
+    },
+    set(newValue) {
+      if (newValue !== this.$store.state.switchOn) {
+        this.$store.commit('switch', newValue);
+      }
+    }
+  }
+}
+```
+
 #### Vuex
 
 Since multiple navigation components are combined in this app, Vuex becomes quite handy to manipulate a component from anywhere in the app. For example, changing a `VOnsTabbar` section directly from `VOnsSplitter`. It is not required, though, and the same functionality can be achieved without it.
+
+We might add a template store object prepared for these components that can be imported from `vue-onsenui` package if developers consider it useful.
 
 #### What about Vue Router?
 
