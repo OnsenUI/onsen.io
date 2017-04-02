@@ -43,7 +43,7 @@ module.exports = function(language, isStaging) {
       name: 'Monaca Team',
       url: 'https://monaca.io',
     },
-    moongift: {
+    atsushi: {
       name: 'Atsushi Nakatsugawa',
       gravator: '4cafe6a1c6287d64d7252279eeeffa94'
     },
@@ -71,9 +71,6 @@ module.exports = function(language, isStaging) {
       name: 'Konstantin Dinev',
       gravator: '31893df4323fac99458ed86784e25a77'
     },
-    atsushi: {
-      name: '中津川篤司',
-    },
     ryoichi: {
       name: 'Ryoichi Tsukada',
     },
@@ -94,6 +91,11 @@ module.exports = function(language, isStaging) {
       email: 'junio@asial.co.jp',
       gravatar: 'e0bf2e415d1174b8a479ade0c5cc671d',
       url: 'https://github.com/misterjunio'
+    },
+    adam: {
+      name: 'Adam Kozuch',
+      email: 'adam@asial.co.jp',
+      url: 'https://github.com/adamkozuch'
     }
   };
 
@@ -160,7 +162,7 @@ module.exports = function(language, isStaging) {
     },
 
     ja: {
-      url: 'http://ja.onsen.io',
+      url: 'https://ja.onsen.io',
       title: 'HTML5モバイルアプリをもっと速く、もっと美しく Onsen UI',
       description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
       keywords: '',

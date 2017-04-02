@@ -1,31 +1,31 @@
 ---
 page: 'vue-landing'
 category: 'discover'
-title: 'Vue.js components for creating hybrid mobile apps with Onsen UI'
+title: 'Vue.js 2 UI components by Onsen UI Hybrid Mobile App Framework with Cordova'
 layout: 'default.html.eco'
 topbar: false
 actionbar: false
 version: v2
-description: 'Vue.js developers can easily create high-performance hybrid mobile apps, using HTML5, CSS and JavaScript. Material and iOS design with automatic styling.'
+description: 'Vue.js 2 developers can easily create high-performance hybrid mobile apps, using HTML5, CSS and JavaScript. Material and iOS design with automatic styling.'
 ---
 
 <div class="landing vue-landing">
   <%- @partial('global-nav.html.eco') %>
   <div class="landing-header">
     <h1 class="landing-header-title">
-      Onsen UI for Vue.js
+      Onsen UI for Vue 2 <div style="display: inline-block;"><span style="font-size: 10px; color: #e10; border: 1px solid #ccc; padding: 2px 5px; vertical-align: middle;">beta release</span>
     </h1>
     <div class="landing-header-subtitle">
-      Preview version of binding library to help create hybrid apps with Onsen UI.
+      Power of Vue.js to create hybrid &amp; mobile web apps with Onsen UI.
     </div>
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
 
-    <a href="https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue" class="landing-header-get-started">
+    <a href="/v2/docs/guide/vue/" class="landing-header-get-started">
       <div class="landing-header-get-started-title">
         Get Started
       </div>
       <div class="landing-header-get-started-subtitle">
-        with Onsen UI for Vue.js
+        with Onsen UI for Vue 2
       </div>
     </a>
 
@@ -59,52 +59,60 @@ description: 'Vue.js developers can easily create high-performance hybrid mobile
 <div class="container">
 <%- @markdown => %>
 
-## Create hybrid and mobile apps with Onsen UI and Vue.js
+## Create Cordova based hybrid mobile apps with Onsen UI and Vue 2
 
-We have created a small set of bindings that make it easier to integrate Onsen UI into Vue apps. Onsen UI is a component library for creating hybrid apps built on top of **Web Components**. With this library we extend the Onsen UI components so they work well when used inside a Vue app.
+Integrating Onsen UI with Vue 2 is now really simple. Vue bindings for Onsen UI provides a Vue-like API to interact with Onsen UI elements in the shape of Vue components and directives. All the power of Onsen UI is now available for your Vue.js apps.
 
-## Available on npm
+## Installing Vue bindings for Onsen UI
 
-The bindings are [available on npm](https://www.npmjs.com/package/vue-onsenui). To use them you also need the core Onsen UI library.
+The bindings are [available on NPM](https://www.npmjs.com/package/vue-onsenui). To use them you also need the core Onsen UI library.
 
-So to install the library in your app all you need to do is:
+Therefore, to install the library in your app all you need to do is:
 
 ```bash
-npm install --save onsenui vue-onsenui
+yarn add onsenui vue-onsenui # Or use npm
 ```
+
+It is also available from Unpkg CDN: [core](https://unpkg.com/onsenui/) and [bindings](https://unpkg.com/vue-onsenui/).
 
 ## Easy to use
 
 The library is distributed as a Vue plugin so you can easily add it to your application:
 
 ```javascript
+/**
+ * The stylesheets can be loaded with Webpack
+ * or added with link tags.
+ */
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+// Import Vue
 import Vue from 'vue';
 
+// Import Onsen UI core and Vue bindings
+import 'onsenui';
 import VueOnsen from 'vue-onsenui';
-import ons from 'onsenui';
 
+// And just plug the bindings
 Vue.use(VueOnsen);
 
-ons.ready(() => {
-  /* eslint-disable no-new */
-  new Vue({
-    el: 'body',
-    components: { App }
-  });
+new Vue({
+  el: '#app',
+  template: '<App/>',
+  components: { App }
 });
 ```
 
-This exposes some utility functions that make it easier to control the Onsen UI components.
+This exposes all the Onsen UI custom elements as `<v-ons-*>` components as well as some utility functions for platform recognition and creating quick alert dialogs.
 
 ## Learn more
 
-We have published an article where you can learn how to use the library. We have also created an app that showcases most of the Onsen UI components.
-
-* [Preview! Vue.js support for Onsen UI](/blog/preview-vue-support-onsen-ui/)
-* [Kitchensink example](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+* [Docs](/v2/docs/guide/vue/)
 * [GitHub repository](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
+* [Examples](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/examples/components)
 
-This library is still an early preview but we are planning to add more features and also publish more documentation so everyone can start building mobile apps with Vue and Onsen UI!
+<b>This library is still an beta version, but all components are implemented and fully working. We'd like to get your feedback to improve the API, so everyone can flawlessly start building mobile apps with Vue and Onsen UI!</b>
 
 <% end %>
 </div>

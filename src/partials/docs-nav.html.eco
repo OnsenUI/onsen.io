@@ -37,6 +37,12 @@
                 React
               </a>
             </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'vue' %>">
+              <a href="/v2/docs/<%- if @reference then 'vue.html' else 'guide/vue' %>">
+                <img src="/images/common/icn_vue_4c.svg">
+                Vue 2
+              </a>
+            </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'onsen1' %>">
               <a href="/v1/<%- if @reference then 'reference/javascript.html' else 'guide.html' %>">
                 <img src="/images/common/icn_something_4c.svg">
@@ -61,6 +67,8 @@
               React
             <% else if @framework == 'js': %>
               JavaScript Core
+            <% else if @framework == 'vue': %>
+              Vue 2
             <% else if @framework == 'onsen1' or typeof @framework != 'string': %>
               Onsen UI v1
             <% end %>

@@ -36,6 +36,7 @@ module.exports = function(lang, isStaging) {
         .use(require('./helpers')())
         .use(require('./v1-api-docs')(lang))
         .use(require('./v2-wc-api-docs')(lang, 'js'))
+        .use(require('./v2-wc-api-docs')(lang, 'vue'))
         .use(require('./v2-wc-api-docs')(lang, 'angular1'))
         .use(require('./v2-wc-api-docs')(lang, 'angular2'))
         .use(require('./v2-react-api-docs')(lang))
@@ -280,15 +281,42 @@ module.exports = function(lang, isStaging) {
           .use(templates({inPlace: true, engine: 'eco'}))
         )
         .use(metalsmithDebug())
-        .use(feed({
-          collection: 'articles',
-          limit: 10,
-          destination: 'rss.xml',
-          feedOptions: {
-            title: 'The Official Onsen UI Framework Blog',
-            url: 'http://onsen.io/'
+        .use(function(files, metalsmith, done) { // Generate RSS feed
+          var articles = metalsmith.metadata().collections['articles'];
+
+          // Fix the metadata `author` of each article for metalsmith-feed
+          var originalAuthors = {}; // for restoring `author` later
+          for (var i = 0 ; i < articles.length ; i++) {
+            if (articles[i].author) {
+              originalAuthors[i] = articles[i].author;
+              articles[i].author = articles[i].author.name;
+            }
           }
-        }))
+
+          // Generate RSS feed based on the fixed collection `articles`
+          feed({
+            collection: 'articles',
+            limit: 10,
+            destination: 'rss.xml',
+            feedOptions: {
+              title: 'The Official Onsen UI Framework Blog',
+              url: 'http://onsen.io/'
+            }
+          })
+          (
+            files,
+            metalsmith,
+            function(){ // when `feed` is done
+              // Restore original `author`
+              for (var i = 0 ; i < articles.length ; i++) {
+                if (articles[i].author) {
+                  articles[i].author = originalAuthors[i];
+                }
+              }
+              done();
+            }
+          )
+        })
         .use(branch('!rss.xml')
           .use(currentPath())
           .use(layouts({

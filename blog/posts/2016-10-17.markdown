@@ -12,7 +12,7 @@ tags: onsen ui, angular 1, angular 2, react, vue, knockout
 
 The fact that Onsen UI is [built on top of Web Components](/blog/create-reusable-future-proof-ui-components-with-custom-elements-v1-web-components/) makes us proud to be framework agnostic. However, there are so many options out there that we can feel overwhelmed when it comes to choosing a front-end framework to develop with. Especially for those who don't have a large background in web programming, deciding which framework works better for them could be a tedious task.
 
-Have you already chosen your framework to work with Onsen UI? For those who still don't have a preference, in this article we show how to make a simple Hello World app with some of the existing alternatives: **Vanilla JavaScript, AngularJS, Angular 2, React, Vue.js and Knockout.js**. 
+Have you already chosen your framework to work with Onsen UI? For those who still don't have a preference, in this article we show how to make a simple Hello World app with some of the existing alternatives: **Vanilla JavaScript, AngularJS, Angular 2, React, Vue.js and Knockout.js**.
 
 <!-- more -->
 
@@ -62,13 +62,13 @@ More examples with React Components for Onsen UI [here](https://tutorial.onsen.i
 
 ### Vue.js
 
-Vue is a very powerful framework that keeps things simple. Or at least simpler than the previous two, in my personal opinion. Notice that in the first two lines we are just including Vue.js framework and `vue-onsenui` bindings, but the rest is almost like Vanilla JavaScript. In Vue we have access to `$notification` instead of `ons.notification` object directly from the template.
+Vue is a very powerful framework that keeps things simple. Or at least simpler than the previous two, in my personal opinion. In Vue we have access to `$notification` instead of `ons.notification` object directly from the template.
 
 <div class="local-iframe-wrapper-style">
-  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?external=https://tutorial.onsen.io/tutorial/other/vue_helloworld.html&docs=false"></iframe>
+  <iframe class="local-iframe-style" src="https://tutorial.onsen.io/embed-compact.html?framework=vue&category=Reference&module=page&docs=false"></iframe>
 </div>
 
-Vue bindings are still a **work in progress**. From now on we want to prepare these bindings to fully support Vue 2. Stay tunned!
+More information about Vue bindings [here](https://onsen.io/vue).
 
 ### Knockout.js
 

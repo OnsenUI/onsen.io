@@ -1,0 +1,67 @@
+---
+author: onsen
+date: 2017-02-03
+id: vuejs-2-binding-alpha-version-is-here
+title: "Onsen UI for Vue 2 α版リリース！"
+tags: vue, onsen ui
+product: onsen
+category: ニュース
+---
+
+（この記事は Onsen UI チームの [Júnio Silva](https://onsen.io/blog/junio/) が英語版 Monaca x Onsen ブログに投稿した [Vue 2 binding alpha version is here!](https://onsen.io/blog/vuejs-2-binding-alpha-version-is-here/) の翻訳です。）
+
+![Title](https://onsen.io/blog/content/images/2017/Feb/vue-onsenui-alpha.png)
+
+皆さんこんにちは。私は Onsen UI チームで最近インターンを始めた Júnio （ジュニオ）と言います。
+私たちは、[先日の記事](/blog/vue2-support-status-jan-2017/ "Vue 2 対応の進捗とリリーススケジュール")でお伝えしたリリース日を守るため、*Vue 2* バインディングの更新に日々取り組んできました。
+
+この度 α 版をリリースできることを嬉しく思います。では、早速詳細をお伝えしていきたいと思います。
+
+<!-- more -->
+
+### 使い方
+
+Onsen UI for Vue 2 は `npm install vue-onsenui` でインストールできます（Yarn でも構いません）。また、[GitHub](https://github.com/OnsenUI/OnsenUI "Vue 2 バインディング リポジトリ") から直接入手することもできます。
+
+次にそれを `import VueOnsen from 'vue-onsenui';` で import してください。そして `Vue.use(VueOnsen);` で `VueOnsen` プラグインをインストールしてください。
+
+なお、以上の工程は [*Vue*](https://jp.vuejs.org/v2/guide/installation.html "Vue.js のインストール") と [*Onsen UI*](https://ja.onsen.io/getting-started/#npm "Onsen UI のインストール") のインストールが既に済んでいることを前提としています。もしお済みでない場合は、各ライブラリのインストール手順を参照してください。
+
+より詳しい解説については、GitHub リポジトリにある [README（英語）](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/vue/README.md "より詳しい解説") および
+[公式サイト（日本語）](https://ja.onsen.io/vue/ "公式サイト") をご確認ください。
+
+### フィードバックのお願い
+
+α 版での新機能の紹介の前に、素晴らしい Vue デベロッパーである皆さんに一つお願いをさせてください。
+もし α 版をお試し頂けるなら、不具合報告や、機能改善のアイディア、API に対するご意見、コメント等を頂けると非常に幸いです。
+
+そのための一番良い方法は、[Gitter チャンネル（英語）](https://gitter.im/OnsenUI/OnsenUI "Gitter チャンネル") で直接私たちとお話しして頂くことです。その他にも、[コミュニティフォーラム（英語）](https://community.onsen.io/category/2/onsen-ui "コミュニティフォーラム") または [Stack Overflow（英語）](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow（英語）") の **onsen-ui** タグでご質問いただけます<span style="font-size: small; color: #ff8000; opacity: 0.6;">（訳者注: 日本では [Twitter: @Onsen_UI_ja](https://twitter.com/Onsen_UI_ja) にて開発チームへのご意見を、[teratail の Onsen UI タグ](https://teratail.com/tags/Onsen+UI) にてご質問を受け付けております）</span>。また、[GitHub レポジトリ（英語）](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ（英語）")に Issue を立てていただくこともできます。皆さんからご意見を頂くために、窓口をたくさん用意しています :)
+
+先日の記事でお伝えしたように（また、α 版であるゆえに）、私たちは β 版までにいくらかの破壊的変更を行うことができます。そのため、もし何かご提案いただけるなら、今が完璧なタイミングです。
+
+### What's new
+
+[先日の記事](https://ja.onsen.io/blog/vue2-support-status-jan-2017/ "Vue 2 対応の進捗とリリーススケジュール")でお見せしたコンポーネントリストで言うと、現時点では（**Lazy Repeat** 以外の）全ての Vue コンポーネントが実装されています。また、各 Vue コンポーネントは Onsen UI Core の API をそのまま使えるように実装されています。
+
+しかし、私たちはより洗練された API を提供したいと考えています。
+そこで、API に *Vue* 固有の機能を実装していくことにしました。
+まず、Vue ライクな構文で各コンポーネントを使えるようにしました。
+あちらこちらで技巧を凝らす必要がありましたが、ひとまずの解決には至りました。
+
+例えば、`v-ons-input` コンポーネントへの `v-ons-model` カスタムディレクティブの導入があります。*Vue* はチェックボックスやラジオボタンに対して特殊な処理を行うため、私たちは `v-model` ディレクティブを模した `v-ons-model` カスタムディレクティブを導入せざるを得ませんでした。*Carousel* や *Tabbar* に対する `v-ons-index` カスタムディレクティブにも同じことが言えます。
+
+以上の件に関して、また他の実装に関して、現在私たちはドキュメントを準備中です。数日中には Onsen UI の Web サイトに公開できると思います<span style="font-size: small; color: #ff8000; opacity: 0.6;">（訳者注: 現在英語サイト・日本語サイトともに既に[ドキュメント](https://ja.onsen.io/vue/)を公開済みです）</span>。
+
+Happy coding.
+
+### まとめ
+
+- α 版をリリースしました。*NPM* または *Yarn* でインストールできます。（ソースコードは [GitHub レポジトリ](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ") に置いてあります）
+
+- 不具合報告やその他コントリビューションは [Gitter チャンネル（英語）](https://gitter.im/OnsenUI/OnsenUI "Gitter チャンネル（英語）")、[コミュニティフォーラム（英語）](https://community.onsen.io/category/2/onsen-ui "コミュニティフォーラム（英語）")、[Stack Overflow（英語）](http://stackoverflow.com/questions/tagged/onsen-ui "Stack Overflow（英語）") にお願いいたします<span style="font-size: small; color: #ff8000; opacity: 0.6;">（訳者注: 日本では [Twitter: @Onsen_UI_ja](https://twitter.com/Onsen_UI_ja) にて開発チームへのご意見を、[teratail の Onsen UI タグ](https://teratail.com/tags/Onsen+UI) にてご質問を受け付けております）</span>。
+
+Onsen UI for Vue 2 の今後にご期待ください。**Let's make Vue-OnsenUI great again.**
+
+---
+
+Onsen UI はハイブリッドアプリの UI 構築などに使えるオープンソースのライブラリです。詳しくは [GitHub レポジトリ](https://github.com/OnsenUI/OnsenUI "GitHub レポジトリ") をご覧ください。Onsen UI が好きな方は、GitHub スターをつけるのをお忘れなく！★★★★★

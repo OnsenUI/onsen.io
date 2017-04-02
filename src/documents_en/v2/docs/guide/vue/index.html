@@ -1,0 +1,163 @@
+---
+title: 'Onsen UI 2 Guide for Vue 2 - Onsen UI Framework'
+category: docs
+page: 'guide'
+framework: 'vue'
+needHelp: true
+autotoc: true
+actionbar: false
+tocTitle: 'Guide for Vue 2'
+version: v2
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+<%- @includeGuideSection('starting-project.md') %>
+
+#### Download via npm
+
+```bash
+$ npm install onsenui vue-onsenui --save-dev
+```
+
+#### Direct download
+
+Get `onsenui.js`, `onsenui.css` and `onsenui-css-components.css` from the [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases). You will also need `vue-onsenui.js` file from [this CDN link](https://unpkg.com/vue-onsenui).
+
+### Loading Onsen UI
+
+Vue bindings for Onsen UI (`VueOnsen`) provide Vue 2 components and directives that wrap the core Web Components and expose a Vue-like API to interact with them. You need to load the following two JavaScript modules:
+
+- Onsen UI Core ([GitHub](https://github.com/OnsenUI/OnsenUI))
+- Onsen UI for Vue ([GitHub](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue))
+
+You can load with normal `<script></script>` and `<link>` tags as follows:
+
+```html
+<link rel="stylesheet" href="onsenui.css">
+<link rel="stylesheet" href="onsen-css-components.css">
+
+<script src="vue.js"></script>
+<script src="onsenui.js"></script>
+<script src="vue-onsenui.js"></script>
+```
+
+Or, you can use `VueOnsen` from npm with a module bundler like [Webpack](https://webpack.js.org/). In this case, use the `onsenui` and `vue-onsenui` packages.
+
+```javascript
+// Webpack CSS import
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+// JS import
+import Vue from 'vue';
+import 'onsenui';
+import VueOnsen from 'vue-onsenui';
+
+Vue.use(VueOnsen);
+```
+
+Notice how `VueOnsen` is used as a plugin for Vue in the last line (this is already done automatically if `window.Vue` exists). Alternatively, you can use `require` instead of ES6 imports.
+
+### Onsen UI HelloWorld with Vue
+
+To get started, let's create a simple Hello World application. The following sample code is a Vue version of Onsen UI HelloWorld.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="onsenui.css">
+    <link rel="stylesheet" href="onsen-css-components.css">
+    <script src="vue.js"></script>
+    <script src="onsenui.js"></script>
+    <script src="vue-onsenui.js"></script>
+  </head>
+  <body>
+    <template id="main-page">
+      <v-ons-page>
+        <v-ons-toolbar>
+          <div class="center">Title</div>
+        </v-ons-toolbar>
+        <p style="text-align: center">
+          <v-ons-button @click="$ons.notification.alert('Hello World!')">Click</v-ons-button>
+        </p>
+      </v-ons-page>
+    </template>
+
+    <div id="app"></div>
+  </body>
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      template: '#main-page'
+    });
+  </script>
+</html>
+```
+
+This example is loading the following JS libraries, `vue.js`, `onsenui.js` and `vue-onsenui.js`. For stylesheets, it is loading `onsenui.css` and `onsen-css-components.css` which are bundled in Onsen UI distribution package. To know the details about Onsen UI stylesheets, please refer to our [Style Sheets Guide](/v2/docs/guide/js/#css-definitions) document.
+
+```html
+<link rel="stylesheet" href="path/to/onsenui.css">
+<link rel="stylesheet" href="path/to/onsen-css-components.css">
+```
+
+The `<div id="app"></div>` node is where Vue will render the content into (`el` property in the constructor).
+
+This is a pure ES5 example, although normally it's advisable to use ES2015 and [`vue-loader`](https://github.com/vuejs/vue-loader) since it allows `*.vue` format. For consistency, from now on we will write every Vue component example following the aforementioned format.
+
+For more information about Vue, we recommend to read the official [Vue docs](https://vuejs.org/v2/guide/).
+
+<%- @mapKeywords @includeGuideSection('creating-page.md') %>
+
+### Event Handling
+
+Onsen UI components are capable of handling events. For instance, you can catch a tap event by using the `@click` handler, or text input change with the `@input` handler.
+
+```html
+ <v-ons-input @input="..." type="text"></v-ons-input>
+ <v-ons-input @change="..." type="checkbox"></v-ons-input>
+ <v-ons-button @click="..."></v-ons-button>
+ <v-ons-navigator @prepop="..."></v-ons-navigator>
+ <v-ons-page @deviceBackButton="..."></v-ons-page>
+```
+
+<%- @mapKeywords @includeGuideSection('ons-object.md') %>
+
+### Understanding Vue Components
+
+Having a general idea about how everything is implemented could be useful in some situations. This is a brief explanation about how Vue Componentes for Onsen UI work.
+
+These components are simple wrappers around inner [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) in most of the cases. This means that a Vue Component takes some props and translate them into DOM properties, DOM attributes or method calls for the Onsen UI core. It also listens for native events and fires the corresponding Vue events. If you inspect the DOM you will likely see a bunch of `ons-*` components without `v-*` prefix (these are real HTMLelements). You can have a look at the implementation [here](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/src/components).
+
+<%- @mapKeywords @includeGuideSection('page-content.md') %>
+
+### VOnsModel Directive
+
+Vue offers a very handy `v-model` directive for `input` element. Unfortunately, `v-model` is not fully extendable (not even with the [update in Vue 2.2.0](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model)) and features like using an array with checkboxes do not work with custom UI components. Therefore, Onsen UI implements `v-ons-model` directive that can be used with Onsen UI inputs (`v-ons-input` of any type, `v-ons-switch`, `v-ons-range` and `v-ons-select`). It emulates the original behavior of `v-model`, making it possible again to assign arrays or booleans to checkboxes and switches, for example. The value passed to `v-ons-model` should be either a literal value (initial value) or the name of a variable in the current context: `<v-ons-input v-ons-model="myValue"></v-ons-input>`. Currently, it does not support syntax like `v-ons-model="container.value"` or `v-ons-model="container['value']"`.
+
+<%- @mapKeywords @includeGuideSection('dialogs.md') %>
+
+<%- @mapKeywords @includeGuideSection('navigation.md') %>
+
+### Preventing Default Behavior
+
+Sometimes it can be useful to prevent Onsen UI's default behavior on user interaction in order to use some Vue features. For example, a `v-ons-tabbar` could work with `<keep-alive>` component if `v-ons-tab` on click behavior is properly overriden.
+
+Another example could be the click/tap behavior of `v-ons-back-button`. Instead of popping 1 page, it can be overriden to reset the page stack (going back to "home" page). All of these default behaviors can be prevented by running `$event.preventDefault()` in the corresponding event handlers or providing Vue's `prevent` modifier in the event listeners. More information in the reference page of each component.
+
+<%- @mapKeywords @includeGuideSection('modifier.md') %>
+
+<%- @mapKeywords @includeGuideSection('auto-styling.md') %>
+
+<%- @mapKeywords @includeGuideSection('css-definitions.md') %>
+
+<%- @mapKeywords @includeGuideSection('device-back-button.md') %>
+
+<%- @mapKeywords @includeGuideSection('animations.md') %>
+
+<!-- End of markdown -->
+<% end %>

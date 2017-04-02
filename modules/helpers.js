@@ -93,6 +93,10 @@ module.exports = function() {
         return result;
       },
 
+      renderCurrentYear: function() {
+        return new Date().getFullYear();
+      },
+
       getTutorialUrl: function(page, string) {
         //"vanilla/Reference/carousel"
         var tutorial_url = function(match, p1, p2, p3) {
@@ -207,6 +211,24 @@ module.exports = function() {
         return this.site.keywords;
       },
 
+      /**
+       * Prepare Open Graph metadata.
+       */
+      getPreparedOg: function() {
+        var og = {
+          type: this.category ? 'article' : 'website',
+          site_name: this.lang === 'en' ? 'Monaca x Onsen Blog' : 'Monaca x Onsenブログ',
+          image: (this.og && this.og.image) || (this.site.url + '..' + '/images/logo/onsen_with_text.png'),
+          twitter: {
+            card: (this.og && this.og.twitter && this.og.twitter.card) || 'summary_large_image',
+            site: (this.og && this.og.twitter && this.og.twitter.site) || (this.lang === 'en' ? '@Onsen_UI' : '@Onsen_UI_ja'),
+            creator: (this.og && this.og.twitter && this.og.twitter.creator) || (this.lang === 'en' ? '@Onsen_UI' : '@Onsen_UI_ja'),
+          },
+        };
+
+        return og;
+      },
+
       getShortenedTitle: function(title, len) {
         if (title.length > len) {
           return title.substr(0, len - 3).trim() + '...';
@@ -269,6 +291,7 @@ module.exports = function() {
           case "js": return "JavaScript";
           case "angular1": return "Angular 1";
           case "angular2": return "Angular 2";
+          case "vue": return "Vue 2";
           case "react": return "React";
         }
       },
@@ -278,6 +301,7 @@ module.exports = function() {
           case "js": return "js core";
           case "angular1": return "angular 1";
           case "angular2": return "angular 2";
+          case "vue": return "vue";
           case "react": return "react";
         }
       },
@@ -285,6 +309,18 @@ module.exports = function() {
       getExtensionDoc: function(file, framework) {
         if (!file.doc.elements) return null;
         return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
+      },
+
+      mapKeywords: function(message) {
+        if (this.framework === 'vue') {
+          return message
+            .replace(/(^|<\/?|\/)(ons-)/gm, '$1v-$2')
+            .replace(/(^|`|\s|\/)(ons(\.|$|`|\s))/gm, '$1$$$2')
+            .replace(/ element/img, ' component')
+          ;
+        }
+
+        return message;
       },
 
       translate: function(message, lang) {
@@ -338,12 +374,17 @@ module.exports = function() {
         if (this.framework === 'react') {
           return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
         }
+        if (this.framework === 'vue') {
+          return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;
+        }
+
         return 'ons-' + component;
       },
 
       componentLink: function(component) {
-        component = this.mapComponentName(component);
-        return '[`<' + component + '>`](/v2/docs/' + this.framework + '/' + component + '.html)';
+        var linkName = this.mapComponentName(component);
+        var componentName = (/^ons($|\.)/.test(component) ? linkName : ('`<' + linkName + '>`'));
+        return '[' + componentName + '](/v2/docs/' + this.framework + '/' + linkName + '.html)';
       }
     };
 

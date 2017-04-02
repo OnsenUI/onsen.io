@@ -287,3 +287,8 @@ $(function() {
     $('body').addClass('loaded');
   }, 500);
 });
+
+// Set target="_blank" to all the links in the article body
+$(function() {
+  $('.article-content a').attr('target' , '_blank');
+});

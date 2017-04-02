@@ -1,0 +1,149 @@
+---
+author: atsushi
+date: 2017-03-07
+id: introducing-monaca-ci
+title: "Monacaで継続的インテグレーションを実現するMonaca CIの紹介"
+tags: monaca, ci
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/Jan/logo_monaca_ci.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
+---
+
+CI（継続的インテグレーション）という言葉が聞かれるようになって数年経ちました。最近ではWebサービスの開発はもちろん、アプリ開発においてもアプリのビルドやテスト、さらにビルドしたアプリをテスターに配布するといった行程をCIによって自動化することが当たり前となりつつあります。
+
+今回は新しくMonaca IDEに追加された、Monaca CIを使った継続的インテグレーションの方法について紹介します。
+
+## 継続的インテグレーションとは？
+
+そもそもCIとは、開発フローの終盤で行われるユニットテストや結合テスト、さらにビルドやデプロイ、そしてユーザ自身によるテストなど手間のかかる作業を自動化していく施策です。それによって開発者は開発に専念することができ、プロジェクトがよりスムーズに、速く進むようになります。
+
+Monacaは元々デバッガーを使うことで開発とテストのサイクルを短くできますが、CIを利用することでさらにビルドや実機テストなどの作業を効率的に行えるようになります。
+
+## Monaca CIのセットアップ
+
+それでは早速Monaca CIを試します。まず注意点として、対象になるプロジェクトはGitHubリポジトリで管理されている必要があります。そのため、まずはGitHub連携を行ってください。
+
+※ GitHub連携の方法については、以下の記事を参考にしてください。  
+<a href="http://blog.asial.co.jp/1475" target="_blank">MonacaクラウドとGitHub連携方法</a>
+
+GitHub連携設定および、プロジェクトとGitHubリポジトリとの紐づけが完了したら、「設定」メニューの「継続的インテグレーション」を選択します。
+
+![](/blog/content/images/2017/Jan/monaca-ci-1.png)
+
+ここにはJSONを入力する欄があります。デフォルト値は以下のようになっています。
+
+```
+[
+  {
+    "task_name": "Default",
+    "branch": "/master/",
+    "platform": [
+      "android",
+      "ios"
+    ],
+    "build": [
+      "debug",
+      "release"
+    ],
+    "deploy": []
+  }
+]
+```
+
+これは、連携しているGitHubリポジトリののmasterブランチにコードがプッシュされたら、AndroidとiOSのデバッグビルドおよびリリースビルドを自動で実行する、という意味です。  
+その他、JSONフォーマットの詳細は<a href="https://docs.monaca.io/ja/manual/monaca_ci/overview/#json-settings-configuration" target="_blank">ドキュメント</a>を参考にしてください。  
+
+この状態で、「有効」ボタンと「保存する」ボタンを押すと、CIが有効化されます。
+
+
+## Monaca CIの使い方（ビルドの自動化）
+
+GitHubリポジトリへのプッシュを行うと、CIが実行されます。  
+実行中のCIタスクは、「ビルド」メニューの「継続的インテグレーション結果一覧」から確認できます。
+
+![](/blog/content/images/2017/Jan/monaca-ci-2.png)
+
+ステータスがfinishになったら、CIによる自動ビルドが完了しています。
+
+![](/blog/content/images/2017/Jan/monaca-ci-3.png)
+
+完了したビルド結果は、「ビルド」メニューの「ビルド結果一覧」から確認できます。
+
+![](/blog/content/images/2017/Jan/monaca-ci-4.png)
+
+<p style="color:red">
+なお、Androidリリースビルドおよび、iOSデバッグビルド/リリースビルドは、事前に一度手動ビルドが行われている必要があります。  
+CIによるビルドの実行時には、前回選択したキーストアおよびプロビジョニングファイルを使用するようになっています。  
+手動ビルドが行われていない場合はビルドに失敗してしまうので注意して下さい。  
+</p>
+
+## デプロイサービスとの連携
+
+さらに発展的な使い方として、デプロイサービスと連携することでビルドされたアプリをテスターの方へ配布するところまでを自動化できます。  
+今回はデプロイサービスの一つであるDeployGateと連携する例を紹介します。MonacaではDeployGateの他、HockeyAppとも連携可能です。  
+
+まず、<a href="https://deploygate.com/" target="_blank">DeployGate</a>でアカウントを作成し、プロフィールページで自分のAPI keyを確認します。
+
+次にCloud IDEの「設定」メニューから「デプロイサービス」を選択し、DeployGateを追加します。
+
+![](/blog/content/images/2017/Jan/monaca-ci-5.png)
+
+以下の情報を入力して、追加します。
+
+- エイリアス名：任意
+- ユーザー名：DeployGateのユーザー名
+- APIキー：DeployGateのAPI Key
+
+![](/blog/content/images/2017/Jan/monaca-ci-6.png)
+
+そして継続的インテグレーション設定ページで、JSON設定を以下のように書き換えます。
+
+```
+[
+  {
+    "task_name": "Default",
+    "branch": "/master/",
+    "platform": [
+      "android",
+      "ios"
+    ],
+    "build": [
+      "debug",
+      "release"
+    ],
+    "deploy": [
+      {
+        "type": "DeployGate",
+        "alias": "db1"
+      }
+    ]
+  }
+]
+```
+
+`alias`には、先ほど追加したエイリアス名を指定します。「保存する」ボタンを押せば設定は完了です。
+
+これでCIによるビルドが成功した際に、アプリがデプロイサービスに自動的にアップロードされ、テスターの方へ通知が飛ぶようになります。
+
+![](/blog/content/images/2017/Jan/monaca-ci-9.png)
+
+
+## 利用料金について
+
+Monaca CIの実行回数はBasic/Personalプランの場合月10回、Gold/Platinumプランの場合月30回までの制限があります。（詳しくは<a href="https://ja.monaca.io/ci.html" target="_blank">Monaca CIページ</a>を参考にしてください）
+
+実際の開発でコードをプッシュする度にCIを実行していたら、あっという間に上限に達してしまいます。  
+そこで、普段は別のブランチにプッシュするようにしておき、テストを実行するタイミングでプッシュ先をCI設定済みのブランチに変更すれば、開発のイテレーションごとに2、3回の利用で済むでしょう。
+
+----
+
+Monaca CIを使うことで多人数でのアプリ開発時におけるビルド、配布問題がスマートに解決できるようになります。  
+ぜひGitHubとMonaca CI、そしてデプロイサービスを組み合わせた今風の開発スタイルを取り入れてみてください。
+
+[Monaca CIでCordovaのビルドとデプロイを自動化 | Monaca](https://ja.monaca.io/ci.html)
