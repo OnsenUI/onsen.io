@@ -14,7 +14,7 @@ category: 技術情報
 - Vue2
 - Firebase
 
-FirebaseはGoogleがリリースしているモバイルアプリ開発向けプラットフォームになります。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。
+FirebaseはGoogleがリリースしているモバイルアプリ開発向けバックエンドサービスです。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。
 
 ![](/images/2017/Feb/monaca-firebase-auth-14.png)
 
@@ -28,7 +28,7 @@ FirebaseはGoogleアカウントがあればすぐにはじめられます。ま
 
 ![](/images/2017/Feb/monaca-firebase-auth-12.png)
 
-JavaScriptのコードが生成されるので、これをコピーします。
+JavaScriptのコードが生成されます。このコードは後ほど使います。
 
 ![](/images/2017/Feb/monaca-firebase-auth-5.png)
 
@@ -44,7 +44,7 @@ JavaScriptのコードが生成されるので、これをコピーします。
 <script src="js/app.js"></script>
 ```
 
-さらに先ほど生成したFirebaseのコードの内、Firebase.jsを読み込むタグを追加します。
+さらに先ほどFirebaseで生成されたJavaScriptのコードの1行目をペーストして、firebase.jsを読み込むタグを追加します。
 
 ```
 <script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
@@ -86,7 +86,7 @@ document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", on
 
 ### Firebaseの初期化
 
-Firebaseの初期化は先ほどコピーしたコードをそのまま使います。APIキーなどはコピーしたものをそのまま使ってください。
+Firebaseの初期化は、先ほどFirebaseで生成されたJavaScriptのコードの4～11行目をペーストします。APIキーなどはコピーしたものをそのまま使ってください。
 
 ```
 var config = {
