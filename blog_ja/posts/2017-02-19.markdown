@@ -36,11 +36,11 @@ JavaScriptのコードが生成されます。このコードは後ほど使い�
 
 Firebaseのストレージはデフォルトでは認証済みのユーザしかファイルアップロードできなくなっています。これは不特定多数のユーザにファイルをアップロードされるのを防止するためです。
 
-今回は認証しなくてもファイルアップロードできるようにするため、下記のようにルールを書き換えます。
+今回は認証しなくてもファイルアップロードできるようにするため、ルールから `: if request.auth != null` という記述を消去します。
 
 ```
 service firebase.storage {
-  match /b/xxxxxxxxx.appspot.com/o {
+  match /b/{bucket}/o {
     match /{allPaths=**} {
       allow read, write;
     }
