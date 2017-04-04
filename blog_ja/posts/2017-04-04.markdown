@@ -23,21 +23,21 @@ og:
 
 FirebaseはGoogleがリリースしているモバイルアプリ開発向けバックエンドサービスです。多くの機能がありますが、今回はファイルストレージを使ってみたいと思います。
 
-![](/images/2017/Feb/monaca-firebase-auth-14.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-14.png)
 
 ## Firebaseの始め方
 
 FirebaseはGoogleアカウントがあればすぐにはじめられます。まずプロジェクトを作ります。
 
-![](/images/2017/Feb/monaca-firebase-auth-13.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-13.png)
 
 できあがったら、「ウェブアプリにFirebaseを追加」を選択します。
 
-![](/images/2017/Feb/monaca-firebase-auth-12.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-12.png)
 
 JavaScriptのコードが生成されます。このコードは後ほど使います。
 
-![](/images/2017/Feb/monaca-firebase-auth-5.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-5.png)
 
 ## 匿名によるファイルアップロードの許可
 
@@ -55,7 +55,7 @@ service firebase.storage {
 }
 ```
 
-![](/images/2017/Feb/monaca-firebase-storage-3.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-storage-3.png)
 
 ## Monacaアプリの準備
 
@@ -172,7 +172,7 @@ template: `
     </div>`,
 ```
 
-![](/images/2017/Feb/monaca-firebase-storage-1.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-storage-1.png)
 
 #### イベント処理
 
@@ -216,7 +216,7 @@ upload: function() {
 
 アップロードが完了するとURLが取得できますので、それを表示します。
 
-![](/images/2017/Feb/monaca-firebase-storage-2.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-storage-2.png)
 
 ----
 
