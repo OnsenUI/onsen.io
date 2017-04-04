@@ -179,78 +179,39 @@
 
   }
 
-  &-showcase {
-    position: fixed;
-    box-sizing: border-box;
-    width: 320px;
-    height: 569px;
-    top: 50%;
-    transform: translateY(-50%) translateY(1px);
-    z-index: 1;
-    margin-left: 591px;
-    overflow: hidden;
-
-    .tablet-query({
-      display: none;
-    });
-  }
-
-  &-showcase-inner {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-
-    .tablet-query({
-      display: none;
-    });
-  }
-
   &-example {
     width: 100%;
     padding: 8px 0px;
     box-sizing: border-box;
     position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #f6f6f6;
+    border: 1px solid #ccc;
+    width: 320px;
   }
 }
 
+.ons-css {
+  width: 100%;
 
-.css-component-showcase-frame {
-  .tablet-query({
-    display: none;
-  });
-
-  & {
-    background-image: url(../images/common/device-frame.png);
-    background-repeat: no-repeat;
-    width: 378px;
-    min-height: 797px;
-    box-sizing: border-box;
-    padding: 116px 0px 0px 31px;
-    z-index: 20;
-    display: inline-block;
-  }
-
-  &-wrapper {
-    width: 378px;
-    position: fixed;
-    z-index: 0;
-    margin-left: 560px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &-placeholder {
-    padding-top: 250px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #e6e6e6;
+  .page {
+    height: auto;
     text-align: center;
+    border: 0px;
+    background-color: transparent;
+    overflow: visible;
+    display: flex;
+    align-items: center;
   }
 
-  &-inner {
-    width: 320px;
-    height: 568px;
-    background-color: white;
+  .page__content {
+    position: static;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    background-color: transparent;
   }
 }
 

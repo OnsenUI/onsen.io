@@ -41,8 +41,6 @@ module.exports = function(lang) {
           } else if (minimatch(path, '**/overview/*.html')) {
             path = 'v1/reference/' + nodePath.basename(path);
             icon = "object";
-          } else {
-            console.log(path);
           }
 
           files[path] = file;
