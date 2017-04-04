@@ -107,12 +107,13 @@ document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", on
 Firebaseの初期化は、先ほどFirebaseで生成されたJavaScriptのコードの4～11行目をペーストします。APIキーなどはコピーしたものをそのまま使ってください。
 
 ```
+// Firebaseの初期化
 var config = {
-  apiKey: "API_KEY",
-  authDomain: "AUTH_DOMAIN",
-  databaseURL: "DATABASE_URL",
-  storageBucket: "STORAGE_BUCKET",
-  messagingSenderId: "MESSAGING_SENDER_ID"
+    apiKey: "API_KEY",
+    authDomain: "AUTH_DOMAIN",
+    databaseURL: "DATABASE_URL",
+    storageBucket: "STORAGE_BUCKET",
+    messagingSenderId: "MESSAGING_SENDER_ID"
 };
 firebase.initializeApp(config);
 ```
@@ -124,17 +125,17 @@ Vueの基本形は次のようになります。
 ```
 // Vueの処理
 var vm = new Vue({
-  el: '#app',  // マウントするDOM
-  // 初期データの設定
-  data: {},
-    
-  // テンプレート
-  template: ``,
-  // イベント処理
-  methods: {
-    // ファイルを指定した時の処理
-    // 画像アップロード処理
-  }
+    el: '#app',  // マウントするDOM
+    // 初期データの設定
+    data: {},
+      
+    // テンプレート
+    template: ``,
+    // イベント処理
+    methods: {
+        // ファイルを指定した時の処理
+        // 画像アップロード処理
+    }
 });
 ```
 
@@ -143,9 +144,10 @@ var vm = new Vue({
 初期データはファイルオブジェクトを入れるphoto、アップロード完了後にファイルのURLを入れるphoto_urlになります。
 
 ```
+// 初期データの設定
 data: {
-  photo: null,
-  photo_url: null
+    photo: null,
+    photo_url: null
 },
 ```
 
@@ -181,8 +183,9 @@ template: `
 ファイルを選択した時には 変数 photo にデータを入れておきます。
 
 ```
+// ファイルを指定した時の処理
 fileChange: function(e) {
-  this.photo = e.target.files[0];
+    this.photo = e.target.files[0];
 },
 ```
 
@@ -193,21 +196,21 @@ fileChange: function(e) {
 ```
 // 画像アップロード処理
 upload: function() {
-  var me = this;
-  // ストレージオブジェクト作成
-  var storageRef = firebase.storage().ref();
-  // ファイルのパスを設定
-  var mountainsRef = storageRef.child(`images/${this.photo.name}`);
-  // ファイルを適用してファイルアップロード開始
-  var uploadTask = mountainsRef.put(this.photo);
-  // ステータスを監視
-  uploadTask.on('state_changed', function(snapshot){
-  }, function(err) {
-    console.log(err);
-  }, function() {
-    // アップロード完了したら画像のURLを取得
-    me.photo_url = uploadTask.snapshot.downloadURL;
-  })
+    var me = this;
+    // ストレージオブジェクト作成
+    var storageRef = firebase.storage().ref();
+    // ファイルのパスを設定
+    var mountainsRef = storageRef.child(`images/${this.photo.name}`);
+    // ファイルを適用してファイルアップロード開始
+    var uploadTask = mountainsRef.put(this.photo);
+    // ステータスを監視
+    uploadTask.on('state_changed', function(snapshot){
+    }, function(err) {
+        console.log(err);
+    }, function() {
+        // アップロード完了したら画像のURLを取得
+        me.photo_url = uploadTask.snapshot.downloadURL;
+    })
 }
 ```
 
