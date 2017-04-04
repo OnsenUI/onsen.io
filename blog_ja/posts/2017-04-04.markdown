@@ -1,0 +1,227 @@
+---
+author: atsushi
+date: 2017-04-04
+id: monaca-firebase-storage
+title: "Monaca × Firebase連携 その１：Firebase Storage"
+tags: vue, firebase
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/Apr/monaca-firebase.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
+---
+
+この記事では以下の技術を組み合わせています。
+
+- Monaca
+- Vue2
+- Firebase
+
+FirebaseはGoogleがリリースしているモバイルアプリ開発向けバックエンドサービスです。多くの機能がありますが、今回はファイルストレージを使ってみたいと思います。
+
+![](/images/2017/Feb/monaca-firebase-auth-14.png)
+
+## Firebaseの始め方
+
+FirebaseはGoogleアカウントがあればすぐにはじめられます。まずプロジェクトを作ります。
+
+![](/images/2017/Feb/monaca-firebase-auth-13.png)
+
+できあがったら、「ウェブアプリにFirebaseを追加」を選択します。
+
+![](/images/2017/Feb/monaca-firebase-auth-12.png)
+
+JavaScriptのコードが生成されます。このコードは後ほど使います。
+
+![](/images/2017/Feb/monaca-firebase-auth-5.png)
+
+## 匿名によるファイルアップロードの許可
+
+Firebaseのストレージはデフォルトでは認証済みのユーザしかファイルアップロードできなくなっています。これは不特定多数のユーザにファイルをアップロードされるのを防止するためです。
+
+今回は認証しなくてもファイルアップロードできるようにするため、ルールから `: if request.auth != null` という記述を消去します。
+
+```
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write;
+    }
+  }
+}
+```
+
+![](/images/2017/Feb/monaca-firebase-storage-3.png)
+
+## Monacaアプリの準備
+
+今回は最小限のテンプレートをベースとしています。アプリを作ったら、wwwフォルダ以下にjsフォルダを作成し、その中にapp.jsというファイルを作成します。名前は任意です。作成したら、www/index.htmlファイルにて読み込むように指定します。
+
+```
+<script src="js/app.js"></script>
+```
+
+さらに先ほどFirebaseで生成されたJavaScriptのコードの1行目をペーストして、firebase.jsを読み込むタグを追加します。
+
+```
+<script src="https://www.gstatic.com/firebasejs/3.6.9/firebase.js"></script>
+```
+
+次にJS/CSSコンポーネントの追加と削除を選択して、vueをインストールします。最新版を選択しますが、今回は2.1.10となっています。読み込むファイルは components/vue/dist/vue.min.js になります。
+
+## HTMLの準備
+
+body タグ内を次のように書き換えます。
+
+```
+<div id="app"></div>
+```
+
+## js/app.jsの修正
+
+ではJavaScriptの実装に入ります。まずコメントで紹介します。
+
+```
+var onDeviceReady = function() {
+    // Firebaseの初期化
+  
+    // Vueの処理 
+        // 初期データの設定
+  
+        // テンプレート
+
+        // イベント処理
+            // ファイルを指定した時の処理
+
+            // 画像アップロード処理
+};
+document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
+```
+
+### Firebaseの初期化
+
+Firebaseの初期化は、先ほどFirebaseで生成されたJavaScriptのコードの4～11行目をペーストします。APIキーなどはコピーしたものをそのまま使ってください。
+
+```
+// Firebaseの初期化
+var config = {
+    apiKey: "API_KEY",
+    authDomain: "AUTH_DOMAIN",
+    databaseURL: "DATABASE_URL",
+    storageBucket: "STORAGE_BUCKET",
+    messagingSenderId: "MESSAGING_SENDER_ID"
+};
+firebase.initializeApp(config);
+```
+
+### Vueの処理
+
+Vueの基本形は次のようになります。
+
+```
+// Vueの処理
+var vm = new Vue({
+    el: '#app',  // マウントするDOM
+    // 初期データの設定
+    data: {},
+      
+    // テンプレート
+    template: ``,
+    // イベント処理
+    methods: {
+        // ファイルを指定した時の処理
+        // 画像アップロード処理
+    }
+});
+```
+
+#### 初期データの設定
+
+初期データはファイルオブジェクトを入れるphoto、アップロード完了後にファイルのURLを入れるphoto_urlになります。
+
+```
+// 初期データの設定
+data: {
+    photo: null,
+    photo_url: null
+},
+```
+
+#### テンプレート
+
+テンプレートは次のようになります。ファイル選択とファイルアップロードボタンになります。
+
+```
+// テンプレート
+template: `
+    <div>
+    <div class="center"> Firebaseストレージ </div>
+        <section style="margin: 10px;">
+            <input type="file" name="photo" @change="fileChange" accept="image/*" />
+            <button @click="upload">アップロード</button>
+            <div v-if="photo_url">
+                <div class="center">
+                    <img :src="photo_url" width="80%" />
+                </div>
+            </div>
+        </section>
+    </div>`,
+```
+
+![](/images/2017/Feb/monaca-firebase-storage-1.png)
+
+#### イベント処理
+
+イベントはファイルを選択した時とアップロード処理の2つがあります。
+
+##### ファイルを選択した時の処理
+
+ファイルを選択した時には 変数 photo にデータを入れておきます。
+
+```
+// ファイルを指定した時の処理
+fileChange: function(e) {
+    this.photo = e.target.files[0];
+},
+```
+
+##### 画像アップロード処理
+
+ここからがFirebaseへのアップロード処理です。最初にストレージオブジェクトを作り、アップロード先のファイルのパスを指定します。このパスは自由ですが、今回は元々の画像ファイル名をそのまま使います。そして `mountainsRef.put(this.photo)` でアップロード処理が開始します。この時、ステータスを監視するタスクが返ってきます。このタスクのイベント state_changed を使うことでファイルアップロードの進捗やエラー、そして完了時のURLが取得できるようになります。
+
+```
+// 画像アップロード処理
+upload: function() {
+    var me = this;
+    // ストレージオブジェクト作成
+    var storageRef = firebase.storage().ref();
+    // ファイルのパスを設定
+    var mountainsRef = storageRef.child(`images/${this.photo.name}`);
+    // ファイルを適用してファイルアップロード開始
+    var uploadTask = mountainsRef.put(this.photo);
+    // ステータスを監視
+    uploadTask.on('state_changed', function(snapshot){
+    }, function(err) {
+        console.log(err);
+    }, function() {
+        // アップロード完了したら画像のURLを取得
+        me.photo_url = uploadTask.snapshot.downloadURL;
+    })
+}
+```
+
+アップロードが完了するとURLが取得できますので、それを表示します。
+
+![](/images/2017/Feb/monaca-firebase-storage-2.png)
+
+----
+
+Firebaseを使えばサーバを用意せずにファイルアップロード機能が使えるようになります。ぜひ試してみてください。
+
+今回のコードは[moongift/monaca_firebase_storage](https://github.com/moongift/monaca_firebase_storage)にアップロードしてあります。実装時の参考にしてください。
+
+[Firebase](https://firebase.google.com/)
