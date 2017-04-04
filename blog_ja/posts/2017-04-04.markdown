@@ -1,6 +1,6 @@
 ---
 author: atsushi
-date: 2017-02-17
+date: 2017-04-04
 id: monaca-firebase-storage
 title: "MonacaアプリでFirebase Storageを試す"
 tags: vue, firebase
@@ -87,17 +87,17 @@ body タグ内を次のように書き換えます。
 
 ```
 var onDeviceReady = function() {
-  // Firebaseの初期化
+    // Firebaseの初期化
   
-  // Vueの処理 
-	  // 初期データの設定
-	  
-	  // テンプレート
+    // Vueの処理 
+        // 初期データの設定
+  
+        // テンプレート
 
-    // イベント処理
-	  	// ファイルを指定した時の処理
+        // イベント処理
+            // ファイルを指定した時の処理
 
-	  	// 画像アップロード処理
+            // 画像アップロード処理
 };
 document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
@@ -132,8 +132,8 @@ var vm = new Vue({
   template: ``,
   // イベント処理
   methods: {
-  	// ファイルを指定した時の処理
-  	// 画像アップロード処理
+    // ファイルを指定した時の処理
+    // 画像アップロード処理
   }
 });
 ```
@@ -156,18 +156,18 @@ data: {
 ```
 // テンプレート
 template: `
-	  <div>
-      <div class="center"> Firebaseストレージ </div>
-	    <section style="margin: 10px;">
-	    	<input type="file" name="photo" @change="fileChange" accept="image/*" />
-	    	<button @click="upload">アップロード</button>
-	    	<div v-if="photo_url">
-	    		<div class="center">
-		    		<img :src="photo_url" width="80%" />
-		    	</div>
-	    	</div>
-	    </section>
-	  </div>`,
+    <div>
+    <div class="center"> Firebaseストレージ </div>
+        <section style="margin: 10px;">
+            <input type="file" name="photo" @change="fileChange" accept="image/*" />
+            <button @click="upload">アップロード</button>
+            <div v-if="photo_url">
+                <div class="center">
+                    <img :src="photo_url" width="80%" />
+                </div>
+            </div>
+        </section>
+    </div>`,
 ```
 
 ![](/images/2017/Feb/monaca-firebase-storage-1.png)
