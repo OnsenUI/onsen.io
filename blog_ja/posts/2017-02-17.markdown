@@ -21,17 +21,11 @@ og:
 - Vue2
 - Firebase
 
-FirebaseはGoogleがリリースしているモバイルアプリ開発向けバックエンドサービスです。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。
+FirebaseはGoogleが提供しているモバイルアプリ開発向けバックエンドサービスです。第2回目は、認証サービスを使ってみたいと思います。
 
-![](/blog/content/images/2017/Feb/monaca-firebase-auth-14.png)
+## Firebaseの設定
 
-## Firebaseの始め方
-
-FirebaseはGoogleアカウントがあればすぐにはじめられます。まずプロジェクトを作ります。
-
-![](/blog/content/images/2017/Feb/monaca-firebase-auth-13.png)
-
-できあがったら、Webアプリケーション向けの実装を選択します。
+Firebaseでプロジェクトを作成し、「ウェブアプリにFirebaseを追加」を選択します。
 
 ![](/blog/content/images/2017/Feb/monaca-firebase-auth-12.png)
 
@@ -39,7 +33,7 @@ JavaScriptのコードが生成されます。このコードは後ほど使い�
 
 ![](/blog/content/images/2017/Feb/monaca-firebase-auth-5.png)
 
-また、認証機能を使うのでAuthenticationの中のEmail/Passwordを有効にします。
+また、認証機能を使うのでサイドメニューの[Authentication]を選択してメール/パスワードを有効にします。
 
 ![](/blog/content/images/2017/Feb/monaca-firebase-auth-7.png)
 
@@ -73,19 +67,19 @@ body タグ内を次のように書き換えます。
 
 ```
 var onDeviceReady = function() {
-  // Firebaseの初期化
-  
-  // Vueの処理 
-	  // 初期データの設定
+    // Firebaseの初期化
     
-	  // デプロイ完了時のイベント
-    
-	  // テンプレート
-    
-	  // イベント処理
-	  	// 登録処理
-	  	// ログイン処理
-	  	// ログアウト処理
+    // Vueの処理 
+        // 初期データの設定
+      
+        // デプロイ完了時のイベント
+      
+        // テンプレート
+      
+        // イベント処理
+          　　// 登録処理
+          　　// ログイン処理
+          　　// ログアウト処理
 };
 
 document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
@@ -96,12 +90,13 @@ document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", on
 Firebaseの初期化は、先ほどFirebaseで生成されたJavaScriptのコードの4～11行目をペーストします。APIキーなどはコピーしたものをそのまま使ってください。
 
 ```
+// Firebaseの初期化
 var config = {
-  apiKey: "API_KEY",
-  authDomain: "AUTH_DOMAIN",
-  databaseURL: "DATABASE_URL",
-  storageBucket: "STORAGE_BUCKET",
-  messagingSenderId: "MESSAGING_SENDER_ID"
+    apiKey: "API_KEY",
+    authDomain: "AUTH_DOMAIN",
+    databaseURL: "DATABASE_URL",
+    storageBucket: "STORAGE_BUCKET",
+    messagingSenderId: "MESSAGING_SENDER_ID"
 };
 firebase.initializeApp(config);
 ```
@@ -113,36 +108,36 @@ Vueの基本形は次のようになります。
 ```
 // Vueの処理
 var vm = new Vue({
-  el: '#app',  // マウントするDOM
-  // 初期データの設定
-  data: {},
-    
-  // デプロイ完了時のイベント
-  created: function() {},
-    
-  // テンプレート
-  template: ``,
-  // イベント処理
-  methods: {
-    // 登録処理
-    // ログイン処理
-    // ログアウト処理
-  }
+    el: '#app',  // マウントするDOM
+    // 初期データの設定
+    data: {},
+      
+    // デプロイ完了時のイベント
+    created: function() {},
+      
+    // テンプレート
+    template: ``,
+    // イベント処理
+    methods: {
+        // 登録処理
+        // ログイン処理
+        // ログアウト処理
+    }
 });
 ```
 
 #### 初期データの設定
 
-初期データは dataキーの中にオブジェクトで定義します。最初はログインしていませんので、isLoggedInをfalseとしています。
+初期データは dataキーの中にオブジェクトで定義します。ログイン状態は、isLoggedInプロパティに保持するようにしました。最初はログインしていませんので、isLoggedInをfalseに設定しています。
 
 ```
 // 初期データの設定
 data: {
-  user: {
-    isLoggedIn: false,
-    mailAddress: "",
-    password: ""
-  }
+    user: {
+        isLoggedIn: false,
+        mailAddress: "",
+        password: ""
+    }
 },
 ```
 
@@ -153,11 +148,11 @@ VueによるDOMの生成が完了するとcreatedが呼ばれます。ここで�
 ```
 // デプロイ完了時のイベント
 created: function() {
-  // ユーザのステータスが変わったら通知
-  var me = this;
-  firebase.auth().onAuthStateChanged(function(user) {
-    me.user.isLoggedIn = (user !== null);
-  });
+    // ユーザのステータスが変わったら通知
+    var me = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+        me.user.isLoggedIn = (user !== null);
+    });
 },
 ```
 
@@ -165,32 +160,32 @@ created: function() {
 
 #### テンプレート
 
-テンプレートは次のようになります。VueのタグとOnsen UI for Vueのタグが定義されます。
+テンプレートは次のようになります。
 
 ```
 // テンプレート
 template: `
-	  <div>
-	    <div class="center"> Firebase認証 </div>
-		  <section style="margin: 10px;" v-if="user.isLoggedIn">
-		    <p>{{ user.mailAddress }}</p>
-		    <section style="margin: 10px;">
-		      <button @click="logout">ログアウト</button>
-		    </section>
-		  </section>
-		  <section v-else style="margin: 10px;">
-		    <p>メールアドレス</p>
-		    <p>
-		      <input v-model="user.mailAddress" placeholder="メールアドレス" />
-		    </p>
-		    <p>パスワード</p>
-		    <p>
-		      <input v-model="user.password" placeholder="パスワード" type="password" />
-		    </p>
-		    <button @click="register">新規登録</button>
-		    <button @click="login">ログイン</button>
-		  </section>
-		</div>`,
+    <div>
+        <div class="center"> Firebase認証 </div>
+        <section style="margin: 10px;" v-if="user.isLoggedIn">
+            <p>{{ user.mailAddress }}</p>
+            <section style="margin: 10px;">
+                <button @click="logout">ログアウト</button>
+            </section>
+        </section>
+        <section v-else style="margin: 10px;">
+            <p>メールアドレス</p>
+            <p>
+                <input v-model="user.mailAddress" placeholder="メールアドレス" />
+            </p>
+            <p>パスワード</p>
+            <p>
+                <input v-model="user.password" placeholder="パスワード" type="password" />
+            </p>
+            <button @click="register">新規登録</button>
+            <button @click="login">ログイン</button>
+        </section>
+    </div>`,
 ```
 
 #### イベント処理
@@ -199,14 +194,14 @@ template: `
 
 ##### 登録処理
 
-ユーザ登録は入力されたメールアドレスとパスワードをFirebaseに送信します。ログインすると firebase.auth().onAuthStateChanged が呼ばれますので特に何か処理する必要はありません。
+ユーザ登録は入力されたメールアドレスとパスワードをFirebaseに送信します。登録が完了するとログイン状態に切り替わり、前述の firebase.auth().onAuthStateChanged が呼ばれます。
 
 ```
 // 登録処理
 register: function() {
-  firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
+    firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
     .catch(function(error) {
-      alert(error.message);
+        alert(error.message);
     });
 },
 ```
@@ -218,9 +213,9 @@ register: function() {
 ```
 // ログイン処理
 login: function() {
-  firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
+    firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
     .catch(function(error) {
-      alert(error.message);
+        alert(error.message);
     });
 },
 ```
@@ -232,7 +227,7 @@ login: function() {
 ```
 // ログアウト処理
 logout: function() {
-  firebase.auth().signOut();
+    firebase.auth().signOut();
 }
 ```
 
@@ -242,81 +237,86 @@ logout: function() {
 
 ```
 var onDeviceReady = function() {
-  // Firebaseの初期化
-  var config = {
-    apiKey: "API_KEY",
-    authDomain: "AUTH_DOMAIN",
-    databaseURL: "DATABASE_URL",
-    storageBucket: "STORAGE_BUCKET",
-    messagingSenderId: "MESSAGING_SENDER_ID"
-  };
-  firebase.initializeApp(config);
-  
-  // Vueの処理 
-  var vm = new Vue({
-	  el: '#app',  // マウントするDOM
-	  // 初期データの設定
-	  data: {
-	  	user: {
-	  		isLoggedIn: false,
-	  		mailAddress: "",
-	  		password: ""
-	  	}
-	  },
-	  // デプロイ完了時のイベント
-	  created: function() {
-	  	var me = this;
-	  	firebase.auth().onAuthStateChanged(function(user) {
-	  		me.user.isLoggedIn = (user !== null);
-	  	});
-	  },
-	  // テンプレート
-	  template: `
-	  <div>
-	    <div class="center"> Firebase認証 </div>
-		  <section style="margin: 10px;" v-if="user.isLoggedIn">
-		    <p>{{ user.mailAddress }}</p>
-		    <section style="margin: 10px;">
-		      <button @click="logout">ログアウト</button>
-		    </section>
-		  </section>
-		  <section v-else style="margin: 10px;">
-		    <p>メールアドレス</p>
-		    <p>
-		      <input v-model="user.mailAddress" placeholder="メールアドレス" />
-		    </p>
-		    <p>パスワード</p>
-		    <p>
-		      <input v-model="user.password" placeholder="パスワード" type="password" />
-		    </p>
-		    <button @click="register">新規登録</button>
-		    <button @click="login">ログイン</button>
-		  </section>
-		</div>`,
-	  // イベント処理
-    methods: {
-	  	// 登録処理
-	  	register: function() {
-	  		firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
-	  			.catch(function(error) {
-        		alert(error.message);
-	      	});
-	  	},
-	  	// ログイン処理
-	  	login: function() {
-	  		firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
-	  			.catch(function(error) {
-	  				alert(error.message);
-	      	});
-	  	},
-	  	// ログアウト処理
-	  	logout: function() {
-	  		firebase.auth().signOut();
-	  	}
-	  }
-	});
-};
+    // Firebaseの初期化
+    var config = {
+        apiKey: "API_KEY",
+        authDomain: "AUTH_DOMAIN",
+        databaseURL: "DATABASE_URL",
+        storageBucket: "STORAGE_BUCKET",
+        messagingSenderId: "MESSAGING_SENDER_ID"
+    };
+    firebase.initializeApp(config);
 
+    // Vueの処理
+    var vm = new Vue({
+        el: '#app',  // マウントするDOM
+        // 初期データの設定
+        data: {
+            user: {
+                isLoggedIn: false,
+                mailAddress: "",
+                password: ""
+            }
+        },
+
+        // デプロイ完了時のイベント
+        created: function() {
+            // ユーザのステータスが変わったら通知
+            var me = this;
+            firebase.auth().onAuthStateChanged(function(user) {
+                me.user.isLoggedIn = (user !== null);
+            });
+        },
+
+          
+        // テンプレート
+        template: `
+            <div>
+                <div class="center"> Firebase認証 </div>
+                <section style="margin: 10px;" v-if="user.isLoggedIn">
+                    <p>{{ user.mailAddress }}</p>
+                    <section style="margin: 10px;">
+                        <button @click="logout">ログアウト</button>
+                    </section>
+                </section>
+                <section v-else style="margin: 10px;">
+                    <p>メールアドレス</p>
+                    <p>
+                        <input v-model="user.mailAddress" placeholder="メールアドレス" />
+                    </p>
+                    <p>パスワード</p>
+                    <p>
+                        <input v-model="user.password" placeholder="パスワード" type="password" />
+                    </p>
+                    <button @click="register">新規登録</button>
+                    <button @click="login">ログイン</button>
+                </section>
+            </div>`,
+
+        // イベント処理
+        methods: {
+            // 登録処理
+            register: function() {
+                firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+            // ログイン処理
+            login: function() {
+                firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+            // ログアウト処理
+            logout: function() {
+                firebase.auth().signOut();
+            }
+        }
+    });
+
+};
 document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
 
@@ -326,15 +326,17 @@ document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", on
 
 ![](/blog/content/images/2017/Feb/monaca-firebase-auth-3.png)
 
-まずユーザ登録処理を行うと、Firebase consoleのユーザタブにてユーザ登録されるのが確認できます。
+まずユーザ登録処理を行うと、Firebase consoleの[Authentication]＞[ユーザー]タブにて登録が行われているのが確認できます。
 
-![](/blog/content/images/2017/Feb/monaca-firebase-auth-1.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-10.png)
 
 ログインするとユーザ名が表示され、ログアウトボタンも出ます。ログアウトすれば最初の表示に戻ります。
 
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-1.png)
+
 ----
 
-Firebase Authenticationを使うとサーバ側の用意をせず、簡単にアプリへ認証機能を実現できます。Firebaseには他にもたくさんの機能が用意されていますので試してみてください。
+Firebase Authenticationを使うと、サーバサイドの開発をすることなく簡単に認証機能をアプリに組み込めます。次回は匿名認証を紹介する予定です。
 
 今回のコードは[moongift/monaca_firebase_auth](https://github.com/moongift/monaca_firebase_auth)にアップロードしてあります。実装時の参考にしてください。
 
