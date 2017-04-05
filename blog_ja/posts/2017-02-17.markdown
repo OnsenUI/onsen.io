@@ -2,7 +2,7 @@
 author: atsushi
 date: 2017-02-17
 id: monaca-firebase-auth
-title: "MonacaアプリでFirebase Authenticationを試す"
+title: "Monaca × Firebase連携 その２：Authentication"
 tags: vue, firebase
 product: monaca
 category: 技術情報
@@ -16,25 +16,25 @@ category: 技術情報
 
 FirebaseはGoogleがリリースしているモバイルアプリ開発向けバックエンドサービスです。多くの機能がありますが、今回は認証サービスを使ってみたいと思います。
 
-![](/images/2017/Feb/monaca-firebase-auth-14.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-14.png)
 
 ## Firebaseの始め方
 
 FirebaseはGoogleアカウントがあればすぐにはじめられます。まずプロジェクトを作ります。
 
-![](/images/2017/Feb/monaca-firebase-auth-13.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-13.png)
 
 できあがったら、Webアプリケーション向けの実装を選択します。
 
-![](/images/2017/Feb/monaca-firebase-auth-12.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-12.png)
 
 JavaScriptのコードが生成されます。このコードは後ほど使います。
 
-![](/images/2017/Feb/monaca-firebase-auth-5.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-5.png)
 
 また、認証機能を使うのでAuthenticationの中のEmail/Passwordを有効にします。
 
-![](/images/2017/Feb/monaca-firebase-auth-7.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-7.png)
 
 ## Monacaアプリの準備
 
@@ -317,11 +317,11 @@ document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", on
 
 では実際に動かしてみます。
 
-![](/images/2017/Feb/monaca-firebase-auth-3.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-3.png)
 
 まずユーザ登録処理を行うと、Firebase consoleのユーザタブにてユーザ登録されるのが確認できます。
 
-![](/images/2017/Feb/monaca-firebase-auth-1.png)
+![](/blog/content/images/2017/Feb/monaca-firebase-auth-1.png)
 
 ログインするとユーザ名が表示され、ログアウトボタンも出ます。ログアウトすれば最初の表示に戻ります。
 
