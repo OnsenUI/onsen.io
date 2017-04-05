@@ -26,6 +26,23 @@ version: v2
 
   <div class="container-content">
 
+    <h3>CSSコンポーネントについて</h3>
+
+    <p>
+      Onsen UIにおけるCSSコンポーネントは、Onsen UIのカスタム要素のビジュアルデザインを規定します。
+      CSSコンポーネントは、その名の通りCSSで実装されているコンポーネントです。
+    </p>
+  
+    <p>
+      CSSコンポーネントはあくまでCSSのみで実装されているので、CSSレベルで可能な振る舞いしか実装されていません。
+      例えば、CSSコンポーネントはプラットフォームに対して静的ですが、カスタム要素はプラットフォームを判別して自動的にiOSかもしくはMaterial Designのデザインを表示します。
+    </p>
+    
+    <p>
+      開発者はCSSコンポーネントを直接使うのではなく、カスタム要素やフレームワークレベルのコンポーネントを使って下さい。
+      どのCSSコンポーネントがどのカスタム要素と対応しているかは、各CSSコンポーネントの<code>対応する要素</code>の項目を参照して下さい。
+    </p>
+
     <% for category in @cssComponentCategories: %>
     <div class="css-component">
       <h3 id="<%= category.id %>-category"><%= category.name %></h3>
