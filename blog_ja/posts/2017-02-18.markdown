@@ -2,17 +2,24 @@
 author: atsushi
 date: 2017-02-18
 id: monaca-with-firebase-realtime
-title: "MonacaでFirebaseのリアルタイムデータベースを試す"
+title: "Monaca × Firebase連携 その４：リアルタイムデータベース"
 tags: vue, firebase
 product: monaca
 category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/Apr/monaca-firebase.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
 ---
 
-FirebaseはGoogleの提供するモバイル関連サービスのプラットフォームです。前回は認証について紹介しましたが、今回はリアルタイムデータベースを使ってみます。というのもデータは権限を付けて保存されるべきとのFirebaseの推奨があるので、前回の認証を踏まえた上で実装していきたいと思います。
+FirebaseはGoogleが提供しているモバイルアプリ開発向けバックエンドサービスです。前回は認証について紹介しましたが、今回はリアルタイムデータベースを使ってみます。というのもデータは権限を付けて保存されるべきとのFirebaseの推奨があるので、前回の認証を踏まえた上で実装していきたいと思います。
 
 先に完成品を紹介します。Firebaseの管理画面（コンソール）とアプリ側でデータの同期を行っています。スマートフォン側（プレビュー版）でボタンを押すと、現在時刻でデータが登録されます。そして管理画面側でデータを削除すると、それがスマートフォン側に反映されます。
 
-![](/images/2017/Feb/monaca-firebase-realtimedb.gif)
+![](/blog/content/images/2017/Feb/monaca-firebase-realtimedb.gif)
 
 今回もVueを使います。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
 
