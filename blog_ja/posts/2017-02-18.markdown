@@ -15,39 +15,39 @@ og:
     card: summary_large_image
 ---
 
-FirebaseはGoogleが提供しているモバイルアプリ開発向けバックエンドサービスです。前回は認証について紹介しましたが、今回はリアルタイムデータベースを使ってみます。というのもデータは権限を付けて保存されるべきとのFirebaseの推奨があるので、前回の認証を踏まえた上で実装していきたいと思います。
+MonacaとFirebaseの連携方法をご紹介するブログの第4回目です。今回はリアルタイムデータベースを使ってみます。
 
-先に完成品を紹介します。Firebaseの管理画面（コンソール）とアプリ側でデータの同期を行っています。スマートフォン側（プレビュー版）でボタンを押すと、現在時刻でデータが登録されます。そして管理画面側でデータを削除すると、それがスマートフォン側に反映されます。
+先に完成品を紹介します。Firebaseの管理画面（コンソール）とアプリ側でデータの同期を行っています。アプリ側でボタンを押すと、現在時刻でデータが登録されます。そして管理画面側でデータを削除すると、それがアプリ側に反映されます。
 
 ![](/blog/content/images/2017/Feb/monaca-firebase-realtimedb.gif)
 
-今回もVueを使います。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
+第1回目でストレージ機能を紹介した際は、ユーザ認証をせずにデータの登録を行いましたが、あまり好ましい実装とは言えません。Firebaseでは権限をつけてデータを保存することを推奨していますので、認証を踏まえた上で実装していきたいと思います。
+
+そこで今回は第2回で作成した認証機能のプロジェクトにコードを追記する形で作成していきます。
 
 ## HTMLの変更
 
 データの取得に際してFirebaseに接続しますので、セキュリティポリシーを変更します。具体的には `connect-src *;` を追加します。
 
 ```
-<meta http-equiv="Content-Security-Policy" 
-  content="default-src * data:; connect-src *; style-src * 
-  'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+<meta http-equiv="Content-Security-Policy" content="default-src * data:; connect-src *; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
 ```
 
 ## Vueテンプレートの変更
 
-HTML側（Vueテンプレート）ではリストを表示するようにします。また、ボタンを押すとデータを追加するためのイベントを追加します。
+ログイン後のページに、[データ追加]ボタンとデータを表示するリストを追加します。
 
 ```
 <section style="margin: 10px;">
-	<button @click="add">データ追加</button>
-	<button @click="logout">ログアウト</button>
+    <button @click="add">データ追加</button>
+    <button @click="logout">ログアウト</button>
 </section>
 <!-- データを表示するリストを追加 -->
 <section style="margin: 10px;">
-	<div>リスト</div>
-	<ul v-for="item in times">
-		<li>{{ item.time }}</li>
-	</ul>
+    <div>リスト</div>
+    <ul v-for="item in times">
+        <li>{{ item.time }}</li>
+    </ul>
 </section>
 ```
 
@@ -58,95 +58,216 @@ HTML側（Vueテンプレート）ではリストを表示するようにしま�
 JavaScript側ではまず最初に times という変数（配列）を初期化します。
 
 ```
-// Vueの処理 
-var vm = new Vue({
-	el: '#app',
-	// 初期データの設定
-	data: {
-		user: {
-			isLoggedIn: false,
-			mailAddress: "",
-			password: ""
-		},
-		times: []  // 追加
-	},
-	:
+// 初期データの設定
+data: {
+    user: {
+        isLoggedIn: false,
+        mailAddress: "",
+        password: ""
+    },
+    times: []  // 追加
+},
 ```
 
 ### データの追加処理
 
 Firebaseにデータを追加する処理はとても簡単です。
-
-```
-add: function() {
-	// 登録するメッセージを作成
-	var d = new Date;
-	var message = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
-	
-	firebase.database().ref('times/').push({
-		time: message
-	})
-	.catch(function(error) {
-		alert(error.message)
-	})
-},
-```
-
 `firebase.database().ref('times/')` という指定でデータを保存する名称（今回はtimes）を指定します。データの保存はpushで行います。
+
+```
+// イベント処理
+methods: {
+    …省略…
+
+    // データ追加処理
+    add: function() {
+        // 登録するメッセージを作成
+        var d = new Date;
+        var message = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+        
+        firebase.database().ref('times/').push({
+            time: message
+        })
+        .catch(function(error) {
+            alert(error.message)
+        })
+    },
+}
+```
+
+
 
 ### データの取得
 
-データの取得は二種類あります。一つは初期表示、もう一つはデータの追加をしたタイミングです。
+Firebaseリアルタイムデータベースには、データの取得を行うためのvalueイベントがあります。このイベントは、初期データを取得するタイミングと、データに変更があった場合に実行されます。
+（コンソールでデータを削除した場合にも呼ばれます）
 
-#### 初期表示
+ユーザの認証状態に応じて、イベントを有効にするonと無効にするoffを設定します。
 
-データの初期表示を行うのは次のようにします。先ほどの `firebase.database().ref('times/')` に対して value というイベントを使います。このイベントはVueの構築が終わったタイミング（created内）で行います。ユーザの認証状態に応じて、イベントを有効にするonと無効にするoffを設定します。
-
-```
-firebase.auth().onAuthStateChanged(function(user) {
-	me.user.isLoggedIn = (user !== null);
-	if (user !== null) {
-		data.on('value', function(times) {
-			me.times = [];
-			times.forEach(function(time) {
-				me.times.push({
-					key: time.key,
-					time: time.val().time
-				})
-			});
-		});
-	}else{
-		data.off('value');
-	}
-});
-```
-
-データは配列で返ってきますので、変数timesを一旦初期化して入れ直します。データは val() メソッドでJSONオブジェクトとして返ってきます。このvalueイベントは外部でデータを削除した場合にも呼ばれます。
-
-#### データの追加
-
-データを追加した際には child_added というイベントが通知されます。つまり次のように実装します。この処理の中では、すでに同じキーの要素が入っていないかチェックしておきます。
+この処理はVueの構築が終わったタイミング（created内）で行います。
 
 ```
-data.on('child_added', function(time) {
-	var result = me.times.filter(function(item) {
-		return item.key == time.key;
-	})
-	if (result) {
-		return;
-	}
-	me.times.push({
-		key: time.key,
-		time: time.val().time
-	})
-});
+// デプロイ完了時のイベント
+created: function() {
+    // ユーザのステータスが変わったら通知
+    var me = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+        me.user.isLoggedIn = (user !== null);
+            
+        var data = firebase.database().ref('times/');
+        // ログイン状態であればデータ取得イベントを有効化
+        if (user !== null) {
+            // データの取得
+            data.on('value', function(times) {
+                me.times = [];
+                times.forEach(function(time) {
+                    me.times.push({
+                        key: time.key,
+                        time: time.val().time
+                    })
+                });
+            });
+        } else {
+            // ログアウト状態ではイベントを無効化
+            data.off('value');
+        }
+    });
+},
+```
+
+全データが配列で返却されますので、変数timesを初期化して一件ずつ入れ直します。データの値はval()メソッドで取得できます。
+
+
+全体のコードは以下のようになります。
+```
+var onDeviceReady = function() {
+   // Firebaseの初期化
+   var config = {
+        apiKey: "API_KEY",
+        authDomain: "AUTH_DOMAIN",
+        databaseURL: "DATABASE_URL",
+        projectId: "PROJECT_ID",
+        storageBucket: "STORAGE_BUCKET",
+        messagingSenderId: "MESSAGING_SENDER_ID"
+    };
+    firebase.initializeApp(config);
+
+    // Vueの処理
+    var vm = new Vue({
+        el: '#app',  // マウントするDOM
+        // 初期データの設定
+        data: {
+            user: {
+                isLoggedIn: false,
+                mailAddress: "",
+                password: ""
+            },
+            times: []  // 追加
+        },
+
+        // デプロイ完了時のイベント
+        created: function() {
+            // ユーザのステータスが変わったら通知
+            var me = this;
+            firebase.auth().onAuthStateChanged(function(user) {
+                me.user.isLoggedIn = (user !== null);
+                // データの取得
+                var data = firebase.database().ref('times/');
+                // ログイン状態であればデータ取得イベントを有効化
+                if (user !== null) {
+                    
+                    data.on('value', function(times) {
+                        me.times = [];
+                        times.forEach(function(time) {
+                            me.times.push({
+                                key: time.key,
+                                time: time.val().time
+                            })
+                        });
+                    });
+                } else {
+                    // ログアウト状態ではイベントを無効化
+                    data.off('value');
+                }
+            });
+        },
+          
+        // テンプレート
+        template: `
+            <div>
+                <div class="center"> Firebase認証 </div>
+                <section style="margin: 10px;" v-if="user.isLoggedIn">
+                    <p>{{ user.mailAddress }}</p>
+                    <section style="margin: 10px;">
+                        <button @click="add">データ追加</button>
+                        <button @click="logout">ログアウト</button>
+                    </section>
+                    <!-- データを表示するリストを追加 -->
+                    <section style="margin: 10px;">
+                        <div>リスト</div>
+                        <ul v-for="item in times">
+                            <li>{{ item.time }}</li>
+                        </ul>
+                    </section>
+                </section>
+                <section v-else style="margin: 10px;">
+                    <p>メールアドレス</p>
+                    <p>
+                        <input v-model="user.mailAddress" placeholder="メールアドレス" />
+                    </p>
+                    <p>パスワード</p>
+                    <p>
+                        <input v-model="user.password" placeholder="パスワード" type="password" />
+                    </p>
+                    <button @click="register">新規登録</button>
+                    <button @click="login">ログイン</button>
+                </section>
+            </div>`,
+
+        // イベント処理
+        methods: {
+            // 登録処理
+            register: function() {
+                firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+            // ログイン処理
+            login: function() {
+                firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+            // ログアウト処理
+            logout: function() {
+                firebase.auth().signOut();
+            },
+            // データ追加処理
+            add: function() {
+                // 登録するメッセージを作成
+                var d = new Date;
+                var message = `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
+                
+                firebase.database().ref('times/').push({
+                    time: message
+                })
+                .catch(function(error) {
+                    alert(error.message)
+                })
+            },
+        }
+    });
+};
+document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
 
 ----
 
 Firebaseのリアルタイムデータベースではデータの追加処理と、そのイベント通知が分かれているので実装がシンプルになります。チャットや複数端末でのデータ同期などに使うのが良さそうです。
 
-なお、通信にはWebSocketを使っています。特に気にすることはありませんが、WebSocket接続が切れてしまっているとデータが反映されないので注意してください。
+なお、通信にはWebSocketが使われています。特に気にすることはありませんが、何らかの理由によりWebSocket接続が切れてしまっているとデータが反映されないので注意してください。
 
 今回のコードは[moongift/monaca_firebase_realtimedb](https://github.com/moongift/monaca_firebase_realtimedb)にアップロードしてあります。実装時の参考にしてください。
 
