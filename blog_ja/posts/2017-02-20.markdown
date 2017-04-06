@@ -15,175 +15,232 @@ og:
     card: summary_large_image
 ---
 
-FirebaseはGoogleが提供しているモバイルアプリ開発向けバックエンドサービスです。前回は認証について紹介しましたが、今回はそれをベースに匿名認証を使ってみたいと思います。これはIDやパスワードの設定が必要ない、簡易的な認証です。
+FirebaseはGoogleが提供しているモバイルアプリ開発向けバックエンドサービスです。前回は認証について紹介しましたが、今回はそれをベースに匿名認証を使ってみたいと思います。匿名認証はIDやパスワードの設定が必要ない、簡易的な認証です。
 
-先に完成品を紹介します。匿名ユーザとしてログインした後、新しいメールアドレスとパスワードを指定して通常ユーザに変更しています。
+## Firebaseの設定
 
-![](/blog/content/images/2017/Feb/monaca-firebase-anonymouse-auth.gif)
+Firabaseコンソールで、[Authentication]メニュー ＞ [ログイン方法]タブを選択し、匿名ログインを有効化します。
 
-今回もVueを使っています。Vueは変数を書き換えると自動的に画面に反映してくれますので、Firebaseから取得したデータを面倒なDOM操作を行うことなく反映できます。
+![](/blog/content/images/2017/Feb/monaca-firebase-anonymouse-auth-1.png)
+
 
 ## テンプレートの修正
 
-Vueのテンプレートで、まず匿名ユーザになるためのボタンを設置します。
+前回作成したVueのテンプレートを、以下のように変更します。
 
 ```
-<button @click="anonymouse">匿名ユーザ</button>
+<div>
+    <div class="center"> Firebase認証 </div>
+    <section style="margin: 10px;" v-if="user.isLoggedIn">
+        <p v-if="user.isAnonymous">匿名ユーザ</p>
+        <p v-else>{{user.mailAddress}}</p>
+          
+        <section style="margin: 10px;">
+            <button @click="logout">ログアウト</button>
+        </section>
+    </section>
+    <section v-else style="margin: 10px;">
+        <p>メールアドレス</p>
+        <p>
+            <input v-model="user.mailAddress" placeholder="メールアドレス" />
+        </p>
+        <p>パスワード</p>
+        <p>
+            <input v-model="user.password" placeholder="パスワード" type="password" />
+        </p>
+        <button @click="register">新規登録</button>
+        <button @click="login">ログイン</button>
+        <button @click="anonymouse">匿名でログイン</button>
+    </section>
+</div>
 ```
 
-匿名ユーザでログインした場合、メールアドレスがありません。そのためログインユーザの表示を変更します。匿名ユーザであることを表す user.isAnonymous （コードは後述）がtrueであれば匿名ユーザと表示します。
+変更箇所は次の通りです。
+
+まず匿名ユーザとしてログインするためのボタンを設置します。
+
+```
+<button @click="anonymouse">匿名でログイン</button>
+```
+
+
+
+前回はログイン後にメールアドレスを表示しましたが、匿名ユーザでログインした場合はメールアドレスがありません。そのためログインユーザの表示処理を変更します。匿名ユーザであることを表す user.isAnonymous （コードは後述）がtrueであれば「匿名ユーザ」と表示します。
 
 ```
 <p v-if="user.isAnonymous">匿名ユーザ</p>
 <p v-else>{{user.mailAddress}}</p>
 ```
 
-最後に匿名ユーザの場合はメールアドレスとパスワードを入力して一般ユーザになるためのフォームを用意します。
 
-```
-<section style="margin: 10px;" v-if="user.isAnonymous">
-  <div class="center">ユーザ化する</div>
-  <p>メールアドレス</p>
-  <p>
-    <input v-model="user.mailAddress" placeholder="メールアドレス" />
-  </p>
-  <p>パスワード</p>
-  <p>
-    <input v-model="user.password" placeholder="パスワード" type="password" />
-  </p>
-  <section style="margin: 10px;">
-    <button @click="anony_register">ユーザ登録</button>
-  </section>
-</section>
-```
 
-テンプレートは次のようになります。
-
-```
-<div>
-  <div class="center"> Firebase認証 </div>
-  <section style="margin: 10px;" v-if="user.isLoggedIn">
-    <p v-if="user.isAnonymous">匿名ユーザ</p>
-    <p v-else>{{user.mailAddress}}</p>
-    
-    <section style="margin: 10px;">
-      <button @click="logout">ログアウト</button>
-    </section>
-    <section style="margin: 10px;" v-if="user.isAnonymous">
-      <div class="center">ユーザ化する</div>
-      <p>メールアドレス</p>
-      <p>
-        <input v-model="user.mailAddress" placeholder="メールアドレス" />
-      </p>
-      <p>パスワード</p>
-      <p>
-        <input v-model="user.password" placeholder="パスワード" type="password" />
-      </p>
-      <section style="margin: 10px;">
-        <button @click="anony_register">ユーザ登録</button>
-      </section>
-    </section>
-  </section>
-  <section v-else style="margin: 10px;">
-    <p>メールアドレス</p>
-    <p>
-      <input v-model="user.mailAddress" placeholder="メールアドレス" />
-    </p>
-    <p>パスワード</p>
-    <p>
-      <input v-model="user.password" placeholder="パスワード" type="password" />
-    </p>
-    <button @click="register">新規登録</button>
-    <button @click="login">ログイン</button>
-    <button @click="anonymouse">匿名ユーザ</button>
-  </section>
-</div>
-```
-
-### JavaScriptの処理
+## JavaScriptの処理
 
 次にデータの初期化についてです。匿名ユーザであることを表す isAnonymous を追加します。
 
 ```
-var vm = new Vue({
-  el: '#app',
-  // 初期データの設定
-  data: {
+// 初期データの設定
+data: {
     user: {
-      isLoggedIn: false,
-      mailAddress: "",
-      password: "",
-      isAnonymous: false // 追加
+        isLoggedIn: false,
+        mailAddress: "",
+        password: "",
+        isAnonymous: false // 追加
     }
-  },
+},
 ```
 
-isAnonymousはユーザのステータスが変わった際にチェックするようにします。Firebaseから返ってくるuserオブジェクトのisAnonymousで調べられますので、そのままVueのデータとして適用します。ログアウト時は変数userがnullになりますので注意してください。
+isAnonymousはデフォルトではfalseに設定しています。
+
+ログイン処理を実行すると、ユーザの認証状態変更を検知する `firebase.auth().onAuthStateChanged` が実行されます。Firebaseから返ってくるuserオブジェクトの中にisAnonymousが含まれており、匿名ユーザの場合はisAnonymousの値がtrueになります。
+
+ログアウト時は変数userがnullになります。
 
 ```
 // デプロイ完了時のイベント
 created: function() {
-	// ユーザのステータスが変わったら通知
-	var me = this;
-	firebase.auth().onAuthStateChanged(function(user) {
-		// 匿名ユーザチェック
-		if (user) {
-			me.user.isAnonymous = user.isAnonymous;
-			me.user.mailAddress = user.email;
-		}
-		me.user.isLoggedIn = (user !== null);
-	});
+    // ユーザの認証ステータスが変わったら通知
+    var me = this;
+    firebase.auth().onAuthStateChanged(function(user) {
+        // 匿名ユーザチェック
+        if (user) {
+            me.user.isAnonymous = user.isAnonymous;
+            me.user.mailAddress = user.email;
+        }
+        me.user.isLoggedIn = (user !== null);
+    });
 },
 ```
 
-### 匿名認証を行う
+## 匿名認証を行う
 
-匿名認証を行うにはFirebaseに用意されている `firebase.auth().signInAnonymously()` を実行するだけです。
+Vueのイベント処理の中に、匿名認証を行うイベントを追加します。匿名認証を行うにはFirebaseに用意されている `firebase.auth().signInAnonymously()` を実行します。
 
 ```
 // 匿名認証を行う
 anonymouse: function() {
-  firebase.auth().signInAnonymously()
+    firebase.auth().signInAnonymously()
     .catch(function(error) {
-      alert(error.message);
+        alert(error.message);
     });
 },
 ```
 
 認証が完了すると認証ステータスが変化して、上記 `firebase.auth().onAuthStateChanged` が実行されます。
 
-ここまでで匿名認証が完了です。
+以上で匿名認証が完了です。アプリを実行すると、匿名ユーザが追加されていることがFirabaseコンソールで確認できます。
 
-### 一般ユーザ化する
+![](/blog/content/images/2017/Feb/monaca-firebase-anonymouse-auth-2.png)
 
-次に匿名ユーザを一般ユーザ化します。これはまずメールアドレスとパスワードを使って認証情報を作成します。その後、現在のログイン情報（匿名ユーザ）に対して認証情報をリンクさせるという方法になります。
+
+全体のソースコードは以下のようになります。
 
 ```
-// 匿名ユーザを一般ユーザ化する
-anony_register: function() {
-  var me = this;
-  // 認証情報作成（新規ユーザ）
-  var credential = firebase.auth.EmailAuthProvider.credential(this.user.mailAddress, this.user.password);
-  // リンクさせる
-  firebase.auth().currentUser.link(credential)
-    .then(function(user) {
-      // ステータス通知が行われないので注意
-      me.user.isAnonymous = false;
-      me.user.isLoggedIn = true;
-    }, function(error) {
-      console.log("エラー", error);
+var onDeviceReady = function() {
+    // Firebaseの初期化
+    var config = {
+        apiKey: "API_KEY",
+        authDomain: "AUTH_DOMAIN",
+        databaseURL: "DATABASE_URL",
+        storageBucket: "STORAGE_BUCKET",
+        messagingSenderId: "MESSAGING_SENDER_ID"
+    };
+    firebase.initializeApp(config);
+
+    // Vueの処理
+    var vm = new Vue({
+        el: '#app',  // マウントするDOM
+        // 初期データの設定
+        data: {
+            user: {
+                isLoggedIn: false,
+                mailAddress: "",
+                password: "",
+                isAnonymous: false // 追加
+            }
+        },
+
+        // デプロイ完了時のイベント
+        created: function() {
+            // ユーザの認証ステータスが変わったら通知
+            var me = this;
+            firebase.auth().onAuthStateChanged(function(user) {
+                // 匿名ユーザチェック
+                if (user) {
+                    me.user.isAnonymous = user.isAnonymous;
+                    me.user.mailAddress = user.email;
+                }
+                me.user.isLoggedIn = (user !== null);
+            });
+        },
+        
+        // テンプレート
+        template: `
+            <div>
+                <div class="center"> Firebase認証 </div>
+                <section style="margin: 10px;" v-if="user.isLoggedIn">
+                    <p v-if="user.isAnonymous">匿名ユーザ</p>
+                    <p v-else>{{user.mailAddress}}</p>
+                      
+                    <section style="margin: 10px;">
+                        <button @click="logout">ログアウト</button>
+                    </section>
+                </section>
+                <section v-else style="margin: 10px;">
+                    <p>メールアドレス</p>
+                    <p>
+                        <input v-model="user.mailAddress" placeholder="メールアドレス" />
+                    </p>
+                    <p>パスワード</p>
+                    <p>
+                        <input v-model="user.password" placeholder="パスワード" type="password" />
+                    </p>
+                    <button @click="register">新規登録</button>
+                    <button @click="login">ログイン</button>
+                    <button @click="anonymouse">匿名でログイン</button>
+                </section>
+            </div>`,
+
+        // イベント処理
+        methods: {
+            // 登録処理
+            register: function() {
+                firebase.auth().createUserWithEmailAndPassword(this.user.mailAddress, this.user.password)
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+            
+            // ログイン処理
+            login: function() {
+                firebase.auth().signInWithEmailAndPassword(this.user.mailAddress, this.user.password)
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+            
+            // 匿名認証を行う
+            anonymouse: function() {
+                firebase.auth().signInAnonymously()
+                .catch(function(error) {
+                    alert(error.message);
+                });
+            },
+
+            // ログアウト処理
+            logout: function() {
+                firebase.auth().signOut();
+            }
+        }
     });
-},
+};
+document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", onDeviceReady, false);
 ```
-
-この時の注意点として、ステータス通知が行われないという問題があります。そのため、ユーザ名を変更するなどといった場合には注意してください。
 
 ----
 
 今回のコードは[moongift/monaca_firebase_anonymouse_auth](https://github.com/moongift/monaca_firebase_anonymouse_auth)にアップロードしてあります。実装時の参考にしてください。
 
-なお、macOSのSafariでは匿名ユーザの情報がうまく消せないのか `firebase.auth().onAuthStateChanged` が何度もコールされてしまうという不具合がありました（執筆時点のバージョン3.6.9において）。iOSのSafariやmacOSのGoogle Chromeでは問題ありませんでしたが、開発時にはご注意ください。
-
-匿名ユーザは利用者のイベントがなくとも使えますので、ユーザ登録の仕組みはなくともデータをセキュアに保ったり、不特定多数にデータを使われたりするのを防止する効果はあるでしょう。ぜひご利用ください。
+匿名ユーザは利用者にユーザ情報の入力を促さがなくても使えますので、ログイン機能を持たないアプリでも、ユーザ固有のデータをセキュアに保持したり、不特定多数にデータを使われるのを防止したりといった用途で利用できるでしょう。
 
 [Firebase](https://firebase.google.com/)
