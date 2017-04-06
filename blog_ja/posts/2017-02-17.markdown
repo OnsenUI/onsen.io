@@ -148,7 +148,7 @@ VueによるDOMの生成が完了するとcreatedが呼ばれます。ここで�
 ```
 // デプロイ完了時のイベント
 created: function() {
-    // ユーザのステータスが変わったら通知
+    // ユーザの認証ステータスが変わったら通知
     var me = this;
     firebase.auth().onAuthStateChanged(function(user) {
         me.user.isLoggedIn = (user !== null);
@@ -194,7 +194,7 @@ template: `
 
 ##### 登録処理
 
-ユーザ登録は入力されたメールアドレスとパスワードをFirebaseに送信します。登録が完了するとログイン状態に切り替わり、前述の firebase.auth().onAuthStateChanged が呼ばれます。
+ユーザ登録は入力されたメールアドレスとパスワードをFirebaseに送信します。登録が完了するとログイン状態に切り替わり、前述の `firebase.auth().onAuthStateChanged` が呼ばれます。
 
 ```
 // 登録処理
@@ -222,7 +222,7 @@ login: function() {
 
 ##### ログアウト処理
 
-ログアウト処理も実行すると自動的に通知が飛びます。
+ログアウト処理も実行すると `firebase.auth().onAuthStateChanged` が呼ばれます。
 
 ```
 // ログアウト処理
