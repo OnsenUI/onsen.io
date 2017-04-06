@@ -100,18 +100,24 @@ add: function() {
 
 #### 初期表示
 
-データの初期表示を行うのは次のようにします。先ほどの `firebase.database().ref('times/')` に対して value というイベントを使います。このイベントはVueの構築が終わったタイミング（created内）で行います。
+データの初期表示を行うのは次のようにします。先ほどの `firebase.database().ref('times/')` に対して value というイベントを使います。このイベントはVueの構築が終わったタイミング（created内）で行います。ユーザの認証状態に応じて、イベントを有効にするonと無効にするoffを設定します。
 
 ```
-var data = firebase.database().ref('times/');
-data.on('value', function(times) {
-	me.times = [];
-	times.forEach(function(time) {
-		me.times.push({
-			key: time.key,
-			time: time.val().time
-		})
-	});
+firebase.auth().onAuthStateChanged(function(user) {
+	me.user.isLoggedIn = (user !== null);
+	if (user !== null) {
+		data.on('value', function(times) {
+			me.times = [];
+			times.forEach(function(time) {
+				me.times.push({
+					key: time.key,
+					time: time.val().time
+				})
+			});
+		});
+	}else{
+		data.off('value');
+	}
 });
 ```
 
