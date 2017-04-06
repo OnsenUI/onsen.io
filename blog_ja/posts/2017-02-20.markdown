@@ -119,13 +119,18 @@ created: function() {
 Vueのイベント処理の中に、匿名認証を行うイベントを追加します。匿名認証を行うにはFirebaseに用意されている `firebase.auth().signInAnonymously()` を実行します。
 
 ```
-// 匿名認証を行う
-anonymouse: function() {
-    firebase.auth().signInAnonymously()
-    .catch(function(error) {
-        alert(error.message);
-    });
-},
+// イベント処理
+methods: {
+    …省略…
+    
+    // 匿名認証を行う
+    anonymouse: function() {
+        firebase.auth().signInAnonymously()
+        .catch(function(error) {
+            alert(error.message);
+        });
+    },
+}
 ```
 
 認証が完了すると認証ステータスが変化して、上記 `firebase.auth().onAuthStateChanged` が実行されます。
