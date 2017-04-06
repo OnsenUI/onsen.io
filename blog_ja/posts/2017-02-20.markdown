@@ -63,6 +63,7 @@ Firabaseコンソールで、[Authentication]メニュー ＞ [ログイン方�
 <button @click="anonymouse">匿名でログイン</button>
 ```
 
+![](/blog/content/images/2017/Feb/monaca-firebase-anonymouse-auth-3.jpg)
 
 
 前回はログイン後にメールアドレスを表示しましたが、匿名ユーザでログインした場合はメールアドレスがありません。そのためログインユーザの表示処理を変更します。匿名ユーザであることを表す user.isAnonymous （コードは後述）がtrueであれば「匿名ユーザ」と表示します。
@@ -72,6 +73,7 @@ Firabaseコンソールで、[Authentication]メニュー ＞ [ログイン方�
 <p v-else>{{user.mailAddress}}</p>
 ```
 
+![](/blog/content/images/2017/Feb/monaca-firebase-anonymouse-auth-4.jpg)
 
 
 ## JavaScriptの処理
