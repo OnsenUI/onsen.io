@@ -171,11 +171,11 @@ var onDeviceReady = function() {
             var me = this;
             firebase.auth().onAuthStateChanged(function(user) {
                 me.user.isLoggedIn = (user !== null);
-                // データの取得
+                
                 var data = firebase.database().ref('times/');
                 // ログイン状態であればデータ取得イベントを有効化
                 if (user !== null) {
-                    
+                    // データの取得
                     data.on('value', function(times) {
                         me.times = [];
                         times.forEach(function(time) {
