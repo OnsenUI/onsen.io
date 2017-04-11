@@ -1,6 +1,6 @@
 ---
 author: atsushi
-date: 2017-02-20
+date: 2017-04-14
 id: monaca-with-firebase-anonymouse-auth
 title: "Monaca × Firebase連携 その３：匿名認証"
 tags: vue, firebase
@@ -249,6 +249,6 @@ document.addEventListener(window.cordova ?"deviceready" : "DOMContentLoaded", on
 
 今回のコードは[moongift/monaca_firebase_anonymouse_auth](https://github.com/moongift/monaca_firebase_anonymouse_auth)にアップロードしてあります。実装時の参考にしてください。
 
-匿名ユーザは利用者にユーザ情報の入力を促さがなくても使えますので、ログイン機能を持たないアプリでも、ユーザ固有のデータをセキュアに保持したり、不特定多数にデータを使われるのを防止したりといった用途で利用できるでしょう。
+匿名ユーザは利用者にユーザ情報の入力を促さがなくても使えますので、ログイン機能を持たないアプリでも、ユーザ固有のデータをセキュアに保持する用途等で利用できるでしょう。
 
 [Firebase](https://firebase.google.com/)
