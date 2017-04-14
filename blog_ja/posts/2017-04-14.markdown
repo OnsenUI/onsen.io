@@ -1,0 +1,291 @@
+---
+author: atsushi
+date: 2017-04-14
+id: monaca-with-hotpepper-api
+title: "MonacaとホットペッパーAPIを組み合わせてみる"
+product: monaca
+tags: monaca, onsenui, webapi
+category: 技術情報
+---
+
+Web APIを使うと自分たちだけでは手に入らないようなデータを使えたり、複数のWeb APIをベースに全く新しいアプリを作ることができます（なお、複数のWeb APIを組み合わせることをマッシュアップと言います）。
+
+今回はそんなWeb APIの一つ、ホットペッパーAPIを使ったアプリの開発方法について紹介します。
+
+## ホットペッパーAPIの取得について
+
+多くのWeb APIが認証方式になっています。そうしないと無尽蔵にWeb APIをコールされてサーバが被害を受けたり、他の利用者に迷惑をかける可能性があるからです。ホットペッパーAPIでもそのようになっており、各自にAPIキーが配布されます。これはWeb APIを利用する際に使います。[新規登録 | リクルートWEBサービス](https://webservice.recruit.co.jp/register/index.html)より取得してください。
+
+## Monacaアプリについて
+
+今回は位置情報を使って付近のレストラン情報を収集するアプリを作ってみたいと思います。イメージでは次のようになります。まずトップページがあります。
+
+![](../content/images/2017/Apr/monaca-hotpepper-1.png)
+
+レストラン検索ボタンを押すと、ホットペッパーAPIからレストラン情報を取得して一覧表示します。
+
+![](../content/images/2017/Apr/monaca-hotpepper-2.png)
+
+一覧の中からタップするとレストランの詳細（今回は住所だけですが）を表示します。
+
+![](../content/images/2017/Apr/monaca-hotpepper-3.png)
+
+では作っていきましょう。
+
+## Onsen UIと組み合わせ
+
+今回はOnsen UI V2 JS Navigationをベースにしています。画面遷移（今回は一覧画面と詳細画面）の伴う場合、このテンプレートが参考になるでしょう。そしてCordovaプラグインとしてGeolocationをインストールします。HTML5 APIのGeolocationを使うこともできますが、この場合位置情報を取得する度に許可を求める確認ダイアログが出てしまいます。プラグインであれば一度許可すれば次からは出ません。
+
+![](monaca-hotpepper-4.png)
+
+追加でjQueryを入れておいて、準備は完了です。
+
+## HTMLについて
+
+まず画面について紹介します。まず画面遷移するので ons-navigator を使います。page要素は最初に表示するページの名前です。
+
+```
+ons-navigator id="navigator" page="list.html"></ons-navigator>
+```
+
+list.htmlは次のようになります。レストラン検索を行うボタンと、検索結果が入る空の #shops を用意しておきます。
+
+```
+<ons-template id="list.html">
+  <ons-page id="list-page">
+    <ons-toolbar>
+      <div class="center">レストラン検索</div>
+    </ons-toolbar>
+
+    <div class="content" style="text-align: center">
+      <ons-list>
+        <ons-list-header>
+          <a href="http://webservice.recruit.co.jp/"><img src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif" alt="ホットペッパー Webサービス" width="135" height="17" border="0" title="ホットペッパー Webサービス"></a>
+        </ons-list-header>
+        <ons-list-item>
+          <div class="center">
+            <ons-button id="getShops">レストラン取得</ons-button>
+          </div>
+        </ons-list-item>
+        <div id="shops">
+        </div>
+      </ons-list>
+    </div>
+  </ons-page>
+</ons-template>
+```
+
+最後に一覧からタップした時の画面です。ここではまだ空の店名、住所を入れるshop-nameとshop-addressを用意しておきます。
+
+```
+<ons-template id="detail.html">
+  <ons-page id="detail-page">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>戻る</ons-back-button></div>
+      <div class="center shop-name">レストラン詳細</div>
+    </ons-toolbar>
+
+    <div class="content" id="shop-info" style="text-align: center">
+      <ons-list class="shop-info-list">
+        <ons-list-header>名前</ons-list-header>
+        <ons-list-item id="shop-name"></span></ons-list-item>
+        <ons-list-header>住所</ons-list-header>
+        <ons-list-item id="shop-address"></ons-list-item>
+      </ons-list>
+    </div>
+  </ons-page>
+</ons-template>
+```
+
+## JavaScriptの実装
+
+では続いてJavaScriptの処理について紹介します。まずコメントで紹介します。
+
+```
+// ホットペッパーAPIのキー
+var api_key = "YOUR_API_KEY";
+
+// 検索結果のレストラン一覧を入れます
+var shops = [];
+w
+// 画面が切り替わる度に呼ばれます
+document.addEventListener('init', function(event) {
+  // 最初の画面を表示した時の処理
+  if (page == "list-page") {
+    
+    // レストラン取得ボタンを押した時の処理
+    // 現在位置を取得します
+      // Ajax実行
+        // 処理が成功した場合
+          // リストに追加
+        // 処理が失敗した場合
+    // レストラン名をタップした時のイベント
+      // レストランデータを特定
+    
+      // ページ移動
+  }
+  
+  // 詳細画面を表示した時の処理
+  if (page == "detail-page") {
+    // レストランデータを表示
+    
+  }
+```
+
+### 最初の画面を表示した時の処理
+
+一番最初の画面で行う処理は主に2つです。
+
+1. レストラン取得ボタンを押したら、ホットペッパーAPIをコールして結果を一覧表示
+2. 一覧をタップした時に詳細画面に遷移する
+
+#### レストラン取得ボタンを押したら、ホットペッパーAPIをコールして結果を一覧表示
+
+ボタンが押されたら、navigator.geolocation.getCurrentPosition を使って位置情報を取得します。
+
+```
+$("#getShops").on("click", () => {
+  // 現在位置を取得します
+  navigator.geolocation.getCurrentPosition((location) => {
+    :
+  });
+});
+```
+
+位置情報が取得できたら、位置情報を使ってホットペッパーAPIにアクセスするためのURLを生成します。詳しくは[ホットペッパー | APIリファレンス | リクルートWEBサービス](https://webservice.recruit.co.jp/hotpepper/reference.html)にて確認できますが、今回は次のようになります。
+
+```
+var url = `http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${api_key}&lat=${location.coords.latitude}&lng=${location.coords.longitude}&range=5&order=4&format=json`;
+```
+
+なお、レスポンスをjsonとしているのでMonaca IDEでは動作しないかと思います。もしそちらでも確認したいという時にはjsonpを指定してください。
+
+そしてAjaxを実行します。
+
+```
+$.ajax({
+  type: 'GET',
+  dataType: "json",
+  url: url
+}).done((results) => {
+  // 処理が成功した場合
+    :
+}).fail((err) => {
+	// 処理が失敗した場合
+  alert("エラー！");
+})
+```
+
+処理が成功した場合、一覧が返ってきますのでリストに反映します。
+
+```
+shops = results.results.shop;
+for (var i = 0; i < shops.length; i++) {
+  var shop = shops[i];
+  // リストに追加
+  $("#shops").append(`<ons-list-item modifier="chevron" class="shop" tappable><span data-shop-id="${i}">${shop.name}</span></ons-list-item>`);
+}
+```
+
+#### レストラン名をタップした時の処理
+
+続いて一覧からレストラン名をタップした時の処理についてです。ここではレストランデータを取得し、次の画面に引き渡します。これはpushPageの二つ目の引数にdataとして渡します。
+
+```
+// レストラン名をタップした時のイベント
+$(document).on("tap", ".shop span", (e) => {
+  // レストランデータを特定
+  var index = $(e.target).data("shop-id");
+  var shop = shops[index];
+  
+  // ページ移動
+  var nav = document.querySelector('#navigator');
+  nav.pushPage('detail.html', {data: {shop: shop}});
+});
+```
+
+### 詳細画面を表示した時の処理
+
+次に詳細画面へ遷移した時の処理についてです。ここでは前の画面から渡されたレストラン情報を表示します。HTML側でid指定している部分に描画するだけです。
+
+```
+// 詳細画面を表示した時の処理
+if (page == "detail-page") {
+  // レストランデータを表示
+  var shop = event.target.data.shop;
+  $("#shop-name").text(shop.name);
+  $("#shop-address").text(shop.address);
+}
+```
+
+JavaScript全体の処理は次のようになります。ホットペッパーAPIのキーは自分のものに置き換えてください。
+
+```
+// ホットペッパーAPIのキー
+var api_key = "YOUR_API_KEY";
+
+// 検索結果のレストラン一覧を入れます
+var shops = [];
+
+// 画面が切り替わる度に呼ばれます
+document.addEventListener('init', function(event) {
+  var page = event.target.id;
+  
+  // 最初の画面を表示した時の処理
+  if (page == "list-page") {
+    // レストラン取得ボタンを押した時の処理
+    $("#getShops").on("click", () => {
+      // 現在位置を取得します
+      navigator.geolocation.getCurrentPosition((location) => {
+        // 検索実行するURL
+        var url = `http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${api_key}&lat=${location.coords.latitude}&lng=${location.coords.longitude}&range=5&order=4&format=json`;
+        // Ajax実行
+        $.ajax({
+          type: 'GET',
+          dataType: "json",
+          url: url
+        }).done((results) => {
+          
+          // 処理が成功した場合
+          shops = results.results.shop;
+          for (var i = 0; i < shops.length; i++) {
+            var shop = shops[i];
+            // リストに追加
+            $("#shops").append(`<ons-list-item modifier="chevron" class="shop" tappable><span data-shop-id="${i}">${shop.name}</span></ons-list-item>`);
+          }
+        }).fail((err) => {
+          // 処理が失敗した場合
+          alert("エラー！");
+        });
+      }, (err) => {
+        
+      });
+    });
+    
+    // レストラン名をタップした時のイベント
+    $(document).on("tap", ".shop span", (e) => {
+      // レストランデータを特定
+      var index = $(e.target).data("shop-id");
+      var shop = shops[index];
+      
+      // ページ移動
+      var nav = document.querySelector('#navigator');
+      nav.pushPage('detail.html', {data: {shop: shop}});
+    });
+  }
+  
+  // 詳細画面を表示した時の処理
+  if (page == "detail-page") {
+    // レストランデータを表示
+    var shop = event.target.data.shop;
+    $("#shop-name").text(shop.name);
+    $("#shop-address").text(shop.address);
+  }
+});
+```
+
+----
+
+Web APIを使うことでアプリの可能性を飛躍的に向上させられます。他にもたくさんのAPIがありますのでぜひアプリ開発に組み込んでみてください。
+
+今回のコードは[moongift/monaca_with_hotpepper_api](https://github.com/moongift/monaca_with_hotpepper_api)にアップロードしてあります。実装時の参考にしてください。
