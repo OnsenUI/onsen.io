@@ -73,7 +73,7 @@ From Monaca Cloud IDE, create a new project with a template called `Onsen UI v2 
 <preference name="deployment-target" value="7.0" />
 ```
 
-## Step 4: File Components and Explanation
+## Step 4: It's Coding Time!
 
 ![File Tree](/blog/content/images/2017/Apr/twitter_files.png)
 
@@ -118,7 +118,7 @@ As you can see, inside the body there is only an [<ons-navigator>](https://onsen
 
 ### home.html
 
-Replace the following code to `home.html` file:
+Please create a `home.html` file with the following content: 
 
 ```html
 <ons-page ng-controller="HomeCtrl as home" ng-init="CheckLoginStatus()">
@@ -292,11 +292,15 @@ ons.bootstrap()
 
 Inside this file, there is service called `StorageService` to store the login information of the user using the device's Local Storage. 
 
-There is also one controller called `HomeCtrl` which consists of two main functions such as `Login()` and `Logout()`. Inside the `Login()` function, `TwitterConnect.login()` is called asking the user the login with a valid Twitter account information. If you have logged in with a Twitter application on your device, the information of that account will be shown automatically. See below screenshot as example: 
+There is also one controller called `HomeCtrl` which consists of two main functions such as `Login()` and `Logout()`. Inside the `Login()` function, `TwitterConnect.login()` is called asking the user the login with a valid Twitter account information. 
+
+**NOTE**: If you have logged in with a Twitter application on your device, the information of that account will be shown automatically (See below screenshot as example). If you want to login with different account, please go to your Twitter app and change the account there. 
 
 ![Authentication](/blog/content/images/2017/Apr/twitter_authentication.png)
 
-After a successful login, `StorageService` is called to store the login information and you will be directed back to `home.html` page showing the profile information of the logged in user. Inside the `Login()` function, a confirmation dialog is shown to confirm the activity (see the screenshot below). If the user select `Yes`, the `TwitterConnect.logout()` function is called and `StorageService` is also called to remove the login information.
+After a successful login, `StorageService` is called to store the login information and you will be directed back to `home.html` page showing the profile information of the logged in user. Inside the `Logout()` function, a confirmation dialog is shown to confirm the activity (see the screenshot below). If the user select `Yes`, the `TwitterConnect.logout()` function is called and `StorageService` is also called to remove the login information.
+
+**NOTE**: This `Logout()` function can only log the user out of this application, not the Twitter app.
 
 ![Confirmation](/blog/content/images/2017/Apr/twitter_confirmation.png)
 
