@@ -96,6 +96,11 @@ module.exports = function(language, isStaging) {
       name: 'Adam Kozuch',
       email: 'adam@asial.co.jp',
       url: 'https://github.com/adamkozuch'
+    },
+    khemry: {
+      name: 'Khemry Khourn',
+      email: 'khemry@asial.co.jp',
+      gravatar: 'df8437575137316a8ad04e7c8a62f17a'
     }
   };
 
