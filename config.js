@@ -99,8 +99,13 @@ module.exports = function(language, isStaging) {
     },
     khemry: {
       name: 'Khemry Khourn',
-      email: 'khemry@asial.co.jp',
+      email: 'k.khemry@yahoo.com',
       gravatar: 'df8437575137316a8ad04e7c8a62f17a'
+    },
+    nikola: {
+      name: 'Nikola Cvetkovski',
+      email: 'nikola@asial.co.jp',
+      gravatar: '808bdc0eea25718da7616a26bcecd221'
     }
   };
 
