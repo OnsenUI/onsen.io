@@ -1,0 +1,221 @@
+---
+author: fran
+date: 2017-05-08
+id: vue-2-onseui-beta-release-ja
+title: "Onsen UI for Vue 2（β版）リリースのご案内：Vueを使用したモバイルアプリの開発をはじめよう"
+product: onsen
+category: ニュース
+tags: onsen ui, vue, vuex
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://onsen.io/blog/content/images/2017/Mar/onsen-vue.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+![Onsen UI and Vue.js](/blog/content/images/2017/Mar/onsen-vue.png)
+
+（この記事は [Fran Dios](https://onsen.io/blog/fran/) が 2017年3月30日に英語版 Monaca x Onsen ブログに投稿した [Start your Vue Mobile App Now. Onsen UI for Vue 2 Beta Release](https://onsen.io/blog/vue-2-onseui-beta-release/) の翻訳です。）
+
+
+ついに、「Onsen UI for Vue 2（β版）」がリリースされました！NPM経由で、`vue-onsenui@2.0.0-beta.0` をインストールすれば、Onsen UIを活用しつつ、Vue を使用したモバイルアプリの開発ができます。モバイル端末向けのVue UIが、これを可能にしてくれました。
+
+この記事では、「Onsen UI for Vue 2（β版）」を使用したアプリの作成方法を解説します。できるだけ多くのコンポーネントの使用例をご紹介するため、通称「Kitchen Sinkアプリ」と呼ばれるデモ用アプリを使用します（なお、コンポーネントにより、Vuex使用の有無が異なります）。
+
+
+<!-- more -->
+
+## Onsen UI とは？
+
+「[Vue](https://jp.vuejs.org/)を使用したモバイルアプリの開発経験はあるけれど、Onsen UI のことは初めて聞いた。」という方のために、ここでは、Onsen UIを簡単に解説します。
+
+[Onsen UI](https://ja.onsen.io/)は、オープンソースのライブラリーです。使いやすさとシンプルさに焦点をあてた、ハイブリッドアプリ向けのUIライブラリーです。Custom Elements（[Web Components](https://www.w3.org/standards/techs/components#w3c_all) の構成要素のひとつ）を基礎にして構築されています。
+
+また、Vueを含む、各種JSフレームワークをサポートするためのラッパーも提供しています。Vueに関してのサポートは今回開始されたばかりですが、他のフレームワークに関するサポートは以前からも行っており、これまで多くのモバイルアプリ開発に貢献してきたものと自負しています。
+
+Onsen UIによるアプリ開発では、[Cordova](https://cordova.apache.org/)フレームワークを使用します。Cordovaフレームワークは、ハイブリッドアプリからネイティブ側の機能にアクセスするためのAPIを提供してくれています（ネイティブ機能へのアクセスは、プラグイン経由で行います）。
+
+なお、Onsen UIは、Cordova開発環境「[Monaca](https://ja.monaca.io/)」にバンドルされています。Monacaでは、Cordovaを使用したアプリ開発の全工程をサポートしてくれる、多くのツール・機能が提供されています。たとえば、デバッガー、CLI、各種テンプレート、バックエンド側のソリューション、プッシュ通知機能、App Storeへの申請機能などがあります。Onsen UIはMonacaと併用してアプリを開発するために作成されたものですが、もちろん、Monacaとは切り離し、独立してCordovaアプリまたは各種モバイルサイト開発に使用することもできます。
+
+
+## β版に関する情報
+
+α版では、APIの仕様を数度変更しました。β版では、API自体には大きな変更は行わない予定です（実際、APIは `alpha.1` のままです。機能の追加や修正は、今後、若干あるかと思います）。よって、今後リリースされるバージョンへの移行も、スムーズに行えるのではないでしょうか。
+
+
+## テンプレートアプリの新規追加（Monaca CLI/Localkitで利用可）
+
+Onsen UIとMonacaツールを利用して、Vue を使用したハイブリッドアプリの開発ができるようになりました。先日、Monaca CLIとMonaca Localkitがアップデートされ、Vue 向けのテンプレートが標準装備されました。よって今後は、Onsen UIとVueが動作するテンプレートを利用して、Cordovaアプリの開発が行えます。また、Webpack v2のサポートも、近日中に開始する予定です。
+
+利用方法に関しては [Onsen UI 2をはじめよう](https://ja.onsen.io/getting-started/) を参考にしてください。
+
+
+## Kitchen Sinkアプリ（Vue CLIを使用）
+
+以前のテンプレートでは、Webpack v1 が使用されていましたが、このサンプルアプリの開発には、Webpack v2をサポートしている、[Vue CLI](https://github.com/vuejs/vue-cli) を使用しています。以前のものとは異なり、このプロジェクトには通常のCordovaプロジェクトが持つ構造はありませんが、サンプルとしてなら十分利用できるかと思います。なお、このプロジェクトでは、[`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) テンプレートをベースとして使用し、Onsen UIが使用できるように、修正が加えられています。
+
+解説をはじめる前に、[Onsen UIのドキュメント](hhttps://ja.onsen.io/v2/docs/guide/vue/) または [チュートリアル](https://tutorial.onsen.io) を確認しておくことをお勧めします（特に、Onsen UIの基礎、VueとOnsenUI関連の箇所、各コンポートネントの解説など）。
+
+
+#### 動作の確認
+
+まずは、何をするアプリなのかを理解するため、実際の動作を確認してみましょう。[こちら](https://frandiox.github.io/vue-onsenui-kitchensink/)が、メイン画面となります。
+
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <iframe src="https://frandiox.github.io/vue-onsenui-kitchensink/" scrolling="no" style="width: 345px; height: 600px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-right: 10px" class="lazy-hidden"></iframe>
+  <iframe src="https://frandiox.github.io/vue-onsenui-kitchensink/?platform=android" scrolling="no" style="width: 345px; height: 600px;  border: 0; box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); margin-left: 10px" class="lazy-hidden"></iframe>
+</div>
+
+この2つの画面は同一のソースコードで作られていますが、Onsen UIが提供するスタイルの自動調整機能が適用され、プラットフォームに応じて、各種効果・スタイルが切り替わっています（この機能を使用するか否かは任意です）。
+
+なお、このアプリには、2つのバージョンを用意しています。1つ目のバージョンでは、[Vuex](https://vuex.vuejs.org/ja/) を使用して、アプリの状態（ステート）管理を行います。コードは、[こちら](https://github.com/frandiox/vue-onsenui-kitchensink) で確認できます。
+
+Vuex抜きのバージョンに関しては、[こちら](https://github.com/frandiox/vue-onsenui-kitchensink/tree/no-vuex) をご確認ください。こちらのバージョンでは、状態管理に、`props`（親から子コンポーネントへのデータの受け渡し）を使用しています。
+
+
+#### Webpack 2側の設定
+
+`webpack-simple`テンプレートで使用されているWebpack設定ファイルには、プラグインの追加に加えて、CSS loader周りに重要な修正を加えています。Onsen UIでは、`css/onsen-css-components.css` もバンドルの対象にしています。このファイルには、ベンダープレフィックスなどを含む、変換（トランスパイル）済みのCSSコンポーネントが、すぐに使える状態で格納されています。また、テーマカラーを変更にも対応できるように、`css-components-src/src/onsen-css-components.css` もインクルードされています。どちらのファイルも`.css`拡張子が付いているので紛らわしいかと思いますが、後者に関しては、ブラウザーによってはサポートしていない、CSSの新しい仕様（CSSカスタムプロパティ、@applyルールなど）が使用されています。よって、`postcss-loader` と `postcss-cssnext` が必須となります。設定内容は、[こちら](https://github.com/frandiox/vue-onsenui-kitchensink/blob/master/webpack.config.js) で確認できます。
+
+
+#### コンポーネントの挙動に関して（組み合わせ/順序）
+
+Onsen UIでは、複数のページを管理するための、3つの主要なナビゲーション（ページ遷移）系のコンポーネント（`VOnsNavigator`、`VOnsTabbar`、`VOnsSplitter`）を用意しています。なお、これらのコンポーネントは、子コンポーネントを持つことを前提としているため、その管理も行う必要があります。また、これらのコンポーネントを併用する場合には、使用する組み合わせ/順序によって、コンポーネントの挙動が変わるので、注意が必要です。なお、他のコンポーネントに関しては、DOMツリー内の単なる「葉」（リーフ、子のないノード）と考えることができます。
+
+こちらのアプリでは、`VOnsTabbar` を使用して、「Home」・「Forms」・「Animations」セクションで構成されたタブバーを作成しています。また、それぞれのセクションには、共通するサイドメニューを持たせるようにします。このような挙動にするため、`VOnsTabbar` の親として、`VOnsSplitter` を使用しています。この方法であれば、`VOnsSplitter` 側に干渉せずに、`VOnsTabbar` 内でページを切り替えることができます。なお、この設定において、`VOnsSplitter` のコンテンツを変更した場合には、`VOnsTabbar` も消えてしまいます。
+
+また、遷移先のページでは、他のコンポーネントを使用して作成したページを表示させています。これらのページでは、タブバーおよびサイドメニューの表示を行いません。このような挙動を実現するため、上記2つのコンポーネントの親として、`VOnsNavigator` を使用しています。`VOnsNavigator` を使用すると、ページのプッシュ（push）によって画面遷移が実現され、ページがポップ（pop）されるまで、遷移元のページは背面に隠された状態になっています。
+
+
+#### コードの解説
+
+* ツールバーのカスタマイズ
+
+Onsen UIでは、カスタマイズ可能なコンポーネントを提供しています。必要に応じて、このコンポーネントを別のコンポーネントでラップすることができます。ここでは、`VOnsToolbar` と `VOnsBackButton` を使用して、カスタマイズの例を記します。`VOnsBackButton` の使用時には、通常、ラベルとタイトルを適宜設定する必要があり、加えて別のボタンをツールバー右側に置くことがよくあります。
+
+これを踏まえ、このアプリでは `VOnsToolbar` をラップした単一ファイルコンポーネント（CustomToolbar.vue）を作成しておきます。
+
+```html:CustomToolbar.vue
+<template>
+  <v-ons-toolbar>
+    <div class="left">
+      <slot name="left">
+        <v-ons-back-button v-if="backLabel">
+          {{ backLabel }}
+        </v-ons-back-button>
+      </slot>
+    </div>
+    <div class="center"><slot>{{ title }}</slot></div>
+    <div class="right"><slot name="right"></slot></div>
+  </v-ons-toolbar>
+</template>
+```
+
+すると次の1行で、カスタマイズされたツールバーを追加することができます。
+
+```html
+<custom-toolbar back-label="Back">Title</custom-toolbar>
+```
+
+* Navigatorに関して
+
+`VOnsBackButton` がタップされたとき、または、端末の戻るボタンが押されたとき、`VOnsNavigator` は、デフォルトでは `this.pageStack.pop()` を実行します。このデフォルトの挙動は、それぞれ、 `@click.prevent="..."` または `@deviceBackButton.prevent="..."` を使用すれば上書きできます。
+
+すべての場合に対応できる、もっと手軽な方法もあります。それは、`popPage`プロパティを使用して、`VOnsNavigator` が行うポップ処理を上書きすることです。
+
+```html
+<v-ons-navigator
+  :page-stack="$store.state.navigator.stack"
+  :options="$store.state.navigator.options"
+  :pop-page="() => this.$store.commit('navigator/pop')"
+></v-ons-navigator>
+```
+
+加えて、`options`プロパティを指定すれば、ページ遷移時のアニメーション効果も変更することができます。
+
+
+* Tabbarに関して
+
+iOSでは通常、タブにはアイコンが置かれています。一方、Android（マテリアルデザイン）では、ほとんどの場合ラベルが貼られているだけです。`VOnsTab` では、プラットフォームがiOSの場合だけ、アイコンを表示するように設定することができます。次のように、Androidの場合には、`icon`プロパティにnull値を渡すように記述します。
+
+
+```javascript
+{
+  label: 'Home',
+  icon: this.$ons.platform.isAndroid() ? null : 'ion-home',
+  page: Home
+}
+```
+
+Androidのタイトルに関しても、次のように、プラットフォーム別の処理を置けます（なお、マテリアルデザインでは通常、タブを切り替えたときでもタイトルは固定されています）。
+
+```javascript
+computed: {
+  title() {
+    return this.$ons.platform.isAndroid()
+      ? 'Kitchen Sink'
+      : this.tabs[this.index].label
+    ;
+  }
+}
+```
+
+* Pull Hookに関して
+
+Twitterのような「引っ張って更新する」（pull to refresh）処理も、下記のように簡単に行えます。
+
+```html
+<v-ons-icon
+  :spin="state === 'action'"
+  :icon="state === 'action' ? 'fa-spinner' : 'fa-arrow-down'"
+  :rotate="state === 'preaction' && 180"
+></v-ons-icon>
+```
+
+引っ張った時に、アイコンにCSSアニメーションをつける処理も忘れずに記述しましょう。
+（`transition: transform .2s ease-in-out`）
+
+* Formsに関して
+
+このアプリでは、コンポーネント間での値の共有は行っていません。よって、storeにも値は保存されていません。ただし、次のように`VOnsModel`ディレクティブと算出プロパティを使用すれば、簡単に紐づけることができます。
+
+```javascript
+<v-ons-switch v-ons-model="switchOn" />
+...
+computed: {
+  switchOn: {
+    get() {
+      this.$store.state.switchOn;
+    },
+    set(newValue) {
+      this.$store.commit('switch', newValue);
+    }
+  }
+}
+```
+
+#### Vuex
+
+このアプリでは、ナビゲーション系のコンポーネントを複数組み合わせているため、各コンポーネントの操作をアプリのどこからでも行えると便利です。これには、Vuexを利用できます。たとえば、`VOnsSplitter` から、`VOnsTabbar` のセクションを直接変更する場合に便利です。ただし、Vuexは必須ではありません。Vuex抜きでも、同じ処理を実現することはできます。
+
+もし要望があれば、コンポーネント間で共有できるストアオブジェクトのテンプレートをvue-onsenuiパッケージに追加し、利用できるようにすることも検討しています。
+
+
+
+#### Vue Routerに関して
+
+Onsen UIでは、プッシュ（push）とポップ（pop）操作を基本とした、ルーティング用のコンポーネントを複数用意しています（使い勝手がよく、パワフルなルーティング機能を提供します）。また、複数のページスタック（page stack）を保持することができ、それら複数のスタックを組み合わせて使用することもできます。よって、なんらかのルーターを新規に追加する必要は見いだせません。ただし優先順位は低いものの、Vue開発者様からの要望次第で、Vue Routerの導入も検討しています。この件に関しては、近日中に、なんらかのご案内ができるかと思います。
+
+
+## 皆さまのからの応援をお待ちしています！
+
+以上ですが、Onsen UI開発陣の熱量を感じていただけましたでしょうか。Vueを使用したハイブリッドアプリの開発の際には、ぜひvue-onsenuiをお試しください。また、vue-onsenui の開発は、完全にオープンにしており、随時、皆様からの問題点のご報告、プルリクエスト、ご意見・ご要望を受け付けております。
+
+Onsen UIチームでは、今後も精力的に、Vue開発者向けに改良や修正を加えていく予定です。`vue-onsenui` を、「皆様から最も支持される、モバイルアプリ向けVue UIフレームワーク」にするため、今後ともご支援・ご協力のほどよろしくお願いいたします。
+
+---
+
+Onsen UIは、ハイブリッドアプリ向けUIを作成するためのオープンソースのライブラリーです。詳細は、[GitHubページ](https://github.com/OnsenUI/OnsenUI)をご確認ください。また、Onsen UIを応援してくれる方は、ぜひ、スター（★）をポチッとお願いいたします。
+
