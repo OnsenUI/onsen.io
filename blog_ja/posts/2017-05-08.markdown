@@ -56,7 +56,7 @@ Onsen UIとMonacaツールを利用して、Vue を使用したハイブリッ�
 
 以前のテンプレートでは、Webpack v1 が使用されていましたが、このサンプルアプリの開発には、Webpack v2をサポートしている、[Vue CLI](https://github.com/vuejs/vue-cli) を使用しています。以前のものとは異なり、このプロジェクトには通常のCordovaプロジェクトが持つ構造はありませんが、サンプルとしてなら十分利用できるかと思います。なお、このプロジェクトでは、[`webpack-simple`](https://github.com/vuejs-templates/webpack-simple) テンプレートをベースとして使用し、Onsen UIが使用できるように、修正が加えられています。
 
-解説をはじめる前に、[Onsen UIのドキュメント](hhttps://ja.onsen.io/v2/docs/guide/vue/) または [チュートリアル](https://tutorial.onsen.io) を確認しておくことをお勧めします（特に、Onsen UIの基礎、VueとOnsenUI関連の箇所、各コンポートネントの解説など）。
+解説をはじめる前に、[Onsen UI for Vue 2 のドキュメント](https://ja.onsen.io/v2/docs/guide/vue/) または [チュートリアル](https://tutorial.onsen.io) を確認しておくことをお勧めします（特に、Onsen UIの基礎、VueとOnsenUI関連の箇所、各コンポートネントの解説など）。
 
 
 #### 動作の確認
@@ -200,8 +200,7 @@ computed: {
 
 このアプリでは、ナビゲーション系のコンポーネントを複数組み合わせているため、各コンポーネントの操作をアプリのどこからでも行えると便利です。これには、Vuexを利用できます。たとえば、`VOnsSplitter` から、`VOnsTabbar` のセクションを直接変更する場合に便利です。ただし、Vuexは必須ではありません。Vuex抜きでも、同じ処理を実現することはできます。
 
-もし要望があれば、コンポーネント間で共有できるストアオブジェクトのテンプレートをvue-onsenuiパッケージに追加し、利用できるようにすることも検討しています。
-
+もし要望があれば、各コンポーネントの操作をアプリのどこからでも行えるようにするためのstoreオブジェクトの雛形をvue-onsenuiパッケージに追加し、利用できるようにすることも検討しています。
 
 
 #### Vue Routerに関して
