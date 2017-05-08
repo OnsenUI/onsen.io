@@ -1,0 +1,52 @@
+---
+author: andi
+date: 2017-05-08
+id: monaca-localkit-2-3-0-released-with-new-transpiling-related-features
+title: "Monaca Localkit 2.3.0 released with new transpiling features"
+product: monaca
+category: announcement
+tags: monaca, localkit, transpiling
+---
+
+We are happy to announce the release of [Monaca Localkit 2.3.0](https://monaca.io/localkit.html). As you may have already noticed, recently we have been focused on improving the user experience for the transpiling environment integrated into Localkit and that's exactly what this new Localkit release brings.
+
+Let's not waste time and let's take a look at the new features recently implemented and ready to be immediately used with your Vue, React and Angular2 templates!
+
+<!-- more -->
+
+A new `Transpiler` category has been added to the dashboard's tabbar for the templates that support it.
+
+![Monaca Localkit 2.3.0 dashboard](/blog/content/images/2017/May/localkit-2.3.0.png)
+
+## Transpile process management
+
+One of the biggest issues in the Localkit transpiling environment has been the inability to control the transpiling process management. For example, once a transpilable project was selected, the transpiler was automatically triggered every time a change was made on that project.
+
+We realized this may bring issues on outdated hardware, that's why we decided to allow you to choose when to enable the automatic transpiling or pause it. You can freely manage it with the switch related to `Enable automatic transpiling` option, the settings are persistent and related to each project. The status of the automatic transpiling can also be checked in the `Transpiler` tabbar element.
+
+The only case in which we force to execute a transpiling operation is when the developer performs an `upload` operation to Monaca Cloud because it's the only way to assure content consistency.
+
+## Transpiler Console
+
+Being able to constantly check the log produced by the transpiling process is always important and can help you to spot issues relate to your project in real-time. While we were providing a log since the first transpiling integration, it appeared not user-friendly as it obliged the user to manually configure the log settings. That's why we decided to integrate a Console directly on Localkit, in which you will be able to follow the progression of the whole transpiling process.
+
+The displayed information include:
+
+* Transpiling status.
+* Creation of a new transpiling process with relative PID.
+* Information related to the transpiling process Kill operation.
+* Transpiling settings management.
+
+... and more.
+
+Moreover, the Console can be easily resized and hidden, in case the developer is not interested in displaying the generated log.
+
+## Reconfigure Transpiler
+
+A new `Reconfigure Transpiler` option has been implemented. We know that situations in which your global transpiling dependencies have been "mysteriously" deleted may occur, that's why we decided to provide an option to reconfigure them in the easiest way possible.
+
+From now on, if the transpiling process fails because of some global dependencies missing, just push the reconfigure button and Localkit will do all the magic!
+
+## More to come…
+
+These are just some of the new updates we have been working on. Soon we perform a major update for Monaca Localkit and CLI, providing full support to [Webpack 2](https://webpack.js.org/) and new features related with the transpiler itself. Stay turned and let us know what would you like to see in the future Localkit releases!
