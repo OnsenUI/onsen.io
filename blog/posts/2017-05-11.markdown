@@ -34,17 +34,17 @@ In this post we'd like to explain what the most recent updates of Onsen UI are a
 <!--しかしこの Custom Elements は、[Android では良好にサポートされている一方で、iOS ではあまりよくサポートされていませんでした](https://caniuse.com/#feat=custom-elementsv1)。-->
 In case you are not familiar with it yet, Onsen UI uses a technology called [Custom Elements](https://www.w3.org/TR/custom-elements/) which, although well-supported by Android, was lacking a bit in iOS.
 <!--そのため、Onsen UI を iOS で安定的に動作させることは技術的に困難でした。-->
-For that reason it was previously technically difficult to safely run Onsen UI on iOS.
+For that reason it could at times prove to be not as 100% safe and stable as you're accostumed to by now.
 
 <!--しかし、今年の2月に Custom Elements の開発者達によって[その状況が改善され](https://github.com/webcomponents/custom-elements/issues/34)、-->
 However, good news! The Custom Elements' developers managed to [solve this situation](https://github.com/webcomponents/custom-elements/issues/34) last February.
 <!--結果として Onsen UI の iOS での安定性が飛躍的に向上しました。-->
 <!--特に AngularJS などの JS フレームワークと併用した際の安定性が向上しています。-->
-As a result, the stability of Onsen UI has been significantly improved, especially when used together with frameworks such as AngularJS. A more detailed technical explanation on this matter is provided further down this article.
+As a result, the stability of Onsen UI has been even more improved, especially when used together with frameworks such as AngularJS. A more detailed technical explanation on this matter is provided further down this article.
 
 
 <!--Onsen UI 2.2.3 未満をお使いの方は最新版へのバージョンアップをご検討ください。-->
-If you are using Onsen UI 2.2.2 or older, please consider updating it to the latest version.
+If you are using Onsen UI 2.2.2 or older, please consider updating it to the latest version. The update methods are the same as you're used to. If you are using `angular2-onsenui`, `react-onsenui` or `vue-onsenui`, please do not forget to update them to their latest version as well. And of course let us know if you run into any kind of trouble.
 
 <!--### ons-splitter にアニメーションを追加しました (2.2.5)-->
 ### New animations for `ons-splitter` (2.2.5)
@@ -77,74 +77,13 @@ Before we were providing only an `overlay` animation but since Onsen UI 2.2.5 `p
 <p data-height="512" data-theme-id="light" data-slug-hash="zwPQwb" data-default-tab="html,result" data-user="asial-matagawa" data-embed-version="2" data-pen-title="Onsen UI 2.2.5 - New animations of ons-splitter" class="codepen">See the Pen <a href="https://codepen.io/asial-matagawa/pen/zwPQwb/">Onsen UI 2.2.5 - New animations of ons-splitter</a> by Naoki Matagawa (<a href="http://codepen.io/asial-matagawa">@asial-matagawa</a>) on <a href="http://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-<!--### バージョンアップ方法-->
-### How to update
-
-<!--#### (1) 直接ダウンロードの場合-->
-#### (1) Direct download
-
-<!--[こちら](https://github.com/OnsenUI/OnsenUI-dist/releases) から最新版の zip ファイルをダウンロードしてご利用ください。-->
-If you like to add things manually you can download a zip file of the latest version from [here](https://github.com/OnsenUI/OnsenUI-dist/releases).
-
-<!--#### (2) CDN ([unpkg](https://unpkg.com/)) をご利用の場合-->
-#### (2) For CDN users
-
-<!--最新版を利用する場合は以下のコードをご利用ください。-->
-If you want to use the latest version, paste this code on your index file's head:
-
-```html
-<link ref="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.css">
-<link ref="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
-<script src="https://unpkg.com/onsenui/js/onsenui.js"></script>
-```
-
-<!--バージョンを固定する場合は以下のコードをご利用ください。-->
-If you want to target a specific version, use this code instead and replace the version by the one you want:
-
-```html
-<link ref="stylesheet" href="https://unpkg.com/onsenui@2.2.6/css/onsen-css-components.css">
-<link ref="stylesheet" href="https://unpkg.com/onsenui@2.2.6/css/onsenui.css">
-<script src="https://unpkg.com/onsenui@2.2.6/js/onsenui.js"></script>
-```
-
-<!--#### (3) [Monaca](https://monaca.io) をご利用の場合-->
-#### (3) For [Monaca](https://monaca.io) users
-
-<!--`JS/CSS コンポーネントの追加` 画面から `onsenui` を検索して追加してください。-->
-Please search for `onsenui` in the `Manage JS/CSS Components` screen and add it to your app.
-
-<!--似た名前のコンポーネントとして `Onsen UI (Monaca Version)` がありますが、-->
-<!--これは `onsenui` コンポーネントと `angular` コンポーネントから Monaca に必要なファイルのみを抽出したものです。-->
-`Onsen UI (Monaca Version)` exists as a similar name component, but this has files extracted both from `onsenui` and `angular` components.
-<!--`Onsen UI (Monaca Version)` コンポーネントは不定期に更新されるため、最新版の Onsen UI が含まれているとは限りません。-->
-But since `Onsen UI (Monaca Version)` is not updated periodically, it does not always have the latest Onsen UI.
-<!--最新版の Onsen UI をお求めの方は `onsenui` コンポーネントをご利用ください。-->
-If you want to use the latest version of Onsen UI in Monaca, please stick to the `onsenui` component.
-
-<!--#### (4) npm をご利用の場合-->
-#### (4) For npm users
-
-```sh
-npm install onsenui@latest --save
-```
-
-<!--#### (5) Yarn をご利用の場合-->
-#### (5) For Yarn users
-
-```sh
-yarn upgrade onsenui@latest
-```
-
-<!--`angular2-onsenui`, `react-onsenui`, `vue-onsenui` をご利用の方はそちらも併せて最新版にバージョンアップしてください。-->
-If you are using `angular2-onsenui`, `react-onsenui` or `vue-onsenui`, please do not forget to update them to their latest version as well.
-
 
 <!--### iOS での安定性向上の背景-->
 ### Background of the improvements on iOS
 
 <!--[Web Components](https://www.w3.org/standards/techs/components) が注目を集め始めていることを考慮し、-->
 <!--Web Components に興味をお持ちの方のために、今回の件についてもう少し詳しくお話します。-->
-Following the increasing attention of Web Components, we would like to give more detailed information for Web Components enthusiasts.
+Following the increasing attention given to Web Components, we would like to give more detailed information for Web Components enthusiasts.
 
 <!--今回の iOS での安定性向上は Custom Elements v1 の polyfill の改善に由来するものです。-->
 The stability improvement of Onsen UI on iOS is a consequence of the improvement of the Custom Elements v1 polyfill.
