@@ -1,0 +1,197 @@
+---
+author: naoki
+date: 2017-05-11
+id: onsenui-recent-updates-may-2017
+title: "Recent updates until Onsen UI 2.2.6 and significant stability improvement on iOS"
+product: onsen
+category: announcement
+tags: onsen ui,web components,custom elements
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://onsen.io/blog/content/images/2017/May/CustomElementsStatus.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+<!--2017/03/14 に [Onsen UI 2.2.0 をリリース](https://onsen.io/blog/220-release/)してから約2ヶ月が経ちました。-->
+It has been 2 months since [we released Onsen UI 2.2.0](https://onsen.io/blog/220-release/) in March 14, 2017.
+<!--Onsen UI は[皆さんからのご意見](https://github.com/OnsenUI/OnsenUI/issues)を元に継続的に改善を行っています。-->
+We have been continuously working hard to improve Onsen UI according to [the feedbacks](https://github.com/OnsenUI/OnsenUI/issues) from you users.
+<!--現時点での最新版は 2.2.6 です。-->
+The latest version is 2.2.6.
+
+<!--最近の主なアップデートについてご紹介します。-->
+We would like to explain recent updates from Onsen UI.
+
+<!-- more -->
+
+<!--### iOS での安定性が飛躍的に向上しました (2.2.3)-->
+### Stability on iOS has been significantly improved (2.2.3)
+
+<!--Onsen UI は Custom Elements という技術を使っています。-->
+<!--しかしこの Custom Elements は、[Android では良好にサポートされている一方で、iOS ではあまりよくサポートされていませんでした](https://caniuse.com/#feat=custom-elementsv1)。-->
+Onsen UI is using a technology called Custom Elements, but while it has been supported well on Android, it does not on iOS.
+<!--そのため、Onsen UI を iOS で安定的に動作させることは技術的に困難でした。-->
+From that reason, it had been technically difficult to safely run Onsen UI on iOS.
+
+<!--しかし、今年の2月に Custom Elements の開発者達によって[その状況が改善され](https://github.com/webcomponents/custom-elements/issues/34)、-->
+However the developers of Custom Elements [solved this situation in February of this year](https://github.com/webcomponents/custom-elements/issues/34).
+<!--結果として Onsen UI の iOS での安定性が飛躍的に向上しました。-->
+<!--特に AngularJS などの JS フレームワークと併用した際の安定性が向上しています。-->
+As a result, the stability of Onsen UI has been significantly improved, especially when used together with frameworks such as AngularJS.
+ 
+
+<!--Onsen UI 2.2.3 未満をお使いの方は最新版へのバージョンアップをご検討ください。-->
+If you are a user of Onsen UI 2.2.2 or older, please consider updating it to the latest version.
+
+<!--### ons-splitter にアニメーションを追加しました (2.2.5)-->
+### New animations for ons-splitter (2.2.5)
+
+<!--Onsen UI にはスライドメニューや画面分割を提供する `ons-splitter` タグが用意されています。-->
+<!--その `ons-splitter` において、今までは `overlay` アニメーションのみを提供してきましたが、-->
+<!--Onsen UI 2.2.5 にて `push` アニメーションと `reveal` アニメーションを新たに追加しました。-->
+Onsen UI provides sliding menus and screen splitters through `ons-splitter` element.
+We have been providing only `overlay` animation but now `push` animation and `reveal` animation have been available since Onsen UI 2.2.5.
+
+<table>
+    <tr>
+        <th>Animation name</th>
+        <th>Detail</th>
+    </tr>
+    <tr>
+        <td>`overlay` (or `default`)</td>
+        <td>Side page overlays content page.</td>
+    </tr>
+    <tr>
+        <td>`push`</td>
+        <td>Side page pushes content page.</td>
+    </tr>
+    <tr>
+        <td>`reveal`</td>
+        <td>Content page is slided and then side page is revealed.</td>
+    </tr>
+</table>
+
+<p data-height="512" data-theme-id="light" data-slug-hash="zwPQwb" data-default-tab="html,result" data-user="asial-matagawa" data-embed-version="2" data-pen-title="Onsen UI 2.2.5 - New animations of ons-splitter" class="codepen">See the Pen <a href="https://codepen.io/asial-matagawa/pen/zwPQwb/">Onsen UI 2.2.5 - New animations of ons-splitter</a> by Naoki Matagawa (<a href="http://codepen.io/asial-matagawa">@asial-matagawa</a>) on <a href="http://codepen.io">CodePen</a>.</p>
+<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+
+<!--### バージョンアップ方法-->
+### How to update
+
+<!--#### (1) 直接ダウンロードの場合-->
+#### (1) Direct download
+
+<!--[こちら](https://github.com/OnsenUI/OnsenUI-dist/releases) から最新版の zip ファイルをダウンロードしてご利用ください。-->
+Please download a zip file of the latest version from [here](https://github.com/OnsenUI/OnsenUI-dist/releases).
+
+<!--#### (2) CDN ([unpkg](https://unpkg.com/)) をご利用の場合-->
+#### (2) For CDN users
+
+<!--最新版を利用する場合は以下のコードをご利用ください。-->
+If you want to use the latest version, please copy and paste this code:
+
+```html
+<link ref="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.css">
+<link ref="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+<script src="https://unpkg.com/onsenui/js/onsenui.js"></script>
+```
+
+<!--バージョンを固定する場合は以下のコードをご利用ください。-->
+If you want to use a specific version, please copy and paste this code:
+
+```html
+<link ref="stylesheet" href="https://unpkg.com/onsenui@2.2.6/css/onsen-css-components.css">
+<link ref="stylesheet" href="https://unpkg.com/onsenui@2.2.6/css/onsenui.css">
+<script src="https://unpkg.com/onsenui@2.2.6/js/onsenui.js"></script>
+```
+
+<!--#### (3) [Monaca](https://monaca.io) をご利用の場合-->
+#### (3) For [Monaca](https://monaca.io) users
+
+<!--`JS/CSS コンポーネントの追加` 画面から `onsenui` を検索して追加してください。-->
+Please search for `onsenui` in the `Manage JS/CSS Components` screen and add it to your app.
+
+<!--似た名前のコンポーネントとして `Onsen UI (Monaca Version)` がありますが、-->
+<!--これは `onsenui` コンポーネントと `angular` コンポーネントから Monaca に必要なファイルのみを抽出したものです。-->
+`Onsen UI (Monaca Version)` exists as a similar name component, but this is a component which has files extracted from `onsenui` component and `angular` component.
+<!--`Onsen UI (Monaca Version)` コンポーネントは不定期に更新されるため、最新版の Onsen UI が含まれているとは限りません。-->
+Since `Onsen UI (Monaca Version)` is not updated periodically, it does not always have the latest Onsen UI.
+<!--最新版の Onsen UI をお求めの方は `onsenui` コンポーネントをご利用ください。-->
+If you want to use the latest version of Onsen UI in Monaca, please use `onsenui` component.
+
+<!--#### (4) npm をご利用の場合-->
+#### (4) For npm users
+
+```sh
+npm install onsenui@latest --save
+```
+
+<!--#### (5) Yarn をご利用の場合-->
+#### (5) For Yarn users
+
+```sh
+yarn upgrade onsenui@latest
+```
+
+<!--`angular2-onsenui`, `react-onsenui`, `vue-onsenui` をご利用の方はそちらも併せて最新版にバージョンアップしてください。-->
+If you are using `angular2-onsenui`, `react-onsenui` or `vue-onsenui`, please do not forget to update them to each latest version.
+
+
+<!--### iOS での安定性向上の背景-->
+### Background of the improvements on iOS
+
+<!--[Web Components](https://www.w3.org/standards/techs/components) が注目を集め始めていることを考慮し、-->
+<!--Web Components に興味をお持ちの方のために、今回の件についてもう少し詳しくお話します。-->
+Following the increasing attention of Web Components, we would like to give more detailed information for Web Components enthusiasts.
+
+<!--今回の iOS での安定性向上は Custom Elements v1 の polyfill の改善に由来するものです。-->
+The stability improvement of Onsen UI on iOS is from the improvement of a Custom Elements v1 polyfill.
+<!--Custom Elements v1 は Android の場合「Chrome 54 以上」または「Android System WebView 54 以上」、iOS の場合 iOS 10.3 以上（の Safari または UIWebView）でしか利用できないため、-->
+Custom Elements v1 can be used in Chrome 54+ or Android System WebView 54+ in the case of Android, and can be used in Safari / UIWebView of iOS 10.3 in the case of iOS.
+<!--Onsen UI は Custom Elements v1 の polyfill を利用しています。この polyfill によって古いブラウザでも `ons-*` 要素が動作するようになっています。-->
+Onesn UI is using a polyfill for Custom Elements v1 which enables even old browsers to work `ons-*` elements.
+
+![](/blog/content/images/2017/May/CustomElementsStatus.png)
+
+<!--Custom Elements v1 の polyfill としては2017年5月現在以下の2つが開発されています。-->
+As of May 2017, these 2 packages have been developed as polyfills for Custom Elements v1.
+
+- [@webcomponents/custom-elements](https://github.com/webcomponents/custom-elements) (by [webcomponents.org](https://www.webcomponents.org/))
+- [document-register-element](https://github.com/WebReflection/document-register-element) (by [WebReflection](https://www.webreflection.co.uk/))
+
+<!--2017年1月の時点ではどちらの polyfill も、パフォーマンス上の理由から[カスタム要素のライフサイクルコールバック（custom element reactions）](https://developers.google.com/web/fundamentals/getting-started/primers/customelements#reactions)を `Element#appendChild` や `Element#setAttribute` に対して非同期的に呼び出していました。つまり、`ons-*` 要素を `body` 要素下に追加した際に行うべき処理をすぐには行わず、数ミリ秒遅らせてしまっていたということです。本来ライフサイクルコールバックはそれらに対して同期的に呼ばれるべきで、[W3C](https://www.w3.org/TR/custom-elements/) や [WHATWG](https://html.spec.whatwg.org/multipage/scripting.html#custom-elements) にて規定されている Custom Elements v1 の正式な仕様においてもそのように書かれています。Onsen UI にとってはこの仕様との不一致が致命的でした。Onsen UI はライフサイクルコールバックが同期的に呼ばれることを前提としたコードを多数持つためです。-->
+In Janually 2017, both of the polyfills **asynchronously** call lifecycle callbacks of custom elements (called [custom element reactions]((https://developers.google.com/web/fundamentals/getting-started/primers/customelements#reactions)) against `Element#appendChild` and `Element#setAttribute` for performance reasons.
+That is, they are delaying the process by few milliseconds which should be run when an `ons-*` element is appended to under `body` element.
+Originally the lifecycle callbacks must be called **synchronously** and in fact it is strictly described in the official specification of Custom Elements v1 by [W3C](https://www.w3.org/TR/custom-elements/) and [WHATWG](https://html.spec.whatwg.org/multipage/scripting.html#custom-elements).
+
+![](/blog/content/images/2017/May/CustomElementsV1PolyfillStatus_Before.png)
+
+<!--そんな中、今年の2月、`@webcomponents/custom-elements` は `1.0.0-rc.2` にてライフサイクルコールバックを同期的に呼び出すよう仕様変更を行いました。これにより、仕様により良く準拠した Custom Elements v1 用 polyfill が生まれました。そこで早速 polyfill を `@webcomponents/custom-elements@1.0.0-rc.2` に差し替えたものが Onsen UI 2.2.3 です。-->
+<!--これにより、今までどうしても直せなかった iOS での不具合が一挙になくなり、iOS でのテストケース通過率が 58 % から 99 % に上昇しました。-->
+In Feburary, `@webcomponents/custom-elements` made a change in `1.0.0-rc.2` so that the lifecycle callbacks are called **synchronously**.
+Thanks to this change, a polyfill for Custome Elements v1 which matches the specification well was born.
+Then, we have immediately adopted `@webcomponents/custom-elements@1.0.0-rc.2` and that version is Onsen UI 2.2.3.
+After the update, many issues on iOS which are hard to fix so far were all solved and the test case passing rate was increased from 58% to 99%.
+
+![](/blog/content/images/2017/May/CustomElementsV1PolyfillStatus_After.png)
+
+<!--Web Components が話題となる一方でその実例が少ないことに疑問を感じた方はいらっしゃらないでしょうか？その背景にはこういった polyfill の事情などがあります。-->
+Have you ever wondered why Web Components is rarely used while it gradually gets attention?
+Actually there are circumstances such as this related to polyfills in the background.
+
+<!--しかし、polyfill の問題は過渡期の問題にすぎません。ブラウザの機能拡充により jQuery 無しでも強力な機能が使えるようになったのと同じように、2019-2021 年頃には polyfill 無しで Custom Elements v1 や Shadow DOM v1 を利用できる時代が訪れます。-->
+However the problem of polyfills is a problem of transition period.
+As same as we became able to use powerful features without jQuery thanks to recent browser updates,
+we will be able to use Custom Elements v1, Shadow DOM v1 and other modern features without polyfills in 2019-2021 for sure.
+
+<!--Onsen UI は Web 標準の将来的動向を見据えつつ今後も改善を続けていく所存です。-->
+<!--もし私たちの思想に共感いただけましたら、是非 GitHub スターにてご支援ください（皆様のおかげで、もうすぐ ★5000 に到達します）。-->
+We will continuously improve Onsen UI with looking ahead to the future of Web standards.
+If you sympathize with our philosophy, we would be glad if you give a GitHub star to our `OnsenUI` repository (thanks to your support, we will soon reach ⭐️ x 5000).
+
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-size="large" data-show-count="true" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
