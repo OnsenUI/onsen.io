@@ -80,7 +80,7 @@ Yet another new dialog is provided by `ons-toast`. Use it when you want to pass 
 
 ![Toast](/blog/content/images/2017/May/toast.png)
 
-Here is a way in which you can define a toast dialog:
+Here is a way in which you can define a toast dialog statically:
 
 ``` html
 <ons-toast>
@@ -88,13 +88,19 @@ Here is a way in which you can define a toast dialog:
 </ons-toast>
 ```
 
-refer to [documentation](ons.notification docs) for details
+Similar to the `ons-action-sheet`, you can simply show the above `ons-toast` through your *JavaScript* code or create the whole thing dynamically with the `ons.notification.toast` method. This way you may define extra options such as `callback` (for when the toast is hidden) or `timeout` (to hide it automatically after a certain time). For details please refer to the [documentation](ons.notification docs).
+
+One last thing to notice is that in case you attempt to show more than one toast at once (maybe your server replied with several notices?) there is a queue of toasts that holds them so that there's always only one shown toast (which is in accord with the spec). Once a toast is hidden the next one in the queue (if any) is shown.
 
 ### Search input
 
-
+Finally since the regular HTML `input` with `type='search'` has a design that is not suited for mobile apps, we gave it a new "clothing", as you can see below. Looks more appropriate to what you would find in a native app, right?
 
 ![Search input](/blog/content/images/2017/May/search-input.png)
+
+As usual the style is adapted automatically to the running platform.
+
+Well that's about it, we hope that these new components are useful to you and that you give us some feedback in case you have any. Feel free to reach out to us on [our Gitter chat](https://gitter.im/OnsenUI/OnsenUI) or on [our Community](https://community.onsen.io/).
 
 ---
 
