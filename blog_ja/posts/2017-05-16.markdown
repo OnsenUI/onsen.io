@@ -2,7 +2,7 @@
 author: atsushi
 date: 2017-05-16
 id: monaca-with-hotpepper-api
-title: "Monaca ×　ホットペッパーAPI。レストラン情報を検索するアプリを作る"
+title: "Monaca×ホットペッパーAPI。レストラン情報を検索するアプリを作る"
 product: monaca
 tags: monaca, onsenui, webapi
 category: 技術情報
@@ -189,7 +189,7 @@ document.addEventListener('init', function(event) {
 
 一番最初の画面（#list-page）で行う処理は主に2つです。
 
-1. レストラン取得ボタンを押したら、ホットペッパーAPIをコールして結果を一覧表示
+1. レストラン取得ボタンを押したら、ホットペッパーAPIをコールして結果を一覧表示する
 2. 一覧をタップした時に詳細画面に遷移する
 
 #### レストラン取得ボタンを押したら、ホットペッパーAPIをコールして結果を一覧表示
@@ -197,10 +197,11 @@ document.addEventListener('init', function(event) {
 ボタンが押されたら、 `navigator.geolocation.getCurrentPosition` を使って位置情報を取得します。
 
 ```
+// レストラン取得ボタンを押した時の処理
 $("#getShops").on("click", () => {
   // 現在位置を取得します
   navigator.geolocation.getCurrentPosition((location) => {
-    // 後述
+    // 後述
   });
 });
 ```
@@ -208,12 +209,14 @@ $("#getShops").on("click", () => {
 位置情報が取得できたら、位置情報を元にしてホットペッパーAPIにアクセスするためのURLを生成します。詳しくは[ホットペッパー | APIリファレンス | リクルートWEBサービス](https://webservice.recruit.co.jp/hotpepper/reference.html)にて確認できますが、今回は次のようになります。
 
 ```
+// 検索実行するURL
 var url = `http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=${api_key}&lat=${location.coords.latitude}&lng=${location.coords.longitude}&range=5&order=4&format=json`;
 ```
 
 そしてAjaxを実行します。
 
 ```
+// Ajax実行
 $.ajax({
   type: 'GET',
   dataType: "json",
@@ -230,6 +233,7 @@ $.ajax({
 処理が成功した場合、一覧が返ってきますのでリストに反映します。
 
 ```
+// 処理が成功した場合
 shops = results.results.shop;
 for (var i = 0; i < shops.length; i++) {
   var shop = shops[i];
@@ -239,6 +243,7 @@ for (var i = 0; i < shops.length; i++) {
 ```
 
 なお、上記のWeb API実行処理はMonaca IDEのプレビュー画面では動作しません。Monacaデバッガーで確認を行ってください。
+
 もしプレビュー画面でも確認をしたいという時には、以下のようにhttps通信を使って、フォーマットにはjsonpを指定してください。
 
 ```
