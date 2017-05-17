@@ -10,5 +10,5 @@ ons.notification.confirm('Are you ready?'); // OK - Cancel buttons
 ons.notification.prompt('What is your name?'); // Text input
 ons.notification.toast('New password saved.'); // Toast - Snackbar
 
-ons.actionSheet({ title: 'Actions', buttons: ['Copy', 'Cut', 'Delete'] }); // Options list
+ons.openActionSheet({ title: 'Actions', buttons: ['Copy', 'Cut', 'Delete'] }); // Options list
 ```
