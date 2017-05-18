@@ -32,7 +32,7 @@ Coupled to `ons-action-sheet` there is also another new component `ons-action-sh
 </ons-action-sheet>
 ```
 
-Being a dialog it is naturally hidden by default and you need to open it programatically. For brevity I recommend you check the [tutorial](tutorial link) for an example on how to do that in the different platforms.
+Being a dialog it is naturally hidden by default and you need to open it programatically. For brevity I recommend you check the [tutorial](https://tutorial.onsen.io/?framework=vanilla&category=reference&module=action-sheet) for an example on how to do that in the different platforms.
 
 You can also create and open an action sheet dynamically with the method `ons.openActionSheet` (which btw is also done in the tutorial above). To create the same sheet as in the example above the code would be:
 
@@ -88,7 +88,7 @@ Here is a way in which you can define a toast dialog statically:
 </ons-toast>
 ```
 
-Similar to the `ons-action-sheet`, you can simply show the above `ons-toast` through your *JavaScript* code or create the whole thing dynamically with the `ons.notification.toast` method. This way you may define extra options such as `callback` (for when the toast is hidden) or `timeout` (to hide it automatically after a certain time). For details please refer to the [documentation](ons.notification docs).
+Similar to the `ons-action-sheet`, you can simply show the above `ons-toast` through your *JavaScript* code or create the whole thing dynamically with the `ons.notification.toast` method. This way you may define extra options such as `callback` (for when the toast is hidden) or `timeout` (to hide it automatically after a certain time). For details please refer to the [documentation](https://onsen.io/v2/docs/js/ons.notification.html).
 
 One last thing to notice is that in case you attempt to show more than one toast at once (maybe your server replied with several notices?) there is a queue of toasts that holds them so that there's always only one shown toast (which is in accord with the spec). Once a toast is hidden the next one in the queue (if any) is shown.
 
@@ -100,7 +100,7 @@ Finally since the regular HTML `input` with `type='search'` has a design that is
 
 As usual the style is adapted automatically to the running platform.
 
-Well that's about it, we hope that these new components are useful to you and that you give us some feedback in case you have any. Feel free to reach out to us on [our Gitter chat](https://gitter.im/OnsenUI/OnsenUI) or on [our Community](https://community.onsen.io/).
+Well that's about it, we hope that these new components are useful to you and that you give us some feedback in case you have any. Feel free to reach out to us on [our Gitter chat](https://gitter.im/OnsenUI/OnsenUI) or on [our Community](https://community.onsen.io/) with problems you may have and/or ideas on how to improve this (awesome) mobile UI framework.
 
 ---
 
