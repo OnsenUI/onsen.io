@@ -1,0 +1,107 @@
+---
+author: junio
+date: 2017-05-16
+id: presenting-onsen-ui-newest-components
+title: "Presenting Onsen UI's newest components"
+product: onsen
+category: announcement
+tags: onsen ui, components
+---
+
+You may have happened to read our [last blog post](https://onsen.io/blog/onsenui-recent-updates-may-2017/) about some of the progress we have reached lately in Onsen UI. Well *surprise surprise*, that's not all.
+
+We want to take our hybrid app framework one step further, so besides all those recent updates about stability improvement in iOS and so on, in recent version `2.3.0` we have added **brand new core components** that you can start using right away.
+
+Keep reading if you'd like to get acquainted with these new components.
+
+<!-- more -->
+
+### Action sheet
+
+You are probably familiar with those sheets sliding up from the bottom of the screen and prompting user action, much like dialogs. From `Action sheets` of *iOS* and `Bottom sheets` of *Android*, behold the `ons-action-sheet`.
+
+![Action sheet](/blog/content/images/2017/May/action-sheet.png)
+
+Coupled to `ons-action-sheet` there is also another new component `ons-action-sheet-button` that you can use to create those nice action buttons inside your action sheets. Here is a typical use case template:
+
+``` html
+<ons-action-sheet id="sheet">
+  <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
+  <ons-action-sheet-button icon="md-square-o" modifier="destructive">Delete Label</ons-action-sheet-button>
+  <ons-action-sheet-button icon="md-close">Cancel</ons-action-sheet-button>
+</ons-action-sheet>
+```
+
+Being a dialog it is naturally hidden by default and you need to open it programatically. For brevity I recommend you check the [tutorial](https://tutorial.onsen.io/?framework=vanilla&category=reference&module=action-sheet) for an example on how to do that in the different platforms.
+
+You can also create and open an action sheet dynamically with the method `ons.openActionSheet` (which btw is also done in the tutorial above). To create the same sheet as in the example above the code would be:
+
+``` javascript
+ons.openActionSheet({
+  id: 'sheet',
+  buttons: [
+    {
+      label: 'Label',
+      icon: 'md-square-o'
+    },
+    {
+      label: 'Delete Label',
+      icon: 'md-square-o',
+      modifier: 'destructive'
+    },
+    {
+      label: 'Cancel',
+      icon: 'md-close'
+    }
+  ]
+})
+```
+
+### Card
+
+Want to show some nice pieces of information in a stylish fashion without too much CSS work? The component you are looking for is the new `ons-card`.
+
+![Card](/blog/content/images/2017/May/card.png)
+
+With it you get a highlighted box in which you can insert any type of content you wish. We provide special classes `title` and `content` to make style separation even simpler. Typical use case:
+
+``` html
+<ons-card>
+  <div class="title">Title</div>
+  <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+</ons-card>
+```
+
+Of course a card will be richer if you add other media content such as images to it or mix it up with other Onsen UI components. We even have the open possibility of adding other predefined building blocks (e.g. [the ones here](https://material.io/guidelines/components/cards.html#cards-content-blocks)) so please let us know if you think that would be nice to have.
+
+### Toast
+
+Yet another new dialog is provided by `ons-toast`. Use it when you want to pass a subtler message to the user notifying him that something happened and optionally prompting for an action but allowing the normal app flow to continue.
+
+![Toast](/blog/content/images/2017/May/toast.png)
+
+Here is a way in which you can define a toast dialog statically:
+
+``` html
+<ons-toast>
+  Message Message Message Message<button>Action</button>
+</ons-toast>
+```
+
+Similar to the `ons-action-sheet`, you can simply show the above `ons-toast` through your *JavaScript* code or create the whole thing dynamically with the `ons.notification.toast` method. This way you may define extra options such as `callback` (for when the toast is hidden) or `timeout` (to hide it automatically after a certain time). For details please refer to the [documentation](https://onsen.io/v2/docs/js/ons.notification.html).
+
+One last thing to notice is that in case you attempt to show more than one toast at once (maybe your server replied with several notices?) there is a queue of toasts that holds them so that there's always only one shown toast (which is in accord with the spec). Once a toast is hidden the next one in the queue (if any) is shown.
+
+### Search input
+
+Finally since the regular HTML `input` with `type='search'` has a design that is not suited for mobile apps, we gave it a new "clothing", as you can see below. Looks more appropriate to what you would find in a native app, right?
+
+![Search input](/blog/content/images/2017/May/search-input.png)
+
+As usual the style is adapted automatically to the running platform.
+
+Well that's about it, we hope that these new components are useful to you and that you give us some feedback in case you have any (make sure to upgrade to the latest version in order to be able to use them). Feel free to reach out to us on [our Gitter chat](https://gitter.im/OnsenUI/OnsenUI) or on [our Community](https://community.onsen.io/) with problems you may have and/or ideas on how to improve this (awesome) mobile UI framework.
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
