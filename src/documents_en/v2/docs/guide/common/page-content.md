@@ -4,7 +4,7 @@ For a full list of components please check the [reference page](/v2/docs/<%- @fr
 
 #### Form elements
 
-Onsen UI provides a rich set of form components. Apart from <%- @componentLink('button') %>, <%- @componentLink('switch') %> and <%- @componentLink('range') %>, perhaps the <%- @componentLink('input') %> component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
+Onsen UI provides a rich set of form components. Apart from <%- @componentLink('button') %>, <%- @componentLink('switch') %>,<%- @componentLink('select') %> and <%- @componentLink('range') %>, perhaps the <%- @componentLink('input') %> component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
 
 <% if @framework isnt 'react': %>
 ```
@@ -166,7 +166,7 @@ ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event listen
 
 
 <% if @framework isnt 'react': %>
-Also, <%- @componentLink('gesture-detector') %> component can be used to wrap the target DOM element that should detect the fingers in a handy way. 
+Also, <%- @componentLink('gesture-detector') %> component can be used to wrap the target DOM element that should detect the fingers in a handy way.
 <% end %>
 
 
