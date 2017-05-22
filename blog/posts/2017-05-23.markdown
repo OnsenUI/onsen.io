@@ -1,0 +1,89 @@
+---
+author: bryan
+date: 2017-05-23
+id: enhanced-cordova-app-security-with-ssl-certificate-pinning
+title: "Enhanced Cordova App Security with SSL Certificate Pinning"
+product: monaca
+category: development
+tags: monaca, cordova, ssl
+---
+
+Simple static application has fewer security concerns compared to dynamic application that requires an internet connection. An example concern, that a developer might have with either a static or dynamic application is how to prevent non-authorized users from copying or reading source code. This can easily be resolved by encrypting to the application content.
+
+More security concerns appear when an internet connection is established for fetch data. This connection can put a user or application at risk. The biggest concerns, either hybrid or native development, is the data integrity. Did the data come from the originated source? Has the data been tampered with before reaching the app? This commonly known as a man in the middle attack.
+
+The first step to address this concern is to make sure that all endpoint URLs are using HTTPS/SSL. This will ensure that the data being transported between the server and app is encrypted.
+
+Cordova does not support true certificate pinning. The main barrier to this is a lack of native APIs in Android for intercepting SSL connections to perform the check of the server's certificate.
+
+The second step is to implement a way to for checking the certificate fingerprint validity. This step is known as certificate pinning. There are Cordova plugins available to help achieve this by checking the server's public key fingerprint or certificate.
+
+One of the plugin we will be looking at and setting up is the SSLCertificateChecker-PhoneGap-Plugin plugin. This plugin will check the fingerprint of a certificate is matching.
+
+First, we will need to add this plugin to the project by navigating to the `Manage Cordova Plugin` screen and click on `Import Cordova Plugin`.
+
+Next select `Specify URL or Package Name`, insert `https://github.com/EddyVerbruggen/SSL
+CertificateChecker-PhoneGap-Plugin.git` and press `OK`
+
+_Alternatively, you can download the plugins ZIP package from GitHub and upload the package by selecting `Upload Compressed ZIP Package`._
+
+The plugin will eventually appear under the `Enabled Plugin` list.
+
+
+After the plugin has been added, In JavaScript, we have access to APIs necessary to validate the certificate fingerprint before making requests.
+
+In this example, we will create an app that will have a button to fetch the last 50, most recent Monaca news and release titles.
+
+The button will first perform a check of the API URL against the known fingerprint to determine if the URL's certificate is valid. If the certificate is valid, then it will fetch the content.
+
+In a script tag, we will create two variables.
+
+```
+var url = 'https://monaca.mobi/en/api/news/list?type=news_and_release&limit=50';
+var fingerprint = '67 C2 0A 07 6F D9 55 23 38 03 E4 78 2E 0C B5 CC 24 0C A8 B8';
+```
+
+The url variable will contains the target URL that we will test and make request for data.
+The fingerprint variable will contains the monaca.mobi public key fingerprint for testing.
+
+Next, we will add these variables, to the plugin's API `window.plugins.sslCertificateChecker` with a success and error callback.
+
+Example Usage:
+
+```
+window.plugins.sslCertificateChecker.check(
+  // Success Callback
+  function success(message) { },
+
+  // Error Callback
+  function error(message) { },
+
+
+  // URL to test
+  url,
+
+  // URL Public Key Certificate Fingerprint
+  fingerprint
+);
+```
+
+If the fingerprint is valid, the success callback is executed. This app example will perform the second request to fetch the actual data for display when the success callback is executed.
+
+If the fingerprint is invalid, there are four possible likely outcomes.
+- The URL has a new public key with a new fingerprint.
+- The fingerprint in code was inserted incorrectly.
+- The connection to the server was lost or response timeout.
+- Possible Man in the Middle Attack.
+
+Since this plugin will only performs pre-checks before making the official request for the response data, it will mitigate to an extent but contains some drawbacks.
+
+Drawbacks:
+- If you require to check on every request, this plugin would have to duplicate each request.
+- If the check occurs at a given time during the apps lifecycle, for example start up, the connection maybe secure at that give time but not always. For example: your wifi connection changes networks and your app was already started.
+
+Some of these drawbacks could also be mitigated but the idea case would be to test on every request and not duplicate the requests.
+
+For the entire full source code with a working app, please see the GitHub repository.
+[link]
+
+I hope you found this tutorial helpful on improving your mobile hybrid app's security.
