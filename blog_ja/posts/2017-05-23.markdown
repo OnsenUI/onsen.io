@@ -1,0 +1,67 @@
+---
+author: nikola
+date: 2017-05-23
+id: publish-and-direct-import-ja
+title: "「プロジェクトの公開」および「ダイレクト・インポート」機能リリースのお知らせ"
+product: monaca
+category: ニュース
+tags: monaca
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://ja.onsen.io/blog/content/images/2017/Jan/monaca-logo-ogp.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+（この記事は [Nikola Cvetkovski](https://onsen.io/blog/nikola/) が 2017年4月28日に英語版 Monaca x Onsen ブログに投稿した [Publish your projects online and directly import published projects](https://onsen.io/blog/publish-and-direct-import/) の翻訳です。）
+
+
+先般、Monacaに新たな機能「プロジェクトの公開」と「ダイレクト・インポート」が追加されました。これらの新機能を使うことで、サンプルアプリの共有やプロジェクトの雛形のインポートがより手軽に行えるようになります。
+
+<!-- more -->
+
+## 「プロジェクトの公開」機能
+
+「私が作成したプロジェクトを、他のMonacaユーザーにも使ってもらいたい」といった場合に便利なのが「プロジェクトの公開」機能です。この機能を使用すると、オンライン上でプロジェクトを公開できます。
+
+プロジェクトへアクセスするためのリンクが公開時に自動生成されます。そのリンクを他のMonacaユーザーへ公開・配布すれば、リンク先からそれぞれのアカウントへプロジェクトをコピーすることができます。
+
+コピーしたプロジェクトは自由に編集できます。編集しても、オリジナルのプロジェクトへは反映されません。オリジナルとコピープロジェクト間での同期が行われないことが、従来の「プロジェクトの共有」機能とは異なる点です。
+
+プロジェクトの公開は、次のようにして簡単に行うことができます。
+
+1. ［ファイル］メニューから、［プロジェクトを公開する…］を選択します。
+
+  ![File Menu](/blog/content/images/2017/May/publish-and-direct-import-ja-2.png)
+
+2. ［公開する］ボタンをクリックします。
+
+  ![Not published dialog](/blog/content/images/2017/May/publish-and-direct-import-ja-3.png)
+
+3. 生成されたリンクを、他のユーザーに対して公開・配布します。
+
+  ![Published dialog](/blog/content/images/2017/May/publish-and-direct-import-ja-4.png)
+
+公開を停止する場合には、プロジェクトの公開時に表示されるダイアログ上で、［プライベートにする］ボタンをクリックします。
+
+
+## 「ダイレクト・インポート」機能
+
+「プロジェクトの公開」機能によって公開されているMonacaプロジェクトを、自分のアカウントに直接インポートすることができます。
+
+リンク先へアクセスすると、次の画面が表示されます。［インポート］ボタンをクリックすると、現在ログインしているアカウントにプロジェクトがインポートされます。
+
+![Direct Import Page](/blog/content/images/2017/May/publish-and-direct-import-ja-1.png)
+
+## 試してみよう
+
+ここまでが、今回リリースされた、Monacaの新たな機能「プロジェクトの公開」と「ダイレクト・インポート」です。興味を持たれた方は、Monacaにサインインして、[サンプルアプリ](https://monaca.mobi/directimport?pid=59031258657e4d287f409e41)を実際にインポートしてみましょう。
+
+## 今後の予定（機能拡張など）
+
+現時点では、こちらの機能はMonacaクラウドIDE上だけで利用できます。近い将来、Monaca CLIとLocalkitへも実装させる予定です。また、今後は上記のようなインポート用リンクを活用し、インポートの簡素化とアプリ共有の利便性を向上させていきます。
+
+この機能が、皆様のお役に立つことを祈っております。追加機能に関するご意見・ご要望がありましたら、[コミュニティーフォーラム](https://community.onsen.io/)を通じてお寄せください。皆様からのご意見・ご要望を、心よりお待ちしております！
+
