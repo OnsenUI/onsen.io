@@ -12,6 +12,13 @@ Simple static application has fewer security concerns compared to dynamic applic
 
 More security concerns appear when an internet connection is established for fetch data. This connection can put a user or application at risk. The biggest concerns, either hybrid or native development, is the data integrity. Did the data come from the originated source? Has the data been tampered with before reaching the app? This commonly known as a man in the middle attack.
 
+<!-- more -->
+
+# Requirements
+- Monaca account with a [plan](https://monaca.io/pricing-detail.html) that supports `Custom Cordova plugin`.
+- Existing knowledge on how to build custom [Monaca Debugger](https://docs.monaca.io/en/manual/dependencies/custom_cordova_plugin/#monaca-debugger-with-custom-cordova-plugin).
+
+# SSL Pinning Guide
 The first step to address this concern is to make sure that all endpoint URLs are using HTTPS/SSL. This will ensure that the data being transported between the server and app is encrypted.
 
 Cordova does not support true certificate pinning. The main barrier to this is a lack of native APIs in Android for intercepting SSL connections to perform the check of the server's certificate.
@@ -22,13 +29,18 @@ One of the plugin we will be looking at and setting up is the SSLCertificateChec
 
 First, we will need to add this plugin to the project by navigating to the `Manage Cordova Plugin` screen and click on `Import Cordova Plugin`.
 
+![](/blog/content/images/2017/May/Cordova_Plugin_Management.png)
+
 Next select `Specify URL or Package Name`, insert `https://github.com/EddyVerbruggen/SSL
 CertificateChecker-PhoneGap-Plugin.git` and press `OK`
 
 _Alternatively, you can download the plugins ZIP package from GitHub and upload the package by selecting `Upload Compressed ZIP Package`._
 
+![](/blog/content/images/2017/May/Cordova_Plugin_Import.png)
+
 The plugin will eventually appear under the `Enabled Plugin` list.
 
+![](/blog/content/images/2017/May/Cordova_Plugin_Enabled.png)
 
 After the plugin has been added, In JavaScript, we have access to APIs necessary to validate the certificate fingerprint before making requests.
 
@@ -84,6 +96,6 @@ Drawbacks:
 Some of these drawbacks could also be mitigated but the idea case would be to test on every request and not duplicate the requests.
 
 For the entire full source code with a working app, please see the GitHub repository.
-[link]
+[SSL Certificate Checker Demo Repo](https://github.com/erisu/SSL-Certificate-Checker-Demo)
 
 I hope you found this tutorial helpful on improving your mobile hybrid app's security.
