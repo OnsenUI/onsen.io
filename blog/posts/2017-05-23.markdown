@@ -8,14 +8,14 @@ category: development
 tags: monaca, cordova, ssl
 ---
 
-Simple static application has fewer security concerns compared to dynamic application that requires an internet connection. An example concern, that a developer might have with either a static or dynamic application is how to prevent non-authorized users from copying or reading source code. This can easily be resolved by encrypting to the application content.
+A simple static application has fewer security concerns compared to a dynamic application that requires an internet connection. An example concern, that a developer might have with either a static or dynamic application is how to prevent non-authorized users from copying or reading the source code. This can easily be resolved by encrypting to the application content.
 
 More security concerns appear when an internet connection is established for fetch data. This connection can put a user or application at risk. The biggest concerns, either hybrid or native development, is the data integrity. Did the data come from the originated source? Has the data been tampered with before reaching the app? This commonly known as a man in the middle attack.
 
 <!-- more -->
 
 # Requirements
-- Monaca account with a [plan](https://monaca.io/pricing-detail.html) that supports `Custom Cordova plugin`.
+- A Monaca account with a [plan](https://monaca.io/pricing-detail.html) that supports `Custom Cordova plugin`.
 - Existing knowledge on how to build custom [Monaca Debugger](https://docs.monaca.io/en/manual/dependencies/custom_cordova_plugin/#monaca-debugger-with-custom-cordova-plugin).
 
 # SSL Pinning Guide
@@ -87,13 +87,13 @@ If the fingerprint is invalid, there are four possible likely outcomes.
 - The connection to the server was lost or response timeout.
 - Possible Man in the Middle Attack.
 
-Since this plugin will only performs pre-checks before making the official request for the response data, it will mitigate to an extent but contains some drawbacks.
+Since this plugin will only perform pre-checks before making the official request for the response data, it will mitigate to an extent but contains some drawbacks.
 
 Drawbacks:
-- If you require to check on every request, this plugin would have to duplicate each request.
-- If the check occurs at a given time during the apps lifecycle, for example start up, the connection maybe secure at that give time but not always. For example: your wifi connection changes networks and your app was already started.
+- If you are required to check on every request, this plugin would have to duplicate each request.
+- If the check occurs at a given time during the app's lifecycle, for example start up, the connection may be secure at that give time but not always. For example: your wifi connection changes networks and your app was already started.
 
-Some of these drawbacks could also be mitigated but the idea case would be to test on every request and not duplicate the requests.
+Some of these drawbacks could also be mitigated but the ideal case would be to test on every request and not duplicate the requests.
 
 For the entire full source code with a working app, please see the GitHub repository.
 [SSL Certificate Checker Demo Repo](https://github.com/erisu/SSL-Certificate-Checker-Demo)
