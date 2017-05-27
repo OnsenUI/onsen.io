@@ -1,0 +1,297 @@
+---
+author: atsushi
+date: 2017-05-27
+id: monaca-with-rakuten-travel-api
+title: "今すぐ泊まれる場所は？Monacaで楽天トラベルAPIを試す"
+tags: rakuten, web api
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/May/monaca-rakuten-travel-2.png
+  twitter:
+	# Twitter Card の種類を設定: summary, summary_large_image
+	card: summary_large_image
+---
+
+自分の手元に特別なデータがなくとも、Web APIを使えば大規模なデータ、検索機能などがすぐに手に入ります。そうしたデータを使えば魅力的なアプリが簡単に作れることでしょう。
+
+今回は[楽天トラベルAPI](https://webservice.rakuten.co.jp/api/vacanthotelsearch/)を使い、現在地付近にある泊まれるホテルをリストアップするアプリを作成してみます。
+
+### 必要なもの
+
+[楽天ウェブサービス](https://webservice.rakuten.co.jp)に登録してアプリIDを発行してください。このアプリIDがあれば楽天が提供する各種ウェブサービスを使えるようになります。
+
+また、[GoogleマップのAPIキーも取得](https://developers.google.com/maps/documentation/javascript/get-api-key)してください。ここから取得可能です。
+
+### 作成するアプリについて
+
+今回作成するアプリは次のような構成になっています。まずアプリを立ち上げるとGoogleマップが表示され、付近のホテル情報がアイコン表示されます。
+
+![](monaca-rakuten-travel-1.png)
+
+ホテルをタップすると、その詳細情報が表示されます。
+
+![](monaca-rakuten-travel-2.png)
+
+一番下にある予約するボタンをタップすると楽天トラベルのサイトがInAppBrowserで表示されます。
+
+![](monaca-rakuten-travel-3.png)
+
+### JavaScriptライブラリの追加
+
+今回はMonacaのOnsen UI V2 JS Minimumをベースにしています。アプリを作ったら、まず必要なJavaScriptライブラリをJS/CSSコンポーネントの追加と削除から登録します。今回必要なのは下記のライブラリです。
+
+- [gmap3](http://gmap3.net)  
+Googleマップ操作用のライブラリです。
+- **jQuery (Monaca Version)**  
+DOM操作、Ajax用です。
+
+### HTMLについて
+
+今回のHTMLはとてもシンプルです。 `#map` に地図を、 `#hotel` に地図をタップした際のホテル情報を表示します。
+
+```
+<ons-page>
+	<div id="map" style="width:100%;height:300px"></div>
+	<div id="hotel" style="display:none">
+		<ons-list>
+			<ons-list-header>ホテル情報</ons-list-header>
+			<ons-list-item id="hotelName"></ons-list-item>
+			<ons-list-item id="hotelSpecial"></ons-list-item>
+			<ons-list-item id="telephoneNo"></ons-list-item>
+			<ons-list-header>アクセス</ons-list-header>
+			<ons-list-item id="address"></ons-list-item>
+			<ons-list-item id="access"></ons-list-item>
+		</ons-list>
+		<ons-button id="reserve" modifier="large">予約する</ons-button>
+	</div>
+</ons-page>
+```
+
+また、GoogleマップのAPIキーを登録した後で、下記のようにHTMLをheadタグ内に追加します。APIKEYは取得したものと書き換えてください。
+
+```
+<script src="https://maps.google.com/maps/api/js?libraries=geometry&v=3.25&key=APIKEY"></script>
+```
+
+### JavaScriptについて
+
+JavaScriptでは幾つかの部分に分かれています。まず最初に現在位置を取得します。
+
+```
+// 現在の位置情報を取得
+navigator.geolocation.getCurrentPosition(function(pos) {
+	// 位置情報を設定
+	var cords = pos.coords;
+	var latitude = cords.latitude;
+  var longitude = cords.longitude;
+    :
+, function(err) {
+})
+```
+
+現在位置が取得できたら、その位置情報に基づいてGoogleマップを表示します。
+
+```
+// Googleマップを描画します
+// 位置情報に基づいて中央に設定します
+$('#map')
+  .gmap3({
+    center:[
+      latitude, 
+      longitude
+    ],
+    zoom: 15 // ある程度ズームした大きさに指定
+  })
+```
+
+この地図をドラッグした時のイベントとして、楽天トラベルAPIをコールするように指定します。渡す引数は位置情報です。
+
+```
+$('#map')
+  :
+  .on('dragend', function(e) {
+    // 地図の緯度経度を取得します
+    var center = $('#map').gmap3().get()[0].center;
+    searchTravelAPI({
+      latitude: center.lat(),
+      longitude: center.lng()
+    });
+  });
+```
+
+同じ `searchTravelAPI` を初回表示時にも呼び出します。
+
+```
+// 最初に検索を実行します
+searchTravelAPI(cords);
+```
+
+### 楽天トラベルAPIの検索
+
+楽天トラベルの検索を行うのは `searchTravelAPI` という関数になります。URLを生成（後述）し、Ajaxで楽天トラベルAPIを呼び出します。この時、Web IDEでも結果が確認できるようにJSONPで実行しています。
+
+ホテル一覧が返ってきたら、`viewHotels` 関数にて処理します。
+
+```
+// 楽天トラベルAPIの検索を行います。
+// 引数のcordsは位置情報になります
+var searchTravelAPI = function(cords) {
+  // 検索用のURL作成
+  var url = buildUrl(cords);
+  
+  // Ajaxで表示します
+  // CORS対策のため、JSONPで実行します
+  $.ajax({
+    url: url,
+    dataType: 'jsonp'
+  })
+  .then(function(data) {
+    // 結果のホテル一覧を表示します
+    viewHotels(data.hotels);
+  }, function(err) {
+    // エラー
+    console.log(err);
+  })
+}
+```
+
+### URLのビルド
+
+楽天トラベルAPIにアクセスするURLを生成するのは `buildUrl` 関数になります。チェックインする日付は今日で、チェックアウトする日付は明日を指定します。また、楽天トラベルAPIでは測地系のデフォルトが日本測地系になっていますので、世界測地系を指定しています。
+
+```
+// Ajaxで取得するURLを生成します
+// 引数のcordsは位置情報になります
+var buildUrl = function(cords) {
+  
+  // チェックイン、チェックアウトの日付を生成します
+  var checkInDate = new Date;
+  var checkOutDate = new Date(checkInDate.getTime() + 60*60*24*1000);
+  
+  // URLを生成します
+  url = 'https://app.rakuten.co.jp/services/api/Travel/VacantHotelSearch/20131024?';
+  
+  // パラメータの設定
+  var params = {
+    // 楽天ウェブサービスのアプリID
+    applicationId: RAKUTEN_APP_ID,
+    // チェックインする日付（YYYY-MM-DD形式）
+    checkinDate: `${checkInDate.getFullYear()}-${checkInDate.getMonth() + 1}-${checkInDate.getDate()}`,
+    // チェックアウトする日付（YYYY-MM-DD形式）
+    checkoutDate: `${checkOutDate.getFullYear()}-${checkOutDate.getMonth() + 1}-${checkOutDate.getDate()}`,
+    // 位置情報
+    latitude: cords.latitude,
+    longitude: cords.longitude,
+    // 結果のフォーマット
+    format: 'json',
+    // 検索時の測地系。1は世界測地系
+    datumType: 1,
+    // 検索半径。1は1km
+    searchRadius: 1
+  };
+  
+  // パラメータを連結
+  var ary = [];
+  for (var key in params) {
+    ary.push(`${key}=${encodeURIComponent(params[key])}`);
+  }
+  
+  // URLにパラメータを付けて返す
+  return url + ary.join('&');
+}
+```
+
+### 検索結果をGoogleマップ上に表示
+
+楽天トラベルAPIの検索結果をGoogleマップ上に表示するのが `viewHotels` 関数です。マーカーとして立てていきますが、これはgmap3の機能を使います。titleに配列のインデックスを指定しておき、後でタップした際のデータが分かるようにしておきます。
+
+そしてアイコン画像をタップした際には `viewInfo` 関数に情報を送ります。
+
+```
+// 検索結果のホテル一覧をGoogleマップ上に配置します
+var viewHotels = function(hotels) {
+  if (!hotels)
+    return;
+  for (var i = 0; i < hotels.length; i++) {
+    
+    // 0番目がホテル情報、他は予約プランです
+    var hotel = hotels[i].hotel[0].hotelBasicInfo;
+    
+    // マーカーを作ります
+    var marker = $('#map').gmap3().marker({
+      // 位置情報
+      position: [
+        hotel.latitude,
+        hotel.longitude
+      ],
+      // titleタグにタップしたホテルの番号
+      // （配列のインデックス）を保存しておきます
+      title: String(i),
+      
+      // アイコンはURLをHTTP -> HTTPSに変更して表示します
+      icon: {
+        url: hotel.hotelThumbnailUrl.replace('http:', 'https:')
+      }
+    });
+    
+    // マーカーをクリックした時のイベント
+    marker.on('click', function(e) {
+      // titleに入っているデータを使ってホテルの情報を得ます
+      var hotel = hotels[e.title].hotel[0].hotelBasicInfo;
+      
+      // ホテル情報を表示します
+      viewInfo(hotel);
+    });
+  }    
+}
+```
+
+### 詳細情報を表示
+
+ホテルの詳細情報を表示するのが `viewInfo` 関数です。ここではHTMLのテンプレートに合わせて情報を埋め込んでいきます。
+
+```
+var viewInfo = function(hotel) {
+  // 以下の情報を id で一致したDOMに表示します
+  var ids = [
+    'hotelName',
+    'hotelSpecial',
+    'telephoneNo',
+    'access'
+  ];
+  for (var i = 0; i < ids.length; i++) {
+    var id = ids[i];
+    $(`#${id}`).text(hotel[id]);
+  }
+  
+  // addressは1と2を結合して表示します
+  $('#address').text(`${hotel.address1}${hotel.address2}`);
+  
+  // 予約するボタンをタップした時のURLはdata要素に適用します
+  $('#reserve').data('uri', hotel.planListUrl);
+  
+  // 表示します
+  $("#hotel").show();
+}
+```
+
+### 予約するボタンをタップ
+
+予約するボタンをタップした際には、 `data-uri` で指定されたURLをInAppBrowserで開きます。
+
+```
+// 予約するボタンを押した時のアクションです
+$('body').on('click', '#reserve', function(e) {
+  var url = $(e.target).data('uri');
+  window.open(url, 'menubar=no, toolbar=no, scrollbars=yes')
+});
+```
+
+----
+
+ここまでの処理で楽天トラベルAPIを呼び出して結果を地図上にマッピングし、さらに詳細情報の表示ができるようになります。コードは[moongift/monaca-rakuten-travel-api](https://github.com/moongift/monaca-rakuten-travel-api)にアップロードしてありますので実装時の参考にしてください。
+
+Web APIを使えば多機能なアプリが簡単に作れるようになります。ぜひ様々なWeb APIをチェックしてみてください。
