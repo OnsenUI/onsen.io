@@ -38,7 +38,7 @@ By default, old webpack would include both `foo` and `bar` functions in the mini
 
 ## Code Splitting in webpack
 
-webpack is used to bundle your project into one monolith file. In other words, webpack generates one file containing all third-party libraries together with the code of your application. Therefore, each time you change something in the application, the whole file has to be re-uploaded to the server and then re-downloaded by the clients. Considering the fact that the source code of third-party libraries rarely changes while the code of your application changes frequently, it is very inefficient to keep reuploading and redownloading the whole file in this case. What if you could separate these two source code? [Code splitting](https://webpack.js.org/guides/code-splitting/#components/sidebar/sidebar.jsx) feature can do this.
+By default,webpack is bundling your project into one monolith file. In other words, webpack generates one file containing all third-party libraries together with the code of your application. Therefore, each time you change something in the application, the whole file has to be re-uploaded to the server and then re-downloaded by the clients. Considering the fact that the source code of third-party libraries rarely changes while the code of your application changes frequently, it is very inefficient to keep reuploading and redownloading the whole file in this case. What if you could separate static and dynamic part of your code? [Code splitting](https://webpack.js.org/guides/code-splitting/#components/sidebar/sidebar.jsx) feature can do this.
 
 In the next section, I will briefly explain various types of `code splitting` in webpack. Then, I will talk about the newly introduced `performance` configuration object which can give us more information about splits generation.
 
@@ -58,8 +58,7 @@ This allows loading code splits that are only needed for a particular use case o
 
 Please note that bundle size can have a significant impact on your application load time. That's why putting an effort in proper configuration of code splitting is worthwhile. After using the code splitting, how can we actually check if its configuration works as expected? Discussion about [Webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216) led to adding `performance` configuration object in webpack 2. Thanks to this, you can now configure webpack to detect code splits that are above the expected size limit.
 
-In case there are oversized splits, you can specify webpack behavior by setting property `hints` inside `performance` object.
-By default, `hints` is set to `warning` which will display a warning with information about oversized splits. You can also set it to `error` which will throw an error when the split is exceeding the size limit. You can adjust these options to your environment. For instance, webpack documentation recommends setting `error` property for production.
+Setting property `hints` inside `performance` object will define webpack bahaviour for handling oversized splits. By default, `hints` is set to `warning` which will display a warning with information about oversized splits. You can also set it to `error` which will throw an error when the split is exceeding the size limit. You can adjust these options to your environment. For instance, webpack documentation recommends setting `hints` to `error` for production.
 
 Other properties we can specify are `maxEntryPointSize`, `maxAssetSize` and `assetFilter`. I will explain them base on the example below:
 
