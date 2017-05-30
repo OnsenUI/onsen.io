@@ -5,18 +5,14 @@ id: performance-features-in-webpack-2
 title: "Performance features in webpack 2"
 product: monaca
 category: development
-tags: webpack, monaca 
+tags: webpack, monaca
 ---
 
-Webpack 2 is out for a while and I believe it's worth to explore some features introduced in it. 
-The focus of this blog post is mainly on features that help to control and improve the performance of your application. 
-Firstly I will tell you about `tree shaking` feature which helps to reduce the size of your bundle by not including 
-unused exports in it. Secondly, I will briefly describe code splitting feature and 
-how brand new `performance` configuration object can help you to use this feature properly.
+Webpack 2 is out for a while now with some interesting features which can help to control and improve the performance of your application. For this reason, we are going to talk about these features here in this blog post. I'm gonna start by talking about `tree shaking` feature which helps to reduce the size of your bundle by excluding unused exports in it. Then, I will briefly describe `code splitting` feature and how brand new `performance` configuration object can help you to use this feature properly.
 
 ## Tree Shaking
-I would like to start from tree shaking feature which during transpiling process exclude
-unused exports. This very simple example will illustrate the issue: 
+
+The `tree shaking` feature is used during the transpiling process to exclude unused exports. Here is an example of how this feature can be used:
 
 ```
 // exports.js
@@ -28,6 +24,7 @@ export function bar() {
   return 'unused';
 }
 ```
+
 if you want to print value returned by `foo` you could use following syntax:
 
 ```
@@ -36,52 +33,35 @@ import {foo} from './exports'
 console.log(foo());
 ```
 
-Old webpack by default would include both `foo` and 'bar' in minified file.
-New webpack introduces algorithm for excluding parts of code that are exported but not used in your application.   
-In case presented above, `bar` function is not used in our file and in consequence it won't be part of minified bundle. 
-This has a significant impact on output file size and can improve the loading time of your application.
-For further information about tree shaking check out blog post under 
-this [link](http://2ality.com/2015/12/webpack-tree-shaking.html).
+By default, old webpack would include both `foo` and `bar` functions in the minified file. However, the new webpack introduces an algorithm for excluding parts of the code that are exported but not used in your application. Therefore, in the above case, the unused `bar` function won't be included in the minified bundle. For further information about `tree shaking`, check out [this blog post](http://2ality.com/2015/12/webpack-tree-shaking.html).
 
-## Code splitting in webpack 
 
-By default, webpack is bundling your project in one monolith file. What does this mean is that
-webpack generate one file that contains all third party libraries together with the code of your application. 
-So each time you change something in the application the whole file has to be
-uploaded again to the server and then downloaded by the clients. It is very inefficient since 
-the source code of third party libraries changes very rarely but from the other hand code of our application
-changes frequently. What if you could separate code that changes frequently from the one that changes occasionally? 
-Webpack from the beginning supports the feature called [code splitting](https://webpack.js.org/guides/code-splitting/#components/sidebar/sidebar.jsx) which let you do that.
+## Code Splitting in webpack
 
-Below I will briefly explain types of code splitting in webpack and then I will tell you about newly introduced
-`performance` configuration object which can give us more information about generated splits.
+webpack is used to bundle your project into one monolith file. In other words, webpack generates one file containing all third-party libraries together with the code of your application. Therefore, each time you change something in the application, the whole file has to be re-uploaded to the server and then re-downloaded by the clients. Considering the fact that the source code of third-party libraries rarely changes while the code of your application changes frequently, it is very inefficient to keep reuploading and redownloading the whole file in this case. What if you could separate these two source code? [Code splitting](https://webpack.js.org/guides/code-splitting/#components/sidebar/sidebar.jsx) feature can do this.
 
-#### Vendor code splitting
+In the next section, I will briefly explain various types of `code splitting` in webpack. Then, I will talk about the newly introduced `performance` configuration object which can give us more information about splits generation.
 
-These are third party libraries in which content doesn't change often and in consequence,
-browser can load it once and then store it in the cache.
-#### CSS splitting
+#### Vendor Code Splitting
 
-You can split CSS files into separate bundle. Such a separation allow loading application code in parallel 
-with styles. In this case, you can as well take advantage of caching. 
-#### On demand code splitting
+These are third-party libraries whose content doesn't change often; thus, browsers can load it once and then store it in the cache.
 
-This allows loading code splits that are only needed for the particular use case on programmer request.
-That way you can prioritize resource loading. For more information check webpack [documentation](https://webpack.js.org/guides/code-splitting-async/).
-## Code splitting and performance indicators
+#### CSS Splitting
 
-You need to remember that bundle size can have a significant impact on your application load time.
-That's why putting and effort in proper configuration of code splitting is worthwhile.
-You can use above features but how you actually check if code splitting configuration works as expected?
-Discussion about [Webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216) 
-led to adding `performance` configuration object in webpack 2.
-Thanks to it you can configure webpack to detect code splits that are above the expected size limit. 
-In case if that happen you can specify webpack behaviour by setting property `hints` inside `performance` object.
-By default, `hints` is set to `warning` which will cause display warning with information about large splits.
-You can also set it to `error` which will throw an error in case of exceeding size limit. You can adjust 
-these options to your environment. For instance, webpack documentation recommends setting 'error' property for production. 
+You can split CSS files into separate bundles. Such separation allows loading application code in parallel with styles. In this case, you can also take advantage of caching.
 
-Another properties we can specify are `maxEntryPointSize`, `maxAssetSize` and `assetFilter` I will explain them base on the example:
+#### On Demand Code Splitting
+
+This allows loading code splits that are only needed for a particular use case on programming request. That way you can prioritize resource loading. For more information, please check [webpack documentation](https://webpack.js.org/guides/code-splitting-async/).
+
+## Code Splitting and Performance Indicators
+
+Please note that bundle size can have a significant impact on your application load time. That's why putting an effort in proper configuration of code splitting is worthwhile. After using the code splitting, how can we actually check if its configuration works as expected? Discussion about [Webpack Performance Budgets](https://github.com/webpack/webpack/issues/3216) led to adding `performance` configuration object in webpack 2. Thanks to this, you can now configure webpack to detect code splits that are above the expected size limit.
+
+In case there are oversized splits, you can specify webpack behavior by setting property `hints` inside `performance` object.
+By default, `hints` is set to `warning` which will display a warning with information about oversized splits. You can also set it to `error` which will throw an error when the split is exceeding the size limit. You can adjust these options to your environment. For instance, webpack documentation recommends setting `error` property for production.
+
+Other properties we can specify are `maxEntryPointSize`, `maxAssetSize` and `assetFilter`. I will explain them base on the example below:
 
 ```
 performance: {
@@ -94,14 +74,8 @@ performance: {
 }
 ```
 
-By applying above configuration you will receive warning in case if size of our entry 
-assets will be above 0.4 megabyte or if any of assets size emitted by webpack exceed 0.15 megabyte. Metrics will be
-calculated based only on size of javascript files in the project.
+By applying the above configuration, you will receive a warning when your entry assets are above 0.3 megabyte or when any assets emitted by webpack exceed 0.15 megabytes. Metrics will be calculated based only on the size of javascript files in the project.
 
-Given numbers are just example and on [performance budget](http://www.performancebudget.io/) site you can 
-specify what loading time of your application you expect and base on that appropriate
-bundle size for your application will be calculated.
-Having that number in your webpack configuration will help you to control size of your code splits
-and in consequence avoid performance issues.
+The given numbers are just an example. On the [Performance Budget site](http://www.performancebudget.io/), you can specify your expected application load time, then based on that an appropriate bundle size for your application will be calculated. Having that number in your webpack configuration will help you to control the size of your code splits; therefore, avoid performance issues.
 
-I hope that you find this post interesting. Feel free to leave some feedback about it.
+I hope that you find this post helpful. Feel free to leave some feedback here.
