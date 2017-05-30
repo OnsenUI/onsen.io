@@ -6,6 +6,13 @@ title: "Monacaでマッシュアップ。楽天ブックスAPIを使ってみる
 product: monaca
 tags: monaca,onsenui,web api
 category: 技術情報
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://ja.onsen.io/blog/content/images/2017/Jan/monaca-logo-ogp.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
 ---
 
 Web APIを使うと個人や一企業での収集が難しいデータが簡単に手に入ります。多くは自社の保有するデータをオープンにするWeb APIが多いですが、中には翻訳や画像変換などの様々な機能をWeb APIとして公開しているものもあります。
