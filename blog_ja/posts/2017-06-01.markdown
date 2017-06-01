@@ -1,0 +1,300 @@
+---
+author: kayoko
+date: 2017-06-01
+id: monaca-with-a3rt-talk-api
+title: "リクルートの人工知能API A3RTとOnsenUIでチャットボットを作ってみた"
+product: monaca
+tags: monaca, onsenui, webapi
+category: 技術情報
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://ja.onsen.io/blog/content/images/2017/Jun/a3rt-talk-api-08.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+# リクルートの人工知能API A3RTとOnsenUIでチャットボットを作ってみた
+
+機械学習やAIといったキーワードが盛り上がりを見せています。
+AIを用いたサービスをフルスクラッチで開発するのは難しそうですが、最近は画像認識や翻訳といったAIテクノロジーを気軽に扱えるAPIやライブラリが存在しています。
+今回は、リクルートが提供する人工知能API群[A3RT](https://a3rt.recruit-tech.co.jp)の[Talk API](https://a3rt.recruit-tech.co.jp/product/talkAPI/)とOnsen UIを使って、雑談を楽しめる簡単なチャットボットの仕組みを作ってみたいと思います。
+
+## つくるもの
+
+完成品はこのようになります。
+画面下部のメッセージボックスからメッセージを送信すると、botが雑談を返してくれます。
+
+![画像7](/blog/content/images/2017/Jun/a3rt-talk-api-07.png)
+
+![画像8](/blog/content/images/2017/Jun/a3rt-talk-api-08.png)
+
+## API KEYの取得
+
+まずはA3RTのAPIを使用するためのAPI KEYを取得します。[API発行｜Talk API｜PRODUCT｜A3RT](https://a3rt.recruit-tech.co.jp/product/talkAPI/registered/)から簡単に取得できるので、準備をしておきましょう。
+
+![画像1](/blog/content/images/2017/Jun/a3rt-talk-api-01.png)
+
+## チャット画面作成
+
+新規プロジェクトを「Onsen UI V2 JS Minimum」を使って作成します。
+プロジェクトが起動したら、「設定」 > 「JS/CSSコンポーネントの追加と削除」に進み、jQueryをインストールしておきます。
+
+それではチャット画面を作成していきましょう。
+`<body></body>`内に以下のコードでチャットのUIを作ります。
+
+```
+<ons-page>
+
+  <ons-toolbar class="header center">
+    <div class="center">A3RT チャットボット</div>
+  </ons-toolbar>
+
+  <div class="content">
+    <ons-list id="chats">
+    </ons-list>
+  </div>
+
+  <ons-tabbar position="auto" class="send-area">
+    <ons-input id="message" placeholder="メッセージ" class="send-area__input"></ons-input>
+    <ons-button id="send" modifier="quiet" class="send-area__btn">送信</ons-button>
+  </ons-tabbar>
+
+</ons-page>
+```
+
+すると以下のような画面が作られます。
+
+![画像2](/blog/content/images/2017/Jun/a3rt-talk-api-02.png)
+
+メッセージ送信エリアの部分は`<ons-tabbar>`を使うと簡単に画面下部に固定することができます。
+このままではちょっと見栄えが悪いので、CSSを調整しましょう。
+
+```
+.header {
+	background-color: rgb(45,54,74);
+}
+
+.header div {
+	color: white;
+}
+
+.content {
+	text-align: center;
+	padding-bottom: 4em;
+}
+
+.send-area__btn {
+	color: white;
+	background-color: #428bca;
+}
+
+.send-area__input {
+	display: inline-block;
+	position: relative;
+	width: calc(100% - 46px);
+}
+
+.send-area__input input {
+	vertical-align: middle;
+}
+```
+
+![画像3](/blog/content/images/2017/Jun/a3rt-talk-api-03.png)
+
+## 送信ボタン押下時の挙動
+
+画面のベースはできたので、次は送信ボタンを押したときの挙動について書いていきます。
+メッセージを送信するごとに、
+`<ons-list></ons-list>`
+の中に
+`<ons-list-item></ons-list-item>`
+が増えていくような実装になります。
+
+### 自分の送信内容を表示する
+まずは自分が送信した内容が画面に表示されるようにスクリプトを書いていきます。
+
+```
+ons.ready(function() {
+  // 送信ボタンを押した時の処理
+  $("#send").on("click", function(e) {
+    e.preventDefault();
+
+    // 自分の送信内容を画面右側に表示
+    $('#chats').append(`
+        <ons-list-item modifier="nodivider">
+          <div class="right">
+            <span class="msg">${$("#message").val()}</span>
+          </div>
+        </ons-list-item>
+    `);
+
+    // 元の入力内容は削除
+    $("#message").val("")
+  });
+});
+```
+
+これで、テキストを入力して送信ボタンを押すと自分のメッセージが表示されるようになりました。
+
+![画像４](/blog/content/images/2017/Jun/a3rt-talk-api-04.png)
+
+
+### ボットからの返事を表示する
+
+いよいよA3RT Talk APIの出番です。
+[A3RT Talk APIのサイト](https://a3rt.recruit-tech.co.jp/product/talkAPI/)を見ると、サンプルのリクエストを確認できます。
+
+試しにターミナルからサンプルのリクエストを送ってみましょう。
+apikeyの部分は自分が最初に取得したAPI KEYに置き換えてください。
+
+```
+curl -X POST https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk \
+-F "apikey=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" \
+-F "query=おはよう"
+```
+
+このようなレスポンスが返ってくれば成功です。
+
+```
+{
+	status: 200,
+	message: "ok",
+	results: [{
+		perplexity: 2.3688167429546714,
+		reply: "おはようございます"
+	}],
+}
+```
+
+ターミナルでレスポンスが返ってくるのを確認できたら、今度は画面からAjaxでリクエストを投げてみましょう。
+APIを呼ぶ前に、あらかじめ取得していたAPIKeyとAPIのエンドポイントを最初に定義しておきます。
+
+```
+ons.ready(function() {
+
+  // A3RTのWEBサイトで発行したAPIKey
+  var apiKey   = "your api key";
+
+  // Talk APIのエンドポイント
+  var url      = "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk";
+
+  // 送信ボタンを押した時の処理
+  $("#send").on("click", function(e) {
+    e.preventDefault();
+
+    // 自分の発言を画面右側に表示
+    ....
+    ....
+    ....
+});
+```
+
+APIを呼ぶときの処理は次の通りです。
+
+```
+// API Call
+$.ajax({
+  url: url,
+  type:'POST',
+  data : {apikey: apiKey, query: $("#message").val()}
+}).then(function(data){
+
+  // 成功したらレスポンスをchatbotの返事として画面左側に表示
+  $('#chats').append(`
+    <ons-list-item modifier="nodivider">
+      <span class="msg--reply">${data.results[0]['reply']}</span>
+      <span class="list-item__subtitle">A3RT chatbot</span>
+    </ons-list-item>
+  `);
+
+}).fail(function(data){
+    alert('失敗しました。');
+});
+```
+
+パラメータとしてAPIKeyと自分が送信したメッセージの内容をデータとして送っています。
+レスポンスステータスが200で返ってきたら、画面の左側にAIからの返事を表示させています。
+今回は簡易デモということで、例外処理は省略します。
+
+スクリプトの全体はこのようになります。
+
+```
+ons.ready(function() {
+
+  // A3RTのWEBサイトで発行したAPIKey
+  var apiKey   = "your api key";
+
+  // 送信ボタンを押した時の処理
+  $("#send").on("click", function(e) {
+    e.preventDefault();
+
+    // 自分の発言を画面右側に表示
+    $('#chats').append(`
+        <ons-list-item modifier="nodivider">
+          <div class="right">
+            <span class="msg">${$("#message").val()}</span>
+          </div>
+        </ons-list-item>
+    `);
+
+    // API Call
+    $.ajax({
+      url: "https://api.a3rt.recruit-tech.co.jp/talk/v1/smalltalk",
+      type:'POST',
+      data : {apikey: apiKey, query: $("#message").val()}
+    }).then(function(data){
+
+      // 成功したらレスポンスをchatbotの返事として画面左側に表示
+      $('#chats').append(`
+        <ons-list-item modifier="nodivider">
+          <span class="msg--reply">${data.results[0]['reply']}</span>
+          <span class="list-item__subtitle">A3RT chatbot</span>
+        </ons-list-item>
+      `);
+
+    }).fail(function(data){
+        alert('失敗しました。');
+    });
+
+    // 元の入力内容は削除
+    $("#message").val("")
+  });
+});
+```
+
+この状態で何か送ってみると...
+
+AIから返事が返ってきました！
+
+![画像5](/blog/content/images/2017/Jun/a3rt-talk-api-05.png)
+
+最後にメッセージの見た目をちょっとだけ修正しておきます。
+
+```
+.msg, .msg--reply {
+	display: inline-block;
+	background-color: rgb(189, 243, 135);
+	padding: 1em;
+	border-radius: 10%;
+}
+
+.msg--reply {
+	background-color: #eee;
+}
+```
+
+![画像6](/blog/content/images/2017/Jun/a3rt-talk-api-06.png)
+
+簡易雑談ボットの完成です。
+
+----
+
+いかがでしたでしょうか？
+AIというと難しく感じてしまいますが、こんなに簡単なAPIが提供されているとアイディア次第で自分でも何か作れそうですよね。
+さらにMonacaとOnsenUIを使えばさくっとプロトタイピングができます。
+
+他にもいろんなAPIが揃っていますので是非試してみてください。
+
+今回のコードは[moongift/monaca-with-a3rt-talk-api](https://github.com/moongift/monaca-with-a3rt-talk-api)にアップロードしてあります。実装時の参考にしてください。
