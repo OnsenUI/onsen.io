@@ -33,7 +33,7 @@ Onsen UI provides a rich set of form components: <%- @componentLink('button') %>
 
 #### Lists
 
-Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using <%- @componentLink('list') %>, <%- @componentLink('list-item') %> and <%- @componentLink('list-header') %> you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<<%- @mapComponentName('toolbar') %>>`, and some CSS classes are provided for default styles (`list-item__icon`, `list-item__thumbnail`, `list-item__title` and `list-item__subtitle`).
+Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using <%- @componentLink('list') %>, <%- @componentLink('list-item') %>, <%- @componentLink('list-header') %> and <%- @componentLink('list-title') %> you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<<%- @mapComponentName('toolbar') %>>`, and some CSS classes are provided for default styles (`list-item__icon`, `list-item__thumbnail`, `list-item__title` and `list-item__subtitle`).
 
 <% if @framework isnt 'react': %>
 ```
