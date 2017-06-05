@@ -129,7 +129,7 @@ module.exports = function() {
       },
 
       /**
-       * highlighter 
+       * highlighter
        */
       highlight: function(capture, language) {
         var code = stripIndent(capture().toString()).trim();
@@ -144,7 +144,7 @@ module.exports = function() {
 
       cssShowcase: function(capture) {
         try {
-          return '<div class="css-component-showcase ons-css">' + 
+          return '<div class="css-component-showcase ons-css">' +
             '<div class="page css-component-showcase-inner" style="position: static; height: 568px;">' +
             capture().toString() + '</div></div>';
         } catch(e) {
@@ -165,7 +165,7 @@ module.exports = function() {
         }
 
         var extraAttributes = '';
-        if (options.minHeight) { 
+        if (options.minHeight) {
           extraAttributes += ' style="min-height: ' + options.minHeight + 'px"';
         }
 
@@ -378,7 +378,7 @@ module.exports = function() {
           return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;
         }
 
-        return 'ons-' + component;
+        return (/^ons($|\.)/.test(component) ? '' : 'ons-') + component;
       },
 
       componentLink: function(component) {
