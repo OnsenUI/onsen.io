@@ -1,0 +1,125 @@
+---
+author: junio
+date: 2017-06-06
+id: presenting-onsen-ui-newest-components-ja
+title: "リリースのご案内：Onsen UI に新規コンポーネントが追加されました！"
+product: onsen
+category: ニュース
+tags: onsen ui
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://ja.onsen.io/blog/content/images/2017/Jun/onsen-logo-ogp.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+（この記事は [Júnio Silva](https://onsen.io/blog/junio/) が 2017年5月16日に英語版 Monaca x Onsen ブログに投稿した [Presenting Onsen UI's newest components](https://onsen.io/blog/presenting-onsen-ui-newest-components/) の翻訳です。）
+
+
+Onsen UI のアップグレードは継続的に行われており、最近ではOnsen UI の安定性の向上（iOS 向けの改善点）をはじめとし、機能の改善や追加が精力的に行われています。一番最近のマイナーリリースとなるバージョン `2.3.0` においても、簡単に組み込めてしかもすぐに利用できる新たなコンポーネントが複数追加されました。
+
+今回のブログでは、これらのコンポーネントに関してご案内させていただきます。
+
+<!-- more -->
+
+## アクションシート（ Action Sheet ）
+
+画面の下部からスライド形式で表示される「シート」です。シートは、ユーザーの承認を求める場合やコンテンツを追加表示する場合に使用されます。使用方法は「ダイアログ」と類似しています。iOS ではアクションシート（ Action Sheet ）と呼ばれ、Android ではボトムシート（ Bottom Sheets ）と呼ばれています。
+
+以下が今回リリースした `<ons-action-sheet>` となります。
+
+![Action sheet](/blog/content/images/2017/May/action-sheet.png)
+
+`<ons-action-sheet>` と併用することを前提に、`<ons-action-sheet-button>` コンポートネントも新たにリリースしました。アクションシート内にボタンを配置するときに、`<ons-action-sheet-button>` コンポーネントを使用します。典型的な使用例は次のとおりです。
+
+``` html
+<ons-action-sheet id="sheet">
+  <ons-action-sheet-button icon="md-square-o">Label</ons-action-sheet-button>
+  <ons-action-sheet-button icon="md-square-o" modifier="destructive">Delete Label</ons-action-sheet-button>
+  <ons-action-sheet-button icon="md-close">Cancel</ons-action-sheet-button>
+</ons-action-sheet>
+```
+
+アクションシートは一種のダイアログなのでデフォルトでは非表示となっており、表示するためのコードが別途必要となります。Onsen UI サイトの [チュートリアル](https://tutorial.onsen.io/?framework=vanilla&category=reference&module=action-sheet) には、JS フレームワーク別にアクションシートの表示方法が掲載されていますので、併せてご確認ください。
+
+また、アクションシートを「動的」に作成・表示する場合には、`ons.openActionSheet` メソッドを使用します（動的にアクションシートを作成・表示する方法もチュートリアルに掲載されています）。次のように記述すれば、上記のアクションシートと同じシートを動的に作成することができます。
+
+``` javascript
+ons.openActionSheet({
+  id: 'sheet',
+  buttons: [
+    {
+      label: 'Label',
+      icon: 'md-square-o'
+    },
+    {
+      label: 'Delete Label',
+      icon: 'md-square-o',
+      modifier: 'destructive'
+    },
+    {
+      label: 'Cancel',
+      icon: 'md-close'
+    }
+  ]
+})
+```
+
+## カード型レイアウト（ Card ）
+
+CSSを（極力）使用せずともスタイリッシュでしかもコンパクトにコンテンツを表示できるように、`<ons-card>` コンポーネントも新たにリリースしました。
+
+![Card](/blog/content/images/2017/May/card.png)
+
+このコンポーネントを使用するとハイライト表示されたボックスが配置され、お好みのコンテンツをその上に置くことができます。
+
+また、スタイルを適宜設定できるように、`title` と `content` の2つの特別なCSSクラスもご用意しました。典型的な使用例は次のとおりです。
+
+``` html
+<ons-card>
+  <div class="title">Title</div>
+  <div class="content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+</ons-card>
+```
+
+カードには、文書以外にも画像などのメディアコンテンツを置くことができます。また、他の Onsen UI コンポーネントと組み合わせて使用することもできます。
+
+さらに、カード上に置くことができる各種ブロックのひな形（参考サイトは[こちら](https://material.io/guidelines/components/cards.html#cards-actions)）の開発も検討しています。ひな形に関するご要望があればぜひお聞かせください。
+
+## トースト（ Toast ）
+
+トーストは、ダイアログの一種です。`<ons-toast>` を使用して構築します。短いメッセージを表示する場合やユーザー側になんらかの操作を要求する場合に使用します。また、現在実行されているアプリの処理に影響を与えることもありません。
+
+![Toast](/blog/content/images/2017/May/toast.png)
+
+以下が「静的」にトーストを構築する方法です。
+
+``` html
+<ons-toast>
+  Message Message Message Message<button>Action</button>
+</ons-toast>
+```
+
+`<ons-action-sheet>` と同様に、JavaScript 経由で `<ons-toast>` の表示処理を行うことができます。
+
+あるいは、 `ons.notification.toast` メソッドを使用して「動的」に作成・表示することもできます。この方法であれば、メッセージの他にもコールバック（たとえばトーストが隠された後の処理など）やタイムアウト（たとえば一定時間経過後トーストを隠す場合）などの処理も追加することができます。詳細は、[ドキュメント](https://ja.onsen.io/v2/docs/js/ons.notification.html#method-toast)をご確認ください。
+
+なお、一度に複数のトーストを表示させようとした場合でも（たとえばサーバー側から複数の通知を受け取った場合）、トーストで使用しているキューの仕様上、一度に一個のトーストのみが表示されます。表示されているトーストが隠されると、キュー内の次のトーストが表示されます。
+
+
+## 検索時のテキスト入力欄
+
+HTML 標準の検索テキスト入力欄（ `<input>` タグに `type='search'` 指定 ）は、デザインの観点からモバイルアプリにふさわしいものとは言えません。そこで、テキスト入力欄に適用できる「装飾」用のスタイルを提供することにしました。以下のスクリーンショットでサンプルをご確認ください。ネイティブアプリ上でよく見られる入力欄よりも、こちらの方がより検索入力欄らしい外見ではないでしょうか。
+
+![Search input](/blog/content/images/2017/May/search-input.png)
+
+ここでも、Onsen UI が提供するスタイルの自動調整機能が適用され、プラットフォームに応じてスタイルは自動で切り替わります。
+
+なお、今回ご紹介しましたコンポーネントを使用する場合には、最新バージョンの Onsen UI を必ずご使用ください。
+最後とはなりましたが、開発陣一同、これらのコンポーネントが皆様のアプリ開発に役立つことを祈っております。また、皆様からのフィードバックもお待ちしております。[Gitter チャット](https://gitter.im/OnsenUI/OnsenUI)・[コミュニティーフォーラム](https://community.onsen.io/)でもご意見・ご要望、障害報告などを随時受け付けております。
+
+---
+
+Onsen UI は、ハイブリッドアプリ向けのUIを作成するためのオープンソースのライブラリーです。詳細は、[GitHub ページ](https://github.com/OnsenUI/OnsenUI)をご確認ください。また、Onsen UI を応援してくれる方はぜひスター（★）をポチッとお願いいたします。
