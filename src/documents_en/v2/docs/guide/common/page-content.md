@@ -4,7 +4,7 @@ For a full list of components please check the [reference page](/v2/docs/<%- @fr
 
 #### Form elements
 
-Onsen UI provides a rich set of form components. Apart from <%- @componentLink('button') %>, <%- @componentLink('switch') %>,<%- @componentLink('select') %> and <%- @componentLink('range') %>, perhaps the <%- @componentLink('input') %> component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
+Onsen UI provides a rich set of form components: <%- @componentLink('button') %>, <%- @componentLink('switch') %>, <%- @componentLink('select') %>, <%- @componentLink('input') %> (type `text`, `password`, etc.), <%- @componentLink('checkbox') %>, <%- @componentLink('radio') %>, <%- @componentLink('search-input') %>,  and <%- @componentLink('range') %>.
 
 <% if @framework isnt 'react': %>
 ```
@@ -27,7 +27,7 @@ Onsen UI provides a rich set of form components. Apart from <%- @componentLink('
   modifier='material'
   placeholder='Username' />
 
-<Input type="checkbox" checked={this.state.checked} onChange={this.onChange} />
+<Checkbox checked={this.state.checked} onChange={this.onChange} />
 ```
 <% end %>
 

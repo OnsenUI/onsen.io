@@ -115,11 +115,9 @@ For more information about Vue, we recommend to read the official [Vue docs](htt
 
 ### Event Handling
 
-Onsen UI components are capable of handling events. For instance, you can catch a tap event by using the `@click` handler, or text input change with the `@input` handler.
+Onsen UI components are capable of handling events. For instance, you can catch a tap event by using the `@click` handler or a device back button with `@deviceBackButton` handler.
 
 ```html
- <v-ons-input @input="..." type="text"></v-ons-input>
- <v-ons-input @change="..." type="checkbox"></v-ons-input>
  <v-ons-button @click="..."></v-ons-button>
  <v-ons-navigator @prepop="..."></v-ons-navigator>
  <v-ons-page @deviceBackButton="..."></v-ons-page>
@@ -135,9 +133,23 @@ These components are simple wrappers around inner [Custom Elements](https://deve
 
 <%- @mapKeywords @includeGuideSection('page-content.md') %>
 
-### VOnsModel Directive
+### Inputs and v-model
 
-Vue offers a very handy `v-model` directive for `input` element. Unfortunately, `v-model` is not fully extendable (not even with the [update in Vue 2.2.0](https://vuejs.org/v2/guide/components.html#Customizing-Component-v-model)) and features like using an array with checkboxes do not work with custom UI components. Therefore, Onsen UI implements `v-ons-model` directive that can be used with Onsen UI inputs (`v-ons-input` of any type, `v-ons-switch`, `v-ons-range` and `v-ons-select`). It emulates the original behavior of `v-model`, making it possible again to assign arrays or booleans to checkboxes and switches, for example. The value passed to `v-ons-model` should be either a literal value (initial value) or the name of a variable in the current context: `<v-ons-input v-ons-model="myValue"></v-ons-input>`. Currently, it does not support syntax like `v-ons-model="container['value']"`. Use dot notation instead: `v-ons-model="container.value"`.
+Input components in Onsen UI (such as `v-ons-input` and `v-ons-checkbox`) support Vue's `v-model` directive:
+
+```html
+<v-ons-input v-model="something"></v-ons-input>
+```
+
+The only exceptions are `v-model` modifiers, which are not supported by custom components as of `vue@2.3`. However, there is a workaround for the `lazy` modifier:
+
+```html
+<v-ons-input v-model="something" model-event="change"></v-ons-input>
+```
+
+This will update the model on `change` events instead of `input` (default). The rest ofthe modifiers can be easily implemented in other ways.
+
+It is also possible to bind arrays to `v-ons-checkbox` or `v-ons-switch` just like normal `<input type="checkbox">`, and make radio groups with `v-model` for `v-ons-radio`.
 
 <%- @mapKeywords @includeGuideSection('dialogs.md') %>
 
