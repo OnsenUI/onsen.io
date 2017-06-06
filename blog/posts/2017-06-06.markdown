@@ -8,13 +8,13 @@ category: tutorial
 tags: onsen ui, components
 ---
 
-Onsen UI provides native-like styles for all the UI components that presumably work for most of the situations. However, sometimes we want to give our apps a personal touch in the shape of custom styles or animations. Let's learn how to quickly implement custom "modifiers" to alter the style of our components.
+Onsen UI provides native-like styles for all the UI components that presumably work for most of the situations. However, sometimes we want to give our apps a personal touch in the shape of custom styles or animations. Let’s learn how to quickly implement custom “modifiers” to alter the style of our components in this article.
 
 <!-- more -->
 
 ### About "modifier" attribute
 
-Every visual component in Onsen UI accepts a `modifier` attribute that alters its style. Modifiers are a cross-component way to provide visual customizability. A modifier is translated into a set of CSS classes not only for the own element, but also for its children. This way, we don't need to set CSS classes manually for every child element of our UI component or provide complex CSS selectors.
+Every visual component in Onsen UI accepts a `modifier` attribute that alters its style. Modifiers are a cross-component way to provide visual customizability. A modifier is translated into a set of CSS classes not only for the own element but also for its children. This way, we don't need to set CSS classes manually for every child element of our UI component or provide complex CSS selectors.
 
 For example, using `material` modifier in `ons-input` element automatically sets `.text-input--material` and `.text-input--material__label` to its children, whereas `underbar` modifier sets `.text-input--underbar` and `.text-input--underbar__label`.
 
@@ -22,11 +22,11 @@ In order to see how any element sets these classes, you can have a look at the `
 
 ### Custom modifier
 
-Let's see a simple but useful example on how to create a custom modifier for one of our recent components, [`ons-toast`](https://onsen.io/v2/docs/js/ons-toast.html).
+Let's see a simple but useful example of how to create a custom modifier for one of our recent components, [`ons-toast`](https://onsen.io/v2/docs/js/ons-toast.html).
 
 By default, `ons-toast` is displayed full-width at the bottom of the page. Let's change it!
 
-We simply need to check the DOM and play a bit with the CSS properties. With this simple CSS we can make a right-aligned "danger" modifier:
+We simply need to check the DOM and play a bit with the CSS properties. With this simple CSS, we can make a right-aligned "danger" modifier:
 
 ```css
 .toast--danger {
@@ -78,7 +78,7 @@ ons.notification.toast('Success!', {
 });
 ```
 
-As a side note, if we only want to apply a specific modifier for iOS, for example, we can exclude the `material` modifier with `:not` selector:
+In case we only want to apply a specific modifier for a specific platform, we can use `:not` selector. For example, let's say we want to exclude the `material` modifier for iOS, we can with `:not` selector as shown below:
 
 ```css
 .toast--onlyios:not(.toast--material) {
