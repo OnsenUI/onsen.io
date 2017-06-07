@@ -13,6 +13,106 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
+このガイドでは、Angular 用ライブラリ `ngx-onsenui` の利用方法を解説します。
+Onsen UI の概要については [~~~~]() をご参照ください。
+
+### セットアップ
+
+#### 前提条件
+
+ここでは、既に Angular プロジェクトが用意されているものと仮定します。
+Angular プロジェクトの用意がお済みでない場合は[公式ガイド](https://angular.io/)を元に Angular プロジェクトをセットアップしてください。
+
+#### `onsenui` と `ngx-onsenui` のインストール
+
+まず、Onsen UI 本体（`onsenui`）と Angular 用ライブラリ（`ngx-onsenui`）をインストールします。
+
+```bash
+npm install onsenui ngx-onsenui --save
+```
+
+#### `OnsenModule` のインポート
+
+次に、Angular アプリのルートモジュール（典型的な名前: `AppModule`）に `OnsenModule` をインポートします。
+
+<!--in app.module.ts-->
+```ts
+import { OnsenModule } from 'ngx-onsenui'; // Add this line
+```
+
+<!--in app.module.ts-->
+```ts
+imports: [
+   BrowserModule,
+   OnsenModule, // Add this line
+],
+```
+
+これにより、`ngx-onsenui` の機能および Onsen UI 本体（`onsenui`）がアプリに読み込まれます。
+
+#### `CUSTOM_ELEMENTS_SCHEMA` の読み込み
+
+次に、ルートモジュールに `schemas` を追加し、その中に `CUSTOM_ELEMENTS_SCHEMA` を追加します。
+
+<!--in app.module.ts-->
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'; // Add this line
+```
+
+<!--in app.module.ts-->
+```ts
+  schemas: [
+      CUSTOM_ELEMENTS_SCHEMA, // Add this line
+  ],
+```
+
+これにより、テンプレート内に `ons-*` タグを書いても警告が出なくなります。
+
+#### CSS ファイルの読み込み
+
+最後に、`node_modules/onsenui/css/` ディレクトリ内にある `onsenui.css` と `onsen-css-components.css` を **この順番で** 読み込みます。
+
+##### (1) Angular CLI をお使いの場合
+
+[公式ガイド](https://github.com/angular/angular-cli/wiki/stories-global-styles)に従って `.angular-cli.json` に以下の2行を追記します。
+
+<!--in .angular-cli.json-->
+```json
+"styles": [
+  "../node_modules/onsenui/css/onsenui.css",
+  "../node_modules/onsenui/css/onsen-css-components.css",
+  "styles.css"
+],
+```
+
+##### (2) Angular CLI 以外の環境をお使いの場合
+
+以下の2行を適切に修正してプロジェクト内のグローバルスタイルファイルに追記します。
+
+<!--in styles.css, app.css, etc.-->
+```css
+@import '../node_modules/onsenui/css/onsenui.css';
+@import '../node_modules/onsenui/css/onsen-css-components.css';
+```
+
+#### 完了
+
+これで `ngx-onsenui` のセットアップは完了です。
+
+### `angular2-onsenui` について
+
+過去に提供していた Angular 用ライブラリ `angular2-onsenui` は、Angular 4 の発表に伴い廃止されました。
+`angular2-onsenui` をお使いの方は、`ngx-onsenui` へのアップデートをお願いいたします。
+
+---------------
+
+
+
+
+
+
+
+
 このガイドでは、Angular 2とOnsen UIを組み合わせて利用する方法について説明します。
 
 ### プロジェクトを始める
