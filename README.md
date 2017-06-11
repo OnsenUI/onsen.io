@@ -32,6 +32,9 @@ popd
 pushd dist/v2/OnsenUI/
 git checkout 2.0.3 # change this
 yarn install
+pushd css-components/
+yarn install
+popd
 gulp build
 popd
 ```

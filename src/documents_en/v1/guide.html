@@ -11,17 +11,17 @@ version: v1
 
 <%- @markdown => %>
 
-**This is the guide for Onsen UI version 1. Onsen UI 2 contains a lot of additional features including Material Design components, React and Angular 2 support, and many new components. If you are looking for documents for Onsen UI Version 2, please visit <a href="/v2/docs/guide/angular1/">Version 2 Docs</a> page. We also have [Migration Guide from V1 to V2](/v2/docs/guide/angular1/from-v1-to-v2.html).**
+**This is the guide for Onsen UI version 1. Onsen UI 2 contains a lot of additional features including Material Design components, React and Angular 2+ support, and many new components. If you are looking for documents for Onsen UI Version 2, please visit <a href="/v2/docs/guide/angular1/">Version 2 Docs</a> page. We also have [Migration Guide from V1 to V2](/v2/docs/guide/angular1/from-v1-to-v2.html).**
 
 <h3 id="LoadingOnsenUIinYourProject">Loading Onsen UI in Your Project</h3>
 
 Note: For faster instructions to use Onsen UI in your project, please refer to [Getting Started](/getting-started).
 
-Even though Onsen UI uses AngularJS to provide custom elements, it is *not required* to understand AngularJS. Onsen UI can be used with any JS frameworks including jQuery or Backbone.js, or with AngularJS to have a tighter integration.
+Even though Onsen UI uses AngularJS 1 to provide custom elements, it is *not required* to understand AngularJS. Onsen UI can be used with any JS frameworks including jQuery or Backbone.js, or with AngularJS 1 to have a tighter integration.
 
 <h4 id="UsingOnsenUIwithAngularJS">Onsen UI with AngularJS</h4>
 
-An Onsen UI app is actually an AngularJS app. Here is the minimum boilerplate which should be very familiar to the AngularJS users.
+An Onsen UI app is actually an AngularJS 1 app. Here is the minimum boilerplate which should be very familiar to the AngularJS 1 users.
 
 ```html
 <!doctype html>
@@ -1077,7 +1077,7 @@ After you add an `<ons-carousel-item>` element to the `<ons-carousel>`, you must
 
   ```
   carousel.on('overscroll', function(event) {
-    var deferred = $q.defer(); // Use AngularJS $q service
+    var deferred = $q.defer(); // Use AngularJS 1 $q service
     event.waitToReturn(deferred.promise);
     window.setTimeout(function() {
       deferred.resolve();
@@ -1148,7 +1148,7 @@ When the `ons.createPopover()` function is called, it will return a `Promise` ob
 
 - `show(target[, options])`
 
-  Displays the popover component at the specified `target`. The `target` can be a `DomElement`, a query selector or a AngularJS `$event`.
+  Displays the popover component at the specified `target`. The `target` can be a `DomElement`, a query selector or a AngularJS 1 `$event`.
 
   You can specify following parameters in the `options`.
 
@@ -1457,7 +1457,7 @@ ons.ready(function() {
 
 `ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
 
-For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter. `ons.bootstrap()` will return the AngularJS module object which can be used to add services from now on.
+For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter. `ons.bootstrap()` will return the AngularJS 1 module object which can be used to add services from now on.
 
 ```html
 <script>
@@ -1475,7 +1475,7 @@ You can also specify the module name when calling `ons.bootstrap()`.
 </script>
 ```
 
-If you want to load Onsen UI in more AngularJS way, you can use a `onsen` module.
+If you want to load Onsen UI in more AngularJS 1 way, you can use a `onsen` module.
 
 ```html
 <script>
@@ -1584,7 +1584,7 @@ To detect a finger gesture, you must wrap the target DOM element using [`<ons-ge
 </script>
 ```
 
-Or, use `ng-gestureeventname` if you prefer an AngularJS way.
+Or, use `ng-gestureeventname` if you prefer an AngularJS 1 way.
 
 ```html
 <ons-gesture-detector ng-swipeleft="doSomething()">
@@ -1636,7 +1636,7 @@ Here is the way to define a back button handler by `ons-page` attribute.
 </ons-page>
 ```
 
-Or the AngularJS way,
+Or the AngularJS 1 way,
 
 ```html
 <ons-page ng-device-backbutton="doSomething()">
@@ -1734,7 +1734,7 @@ In order to call those APIs, you need to assign a variable to the component by u
 <ons-navigator var="myNavigator">
 ```
 
-Now, `myNavigator` has become a global accessible variable. It is defined in the `window` object, and also in the AngularJS global scope.
+Now, `myNavigator` has become a global accessible variable. It is defined in the `window` object, and also in the AngularJS 1 global scope.
 
 To use the defined variable, you can refer the variable like the code below.
 
@@ -1744,7 +1744,7 @@ To use the defined variable, you can refer the variable like the code below.
 </script>
 ```
 
-Or, the AngularJS way.
+Or, the AngularJS 1 way.
 
 ```html
 <script>
@@ -1850,7 +1850,7 @@ The most frequently used action is a tap on the element, the event can be trigge
 <ons-button onclick="alert('You tapped me!')">Click Me</ons-button>
 ```
 
-Also, if you are familiar with AngularJS events, you can also get the same event by `ng-click` handler.
+Also, if you are familiar with AngularJS 1 events, you can also get the same event by `ng-click` handler.
 
 ```html
 <ons-button ng-click="alert('You tapped me!')">Click Me</ons-button>
@@ -1868,7 +1868,7 @@ Component event handlers can also be added using HTML attributes. These attribut
 </ons-navigator>
 ```
 
-The value of the attribute should be an Angular expression, so in the case where you are not using AngularJS these attributes can't be used.
+The value of the attribute should be an Angular expression, so in the case where you are not using AngularJS 1 these attributes can't be used.
 
 <h4 id="Pagelifecycle">Page life cycle events</h4>
 
@@ -1967,7 +1967,7 @@ Alternatively, a `<script>` tag can also be used to define a template. In this c
 
 <h4 id="AngularJSTemplateCache">Using $templateCache from AngularJS</h4>
 
-The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
+The templates defined above are also treated as an AngularJS 1 template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS 1 `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
 
 <h3 id="UsingModifier">Using Modifier</h3>
 
@@ -2022,7 +2022,7 @@ Then, write the appropriate style code under the style tag or in the css file.
 
 <h4 id="CustomizingunderlyingHTML">Customizing underlying HTML</h4>
 
-If you need to customize the underlying HTML code, you need to understand about AngularJS directive. AngularJS directive is a way to combine HTML code and JavaScript into a HTML tag.
+If you need to customize the underlying HTML code, you need to understand about AngularJS 1 directive. AngularJS 1 directive is a way to combine HTML code and JavaScript into a HTML tag.
 
 HTML code for each components are located under the framework's `templates` directory. For instance, the HTML code for `<ons-button>` is found in `framework/templates/button.tpl`.
 

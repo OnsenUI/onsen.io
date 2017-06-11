@@ -30,7 +30,7 @@ A conditional element called <%- @componentLink('if') %> is available to filter 
 With this, for example, you can display <%- @componentLink('fab') %> for Material Design and other type of button for iOS flat design.
 
 <% if @framework is 'angular1': %>
-AngularJS bindings also provide <%- @componentLink('if-platform') %> directive for this purpose:
+AngularJS 1 bindings also provide <%- @componentLink('if-platform') %> directive for this purpose:
 
 ```
 <div ons-if-platform="android">
