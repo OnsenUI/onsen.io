@@ -289,8 +289,8 @@ module.exports = function() {
       frameworkName: function(framework) {
         switch (framework) {
           case "js": return "JavaScript";
-          case "angular1": return "Angular 1";
-          case "angular2": return "Angular 2";
+          case "angular1": return "AngularJS 1";
+          case "angular2": return "Angular 2+";
           case "vue": return "Vue 2";
           case "react": return "React";
         }

@@ -1,12 +1,12 @@
 ---
-title: 'Onsen UI 2 Guide for AngularJS - Onsen UI Framework'
+title: 'Onsen UI 2 Guide for AngularJS 1 - Onsen UI Framework'
 category: docs
 page: 'guide'
 needHelp: true
 framework: 'angular1'
 autotoc: true
 actionbar: false
-tocTitle: 'Guide for Angular 1'
+tocTitle: 'Guide for AngularJS 1'
 version: v2
 layout: docs.html.eco
 ---
@@ -14,21 +14,21 @@ layout: docs.html.eco
 <%- @markdown => %>
 
 
-This guide provides the basic concepts of Onsen UI with AngularJS (1.x). For more information about specific components, please see the reference section. A live example is included in each reference page with extended examples and information. We also have [Migration Guide from V1 to V2](from-v1-to-v2.html).
+This guide provides the basic concepts of Onsen UI with AngularJS 1.x. For more information about specific components, please see the reference section. A live example is included in each reference page with extended examples and information. We also have [Migration Guide from V1 to V2](from-v1-to-v2.html).
 
 <%- @includeGuideSection('starting-project.md') %>
 
 #### Download via npm or bower
 
 ```bash
-# Angular 1 binding is included in onsenui package
+# AngularJS 1 binding is included in onsenui package
 $ npm install onsenui
 $ bower install onsenui
 ```
 
 ### Loading Onsen UI with AngularJS
 
-AngularJS bindings for Onsen UI is separated from the core but distributed in the same package. To load it in your project, please include `onsen.js` and `angular.js` before `angular-onsenui.js`. After loading `angular-onsenui.js`, the `onsen` AngularJS module is ready to use.
+AngularJS 1 bindings for Onsen UI is separated from the core but distributed in the same package. To load it in your project, please include `onsen.js` and `angular.js` before `angular-onsenui.js`. After loading `angular-onsenui.js`, the `onsen` AngularJS 1 module is ready to use.
 
 ```html
 <!doctype html>
@@ -107,15 +107,15 @@ For example, both <%- @componentLink('page') %> and <%- @componentLink('navigato
 
 <%- @includeGuideSection('ons-object.md') %>
 
-#### AngularJS utility functions
+#### AngularJS 1 utility functions
 
-Aside from utility functions described in the core guide, you can use some functions that are specific to AngularJS bindings. 
+Aside from utility functions described in the core guide, you can use some functions that are specific to AngularJS 1 bindings. 
 
 #### ons.bootstrap
 
 `ons.bootstrap()` function is a handy way to load Onsen UI with one line of code. What it really does is add the Onsen UI module to AngularJS, and make it callable from any scope in the app. It must be executed after `onsenui.js` is loaded.
 
-For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter. `ons.bootstrap()` will return the AngularJS module object which can be used to add services from now on.
+For instance, following code will load Onsen UI with `ngAnimate` module. You can specify list of modules to add in the parameter. `ons.bootstrap()` will return the AngularJS 1 module object which can be used to add services from now on.
 
 ```html
 <script>
@@ -157,7 +157,7 @@ ons.ready(function() {
 
 #### Using $templateCache from AngularJS
 
-The templates defined above are also treated as an AngularJS template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
+The templates defined above are also treated as an AngularJS 1 template cache. Therefore, `$templateCache` service can be used for further integration. For more details, please see the [AngularJS 1 `$templateCache` description](https://docs.angularjs.org/api/ng/service/$templateCache).
 
 <%- @includeGuideSection('modifier.md') %>
 

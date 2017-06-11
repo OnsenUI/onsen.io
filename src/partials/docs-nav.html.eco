@@ -22,13 +22,13 @@
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular1' %>">
               <a href="/v2/docs/<%- if @reference then 'angular1.html' else 'guide/angular1' %>">
                 <img src="/images/common/icn_angular1_4c.svg">
-                AngularJS
+                AngularJS 1
               </a>
             </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular2' %>">
               <a href="/v2/docs/<%- if @reference then 'angular2.html' else 'guide/angular2' %>">
                 <img src="/images/common/icn_angular2_4c.svg">
-                Angular 2
+                Angular 2+
               </a>
             </div>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'react' %>">
@@ -60,9 +60,9 @@
           </div>
           <div class="docs-nav-framework-name">
             <% if @framework == 'angular1': %>
-              AngularJS
+              AngularJS 1
             <% else if @framework == 'angular2': %>
-              Angular 2
+              Angular 2+
             <% else if @framework == 'react': %>
               React
             <% else if @framework == 'js': %>
