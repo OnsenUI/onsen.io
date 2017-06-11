@@ -1,0 +1,74 @@
+---
+author: junio
+date: 2017-06-11
+id: monaca-rpg-maker
+title: "MonacaとRPGツクールMVが連携しました！"
+product: monaca
+category: 技術情報
+tags: monaca, game
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://ja.onsen.io/blog/content/images/2017/Jun/onsen-logo-ogp.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+誰でも簡単にRPGゲームが作れるRPGツクールは昔からあるゲーム開発ソフトウェアです。[Wikipediaによれば](https://ja.wikipedia.org/wiki/RPGツクール)、第一作は1990年に作られた『RPGコンストラクションツール Dante』で、その後多数の環境へ移植されています。
+
+PC版向けには最新作として[RPGツクールMV](http://tkool.jp/mv/)がリリースされています。このRPGツクールMVではHTML5を使ってRPGゲームが開発できるようになっており、PC（Windows/macOS/Linux）やWebブラウザ、スマートフォン向けに出力できるようになっています。ただし出力されるのはHTMLファイルなので、その後スマートフォンアプリにする手順は別途必要になります。ゲームを作るのは好きでも、そうした手間暇をかけるのは苦手という方は多いはずです。
+
+今回、MonacaはRPGツクールMVに対応し、スマートフォンアプリを簡単に作れるようになりました（via [KADOKAWAとアシアルが、共同で『Monaca for RPGツクール』の提供を開始！ | アシアル株式会社](http://www.asial.co.jp/pressrelease/457)）これにより、RPGツクールMVで作ったゲームをMonaca上でビルドできるようになります。この記事ではその使い方を紹介します。
+
+## RPGツクールMVの使い方は変わりません
+
+RPGツクールMVで特別な設定を行うことはありません。これまで通りゲーム開発を行ってください。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-17.png)
+
+## ゲームをアプリ化メニューが追加されています
+
+ゲームができあがったら、ファイルメニューにある **ゲームをアプリ化（Monaca）** を選択します。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-1.png)
+
+そうするとゲームコンテンツがアップロードされた後、専用のログインページに遷移します。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-5.png)
+
+注意点として、このRPGツクールMVユーザ向けの機能は専用なものになっていますので、通常のMonacaアカウントとは共有できません。[ログインページもこちらの専用のもの](https://app.monaca.mobi/ja/rpgtkool/login)になります。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-6.png)
+
+ログインすると、ゲームの内容をインポートしたMonacaプロジェクトができあがっています。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-8.png)
+
+このRPGツクールMV向けの機能ではビルドのみがサポートされています。iOSやAndroid向けのビルド設定を行って、アプリをビルドしてください。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-10.png)
+
+後は通常のアプリと同じようにビルドしてインストールできるようになります。
+
+![](/blog/content/images/2017/Jun/monaca-rpg-maker-16.png)
+
+## その他の機能
+
+ゲームアプリは音源や動画、画像リソースなどでサイズが大きくなりがちです。その結果、ダウンロードサイズが大きくなったり、そもそもGoogle Playではアプリの最大容量がアップロードできません。そこで、リソースをMonaca上で管理し、アプリの初回起動時に配信する仕組みを提供しています。RPGゲームを開発する際にリソース容量などを気にせず開発できます。
+
+## 料金について
+
+Monaca for RPGツクールMVは3ヶ月980円のサービスとなっています（アプリタイトル単位）。また、2週間の無料トライアル期間を用意しています。
+
+トライアル中はデバッグビルドのみが可能となっています。デバッグビルドのままではアプリストアへ申請できませんのでご注意ください。
+
+## 注意点
+
+Monaca for RPGツクールMVはこれまでのMonacaアカウントでは使えない機能になりますのでご注意ください。別途専用のアカウントが必要です。
+
+----
+
+Monaca for RPGツクールMVを使えばRPGツクールMVで作ったゲームを簡単にiOS/Androidのアプリストアで配信できます。HTMLやJavaScript、CSSなどを修正する必要もありません。ぜひRPGツクールMVを使ったゲーム開発にチャレンジしてみてください。
+
+[RPGツクールMV](http://tkool.jp/mv/)
