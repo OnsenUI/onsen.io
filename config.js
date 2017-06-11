@@ -166,7 +166,7 @@ module.exports = function(language, isStaging) {
     en: {
       url: 'https://onsen.io',
       title: 'Onsen UI: Beautiful HTML5 Hybrid Mobile App UI Framework',
-      description: 'Make beautiful hybrid mobile apps using HTML5, CSS and JavaScript. Works with React, Angular 1 &amp; 2 and Web Components. Both Material Design and Flat Design.',
+      description: 'Make beautiful hybrid mobile apps using HTML5, CSS and JavaScript. Works with React, AngularJS 1 &amp; 2 and Web Components. Both Material Design and Flat Design.',
       keywords: '',
       twitter: 'Onsen UI is a Custom Elements-Based HTML5 UI Framework for Building Your Mobile Front End.'
     },
@@ -174,7 +174,7 @@ module.exports = function(language, isStaging) {
     ja: {
       url: 'https://ja.onsen.io',
       title: 'HTML5モバイルアプリをもっと速く、もっと美しく Onsen UI',
-      description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS and jQuery bindings.',
+      description: 'Develop awesome looking and high performance HTML5 mobile apps with Onsen framework and UI components. Provides AngularJS 1 and jQuery bindings.',
       keywords: '',
       twitter: 'Onsen UIでHTML5モバイルアプリをもっと速く、美しく。'
     }

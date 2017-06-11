@@ -15,11 +15,11 @@ layout: docs.html.eco
 
 ### Migration from Onsen UI 1.x
 
-Onsen UI 1.x was dependent on AngularJS 1.x, while Onsen UI 2.x is built on top of Web Components and is framework agnostic. However, we do provide AngularJS bindings to support the cool features of this framework.
+Onsen UI 1.x was dependent on AngularJS 1.x, while Onsen UI 2.x is built on top of Web Components and is framework agnostic. However, we do provide AngularJS 1 bindings to support the cool features of this framework.
 
-In this guide, we will briefly explain how to migrate the code of your apps from Onsen UI 1.x to Onsen UI 2.x + AngularJS bindings. If you rather want to use with [Angular 2](/v2/docs/angular2.html) or even [React](/v2/docs/react.html) and other frameworks, please take a look into [docs for each frameworks](/v2/docs/). They share the same core, which means you can still use the same knowledge, components and style definitions.
+In this guide, we will briefly explain how to migrate the code of your apps from Onsen UI 1.x to Onsen UI 2.x + AngularJS 1 bindings. If you rather want to use with [Angular 2+](/v2/docs/angular2.html) or even [React](/v2/docs/react.html) and other frameworks, please take a look into [docs for each frameworks](/v2/docs/). They share the same core, which means you can still use the same knowledge, components and style definitions.
 
-Within the provided Onsen UI 2 package, you will find `onsenui.js` as well as `angular-onsenui.js`, the latter standing for the mentioned bindings. It does not include AngularJS itself anymore. First of all, you need to update the included files in your `index.html` in the following way:
+Within the provided Onsen UI 2 package, you will find `onsenui.js` as well as `angular-onsenui.js`, the latter standing for the mentioned bindings. It does not include AngularJS 1 itself anymore. First of all, you need to update the included files in your `index.html` in the following way:
 
 ```
 <script src="path/to/onsenui.js"></script>
@@ -84,7 +84,7 @@ This directive has been removed. You can use a `div` element with simple CSS to 
 
 #### Removing AngularJS?
 
-In case you want to also remove AngularJS dependency from your project, you may need to do something else:
+In case you want to also remove AngularJS 1 dependency from your project, you may need to do something else:
 
 * `var` attribute works only for AngularJS. Use `id` instead and get the element with `getElementById` or `querySelector`. Example. `var myNavigator = document.getElementById('my-navigator'); myNavigator.pushPage(...);`
 * Listeners such as `ons-prepush` attributes work only for AngularJS. Use normal JavaScript event listeners instead. Example: `document.addEventListener('prepush', function(event) {});

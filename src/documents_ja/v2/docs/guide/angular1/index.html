@@ -1,19 +1,19 @@
 ---
-title: 'Onsen UI 2 Guide for AngularJS - Onsen UI Framework'
+title: 'Onsen UI 2 Guide for AngularJS 1 - Onsen UI Framework'
 category: docs
 page: 'guide'
 needHelp: true
 framework: 'angular1'
 autotoc: true
 actionbar: false
-tocTitle: 'Guide for Angular 1'
+tocTitle: 'Guide for AngularJS 1'
 version: v2
 layout: docs.html.eco
 ---
 
 <%- @markdown => %>
 
-ここでは、Angular 1.X と Onsen UI を連携させて使用する方法を解説します。また、[Onsen UI 1 系からの移行](from-v1-to-v2.html) も併せてご確認ください。
+ここでは、AngularJS 1.X と Onsen UI を連携させて使用する方法を解説します。また、[Onsen UI 1 系からの移行](from-v1-to-v2.html) も併せてご確認ください。
 
 ### プロジェクトを始める
 
@@ -23,21 +23,21 @@ Onsen UI を実際に使用する前に、「 [はじめよう](/guide/getting_s
 
 ```bash
 $ npm install -g monaca # Monaca CLI をインストールする。
-$ monaca create helloworld # Angular 1 テンプレートを選択する。
+$ monaca create helloworld # AngularJS 1 テンプレートを選択する。
 $ cd helloworld; monaca preview # プレビューを起動する。または、"monaca debug" コマンドを実行して、端末上でプロジェクトを実行する。
 ```
 
 #### npm または bower からダウンロードする
 
 ```bash
-# Angular 1 との連携処理は、「 onsenui 」 コンポーネント内で行われます。
+# AngularJS 1 との連携処理は、「 onsenui 」 コンポーネント内で行われます。
 $ npm install onsenui
 $ bower install onsenui
 ```
 
-### angular-onsenui ( AngularJS と Onsen UI の連携 ) を読み込む
+### angular-onsenui ( AngularJS 1 と Onsen UI の連携 ) を読み込む
 
-Angular 1.x と Onsen UI との連携処理は、Onsen UI の中核部分から切り離して、別のファイル内で行われています。よって、プロジェクトにロードする場合には、`onsen.js` と `angular-onsenui.js` の両方のファイルを読み込む必要があります。「 `onsen` 化 」 された AngularJS モジュールを使用できるのは、`angular-onsenui.js` を読み込んだ後になります。
+AngularJS 1.x と Onsen UI との連携処理は、Onsen UI の中核部分から切り離して、別のファイル内で行われています。よって、プロジェクトにロードする場合には、`onsen.js` と `angular-onsenui.js` の両方のファイルを読み込む必要があります。「 `onsen` 化 」 された AngularJS 1 モジュールを使用できるのは、`angular-onsenui.js` を読み込んだ後になります。
 
 ```html
 <!doctype html>
@@ -122,7 +122,7 @@ myNavigator.on("prepush", function() {
 </ons-navigator>
 ```
 
-属性に指定する値には、Angular の記法を使用します。よって、AngularJS を使用していない場合、これらの属性は使用できません。
+属性に指定する値には、Angular の記法を使用します。よって、AngularJS 1 を使用していない場合、これらの属性は使用できません。
 
 #### DOM イベント
 
@@ -187,9 +187,9 @@ document.addEventListener("init", function(event) {
 </script>
 ```
 
-#### $templateCache の使用 ( AngularJS の機能 )
+#### $templateCache の使用 ( AngularJS 1 の機能 )
 
-上記のように定義した template は、AngularJS の template 機能と同じように取り扱うことができます。よって、`$templateCache` サービスを使用できます。詳細は、[`$templateCache` の解説 ( AngularJS の公式ドキュメント )](https://docs.angularjs.org/api/ng/service/$templateCache) をご確認ください。
+上記のように定義した template は、AngularJS 1 の template 機能と同じように取り扱うことができます。よって、`$templateCache` サービスを使用できます。詳細は、[`$templateCache` の解説 ( AngularJS 1 の公式ドキュメント )](https://docs.angularjs.org/api/ng/service/$templateCache) をご確認ください。
 
 ### ons-lazy-repeat 使用時に必要となる デリゲートオブジェクト ( Delegate Object )
 
@@ -227,14 +227,14 @@ $scope.MyDelegate = {
 
 ### ユーティリティ関数
 
-[Onsen UI ガイド ( JavaScript )](/v2/docs/guide/js/) に記載されているユーティリティ関数以外にも、Angular 1 との連携処理を行ってくれる関数が、Onsen UI では提供されています。
+[Onsen UI ガイド ( JavaScript )](/v2/docs/guide/js/) に記載されているユーティリティ関数以外にも、AngularJS 1 との連携処理を行ってくれる関数が、Onsen UI では提供されています。
 
 #### ons.bootstrap
 
-`ons.bootstrap()` 関数を使用すれば、Onsen UI の読み込みを、たった 1 行で行えます。この関数では、Onsen UI モジュールを AngularJS へ追加し
+`ons.bootstrap()` 関数を使用すれば、Onsen UI の読み込みを、たった 1 行で行えます。この関数では、Onsen UI モジュールを AngularJS 1 へ追加し
 、どのスコープからでも呼べるようにしています。この関数を実行する場合には、事前に、`onsenui.js` の読み込むを済ませておく必要があります。
 
-次の例では、`ngAnimate` モジュールを指定して、Onsen UI を読み込んでいます。このパラメーターには、モジュールを複数個、指定できます。`ons.bootstrap()` は、AngularJS モジュールのオブジェクトを返します。このオブジェクトを使用して、各種サービスを追加することができます。
+次の例では、`ngAnimate` モジュールを指定して、Onsen UI を読み込んでいます。このパラメーターには、モジュールを複数個、指定できます。`ons.bootstrap()` は、AngularJS 1 モジュールのオブジェクトを返します。このオブジェクトを使用して、各種サービスを追加することができます。
 
 ```html
 <script>
