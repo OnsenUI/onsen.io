@@ -45,10 +45,10 @@
       & > a {
         text-transform: uppercase;
         text-decoration: none;
-        font-size: 13px;
+        font-size: 15px;
         font-weight: 700;
         color: #fff;
-        opacity: 0.5;
+        opacity: 0.8;
       }
 
       &-active {
@@ -78,6 +78,17 @@
       &:last-child {
         margin: 0;
       }
+    }
+
+    &-arrow {
+      display: inline-block;
+      vertical-align: middle;
+      width: 0px;
+      height: 0px;
+      opacity: 0.3;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid rgb(255, 255, 255);
     }
 
     @media @smallscreen {
