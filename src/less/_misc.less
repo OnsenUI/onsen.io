@@ -149,19 +149,18 @@
     width: @aside-width;
     box-sizing: border-box;
     list-style: none;
-    padding: 7px 0;
     margin: 0;
     position: relative;
 
     &:hover {
-      background-color: #ebebeb;
 
       & > a {
+        background-color: #ebebeb;
         text-decoration: none;
       }
     }
 
-    &-open:after {
+    &-open .toc-1-link:after {
       content: '';
       position: absolute;
       width: 0;
@@ -175,7 +174,7 @@
   }
 
   &-1-item {
-    padding-left: 16px;
+
   }
 
   &-2-item {
@@ -184,6 +183,7 @@
   }
 
   &-link {
+    padding: 7px 0;
     text-decoration: none;
     color:  #a6a6a6;
     font-size: 14px;
@@ -191,7 +191,9 @@
     text-decoration: none;
     line-height: 20px;
     display: block;
-    width: 170px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
 
     &.current {
       color: #666;
@@ -199,35 +201,35 @@
   }
 
   &-1-link {
-
+    padding-left: 16px;
   }
 
   &-2-link {
     display: inline-block;
-    padding: 0px 0px 0px 12px;
-    font-size: 14px;
-    color: @light-text-color;
+    padding-left: 28px;
+    // font-size: 14px;
+    // color: @light-text-color;
 
-    &:link, &:hover, &:visited {
-      color: @light-text-color;
-      text-decoration: none;
-    }
+    // &:link, &:hover, &:visited {
+    //   color: @light-text-color;
+    //   text-decoration: none;
+    // }
 
-    &:hover {
-      text-decoration: underline;
-    }
+    // &:hover {
+    //   text-decoration: underline;
+    // }
 
-    &.current {
-      &:link, &:hover, &:visited {
-        color: @link-color;
-        text-decoration: underline;
-        font-weight: bold;
-      }
+    // &.current {
+    //   &:link, &:hover, &:visited {
+    //     color: @link-color;
+    //     text-decoration: underline;
+    //     font-weight: bold;
+    //   }
 
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+    //   &:hover {
+    //     text-decoration: underline;
+    //   }
+    // }
   }
 }
 
