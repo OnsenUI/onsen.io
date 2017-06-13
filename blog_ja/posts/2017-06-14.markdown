@@ -1,6 +1,6 @@
 ---
-author: junio
-date: 2017-06-11
+author: atsushi
+date: 2017-06-14
 id: monaca-rpg-maker
 title: "MonacaとRPGツクールMVが連携しました！"
 product: monaca
@@ -9,15 +9,15 @@ tags: monaca, game
 # Open Graph protocol metadata
 og:
   # Set og:image
-  image: https://ja.onsen.io/blog/content/images/2017/Jun/onsen-logo-ogp.png
+  image: https://ja.onsen.io/blog/content/images/2017/Jun/monaca-rpg-maker.png
   twitter:
     # Set type of Twitter Card: summary, summary_large_image
     card: summary_large_image
 ---
 
-誰でも簡単にRPGゲームが作れるRPGツクールは昔からあるゲーム開発ソフトウェアです。[Wikipediaによれば](https://ja.wikipedia.org/wiki/RPGツクール)、第一作は1990年に作られた『RPGコンストラクションツール Dante』で、その後多数の環境へ移植されています。
+誰でも簡単にRPGゲームが作れるRPGツクールは、歴史ある有名なゲーム開発ソフトウェアです。[Wikipediaによれば](https://ja.wikipedia.org/wiki/RPGツクール)、第一作は1990年に作られた『RPGコンストラクションツール Dante』で、その後多数の環境へ移植されています。
 
-PC版向けには最新作として[RPGツクールMV](http://tkool.jp/mv/)がリリースされています。このRPGツクールMVではHTML5を使ってRPGゲームが開発できるようになっており、PC（Windows/macOS/Linux）やWebブラウザ、スマートフォン向けに出力できるようになっています。ただし出力されるのはHTMLファイルなので、その後スマートフォンアプリにする手順は別途必要になります。ゲームを作るのは好きでも、そうした手間暇をかけるのは苦手という方は多いはずです。
+PC版向けには最新作として[RPGツクールMV](http://tkool.jp/mv/)がリリースされています。このRPGツクールMVではHTML5を使ってRPGゲームが開発できるようになっており、PC（Windows/macOS/Linux）やWebブラウザ、スマートフォン向けに出力できるようになっています。ただし出力されるのはHTMLファイルなので、その後スマートフォンアプリとしてパッケージ化する手順は別途必要になります。ゲームを作るのは好きでも、そうした手間暇をかけるのは苦手という方は多いのではないでしょうか。
 
 今回、MonacaはRPGツクールMVに対応し、スマートフォンアプリを簡単に作れるようになりました（via [KADOKAWAとアシアルが、共同で『Monaca for RPGツクール』の提供を開始！ | アシアル株式会社](http://www.asial.co.jp/pressrelease/457)）これにより、RPGツクールMVで作ったゲームをMonaca上でビルドできるようになります。この記事ではその使い方を紹介します。
 
@@ -27,7 +27,7 @@ RPGツクールMVで特別な設定を行うことはありません。これま
 
 ![](/blog/content/images/2017/Jun/monaca-rpg-maker-17.png)
 
-## ゲームをアプリ化メニューが追加されています
+## 「ゲームをアプリ化」メニューが追加されています
 
 ゲームができあがったら、ファイルメニューにある **ゲームをアプリ化（Monaca）** を選択します。
 
@@ -37,7 +37,7 @@ RPGツクールMVで特別な設定を行うことはありません。これま
 
 ![](/blog/content/images/2017/Jun/monaca-rpg-maker-5.png)
 
-注意点として、このRPGツクールMVユーザ向けの機能は専用なものになっていますので、通常のMonacaアカウントとは共有できません。[ログインページもこちらの専用のもの](https://app.monaca.mobi/ja/rpgtkool/login)になります。
+注意点として、このRPGツクールMVユーザ向けの機能は通常のMonacaの機能からは独立していますので、通常のMonacaアカウントとは共有できません。[ログインページもこちらの専用のもの](https://app.monaca.mobi/ja/rpgtkool/login)になります。
 
 ![](/blog/content/images/2017/Jun/monaca-rpg-maker-6.png)
 
@@ -59,7 +59,7 @@ RPGツクールMVで特別な設定を行うことはありません。これま
 
 ## その他の機能
 
-ゲームアプリは音源や動画、画像リソースなどでサイズが大きくなりがちです。その結果、ダウンロードサイズが大きくなったり、そもそもGoogle Playではアプリの最大容量がアップロードできません。そこで、リソースをMonaca上で管理し、アプリの初回起動時に配信する仕組みを提供しています。RPGゲームを開発する際にリソース容量などを気にせず開発できます。
+ゲームアプリは音源や動画、画像リソースなどでサイズが大きくなりがちです。その結果、ダウンロードサイズが大きくなったり、そもそもGoogle Playではアプリの最大サイズが100MBまでとなっているため、アップロードすることができません。そこで、リソースをMonaca上で管理し、アプリの初回起動時に配信する仕組みを提供しています。RPGゲームを開発する際にリソース容量などを気にせずに開発できます。
 
 ## 料金について
 
