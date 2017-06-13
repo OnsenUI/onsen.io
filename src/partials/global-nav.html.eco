@@ -14,7 +14,7 @@
           <a href="/getting-started"><%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%></a>
         </li>
         <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
-          <a href="#"><%=@translate("[en]API[/en][ja]ドキュメント[/ja]")%></a>
+          <a href="#"><%=@translate("[en]Guide[/en][ja]ドキュメント[/ja]")%></a>
           <div class="dropdown-container">
             <ul class="dropdown-content">
               <li class="dropdown-item">
@@ -34,6 +34,29 @@
               </li>
               <li class="dropdown-item">
                 <a href="/v1/guide.html">Onsen UI v1</a>
+              </li>
+            </ul>
+          </div>
+          <span class="global-nav-menu-arrow"></span>
+        </li>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'reference' %>">
+          <a href="#"><%=@translate("[en]API[/en][ja]ドキュメント[/ja]")%></a>
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+              <li class="dropdown-item">
+                <a href="/v2/docs/js.html">JavaScript</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/docs/angular1.html">AngularJS 1</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/docs/angular2.html">Angular 2+</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/docs/react.html">React</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/docs/vue.html">Vue 2</a>
               </li>
             </ul>
           </div>
