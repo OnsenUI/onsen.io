@@ -10,6 +10,9 @@
 
     <% if @lang == "en": %>
       <ul class="global-nav-menu">
+        <li class="global-nav-menu-search">
+          <input type="text" class="global-nav-search-input" id="docsearch" placeholder="Search the docs...">
+        </li>
         <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
           <a href="/getting-started"><%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%></a>
         </li>
