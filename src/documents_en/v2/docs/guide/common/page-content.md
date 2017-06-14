@@ -4,7 +4,7 @@ For a full list of components please check the [reference page](/v2/docs/<%- @fr
 
 #### Form elements
 
-Onsen UI provides a rich set of form components. Apart from <%- @componentLink('button') %>, <%- @componentLink('switch') %>,<%- @componentLink('select') %> and <%- @componentLink('range') %>, perhaps the <%- @componentLink('input') %> component is the most common one since it supports different shapes: `checkbox`, `radio`, `password`, etc.
+Onsen UI provides a rich set of form components: <%- @componentLink('button') %>, <%- @componentLink('switch') %>, <%- @componentLink('select') %>, <%- @componentLink('input') %> (type `text`, `password`, etc.), <%- @componentLink('checkbox') %>, <%- @componentLink('radio') %>, <%- @componentLink('search-input') %>,  and <%- @componentLink('range') %>.
 
 <% if @framework isnt 'react': %>
 ```
@@ -27,13 +27,13 @@ Onsen UI provides a rich set of form components. Apart from <%- @componentLink('
   modifier='material'
   placeholder='Username' />
 
-<Input type="checkbox" checked={this.state.checked} onChange={this.onChange} />
+<Checkbox checked={this.state.checked} onChange={this.onChange} />
 ```
 <% end %>
 
 #### Lists
 
-Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using <%- @componentLink('list') %>, <%- @componentLink('list-item') %> and <%- @componentLink('list-header') %> you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<<%- @mapComponentName('toolbar') %>>`, and some CSS classes are provided for default styles (`list-item__icon`, `list-item__thumbnail`, `list-item__title` and `list-item__subtitle`).
+Lists are a very common pattern in mobile apps and thus Onsen UI provides abstraction for it. By using <%- @componentLink('list') %>, <%- @componentLink('list-item') %>, <%- @componentLink('list-header') %> and <%- @componentLink('list-title') %> you can make simple or complex lists of items. Every list item is by default divided into three sections, just like `<<%- @mapComponentName('toolbar') %>>`, and some CSS classes are provided for default styles (`list-item__icon`, `list-item__thumbnail`, `list-item__title` and `list-item__subtitle`).
 
 <% if @framework isnt 'react': %>
 ```
