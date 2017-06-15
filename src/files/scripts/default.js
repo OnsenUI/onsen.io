@@ -76,6 +76,11 @@ $(function() {
     prepare();
     setTimeout(update, 400);
     scrollWrapper.addEventListener('scroll', queueUpdate, true);
+
+    // Select current item in ToC
+    var mainID = $('.container-content > h3:first-of-type')[0].id
+    linkMap['#' + mainID].link.addClass('current');
+    linkMap['#' + mainID].link.parent('li').addClass('toc-item-open');
   }
 
   var queued = false;
