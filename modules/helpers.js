@@ -1,4 +1,4 @@
-
+var nodePath = require('path');
 var marked = require('marked');
 var eco = require('eco');
 var extend = require('extend');
@@ -45,6 +45,8 @@ module.exports = function() {
 
     for (var path in files) {
       files[path].origPath = path;
+      files[path].isGuide = path.indexOf(nodePath.sep + 'guide' + nodePath.sep) >= 0;
+      files[path].docName = path.split(nodePath.sep).pop().split('.').shift();
     }
 
     var helpers = {

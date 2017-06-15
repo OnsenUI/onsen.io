@@ -67,10 +67,9 @@
   </div>
 
   <div class="container">
-		<% if @autotoc: %>
+		<% if @isGuide: %>
 		<aside class="content-info content-info-page">
-			<div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
-			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
+			<%- @partial('toc.html.eco', {tocItems: @toc, docName: @docName}) %>
 		</aside>
 		<% end %>
     <div class="container-content">

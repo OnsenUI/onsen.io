@@ -19,6 +19,7 @@ TocItem.prototype = {
     this.text = params.text || '';
     this.children = [];
     this.parent = null;
+    this.link = params.link || '';
   },
   /**
    * @param {TocItem} tocItem
@@ -49,7 +50,7 @@ module.exports = function() {
     }
   }
 
-  function buildTocItems(headers) {
+  function buildTocItems(headers, docName) {
     var root = new TocItem();
     var toc = root;
     var lastLevel = 2;
@@ -58,6 +59,7 @@ module.exports = function() {
       var id = header.id;
       var text = header.innerHTML;
       var level = parseInt(header.tagName.match(/^h([123456])$/i)[1], 10);
+      var link = docName + '.html';
 
       while (level != 1 + lastLevel) {
         if (level < 1 + lastLevel) {
@@ -73,7 +75,8 @@ module.exports = function() {
 
       var newToc = new TocItem({
         text: header.textContent,
-        id: header.id
+        id: header.id,
+        link: link
       });
 
       toc.add(newToc);
@@ -90,32 +93,46 @@ module.exports = function() {
     });
 
     async.each(fileList, function(file, done) {
-      if (!file.autotoc) {
-        done();
-      } else {
-        var contents = file.contents.toString('utf8');
-        jsdom.env({
-          html: '<html><body>' + contents + '</body></html>',
-          feature: {QuerySelector: true},
-          done: function(error, window) {
-            if (error) {
-              throw error;
-            }
-
-            var headers = Array.prototype.slice.call(
-              window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
-            ).map(function(header) {
-              header.id = generateId(header);
-              return header;
-            });
-
-            file.contents = new Buffer(window.document.body.innerHTML);
-            file.toc = buildTocItems(headers);
-            done();
+      var contents = file.contents.toString('utf8');
+      jsdom.env({
+        html: '<html><body>' + contents + '</body></html>',
+        feature: {QuerySelector: true},
+        done: function(error, window) {
+          if (error) {
+            throw error;
           }
-        });
-      }
+
+          var headers = Array.prototype.slice.call(
+            window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
+          ).map(function(header) {
+            header.id = generateId(header);
+            return header;
+          });
+
+          file.contents = new Buffer(window.document.body.innerHTML);
+          file.toc = buildTocItems(headers, file.docName);
+          if (file.newSection) {
+            file.toc.unshift({ section: file.newSection });
+          }
+          done();
+        }
+      });
     }, function() {
+      var guideFiles = fileList.filter(function(file) {
+        return file.isGuide;
+      }).sort(function(a, b) {
+        return a.order > b.order;
+      })
+      ;
+
+      var fullToc = guideFiles.reduce(function(result, file) {
+        return result.concat(file.toc || []);
+      }, [])
+
+      guideFiles.forEach(function(file) {
+        file.toc = fullToc;
+      });
+
       done();
     });
   };

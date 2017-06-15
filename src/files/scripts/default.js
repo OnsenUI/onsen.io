@@ -114,7 +114,7 @@ $(function() {
   function prepare() {
     for (var i = 0; i < links.length; i++) {
       var link = $(links[i]);
-      var id = link.attr('href');
+      var id = '#' + link.attr('href').split('#').pop();
       try {
         var section = $(id);
         if (section) {
