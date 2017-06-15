@@ -19,7 +19,7 @@ version: v2
     <div class="toc-title toc-title-no-toggle">CSS Components</div>
     <ul class="toc toc-1">
       <% for category in @cssComponentCategories: %>
-      <li class="toc-1-item toc-item"><a href="#<%= category.id %>-category"><%= category.name %></a></li>
+      <li class="toc-1-item toc-item"><a href="#<%= category.id %>-category" class="toc-link toc-1-link"><%= category.name %></a></li>
       <% end %>
     </ul>
   </aside>
