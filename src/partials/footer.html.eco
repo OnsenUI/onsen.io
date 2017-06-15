@@ -1,4 +1,5 @@
 <footer class="footer-container">
+  <% if !@skipInfo: %>
   <div class="footer-container-info">
     <div class="footer-container-info-item">
       <img src="/images/common/icn_getting.svg">
@@ -24,8 +25,9 @@
       </p>
       <a href="/docs/js.html"><%-@translate("[en]Show detail &gt;[/en][ja]ドキュメントを読む &gt;[/ja]")%></a>
     </div>
-
   </div>
+  <% end %>
+
   <div class="footer-container-upper">
     <div class="footer-container-upper-message">
       <% if @lang == "en": %>
@@ -53,7 +55,7 @@
           <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-count-href="/OnsenUI/OnsenUI/stargazers" data-count-api="/repos/OnsenUI/OnsenUI#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star OnsenUI/OnsenUI on GitHub">スター</a>
         </div>
       </div>
-    <% end %>      
+    <% end %>
 
   </div>
   <div class="footer-container-lower">

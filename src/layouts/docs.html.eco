@@ -78,7 +78,7 @@
     </div>
   </div>
 
-  <%- @partial('footer.html.eco') %>
+  <%- @partial('footer.html.eco', {skipInfo: true}) %>
 
   <%- @partial('popup.html.eco') %>
 
