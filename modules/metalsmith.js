@@ -32,6 +32,7 @@ module.exports = function(lang, isStaging) {
         .source('./src/documents_' + lang)
         .metadata(require('../config.js')(lang, isStaging))
         .use(ignore(['**/.DS_Store']))
+        .use(ignore(['**/.*']))
         .use(draft())
         .use(require('./helpers')())
         .use(require('./v1-api-docs')(lang))
@@ -69,7 +70,7 @@ module.exports = function(lang, isStaging) {
         .use(currentPath())
         .use(branch('!robots.txt')
           .use(layouts({
-            engine: 'eco', 
+            engine: 'eco',
             directory: './src/layouts/',
             default: 'default.html.eco'
           }))
