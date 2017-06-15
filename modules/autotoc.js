@@ -20,6 +20,7 @@ TocItem.prototype = {
     this.children = [];
     this.parent = null;
     this.link = params.link || '';
+    this.isTitle = params.isTitle || false;
   },
   /**
    * @param {TocItem} tocItem
@@ -88,9 +89,22 @@ module.exports = function() {
   }
 
   return function(files, metalsmith, done) {
-    var fileList = Object.keys(files).map(function(path) {
-      return files[path]
-    });
+    var tocGroups = {};
+    var fileList = Object.keys(files).reduce(function(result, path) {
+      // Filter files that needs ToC
+      if (files[path].autotoc || files[path].tocGroup) {
+        result.push(files[path]);
+
+        // Group ToCs
+        if (files[path].tocGroup) {
+          if (!tocGroups[files[path].tocGroup]) {
+            tocGroups[files[path].tocGroup] = [];
+          }
+          tocGroups[files[path].tocGroup.trim()].push(files[path]);
+        }
+      }
+      return result;
+    }, []);
 
     async.each(fileList, function(file, done) {
       var contents = file.contents.toString('utf8');
@@ -111,26 +125,29 @@ module.exports = function() {
 
           file.contents = new Buffer(window.document.body.innerHTML);
           file.toc = buildTocItems(headers, file.docName);
-          if (file.newSection) {
-            file.toc.unshift({ section: file.newSection });
+
+          if (file.tocTitle) {
+            var tocTitle = new TocItem({isTitle: true, text: file.tocTitle});
+            file.toc.unshift(tocTitle);
           }
+
           done();
         }
       });
     }, function() {
-      var guideFiles = fileList.filter(function(file) {
-        return file.isGuide;
-      }).sort(function(a, b) {
-        return a.order > b.order;
-      })
-      ;
+      // Merge ToC depending on tocGroup
+      Object.keys(tocGroups).forEach(function(group) {
+        var fullToc = tocGroups[group]
+          .sort(function(a, b) {
+            return (a.order || 0) >= (b.order || 0);
+          })
+          .reduce(function(result, file) {
+            return result.concat(file.toc || []);
+          }, []);
 
-      var fullToc = guideFiles.reduce(function(result, file) {
-        return result.concat(file.toc || []);
-      }, [])
-
-      guideFiles.forEach(function(file) {
-        file.toc = fullToc;
+        tocGroups[group].forEach(function(file) {
+          file.toc = fullToc;
+        });
       });
 
       done();

@@ -17,7 +17,7 @@ version: v2
 
   <aside class="content-info content-info-page">
     <div class="toc-title toc-title-no-toggle">CSS Components</div>
-    <ul class="toc toc-1">
+    <ul class="toc">
       <% for category in @cssComponentCategories: %>
       <li class="toc-1-item toc-item"><a href="#<%= category.id %>-category" class="toc-link toc-1-link"><%= category.name %></a></li>
       <% end %>
@@ -40,7 +40,7 @@ version: v2
         <% end %>
 
         <% if component.annotation.elements: %>
-        <div>Corresponding elements: 
+        <div>Corresponding elements:
           <% for elementName in component.annotation.elements: %>
           <a href="/v2/docs/js/<%= elementName %>.html"><%= elementName %></a>
           <% end %>

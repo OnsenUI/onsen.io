@@ -67,9 +67,9 @@
   </div>
 
   <div class="container">
-		<% if @isGuide: %>
+		<% if @autotoc || @tocGroup: %>
 		<aside class="content-info content-info-page">
-			<%- @partial('toc.html.eco', {tocItems: @toc, docName: @docName}) %>
+			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
 		</aside>
 		<% end %>
     <div class="container-content">
