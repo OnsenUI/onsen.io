@@ -192,7 +192,7 @@ module.exports = function() {
       getPreparedTitle: function() {
         var title = this.pageTitle || this.title || this.site.title;
         title = title.replace(/<(?:.|\n)*?>/gm, '');
-        return title;
+        return title + ' - Onsen UI';
       },
 
       getPreparedBlogTitle: function() {

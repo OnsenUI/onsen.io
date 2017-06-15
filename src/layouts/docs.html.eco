@@ -26,7 +26,7 @@
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="<%= @title %>" />
+  <meta property="og:title" content="<%= @getPreparedTitle() %>" />
   <meta property="og:site_name" content="Onsen UI" />
   <meta property="og:url" content="<%= @site.url %>/<%= @path %>" />
   <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
