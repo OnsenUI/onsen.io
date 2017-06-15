@@ -63,7 +63,11 @@
 
   <div class="header">
     <%- @partial('global-nav.html.eco') %>
-    <%- @partial('docs-nav.html.eco') %>
+    <% if @isGuide: %>
+      <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %>
+    <% else: %>
+      <%- @partial('docs-nav.html.eco') %>
+    <% end %>
   </div>
 
   <div class="container">

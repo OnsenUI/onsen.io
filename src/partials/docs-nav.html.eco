@@ -1,19 +1,102 @@
 <nav class="docs-nav">
   <div class="docs-nav-inner">
     <div class="docs-nav-left">
+
+      <!-- start framwork dropdown -->
+      <div class="docs-nav-title">
+        <h1>
+          <%=@translate("[en]Onsen UI API[/en][ja]Onsen UIドキュメント[/ja]")%>
+        </h1>
+      </div>
+      <label for="select-framework" class="docs-nav-framework">
+        <div class="docs-nav-framework-label">
+          <%=@translate("[en]Framework:[/en][ja]フレームワーク:[/ja]")%>
+        </div>
+        <div class="docs-nav-framework-select">
+          <input id="select-framework" type="checkbox" class="docs-nav-checkbox">
+          <div class="docs-nav-dropdown">
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'js' %>">
+              <a href="/v2/api/<%- if @reference then 'js.html' else 'guide/js' %>">
+                <img src="/images/common/icn_js_4c.svg">
+                JavaScript Core
+              </a>
+            </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular1' %>">
+              <a href="/v2/api/<%- if @reference then 'angular1.html' else 'guide/angular1' %>">
+                <img src="/images/common/icn_angular1_4c.svg">
+                AngularJS 1
+              </a>
+            </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'angular2' %>">
+              <a href="/v2/api/<%- if @reference then 'angular2.html' else 'guide/angular2' %>">
+                <img src="/images/common/icn_angular2_4c.svg">
+                Angular 2+
+              </a>
+            </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'react' %>">
+              <a href="/v2/api/<%- if @reference then 'react.html' else 'guide/react' %>">
+                <img src="/images/common/icn_react_4c.svg">
+                React
+              </a>
+            </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'vue' %>">
+              <a href="/v2/api/<%- if @reference then 'vue.html' else 'guide/vue' %>">
+                <img src="/images/common/icn_vue_4c.svg">
+                Vue 2
+              </a>
+            </div>
+            <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'onsen1' %>">
+              <a href="/v1/<%- if @reference then 'reference/javascript.html' else 'guide.html' %>">
+                <img src="/images/common/icn_something_4c.svg">
+                Onsen UI v1
+              </a>
+            </div>
+          </div>
+
+          <div class="docs-nav-framework-icon">
+            <% if @framework == 'onsen1' or typeof @framework != 'string': %>
+              <img src="/images/common/icn_something_1c.svg">
+            <% else: %>
+              <img src="/images/common/icn_<%=@framework%>_1c.svg">
+            <% end %>
+          </div>
+          <div class="docs-nav-framework-name">
+            <% if @framework == 'angular1': %>
+              AngularJS 1
+            <% else if @framework == 'angular2': %>
+              Angular 2+
+            <% else if @framework == 'react': %>
+              React
+            <% else if @framework == 'js': %>
+              JavaScript Core
+            <% else if @framework == 'vue': %>
+              Vue 2
+            <% else if @framework == 'onsen1' or typeof @framework != 'string': %>
+              Onsen UI v1
+            <% end %>
+          </div>
+          <div class="docs-nav-framework-caret"></div>
+          <label for="select-framework" class="docs-nav-mask"></label>
+        </div>
+      </label>
+    </div>
+    <!-- end framwork dropdown -->
+
+
+    <div class="docs-nav-right">
       <ul class="docs-nav-menu">
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if !@reference %>">
           <% if @framework == 'onsen1' or typeof @framework != 'string': %>
             <a href="/v1/guide.html"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% else: %>
-            <a href="/v2/docs/guide/<%- @framework %>"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
+            <a href="/v2/guide/<%- @framework %>.html"><%=@translate("[en]Framework Guide[/en][ja]ガイド[/ja]")%></a>
           <% end %>
         </li>
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if @reference %>">
           <% if @framework == 'onsen1' or typeof @framework != 'string': %>
             <a href="/v1/reference/javascript.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
           <% else: %>
-            <a href="/v2/docs/<%- @framework %>.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
+            <a href="/v2/<%- @framework %>.html"><%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%></a>
           <% end %>
         </li>
       </ul>
