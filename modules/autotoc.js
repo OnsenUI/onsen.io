@@ -139,7 +139,7 @@ module.exports = function() {
       Object.keys(tocGroups).forEach(function(group) {
         var fullToc = tocGroups[group]
           .sort(function(a, b) {
-            return (a.order || 0) >= (b.order || 0);
+            return Number(a.order || 0) - Number(b.order || 0);
           })
           .reduce(function(result, file) {
             return result.concat(file.toc || []);
