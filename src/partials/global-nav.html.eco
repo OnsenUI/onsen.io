@@ -16,50 +16,30 @@
         <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
           <a href="/getting-started"><%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%></a>
         </li>
-        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
-          <a href="#"><%=@translate("[en]Guide[/en][ja]ドキュメント[/ja]")%></a>
-          <div class="dropdown-container">
-            <ul class="dropdown-content">
-              <li class="dropdown-item">
-                <a href="/docs/guide/js">JavaScript</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="/docs/guide/angular1">AngularJS 1</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="/docs/guide/angular2">Angular 2+</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="/docs/guide/react">React</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="/v2/docs/guide/vue">Vue 2</a>
-              </li>
-              <li class="dropdown-item">
-                <a href="/v1/guide.html">Onsen UI v1</a>
-              </li>
-            </ul>
-          </div>
-          <span class="global-nav-menu-arrow"></span>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @isGuide %>">
+          <a href="/v2/guide"><%=@translate("[en]Guide[/en][ja]ドキュメント[/ja]")%></a>
         </li>
-        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'reference' %>">
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @isAPI %>">
           <a href="#"><%=@translate("[en]API[/en][ja]ドキュメント[/ja]")%></a>
           <div class="dropdown-container">
             <ul class="dropdown-content">
               <li class="dropdown-item">
-                <a href="/v2/docs/js.html">JavaScript</a>
+                <a href="/v2/api/css.html">CSS Components</a>
               </li>
               <li class="dropdown-item">
-                <a href="/v2/docs/angular1.html">AngularJS 1</a>
+                <a href="/v2/api/js.html">JS - jQuery</a>
               </li>
               <li class="dropdown-item">
-                <a href="/v2/docs/angular2.html">Angular 2+</a>
+                <a href="/v2/api/angular1.html">AngularJS 1.x</a>
               </li>
               <li class="dropdown-item">
-                <a href="/v2/docs/react.html">React</a>
+                <a href="/v2/api/angular2.html">Angular 2+</a>
               </li>
               <li class="dropdown-item">
-                <a href="/v2/docs/vue.html">Vue 2</a>
+                <a href="/v2/api/react.html">React</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/api/vue.html">Vue.js 2</a>
               </li>
             </ul>
           </div>
@@ -76,9 +56,6 @@
                 <a href="http://tutorial.onsen.io/"><%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%></a>
               </li>
               <li class="dropdown-item">
-                <a href="/v2/docs/css.html">CSS Components</a>
-              </li>
-              <li class="dropdown-item">
                 <a href="/community">Community</a>
               </li>
               <li class="dropdown-item">
@@ -89,6 +66,7 @@
           <span class="global-nav-menu-arrow"></span>
         </li>
       </ul>
+
     <% else if @lang == "ja": %>
       <ul class="global-nav-menu">
         <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'discover' %>">
