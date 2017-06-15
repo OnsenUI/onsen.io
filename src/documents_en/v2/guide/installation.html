@@ -12,19 +12,51 @@ layout: docs.html.eco
 
 Onsen UI has several quick and easy ways to get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.
 
-<div style="display: flex; justify-content: space-between;">
-  <div>Onsen UI</div>
-  <div>Source Code</div>
-  <div>Framework Bindings</div>
+<div class="install-row">
+  <div>
+    <p class="install-row-title">Onsen UI</p>
+    <p class="install-row-content">Compiled and minified JavaScript, CSS and resources. Web Components version.</p>
+    <a class="install-row-link" href="#">Download Onsen UI</a>
+  </div>
+  <div>
+    <p class="install-row-title">Source Code</p>
+    <p class="install-row-content">Source CSS, JavaScript, and other related files. [Build instructions](#).</p>
+    <a class="install-row-link" href="#">Download Source</a>
+  </div>
+  <div>
+    <p class="install-row-title">Framwork Bindings</p>
+    <p class="install-row-content">
+      Onsen UI is framework agnostic. Pure JavaScript, jQuery, AngularJS, Angular 2+, React, Vue.js...
+    </p>
+    <a class="install-row-link" href="#">See more</a>
+  </div>
 </div>
 
 
 #### Onsen UI CDN
 
-#### Install with NPM or Yarn
+[Unpkg](https://unpkg.com/onsenui/) provides CDN support for Onsen UI's CSS and JavaScript. Just use these CDN links.
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+```
+
+#### Install with NPM
+
+You can also use the Node Package Manager (NPM) to install Onsen UI:
+
+```sh
+npm install onsenui --save
+```
 
 #### Command line tool to package for mobile apps - Monaca CLI
 
+Monaca CLI is deeply integrated with Onsen UI to provide a simple & quick build process for Cordova hybrid apps. Please refer to the [Monaca CLI Tutorial](https://docs.monaca.io/en/quick_start/cli/) to better understand the program's installation and workflow. For more detailed information on the development feature provided by Monaca, please refer to What is Monaca.
+
 #### Old Releases & Changelogs
+
+Onsen UI releases and changelogs can be seen at [OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases). The source repository is hosted in [OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/).
 
 <% end %>
