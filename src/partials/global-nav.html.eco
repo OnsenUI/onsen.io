@@ -16,10 +16,34 @@
         <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
           <a href="/getting-started"><%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%></a>
         </li>
-        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @isGuide %>">
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isGuide or @page == 'guide') %>">
           <a href="/v2/guide"><%=@translate("[en]Guide[/en][ja]ドキュメント[/ja]")%></a>
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+              <li class="dropdown-item">
+                <a href="/v2/guide">Onsen UI Guide</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/guide/angular1.html">AngularJS 1.x</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/guide/angular2.html">Angular 2+</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/guide/react.html">React</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v2/guide/vue.html">Vue.js 2</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v1/guide.html">Onsen UI 1.x</a>
+              </li>
+            </ul>
+          </div>
+          <span class="global-nav-menu-arrow"></span>
+
         </li>
-        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @isAPI %>">
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isAPI or @reference) %>">
           <a href="#"><%=@translate("[en]API[/en][ja]ドキュメント[/ja]")%></a>
           <div class="dropdown-container">
             <ul class="dropdown-content">
@@ -40,6 +64,9 @@
               </li>
               <li class="dropdown-item">
                 <a href="/v2/api/vue.html">Vue.js 2</a>
+              </li>
+              <li class="dropdown-item">
+                <a href="/v1/reference/javascript.html">Onsen UI 1.x</a>
               </li>
             </ul>
           </div>
