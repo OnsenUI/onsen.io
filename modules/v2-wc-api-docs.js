@@ -127,7 +127,7 @@ module.exports = function(lang, extension) {
 
           // Only allow to include JavaScript or that target extension version
           if ([ 'js', extension ].indexOf(targetExtension) > -1) {
-            files['v2/docs/' + extension + '/' + result.doc.name + '.html'] = result.file;
+            files['v2/api/' + extension + '/' + result.doc.name + '.html'] = result.file;
           }
         });
       }));
