@@ -20,6 +20,15 @@ marked.setOptions({
   smartypants: true
 });
 
+var autoAnchorRenderer = new marked.Renderer();
+autoAnchorRenderer.heading = function (text, level) {
+  return '<a class="header-link" href="#' +
+    slug(text.toLowerCase()) +
+    '"><h' + level + '>' +
+    text +
+    '</h' + level + '></a>';
+};
+
 var renderPatternName = function(name) {
   name = name.replace(/\.html$/, '');
   name = name.replace(/_/g, ' ');
@@ -125,7 +134,7 @@ module.exports = function() {
 
       markdown: function(capture) {
         try {
-          return marked(capture().toString());
+          return marked(capture().toString(), { renderer: autoAnchorRenderer});
         } catch(e) {
           return e.toString();
         }

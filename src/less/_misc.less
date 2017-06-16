@@ -91,6 +91,21 @@
     > :first-child {
       margin-top: 0;
     }
+
+    h1,h2,h3,h4,h5,h6 {
+      &:hover:after {
+        color: #AAA;
+        padding-left: 6px;
+        content: '#';
+      }
+    }
+  }
+
+  .header-link {
+    color: inherit;
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
