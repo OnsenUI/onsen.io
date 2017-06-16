@@ -387,11 +387,17 @@ module.exports = function() {
         return escape(str);
       },
 
-      mapComponentName: function(component) {
-        if (this.framework === 'react') {
+      removeOnsPrefix: function(component) {
+        return component.indexOf('ons-') >= 0 ? component.slice(4) : component;
+      },
+
+      mapComponentName: function(component, framework) {
+        component = this.removeOnsPrefix(component);
+        framework = framework || this.framework;
+        if (framework === 'react') {
           return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
         }
-        if (this.framework === 'vue') {
+        if (framework === 'vue') {
           return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;
         }
 
