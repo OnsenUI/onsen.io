@@ -22,11 +22,16 @@ marked.setOptions({
 
 var autoAnchorRenderer = new marked.Renderer();
 autoAnchorRenderer.heading = function (text, level) {
+  var id = slug(text.toLowerCase());
   return '<a class="header-link" href="#' +
-    slug(text.toLowerCase()) +
-    '"><h' + level + '>' +
+    id + '">' +
+    '<h' + level + ' id="' +
+    id + '">' +
+    '<span>' +
     text +
-    '</h' + level + '></a>';
+    '</span>' +
+    '</h' + level + '>' +
+    '</a>';
 };
 
 var renderPatternName = function(name) {

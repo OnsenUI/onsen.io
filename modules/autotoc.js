@@ -51,7 +51,7 @@ module.exports = function() {
     }
   }
 
-  function buildTocItems(headers, docName) {
+  function buildTocItems(headers, origPath) {
     var root = new TocItem();
     var toc = root;
     var lastLevel = 2;
@@ -60,7 +60,7 @@ module.exports = function() {
       var id = header.id;
       var text = header.innerHTML;
       var level = parseInt(header.tagName.match(/^h([123456])$/i)[1], 10);
-      var link = docName + '.html';
+      var link = '/' + origPath;
 
       while (level != 1 + lastLevel) {
         if (level < 1 + lastLevel) {
@@ -124,7 +124,7 @@ module.exports = function() {
           });
 
           file.contents = new Buffer(window.document.body.innerHTML);
-          file.toc = buildTocItems(headers, file.docName);
+          file.toc = buildTocItems(headers, file.origPath);
 
           if (file.tocTitle) {
             var tocTitle = new TocItem({isTitle: true, text: file.tocTitle});
