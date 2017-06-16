@@ -20,8 +20,8 @@ marked.setOptions({
   smartypants: true
 });
 
-var autoAnchorRenderer = new marked.Renderer();
-autoAnchorRenderer.heading = function (text, level) {
+var guideRenderer = new marked.Renderer();
+guideRenderer.heading = function (text, level) {
   var id = slug(text.toLowerCase());
   return '<a class="header-link" href="#' +
     id + '">' +
@@ -32,6 +32,10 @@ autoAnchorRenderer.heading = function (text, level) {
     '</span>' +
     '</h' + level + '>' +
     '</a>';
+};
+
+guideRenderer.blockquote = function(text) {
+  return text.replace(/^<p/, '<p class="blockquote"');
 };
 
 var renderPatternName = function(name) {
@@ -139,7 +143,7 @@ module.exports = function() {
 
       markdown: function(capture) {
         try {
-          return marked(capture().toString(), { renderer: autoAnchorRenderer});
+          return marked(capture().toString(), { renderer: guideRenderer});
         } catch(e) {
           return e.toString();
         }
