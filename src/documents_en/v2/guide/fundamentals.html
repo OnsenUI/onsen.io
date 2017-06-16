@@ -15,33 +15,126 @@ Lorem ipsum.
 
 ##### What is a Page
 
+In the application world, a page is commonly referred as a window or a page view. In Onsen UI, a page is a container that fully covers the viewport (usually a screen). In Onsen UI, a page can be defined by wrapping in `ons-page` component.
+
 ##### A Sample App with a Page and Toolbar
+
+The following sample code illustrates the most basic app that contains a page and toolbar. Inside the page container you can add any other native HTML DOM elements or Onsen UI components.
+
+```html
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class=”center”>Toolbar</div>
+    </ons-toolbar>
+
+    <!-- Your page content here. -->
+
+  </ons-page>
+</body>
+```
+
+Now you've got your first Onsen UI app containing a single page! Adding more components will make this app even more great.
+
+Usually, an app may have multiple pages with transitioning screens. In the next chapter, we will cover how to manage multiple pages.
 
 #### Managing Pages
 
-Write about `<ons-template>`, `<template>`, and separate files.
+Most applications have multiple pages (screens), which in Onsen UI can be achieved by defining multiple `ons-page` components.
+
+##### Templates
+
+**TODO**
+
+But, how can you move between them and switch their visibility? Onsen UI has 3 components that are used to manage multiple pages: ons-navigator, ons-tabbar and ons-splitter.
 
 ##### Navigator
 
+If the app contains multiple pages in a hierarchical order, consider using the navigator component. It provides a page stack where you can push and pop pages with transition animations. Check out [`ons-navigator` reference](../api/js/ons-navigator.html).
+
 ##### Tab Bar
+
+If the app contains multiple pages at the same level, a tab bar is the appropriate choice. Users can pick which page to display by clicking the item on the tab. Check out [`ons-tabbar` reference](../api/js/ons-tabbar.html).
 
 ##### Splitter
 
+Although it is named a splitter, small devices will create a side menu which can be shown/hidden by the user interaction. On larger screens, this will split a single page into two. Check out [`ons-splitter` reference](../api/js/ons-splitter.html).
+
+By using these components, an app can have multiple pages, allowing creation of everything from simple to complex user interfaces. They are composable, meaning that you can combine them to achieve the desired routing for your specific app. In general, external routers are not necessary thanks to these 3 components.
+
 #### Handling Components
+
+Now you have the necessary skills and information to layout a page, as well as manage multiple pages. It's time to access the component using JavaScript and make it a dynamic component.
 
 ##### The ons Object
 
-##### Initialization
+The `ons` JavaScript object is globally available, and has several useful methods and properties.
+
+For example, `ons.ready(callback)` method can be used to wait for app initialization. Specifically, this function waits until "DOMContentLoaded" and Cordova's "deviceready" events are fired. This is useful, for instance, to know when is safe to make calls to Cordova APIs.
+
+```html
+<head>
+  <script>
+    ons.ready(function() {
+      // Cordova APIs are ready
+      console.log(window.device);
+    });
+  </script>
+</head>
+```
+
+> Note that `ons.ready()` has nothing to do with `ons-page` initialization (see [lifecycle section](lifecycle.html) for that).
 
 ##### Attributes, properties, methods and events
 
+The Onsen UI component is a simple DOM Element (JavaScript object). Thus, it has its own properties, methods, and events. These can be used to configure behavior or call a specific function during runtime. Let's take `ons-navigator` for example and see how it can be used.
+
 ###### Attributes
+
+An **attribute** either modifies the default functionality or specifies how the component should perform. Most of the attributes are optional. Note that some attributes need to be specified before the page initialization. For instance, `ons-navigator` can take "animation" attribute and change it at any time.
+
+```html
+<ons-navigator animation="slide"></ons-navigator>
+<script>
+  var myNavigator = document.querySelector('ons-navigator');
+  myNavigator.setAttribute('animation', 'lift');
+</script>
+```
 
 ###### Properties
 
+A component has **properties** which can be accessed from DOM Element. For instance, you could access the `topPage` property of an `ons-navigator` component to get information about the top page.
+
+```js
+var myNavigator = document.querySelector('ons-navigator');
+console.log(myNavigator.topPage);
+```
+
 ###### Methods
 
+A **method** is a function that trigger a specific action for the component. The following example is calling `pushPage` method to open a new page.
+
+```js
+var myNavigator = document.querySelector('ons-navigator');
+myNavigator.pushPage('page2.html');
+```
+
 ###### Events
+
+**DOM Events** are fired at a specific timing. To listen for an event, use JavaScript's `addEventListener()` function. An event is also supplied with an event object, which is useful for getting some details.
+
+```js
+var myNavigator = document.querySelector('ons-navigator');
+myNavigator.addEventListener('postpush', function(event) {
+  console.log("'pushPage' is completed!", event);
+});
+```
+
+Events can bubble up, which means that event listeners can be added to parent components or directly to `document` instead.
+
+----
+
+Great job! That’s it for Onsen UI’s 101. By now, you should have a fairly good understanding of the basics. Feel free to escape this documentation and surf around some of our useful resources: [Playground](https://tutorial.onsen.io/) (Interactive Tutorial), [GitHub repository](https://github.com/OnsenUI/OnsenUI/), or [Community Forum](https://community.onsen.io/)!
 
 <% end %>
 

@@ -11,13 +11,82 @@ layout: docs.html.eco
 
 #### How can I disable ...?
 
+Onsen UI automatically performs several optimizations automatically, but these are fully optional and able to be turned off at any time. If you would like to disable these, here’s how.
+
+- **Disable auto styling**
+
+Call `ons.disableAutoStyling()` to disable automatic styling of iOS and Android. Be sure to call it right after including `onsenui.js`. For disabling automatic styling for specific components, use the `disable-auto-styling` attribute.
+
+- **Disable animations for testing**
+
+Call `ons.disableAnimations()` before starting the tests.
+
+- **Disable status bar fill on iOS 7 and above**
+
+Call `ons.disableAutoStatusBarFill()` right after including `onsenui.js`.
+
+- **Disable Android Device Back Button handlers**
+
+Call `ons.disableDeviceBackButtonHandler()`.
+
 #### How can I force specific styles?
+
+The auto styling feature displays flat design for iOS and Material Design for Android. Auto styling can be disabled with `ons.disableAutoStyling()` in order to display the default flat design on every platform. `material` modifier can be added manually to elements that should be displayed as Material Design.
+
+However, it is also possible to fake the platform by running `ons.platform.select(‘android’)` or `ons.platform.select(‘ios’)`  right after including `onsenui.js`. Note that changing the platform also affects other utilities like `ons.platform.isAndroid()`.
+
+During development, you can change the device view in the Developer Tools of your browser and refresh the page to update the styles. For instance, “iPhone 5” will show flat design whereas “Nexus 5” displays Material Design. Otherwise, append `?platform=android` or `?platform=ios` as a query string to the URL.
 
 #### Common Error Messages
 
+
+- **ons is not defined**
+
+**TODO**
+
+- **Set/Map is not defined - Can't find variable Set/Map**
+
+The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
+
+- **MutationObserver is not defined**
+
+The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
+
+- **Module ‘onsenui’ has no default export**
+
+**TODO**
+
+- **pushPage/popPage is already running**
+
+A different push or pop action is currently running. This could happen when calling `pushPage` or `popPage` twice before the first animation ends (or clicking twice a button that triggers these actions). Use `options.callback` or the returned promise to trigger the second action after the first one finishes. Otherwise, if the behavior is correct, it is safe to ignore this error.
+
+- **Splitter side is locked**
+
+This can happen when a splitter side is toggled twice before the first animation ends either by calling a method or by dragging the element. Commonly, dragging the splitter side and releasing it on top of a button that toggles the same splitter could throw this error. If the behavior is correct, it is safe to ignore this error.
+
+- **Cannot read property ... of null**
+
+You might be accessing the DOM before your target is in place (timing issue). When you try to access a DOM element inside an `ons-page`, make sure that you are waiting for the page to be attached to the DOM (see [page lifecycle section](lifecycle.html)).
+
 #### Old Browsers
 
-#### Testing with Jest/jsDom/PhantomJS/other
+As mentioned in the [Browser and Device Support](index.html#browser-and-device-support), some older browsers will not work properly due to the lack of some recent functions. We only test on the Webkit family platforms. If you need Onsen UI to work on the following environment, please try adding polyfills to fill the gap to the latest HTML5 standard.
+
+- **Edge**: Most of the features will work correctly.
+- **Firefox**: Most of the features will work correctly.
+- **Internet Explorer 11** and up; **Windows Phone 10** and up:
+    - Polyfill for Set/Map/WeakMap
+    - Polyfill for MutationObserver
+    - Polyfill for Promise
+    - Polyfill for CustomEvent
+    - Polyfill for Element.prototype.classList
+    - Polyfill for Element.prototype.remove
+
+#### Headless Testing
+
+**Jest**, **jsDom**, **PhantomJS**, etc. are very useful tools for headless testing. However, you need to make sure that your testing suite supports the latest Web APIs and is compatible specifically with Custom Elements (part of Web Components). As of early 2017, none of the mentioned tools support it out of the box.
+
+As a suggestion, try Karma + **Chrome headless** (+v59).
 
 <% end %>
 

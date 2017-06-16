@@ -9,9 +9,97 @@ layout: docs.html.eco
 
 ### Vue.js
 
-Lorem ipsum.
+> Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
 
-#### Setup
+Vue bindings for Onsen UI (VueOnsen) provide Vue 2 components and directives that wrap the core Web Components and expose a Vue-like API to interact with them.
+
+#### Download Vue bindings
+
+Vue bindings are distributed in [`vue-onsenui` package](https://www.npmjs.com/package/vue-onsenui). You can download it via NPM:
+
+```sh
+$ npm install onsenui vue-onsenui --save-dev
+```
+
+It is also available [via CDN](https://unpkg.com/vue-onsenui). The [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also contains Vue bindings.
+
+#### Setup Vue bindings
+
+You can load Onsen UI with normal <script></script> and <link> tags as follows:
+
+```html
+<link rel="stylesheet" href="onsenui.css">
+<link rel="stylesheet" href="onsen-css-components.css">
+
+<script src="vue.js"></script>
+<script src="onsenui.js"></script>
+<script src="vue-onsenui.js"></script>
+```
+
+Or, you can import `VueOnsen` from `node_modules/vue-onsenui` with a module bundler like [Webpack](https://webpack.js.org/):
+
+```js
+// Webpack CSS import
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+// JS import
+import Vue from 'vue';
+import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'
+
+Vue.use(VueOnsen);
+```
+
+Notice how `VueOnsen` is used as a plugin for Vue in the last line (this is already done automatically if `window.Vue` exists). Alternatively, you can use `require` instead of ES6 imports.
+
+#### Hello World with Vue
+
+To get started, let’s create a simple Hello World application. The following sample code is a Vue version of Onsen UI HelloWorld.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="onsenui.css">
+  <link rel="stylesheet" href="onsen-css-components.css">
+  <script src="vue.js"></script>
+  <script src="onsenui.js"></script>
+  <script src="vue-onsenui.js"></script>
+</head>
+
+<body>
+  <template id="main-page">
+    <v-ons-page>
+      <v-ons-toolbar>
+        <div class="center">Title</div>
+      </v-ons-toolbar>
+
+      <p style="text-align: center">
+        <v-ons-button @click="$ons.notification.alert('Hello World!')">
+          Click me!
+        </v-ons-button>
+      </p>
+    </v-ons-page>
+  </template>
+
+  <div id="app"></div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      template: '#main-page'
+    });
+  </script>
+</body>
+</html>
+```
+
+The `<div id="app"></div>` node is where Vue will render the content into (`el` property in the constructor).
+
+This is a pure ES5 example, although normally it's advisable to use ES2015 and [`vue-loader`](https://github.com/vuejs/vue-loader) since it allows `*.vue` format.
+
+For more information about Vue itself, we recommend to read the official [Vue docs](https://vuejs.org/v2/guide/).
 
 <% end %>
 
