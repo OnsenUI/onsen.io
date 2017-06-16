@@ -61,10 +61,10 @@
 
 <body id="<%- @page %>">
 
-  <div class="header">
+  <div class="header<%= ' header-fixed' if @isGuide %>">
     <%- @partial('global-nav.html.eco') %>
     <% if @isGuide || @page == 'guide': %>
-      <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %>
+      <!-- <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %> -->
     <% else: %>
       <%- @partial('docs-nav.html.eco') %>
     <% end %>

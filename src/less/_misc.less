@@ -86,22 +86,43 @@
 
   &-content {
     min-height: 100vh;
-    padding: 70px 0 0 0;
+    padding: 30px 0 0 0;
 
-    > :first-child {
+    .header-link h3:first-of-type {
       margin-top: 0;
     }
 
-    h1,h2,h3,h4,h5,h6 {
-      &:hover:after {
-        color: #AAA;
-        padding-left: 6px;
-        content: '#';
+    :not(.css-component) { // Skip for CSS Components
+
+      h1,h2,h3,h4,h5,h6 {
+        &:hover:after { // Hover headers
+          color: #AAA;
+          padding-left: 6px;
+          content: '#';
+        }
+
+        &:before { // Magic "margin top" for anchor
+          content: '';
+          display: block;
+          margin-top: -120px;
+          height: 120px;
+          visibility: hidden;
+        }
+
+        span { // Contains the actual clickable title
+          pointer-events: auto;
+          color: inherit;
+          font-size: inherit;
+          font-weight: inherit;
+          font-family: inherit;
+        }
       }
     }
   }
 
-  .header-link {
+  .header-link { // Anchor wraper for headers
+    display: block;
+    pointer-events: none;
     color: inherit;
     &:hover {
       text-decoration: none;
@@ -247,15 +268,15 @@
   width: @aside-width;
   overflow: auto;
   box-sizing: border-box;
-  padding: 70px 0 50px 0;
+  padding: 40px 0 50px 0;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   &-fixed {
+    top: 0;
     position: fixed;
-    top: 0px;
     bottom: 0px;
     height: 100%;
   }
@@ -265,6 +286,10 @@
     bottom: 0px;
     height: 100%;
   }
+}
+
+.header-fixed + .container .content-info-fixed {
+  top: @header-height;
 }
 
 .content-info + .container-content {

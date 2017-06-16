@@ -1,7 +1,5 @@
 .global-nav {
-  @nav-height: 80px;
-
-  height: @nav-height;
+  height: @header-height;
   background: transparent;
 
   &-inner {
@@ -11,7 +9,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: @nav-height;
+    height: @header-height;
     align-items: center;
   }
 
@@ -129,7 +127,7 @@
       z-index: 10000;
       display: none;
       position: absolute;
-      top: @nav-height;
+      top: @header-height;
       left: 0;
       right: 0;
       bottom: 0;
@@ -238,5 +236,15 @@
     &-close {
       display: none;
     }
+  }
+}
+
+.header-fixed {
+  .global-nav {
+    z-index: 1;
+    position: fixed;
+    width: 100%;
+    background-color: @header-bg-color;
+    background-image: @header-bg-image;
   }
 }

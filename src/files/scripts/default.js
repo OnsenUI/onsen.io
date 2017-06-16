@@ -23,6 +23,7 @@ $(function() {
   }
 
   var elementTop = sticked.offset().top;
+  var headerOffset = $('.header-fixed').height() || 0;
   var footerHeight = $('.footer-container').height();
 
   $(window).scroll(update);
@@ -33,8 +34,7 @@ $(function() {
       documentHeight = $(window.document).height()
       offset = 10;
 
-
-    if (scrollTop > elementTop) {
+    if (scrollTop > elementTop - headerOffset) {
       if (scrollTop > documentHeight - windowHeight - footerHeight - offset) {
         sticked.removeClass('content-info-fixed');
         sticked.addClass('content-info-bottom');
