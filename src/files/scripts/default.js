@@ -30,14 +30,16 @@ $(function() {
   function update() {
     var scrollTop = $(window).scrollTop(),
       windowHeight = $(window).height(),
-      documentHeight = $(window.document).height();
+      documentHeight = $(window.document).height()
+      offset = 10;
+
 
     if (scrollTop > elementTop) {
-      if (scrollTop > documentHeight - windowHeight - footerHeight) {
+      if (scrollTop > documentHeight - windowHeight - footerHeight - offset) {
         sticked.removeClass('content-info-fixed');
         sticked.addClass('content-info-bottom');
         sticked.css({
-          top: (documentHeight - windowHeight - footerHeight) + 'px'
+          top: (documentHeight - windowHeight - footerHeight - offset) + 'px'
         });
       } else {
         sticked.removeClass('content-info-bottom');
