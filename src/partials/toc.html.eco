@@ -5,17 +5,16 @@
 <% if items.length: %>
   <ul class="toc toc-<%= level %>">
     <% for item in items: %>
-      <% if item.isTitle: %>
-        <li class="toc-title toc-title-no-toggle"><%=item.text.trim() %></li>
-      <% else: %>
-
-        <li class="toc-<%= level %>-item toc-item"><a href="<%= base %><%= item.link %>#<%= item.id %>" class="toc-<%= level %>-link toc-link"><%= item.text.replace(/\(.+\)$/, "").trim() %></a>
-          <% if item.children: %>
-          <%- renderToc item.children, level + 1 %>
-          <% end %>
-        </li>
-
+      <% if item.sectionTitle: %>
+        <li class="toc-title toc-title-no-toggle"><%=item.sectionTitle %></li>
       <% end %>
+
+      <li class="toc-<%= level %>-item toc-item"><a href="<%= base %><%= item.link %>#<%= item.id %>" class="toc-<%= level %>-link toc-link"><%= item.text.replace(/\(.+\)$/, "").trim() %></a>
+        <% if item.children: %>
+        <%- renderToc item.children, level + 1 %>
+        <% end %>
+      </li>
+
 
     <% end %>
   </ul>

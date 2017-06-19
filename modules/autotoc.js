@@ -19,8 +19,8 @@ TocItem.prototype = {
     this.text = params.text || '';
     this.children = [];
     this.parent = null;
+    this.order = params.order || 0;
     this.link = params.link || '';
-    this.isTitle = params.isTitle || false;
   },
   /**
    * @param {TocItem} tocItem
@@ -51,7 +51,7 @@ module.exports = function() {
     }
   }
 
-  function buildTocItems(headers, origPath) {
+  function buildTocItems(headers, origPath, order) {
     var root = new TocItem();
     var toc = root;
     var lastLevel = 2;
@@ -77,7 +77,8 @@ module.exports = function() {
       var newToc = new TocItem({
         text: header.textContent,
         id: header.id,
-        link: link
+        link: link,
+        order: order
       });
 
       toc.add(newToc);
@@ -124,11 +125,10 @@ module.exports = function() {
           });
 
           file.contents = new Buffer(window.document.body.innerHTML);
-          file.toc = buildTocItems(headers, file.origPath);
+          file.toc = buildTocItems(headers, file.origPath, file.order);
 
           if (file.tocTitle) {
-            var tocTitle = new TocItem({isTitle: true, text: file.tocTitle});
-            file.toc.unshift(tocTitle);
+            file.toc[0].sectionTitle = file.tocTitle.trim();
           }
 
           done();
