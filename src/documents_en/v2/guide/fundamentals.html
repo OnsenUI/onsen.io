@@ -9,11 +9,9 @@ layout: docs.html.eco
 
 ### Fundamentals (Onsen UI 101)
 
-Lorem ipsum.
+Learning Onsen UI is not difficult at all. In this section, we'll cover all the fundamentals for building your very first mobile app.
 
-#### Laying Out a Page
-
-##### What is a Page
+#### What is a Page?
 
 In the application world, a page is commonly referred as a window or a page view. In Onsen UI, a page is a container that fully covers the viewport (usually a screen). In Onsen UI, a page can be defined by wrapping in `ons-page` component.
 
@@ -42,10 +40,6 @@ Usually, an app may have multiple pages with transitioning screens. In the next 
 
 Most applications have multiple pages (screens), which in Onsen UI can be achieved by defining multiple `ons-page` components.
 
-##### Templates
-
-**TODO**
-
 But, how can you move between them and switch their visibility? Onsen UI has 3 components that are used to manage multiple pages: ons-navigator, ons-tabbar and ons-splitter.
 
 ##### Navigator
@@ -62,11 +56,9 @@ Although it is named a splitter, small devices will create a side menu which can
 
 By using these components, an app can have multiple pages, allowing creation of everything from simple to complex user interfaces. They are composable, meaning that you can combine them to achieve the desired routing for your specific app. In general, external routers are not necessary thanks to these 3 components.
 
-#### Handling Components
-
 Now you have the necessary skills and information to layout a page, as well as manage multiple pages. It's time to access the component using JavaScript and make it a dynamic component.
 
-##### The ons Object
+#### The ons Object
 
 The `ons` JavaScript object is globally available, and has several useful methods and properties.
 
@@ -85,11 +77,11 @@ For example, `ons.ready(callback)` method can be used to wait for app initializa
 
 > Note that `ons.ready()` has nothing to do with `ons-page` initialization (see [lifecycle section](lifecycle.html) for that).
 
-##### Attributes, properties, methods and events
+#### Attributes, Properties, Methods and Events
 
 The Onsen UI component is a simple DOM Element (JavaScript object). Thus, it has its own properties, methods, and events. These can be used to configure behavior or call a specific function during runtime. Let's take `ons-navigator` for example and see how it can be used.
 
-###### Attributes
+##### Attributes
 
 An **attribute** either modifies the default functionality or specifies how the component should perform. Most of the attributes are optional. Note that some attributes need to be specified before the page initialization. For instance, `ons-navigator` can take "animation" attribute and change it at any time.
 
@@ -101,7 +93,7 @@ An **attribute** either modifies the default functionality or specifies how the 
 </script>
 ```
 
-###### Properties
+##### Properties
 
 A component has **properties** which can be accessed from DOM Element. For instance, you could access the `topPage` property of an `ons-navigator` component to get information about the top page.
 
@@ -110,7 +102,7 @@ var myNavigator = document.querySelector('ons-navigator');
 console.log(myNavigator.topPage);
 ```
 
-###### Methods
+##### Methods
 
 A **method** is a function that trigger a specific action for the component. The following example is calling `pushPage` method to open a new page.
 
@@ -119,7 +111,7 @@ var myNavigator = document.querySelector('ons-navigator');
 myNavigator.pushPage('page2.html');
 ```
 
-###### Events
+##### Events
 
 **DOM Events** are fired at a specific timing. To listen for an event, use JavaScript's `addEventListener()` function. An event is also supplied with an event object, which is useful for getting some details.
 

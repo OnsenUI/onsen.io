@@ -15,19 +15,19 @@ Onsen UI automatically performs several optimizations automatically, but these a
 
 - **Disable auto styling**
 
-Call `ons.disableAutoStyling()` to disable automatic styling of iOS and Android. Be sure to call it right after including `onsenui.js`. For disabling automatic styling for specific components, use the `disable-auto-styling` attribute.
+  Call `ons.disableAutoStyling()` to disable automatic styling of iOS and Android. Be sure to call it right after including `onsenui.js`. For disabling automatic styling for specific components, use the `disable-auto-styling` attribute.
 
 - **Disable animations for testing**
 
-Call `ons.disableAnimations()` before starting the tests.
+  Call `ons.disableAnimations()` before starting the tests.
 
 - **Disable status bar fill on iOS 7 and above**
 
-Call `ons.disableAutoStatusBarFill()` right after including `onsenui.js`.
+  Call `ons.disableAutoStatusBarFill()` right after including `onsenui.js`.
 
 - **Disable Android Device Back Button handlers**
 
-Call `ons.disableDeviceBackButtonHandler()`.
+  Call `ons.disableDeviceBackButtonHandler()`.
 
 #### How can I force specific styles?
 
@@ -42,31 +42,31 @@ During development, you can change the device view in the Developer Tools of you
 
 - **ons is not defined**
 
-**TODO**
+  **TODO**
 
 - **Set/Map is not defined - Can't find variable Set/Map**
 
-The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
+  The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
 
 - **MutationObserver is not defined**
 
-The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
+  The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
 
 - **Module ‘onsenui’ has no default export**
 
-**TODO**
+  **TODO**
 
 - **pushPage/popPage is already running**
 
-A different push or pop action is currently running. This could happen when calling `pushPage` or `popPage` twice before the first animation ends (or clicking twice a button that triggers these actions). Use `options.callback` or the returned promise to trigger the second action after the first one finishes. Otherwise, if the behavior is correct, it is safe to ignore this error.
+  A different push or pop action is currently running. This could happen when calling `pushPage` or `popPage` twice before the first animation ends (or clicking twice a button that triggers these actions). Use `options.callback` or the returned promise to trigger the second action after the first one finishes. Otherwise, if the behavior is correct, it is safe to ignore this error.
 
 - **Splitter side is locked**
 
-This can happen when a splitter side is toggled twice before the first animation ends either by calling a method or by dragging the element. Commonly, dragging the splitter side and releasing it on top of a button that toggles the same splitter could throw this error. If the behavior is correct, it is safe to ignore this error.
+  This can happen when a splitter side is toggled twice before the first animation ends either by calling a method or by dragging the element. Commonly, dragging the splitter side and releasing it on top of a button that toggles the same splitter could throw this error. If the behavior is correct, it is safe to ignore this error.
 
 - **Cannot read property ... of null**
 
-You might be accessing the DOM before your target is in place (timing issue). When you try to access a DOM element inside an `ons-page`, make sure that you are waiting for the page to be attached to the DOM (see [page lifecycle section](lifecycle.html)).
+  You might be accessing the DOM before your target is in place (timing issue). When you try to access a DOM element inside an `ons-page`, make sure that you are waiting for the page to be attached to the DOM (see [page lifecycle section](lifecycle.html)).
 
 #### Old Browsers
 
