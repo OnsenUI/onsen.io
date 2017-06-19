@@ -91,7 +91,7 @@
           <% if @framework == 'onsen1' or typeof @framework != 'string': %>
             <a href="/v1/guide.html"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% else: %>
-            <a href="/v2/guide/<%- @framework %>"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
+            <a href="/v2/guide/<%- if @framework == 'js' then '' else @framework %>"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
           <% end %>
         </li>
         <li class="docs-nav-menu-item <%- 'docs-nav-menu-item-active' if @reference %>">
