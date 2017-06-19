@@ -40,7 +40,25 @@ Usually, an app may have multiple pages with transitioning screens. In the next 
 
 Most applications have multiple pages (screens), which in Onsen UI can be achieved by defining multiple `ons-page` components.
 
-But, how can you move between them and switch their visibility? Onsen UI has 3 components that are used to manage multiple pages: ons-navigator, ons-tabbar and ons-splitter.
+##### Templates
+
+In order to create multiple pages, we need to understand the concept of "template". A template defines a generic layout that is used during ejecution time to create instances. If a template is modified at a given time, it won't change the already created instances but will affect the ones created later on. In Onsen UI, this layout must always be an `ons-page` component (one single root node). Any other component must be a child of the page.
+
+A template must be given a unique ID that will be used later on to reference the template. Templates can be defined in two different ways:
+
+- Separate files: `*.html` files that contain a single `ons-page` component as the root. Their ID is given by the path in the project, e.g. `./my/views/page1.html`.
+
+- Using [`<template>` elements](https://developer.mozilla.org/en/docs/Web/HTML/Element/template) inside `index.html`: Sometimes is useful to have a bunch of templates in the main file (`index.html`). HTML template elements can hold pages just like separate files do. Their ID must be manually specified by the `id` attribute. For example:
+
+  ```html
+  <template id="page.html">
+    <ons-page><!-- Content here--></ons-page>
+  </template>
+  ```
+
+  > [`<ons-template>` element](/v2/api/js/ons-template.html) is also supported for the same purpose, but native `<template>` is preferred since v2.4.0
+
+But, how can you move between these pages and switch their visibility? Onsen UI has 3 components that are used to manage multiple pages: `ons-navigator`, `ons-tabbar` and `ons-splitter`.
 
 ##### Navigator
 

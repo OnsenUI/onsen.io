@@ -9,8 +9,12 @@ layout: docs.html.eco
 
 ### Theming
 
-A modifier is a cross-component way to provide customizability for Onsen UI components. When a component is defined with a modifier, it will have a separate class namespace so that you can apply custom styles to the component. Some components have several easy to use preset modifiers to change the appearance.
- 
+Onsen UI style can be easily modified in a variety of ways. Here are the most common options.
+
+#### Modifiers
+
+A modifier is a cross-component way to provide customizability for Onsen UI components in the shape of custom attributes. When a component is defined with a modifier, it will have a separate class namespace so that you can apply custom styles to the component. Some components have several easy to use preset modifiers to change the appearance.
+
 For example, each of the following buttons have a different look. To change modifiers dynamically, please manipulate modifier attribute from JavaScript.
 
 ```
@@ -21,9 +25,11 @@ For example, each of the following buttons have a different look. To change modi
 <ons-button modifier="material">Material Design</ons-button>
 ```
 
-#### Cross Platform Styling
+For further information, please have a look at [this article](https://onsen.io/blog/creating-custom-modifiers/).
 
-Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views.
+#### Cross Platform Styling (Autostyling)
+
+Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views or by appending `?platform=android` or `?platform=ios` as a query string to the URL.
 
 Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-styling` attribute in specific components that you don't want to auto style.
 
@@ -31,13 +37,13 @@ Some tools are provided to give a more accurate customization.
 
 ##### Platform utilities
 
-<%- @componentLink('ons.platform')%> object is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
+[`ons.platform`](/v2/api/js/ons.platform.html) object is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
 
 You can set a platform with `ons.platform.select('android')`, for example, in order to display Material Design on every platform. This must be called before the app is initialized (right after including `onsenui.js`).
 
 ##### Conditional element
 
-A conditional element called <%- @componentLink('if') %> is available to filter content depending on the platform or orientation.
+A conditional element called [`ons-if`](/v2/api/js/ons-if.html) is available to filter content depending on the platform or orientation.
 
 > `<ons-if>` component is not available for React and Vue bindings.
 
@@ -50,11 +56,11 @@ A conditional element called <%- @componentLink('if') %> is available to filter 
   </ons-if>
 ```
 
-With this, for example, you can display <%- @componentLink('fab') %> for Material Design and other type of button for iOS flat design.
+With this, for example, you can display [`ons-fab`](/v2/api/js/ons-fab.html) for Material Design and other type of button for iOS flat design.
 
-AngularJS 1 bindings also provide <%- @componentLink('if-platform') %> directive for this purpose:
+AngularJS 1 bindings also provide [`ons-if-platform`](/v2/api/angular1/ons-if-platform.html) for this purpose:
 
-```
+```html
 <div ons-if-platform="android">
   This is Android
 </div>
@@ -62,17 +68,17 @@ AngularJS 1 bindings also provide <%- @componentLink('if-platform') %> directive
 
 ##### Icons shortcut
 
-<%- @componentLink('icon') %> component provides a shortcut to make auto styling easier:
+[`ons-icon`](/v2/api/js/ons-icon.html) provides a shortcut to make auto styling easier:
 
-```
-<<%- @mapComponentName('icon') %> icon="ion-navicon, material:md-menu" size="24px, material:20px"<%- if @framework is 'react' then ' /' else '></ons-icon' %>>
+```html
+<ons-icon icon="ion-navicon, material:md-menu" size="24px, material:20px"></ons-icon>
 ```
 
 The second icon will be displayed when `material` modifier is present (other modifiers can be used).
 
 #### Applying Styles to Inner Custom Elements
 
-Most Onsen UI components expand the inner element during runtime. For instance, ons-page automatically injects the following code inside 
+Most Onsen UI components expand the inner element during runtime. For instance, ons-page automatically injects the following code inside
 `<ons-page>` and `</ons-page>`.
 
 ```
@@ -104,7 +110,7 @@ Onsen UI compiles the code above into the following code without adding new `<di
 ```
 
 but `<div class=”page__background”>` will be added since no `<div class=”page__background”>` is placed.
- 
+
 Understanding how to bypass compilation is important if you want to attach style to `div`, which means you can write:
 
 ```
@@ -117,7 +123,7 @@ Understanding how to bypass compilation is important if you want to attach style
 ##### Pitfalls: Specially treated tags in compilation
 
 `<ons-toolbar>`, `<ons-bottom-toolbar>` and some tags are treated specially in compilation.
-  
+
 For example,
 
 ```
@@ -125,19 +131,19 @@ For example,
   <ons-toolbar>
     <div class="center">Title</div>
   </ons-toolbar>
- 
+
   <!-- Your page content -->
 </ons-page>
 ```
 
-will be compiled into 
+will be compiled into
 
 ```
 <ons-page class="page">
   <ons-toolbar class="toolbar">
     <div class="center toolbar__center toolbar__title">Title</div>
   </ons-toolbar>
- 
+
   <div class="page__background"></div>
   <div class="page__content"><!-- Your page content --></div>
 </ons-page>

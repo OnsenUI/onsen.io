@@ -27,20 +27,20 @@ Grid is not necessary in general for list items. Special layout is provided for 
 
 #### Gesture Detection
 
-It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in <%- @componentLink('ons.GestureDetector') %> object.
+It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in [`ons.GestureDetector`](/v2/api/js/ons.GestureDetector.html) object.
 
 Non-Angular:
 
-```
+```js
 var divGD = ons.GestureDetector(document.querySelector('#my-div'));
 divGD.on('dragup dragdown', function(event) {
   console.log('drag Y axis');
 });
 ```
 
-Angular: 
+Angular:
 
-```
+```js
 @ViewChild('somediv') divGD; // <div #somediv>
 this.divGD.nativeElement.on('dragup dragdown', function(event) {
   console.log('drag Y axis');
@@ -49,20 +49,20 @@ this.divGD.nativeElement.on('dragup dragdown', function(event) {
 
 If you want to use another library for this purpose and have any conflict, Onsen UI gesture detectors can be disabled easily:
 
-Non-Angular: 
+Non-Angular:
 
-```
+```js
 ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove event listeners from the menu
 ```
 
 Angular:
 
-```
+```js
 @ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>
 ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event listeners from the menu
 ```
 
-For non-React users, also, <%- @componentLink('gesture-detector') %> component can be used to wrap the target DOM element that should detect the fingers in a handy way.
+For non-React users, also, [`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.html) component can be used to wrap the target DOM element that should detect the fingers in a handy way.
 
 #### FastClick
 

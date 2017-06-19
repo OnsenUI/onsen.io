@@ -9,7 +9,7 @@ layout: docs.html.eco
 
 ### Cordova-specific Features
 
-Onsen UI fit well with hybrid app development. This section covers some gotchas when developing a Cordova app.
+Onsen UI fits well with hybrid app development. This section covers some gotchas when developing a Cordova app.
 
 #### Handling 'deviceready' event
 
@@ -17,8 +17,8 @@ Cordova APIs can be called after `deviceready` event is fired. In Onsen UI, `ons
 
 ```
 ons.ready(function() {
-    // deviceready event is fired
-    // Call whatever Cordova APIs
+  // deviceready event is fired
+  // Call whatever Cordova APIs
 });
 ```
 
@@ -33,7 +33,7 @@ Onsen UI sets handlers with default behavior for Android back button in certain 
 - Splitter: Closes the menu if it’s open.
 - If the conditions are not met, these elements will call the parent element’s handler. The final global handler closes the app.
 
-While this is probably the desired behavior for many apps, Onsen UI allows to modify these handlers for better customization. To modify the app global handler (closing the app), the ons object provides few methods:
+While this is probably the desired behavior for many apps, Onsen UI allows to modify these handlers for better customization. To modify the app global handler (closing the app), the [`ons` object](../api/js/ons.html) provides few methods:
 
 ```
 // Disable or enable
@@ -51,7 +51,7 @@ ons.setDefaultDeviceBackButtonListener(function(event) {
 });
 ```
 
-Apart from this, the mentioned elements together with ons-page element expose a way to modify their own handler:
+Apart from this, the mentioned elements together with `ons-page` element expose a way to modify their own handler:
 
 ```
 var myNavigator = document.getElementById('my-navigator');

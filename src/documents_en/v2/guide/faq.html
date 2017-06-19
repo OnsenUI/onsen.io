@@ -37,6 +37,10 @@ However, it is also possible to fake the platform by running `ons.platform.selec
 
 During development, you can change the device view in the Developer Tools of your browser and refresh the page to update the styles. For instance, “iPhone 5” will show flat design whereas “Nexus 5” displays Material Design. Otherwise, append `?platform=android` or `?platform=ios` as a query string to the URL.
 
+#### Pushing new pages is slow
+
+If you are creating pages from separate files which, at the same time, contain other pages from even more files (e.g. pushing a tab bar), it can get a bit slow since there are many requests going on. In this case, you can use [`ons.preload([...])` method](/v2/api/js/ons.html#method-preload) at any time to make requests and cache those templates beforehand.
+
 #### Common Error Messages
 
 
