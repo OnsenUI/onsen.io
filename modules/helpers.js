@@ -412,6 +412,17 @@ module.exports = function() {
         var linkName = this.mapComponentName(component);
         var componentName = (/^ons($|\.)/.test(component) ? linkName : ('`<' + linkName + '>`'));
         return '[' + componentName + '](/v2/docs/' + this.framework + '/' + linkName + '.html)';
+      },
+
+      findSectionLinks: function(toc, order) {
+        var index = toc.findIndex(function(item) {
+          return item.order === order;
+        });
+
+        return {
+          prev: index > 0 ? toc[index - 1] : null,
+          next: index < toc.length - 1 ? toc[index + 1] : null
+        };
       }
     };
 

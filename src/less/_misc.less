@@ -92,7 +92,15 @@
       margin-top: 0;
     }
 
-    :not(.css-component) { // Skip for CSS Components
+    .guide-links {
+      a {
+        color: #FE253C;
+        font-weight: 700;
+        font-size: 14px;
+      }
+    }
+
+    :not(.css-component, reference-container) { // Only Guide
 
       h1,h2,h3,h4,h5,h6 {
         &:hover:after { // Hover headers
