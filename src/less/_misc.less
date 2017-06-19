@@ -100,7 +100,7 @@
       }
     }
 
-    :not(.css-component, reference-container) { // Only Guide
+    &.headers-are-anchors { // Only Guide
 
       h1,h2,h3,h4,h5,h6 {
         &:hover:after { // Hover headers
@@ -278,11 +278,12 @@
 }
 
 .content-info {
-  position: absolute;
+  position: fixed;
   width: @aside-width;
+  height: 100%;
   overflow: auto;
   box-sizing: border-box;
-  padding: 40px 0 50px 0;
+  padding-top: 40px;
 
   &::-webkit-scrollbar {
     display: none;
@@ -304,6 +305,7 @@
 
 .header-fixed + .container .content-info-fixed {
   top: @header-height;
+  padding-bottom: @header-height;
 }
 
 .content-info + .container-content {

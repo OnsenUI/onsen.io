@@ -81,8 +81,17 @@ $(function() {
 
     // Select current item in ToC
     var mainID = $('.container-content h3:first-of-type')[0].id
+    var el = linkMap['#' + mainID].link;
     linkMap['#' + mainID].link.addClass('current');
     linkMap['#' + mainID].link.parent('li').addClass('toc-item-open');
+    // Show current item in screen
+    var elOffset = el.offset();
+    var menu = $('.content-info');
+    if (elOffset && elOffset.top > menu.height() / 2) {
+      setTimeout(function() {
+        menu.scrollTop(elOffset.top - menu.offset().top - menu.height()/2);
+      }, 0)
+    }
   }
 
   var queued = false;

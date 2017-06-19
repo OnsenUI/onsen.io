@@ -76,7 +76,7 @@
 			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
 		</aside>
 		<% end %>
-    <div class="container-content">
+    <div class="container-content<%= ' headers-are-anchors' if @isGuide %>">
       <%- @contents %>
       <%- @partial('guide_section_footer.html.eco') if @isGuide %>
       <%- @partial('need_help.html.eco') if @needHelp %>
