@@ -1,0 +1,84 @@
+---
+author: atsushi
+date: 2017-06-20
+id: ng-japan-2017
+title: "ng-japan 2017 登壇レポート"
+product: onsen
+category: ニュース
+tags: onsen ui
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://ja.onsen.io/blog/content/images/2017/Jun/onsen-logo-ogp.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+6月17日、日本Microsoft社にて[Angularのカンファレンス、ng-japan](http://ngjapan.org)が開催されました。今回、アシアル社の又川さんが登壇しました。こちらはそのレポートになります。
+
+![](/blog/content/images/2017/Jun/ng-japan.jpg)
+
+# Web Componentsの期待と実状、未来 - 2年のライブラリ開発経験から
+
+<script async class="speakerdeck-embed" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+元々のタイトルは Web Components and Onsen UI でしたが、Onsen UIを外しています。より純粋に Web Components のお話をしようと思います。とは言え、Web Componentsって何という方もいらっしゃると思いますので、まずはOnsen UIを含めてWeb Componentsの紹介をします。
+
+Onsen UI 2 はスマートフォンアプリを作るのに必要になるUI/UXフレームワークになります。例えばメニューの表示機能があります。ハンバーガーメニューをクリックすると表示される、よくあるものです。表示した後はマウスでドラッグもできます。また、iOS向けだけでなくAndroid、つまりマテリアルデザインにも変更できます。このようにBootstrapなどで見られるような単にデザインを提供するだけなく、動作も含めて提供するのがOnsen UI 2です。
+
+この Onsen UI 2 はWeb Componentsに対応しています。その特性を活かして幅広いフレームワークに対応しています。
+
+今日の発表ですが、まず Web Componentsについて知ってもらいたいと考えています。良く聞かれる疑問として「今後もAngularを使って大丈夫なのか？」とか「またWebに一波来るのか」などがあります。こうした疑問にもお答えしていきます。最初にお答えしておくと、AngularとWeb Componentsは無関係ではありません。さらに言えばフレームワークと密接な関係があります。
+
+## Web Componentsの光
+
+<script async class="speakerdeck-embed" data-slide="7" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+Web ComponentsはWebブラウザの機能です。WebGL、Web Audio APIなどと同じです。最近度々話題にあがるのですが、これはメジャーブラウザに搭載されはじめたからです。Chromeなどのメジャーブラウザでサポートされており、特に最近iOS 10.3でも対応したことで反響が大きくなっています。また、最近ではAngularがいい、Reactがいいといったフレームワーク選定の話が収束してきたように感じます。そして各フレームワークを掘り下げる流れになってきています。そして Web Components が新しい話題として注目されてきています。
+
+<script async class="speakerdeck-embed" data-slide="9" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+### 主な機能は二つ
+
+Web Componentsは複数の機能が集まっていますが、重要な機能は二つです。まず、特定の名前を持つ要素 `<x-hoge />` が生成された時やDOMツリーに追加された時に指定した機能を実行できます。具体的に言うと、`customElements.define` で呼び出すことで `<x-hoge />` が使えるようになります。そして `<x-hoge />` を生成したり、DOMツリーに追加した時にコールバックが起きます。これは通常のJavaScriptの機能だけでは実現できません。
+
+<script async class="speakerdeck-embed" data-slide="13" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+もう一つはDOMツリーの一部分に対して個別のDOM、CSSスコープを与える機能です。これはShadow DOMとして知られている機能です。 `<x-hoge />` 以下にだけ適用できるスタイル設定を追加することできます。Webブラウザだけでスコープ機能が実現できます。
+
+<script async class="speakerdeck-embed" data-slide="15" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+この2つの機能を使ってHTML標準のinput/video/tableなどと同じ仕組みで新しいタグを作ることができます。まるでHTML5に新しい機能が増えたかのような感覚でコンポーネントが使えるようになります。
+
+特に大きいのはこの再利用可能なコンポーネントをWebブラウザ標準の機能だけで開発できることです。特定のフレームワークに依存しない実装が可能で、シェアしたり利用できます。これは別にAngularが不要になるという訳ではありません。
+
+## Web Componentsの闇
+
+では逆に悩みどころを紹介します。まず機能不足な点が挙げられます。データバインディングやInput/Output、DI、パイプ、モジュール、アニメーションなどの機能がありません。そこでWeb Componentsをラップして使いやすくするライブラリがあります。
+
+<script async class="speakerdeck-embed" data-slide="15" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+例えばX-Tag、Polymer、slim.js、Skateといったライブラリです。やり方としては二種類あり、一つはランタイムライブラリを読み込むものです。これはWebブラウザ標準以外の機能を使わないといけません。もう一つは別な形式で書いてWeb Componentsに変換するものです（現時点ではありません）。この場合、ランタイムライブラリは不要ですがビルドする環境が必要になります。
+
+Web Componentsのままであればフレームワークを使わないユーザにとっては魅力的です。ライブラリなしで動きますし、コードをコピー&ペーストするだけで使えます。
+
+### Web Componentsの今後
+
+ライブラリ提供者にとってもWeb Componentsは魅力的です。これまでUIライブラリを提供する場合、フレームワークの数だけライブラリを開発する必要がありました。Web Componentsであればコア部分さえ実装してしまえば、後は @angular/forms のような各フレームワーク独自部分を実装していくだけで済みます。これは実際 Onsen UI 2 で採用している方法です。
+
+<script async class="speakerdeck-embed" data-slide="15" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
+
+Angular/React/Vue.jsについては公式で提供していますが、Ember/Aureliaについてはユーザが開発してくれています。今後このような設計手法を採用するライブラリは増えていくのではないでしょうか。
+
+なお、Web ComponentsはWebブラウザ標準で実装されているので処理が高速です。まだ足りない機能も多いのが現実ですが、今後に期待しましょう。今後AngularチームはWeb Components側に寄せていくそうです。
+
+----
+
+Q. Webブラウザごとに実装差異は出そうですか？
+
+仕組みは複雑ではないのでそのようなことはないですが、まだWeb Componentsをサポートしていないブラウザでは動作仕様が異なることがあります。
+
+Q. フレームワーク固有の部分だけを個別に実装しているとありましたが、共通化の割合はどれくらいですか？
+
+Web Componentsが8割。各フレームワーク固有の部分は2割くらいです。
