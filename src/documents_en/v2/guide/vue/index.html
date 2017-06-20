@@ -176,6 +176,26 @@ It is also possible to bind arrays to `v-ons-checkbox` or `v-ons-switch` just li
 
 #### Vue Bindings FAQ
 
+##### How to set up global Onsen UI options?
+
+The main guide describes [how to disable or set some global features](../faq.html) "right after including `onsenui.js` in the app". This means that it must take effect before any component is rendered. Since `ons` object is not provided globally, we need to use `$ons` object at the very first possible location:
+
+```
+import Vue from 'vue';
+import VueOnsen from 'vue-onsenui';
+Vue.use(VueOnsen);
+
+new Vue({
+  el: '#app',
+  render: h => h(...),
+  beforeCreate() {
+    this.$ons.disableAutoStyling(); // Or any other method
+  }
+})
+```
+
+This way, changes take effect before any component is rendered.
+
 ##### How to pass data to the next page in the navigator?
 
 Navigator's pages are sibling elements, which means that communication among them in Vue is fairly challenging. [Vuex](https://vuex.vuejs.org/) is a good solution for this, but not the only one. When you push a new page component and want to add some initial data, you can simply extend it:
