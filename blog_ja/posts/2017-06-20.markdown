@@ -1,6 +1,6 @@
 ---
 author: atsushi
-date: 2017-06-19
+date: 2017-06-20
 id: ng-japan-2017
 title: "ng-japan 2017 登壇レポート"
 product: onsen
@@ -59,13 +59,13 @@ Web Componentsは複数の機能が集まっていますが、重要な機能は
 
 <script async class="speakerdeck-embed" data-slide="15" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
-例えばX-tag、Polymer、Slim.js、Skateといったライブラリです。やり方としては二種類あり、一つはランタイムライブラリを読み込むものです。これはWebブラウザ標準以外の機能を使わないといけません。もう一つは別な形式で書いてWeb Componentsに変換するものです（現時点ではありません）。この場合、ランタイムライブラリは不要ですがビルドする環境が必要になります。
+例えばX-Tag、Polymer、slim.js、Skateといったライブラリです。やり方としては二種類あり、一つはランタイムライブラリを読み込むものです。これはWebブラウザ標準以外の機能を使わないといけません。もう一つは別な形式で書いてWeb Componentsに変換するものです（現時点ではありません）。この場合、ランタイムライブラリは不要ですがビルドする環境が必要になります。
 
 Web Componentsのままであればフレームワークを使わないユーザにとっては魅力的です。ライブラリなしで動きますし、コードをコピー&ペーストするだけで使えます。
 
 ### Web Componentsの今後
 
-ライブラリ提供者にとってもWeb Componentsは魅力的です。これまでUIライブラリを提供する場合、フレームワークの数だけライブラリを開発する必要がありました。Web Componentsであればコア部分さえ実装してしまえば、後は @angular/form のような各フレームワーク独自部分を実装していくだけで済みます。これは実際 Onsen UI 2 で採用している方法です。
+ライブラリ提供者にとってもWeb Componentsは魅力的です。これまでUIライブラリを提供する場合、フレームワークの数だけライブラリを開発する必要がありました。Web Componentsであればコア部分さえ実装してしまえば、後は @angular/forms のような各フレームワーク独自部分を実装していくだけで済みます。これは実際 Onsen UI 2 で採用している方法です。
 
 <script async class="speakerdeck-embed" data-slide="15" data-id="d1c8573366ea47f5b8b18402c5515d01" data-ratio="1.33333333333333" src="//speakerdeck.com/assets/embed.js"></script>
 
