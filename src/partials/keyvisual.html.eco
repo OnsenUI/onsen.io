@@ -6,7 +6,7 @@
         <%- "HTML5ハイブリッドアプリ<br>モバイルWebアプリを<br>最高に美しく、スムーズに。" if @lang == "ja" %>
       </div>
 
-      <a href="/getting-started" class="keyvisual-getstarted">
+      <a href="/v2/guide/index.html#getting-started" class="keyvisual-getstarted">
         <%- "Get started" if @lang == "en" %>
         <%- "はじめよう" if @lang == "ja" %>
       </a>

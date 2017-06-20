@@ -1,4 +1,5 @@
 <footer class="footer-container">
+  <% if !@skipInfo: %>
   <div class="footer-container-info">
     <div class="footer-container-info-item">
       <img src="/images/common/icn_getting.svg">
@@ -22,40 +23,11 @@
           Onsen UIコンポーネントの使い方を学びましょう。Onsen UIのすべてのコンポーネントの詳細なリファレンスと使い方が記述されています。
         <% end %>
       </p>
-      <a href="/docs/js.html"><%-@translate("[en]Show detail &gt;[/en][ja]ドキュメントを読む &gt;[/ja]")%></a>
+      <a href="/v2/guide"><%-@translate("[en]Show detail &gt;[/en][ja]ドキュメントを読む &gt;[/ja]")%></a>
     </div>
-
   </div>
-  <div class="footer-container-upper">
-    <div class="footer-container-upper-message">
-      <% if @lang == "en": %>
-        You just discovered delightful and future-proof mobile app development! It's an experience worth sharing!
-      <% else: %>
-        Onsen UIについて周りにお伝えください。<br>Twitterのフォローや、GitHubスターもぜひお願いいたします。
-      <% end %>
-    </div>
+  <% end %>
 
-    <% if @lang == "en": %>
-      <div class="footer-container-upper-social">
-        <div class="footer-container-upper-social-twitter">
-          <a href="https://twitter.com/Onsen_UI" class="twitter-follow-button">Follow @Onsen_UI</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-        <div class="footer-container-upper-social-github">
-          <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-count-href="/OnsenUI/OnsenUI/stargazers" data-count-api="/repos/OnsenUI/OnsenUI#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
-        </div>
-      </div>
-    <% else: %>
-      <div class="footer-container-upper-social-ja">
-        <div class="footer-container-upper-social-twitter">
-          <a href="https://twitter.com/Onsen_UI_ja" class="twitter-follow-button">@Onsen_UI_jaをフォロー</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-        </div>
-        <div class="footer-container-upper-social-github">
-          <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-count-href="/OnsenUI/OnsenUI/stargazers" data-count-api="/repos/OnsenUI/OnsenUI#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star OnsenUI/OnsenUI on GitHub">スター</a>
-        </div>
-      </div>
-    <% end %>      
-
-  </div>
   <div class="footer-container-lower">
     <div class="footer-container-lower-inner">
       <div class="footer-container-navigation">
@@ -100,13 +72,13 @@
           <div class="footer-container-navigation-header">
             <%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%>
           </div>
-          <a href="/docs/guide/js/" class="footer-container-navigation-link">
+          <a href="/v2/guide/" class="footer-container-navigation-link">
             <%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%>
           </a>
-          <a href="/docs/js.html" class="footer-container-navigation-link">
+          <a href="/v2/api/js" class="footer-container-navigation-link">
             <%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%>
           </a>
-          <a href="/tutorial" class="footer-container-navigation-link">
+          <a href="https://tutorial.onsen.io/" class="footer-container-navigation-link">
             <%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%>
           </a>
         </div>
@@ -148,13 +120,13 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="footer-container-copyright">
-    <% if @lang == "en": %>
-    Copyright &copy; 2013-<%= @renderCurrentYear() %> <a href="https://monaca.io/">Monaca x Onsen UI Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
-    <% else: %>
-    Copyright &copy; 2013-<%= @renderCurrentYear() %> <a href="https://ja.monaca.io/">アシアル株式会社</a>. All rights reserved. <a href="https://ja.monaca.io/terms-of-service/policy.html">プライバシーポリシー</a>
-    <% end %>
+    <div class="footer-container-copyright">
+      <% if @lang == "en": %>
+      Copyright &copy; 2013-<%= @renderCurrentYear() %> <a href="https://monaca.io/">Monaca x Onsen UI Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
+      <% else: %>
+      Copyright &copy; 2013-<%= @renderCurrentYear() %> <a href="https://ja.monaca.io/">アシアル株式会社</a>. All rights reserved. <a href="https://ja.monaca.io/terms-of-service/policy.html">プライバシーポリシー</a>
+      <% end %>
+    </div>
   </div>
 </footer>
 

@@ -90,7 +90,7 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       if (error) {
         return reject(error);
       }
-      
+
       var componentName = nodePath.basename(docPath, nodePath.extname(docPath))
       try {
         var cacheFile = cacheDir + '/' + componentName;
@@ -147,9 +147,9 @@ module.exports = function(lang) {
     ]).then(function(paths) {
       return Promise.all(paths.map(function(path) {
         return generateAPIDocument(metalsmith, path).then(function(result) {
-          files['v2/docs/react/' + result.file.name + '.html'] = result.file;
+          files['v2/api/react/' + result.file.name + '.html'] = result.file;
           if (result.doc.original) {
-            files['v2/docs/react/' + result.file.name + '.html'].originalFile = files['v2/docs/js/' + result.doc.original + '.html'];
+            files['v2/api/react/' + result.file.name + '.html'].originalFile = files['v2/api/js/' + result.doc.original + '.html'];
           }
 
         });

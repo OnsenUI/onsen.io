@@ -1,0 +1,72 @@
+---
+title: 'Page Lifecycle'
+order: 150
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Page Lifecycle
+
+Due to the asynchronous nature of JavaScript and animations, Onsen UI provides `ons-page` life cycle to perform actions at the right time. Loading data, updating the view, saving data before destroying... all of these and more actions are examples of what can be done thanks to page's life cycle.
+
+#### Events
+
+`<ons-page>` provides a set of DOM events that will be fired in unique and set times of its life cycle. Use these events to alter the behavior on each page.
+
+- **`init` event** is fired after `<ons-page>` is attached to DOM. Use this event to initialize the code or dynamic content of a page when it is created (before it is shown).
+- **`destroy` event** is fired before `<ons-page>` is destroyed and prior to DOM detachment. Use this event to clean up or save anything you need.
+- **`show` event** is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up. Use this event to run code every time a page appears.
+- **`hide` event** is fired every time `<ons-page>` disappears from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack. Use this event to run code every time a page disappears.
+
+Page lifecycle events will be propagated to the page’s descendants so they are correspondingly shown, hidden, or destroyed. For example, destroying <ons-navigator> will throw hide event only for the displayed page (navigator’s top page) and destroy event for every page in navigator’s page stack.
+
+Since lifecycle events are normal DOM events and bubble up, you can add a listener to the document or any parent element of the page. The event object contains a reference to the page itself (`event.target`).
+
+```html
+<ons-page id="page1">This is a blank page</ons-page>
+
+<script>
+document.addEventListener('init', function(event) {
+  if (event.target.matches('#page1')) {
+    ons.notification.alert('Page 1 is initiated.');
+    // Set up content...
+  }
+}, false);
+</script>
+ ```
+
+#### Hooks
+
+Since v2.4.0 and thanks to the support for native `<template>` elements, lifecycle hooks are also available. Hooks are run at the same time as the corresponding events:
+
+```
+<template id="page1.html">
+  <ons-page id="page1">
+    <ons-toolbar>
+      <div class="center"></div>
+    </ons-toolbar>
+    <!-- More content here -->
+
+    <script>
+      document.querySelector('#page1').onInit = function() {
+        // Set up page's content or anything else
+        this.querySelector('ons-toolbar .center').innerHTML = 'Title';
+
+        this.onShow = function() { ... };
+        this.onHide = function() { ... };
+        this.onDestroy = function() { ... };
+      };
+    </script>
+  </ons-page>
+</template>
+```
+
+Keep in mind that there can only be 1 root node per template (an `ons-page`). Optionally, `<template>` elements allow `<script></script>` tags inside that run when the element is created and attached to the DOM.
+
+>  This script is evaluated in the global scope and anything that you write here might affect any other part of your app. For example, variables declared in this script will pollute the global scope unless it is wrapped inside a closure.
+
+  In the previous example, `ons-page` has `id="page1"` and it can be used to find the element and modify its `onInit` hook. Hook functions are bound to the page element so you can use `this`. Beware of, if you give an ID to the page, you should only create 1 instance of this page. Otherwise, use class or custom attributes.
+
+  It is up to the developer choosing between events or hooks. Events allow separating the view from the logic while hooks provide a more compact approach.

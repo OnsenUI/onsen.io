@@ -1,0 +1,14 @@
+<% @tocLinks = @findSectionLinks(@toc, @order) %>
+
+<hr>
+<div class="guide-links">
+
+<% if @tocLinks.prev: %>
+<span>← <a href="<%= @tocLinks.prev.link %>"><%= @tocLinks.prev.text.trim() %></a></span>
+<% end %>
+
+<% if @tocLinks.next: %>
+<span style="float: right"><a href="<%= @tocLinks.next.link %>"><%= @tocLinks.next.text.trim() %></a> →</span>
+<% end %>
+
+</div>

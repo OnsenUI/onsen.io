@@ -1,0 +1,52 @@
+---
+title: 'jQuery'
+order: 80
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### jQuery
+
+> Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
+
+#### Setup
+
+Using jQuery with Onsen UI is pretty simple.
+
+1. [Download Onsen UI](../installation.html).
+2. [Get jQuery](https://jquery.com).
+3. Load onsenui.js and 2 CSS files.
+3. Load jQuery.
+
+Onsen UI components can be used as other native DOM element.
+
+#### Example Installation
+
+The following code illustrates how to use jQuery with Onsen UI, both loaded from the CDN.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+    $(function(){
+      // Initialization code
+      $('ons-button').on('click', function(e) {
+        ons.notification.alert('Button is tapped!');
+      })
+    });
+  </script>
+  <ons-button>Click me!</ons-button>
+</body>
+</html>
+
+```
+<% end %>

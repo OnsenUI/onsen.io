@@ -26,7 +26,7 @@
   <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="<%= @title %>" />
+  <meta property="og:title" content="<%= @getPreparedTitle() %>" />
   <meta property="og:site_name" content="Onsen UI" />
   <meta property="og:url" content="<%= @site.url %>/<%= @path %>" />
   <meta property="og:image" content="<%= @site.url %>/images/logo/onsen_with_text.png" />
@@ -47,6 +47,7 @@
       hasAlternatePage: <% if @hasAlternateLangPage(): %>true<% else: %>false<% end %>
     };
   </script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.css" />
   <script>
     (function(h,o,t,j,a,r){
         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
@@ -61,25 +62,29 @@
 
 <body id="<%- @page %>">
 
-  <div class="header">
+  <div class="header<%= ' header-fixed' if @isGuide %>">
     <%- @partial('global-nav.html.eco') %>
-    <%- @partial('docs-nav.html.eco') %>
+    <% if @isGuide || @page == 'guide': %>
+      <!-- <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %> -->
+    <% else: %>
+      <%- @partial('docs-nav.html.eco') %>
+    <% end %>
   </div>
 
   <div class="container">
-		<% if @autotoc: %>
+		<% if @autotoc || @tocGroup: %>
 		<aside class="content-info content-info-page">
-			<div class="toc-title toc-title-no-toggle"><%=@tocTitle||"Table Of Contents"%></div>
 			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
 		</aside>
 		<% end %>
-    <div class="container-content">
+    <div class="container-content<%= ' headers-are-anchors' if @isGuide %>">
       <%- @contents %>
+      <%- @partial('guide_section_footer.html.eco') if @isGuide %>
       <%- @partial('need_help.html.eco') if @needHelp %>
     </div>
   </div>
 
-  <%- @partial('footer.html.eco') %>
+  <%- @partial('footer.html.eco', {skipInfo: true}) %>
 
   <%- @partial('popup.html.eco') %>
 
@@ -88,6 +93,15 @@
   <script src="/vendor/highlight.min.js"></script>
   <script src="/vendor/moment.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript"> docsearch({
+  apiKey: '898f1776da86432b7aa2ffa3632ba17e',
+  indexName: 'onsen',
+  inputSelector: '#docsearch',
+  debug: false // Set debug to true if you want to inspect the dropdown
+  });
+  </script>
 
  </body>
  </html>

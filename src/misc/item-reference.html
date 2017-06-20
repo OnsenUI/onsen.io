@@ -8,7 +8,7 @@ actionbar: false
 
 <div class="reference-container">
   <div class="breadcrumb">
-    <a href="/v2/docs/<%=@framework%>.html"><%=@frameworkName @framework%> Reference</a> &gt;
+    <a href="/v2/api/<%=@framework%>"><%=@frameworkName @framework%> Reference</a> &gt;
 
     <% if @extensionDoc and @extensionDoc.directive: %>
       <%= @extensionDoc.directive %>
@@ -30,7 +30,7 @@ actionbar: false
       <% else: %>
         <%= @doc.name %>
       <% end %>
-    <% end %>  
+    <% end %>
   </h2>
 
   <% if @doc.extensionOf: %>
@@ -52,7 +52,7 @@ actionbar: false
     <% if @doc.tutorial: %>
     <li><a href="#tutorial"><%= @translate '[en]Tutorial[/en][ja]実例[/ja]' %></a></li>
     <% else if @doc.examples and @doc.examples.length > 0: %>
-    <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>	
+    <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
     <% end %>
 
     <% if @ownedAttributes.length > 0: %>
@@ -134,7 +134,7 @@ actionbar: false
 
     <ul class="seealso">
       <% for guide in @doc.guides: %>
-        <li class="guide"><a href="/v2/docs/guide/<%= @framework %>/#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
+        <li class="guide"><a href="/v2/guide/<%= @framework %>/#<%= guide.name.trim() %>"><%- @markd @translate guide.description %></a></li>
       <% end %>
       <% for seealso in @doc.seealsos: %>
         <li class="seealso"><a href="<%= @mapKeywords seealso.name.trim() %>.html"><%- @markd @mapKeywords @translate seealso.description %></a></li>

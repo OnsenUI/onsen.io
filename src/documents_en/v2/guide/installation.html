@@ -1,0 +1,79 @@
+---
+title: 'Installation'
+order: 10
+tocGroup: guide
+tocTitle: Essentials
+layout: docs.html.eco
+---
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI/releases/latest';
+  var zipUrl = "";
+  $.getJSON(url, function(res) {
+    zipUrl = res.zipball_url;
+    $('#get-latest-build').text('Download Onsen UI (Version ' + res.name + ')')
+  });
+
+  $('#get-latest-build').click(function(event) {
+    if (zipUrl) {
+      event.preventDefault();
+      location.href = zipUrl;
+    }
+  });
+});
+</script>
+
+<%- @markdown => %>
+
+### Installation
+
+Onsen UI has several quick and easy ways to get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.
+
+<div class="install-row">
+  <div>
+    <p class="install-row-title">Onsen UI</p>
+    <p class="install-row-content">Compiled and minified JavaScript, CSS and resources. Web Components version.</p>
+    <a class="install-row-link" id="get-latest-build" href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest">Download Onsen UI</a>
+  </div>
+  <div>
+    <p class="install-row-title">Source Code</p>
+    <p class="install-row-content">Source CSS, JavaScript, and other related files. [Build instructions](/v2/guide/build.html).</p>
+    <a class="install-row-link" href="https://github.com/OnsenUI/OnsenUI/">See GitHub Repo</a>
+  </div>
+  <div>
+    <p class="install-row-title">Framwork Bindings</p>
+    <p class="install-row-content">
+      Onsen UI is framework agnostic. Pure JavaScript, jQuery, AngularJS, Angular 2+, React, Vue.js...
+    </p>
+    <a class="install-row-link" href="/v2/guide/frameworks">Read more</a>
+  </div>
+</div>
+
+
+#### Onsen UI CDN
+
+[Unpkg](https://unpkg.com/onsenui/) provides CDN support for Onsen UI's CSS and JavaScript. Just use these CDN links.
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+```
+
+#### Install with NPM
+
+You can also use the Node Package Manager (NPM) to install Onsen UI:
+
+```sh
+npm install onsenui --save
+```
+
+#### Command line tool to package for mobile apps - Monaca CLI
+
+Monaca CLI is deeply integrated with Onsen UI to provide a simple & quick build process for Cordova hybrid apps. Please refer to the [Monaca CLI Tutorial](https://docs.monaca.io/en/monaca_cli/tutorial/) to better understand the program's installation and workflow. For more detailed information on the development feature provided by Monaca, please refer to What is Monaca.
+
+#### Old Releases & Changelogs
+
+Onsen UI releases and changelogs can be seen at [OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases). The source repository is hosted in [OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/). Please give us a ★!
+
+<% end %>
