@@ -5,6 +5,23 @@ tocGroup: guide
 tocTitle: Essentials
 layout: docs.html.eco
 ---
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI/releases/latest';
+  var zipUrl = "";
+  $.getJSON(url, function(res) {
+    zipUrl = res.zipball_url;
+    $('#get-latest-build').text('Download Onsen UI (Version ' + res.name + ')')
+  });
+
+  $('#get-latest-build').click(function(event) {
+    if (zipUrl) {
+      event.preventDefault();
+      location.href = zipUrl;
+    }
+  });
+});
+</script>
 
 <%- @markdown => %>
 
@@ -16,7 +33,7 @@ Onsen UI has several quick and easy ways to get started, each one appealing to a
   <div>
     <p class="install-row-title">Onsen UI</p>
     <p class="install-row-content">Compiled and minified JavaScript, CSS and resources. Web Components version.</p>
-    <a class="install-row-link" href="https://github.com/OnsenUI/OnsenUI-dist/archive/master.zip">Download Onsen UI</a>
+    <a class="install-row-link" id="get-latest-build" href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest">Download Onsen UI</a>
   </div>
   <div>
     <p class="install-row-title">Source Code</p>
