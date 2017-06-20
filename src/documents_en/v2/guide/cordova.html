@@ -24,16 +24,18 @@ ons.ready(function() {
 
 #### Device Back Button
 
-For Android devices, Cordova fires a backbutton event on hardware back button. It is important to understand that this event is fired by Cordova so it requires cordova.js file or similars (loader.js in Monaca) to be included in the app.
+For Android devices, Cordova fires a `backbutton` event on hardware back button. It is important to understand that this event is fired by Cordova so it requires `cordova.js` file or similars (`loader.js` in Monaca) to be included in the app.
+
+> On desktop browsers you can simulate a `backbutton` event by pressing ESC.
 
 Onsen UI sets handlers with default behavior for Android back button in certain elements:
 
-- Dialogs: Closes the dialog if it’s cancelable (except Modals).
+- Dialogs: Closes the dialog if it’s cancelable (except Modals and Toasts).
 - Navigator: Pops a page if the page stack is not empty.
 - Splitter: Closes the menu if it’s open.
 - If the conditions are not met, these elements will call the parent element’s handler. The final global handler closes the app.
 
-While this is probably the desired behavior for many apps, Onsen UI allows to modify these handlers for better customization. To modify the app global handler (closing the app), the [`ons` object](../api/js/ons.html) provides few methods:
+While this is probably the desired behavior for many apps, Onsen UI allows modifying these handlers for better customization. To change the app global handler (closing the app), the [`ons` object](../api/js/ons.html) provides a few methods:
 
 ```
 // Disable or enable
