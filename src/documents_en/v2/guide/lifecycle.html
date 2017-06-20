@@ -63,7 +63,9 @@ Since v2.4.0 and thanks to the support for native `<template>` elements, lifecyc
 </template>
 ```
 
-Keep in mind that there can only be 1 root node per template (an `ons-page`). Optionally, `<template>` elements allow `<script></script>` tags inside that run when the element is created and attached to the DOM. Note that this is evaluated in the global scope and anything that you write here might affect any other part of your app. For example, variables declared in this script will pollute the global scope unless it is wrapped inside a closure.
+Keep in mind that there can only be 1 root node per template (an `ons-page`). Optionally, `<template>` elements allow `<script></script>` tags inside that run when the element is created and attached to the DOM.
+
+>  This script is evaluated in the global scope and anything that you write here might affect any other part of your app. For example, variables declared in this script will pollute the global scope unless it is wrapped inside a closure.
 
   In the previous example, `ons-page` has `id="page1"` and it can be used to find the element and modify its `onInit` hook. Hook functions are bound to the page element so you can use `this`. Beware of, if you give an ID to the page, you should only create 1 instance of this page. Otherwise, use class or custom attributes.
 
