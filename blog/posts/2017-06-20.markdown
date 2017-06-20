@@ -1,0 +1,411 @@
+---
+author: khemry
+date: 2017-06-20
+id: monaca-api-ai
+title: "Integrating Monaca with API.AI"
+product: monaca
+category: tutorial
+tags: onsen ui 2, monaca, api.ai, angular 1
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://onsen.io/blog/content/images/2017/Jun/api_ai_cover.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+![Cover Page](/blog/content/images/2017/Jun/api_ai_cover.png)
+
+In this article, you will learn how to create a Conversational app with [Google's api.ai](https://api.ai/). `api.ai` is a natural language interactions platform created by Google. We will demonstrate how to integrate [Google's api.ai](https://api.ai/) with [Monaca Cloud IDE](https://monaca.io/cloud.html) using Angular 1 and Onsen UI v2. The integration is done based on [the official Cordova plugin for api.ai](https://github.com/api-ai/apiai-cordova-client).
+
+Click [here](https://monaca.mobi/directimport?pid=5948e341ff2af2305254a9e6) to import this sample project directly into Monaca Cloud IDE.
+
+#### Tested Environments: Android 7.0 & iOS 10.1
+
+## Step 1: Setting up api.ai
+
+### Using Prebuilt Agents
+
+### Creating Agents
+
+### Creating Intents
+
+## Step 2: Starting a Monaca Project
+
+From Monaca Cloud IDE, create a new project with a template called `Onsen UI v2 Angular 1 Minimum`.
+
+## Step 3: Adding the Plugin
+
+1. From Monaca Cloud IDE, please import [twitter-connect-plugin](https://github.com/ManifestWebDesign/twitter-connect-plugin). For more details, please refer to [Add/Import Cordova Plugins](https://docs.monaca.io/en/manual/dependencies/cordova_plugin/#add-import-cordova-plugins).
+2. Add the `Fabric API Key` to the plugin's configuration.
+
+![Plugin Configuration](/blog/content/images/2017/Apr/twitter_plugin_config.png)
+
+## Step 4: It's Coding Time!
+
+![File Tree](/blog/content/images/2017/Jun/api_ai_file_tree.png)
+
+In this sample application, there are 4 main files such as:
+
+* `index.html` : The startup page consists of HTML, Onsen UI v2 and Angular 1 elements.
+* `style.css`: This is a stylesheet for the application.
+* `app.js`: An Angular 1 file containing a service and a controller used in the application.
+
+
+### index.html
+
+This is, of course, the main page of the application, the one loaded by default. Replace the following code to `index.html` file:
+
+```html
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+  <script type="text/javascript" src="js/app.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body ng-controller="HomeCtrl as home">
+
+<ons-tabbar var="myTabbar">
+    <ons-tab label="Text" page="text.html" active><ons-icon icon="ion-android-textsms" size="30px"></ons-icon></ons-tab>
+    <ons-tab label="Voice" page="voice.html"><ons-icon icon="ion-mic-a" size="30px"></ons-icon></ons-tab>
+    <ons-tab label="Settings" page="lang.html"><ons-icon icon="fa-language" size="30px"></ons-icon></ons-tab>
+</ons-tabbar>
+
+<ons-template id="text.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Monaca x API.AI</div>
+        </ons-toolbar>
+
+        <div class="page">
+            <h4>Text Conversation ({{current_lang}})</h4>
+            <ons-list>
+                <ons-list-item ng-repeat="rowContent in textRows" modifier="nodivider">
+                    <ons-row class="question"><span>{{rowContent.question}}</span></ons-row>
+                    <ons-row class="answer"><span>{{rowContent.answer}}</span></ons-row>
+                </ons-list-item>
+            </ons-list>
+        </div>
+        <div class="stay_bottom">
+            <ons-input type="text" ng-model="question" id="text-question" placeholder="Type your question here..."></ons-input>
+            <ons-button modifier="quiet" class="float-right" ng-click="sendText(question)"><ons-icon icon="ion-android-send" size="20px"></ons-icon></ons-button>
+        </div>    
+    </div>    
+    </ons-page>
+</ons-template>
+
+<ons-template id="voice.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Monaca x API.AI</div>
+        </ons-toolbar>
+
+        <div class="page">
+            <h4>Voice Converation ({{current_lang}})</h4>
+            <ons-list>
+                <ons-list-item ng-repeat="rowContent in voiceRows" modifier="nodivider">
+                    <ons-row class="question"><span>{{rowContent.question}}</span></ons-row>
+                    <ons-row class="answer"><span>{{rowContent.answer}}</span></ons-row>
+                </ons-list-item>
+            </ons-list>
+
+            <div class="stay_bottom voice">
+                <ons-button ng-click="sendVoice()">{{recordButton}}</ons-button>
+                <!--<ons-button ng-click="stop()">Stop Recording</ons-button>-->
+            </div>    
+        </div>
+    </ons-page>
+</ons-template>
+
+<ons-template id="lang.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Monaca x API.AI</div>
+        </ons-toolbar>
+
+        <div class="page">
+            <h4>Language Configuration</h4>
+            <p style="text-align: left">Selected Language: <b>{{current_lang}}</b></p>
+
+            <ons-list style="text-align: left">
+                <ons-list-header>Currently available languages</ons-list-header>
+                <ons-list-item ng-repeat="language in languages" ng-click="updateLanguage($index)" tappable>
+                    {{language.title}}
+                </ons-list-item>
+            </ons-list>
+        </div>
+    </ons-page>
+</ons-template>
+</body>
+</html>
+```
+
+This page contains two sections which is shown based on the login status (`login_status` variable) of the user in the application:
+
+1. Login section: This section is shown if there is no existing login information found in the device.
+
+  ![Text Converation (English)](/blog/content/images/2017/Jun/api_ai_en_text.png)
+
+2. Profile section: When the existing login info is found, this section will be displayed.
+
+  ![Voice Converation (English)](/blog/content/images/2017/Jun/api_ai_en_voice.png)
+
+### style.css
+
+There is a default empty `style.css` file after you creating a project with the specified template. Add the following code to it. The main purpose of this sheet is simply for the page and Twitter profile image.
+
+
+```css
+
+body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.list-item{
+    padding: 0 !important;
+}
+.list-item__center{
+    padding-right: 0 !important;
+}
+
+div.page {
+    width: 100%
+    text-align: center;
+    margin: 0px 10px 60px 10px;
+    overflow: scroll;
+}
+
+.question {
+    display: inline-block;
+    float: right;
+    float: right;
+    margin: 0 0 5px 50px;
+    text-align: right;
+}
+
+.answer {
+    display: inline-block;
+    float: left;
+    text-align: left;
+    margin: 0 50px 5px 0;
+}
+
+span {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.question span {
+    border-radius: 5px;
+    background-color: #0096ff;
+}
+
+.answer span {    
+    background-color: #ff7e79;
+}
+
+.stay_bottom {
+  position: fixed;
+  /*z-index: 200;*/
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  text-align: left;
+  text-align: center;
+  border: 1px solid #777;
+  border-radius: 3px;
+  width: inherit;
+  margin: 10px;
+}
+
+.voice {
+    border: 0;
+}
+
+#text-question {
+    width: 80%;
+    display: inline-block;
+    text-align: left;
+    padding: 5px;
+    float: left;
+}
+
+span.input-label {
+    display: none;
+}
+```
+
+### app.js
+
+This is an Angular 1 file containig a service and a controller used in the application. Add the following code to `app.js` file:
+
+```javascript
+var app = angular.module('myApp', ['onsen']);    
+
+app.factory('LanguageSettings', function() {
+    var language = {};
+    var languages = [
+        {
+            title: 'English',
+            clientAccessToken: '4d723adba6c8403ea4d4c2b5acc34045',
+            lang: 'en'
+        },
+        {
+            title: '日本語',
+            clientAccessToken: 'af2dc88346fc45fbade8f71a106a9dfb',
+            lang: 'ja'
+        }
+    ];
+    language.all_languages = languages;
+
+    language.selectedLanguage = {};
+
+    language.setSelectedLanguage = function(value) {
+        this.selectedLanguage = value;        
+        try {
+            ApiAIPlugin.init(
+                {
+                    clientAccessToken: value.clientAccessToken,
+                    lang: value.lang
+                },
+                function () {
+                    console.log("Init success");
+
+                },
+                function (error) {
+                    alert("Init error\n" + error);
+                });
+        } catch (e) {
+            alert(e);
+        }
+    };
+
+    return language;
+});
+
+app.controller('HomeCtrl', function($scope, LanguageSettings, $timeout) {
+    var language = {};
+    $scope.textRows = [];
+    $scope.voiceRows = [];
+    $scope.recordButton = "Start Recording";
+
+    ons.ready(function() {
+        //set default language to English
+        language = LanguageSettings;
+        language.setSelectedLanguage(language.all_languages[0]);
+    });
+
+    $timeout(function(){
+        $scope.current_lang = language.selectedLanguage.title;
+        $scope.languages = language.all_languages;
+    }, 3000);
+
+    $scope.sendText = function(inputText){
+        try {
+            ApiAIPlugin.requestText(
+                {
+                    query: inputText
+                },
+                function (response) {
+                    $scope.$apply(function () {
+                        var answer = response['result']['fulfillment']['speech'];
+                        $scope.textRows.push({
+                            question: inputText,
+                            answer: answer
+                        });
+                        $scope.question = "";
+                    });
+                },
+                function (error) {
+                    alert(error);
+                });
+        } catch (e) {
+            alert(e);
+        }
+    }
+
+    $scope.sendVoice = function() {
+        console.log("voice");
+        try {
+            ApiAIPlugin.setListeningStartCallback(function () {
+                console.log("listening started");
+                $scope.$apply(function () {
+                    $scope.recordButton = "Recording now...";
+                });
+            });
+            ApiAIPlugin.requestVoice(
+                {}, // empty for simple requests, some optional parameters can be here
+                function (response) {                   
+                    $scope.$apply(function () {
+                        $scope.recordButton = "Start Recording";
+                        var question = response['result']['resolvedQuery'];
+                        var answer = response['result']['fulfillment']['speech'];
+                        $scope.voiceRows.push({
+                            question: question,
+                            answer: answer
+                        });
+                    });
+                },
+                function (error) {
+                    ApiAIPlugin.stopListening();
+                    console.log("listening stopped");        
+                    $scope.$apply(function () {
+                        $scope.recordButton = "Start Recording";
+                    });
+                    alert(error);
+                }
+            );        
+        } catch (e) {
+            alert(e);
+            ApiAIPlugin.stopListening();
+            console.log("listening stopped");
+            $scope.$apply(function () {
+                $scope.recordButton = "Start Recording";
+            });
+        }
+    }
+
+    $scope.updateLanguage = function(index){
+        language.setSelectedLanguage(language.all_languages[index]);
+        $scope.current_lang = language.selectedLanguage.title;
+        $scope.textRows = [];
+        $scope.voiceRows = [];
+    }  
+});
+```
+
+Inside this file, there is service called `StorageService` to store the login information of the user using the device's Local Storage.
+
+There is also one controller called `HomeCtrl` which consists of two main functions such as `Login()` and `Logout()`. Inside the `Login()` function, `TwitterConnect.login()` is called asking the user the login with a valid Twitter account information.
+
+![Voice Conversation (Japanese)](/blog/content/images/2017/Jun/api_ai_lang.png)
+
+**NOTE**: If you have logged in with a Twitter application on your device, the information of that account will be shown automatically (see the screenshot below as example). If you want to login with a different account, please go to your Twitter application and change the account there.
+
+![Text Conversation (Japanese)](/blog/content/images/2017/Jun/api_ai_ja_text.png)
+
+After a successful login, `StorageService` is called to store the login information and you will be directed back to `home.html` page showing the profile information of the logged in user. Inside the `Logout()` function, a confirmation dialog is shown to confirm the activity (see the screenshot below). If the user selects `Yes`, the `TwitterConnect.logout()` function is called and `StorageService` is also called to remove the login information.
+
+**NOTE**: This `Logout()` function can only log the user out of this application, not the Twitter application.
+
+![Voice Conversation (Japanese)](/blog/content/images/2017/Jun/api_ai_ja_voice.png)
+
+
+## Conclusion
+
+Until this point, you have completed a conversational app with Monaca. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() it and install on your device.
