@@ -17,7 +17,7 @@ og:
 
 ![Cover Page](/blog/content/images/2017/Jun/api_ai_cover.png)
 
-In this article, you will learn how to create a conversational app with [Monaca Cloud IDE](https://monaca.io/cloud.html) and [Google's api.ai](https://api.ai/). `api.ai` is a natural language interactions platform created by Google. We will demonstrate how to integrate [Google's api.ai](https://api.ai/) with [Monaca Cloud IDE](https://monaca.io/cloud.html) using Angular 1 and Onsen UI v2. The integration is done based on [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin.
+In this article, you will learn how to create a conversational app with [Monaca Cloud IDE](https://monaca.io/cloud.html) and [api.ai](https://api.ai/). `api.ai` is a natural language interactions platform created by Google. We will demonstrate how to integrate [Google's api.ai](https://api.ai/) with [Monaca Cloud IDE](https://monaca.io/cloud.html) using Angular 1 and Onsen UI v2. The integration is done based on [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin.
 
 
 The implemented features of this sample application are:
@@ -41,7 +41,7 @@ In this sample application, we created two simple agents:
 
 Each agent has the same number of intents about daily conversation such as food, weather, greeting and so on.
 
-**Note:** We do not talk about how to create an agent or an intent in this article. Please refer to the official documentation on [how to get started with `api.ai`](https://docs.api.ai/docs/get-started).
+**Note:** We won't talk about how to create an agent or an intent in this article. Please refer to the official documentation on [how to get started with `api.ai`](https://docs.api.ai/docs/get-started).
 
 ## Step 1: Prerequisite
 
@@ -416,4 +416,4 @@ app.controller('HomeCtrl', function($scope, LanguageSettings, $timeout) {
 ```
 ## Conclusion
 
-Until this point, you have completed a conversational app with Monaca. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() and install it on your device.
+Now that you understand how to create a conversational app with Monaca using `api.ai`. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() and install it on your device.
