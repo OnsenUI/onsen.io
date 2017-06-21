@@ -1,0 +1,419 @@
+---
+author: khemry
+date: 2017-06-20
+id: monaca-api-ai
+title: "Integrating Monaca with API.AI"
+product: monaca
+category: tutorial
+tags: onsen ui 2, monaca, api.ai, angular 1
+# Open Graph protocol metadata
+og:
+  # Set og:image
+  image: https://onsen.io/blog/content/images/2017/Jun/api_ai_cover.png
+  twitter:
+    # Set type of Twitter Card: summary, summary_large_image
+    card: summary_large_image
+---
+
+![Cover Page](/blog/content/images/2017/Jun/api_ai_cover.png)
+
+In this article, you will learn how to create a conversational app with [Monaca Cloud IDE](https://monaca.io/cloud.html) and [api.ai](https://api.ai/). `api.ai` is a natural language interactions platform created by Google. We will demonstrate how to integrate [Google's api.ai](https://api.ai/) with [Monaca Cloud IDE](https://monaca.io/cloud.html) using Angular 1 and Onsen UI v2. The integration is done based on [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin.
+
+
+The implemented features of this sample application are:
+
+- text conversation in a predefined languages: English and Japanese
+- voice conversation in a predefined languages: English and Japanese
+- language settings: currently available languages are English and Japanese
+
+
+#### Tested Environments: Android 7.0 & iOS 10.1
+
+## Getting Started with api.ai
+
+API.AI is a natural language understanding platform that makes it easy for developers (and non-developers) to design and integrate intelligent and sophisticated conversational user interfaces into mobile apps, web applications, devices, and bots.
+
+An API.AI agent represents a conversational interface of the application. An intent determines what kind of user requests should be understood and to what actionable data (JSON response) those requests should be converted.
+
+In this sample application, we created two simple agents:
+- `MonacaAI_EN`: a conversational interface in English
+- `MonacaAI_JA`: a conversational interface in Japanese
+
+Each agent has the same number of intents about daily conversation such as food, weather, greeting and so on.
+
+**Note:** We won't talk about how to create an agent or an intent in this article. Please refer to the official documentation on [how to get started with `api.ai`](https://docs.api.ai/docs/get-started).
+
+## Step 1: Prerequisite
+
+In order to integrate `api.ai` with Monaca, `Client access token` of an agent is required to initialize with [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin.
+
+In order to find the `Client access token` of an agent, please do as follows:
+
+1. Go to [api.ai console](https://console.api.ai/).
+2. Select an agent.
+3. Click on `Settings` icon (see the screenshot below)
+
+![Settings icon](/blog/content/images/2017/Jun/api_ai_agent1.png)
+
+4. Then, the following page will be shown and you can find the `Client access token` here.
+
+![Client Access Token](/blog/content/images/2017/Jun/api_ai_agent2.png)
+
+## Step 2: Importing This Project into Monaca Cloud IDE
+
+[<img src="/blog/content/images/2017/Jun/api_ai_import.png" alt="Import the project into Monaca Cloud IDE">](https://monaca.mobi/directimport?pid=5948e341ff2af2305254a9e6)
+
+## Step 3: Understanding the Application
+
+![File Tree](/blog/content/images/2017/Jun/api_ai_file_tree.png)
+
+In this sample application, there are 3 main files such as:
+
+* `index.html` : The startup page consists of HTML, Onsen UI v2 and Angular 1 elements.
+* `style.css`: This is a stylesheet for the application.
+* `app.js`: An Angular 1 file containing a service and a controller used in the application.
+
+
+### index.html
+
+This is, of course, the main page of the application, the one loaded by default. As you can see, this application has 3 tabs represented by 3 pages: `text.html`, `voice.html` and `lang.html`. These 3 pages are created using [ons-template](https://onsen.io/v2/docs/angular1/ons-template.html) within `index.html` file.  
+
+![Text Converation (English)](/blog/content/images/2017/Jun/api_ai_ja_voice.png)
+
+In this section, we will explain how each page components are created. Firstly, we start by creating a tabbar component using [ons-tabbar](https://onsen.io/v2/docs/angular1/ons-tabbar.html). Here is a code snippet of the tabbar containing 3 tabs:
+
+```html
+[...]
+<ons-tabbar var="myTabbar">
+    <ons-tab label="Text" page="text.html" active><ons-icon icon="ion-android-textsms" size="30px"></ons-icon></ons-tab>
+    <ons-tab label="Voice" page="voice.html"><ons-icon icon="ion-mic-a" size="30px"></ons-icon></ons-tab>
+    <ons-tab label="Settings" page="lang.html"><ons-icon icon="fa-language" size="30px"></ons-icon></ons-tab>
+</ons-tabbar>
+[...]
+```
+
+Now let's start creating each required page using [ons-template](https://onsen.io/v2/docs/angular1/ons-template.html) component. The first page is `text.html` for a text conversation. Here is a code snippet of this page:
+
+```html
+[...]
+<ons-template id="text.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Monaca x API.AI</div>
+        </ons-toolbar>
+
+        <div class="page">
+            <h4>Text Conversation ({{current_lang}})</h4>
+            <ons-list>
+                <ons-list-item ng-repeat="rowContent in textRows" modifier="nodivider">
+                    <ons-row class="question"><span>{{rowContent.question}}</span></ons-row>
+                    <ons-row class="answer"><span>{{rowContent.answer}}</span></ons-row>
+                </ons-list-item>
+            </ons-list>
+        </div>
+        <div class="stay_bottom">
+            <ons-input type="text" ng-model="question" id="text-question" placeholder="Type your question here..."></ons-input>
+            <ons-button modifier="quiet" class="float-right" ng-click="sendText(question)"><ons-icon icon="ion-android-send" size="20px"></ons-icon></ons-button>
+        </div>    
+    </div>    
+    </ons-page>
+</ons-template>
+[...]
+```
+![Text Conversation (English)](/blog/content/images/2017/Jun/api_ai_en_text.png)
+
+The second page is `voice.html` for a voice conversation. In this page, a user will start asking a question by tapping on `START RECORDING` button. Then, the question will be sent and reply will be displayed. Here is a code snippet of this page:
+
+```html
+[...]
+<ons-template id="voice.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Monaca x API.AI</div>
+        </ons-toolbar>
+
+        <div class="page">
+            <h4>Voice Converation ({{current_lang}})</h4>
+            <ons-list>
+                <ons-list-item ng-repeat="rowContent in voiceRows" modifier="nodivider">
+                    <ons-row class="question"><span>{{rowContent.question}}</span></ons-row>
+                    <ons-row class="answer"><span>{{rowContent.answer}}</span></ons-row>
+                </ons-list-item>
+            </ons-list>
+
+            <div class="stay_bottom voice">
+                <ons-button ng-click="sendVoice()">{{recordButton}}</ons-button>
+                <!--<ons-button ng-click="stop()">Stop Recording</ons-button>-->
+            </div>    
+        </div>
+    </ons-page>
+</ons-template>
+[...]
+```
+
+![Voice Conversation (English)](/blog/content/images/2017/Jun/api_ai_en_voice.png)
+
+The last page is `lang.html` for setting the language of the conversation. In this page, the predefined languages will be displayed. Here is a code snippet of this page:
+
+```html
+[...]
+<ons-template id="lang.html">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Monaca x API.AI</div>
+        </ons-toolbar>
+
+        <div class="page">
+            <h4>Language Configuration</h4>
+            <p style="text-align: left">Selected Language: <b>{{current_lang}}</b></p>
+
+            <ons-list style="text-align: left">
+                <ons-list-header>Currently available languages</ons-list-header>
+                <ons-list-item ng-repeat="language in languages" ng-click="updateLanguage($index)" tappable>
+                    {{language.title}}
+                </ons-list-item>
+            </ons-list>
+        </div>
+    </ons-page>
+</ons-template>
+[...]
+```
+
+![Language Setting](/blog/content/images/2017/Jun/api_ai_lang.png)
+
+
+### style.css
+
+This is a stylesheet file for styling each page of the application. Here is a complete code for it.
+
+
+```css
+body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.list-item{
+    padding: 0 !important;
+}
+.list-item__center{
+    padding-right: 0 !important;
+}
+
+div.page {
+    width: 100%
+    text-align: center;
+    margin: 0px 10px 60px 10px;
+    overflow: scroll;
+}
+
+.question {
+    display: inline-block;
+    float: right;
+    float: right;
+    margin: 0 0 5px 50px;
+    text-align: right;
+}
+
+.answer {
+    display: inline-block;
+    float: left;
+    text-align: left;
+    margin: 0 50px 5px 0;
+}
+
+span {
+    display: inline-block;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.question span {
+    border-radius: 5px;
+    background-color: #0096ff;
+}
+
+.answer span {    
+    background-color: #ff7e79;
+}
+
+.stay_bottom {
+  position: fixed;
+  /*z-index: 200;*/
+  right: 0;
+  bottom: 50px;
+  left: 0;
+  text-align: left;
+  text-align: center;
+  border: 1px solid #777;
+  border-radius: 3px;
+  width: inherit;
+  margin: 10px;
+}
+
+.voice {
+    border: 0;
+}
+
+#text-question {
+    width: 80%;
+    display: inline-block;
+    text-align: left;
+    padding: 5px;
+    float: left;
+}
+
+span.input-label {
+    display: none;
+}
+```
+
+### <a name="app_js"></a> app.js
+
+This is an Angular 1 file containing a factory and a controller used in the application. In this sample application, we created two agents in `api.ai` representing Japanese and English conversations. The `LanguageSettings` factory is used to change the language of the conversation. It has the predefined information of the existing agents and a method to config which agent is used in the application. For example, you want to set the default language to English. This factory should be triggered as soon as the page is loaded. When it is called, it will trigger `ApiAIPlugin.init()` function to initialize the [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin with the selected agent, in this case it is the agent for English conversation. Here is the code snippet of this factory:
+
+```javascript
+app.factory('LanguageSettings', function() {
+    var language = {};
+    var languages = [
+        {
+            title: 'English',
+            clientAccessToken: '4d723adba6c8403ea4d4c2b5acc34045',
+            lang: 'en'
+        },
+        {
+            title: '日本語',
+            clientAccessToken: 'af2dc88346fc45fbade8f71a106a9dfb',
+            lang: 'ja'
+        }
+    ];
+    language.all_languages = languages;
+
+    language.selectedLanguage = {};
+
+    language.setSelectedLanguage = function(value) {
+        this.selectedLanguage = value;        
+        try {
+            ApiAIPlugin.init(
+                {
+                    clientAccessToken: value.clientAccessToken,
+                    lang: value.lang
+                },
+                function () {
+                    console.log("Init success");
+
+                },
+                function (error) {
+                    alert("Init error\n" + error);
+                });
+        } catch (e) {
+            alert(e);
+        }
+    };
+
+    return language;
+});
+```
+
+Next, we will talk about the `HomeCtrl` controller. In this controller, there are 3 main functions such as:
+- `sendText()`: send the user's text question to `api.ai` with the corresponding agent. After successfully receive a response, both question and corresponding answer will be displayed on `text.html` page.
+- `sendVoice()`: send the user's voice question to `api.ai` with the corresponding agent. After successfully receive a response, both question and corresponding answer will be displayed (as text) on `text.html` page.
+- `updateLanguage()`: update the language of the conversation based on the predefined agents.
+
+Here is the code snippet of this controller:
+
+```javascript
+app.controller('HomeCtrl', function($scope, LanguageSettings, $timeout) {
+    var language = {};
+    $scope.textRows = [];
+    $scope.voiceRows = [];
+    $scope.recordButton = "Start Recording";
+
+    ons.ready(function() {
+        //set default language to English
+        language = LanguageSettings;
+        language.setSelectedLanguage(language.all_languages[0]);
+    });
+
+    $timeout(function(){
+        $scope.current_lang = language.selectedLanguage.title;
+        $scope.languages = language.all_languages;
+    }, 3000);
+
+    $scope.sendText = function(inputText){
+        try {
+            ApiAIPlugin.requestText(
+                {
+                    query: inputText
+                },
+                function (response) {
+                    $scope.$apply(function () {
+                        var answer = response['result']['fulfillment']['speech'];
+                        $scope.textRows.push({
+                            question: inputText,
+                            answer: answer
+                        });
+                        $scope.question = "";
+                    });
+                },
+                function (error) {
+                    alert(error);
+                });
+        } catch (e) {
+            alert(e);
+        }
+    }
+
+    $scope.sendVoice = function() {
+        console.log("voice");
+        try {
+            ApiAIPlugin.setListeningStartCallback(function () {
+                console.log("listening started");
+                $scope.$apply(function () {
+                    $scope.recordButton = "Recording now...";
+                });
+            });
+            ApiAIPlugin.requestVoice(
+                {}, // empty for simple requests, some optional parameters can be here
+                function (response) {                   
+                    $scope.$apply(function () {
+                        $scope.recordButton = "Start Recording";
+                        var question = response['result']['resolvedQuery'];
+                        var answer = response['result']['fulfillment']['speech'];
+                        $scope.voiceRows.push({
+                            question: question,
+                            answer: answer
+                        });
+                    });
+                },
+                function (error) {
+                    ApiAIPlugin.stopListening();
+                    console.log("listening stopped");        
+                    $scope.$apply(function () {
+                        $scope.recordButton = "Start Recording";
+                    });
+                    alert(error);
+                }
+            );        
+        } catch (e) {
+            alert(e);
+            ApiAIPlugin.stopListening();
+            console.log("listening stopped");
+            $scope.$apply(function () {
+                $scope.recordButton = "Start Recording";
+            });
+        }
+    }
+
+    $scope.updateLanguage = function(index){
+        language.setSelectedLanguage(language.all_languages[index]);
+        $scope.current_lang = language.selectedLanguage.title;
+        $scope.textRows = [];
+        $scope.voiceRows = [];
+    }  
+});
+```
+## Conclusion
+
+Now that you understand how to create a conversational app with Monaca using `api.ai`. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() and install it on your device.

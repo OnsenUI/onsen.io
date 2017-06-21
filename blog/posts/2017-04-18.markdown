@@ -4,7 +4,7 @@ date: 2017-04-18
 id: monaca-twitter-single-sign-on
 title: "Creating Twitter Single Sign On App with Monaca using Angular 1 and Onsen UI v2"
 product: monaca
-category: announcement
+category: tutorial
 tags: onsen ui, monaca, twitter, authentication, angular 1
 # Open Graph protocol metadata
 og:
@@ -27,7 +27,7 @@ In this article, you will learn how to use Twitter Single Sign On (SSO) with [Mo
 
 You are required to obtain `Consumer Key` and `Consumer Secret` by registering your Monaca app with Twitter Apps page. Please do as follows:
 
-1. Go to [Twitter Apps page](https://apps.twitter.com/) and sign in with a valid Twitter account. 
+1. Go to [Twitter Apps page](https://apps.twitter.com/) and sign in with a valid Twitter account.
 2. Click on `Create New App` button.
 3. Fill in the information of your app such as: Name, Description, Website and Callback URL (optional). Then, tick `Yes, I have read and agree to the Twitter Developer Agreement.` and click `Create your Twitter application` button.
 4. Go to `Settings` tab and tick `Allow this application to be used to Sign in with Twitter`. Then, click `Update Settings` button.
@@ -81,7 +81,7 @@ In this sample application, there are 4 main files such as:
 
 * `index.html` and `home.html`: Each one of these pages is a combination of HTML, Onsen UI v2 and Angular 1 elements.
 * `style.css`: This is a stylesheet for the application.
-* `app.js`: An Angular 1 file containig a service and a controller used in the application.
+* `app.js`: An Angular 1 file containing a service and a controller used in the application.
 
 
 ### index.html
@@ -100,7 +100,7 @@ This is, of course, the main page of the application, the one loaded by default.
     <script src="lib/onsenui/js/onsenui.min.js"></script>
     <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
     <script src="js/app.js"></script>
-    
+
     <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
@@ -113,12 +113,12 @@ This is, of course, the main page of the application, the one loaded by default.
 </html>
 ```
 
-As you can see, inside the body there is only an [<ons-navigator>](https://onsen.io/v2/docs/angular1/ons-navigator.html) component. It provides page stack management and navigation. The attribute `page` is used to identify the first page in the stack. Since we have only one main page in this sample application, `home.html` (will be described in the next section) is of course the first in the page stack and will be loaded as soon as the `index.html` file is completed. 
+As you can see, inside the body there is only an [<ons-navigator>](https://onsen.io/v2/docs/angular1/ons-navigator.html) component. It provides page stack management and navigation. The attribute `page` is used to identify the first page in the stack. Since we have only one main page in this sample application, `home.html` (will be described in the next section) is of course the first in the page stack and will be loaded as soon as the `index.html` file is completed.
 
 
 ### home.html
 
-Please create a `home.html` file with the following content: 
+Please create a `home.html` file with the following content:
 
 ```html
 <ons-page ng-controller="HomeCtrl as home" ng-init="CheckLoginStatus()">
@@ -159,17 +159,17 @@ This page contains two sections which is shown based on the login status (`login
   ![Login Section](/blog/content/images/2017/Apr/twitter_home.png)
 
 2. Profile section: When the existing login info is found, this section will be displayed.
-  
+
   ![Profile Section](/blog/content/images/2017/Apr/twitter_profile.png)
 
 ### style.css
 
-There is a default empty `style.css` file after you creating a project with the specified template. Add the following code to it. The main purpose of this sheet is simply for the page and Twitter profile image. 
+There is a default empty `style.css` file after you creating a project with the specified template. Add the following code to it. The main purpose of this sheet is simply for the page and Twitter profile image.
 
 
 ```css
 div.page {
-   padding: 5%; 
+   padding: 5%;
    text-align: center;
 }
 
@@ -224,15 +224,15 @@ ons.bootstrap()
         } else {
             console.log('Login info is found!');
             $scope.login_status = 1;
-            
+
         }
     }
-    
+
     $scope.Login = function(){
         TwitterConnect.login(
             function(result) {
             console.log('Successful login!');
-            
+
             TwitterConnect.showUser(
                 function(user) {
                     //Get larger profile picture
@@ -257,7 +257,7 @@ ons.bootstrap()
             }
         );   
     }
-    
+
     var LogoutFromTwitter = function(){
         TwitterConnect.logout(
             function() {
@@ -270,7 +270,7 @@ ons.bootstrap()
             }
         );  
     }
-    
+
     $scope.Logout = function(){
         ons.notification.confirm({
             message: "Are you sure you want to log out?",
@@ -290,11 +290,11 @@ ons.bootstrap()
 });
 ```
 
-Inside this file, there is service called `StorageService` to store the login information of the user using the device's Local Storage. 
+Inside this file, there is service called `StorageService` to store the login information of the user using the device's Local Storage.
 
-There is also one controller called `HomeCtrl` which consists of two main functions such as `Login()` and `Logout()`. Inside the `Login()` function, `TwitterConnect.login()` is called asking the user the login with a valid Twitter account information. 
+There is also one controller called `HomeCtrl` which consists of two main functions such as `Login()` and `Logout()`. Inside the `Login()` function, `TwitterConnect.login()` is called asking the user the login with a valid Twitter account information.
 
-**NOTE**: If you have logged in with a Twitter application on your device, the information of that account will be shown automatically (see the screenshot below as example). If you want to login with a different account, please go to your Twitter application and change the account there. 
+**NOTE**: If you have logged in with a Twitter application on your device, the information of that account will be shown automatically (see the screenshot below as example). If you want to login with a different account, please go to your Twitter application and change the account there.
 
 ![Authentication](/blog/content/images/2017/Apr/twitter_authentication.png)
 
@@ -308,5 +308,3 @@ After a successful login, `StorageService` is called to store the login informat
 ## Conclusion
 
 Until this point, you have completed a Twitter SSO app with Monaca. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() it and install on your device.
-
-
