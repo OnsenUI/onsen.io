@@ -17,36 +17,57 @@ og:
 
 ![Cover Page](/blog/content/images/2017/Jun/api_ai_cover.png)
 
-In this article, you will learn how to create a Conversational app with [Google's api.ai](https://api.ai/). `api.ai` is a natural language interactions platform created by Google. We will demonstrate how to integrate [Google's api.ai](https://api.ai/) with [Monaca Cloud IDE](https://monaca.io/cloud.html) using Angular 1 and Onsen UI v2. The integration is done based on [the official Cordova plugin for api.ai](https://github.com/api-ai/apiai-cordova-client).
+In this article, you will learn how to create a conversational app with [Monaca Cloud IDE](https://monaca.io/cloud.html) and [Google's api.ai](https://api.ai/). `api.ai` is a natural language interactions platform created by Google. We will demonstrate how to integrate [Google's api.ai](https://api.ai/) with [Monaca Cloud IDE](https://monaca.io/cloud.html) using Angular 1 and Onsen UI v2. The integration is done based on [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin.
 
-Click [here](https://monaca.mobi/directimport?pid=5948e341ff2af2305254a9e6) to import this sample project directly into Monaca Cloud IDE.
+
+The implemented features of this sample application are:
+
+- text conversation in a predefined languages: English and Japanese
+- voice conversation in a predefined languages: English and Japanese
+- language settings: currently available languages are English and Japanese
+
 
 #### Tested Environments: Android 7.0 & iOS 10.1
 
-## Step 1: Setting up api.ai
+## Getting Started with api.ai
 
-### Using Prebuilt Agents
+API.AI is a natural language understanding platform that makes it easy for developers (and non-developers) to design and integrate intelligent and sophisticated conversational user interfaces into mobile apps, web applications, devices, and bots.
 
-### Creating Agents
+An API.AI agent represents a conversational interface of the application. An intent determines what kind of user requests should be understood and to what actionable data (JSON response) those requests should be converted.
 
-### Creating Intents
+In this sample application, we created two simple agents:
+- `MonacaAI_EN`: a conversational interface in English
+- `MonacaAI_JA`: a conversational interface in Japanese
 
-## Step 2: Starting a Monaca Project
+Each agent has the same number of intents about daily conversation such as food, weather, greeting and so on.
 
-From Monaca Cloud IDE, create a new project with a template called `Onsen UI v2 Angular 1 Minimum`.
+**Note:** We do not talk about how to create an agent or an intent in this article. Please refer to the official documentation on [how to get started with `api.ai`](https://docs.api.ai/docs/get-started).
 
-## Step 3: Adding the Plugin
+## Step 1: Prerequisite
 
-1. From Monaca Cloud IDE, please import [twitter-connect-plugin](https://github.com/ManifestWebDesign/twitter-connect-plugin). For more details, please refer to [Add/Import Cordova Plugins](https://docs.monaca.io/en/manual/dependencies/cordova_plugin/#add-import-cordova-plugins).
-2. Add the `Fabric API Key` to the plugin's configuration.
+In order to integrate `api.ai` with Monaca, `Client access token` of an agent is required to initialize with [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin.
 
-![Plugin Configuration](/blog/content/images/2017/Apr/twitter_plugin_config.png)
+In order to find the `Client access token` of an agent, please do as follows:
 
-## Step 4: It's Coding Time!
+1. Go to [api.ai console](https://console.api.ai/).
+2. Select an agent.
+3. Click on `Settings` icon (see the screenshot below)
+
+![Settings icon](/blog/content/images/2017/Jun/api_ai_agent1.png)
+
+4. Then, the following page will be shown and you can find the `Client access token` here.
+
+![Client Access Token](/blog/content/images/2017/Jun/api_ai_agent2.png)
+
+## Step 2: Importing This Project into Monaca Cloud IDE
+
+[<img src="/blog/content/images/2017/Jun/api_ai_import.png" alt="Import the project into Monaca Cloud IDE">](https://monaca.mobi/directimport?pid=5948e341ff2af2305254a9e6)
+
+## Step 3: Understanding the Application
 
 ![File Tree](/blog/content/images/2017/Jun/api_ai_file_tree.png)
 
-In this sample application, there are 4 main files such as:
+In this sample application, there are 3 main files such as:
 
 * `index.html` : The startup page consists of HTML, Onsen UI v2 and Angular 1 elements.
 * `style.css`: This is a stylesheet for the application.
@@ -55,34 +76,26 @@ In this sample application, there are 4 main files such as:
 
 ### index.html
 
-This is, of course, the main page of the application, the one loaded by default. Replace the following code to `index.html` file:
+This is, of course, the main page of the application, the one loaded by default. As you can see, this application has 3 tabs represented by 3 pages: `text.html`, `voice.html` and `lang.html`. These 3 pages are created using [ons-template](https://onsen.io/v2/docs/angular1/ons-template.html) within `index.html` file.  
+
+![Text Converation (English)](/blog/content/images/2017/Jun/api_ai_ja_voice.png)
+
+In this section, we will explain how each page components are created. Firstly, we start by creating a tabbar component using [ons-tabbar](https://onsen.io/v2/docs/angular1/ons-tabbar.html). Here is a code snippet of the tabbar containing 3 tabs:
 
 ```html
-<!DOCTYPE HTML>
-<html ng-app="myApp">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
-  <script src="components/loader.js"></script>
-  <script src="lib/angular/angular.min.js"></script>
-  <script src="lib/onsenui/js/onsenui.min.js"></script>
-  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
-  <script type="text/javascript" src="js/app.js"></script>
-
-  <link rel="stylesheet" href="components/loader.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
-  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body ng-controller="HomeCtrl as home">
-
+[...]
 <ons-tabbar var="myTabbar">
     <ons-tab label="Text" page="text.html" active><ons-icon icon="ion-android-textsms" size="30px"></ons-icon></ons-tab>
     <ons-tab label="Voice" page="voice.html"><ons-icon icon="ion-mic-a" size="30px"></ons-icon></ons-tab>
     <ons-tab label="Settings" page="lang.html"><ons-icon icon="fa-language" size="30px"></ons-icon></ons-tab>
 </ons-tabbar>
+[...]
+```
 
+Now let's start creating each required page using [ons-template](https://onsen.io/v2/docs/angular1/ons-template.html) component. The first page is `text.html` for a text conversation. Here is a code snippet of this page:
+
+```html
+[...]
 <ons-template id="text.html">
     <ons-page>
         <ons-toolbar>
@@ -105,7 +118,14 @@ This is, of course, the main page of the application, the one loaded by default.
     </div>    
     </ons-page>
 </ons-template>
+[...]
+```
+![Text Conversation (English)](/blog/content/images/2017/Jun/api_ai_en_text.png)
 
+The second page is `voice.html` for a voice conversation. In this page, a user will start asking a question by tapping on `START RECORDING` button. Then, the question will be sent and reply will be displayed. Here is a code snippet of this page:
+
+```html
+[...]
 <ons-template id="voice.html">
     <ons-page>
         <ons-toolbar>
@@ -128,7 +148,15 @@ This is, of course, the main page of the application, the one loaded by default.
         </div>
     </ons-page>
 </ons-template>
+[...]
+```
 
+![Voice Conversation (English)](/blog/content/images/2017/Jun/api_ai_en_voice.png)
+
+The last page is `lang.html` for setting the language of the conversation. In this page, the predefined languages will be displayed. Here is a code snippet of this page:
+
+```html
+[...]
 <ons-template id="lang.html">
     <ons-page>
         <ons-toolbar>
@@ -148,27 +176,18 @@ This is, of course, the main page of the application, the one loaded by default.
         </div>
     </ons-page>
 </ons-template>
-</body>
-</html>
+[...]
 ```
 
-This page contains two sections which is shown based on the login status (`login_status` variable) of the user in the application:
+![Language Setting](/blog/content/images/2017/Jun/api_ai_lang.png)
 
-1. Login section: This section is shown if there is no existing login information found in the device.
-
-  ![Text Converation (English)](/blog/content/images/2017/Jun/api_ai_en_text.png)
-
-2. Profile section: When the existing login info is found, this section will be displayed.
-
-  ![Voice Converation (English)](/blog/content/images/2017/Jun/api_ai_en_voice.png)
 
 ### style.css
 
-There is a default empty `style.css` file after you creating a project with the specified template. Add the following code to it. The main purpose of this sheet is simply for the page and Twitter profile image.
+This is a stylesheet file for styling each page of the application. Here is a complete code for it.
 
 
 ```css
-
 body {
     width: 100%;
     height: 100%;
@@ -250,13 +269,11 @@ span.input-label {
 }
 ```
 
-### app.js
+### <a name="app_js"></a> app.js
 
-This is an Angular 1 file containig a service and a controller used in the application. Add the following code to `app.js` file:
+This is an Angular 1 file containing a factory and a controller used in the application. In this sample application, we created two agents in `api.ai` representing Japanese and English conversations. The `LanguageSettings` factory is used to change the language of the conversation. It has the predefined information of the existing agents and a method to config which agent is used in the application. For example, you want to set the default language to English. This factory should be triggered as soon as the page is loaded. When it is called, it will trigger `ApiAIPlugin.init()` function to initialize the [apiai-cordova-client](https://github.com/api-ai/apiai-cordova-client) plugin with the selected agent, in this case it is the agent for English conversation. Here is the code snippet of this factory:
 
 ```javascript
-var app = angular.module('myApp', ['onsen']);    
-
 app.factory('LanguageSettings', function() {
     var language = {};
     var languages = [
@@ -297,7 +314,16 @@ app.factory('LanguageSettings', function() {
 
     return language;
 });
+```
 
+Next, we will talk about the `HomeCtrl` controller. In this controller, there are 3 main functions such as:
+- `sendText()`: send the user's text question to `api.ai` with the corresponding agent. After successfully receive a response, both question and corresponding answer will be displayed on `text.html` page.
+- `sendVoice()`: send the user's voice question to `api.ai` with the corresponding agent. After successfully receive a response, both question and corresponding answer will be displayed (as text) on `text.html` page.
+- `updateLanguage()`: update the language of the conversation based on the predefined agents.
+
+Here is the code snippet of this controller:
+
+```javascript
 app.controller('HomeCtrl', function($scope, LanguageSettings, $timeout) {
     var language = {};
     $scope.textRows = [];
@@ -388,24 +414,6 @@ app.controller('HomeCtrl', function($scope, LanguageSettings, $timeout) {
     }  
 });
 ```
-
-Inside this file, there is service called `StorageService` to store the login information of the user using the device's Local Storage.
-
-There is also one controller called `HomeCtrl` which consists of two main functions such as `Login()` and `Logout()`. Inside the `Login()` function, `TwitterConnect.login()` is called asking the user the login with a valid Twitter account information.
-
-![Voice Conversation (Japanese)](/blog/content/images/2017/Jun/api_ai_lang.png)
-
-**NOTE**: If you have logged in with a Twitter application on your device, the information of that account will be shown automatically (see the screenshot below as example). If you want to login with a different account, please go to your Twitter application and change the account there.
-
-![Text Conversation (Japanese)](/blog/content/images/2017/Jun/api_ai_ja_text.png)
-
-After a successful login, `StorageService` is called to store the login information and you will be directed back to `home.html` page showing the profile information of the logged in user. Inside the `Logout()` function, a confirmation dialog is shown to confirm the activity (see the screenshot below). If the user selects `Yes`, the `TwitterConnect.logout()` function is called and `StorageService` is also called to remove the login information.
-
-**NOTE**: This `Logout()` function can only log the user out of this application, not the Twitter application.
-
-![Voice Conversation (Japanese)](/blog/content/images/2017/Jun/api_ai_ja_voice.png)
-
-
 ## Conclusion
 
-Until this point, you have completed a conversational app with Monaca. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() it and install on your device.
+Until this point, you have completed a conversational app with Monaca. Now, you can start testing your app with [Monaca Debugger](). Then, try to [build]() and install it on your device.
