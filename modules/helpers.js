@@ -118,10 +118,10 @@ module.exports = function() {
         return new Date().getFullYear();
       },
 
-      getTutorialUrl: function(page, string) {
+      getTutorialUrl: function(page, string, docs) {
         //"vanilla/Reference/carousel"
         var tutorial_url = function(match, p1, p2, p3) {
-          return 'https://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3;
+          return 'https://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3 + '&docs=' + (docs != null ? docs.toString() : 'true');
         };
         return string.replace(/(.+)\/(.+)\/(.+)/, tutorial_url);
       },
