@@ -9,19 +9,19 @@
 }
 
 .desktop-query(@rules) {
-  @media (min-width: @width) {
+  @media @largescreen {
     & { @rules(); }
   }
 }
 
 .tablet-query(@rules) {
-  @media (max-width: @width) {
+  @media @smallscreen {
     & { @rules(); }
   }
 }
 
 .mobile-query(@rules) {
-  @media (max-width: @mobile-width) {
+  @media @mobilescreen {
     & { @rules(); }
   }
 }
@@ -444,7 +444,7 @@
       margin: auto;
     }
 
-    @media (max-width: @mobile-width) {
+    @media @mobilescreen {
       width: 300px;
 
       .input-email-popup-newsletter {
@@ -461,7 +461,7 @@
   }
 
   &-email {
-    @media (max-width: @mobile-width) {
+    @media @mobilescreen {
       width: 200px;
     }
     width: 300px;

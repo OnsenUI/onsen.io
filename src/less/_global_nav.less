@@ -47,6 +47,10 @@
       background-color: white;
       color: #666;
     }
+
+    @media @smallscreen {
+      display: none;
+    }
   }
 
   &-menu {
@@ -100,7 +104,7 @@
           bottom: -8px;
         }
 
-        @media @smallscreen {
+        @media @mobilescreen {
           > a {
             color: #333333 !important;
           }
@@ -123,7 +127,7 @@
       border-top: 6px solid rgb(255, 255, 255);
     }
 
-    @media @smallscreen {
+    @media @mobilescreen {
       z-index: 10000;
       display: none;
       position: absolute;
@@ -187,7 +191,7 @@
     display: none;
   }
 
-  @media @smallscreen {
+  @media @mobilescreen {
     .global-nav-toggle {
       height: 22px;
       width: 22px;
@@ -217,7 +221,7 @@
     display: none;
     position: relative;
 
-    @media @smallscreen {
+    @media @mobilescreen {
       display: block;
     }
 
