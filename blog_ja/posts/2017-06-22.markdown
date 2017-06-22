@@ -1,6 +1,6 @@
 ---
 author: atsushi
-date: 2017-04-27
+date: 2017-06-22
 id: monaca-with-computer-vision-api
 title: "Computer Vision APIを使って簡単に写真解析アプリを作る"
 product: monaca
@@ -15,11 +15,13 @@ og:
     card: summary_large_image
 ---
 
-Web APIを使うと個人や一企業で開発する以上の機能やデータが簡単に手に入ります。多くは自社の保有するデータをオープンにするWeb APIが多いですが、中には機能をWeb APIとして公開するものもあります。
+Web APIを使うと個人や一企業で開発する以上の機能やデータが簡単に手に入ります。多くは自社の保有するデータをオープンにするWeb APIが多いですが、中には各種機能をWeb APIとして公開するものもあります。
 
-今回はそんな機能を提供するWeb APIの一つ、Microsoft Cognitive Servicesの一つ、Computer Vision APIをMonacaと組み合わせてみたいと思います。作るのはディープラーニングのサンプルとしてよく見られる、写真に写っているものを判別するアプリです。
+今回はそんな機能を提供するWeb APIの中から、Microsoft Cognitive Servicesを利用してアプリを作成します。
 
-## 実際の動作について
+Microsoft Cognitive Servicesには顔認識、音声認識、言語解析などの様々な機能がありますが、今回は画像を分析するComputer Vision APIをMonacaと組み合わせてみたいと思います。作るのはディープラーニングのサンプルとしてよく見られる、写真に写っているものを判別するアプリです。
+
+## 今回作成するアプリ
 
 まずは動作を紹介します。なお、今回はOnsen UIを使っています。最初はこのように何も表示されていません。
 
@@ -31,16 +33,28 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
 
 それでは作っていきましょう。
 
-## ベースについて
+## Computer Vision APIの利用登録
 
-今回はOnsen UI V2 JS Minimumを使っています。画面遷移がない一画面のアプリであったり、よりカスタマイズする場合はこれをベースにすると良いでしょう。
+[Computer Vision API](https://azure.microsoft.com/ja-jp/services/cognitive-services/computer-vision/) のサイトでアカウントを作成します。
+試用版も利用可能です。
 
-また、jQueryとJavaScript-Load-ImageをJS/CSSの追加と削除から登録しています。JavaScript-Load-Imageは後述する、写真を正しく表示するためのライブラリです。js-load-imageと検索して追加してください。
+試用版のアカウントを作成すると、以下の画面が表示されます。
+
+![](/blog/content/images/2017/Apr/computer-vision-3.png)
+
+`エンドポイント` と `キー１` の値は後ほど利用します。
+
+## Monacaでのアプリ作成
+
+ベースのテンプレートにはOnsen UI V2 JS Minimumを使っています。
+
+また、jQueryとJavaScript-Load-ImageをJS/CSSの追加と削除から登録しています。JavaScript-Load-Imageは後述する、写真を正しく表示するためのライブラリです。`js-load-image` で検索して追加してください。
 
 ## HTMLについて
 
 今回のHTMLは写真のプレビュー、ファイル選択そして読み取った情報を一覧表示する部分で構成されています。
 
+```
       <ons-page>
       	<p style="text-align:center" id="preview">
     	  	<ons-icon size="250px" icon="photo"></ons-icon>
@@ -56,51 +70,62 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
     	    </ons-list>
         </p>
     </ons-page>
+```
 
 ## JavaScriptについて
 
-次にJavaScriptの実装です。大きく分けて以下の処理があります。
+次にJavaScriptの実装です。今回のアプリでは大きく分けて以下の処理があります。
 
 1. 変数の定義、初期化
 2. 指定された画像をCanvasタグで描画
 3. 指定された画像をComputer Vision APIに送信
 4. 返却された内容を描画
 
-まず大枠でのJavaScriptです。Onsen UIではDOM構築などが完了すると ons.ready が呼ばれます。
+まず、Onsen UIではDOM構築などが完了すると ons.ready が呼ばれます。
 
+```
     ons.ready(function() {
       // 処理はこの中に記述していきます
     });
+```
 
-また、処理はすべてファイルを選択したタイミングに開始されます。
+1～4の処理は、画像ファイルを選択したタイミングで実行します。
 
+```
     ons.ready(function() {
       // ファイルを選択したら呼ばれるイベント
       $("#file").on("change", function(e) {
         // 処理はこの中に記述していきます
       });
     });
+```
 
 ### 変数の定義、初期化
 
-まず変数を定義、初期化します。YOUR_SUBSCRIPTION_KEYは自分で取得したものと差し替えてください。
+まず変数を定義、初期化します。`ENDPOINT` は 先ほど取得した `エンドポイント` に、`YOUR_SUBSCRIPTION_KEY` は先ほど取得した `キー１` にそれぞれ差し替えてください。
 
+```
     // ファイルを取得
     var f = e.target.files[0];
     if (!f)
       return;
     
+    // エンドポイントを設定
+    var ENDPOINT = "YOUR_ENDPOINT";
+
     // サブスクリプションキーを設定
     var SUBSCRIPTION_KEY = "YOUR_SUBSCRIPTION_KEY";
     
     // 描画のリセット
     $("#preview").html("");
     $("#info").html("");
+```
 
 ### 指定された画像をCanvasタグで描画
 
 次に取得したファイルオブジェクト（f）を使ってCanvasタグ内に画像を描画します。今回はJavaScript-Load-Imageというライブラリを使います。このライブラリを使うと画像の回転（Orientation）を読み込んで画像を正しく表示できるようになります。
 
+```
     // 画像を表示する処理
     loadImage.parseMetaData(f, function (data) {
       var options = {canvas: true, maxWidth: 320};
@@ -111,11 +136,13 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
         $("#preview").html(canvas);
       }, options);
     });
+```
 
  ### 指定された画像をComputer Vision APIに送信
 
-そしてもう一つの処理として指定された画像をComputer Vision APIへ送ります。こちらは画像ではなくArrayBufferとしてデータを取得します。visualFeaturesパラメータでは取得したい内容を指定できます。これはCognitive Services APIs Referenceを参考にしてください。言語は現在のところenまたはzh（簡体中国語）となっています。
+そしてもう一つの処理として指定された画像をComputer Vision APIへ送ります。こちらは画像ではなくArrayBufferとしてデータを取得します。visualFeaturesパラメータでは取得したい内容を指定できます。これはCognitive Services APIs Referenceを参考にしてください。言語は現在のところenまたはzh（簡体中国語）にのみ対応しています。
 
+```
     // ファイルとして読み込み
     var r = new FileReader();
     r.onload = function(e) {
@@ -131,7 +158,7 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
       
       // Ajaxを実行
       $.ajax({
-        url: "https://eastus2.api.cognitive.microsoft.com/vision/v1.0/analyze?" + $.param(params),
+        url: ENDPOINT + "/analyze?" + $.param(params),
         contentType: "application/octet-stream",
         headers: {
           "Ocp-Apim-Subscription-Key": SUBSCRIPTION_KEY
@@ -150,11 +177,13 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
       });
     }
     r.readAsArrayBuffer(f);
+```
 
 ### 返却された内容を描画
 
 最後に処理結果がうまくいった場合です。まず顔データがあれば、そのデータを使ってCanvasタグ内に枠線を引きます。後は取得できるメタデータの一部を画面上に描画します。
 
+```
     var percentage = 320 / data.metadata.width;
     var ctx = $("canvas")[0].getContext('2d');
     
@@ -177,6 +206,7 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
       <ons-list-header>状況</ons-list-header>
       <ons-list-item>${data.description.captions[0].text}</ons-list-item>
     `);
+```
 
 他にも年齢や性別などたくさんのデータが取得できますので、レスポンスデータを確認してみてください。
 
@@ -184,6 +214,6 @@ Web APIを使うと個人や一企業で開発する以上の機能やデータ�
 
 ---
 
-MicrosoftではComputer Vision API以外にもたくさんのWeb APIを公開、提供しています。ぜひ使い方を覚えてアプリを一層魅力的なものにしてください。
+Microsoft Cognitive ServicesではComputer Vision API以外にもたくさんのWeb APIを公開、提供しています。ぜひ使い方を覚えてアプリを一層魅力的なものにしてください。
 
 今回のコードは[moongift/monaca-computer-vision](https://github.com/moongift/monaca-computer-vision)にアップロードしてあります。実装時の参考にしてください。
