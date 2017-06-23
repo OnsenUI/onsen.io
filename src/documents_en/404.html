@@ -14,9 +14,9 @@ sitemap:
   var redirectRules = [ // the higher, the more prioritized
 
     // Old Onsen UI docs URLs (Used in ~2017/06/23)
-    { langs: ['en'], from: /^\/v2\/docs\/guide\/js\/(index\.html)?$/,
+    { langs: ['en'], from: /^\/v2\/docs\/guide\/js(\/(index\.html)?)?$/,
                        to: '/v2/guide/' },
-    { langs: ['en'], from: /^\/v2\/docs\/guide\/(react|angular1|angular2|vue)\/(index\.html)?$/,
+    { langs: ['en'], from: /^\/v2\/docs\/guide\/(react|angular1|angular2|vue)(\/(index\.html)?)?$/,
                        to: '/v2/guide/$1/' },
     { langs: ['en'], from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\/(.*)$/,
                        to: '/v2/api/$1/$2' },
