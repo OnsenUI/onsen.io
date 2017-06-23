@@ -75,8 +75,8 @@
           </div>
           <span class="global-nav-menu-arrow"></span>
         </li>
-        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'ecosystem' %>">
-          <a href="#"><%=@translate("[en]Ecosystem[/en][ja]エコシステム[/ja]")%></a>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'resources' %>">
+          <a href="#"><%=@translate("[en]Resources[/en][ja]資料[/ja]")%></a>
           <div class="dropdown-container">
             <ul class="dropdown-content">
               <li class="dropdown-item-1">
