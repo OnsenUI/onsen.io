@@ -1,0 +1,19 @@
+---
+title: 'Building Onsen UI'
+order: 180
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Building Onsen UI
+
+It is not that difficult to build Onsen UI from source. However, there are some prerequisites for a success build.
+
+[CircleCI Recipe](https://github.com/OnsenUI/OnsenUI/blob/master/circle.yml) is a good starting point that describes the build dependencies. Please note that we periodically make changes to the building tools - like Yarn, Node version, etc.
+
+We have been using Linux environment for building the package, but other *NIX environments should run the build too.
+
+<% end %>
+

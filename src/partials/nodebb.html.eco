@@ -13,7 +13,7 @@
   articleID = '<%= @framework + '_' + @name %>';
   var articleData = {
     title_plain: '<%= @name %>',
-    url: 'https://onsen.io/v2/docs/<%= @framework %>/<%= @name %>.html',
+    url: 'https://onsen.io/v2/api/<%= @framework %>/<%= @name %>.html',
     tags: [{title: '<%= @name %>'}, {title: '<%= @frameworkTag @framework %>'}],
     cid: <%= cidFramework[@framework] %>,
     markDownContent: '<div>' + '<%- @escape @nl2ws @translate @doc.description %>' + '</div>'

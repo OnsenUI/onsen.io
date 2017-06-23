@@ -1,4 +1,4 @@
-
+var nodePath = require('path');
 var marked = require('marked');
 var eco = require('eco');
 var extend = require('extend');
@@ -19,6 +19,24 @@ marked.setOptions({
   smartLists: true,
   smartypants: true
 });
+
+var guideRenderer = new marked.Renderer();
+guideRenderer.heading = function (text, level) {
+  var id = slug(text.toLowerCase());
+  return '<a class="header-link" href="#' +
+    id + '">' +
+    '<h' + level + ' id="' +
+    id + '">' +
+    '<span>' +
+    text +
+    '</span>' +
+    '</h' + level + '>' +
+    '</a>';
+};
+
+guideRenderer.blockquote = function(text) {
+  return text.replace(/^<p/, '<p class="blockquote"');
+};
 
 var renderPatternName = function(name) {
   name = name.replace(/\.html$/, '');
@@ -45,6 +63,9 @@ module.exports = function() {
 
     for (var path in files) {
       files[path].origPath = path;
+      files[path].isGuide = path.indexOf(nodePath.sep + 'guide' + nodePath.sep) >= 0;
+      files[path].isAPI = path.indexOf(nodePath.sep + 'api' + nodePath.sep) >= 0;
+      files[path].docName = path.split(nodePath.sep).pop().split('.').shift();
     }
 
     var helpers = {
@@ -97,10 +118,10 @@ module.exports = function() {
         return new Date().getFullYear();
       },
 
-      getTutorialUrl: function(page, string) {
+      getTutorialUrl: function(page, string, docs) {
         //"vanilla/Reference/carousel"
         var tutorial_url = function(match, p1, p2, p3) {
-          return 'https://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3;
+          return 'https://tutorial.onsen.io/' + page + '.html?framework=' + p1 + '&category=' + p2 + '&module=' + p3 + '&docs=' + (docs != null ? docs.toString() : 'true');
         };
         return string.replace(/(.+)\/(.+)\/(.+)/, tutorial_url);
       },
@@ -122,7 +143,7 @@ module.exports = function() {
 
       markdown: function(capture) {
         try {
-          return marked(capture().toString());
+          return marked(capture().toString(), { renderer: guideRenderer});
         } catch(e) {
           return e.toString();
         }
@@ -189,7 +210,7 @@ module.exports = function() {
       getPreparedTitle: function() {
         var title = this.pageTitle || this.title || this.site.title;
         title = title.replace(/<(?:.|\n)*?>/gm, '');
-        return title;
+        return title + ' - Onsen UI';
       },
 
       getPreparedBlogTitle: function() {
@@ -370,11 +391,17 @@ module.exports = function() {
         return escape(str);
       },
 
-      mapComponentName: function(component) {
-        if (this.framework === 'react') {
+      removeOnsPrefix: function(component) {
+        return component.indexOf('ons-') >= 0 ? component.slice(4) : component;
+      },
+
+      mapComponentName: function(component, framework) {
+        component = this.removeOnsPrefix(component);
+        framework = framework || this.framework;
+        if (framework === 'react') {
           return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
         }
-        if (this.framework === 'vue') {
+        if (framework === 'vue') {
           return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;
         }
 
@@ -385,6 +412,17 @@ module.exports = function() {
         var linkName = this.mapComponentName(component);
         var componentName = (/^ons($|\.)/.test(component) ? linkName : ('`<' + linkName + '>`'));
         return '[' + componentName + '](/v2/docs/' + this.framework + '/' + linkName + '.html)';
+      },
+
+      findSectionLinks: function(toc, order) {
+        var index = toc.findIndex(function(item) {
+          return item.order === order;
+        });
+
+        return {
+          prev: index > 0 ? toc[index - 1] : null,
+          next: index < toc.length - 1 ? toc[index + 1] : null
+        };
       }
     };
 

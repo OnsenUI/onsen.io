@@ -1,0 +1,71 @@
+---
+title: 'Additional Features'
+order: 140
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Additional Features
+
+#### Grid Layout
+
+Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
+
+The layout can be performed by combining [`<ons-col>`](../api/js/ons-col.html) and [`<ons-row>`](../api/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
+
+Grid is not necessary in general for list items. Special layout is provided for list items based on flat iOS and Material Design specific.
+
+#### Platform Detection
+
+[`ons.platform`](/v2/api/js/ons.platform.html) is useful to detect running platform.
+
+#### Rotation Detection
+
+[`ons.orientation`](/v2/api/js/ons.orientation.html) is useful to detect the display orientation.
+
+#### Gesture Detection
+
+It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in [`ons.GestureDetector`](/v2/api/js/ons.GestureDetector.html) object.
+
+Non-Angular:
+
+```js
+var divGD = ons.GestureDetector(document.querySelector('#my-div'));
+divGD.on('dragup dragdown', function(event) {
+  console.log('drag Y axis');
+});
+```
+
+Angular:
+
+```js
+@ViewChild('somediv') divGD; // <div #somediv>
+this.divGD.nativeElement.on('dragup dragdown', function(event) {
+  console.log('drag Y axis');
+});
+```
+
+If you want to use another library for this purpose and have any conflict, Onsen UI gesture detectors can be disabled easily:
+
+Non-Angular:
+
+```js
+ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove event listeners from the menu
+```
+
+Angular:
+
+```js
+@ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>
+ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event listeners from the menu
+```
+
+For non-React users, also, [`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.html) component can be used to wrap the target DOM element that should detect the fingers in a handy way.
+
+#### FastClick
+
+This section is under construction.
+
+<% end %>

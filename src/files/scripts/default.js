@@ -23,6 +23,7 @@ $(function() {
   }
 
   var elementTop = sticked.offset().top;
+  var headerOffset = $('.header-fixed').height() || 0;
   var footerHeight = $('.footer-container').height();
 
   $(window).scroll(update);
@@ -30,14 +31,15 @@ $(function() {
   function update() {
     var scrollTop = $(window).scrollTop(),
       windowHeight = $(window).height(),
-      documentHeight = $(window.document).height();
+      documentHeight = $(window.document).height()
+      offset = 10;
 
-    if (scrollTop > elementTop) {
-      if (scrollTop > documentHeight - windowHeight - footerHeight) {
+    if (scrollTop > elementTop - headerOffset) {
+      if (scrollTop > documentHeight - windowHeight - footerHeight - offset) {
         sticked.removeClass('content-info-fixed');
         sticked.addClass('content-info-bottom');
         sticked.css({
-          top: (documentHeight - windowHeight - footerHeight) + 'px'
+          top: (documentHeight - windowHeight - footerHeight - offset) + 'px'
         });
       } else {
         sticked.removeClass('content-info-bottom');
@@ -76,6 +78,20 @@ $(function() {
     prepare();
     setTimeout(update, 400);
     scrollWrapper.addEventListener('scroll', queueUpdate, true);
+
+    // Select current item in ToC
+    var mainID = $('.container-content h3:first-of-type')[0].id
+    var el = linkMap['#' + mainID].link;
+    linkMap['#' + mainID].link.addClass('current');
+    linkMap['#' + mainID].link.parent('li').addClass('toc-item-open');
+    // Show current item in screen
+    var elOffset = el.offset();
+    var menu = $('.content-info');
+    if (elOffset && elOffset.top > menu.height() / 2) {
+      setTimeout(function() {
+        menu.scrollTop(elOffset.top - menu.offset().top - menu.height()/2);
+      }, 0)
+    }
   }
 
   var queued = false;
@@ -114,7 +130,7 @@ $(function() {
   function prepare() {
     for (var i = 0; i < links.length; i++) {
       var link = $(links[i]);
-      var id = link.attr('href');
+      var id = '#' + link.attr('href').split('#').pop();
       try {
         var section = $(id);
         if (section) {

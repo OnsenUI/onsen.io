@@ -1,19 +1,5 @@
 
 $(function() {
-  $('#get-latest-build').click(function(event) {
-    event.preventDefault();
-
-    var rootUrl = 'https://circleci.com/api/v1/project/OnsenUI/OnsenUI';
-
-    $.getJSON(rootUrl + '/tree/master?shallow=true&offset=0&limit=1&filter=successful', function(res) {
-      var artifactUrl = rootUrl + '/' + res[0].build_num  + '/artifacts';
-
-      $.getJSON(artifactUrl, function(res) {
-        location.href = res[0].url;
-      });
-    });
-  });
-
   var template = $('<li><a href="" class="old-versions-download"></a> <a href="" class="old-versions-release-note">Release Notes</a></li>');
   $.getJSON('https://api.github.com/repos/OnsenUI/OnsenUI/releases', function(res) {
     var items = res.map(function(release) {

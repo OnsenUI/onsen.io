@@ -42,6 +42,7 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.doc = doc;
       file.title = doc.name;
       file.name = doc.name;
+      file.original = doc.name;
       file.is2 = true;
       file.componentCategory = doc.category;
       file.extension = extension;
@@ -63,7 +64,6 @@ function generateAPIDocument(metalsmith, docPath, extension) {
         if (['ons-if', 'ons-template', 'ons-gesture-detector'].indexOf(doc.name) !== -1) {
           file.extension = 'not vue';
         } else {
-
           file.name = doc.name = doc.name.replace(/^ons-/, 'v-ons-').replace(/^(ons)(\.|$)/gm, '$$$&');
 
           doc.props = file.ownedAttributes
@@ -127,7 +127,7 @@ module.exports = function(lang, extension) {
 
           // Only allow to include JavaScript or that target extension version
           if ([ 'js', extension ].indexOf(targetExtension) > -1) {
-            files['v2/docs/' + extension + '/' + result.doc.name + '.html'] = result.file;
+            files['v2/api/' + extension + '/' + result.doc.name + '.html'] = result.file;
           }
         });
       }));

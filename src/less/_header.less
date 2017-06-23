@@ -1,4 +1,8 @@
 .header {
-  background-color: #ef3e29;
-  background-image: linear-gradient(to right, #ef2929, #f05429);
+  background-color: @header-bg-color;
+  background-image: @header-bg-image;
+
+  &.header-fixed {
+    height: @header-height;
+  }
 }

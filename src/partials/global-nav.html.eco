@@ -8,87 +8,168 @@
 
     <input id="toggle-menu" type="checkbox" class="global-nav-checkbox">
 
-    <ul class="global-nav-menu">
-      <li class="global-nav-menu-search">
-        <input type="text" class="global-nav-search-input" id="docsearch" placeholder="Search the docs...">
-      </li>
-      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'discover' %>">
-        <a href="#"><%=@translate("[en]Discover[/en][ja]フレームワーク[/ja]")%></a>
-
-        <div class="dropdown-container">
-          <ul class="dropdown-content">
-            <li class="dropdown-item">
-              <a href="/react">React</a>
-            </li>
-            <li class="dropdown-item">
-              <a href="/angular2">AngularJS 1 / Angular 2+</a>
-            </li>
-            <li class="dropdown-item">
-              <a href="/vue">Vue 2</a>
-            </li>
-            <li class="dropdown-item">
-              <a href="/meteor">Meteor</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
-        <a href="/getting-started"><%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%></a>
-      </li>
-      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'samples' %>">
-        <a href="/samples"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
-      </li>
-      <li class="global-nav-menu-item">
-        <a href="http://tutorial.onsen.io/"><%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%></a>
-      </li>
-      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
-        <a href="#"><%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%></a>
-
-        <div class="dropdown-container">
-          <ul class="dropdown-content">
-
-            <li class="dropdown-item">
-              <a href="/v2/docs/css.html">CSS Components</a>
-            </li>
-
-            <li class="dropdown-item">
-              <a href="/docs/guide/js">JavaScript</a>
-            </li>
-
-            <li class="dropdown-item">
-              <a href="/docs/guide/angular1">AngularJS 1</a>
-            </li>
-
-            <li class="dropdown-item">
-              <a href="/docs/guide/angular2">Angular 2+</a>
-            </li>
-            <li class="dropdown-item">
-              <a href="/docs/guide/react">React</a>
-            </li>
-
-            <li class="dropdown-item">
-              <a href="/v2/docs/guide/vue">Vue 2</a>
-            </li>
-            <li class="dropdown-item">
-              <a href="/v1/guide.html">Onsen UI v1</a>
-            </li>
-          </ul>
-        </div>
-
-      </li>
-      <% if @lang == "en": %>
-        <li class="global-nav-menu-item">
-          <a href="/community">Community</a>
+    <% if @lang == "en": %>
+      <ul class="global-nav-menu">
+        <li class="global-nav-menu-search">
+          <input type="text" class="global-nav-search-input" id="docsearch" placeholder="Search the docs...">
         </li>
-      <% else if @lang == "ja": %>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isGuide or @page == 'guide') %>">
+          <a href="/v2/guide"><%=@translate("[en]Guide[/en][ja]ドキュメント[/ja]")%></a>
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+              <li class="dropdown-item-1">
+                <a href="/v2/guide">Onsen UI Overview</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v2/guide/frameworks.html">Using with Frameworks</a>
+              </li>
+              <li class="dropdown-item-2">
+                <a href="/v2/guide/jquery/">jQuery</a>
+              </li>
+              <li class="dropdown-item-2">
+                <a href="/v2/guide/angular1/">AngularJS 1.x</a>
+              </li>
+              <li class="dropdown-item-2">
+                <a href="/v2/guide/angular2/">Angular 2+</a>
+              </li>
+              <li class="dropdown-item-2">
+                <a href="/v2/guide/react/">React</a>
+              </li>
+              <li class="dropdown-item-2">
+                <a href="/v2/guide/vue/">Vue.js</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v1/guide.html">Onsen UI 1.x</a>
+              </li>
+            </ul>
+          </div>
+          <span class="global-nav-menu-arrow"></span>
+
+        </li>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isAPI or @reference) %>">
+          <a href="#"><%=@translate("[en]API[/en][ja]ドキュメント[/ja]")%></a>
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+              <li class="dropdown-item-1">
+                <a href="/v2/api/css.html">CSS Components</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v2/api/js">Web Components</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v2/api/angular1">AngularJS 1.x</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v2/api/angular2">Angular 2+</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v2/api/react">React</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v2/api/vue">Vue.js</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v1/reference/javascript.html">Onsen UI 1.x</a>
+              </li>
+            </ul>
+          </div>
+          <span class="global-nav-menu-arrow"></span>
+        </li>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'resources' %>">
+          <a href="#"><%=@translate("[en]Resources[/en][ja]資料[/ja]")%></a>
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+              <li class="dropdown-item-1">
+                <a href="/samples"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="http://tutorial.onsen.io/"><%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%></a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="https://community.onsen.io">Community</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/blog"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
+              </li>
+            </ul>
+          </div>
+          <span class="global-nav-menu-arrow"></span>
+        </li>
+      </ul>
+
+    <% else if @lang == "ja": %>
+      <ul class="global-nav-menu">
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'discover' %>">
+          <a href="#"><%=@translate("[en]Discover[/en][ja]フレームワーク[/ja]")%></a>
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+              <li class="dropdown-item-1">
+                <a href="/react">React</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/angular2">AngularJS 1 / Angular 2+</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/vue">Vue 2</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/meteor">Meteor</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'getting_started' %>">
+          <a href="/getting-started"><%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%></a>
+        </li>
+        <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if @page == 'samples' %>">
+          <a href="/samples"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
+        </li>
+        <li class="global-nav-menu-item">
+          <a href="http://tutorial.onsen.io/"><%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%></a>
+        </li>
+        <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'docs' %>">
+          <a href="#"><%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%></a>
+
+          <div class="dropdown-container">
+            <ul class="dropdown-content">
+
+              <li class="dropdown-item-1">
+                <a href="/v2/docs/css.html">CSS Components</a>
+              </li>
+
+              <li class="dropdown-item-1">
+                <a href="/docs/guide/js">JavaScript</a>
+              </li>
+
+              <li class="dropdown-item-1">
+                <a href="/docs/guide/angular1">AngularJS 1</a>
+              </li>
+
+              <li class="dropdown-item-1">
+                <a href="/docs/guide/angular2">Angular 2+</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/docs/guide/react">React</a>
+              </li>
+
+              <li class="dropdown-item-1">
+                <a href="/v2/docs/guide/vue">Vue 2</a>
+              </li>
+              <li class="dropdown-item-1">
+                <a href="/v1/guide.html">Onsen UI v1</a>
+              </li>
+            </ul>
+          </div>
+        </li>
         <li class="global-nav-menu-item">
           <a href="https://teratail.com/tags/Onsen+UI">コミュニティ</a>
         </li>
-      <% end %>
-      <li class="global-nav-menu-item">
-        <a href="/blog"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
-      </li>
-    </ul>
+        <li class="global-nav-menu-item">
+          <a href="/blog"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
+        </li>
+      </ul>
+
+    <% end %>
 
     <label for="toggle-menu" class="global-nav-toggle">
       <img class="global-nav-toggle-open" src="/images/common/icn_menu_open.svg">

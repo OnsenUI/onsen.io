@@ -19,6 +19,8 @@ TocItem.prototype = {
     this.text = params.text || '';
     this.children = [];
     this.parent = null;
+    this.order = params.order || 0;
+    this.link = params.link || '';
   },
   /**
    * @param {TocItem} tocItem
@@ -49,7 +51,7 @@ module.exports = function() {
     }
   }
 
-  function buildTocItems(headers) {
+  function buildTocItems(headers, origPath, order) {
     var root = new TocItem();
     var toc = root;
     var lastLevel = 2;
@@ -58,6 +60,7 @@ module.exports = function() {
       var id = header.id;
       var text = header.innerHTML;
       var level = parseInt(header.tagName.match(/^h([123456])$/i)[1], 10);
+      var link = '/' + origPath;
 
       while (level != 1 + lastLevel) {
         if (level < 1 + lastLevel) {
@@ -73,7 +76,9 @@ module.exports = function() {
 
       var newToc = new TocItem({
         text: header.textContent,
-        id: header.id
+        id: header.id,
+        link: link,
+        order: order
       });
 
       toc.add(newToc);
@@ -85,37 +90,66 @@ module.exports = function() {
   }
 
   return function(files, metalsmith, done) {
-    var fileList = Object.keys(files).map(function(path) {
-      return files[path]
-    });
+    var tocGroups = {};
+    var fileList = Object.keys(files).reduce(function(result, path) {
+      // Filter files that needs ToC
+      if (files[path].autotoc || files[path].tocGroup) {
+        result.push(files[path]);
+
+        // Group ToCs
+        if (files[path].tocGroup) {
+          if (!tocGroups[files[path].tocGroup]) {
+            tocGroups[files[path].tocGroup] = [];
+          }
+          tocGroups[files[path].tocGroup.trim()].push(files[path]);
+        }
+      }
+      return result;
+    }, []);
 
     async.each(fileList, function(file, done) {
-      if (!file.autotoc) {
-        done();
-      } else {
-        var contents = file.contents.toString('utf8');
-        jsdom.env({
-          html: '<html><body>' + contents + '</body></html>',
-          feature: {QuerySelector: true},
-          done: function(error, window) {
-            if (error) {
-              throw error;
-            }
-
-            var headers = Array.prototype.slice.call(
-              window.document.querySelectorAll(file.autotocSelector || 'h3')
-            ).map(function(header) {
-              header.id = generateId(header);
-              return header;
-            });
-
-            file.contents = new Buffer(window.document.body.innerHTML);
-            file.toc = buildTocItems(headers);
-            done();
+      var contents = file.contents.toString('utf8');
+      jsdom.env({
+        html: '<html><body>' + contents + '</body></html>',
+        feature: {QuerySelector: true},
+        done: function(error, window) {
+          if (error) {
+            throw error;
           }
-        });
-      }
+
+          var headers = Array.prototype.slice.call(
+            window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
+          ).map(function(header) {
+            header.id = generateId(header);
+            return header;
+          });
+
+          file.contents = new Buffer(window.document.body.innerHTML);
+          file.toc = buildTocItems(headers, file.origPath, file.order);
+
+          if (file.tocTitle) {
+            file.toc[0].sectionTitle = file.tocTitle.trim();
+          }
+
+          done();
+        }
+      });
     }, function() {
+      // Merge ToC depending on tocGroup
+      Object.keys(tocGroups).forEach(function(group) {
+        var fullToc = tocGroups[group]
+          .sort(function(a, b) {
+            return Number(a.order || 0) - Number(b.order || 0);
+          })
+          .reduce(function(result, file) {
+            return result.concat(file.toc || []);
+          }, []);
+
+        tocGroups[group].forEach(function(file) {
+          file.toc = fullToc;
+        });
+      });
+
       done();
     });
   };

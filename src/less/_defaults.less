@@ -14,7 +14,7 @@ body {
   }
 
   .lang-en & {
-    font-size: 17px;
+    font-size: 15px;
   }
 }
 
@@ -53,8 +53,8 @@ h1, h2, h3, h4, h5, h6 {
   color: @header-text-color;
 
   .lang-en & {
-    font-family: @en-font-family;
-    font-weight: normal;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -111,11 +111,11 @@ h3 {
   });
 
   .lang-en & {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: 700;
 
     .mobile-query({
-      font-size: 24px;
+      font-size: 28px;
     });
   }
 }
@@ -126,7 +126,7 @@ h4 {
   font-weight: bold;
 
   .lang-en & {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
 
     .mobile-query({
@@ -136,16 +136,17 @@ h4 {
 }
 
 h5 {
-  font-size: 14px;
+  font-size: 15px;
   margin: 36px 0 8px 0;
   font-weight: bold;
 
   .lang-en & {
-    font-size: 16px;
-    font-weight: normal;
+    font-size: 15px;
+    font-weight: 700;
+    color: #666;
 
     .mobile-query({
-      font-size: 20px;
+      font-size: 15px;
     });
   }
 }
@@ -250,6 +251,10 @@ li {
 
 p, pre, ul, ol {
   margin: 16px 0;
+}
+
+ol ul, ul ol, ul ul, ol ol {
+  margin-top: 4px;
 }
 
 a {
