@@ -1,0 +1,26 @@
+<% if @topbar != false: %>
+  <div class="top-bar">
+    <div class="wrapper">
+      <h1><%- @h1 || @title %></h1>
+    </div>
+  </div>
+<% end %>
+<% if @actionbar != false: %>
+  <div class="actions-bar">
+    <div class="wrapper">
+      <nav>
+        <!-- <a class="action twitter" href="https://twitter.com/@onsen_ui">Follow @Onsen_UI</a> -->
+        <a class="action ask" href="https://community.onsen.io" target="_blank">Ask in our Forum</a>
+        <a class="action github" href="https://github.com/OnsenUI/OnsenUI">Star on GitHub</a>
+      </nav>
+
+      <div class="newsletter-signup newsletter-form">
+        <form>
+          <input type="email" placeholder="Input email address to receive updates" name="email">
+          <button>Sign up</button>
+        </form>
+        <div class="newsletter-thankyou">Thank you!</div>
+      </div>
+    </div>
+  </div>
+<% end %>
