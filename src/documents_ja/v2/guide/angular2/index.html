@@ -1,0 +1,52 @@
+---
+title: 'Angular 2+'
+order: 100
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Angular 2+
+
+> Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
+
+Angular 2+ bindings for Onsen UI provide Angular directives that enhance the core Web Components and expose a Angular-like API to interact with them.
+
+#### Download Angular 2+ bindings
+
+Angular 2+ bindings are distributed in [`ngx-onsenui` package](https://www.npmjs.com/package/ngx-onsenui). You can download it via NPM:
+
+```sh
+$ npm install onsenui ngx-onsenui --save-dev
+```
+
+It is also available [via CDN](https://unpkg.com/ngx-onsenui). The [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also contains Angular 2+ bindings.
+
+#### Setup Angular 2+ bindings
+
+Onsen UI for Angular 2+ provides Angular 2+ directives which wraps Web Components. Those directives are included in Angular Module (`NgModule`) named `OnsenModule`. For details about `NgModule`, please refer to [Angular Modules (`NgModule`) - TS](https://angular.io/docs/ts/latest/guide/ngmodule.html).
+
+To use `OnsenModule`, please import it to the application’s module by specifying at import parameter of `@NgModule`. Onsen UI components will not render properly if `OnsenModule` is not loaded.
+
+Also, please aware to specify `CUSTOM_ELEMENTS_SCHEMA` as module’s schema, since Onsen UI is built of Custom Elements. Forgetting to specify this will result in error when using Onsen UI custom elements in the template.
+
+```js
+import {OnsenModule} from 'angular2-onsenui';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+// Start module
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
+
+<% end %>
+

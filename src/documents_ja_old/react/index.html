@@ -1,0 +1,221 @@
+---
+page: 'react-landing'
+category: 'discover'
+title: 'Reactに対応したOnsen UIハイブリッドアプリ対応モバイル用フレームワーク'
+layout: 'default.html.eco'
+topbar: false
+actionbar: false
+version: v2
+description: 'ReactとOnsen UIを使ったモバイルアプリ開発はとても簡単に始められます。HTML5とJavaScriptで驚きのパフォーマンスを実現します。MaterialとiOSの両方にクロスプラットフォームに対応します。'
+---
+
+<div class="landing react-landing">
+  <div class="landing-header">
+    <%- @partial('global-nav.html.eco') %>
+    <h1 class="landing-header-title">
+      Onsen UI for React
+    </h1>
+    <div class="landing-header-subtitle">
+      驚くほど高速なハイブリッドアプリが<br>驚くほど簡単に開発できます
+    </div>
+    <img class="landing-header-keyvisual" src="/images/landing/keyvisual_react.png">
+
+    <a href="/v2/docs/guide/react" class="landing-header-get-started">
+      <div class="landing-header-get-started-title">
+        はじめよう
+      </div>
+      <div class="landing-header-get-started-subtitle">
+        Onsen UI for React
+      </div>
+    </a>
+
+    <div class="landing-header-available">
+      <span>
+        他のフレームワークでも...
+      </span>
+      <div class="landing-header-available-frameworks">
+        <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
+        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
+      </div>
+    </div>
+
+    <div class="landing-header-latest">
+      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>. Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+    </div>
+  </div>
+
+  <div class="landing-social">
+    <a href="https://twitter.com/Onsen_UI_ja" target="_blank" class="landing-social-twitter">
+      @Onsen_UI_jaのフォロー
+    </a>
+    <a href="https://github.com/OnsenUI/OnsenUI" target="_blank" class="landing-social-github">
+      GitHubスターをお願いします
+    </a>
+  </div>
+
+  <div class="landing-content">
+  <div id="features">
+    <div class="feature">
+      <h2>美しく作られたAndroidとiOSのコンポーネント</h2>
+      <p>マテリアルとフラットデザインに対応した100以上のコンポーネントが、完全クロスプラットフォームを実現します。</p>
+      <div id="showcase-carousel-wrapper">
+        <iframe id="showcase-carousel" src="https://onsenui.github.io/showcase-carousel"></iframe>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="feature">
+      <h2>Reactデベロッパーにとって使いやすく</h2>
+      <p>Onsen UI ReactコンポーネントはReactの特徴であるバーチャルDOMと最高の相性です。</p>
+      <div class="platform-buttons">
+        <div class="ios selected"></div>
+        <div class="android"></div>
+      </div>
+      <div class="code-explanation-container">
+        <div class="code-explanation ios selected">
+
+          <img src="/images/design_2016/app_ios.png" alt="react-app-ios">
+          <div class="arrow-container">
+            <div class="arrow a1"></div>
+            <div class="arrow a2"></div>
+            <div class="arrow a3"></div>
+            <div class="arrow a4"></div>
+            <div class="bracket"></div>
+          </div>
+          <div class="react-code">
+          <code>
+            &lt;Navigator
+              initialRoute={this.initialRoute}
+              renderScene={this.renderScene}
+            /&gt;
+          </code>
+
+          <code>
+            &lt;Toolbar&gt;
+              &lt;div className=&quot;left&quot;&gt;...&lt;/div&gt;
+              &lt;div className=&quot;center&quot;&gt;Todo&lt;/div&gt;
+              &lt;div className=&quot;right&quot;&gt;...&lt;/div&gt;
+            &lt;/Toolbar&gt;
+          </code>
+
+          <code>
+            &lt;List
+              dataSource={this.todos}
+              renderRow={(todo) =&gt;
+                &lt;Todo data={todo} /&gt;
+              }
+            /&gt;
+          </code>
+
+          <code>
+            &lt;Tabbar
+              initialIndex={0}
+              renderTabs={this.renderTabs}
+            /&gt;
+          </code>
+          </div>
+        </div>
+
+
+        <div class="code-explanation android">
+
+          <img src="/images/design_2016/app_android.png" alt="react-app-android">
+          <div class="arrow-container">
+            <div class="arrow a1"></div>
+            <div class="arrow a2"></div>
+            <div class="arrow a3"></div>
+            <div class="arrow a4"></div>
+            <div class="arrow a5"></div>
+            <div class="bracket"></div>
+          </div>
+          <div class="react-code">
+            <code>
+              &lt;Navigator
+                initialRoute={this.initialRoute}
+                renderScene={this.renderScene}
+              /&gt;
+            </code>
+
+            <code>
+              &lt;Toolbar&gt;
+                &lt;div class=&quot;left&quot;&gt;...&lt;/div&gt;
+                &lt;div class=&quot;center&quot;&gt;Contacts&lt;/div&gt;
+              &lt;/Toolbar&gt;
+            </code>
+
+            <code>
+              &lt;Tabbar
+                initialIndex={0}
+                renderTabs={this.renderTabs}
+              /&gt;
+            </code>
+
+            <code>
+              &lt;List
+                dataSource={this.contacts}
+                renderRow={(contact) =&gt;
+                  &lt;Contact data={contact} /&gt;
+                }
+              /&gt;
+            </code>
+
+            <code>
+              &lt;Fab&gt;
+                &lt;Icon icon=&quot;md-edit&quot; /&gt;
+              &lt;/Fab&gt;
+            </code>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div class="feature">
+    <h2>充実の開発ツールで簡単セットアップ</h2>
+    <p><a href="https://monaca.io/">Monacaプラットフォーム</a>を通じて、Onsen UI開発は一層簡単になります。強力なデバッガーやリモートビルド、バックエンド機能が、クラウドを通じて提供されます。</p>
+<pre><code class="html">$ <strong style="font-weight: bold">monaca create helloworld</strong>
+Which project do you want to create?
+<b style="color: red;">&gt; Onsen 2 with React</b>
+&gt; Onsen 2 with Angular JS 1
+&gt; Onsen 2 with Angular 2+
+&gt; Onsen 2 with JavaScript
+</code></pre>
+  </div>
+  </div>
+  </div>
+</div>
+
+<script src="/vendor/highlight.min.js"></script>
+<script>
+  var $ = document.querySelector.bind(document);
+  var $$ = document.querySelectorAll.bind(document);
+  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
+  var code = $$('code');
+  var arrows = $$('.arrow');
+  var height = $('.code-explanation').offsetHeight;
+
+  each(arrows, function (e, i) {
+    var lines = code[i].textContent.split(/\n/);
+    var indent = lines[1].match(/\s*/)[0].length;
+    code[i].textContent = lines.map(function(e) {
+      return e.slice(indent);
+    }).join('\n').trim();
+    hljs.highlightBlock(code[i]);
+    e.style.bottom = height - (code[i].offsetTop + code[i].offsetHeight / 2) + 'px';
+  });
+
+  var buttons = $('.platform-buttons').children;
+  var examples = $$('.code-explanation');
+  each(buttons, function(e, i) {
+    e.onclick = function () {
+      var j = (i + 1) % 2;
+      if (!this.classList.contains('selected')) {
+        buttons[i].classList.add('selected');
+        buttons[j].classList.remove('selected');
+        examples[i].classList.add('selected');
+        examples[j].classList.remove('selected');
+      }
+    }
+  });
+</script>

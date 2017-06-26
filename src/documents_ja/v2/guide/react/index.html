@@ -1,0 +1,115 @@
+---
+title: 'React'
+order: 110
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### React
+
+> Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
+
+React bindings for Onsen UI provide React components that wrap the core Web Components and expose a React-like API to interact with them.
+
+#### Download React bindings
+
+React bindings are distributed in [`react-onsenui` package](https://www.npmjs.com/package/react-onsenui). You can download it via NPM:
+
+```sh
+$ npm install onsenui react-onsenui --save-dev
+```
+
+It is also available [via CDN](https://unpkg.com/react-onsenui). The [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also contains React bindings.
+
+#### Setup React bindings
+
+You can load Onsen UI with normal <script></script> and <link> tags as follows:
+
+```html
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="onsenui.js"></script>
+<script src="react-onsenui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+```
+
+Or, you can use React and Onsen UI from npm with CommonJS module system like Browserify or Webpack. In this case, use the `onsenui` and `react-onsenui` packages, in addition to react and `react-dom` npm packages. In the example below `ons` contains Onsen UI core instance, and `Ons` contains React components.
+
+```js
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ons = require('onsenui');
+var Ons = require('react-onsenui');
+```
+
+Alternatively, you can also use ES6 imports to specify the modules you want to use in `react-onsenui` package.
+
+```js
+import {Page, Toolbar, Button} from 'react-onsenui';
+```
+
+#### Hello World with React
+
+To get started, let’s create a simple Hello World application. The following sample code is a React version of Onsen UI HelloWorld.
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.css">
+  <script src="react.js"></script>
+  <script src="react-dom.js"></script>
+  <script src="onsenui.js"></script>
+  <script src="react-onsenui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+    var App = React.createClass({
+      handleClick: function() {
+        ons.notification.alert('Hello world!');
+      },
+
+      render: function() {
+        return (
+          <Ons.Page>
+            <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
+          </Ons.Page>
+        );
+      }
+    });
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+</body>
+</html>
+```
+
+In `<body>` tag, there is only a `<div>` tag having app id. This is where React will render the content into, and you can see it in the very bottom of JS code.
+
+Also notice `<script></script>` tag has `text/babel` type. This means this script is not a pure JavaScript that browser supports (most commonly ECMAScript5), but is a ECMAScript6 (ES2015) with [JSX format](). Babel will transpile this code into ES5 in the browser. To get better performance, we can use Node.js to transpile the code.
+
+Inside the script, `React.createClass()` function defines a React Component called "App". It has one method called render, and this is the function that is called when the app is rendered. The returning object is described in JSX, which is a XML like language that extends JavaScript. In this case, it is returning `<Ons.Page>` component that has an `<Ons.Button>` component. The `onClick` prop is used to call the `handleClick` method when the user taps the button.
+
+```js
+return (
+  <Ons.Page>
+    <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
+  </Ons.Page>
+);
+```
+
+As you can see in this example, all <Ons.*> components are React Components, and they are loaded by `react-onsenui.js`. For a full list of React Components, see the [reference page](../../api/react).
+
+Putting together, when `index.html` is loaded into the browser, it will compile JSX code, inject into the body, and render the content.
+
+For more information about React itself or JSX format, we recommend reading the official [React docs](https://facebook.github.io/react/docs/hello-world.html).
+
+<% end %>
+
