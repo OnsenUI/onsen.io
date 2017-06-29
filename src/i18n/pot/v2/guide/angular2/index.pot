@@ -1,0 +1,115 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-29 19:56+0000\n"
+"Plural-Forms: \n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:1
+msgid ""
+"title: 'Angular 2+'\n"
+"order: 100\n"
+"tocGroup: guide"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:2
+msgid "layout: docs.html.eco"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:3
+msgid "<%- @markdown => %>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:4
+msgid "Angular 2+"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:6
+msgid ""
+"Before reading this section, we suggest you reading [Getting "
+"Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp "
+"the basics of Onsen UI. Don't worry, it won't take more than 5 minutes."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:8
+msgid ""
+"Angular 2+ bindings for Onsen UI provide Angular directives that enhance "
+"the core Web Components and expose a Angular-like API to interact with them."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:9
+msgid "Download Angular 2+ bindings"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:10
+msgid ""
+"Angular 2+ bindings are distributed in [`ngx-onsenui` "
+"package](https://www.npmjs.com/package/ngx-onsenui). You can download it "
+"via NPM:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:11
+msgid "$ npm install onsenui ngx-onsenui --save-dev"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:12
+msgid ""
+"It is also available [via CDN](https://unpkg.com/ngx-onsenui). The [latest "
+"core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also "
+"contains Angular 2+ bindings."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:13
+msgid "Setup Angular 2+ bindings"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:14
+msgid ""
+"Onsen UI for Angular 2+ provides Angular 2+ directives which wraps Web "
+"Components. Those directives are included in Angular Module (`NgModule`) "
+"named `OnsenModule`. For details about `NgModule`, please refer to [Angular "
+"Modules (`NgModule`) - "
+"TS](https://angular.io/docs/ts/latest/guide/ngmodule.html)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:15
+msgid ""
+"To use `OnsenModule`, please import it to the application’s module by "
+"specifying at import parameter of `@NgModule`. Onsen UI components will not "
+"render properly if `OnsenModule` is not loaded."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:16
+msgid ""
+"Also, please aware to specify `CUSTOM_ELEMENTS_SCHEMA` as module’s schema, "
+"since Onsen UI is built of Custom Elements. Forgetting to specify this will "
+"result in error when using Onsen UI custom elements in the template."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:17
+msgid ""
+"import {OnsenModule} from 'angular2-onsenui';\n"
+"import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';\n"
+"import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';\n"
+"\n"
+"@NgModule({\n"
+"  imports: [OnsenModule],\n"
+"  declarations: [AppComponent],\n"
+"  bootstrap: [AppComponent],\n"
+"  schemas: [CUSTOM_ELEMENTS_SCHEMA]\n"
+"})\n"
+"class AppModule { }\n"
+"\n"
+"// Start module\n"
+"platformBrowserDynamic().bootstrapModule(AppModule);"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:18
+msgid "<% end %>"
+msgstr ""

@@ -1,0 +1,481 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-29 19:56+0000\n"
+"Plural-Forms: \n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:1
+msgid ""
+"title: 'Theming'\n"
+"order: 160\n"
+"tocGroup: guide"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:2
+msgid "layout: docs.html.eco"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:3
+msgid "<%- @markdown => %>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:4
+msgid "Theming"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:5
+msgid ""
+"Onsen UI style can be easily modified in a variety of ways. Here are the "
+"most common options."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:6
+msgid "Modifiers"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:7
+msgid ""
+"A modifier is a cross-component way to provide customizability for Onsen UI "
+"components in the shape of custom attributes. When a component is defined "
+"with a modifier, it will have a separate class namespace so that you can "
+"apply custom styles to the component. Some components have several easy to "
+"use preset modifiers to change the appearance."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:8
+msgid ""
+"For example, each of the following buttons have a different look. To change "
+"modifiers dynamically, please manipulate modifier attribute from JavaScript."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:9
+msgid ""
+"<ons-button modifier=\"quiet\">Quiet</ons-button>\n"
+"<ons-button modifier=\"light\">Light</ons-button>\n"
+"<ons-button modifier=\"large\">Large</ons-button>\n"
+"<ons-button modifier=\"cta\">Call To Action</ons-button>\n"
+"<ons-button modifier=\"material\">Material Design</ons-button>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:10
+msgid ""
+"For further information, please have a look at [this "
+"article](https://onsen.io/blog/creating-custom-modifiers/)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:11
+msgid "Cross Platform Styling (Autostyling)"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:12
+msgid ""
+"Onsen UI components are automatically styled depending on the platform "
+"where the app runs. You can easily test this feature with your browser Dev "
+"Tools by switching between iOS and Android views or by appending "
+"`?platform=android` or `?platform=ios` as a query string to the URL."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:13
+msgid ""
+"Automatic styling simply applies `modifier=\"material\"` to the components "
+"when `ons.platform.isAndroid()` is true. You can disable this feature by "
+"running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. "
+"before the app is initialized). If you disable it you may need to manually "
+"specify `modifier=\"material\"` in every component you want to display with "
+"Material Design. You can also specify `disable-auto-styling` attribute in "
+"specific components that you don't want to auto style."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:14
+msgid "Some tools are provided to give a more accurate customization."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:15
+msgid "Platform utilities"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:16
+msgid ""
+"[`ons.platform`](/v2/api/js/ons.platform.html) object is available with "
+"methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:17
+msgid ""
+"You can set a platform with `ons.platform.select('android')`, for example, "
+"in order to display Material Design on every platform. This must be called "
+"before the app is initialized (right after including `onsenui.js`)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:18
+msgid "Conditional element"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:19
+msgid ""
+"A conditional element called [`ons-if`](/v2/api/js/ons-if.html) is "
+"available to filter content depending on the platform or orientation."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:21
+msgid "`<ons-if>` component is not available for React and Vue bindings."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:23
+msgid ""
+"  <ons-if platform=\"android\">\n"
+"    This is Android\n"
+"  </ons-if>\n"
+"  <ons-if platform=\"ios other\">\n"
+"    This is NOT Android\n"
+"  </ons-if>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:24
+msgid ""
+"With this, for example, you can display "
+"[`ons-fab`](/v2/api/js/ons-fab.html) for Material Design and other type of "
+"button for iOS flat design."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:25
+msgid ""
+"AngularJS 1 bindings also provide "
+"[`ons-if-platform`](/v2/api/angular1/ons-if-platform.html) for this purpose:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:26
+msgid ""
+"<div ons-if-platform=\"android\">\n"
+"  This is Android\n"
+"</div>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:27
+msgid "Icons shortcut"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:28
+msgid ""
+"[`ons-icon`](/v2/api/js/ons-icon.html) provides a shortcut to make auto "
+"styling easier:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:29
+msgid ""
+"<ons-icon icon=\"ion-navicon, material:md-menu\" size=\"24px, "
+"material:20px\"></ons-icon>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:30
+msgid ""
+"The second icon will be displayed when `material` modifier is present "
+"(other modifiers can be used)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:31
+msgid "Applying Styles to Inner Custom Elements"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:32
+msgid ""
+"Most Onsen UI components expand the inner element during runtime. For "
+"instance, ons-page automatically injects the following code inside\n"
+"`<ons-page>` and `</ons-page>`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:33
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:39
+msgid ""
+"<ons-page class=\"page\">\n"
+"  <div class=”page__background”></div>\n"
+"  <div class=”page__content”><!-- Your page content --></div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:34
+msgid ""
+"Notice some additional attributes (such as `class=”page”`) and elements "
+"(such as `div`) are added."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:35
+msgid ""
+"However, you can avoid this behavior by writing the auto-inserted "
+"attributes or elements manually."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:36
+msgid "If you write the following code,"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:37
+msgid ""
+"<ons-page>\n"
+"  <div class=”page__content”><!-- Your page content --></div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:38
+msgid ""
+"Onsen UI compiles the code above into the following code without adding new "
+"`<div class=”page__content”>`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:40
+msgid ""
+"but `<div class=”page__background”>` will be added since no `<div "
+"class=”page__background”>` is placed."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:41
+msgid ""
+"Understanding how to bypass compilation is important if you want to attach "
+"style to `div`, which means you can write:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:42
+msgid ""
+"<ons-page>\n"
+"  <div class=”page__background” style=”background-color: #000;”></div>\n"
+"  <div class=”page__content” style=”color: #ccc;”><!-- Your page content "
+"--></div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:43
+msgid "Pitfalls: Specially treated tags in compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:44
+msgid ""
+"`<ons-toolbar>`, `<ons-bottom-toolbar>` and some tags are treated specially "
+"in compilation."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:45
+msgid "For example,"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:46
+msgid ""
+"<ons-page>\n"
+"  <ons-toolbar>\n"
+"    <div class=\"center\">Title</div>\n"
+"  </ons-toolbar>\n"
+"\n"
+"  <!-- Your page content -->\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:47
+msgid "will be compiled into"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:48
+msgid ""
+"<ons-page class=\"page\">\n"
+"  <ons-toolbar class=\"toolbar\">\n"
+"    <div class=\"center toolbar__center toolbar__title\">Title</div>\n"
+"  </ons-toolbar>\n"
+"\n"
+"  <div class=\"page__background\"></div>\n"
+"  <div class=\"page__content\"><!-- Your page content --></div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:49
+msgid ""
+"You can notice that `<ons-toolbar>` is never moved into `<div "
+"class=\"page__content\">`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:50
+msgid ""
+"Some components have behaviours such as these, so make sure to keep that in "
+"mind."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:51
+msgid "Extending animations"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:52
+msgid ""
+"Onsen UI already provides multiple built-in animations for its routing "
+"components and dialogs. However, it is also possible to create custom "
+"animations for specific components or even extend existing animations and "
+"change part of them. This is a relatively advanced topic since it requires "
+"digging a bit in Onsen UI core code."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:53
+msgid "Animit"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:54
+msgid ""
+"Onsen UI relies on "
+"[Animit](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/ons/animit."
+"js), a minimal animation library for managing CSS transtions on mobile "
+"browsers."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:55
+msgid ""
+"Animit can be accessed with `ons.animit` or `import { animit } from ons;`, "
+"depending on the type of the app. It exposes methods to queue CSS "
+"animations, apply delays and run callbacks as follows:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:56
+msgid ""
+"let animation1 = animit(myElement) // This defines the animation for the "
+"provided element\n"
+"  .saveStyle() // Saves the original style of the element\n"
+"  .queue({ // Original position/style in the animation\n"
+"    css: {\n"
+"      transform: 'translate3D(0, 100%, 0)'\n"
+"    },\n"
+"    duration: 0\n"
+"  })\n"
+"  .wait(0.2) // Delay applied before the transition starts\n"
+"  .queue({ // Next step in the animation\n"
+"    css: {\n"
+"      transform: 'translate3D(0, 0, 0)',\n"
+"    },\n"
+"    duration: 0.6,\n"
+"    timing: 'linear'\n"
+"  })\n"
+"  .restoreStyle() // Restores the original style of the element\n"
+"  .queue(done => { // Optional \"On transition end\" callback\n"
+"    callback();\n"
+"    done();\n"
+"  }\n"
+");\n"
+"\n"
+"animation1.play(); // Run the animation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:57
+msgid ""
+"Since Animit modifies the element's `style` property, it provides "
+"`saveStyle()` and `restoreStyle()` methods to ensure the previous styles "
+"are not lost. `queue({css: {...}, duration: 0, timing: 'linear'})` or "
+"`queue({...}, {duration: 0, timing: 'linear'})` method is provided to add "
+"transitions to the queue. The first one will be the first style applied in "
+"the animation that will transition into the following styles. In the "
+"provided example, we are moving a new page inside the view from right to "
+"left. Therefore, it needs to start at position `translate3d(0, 100%, 0)` "
+"and move to `translate3d(0, 0, 0)`. Method `wait(...)` can be used to apply "
+"a delay between transitions. Finally, we can optionally call "
+"`queue(function(done) { ...; done(); })` again to run a callback if "
+"necessary."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:58
+msgid ""
+"It is also possible to pass an array of HTML elements to `animit` if "
+"performing the same animation on multiple elements is required: "
+"`animit([el1, el2]).saveStyle()...`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:59
+msgid ""
+"It is very common to have more than one animation running at the same time. "
+"`animit.runAll(animation1, animation2, animation3);` method can be used for "
+"this behavior instead of `animation1.play(); animation2.play(); "
+"animation3.play();`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:60
+msgid "Creating animators"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:61
+msgid ""
+"Animators can be created from scratch by extending the necessary animator "
+"classes that Onsen UI provides. Every component exposes a minimum animator "
+"interface that must be extended and implemented: "
+"`NavigatorTransitionAnimator`, `AlertDialogAnimator`, `DialogAnimator`, "
+"`PopoverAnimator`, `ModalAnimator`, `TabbarAnimator` and "
+"`SplitterAnimator`. This is the desired way to implement animators if you "
+"want to build a custom version of Onsen UI or want to make a pull request "
+"to the repository. For more information, please have a look at the "
+"[existing "
+"animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements)"
+" for every component."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:62
+msgid ""
+"ES2015 (ES6) is preffered but not strictly required for this to work. An "
+"example in ES5 can be found "
+"[here](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:63
+msgid "Extending animators"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:64
+msgid ""
+"Another way to make new animators is extending an existing animator and "
+"modifiying part of its behavior (or all). This is in general easier if you "
+"just want to tweak the appearance or timing, or even if you want to create "
+"a whole new thing starting from another animator. For this it is also "
+"required to have a look at the [existing "
+"animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements)"
+", choose one and check its properties and methods. Every animator provides "
+"a `extend({...})` class method that returns a new animator. Animators are "
+"exposed in every component class: `ons.NavigatorElement.animators` or "
+"`ons.AlertDialogElement.animators` are some examples. These objects contain "
+"all the registered animators and can be extended as follows."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:65
+msgid ""
+"var fadeIOS = ons.NavigatorElement.animators['fade-ios'];\n"
+"var customAnimator = fadeIOS.extend({\n"
+"  timing: 'cubic-bezier(.1, .7, .1, 1)',\n"
+"  delay: 0.1,\n"
+"  push: function(enterPage, leavePage, callback) {\n"
+"    ons.animit.runAll(\n"
+"      ons.animit(enterPage)...,\n"
+"      ons.animit(leavePage)...\n"
+"    );\n"
+"  }\n"
+"});\n"
+"\n"
+"// This step is mandatory\n"
+"ons.NavigatorElement.registerAnimator('customAnimationName', "
+"customAnimator);"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:66
+msgid ""
+"This overwrites the `push` animation but uses the original `pop` animation. "
+"`timing` and `delay` properties will still affect both animations. Some "
+"animators have extra properties, such as `backgroundMask`. Please check the "
+"animator you want to extend to see all the properties."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:67
+msgid ""
+"After the new animator is created and registered, we can simply specify the "
+"animation with its name: `myNavigator.pushPage('page.html', {animation: "
+"'customAnimationName'})`. Or make it default: `<ons-navigator "
+"animation=\"customAnimationName\">`. The same applies to the other "
+"components."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:68
+msgid "<% end %>"
+msgstr ""

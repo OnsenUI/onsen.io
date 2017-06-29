@@ -1,0 +1,82 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-29 19:56+0000\n"
+"Plural-Forms: \n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:1
+msgid ""
+"title: 'Architecture'\n"
+"order: 130\n"
+"tocTitle: Advanced\n"
+"tocGroup: guide"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:2
+msgid "layout: docs.html.eco"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:3
+msgid "<%- @markdown => %>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:4
+msgid "Architecture"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:5
+msgid ""
+"Onsen UI is made with standard Web technologies including HTML5, JavaScript "
+"and CSS."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:6
+msgid ""
+"Onsen UI has three layers: 1. CSS components, 2. Web Components, and 3. "
+"Framework bindings. It is your decision to pick which one to use in your "
+"project. CSS components and Web Components are built on top of Web "
+"standards, and no additional dependencies are required."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:7
+msgid "<img src=\"/images/guide/architecture.png\">"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:8
+msgid ""
+"**Onsen UI CSS components** describes all visual aspects, implemented in "
+"pure CSS (cssnext). See the [list of CSS components](/v2/api/css.html)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:9
+msgid ""
+"**Web Components** is a Web standard specification to define components. "
+"All of Onsen UI components are Web Components, and we are using Custom "
+"Elements to define each components as tags. Therefore, Onsen UI is purely "
+"written in JavaScript (ES6) and is framework agnostic. If you like to use "
+"with DOM friendly frameworks like jQuery, Backbone or Bootstrap, you should "
+"go with Web Components."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:10
+msgid ""
+"**Framework bindings** are provided to take advantage of advanced "
+"JavaScript frameworks that provides additional capability. Bindings simply "
+"enhances the API to make it feel like an extion of the corresponding "
+"framework. Officially, we provide bindings for Vue.js, React, Angular 1, "
+"and Angular 2+. It's completely up to you. It is important to mention that "
+"there are also community-supported bindings for other major frameworks like "
+"Ember.js and Aurelia. See [Introduction to Bindings](frameworks.html) "
+"section for more information."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/architecture.html:11
+msgid "<% end %>"
+msgstr ""

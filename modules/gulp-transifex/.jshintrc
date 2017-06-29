@@ -1,0 +1,59 @@
+{
+
+/** forbids the declaration of functions inside loops, be careful though */
+	"loopfunc": false,
+
+/** Strings should be uniformely declared with single quotes"
+	"quotmark": "single",
+
+/** The equality must be compared with full type comparission */
+	"eqeqeq": true,
+
+/** Enforces use of braces in loops and conditionals */
+	"curly": true,
+
+/** The variables must be defined before used except for functions */
+	"latedef": "nofunc",
+
+/** Enforces a 4 spaces indent */
+	"indent": 4,
+
+/** permits  the use of empty blocks */
+	"noempty":false,
+
+/** Forbids of "non-breaking whitespace" */
+	"nonbsp":true,
+
+/** prohibits the use of explicitly undeclared variables */
+	"undef":true,
+
+/** all variables declared should be used. Only vars, func params nope */
+	"unused": true,
+
+/** Declare permitted globals */
+	"predef": [
+		"config", "Buffer", "voyage", "db", "log", "components", "res", "controllers",
+		"Braintree", "BraintreeData", "isFontAvailable"
+	],
+
+/** allows one 'use strict' per file, instead of every function */
+	"globalstrict": true,
+
+/** Allows the liberal use of dot and hash notation for objects */
+	"sub": true,
+
+/** Allows the use of ES6 features */
+	"esnext": true,
+
+/** If IIFE is used, enforce the use of parentheses to enclose it */
+	"immed": true,
+
+/** Forbids constructions as function () {} */
+	"noempty": true,
+
+/** Allows generator functions withou a yield */
+	"noyield": true,
+
+/** Declare Node as the environment and therefore accepts node globals (__dirname, module, require) */
+	"node": true
+}

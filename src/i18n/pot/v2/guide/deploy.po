@@ -1,0 +1,123 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language-Team: \n"
+"PO-Revision-Date: 2017-06-29 12:59-0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-29 12:57-0700\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Language: ja\n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:1
+msgid ""
+"title: 'Deploying Your App'\n"
+"order: 50\n"
+"tocGroup: guide"
+msgstr ""
+"title: 'Deploying Your App'\n"
+"order: 50\n"
+"tocGroup: guide"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:2
+msgid "layout: docs.html.eco"
+msgstr "layout: docs.html.eco"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:3
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:4
+msgid "Deploying Your App"
+msgstr "アプリとしてデプロイする"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:5
+msgid "Cordova (Hybrid Apps)"
+msgstr "Cordova（ハイブリッドアプリ）"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:6
+msgid ""
+"[Cordova](https://cordova.apache.org/) is an open-source framework to "
+"convert Onsen UI apps to native webview-based apps running locally on iOS "
+"and Android."
+msgstr ""
+"[Cordova](https://cordova.apache.org/)を使うと、iOSやAndroidの端末上で実行さ"
+"れる、ネイティブWebViewを持つアプリに変換できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:7
+msgid ""
+"[Monaca](monaca.html) is a tool that helps Onsen UI developers to build "
+"hybrid apps. For instance, Monaca CLI can be used to start a project, debug "
+"the app on the device, and perform remote build. Monaca is free as well, but "
+"has additional features available to purchase."
+msgstr ""
+"[Monaca](monaca.html)を使うと、Onsen UIを使って簡単にハイブリッドアプリを開発"
+"できます。Monacaはコマンドライン版のほか、ブラウザー上で動くオンラインIDEな"
+"ど、多彩な開発オプションを持っています。Monacaは無料でも使用できますが、購入"
+"することで追加の機能を利用できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:8
+msgid ""
+"<!--\n"
+"Please take a look at this video on how to create a hybrid app.\n"
+"\n"
+"<div class=\"resource-placeholder\"></div>\n"
+"-->"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:9
+msgid "Progressive Web Apps (PWA)"
+msgstr "Progressive Web Apps（PWA）"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:10
+msgid ""
+"[Progressive Web Apps](https://developers.google.com/web/fundamentals/"
+"getting-started/codelabs/your-first-pwapp/) (PWA) brings a new experience to "
+"your mobile apps. PWA is a Web app with a [manifest file](https://developers."
+"google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and a "
+"background-running [Service Worker](https://developers.google.com/web/ilt/"
+"pwa/introduction-to-service-worker). By adding those, you can receive push "
+"notifications, offline support, and additional features to give your mobile "
+"apps even more power."
+msgstr ""
+"[プログレッシブ・ウェブ・アプリ](https://developers.google.com/web/"
+"fundamentals/getting-started/codelabs/your-first-pwapp/)（PWA）はモバイルアプ"
+"リに新しい体験を吹き込みます。PWAは[マニフェストファイル](https://developers."
+"google.com/web/fundamentals/engage-and-retain/web-app-manifest/)と、バックグ"
+"ラウンドで実行される[サービスワーカー](https://developers.google.com/web/ilt/"
+"pwa/introduction-to-service-worker)を追加した、モバイルWebアプリです。PWAを使"
+"うと、プッシュ通知やオフライン対応など、モバイルアプリでも新しい機能を使うこ"
+"とができます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:11
+msgid ""
+"<!--\n"
+"Interested in getting started with a PWA? Check out this video.\n"
+"\n"
+"<div class=\"resource-placeholder\"></div>\n"
+"-->"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:12
+msgid "Mobile & Desktop Web"
+msgstr "モバイルWeb、デスクトップWeb"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:13
+msgid ""
+"Onsen UI is also suitable for developing web apps with any screen size. "
+"Onsen UI components are responsive and scalable, fitting perfectly even with "
+"desktop websites. Furthermore, you could create a desktop app by using "
+"[Electron](https://electron.atom.io/) or [Node WebKit](https://nwjs.io/)."
+msgstr ""
+"Onsen UIは、小さい画面から大きい画面まで、画面のサイズに問わずWebアプリ開発に"
+"も利用できます。Onsen UIのすべてのコンポーネントはレスポンシブに対応してお"
+"り、PCで使用するWebアプリにも最適です。さらに、[Electron](https://electron."
+"atom.io/)や[Node WebKit](https://nwjs.io/)を使って、デスクトップ向けアプリ開"
+"発をすることもできます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:14
+msgid "<% end %>"
+msgstr "<% end %>"

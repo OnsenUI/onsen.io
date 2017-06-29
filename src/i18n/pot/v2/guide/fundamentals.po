@@ -1,0 +1,465 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language-Team: \n"
+"PO-Revision-Date: 2017-06-29 13:04-0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-29 12:59-0700\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Language: ja\n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:1
+msgid ""
+"title: 'Fundamentals'\n"
+"order: 30\n"
+"tocGroup: guide"
+msgstr ""
+"title: 'Onsen UIの基礎'\n"
+"order: 30\n"
+"tocGroup: guide"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:2
+msgid "layout: docs.html.eco"
+msgstr "layout: docs.html.eco"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:3
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:4
+msgid "Fundamentals (Onsen UI 101)"
+msgstr "Onsen UIの基礎"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:5
+msgid ""
+"Learning Onsen UI is not difficult at all. In this section, we'll cover all "
+"the fundamentals for building your very first mobile app."
+msgstr ""
+"Onsen UIの学習は難しくありません。このセクションでは、はじめてのモバイルアプ"
+"リを開発するための基本的な内容を記述しています。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:6
+msgid "What is a Page?"
+msgstr "Onsen UIの「ページ」"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:7
+msgid ""
+"In the application world, a page is commonly referred as a window or a page "
+"view. In Onsen UI, a page is a container that fully covers the viewport "
+"(usually a screen). In Onsen UI, a page can be defined by wrapping in `ons-"
+"page` component."
+msgstr ""
+"アプリケーションの世界では、ページはウィンドウや画面のことを指します。Onsen "
+"UIでは、ビューポート（通常は画面）を完全に覆うコンテナのことを指します。ペー"
+"ジを定義するには、`ons-page`コンポーネントを使用します。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:8
+msgid "A Sample App with a Page and Toolbar"
+msgstr "ページとツールバーを持つサンプルアプリ"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:9
+msgid ""
+"The following sample code illustrates the most basic app that contains a "
+"page and toolbar. Inside the page container you can add any other native "
+"HTML DOM elements or Onsen UI components."
+msgstr ""
+"下記のコードは、ページとツールバーが1つずつ定義された最も基礎的なアプリの例に"
+"なります。`<ons-page>`で囲まれたページの中には、他のHTML要素やOnsen UIコン"
+"ポーネントを含められます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:10
+msgid ""
+"<body>\n"
+"  <ons-page>\n"
+"    <ons-toolbar>\n"
+"      <div class=”center”>Toolbar</div>\n"
+"    </ons-toolbar>\n"
+"\n"
+"    <!-- Your page content here. -->\n"
+"\n"
+"  </ons-page>\n"
+"</body>"
+msgstr ""
+"<body>\n"
+"  <ons-page>\n"
+"    <ons-toolbar>\n"
+"      <div class=”center”>Toolbar</div>\n"
+"    </ons-toolbar>\n"
+"\n"
+"    <!-- ここにページの内容を記述します -->\n"
+"\n"
+"  </ons-page>\n"
+"</body>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:11
+msgid ""
+"Now you've got your first Onsen UI app containing a single page! Adding more "
+"components will make this app even more great."
+msgstr ""
+"これで、1つのページを持つOnsen UIアプリの完成です。ページ内に他のコンポーネン"
+"トを入れていき、アプリを完成させてください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:12
+msgid ""
+"Usually, an app may have multiple pages with transitioning screens. In the "
+"next chapter, we will cover how to manage multiple pages."
+msgstr ""
+"ただし、通常のアプリでは複数のページ間で遷移します。次の章では、複数のページ"
+"を管理する方法について見ていきましょう。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:13
+msgid "Managing Pages"
+msgstr "ページを管理する"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:14
+msgid ""
+"Most applications have multiple pages (screens), which in Onsen UI can be "
+"achieved by defining multiple `ons-page` components."
+msgstr ""
+"ほとんどのアプリは複数のページ（画面）を持ちます。Onsen UIでは、複数の`ons-"
+"page`コンポーネントを定義して実現します。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:15
+msgid "Templates"
+msgstr "テンプレート"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:16
+msgid ""
+"In order to create multiple pages, we need to understand the concept of "
+"\"template\". A template defines a generic layout that is used during "
+"execution time to create instances. If a template is modified at a given "
+"time, it won't change the already created instances but will affect the ones "
+"created later on. In Onsen UI, this layout must always be an `ons-page` "
+"component (one single root node). Any other component must be a child of the "
+"page."
+msgstr ""
+"複数ページを作成するには、テンプレートの仕組みを学ぶ必要があります。テンプ"
+"レートとは実行時に構築される、画面のレイアウトを定義したものです。アプリの実"
+"行中にテンプレートを変更しても、既に作成されたものには変更が行われず、今後作"
+"成されるものだけに反映されます。Onsen UIではレイアウトは`ons-page`コンポーネ"
+"ントで定義します。他のコンポーネントは、ページの子要素になります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:17
+msgid ""
+"A template must be given a unique ID that will be used later on to reference "
+"the template. Templates can be defined in two different ways:"
+msgstr ""
+"後で参照するためにテンプレートには特定のIDを割り当てます。テンプレートの定義"
+"には下記の2つの方法があります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:20
+msgid ""
+"Separate files: `*.html` files that contain a single `ons-page` component as "
+"the root. Their ID is given by the path in the project, e.g. `./my/views/"
+"page1.html`."
+msgstr ""
+"別のファイル: `ons-page`ではじまるHTMLファイルをテンプレートとして利用できま"
+"す。IDはそのプロジェクトのパス（例えば`./my/views/page1.html`）となります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:23
+msgid ""
+"Using [`<template>` elements](https://developer.mozilla.org/en/docs/Web/HTML/"
+"Element/template) inside `index.html`: Sometimes is useful to have a bunch "
+"of templates in the main file (`index.html`). HTML template elements can "
+"hold pages just like separate files do. Their ID must be manually specified "
+"by the `id` attribute. For example:"
+msgstr ""
+"`index.html`内に[`<template>`要素](https://developer.mozilla.org/en/docs/Web/"
+"HTML/Element/template)を定義する: メインのファイル（`index.html`）内に複数の"
+"テンプレートを定義できます。HTMLの`template`要素を使うと、別のファイルに定義"
+"されているかのように扱うことができます。下記のように、IDは`id`属性で定義しま"
+"す。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:25
+msgid ""
+"<template id=\"page.html\">\n"
+"  <ons-page><!-- Content here--></ons-page>\n"
+"</template>"
+msgstr ""
+"<template id=\"page.html\">\n"
+"  <ons-page><!-- テンプレートの内容をここに記述--></ons-page>\n"
+"</template>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:27
+msgid ""
+"[`<ons-template>` element](/v2/api/js/ons-template.html) is also supported "
+"for the same purpose, but native `<template>` is preferred since v2.4.0"
+msgstr ""
+"[`<ons-template>`要素](/v2/api/js/ons-template.html)も同じ目的で利用できます"
+"が、バージョン2.4.0以降はネイティブの`<template>`要素を使うことを推奨します。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:32
+msgid ""
+"But, how can you move between these pages and switch their visibility? Onsen "
+"UI has 3 components that are used to manage multiple pages: `ons-navigator`, "
+"`ons-tabbar` and `ons-splitter`."
+msgstr ""
+"では、これらで定義したページの間をどのように推移して、表示を切り替えれば良い"
+"のでしょうか。Onsen UIには、その目的で`ons-navigator`、`ons-tabbar`、`ons-"
+"splitter`という3つのコンポーネントを用意しています。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:33
+msgid "Navigator"
+msgstr "ナビゲーター"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:34
+msgid ""
+"If the app contains multiple pages in a hierarchical order, consider using "
+"the navigator component. It provides a page stack where you can push and pop "
+"pages with transition animations. Check out [`ons-navigator` reference](../"
+"api/js/ons-navigator.html)."
+msgstr ""
+"複数のページを階層的に管理する必要がある場合は、ナビゲーターを使用してくださ"
+"い。ページスタックの機能を持っており、遷移アニメーションを持つ、ページの追加"
+"（プッシュ）操作と破棄（ポップ）操作を行えます。詳細は、[`ons-navigator`のリ"
+"ファレンス](../api/js/ons-navigator.html)を参照してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:35
+msgid "Tab Bar"
+msgstr "タブバー"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:36
+msgid ""
+"If the app contains multiple pages at the same level, a tab bar is the "
+"appropriate choice. Users can pick which page to display by tapping the item "
+"on the tab. Check out [`ons-tabbar` reference](../api/js/ons-tabbar.html)."
+msgstr ""
+"同じレベルに複数のページがあるような場合は、タブバーを使うのがよいでしょう。"
+"この場合はタブの項目をタップすることで、ページを切り替えることができます。詳"
+"細については、[`ons-tabbar`のリファレンス](../api/js/ons-tabbar.html)を参照し"
+"てください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:37
+msgid "Splitter"
+msgstr "スプリッター"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:38
+msgid ""
+"Although it is named a splitter, small devices will create a side menu which "
+"can be shown/hidden by the user interaction. On larger screens, this will "
+"split a single page into two. Check out [`ons-splitter` reference](../api/js/"
+"ons-splitter.html)."
+msgstr ""
+"スプリッターという名前ではありますが、スマートフォンなどの小さな画面を持つ端"
+"末においては、ユーザーの操作で出し入れできるサイドメニュー機能を提供します。"
+"画面サイズが大きい場合は、1つの画面を2つのページに分割します。[`ons-splitter`"
+"のリファレンス](../api/js/ons-splitter.html)を参照してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:39
+msgid ""
+"By using these components, an app can have multiple pages, allowing creation "
+"of everything from simple to complex user interfaces. They are composable, "
+"meaning that you can combine them to achieve the desired routing for your "
+"specific app. In general, external routers are not necessary thanks to these "
+"3 components."
+msgstr ""
+"これらのコンポーネントを使って複数のページを管理することで、簡単なものだけで"
+"なく、複雑なUIを持つページを作成することができます。さらに、ページは好きな順"
+"序で入れ替えることができるなど、自由に配置をすることができます。これらの3つの"
+"コンポーネントのおかげで、いわゆるルーターの仕組みを導入する必要はありませ"
+"ん。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:40
+msgid ""
+"Now you have the necessary skills and information to layout a page, as well "
+"as manage multiple pages. It's time to access the component using JavaScript "
+"and make it a dynamic component."
+msgstr ""
+"ページのレイアウトに必要な事前知識は以上となります。ここからはJavaScriptを用"
+"いて、動的なコンポーネントを構築する方法を見ていきましょう。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:41
+msgid "The ons Object"
+msgstr "onsオブジェクト"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:42
+msgid ""
+"The `ons` JavaScript object is globally available, and has several useful "
+"methods and properties."
+msgstr ""
+"`ons`オブジェクトはJavaScriptのグローバルスコープで利用でき、多くの便利なメ"
+"ソッドやプロパティを提供してくれます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:43
+msgid ""
+"For example, `ons.ready(callback)` method can be used to wait for app "
+"initialization. Specifically, this function waits until \"DOMContentLoaded\" "
+"and Cordova's \"deviceready\" events are fired. This is useful, for "
+"instance, to know when is safe to make calls to Cordova APIs."
+msgstr ""
+"たとえば、`ons.ready(callback)`メソッドはアプリの初期化（`DOMContentLoaded`と"
+"Cordovaの`deviceready`イベント）を待つために使用できます。このイベントの後に"
+"CordovaのAPIを実行してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:44
+msgid ""
+"<head>\n"
+"  <script>\n"
+"    ons.ready(function() {\n"
+"      // Cordova APIs are ready\n"
+"      console.log(window.device);\n"
+"    });\n"
+"  </script>\n"
+"</head>"
+msgstr ""
+"<head>\n"
+"  <script>\n"
+"    ons.ready(function() {\n"
+"      // CordovaのAPIを呼び出す準備が整った\n"
+"      console.log(window.device);\n"
+"    });\n"
+"  </script>\n"
+"</head>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:46
+msgid ""
+"Note that `ons.ready()` has nothing to do with `ons-page` initialization "
+"(see [lifecycle section](lifecycle.html) for that)."
+msgstr ""
+"`ons.ready()`は`ons-page`の初期化とは関係ないことに注意が必要です。詳細につい"
+"ては、[ページのライフサイクル](lifecycle.html)をお読みください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:48
+msgid "Attributes, Properties, Methods and Events"
+msgstr "属性・プロパティ・メソッド・イベント"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:49
+msgid ""
+"The Onsen UI component is a simple DOM Element (JavaScript object). Thus, it "
+"has its own properties, methods, and events. These can be used to configure "
+"behavior or call a specific function during runtime. Let's take `ons-"
+"navigator` for example and see how it can be used."
+msgstr ""
+"Onsen UIのコンポーネントは、すべてDOM要素（JavaScriptオブジェクト）です。他の"
+"要素と同様に、独自のプロパティやメソッド、イベントなどを呼び出すことができま"
+"す。これによりコンポーネントの挙動を変更したり、特定のアクションを実行するこ"
+"とができます。具体的な例として`ons-navigator`を参考に見ていきましょう。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:50
+msgid "Attributes"
+msgstr "属性"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:51
+msgid ""
+"An **attribute** either modifies the default functionality or specifies how "
+"the component should perform. Most of the attributes are optional. Note that "
+"some attributes need to be specified before the page initialization. For "
+"instance, `ons-navigator` can take \"animation\" attribute and change it at "
+"any time."
+msgstr ""
+"**属性（Attribute）**は、コンポーネントのデフォルト状態や振る舞いを変更するた"
+"めに使用します。ほとんどの属性は任意項目となっています。いくつかの属性はペー"
+"ジが初期化されるよりも前に指定されている必要があることに注意が必要です。たと"
+"えば`ons-navigator`では`animation`という属性があり、これはどのタイミングでも"
+"変更することができます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:52
+msgid ""
+"<ons-navigator animation=\"slide\"></ons-navigator>\n"
+"<script>\n"
+"  var myNavigator = document.querySelector('ons-navigator');\n"
+"  myNavigator.setAttribute('animation', 'lift');\n"
+"</script>"
+msgstr ""
+"<ons-navigator animation=\"slide\"></ons-navigator>\n"
+"<script>\n"
+"  var myNavigator = document.querySelector('ons-navigator');\n"
+"  myNavigator.setAttribute('animation', 'lift');\n"
+"</script>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:53
+msgid "Properties"
+msgstr "プロパティ"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:54
+msgid ""
+"A component has **properties** which can be accessed from DOM Element. For "
+"instance, you could access the `topPage` property of an `ons-navigator` "
+"component to get information about the top page."
+msgstr ""
+"**プロパティ（Property）**はDOM要素を使って参照できます。たとえば`ons-"
+"navigator`の`topPage`プロパティを使うと、一番上のページの情報を取得できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:55
+msgid ""
+"var myNavigator = document.querySelector('ons-navigator');\n"
+"console.log(myNavigator.topPage);"
+msgstr ""
+"var myNavigator = document.querySelector('ons-navigator');\n"
+"console.log(myNavigator.topPage)"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:56
+msgid "Methods"
+msgstr "メソッド"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:57
+msgid ""
+"A **method** is a function that trigger a specific action for the component. "
+"The following example is calling `pushPage` method to open a new page."
+msgstr ""
+"**メソッド（Method）**とは関数のことで、何らかの実行を行う時に使用します。下"
+"の例は`pushPage`メソッドを呼び出し、新しいページを開いています。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:58
+msgid ""
+"var myNavigator = document.querySelector('ons-navigator');\n"
+"myNavigator.pushPage('page2.html');"
+msgstr ""
+"var myNavigator = document.querySelector('ons-navigator');\n"
+"myNavigator.pushPage('page2.html');"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:59
+msgid "Events"
+msgstr "イベント"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:60
+msgid ""
+"**DOM Events** are fired at a specific timing. To listen for an event, use "
+"JavaScript's `addEventListener()` function. An event is also supplied with "
+"an event object, which is useful for getting some details."
+msgstr ""
+"**DOMイベント**は特定のタイミングで実行されます。イベントを受け取るには"
+"`addEventListener()`関数を使用します。イベントが発生した際にはイベントオブ"
+"ジェクトも渡されます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:61
+msgid ""
+"var myNavigator = document.querySelector('ons-navigator');\n"
+"myNavigator.addEventListener('postpush', function(event) {\n"
+"  console.log(\"'pushPage' is completed!\", event);\n"
+"});"
+msgstr ""
+"var myNavigator = document.querySelector('ons-navigator');\n"
+"myNavigator.addEventListener('postpush', function(event) {\n"
+"  console.log(\"pushPage処理が終わりました！\", event);\n"
+"});"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:62
+msgid ""
+"Events can bubble up, which means that event listeners can be added to "
+"parent components or directly to `document` instead."
+msgstr ""
+"親のコンポーネントや`document`にイベントリスナーをセットしてもイベントを受け"
+"取ることができます。これはイベントのバブリングと呼ばれます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:64
+msgid ""
+"Great job! That’s it for Onsen UI’s 101. By now, you should have a fairly "
+"good understanding of the basics. Feel free to escape this documentation and "
+"surf around some of our useful resources: [Playground](https://tutorial."
+"onsen.io/) (Interactive Tutorial), [GitHub repository](https://github.com/"
+"OnsenUI/OnsenUI/), or [Community Forum](https://community.onsen.io/)!"
+msgstr ""
+"おめでとうございます。Onsen UIの基礎はこれで以上となります。\n"
+"\n"
+"ここから先は、他の記事を読み進めていただいても構いませんし、[Playground]"
+"(https://tutorial.onsen.io/)（チュートリアル）や[GitHubレポジトリ](https://"
+"github.com/OnsenUI/OnsenUI/)なども参考になると思います。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/fundamentals.html:65
+msgid "<% end %>"
+msgstr "<% end %>"

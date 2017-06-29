@@ -1,0 +1,82 @@
+{
+  "_args": [
+    [
+      "gulp-transifex@github:everdance/gulp-transifex#patch-1",
+      "/data/docs.monaca.mobi"
+    ]
+  ],
+  "_from": "everdance/gulp-transifex#patch-1",
+  "_id": "gulp-transifex@0.1.17",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/gulp-transifex",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/everdance/gulp-transifex/patch-1/package.json",
+      "gitUrl": "git://github.com/everdance/gulp-transifex.git#patch-1",
+      "httpsUrl": "git+https://github.com/everdance/gulp-transifex.git#patch-1",
+      "shortcut": "github:everdance/gulp-transifex#patch-1",
+      "ssh": "git@github.com:everdance/gulp-transifex.git#patch-1",
+      "sshUrl": "git+ssh://git@github.com/everdance/gulp-transifex.git#patch-1",
+      "type": "github"
+    },
+    "name": "gulp-transifex",
+    "raw": "gulp-transifex@github:everdance/gulp-transifex#patch-1",
+    "rawSpec": "github:everdance/gulp-transifex#patch-1",
+    "scope": null,
+    "spec": "github:everdance/gulp-transifex#patch-1",
+    "type": "hosted"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git://github.com/everdance/gulp-transifex.git#8271cb89314cdf1200e8d87ae65947c786d7836c",
+  "_shasum": "dedff845764d6ffa7390ea1d3f40bfb178a5d44a",
+  "_shrinkwrap": null,
+  "_spec": "gulp-transifex@github:everdance/gulp-transifex#patch-1",
+  "_where": "/data/docs.monaca.mobi",
+  "bugs": {
+    "url": "https://github.com/NEURS/gulp-transifex/issues"
+  },
+  "dependencies": {
+    "async": "~0.9.0",
+    "chalk": "^0.5.1",
+    "gulp": "^3.8.6",
+    "gulp-util": "^3.0.0",
+    "mkdirp": "^0.5.0",
+    "path": "^0.4.9",
+    "sprintf": "^0.1.3",
+    "through2": "^0.5.1"
+  },
+  "description": "Gulp plugin for uploading source languages files to transifex",
+  "devDependencies": {
+    "mocha": "^1.21.0",
+    "should": "^4.0.4",
+    "sprintf": "^0.1.5"
+  },
+  "gitHead": "8271cb89314cdf1200e8d87ae65947c786d7836c",
+  "homepage": "https://github.com/NEURS/gulp-transifex/",
+  "keywords": [
+    "gulp",
+    "i18n",
+    "plugin",
+    "transifex"
+  ],
+  "maintainers": [
+    {
+      "name": "Kevin J. Martin",
+      "email": "kevin@neurs.net",
+      "url": "http://neurs.net"
+    }
+  ],
+  "name": "gulp-transifex",
+  "optionalDependencies": {},
+  "readme": "gulp-transifex\n==============\n\nGulp plugin for uploading resources and downloading translations in Transifex\n\nFeel free to fork and improve\n\nUsage\n------\n\n```javascript\nvar options = {\n    host: <String optional. Defaults to 'www.transifex.com'>,\n    base_path: <String optional. Defaults to '/api/2/project/'>,\n    user: <String required. Transifex username>,\n    password: <String required. Transifex Password>,\n    project: <String required. Transifex projects name>,\n    local_path: <String optional. Local root path for the translations>,\n    custom_language_codes:{\n        <ISO 639-1 language code>: <custom language code>\n    },\n    use_custom_language_codes: <Boolean>,\n    language_codes_as_objects: <Boolean>\n}\n```\n\nUsing Custom Language Codes\n---------------------------\n\nTransifex uses ISO 639-1 to code languages. If you want to use your custom language code (another standard or just map `es` to Klingon) use the `custom_language_codes` option with `use_custom_language_codes` set to `true`.\n\n###`language_codes_as_objects`\nBy default the `languages()` method returns an array of strings with the language codes. If you specify `custom_language_codes` _AND_ `use_custom_language_codes` is set to true, it will return an array of strings with your own custom codes.\nAdditionally, if `language_codes_as_objects` is set to `true` it will return an array of object in the form:\n\n```javascript\n[\n    {\n        <ISO 639-1 language code>: <custom language code>\n    },\n    ...\n]\n```\n\n\nUploading Resource files:\n-------------------------\ngulp-transifex will go file by file uploading them to the project as a resource\nTransifex will check if the file has changed and will store the changes\n\n```javascript\nvar transifex = require('transifex').createClient(options)\nvar gulp = require('gulp')\n\ngulp.task('upstream', function(){\n    return gulp.src('path/to/source/language/*')\n        .pipe(transifex.pushResource())\n})\n```\n\nDownloading translation files:\n------------------------------\nSimilarly, for every resource file, gulp-transifex will check on the server for the languages and will start going to every file in each language and copy it in the local translation folder: `options.local_path`\n\n```javascript\nvar transifex = require('transifex').createClient(options)\nvar gulp = require('gulp')\n\ngulp.task('downstream', function(){\n    return gulp.src('path/to/source/language/*')\n        .pipe(transifex.pullResource())\n})\n```\n\nChaining Tasks with gulp-transifex\n-----------------------------------\n\nSince this plugins makes remote requests you have to call it asynchronously if you\nneed the translation files in next tasks, just return the stream:\n\n```javascript\nvar transifex = require('transifex').createClient(options)\nvar gulp = require('gulp')\n\ngulp.task('downstream', function(){\n    return gulp.src('path/to/source/language/*')\n        .pipe(transifex.pullResource())\n});\n\ngulp.task('requireTransifexFiles', ['downstream'], function () {\n    ...\n});\n```\n\nOther methods exposed\n---------------------\n\nThere are other methods exposed that doesn't return streams but accepts callbacks:\n\n###resources()\n\nGets an array of resources in the project\n\n```javascript\nvar transifex = require('transifex').createClient(options)\n\ntransifex.resources(function(data){\n    ...\n})\n```\n\n###languages()\n\nGets an array of language codes in the project\n\n```javascript\nvar transifex = require('transifex').createClient(options)\n\ntransifex.languages(function (data){\n    ...\n})\n```\n\nTODO\n----\n\n* ~~Add local modifications check. If there's no local modifications, don't bother check the file in transifex~~\n* Add updates check in translation files. If there ain't new translation why download the file.\n* Better division of concerns (Modularize further, separate transform function from stream declarations)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NEURS/gulp-transifex.git"
+  },
+  "version": "0.1.17"
+}

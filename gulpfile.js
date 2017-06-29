@@ -9,7 +9,9 @@ var fs = require('fs');
 var path = require('path');
 var merge = require('merge-stream');
 var siteGenerator = require('./modules/metalsmith');
-var parallelize = require("concurrent-transform");
+var gettext = require('./modules/gettext');
+var parallelize = require('concurrent-transform');
+var transifex = require('./modules/gulp-transifex');
 
 //--
 
@@ -45,6 +47,35 @@ gulp.task('authors', function(done) {
 //////////////////////////////
 gulp.task('metalsmith', function(done) {
   siteGenerator(lang, env === 'staging').site(done);
+});
+
+//////////////////////////////
+// i18n
+//////////////////////////////
+var createTransifexClient = function() {
+  if (!process.env.TRANSIFEX && !config.TRANSIFEX) {
+    gutil.log(gutil.colors.bold.red("No TRANSIFEX variable found in env or config.json!"));
+    gutil.log(gutil.colors.red("Transifex sync is not available."));
+    return null;
+  }
+  var userpw = process.env.TRANSIFEX || config.TRANSIFEX;
+  return transifex.createClient({
+      user: userpw.split(":")[0],
+      password: userpw.split(":")[1],
+      project: "onsen-ui-website",
+      local_path: "src/i18n/",
+    });
+}
+gulp.task('i18n-extract', function(done) {
+  return gulp.src('src/documents_en/v2/guide/**/*')
+    .pipe(gettext.extract())
+    .pipe(gulp.dest('src/i18n/pot/v2/guide'));
+});
+
+gulp.task('i18n-translate', function() {
+  return gulp.src('src/i18n/po/v2/guide/**/*')
+    .pipe(gettext.translate())
+    .pipe(gulp.dest('src/documents_ja/v2/guide'));
 });
 
 //////////////////////////////
@@ -182,7 +213,7 @@ gulp.task('deploy-aws', function() {
       }
     };
   }
-
+  
   if (!aws) {
     throw new Error('AWS configuration is missing! Please create a config file, or set it in the environment before trying to deploy!');
   }
