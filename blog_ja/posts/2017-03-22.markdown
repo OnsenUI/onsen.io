@@ -1,0 +1,228 @@
+---
+author: atsushi
+date: 2017-03-22
+id: monaca-with-universal-link
+title: "Webサイトとアプリの共存に。Monacaアプリにユニバーサルリンクを導入する"
+product: monaca
+tags: monaca, 
+category: Monaca
+---
+
+スマートフォンアプリ（特にWebブラウザ）でURLを開いた際に、Webブラウザではなくアプリが立ち上がることがあります。例えばFacebook、YouTube、Twitterなどです。従来、こうしたWebブラウザからアプリを立ち上げるためには専用のURLスキーマが使われてきました。しかしURLスキーマはそのアプリがインストールされていないと使えませんし、Webサイトからアプリがインストールされているかどうか判断するのは難しかったかと思います。
+
+そこで現在使われているのがユニバーサルリンクと呼ばれる手法です。URLにアクセスした際に、アプリがインストールされていればすぐにアプリを開き、インストールされていない場合はWebサイトが表示されます。これにより、ユーザビリティの高い仕組みが実現できます。
+
+今回はMonacaアプリでユニバーサルリンクを実現する、[Cordova Universal Links Plugin](https://github.com/nordnet/cordova-universal-links-plugin#android-web-integration)の使い方を紹介します。
+
+## 利用手順
+
+Cordova Universal Links Pluginを使う手順は幾つかの段階に分かれています。まずアプリにCordova Universal Links Pluginをインストールします。Monaca IDEにてCodovaプラグインとしてcordova-universal-links-pluginを追加してください。
+
+次にconfig.xmlを開きます。そして設定を次のように追加します。IOS_TEAM_IDはそれぞれ読み替えてください。
+
+```
+<universal-links>
+	<ios-team-id value="IOS_TEAM_ID" />
+	<host name="www.moongift.jp" scheme="https">
+		<path url="/" />
+		<path url="/news/" event="openNewsListPage" />
+	</host>
+</universal-links>
+```
+
+ここで pathの値にマッチしたURLがあれば、アプリが開きます。pathを指定しなければドメインがマッチすればすべてアプリで開くようになります。また、pathに対してeventを指定すれば、マッチした時にそのイベントが実行されるようになります。
+
+JavaScript側は次のように実装されます。
+
+```
+ons.ready(function() {
+  universalLinks.subscribe('openNewsListPage', onNewsListPageRequested);
+});
+
+function onNewsListPageRequested(event) {
+  var urlData = event.detail;
+  console.log('リンクから開きました：' + urlData.url);
+  alert("ニュースページを開きます")	
+}
+```
+
+この場合は上記XMLで指定した openNewsListPage というイベントを購読する形です。すべて同じイベントで購読し、event.detail.url で処理分けすることもできます。
+
+## iOSでの手順
+
+iOSでユニバーサルリンクを実現する場合、まずプロビジョニングを作成する必要があります。その際、Associated Domainsを有効にします。
+
+次に apple-app-site-association というファイルを作成します。内容は次のようになります。<TEAM_ID_FROM_MEMBER_CENTER> と <BUNDLE_ID> はそれぞれ自分のものを設定します。pathsは細かく指定することもできます。
+
+```
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "<TEAM_ID_FROM_MEMBER_CENTER>.<BUNDLE_ID>",
+        "paths": [
+          "/", "*"
+        ]
+      }
+    ]
+  }
+}
+```
+
+apple-app-site-associationは config.xml で指定したサイトのルートパスに配置します。つまり、 https://www.example.com/apple-app-site-association でアクセスできる必要があります。さらにHTTPSになっており（HTTPの場合は別途署名する必要があります）、HTTPのレスポンスが application/json になっていなければなりません。
+
+## Androidでの手順
+
+Androidの場合はGoogle Play Consoleでの設定が必要になります。また、Webサイトをアプリと連携しますので、一度プロダクションとしてビルドし、アプリをアップロードします。
+
+アップロードするとWebサイトが連携できるようになるので、Webmaster Toolsを使って登録します。つまり自分で運用しているサイトでしか使えません。
+
+次にWebサイトに次のタグを埋め込みます。
+
+```
+<link rel="alternate"
+      href="android-app://<package_name>/<scheme>/<host><path>" />
+```
+
+これは複数指定可能です。例えば次のような記述になります。
+
+```
+<link rel="alternate" href="android-app://jp.moongift.monaca.deeplink/https/www.moongift.jp" />
+```
+
+さらに https://www.example.com/.well-known/assetlinks.json というURLでアクセスできるJSONファイルを配置します。内容は次のようになります。
+
+```
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target" : { "namespace": "android_app", "package_name": "com.example.app",
+               "sha256_cert_fingerprints": ["hash_of_app_certificate"] }
+}]
+```
+
+この中で hash_of_app_certificate となっている部分はMonaca IDEで作成したキーストアファイルをダウンロードし、次のようにコマンドを打ちます。keytoolはJava JDKに同梱されるコマンドです。
+
+```
+keytool -list -v -keystore /path/to/keystore.private 
+```
+
+コマンドを実行すると次のような結果が返ってきます。
+
+```
+キーストアのタイプ: JKS
+キーストア・プロバイダ: SUN
+
+キーストアには1エントリが含まれます
+
+別名: monaca
+作成日: 2017/03/22
+エントリ・タイプ: PrivateKeyEntry
+証明書チェーンの長さ: 1
+証明書[1]:
+所有者: C=JP
+発行者: C=JP
+シリアル番号: 10474f72
+有効期間の開始日: Wed Mar 22 11:27:00 JST 2017終了日: Sun Aug 07 11:27:00 JST 2044
+証明書のフィンガプリント:
+	 MD5:  2E:16:6C:F4:81:C2:6C:02:64:05:97:69:62:26:CC:CA
+	 SHA1: 5A:91:E4:44:58:F0:2B:A1:1A:19:51:7E:10:ED:A4:5E:A4:4A:1F:59
+	 SHA256: BC:8D:F2:93:32:EE:3D:E4:E3:61:C9:50:77:31:59:BC:C9:A4:D6:8D:19:2B:97:42:5D:D5:99:93:F7:24:ED:A6
+	 署名アルゴリズム名: SHA256withRSA
+	 バージョン: 3
+
+拡張: 
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+```
+
+ここで使うのは証明書のフィンガプリントで、SHA256に書かれている文字列を使います。これを上記のJSONファイルのhash_of_app_certificateと書き換えます。
+
+なお、ここまでの設定がうまくいっていたら、次のURLを開くことでステータスが確認できます。iOSについてはこのような確認サイトはありませんのでご注意ください。
+
+    https://digitalassetlinks.googleapis.com/v1/statements:list?source.web.site=サイトのURL&relation=delegate_permission/common.handle_all_urls
+
+例えば次のように返ってきます。エラーがなければ問題ありません。
+
+```
+{
+    "debugString": "********************* ERRORS *********************
+None!
+********************* INFO MESSAGES *********************
+* Info: The following statements were considered when processing the request:
+
+---
+Source: Web asset with site https://www.moongift.jp. (which is equivalent to 'https://www.moongift.jp')
+Relation: delegate_permission/common.handle_all_urls
+Target: Android app asset with package name jp.moongift.monaca.deeplink and certificate fingerprint BC:8D:F2:93:32:EE:3D:E4:E3:61:C9:50:77:31:59:BC:C9:A4:D6:8D:19:2B:97:42:5D:D5:99:93:F7:24:ED:A6
+Where this statement came from:
+  Origin of the statement: Web asset with site https://www.moongift.jp. (which is equivalent to 'https://www.moongift.jp')
+  Include directives followed (in order):
+    <None>
+Matches source query: Yes
+Matches relation query: Yes
+Matches target query: Yes
+
+--- End of statement list. ---
+
+
+", 
+    "maxAge": "59.999420343s", 
+    "statements": [
+        {
+            "relation": "delegate_permission/common.handle_all_urls", 
+            "source": {
+                "web": {
+                    "site": "https://www.moongift.jp."
+                }
+            }, 
+            "target": {
+                "androidApp": {
+                    "certificate": {
+                        "sha256Fingerprint": "BC:8D:F2:93:32:EE:3D:E4:E3:61:C9:50:77:31:59:BC:C9:A4:D6:8D:19:2B:97:42:5D:D5:99:93:F7:24:ED:A6"
+                    }, 
+                    "packageName": "jp.moongift.monaca.deeplink"
+                }
+            }
+        }
+    ]
+}
+```
+
+## 試す
+
+後はアプリをビルドしてインストール後、URLをクリックするだけです。なお、iOSでは幾つかの条件があります。
+
+|アプリ名|対応状況|
+|:----------|:----------|
+|Safari|状況による|
+|Chrome|状況による|
+|メッセージ|利用可能|
+|Slack|利用可能|
+|メール|利用可能|
+|Gmai|利用不可|
+|Facebook|利用不可|
+|Twitter|利用不可|
+|Facebookメッセンジャー|利用不可|
+
+via [iOS 9.2 Deep Linking Guide: Transitioning to Universal Links | Branch Blog](https://blog.branch.io/ios-9.2-deep-linking-guide-transitioning-to-universal-links/)
+
+といった具合になっています。状況によると言うのは、ブラウザのアドレスバーにURLを入力した場合に動かないということと、同じドメイン以下のリンクでは動作しないという点です。
+
+URLを開こうとすると、アプリに遷移すればOKです。さらに特定のURLについてイベントハンドラを指定しておけば、そちらに処理が流れるようになります。
+
+初回はどのアプリで開くか確認が出ます。この時点でアプリ名が出ていればOKです。
+
+![](/blog/content/images/2017/Mar/universal-link-android-1.png)
+
+そしてイベントハンドラが認識されれば問題ありません。
+
+![](/blog/content/images/2017/Mar/universal-link-android-2.png)
+
+----
+
+Webサイトとアプリを両方運用している際にユニバーサルリンクは便利な仕組みではないでしょうか。ぜひ活用してください。
+
+今回のソースコードは[moongift/monaca-with-universal-link](https://github.com/moongift/monaca-with-universal-link)にアップロードしてあります。実装時の参考にしてください。
+
+
