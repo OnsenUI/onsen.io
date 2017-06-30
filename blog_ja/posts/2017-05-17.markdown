@@ -1,0 +1,337 @@
+---
+author: atsushi
+date: 2017-05-17
+id: monaca-rakuten-recipe-api
+title: "Web APIとMonacaを連携。楽天レシピAPIを試す"
+tags: Onsen UI,Web API,Rakuten
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://onsen.io/blog/content/images/2017/May/CustomElementsStatus.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
+---
+
+Web APIを使うと個人で作っているアプリだけでは手に入らない情報が簡単に使えるようになります。オンライン上にはたくさんのWeb APIが存在し、それらを使うことでアプリに魅力を追加するのはもちろん、新しいアプリを作るアイディアにつながることでしょう。
+
+今回は楽天レシピAPIを使ってレシピ情報を見るアプリを作ってみたいと思います。
+
+## 作成するアプリについて
+
+今回作成するアプリは、まず最初にレシピのカテゴリが一覧表示されます。
+
+![](/blog/content/images/2017/May/rakuten-recipe-api-4.png)
+
+カテゴリをタップするとレシピが並びます。
+
+![](/blog/content/images/2017/May/rakuten-recipe-api-3.png)
+
+レシピをタップすると、そのレシピの簡単な情報が表示されます。
+
+![](/blog/content/images/2017/May/rakuten-recipe-api-2.png)
+
+さらに詳細なレシピ情報はInAppBrowserにて楽天レシピのサイトにアクセスして表示されます。
+
+![](/blog/content/images/2017/May/rakuten-recipe-api-1.png)
+
+このような4つの画面で構成されたアプリになります。
+
+## ベースについて
+
+今回のベースはOnsen UI V2 JS Navigationになります。一覧/詳細画面があるようなアプリではこのテンプレートが参考になるでしょう。
+
+## 楽天レシピAPIについて
+
+今回利用するWeb APIは以下の2つです。
+
+- [楽天レシピカテゴリ一覧API](https://webservice.rakuten.co.jp/api/recipecategorylist/)
+- [楽天レシピカテゴリ別ランキングAPI](https://webservice.rakuten.co.jp/api/recipecategoryranking/)
+
+利用の際にはアプリIDが必要になりますので[新規アプリ登録](https://webservice.rakuten.co.jp/app/create)より登録してください（楽天のユーザIDが必要です）。
+
+## HTMLの実装について
+
+HTMLはInAppBrowserの画面を除く、全部で3つの画面で構成されます。
+
+### カテゴリ一覧画面
+
+この画面では楽天レシピカテゴリ一覧APIからデータを取得し、`#categories` の中にデータを追加します。
+
+```
+<ons-navigator id="navigator" page="page1.html"></ons-navigator>
+
+<ons-template id="page1.html">
+  <ons-page id="first-page">
+    <ons-toolbar>
+      <div class="center">カテゴリ</div>
+    </ons-toolbar>
+
+    <div class="content" style="text-align: center">
+      <p id="loading">
+        <ons-progress-circular indeterminate></ons-progress-circular>
+      </p>
+      <ons-list id="categories">
+      </ons-list>
+    </div>
+  </ons-page>
+</ons-template>
+```
+
+### レシピ一覧
+
+この画面では前の画面で選択されたカテゴリに基づいて楽天レシピカテゴリ別ランキングAPIの結果を取得し、 `#recipes` の中にレシピ情報を追加します。また、`#categoryName` に選択されたカテゴリ名を表示します。
+
+```
+<ons-template id="page2.html">
+  <ons-page id="second-page">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>一覧</ons-back-button></div>
+      <div class="center" id="categoryName">カテゴリ名</div>
+    </ons-toolbar>
+
+    <div class="content" style="text-align: center">
+      <ons-list id="recipes">
+      </ons-list>
+    </div>
+  </ons-page>
+</ons-template>
+```
+
+### レシピ情報表示
+
+この画面では前の画面で選択されたレシピの情報を表示します。この時点では詳細なレシピ情報は得られませんので代表的な情報を `#detail` の中に表示します。
+
+```
+<ons-template id="page3.html">
+  <ons-page id="third-page">
+    <ons-toolbar>
+      <div class="left"><ons-back-button>レシピ</ons-back-button></div>
+      <div class="center" id="recipeTitle">Page 2</div>
+    </ons-toolbar>
+
+    <div class="content" style="text-align: center">
+      <img src="" id="recipeImage" style="width:100%" />
+      <div id="detail">
+        <ons-list>
+        </ons-list>
+      </div>
+    </div>
+  </ons-page>
+</ons-template>
+```
+
+## JavaScriptについて
+
+JavaScriptは主に3つのブロックに分かれます。
+
+1. カテゴリ一覧画面
+2. レシピ一覧画面
+3. レシピ詳細画面
+
+まず全体の処理は次のようになります。
+
+```
+// 楽天APIのアプリID
+var RAKUTEN_APP_ID = "RAKUTEN_APP_ID";
+
+// ページが切り替わる度に呼ばれます
+document.addEventListener('init', function(event) {
+  var page = event.target;
+  
+  // カテゴリ一覧画面の場合
+  if (page.matches('#first-page')) {
+  
+  // レシピ一覧画面の場合
+  } else if (page.matches('#second-page')) {
+  
+  // レシピ詳細画面の場合
+  } else if (page.matches('#third-page')) {
+  
+  }
+});
+```
+
+### カテゴリ一覧画面
+
+カテゴリ一覧画面では次の処理を行います。
+
+1. 楽天レシピカテゴリ一覧APIを呼んで結果に基づいてカテゴリ一覧を表示
+2. カテゴリをタップしたら、そのカテゴリの楽天レシピカテゴリ別ランキングAPIを呼ぶ
+3. レシピ一覧画面へ遷移
+
+#### 楽天レシピカテゴリ一覧APIを呼んで結果に基づいてカテゴリ一覧を表示
+
+一覧表示を行う際にはカテゴリ一覧取得APIのURLを指定し、JSONPでコールします。それによってMonaca IDE上でも動作が確認できるようになります。
+
+そして結果が返ってきたら、カテゴリの配列（data.result.large）を順番に `<ons-list-item />` の中に追加しています。`data-id` としてカテゴリIDを指定しておきます。これはカテゴリをタップした際に使います。
+
+```
+// カテゴリ一覧取得APIの設定
+let url = `https://app.rakuten.co.jp/services/api/Recipe/CategoryList/20121121?applicationId=${RAKUTEN_APP_ID}&categoryType=large`;
+// Ajaxで取得
+$.ajax({
+  url: url,
+  dataType: 'jsonp'
+})
+.then(function(data) {
+  // 取得できたらOnsen UIのタグを生成します
+  let ary = [];
+  let categories = data.result.large;
+  for (let i = 0; i < categories.length; i++) {
+    let category = categories[i];
+    ary.push(`<ons-list-item class="category" data-id="${category.categoryId}" modifier="chevron" tappable>${category.categoryName}</ons-list-item>`);
+  }
+  // できあがったHTMLを表示します
+  $("#categories").html(ary.join(""));
+});
+```
+
+#### カテゴリをタップしたら、そのカテゴリの楽天レシピカテゴリ別ランキングAPIを呼ぶ
+
+カテゴリは動的に生成しますので次のようにjQueryでタップイベントをキャッチします。data-idを取得し、それを使ってレシピを取得するURLを作成します。
+
+```
+// カテゴリをタップした際のイベントを設定します
+$("body").on("click", ".category", function(e) {
+  // data-idで指定したカテゴリのIDを取得します
+  let category_id = $(e.target).parent('ons-list-item').data("id");
+  // カテゴリ名を取得します
+  let categoryName = $(e.target).text();
+  
+  // レシピを取得するAPIのURLを設定します
+  let url = `https://app.rakuten.co.jp/services/api/Recipe/CategoryRanking/20121121?applicationId=${RAKUTEN_APP_ID}&categoryId=${category_id}`;
+  
+  // Ajaxを実行します
+  $.ajax({
+    url: url,
+    dataType: 'jsonp'
+  })
+  .then(function(data) {
+    // 取得成功時の処理（後述）
+  });
+});
+```
+
+#### レシピ一覧画面へ遷移
+
+楽天レシピカテゴリ別ランキングAPIの実行が成功したら、取得したデータを次の画面に引き継ぎます。dataオプションを使って次の画面にデータが引き継げます。
+
+```
+// 取得できたら次のページに遷移します
+// 取得したデータをdataオプションとして引き継ぎます
+document.querySelector('#navigator').pushPage('page2.html', {
+  data: {
+    recipes: data.result,
+    title: categoryName
+  }
+});
+```
+
+### レシピ一覧画面
+
+この画面では前の画面から引き継がれているレシピ一覧を表示します。この画面では次のような処理を行います。
+
+1. レシピ一覧を表示
+2. レシピをタップした際にレシピ詳細画面へ遷移
+
+#### レシピ一覧を表示
+
+レシピ一覧を表示する際には前画面から渡された情報を `<ons-list-item />` の中に表示します。左側にサムネイル画像を、その横にレシピのタイトルを表示します。
+
+カテゴリの際にはカテゴリIDをdata-idに紐付けていましたが、今回は配列のインデックスとしています。これはタップしたレシピの情報を取得しやすくするためです。
+
+```
+// 前画面から送られているデータを取得
+let data = event.target.data;
+// カテゴリ名を表示
+$("#categoryName").text(data.title);
+// レシピ一覧のHTMLを生成
+let ary = [];
+let recipes = data.recipes;
+for (let i = 0; i < recipes.length; i++) {
+  let recipe = recipes[i];
+  ary.push(`<ons-list-item class="recipe" data-recepe-index="${i}" modifier="chevron" tappable>
+    <div class="left">
+      <img class="list-item__thumbnail" src="${recipe.foodImageUrl}">
+    </div>
+    <div class="center">
+      ${recipe.recipeTitle}
+    </div>
+  </ons-list-item>`);
+}
+// レシピ一覧を表示
+$("#recipes").html(ary.join(""));
+```
+
+#### レシピをタップした際にレシピ詳細画面へ遷移
+
+表示されたレシピをタップしたら呼ばれるイベントです。ここではタップされたレシピを特定し、その情報を次の画面に引き継ぎます。
+
+```
+// レシピをタップした際のイベント
+$("body").on("click", ".recipe", function(e) {
+  
+  // 上から何番目をタップしたかを取得
+  let index = $(e.target).parent('ons-list-item').data('recepe-index');
+  // 次の画面へレシピ情報を引き渡し
+  document.querySelector('#navigator').pushPage('page3.html', {
+        data: {
+          recipe: recipes[index]
+        }
+  });
+});
+```
+
+### レシピ情報表示
+
+レシピの情報を表示する画面です。ここでは前画面から引き継がれているレシピ情報を表示します。
+
+```
+// レシピ情報を表示
+let recipe = event.target.data.recipe;
+$("#recipeTitle").text(recipe.recipeTitle);
+$("#recipeImage").attr("src", recipe.foodImageUrl);
+$("#detail").html(`
+  <ons-list-item>
+    <div class="right">
+      ${recipe.nickname}さん
+    </div>
+  </ons-list-item>
+  <ons-list-item>
+    <div style="text-align:left">
+      ${recipe.recipeDescription}
+    </div>
+  </ons-list-item>
+  <ons-list-header>材料</ons-list-header>
+  <ons-list-item>
+    <div style="text-align:left">
+      ${recipe.recipeMaterial.join(", ")}
+    </div>
+  </ons-list-item>
+  <ons-list-item>
+    <ons-button modifier="large" class="open">
+      レシピを見る
+    </ons-button>
+  </ons-list-item>
+`);
+```
+
+最後にレシピを見るボタンをタップした際の処理を作ります。これはInAppBrowserで表示します。
+
+```
+// レシピの詳細をInAppBrowserで表示します
+$("body").on("click", ".open", function(e) {
+  var ref = window.open(recipe.recipeUrl, '_blank', 'location=no&toolbar=no');
+});
+```
+
+----
+
+ここまでのコードでカテゴリの表示、レシピ一覧と詳細、そしてInAppBrowserによるレシピ表示までが行えるようになりました。Web APIは簡単に使える上、アプリに新しい機能をもたらしてくれます。
+
+今回のコードは[moongift/monaca-rakuten-recipe-api](https://github.com/moongift/monaca-rakuten-recipe-api)にアップロードされています。実装時の参考にしてください。
+
+[楽天ウェブサービス(RAKUTEN WEBSERVICE)](https://webservice.rakuten.co.jp/)
