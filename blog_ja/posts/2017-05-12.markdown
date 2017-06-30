@@ -1,0 +1,105 @@
+---
+author: atsushi
+date: 2017-05-12
+id: monaca-with-print-plugin
+title: "Monacaアプリで印刷。Cordova Print Pluginレビュー"
+tags: plugin, print
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/May/monaca-print-plugin-1.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
+---
+
+スマートフォンアプリで印刷したいと思ったことはないでしょうか。ドキュメント系以外のアプリではそもそもプリント機能がサポートされておらず、スクリーンショットを印刷するなんてこともよくあります。しかし、そうやって印刷したものには不要な情報もたくさん含まれてしまっています。
+
+Monacaアプリにきれいな印刷機能を実装したいと思ったら[Cordova Print Plugin](https://github.com/katzer/cordova-plugin-printer)を使ってみましょう。
+
+## Cordova Print Pluginが印刷できるコンテンツについて
+
+Cordova Print PluginではHTMLを指定して印刷できる機能があります。まずURLを指定して印刷できます。これはローカル、リモート両方に対応しています。
+
+```
+cordova.plugins.printer.print("https://monaca.io", 'Document.html');
+```
+
+IDなどを指定してコンテンツの一部を印刷できます。
+
+```
+var page = document.getElementById('legal-notice');
+
+cordova.plugins.printer.print(page, 'Document.html');
+```
+
+さらに文字列でHTMLを渡して印刷もできます。
+
+```
+var page = '<h1>Hello Document</h1>';
+
+cordova.plugins.printer.print(page, 'Document.html');
+```
+
+## Cordova Print Pluginを試す
+
+では実際にMonacaアプリの中でCordova Print Pluginを使ってみましょう。まずCordovaプラグインの管理にてCordova Print Pluginを追加します。
+
+次に、自分でHTMLを作れるように[Quill](https://quilljs.com)を使います。これはスマートフォンでも使えるWYSIWYGエディタです。
+
+今回はCDN版を使います。index.htmlのheaderタグ内に次のように記述します。
+
+```
+<link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+```
+
+そしてJS/CSSの追加と削除からjQueryも追加しておきます。必須ではありませんが、作成したコンテンツが取得しやすいためです。
+
+Quillは次のように記述して実行します。今回は太字、イタリック、下線、打ち消し線の4つをツールバーに追加していますが、実際にはもっとたくさんあります。
+
+```
+var toolbarOptions = ['bold', 'italic', 'underline', 'strike'];
+var editor = new Quill('#editor', {
+    modules: { toolbar: toolbarOptions },
+    theme: 'snow'
+});
+```
+
+bodyタグ内は次のように記述します。
+
+```
+<div id="editor">
+	<p>ここに文章を書きます。</p>
+</div>
+<p>
+	<button id="print">印刷</button>
+</p>
+```
+
+最後にボタンを押した時のイベントは次のように記述します。Quill内で記述されている内容を取得して、それをCordova Print Pluginに送っています。
+
+```
+$("#print").on('click', function(e) {
+	var page = $("#editor div").html();
+	cordova.plugins.printer.print(page, 'Document.html');
+});
+```
+
+ここまでの実装で完成です。後はデバッグビルドなどを行って実機にインストールします。プラグインを使っていますので、シミュレータなどでは動作しません。
+
+自由にHTMLを記述して、印刷ボタンを押すとプリンタのダイアログが表示されます。
+
+![](/blog/content/images/2017/May/monaca-print-plugin-1.png)
+
+![](/blog/content/images/2017/May/monaca-print-plugin-2.png)
+
+----
+
+HTMLが自由に使えますので、表示内容と印刷内容を分けることも簡単です。レポートなどの印刷機能を提供しても良いでしょう。ビジネス用アプリなどで役立ちそうなプラグインです。
+
+今回のコードは[moongift/monaca-printer-plugin](https://github.com/moongift/monaca-printer-plugin)にアップロードしてあります。実装時の参考にしてください。
+
+[katzer/cordova-plugin-printer: Print HTML documents](https://github.com/katzer/cordova-plugin-printer)
