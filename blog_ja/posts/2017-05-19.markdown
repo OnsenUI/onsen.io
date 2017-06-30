@@ -1,0 +1,215 @@
+---
+author: atsushi
+date: 2017-05-19
+id: monaca-video-tag
+title: "Monacaアプリで動画を再生する色々な方法"
+tags: video
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/Apr/monaca-firebase.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
+---
+
+HTML5では新しくvideoタグが追加されました。使ったことがある方もいると思いますが、素のまま使うのではなく何らかのJavaScriptライブラリと組み合わせることが多いかと思います。iPhoneなどでは動画の再生は全画面表示になるのであまり外部ライブラリと組み合わせることはありません。
+
+今回はそんなvideoタグに対して様々な方法で再生、リソースを適用する方法について紹介します。
+
+## JavaScriptから再生する基本的な方法
+
+一番基本的な再生方法は次のようなコードです。video.currentTimeとして再生開始する秒数を指定できます。
+
+```
+<video style="display: none;" id="video1" src="mp4_h264_aac.mp4" width="320" height="240" controls></video>
+
+<script>
+  var video = document.getElementById("video1");
+  video.currentTime = 10;
+  video.play();
+</script>
+```
+
+videoタグを取得してplayメソッドを実行するだけです。
+
+![](/blog/content/images/2017/May/monaca-video-tag-1.png)
+
+## ダウンロードした動画を再生する（FileTransferを使った方法）
+
+動画リソースをあらかじめアプリ内に入れるのではなく、外部から取得する方法もあります。動画はバッファーに時間がかかることがあり、利用者にとってはストレスになります。そこであらかじめバックグラウンドでダウンロードしておくと便利です。
+
+まずダウンロードする処理を紹介します。今回はFileTransferプラグイン（Monacaで標準提供しています）を使っています。そして fileTransfer.download メソッドを使って動画ファイルをダウンロードします。ダウンロード先は cdvfile として、Cordovaアプリ用のURLスキームの中に保存します。
+
+```
+// ダウンロード元
+var uri = encodeURI("http://example.com/mp4_h264_aac.mp4");
+// ダウンロード先
+var fileURL = "cdvfile://localhost/temporary/sample_aac.mp4";
+
+// ファイルのダウンロード
+var fileTransfer = new FileTransfer();
+fileTransfer.download(
+    uri,
+    fileURL,
+    function(fileSyatem) {
+      
+      downloadFileURL = fileSyatem.toURL();
+      var video = document.getElementById("video1");
+      video.setAttribute('src', downloadFileURL);      
+    },
+    function(error) {
+      // エラー
+    },
+    false,
+    {}
+);
+```
+
+後はこの時のURLをvideoタグのsrc要素に適用するだけです。
+
+```
+var video = document.getElementById("video1");
+video.setAttribute('src', downloadFileURL);
+
+// iOS対策
+// setTimeoutを利用し、
+// currentTimeの前に、何か一つ処理を入れないとcurrentTimeが動作しません。
+if (monaca.isIOS) {
+  setTimeout(function() {
+    video.currentTime = 10;
+    video.play();
+  }, 500);
+}
+
+if (monaca.isAndroid) {
+  video.currentTime = 10;
+  video.play();
+}
+```
+
+## ダウンロードした動画を再生する（Ajaxを使った方法）
+
+FileTransferはプラグインなので、もう少し使いやすいAjaxを使った実装は次のようになります。このように実装することであらかじめコンテンツがキャッシュされた状態で再生できますので、バッファーで悩むことがありません。
+
+なお、POSTメソッドを使う場合はCORSに対応している必要があります。
+
+```
+// ソース元
+var uri = encodeURI("http://example.com/mp4_h264_aac.mp4");
+
+var xmlHttpRequest = new XMLHttpRequest();
+xmlHttpRequest.onreadystatechange = function() {
+  var READYSTATE_COMPLETED = 4;
+  var HTTP_STATUS_OK = 200;
+  
+  if (this.readyState == READYSTATE_COMPLETED && this.status == HTTP_STATUS_OK) {
+    var video = document.getElementById("video1");
+    video.setAttribute('src', uri);
+  } else {
+    // エラー
+  }
+}
+
+// openメソッドをPOSTで実行した場合：Origin：file://
+// openメソッドをGETで実行した場合：Origin：設定なし
+xmlHttpRequest.open('GET', uri);
+xmlHttpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+// xmlHttpRequest.setRequestHeader('Access-Control-Allow-Origin', 'file://');
+xmlHttpRequest.send();
+```
+
+## 同時に複数の動画を再生する
+
+こちらは実験です。videoタグで2つの動画を再生しようとするとどうなるでしょうか。この場合、後から再生したものが優先されます。
+
+```
+<video style="display: none;" id="video1" src="mp4_h264_aac.mp4" width="320" height="240" controls></video><br />
+<video style="display: none;" id="video2" src="waterfall-free-video1.mp4" width="320" height="240" controls></video>
+
+
+<script>
+  var video1 = document.getElementById("video1");
+  var video2 = document.getElementById("video2");
+  
+  video1.play();
+  video2.play(); // こちらが再生されます
+</script>
+```
+
+![](/blog/content/images/2017/May/monaca-video-tag-2.png)
+
+## ループ再生させる
+
+動画を繰り返し再生させるのもJavaScriptから操作できます。loop要素にtrueを指定するだけです。
+
+```
+var video1 = document.getElementById("video1");
+video1.setAttribute('loop', true);
+video1.src = "mp4_h264_aac.mp4";
+video1.load();
+video1.play();
+```
+
+## 動画ではなくCanvasタグを使う
+
+さらに変わった方法としてvideoタグではなくCanvasタグを使って動画を描画する方法があります。この場合のメリットとして全画面表示ではなく、埋め込み再生が可能になります。Canvasタグ単独では音声は出ませんが、Audioタグを使うことでカバーできます。なおAndroidでは音声は出ないようです。
+
+```
+var audio = new Audio();
+var video = document.getElementById("video1");
+var canvas = document.getElementById("canvas1");
+
+video.load();
+
+if (monaca.isAndroid) {
+  video.loop = true;
+  video.play();
+  video.addEventListener('canplay',function(){
+    setInterval(function(){
+      canvas.getContext("2d").drawImage(video, 0, 0, 320, 240);
+    }, 1000/30);
+  },false);
+}
+
+if (monaca.isIOS) {
+  audio.src = 'mp4_h264_aac.mp4';
+  audio.load();
+  audio.play();
+  
+  video.addEventListener('canplay',function() {
+    lastTime = Date.now();
+    setInterval(function() {
+      video.currentTime = audio.currentTime;
+      canvas.getContext("2d").drawImage(video, 0, 0, 320, 240);
+      if(video.duration <= video.currentTime) {
+        // ループ
+        audio.play();
+      }
+    }, 1000/30);
+  },false);
+}
+```
+
+このように実装することで音声の位置（audio.currentTime）に合わせてvideoの内容を取得（video.currentTime）し、Canvas上に描画できます。
+
+![](/blog/content/images/2017/May/monaca-video-tag-3.png)
+
+## 動画を停止する
+
+動画の停止はpauseメソッドを使います。音声も同様にpauseで停止できます。
+
+```
+var video1 = document.getElementById("video1");
+var video2 = document.getElementById("video2");
+
+video1.pause();
+video2.pause();
+audio.pause();
+```
+
+----
+
+videoタグを使って単純に動画を再生するだけでなく、JavaScriptと組み合わせることでよりインタラクティブに操作できるようになります。ぜひ今回紹介したテクニックを使って動画を楽しめるアプリを作成してください。
