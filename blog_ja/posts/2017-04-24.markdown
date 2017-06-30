@@ -1,0 +1,244 @@
+---
+author: atsushi
+date: 2017-04-24
+id: websocket-with-monaca
+title: "MonacaアプリでWebSocketを使ってみよう"
+tags: websocket
+product: monaca
+category: 技術情報
+# Open Graph protocol (OGP) 用の情報を設定
+og:
+  # og:image を設定
+  image: https://ja.onsen.io/blog/content/images/2017/Apr/monaca-firebase.png
+  twitter:
+    # Twitter Card の種類を設定: summary, summary_large_image
+    card: summary_large_image
+---
+
+ここ数年、チャット系のアプリが流行っています。LINE、Facebookメッセンジャー、WhatsAppなど様々に存在します。チャットアプリの肝と言えばリアルタイム通信になります。誰かが書き込んだ内容が即座に反映されてこそ、会話が盛り上がるというものです。
+
+リアルタイムに同期する技術は幾つかありますが、HTML5上で使われるものとしてWebSocketがあります。今回はWebSocketを使って簡易的なチャットアプリを作ってみたいと思います。
+
+## アプリ構成
+
+こちらが出来上がったアプリです。最初にユーザ名を決めます。
+
+![](/blog/content/images/2017/Apr/monaca-websocket-1.png)
+
+ユーザ名を決めるとチャット画面に入ります。今回はメッセージをデータベースに保存していませんので、最初は何もメッセージがない状態からはじまります。
+
+![](/blog/content/images/2017/Apr/monaca-websocket-3.png)
+
+メッセージが届くと、それが即座に画面に反映されます。他の人が書いたメッセージは青で、名前も一緒に表示されます。
+
+![](/blog/content/images/2017/Apr/monaca-websocket-4.png)
+
+自分が書いたメッセージも表示されます。この場合は色は緑、文字は右寄せとしています。
+
+![](/blog/content/images/2017/Apr/monaca-websocket-7.png)
+
+## 画面について
+
+では最初の画面を作っていきます。画面は二つあります。
+
+### ユーザ名を決める画面
+
+まず最初に表示されるのがユーザ名を決める画面です。今回はOnsen UIを使っています。ここは取り立てて難しいことはしていません。
+
+```
+<ons-template id="page1.html">
+  <ons-page id="first-page">
+    <ons-toolbar>
+      <div class="center">入室</div>
+    </ons-toolbar>
+
+    <div class="content" style="text-align: center">
+      <p>チャットへようこそ。<br />名前を決めてください。</p>
+      <div style="text-align: center; margin-top: 30px;">
+        <p>
+          <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+        </p>
+      </div>
+      <ons-button id="push-button">入室</ons-button>
+    </div>
+  </ons-page>
+</ons-template>
+```
+
+### チャット画面
+
+次にチャット画面です。メッセージは動的に追加しますのでここでは定義しません。タブバーを使って画面下にテキストボックスとボタンを固定表示しています。
+
+```
+<ons-template id="page2.html">
+  <ons-page id="second-page">
+    <ons-toolbar>
+      <div class="left"><ons-back-button id="pop-button">入室</ons-back-button></div>
+      <div class="center">チャット</div>
+    </ons-toolbar>
+
+    <div class="content" style="text-align: center;padding-bottom: 4em;">
+      <ons-list id="chats">
+      </ons-list>
+    </div>
+    <ons-tabbar position="auto" style="text-align: center">
+      <ons-input id="message" placeholder="メッセージ"></ons-input>
+      <ons-button id="send" modifier="quiet">送信</ons-button>
+    </ons-tabbar>
+  </ons-page>
+</ons-template>
+```
+
+## WebSocketについて
+
+WebSocketサーバですが、今回は[heroku-examples/ruby-websockets-chat-demo](https://github.com/heroku-examples/ruby-websockets-chat-demo)を使っています。Deploy to Herokuにも対応していますので、すぐに自分でサーバが立てられるはずです。
+
+これはサンプルなのでデータベースはありません（Redisはありますが、ストレージとしては使っていません）。本格的に作っていく際にはメッセージを保存する仕組みが必要でしょう。
+
+## JavaScriptについて
+
+ではコードを書いていきます。まずはコメントだけで紹介します。
+
+```
+// WebSocketサーバの定義
+
+// ユーザ名をlocalStorageから取得
+
+// 最初のページ。チャット名を決めます。
+if (page.matches('#first-page')) {
+  
+  // すでに設定済みであればチャット画面に遷移します。
+  
+  // ユーザ名を設定
+    // 変数とlocalStorageに保存
+    
+    // チャット画面に遷移
+} else if (page.matches('#second-page')) {
+  // チャット画面。
+  
+  // WebSocketでメッセージを受け取った時の処理
+    // 送信元が自分か他人かで画面のデザインを変更
+  
+  // 送信ボタンを押した時の処理
+    // WebSocketで送信
+    
+    // 元の入力内容は削除
+  
+  // 画面を戻るときの処理
+```
+
+### WebSocketサーバの定義
+
+WebSocketサーバはHerokuにデプロイしたものを使います。URLは自分のものを設定してください。Herokuにデプロイした場合、WebSockets over SSL/TLSに対応しているのでwssがプロトコルになります。
+
+```
+// WebSocketサーバの定義
+var uri      = "wss://your-chat.herokuapp.com/";
+var ws       = new WebSocket(uri);
+```
+
+### ユーザ名をlocalStorageから取得
+
+ユーザ名を何度も入力するのは面倒なのでlocalStorageに保存しておきます。
+
+```
+var username = localStorage.getItem("userName");
+```
+
+もしすでにユーザ名が設定されている場合はチャット画面に遷移します。
+
+```
+// すでに設定済みであればチャット画面に遷移します。
+if (username) {
+	document.querySelector('#navigator').pushPage('page2.html');
+}
+```
+
+### ユーザ名を設定
+
+ボタンが押されたらユーザ名を保存してチャット画面に遷移します。
+
+```
+// ユーザ名を設定
+page.querySelector('#push-button').onclick = function() {
+  // 変数とlocalStorageに保存
+  username = $('#username').val();
+  localStorage.setItem('userName', username);
+  
+  // チャット画面に遷移
+  document.querySelector('#navigator').pushPage('page2.html');
+};
+```
+
+### WebSocketでメッセージを受け取ったときの処理
+
+WebSocket経由でメッセージを受け取った時には onmessage イベントが呼ばれます。この時、データが文字列で送られてくるので、受信した際にはJSON.parseで復元します。
+
+そして、自分が送り主だった場合（data.handle == username）はボタンを緑にして右寄せ、他のユーザからの場合はユーザ名とメッセージを通常のボタンのデザインで表示します。
+
+```
+// WebSocketでメッセージを受け取った時の処理
+ws.onmessage = function(message) {
+  var data = JSON.parse(message.data);
+  
+  // 送信元が自分か他人かで画面のデザインを変更
+  if (data.handle == username) {
+    $('#chats').append(`
+      <ons-list-item modifier="nodivider">
+        <div class="right">
+          <ons-button style="background-color: green">${data.text}</ons-button>
+        </div>
+      </ons-list-item>`);
+  }else{
+    $('#chats').append(`
+      <ons-list-item modifier="nodivider">
+        <ons-button>${data.text}</ons-button>
+        <span class="list-item__subtitle">${data.handle}</span>
+      </ons-list-item>`);
+  }
+};
+```
+
+### 送信ボタンを押した時の処理
+
+メッセージを送信する時の処理は、WebSocketのsendメソッドを使います。この時はJSONをJSON.stringifyを使って文字列にした上で送信します。
+
+```
+// 送信ボタンを押した時の処理
+$("#send").on("click", function(e) {
+	e.preventDefault();
+	
+	// WebSocketで送信
+	ws.send(JSON.stringify({ handle: username, text: $("#message").val() }));
+	
+	// 元の入力内容は削除
+	$("#message").val("")
+});
+```
+
+### 画面を戻るときの処理
+
+最後に画面を戻る処理です。これはons-navigatorの機能を使います。
+
+```
+// 画面を戻るときの処理
+page.querySelector('#pop-button').onclick = function() {
+  document.querySelector('#navigator').popPage();
+};
+```
+
+ここまでの処理でチャットアプリの完成となります。他に必要な機能としては、以下のような機能が挙げられるでしょう。
+
+- 認証
+- チャットルーム選択
+- 画像アップロード
+- 参加者一覧
+- メッセージ検索
+
+ぜひ今回のコードをベースにしてカスタマイズしてみてください。
+
+----
+
+チャットは単独のアプリだけでなく、既存のアプリをさらに魅力的にするために追加しても良い機能になります。WebSocketを使うことで、そのための実装はすぐに実現できるでしょう。
+
+今回のコードは[moongift/monaca-with-websocket](https://github.com/moongift/monaca-with-websocket)にアップロードしてあります。実装時の参考にしてください。
