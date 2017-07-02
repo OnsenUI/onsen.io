@@ -9,27 +9,27 @@ layout: docs.html.eco
 
 ### Angular 2+
 
-> Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
 
-Angular 2+ bindings for Onsen UI provide Angular directives that enhance the core Web Components and expose a Angular-like API to interact with them.
+Angular 2+用のバインディングは、Onsen UIのWeb Componentsを拡張してAngularと親和性の高いAPIを提供するものです。
 
-#### Download Angular 2+ bindings
+#### Angular 2+バインディングのダウンロード
 
-Angular 2+ bindings are distributed in [`ngx-onsenui` package](https://www.npmjs.com/package/ngx-onsenui). You can download it via NPM:
+Angular 2+バインディングは[`ngx-onsenui`パッケージ](https://www.npmjs.com/package/ngx-onsenui)を通じて配布されます。下記のようにしてNPM経由でダウンロードしてください。
 
 ```sh
 $ npm install onsenui ngx-onsenui --save-dev
 ```
 
-It is also available [via CDN](https://unpkg.com/ngx-onsenui). The [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also contains Angular 2+ bindings.
+また、[CDN経由](https://unpkg.com/ngx-onsenui)で利用することもできます。[最新のリリース](https://github.com/OnsenUI/OnsenUI-dist/releases)にもAngular 2+バインディングが含まれます。
 
-#### Setup Angular 2+ bindings
+#### Angular 2+バインディングのセットアップ
 
-Onsen UI for Angular 2+ provides Angular 2+ directives which wraps Web Components. Those directives are included in Angular Module (`NgModule`) named `OnsenModule`. For details about `NgModule`, please refer to [Angular Modules (`NgModule`) - TS](https://angular.io/docs/ts/latest/guide/ngmodule.html).
+Onsen UI for Angular 2+は、Web ComponentsをラッピングしたAngular 2+向けのディレクティブが含まれています。これらのディレクティブは`OnsenModule`と呼ばれ、Angularモジュール（`NgModule`）に含まれます。`NgModule`の詳細については、[Angularモジュール（`NgModule`）- TS](https://angular.io/docs/ts/latest/guide/ngmodule.html)を参照してください。
 
-To use `OnsenModule`, please import it to the application’s module by specifying at import parameter of `@NgModule`. Onsen UI components will not render properly if `OnsenModule` is not loaded.
+`OnsenModule`を使用するには`@NgModule`を用いてインポートしてください。`OnsenModule`が正しく読み込めていない場合は、正しくレンダリングすることができません。
 
-Also, please aware to specify `CUSTOM_ELEMENTS_SCHEMA` as module’s schema, since Onsen UI is built of Custom Elements. Forgetting to specify this will result in error when using Onsen UI custom elements in the template.
+またOnsen UIはCustom Elementsを用いて構築されていることから、`CUSTOM_ELEMENTS_SCHEMA`をモジュールのスキーマに指定する必要があります。この指定が含まれていない場合は、Onsen UIのコンポーネントを読み込んだ際にエラーが発生致します。
 
 ```js
 import {OnsenModule} from 'angular2-onsenui';
@@ -49,4 +49,3 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ```
 
 <% end %>
-

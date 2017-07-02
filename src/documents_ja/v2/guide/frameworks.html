@@ -1,5 +1,5 @@
 ---
-title: 'Framework Support'
+title: ‘フレームワークと共に使う’
 order: 70
 tocTitle: Framework Support
 tocGroup: guide
@@ -8,11 +8,11 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-### Introduction to Bindings
+### バインディングとは？
 
-> This section contains intermediate level knowledge of JavaScript. You will find difficulty if you have no experience using JavaScript frameworks.
+この章は、JavaScriptについてある程度ご理解のある方を対象としています。JavaScriptフレームワークを入門されたばかりの方には、少し高度な内容となりますのでご了承ください。
 
-Onsen UI is built to perform and create apps even without the addition of any front-end frameworks. For more complex apps, please consider implementing further frameworks to make even more features and tools available for your app.
+Onsen UIを使うと、特にフロントエンドのフレームワークを追加することなくアプリの開発を行うことができます。しかしながら、複雑で大規模なアプリを開発する場合は、より高度な機能やツールを備えたフレームワークと共にお使いいただくのも一案です。
 
 <div id="landing-new">
     <div id="features">
@@ -41,12 +41,10 @@ Onsen UI is built to perform and create apps even without the addition of any fr
     </div>
 </div>
 
-Onsen UI is framework agnostic, meaning you can use it with any JavaScript frameworks. Just plug Onsen UI into the project and that's it. However, in order to tailor Onsen UI's API for specific framework users, we provide bindings for widely used frameworks. These bindings are just sets of wrappers that translate Web Components API to the corresponding framework.
+Onsen UIは特定のフレームワークに依存しません。そのため、**どのJavaScriptフレームワークとでも利用できます**。Onsen UIを開発中のプロジェクトに組み込むだけで、他のフレームワークと利用できます。しかし一方で、Onsen UIのAPIをそのフレームワークに最適化するために、各フレームワークごとのバインディングも提供しています。これらのバインディングは、Web ComponentsでできているAPIを、各フレームワークに向けた形式としてラッピングしたものです。
 
-For instance, Vue or React developers do not want to grab DOM elements and call methods or change properties. It is more natural to simply pass props. AngularJS developers would prefer using `ng-model` over manually adding event handlers. This API tailoring is achieved by using bindings.
+たとえば、VueやReactの開発では、DOM要素を取得してメソッドを呼び出したり、プロパティを変更することは望ましくありません。一般的にはPropsを用いてアクセスするからです。一方で、AngularJSの開発ではイベントハンドラーを登録するよりも`ng-model`を用いる方が筋が良いでしょう。このようにフレームワークごとにAPIを最適化する処理を、バインディングが行っています。
 
-Once again, it is dead simple creating apps using only Onsen UI and JavaScript. However, if you really prefer using frameworks, the bindings have got you covered. We currently provide official bindings for [Vue.js](vue/), [React](react/), [AngularJS 1.x](angular1/), and [Angular 2+](angular2/). DOM friendly libraries like [jQuery](jquery/) should be quite straightforward as well. Additionally, community-based bindings are available for [Aurelia](https://www.npmjs.com/package/aurelia-onsenui) and [Ember.js](https://www.npmjs.com/package/ember-onsenui). For simple frameworks like Knockout.js, custom bindings can be [easily created](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html).
-
+繰り返しになりますが、Onsen UIとJavaScriptだけでアプリを作ることも十分に簡単で、強力です。しかし、フレームワークと使って開発をしたい場合は、これらのバインディングが手助けしてくれるでしょう。現在のところ、[Vue.js](vue/)、[React](react/)、[AngularJS 1.x](angular1/)および[Angular 2+](angular2/)に向けて、公式バインディングを提供しています。また、[jQuery](jquery/)のようなフレームワークの場合は、Web Components版をそのまま使用するのが良いでしょう。コミュニティの協力により、[Aurelia](https://www.npmjs.com/package/aurelia-onsenui)や[Ember.js](https://www.npmjs.com/package/ember-onsenui)といったフレームワークにも対応しています。Knockout.jsのようなシンプルなフレームワークの場合には、[この例のように](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html)バインディングは最小限なものになります。
 
 <% end %>
-

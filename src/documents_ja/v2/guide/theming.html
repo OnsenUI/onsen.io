@@ -1,9 +1,9 @@
----
-title: 'Theming'
+
+title: ‘テーマ’
 order: 160
 tocGroup: guide
-layout: docs.html.eco
----
+
+## layout: docs.html.eco
 
 <%- @markdown => %>
 
@@ -45,7 +45,7 @@ You can set a platform with `ons.platform.select('android')`, for example, in or
 
 A conditional element called [`ons-if`](/v2/api/js/ons-if.html) is available to filter content depending on the platform or orientation.
 
-> `<ons-if>` component is not available for React and Vue bindings.
+`<ons-if>` component is not available for React and Vue bindings.
 
 ```html
   <ons-if platform="android">
@@ -153,8 +153,7 @@ You can notice that `<ons-toolbar>` is never moved into `<div class="page__conte
 
 Some components have behaviours such as these, so make sure to keep that in mind.
 
-
-#### Extending animations
+#### アニメーションを拡張する
 
 Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even extend existing animations and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
 
@@ -229,4 +228,3 @@ This overwrites the `push` animation but uses the original `pop` animation. `tim
 After the new animator is created and registered, we can simply specify the animation with its name: `myNavigator.pushPage('page.html', {animation: 'customAnimationName'})`. Or make it default: `<ons-navigator animation="customAnimationName">`. The same applies to the other components.
 
 <% end %>
-

@@ -1,17 +1,18 @@
 ---
-title: 'Installation'
+title: ‘インストール’
 order: 10
 tocGroup: guide
 tocTitle: Essentials
 layout: docs.html.eco
 ---
+
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   var url = 'https://api.github.com/repos/OnsenUI/OnsenUI/releases/latest';
   var zipUrl = "";
   $.getJSON(url, function(res) {
     zipUrl = res.zipball_url;
-    $('#get-latest-build').text('Download Onsen UI (Version ' + res.name + ')')
+    $('#get-latest-build').text('Onsen UI最新版のダウンロード (バージョン’ + res.name + ')')
   });
 
   $('#get-latest-build').click(function(event) {
@@ -25,34 +26,33 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <%- @markdown => %>
 
-### Installation
+### インストール
 
-Onsen UI has several quick and easy ways to get started, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.
+いくつかのインストール方法を提供しています。ニーズに合わせて、どの方法にするかを選択してください。
 
 <div class="install-row">
   <div>
     <p class="install-row-title">Onsen UI</p>
-    <p class="install-row-content">Compiled and minified JavaScript, CSS and resources. Web Components version.</p>
-    <a class="install-row-link" id="get-latest-build" href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest">Download Onsen UI</a>
+    <p class="install-row-content">コンパイル、最小化済みのJavaScript、CSS、アセットが含まれています。Web Components版</p>
+    <a class="install-row-link" id="get-latest-build" href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest">Onsen UIをダウンロード</a>
   </div>
   <div>
-    <p class="install-row-title">Source Code</p>
-    <p class="install-row-content">Source CSS, JavaScript, and other related files. [Build instructions](/v2/guide/build.html).</p>
-    <a class="install-row-link" href="https://github.com/OnsenUI/OnsenUI/">See GitHub Repo</a>
+    <p class="install-row-title">ソースコード</p>
+    <p class="install-row-content">CSS、JavaScript、関連ファイルを含むコード。[ビルド方法はこちら](/v2/guide/build.html)。</p>
+    <a class="install-row-link" href="https://github.com/OnsenUI/OnsenUI/">GitHubレポジトリ</a>
   </div>
   <div>
-    <p class="install-row-title">Framwork Bindings</p>
+    <p class="install-row-title">フレームワーク用バインディング</p>
     <p class="install-row-content">
-      Onsen UI is framework agnostic. Pure JavaScript, jQuery, AngularJS, Angular 2+, React, Vue.js...
+      Onsen UIはフレームワークに依存しません。JavaScript、jQuery、Angular（1と2+）、React、Vue.jsなどに対応します。
     </p>
-    <a class="install-row-link" href="/v2/guide/frameworks.html">Read more</a>
+    <a class="install-row-link" href="/v2/guide/frameworks.html">使い方を見る</a>
   </div>
 </div>
 
+#### Onsen UIのCDN
 
-#### Onsen UI CDN
-
-[Unpkg](https://unpkg.com/onsenui/) provides CDN support for Onsen UI's CSS and JavaScript. Just use these CDN links.
+[Unpkg](https://unpkg.com/onsenui/)経由でOnsen UIのCSSとJavaScriptを利用できます。下記のURLを用いてください。
 
 ```html
 <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
@@ -60,20 +60,20 @@ Onsen UI has several quick and easy ways to get started, each one appealing to a
 <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
 ```
 
-#### Install with NPM
+#### NPM経由のインストール
 
-You can also use the Node Package Manager (NPM) to install Onsen UI:
+Node Package Manager（NPM）を用いてOnsen UIをインストールできます。
 
 ```sh
 npm install onsenui --save
 ```
 
-#### Command line tool to package for mobile apps - Monaca CLI
+#### Monaca CLIを使ったコマンドラインツール（モバイルアプリの開発用）
 
-Monaca CLI is deeply integrated with Onsen UI to provide a simple & quick build process for Cordova hybrid apps. Please refer to the [Monaca CLI Tutorial](https://docs.monaca.io/en/monaca_cli/tutorial/) to better understand the program's installation and workflow. For more detailed information on the development feature provided by Monaca, please refer to What is Monaca.
+Monaca CLIを使うと、Onsen UIを用いたハイブリッドアプリ開発が簡単に行えます。詳細は[Monaca CLIチュートリアル](https://docs.monaca.io/ja/monaca_cli/tutorial/)を参照してください。Monacaについては[こちらの公式ページ](https://ja.monaca.io/)も参考にしてください。
 
-#### Old Releases & Changelogs
+#### 旧バージョンと変更履歴
 
-Onsen UI releases and changelogs can be seen at [OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases). The source repository is hosted in [OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/). Please give us a ★!
+Onsen UIの過去のバージョンと、それぞれのバージョンの変更点は、[OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases)に記載しています。ソースコードは[OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/)に用意されています。是非レポジトリにスターをお願いします！
 
 <% end %>

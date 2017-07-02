@@ -33,7 +33,11 @@ function translate() {
     if (file.isBuffer()) {
       var po = fs.readFileSync(file.path, 'utf-8');
       gettext.po2md(file.path, po).then(function(contents) {
-        file.contents = new Buffer(contents[0].data);
+        var data = contents[0].data.trim();
+        data = data.replace('title:', '---\ntitle:');
+        data = data.replace(/\n\n## (layout:.+)/, '\n$1\n---');
+        console.log(data);
+        file.contents = new Buffer(data);
         file.path = file.path.replace('.po', '.html');
         self.push(file);
         cb();

@@ -69,11 +69,11 @@ var createTransifexClient = function() {
 gulp.task('i18n-extract', function(done) {
   return gulp.src('src/documents_en/v2/guide/**/*')
     .pipe(gettext.extract())
-    .pipe(gulp.dest('src/i18n/pot/v2/guide'));
+    .pipe(gulp.dest('src/i18n/gettext/v2/guide'));
 });
 
 gulp.task('i18n-translate', function() {
-  return gulp.src('src/i18n/po/v2/guide/**/*')
+  return gulp.src('src/i18n/gettext/v2/guide/**/*.po')
     .pipe(gettext.translate())
     .pipe(gulp.dest('src/documents_ja/v2/guide'));
 });

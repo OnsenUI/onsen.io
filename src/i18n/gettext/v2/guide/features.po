@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language-Team: \n"
+"PO-Revision-Date: 2017-06-30 12:33-0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-30 12:23-0700\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Language: ja\n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:1
+msgid ""
+"title: 'Additional Features'\n"
+"order: 140\n"
+"tocGroup: guide"
+msgstr ""
+"title: ‘その他の機能’\n"
+"order: 140\n"
+"tocGroup: guide"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:2
+msgid "layout: docs.html.eco"
+msgstr "layout: docs.html.eco"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:3
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:4
+msgid "Additional Features"
+msgstr "その他の機能"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:5
+msgid "Grid Layout"
+msgstr "グリッドレイアウト"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:6
+msgid ""
+"Onsen UI provides a grid system to place your elements in the screen. The "
+"grid system divides the screen into rows and columns, just like a "
+"spreadsheet. The width and height of each grid is adjustable, and you can "
+"also condense two or more grids in a row or column, into one grid."
+msgstr ""
+"Onsen UIでは、画面上に各要素を配置するときにグリッドシステムを採用していま"
+"す。グリッドシステムでは、スプレッドシートのように画面を横列と縦列に分けま"
+"す。各グリッドの横幅と縦幅を自由に指定したり、複数の行や列を結合することもで"
+"きます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:7
+msgid ""
+"The layout can be performed by combining [`<ons-col>`](../api/js/ons-col."
+"html) and [`<ons-row>`](../api/js/ons-row.html) components. The width and "
+"height can be adjusted in a flexible way."
+msgstr ""
+"レイアウトは[`<ons-col>`](/v2/docs/js/ons-col.html)コンポーネントと[`<ons-"
+"row>`](/v2/docs/js/ons-row.html)コンポーネントを組み合わせて構成します。横幅"
+"と縦幅は、属性やCSSを使用して柔軟に指定できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:8
+msgid ""
+"Grid is not necessary in general for list items. Special layout is provided "
+"for list items based on flat iOS and Material Design specific."
+msgstr ""
+"なお、一覧表示を行うときにはグリッド関連のコンポーネントを使用する必要はあり"
+"ません。iOSフラットデザインとAndroidマテリアルデザインの仕様に準拠したリスト"
+"用のコンポーネントを提供していますので、そちらをご利用ください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:9
+msgid "Platform Detection"
+msgstr "プラットフォームの識別"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:10
+msgid ""
+"[`ons.platform`](/v2/api/js/ons.platform.html) is useful to detect running "
+"platform."
+msgstr ""
+"[`ons.platform`](/v2/docs/js/ons.platform.html)を使い、実行中のプラットフォー"
+"ムを識別できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:11
+msgid "Rotation Detection"
+msgstr "画面向きの識別"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:12
+msgid ""
+"[`ons.orientation`](/v2/api/js/ons.orientation.html) is useful to detect the "
+"display orientation."
+msgstr ""
+"[`ons.orientation`](/v2/api/js/ons.orientation.html)を使って画面の向きを識別"
+"できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:13
+msgid "Gesture Detection"
+msgstr "ジェスチャーの認識"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:14
+msgid ""
+"It is a common use case to detect a finger gesture and do a specific task. "
+"Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github."
+"io/) for gesture detection. The Gesture Detector class (Hammer.js) is "
+"exposed in [`ons.GestureDetector`](/v2/api/js/ons.GestureDetector.html) "
+"object."
+msgstr ""
+"スワイプや長押しといったジェスチャーを検出することができます。Onsen UIでは"
+"[Hammer.js](https://hammerjs.github.io/)を組み込んでおり、[`ons."
+"GestureDetector`](/v2/api/js/ons.GestureDetector.html)オブジェクトとして利用"
+"できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:15
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:20
+msgid "Non-Angular:"
+msgstr "Angularフレームワーク以外の場合:"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:16
+msgid ""
+"var divGD = ons.GestureDetector(document.querySelector('#my-div'));\n"
+"divGD.on('dragup dragdown', function(event) {\n"
+"  console.log('drag Y axis');\n"
+"});"
+msgstr ""
+"var divGD = ons.GestureDetector(document.querySelector('#my-div'));\n"
+"divGD.on('dragup dragdown', function(event) {\n"
+"  console.log('drag Y axis');\n"
+"});"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:17
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:22
+msgid "Angular:"
+msgstr "Angularフレームワークの場合:"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:18
+msgid ""
+"@ViewChild('somediv') divGD; // <div #somediv>\n"
+"this.divGD.nativeElement.on('dragup dragdown', function(event) {\n"
+"  console.log('drag Y axis');\n"
+"});"
+msgstr ""
+"@ViewChild('somediv') divGD; // <div #somediv>\n"
+"this.divGD.nativeElement.on('dragup dragdown', function(event) {\n"
+"  console.log('drag Y axis');\n"
+"});"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:19
+msgid ""
+"If you want to use another library for this purpose and have any conflict, "
+"Onsen UI gesture detectors can be disabled easily:"
+msgstr ""
+"他のライブラリを使っていてコンフリクトした場合は、下記のようにしてOnsen UIの"
+"持つジェスチャー機能を無効にできます："
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:21
+msgid ""
+"ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove "
+"event listeners from the menu"
+msgstr ""
+"ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove "
+"event listeners from the menu"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:23
+msgid ""
+"@ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>\n"
+"ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event "
+"listeners from the menu"
+msgstr ""
+"@ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>\n"
+"ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event "
+"listeners from the menu"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:24
+msgid ""
+"For non-React users, also, [`ons-gesture-detector`](/v2/api/js/ons-gesture-"
+"detector.html) component can be used to wrap the target DOM element that "
+"should detect the fingers in a handy way."
+msgstr ""
+"React用バインディングを除き、ジェスチャーを受け取りたい部分のDOMに対して"
+"[`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.html)コンポーネント"
+"を囲むことで、簡単にジェスチャーを認識できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:25
+msgid "FastClick"
+msgstr "FastClick"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:26
+msgid "This section is under construction."
+msgstr "この章は執筆中です。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/features.html:27
+msgid "<% end %>"
+msgstr "<% end %>"

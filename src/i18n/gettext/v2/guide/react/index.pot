@@ -1,0 +1,224 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-30 22:54+0000\n"
+"Plural-Forms: \n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:1
+msgid ""
+"title: 'React'\n"
+"order: 110\n"
+"tocGroup: guide"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:2
+msgid "layout: docs.html.eco"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:3
+msgid "<%- @markdown => %>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:4
+msgid "React"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:6
+msgid ""
+"Before reading this section, we suggest you reading [Getting "
+"Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp "
+"the basics of Onsen UI. Don't worry, it won't take more than 5 minutes."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:8
+msgid ""
+"React bindings for Onsen UI provide React components that wrap the core Web "
+"Components and expose a React-like API to interact with them."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:9
+msgid "Download React bindings"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:10
+msgid ""
+"React bindings are distributed in [`react-onsenui` "
+"package](https://www.npmjs.com/package/react-onsenui). You can download it "
+"via NPM:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:11
+msgid "$ npm install onsenui react-onsenui --save-dev"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:12
+msgid ""
+"It is also available [via CDN](https://unpkg.com/react-onsenui). The "
+"[latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases) "
+"also contains React bindings."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:13
+msgid "Setup React bindings"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:14
+msgid ""
+"You can load Onsen UI with normal <script></script> and <link> tags as "
+"follows:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:15
+msgid ""
+"<script src=\"react.js\"></script>\n"
+"<script src=\"react-dom.js\"></script>\n"
+"<script src=\"onsenui.js\"></script>\n"
+"<script src=\"react-onsenui.js\"></script>\n"
+"<script "
+"src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min."
+"js\"></script>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:16
+msgid ""
+"Or, you can use React and Onsen UI from npm with CommonJS module system "
+"like Browserify or Webpack. In this case, use the `onsenui` and "
+"`react-onsenui` packages, in addition to react and `react-dom` npm "
+"packages. In the example below `ons` contains Onsen UI core instance, and "
+"`Ons` contains React components."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:17
+msgid ""
+"var React = require('react');\n"
+"var ReactDOM = require('react-dom');\n"
+"var ons = require('onsenui');\n"
+"var Ons = require('react-onsenui');"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:18
+msgid ""
+"Alternatively, you can also use ES6 imports to specify the modules you want "
+"to use in `react-onsenui` package."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:19
+msgid "import {Page, Toolbar, Button} from 'react-onsenui';"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:20
+msgid "Hello World with React"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:21
+msgid ""
+"To get started, let’s create a simple Hello World application. The "
+"following sample code is a React version of Onsen UI HelloWorld."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:22
+msgid ""
+"<!DOCTYPE html>\n"
+"<html lang=\"en\">\n"
+"<head>\n"
+"  <meta charset=\"utf-8\" />\n"
+"  <link rel=\"stylesheet\" href=\"css/onsenui.css\">\n"
+"  <link rel=\"stylesheet\" href=\"css/onsen-css-components.css\">\n"
+"  <script src=\"react.js\"></script>\n"
+"  <script src=\"react-dom.js\"></script>\n"
+"  <script src=\"onsenui.js\"></script>\n"
+"  <script src=\"react-onsenui.js\"></script>\n"
+"  <script "
+"src=\"https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min."
+"js\"></script>\n"
+"</head>\n"
+"\n"
+"<body>\n"
+"  <div id=\"app\"></div>\n"
+"\n"
+"  <script type=\"text/babel\">\n"
+"    var App = React.createClass({\n"
+"      handleClick: function() {\n"
+"        ons.notification.alert('Hello world!');\n"
+"      },\n"
+"\n"
+"      render: function() {\n"
+"        return (\n"
+"          <Ons.Page>\n"
+"            <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>\n"
+"          </Ons.Page>\n"
+"        );\n"
+"      }\n"
+"    });\n"
+"    ReactDOM.render(<App />, document.getElementById('app'));\n"
+"  </script>\n"
+"</body>\n"
+"</html>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:23
+msgid ""
+"In `<body>` tag, there is only a `<div>` tag having app id. This is where "
+"React will render the content into, and you can see it in the very bottom "
+"of JS code."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:24
+msgid ""
+"Also notice `<script></script>` tag has `text/babel` type. This means this "
+"script is not a pure JavaScript that browser supports (most commonly "
+"ECMAScript5), but is a ECMAScript6 (ES2015) with [JSX format](). Babel will "
+"transpile this code into ES5 in the browser. To get better performance, we "
+"can use Node.js to transpile the code."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:25
+msgid ""
+"Inside the script, `React.createClass()` function defines a React Component "
+"called \"App\". It has one method called render, and this is the function "
+"that is called when the app is rendered. The returning object is described "
+"in JSX, which is a XML like language that extends JavaScript. In this case, "
+"it is returning `<Ons.Page>` component that has an `<Ons.Button>` "
+"component. The `onClick` prop is used to call the `handleClick` method when "
+"the user taps the button."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:26
+msgid ""
+"return (\n"
+"  <Ons.Page>\n"
+"    <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>\n"
+"  </Ons.Page>\n"
+");"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:27
+msgid ""
+"As you can see in this example, all <Ons.*> components are React "
+"Components, and they are loaded by `react-onsenui.js`. For a full list of "
+"React Components, see the [reference page](../../api/react)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:28
+msgid ""
+"Putting together, when `index.html` is loaded into the browser, it will "
+"compile JSX code, inject into the body, and render the content."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:29
+msgid ""
+"For more information about React itself or JSX format, we recommend reading "
+"the official [React "
+"docs](https://facebook.github.io/react/docs/hello-world.html)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/react/index.html:30
+msgid "<% end %>"
+msgstr ""

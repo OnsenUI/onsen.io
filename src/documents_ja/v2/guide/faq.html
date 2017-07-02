@@ -1,5 +1,5 @@
 ---
-title: 'Troubleshooting and FAQ'
+title: ‘FAQとトラブルシューティング’
 order: 60
 tocGroup: guide
 layout: docs.html.eco
@@ -7,90 +7,88 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-### Troubleshooting and FAQ
+### FAQとトラブルシューティング
 
-#### How can I disable ...?
+#### デフォルトの機能を無効にしたい
 
-Onsen UI automatically performs several optimizations automatically, but these are fully optional and able to be turned off at any time. If you would like to disable these, here’s how.
+Onsen UIはいくつかの処理を自動的に最適化を行いますが、時には無効にしたい場合もあります。
 
-- **Disable auto styling**
+- **オートスタイルを無効にする**
 
-  Call `ons.disableAutoStyling()` to disable automatic styling of iOS and Android. Be sure to call it right after including `onsenui.js`. For disabling automatic styling for specific components, use the `disable-auto-styling` attribute.
+  `ons.disableAutoStyling()`を呼び出すことで、iOSとAndroidのオートスタイル機能を無効にできます。ただし、この関数は`onsenui.js`を呼び出した直後に呼び出してください。`disable-auto-styling`属性を用ると特定のコンポーネントに対してオートスタイルを無効にできます。
 
-- **Disable animations for testing**
+- **テストのためにアニメーションを無効にしたい**
 
-  Call `ons.disableAnimations()` before starting the tests.
+  `ons.disableAnimations()`関数を呼び出してください。
 
-- **Disable status bar fill on iOS 7 and above**
+- **iOS 7以上でステータスバーの補完を無効にしたい**
 
-  Call `ons.disableAutoStatusBarFill()` right after including `onsenui.js`.
+  `onsenui.js`を呼び出した直後に`ons.disableAutoStatusBarFill()`関数を呼び出してください。
 
-- **Disable Android Device Back Button handlers**
+- **Android端末で戻るボタンの制御を無効にしたい**
 
-  Call `ons.disableDeviceBackButtonHandler()`.
+  `ons.disableDeviceBackButtonHandler()`を呼び出してください。
 
-#### How can I force specific styles?
+#### 特定のスタイルを強制するには
 
-The auto styling feature displays flat design for iOS and Material Design for Android. Auto styling can be disabled with `ons.disableAutoStyling()` in order to display the default flat design on every platform. `material` modifier can be added manually to elements that should be displayed as Material Design.
+オートスタイル機能を使うと、iOSではフラットデザイン、Androidではマテリアルデザインを表示します。オートスタイルは`ons.disableAutoStyling()`関数を呼び出すことで無効にし、すべてをiOSのデザインで表示できます。その場合でも、コンポーネントに`material`属性を指定することで、マテリアルデザインを表示することができます。
 
-However, it is also possible to fake the platform by running `ons.platform.select(‘android’)` or `ons.platform.select(‘ios’)`  right after including `onsenui.js`. Note that changing the platform also affects other utilities like `ons.platform.isAndroid()`.
+`onsenui.js`を読み込んだ直後に`ons.platform.select(‘android’)`や`ons.platform.select(‘ios’)`を呼び出すことで、実行中のプラットフォームを切り替えられます。ただしこの場合は`ons.platform.isAndroid()`といったプラットフォームを扱う他の機能が影響を受けます。
 
-During development, you can change the device view in the Developer Tools of your browser and refresh the page to update the styles. For instance, “iPhone 5” will show flat design whereas “Nexus 5” displays Material Design. Otherwise, append `?platform=android` or `?platform=ios` as a query string to the URL.
+開発中はブラウザのDevToolsを用いてユーザーエージェントを切り替えることで、スタイルの更新を確認していくと良いでしょう。たとえば、”iPhone 5”を選ぶとフラットデザインとなり、”Nexus 5”を選ぶとマテリアルデザインで表示されます。別の方法として、URLに`?platform=android`や`?platform=ios`といった形でクエリパラメータを加えることでも外見の切り替えができます。
 
-#### Pushing new pages is slow
+#### 新しいページの表示が遅い
 
-If you are creating pages from separate files which, at the same time, contain other pages from even more files (e.g. pushing a tab bar), it can get a bit slow since there are many requests going on. In this case, you can use [`ons.preload([...])` method](/v2/api/js/ons.html#method-preload) at any time to make requests and cache those templates beforehand.
+もし新しく作成しようとしているページがさらに他のファイルを含んでいる場合（タブバーを含むページを表示する場合など）、多くのリクエストが発生するために、ページ遷移が遅れる可能性があります。これを防ぐには[`ons.preload([…])`メソッド](/v2/api/js/ons.html#method-preload)を使って事前にリクエストをしておき、テンプレートをキャッシュすると良いでしょう。
 
-#### Common Error Messages
-
+#### よくあるエラーメッセージ
 
 - **ons is not defined**
 
-  **TODO**
+  **執筆中です**
 
 - **Set/Map is not defined - Can't find variable Set/Map**
 
-  The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
+  実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを使うか、Polyfillを組み込んでください。
 
 - **MutationObserver is not defined**
 
-  The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
+  実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを使うか、Polyfillを組み込んでください。
 
 - **Module ‘onsenui’ has no default export**
 
-  **TODO**
+  **執筆中です**
 
 - **pushPage/popPage is already running**
 
-  A different push or pop action is currently running. This could happen when calling `pushPage` or `popPage` twice before the first animation ends (or clicking twice a button that triggers these actions). Use `options.callback` or the returned promise to trigger the second action after the first one finishes. Otherwise, if the behavior is correct, it is safe to ignore this error.
+  他のプッシュやポップ操作が行われています。これは`pushPage`や`popPage`を二重で動かす場合に発生します。二重で動かしたい場合は`options.callback`や返されるPromiseを使って、1つめの操作が完全に終わるまで待機させてください。そうでない場合は、このエラーを無視しても大丈夫です。
 
 - **Splitter side is locked**
 
-  This can happen when a splitter side is toggled twice before the first animation ends either by calling a method or by dragging the element. Commonly, dragging the splitter side and releasing it on top of a button that toggles the same splitter could throw this error. If the behavior is correct, it is safe to ignore this error.
+  Splitterのサイドメニューの出し入れが、最初のアニメーションが終わる前に行われた場合に発生します。良くあるケースとして、スプリッターのメニューをドラッグしながら、スプリッターの表示を動的に切り替えようとした場合に発生します。このエラーは無視しても問題ありません。
 
 - **Cannot read property ... of null**
 
-  You might be accessing the DOM before your target is in place (timing issue). When you try to access a DOM element inside an `ons-page`, make sure that you are waiting for the page to be attached to the DOM (see [page lifecycle section](lifecycle.html)).
+  タイミングも問題で、DOM要素が存在する前にその要素にアクセスしようとしているケースが考えられます。`ons-page`内のDOM要素にアクセスする場合は、DOMがアタッチされるまで待機する必要があります（詳細は[ページのライフサイクル](lifecycle.html)を参照してください）。
 
-#### Old Browsers
+#### 古いブラウザーのサポート
 
-As mentioned in the [Browser and Device Support](index.html#browser-and-device-support), some older browsers will not work properly due to the lack of some recent functions. We only test on the Webkit family platforms. If you need Onsen UI to work on the following environment, please try adding polyfills to fill the gap to the latest HTML5 standard.
+[旧ブラウザーとデバイスのサポート](index.html#browser-and-device-support)に記載の通り、一部の新しい機能が搭載されていないブラウザーではOnsen UIが正しく動作しない可能性があります。特に、Onsen UIのチームはWebkitとそれに近いプラットフォームに限ってテストをしています。Onsen UIを下記の環境で動作させる場合は、最新のHTML5標準をサポートするためのPolyfillを追加で導入する必要があります。
 
-- **Edge**: Most of the features will work correctly.
-- **Firefox**: Most of the features will work correctly.
-- **Internet Explorer 11** and up; **Windows Phone 10** and up:
-    - Polyfill for Set/Map/WeakMap
-    - Polyfill for MutationObserver
-    - Polyfill for Promise
-    - Polyfill for CustomEvent
-    - Polyfill for Element.prototype.classList
-    - Polyfill for Element.prototype.remove
+- **Edge**: ほとんどの機能を利用できます
+- **Firefox**: ほとんどの機能を利用できます
+- **IE11**以上、**Windows Phone 10**以上:
+  - Set/Map/WeakMapのPolyfillが必要です
+  - MutationObserverのPolyfillが必要です
+  - PromiseのPolyfillが必要です
+  - CustomEventのPolyfillが必要です
+  - Element.prototype.classListのPolyfillが必要です
+  - Element.prototype.removeのPolyfillが必要です
 
-#### Headless Testing
+#### ヘッドレステスト
 
-**Jest**, **jsDom**, **PhantomJS**, etc. are very useful tools for headless testing. However, you need to make sure that your testing suite supports the latest Web APIs and is compatible specifically with Custom Elements (part of Web Components). As of early 2017, none of the mentioned tools support it out of the box.
+**Jest**や**jsDom**、**PhantomJS**といったヘッドレステストを行うためのツールと組み合わせる場合、Onsen UIの動作に必要な最新のWeb APIと、Custom Elementsの対応がされていることを確認してください。2017年初頭においては、上記のテストツールはまだ十分に対応されていません。
 
-As a suggestion, try Karma + **Chrome headless** (+v59).
+ヘッドレストテストを実施する場合は、Karmaと**Chrome Headless**（v59以降）の組み合わせを推奨します。
 
 <% end %>
-

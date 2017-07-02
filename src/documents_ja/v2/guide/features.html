@@ -1,5 +1,5 @@
 ---
-title: 'Additional Features'
+title: ‘その他の機能’
 order: 140
 tocGroup: guide
 layout: docs.html.eco
@@ -7,29 +7,29 @@ layout: docs.html.eco
 
 <%- @markdown => %>
 
-### Additional Features
+### その他の機能
 
-#### Grid Layout
+#### グリッドレイアウト
 
-Onsen UI provides a grid system to place your elements in the screen. The grid system divides the screen into rows and columns, just like a spreadsheet. The width and height of each grid is adjustable, and you can also condense two or more grids in a row or column, into one grid.
+Onsen UIでは、画面上に各要素を配置するときにグリッドシステムを採用しています。グリッドシステムでは、スプレッドシートのように画面を横列と縦列に分けます。各グリッドの横幅と縦幅を自由に指定したり、複数の行や列を結合することもできます。
 
-The layout can be performed by combining [`<ons-col>`](../api/js/ons-col.html) and [`<ons-row>`](../api/js/ons-row.html) components. The width and height can be adjusted in a flexible way.
+レイアウトは[`<ons-col>`](/v2/docs/js/ons-col.html)コンポーネントと[`<ons-row>`](/v2/docs/js/ons-row.html)コンポーネントを組み合わせて構成します。横幅と縦幅は、属性やCSSを使用して柔軟に指定できます。
 
-Grid is not necessary in general for list items. Special layout is provided for list items based on flat iOS and Material Design specific.
+なお、一覧表示を行うときにはグリッド関連のコンポーネントを使用する必要はありません。iOSフラットデザインとAndroidマテリアルデザインの仕様に準拠したリスト用のコンポーネントを提供していますので、そちらをご利用ください。
 
-#### Platform Detection
+#### プラットフォームの識別
 
-[`ons.platform`](/v2/api/js/ons.platform.html) is useful to detect running platform.
+[`ons.platform`](/v2/docs/js/ons.platform.html)を使い、実行中のプラットフォームを識別できます。
 
-#### Rotation Detection
+#### 画面向きの識別
 
-[`ons.orientation`](/v2/api/js/ons.orientation.html) is useful to detect the display orientation.
+[`ons.orientation`](/v2/api/js/ons.orientation.html)を使って画面の向きを識別できます。
 
-#### Gesture Detection
+#### ジェスチャーの認識
 
-It is a common use case to detect a finger gesture and do a specific task. Onsen UI utilizes a modified version of [Hammer.js](https://hammerjs.github.io/) for gesture detection. The Gesture Detector class (Hammer.js) is exposed in [`ons.GestureDetector`](/v2/api/js/ons.GestureDetector.html) object.
+スワイプや長押しといったジェスチャーを検出することができます。Onsen UIでは[Hammer.js](https://hammerjs.github.io/)を組み込んでおり、[`ons.GestureDetector`](/v2/api/js/ons.GestureDetector.html)オブジェクトとして利用できます。
 
-Non-Angular:
+Angularフレームワーク以外の場合:
 
 ```js
 var divGD = ons.GestureDetector(document.querySelector('#my-div'));
@@ -38,7 +38,7 @@ divGD.on('dragup dragdown', function(event) {
 });
 ```
 
-Angular:
+Angularフレームワークの場合:
 
 ```js
 @ViewChild('somediv') divGD; // <div #somediv>
@@ -47,25 +47,25 @@ this.divGD.nativeElement.on('dragup dragdown', function(event) {
 });
 ```
 
-If you want to use another library for this purpose and have any conflict, Onsen UI gesture detectors can be disabled easily:
+他のライブラリを使っていてコンフリクトした場合は、下記のようにしてOnsen UIの持つジェスチャー機能を無効にできます：
 
-Non-Angular:
+Angularフレームワーク以外の場合:
 
 ```js
 ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove event listeners from the menu
 ```
 
-Angular:
+Angularフレームワークの場合:
 
 ```js
 @ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>
 ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event listeners from the menu
 ```
 
-For non-React users, also, [`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.html) component can be used to wrap the target DOM element that should detect the fingers in a handy way.
+React用バインディングを除き、ジェスチャーを受け取りたい部分のDOMに対して[`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.html)コンポーネントを囲むことで、簡単にジェスチャーを認識できます。
 
 #### FastClick
 
-This section is under construction.
+この章は執筆中です。
 
 <% end %>

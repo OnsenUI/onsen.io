@@ -9,14 +9,13 @@ layout: docs.html.eco
 
 ### AngularJS 1.x
 
-> Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
 
-AngularJS bindings for Onsen UI provide AngularJS directives that enhance the core Web Components and expose a AngularJS-like API to interact with them.
+AngularJSバインディングは、Onsen UIの持つWeb Componentsを拡張子、AngularJSと親和性の高いAPIを提供するものです。
 
-#### Setup AngularJS 1.x bindings
+#### AngularJS 1.xバインディングのセットアップ
 
-AngularJS 1.x bindings for Onsen UI is separated from the core but distributed in the same package. To load it in your project, please include `onsenui.js` and `angular.js` before `angular-onsenui.js`.
-
+AngularJS 1.xバインディングは、Onsen UI本体とは分かれていますが、同じパッケージに同梱されています。プロジェクトに組み込む場合は、`onsenui.js`と`angular.js`を読み込んだ後、`angular-onsenui.js`よ読み込んでください。
 
 ```html
 <link rel="stylesheet" href="onsenui.css"/>
@@ -26,16 +25,16 @@ AngularJS 1.x bindings for Onsen UI is separated from the core but distributed i
 <script src="angular-onsenui.min.js"></script>
 ```
 
-After loading `angular-onsenui.js`, the `onsen` AngularJS module is ready to use.
+`angular-onsenui.js`を読み込むと、AngularJSモジュールである`onsen`を利用することができます。
 
 ```js
 var module = angular.module('my-app', ['onsen']);
 module.controller('AppController', function() { });
 ```
 
-#### Hello World with AngularJS 1.x
+#### AngularJS 1.xでHello World
 
-To get started, let’s create a simple Hello World application. The following sample code is a React version of Onsen UI HelloWorld.
+では簡単なHello Worldアプリを開発してみましょう。下記のコードは、Onsen UIとAngularJSを用いたHello Worldコードの例になります。
 
 ```
 <!DOCTYPE html>
@@ -74,11 +73,10 @@ To get started, let’s create a simple Hello World application. The following s
 </html>
 ```
 
-Using Onsen UI into your app is really simple. Just include each element in your HTML and plug funcionality from the controller with the standard `ng-*` attributes.
+アプリへの組み込みはとても簡単です。Onsen UIの各コンポーネントをHTML内に配置し、いつも通り`ng-*`属性を利用できます。
 
-Some components have methods and properties. Use the `var` attribute to save a reference into a scoped variable. For example, the following `<ons-navigator var="myNavigator">` can be accessed via `$scope.myNavigator` variable, which exists in the current `$scope` object.
+いくつかのコンポーネントはメソッドやプロパティを持っています。この場合には、`var`属性を使って、コンポーネントの参照を変数に定義してください。たとえば、`<ons-navigator var="myNavigator">`とした場合は`$scope.myNavigator`のようにしてアクセスできます。
 
-For more information about AngularJS 1.x itself, we recommend reading the official [AngularJS docs](https://docs.angularjs.org/tutorial).
+AngularJS 1.xに関する詳細については、[AngularJSドキュメント](https://docs.angularjs.org/tutorial)を参照してください。
 
 <% end %>
-

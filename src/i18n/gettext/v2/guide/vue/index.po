@@ -1,0 +1,671 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language-Team: \n"
+"PO-Revision-Date: 2017-07-02 16:52+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-07-01 06:38+0900\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Language: ja\n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:1
+msgid ""
+"title: 'Vue.js 2+'\n"
+"order: 120\n"
+"tocGroup: guide"
+msgstr ""
+"title: 'Vue.js 2+'\n"
+"order: 120\n"
+"tocGroup: guide"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:2
+msgid "layout: docs.html.eco"
+msgstr "layout: docs.html.eco"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:3
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:4
+msgid "Vue.js"
+msgstr "Vue.js"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:6
+msgid ""
+"Before reading this section, we suggest you reading [Getting Started](../"
+"index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of "
+"Onsen UI. Don't worry, it won't take more than 5 minutes."
+msgstr ""
+"この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基"
+"礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありませ"
+"ん、読み終わるまで5分もかかりません。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:8
+msgid ""
+"Vue bindings for Onsen UI (VueOnsen) provide Vue 2 components and directives "
+"that wrap the core Web Components and expose a Vue-like API to interact with "
+"them."
+msgstr ""
+"Onsen UI向けのVueバインディング（VueOnsen）は、Web Componentsでできたコアを"
+"ラッピングし、Vue形式のAPIでアクセスできるようにしたものです。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:9
+msgid ""
+"In this guide we explain how to set up Onsen UI + Vue and some fundamental "
+"tips to get started."
+msgstr ""
+"このガイドでは、Onsen UIとVueを組み合わせた場合の開発方法について紹介いたしま"
+"す。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:10
+msgid "Download Vue bindings"
+msgstr "Vueバインディングのダウンロード"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:11
+msgid ""
+"Vue bindings are distributed in [`vue-onsenui` package](https://www.npmjs."
+"com/package/vue-onsenui). You can download it via NPM:"
+msgstr ""
+"Vueバインディングは、[`vue-onsenui`パッケージ](https://www.npmjs.com/package/"
+"vue-onsenui)として配布されています。NPMを用いて下記のようにダウンロードできま"
+"す。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:12
+msgid "$ npm install onsenui vue-onsenui --save-dev"
+msgstr "$ npm install onsenui vue-onsenui --save-dev"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:13
+msgid ""
+"It is also available [via CDN](https://unpkg.com/vue-onsenui). The [latest "
+"core release](https://github.com/OnsenUI/OnsenUI-dist/releases) contains Vue "
+"bindings as well."
+msgstr ""
+"他にも[CDN経由](https://unpkg.com/vue-onsenui)で使ったり、[Onsen UIのリリー"
+"ス](https://github.com/OnsenUI/OnsenUI-dist/releases)に含まれているVueバイン"
+"ディングを使うこともできます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:14
+msgid "Setup Vue bindings"
+msgstr "Vueバインディングのセットアップ"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:15
+msgid ""
+"You can load Onsen UI with normal `<script></script>` and `<link>` tags as "
+"follows:"
+msgstr ""
+"Onsen UIを`<script></script>`や`<link>`タグを使って、下記のように読み込めま"
+"す:"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:16
+msgid ""
+"<link rel=\"stylesheet\" href=\"onsenui.css\">\n"
+"<link rel=\"stylesheet\" href=\"onsen-css-components.css\">\n"
+"\n"
+"<script src=\"vue.js\"></script>\n"
+"<script src=\"onsenui.js\"></script>\n"
+"<script src=\"vue-onsenui.js\"></script>"
+msgstr ""
+"<link rel=\"stylesheet\" href=\"onsenui.css\">\n"
+"<link rel=\"stylesheet\" href=\"onsen-css-components.css\">\n"
+"\n"
+"<script src=\"vue.js\"></script>\n"
+"<script src=\"onsenui.js\"></script>\n"
+"<script src=\"vue-onsenui.js\"></script>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:17
+msgid ""
+"Or, you can import `VueOnsen` from `node_modules/vue-onsenui` with a module "
+"bundler like [Webpack](https://webpack.js.org/):"
+msgstr ""
+"もしくは[Webpack](https://webpack.js.org/)を使う場合は、`node_modules/vue-"
+"onsenui`から`VueOnsen`インポートしてください:"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:18
+msgid ""
+"// Webpack CSS import\n"
+"import 'onsenui/css/onsenui.css';\n"
+"import 'onsenui/css/onsen-css-components.css';\n"
+"\n"
+"// JS import\n"
+"import Vue from 'vue';\n"
+"import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'\n"
+"\n"
+"Vue.use(VueOnsen);"
+msgstr ""
+"// Webpack CSS import\n"
+"import 'onsenui/css/onsenui.css';\n"
+"import 'onsenui/css/onsen-css-components.css';\n"
+"\n"
+"// JS import\n"
+"import Vue from 'vue';\n"
+"import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'\n"
+"\n"
+"Vue.use(VueOnsen);"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:19
+msgid ""
+"Notice how `VueOnsen` is used as a plugin for Vue in the last line (this is "
+"already done automatically if `window.Vue` exists). Alternatively, you can "
+"use `require` instead of ES6 imports."
+msgstr ""
+"`Vue.Use`を用いて`VueOnsen`を読み込みます（`window.Vue`が存在する場合には、こ"
+"れも自動的に行われます)。ES6以降で備わったImport機能を使用しない場合は、"
+"`require`を用いて読み込むこともできます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:20
+msgid "Using Vue CLI"
+msgstr "Vue CLIと共に使う"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:21
+msgid "Onsen UI provides ready-to-go templates for Vue CLI as well:"
+msgstr "Vue CLIで使えるテンプレートも提供しています:"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:24
+msgid ""
+"__Cordova__: [vue-cordova-webpack](https://github.com/OnsenUI/vue-cordova-"
+"webpack)"
+msgstr ""
+"__Cordova__: [vue-cordova-webpack](https://github.com/OnsenUI/vue-cordova-"
+"webpack)"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:25
+msgid "$ vue init OnsenUI/vue-cordova-webpack hello-world"
+msgstr "$ vue init OnsenUI/vue-cordova-webpack hello-world"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:28
+msgid ""
+"__Progressive Web App__: [vue-pwa-webpack](https://github.com/OnsenUI/vue-"
+"pwa-webpack)"
+msgstr ""
+"__Progressive Web App__: [vue-pwa-webpack](https://github.com/OnsenUI/vue-"
+"pwa-webpack)"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:29
+msgid "$ vue init OnsenUI/vue-pwa-webpack hello-world"
+msgstr "$ vue init OnsenUI/vue-pwa-webpack hello-world"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:32
+msgid ""
+"These templates bundle Onsen UI + Vue bindings with unit & e2e testing "
+"solutions compatible with Onsen UI."
+msgstr ""
+"これらのテンプレートは、Onsen UIとVueを組み合わせたもので、ユニットテストと"
+"E2Eテストのための機能も組み込まれています。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:33
+msgid "Hello World with Vue"
+msgstr "VueでHello World"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:34
+msgid ""
+"To get started, let’s create a simple Hello World application. The following "
+"sample code is a Vue version of Onsen UI HelloWorld."
+msgstr ""
+"では簡単なHello Worldアプリを開発してみましょう。下記のコードは、Onsen UIと"
+"Vueを用いたHello Worldコードの例になります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:35
+msgid ""
+"<!DOCTYPE html>\n"
+"<html lang=\"en\">\n"
+"<head>\n"
+"  <meta charset=\"utf-8\" />\n"
+"  <link rel=\"stylesheet\" href=\"onsenui.css\">\n"
+"  <link rel=\"stylesheet\" href=\"onsen-css-components.css\">\n"
+"  <script src=\"vue.js\"></script>\n"
+"  <script src=\"onsenui.js\"></script>\n"
+"  <script src=\"vue-onsenui.js\"></script>\n"
+"</head>\n"
+"\n"
+"<body>\n"
+"  <template id=\"main-page\">\n"
+"    <v-ons-page>\n"
+"      <v-ons-toolbar>\n"
+"        <div class=\"center\">Title</div>\n"
+"      </v-ons-toolbar>\n"
+"\n"
+"      <p style=\"text-align: center\">\n"
+"        <v-ons-button @click=\"$ons.notification.alert('Hello World!')\">\n"
+"          Click me!\n"
+"        </v-ons-button>\n"
+"      </p>\n"
+"    </v-ons-page>\n"
+"  </template>\n"
+"\n"
+"  <div id=\"app\"></div>\n"
+"\n"
+"  <script>\n"
+"    var vm = new Vue({\n"
+"      el: '#app',\n"
+"      template: '#main-page'\n"
+"    });\n"
+"  </script>\n"
+"</body>\n"
+"</html>"
+msgstr ""
+"<!DOCTYPE html>\n"
+"<html lang=\"en\">\n"
+"<head>\n"
+"  <meta charset=\"utf-8\" />\n"
+"  <link rel=\"stylesheet\" href=\"onsenui.css\">\n"
+"  <link rel=\"stylesheet\" href=\"onsen-css-components.css\">\n"
+"  <script src=\"vue.js\"></script>\n"
+"  <script src=\"onsenui.js\"></script>\n"
+"  <script src=\"vue-onsenui.js\"></script>\n"
+"</head>\n"
+"\n"
+"<body>\n"
+"  <template id=\"main-page\">\n"
+"    <v-ons-page>\n"
+"      <v-ons-toolbar>\n"
+"        <div class=\"center\">Title</div>\n"
+"      </v-ons-toolbar>\n"
+"\n"
+"      <p style=\"text-align: center\">\n"
+"        <v-ons-button @click=\"$ons.notification.alert('Hello World!')\">\n"
+"          Click me!\n"
+"        </v-ons-button>\n"
+"      </p>\n"
+"    </v-ons-page>\n"
+"  </template>\n"
+"\n"
+"  <div id=\"app\"></div>\n"
+"\n"
+"  <script>\n"
+"    var vm = new Vue({\n"
+"      el: '#app',\n"
+"      template: '#main-page'\n"
+"    });\n"
+"  </script>\n"
+"</body>\n"
+"</html>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:36
+msgid ""
+"The `<div id=\"app\"></div>` node is where Vue will render the content into "
+"(`el` property in the constructor)."
+msgstr ""
+"ここで`<div id=\"app\"></div>`は、Vueがコンテンツをレンダリングする起点となり"
+"ます（コンストラクタで`el`プロパティで指定しています）。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:37
+msgid ""
+"This is a pure ES5 example, although normally it's advisable to use ES2015 "
+"and [`vue-loader`](https://github.com/vuejs/vue-loader) since it allows `*."
+"vue` format."
+msgstr ""
+"これはES5を用いた例ですが、ES2015と[`vue-loader`](https://github.com/vuejs/"
+"vue-loader)を組み合わせると`*.vue`ファイルを用いた開発ができるのでお勧めで"
+"す。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:38
+msgid ""
+"For more information about Vue itself, we recommend reading the official "
+"[Vue docs](https://vuejs.org/v2/guide/)."
+msgstr ""
+"Vueに関する詳細は、公式の[Vueドキュメント](https://vuejs.org/v2/guide)を参照"
+"してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:39
+msgid "Understanding Vue Components"
+msgstr "Vueコンポーネント"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:40
+msgid ""
+"Having a general idea about how everything is implemented could be useful in "
+"some situations. This is a brief explanation about how Vue Componentes for "
+"Onsen UI work."
+msgstr ""
+"より深い理解のためにも、Onsen UIとVueコンポーネントの関係について知っておくの"
+"が良いでしょう。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:41
+msgid ""
+"These components are simple wrappers around inner [Custom Elements](https://"
+"developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) in most "
+"of the cases. This means that a Vue Component takes some props and translate "
+"them into DOM properties, DOM attributes or method calls for the Onsen UI "
+"core. It also listens for native events and fires the corresponding Vue "
+"events. If you inspect the DOM you will likely see a bunch of `ons-*` "
+"components without `v-*` prefix (these are real HTMLelements). You can have "
+"a look at the implementation [here](https://github.com/OnsenUI/OnsenUI/tree/"
+"master/bindings/vue/src/components)."
+msgstr ""
+"これらOnsen UIのVueコンポーネントは、Web Componentsである[Custom Elements]"
+"(https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements)"
+"をラッピングしたものになります。そのため、VueコンポーネントのPropは、Custom "
+"ElementsのDOMプロパティや属性、メソッドと対応しています。また、ネイティブイベ"
+"ントを受け取った場合は、Vueイベントを呼び出します。DevTools等でDOMをインスペ"
+"クトすると、`v-*`から始まらない`ons-*`コンポーネントが見えるでしょう。これら"
+"はWeb Componentsでできた、Onsen UIのHTML要素です。詳細の実装については、[こち"
+"らのコード](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/src/"
+"components)を参照してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:42
+msgid ""
+"Since `v-ons-*` components compiles into `ons-*` DOM element, you can use "
+"this knowledge to style your component with tag names as well."
+msgstr ""
+"`v-ons-*`ではじまるコンポーネントは、すべて`ons-*`からはじまるDOM要素にコンパ"
+"イルされることから、CSS等でスタイルを定義する場合はタグ名を使用してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:43
+msgid "The $ons object"
+msgstr "$onsオブジェクト"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:44
+msgid ""
+"The original [`ons` object](../fundamentals.html#the-ons-object) is not "
+"available in the global scope in Vue applications. Instead, it is provided "
+"in every Vue instance as `this.$ons` through Vue's protoytpe:"
+msgstr ""
+"グローバルで提供される[`ons` object](../fundamentals.html#the-ons-object)オブ"
+"ジェクトは、Vueでは利用できません。その代わりに、すべてのVueインスタンスには"
+"`this.$ons`オブジェクトを利用できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:45
+msgid ""
+"<v-ons-button @click=\"$ons.notification.alert('Hi there!')\">\n"
+"  Click me\n"
+"</v-ons-button>"
+msgstr ""
+"<v-ons-button @click=\"$ons.notification.alert('Hi there!')\">\n"
+"  Click me\n"
+"</v-ons-button>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:46
+msgid "Event Handling"
+msgstr "イベント処理"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:47
+msgid ""
+"DOM events fired by Onsen UI elements are translated into Vue events in the "
+"corresponding components. For example, `v-ons-navigator` can handle a "
+"`postpush` event with `@postpush=\"...\"`. Note that only custom events like "
+"`postpush`, `init`, `prechange`, etc. are treated like this. Native events "
+"like `input` or `change` will still need to be handled as DOM events: "
+"`@input.native=\"...\"` (normally you'd want to use `v-model` for these "
+"events)."
+msgstr ""
+"Onsen UIが受け取るDOMイベントはVueイベントに変換されます。たとえば、`v-ons-"
+"navigator`で`postpush`イベントを受け取るには、`@postpush=\"...\"`と記述できま"
+"す。ただし、このような変換は`postpush`、`init`、`prechange`といったカスタムイ"
+"ベントに対してのみ行われます。`input`や`change`といったネイティブなイベント"
+"は、`@input.native=\"...\"`という形でDOMイベントとして受け取る必要がありま"
+"す。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:48
+msgid ""
+"The exception to this is `click` event, which can be handled as a Vue event: "
+"`<v-ons-tab @click=\"...\">`. The reason is that `click` event is used to "
+"override the default behavior of some components:"
+msgstr ""
+"ただし`click`イベントに限りVueイベントとして、`<v-ons-tab @click=\"...\">`の"
+"ように受け取ることができます。これは、Onsen UIでは`click`イベントに対して特別"
+"な処理を加えているためです。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:49
+msgid ""
+"<v-ons-back-button @click.prevent=\"pageStack.splice(1)\"></v-ons-back-"
+"button>"
+msgstr ""
+"<v-ons-back-button @click.prevent=\"pageStack.splice(1)\"></v-ons-back-"
+"button>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:50
+msgid ""
+"The previous example overrides the `v-ons-back-button` default behavior, "
+"popping 1 single page, and resets the stack to the first page instead. The "
+"`prevent` modifier is just calling `$event.preventDefault()`."
+msgstr ""
+"この例では、`v-ons-back-button`のデフォルトの振る舞いを変更し、1ページ前に"
+"戻った後、先頭ページにリセットを行っています。なお、ここで使われている"
+"`prevent`修正子は`$event.preventDefault()`を呼び出すために使用しています。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:51
+msgid ""
+"Additionally, components that are capable of handling Cordova's `backbutton` "
+"event (Android's back button), can listen for this event with "
+"`@deviceBackButton` handler."
+msgstr ""
+"Cordovaの`backbutton`イベント（Androidの戻るボタン）に対応しているコンポーネ"
+"ントについては、`@deviceBackButton`ハンドラーを使ってイベントを受け取ることが"
+"できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:52
+msgid ""
+"<v-ons-dialog @deviceBackButton=\"$event.callParentHandler()\"></v-ons-"
+"dialog>"
+msgstr ""
+"<v-ons-dialog @deviceBackButton=\"$event.callParentHandler()\"></v-ons-"
+"dialog>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:53
+msgid ""
+"More information about this event in the original [Cordova-specific Features]"
+"(../cordova.html#device-back-button) section."
+msgstr ""
+"このイベントに関する詳細は、[Cordova特有の機能を使用する](../cordova."
+"html#device-back-button)を参照してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:54
+msgid "Inputs and v-model"
+msgstr "入力とv-modelの使い方"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:55
+msgid ""
+"Input components in Onsen UI (such as `v-ons-input` or `v-ons-checkbox`) "
+"support Vue’s `v-model` directive:"
+msgstr ""
+"Onsen UIの入力コンポーネント（`v-ons-input`や`v-ons-checkbox`）では、Vueが提"
+"供する`v-model`ディレクティブを使用できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:56
+msgid "<v-ons-input v-model=\"something\"></v-ons-input>"
+msgstr "<v-ons-input v-model=\"something\"></v-ons-input>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:57
+msgid ""
+"The only exceptions are `v-model` modifiers, which are not supported by "
+"custom components as of `vue@2.3`, unfortunately. However, there is a "
+"workaround for the most important one, the `lazy` modifier:"
+msgstr ""
+"ただし、`v-model`修正子については、Vue 2.3の段階ではカスタムコンポーネントに"
+"対して対応されていません。しかし、最も重要な`lazy`修正子について、下記のよう"
+"に回避することができます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:58
+msgid ""
+"<v-ons-input v-model=\"something\" model-event=\"change\"></v-ons-input>"
+msgstr ""
+"<v-ons-input v-model=\"something\" model-event=\"change\"></v-ons-input>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:59
+msgid ""
+"This will update the model on `change` events instead of `input` (default). "
+"The rest ofthe modifiers can be easily implemented in other ways."
+msgstr ""
+"この例では、`input`イベントの代わりに`change`イベントを用いてモデルの更新を行"
+"います。残りの修正子も、同じように実装することができます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:60
+msgid ""
+"It is also possible to bind arrays to `v-ons-checkbox` or `v-ons-switch` "
+"just like normal `<input type=\"checkbox\">`, and make radio groups with `v-"
+"model` for `v-ons-radio`."
+msgstr ""
+"また、`v-ons-checkbox`や`v-ons-switch`などのコンポーネントに対して配列をバイ"
+"ンドできます。それにより、`<input type=“checkbox”>`と同じように扱うことができ"
+"ます。また、`v-ons-radio`に`v-model`を使ってグループを作成することもできま"
+"す。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:61
+msgid "Vue Bindings FAQ"
+msgstr "Vueバインディングに関するFAQ"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:62
+msgid "How to set up global Onsen UI options?"
+msgstr "Onsen UIのグローバル設定を変更するには？"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:63
+msgid ""
+"The main guide describes [how to disable or set some global features](../faq."
+"html) \"right after including `onsenui.js` in the app\". This means that it "
+"must take effect before any component is rendered. Since `ons` object is not "
+"provided globally, we need to use `$ons` object at the very first possible "
+"location:"
+msgstr ""
+"ガイドの[Onsen UIの一部機能を無効にする](../faq.html)に記述されている通り、"
+"`onsenui.js`を読み込んだ直後に設定を行う必要があります。具体的にはコンポーネ"
+"ントを描画するよりも前に実施される必要があります。しかしVueでは`ons`オブジェ"
+"クトをグローバルで取得できないため、最初に`$ons`を受け取れる箇所で設定を行い"
+"ます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:64
+msgid ""
+"import Vue from 'vue';\n"
+"import VueOnsen from 'vue-onsenui';\n"
+"Vue.use(VueOnsen);\n"
+"\n"
+"new Vue({\n"
+"  el: '#app',\n"
+"  render: h => h(...),\n"
+"  beforeCreate() {\n"
+"    this.$ons.disableAutoStyling(); // Or any other method\n"
+"  }\n"
+"})"
+msgstr ""
+"import Vue from 'vue';\n"
+"import VueOnsen from 'vue-onsenui';\n"
+"Vue.use(VueOnsen);\n"
+"\n"
+"new Vue({\n"
+"  el: '#app',\n"
+"  render: h => h(...),\n"
+"  beforeCreate() {\n"
+"    this.$ons.disableAutoStyling(); // Or any other method\n"
+"  }\n"
+"})"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:65
+msgid "This way, changes take effect before any component is rendered."
+msgstr ""
+"このように設定することで、コンポーネントが描画されるよりも先に設定を適用でき"
+"ます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:66
+msgid "How to pass data to the next page in the navigator?"
+msgstr "ナビゲーターに次ページのデータを渡すにはどうすればいいですか？"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:67
+msgid ""
+"Navigator's pages are sibling elements, which means that communication among "
+"them in Vue is fairly challenging. [Vuex](https://vuex.vuejs.org/) is a good "
+"solution for this, but not the only one. When you push a new page component "
+"and want to add some initial data, you can simply extend it:"
+msgstr ""
+"ナビゲーターのページは、兄弟関係を持つ要素となります。そのため、Vueを用いた場"
+"合のデータの受け渡しには工夫が必要です。[Vuex](https://vuex.vuejs.org/)を使用"
+"する方法だけでなく、下記のように継承を用いてデータを渡すこともできます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:68
+msgid ""
+"import nextPage from 'nextPage.vue';\n"
+"// ...\n"
+"\n"
+"pageStack.push({\n"
+"  extends: nextPage,\n"
+"  data() {\n"
+"    return {\n"
+"      myCustomDataHere: 42\n"
+"    };\n"
+"  }\n"
+"})"
+msgstr ""
+"import nextPage from 'nextPage.vue';\n"
+"// ...\n"
+"\n"
+"pageStack.push({\n"
+"  extends: nextPage,\n"
+"  data() {\n"
+"    return {\n"
+"      myCustomDataHere: 42\n"
+"    };\n"
+"  }\n"
+"})"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:69
+msgid ""
+"In order to send data back to the previous page before popping, any of Vue's "
+"methods for [non parent-child communication](https://vuejs.org/v2/guide/"
+"components.html#Non-Parent-Child-Communication) works."
+msgstr ""
+"また、ページが戻す際に前ページにデータを渡したい場合は、Vueのドキュメントにあ"
+"る[親子関係を伴わないコミュニケーション](https://vuejs.org/v2/guide/"
+"components.html#Non-Parent-Child-Communication)が参考になるでしょう。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:70
+msgid "Can I use Vuex with Onsen UI?"
+msgstr "Onsen UIとVuexは組み合わせられますか？"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:71
+msgid ""
+"Definitely yes. Vuex is a good solution for components communication. If you "
+"have too many props and events up and down, Vuex may be a good fit. For an "
+"example of Onsen UI + Vue + Vuex, see [kitchensink app](https://frandiox."
+"github.io/vue-onsenui-kitchensink/)."
+msgstr ""
+"もちろんです。Vuexを使うと、コンポーネント間の通信が書きやすくなります。多く"
+"のPropsがあり、イベントが頻繁に発行されるようなケースではVuexを使うのが良いで"
+"しょう。Onsen UIとVuexを組み合わせがサンプルは、[キッチンシンクアプリ]"
+"(https://frandiox.github.io/vue-onsenui-kitchensink/)を参考にしてみてくださ"
+"い。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:72
+msgid "What about vue-router?"
+msgstr "vue-routerと組み合わせて使うには？"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:73
+msgid ""
+"Onsen UI provides its own routing components: [`v-ons-navigator`](/v2/api/"
+"vue/v-ons-navigator.html), [`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html) "
+"and [`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html). These components "
+"can be mixed in many different ways to achieve the desired route pattern. "
+"This is in general completely enough for mobile SPA, so there is no need to "
+"plug an external router."
+msgstr ""
+"Onsen UIでは、[`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html)、[`v-ons-"
+"tabbar`](/v2/api/vue/v-ons-tabbar.html)および[`v-ons-splitter`](/v2/api/vue/"
+"v-ons-splitter.html)を、ルーティング用のコンポーネントとして提供しています。"
+"これらを組み合わせることで、必要なパターンのルーティングを実装できます。SPA形"
+"式のモバイルアプリ開発においては、これらのコンポーネントだけで足りるケースが"
+"多く、追加でルーターを導入する必要はないかもしれません。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:74
+msgid ""
+"However, for those who really want to integrate vue-router, it is compatible "
+"with Onsen UI with the exception of navigator's animations. Currently, you'd "
+"need to make your own transitions for this. While there are workarounds like "
+"pushing pages to navigator's `pageStack` on router guards, it still has a "
+"few drawbacks."
+msgstr ""
+"しかしvue-routerと組み合わせることもできます。この場合、ナビゲーターのアニ"
+"メーションはサポートできないため、個別にページ遷移ロジックを実装する必要があ"
+"ります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:75
+msgid ""
+"For other components like `v-ons-tabbar`, you can override `v-ons-tab` \"on "
+"click\" behavior with `@click.prevent=\"...\"` and change your router view."
+msgstr ""
+"また、`v-ons-tabbar`のようなコンポーネントの場合は、`v-ons-tab`の`onclick`イ"
+"ベントを`@click.prevent=\"...\"`という形で上書きし、ルーターを用いた記述に変"
+"更してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:76
+msgid "<% end %>"
+msgstr "<% end %>"
