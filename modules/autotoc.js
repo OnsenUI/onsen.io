@@ -1,7 +1,8 @@
 
 var jsdom = require('jsdom');
 var async = require('async');
-var slug = require('slug');
+var slug = require('limax');
+var kuroshiro = require('kuroshiro');
 
 var TocItem = function() {
   TocItem.prototype.init.apply(this, arguments);
@@ -44,11 +45,7 @@ TocItem.prototype = {
 
 module.exports = function() {
   function generateId(header) {
-    if (!header.id) {
-      return slug(('' + header.textContent).toLowerCase());
-    } else {
-      return header.id;
-    }
+    return slug(('' + kuroshiro.convert(header.textContent)).toLowerCase());
   }
 
   function buildTocItems(headers, origPath, order) {
@@ -107,50 +104,55 @@ module.exports = function() {
       return result;
     }, []);
 
-    async.each(fileList, function(file, done) {
-      var contents = file.contents.toString('utf8');
-      jsdom.env({
-        html: '<html><body>' + contents + '</body></html>',
-        feature: {QuerySelector: true},
-        done: function(error, window) {
-          if (error) {
-            throw error;
+    kuroshiro.init(function(err) {
+      if (err) {
+        throw 'Kuroshiro initialize failed!';
+      }
+      async.each(fileList, function(file, done) {
+        var contents = file.contents.toString('utf8');
+        jsdom.env({
+          html: '<html><body>' + contents + '</body></html>',
+          feature: {QuerySelector: true},
+          done: function(error, window) {
+            if (error) {
+              throw error;
+            }
+
+            var headers = Array.prototype.slice.call(
+              window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
+            ).map(function(header) {
+              header.id = generateId(header);
+              return header;
+            });
+
+            file.contents = new Buffer(window.document.body.innerHTML);
+            file.toc = buildTocItems(headers, file.origPath, file.order);
+
+            if (file.tocTitle) {
+              file.toc[0].sectionTitle = file.tocTitle.trim();
+            }
+
+            done();
           }
-
-          var headers = Array.prototype.slice.call(
-            window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
-          ).map(function(header) {
-            header.id = generateId(header);
-            return header;
-          });
-
-          file.contents = new Buffer(window.document.body.innerHTML);
-          file.toc = buildTocItems(headers, file.origPath, file.order);
-
-          if (file.tocTitle) {
-            file.toc[0].sectionTitle = file.tocTitle.trim();
-          }
-
-          done();
-        }
-      });
-    }, function() {
-      // Merge ToC depending on tocGroup
-      Object.keys(tocGroups).forEach(function(group) {
-        var fullToc = tocGroups[group]
-          .sort(function(a, b) {
-            return Number(a.order || 0) - Number(b.order || 0);
-          })
-          .reduce(function(result, file) {
-            return result.concat(file.toc || []);
-          }, []);
-
-        tocGroups[group].forEach(function(file) {
-          file.toc = fullToc;
         });
-      });
+      }, function() {
+        // Merge ToC depending on tocGroup
+        Object.keys(tocGroups).forEach(function(group) {
+          var fullToc = tocGroups[group]
+            .sort(function(a, b) {
+              return Number(a.order || 0) - Number(b.order || 0);
+            })
+            .reduce(function(result, file) {
+              return result.concat(file.toc || []);
+            }, []);
 
-      done();
+          tocGroups[group].forEach(function(file) {
+            file.toc = fullToc;
+          });
+        });
+
+        done();
+      });
     });
   };
 };

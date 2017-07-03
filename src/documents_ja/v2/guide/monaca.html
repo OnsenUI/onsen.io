@@ -1,0 +1,29 @@
+---
+title: 'Monaca'
+order: 200
+tocTitle: More
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Monacaとは？
+
+ハイブリッドアプリ開発でOnsen UIを用いる場合は、Monacaを使うと簡単にネイティブアプリに変換することができます。同じチームが開発しているMonacaは、クラウドを用いたアプリケーションの開発プラットフォームです。
+
+MonacaはOnsen UIとその周辺ツールを1つにまとめたものです。下記のような機能を有しています。
+
+<img src="https://monaca.io/img/home/img01_01.png">
+
+- **クラウドIDE**: ブラウザー上で動作するオンライン開発環境です。
+- **コマンドラインツール（CLI）**: Monaca CLIやLocalkit（デスクトップアプリ）を用いてローカル開発も行えます。
+- **デバッガー**: Onsen UIアプリを簡単にアプリとして実行できます。[Google Playストア](https://play.google.com/store/apps/details?id=mobi.monaca.debugger)や[App Store](http://itunes.apple.com/app/monaca/id550941371?mt=8)からダウンロードしてください。
+- **リモートビルド**: ローカルにSDKをインストールすることなくiOSとAndroidアプリをビルドできます。もちろんWindowsマシンにも対応しています。
+- **継続的インテグレーション**: 自動的にビルドを実施し、配信サービスに配布できます。
+- **Cordovaプラグイン**: より高度なアプリ開発のためのプラグインを数多く提供しています。たとえばHTML5、JavaScriptの暗号化や、アプリの自動更新、セキュアなストレージなどが用意されています。
+- **プッシュ通知やユーザー管理**: Monacaバックエンドを使うと、プッシュ通知を簡単にアプリに組み込むことができます。また、ユーザーやコレクションの管理といった、リモートDB機能も提供されています。
+
+Monacaは商用サービスですが、**無料で始めることができます**。詳細については、[Monaca公式サイト](https://ja.monaca.io)を参照してください。
+
+<% end %>

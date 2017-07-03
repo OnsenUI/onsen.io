@@ -1,0 +1,114 @@
+---
+title: 'React'
+order: 110
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### React
+
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
+
+Reactバインディングは、Web Componentsをラッピングし、Reactとの親和性の高いAPIを提供するものです。
+
+#### Reactバインディングのダウンロード
+
+Reactバインディングは[`react-onsenui`パッケージ](https://www.npmjs.com/package/react-onsenui)を通じて提供されます。下記のようにしてNPMを通じてダウンロードしてください。
+
+```sh
+$ npm install onsenui react-onsenui --save-dev
+```
+
+他にも[CDN経由](https://unpkg.com/react-onsenui)で使ったり、[Onsen UIのリリース](https://github.com/OnsenUI/OnsenUI-dist/releases)に含まれているReactバインディングを使うこともできます。
+
+#### Reactバインディングのセットアップ
+
+Onsen UIを`<script></script>`や`<link>`タグを使って、下記のように読み込めます:
+
+```html
+<script src="react.js"></script>
+<script src="react-dom.js"></script>
+<script src="onsenui.js"></script>
+<script src="react-onsenui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+```
+
+もしくは、BrowserifyやWebpackといったCommonJSモジュールシステムを用いることもできます。この場合、`react`と`react-dom`パッケージに加えて、`onsenui`と`react-onsenui`パッケージを取り込んでください。下記の例では、`ons`にOnsen UIのコアインスタンスを、`Ons`にReactのコンポーネントをセットしています。
+
+```js
+var React = require('react');
+var ReactDOM = require('react-dom');
+var ons = require('onsenui');
+var Ons = require('react-onsenui');
+```
+
+他にも、ES6インポートを用いて、`react-onsenui`パッケージから必要なモジュールだけを読み込むことができます。
+
+```js
+import {Page, Toolbar, Button} from 'react-onsenui';
+```
+
+#### ReactでHello World
+
+では簡単なHello Worldアプリを開発してみましょう。下記のコードは、Onsen UIとReactを用いたHello Worldコードの例になります。
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.css">
+  <script src="react.js"></script>
+  <script src="react-dom.js"></script>
+  <script src="onsenui.js"></script>
+  <script src="react-onsenui.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/6.1.19/browser.min.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+
+  <script type="text/babel">
+    var App = React.createClass({
+      handleClick: function() {
+        ons.notification.alert('Hello world!');
+      },
+
+      render: function() {
+        return (
+          <Ons.Page>
+            <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
+          </Ons.Page>
+        );
+      }
+    });
+    ReactDOM.render(<App />, document.getElementById('app'));
+  </script>
+</body>
+</html>
+```
+
+この例では、`<body>`タグの中に`<div>`タグが配置されており、アプリのIDが指定されています。下の方のJavaScriptコードに記述されているように、ここにReactはコンテンツを描画します。
+
+また、`<script></script>`に`text/babel`という形式が指定されています。これは、このスクリプトはブラウザがサポートする（通常はECMAScript5）JavaScriptではなく、JSX形式に対応したECMAScript6（ES2015）であることを示しています。BabelはこのコードをES5に変換します。パフォーマンス向上のために、Node.jsを用いてコードをトランスパイルすることができます。
+
+コードでは、`React.createClass()`関数を用いて、"App"という名前を持つReactコンポーネントを定義しています。このコンポーネントは`render`というメソッドを持ち、アプリが描画される時にはこの関数が呼び出されます。戻り値はJavaScriptを拡張したXML風の言語である、JSXで定義されています。今回の例では、`<Ons.Button>`コンポーネントが含まれた`<Ons.Page>`コンポーネントを返しています。`onClick` Propを使って、ユーザーがボタンをタップした際に`handleClick`メソッドを呼び出します。
+
+```js
+return (
+  <Ons.Page>
+    <Ons.Button onClick={this.handleClick}>Tap me!</Ons.Button>
+  </Ons.Page>
+);
+```
+
+この例のように、すべての<Ons.*>コンポーネントはReactコンポーネントで、`react-onsenui.js`で呼び出されます。すべてのReactコンポーネントの一覧は、[リファレンス](../../api/react)を参照してください。
+
+これらをまとめると、`index.html`がブラウザーで呼び出されると、JSXコードがコンパイルされ、body要素に組み込み、内容がレンダリングされます。
+
+ReactやJSXに関する詳細については、[Reactドキュメント](https://facebook.github.io/react/docs/hello-world.html)も参照してください。
+
+<% end %>

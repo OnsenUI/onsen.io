@@ -1,0 +1,71 @@
+---
+title: ‘その他の機能’
+order: 140
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### その他の機能
+
+#### グリッドレイアウト
+
+Onsen UIでは、画面上に各要素を配置するときにグリッドシステムを採用しています。グリッドシステムでは、スプレッドシートのように画面を横列と縦列に分けます。各グリッドの横幅と縦幅を自由に指定したり、複数の行や列を結合することもできます。
+
+レイアウトは[`<ons-col>`](/v2/docs/js/ons-col.html)コンポーネントと[`<ons-row>`](/v2/docs/js/ons-row.html)コンポーネントを組み合わせて構成します。横幅と縦幅は、属性やCSSを使用して柔軟に指定できます。
+
+なお、一覧表示を行うときにはグリッド関連のコンポーネントを使用する必要はありません。iOSフラットデザインとAndroidマテリアルデザインの仕様に準拠したリスト用のコンポーネントを提供していますので、そちらをご利用ください。
+
+#### プラットフォームの識別
+
+[`ons.platform`](/v2/docs/js/ons.platform.html)を使い、実行中のプラットフォームを識別できます。
+
+#### 画面向きの識別
+
+[`ons.orientation`](/v2/api/js/ons.orientation.html)を使って画面の向きを識別できます。
+
+#### ジェスチャーの認識
+
+スワイプや長押しといったジェスチャーを検出することができます。Onsen UIでは[Hammer.js](https://hammerjs.github.io/)を組み込んでおり、[`ons.GestureDetector`](/v2/api/js/ons.GestureDetector.html)オブジェクトとして利用できます。
+
+Angularフレームワーク以外の場合:
+
+```js
+var divGD = ons.GestureDetector(document.querySelector('#my-div'));
+divGD.on('dragup dragdown', function(event) {
+  console.log('drag Y axis');
+});
+```
+
+Angularフレームワークの場合:
+
+```js
+@ViewChild('somediv') divGD; // <div #somediv>
+this.divGD.nativeElement.on('dragup dragdown', function(event) {
+  console.log('drag Y axis');
+});
+```
+
+他のライブラリを使っていてコンフリクトした場合は、下記のようにしてOnsen UIの持つジェスチャー機能を無効にできます：
+
+Angularフレームワーク以外の場合:
+
+```js
+ons.GestureDetector(document.querySelector('#my-menu')).dispose(); // Remove event listeners from the menu
+```
+
+Angularフレームワークの場合:
+
+```js
+@ViewChild('mymenu') myMenu; // <ons-splitter #mymenu>
+ons.GestureDetector(this.myMenu.nativeElement).dispose(); // Remove event listeners from the menu
+```
+
+React用バインディングを除き、ジェスチャーを受け取りたい部分のDOMに対して[`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.html)コンポーネントを囲むことで、簡単にジェスチャーを認識できます。
+
+#### FastClick
+
+この章は執筆中です。
+
+<% end %>

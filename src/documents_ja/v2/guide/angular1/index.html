@@ -1,0 +1,82 @@
+---
+title: 'AngularJS 1.x'
+order: 90
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### AngularJS 1.x
+
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
+
+AngularJSバインディングは、Onsen UIの持つWeb Componentsを拡張子、AngularJSと親和性の高いAPIを提供するものです。
+
+#### AngularJS 1.xバインディングのセットアップ
+
+AngularJS 1.xバインディングは、Onsen UI本体とは分かれていますが、同じパッケージに同梱されています。プロジェクトに組み込む場合は、`onsenui.js`と`angular.js`を読み込んだ後、`angular-onsenui.js`よ読み込んでください。
+
+```html
+<link rel="stylesheet" href="onsenui.css"/>
+<link rel="stylesheet" href="onsen-css-components.css"/>
+<script src="angular.min.js"></script>
+<script src="onsenui.min.js"></script>
+<script src="angular-onsenui.min.js"></script>
+```
+
+`angular-onsenui.js`を読み込むと、AngularJSモジュールである`onsen`を利用することができます。
+
+```js
+var module = angular.module('my-app', ['onsen']);
+module.controller('AppController', function() { });
+```
+
+#### AngularJS 1.xでHello World
+
+では簡単なHello Worldアプリを開発してみましょう。下記のコードは、Onsen UIとAngularJSを用いたHello Worldコードの例になります。
+
+```
+<!DOCTYPE html>
+<html lang="en" ng-app="my-app">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="onsenui.css"/>
+  <link rel="stylesheet" href="onsen-css-components.css"/>
+  <script src="angular.min.js"></script>
+  <script src="onsenui.min.js"></script>
+  <script src="angular-onsenui.min.js"></script>
+</head>
+
+<body>
+  <ons-page ng-controller="PageController">
+    <ons-toolbar>
+      <div class="center">Title</div>
+    </ons-toolbar>
+
+    <p style="text-align: center">
+      <ons-button ng-click="alert('Hello World!')">
+        Click me!
+      </ons-button>
+    </p>
+  </ons-page>
+
+  <script>
+    var module = angular.module('my-app', ['onsen']);
+    module.controller('PageController', function($scope) {
+      $scope.alert = function(message) {
+        ons.notification.alert(message);
+      };
+    });
+  </script>
+</body>
+</html>
+```
+
+アプリへの組み込みはとても簡単です。Onsen UIの各コンポーネントをHTML内に配置し、いつも通り`ng-*`属性を利用できます。
+
+いくつかのコンポーネントはメソッドやプロパティを持っています。この場合には、`var`属性を使って、コンポーネントの参照を変数に定義してください。たとえば、`<ons-navigator var="myNavigator">`とした場合は`$scope.myNavigator`のようにしてアクセスできます。
+
+AngularJS 1.xに関する詳細については、[AngularJSドキュメント](https://docs.angularjs.org/tutorial)を参照してください。
+
+<% end %>

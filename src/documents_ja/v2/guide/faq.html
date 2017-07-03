@@ -1,0 +1,94 @@
+---
+title: ‘FAQとトラブルシューティング’
+order: 60
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### FAQとトラブルシューティング
+
+#### デフォルトの機能を無効にしたい
+
+Onsen UIはいくつかの処理を自動的に最適化を行いますが、時には無効にしたい場合もあります。
+
+- **オートスタイルを無効にする**
+
+  `ons.disableAutoStyling()`を呼び出すことで、iOSとAndroidのオートスタイル機能を無効にできます。ただし、この関数は`onsenui.js`を呼び出した直後に呼び出してください。`disable-auto-styling`属性を用ると特定のコンポーネントに対してオートスタイルを無効にできます。
+
+- **テストのためにアニメーションを無効にしたい**
+
+  `ons.disableAnimations()`関数を呼び出してください。
+
+- **iOS 7以上でステータスバーの補完を無効にしたい**
+
+  `onsenui.js`を呼び出した直後に`ons.disableAutoStatusBarFill()`関数を呼び出してください。
+
+- **Android端末で戻るボタンの制御を無効にしたい**
+
+  `ons.disableDeviceBackButtonHandler()`を呼び出してください。
+
+#### 特定のスタイルを強制するには
+
+オートスタイル機能を使うと、iOSではフラットデザイン、Androidではマテリアルデザインを表示します。オートスタイルは`ons.disableAutoStyling()`関数を呼び出すことで無効にし、すべてをiOSのデザインで表示できます。その場合でも、コンポーネントに`material`属性を指定することで、マテリアルデザインを表示することができます。
+
+`onsenui.js`を読み込んだ直後に`ons.platform.select(‘android’)`や`ons.platform.select(‘ios’)`を呼び出すことで、実行中のプラットフォームを切り替えられます。ただしこの場合は`ons.platform.isAndroid()`といったプラットフォームを扱う他の機能が影響を受けます。
+
+開発中はブラウザのDevToolsを用いてユーザーエージェントを切り替えることで、スタイルの更新を確認していくと良いでしょう。たとえば、”iPhone 5”を選ぶとフラットデザインとなり、”Nexus 5”を選ぶとマテリアルデザインで表示されます。別の方法として、URLに`?platform=android`や`?platform=ios`といった形でクエリパラメータを加えることでも外見の切り替えができます。
+
+#### 新しいページの表示が遅い
+
+もし新しく作成しようとしているページがさらに他のファイルを含んでいる場合（タブバーを含むページを表示する場合など）、多くのリクエストが発生するために、ページ遷移が遅れる可能性があります。これを防ぐには[`ons.preload([…])`メソッド](/v2/api/js/ons.html#method-preload)を使って事前にリクエストをしておき、テンプレートをキャッシュすると良いでしょう。
+
+#### よくあるエラーメッセージ
+
+- **ons is not defined**
+
+  **執筆中です**
+
+- **Set/Map is not defined - Can't find variable Set/Map**
+
+  実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを使うか、Polyfillを組み込んでください。
+
+- **MutationObserver is not defined**
+
+  実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを使うか、Polyfillを組み込んでください。
+
+- **Module ‘onsenui’ has no default export**
+
+  **執筆中です**
+
+- **pushPage/popPage is already running**
+
+  他のプッシュやポップ操作が行われています。これは`pushPage`や`popPage`を二重で動かす場合に発生します。二重で動かしたい場合は`options.callback`や返されるPromiseを使って、1つめの操作が完全に終わるまで待機させてください。そうでない場合は、このエラーを無視しても大丈夫です。
+
+- **Splitter side is locked**
+
+  Splitterのサイドメニューの出し入れが、最初のアニメーションが終わる前に行われた場合に発生します。良くあるケースとして、スプリッターのメニューをドラッグしながら、スプリッターの表示を動的に切り替えようとした場合に発生します。このエラーは無視しても問題ありません。
+
+- **Cannot read property ... of null**
+
+  タイミングも問題で、DOM要素が存在する前にその要素にアクセスしようとしているケースが考えられます。`ons-page`内のDOM要素にアクセスする場合は、DOMがアタッチされるまで待機する必要があります（詳細は[ページのライフサイクル](lifecycle.html)を参照してください）。
+
+#### 古いブラウザーのサポート
+
+[旧ブラウザーとデバイスのサポート](index.html#browser-and-device-support)に記載の通り、一部の新しい機能が搭載されていないブラウザーではOnsen UIが正しく動作しない可能性があります。特に、Onsen UIのチームはWebkitとそれに近いプラットフォームに限ってテストをしています。Onsen UIを下記の環境で動作させる場合は、最新のHTML5標準をサポートするためのPolyfillを追加で導入する必要があります。
+
+- **Edge**: ほとんどの機能を利用できます
+- **Firefox**: ほとんどの機能を利用できます
+- **IE11**以上、**Windows Phone 10**以上:
+  - Set/Map/WeakMapのPolyfillが必要です
+  - MutationObserverのPolyfillが必要です
+  - PromiseのPolyfillが必要です
+  - CustomEventのPolyfillが必要です
+  - Element.prototype.classListのPolyfillが必要です
+  - Element.prototype.removeのPolyfillが必要です
+
+#### ヘッドレステスト
+
+**Jest**や**jsDom**、**PhantomJS**といったヘッドレステストを行うためのツールと組み合わせる場合、Onsen UIの動作に必要な最新のWeb APIと、Custom Elementsの対応がされていることを確認してください。2017年初頭においては、上記のテストツールはまだ十分に対応されていません。
+
+ヘッドレストテストを実施する場合は、Karmaと**Chrome Headless**（v59以降）の組み合わせを推奨します。
+
+<% end %>

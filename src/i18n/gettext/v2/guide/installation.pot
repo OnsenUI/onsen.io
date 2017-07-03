@@ -1,0 +1,152 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-30 22:54+0000\n"
+"Plural-Forms: \n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:1
+msgid ""
+"title: 'Installation'\n"
+"order: 10\n"
+"tocGroup: guide\n"
+"tocTitle: Essentials"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:2
+msgid "layout: docs.html.eco"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:3
+msgid ""
+"<script>\n"
+"document.addEventListener('DOMContentLoaded', function() {\n"
+"  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI/releases/latest';\n"
+"  var zipUrl = \"\";\n"
+"  $.getJSON(url, function(res) {\n"
+"    zipUrl = res.zipball_url;\n"
+"    $('#get-latest-build').text('Download Onsen UI (Version ' + res.name + "
+"')')\n"
+"  });\n"
+"\n"
+"  $('#get-latest-build').click(function(event) {\n"
+"    if (zipUrl) {\n"
+"      event.preventDefault();\n"
+"      location.href = zipUrl;\n"
+"    }\n"
+"  });\n"
+"});\n"
+"</script>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:4
+msgid "<%- @markdown => %>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:5
+msgid "Installation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:6
+msgid ""
+"Onsen UI has several quick and easy ways to get started, each one appealing "
+"to a different skill level and use case. Read through to see what suits "
+"your particular needs."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:7
+msgid ""
+"<div class=\"install-row\">\n"
+"  <div>\n"
+"    <p class=\"install-row-title\">Onsen UI</p>\n"
+"    <p class=\"install-row-content\">Compiled and minified JavaScript, CSS "
+"and resources. Web Components version.</p>\n"
+"    <a class=\"install-row-link\" id=\"get-latest-build\" "
+"href=\"https://github.com/OnsenUI/OnsenUI-dist/releases/latest\">Download "
+"Onsen UI</a>\n"
+"  </div>\n"
+"  <div>\n"
+"    <p class=\"install-row-title\">Source Code</p>\n"
+"    <p class=\"install-row-content\">Source CSS, JavaScript, and other "
+"related files. [Build instructions](/v2/guide/build.html).</p>\n"
+"    <a class=\"install-row-link\" "
+"href=\"https://github.com/OnsenUI/OnsenUI/\">See GitHub Repo</a>\n"
+"  </div>\n"
+"  <div>\n"
+"    <p class=\"install-row-title\">Framwork Bindings</p>\n"
+"    <p class=\"install-row-content\">\n"
+"      Onsen UI is framework agnostic. Pure JavaScript, jQuery, AngularJS, "
+"Angular 2+, React, Vue.js...\n"
+"    </p>\n"
+"    <a class=\"install-row-link\" href=\"/v2/guide/frameworks.html\">Read "
+"more</a>\n"
+"  </div>\n"
+"</div>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:8
+msgid "Onsen UI CDN"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:9
+msgid ""
+"[Unpkg](https://unpkg.com/onsenui/) provides CDN support for Onsen UI's CSS "
+"and JavaScript. Just use these CDN links."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:10
+msgid ""
+"<link rel=\"stylesheet\" "
+"href=\"https://unpkg.com/onsenui/css/onsenui.css\">\n"
+"<link rel=\"stylesheet\" "
+"href=\"https://unpkg.com/onsenui/css/onsen-css-components.min.css\">\n"
+"<script src=\"https://unpkg.com/onsenui/js/onsenui.min.js\"></script>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:11
+msgid "Install with NPM"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:12
+msgid "You can also use the Node Package Manager (NPM) to install Onsen UI:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:13
+msgid "npm install onsenui --save"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:14
+msgid "Command line tool to package for mobile apps - Monaca CLI"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:15
+msgid ""
+"Monaca CLI is deeply integrated with Onsen UI to provide a simple & quick "
+"build process for Cordova hybrid apps. Please refer to the [Monaca CLI "
+"Tutorial](https://docs.monaca.io/en/monaca_cli/tutorial/) to better "
+"understand the program's installation and workflow. For more detailed "
+"information on the development feature provided by Monaca, please refer to "
+"What is Monaca."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:16
+msgid "Old Releases & Changelogs"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:17
+msgid ""
+"Onsen UI releases and changelogs can be seen at "
+"[OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases). "
+"The source repository is hosted in "
+"[OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/). Please give us a ★!"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/installation.html:18
+msgid "<% end %>"
+msgstr ""

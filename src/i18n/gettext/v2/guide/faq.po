@@ -1,0 +1,319 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language-Team: \n"
+"PO-Revision-Date: 2017-06-30 12:23-0700\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-06-30 11:52-0700\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Language: ja\n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:1
+msgid ""
+"title: 'Troubleshooting and FAQ'\n"
+"order: 60\n"
+"tocGroup: guide"
+msgstr ""
+"title: ‘FAQとトラブルシューティング’\n"
+"order: 60\n"
+"tocGroup: guide"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:2
+msgid "layout: docs.html.eco"
+msgstr "layout: docs.html.eco"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:3
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:4
+msgid "Troubleshooting and FAQ"
+msgstr "FAQとトラブルシューティング"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:5
+msgid "How can I disable ...?"
+msgstr "デフォルトの機能を無効にしたい"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:6
+msgid ""
+"Onsen UI automatically performs several optimizations automatically, but "
+"these are fully optional and able to be turned off at any time. If you would "
+"like to disable these, here’s how."
+msgstr ""
+"Onsen UIはいくつかの処理を自動的に最適化を行いますが、時には無効にしたい場合"
+"もあります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:9
+msgid "**Disable auto styling**"
+msgstr "**オートスタイルを無効にする**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:11
+msgid ""
+"Call `ons.disableAutoStyling()` to disable automatic styling of iOS and "
+"Android. Be sure to call it right after including `onsenui.js`. For "
+"disabling automatic styling for specific components, use the `disable-auto-"
+"styling` attribute."
+msgstr ""
+"`ons.disableAutoStyling()`を呼び出すことで、iOSとAndroidのオートスタイル機能"
+"を無効にできます。ただし、この関数は`onsenui.js`を呼び出した直後に呼び出して"
+"ください。`disable-auto-styling`属性を用ると特定のコンポーネントに対してオー"
+"トスタイルを無効にできます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:14
+msgid "**Disable animations for testing**"
+msgstr "**テストのためにアニメーションを無効にしたい**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:16
+msgid "Call `ons.disableAnimations()` before starting the tests."
+msgstr "`ons.disableAnimations()`関数を呼び出してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:19
+msgid "**Disable status bar fill on iOS 7 and above**"
+msgstr "**iOS 7以上でステータスバーの補完を無効にしたい**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:21
+msgid ""
+"Call `ons.disableAutoStatusBarFill()` right after including `onsenui.js`."
+msgstr ""
+"`onsenui.js`を呼び出した直後に`ons.disableAutoStatusBarFill()`関数を呼び出し"
+"てください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:24
+msgid "**Disable Android Device Back Button handlers**"
+msgstr "**Android端末で戻るボタンの制御を無効にしたい**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:26
+msgid "Call `ons.disableDeviceBackButtonHandler()`."
+msgstr "`ons.disableDeviceBackButtonHandler()`を呼び出してください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:30
+msgid "How can I force specific styles?"
+msgstr "特定のスタイルを強制するには"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:31
+msgid ""
+"The auto styling feature displays flat design for iOS and Material Design "
+"for Android. Auto styling can be disabled with `ons.disableAutoStyling()` in "
+"order to display the default flat design on every platform. `material` "
+"modifier can be added manually to elements that should be displayed as "
+"Material Design."
+msgstr ""
+"オートスタイル機能を使うと、iOSではフラットデザイン、Androidではマテリアルデ"
+"ザインを表示します。オートスタイルは`ons.disableAutoStyling()`関数を呼び出す"
+"ことで無効にし、すべてをiOSのデザインで表示できます。その場合でも、コンポーネ"
+"ントに`material`属性を指定することで、マテリアルデザインを表示することができ"
+"ます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:32
+msgid ""
+"However, it is also possible to fake the platform by running `ons.platform."
+"select(‘android’)` or `ons.platform.select(‘ios’)`  right after including "
+"`onsenui.js`. Note that changing the platform also affects other utilities "
+"like `ons.platform.isAndroid()`."
+msgstr ""
+"`onsenui.js`を読み込んだ直後に`ons.platform.select(‘android’)`や`ons."
+"platform.select(‘ios’)`を呼び出すことで、実行中のプラットフォームを切り替えら"
+"れます。ただしこの場合は`ons.platform.isAndroid()`といったプラットフォームを"
+"扱う他の機能が影響を受けます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:33
+msgid ""
+"During development, you can change the device view in the Developer Tools of "
+"your browser and refresh the page to update the styles. For instance, "
+"“iPhone 5” will show flat design whereas “Nexus 5” displays Material Design. "
+"Otherwise, append `?platform=android` or `?platform=ios` as a query string "
+"to the URL."
+msgstr ""
+"開発中はブラウザのDevToolsを用いてユーザーエージェントを切り替えることで、ス"
+"タイルの更新を確認していくと良いでしょう。たとえば、”iPhone 5”を選ぶとフラッ"
+"トデザインとなり、”Nexus 5”を選ぶとマテリアルデザインで表示されます。別の方法"
+"として、URLに`?platform=android`や`?platform=ios`といった形でクエリパラメータ"
+"を加えることでも外見の切り替えができます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:34
+msgid "Pushing new pages is slow"
+msgstr "新しいページの表示が遅い"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:35
+msgid ""
+"If you are creating pages from separate files which, at the same time, "
+"contain other pages from even more files (e.g. pushing a tab bar), it can "
+"get a bit slow since there are many requests going on. In this case, you can "
+"use [`ons.preload([...])` method](/v2/api/js/ons.html#method-preload) at any "
+"time to make requests and cache those templates beforehand."
+msgstr ""
+"もし新しく作成しようとしているページがさらに他のファイルを含んでいる場合（タ"
+"ブバーを含むページを表示する場合など）、多くのリクエストが発生するために、"
+"ページ遷移が遅れる可能性があります。これを防ぐには[`ons.preload([…])`メソッ"
+"ド](/v2/api/js/ons.html#method-preload)を使って事前にリクエストをしておき、テ"
+"ンプレートをキャッシュすると良いでしょう。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:36
+msgid "Common Error Messages"
+msgstr "よくあるエラーメッセージ"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:39
+msgid "**ons is not defined**"
+msgstr "**ons is not defined**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:41
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:56
+msgid "**TODO**"
+msgstr "**執筆中です**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:44
+msgid "**Set/Map is not defined - Can't find variable Set/Map**"
+msgstr "**Set/Map is not defined - Can't find variable Set/Map**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:46
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:51
+msgid ""
+"The running platform might not be fully supported. Consider using Crosswalk "
+"project for Android or including the necessary polyfills."
+msgstr ""
+"実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを"
+"使うか、Polyfillを組み込んでください。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:49
+msgid "**MutationObserver is not defined**"
+msgstr "**MutationObserver is not defined**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:54
+msgid "**Module ‘onsenui’ has no default export**"
+msgstr "**Module ‘onsenui’ has no default export**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:59
+msgid "**pushPage/popPage is already running**"
+msgstr "**pushPage/popPage is already running**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:61
+msgid ""
+"A different push or pop action is currently running. This could happen when "
+"calling `pushPage` or `popPage` twice before the first animation ends (or "
+"clicking twice a button that triggers these actions). Use `options.callback` "
+"or the returned promise to trigger the second action after the first one "
+"finishes. Otherwise, if the behavior is correct, it is safe to ignore this "
+"error."
+msgstr ""
+"他のプッシュやポップ操作が行われています。これは`pushPage`や`popPage`を二重で"
+"動かす場合に発生します。二重で動かしたい場合は`options.callback`や返される"
+"Promiseを使って、1つめの操作が完全に終わるまで待機させてください。そうでない"
+"場合は、このエラーを無視しても大丈夫です。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:64
+msgid "**Splitter side is locked**"
+msgstr "**Splitter side is locked**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:66
+msgid ""
+"This can happen when a splitter side is toggled twice before the first "
+"animation ends either by calling a method or by dragging the element. "
+"Commonly, dragging the splitter side and releasing it on top of a button "
+"that toggles the same splitter could throw this error. If the behavior is "
+"correct, it is safe to ignore this error."
+msgstr ""
+"Splitterのサイドメニューの出し入れが、最初のアニメーションが終わる前に行われ"
+"た場合に発生します。良くあるケースとして、スプリッターのメニューをドラッグし"
+"ながら、スプリッターの表示を動的に切り替えようとした場合に発生します。このエ"
+"ラーは無視しても問題ありません。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:69
+msgid "**Cannot read property ... of null**"
+msgstr "**Cannot read property ... of null**"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:71
+msgid ""
+"You might be accessing the DOM before your target is in place (timing "
+"issue). When you try to access a DOM element inside an `ons-page`, make sure "
+"that you are waiting for the page to be attached to the DOM (see [page "
+"lifecycle section](lifecycle.html))."
+msgstr ""
+"タイミングも問題で、DOM要素が存在する前にその要素にアクセスしようとしている"
+"ケースが考えられます。`ons-page`内のDOM要素にアクセスする場合は、DOMがアタッ"
+"チされるまで待機する必要があります（詳細は[ページのライフサイクル](lifecycle."
+"html)を参照してください）。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:75
+msgid "Old Browsers"
+msgstr "古いブラウザーのサポート"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:76
+msgid ""
+"As mentioned in the [Browser and Device Support](index.html#browser-and-"
+"device-support), some older browsers will not work properly due to the lack "
+"of some recent functions. We only test on the Webkit family platforms. If "
+"you need Onsen UI to work on the following environment, please try adding "
+"polyfills to fill the gap to the latest HTML5 standard."
+msgstr ""
+"[旧ブラウザーとデバイスのサポート](index.html#browser-and-device-support)に記"
+"載の通り、一部の新しい機能が搭載されていないブラウザーではOnsen UIが正しく動"
+"作しない可能性があります。特に、Onsen UIのチームはWebkitとそれに近いプラット"
+"フォームに限ってテストをしています。Onsen UIを下記の環境で動作させる場合は、"
+"最新のHTML5標準をサポートするためのPolyfillを追加で導入する必要があります。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:79
+msgid "**Edge**: Most of the features will work correctly."
+msgstr "**Edge**: ほとんどの機能を利用できます"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:82
+msgid "**Firefox**: Most of the features will work correctly."
+msgstr "**Firefox**: ほとんどの機能を利用できます"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:85
+msgid "**Internet Explorer 11** and up; **Windows Phone 10** and up:"
+msgstr "**IE11**以上、**Windows Phone 10**以上:"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:88
+msgid "Polyfill for Set/Map/WeakMap"
+msgstr "Set/Map/WeakMapのPolyfillが必要です"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:91
+msgid "Polyfill for MutationObserver"
+msgstr "MutationObserverのPolyfillが必要です"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:94
+msgid "Polyfill for Promise"
+msgstr "PromiseのPolyfillが必要です"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:97
+msgid "Polyfill for CustomEvent"
+msgstr "CustomEventのPolyfillが必要です"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:100
+msgid "Polyfill for Element.prototype.classList"
+msgstr "Element.prototype.classListのPolyfillが必要です"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:103
+msgid "Polyfill for Element.prototype.remove"
+msgstr "Element.prototype.removeのPolyfillが必要です"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:109
+msgid "Headless Testing"
+msgstr "ヘッドレステスト"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:110
+msgid ""
+"**Jest**, **jsDom**, **PhantomJS**, etc. are very useful tools for headless "
+"testing. However, you need to make sure that your testing suite supports the "
+"latest Web APIs and is compatible specifically with Custom Elements (part of "
+"Web Components). As of early 2017, none of the mentioned tools support it "
+"out of the box."
+msgstr ""
+"**Jest**や**jsDom**、**PhantomJS**といったヘッドレステストを行うためのツール"
+"と組み合わせる場合、Onsen UIの動作に必要な最新のWeb APIと、Custom Elementsの"
+"対応がされていることを確認してください。2017年初頭においては、上記のテスト"
+"ツールはまだ十分に対応されていません。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:111
+msgid "As a suggestion, try Karma + **Chrome headless** (+v59)."
+msgstr ""
+"ヘッドレストテストを実施する場合は、Karmaと**Chrome Headless**（v59以降）の組"
+"み合わせを推奨します。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:112
+msgid "<% end %>"
+msgstr "<% end %>"

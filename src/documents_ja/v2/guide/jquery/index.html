@@ -1,0 +1,52 @@
+---
+title: 'jQuery'
+order: 80
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### jQuery
+
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
+
+#### セットアップ
+
+Onsen UIとjQueryの組み合わせは非常に簡単です。
+
+1. [Onsen UIをダウンロード](../installation.html)。
+1. [jQueryを入手](https://jquery.com)。
+1. onsenui.jsと2つのCSSファイルを読み込む。
+1. jQueryを読み込む。
+
+Onsen UIコンポーネントは、他のDOM要素と同じように操作できます。
+
+#### インストールの例
+
+下記のコードは、jQueryとOnsen UIをCDNから読み込み、組み合わせる例となります。
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+  <script>
+    $(function(){
+      // Initialization code
+      $('ons-button').on('click', function(e) {
+        ons.notification.alert('Button is tapped!');
+      })
+    });
+  </script>
+  <ons-button>Click me!</ons-button>
+</body>
+</html>
+```
+
+<% end %>

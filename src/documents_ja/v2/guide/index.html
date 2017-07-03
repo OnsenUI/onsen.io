@@ -1,0 +1,114 @@
+---
+title: 'Onsen UIをはじめよう'
+order: 20
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Onsen UIをはじめよう！
+
+この章の内容は動画でも用意しています。読み飛ばしたい方は、こちらの動画をご利用ください。
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/U_83GjDpGMU?ecver=1" frameborder="0" allowfullscreen></iframe>
+
+このガイドでは、お読みの方がHTML、CSSとJavaScriptの基本的な知識をお持ちであることを想定しています。JavaScriptを使った開発がはじめての方は、ぜひ入門書を片手に読み進めてください。
+
+#### Onsen UIとは？
+
+Onsen UIは、下のような特徴を持つライブラリです。
+
+- モバイルアプリの開発に特化した**UIコンポーネント**の集まりです。
+- **ネイティブなiOSとAndroidのデザインガイド**に準拠したデザインと機能を持っています。
+- 無料で利用でき、**完全にオープンソース**なソフトウェアです（[Apache v2 license](https://github.com/OnsenUI/OnsenUI/blob/master/LICENSE)）。
+
+Onsen UIを使うと、モバイルWebアプリの上でネイティブUIと同等のUX（ユーザー・エクスペリエンス）を提供することができます。モバイルWebアプリ（[Progressive Web Apps](https://developers.google.com/web/progressive-web-apps/)とも呼ばれます）や、Cordovaを用いたハイブリッドアプリ開発に最適です。詳細については、[アプリとしてデプロイする](/v2/guide/deploy.html#deploying-your-app)を参照してください。
+
+##### 先進的なアーキテクチャー
+
+Onsen UIの中身は3つのレイヤーで作られています。
+
+1. **CSSコンポーネント**: 次世代のCSSである[cssnext](http://cssnext.io/)で実装されています。
+1. **Web Components**: JavaScriptで記述されており、**どんなフレームワークとも**お使いいただけます。
+1. **フレームワークバインディング**: 人気のフレームワークである[Vue.js](vue)、[AngularJS 1](angular1)、[Angular 2+](angular2)、[React](react)向けに、拡張された機能を提供します。
+
+一言で表現すると、Onsen UIはモバイル開発を簡単にし、どのようなフレームワークとでも使う事ができ、 **将来性が保証されて** います！
+
+Onsen UIのアーキテクチャーに興味がある方は、[Onsen UIアーキテクチャー](architecture.html)をご覧ください。
+
+##### どんなコンポーネントがある？
+
+Onsen UIのすべてのコンポーネントを含んだサンプルアプリ（Kitchen Sink App）があります。下記のアプリは2つの異なった外見をしていますが、実はソースコードは共通です。この機能はOnsen UIで[オートスタイル](theming.html#auto-styling)と呼ばれます。
+
+<iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", "vanilla/common_patterns/kitchensink", false %>"></iframe>
+
+コンポーネントの一覧に興味がある方は、[CSSコンポーネント](../api/css.html)や[Webコンポーネント](../api/js)のAPIも参照してください。
+
+##### サポートするブラウザーと端末
+
+Onsen UIは主にiOSとAndroidデバイスに向けて設計をしているため、下記のプラットフォームに最適化しテストを行っています。
+
+- モバイル環境
+  - **iOS 8以降**
+  - **Android 4.4.4以降**のWebViewやブラウザー
+    （Android 4.0以降は[Crosswalkエンジン](https://crosswalk-project.org/)に対応）
+- デスクトップ環境
+  - 最新版のSafariブラウザ
+  - 最新版のChromeブラウザ
+
+他のプラットフォームについては、いくつかのコンポーネントや機能が正しく動作しない可能性があります。詳細については[旧ブラウザへの対応](/v2/guide/faq.html#old-browsers)をお読みください。
+
+#### はじめてのOnsen UIアプリ
+
+Onsen UIを使って、実際にアプリを作ってみましょう。手っ取り早くセットアップをするために、CDNを用いて読み込みをしてみます。`index.html`という名前のファイルを作成し、下記のHTMLを張り付けてみてください。
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+</head>
+<body>
+  <ons-button onclick="alert('Hello World!')">Click Me</ons-button>
+</body>
+</html>
+```
+
+<img src="/images/guide/first_onsen_ui_app.png" style="border: 1px solid #ccc;">
+
+このコードは非常に単純ですが、Onsen UIの基本となるものです。
+
+- 2つのCSSファイル（`onsenui.css`と`onsen-css-components.min.css`）と、1つのJavaScriptファイル(`onsenui.min.js`)を読み込む必要があります。
+- 上のコードでは`<ons-button>`コンポーネントが使われています。これはボタンを表現するためのカスタムなタグ（Onsen UIタグ）です。すべてのOnsen UIタグは`ons-`から始まります。
+- 他のタグ（HTML要素）と同様に、Onsen UIコンポーネントにも属性（今回の例では`onclick`）、メソッド、イベントリスナーがあります。詳細は[属性・プロパティ・メソッド・イベント](/v2/guide/fundamentals.html#attributes-properties-methods-and-events)の章を参照してください。
+
+これでOnsen UIの基本的な説明はおしまいです。使いたいコンポーネント（`<ons-input>`、`<ons-icon>`、`<ons-carousel>`など）を[コンポーネント一覧](../api/js)から探し、あなたのコードに加えるだけで、アプリ開発ができるのです。
+
+TIPS（ネイティブなダイアログ）: 上の例で使われている`alert()`関数はネイティブな見た目になりません。そのため、Onsen UIでは[`ons.notification`](../api/js/ons.notification.html)オブジェクトを使ってダイアログを表示することができます。先述のコードで`alert`を`ons.notification.alert`に置き換えてみましょう。
+<img src="/images/guide/first_onsen_ui_app_native_alert.png" style="margin-top: 16px; border: 1px solid #ccc;">
+
+#### Webアプリ、ハイブリッドアプリをネイティブに近づける
+
+iPhoneやAndroidアプリの外見をまねただけでは、ユーザーの期待するレベルのUXを表現できたとは言えません。タッチしたときのインタラクションやモーションを含めてネイティブの動きに近づける必要があります。
+
+このギャップを埋めるために、Onsen UIはページ遷移などのアニメーション、リップル効果などのエフェクト、精度の高いコンポーネントのデザインを行っています。神は細部に宿るのです。
+
+<iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", "vanilla/reference/navigator", false %>"></iframe>
+
+上の例では`<ons-page>`コンポーネントで2つのページが定義されています。次に、`<ons-navigator>`コンポーネントがネイティブ同等の遷移アニメーションを実現します。このようにアプリの挙動をよりネイティブに近づけたい場合は、[Onsen UIの基礎](/v2/guide/fundamentals.html)に進んでください。
+
+Onsen UIでは、ビジュアル面から詳細な実装まで、アプリケーションがネイティブに近づけるための仕組みが備わっています。
+
+#### 参考リソース
+
+Onsen UIの学びをより簡単にするため、下記のようなリソースを提供しています。英語での提供とはなりますが、ぜひご活用ください！
+
+- [Playground](https://tutorial.onsen.io/)（チュートリアル）: ライブコーディングもできるチュートリアル。
+- [サンプルアプリ](/sample): Onsen UIを使ったアプリとそのコードを提供しています。
+- [Showcase](https://monaca.io/great-apps.html): Onsen UIが使われているアプリの事例となります。
+- 英語とはなりますが、オンラインのコースも用意されています：[Udemy](https://www.udemy.com/learn-to-build-your-first-apache-cordova-app/) & [YouTube getting started video](https://www.youtube.com/watch?v=G7CaEEr8kBs)
+
+<% end %>

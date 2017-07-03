@@ -1,0 +1,231 @@
+---
+title: 'Vue.js 2+'
+order: 120
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Vue.js
+
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
+
+Onsen UI向けのVueバインディング（VueOnsen）は、Web Componentsでできたコアをラッピングし、Vue形式のAPIでアクセスできるようにしたものです。
+
+このガイドでは、Onsen UIとVueを組み合わせた場合の開発方法について紹介いたします。
+
+#### Vueバインディングのダウンロード
+
+Vueバインディングは、[`vue-onsenui`パッケージ](https://www.npmjs.com/package/vue-onsenui)として配布されています。NPMを用いて下記のようにダウンロードできます。
+
+```sh
+$ npm install onsenui vue-onsenui --save-dev
+```
+
+他にも[CDN経由](https://unpkg.com/vue-onsenui)で使ったり、[Onsen UIのリリース](https://github.com/OnsenUI/OnsenUI-dist/releases)に含まれているVueバインディングを使うこともできます。
+
+#### Vueバインディングのセットアップ
+
+Onsen UIを`<script></script>`や`<link>`タグを使って、下記のように読み込めます:
+
+```html
+<link rel="stylesheet" href="onsenui.css">
+<link rel="stylesheet" href="onsen-css-components.css">
+
+<script src="vue.js"></script>
+<script src="onsenui.js"></script>
+<script src="vue-onsenui.js"></script>
+```
+
+もしくは[Webpack](https://webpack.js.org/)を使う場合は、`node_modules/vue-onsenui`から`VueOnsen`インポートしてください:
+
+```js
+// Webpack CSS import
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+// JS import
+import Vue from 'vue';
+import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'
+
+Vue.use(VueOnsen);
+```
+
+`Vue.Use`を用いて`VueOnsen`を読み込みます（`window.Vue`が存在する場合には、これも自動的に行われます)。ES6以降で備わったImport機能を使用しない場合は、`require`を用いて読み込むこともできます。
+
+#### Vue CLIと共に使う
+
+Vue CLIで使えるテンプレートも提供しています:
+
+- __Cordova__: [vue-cordova-webpack](https://github.com/OnsenUI/vue-cordova-webpack)
+  ```bash
+  $ vue init OnsenUI/vue-cordova-webpack hello-world
+  ```
+- __Progressive Web App__: [vue-pwa-webpack](https://github.com/OnsenUI/vue-pwa-webpack)
+  ```bash
+  $ vue init OnsenUI/vue-pwa-webpack hello-world
+  ```
+
+これらのテンプレートは、Onsen UIとVueを組み合わせたもので、ユニットテストとE2Eテストのための機能も組み込まれています。
+
+#### VueでHello World
+
+では簡単なHello Worldアプリを開発してみましょう。下記のコードは、Onsen UIとVueを用いたHello Worldコードの例になります。
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="onsenui.css">
+  <link rel="stylesheet" href="onsen-css-components.css">
+  <script src="vue.js"></script>
+  <script src="onsenui.js"></script>
+  <script src="vue-onsenui.js"></script>
+</head>
+
+<body>
+  <template id="main-page">
+    <v-ons-page>
+      <v-ons-toolbar>
+        <div class="center">Title</div>
+      </v-ons-toolbar>
+
+      <p style="text-align: center">
+        <v-ons-button @click="$ons.notification.alert('Hello World!')">
+          Click me!
+        </v-ons-button>
+      </p>
+    </v-ons-page>
+  </template>
+
+  <div id="app"></div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      template: '#main-page'
+    });
+  </script>
+</body>
+</html>
+```
+
+ここで`<div id="app"></div>`は、Vueがコンテンツをレンダリングする起点となります（コンストラクタで`el`プロパティで指定しています）。
+
+これはES5を用いた例ですが、ES2015と[`vue-loader`](https://github.com/vuejs/vue-loader)を組み合わせると`*.vue`ファイルを用いた開発ができるのでお勧めです。
+
+Vueに関する詳細は、公式の[Vueドキュメント](https://vuejs.org/v2/guide)を参照してください。
+
+#### Vueコンポーネント
+
+より深い理解のためにも、Onsen UIとVueコンポーネントの関係について知っておくのが良いでしょう。
+
+これらOnsen UIのVueコンポーネントは、Web Componentsである[Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements)をラッピングしたものになります。そのため、VueコンポーネントのPropは、Custom ElementsのDOMプロパティや属性、メソッドと対応しています。また、ネイティブイベントを受け取った場合は、Vueイベントを呼び出します。DevTools等でDOMをインスペクトすると、`v-*`から始まらない`ons-*`コンポーネントが見えるでしょう。これらはWeb Componentsでできた、Onsen UIのHTML要素です。詳細の実装については、[こちらのコード](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/src/components)を参照してください。
+
+`v-ons-*`ではじまるコンポーネントは、すべて`ons-*`からはじまるDOM要素にコンパイルされることから、CSS等でスタイルを定義する場合はタグ名を使用してください。
+
+#### $onsオブジェクト
+
+グローバルで提供される[`ons` object](../fundamentals.html#the-ons-object)オブジェクトは、Vueでは利用できません。その代わりに、すべてのVueインスタンスには`this.$ons`オブジェクトを利用できます。
+
+```html
+<v-ons-button @click="$ons.notification.alert('Hi there!')">
+  Click me
+</v-ons-button>
+```
+
+#### イベント処理
+
+Onsen UIが受け取るDOMイベントはVueイベントに変換されます。たとえば、`v-ons-navigator`で`postpush`イベントを受け取るには、`@postpush="..."`と記述できます。ただし、このような変換は`postpush`、`init`、`prechange`といったカスタムイベントに対してのみ行われます。`input`や`change`といったネイティブなイベントは、`@input.native="..."`という形でDOMイベントとして受け取る必要があります。
+
+ただし`click`イベントに限りVueイベントとして、`<v-ons-tab @click="...">`のように受け取ることができます。これは、Onsen UIでは`click`イベントに対して特別な処理を加えているためです。
+
+```html
+<v-ons-back-button @click.prevent="pageStack.splice(1)"></v-ons-back-button>
+```
+
+この例では、`v-ons-back-button`のデフォルトの振る舞いを変更し、1ページ前に戻った後、先頭ページにリセットを行っています。なお、ここで使われている`prevent`修正子は`$event.preventDefault()`を呼び出すために使用しています。
+
+Cordovaの`backbutton`イベント（Androidの戻るボタン）に対応しているコンポーネントについては、`@deviceBackButton`ハンドラーを使ってイベントを受け取ることができます。
+
+```
+<v-ons-dialog @deviceBackButton="$event.callParentHandler()"></v-ons-dialog>
+```
+
+このイベントに関する詳細は、[Cordova特有の機能を使用する](../cordova.html#device-back-button)を参照してください。
+
+#### 入力とv-modelの使い方
+
+Onsen UIの入力コンポーネント（`v-ons-input`や`v-ons-checkbox`）では、Vueが提供する`v-model`ディレクティブを使用できます。
+
+```html
+<v-ons-input v-model="something"></v-ons-input>
+```
+
+ただし、`v-model`修正子については、Vue 2.3の段階ではカスタムコンポーネントに対して対応されていません。しかし、最も重要な`lazy`修正子について、下記のように回避することができます。
+
+```html
+<v-ons-input v-model="something" model-event="change"></v-ons-input>
+```
+
+この例では、`input`イベントの代わりに`change`イベントを用いてモデルの更新を行います。残りの修正子も、同じように実装することができます。
+
+また、`v-ons-checkbox`や`v-ons-switch`などのコンポーネントに対して配列をバインドできます。それにより、`<input type=“checkbox”>`と同じように扱うことができます。また、`v-ons-radio`に`v-model`を使ってグループを作成することもできます。
+
+#### Vueバインディングに関するFAQ
+
+##### Onsen UIのグローバル設定を変更するには？
+
+ガイドの[Onsen UIの一部機能を無効にする](../faq.html)に記述されている通り、`onsenui.js`を読み込んだ直後に設定を行う必要があります。具体的にはコンポーネントを描画するよりも前に実施される必要があります。しかしVueでは`ons`オブジェクトをグローバルで取得できないため、最初に`$ons`を受け取れる箇所で設定を行います。
+
+```
+import Vue from 'vue';
+import VueOnsen from 'vue-onsenui';
+Vue.use(VueOnsen);
+
+new Vue({
+  el: '#app',
+  render: h => h(...),
+  beforeCreate() {
+    this.$ons.disableAutoStyling(); // Or any other method
+  }
+})
+```
+
+このように設定することで、コンポーネントが描画されるよりも先に設定を適用できます。
+
+##### ナビゲーターに次ページのデータを渡すにはどうすればいいですか？
+
+ナビゲーターのページは、兄弟関係を持つ要素となります。そのため、Vueを用いた場合のデータの受け渡しには工夫が必要です。[Vuex](https://vuex.vuejs.org/)を使用する方法だけでなく、下記のように継承を用いてデータを渡すこともできます。
+
+```
+import nextPage from 'nextPage.vue';
+// ...
+
+pageStack.push({
+  extends: nextPage,
+  data() {
+    return {
+      myCustomDataHere: 42
+    };
+  }
+})
+```
+
+また、ページが戻す際に前ページにデータを渡したい場合は、Vueのドキュメントにある[親子関係を伴わないコミュニケーション](https://vuejs.org/v2/guide/components.html#Non-Parent-Child-Communication)が参考になるでしょう。
+
+##### Onsen UIとVuexは組み合わせられますか？
+
+もちろんです。Vuexを使うと、コンポーネント間の通信が書きやすくなります。多くのPropsがあり、イベントが頻繁に発行されるようなケースではVuexを使うのが良いでしょう。Onsen UIとVuexを組み合わせがサンプルは、[キッチンシンクアプリ](https://frandiox.github.io/vue-onsenui-kitchensink/)を参考にしてみてください。
+
+##### vue-routerと組み合わせて使うには？
+
+Onsen UIでは、[`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html)、[`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html)および[`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html)を、ルーティング用のコンポーネントとして提供しています。これらを組み合わせることで、必要なパターンのルーティングを実装できます。SPA形式のモバイルアプリ開発においては、これらのコンポーネントだけで足りるケースが多く、追加でルーターを導入する必要はないかもしれません。
+
+しかしvue-routerと組み合わせることもできます。この場合、ナビゲーターのアニメーションはサポートできないため、個別にページ遷移ロジックを実装する必要があります。
+
+また、`v-ons-tabbar`のようなコンポーネントの場合は、`v-ons-tab`の`onclick`イベントを`@click.prevent="..."`という形で上書きし、ルーターを用いた記述に変更してください。
+
+<% end %>

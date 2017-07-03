@@ -1,0 +1,50 @@
+---
+title: ‘フレームワークと共に使う’
+order: 70
+tocTitle: Framework Support
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### バインディングとは？
+
+この章は、JavaScriptについてある程度ご理解のある方を対象としています。JavaScriptフレームワークを入門されたばかりの方には、少し高度な内容となりますのでご了承ください。
+
+Onsen UIを使うと、特にフロントエンドのフレームワークを追加することなくアプリの開発を行うことができます。しかしながら、複雑で大規模なアプリを開発する場合は、より高度な機能やツールを備えたフレームワークと共にお使いいただくのも一案です。
+
+<div id="landing-new">
+    <div id="features">
+    <div class="frameworks">
+    <a href="/v2/guide/jquery" class="jquery">
+        <div></div>
+        <div></div>
+    </a>
+    <a href="/v2/guide/angular1" class="angular1">
+        <div></div>
+        <div></div>
+    </a>
+    <a href="/v2/guide/angular2" class="angular2">
+        <div></div>
+        <div></div>
+    </a>
+    <a href="/v2/guide/react" class="react">
+        <div></div>
+        <div></div>
+    </a>
+    <a href="/v2/guide/vue" class="vue">
+        <div></div>
+        <div></div>
+    </a>
+    </div>
+    </div>
+</div>
+
+Onsen UIは特定のフレームワークに依存しません。そのため、**どのJavaScriptフレームワークとでも利用できます**。Onsen UIを開発中のプロジェクトに組み込むだけで、他のフレームワークと利用できます。しかし一方で、Onsen UIのAPIをそのフレームワークに最適化するために、各フレームワークごとのバインディングも提供しています。これらのバインディングは、Web ComponentsでできているAPIを、各フレームワークに向けた形式としてラッピングしたものです。
+
+たとえば、VueやReactの開発では、DOM要素を取得してメソッドを呼び出したり、プロパティを変更することは望ましくありません。一般的にはPropsを用いてアクセスするからです。一方で、AngularJSの開発ではイベントハンドラーを登録するよりも`ng-model`を用いる方が筋が良いでしょう。このようにフレームワークごとにAPIを最適化する処理を、バインディングが行っています。
+
+繰り返しになりますが、Onsen UIとJavaScriptだけでアプリを作ることも十分に簡単で、強力です。しかし、フレームワークと使って開発をしたい場合は、これらのバインディングが手助けしてくれるでしょう。現在のところ、[Vue.js](vue/)、[React](react/)、[AngularJS 1.x](angular1/)および[Angular 2+](angular2/)に向けて、公式バインディングを提供しています。また、[jQuery](jquery/)のようなフレームワークの場合は、Web Components版をそのまま使用するのが良いでしょう。コミュニティの協力により、[Aurelia](https://www.npmjs.com/package/aurelia-onsenui)や[Ember.js](https://www.npmjs.com/package/ember-onsenui)といったフレームワークにも対応しています。Knockout.jsのようなシンプルなフレームワークの場合には、[この例のように](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html)バインディングは最小限なものになります。
+
+<% end %>

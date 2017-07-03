@@ -1,0 +1,148 @@
+---
+title: 'Onsen UIの基礎'
+order: 30
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Onsen UIの基礎
+
+Onsen UIの学習は難しくありません。このセクションでは、はじめてのモバイルアプリを開発するための基本的な内容を記述しています。
+
+#### Onsen UIの「ページ」
+
+アプリケーションの世界では、ページはウィンドウや画面のことを指します。Onsen UIでは、ビューポート（通常は画面）を完全に覆うコンテナのことを指します。ページを定義するには、`ons-page`コンポーネントを使用します。
+
+##### ページとツールバーを持つサンプルアプリ
+
+下記のコードは、ページとツールバーが1つずつ定義された最も基礎的なアプリの例になります。`<ons-page>`で囲まれたページの中には、他のHTML要素やOnsen UIコンポーネントを含められます。
+
+```html
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class=”center”>Toolbar</div>
+    </ons-toolbar>
+
+    <!-- ここにページの内容を記述します -->
+
+  </ons-page>
+</body>
+```
+
+これで、1つのページを持つOnsen UIアプリの完成です。ページ内に他のコンポーネントを入れていき、アプリを完成させてください。
+
+ただし、通常のアプリでは複数のページ間で遷移します。次の章では、複数のページを管理する方法について見ていきましょう。
+
+#### ページを管理する
+
+ほとんどのアプリは複数のページ（画面）を持ちます。Onsen UIでは、複数の`ons-page`コンポーネントを定義して実現します。
+
+##### テンプレート
+
+複数ページを作成するには、テンプレートの仕組みを学ぶ必要があります。テンプレートとは実行時に構築される、画面のレイアウトを定義したものです。アプリの実行中にテンプレートを変更しても、既に作成されたものには変更が行われず、今後作成されるものだけに反映されます。Onsen UIではレイアウトは`ons-page`コンポーネントで定義します。他のコンポーネントは、ページの子要素になります。
+
+後で参照するためにテンプレートには特定のIDを割り当てます。テンプレートの定義には下記の2つの方法があります。
+
+- 別のファイル: `ons-page`ではじまるHTMLファイルをテンプレートとして利用できます。IDはそのプロジェクトのパス（例えば`./my/views/page1.html`）となります。
+
+- `index.html`内に[`<template>`要素](https://developer.mozilla.org/en/docs/Web/HTML/Element/template)を定義する: メインのファイル（`index.html`）内に複数のテンプレートを定義できます。HTMLの`template`要素を使うと、別のファイルに定義されているかのように扱うことができます。下記のように、IDは`id`属性で定義します。
+
+  ```html
+  <template id="page.html">
+    <ons-page><!-- テンプレートの内容をここに記述--></ons-page>
+  </template>
+  ```
+  [`<ons-template>`要素](/v2/api/js/ons-template.html)も同じ目的で利用できますが、バージョン2.4.0以降はネイティブの`<template>`要素を使うことを推奨します。
+
+では、これらで定義したページの間をどのように推移して、表示を切り替えれば良いのでしょうか。Onsen UIには、その目的で`ons-navigator`、`ons-tabbar`、`ons-splitter`という3つのコンポーネントを用意しています。
+
+##### ナビゲーター
+
+複数のページを階層的に管理する必要がある場合は、ナビゲーターを使用してください。ページスタックの機能を持っており、遷移アニメーションを持つ、ページの追加（プッシュ）操作と破棄（ポップ）操作を行えます。詳細は、[`ons-navigator`のリファレンス](../api/js/ons-navigator.html)を参照してください。
+
+##### タブバー
+
+同じレベルに複数のページがあるような場合は、タブバーを使うのがよいでしょう。この場合はタブの項目をタップすることで、ページを切り替えることができます。詳細については、[`ons-tabbar`のリファレンス](../api/js/ons-tabbar.html)を参照してください。
+
+##### スプリッター
+
+スプリッターという名前ではありますが、スマートフォンなどの小さな画面を持つ端末においては、ユーザーの操作で出し入れできるサイドメニュー機能を提供します。画面サイズが大きい場合は、1つの画面を2つのページに分割します。[`ons-splitter`のリファレンス](../api/js/ons-splitter.html)を参照してください。
+
+これらのコンポーネントを使って複数のページを管理することで、簡単なものだけでなく、複雑なUIを持つページを作成することができます。さらに、ページは好きな順序で入れ替えることができるなど、自由に配置をすることができます。これらの3つのコンポーネントのおかげで、いわゆるルーターの仕組みを導入する必要はありません。
+
+ページのレイアウトに必要な事前知識は以上となります。ここからはJavaScriptを用いて、動的なコンポーネントを構築する方法を見ていきましょう。
+
+#### onsオブジェクト
+
+`ons`オブジェクトはJavaScriptのグローバルスコープで利用でき、多くの便利なメソッドやプロパティを提供してくれます。
+
+たとえば、`ons.ready(callback)`メソッドはアプリの初期化（`DOMContentLoaded`とCordovaの`deviceready`イベント）を待つために使用できます。このイベントの後にCordovaのAPIを実行してください。
+
+```html
+<head>
+  <script>
+    ons.ready(function() {
+      // CordovaのAPIを呼び出す準備が整った
+      console.log(window.device);
+    });
+  </script>
+</head>
+```
+
+`ons.ready()`は`ons-page`の初期化とは関係ないことに注意が必要です。詳細については、[ページのライフサイクル](lifecycle.html)をお読みください。
+
+#### 属性・プロパティ・メソッド・イベント
+
+Onsen UIのコンポーネントは、すべてDOM要素（JavaScriptオブジェクト）です。他の要素と同様に、独自のプロパティやメソッド、イベントなどを呼び出すことができます。これによりコンポーネントの挙動を変更したり、特定のアクションを実行することができます。具体的な例として`ons-navigator`を参考に見ていきましょう。
+
+##### 属性
+
+**属性（Attribute）**は、コンポーネントのデフォルト状態や振る舞いを変更するために使用します。ほとんどの属性は任意項目となっています。いくつかの属性はページが初期化されるよりも前に指定されている必要があることに注意が必要です。たとえば`ons-navigator`では`animation`という属性があり、これはどのタイミングでも変更することができます。
+
+```html
+<ons-navigator animation="slide"></ons-navigator>
+<script>
+  var myNavigator = document.querySelector('ons-navigator');
+  myNavigator.setAttribute('animation', 'lift');
+</script>
+```
+
+##### プロパティ
+
+**プロパティ（Property）**はDOM要素を使って参照できます。たとえば`ons-navigator`の`topPage`プロパティを使うと、一番上のページの情報を取得できます。
+
+```js
+var myNavigator = document.querySelector('ons-navigator');
+console.log(myNavigator.topPage)
+```
+
+##### メソッド
+
+**メソッド（Method）**とは関数のことで、何らかの実行を行う時に使用します。下の例は`pushPage`メソッドを呼び出し、新しいページを開いています。
+
+```js
+var myNavigator = document.querySelector('ons-navigator');
+myNavigator.pushPage('page2.html');
+```
+
+##### イベント
+
+**DOMイベント**は特定のタイミングで実行されます。イベントを受け取るには`addEventListener()`関数を使用します。イベントが発生した際にはイベントオブジェクトも渡されます。
+
+```js
+var myNavigator = document.querySelector('ons-navigator');
+myNavigator.addEventListener('postpush', function(event) {
+  console.log("pushPage処理が終わりました！", event);
+});
+```
+
+親のコンポーネントや`document`にイベントリスナーをセットしてもイベントを受け取ることができます。これはイベントのバブリングと呼ばれます。
+
+おめでとうございます。Onsen UIの基礎はこれで以上となります。
+
+ここから先は、他の記事を読み進めていただいても構いませんし、[Playground](https://tutorial.onsen.io/)（チュートリアル）や[GitHubレポジトリ](https://github.com/OnsenUI/OnsenUI/)なども参考になると思います。
+
+<% end %>

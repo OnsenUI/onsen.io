@@ -1,0 +1,25 @@
+---
+title: ‘アーキテクチャー’
+order: 130
+tocTitle: Advanced
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### アーキテクチャー
+
+Onsen UIはHTML5とJavaScript、CSSという標準的なWeb技術を用いて実装されています。
+
+Onsen UIは3つの層から構成されています。その3層とは、① CSSコンポーネント、② Web Components、そして ③ 各種フレームワーク向けのバインディングです。アプリには、どれも自由に組み込むこともできます。CSSとWeb Componentsは完全に標準Webスタンダードに準拠して作成されているため、追加で必要なライブラリーや依存関係は一切ありません。
+
+<img src="/images/guide/architecture.png">
+
+**Onsen UI CSSコンポーネント** はコンポーネントのデザインを定義しており、CSS（cssnext）で実装されています。詳細は[CSSコンポーネントの一覧](/v2/api/css.html)を参照してください。
+
+**Web Components**はOnsen UIのコンポーネントを定義するために用いられているWeb標準です。Onsen UIのすべてのコンポーネントはWebコンポーネントであり、タグとして使えるようにするためにCustom Elementsを使用しています。そのため、Onsen UIはJavaScript（ES6）だけで実装されており、フレームワークに依存しません。たとえばjQuery、Backbone、BootstrapといったDOMを使うフレームワークを使用する場合は、Web Componentsを使用することを推奨します。
+
+**フレームワーク用バインディング**は、より高度なフレームワークに向けて機能を拡張するために提供されます。バインディングを使うと、各フレームワークの方式に従って開発ができるため、親和性が高くなります。オフィシャルではVue.js、React、Angular 1、Angular 2以上のフレームワーク向けのバインディングを提供しています。またEmber.jsやAureliaといった他のフレームワークに向けては、コミュニティによるバインディングが作られています。詳細については、[フレームワーク用バインディングについて](frameworks.html)を参照してください。
+
+<% end %>

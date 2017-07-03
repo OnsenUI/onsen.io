@@ -1,0 +1,75 @@
+---
+title: ‘Cordovaに関する機能’
+order: 170
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Cordovaに関する機能
+
+Onsen UIはハイブリッドアプリ開発に最適です。この章では、Cordovaアプリを開発する時の機能について解説します。
+
+#### ‘deviceready’イベントに対応する
+
+Cordova APIは`deviceready`イベントの後で呼び出すことができます。Onsen UIの場合、`ons.ready()`関数を使ってイベントをキャッチすることができます。
+
+```
+ons.ready(function() {
+  // devicereadyイベントが呼ばれました
+  // Cordova APIを呼び出すことができます
+});
+```
+
+#### 端末側の戻るボタン
+
+Android端末で「戻る」ボタンが押されたときに、Cordova側では`backbutton`イベントが呼ばれます。このイベントはCordovaが呼び出すため、`cordova.js`ファイル、または同等の処理を行うファイル（Monacaであれば`loader.js`）を事前に読み込む必要があります。
+
+デスクトップブラウザーでは`backbutton`のイベントをシミュレートするためにESCキーをご利用いただけます。
+
+Onsen UIでは、端末側の戻るボタンが押されたときの挙動を、デフォルトで設定している要素もあります。
+
+- ダイアログ: `cancelable`属性を指定している場合にダイアログを閉じます。ただしModalとToastは対象外です。
+- ナビゲーター: 一つ前のページに戻ります。
+- スプリッター: メニューを閉じます。
+- 条件が満たされない場合、これらの要素は親要素のハンドラーを呼び出し、最終的には最上位のハンドラー（ここでは「グローバルハンドラー」と呼称します）がアプリを終了させます。
+
+多くのアプリにおいて上記の対応で十分かと思いますが、Onsen UIではグローバルハンドラーの挙動をさらにカスタマイズできます。カスタマイズする場合には、[`ons`](/v2/docs/js/ons.html) オブジェクトが提供するメソッドを使用します。
+
+```
+// 無効化、または、有効化
+ons.disableDeviceBackButtonHandler();
+ons.enableDeviceBackButtonHandler();
+
+// 新規ハンドラーの登録
+ons.setDefaultDeviceBackButtonListener(function(event) {
+  ons.notification.confirm('Do you want to close the app?') // ユーザー側に確認します。
+    .then(function(index) {
+      if (index === 1) { // OK が押された場合
+        navigator.app.exitApp(); // アプリを終了します。
+      }
+    });
+  ));
+});
+```
+
+これとは別に、前述の要素と`ons-page`要素では戻るボタンのハンドラーの挙動を制御することもできます。
+
+```
+var myNavigator = document.getElementById('my-navigator');
+myNavigator.onDeviceBackButton.disable(); // バックボタン用のハンドラーを無効にします。
+myNavigator.onDeviceBackButton.enable(); // バックボタン用のハンドラーを有効にします。
+myNavigator.onDeviceBackButton.isEnabled(); // 有効化されている場合、true を返します。
+myNavigator.onDeviceBackButton.destroy(); // 現在のハンドラーの登録を解除します。
+
+var page = myNavigator.topPage;
+page.onDeviceBackButton = function(event) {
+  console.log('Hardware back button!');
+  event.callParentHandler(); // 親のハンドラーを呼び出します ( この例ではnavigatorのハンドラーとなります )。
+};
+```
+
+このハンドラーに渡される`event`オブジェクトには、`event.callParentHandler()`メソッドが用意されています。
+
+<% end %>

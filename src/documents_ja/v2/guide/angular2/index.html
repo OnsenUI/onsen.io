@@ -1,0 +1,51 @@
+---
+title: 'Angular 2+'
+order: 100
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Angular 2+
+
+この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
+
+Angular 2+用のバインディングは、Onsen UIのWeb Componentsを拡張してAngularと親和性の高いAPIを提供するものです。
+
+#### Angular 2+バインディングのダウンロード
+
+Angular 2+バインディングは[`ngx-onsenui`パッケージ](https://www.npmjs.com/package/ngx-onsenui)を通じて配布されます。下記のようにしてNPM経由でダウンロードしてください。
+
+```sh
+$ npm install onsenui ngx-onsenui --save-dev
+```
+
+また、[CDN経由](https://unpkg.com/ngx-onsenui)で利用することもできます。[最新のリリース](https://github.com/OnsenUI/OnsenUI-dist/releases)にもAngular 2+バインディングが含まれます。
+
+#### Angular 2+バインディングのセットアップ
+
+Onsen UI for Angular 2+は、Web ComponentsをラッピングしたAngular 2+向けのディレクティブが含まれています。これらのディレクティブは`OnsenModule`と呼ばれ、Angularモジュール（`NgModule`）に含まれます。`NgModule`の詳細については、[Angularモジュール（`NgModule`）- TS](https://angular.io/docs/ts/latest/guide/ngmodule.html)を参照してください。
+
+`OnsenModule`を使用するには`@NgModule`を用いてインポートしてください。`OnsenModule`が正しく読み込めていない場合は、正しくレンダリングすることができません。
+
+またOnsen UIはCustom Elementsを用いて構築されていることから、`CUSTOM_ELEMENTS_SCHEMA`をモジュールのスキーマに指定する必要があります。この指定が含まれていない場合は、Onsen UIのコンポーネントを読み込んだ際にエラーが発生致します。
+
+```js
+import {OnsenModule} from 'angular2-onsenui';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+
+@NgModule({
+  imports: [OnsenModule],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+class AppModule { }
+
+// Start module
+platformBrowserDynamic().bootstrapModule(AppModule);
+```
+
+<% end %>
