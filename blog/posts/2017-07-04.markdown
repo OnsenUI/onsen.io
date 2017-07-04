@@ -32,7 +32,7 @@ This is for more advanced developers who may have already been using Onsen UI, V
 
 From `vue-onsenui@beta` to its final release we passed through a release-candidate version that changed a few things. The biggest change came along with the core move for the `<ons-input>` component, which has been split into `<ons-input>`, `<ons-checkbox>`, `<ons-radio>` and `<ons-search-input>`. So in `vue-onsenui` instead of writing `<v-ons-input type="checkbox">` you should now write `<v-ons-checkbox>` and similar for the `radio` and `search` input types.
 
-This allowed for our custom directive `v-ons-model` to be dropped in favor of the original `v-model` for template data syncing. You can now simply use `v-model` for all your inputs. Also `<v-ons-input>` and `<v-ons-range>` elements now have a `model-event` prop so you can do something like `<v-ons-input v-model="something" model-event="change">` to bind the input model to the `change` event instead of `input`, for example.
+This allowed for our custom directive `v-ons-model` to be dropped in favor of the original `v-model` for template data syncing. You can now simply use `v-model` for all your inputs, which is nice.
 
 Finally the `tabs` array prop of `<v-ons-tabbar>` now accepts a `props` property for each tab object, which allows an easier passing of props to each corresponding page component.
 
@@ -53,6 +53,12 @@ $ vue init OnsenUI/vue-pwa-webpack hello-world
 Add that to a framework that consistently gives you high design quality, great tooling (be sure to check out [Monaca](https://monaca.io/) as well if you don't know it yet) and more resources like state of the art documentation, tutorials and sample apps. What other reason do you need to try the best UI framework for Vue.js **right now**?
 
 We are starting to build a big and active community so if you like Vue.js and / or Onsen UI don't miss out on the opportunity to be a part of it. Reach us on our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI) and the [Community forums](https://community.onsen.io/) or open issues and give enhancement suggestions on our [GitHub page](https://github.com/OnsenUI/OnsenUI). Hope to be talking to you really soon. :D
+
+### What's next
+
+As an extra we'd like to introduce an awesome feature coming up next in Onsen UI that we are excited about: **swipe-to-pop**. You'll very soon be able to emulate this nice native iOS ability to swipe left-to-right to slowly reveal and bring back the last navigation page.
+
+Stay tuned to Onsen UI to get all the latest updates from our side.
 
 ---
 
