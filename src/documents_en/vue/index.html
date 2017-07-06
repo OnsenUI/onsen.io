@@ -36,7 +36,7 @@ description: 'Vue.js developers can easily create high-performance cordova hybri
         <p>Follow <a href="/v2/api/vue/">this link</a> for a complete reference of all the components you can use in Onsen UI for Vue.</p>
       </div>
       <div class="feature-image">
-        <img src="/images/landing/onsen_ui_simplest_components.png">
+        <iframe style="width:100%; height: 480px" src="./visual-components.html"></iframe>
       </div>
     </div>
 
@@ -101,25 +101,28 @@ new Vue({
 <%- @markdown => %>
 ```html
 <template>
-  <v-ons-carousel fullscreen swipeable auto-scroll overscrollable :index.sync="carouselIndex">
-    <v-ons-carousel-item v-for="(url, key) in items">
-      <img width="100%" :src="url">
+  <v-ons-carousel :index.sync="carouselIndex"
+    fullscreen swipeable auto-scroll overscrollable>
+    <v-ons-carousel-item v-for="url in items">
+      <img style="width:100%" :src="url">
     </v-ons-carousel-item>
   </v-ons-carousel>
 </template>
 
+<script>
 export default {
   data() {
     return {
       carouselIndex: 0,
-      items: {
-        0: 'http://placekitten.com/g/300/300',
-        1: 'http://placekitten.com/g/400/400',
-        2: 'http://placekitten.com/g/500/500'
-      }
+      items: [
+        'http://placekitten.com/g/300/300',
+        'http://placekitten.com/g/400/400',
+        'http://placekitten.com/g/500/500'
+      ]
     };
   }
 };
+</script>
 ```
 <% end %>
       </div>
