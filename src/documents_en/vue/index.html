@@ -30,7 +30,10 @@ description: 'Vue.js developers can easily create high-performance cordova hybri
     <div class="feature">
       <div class="feature-text">
         <h2>Beautifully designed UI components that ensure native look and feel</h2>
-        <p>Onsen UI provides a wide variety of ready-to-use UI components that <strong>emulate iOS and Android UI guidelines and designs</strong>. Building native looking high-performance apps could never be easier.</p>
+        <p>Onsen UI provides a wide variety of ready-to-use UI components that <strong>emulate iOS and Android UI guidelines and designs</strong>.</p>
+        <p>Simply pick out the elements you want in your app (like toolbars, lists, buttons... you name it) and they <strong>automatically</strong> show the iOS or Android look and feel according to the device they are running in.</p>
+        <p>Building <strong>native-looking</strong> and <strong>high-performance</strong> apps could never be easier.</p>
+        <p>Follow <a href="/v2/api/vue/">this link</a> for a complete reference of all the components you can use in Onsen UI for Vue.</p>
       </div>
       <div class="feature-image">
         <img src="/images/landing/onsen_ui_simplest_components.png">
@@ -41,6 +44,7 @@ description: 'Vue.js developers can easily create high-performance cordova hybri
       <div class="feature-text">
         <h2>Easy to build even the most complicated UIs</h2>
         <p>In addition to pretty components, Onsen UI even equips you with powerful components like <strong>stack navigator, side menu, tab bar, carousel, infinite scroll and pull hook</strong> that make it easy to implement mobile specific UIs.</p>
+        <p>Now your app is <strong>beautiful</strong> AND <strong>easy to use</strong>.</p>
       </div>
       <div class="feature-image">
         <div class="resource-placeholder"></div>
@@ -50,76 +54,72 @@ description: 'Vue.js developers can easily create high-performance cordova hybri
     <div class="feature">
       <div class="feature-text">
         <h2>Simple setup</h2>
-        <p>Just writing <code>Vue.use(VueOnsen);</code> will get you access to a wide range of UI components.</p>
+        <p>No experience in using mobile UI frameworks? <strong>No problem</strong>. Getting started is not complicated, even for beginners:</p>
+        <ul>
+          <li>(1) Just install our packages from the command line...</li>
+          <li>(2) ... import our files to your code...</li>
+          <li>(3) ... and write <code>Vue.use(VueOnsen);</code></li>
+        </ul>
+        <p><strong>3 simple steps</strong> that will get you access to a wide range of UI components.</p>
       </div>
       <div class="feature-image">
 <%- @markdown => %>
 ```bash
-# Install two packages
-npm install onsenui vue-onsenui --save
+# (1) Install two packages
+$ npm install onsenui vue-onsenui --save
 ```
 ```js
-// Webpack CSS import
+// (2) Webpack CSS import
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
-// JS import
+// (2) JS import
 import Vue from 'vue';
-import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'
+import VueOnsen from 'vue-onsenui';
 
-// And just plug the bindings
+// (3) And plug in the bindings
 Vue.use(VueOnsen);
 
+// Now you can use the awesome Onsen UI + Vue components
 new Vue({
   el: '#app',
   template: '<v-ons-button>Click Me</v-ons-button>',
 });
 ```
 <% end %>
-  <img src="/images/guide/first_onsen_ui_app.png" style="border: 1px solid #ccc;">
       </div>
     </div>
 
     <div class="feature">
       <div class="feature-text">
         <h2>Reactive API that blends perfectly with Vue</h2>
+        <p>Whether you are already a Vue developer or trying it out alongside Onsen UI for the first time, you will find that they <strong>play very well together</strong>.</p>
         <p>Components of Onsen UI for Vue are designed to act reactively to received props.</p>
+        <p>We have an <strong>especially tailored API</strong> to fit all your needs.</p>
       </div>
       <div class="feature-image">
 <%- @markdown => %>
-```js
-const page1 = {
-  template: `
-    <v-ons-page>
-      <v-ons-toolbar>
-        <div class="center">Page1</div>
-      </v-ons-toolbar>
-      <p style="text-align: center">
-        This is the first page
-        <v-ons-button @click="$emit('push', page2)">
-          Push Page 2
-        </v-ons-button>
-      </p>
-    </v-ons-page>
-  `
-};
+```html
+<template>
+  <v-ons-carousel fullscreen swipeable auto-scroll overscrollable :index.sync="carouselIndex">
+    <v-ons-carousel-item v-for="(url, key) in items">
+      <img width="100%" :src="url">
+    </v-ons-carousel-item>
+  </v-ons-carousel>
+</template>
 
-new Vue({
-  el: '#app',
-  template: `
-    <v-ons-navigator :page-stack="pageStack">
-      <component v-for="page in pageStack"
-                :is="page"
-                @push="pageStack.push($event)">
-      </component>
-    </v-ons-navigator>
-  `,
+export default {
   data() {
     return {
-      pageStack: [page1]
+      carouselIndex: 0,
+      items: {
+        0: 'http://placekitten.com/g/300/300',
+        1: 'http://placekitten.com/g/400/400',
+        2: 'http://placekitten.com/g/500/500'
+      }
     };
   }
-});
+};
 ```
 <% end %>
       </div>
@@ -148,7 +148,7 @@ new Vue({
     <div class="feature">
       <div class="feature-text">
         <h2>Tons of resources &amp; support</h2>
-        <p>Ample documentation&lt;link&gt;, interactive component tutorials, guides, how-to and sample apps will get you up and running quickly and guide you to the finish line. When you need a hand, the Onsen UI team and the active community will help you via [Community Forum](https://community.onsen.io/), [Gitter](https://gitter.im/OnsenUI/OnsenUI) and Stack Overflow.</p>
+        <p>Ample documentation&lt;link&gt;, interactive component tutorials, guides, how-to and sample apps will get you up and running quickly and guide you to the finish line. When you need a hand, the Onsen UI team and the active community will help you via  <a href="https://community.onsen.io/">Community Forum</a>, <a href="https://gitter.im/OnsenUI/OnsenUI">Gitter</a> and Stack Overflow.</p>
       </div>
       <div class="feature-image">
         <div class="resource-placeholder"></div>
