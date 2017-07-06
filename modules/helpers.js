@@ -396,7 +396,7 @@ module.exports = function() {
       },
 
       mapComponentName: function(component, framework) {
-        component = this.removeOnsPrefix(component);
+        component = this.removeOnsPrefix(component || '');
         framework = framework || this.framework;
         if (framework === 'react') {
           return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });

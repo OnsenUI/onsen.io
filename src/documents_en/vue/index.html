@@ -13,106 +13,151 @@ description: 'Vue.js developers can easily create high-performance cordova hybri
   <%- @partial('global-nav.html.eco') %>
   <div class="landing-header">
     <h1 class="landing-header-title">
-      Onsen UI for Vue 2
+      Onsen UI for Vue
     </h1>
     <div class="landing-header-subtitle">
-      Power of Vue.js to create hybrid &amp; mobile web apps with Onsen UI.
+      Brings the Power and Simplicity of Vue.js to Hybrid and Progressive Web Apps.
     </div>
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
-
-    <a href="/v2/docs/guide/vue/" class="landing-header-get-started">
-      <div class="landing-header-get-started-title">
-        Get Started
+    
+    <div style="display: flex; justify-content: center;">
+      <a href="https://onsenui.github.io/vue-onsenui-kitchensink/" target="_blank" class="landing-header-get-started" style="margin: 0 10px">
+        <div class="landing-header-get-started-title">
+          Try Kitchensink
+        </div>
+      </a>
+      <a href="/v2/guide/vue/" class="landing-header-get-started" style="margin: 0 10px">
+        <div class="landing-header-get-started-title">
+          Get Started
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="landing-content">
+    <div class="feature">
+      <div class="feature-text">
+        <h2>Beautifully designed UI components that ensure native look and feel</h2>
+        <p>Onsen UI provides a wide variety of ready-to-use UI components that <strong>emulate iOS and Android UI guidelines and designs</strong>.</p>
+        <p>Simply pick out the elements you want in your app (like navigators, tabbar, lists, buttons... you name it) and they <strong>automatically</strong> show the iOS or Android look and feel according to the device they are running in.</p>
+        <p>Building <strong>native-looking</strong> and <strong>high-performance</strong> apps could never be easier.</p>
+        <p><a href="/v2/api/vue/">Follow this link</a> for a complete reference of all the components you can use in Onsen UI for Vue.</p>
       </div>
-      <div class="landing-header-get-started-subtitle">
-        with Onsen UI for Vue 2
-      </div>
-    </a>
-
-    <div class="landing-header-available">
-      <span>
-        Also available for...
-      </span>
-      <div class="landing-header-available-frameworks">
-        <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
-        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
-        <a href="/v2/docs/guide/react" class="landing-header-available-frameworks-react"></a>
-        <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
+      <div class="feature-image">
+        <iframe style="width:100%; height: 480px" src="./visual-components.html"></iframe>
       </div>
     </div>
 
-    <div class="landing-header-latest">
-      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>. Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
-    </div>
-  </div>
-
-  <div class="landing-social">
-    <a href="https://twitter.com/Onsen_UI" target="_blank" class="landing-social-twitter">
-      Follow @Onsen_UI
-    </a>
-    <a href="https://github.com/OnsenUI/OnsenUI" target="_blank" class="landing-social-github">
-      Star on GitHub
-    </a>
-  </div>
-</div>
-
-<div class="container">
+    <div class="feature">
+      <div class="feature-text">
+        <h2>Simple setup</h2>
+        <p>No experience in using mobile UI frameworks? <strong>No problem</strong>. Getting started is not complicated, even for beginners:</p>
+        <ul>
+          <li>(1) Just install our packages from the command line...</li>
+          <li>(2) ... import our files to your code...</li>
+          <li>(3) ... and write <code>Vue.use(VueOnsen);</code></li>
+        </ul>
+        <p><strong>3 simple steps</strong> that will get you access to a wide range of UI components.</p>
+      </div>
+      <div class="feature-image">
 <%- @markdown => %>
-
-## Create Cordova based hybrid mobile apps with Onsen UI and Vue 2
-
-Integrating Onsen UI with Vue 2 is now really simple. Vue bindings for Onsen UI provides a Vue-like API to interact with Onsen UI elements in the shape of Vue components and directives. All the power of Onsen UI is now available for your Vue.js apps.
-
-## Installing Vue bindings for Onsen UI
-
-The bindings are [available on NPM](https://www.npmjs.com/package/vue-onsenui). To use them you also need the core Onsen UI library.
-
-Therefore, to install the library in your app all you need to do is:
-
 ```bash
-yarn add onsenui vue-onsenui # Or use npm
+# (1) Install two packages
+$ npm install onsenui vue-onsenui --save
 ```
-
-It is also available from Unpkg CDN: [core](https://unpkg.com/onsenui/) and [bindings](https://unpkg.com/vue-onsenui/).
-
-## Easy to use
-
-The library is distributed as a Vue plugin so you can easily add it to your application:
-
-```javascript
-/**
- * The stylesheets can be loaded with Webpack
- * or added with link tags.
- */
+```js
+// (2) Webpack CSS import
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
-// Import Vue
+// (2) JS import
 import Vue from 'vue';
-
-// Import Onsen UI core and Vue bindings
-import 'onsenui';
 import VueOnsen from 'vue-onsenui';
 
-// And just plug the bindings
+// (3) And plug in the bindings
 Vue.use(VueOnsen);
 
+// Now you can use the awesome Onsen UI + Vue components
 new Vue({
   el: '#app',
-  template: '<App/>',
-  components: { App }
+  template: '<v-ons-button>Click Me</v-ons-button>',
 });
 ```
-
-This exposes all the Onsen UI custom elements as `<v-ons-*>` components as well as some utility functions for platform recognition and creating quick alert dialogs.
-
-## Learn more
-
-* [Docs](/v2/docs/guide/vue/)
-* [GitHub repository](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
-* [Examples](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/examples/components)
-
 <% end %>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-text">
+        <h2>Reactive API that blends perfectly with Vue</h2>
+        <p>Whether you are already a Vue developer or trying it out alongside Onsen UI for the first time, you will find that they <strong>play very well together</strong>.</p>
+        <p>Components of Onsen UI for Vue are designed to act reactively to received props.</p>
+        <p>We have an <strong>especially tailored API</strong> to fit all your needs.</p>
+      </div>
+      <div class="feature-image">
+<%- @markdown => %>
+```html
+<template>
+  <v-ons-carousel :index.sync="carouselIndex"
+    fullscreen swipeable auto-scroll overscrollable>
+    <v-ons-carousel-item v-for="url in items">
+      <img style="width:100%" :src="url">
+    </v-ons-carousel-item>
+  </v-ons-carousel>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      carouselIndex: 0,
+      items: [
+        'http://placekitten.com/g/300/300',
+        'http://placekitten.com/g/400/400',
+        'http://placekitten.com/g/500/500'
+      ]
+    };
+  }
+};
+</script>
+```
+<% end %>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-text">
+        <h2>CLI, hot reload, debugger, native plugins - all covered</h2>
+        <p>You can get started with Onsen UI by using our templates within the Vue CLI. Pick the PWA or Cordova template and you're ready to go!</p>
+        <p>Beyond that, we’ve got full-stack tools to streamline your app development with zero-time setup. Onsen UI family’s <a href="/v2/guide/monaca.html">Monaca CLI</a> simplifies complicated tasks. Our development stack includes TypeScript, Webpack and Cordova, all integrated with app debugging features like live-reload on device, remote-build and many other cloud services.</p>
+      </div>
+      <div class="feature-image">
+<%- @markdown => %>
+  * __Progressive Web App__: [vue-pwa-webpack](https://github.com/OnsenUI/vue-pwa-webpack)
+  ```bash
+  $ vue init OnsenUI/vue-pwa-webpack hello-world
+  ```
+  * __Cordova__: [vue-cordova-webpack](https://github.com/OnsenUI/vue-cordova-webpack)
+  ```bash
+  $ vue init OnsenUI/vue-cordova-webpack hello-world
+  ```
+<% end %>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-text">
+        <h2>Tons of resources &amp; support</h2>
+        <p>Ample documentation, interactive tutorials, guides, how-to and sample apps will get you up and running quickly and guide you to the finish line. When you need a hand, the Onsen UI team and the active community will help you via <a href="https://community.onsen.io/">Community Forum</a> and <a href="https://gitter.im/OnsenUI/OnsenUI">Gitter</a>!</p>
+      </div>
+    </div>
+  </div>
+  <div class="landing-header">
+    <a href="/v2/guide/vue/" class="landing-header-get-started">
+      <div class="landing-header-get-started-title">
+        Let's Get Started
+      </div>
+    </a>
+  </div>
 </div>
 
 

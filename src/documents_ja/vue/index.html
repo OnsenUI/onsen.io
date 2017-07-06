@@ -1,7 +1,7 @@
 ---
 page: 'vue-landing'
 category: 'discover'
-title: 'Onsen UI for Vue.js - ハイブリッドアプリ開発フレームワーク'
+title: 'Onsen UI for Vue - ハイブリッドアプリ開発フレームワーク'
 layout: 'default.html.eco'
 topbar: false
 actionbar: false
@@ -13,112 +13,141 @@ description: 'Vue 2とOnsen UIを組み合わせると、高いパフォーマ�
   <%- @partial('global-nav.html.eco') %>
   <div class="landing-header">
     <h1 class="landing-header-title">
-      Onsen UI for Vue 2
+      Onsen UI for Vue
     </h1>
     <div class="landing-header-subtitle">
-      ハイブリッドアプリ開発を速く、シンプルに。現在 α 版を提供中。
+      iOS / Android のデザインを忠実に再現した、モバイル UI ライブラリの決定版。
     </div>
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
 
-    <a href="/v2/docs/guide/vue/" class="landing-header-get-started">
+    <a href="/v2/guide/vue/" class="landing-header-get-started">
       <div class="landing-header-get-started-title">
         はじめよう
       </div>
-      <div class="landing-header-get-started-subtitle">
-        Onsen UI for Vue 2
-      </div>
     </a>
-
-    <div class="landing-header-available">
-      <span>
-        他のフレームワークでも...
-      </span>
-      <div class="landing-header-available-frameworks">
-        <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
-        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
-        <a href="/v2/docs/guide/react" class="landing-header-available-frameworks-react"></a>
-        <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
+  </div>
+  <div class="landing-content">
+    <div class="feature">
+      <div class="feature-text">
+        <h2>iOS / Android ガイドラインに準拠した<br>34 個のコンポーネント</h2>
+        <p>Onsen UI は <strong>iOS や Android のデザインを忠実に再現</strong> したコンポーネントを提供します。</p>
+        <p>これにより、Web サイトや Progressive Web App (PWA)、および Cordova アプリを本物の iOS アプリ・Android アプリのような見た目に仕上げることができます。</p>
+      </div>
+      <div class="feature-image">
+        <img src="/images/landing/Onsen_UI_Simple_Components.png">
       </div>
     </div>
 
-    <div class="landing-header-latest">
-      <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI"><%- @framework.version %></a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>. Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+    <div class="feature">
+      <div class="feature-text">
+        <h2>複雑な UI の実装を驚くほど簡単に</h2>
+        <p>Onsen UI は美麗なコンポーネントだけでなく、<strong>スタックナビゲーター、サイドメニュー、タブバー、カルーセル、無限スクロール、プルフック</strong>等といったモバイル特有の UI を簡単に実装するための仕組みも備えています。外部ページの動的な読み込みやキャッシュにも対応しています。</p>
+      </div>
+      <div class="feature-image">
+        <div class="resource-placeholder"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="landing-social">
-    <a href="https://twitter.com/Onsen_UI_ja" target="_blank" class="landing-social-twitter">
-      @Onsen_UI_jaをフォロー
-    </a>
-    <a href="https://github.com/OnsenUI/OnsenUI" target="_blank" class="landing-social-github">
-      GitHubスターをお願いします
-    </a>
-  </div>
-</div>
-
-<div class="container">
+    <div class="feature">
+      <div class="feature-text">
+        <h2>面倒な設定は不要</h2>
+        <p>Onsen UI for Vue の利用に特別な知識は一切必要ありません。<code>Vue.use(VueOnsen);</code> と書くだけで、多種多様なコンポーネントをすぐに使えるようになります。</p>
+      </div>
+      <div class="feature-image">
 <%- @markdown => %>
-
-## Onsen UI と Vue 2 でハイブリッドアプリやモバイルWebアプリを開発しよう
-
-Onsen UI を Vue 2 で使いやすくするためのバインディングを作成しました。Onsen UI は **Web Components** に準拠した、ハイブリッドアプリ開発のためのライブラリです。
-
-## 入手方法
-
-このバインディングは [NPM にて公開](https://www.npmjs.com/package/vue-onsenui)されています。利用するためには、Onsen UI コアライブラリも必要です。
-
-アプリに組み込むには、下記のように yarn コマンドを用いてプロジェクトに加えてください。
-
 ```bash
-yarn add onsenui vue-onsenui # または npm install onsenui vue-onsenui --save
+# Install two packages
+npm install onsenui vue-onsenui --save
 ```
-
-また、直接 [onsenui](https://unpkg.com/onsenui/) と [vue-onsenui](https://unpkg.com/vue-onsenui/) をダウンロードすることもできます。
-
-## アプリへの組み込み
-
-ライブラリは Vue プラグインとして配布されているため、下記のように簡単にアプリで使用できます。
-
-```javascript
-/**
- * webpack または link タグで
- * スタイルシートを読み込み
- */
+```js
+// Webpack CSS import
 import 'onsenui/css/onsenui.css';
 import 'onsenui/css/onsen-css-components.css';
 
-// Vue 2 をインポート
+// JS import
 import Vue from 'vue';
+import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'
 
-// Onsen UI コアライブラリと Vue 2 バインディングをインポート
-import 'onsenui';
-import VueOnsen from 'vue-onsenui';
-
-// Vue 2 バインディングをプラグインとして適用
+// And just plug the bindings
 Vue.use(VueOnsen);
 
 new Vue({
   el: '#app',
-  template: '<App/>',
-  components: { App }
+  template: '<v-ons-button>Click Me</v-ons-button>',
 });
 ```
-
-これにより Onsen UI が持つ全てのカスタム要素が `<v-ons-*>` というコンポーネント名で使えるようになります。また、プラットフォーム別処理や簡易アラートダイアログ表示を行えるユーティリティ関数も使えるようになります。
-
-## 詳細
-
-ライブラリの使い方は、下記のドキュメントに記述しています。また、多くの Onsen UI コンポーネントを組み込んだサンプルアプリも提供しています。
-
-* [ドキュメント](/v2/docs/guide/vue/)
-* [GitHubレポジトリ](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue)
-* [サンプルコード](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/examples/components)
-
-<b>このライブラリは α 版の段階ですが、既に全てのコンポーネントを実装済みです。</b>
-皆さんからのフィードバックを元に、Vue 2 と Onsen UI を使ったモバイルアプリ開発を強力にサポートしていきます。
-API へのフィードバックは <a href="https://twitter.com/Onsen_UI_ja" target="_blank">Twitter (@Onsen_UI_ja)</a> にて受け付けております。
-
 <% end %>
+  <img src="/images/guide/first_onsen_ui_app.png" style="border: 1px solid #ccc;">
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-text">
+        <h2>リアクティブな API</h2>
+        <p>Onsen UI for Vue のコンポーネントは受け取った prop に対してリアクティブに動作するように設計されています。それにより、Vue と極めて親和性の高いリアクティブな API を提供しています。</p>
+      </div>
+      <div class="feature-image">
+<%- @markdown => %>
+```js
+const page1 = {
+  template: `
+    <v-ons-page>
+      <v-ons-toolbar>
+        <div class="center">Page1</div>
+      </v-ons-toolbar>
+      <p style="text-align: center">
+        This is the first page
+        <v-ons-button @click="$emit('push', page2)">
+          Push Page 2
+        </v-ons-button>
+      </p>
+    </v-ons-page>
+  `
+};
+
+new Vue({
+  el: '#app',
+  template: `
+    <v-ons-navigator :page-stack="pageStack">
+      <component v-for="page in pageStack"
+                :is="page"
+                @push="pageStack.push($event)">
+      </component>
+    </v-ons-navigator>
+  `,
+  data() {
+    return {
+      pageStack: [page1]
+    };
+  }
+});
+```
+<% end %>
+      </div>
+    </div>
+
+    <div class="feature">
+      <div class="feature-text">
+        <h2>Vue CLI 用テンプレートを完備</h2>
+        <p>Onsen UI for Vue をすぐに試したいという方のために、Vue CLI 用のテンプレートを2種類用意しています。
+          現在、Progressive Web App と Cordova アプリに対応しています。</p>
+        <p>また、外部サービスの Monaca CLI（無料）を利用すると Vue CLI で作成した Cordova アプリを実機でリアルタイムデバッグしたり、iOS / Android 向けにリモートでビルドしたりすることができます。
+        </p>
+      </div>
+      <div class="feature-image">
+<%- @markdown => %>
+  * __Progressive Web App__: [vue-pwa-webpack](https://github.com/OnsenUI/vue-pwa-webpack)
+  ```bash
+  $ vue init OnsenUI/vue-pwa-webpack hello-world
+  ```
+  * __Cordova__: [vue-cordova-webpack](https://github.com/OnsenUI/vue-cordova-webpack)
+  ```bash
+  $ vue init OnsenUI/vue-cordova-webpack hello-world
+  ```
+<% end %>
+      </div>
+    </div>
+  </div>
 </div>
 
 
