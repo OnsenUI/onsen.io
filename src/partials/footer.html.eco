@@ -1,32 +1,4 @@
 <footer class="footer-container">
-  <% if !@skipInfo: %>
-  <div class="footer-container-info">
-    <div class="footer-container-info-item">
-      <img src="/images/common/icn_getting.svg">
-      <h3><%=@translate("[en]Getting started[/en][ja]はじめよう[/ja]")%></h3>
-      <p>
-        <% if @lang == "en": %>
-          Start creating beautiful and performant hybrid apps using Onsen UI. In addition to the library we provide a powerful CLI tool that helps you create and build apps without any additional requirements.
-        <% else: %>
-          Onsen UIを使って、美しく、パフォーマンスに優れたハイブリッドアプリを開発しましょう。Monacaのツールと組み合わせることで、アプリの開発からビルドまで簡単に行うことができます。
-        <% end %>
-      </p>
-      <a href="/getting-started/"><%-@translate("[en]Show detail &gt;[/en][ja]詳細を見る &gt;[/ja]")%></a>
-    </div>
-    <div class="footer-container-info-item">
-      <img src="/images/common/icn_docu.svg">
-      <h3><%=@translate("[en]Documentation[/en][ja]ドキュメント[/ja]")%></h3>
-      <p>
-        <% if @lang == "en": %>
-          Learn how to use the Onsen UI components. The documentation contains both a reference for every component and a comprehensive guide that explains the finer points of Onsen UI.
-        <% else: %>
-          Onsen UIコンポーネントの使い方を学びましょう。Onsen UIのすべてのコンポーネントの詳細なリファレンスと使い方が記述されています。
-        <% end %>
-      </p>
-      <a href="/v2/guide"><%-@translate("[en]Show detail &gt;[/en][ja]ドキュメントを読む &gt;[/ja]")%></a>
-    </div>
-  </div>
-  <% end %>
 
   <div class="footer-container-lower">
     <div class="footer-container-lower-inner">
