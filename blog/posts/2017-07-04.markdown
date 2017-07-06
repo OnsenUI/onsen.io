@@ -1,0 +1,65 @@
+---
+author: junio
+date: 2017-07-04
+id: onsenui-has-full-vuejs-support
+title: "Onsen UI has full Vue.js support!"
+product: onsen
+category: announcement
+tags: onsen ui, vue, release
+---
+
+![Onsen UI and Vue.js](/blog/content/images/2017/Mar/onsen-vue.png)
+
+This is it. After months of grooming the Vue.js bindings to a sweet and stable spot, the Onsen UI team is happy to announce that our bindings for Vue.js are now available as a permanent product.
+
+As the *Vue* community is growing bigger and bigger, if you were looking for the best mobile UI framework to build your Vue.js mobile apps with, look no further than this blog post. Just as simple, performant and powerful as *Vue*, keep reading to find out all about the added value Onsen UI can bring to your projects.
+
+<!-- more -->
+
+### What's first
+
+First of all I'd like to welcome everyone to visit our [recently renewed website](https://onsen.io/v2/guide/). The recent changes allow for an easier adaptation to the framework for beginners. It also provides a much clearer guide for both basic and advanced features, answers your FAQs and in general eases the understanding of Onsen UI as well as its bindings to Angular, React and of course Vue.js.
+
+Did you just hear about Onsen UI? Well, as you can see in the website our framework provides a wide variety of ready-to-use UI components that emulate iOS and Android UI guidelines and designs. Ranging from simple elements like buttons or inputs to more complicated ones like menus to provide app navigation, your HTML program will automatically acquire the typical iOS and Android look and feel according to the device it runs in. It's that simple.
+
+![Onsen UI example](/blog/content/images/2017/Jul/ui-example.jpeg)
+
+Then you can make use of our Vue.js adaptation to create beautiful, native-looking as well as high-performance hybrid or progressive web apps. To get started with Onsen UI you can simply follow the quick installation guide [here](https://onsen.io/v2/guide/installation.html#installation) and after that get started with the Vue.js bindings' specific documentation in this [direct link](https://onsen.io/v2/guide/vue/index.html#vue-js). It's very simple to get everything set up, and we'll be glad to help if you find any trouble. I'd also recommend you read our [previous post](https://onsen.io/blog/vue-2-onseui-beta-release/) at the time of the beta release, which describes some implementation details and links to a kitchensink application where you can *vue* pretty much all of the framework's components in action.
+
+### What's new
+
+This is for more advanced developers who may have already been using Onsen UI, Vue.js, or both.
+
+From `vue-onsenui@beta` to its final release we passed through a release-candidate version that changed a few things. The biggest change came along with the core move for the `<ons-input>` component, which has been split into `<ons-input>`, `<ons-checkbox>`, `<ons-radio>` and `<ons-search-input>`. So in `vue-onsenui` instead of writing `<v-ons-input type="checkbox">` you should now write `<v-ons-checkbox>` and similar for the `radio` and `search` input types.
+
+This allowed for our custom directive `v-ons-model` to be dropped in favor of the original `v-model` for template data syncing. You can now simply use `v-model` for all your inputs, which is nice.
+
+Finally the `tabs` array prop of `<v-ons-tabbar>` now accepts a `props` property for each tab object, which allows an easier passing of props to each corresponding page component.
+
+### What's more
+
+So, all these changes reflect our efforts to bring to you a tailored API, simple and pluggable, that combines the best of Vue.js and Onsen UI and optimized for mobile Vue.js apps.
+
+With this you can create not only the more traditional *Cordova* apps but also the futuristic Progressive Web Apps (jump [here](https://developers.google.com/web/progressive-web-apps/) to find out more about those). Actually we have even created templates to start from for both cases, ignitable from your usual `vue-cli`. Just try:
+
+```
+// this command for a Cordova app
+$ vue init OnsenUI/vue-cordova-webpack hello-world
+
+// this one for a PWA
+$ vue init OnsenUI/vue-pwa-webpack hello-world
+```
+
+Add that to a framework that consistently gives you high design quality, great tooling (be sure to check out [Monaca](https://monaca.io/) as well if you don't know it yet) and more resources like state of the art documentation, tutorials and sample apps. What other reason do you need to try the best UI framework for Vue.js **right now**?
+
+We are starting to build a big and active community so if you like Vue.js and / or Onsen UI don't miss out on the opportunity to be a part of it. Reach us on our [Gitter channel](https://gitter.im/OnsenUI/OnsenUI) and the [Community forums](https://community.onsen.io/) or open issues and give enhancement suggestions on our [GitHub page](https://github.com/OnsenUI/OnsenUI). Hope to be talking to you really soon. :D
+
+### What's next
+
+As an extra we'd like to introduce an awesome feature coming up next in Onsen UI that we are excited about: **swipe-to-pop**. You'll very soon be able to emulate this nice native iOS ability to swipe left-to-right to slowly reveal and bring back the last navigation page.
+
+Stay tuned to Onsen UI to get all the latest updates from our side.
+
+---
+
+Onsen UI is an open source library used to create the user interface of hybrid apps. You can find more information on our [GitHub page](https://github.com/OnsenUI/OnsenUI). If you like Onsen UI, please don't forget to give us a star! ★★★★★
