@@ -54,6 +54,15 @@ Edit & Serve
 gulp serve --lang en
 ```
 
+Translate
+------------
+
+```bash
+1. $ gulp i18n-extract # This will generate POT files into src/i18n/gettext
+2. And use PO editor to generate po files
+3. $ gulp i18n-translate # This will translate and overwrite files into src/documents_ja/
+```
+
 Deploying the Onsen UI Website to S3
 ------------------------------------
 

@@ -36,7 +36,6 @@ function translate() {
         var data = contents[0].data.trim();
         data = data.replace('title:', '---\ntitle:');
         data = data.replace(/\n\n## (layout:.+)/, '\n$1\n---');
-        console.log(data);
         file.contents = new Buffer(data);
         file.path = file.path.replace('.po', '.html');
         self.push(file);
