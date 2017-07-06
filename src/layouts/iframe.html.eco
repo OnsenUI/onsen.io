@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="<%=@lang%>" class="<% if @lang == 'ja': %>lang-ja<% else: %>lang-en<% end %>">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="<%= @rootUrl %>css/main.css">
+  <link rel="stylesheet" href="<%= @rootUrl %>font-awesome/css/font-awesome.min.css">
+  <link rel="shortcut icon" href="<%= @rootUrl %>icons/favicon.ico" />
+
+  <!-- Load Onsen UI -->
+  <link rel="stylesheet" href="https://unpkg.com/onsenui@2.4.2/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui@2.4.2/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui@2.4.2/js/onsenui.min.js"></script>
+</head>
+
+<body id="<%- @page %>">
+  <%- @contents %>
+</body>
+</html>
