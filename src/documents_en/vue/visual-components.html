@@ -1,0 +1,108 @@
+---
+layout: 'iframe.html.eco'
+---
+
+<style>
+  ons-row {
+    margin-top: 14px;
+  }
+  ons-col {
+    margin: 0 10px;
+  }
+</style>
+
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-progress-bar value="20"></ons-progress-bar>
+    <ons-progress-bar value="40" secondary-value="80" style="margin: 14px 0"></ons-progress-bar>
+    <ons-progress-bar indeterminate></ons-progress-bar>
+
+  </ons-col>
+  <ons-col width="120px" vertical-align="center" style="margin-left: 10px">
+    <ons-progress-circular value="20"></ons-progress-circular>
+    <ons-progress-circular value="40" secondary-value="80"></ons-progress-circular>
+    <ons-progress-circular indeterminate></ons-progress-circular>
+  </ons-col>
+</ons-row>
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-button>Normal</ons-button>
+    <ons-button modifier="quiet">Quiet</ons-button>
+    <ons-button modifier="outline">Outline</ons-button>
+  </ons-col>
+
+  <ons-col width="120px" vertical-align="center" style="margin-left: 10px">
+    <ons-switch checked></ons-switch>
+    <ons-switch checked disabled></ons-switch>
+  </ons-col>
+</ons-row>
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-button modifier="cta">Call to action</ons-button>
+    <ons-button modifier="light">Light</ons-button>
+  </ons-col>
+
+  <ons-col width="170px" vertical-align="center" style="margin-left: 10px">
+    <ons-range value="30" style="width: 154px"></ons-range>
+  </ons-col>
+</ons-row>
+
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-search-input placeholder="Search"></ons-search-input>
+  </ons-col>
+
+  <ons-col width="60px" vertical-align="center" style="margin-left: 10px">
+    <ons-checkbox checked></ons-checkbox>
+    <ons-checkbox checked disabled></ons-checkbox>
+  </ons-col>
+</ons-row>
+
+<br><br>
+<!-- MATERIAL -->
+
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-progress-bar modifier="material" value="20"></ons-progress-bar>
+    <ons-progress-bar modifier="material" value="40" secondary-value="80" style="margin: 14px 0"></ons-progress-bar>
+    <ons-progress-bar modifier="material" indeterminate></ons-progress-bar>
+
+  </ons-col>
+  <ons-col width="120px" vertical-align="center" style="margin-left: 10px">
+    <ons-progress-circular modifier="material" value="20"></ons-progress-circular>
+    <ons-progress-circular modifier="material" value="40" secondary-value="80"></ons-progress-circular>
+    <ons-progress-circular modifier="material" indeterminate></ons-progress-circular>
+  </ons-col>
+</ons-row>
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-button modifier="material" ripple>Normal</ons-button>
+    <ons-button modifier="material--flat" ripple>Quiet</ons-button>
+  </ons-col>
+
+  <ons-col width="120px" vertical-align="center" style="margin-left: 10px">
+    <ons-switch modifier="material" checked></ons-switch>
+    <ons-switch modifier="material" checked disabled></ons-switch>
+  </ons-col>
+</ons-row>
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-button modifier="material" disabled>Normal</ons-button>
+    <ons-button modifier="material--flat" disabled>Quiet</ons-button>
+  </ons-col>
+
+  <ons-col width="170px" vertical-align="center" style="margin-left: 10px">
+    <ons-range modifier="material" value="30" style="width: 154px"></ons-range>
+  </ons-col>
+</ons-row>
+
+<ons-row>
+  <ons-col vertical-align="center">
+    <ons-search-input modifier="material" placeholder="Search"></ons-search-input>
+  </ons-col>
+
+  <ons-col width="60px" vertical-align="center" style="margin-left: 10px">
+    <ons-checkbox modifier="material" checked></ons-checkbox>
+    <ons-checkbox modifier="material" checked disabled></ons-checkbox>
+  </ons-col>
+</ons-row>
