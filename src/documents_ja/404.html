@@ -14,27 +14,27 @@ sitemap:
   var redirectRules = [ // the higher, the more prioritized
 
     // Old Onsen UI docs URLs (Used in ~2017/06/23)
-    { langs: ['en'], from: /^\/v2\/docs\/guide\/js(\/(index\.html)?)?$/,
+    { langs: ['ja'], from: /^\/v2\/docs\/guide\/js(\/(index\.html)?)?$/,
                        to: '/v2/guide/' },
-    { langs: ['en'], from: /^\/v2\/docs\/guide\/(react|angular1|angular2|vue)(\/(index\.html)?)?$/,
+    { langs: ['ja'], from: /^\/v2\/docs\/guide\/(react|angular1|angular2|vue)(\/(index\.html)?)?$/,
                        to: '/v2/guide/$1/' },
-    { langs: ['en'], from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\/(.*)$/,
+    { langs: ['ja'], from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\/(.*)$/,
                        to: '/v2/api/$1/$2' },
-    { langs: ['en'], from: /^\/v2\/docs\/css\.html$/,
+    { langs: ['ja'], from: /^\/v2\/docs\/css\.html$/,
                        to: '/v2/api/css.html' },
-    { langs: ['en'], from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\.html$/,
+    { langs: ['ja'], from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\.html$/,
                        to: '/v2/api/$1/' },
-    { langs: ['en'], from: /^\/v2\/docs\/.*$/,
+    { langs: ['ja'], from: /^\/v2\/docs\/.*$/,
                        to: '/v2/guide/' },
-    { langs: ['en'], from: /^\/v2\/$/,
+    { langs: ['ja'], from: /^\/v2\/$/,
                        to: '/v2/guide/' },
-    { langs: ['en'], from: /^\/v2\/api\/$/,
+    { langs: ['ja'], from: /^\/v2\/api\/$/,
                        to: '/v2/api/js/' },
-    { langs: ['en'], from: /^\/v1\/$/,
+    { langs: ['ja'], from: /^\/v1\/$/,
                        to: '/v1/guide.html' },
-    { langs: ['en'], from: /^\/v1\/reference\/$/,
+    { langs: ['ja'], from: /^\/v1\/reference\/$/,
                        to: '/v1/reference/javascript.html' },
-    { langs: ['en'], from: /^\/getting-started(\/(index\.html)?)?$/,
+    { langs: ['ja'], from: /^\/getting-started(\/(index\.html)?)?$/,
                        to: '/v2/guide/' },
 
   ];
@@ -69,7 +69,7 @@ sitemap:
   var BreakException = {}; // dirty hack to perform `break;` in Array#forEach
   try {
     // Redirect based on the rules
-    formattedRedirectRules['en'].forEach(function(rule){
+    formattedRedirectRules['ja'].forEach(function(rule){
       if (window.location.pathname.match(rule.from)) {
         var destinationPathname = window.location.pathname.replace(rule.from, rule.to);
 
