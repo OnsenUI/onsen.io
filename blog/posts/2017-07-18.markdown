@@ -17,59 +17,51 @@ og:
 
 ![Onsen UI](/blog/content/images/2017/Jul/onsen-logo-ogp.png)
 
-Onsen UI ユーザの皆さん、こんにちは。
-
-この記事では Onsen UI 2.4.0 および 2.5.0 で追加された
+In this article, we will introduce the following new features of Onsen UI added in `2.4.0` and `2.5.0`:
 
 - Swipe to pop (2.5.0)
 - Native `<template>` Support (2.4.0)
 - `<script>` in `<ons-page>` and Page Lifecycle Hooks (2.4.0)
 - Caching / Preloading External Templates (2.4.0)
 
-の4つの新機能についてご説明します。
-
 <!-- more -->
 
 ## Swipe to pop (2.5.0)
 
-Onsen UI 2.5.0 以上では、`<ons-navigator>` に `swipeable` 属性をつけることで、Swipe to pop 機能が有効になります。
-この機能を有効にすると、バックボタンを押す代わりに、ページ左端をスワイプすることで前のページに戻ることができるようになります。
+In Onsen UI 2.5.0 and above, you can use **Swipe to pop** feature by attaching `swipeable` attribute to `<ons-navigator>`.
+This feature enables users to pop pages by swiping the left edge of a page instead of pushing a back button.
 
 <p data-height="512" data-theme-id="dark" data-slug-hash="NgVpoN" data-default-tab="html,result" data-user="asial-matagawa" data-embed-version="2" data-pen-title="Onsen UI 2.5.0 - Swipe to pop" class="codepen">See the Pen <a href="https://codepen.io/asial-matagawa/pen/NgVpoN/">Onsen UI 2.5.0 - Swipe to pop</a> by Naoki Matagawa (<a href="https://codepen.io/asial-matagawa">@asial-matagawa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-また、オプションとして、`swipe-target-width` 属性と `swipe-threshold` 属性が用意されています。
+There are two options for Swipe to pop: `swipe-target-width` and `swipe-threshold` attributes.
 
-`swipe-target-width` 属性を利用すると、画面左端からのスワイプの有効範囲を指定できます。指定可能な値は、正のピクセル値です（デフォルト値は `20px`）。
+`swipe-target-width` attribute can be used to adjust the area where accepts swipe event for Swipe to pop. You can set a positive pixel value for this attribute (Default: `20px`).
 
-`swipe-threshold` 属性を利用すると、ページの pop に必要なスワイプ量を指定できます。指定可能な値は、`0` から `1.0` の小数値です（デフォルト値は `0.2`）。
+`swipe-threshold` attribute can be used to adjust how much users have to swipe the page to pop it. You can set floating points between `0` to `1.0` (Default: `0.2`).
 
-以下に `swipe-target-width` 属性と `swipe-threshold` 属性の使用例を示します。
+Here is an example usage of `swipe-target-width` and `swipe-threshold` attributes:
 
 <p data-height="512" data-theme-id="dark" data-slug-hash="owRWgV" data-default-tab="html,result" data-user="asial-matagawa" data-embed-version="2" data-pen-title="Onsen UI 2.5.0 - Swipe to pop - swipe-target-width & swipe-threshold" class="codepen">See the Pen <a href="https://codepen.io/asial-matagawa/pen/owRWgV/">Onsen UI 2.5.0 - Swipe to pop - swipe-target-width & swipe-threshold</a> by Naoki Matagawa (<a href="https://codepen.io/asial-matagawa">@asial-matagawa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-なお、Material Design 版の `<ons-navigator>` では、
-`swipeable` 属性をつけても Swipe to pop は有効になりません。
-Material Design には Swipe to pop の概念がないためです。
+Note that you cannot use Swipe to pop in the Material version of `ons-navigator` by default because the Material Design does not describe things related to Swipe to pop.
 
-強制的に Swipe to pop を有効にするには、`swipeable="force"` と記述してください。
-その際、`slide-md` 以外の遷移アニメーション（デフォルト値の `lift-md` など）を指定すると不自然な UI になってしまいますのでご注意ください。
+In order to enable Swipe to pop in the Material version of `ons-navigator`, you can use `swipeable="force"`.
+In that case, please keep in mind that you have to use `slide-md` animation since other animations such as `lift-md` (default value) leads to weird behavior.
 
 <p data-height="512" data-theme-id="dark" data-slug-hash="owRWjO" data-default-tab="html,result" data-user="asial-matagawa" data-embed-version="2" data-pen-title="Onsen UI 2.5.0 - Swipe to pop - swipeable="force" in Material Design" class="codepen">See the Pen <a href="https://codepen.io/asial-matagawa/pen/owRWjO/">Onsen UI 2.5.0 - Swipe to pop - swipeable="force" in Material Design</a> by Naoki Matagawa (<a href="https://codepen.io/asial-matagawa">@asial-matagawa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-AngularJS 1.x バインディング, Angular 2+ バインディングをお使いの方は
-上記の例と同じようにそのまま `swipeable`, `swipe-target-width`, `swipe-threshold` 属性を記述してください。
+If you are using AngularJS 1.x binding or Angular 2+ binding, you can just use `swipeable`, `swipe-target-width` and `swipe-threshold` attributes as same as the examples above.
 
-React バインディングをお使いの方は、`<Navigator>` をご利用の場合は `swipeable`, `swipe-target-width`, `swipe-threshold` prop を記述してください。
-`<RouterNavigator>` をご利用の場合は、 `swipeable`, `swipe-target-width`, `swipe-threshold` prop の記述に加えて、[このコード](https://github.com/OnsenUI/OnsenUI/blob/d1254ff33be9b26ed98b67561f31c72279884c63/bindings/react/demo/examples/RouterNavigator.js#L159)を参考に `swipePop` prop を記述してください。
+If you are using React binding with `<Navigator>`, you can just use `swipeable`, `swipe-target-width` and `swipe-threshold` props but in the case of `<RouterNavigator>` you have to use an additional `swipePop` prop according to [this example](https://github.com/OnsenUI/OnsenUI/blob/d1254ff33be9b26ed98b67561f31c72279884c63/bindings/react/demo/examples/RouterNavigator.js#L159).
 
-Vue バインディングをお使いの方は `v-ons-navigator` に `swipeable`, `swipe-target-width`, `swipe-threshold` 属性を記述してください。
+If you are using Vue binding, you can just attach `swipeable`, `swipe-target-width` and `swipe-threshold` to the `v-ons-navigator` component.
 
 ## Native `<template>` Support (2.4.0)
 
-Swipe to pop の例でもお見せしたように、Onsen UI 2.4.0 以上では `<template>` でページを定義できるようになりました。
+As we show in the examples of Swipe to pop, Onsen UI 2.4.0 and above has support for native `<template>` element.
 
 ```html
 <template id="page1.html">
@@ -85,29 +77,31 @@ Swipe to pop の例でもお見せしたように、Onsen UI 2.4.0 以上では 
 </template>
 ```
 
-`<template>` 要素は Android 4.4 以上, iOS 9.0 以上でご利用可能です。
+`<template` element can be used in Android 4.4+ and iOS 9.0+.
 
-Onsen UI 2.3.x までで提供していた `<ons-template>` 要素は後方互換性を考慮して残してありますが、`ons-template` 要素を利用するメリットは特にないため、新しいプロジェクトを始める際は `<template>` 要素を利用することをお勧めします。
+`<ons-template>` is still available for backward compatibility, but there is no advantage if you use `<ons-template>` element. Therefore, we recommend that you use `<template>` elements if you are planning to create new Onsen UI apps.
 
 ## `<script>` in `<ons-page>` and Page Lifecycle Hooks (2.4.0)
 
-Onsen UI 2.4.0 以上では、`<ons-page>` が DOM ツリーに追加された際の処理を、`<script>` 要素の形で `<ons-page>` 内部に直接書けるようになりました。
-また、`onInit`, `onShow`, `onHide`, `onDestroy` の4つのプロパティが追加されました。
-これらを組み合わせることで、以下のようにページの HTML 構造と振る舞いを同時に定義することができます。
+In Onsen UI 2.4.0 and above, you can directly write procedures which are invoked when `<ons-page>` is appended into the DOM tree by embedding `<script>` element inside `ons-page` element. Also, new properties `onInit`, `onShow`, `onHide` and `onDestroy` are now available.
+Combining these new features, you can define the layout and behavior of a page as follows:
 
 <p data-height="512" data-theme-id="dark" data-slug-hash="ModmjQ" data-default-tab="html,result" data-user="asial-matagawa" data-embed-version="2" data-pen-title="Onsen UI 2.4.0 - <script> in <ons-page>" class="codepen">See the Pen <a href="https://codepen.io/asial-matagawa/pen/ModmjQ/">Onsen UI 2.4.0 - &lt;script&gt; in &lt;ons-page&gt;</a> by Naoki Matagawa (<a href="https://codepen.io/asial-matagawa">@asial-matagawa</a>) on <a href="https://codepen.io">CodePen</a>.</p>
 <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
 
-ただし、注意点として、`<script>` 要素は `<ons-page>` 要素の **直下** に **1つだけ** 記述してください。また、`<ons-page>` をテンプレートの中に記述する場合は、`<ons-template>` 要素ではなく `<template>` 要素を使用してください。`<ons-template>` 要素を使用すると、`<ons-page>` が navigator や splitter によって読み込まれる前に `<script>` 要素内のコードが動作してしまいます。
+Note that you have to put **only one** `<script>` elmeent **just under `<ons-page>` element**.
+Also, you have to use `<template>` elmeent if you want to locate `<ons-page>` in page templates. If you put `script` element into `<ons-template>`, the script runs before it is appended into the DOM tree by navigators or splitters.
 
 ## Caching / Preloading External Templates (2.4.0)
 
-ご存知の通り、`ons-navigator#pushPage` や `ons-splitter-content#load` には、外部ファイルを読み込む機能が付いています。しかし、同じ外部ファイルに何度もリクエストが送られるのはパフォーマンス上問題があります。そのため、**Onsen UI 2.4.0 以上では、一度読み込んだ外部ファイルは自動的にキャッシュされます **。
+As you know, `ons-navigator#pushPage`, `ons-splitter-content#load` and some other methods have a feature to load external files, but sending HTTP requests to the same external file multiple times leads to performance degration.
 
-しかし、まだ問題は残っています。外部ファイルへの最初の HTTP リクエストを pushPage や load のタイミングで行うと、通信速度の遅い端末やサーバにおいてパフォーマンスの問題が発生します。そこで **Onsen UI 2.4.0 以上では、外部ファイルへの HTTP リクエストを事前に行うことのできる ons.preload 関数が提供されています**。
+To deal with this problem, Onsen UI 2.4.0 and above **caches external files once they are loaded**.
 
-`ons.preload` 関数は以下のように使用します。
-`ons.preload` 関数は非同期関数であり、外部ファイルを読み込み終えたタイミングで Promise が resolve されます。
+But a problem still exists. If we send a first HTTP request to an external file at the timing of `pushPage` or `load`, it causes a performance problem in the environments which have slow network of slow servers. So Onsen UI 2.4.0 and above **provides `ons.preload` function which enables you to send HTTP requests to external files ahead of time**.
+
+You can use `ons.preload` function as follows.
+`ons.preload` is an asynchronous function and its Promise resolves at the end of loading the external files.
 
 ```html
 <head>
@@ -147,8 +141,8 @@ Onsen UI 2.4.0 以上では、`<ons-page>` が DOM ツリーに追加された�
 </body>
 ```
 
-`ons.preload` 関数は必ずしも `<head>` 要素内で実行する必要はありません。
-状況に合わせて、お好きな場所でご利用ください。
+Of cource `ons.preload` function is not required to be placed in `<head>` element.
+You can use this function wherever you prefer.
 
 ---
 
