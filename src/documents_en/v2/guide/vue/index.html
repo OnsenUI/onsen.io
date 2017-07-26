@@ -75,7 +75,7 @@ These templates bundle Onsen UI + Vue bindings with unit & e2e testing solutions
 
 [Vue Components API Reference](/v2/api/vue/) lists up all the Vue Components included in Onsen UI.
 
-Also, [Kitchensink app](https://onsenui.github.io/vue-onsenui-kitchensink/) will be useful for determining how components behave. [See the code here](https://github.com/onsenui/vue-onsenui-kitchensink). 
+Also, [Kitchensink app](https://onsenui.github.io/vue-onsenui-kitchensink/) will be useful for determining how components behave. [See the code here](https://github.com/onsenui/vue-onsenui-kitchensink).
 
 #### Hello World with Vue
 
@@ -133,6 +133,27 @@ Having a general idea about how everything is implemented could be useful in som
 These components are simple wrappers around inner [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) in most of the cases. This means that a Vue Component takes some props and translate them into DOM properties, DOM attributes or method calls for the Onsen UI core. It also listens for native events and fires the corresponding Vue events. If you inspect the DOM you will likely see a bunch of `ons-*` components without `v-*` prefix (these are real HTMLelements). You can have a look at the implementation [here](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/vue/src/components).
 
 Since `v-ons-*` components compiles into `ons-*` DOM element, you can use this knowledge to style your component with tag names as well.
+
+#### Page Compilation
+
+`v-ons-page` component compiles into `ons-page` custom element. This element, at the same time, processes its content and filters scrollable and fixed elements. Scrollable content is moved into a special `div.page__content` wrapper. This behavior might create issues under some specific situations, like using `v-for` with asynchronous data. To avoid any possible issue, __manually providing a `div.content` element is recommended__:
+
+```html
+<v-ons-page>
+  <v-ons-toolbar></v-ons-toolbar>
+
+  <div class="content">
+    <!-- Scrollable content here -->
+    <v-ons-input></v-ons-input>
+    <div v-for="item in asyncAjaxItems"></div>
+  </div>
+
+  <!-- Fixed content here -->
+  <v-ons-fab></v-ons-fab>
+</v-ons-page>
+```
+
+See also [Components Compilation](../compilation.html) section for more details about this.
 
 #### The $ons object
 
