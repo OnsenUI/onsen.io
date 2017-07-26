@@ -78,7 +78,7 @@ The second icon will be displayed when `material` modifier is present (other mod
 
 #### Applying Styles to Inner Custom Elements
 
-Most Onsen UI components expand the inner element during runtime. For instance, ons-page automatically injects the following code inside
+Some Onsen UI components expand their content during runtime. For instance, `ons-page` automatically injects the following code inside
 `<ons-page>` and `</ons-page>`.
 
 ```
@@ -88,71 +88,9 @@ Most Onsen UI components expand the inner element during runtime. For instance, 
 </ons-page>
 ```
 
-Notice some additional attributes (such as `class=”page”`) and elements (such as `div`) are added.
+Therefore, sometimes you might need to style components using this inner elements. For example, changing background color of a specific page could be done with `#myPage .page__background` CSS selector.
 
-However, you can avoid this behavior by writing the auto-inserted attributes or elements manually.
-
-If you write the following code,
-
-```
-<ons-page>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-Onsen UI compiles the code above into the following code without adding new `<div class=”page__content”>`
-
-```
-<ons-page class="page">
-  <div class=”page__background”></div>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-but `<div class=”page__background”>` will be added since no `<div class=”page__background”>` is placed.
-
-Understanding how to bypass compilation is important if you want to attach style to `div`, which means you can write:
-
-```
-<ons-page>
-  <div class=”page__background” style=”background-color: #000;”></div>
-  <div class=”page__content” style=”color: #ccc;”><!-- Your page content --></div>
-</ons-page>
-```
-
-##### Pitfalls: Specially treated tags in compilation
-
-`<ons-toolbar>`, `<ons-bottom-toolbar>` and some tags are treated specially in compilation.
-
-For example,
-
-```
-<ons-page>
-  <ons-toolbar>
-    <div class="center">Title</div>
-  </ons-toolbar>
-
-  <!-- Your page content -->
-</ons-page>
-```
-
-will be compiled into
-
-```
-<ons-page class="page">
-  <ons-toolbar class="toolbar">
-    <div class="center toolbar__center toolbar__title">Title</div>
-  </ons-toolbar>
-
-  <div class="page__background"></div>
-  <div class="page__content"><!-- Your page content --></div>
-</ons-page>
-```
-
-You can notice that `<ons-toolbar>` is never moved into `<div class="page__content">`.
-
-Some components have behaviours such as these, so make sure to keep that in mind.
-
+See also [Components Compilation](compilation.html) section for more details about this.
 
 #### Extending animations
 
