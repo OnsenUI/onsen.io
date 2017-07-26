@@ -134,7 +134,7 @@ These components are simple wrappers around inner [Custom Elements](https://deve
 
 Since `v-ons-*` components compiles into `ons-*` DOM element, you can use this knowledge to style your component with tag names as well.
 
-#### Page Compilation
+#### VOnsPage Compilation
 
 `v-ons-page` component compiles into `ons-page` custom element. This element, at the same time, processes its content and filters scrollable and fixed elements. Scrollable content is moved into a special `div.page__content` wrapper. This behavior might create issues under some specific situations, like using `v-for` with asynchronous data. To avoid any possible issue, __manually providing a `div.content` element is recommended__:
 
