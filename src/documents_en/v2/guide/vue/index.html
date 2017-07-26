@@ -167,9 +167,11 @@ The original [`ons` object](../fundamentals.html#the-ons-object) is not availabl
 
 #### Event Handling
 
-DOM events fired by Onsen UI elements are translated into Vue events in the corresponding components. For example, `v-ons-navigator` can handle a `postpush` event with `@postpush="..."`. Note that only custom events like `postpush`, `init`, `prechange`, etc. are treated like this. Native events like `input` or `change` will still need to be handled as DOM events: `@input.native="..."` (normally you'd want to use `v-model` for these events).
+DOM events fired by Onsen UI elements are translated into Vue events in the corresponding components. For example, `v-ons-navigator` can handle a `postpush` event with `@postpush="..."`.
 
-The exception to this is `click` event, which can be handled as a Vue event: `<v-ons-tab @click="...">`. The reason is that `click` event is used to override the default behavior of some components:
+From `vue@2.4.0` and `vue-onsenui@2.1.0` onwards, native DOM events are passed down to the children. This means that `<v-ons-checkbox @change="...">` will work __without__ `native` modifier. Prior to these versions, `@change.native="..."` syntax is required. Note that these events are still DOM events and, as such, Vue DevTools won't show any Vue event for these.
+
+The exception to this is `click` event, which is turned into a Vue event in some components. The reason is that `click` event is used to override default behaviors:
 
 ```html
 <v-ons-back-button @click.prevent="pageStack.splice(1)"></v-ons-back-button>
@@ -207,7 +209,7 @@ It is also possible to bind arrays to `v-ons-checkbox` or `v-ons-switch` just li
 
 ##### How to set up global Onsen UI options?
 
-The main guide describes [how to disable or set some global features](../faq.html) "right after including `onsenui.js` in the app". This means that it must take effect before any component is rendered. Since `ons` object is not provided globally, we need to use `$ons` object at the very first possible location:
+The main guide describes [how to disable or set some global features](../faq.html) _"right after including `onsenui.js` in the app"_. This means that it must take effect before any component is rendered. Since `ons` object is not provided globally, we need to use `$ons` object at the very first possible location:
 
 ```
 import Vue from 'vue';
@@ -251,9 +253,9 @@ Definitely yes. Vuex is a good solution for components communication. If you hav
 
 ##### What about vue-router?
 
-Onsen UI provides its own routing components: [`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html), [`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html) and [`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html). These components can be mixed in many different ways to achieve the desired route pattern. This is in general completely enough for mobile SPA, so there is no need to plug an external router.
+Onsen UI provides its own routing components: [`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html), [`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html) and [`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html). These components can be mixed in many ways to achieve the desired route pattern. This is in general completely enough for mobile SPA, so there is no need to plug an external router.
 
-However, for those who really want to integrate vue-router, it is compatible with Onsen UI with the exception of navigator's animations. Currently, you'd need to make your own transitions for this. While there are workarounds like pushing pages to navigator's `pageStack` on router guards, it still has a few drawbacks.
+However, for those who really want to integrate vue-router, it is compatible with Onsen UI except for navigator's animations. Currently, you'd need to make your own transitions for this. While there are workarounds like pushing pages to navigator's `pageStack` on router guards, it still has a few drawbacks.
 
 For other components like `v-ons-tabbar`, you can override `v-ons-tab` "on click" behavior with `@click.prevent="..."` and change your router view.
 
