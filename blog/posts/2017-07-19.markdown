@@ -1,0 +1,57 @@
+---
+author: andi
+date: 2017-07-19
+id: monaca-cli-2-3-0-released-with-onsen-ui-2-4-0-compatibility-and-more
+title: "Monaca CLI 2.3.0 Released with Onsen UI 2.4.0 Compatibility and More!"
+product: monaca
+category: announcement
+tags: monaca, CLI, release
+---
+
+![monaca cli main view](/blog/content/images/2017/Jul/monaca-cli-main.png)
+
+We are happy to announce the release of [Monaca CLI 2.3.0](https://monaca.io/cli.html). With the latest update, we have mainly been focused on enhancing some of the core features of CLI and providing updated tools.
+
+Let's not waste time and immediately take a look at the new features recently implemented and how they will improve your development process and user experience!
+
+<!-- more -->
+
+## Onsen UI 2.4.0 Compatibility and Templates Update
+
+The latest Onsen UI version has been released just a few days ago with exciting updates (check [this blog post](https://onsen.io/blog/onsenui-has-full-vuejs-support/) in case you missed it). For this reason, we have already updated the templates based on Onsen UI itself. More specifically, we have updated all `Angular2`, `React` and `Vue` templates to the latest version of the framework and the related framework bindings. These changes will be available for all the newly created projects while the old ones will still be based on the available version at the moment of their creation.
+
+## Enhanced Debugging
+
+The new transpilable templates have been fixed in order to provide debugging capability during the development process. From now on, there is no need to transpile the project and debug the `www` content as the debugging can be executed live directly with `webpack-dev-server`. Just run `monaca preview` command and start testing your app. In this case, the changes will be available for all the newly created projects while the old ones will still be based on the available version at the moment of their creation.
+
+## New `monaca info` Command
+
+We have created a new `monaca info` command that will allow you to get useful information about your project and environment. Specifically, the command execution provides information about:
+
+* **Monaca Local:** CLI and bundled lib version.
+
+* **System:** OS info and Node/npm version.
+
+* **Monaca Cloud:** availability and local IP address.
+
+* **Project:** info about Cordova, Onsen UI, and other framework/bindings version.
+
+![monaca info command output](/blog/content/images/2017/Jul/monaca-info.png)
+
+## Improved Error Messages and Docs
+
+Various error messages have been improved in order to provide a better feedback about the failure reasons. Moreover, in some specific cases, docs references have been added in order to help to solve the possible issues. An example of these updates can be seen in the image below.
+
+![monaca error](/blog/content/images/2017/Jul/monaca-cli-error.png)
+
+Moreover, Monaca CLI built-in docs and tasks organization have been improved in order to provide a better experience during their consultation.
+
+## Built-in Cordova CLI Updated to Version 6.2
+
+The built-in Cordova CLI version has been updated to 6.2 in order to match Monaca IDE support. This is not a major change as its use is compulsory when using Monaca CLI. Remember that executing commands like `monaca build` or `monaca platform` will trigger the build-in Cordova CLI. It's still possible to use the standalone Cordova CLI tool if you wish so by manually installing it on your local environment.
+
+## Conclusion
+
+If you always want to be up to date with the latest updates, feel free to take a look at [Monaca CLI changelog](https://github.com/monaca/monaca-cli/blob/master/CHANGELOG.md).
+
+We are trying to constantly update Monaca CLI with new tools and features. If there is something that you would like to see in CLI or that you think it needs to be improved, don't hesitate and let us know! Any feedback would be appreciated and help us to deliver a better product for the whole Monaca/Onsen UI community.

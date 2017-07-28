@@ -27,16 +27,16 @@
           <div class="footer-container-navigation-header">
             <%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%>
           </div>
-          <a href="/getting-started/#cli" class="footer-container-navigation-link">
+          <a href=/v2/guide/installation.html#command-line-tool-to-package-for-mobile-apps-monaca-cli" class="footer-container-navigation-link">
             <%=@translate("[en]Develop with Monaca CLI[/en][ja]Monaca CLIで開発する[/ja]")%>
           </a>
-          <a href="/getting-started/#cloud" class="footer-container-navigation-link">
+          <a href="https://monaca.io/cloud.html" class="footer-container-navigation-link">
             <%=@translate("[en]Use Monaca Cloud IDE[/en][ja]MonacaクラウドIDEを使う[/ja]")%>
           </a>
-          <a href="/getting-started/#npm" class="footer-container-navigation-link">
+          <a href="/v2/guide/installation.html#install-with-npm" class="footer-container-navigation-link">
             <%=@translate("[en]Install via NPM or Bower[/en][ja]NPMやBowerでインストール[/ja]")%>
           </a>
-          <a href="/getting-started/#download" class="footer-container-navigation-link">
+          <a href="/v2/guide/installation.html#installation" class="footer-container-navigation-link">
             <%=@translate("[en]Download Everything[/en][ja]ダウンロード[/ja]")%>
           </a>
         </div>
@@ -62,7 +62,7 @@
             <%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%>
           </a>
           <% if @lang == "en": %>
-            <a href="/community" class="footer-container-navigation-link">
+            <a href="https://community.onsen.io/" class="footer-container-navigation-link">
               Community
             </a>
           <% else if @lang == "ja": %>

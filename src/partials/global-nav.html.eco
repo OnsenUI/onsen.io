@@ -13,7 +13,7 @@
         <input type="text" class="global-nav-search-input" id="docsearch" placeholder="Search the docs...">
       </li>
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isGuide or @page == 'guide') %>">
-        <a href="/v2/guide"><%=@translate("[en]Guide[/en][ja]ドキュメント[/ja]")%></a>
+        <a href="/v2/guide"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">
@@ -46,7 +46,7 @@
 
       </li>
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isAPI or @reference) %>">
-        <a href="#"><%=@translate("[en]API[/en][ja]ドキュメント[/ja]")%></a>
+        <a href="#"><%=@translate("[en]API[/en][ja]API[/ja]")%></a>
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">

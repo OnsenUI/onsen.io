@@ -1,0 +1,116 @@
+---
+title: 'Components Compilation'
+order: 145
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Components Compilation
+
+In order to provide a very simple API, some Onsen UI components need to automatically add "boilerplate" content on creation. This process is called component compilation, where an element and its correspondent content is wrapped, moved around or new classes are added to it. In general this process is transparent to the developer and shouldn't need to worry about it. However, there are situations where knowing how to bypass compilation might be important (e.g. when implementing new framework bindings). This section explains what kind of changes some Onsen UI components automatically make to their inner content.
+
+#### Page Compilation
+
+The most important changes perhaps occur during `ons-page` compilation. There are basically 3 parts inside an `ons-page`:
+
+* Background: Applies background color or image.
+* Scrollable content: Scrollable part where most of the content is included.
+* Fixed elements: Content that is fixed in the screen during scroll.
+
+Fixed elements could be naively implemented with `position: fixed` property. However, this causes too many issues in some mobile browsers when scrolling. Therefore, separating fixed content and scrollable content in two different containers is necessary. `ons-page` filters fixed and scrollable content on creation, but you need to be aware of it if you want to add extra content at a later time.
+
+Specifically, when you create a page like this:
+
+```html
+<ons-page>
+  <ons-toolbar></ons-toolbar>
+  Some content here
+  <ons-input></ons-input>
+  <ons-fab></ons-fab>
+  <div>More content</div>
+</ons-page>
+```
+
+`ons-page` will compile in the following way:
+
+```html
+<ons-page class="page">
+  <ons-toolbar></ons-toolbar>
+  <div class="page__background"></div>
+  <div class="page__content">
+    Some content here
+    <ons-input></ons-input>
+    <div>More content</div>
+  </div>
+  <ons-fab></ons-fab>
+</ons-page>
+```
+
+As you can see, it added `.page`, `div.page__background` and `div.page__content` automatically. `ons-toolbar` and `ons-fab` are fixed content so they are left outside the previous wrappers. If you want to add an extra `ons-fab` after all of this happens, you should add it as a direct child of `ons-page`. However, other non-fixed elements like `ons-input` must be appended inside `div.page__content`.
+
+Knowing this, it is very easy to bypass the compilation process. If you directly provide the previous structure, Onsen UI won't need to change anything at all. You can also include `<div class="content">` or `<div class="background">` and the other necessary classes (`page__content` and `page__background`) will be added automatically. Example:
+
+```html
+<ons-page>
+  <ons-toolbar></ons-toolbar>
+  <div class="content">
+    Some content here
+    <ons-input></ons-input>
+    <div>More content</div>
+  </div>
+  <ons-fab></ons-fab>
+</ons-page>
+```
+
+#### Toolbar Compilation
+
+`ons-toolbar` divides its layout in three parts: `div.left`, `div.center` and `div.right`. However, these classes are simple aliases for the real classes. A normal toolbar will compile its content as follows:
+
+```html
+<ons-toolbar class="toolbar">
+  <div class="left toolbar__left">Left content</div>
+  <div class="center toolbar__center">Center content</div>
+  <div class="right toolbar__right">Right content</div>
+</ons-toolbar>
+```
+
+In addition, these containers are sorted automatically to always match "left - center - right" order.
+
+#### List Item Compilation
+
+Similarly to the toolbar example, `ons-list-item` also divides its layout in left, center and right parts:
+
+```html
+<ons-list-item class="list-item">
+  <div class="left list-item__left">Left content</div>
+  <div class="center list-item__center">Center content</div>
+  <div class="right list-item__right">Right content</div>
+</ons-list-item>
+```
+
+If none of those sections is provided, `ons-list-item` will wrap all its content inside `div.list-item__center`.
+
+#### Select Compilation
+
+`ons-select` component simply adds a native `select` element if none is provided:
+
+```html
+<ons-select>
+  <option>Opt 1</option>
+  <option>Opt 2</option>
+</ons-select>
+```
+
+Turns into:
+
+```html
+<ons-select class="select">
+  <select class="select-input">
+    <option>Opt 1</option>
+    <option>Opt 2</option>
+  </select>
+</ons-select>
+```
+
