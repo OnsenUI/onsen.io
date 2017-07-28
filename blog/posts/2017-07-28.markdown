@@ -28,7 +28,7 @@ We shall go through these three pages briefly so that we give you the general id
 
 ![Spotify Pattern 01](/blog/content/images/2017/Jul/spotify_pattern_01.png)
 
-The first page of this pattern is the Browsing Page which allows the user to browse through playlists and find one that suits his tastes. The implementation of this page is quite simple. It's constructed with the following Onsen UI elements: `<ons-carousel>`, `<ons-list>`, `<ons-row>`, and `<ons-col>`. 
+The first page of this pattern is the Browsing Page which allows the users to browse through playlists and find one that suits their tastes. The implementation of this page is quite simple. It's constructed with the following Onsen UI elements: `<ons-carousel>`, `<ons-list>`, `<ons-row>`, and `<ons-col>`. 
 
 On the top, we have a carousel which elements have fixed length to get the overflowing horizontal list look, displaying the list of playlists the app recommends to the user:
 
@@ -135,7 +135,7 @@ The second part consists of the list of the playlist's tracks, where the first e
 [...]
 ```
 
-What's peculiar about the list's elements is that each track element has a three dotted icon on the right, which appears horizontally in the case of iOS or vertically in the case of Android. This is accomplished by providing the name of the icon, that will appear on Android, with the `material` keywoard after the name of the default icon.
+What's peculiar about the list's elements is that each track element has a three dotted icon on the right, which appears horizontally in the case of iOS or vertically in the case of Android. This is accomplished by providing the name of the icon, that will appear on Android, with the `material` keyword after the name of the default icon.
 
 Moreover, the two parts are separated by the "Shuffle Play!" `<ons-button>` which, when tapped, shows the `<ons-toast>` element at the bottom of the screen, showing the currently playing track:
 
