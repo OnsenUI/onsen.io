@@ -1,6 +1,6 @@
 ---
 author: nikola
-date: 2017-07-12
+date: 2017-07-28
 id: creating-awesome-user-interfaces-using-onsenui
 title: "Create Awesome User Interfaces On Par With Popular Apps Using Onsen UI"
 product: onsen
@@ -8,19 +8,19 @@ category: announcement
 tags: onsen ui, user interface, spotify, components, design
 ---
 
-For those who know or may not know, Onsen UI offers a rich variety of UI components and tons of ready to implement features, specially designed for mobile apps. However, with all these possibilities one can't help but be puzzled about how can these components be used and to what extent. For that purpose, we in the Onsen UI team will show you how to use a combination of Onsen UI components to create a user interface pattern almost identical to the one of the popular music app Spotify!
+For those may not know, Onsen UI offers a rich variety of UI components and tons of ready to implement features, specially designed for mobile apps. However, with all these possibilities one can't help but be puzzled about how can all these components be combined to create an app. For that purpose, we in the Onsen UI team will show you how to use a combination of Onsen UI components to create a user interface pattern almost identical to the one of the popular music app Spotify!
 
 <!-- more -->
 
 ### The Pages
 
-First of all, when creating an interface, you must decide how many and what kind of screens (pages) do you need for an app. In this case, our work is cut short, since we will follow the example of an already existent app. However, since most of the pages of the existing app are quite similar in design with just slight differences in their functionality, we will limit the number of pages to three:
+First of all, when creating an interface, you must decide how many and what kind of screens (pages) do you need for an app.  In this case, our work is cut short, since we will follow the example of an existing app. However, since most of the pages of the actual app are quite similar in design with just slight differences in their functionality, we will limit the number of pages to three:
 
- - The Browsing Page
- - The Playlist Page
- - The Play Screen
+ - Browsing Page
+ - Playlist Page
+ - Play Screen Page
 
-We shall go through these three pages briefly so that we give you the general idea of how you can easily combine components to create an interface on par with the interfaces of popular apps. For the complete user interface pattern, please visit our [tutorial page](https://onsen.io/tutorial/).
+We shall go through these three pages briefly so that we give you the general idea of how you can easily combine components to create an interface on par with the ones of popular apps. For the complete user interface pattern, please visit our [tutorial page](https://tutorial.onsen.io/?framework=vanilla&category=user%20interface%20tutorials&module=spotify_model).
 
 **Note:** We will not implement the different functionalities of the interface (except some that are necessary for the flow of the app) since that is not the purpose of this post.
 
@@ -28,20 +28,20 @@ We shall go through these three pages briefly so that we give you the general id
 
 ![Spotify Pattern 01](/blog/content/images/2017/Jul/spotify_pattern_01.png)
 
-The first page of this pattern is the Browsing Page which allows the user to browse through playlists and find one that suits his tastes. The implementation of this page is quite simple, as it contains only `<ons-list>` elements with different styling. 
+The first page of this pattern is the Browsing Page which allows the user to browse through playlists and find one that suits his tastes. The implementation of this page is quite simple. It's constructed with the following Onsen UI elements: `<ons-carousel>`, `<ons-list>`, `<ons-row>`, and `<ons-col>`. 
 
-On the top, we have a horizontal list that overflows the screen and displaying the list of playlists the app recommends to the user:
+On the top, we have a carousel which elements have fixed length to get the overflowing horizontal list look, displaying the list of playlists the app recommends to the user:
 
 ```html
 [...]
-<ons-list class="recomended_list">
-  <ons-list-item modifier="nodivider" id="playlist_1" class="recomended_playlist" onclick="openPlaylist(this.id)">
+<ons-carousel auto-refresh swipeable overscrollable item-width="130px" class="recomended_list">
+  <ons-carousel-item modifier="nodivider" id="playlist_1" class="recomended_playlist" onclick="openPlaylist(this.id)">
     <div class="thumbnail"><ons-icon icon="ion-music-note"></ons-icon></div>
     <div class="recomended_playlist_title" id="playlist_1_name">Playlist 1</div>
-  </ons-list-item>
+  </ons-carousel-item>
 
   [...]
-</ons-list>
+</ons-carousel>
 [...]
 ```
 
@@ -57,28 +57,28 @@ Followed by a standard vertical list, giving more options for categorizing the p
 [...]
 ```
 
-And last but not least, another horizontal list, but one that does not overflow, so that we can get the grid-like pattern, used to categorize the playlists by Genre and Mood:
+And last but not least, a grid-like pattern used to categorize the playlists by Genre and Mood, constructed by using the combination of `<ons-row>` and `<ons-col>` elements:
 
 ```html
 [...]
-<ons-list class="category_list">
-  <ons-list-item modifier="nodivider" id="Category_1" class="category" onclick="openPlaylist(this.id)">
+<ons-row class="category">
+  <ons-col modifier="nodivider" id="Category_1" onclick="openPlaylist(this.id)">
     <div class="category_wrapper">
       <figure class="category_thumbnail">
-        <ons-icon icon="users"></ons-icon>
+        <ons-icon icon="fa-users"></ons-icon>
         <div class="category_title" id="Category_1_name">Party</div>
       </figure>
     </div>
-  </ons-list-item>
+  </ons-col>
 
   [...]
-</ons-list>
+</ons-row>
 [...]
 ```
 
 After tapping on some of the recommended playlists or Genres/Moods, the Playlist Page is opened. Notice that the items in the vertical list won't activate anything upon tapping them since this would lead to a screen with similar content, but a different organization of the playlist. 
 
-For the detail code of this page, including the CSS classes, visit visit our [tutorial page](https://onsen.io/tutorial/).
+For the detail code of this page, including the CSS classes, visit our [tutorial page](https://tutorial.onsen.io/?framework=vanilla&category=user%20interface%20tutorials&module=spotify_model).
 
 ### The Playlist Page
 
@@ -121,13 +121,12 @@ The second part consists of the list of the playlist's tracks, where the first e
     </div>
   </ons-list-item>
   <ons-list-item class="track" tappable>
-    <div class="center track_name">
-      <div>Track 01</div>
-      <div class="track_title">Unknown Artist - Track 01</div>
+    <div class="center">
+      <div class="list-item__title">Track 01</div>
+      <div class="list-item__subtitle track_title">Unknown Artist - Track 01</div>
     </div>
     <div class="right">
-      <ons-if platform="android"><ons-icon icon="ion-android-more-vertical"></ons-icon></ons-if>
-      <ons-if platform="ios"><ons-icon icon="ion-ios-more"></ons-icon></ons-if>
+      <ons-icon icon="ion-ios-more,material:ion-android-more-vertical"></ons-icon>
     </div>
   </ons-list-item>
 
@@ -136,7 +135,7 @@ The second part consists of the list of the playlist's tracks, where the first e
 [...]
 ```
 
-What's peculiar about the list's elements is that each track element has a three dotted icon on the right, which appears horizontally in the case of iOS or vertically in the case of Android. This is accomplished with the help of the `<ons-if>` element.
+What's peculiar about the list's elements is that each track element has a three dotted icon on the right, which appears horizontally in the case of iOS or vertically in the case of Android. This is accomplished by providing the name of the icon, that will appear on Android, with the `material` keywoard after the name of the default icon.
 
 Moreover, the two parts are separated by the "Shuffle Play!" `<ons-button>` which, when tapped, shows the `<ons-toast>` element at the bottom of the screen, showing the currently playing track:
 
@@ -175,13 +174,13 @@ This screen is rather simple, however, it contains some interesting components t
 [...]
 ```
 
-Aside from the `<ons-toolbar>`, this screen consists of one standard `<div>` element, containing the album's cover and three`<ons-row>` wrapper elements for easily structuring the screen. These elements are used to show the title of the track, the duration as well as the current progress of the playing track and buttons usually found in a music player. Each `<ons-row>` is divided into equal width parts by using as many `<ons-col>` elements as the number of parts you need.
+Apart from the `<ons-toolbar>`, this screen consists of one standard `<div>` element, containing the album's cover and three`<ons-row>` wrapper elements for easily structuring the screen. These elements are used to show the title of the track, the duration as well as the current progress of the playing track and buttons usually found in a music player. Each `<ons-row>` is divided into equal width parts by using as many `<ons-col>` elements as the number of parts you need.
 
 Although this screen is simple, it can be further improved by enclosing the image and the first `<ons-row>` into a carousel, thus enabling songs switching by swiping the carousel.
 
 ### There's More!!!
 
-We hope this little pattern of ours will give you an inspiration about how to design your app. But this is not all! We created several patterns based on popular apps like this one, which can be accessed on our [tutorial page](https://onsen.io/tutorial/) and hope that they will be of help to you!
+We hope this little pattern of ours will give you an inspiration about how to design your app. But this is not all! We created several patterns based on popular apps like this one, which can be accessed on our [tutorial page](https://tutorial.onsen.io/?framework=vanilla&category=user%20interface%20tutorials&module=netflix_model) and hope that they will be of help to you!
 
 Stay tuned to Onsen UI for even more fun content and new updates!
 
