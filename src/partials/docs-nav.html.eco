@@ -15,7 +15,7 @@
         <div class="docs-nav-framework-select">
           <input id="select-framework" type="checkbox" class="docs-nav-checkbox">
           <div class="docs-nav-dropdown">
-            <% if @page == 'reference-detail' then @refdet = true %>
+            <% if @page == 'reference-detail' and @framework != 'onsen1' then @refdet = true %>
             <% if @isGuide then @type = 'guide' else @type = 'api' %>
             <div class="docs-nav-dropdown-item <%- 'docs-nav-dropdown-item-active' if @framework == 'js' %>">
               <a href="/v2/<%= @type %>/js/<%= @mapComponentName(@original, 'js') + '.html' if @refdet %>">
