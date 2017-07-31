@@ -41,12 +41,24 @@ During development, you can change the device view in the Developer Tools of you
 
 If you are creating pages from separate files which, at the same time, contain other pages from even more files (e.g. pushing a tab bar), it can get a bit slow since there are many requests going on. In this case, you can use [`ons.preload([...])` method](/v2/api/js/ons.html#method-preload) at any time to make requests and cache those templates beforehand.
 
+#### Where is ons-scroller?
+
+`ons-scroller` was a directive in Onsen UI v1 that had scrollable content. It was removed in Onsen UI v2 because it can be replaced with a simple `div` with a few CSS properties:
+
+```
+.scroller {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
+}
+```
+
+Alternatively, you can use [`ons-page`](/v2/api/js/ons-page.html) for extended functionality (it doesn't need to be fullscreen) or a [`ons-carousel`](/v2/api/js/ons-carousel.html) __without__ `auto-scroll` attribute.
+
 #### Common Error Messages
-
-
-- **ons is not defined**
-
-  **TODO**
 
 - **Set/Map is not defined - Can't find variable Set/Map**
 
@@ -55,10 +67,6 @@ If you are creating pages from separate files which, at the same time, contain o
 - **MutationObserver is not defined**
 
   The running platform might not be fully supported. Consider using Crosswalk project for Android or including the necessary polyfills.
-
-- **Module ‘onsenui’ has no default export**
-
-  **TODO**
 
 - **pushPage/popPage is already running**
 
