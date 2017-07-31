@@ -43,14 +43,14 @@ Since v2.4.0 and thanks to the support for native `<template>` elements, lifecyc
 
 ```
 <template id="page1.html">
-  <ons-page id="page1">
+  <ons-page>
     <ons-toolbar>
       <div class="center"></div>
     </ons-toolbar>
     <!-- More content here -->
 
     <script>
-      document.querySelector('#page1').onInit = function() {
+      document.currentScript.parentElement.onInit = function() {
         // Set up page's content or anything else
         this.querySelector('ons-toolbar .center').innerHTML = 'Title';
 
@@ -63,10 +63,10 @@ Since v2.4.0 and thanks to the support for native `<template>` elements, lifecyc
 </template>
 ```
 
-Keep in mind that there can only be 1 root node per template (an `ons-page`). Optionally, `<template>` elements allow `<script></script>` tags inside that run when the element is created and attached to the DOM.
+Keep in mind that there can only be 1 root node per template (an `ons-page`). Optionally, `<template>` elements allow synchronous `<script></script>` tags inside that run when the element is created and attached to the DOM.
 
 >  This script is evaluated in the global scope and anything that you write here might affect any other part of your app. For example, variables declared in this script will pollute the global scope unless it is wrapped inside a closure.
 
-  In the previous example, `ons-page` has `id="page1"` and it can be used to find the element and modify its `onInit` hook. Hook functions are bound to the page element so you can use `this`. Beware of, if you give an ID to the page, you should only create 1 instance of this page. Otherwise, use class or custom attributes.
+In the previous example, we are using [`document.currentScript`](https://developer.mozilla.org/en-US/docs/Web/API/Document/currentScript) to get the current `script` element and `parentElement` to access its parent `ons-page` element. This property is supported since Android 4.4 and iOS 8, which are the compatible targets of Onsen UI. Other alternatives supported in old browsers (including IE) are `document.scripts[document.scripts.length - 1].parentElement`, which points to the current running script (always the last at execution time), or simply `document.querySelector('ons-page#myPageID')` after adding an ID to the page.
 
   It is up to the developer choosing between events or hooks. Events allow separating the view from the logic while hooks provide a more compact approach.
