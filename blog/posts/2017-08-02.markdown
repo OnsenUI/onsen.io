@@ -1,0 +1,60 @@
+---
+author: nikola
+date: 2017-08-02
+id: develop-powerful-apps-with-cordova6-5
+title: "Develop even more powerful apps with Cordova 6.5"
+product: onsen
+category: announcement
+tags: monaca, cordova 6.5, hybrid app, platform, cloud ide, cordova
+---
+
+Our development teams are proud to announce that applications created with Monaca can now use Cordova 6.5.
+With the Cordova 6.5 support, many additional features will be available in Monaca, such as Android Nougat, iOS 11, the iOS library management tool "CocoaPods" as well as the Swift-made plugins.
+In addition, once the Cordova 6.5 support is released, the Cordova version of all newly created projects will be 6.5.
+
+<!-- more -->
+
+### Android update
+
+ * Cordova Android platform updates from "5.1.1" to "6.2.3" (API level 25)
+ * Support for Android 4.1 or later
+ 
+### iOS update
+
+ * Cordova iOS platform version updated from "4.2.0" to "4.4.0"
+ * Xcode version has been updated from "7" to "8"
+ * Supporting iOS 8.0 or later as before
+
+### How to update an existing project?
+
+To upgrade an existing project, do the following steps
+
+ 1. Open the project you want to upgrade
+ 2. Click "Config" in the top menu
+ 3. Click "Manage Cordova Plugins"
+ 4. Click "Upgrade to 6.5.0" in the figure below
+
+![Spotify Pattern 01](/blog/content/images/2017/Aug/Cordova_6_5_update.png)
+
+### Cordova 6.5 Security
+
+Compared to earlier versions, the security in Cordova 6.5 has been greatly enhanced. As a result, the restrictions on applications have become stricter than before and some functions that were running in previous versions, may not work in this one. For that reason, if the behavior of the app changes due to the update, please try to loosen up the CSP (Content-Security-Policy) by adding the following line in the `<head>` tag:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+```
+
+### Other notes
+
+#### Downgrading a project
+
+Updated projects can not be downgraded to previous versions.
+As the backup of the previous version will be created automatically at the time of update, please use the backed up version if necessary.
+
+#### Warnings about the store version debugger
+
+In order to debug Cordova 6.5 projects, use the Monaca Debugger 6.5 or a custom debugger; otherwise, the projects may not work properly.
+
+---
+
+Monaca cloud app development platform supercharges Cordova app development with easy to use tools, services and UI framework. Want to check it out? Visit the official [Monaca website](http://monaca.io)
