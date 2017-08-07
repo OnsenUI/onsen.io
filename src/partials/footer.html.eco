@@ -5,76 +5,64 @@
       <div class="footer-container-navigation">
         <div class="footer-container-navigation-column">
           <div class="footer-container-navigation-header">
-            <%=@translate("[en]Framework[/en][ja]フレームワーク[/ja]")%>
+            <%=@translate("[en]Home[/en][ja]ホーム[/ja]")%>
           </div>
-          <a href="/angular2" class="footer-container-navigation-link">
-            AngularJS 1
+          <a href="/" class="footer-container-navigation-link">
+            Onsen UI
           </a>
-          <a href="/angular2" class="footer-container-navigation-link">
-            Angular 2+
+          <a href="/angular2/" class="footer-container-navigation-link">
+            Onsen UI for Angular
           </a>
-          <a href="/react" class="footer-container-navigation-link">
-            React
+          <a href="/react/" class="footer-container-navigation-link">
+            Onsen UI for React
           </a>
-          <a href="/vue" class="footer-container-navigation-link">
-            Vue.js
-          </a>
-          <a href="/meteor" class="footer-container-navigation-link">
-            Meteor
-          </a>
-        </div>
-        <div class="footer-container-navigation-column">
-          <div class="footer-container-navigation-header">
-            <%=@translate("[en]Get started[/en][ja]はじめよう[/ja]")%>
-          </div>
-          <a href=/v2/guide/installation.html#command-line-tool-to-package-for-mobile-apps-monaca-cli" class="footer-container-navigation-link">
-            <%=@translate("[en]Develop with Monaca CLI[/en][ja]Monaca CLIで開発する[/ja]")%>
-          </a>
-          <a href="https://monaca.io/cloud.html" class="footer-container-navigation-link">
-            <%=@translate("[en]Use Monaca Cloud IDE[/en][ja]MonacaクラウドIDEを使う[/ja]")%>
-          </a>
-          <a href="/v2/guide/installation.html#install-with-npm" class="footer-container-navigation-link">
-            <%=@translate("[en]Install via NPM or Bower[/en][ja]NPMやBowerでインストール[/ja]")%>
-          </a>
-          <a href="/v2/guide/installation.html#installation" class="footer-container-navigation-link">
-            <%=@translate("[en]Download Everything[/en][ja]ダウンロード[/ja]")%>
-          </a>
-        </div>
-        <div class="footer-container-navigation-column">
-          <div class="footer-container-navigation-header">
-            <%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%>
-          </div>
-          <a href="/v2/guide/" class="footer-container-navigation-link">
-            <%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%>
-          </a>
-          <a href="/v2/api/js" class="footer-container-navigation-link">
-            <%=@translate("[en]Reference[/en][ja]リファレンス[/ja]")%>
-          </a>
-          <a href="https://tutorial.onsen.io/" class="footer-container-navigation-link">
-            <%=@translate("[en]Tutorials[/en][ja]チュートリアル[/ja]")%>
-          </a>
-        </div>
-        <div class="footer-container-navigation-column">
-          <div class="footer-container-navigation-header">
-            <%=@translate("[en]More[/en][ja]他にも...[/ja]")%>
-          </div>
-          <a href="/samples" class="footer-container-navigation-link">
-            <%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%>
-          </a>
-          <% if @lang == "en": %>
-            <a href="https://community.onsen.io/" class="footer-container-navigation-link">
-              Community
-            </a>
-          <% else if @lang == "ja": %>
-            <a href="https://teratail.com/tags/Onsen+UI" class="footer-container-navigation-link">
-              コミュニティ
-            </a>
-          <% end %>
-          <a href="/blog" class="footer-container-navigation-link">
-            <%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%>
+          <a href="/vue/" class="footer-container-navigation-link">
+            Onsen UI for Vue
           </a>
         </div>
 
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            <%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%>
+          </div>
+          <a href="/v2/guide/" class="footer-container-navigation-link">
+            <%=@translate("[en]Installation[/en][ja]インストール[/ja]")%>
+          </a>
+          <a href="/v2/guide/installation.html" class="footer-container-navigation-link">
+            <%=@translate("[en]Getting Started[/en][ja]Onsen UIをはじめよう！[/ja]")%>
+          </a>
+          <a href="/v2/guide/fundamentals.html" class="footer-container-navigation-link">
+            <%=@translate("[en]Fundamentals[/en][ja]Onsen UIの基礎[/ja]")%>
+          </a>
+          <a href="/v2/guide/faq.html" class="footer-container-navigation-link">
+            <%=@translate("[en]Troubleshooting and FAQ[/en][ja]FAQとトラブルシューティング[/ja]")%>
+          </a>
+        </div>
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            API
+          </div>
+          <a href="/v2/api/css.html" class="footer-container-navigation-link"><%=@translate("[en]CSS Component[/en][ja]CSSコンポーネント[/ja]")%></a>
+          <a href="/v2/api/js" class="footer-container-navigation-link">JavaScript (Web Components)</a>
+          <a href="/v2/api/angular1" class="footer-container-navigation-link">AngularJS 1.x</a>
+          <a href="/v2/api/angular2" class="footer-container-navigation-link">Angular 2+</a>
+          <a href="/v2/api/react" class="footer-container-navigation-link">React</a>
+          <a href="/v2/api/vue" class="footer-container-navigation-link">Vue.js</a>
+          <a href="/v1/reference/javascript.html" class="footer-container-navigation-link">Onsen UI 1.x</a>
+        </div>
+        <div class="footer-container-navigation-column">
+          <div class="footer-container-navigation-header">
+            <%=@translate("[en]Resources[/en][ja]リソース[/ja]")%>
+          </div>
+          <a href="/samples" class="footer-container-navigation-link"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
+          <a href="http://tutorial.onsen.io/" class="footer-container-navigation-link"><%=@translate("[en]Tutorials[/en][ja]チュートリアル（英語）[/ja]")%></a>
+          <% if @lang == "en": %>
+          <a href="https://community.onsen.io" class="footer-container-navigation-link">Community</a>
+          <% else if @lang == "ja": %>
+          <a href="https://teratail.com/tags/Monaca" class="footer-container-navigation-link">コミュニティ（TeraTail）</a>
+          <% end %>
+          <a href="/blog" class="footer-container-navigation-link"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
+        </div>
       </div>
       <div class="footer-container-newsletter">
         <div class="footer-container-newsletter-header">
