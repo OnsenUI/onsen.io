@@ -255,9 +255,66 @@ Definitely yes. Vuex is a good solution for components communication. If you hav
 
 Onsen UI provides its own routing components: [`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html), [`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html) and [`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html). These components can be mixed in many ways to achieve the desired route pattern. This is in general completely enough for mobile SPA, so there is no need to plug an external router.
 
-However, for those who really want to integrate vue-router, it is compatible with Onsen UI except for navigator's animations. Currently, you'd need to make your own transitions for this. While there are workarounds like pushing pages to navigator's `pageStack` on router guards, it still has a few drawbacks.
+However, for those who really want to integrate vue-router, it is fully compatible with Onsen UI. It simply has to be integrated with the three routing components mentioned above.
 
-For other components like `v-ons-tabbar`, you can override `v-ons-tab` "on click" behavior with `@click.prevent="..."` and change your router view.
+  * __Splitter__:
+    For `v-ons-splitter`, simply put your `router-view` in the place where `v-ons-page` components are normally located. In other words, inside `v-ons-splitter-content` or `v-ons-splitter-side`.
+
+    ```
+    <v-ons-splitter>
+      <v-ons-splitter-side>...</v-ons-splitter-side>
+
+      <v-ons-splitter-content>
+        <router-view></router-view>
+      </v-ons-splitter-content>
+    </v-ons-splitter>
+    ```
+
+  * __Tabbar__:
+    `v-ons-tabbar` accepts a slots syntax that allows us to include `router-view` in the pages slot. Also, `v-ons-tab` default behavior must be overriden in the `click` handler in order to let the router do the job.
+
+    ```
+    <v-ons-tabbar>
+      <router-view slot="pages"></router-view>
+      <v-ons-tab v-for="name in ['Home', 'Settings']" :key="name"
+        :label="name"
+        :active="$route.name === name"
+        @click.prevent="$router.push({name})"
+      ></v-ons-tab>
+    </v-ons-tabbar>
+    ```
+
+  * __Navigator__: In this case we don't need `<router-view>` at all. The router simply has to decide what's going to be the next page stack for the navigator, and the latter will do all the job (transitions, events, etc.):
+
+    ```
+    template: `
+      <div id="app">
+        <v-ons-navigator swipeable
+          :page-stack="pageStack"
+          :pop-page="goBack"
+        ></v-ons-navigator>
+      </div>
+    `,
+    methods: {
+      goBack() {
+        this.$router.push({ name: this.$route.matched[this.$route.matched.length - 2].name });
+      }
+    },
+    created() {
+      const mapRouteStack = route => this.pageStack = route.matched.map(m => m.components.default);
+      mapRouteStack(this.$route);
+      this.$router.beforeEach((to, from, next) => mapRouteStack(to) && next());
+    }
+    ```
+
+    Notice that the previous example is adding __every__ route to the Navigator's page stack. It assumes all the routes have a valid page (`v-ons-page`) as their default component. If this is not your case, simply filter out the routes you don't need.
+
+    Once the router gives the new page stack to the Navigator, this one compares the current stack with the previous one. If the number of pages/routes has decreased and the top page has changed, it will perform a 'popPage' transition. Otherwise it will be 'pushPage'.
+
+    Due to this, going back in the browser history (`$router.go(-1)`) to a deeper route will push a page rather than popping. Therefore, going back in the history with the `v-ons-back-button` is not very recommended unless you have extra logic in your router to avoid unwanted behaviors.
+    In this example, the `v-ons-back-button` components runs `goBack` method, which is simply pushing the parent route (asumming it is the previous `v-ons-page`) instead of going back in the history. This behavior will likely fit most mobile apps.
+
+    For a more complete example of `v-ons-navigator` with `vue-router`, have a look at [this repository](https://github.com/frandiox/onsenui-vue-router).
 
 <% end %>
 
