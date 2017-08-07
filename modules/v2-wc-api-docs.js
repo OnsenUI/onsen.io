@@ -72,7 +72,6 @@ function generateAPIDocument(metalsmith, docPath, extension) {
                 if (/^animation/.test(attr.name)) {
                   attr.name = 'options.' + attr.name;
                 }
-                attr.name = attr.name.replace(/-([a-z])/g, function(m, l) { return l.toUpperCase(); });
                 attr.type = { names: [attr.type || 'Boolean'] };
                 result.push(attr);
               }
