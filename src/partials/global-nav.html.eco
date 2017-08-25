@@ -74,8 +74,22 @@
         </div>
         <span class="global-nav-menu-arrow"></span>
       </li>
-      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'resources' %>">
+      <li
+        style="position: relative;"
+        class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'resources' %>">
         <a href="#"><%=@translate("[en]Resources[/en][ja]リソース[/ja]")%></a>
+        <div style="
+          position: absolute;
+          color: white;
+          font-size: 11px;
+          background-color: red;
+          padding: 0px 6px;
+          margin: 0 0 0 0;
+          top: -14px;
+          right: -2px;
+          border-radius: 8px;
+          box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.15);
+        ">NEW</div><!-- Temporary notification. This will be removed soon -->
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">
@@ -95,6 +109,25 @@
             <% end %>
             <li class="dropdown-item-1">
               <a href="/blog"><%=@translate("[en]Blog[/en][ja]ブログ[/ja]")%></a>
+            </li>
+            <li class="dropdown-item-1">
+              <a href="https://github.com/OnsenUI/awesome-onsenui">
+                <%=@translate("[en]Awesome Onsen UI[/en][ja]Awesome Onsen UI（英語）[/ja]")%>
+                <span style="
+                  vertical-align: middle;
+                  color: white;
+                  font-size: 11px;
+                  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+                  background-color: red;
+                  opacity: 0.8;
+                  display: inline-block;
+                  padding: 0px 6px;
+                  margin: 0px 0px 0px 8px;
+                  position: relative;
+                  top: -2px;
+                  border-radius: 8px;
+                ">NEW</span><!-- Temporary notification. This will be removed soon -->
+              </a>
             </li>
           </ul>
         </div>
