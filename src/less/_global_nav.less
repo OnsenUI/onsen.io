@@ -113,6 +113,15 @@
 
       &:last-child {
         margin: 0;
+
+        // Prevent overflow of the last dropdown menu
+        & .dropdown-container {
+          left: unset;
+          right: -10px;
+          -webkit-transform: unset;
+          -ms-transform: unset;
+          transform: unset;
+        }
       }
     }
 
