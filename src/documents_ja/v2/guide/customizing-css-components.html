@@ -15,7 +15,7 @@ Onsen UIの見た目は、CSSコンポーネントによって定義されてい
 <link rel="stylesheet" type="text/css" href="path/to/onsen-css-components.css">
 ```
 
-Onsen UIのデフォルトの見た目を変更するには、このCSSコンポーネントをカスタマイズして下さい。Onsen UIのCSSコンポーネントは、[cssnext](http://cssnext.io)によって記述されているのでCSSさえわかっていれば誰でもカスタマイズすることができます。 
+Onsen UIのデフォルトの見た目を変更するには、このCSSコンポーネントをカスタマイズして下さい。Onsen UIのCSSコンポーネントは、SASSやLessのような独自のCSSメタ言語ではなく、標準化されている文法を持つ[cssnext](http://cssnext.io)によって記述されているのでCSSさえわかっていれば誰でもカスタマイズすることができます。 
 
 ![スクリーンショット](/images/guide/css-components-previewer-01.png)
 
@@ -23,40 +23,48 @@ Onsen UIのデフォルトの見た目を変更するには、このCSSコンポ
 
 #### セットアップ
 
-CSSコンポーネントのソースコードは、複数のCSSファイルによって構成されています。これらのCSSファイルは、ビルドすることで一つのCSSファイル(onsen-css-components.css)にすることができます。ここではまずビルドするためのセットアップの手順を紹介します。
+CSSコンポーネントのソースコードは、複数のCSSファイルによって構成されています。これらのCSSファイルは、ビルドすることで一つのCSSファイル(`onsen-css-components.css`)にすることができます。ここではまずビルドするためのセットアップの手順を紹介します。
 
-まずgitを使ってOnsen UIのリポジトリをクローンします。
-
-```shell
-$ git clone https://github.com/OnsenUI/OnsenUI.git OnsenUI
-```
-
-利用しているOnsen UIのバージョンと対応するタグをチェックアウトします。
+npmを使ってOnsen UIのパッケージをインストールします。プロジェクトのディレクトリにnpmのパッケージファイル(package.json)がない場合には、`npm init`を実行してパッケージファイルを作成して下さい。
 
 ```shell
-$ cd OnsenUI
-
-$ git checkout v2.5.4
+$ npm init # package.jsonが無い場合
 ```
 
-`css-components`ディレクトリに移動します。
+次に`onsenui`パッケージをインストールします。`onsenui`パッケージのバージョンは自身が利用しているOnsen UIのバージョンに合わせて下さい。
+
+```
+$ npm install onsenui
+
+$ npm install onsenui@2.6.0 # バージョンを指定する場合
+```
+
+`onsenui`パッケージが`node_modules`ディレクトリにインストールされるので、パッケージの`css-components`ディレクトリに移動します。
 
 ```shell
-$ cd css-components
+$ cd node_modules/onsenui/css-components-src
 ```
 
-[yarn](https://yarnpng.com/)を使って依存関係を解決します。yarnをインストールしていない場合は、[yarnのインストール手順](https://yarnpkg.com/lang/en/docs/install/)を参照してyarnをインストールして下さい。
+次に[yarn](https://yarnpng.com/)を使って依存するパッケージをインストールします。`yarn`をインストールしていない場合は、[yarnのインストール手順](https://yarnpkg.com/lang/en/docs/install/)を参照して下さい。
 
 ```shell
 $ yarn install --pure-lockfile
 ```
 
-無事依存関係を解決できたら、次のコマンドを実行してプレビュワーを起動して下さい。
+無事依存するパッケージを解決できたら、次のコマンドを実行してプレビュワーを起動して下さい。
 
 ```shell
 $ yarn run serve
 
-$ (もしくは)npm run serve
+$ npm run serve # もしくは
+```
+
+もし利用するOnsen UIのパッケージのバージョンがv2.6.0よりも前の場合には、`yarn run serve`ではなく`gulp serve`を実行して下さい。
+
+```shell
+$ npm install -g gulp
+
+$ gulp serve
 ```
 
 するとビルドが始まり、成功すると次のようなメッセージが表示されます。
@@ -79,6 +87,14 @@ Built CSS Files:
 ![スクリーンショット](/images/guide/css-components-previewer-01.png)
 
 モバイル端末でプレビューを確認するには、プレビューを動かしているPCとモバイルを同じネットワークに接続した上でモバイル端末のウェブブラウザでコマンドラインに表示された`http://(IP Address):4321/`を開いて下さい。
+
+プレビューを起動するのではなく、単にCSSコンポーネントを一度だけビルドする場合には次のコマンドを実行して下さい。
+
+```shell
+$ yarn run build
+
+$ npm run build #もしくは
+```
 
 #### カスタマイズ
 
@@ -171,7 +187,7 @@ Built CSS Files:
 .switch--material__input
 ```
 
-しかし安心して下さい、Onsen UIのCSSコンポーネントは設計の一貫性と高速なCSSの記述のために、設計規約と命名規則に[BEM](http://getbem.com)と[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用しています。
+しかし安心して下さい、Onsen UIのCSSコンポーネントは設計を堅牢にするために、かつ高速なCSSセレクタの記述をするために、設計規約と命名規則に[BEM](http://getbem.com)と[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用しています。
 
 BEMでは、クラスは**Block**, **Element**, **Modifier**の三つの構成要素によって記述されます。Blockは、ある独立するグループの境界を宣言します。ElementはあるBlockの配下の要素を表現します。ModifierやBlockやElementを修飾するのに用います。
 
@@ -227,7 +243,7 @@ BEMでは、クラスは**Block**, **Element**, **Modifier**の三つの構成�
 */
 ```
 
-アノテーションはCSSのコメント内部に[YAML](http://yaml.org)で埋め込まれてています。もしCSSコンポーネントのプレビューで用いるHTMLを変更したり、プレビューを増やしたい場合にはアノテーションを編集したり新たに埋め込むことができます。
+アノテーションはCSSのコメント内部に[YAML](http://yaml.org)で埋め込まれています。もしCSSコンポーネントのプレビューで用いるHTMLを変更したり、プレビューを増やしたい場合にはアノテーションを編集したり新たに埋め込むことができます。
 
 `yarn run serve`を実行している状態であれば、このアノテーションの変更も即座にプレビューUIに反映されます。
 
