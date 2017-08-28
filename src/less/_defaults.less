@@ -101,31 +101,32 @@ h2 {
 }
 
 h3 {
-  font-size: 26px;
-  margin: 46px 0 26px 0px;
   padding: 0 0 4px 0;
-  font-weight: normal;
-
-  .mobile-query({
-    font-size: 20px;
-  });
 
   .lang-en & {
+    margin: 46px 0 26px 0px;
     font-size: 28px;
     font-weight: 700;
 
     .mobile-query({
-      font-size: 28px;
+      font-size: 20px;
+    });
+  }
+  
+  .lang-ja & {
+    margin: 46px 0 26px 0px;
+    font-size: 32px;
+    font-weight: 700;
+
+    .mobile-query({
+      font-size: 32px;
     });
   }
 }
 
 h4 {
-  font-size: 16px;
-  margin: 46px 0 12px 0;
-  font-weight: bold;
-
   .lang-en & {
+    margin: 46px 0 12px 0;
     font-size: 22px;
     font-weight: 700;
 
@@ -133,35 +134,60 @@ h4 {
       font-size: 22px;
     });
   }
+  
+  .lang-ja & {
+    margin: 46px 0 12px 0;
+    font-size: 24px;
+    font-weight: 700;
+
+    .mobile-query({
+      font-size: 24px;
+    });
+  }
 }
 
 h5 {
-  font-size: 15px;
-  margin: 36px 0 8px 0;
-  font-weight: bold;
+  color: #333;
 
   .lang-en & {
+    margin: 36px 0 8px 0;
     font-size: 15px;
     font-weight: 700;
-    color: #666;
 
     .mobile-query({
       font-size: 15px;
     });
   }
+
+  .lang-ja & {
+    margin: 48px 0 16px 0;
+    font-size: 18px;
+    font-weight: 700;
+
+    .mobile-query({
+      font-size: 18px;
+    });
+  }
 }
 
 h6 {
-  font-size: 12px;
-  margin: 36px 0 8px 0;
-  font-weight: bold;
-
   .lang-en {
+    margin: 36px 0 8px 0;
     font-size: 14px;
     font-weight: normal;
 
     .mobile-query({
-      font-size: 18px;
+      font-size: 14px;
+    });
+  }
+
+  .lang-ja {
+    margin: 36px 0 8px 0;
+    font-size: 14px;
+    font-weight: normal;
+
+    .mobile-query({
+      font-size: 14px;
     });
   }
 }
