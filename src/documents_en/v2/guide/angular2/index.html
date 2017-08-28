@@ -9,44 +9,367 @@ layout: docs.html.eco
 
 ### Angular 2+
 
+<br><br><br>
+*We are having a lack of skilled English translators and looking for contributors interested in [correcting English in this section](https://github.com/OnsenUI/onsen.io/edit/master/src/documents_en/v2/guide/angular2/index.html).*
+<br><br><br>
+
 > Before reading this section, we suggest you reading [Getting Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp the basics of Onsen UI. Don't worry, it won't take more than 5 minutes.
 
-Angular 2+ bindings for Onsen UI provide Angular directives that enhance the core Web Components and expose a Angular-like API to interact with them.
+In this chapter, we would like to explain how to use `ngx-onsenui`, a binding library for Angular.
+About Onsen UI, please refer to [Onsen UI Overview](/v2/docs/guide/js/).
 
-#### Download Angular 2+ bindings
+#### Setup
 
-Angular 2+ bindings are distributed in [`ngx-onsenui` package](https://www.npmjs.com/package/ngx-onsenui). You can download it via NPM:
+##### Prerequisites
 
-```sh
-$ npm install onsenui ngx-onsenui --save-dev
+We assume that you already have an Angular project.
+If not, please setup a project according to [the official Angular guide](https://angular.io/).
+
+##### Install `onsenui` and `ngx-onsenui`
+
+First, please install Onsen UI Core (`onsenui`) and the binding library for Angular (`ngx-onsenui`).
+
+```bash
+npm install onsenui ngx-onsenui --save
 ```
 
-It is also available [via CDN](https://unpkg.com/ngx-onsenui). The [latest core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also contains Angular 2+ bindings.
+##### Import `OnsenModule`
 
-#### Setup Angular 2+ bindings
+Next, import `OnsenModule` into the root module (Typical name: `AppModule`) of your Angular app.
 
-Onsen UI for Angular 2+ provides Angular 2+ directives which wraps Web Components. Those directives are included in Angular Module (`NgModule`) named `OnsenModule`. For details about `NgModule`, please refer to [Angular Modules (`NgModule`) - TS](https://angular.io/docs/ts/latest/guide/ngmodule.html).
+<!--in app.module.ts-->
+```ts
+import { OnsenModule } from 'ngx-onsenui';
+```
 
-To use `OnsenModule`, please import it to the application’s module by specifying at import parameter of `@NgModule`. Onsen UI components will not render properly if `OnsenModule` is not loaded.
+<!--in app.module.ts-->
+```ts
+imports: [
+   BrowserModule,
+   OnsenModule,
+],
+```
 
-Also, please aware to specify `CUSTOM_ELEMENTS_SCHEMA` as module’s schema, since Onsen UI is built of Custom Elements. Forgetting to specify this will result in error when using Onsen UI custom elements in the template.
+This step loads features of `ngx-onsenui` and Onsen UI Core (`onsenui`) into your app.
 
-```js
-import {OnsenModule} from 'angular2-onsenui';
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+##### Load `CUSTOM_ELEMENTS_SCHEMA`
 
-@NgModule({
-  imports: [OnsenModule],
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+Next, add `schemas` property  into the root module and put `CUSTOM_ELEMENTS_SCHEMA` into it.
+
+<!--in app.module.ts-->
+```ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+```
+
+<!--in app.module.ts-->
+```ts
+  schemas: [
+      CUSTOM_ELEMENTS_SCHEMA,
+  ],
+```
+
+This step suppresses warnings caused by `ons-*` tags in templates.
+
+##### Load CSS files
+
+Finally, load `onsenui.css` and `onsen-css-components.css` in `node_modules/onsenui/css/` **in this order**.
+
+##### (1) If you are using Angular CLI
+
+Append the following two lines in `.angular-cli.json` according to [the officlal Angular CLI guide](https://github.com/angular/angular-cli/wiki/stories-global-styles).
+
+<!--in .angular-cli.json-->
+```json
+"styles": [
+  "../node_modules/onsenui/css/onsenui.css",
+  "../node_modules/onsenui/css/onsen-css-components.css",
+  "styles.css"
+],
+```
+
+##### (2) If you are using another environment
+
+Modify the following two lines appropriately and append them into the global stylesheet file in your project.
+
+<!--in styles.css, app.css, etc.-->
+```css
+@import '../node_modules/onsenui/css/onsenui.css';
+@import '../node_modules/onsenui/css/onsen-css-components.css';
+```
+
+##### Finish
+
+`ngx-onsenui` has been set up.
+
+#### How to use `ngx-onsenui`
+
+##### Using components
+
+`ngx-onsenui` provides several tens of components ([list](/v2/docs/angular2.html)).
+You can use each component by describing an `ons-*` tag.
+
+For example, let's show a button.
+
+```ts
+template: `
+  <ons-button>Click Me</ons-button>
+`
+```
+
+If you want to set an action triggered when the button is clicked, you can use [event binding](https://angular.io/docs/ts/latest/guide/user-input.html) feature of Angular.
+
+```ts
+template: `
+  <ons-button (click)="doSomething()">Click Me</ons-button>
+`
+```
+
+If you want to know what events you can use in each component, please refer to each reference page of them.
+
+##### Using two-way binding
+
+Some components such as `ons-input` support two-way binding.
+You can synchronize the value of `val` with the value of `ons-input` by describing `[(value)]="val"`.
+
+```ts
+template: `
+  <ons-input type="text" [(value)]="val"></ons-input>: {{val}}
+`
+```
+
+Some components require `(input)="val = $event.target.value"` as well as `[(value)]="val"`.
+In the case of `ons-range`, otherwise the change of the range value during dragging does not reflect to `val`.
+
+```ts
+template: `
+  <ons-range [(value)]="val" (input)="val = $event.target.value"></ons-range>
+`
+```
+
+##### Using `ons-page`
+
+`ons-page` is a special component which expands to whole screen and provides some features such as iOS-like/Android-like toolbar.
+
+You can use `ons-page` by writing the following code:
+
+```html
+<ons-page>
+  <div class="background"></div><!-- Background of the page -->
+  <div class="content">
+    <!-- Content of the page -->
+  </div>
+</ons-page>
+```
+
+`background` corresponds to the background of the page and `content` corresponds to the content of the page.
+Please keep in mind that if you write contents just under `ons-page` or set `background-color` directly to `ons-page`, it does not work.
+
+`ons-toolbar` can be used to show a toolbar at the top of the page.
+Please note that `ons-toolbar` has to be the first child of `ons-page`.
+
+```html
+<ons-page>
+  <ons-toolbar>
+    <div class="center"><!-- Toolbar title --></div>
+  </ons-toolbar>
+  <div class="background"></div>
+  <div class="content">
+    <!-- Content of the page -->
+  </div>
+</ons-page>
+```
+
+##### Using page managers
+
+`ngx-onsenui` provides three special components (page managers) `ons-navigator`, `ons-splitter` and `ons-tabbar` to realize mobile-like page transition.
+
+You can automatically create, destroy and animate multiple `ons-page`s by using page managers.
+
+We will explain them with `ons-navigator` as an example.
+
+###### Definition of a page component
+
+You need to define pages as Angular components to use page managers.
+
+You can define a page component by set `ons-page[some-id]` to `selector` and describe page content in `template`.
+
+```ts
+@Component({
+  selector: 'ons-page[first]',
+  template: `
+    <ons-toolbar>
+      <div class="center">First</div>
+    </ons-toolbar>
+    <div class="background"></div>
+    <div class="content">
+      First page
+    </div>
+  `
 })
-class AppModule { }
-
-// Start module
-platformBrowserDynamic().bootstrapModule(AppModule);
+export class FirstPageComponent {
+}
 ```
 
-<% end %>
+Please note that you have to set a unique ID into `[]`. Otherwise, the original definition of the `ons-page` directive will be broken and it leads to unexpected behavior.
 
+Next, add the page component into `entryComponents` property of the root module (Typical name: `AppModule`).
+
+```ts
+  entryComponents: [
+    FirstPageComponent
+  ],
+```
+
+This step is required so that `ons-navigator` dynamically creates and destroys `FirstPageComponent`. Otherwise, you will get errors such as `No component factory found for FirstPageComponent`.
+
+###### Set default page of `ons-navigator`
+
+Let's use the features of `ons-navigator`.
+You can set default page of `ons-navigator` by `[page]` attribute.
+
+```ts
+@Component({
+  selector: 'app-root',
+  template: `
+    <ons-navigator [page]="initialPage"></ons-navigator>
+  `
+})
+export class AppComponent {
+  initialPage = FirstPageComponent;
+}
+```
+By this setting, it will show the page content defined by `FirstPageComponent` component.
+
+In this example, we defined `initialPage` and assigned the value to it because Angular does not allow us to write variables outside of classes such as `FirstPageComponent`.
+
+###### Push a page to `ons-navigator`
+
+`ons-navigator` allows us to manage pages in the form of a stack.
+Adding a page to the front side of the screen is called "push"  and removing a page at the most front of the screen is called "pop".
+Then, let's push another page on the initial page.
+
+First, define another page with the name `SecondPageComponent` and add it into `entryComponents` property of the root module.
+
+```ts
+@Component({
+  selector: 'ons-page[second]',
+  template: `
+    <ons-toolbar>
+      <div class="center">Second</div>
+    </ons-toolbar>
+    <div class="background"></div>
+    <div class="content">
+      Second page
+    </div>
+  `
+})
+export class SecondPageComponent {
+}
+```
+
+```ts
+  entryComponents: [
+    FirstPageComponent,
+    SecondPageComponent
+  ],
+```
+
+Next, add a button and a procedure to push pages to `FirstPageComponent` which you defined.
+
+```ts
+import { OnsNavigator } from 'ngx-onsenui';
+
+@Component({
+  selector: 'ons-page[first]',
+  template: `
+    <ons-toolbar>
+      <div class="center">First</div>
+    </ons-toolbar>
+    <div class="background"></div>
+    <div class="content">
+      First page<br>
+      <ons-button (click)="push()">Push</ons-button>
+    </div>
+  `
+})
+export class FirstPageComponent {
+  // Get a way to access `ons-navigator` by Dependency Injection (DI)
+  constructor(private navigator: OnsNavigator) {
+  }
+
+  push() {
+    // Push SecontPageComponent to `ons-navigator
+    this.navigator.element.pushPage(SecondPageComponent);
+  }
+}
+```
+
+By this step, the page defined by `SecondPageComponent` will slide from the right when you push the `Push` button.
+
+As we explained above, to push pages to `ons-navivator`, you need to do the following two steps:
+
+1. Get a way (= the directive instance) to access `ons-navigator` by Dependency Injection (DI)
+2. Push `SecondPageComponent` to `ons-navigator` with `pushPage`
+
+Please note that you have to access `this.navigator.element.pushPage` instead of `this.navigator.pushPage`.
+
+If you want to pop pages, you can run `popPage` in `SecondPageComponent`.
+
+###### Push / pop with parameters
+
+You can pass parameters to a destination page when a pushing / popping page.
+
+In the case of push, to pass parameters, you can use `data` option of `pushPage` in the source page,
+
+```ts
+this.navigator.element.pushPage(SecondPageComponent, {data: {foo: 1234}});
+```
+
+and you can retrieve the parameters by using Dependency Injection (DI) in the destination page.
+
+```ts
+import { Params } from 'ngx-onsenui';
+```
+```ts
+constructor(private params: Params) {
+  console.log(JSON.stringify(params.data)); // => {"foo": 1234}
+}
+```
+
+`pushPage` has several option as well as `data` option such as `animation`option (for more details, please refer to `ons-navigator`). You can retrieve all the options with `Params` as well as `data` option.
+
+#### Example codes
+
+If you want to how to use each component, please refer to `examples` directory in the repository where `ngx-onsenui` is being developed.
+
+ * [Example codes of `ngx-onsenui` (GitHub)](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples)
+
+For example, `carousel.ts` contains information about what code you would write when using `ons-carousel` compoennt.
+
+#### Architecture
+
+This section may contain advanced information.
+
+##### Wrapping Web Components with Angular directives
+
+`ngx-onsenui` provides a feature to set default page with `[page]`, two-way binding and other features, which cannot be realized by features of Web Components itself, by wrapping elements defined in Web Components layer with Angular directives.
+
+For example, `ons-navigator` element is wrapped with `OnsNavigator` directive and `ons-switch` element is wrapped with `OnsSwitch` directive.
+
+However not all the components have corresponding directives. For example, `ons-button` element is not wrapped with any directives since there is no need to wrap the element.
+
+About the list of all the directives provided by `ngx-onsenui`, please refer to [the definition of `OnsenModule` (GitHub)](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/angular2/src/ngx-onsenui.ts).
+
+##### How to directly call methods in Web Components layer
+
+In Web Components, methods are directly defined in DOM elements. To call the methods, you can access elements in some way such as `querySelector()`.
+
+In Angular, you can also access DOM elements with template reference variables (Example: `#var`). For more details, please refer to [the official Angular guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars).
+
+#### About `angular2-onsenui`
+
+`angular2-onsenui` which is previously provided has been obsoleted since Angular 4 was announced.
+If you are still using `angular2-onsenui`, we recommend that you update it to `ngx-onsenui`.
+
+<!-- End of markdown -->
+<% end %>
