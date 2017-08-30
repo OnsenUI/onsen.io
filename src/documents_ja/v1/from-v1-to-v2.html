@@ -1,0 +1,85 @@
+---
+title: 'Onsen UI 1.x からの移行'
+order: 195
+tocTitle: Migrating
+tocGroup: guide
+page: 'guide'
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### Onsen UI 1.x からの移行
+
+Onsen UI 1.x は、AngularJS 1.x に依存していました。Onsen UI は、2.x 以降から、Web Component を基礎として構築され、他のフレームワークへの依存もなくなりました。ただし、AngularJS 1 では役立つ機能も多々提供されているため、Onsen UI と AngularJS 1 を連携させ、一部機能は継続してサポートしています。
+
+ここでは、Onsen UI 1.x から 2.x ( AngularJS 1 と連携 ) へのコードの移行方法を、簡単に解説します。なお、Onsen UI と他のフレームワーク ( [Angular 2+](/v2/docs/angular2.html)、[React](/v2/docs/react.html) など ) の組み合わせに興味がある方は、各フレームワーク向けのドキュメントをご確認ください。Onsen UI のコア/中核となる中身 ( コンポーネント、スタイルなど ) は、どのフレームワークの組み合わせにおいても変わらないため、Onsen UI のコンポーネント、スタイルなどに関しては、同じ知識が使用できます。
+
+配布用 Onsen UI 2 パッケージの中には、`onsenui.js` と `angular-onsenui.js` が置かれており、後者のファイルでは、ファイル名が示すとおり、前述の 連携処理を行っています。なお、AngularJS 1 本体の読み込みは、現在、行っていません ( 代わりに、「 連携処理 」 を行っています )。最初に行うことは、`index.html` 内で読み込んでいるファイルを、次のように更新します。
+
+```
+<script src="path/to/onsenui.js"></script>
+<script src="path/to/angular.js"></script>
+<script src="path/to/angular-onsenui.js"></script>
+```
+
+移行する上で、上記の変更が、最も大事で、最も初めに行う処理です。ただし、上記の更新後に、アプリを実行しても、コンソール上ではエラー ( メソッドの欠如/オブジェクトの欠如を示すエラー ) が出力されます。これは、Onsen UI 2 では、開発者に使いやすいように API が改良されているためです。エラーを解決するためには、別途、コード内で使用されているメソッドの名前を更新したり、または、新規に追加されたプロパティーを使用できるようにメソッドの定義を修正する必要があります。
+
+次の項目では、開発者側で行う変更点をまとめています。変更後もなんらかの問題が生じる場合には、[Onsen UI 2 の ガイド](https://onsen.io/v2/docs/angular1.html) 上で API の詳細などを確認してください。それでも解決できない場合には、[コミュニティーのフォーラム](https://community.onsen.io/) を併せてご確認ください。
+
+##### 概要
+
+* Onsen UI 2.0 では、「 スタイルの自動切り替え機能 」 を提供しています。この機能により、たとえば、Android プラットフォーム上であれば、マテリアルデザインのスタイルで、Onsen UI アプリが表示されます ( Onsen UI アプリの外見には、デフォルトでは、iOS のフラットデザインを使用しています )。この機能を無効にしたい場合には、`onsenui.js` ( `index.html` 上 ) を読み込んだ直後に、`ons.disableAutoStyling();` を呼び出します。
+* CSS 系のコンポーネントのいくつかが更新されています。[こちらのサイト](http://components2.onsen.io/) で新規のスタイルの確認とダウンロードができます。
+* `component.setXXX(...)` と `component.isXXX()` 系のメソッドのほとんどが廃止されました。なお、現在は、メソッド名の 「 XXX 」 部分をプロパティー名として使用します ( すべて小文字にします )。たとえば、`myCarousel.setDisabled(true);` => `myCarousel.disabled = true;` と変更します。
+* `getDeviceBackButtonHandler()` メソッドも廃止されました。代わりに、`onDeviceBackButton` プロパティーを使用します。たとえば、`myNavigator.onDeviceBackButton = function() {};` のように変更します。
+
+##### [ons-navigator](https://onsen.io/v2/docs/angular1/ons-navigator.html)
+
+* `getCurrentPage` メソッドは廃止されました。代わりに、`topPage` プロパティー ( HTMLElement ) を使用します。たとえば、`myNavigator.getCurrentPage();` => `myNavigator.topPage;` のように変更します。
+* `getPages()` メソッドは廃止されました。代わりに、`pages` プロパティー (HTMLCollection) を使用します。たとえば、`myNavigator.getPages();` => `myNavigator.pages;` のように変更します。
+* `options.onTransitionEnd` の名前は、`options.callback` へと変更されました。
+
+##### [ons-tabbar](https://onsen.io/v2/docs/angular1/tabbar.html)
+
+* tab で使用されていた `persistent` 属性と `no-reload` 属性は廃止されました。これらの属性を使用していたときの挙動は、現在、デフォルトの挙動になっています。
+
+##### [ons-list](https://onsen.io/v2/docs/angular1/list.html)
+
+* list 用のコンポーネントに適用する CSS を更新しました。ドキュメントの 「 リファレンス 」 で確認してください。新しく `modifiers` 属性 ( longdivider、nodivider などが設定可 ) が追加されました。
+* `ons-list-item` では、`ons-col`、`ons-row`、または、カスタム CSS を使用しなくとも、`left`、`center`、`right` 要素を指定すれば、一覧を構築できるようになりました。
+
+##### [ons-carousel](https://onsen.io/v2/docs/angular1/ons-carousel.html)
+
+* `setActiveCarouselItemIndex()` メソッドの名前は、`setActiveIndex()` へと変更されました。
+* `getActiveCarouselItemIndex()` メソッドの名前は、`getActiveIndex()` へと変更されました。
+
+##### [ons-button](https://onsen.io/v2/docs/angular1/ons-button.html)
+
+* スピナー関連のメソッドは廃止されました。代替として、カスタム CSS を適宜使用してください。
+
+##### ons-scroller
+
+このディレクティブは廃止されました。現在は、次のような CSS と `div` 要素を使用して、同等の挙動を実現しています。
+
+```
+.scroller {
+  display: block;
+  height: 100%;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
+}
+```
+
+#### AngularJS 1 を取り除く方法
+
+プロジェクトから AngularJS 1 を取り除く場合には、次の処理が必要となります。
+
+* `var` 属性は、AngularJS 1 用です。代わりに、`id` を使用します。そして、要素の取得には、`getElementById` または `querySelector` を使用します。たとえば、`var myNavigator = document.getElementById('my-navigator'); myNavigator.pushPage(...);` のように変更します。
+* `ons-prepush` などのイベントリスナー系の属性は、AngularJS 1 用です。代わりに、JavaScript で使用する、通常のイベントリスナーに変更します。たとえば、`document.addEventListener('prepush', function(event) {}); のように変更します。
+* `ons-sliding-menu` ディレクティブと `ons-split-view` ディレクティブは、AngularJS 1 用です。代わりに、[`ons-splitter` コンポーネント](https://onsen.io/v2/docs/angular1/splitter.html) を使用します。
+
+<!-- End of markdown -->
+<% end %>
