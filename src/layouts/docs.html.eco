@@ -62,7 +62,7 @@
 
 <body id="<%- @page %>">
 
-  <div class="header<%= ' header-fixed' if @isGuide %>">
+  <div class="header<%= ' header-fixed' if @isGuide || @page == 'guide' %>">
     <%- @partial('global-nav.html.eco') %>
     <% if @isGuide || @page == 'guide': %>
       <!-- <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %> -->
@@ -77,14 +77,14 @@
 			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
 		</aside>
 		<% end %>
-    <div class="container-content<%= ' headers-are-anchors' if @isGuide %>">
+    <div class="container-content<%= ' headers-are-anchors' if @isGuide || @page == 'guide' %>">
       <% if @origPath and (@isGuide or @page == 'guide'): %>
         <a class="onsen-button improve-doc-button" target="_blank" href="https://github.com/OnsenUI/onsen.io/edit/master/src/documents_en/<%= @origPath %>">
           <i class="fa fa-pencil"></i>Improve this
         </a>
       <% end %>
       <%- @contents %>
-      <%- @partial('guide_section_footer.html.eco') if @isGuide %>
+      <%- @partial('guide_section_footer.html.eco') if @isGuide || @page == 'guide' %>
       <%- @partial('need_help.html.eco') if @needHelp %>
     </div>
   </div>
