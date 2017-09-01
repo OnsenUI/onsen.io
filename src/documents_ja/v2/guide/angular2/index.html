@@ -11,44 +11,36 @@ layout: docs.html.eco
 
 この章を読み進める前に、[Onsen UIをはじめよう](../index.html)と[Onsen UIの基礎](../fundamentals.html)に目を通して頂くことを推奨いたします。心配ありません、読み終わるまで5分もかかりません。
 
-この章では、Angular 用ライブラリ `ngx-onsenui` の利用方法を解説します。
-Onsen UI の概要については [Onsen UI Core ガイド](/v2/docs/guide/js/) をご参照ください。
+In this chapter, we would like to explain how to use `ngx-onsenui`, a binding library for Angular.
+About Onsen UI, please refer to [Onsen UI Overview](/v2/docs/guide/js/).
 
-#### `ngx-onsenui` のセットアップ
+#### Setup
 
-<!--簡単にプロジェクトをセットアップしたいときには、このパッケージやTypeScriptやWebpackやPolyfillなどの依存を全てダウンロードし、プロジェクトをビルドしてくれるMonaca CLIを利用できます。
+##### Prerequisites
 
-##### Monaca CLIを使う
+This document assumes you are somewhat familiar with Angular framework, and have an existing Angular application.
+If not, we suggest you to go through [the official Angular guide](https://angular.io/) and setup an initial project.
 
-```bash
-$ npm install -g monaca # Monaca CLIをインストールする
-$ monaca create helloworld # "Angular 2 template"を選択する
-$ cd helloworld; monaca preview # Run preview, or "monaca debug" to run on your device
-```-->
+##### Install `onsenui` and `ngx-onsenui`
 
-##### 前提条件
-
-ここでは、既に Angular プロジェクトが用意されているものと仮定します。
-Angular プロジェクトの用意がお済みでない場合は[公式ガイド](https://angular.io/)を元に Angular プロジェクトをセットアップしてください。
-
-##### `onsenui` と `ngx-onsenui` のインストール
-
-まず、Onsen UI 本体（`onsenui`）と Angular 用ライブラリ（`ngx-onsenui`）をインストールします。
+Use npm to install Onsen UI Core (`onsenui`) and the binding library for Angular (`ngx-onsenui`).
 
 ```bash
 npm install onsenui ngx-onsenui --save
 ```
 
-##### `OnsenModule` のインポート
+##### Import `OnsenModule`
 
-次に、Angular アプリのルートモジュール（典型的な名前: `AppModule`）に `OnsenModule` をインポートします。
+Then, import `OnsenModule` into the root module (typically called `AppModule`) of your Angular app.
 
 <!--in app.module.ts-->
+
 ```ts
 import { OnsenModule } from 'ngx-onsenui';
 ```
 
 <!--in app.module.ts-->
+
 ```ts
 imports: [
    BrowserModule,
@@ -56,35 +48,38 @@ imports: [
 ],
 ```
 
-これにより、`ngx-onsenui` の機能および Onsen UI 本体（`onsenui`）がアプリに読み込まれます。
+This step will load all components and features of `ngx-onsenui` and Onsen UI Core (`onsenui`) into your app.
 
-##### `CUSTOM_ELEMENTS_SCHEMA` の読み込み
+##### Load `CUSTOM_ELEMENTS_SCHEMA`
 
-次に、ルートモジュールに `schemas` を追加し、その中に `CUSTOM_ELEMENTS_SCHEMA` を追加します。
+Add `schemas` property into the root module and put `CUSTOM_ELEMENTS_SCHEMA` into it. This is important since Onsen UI components are Web Components (Custom Elements).
 
 <!--in app.module.ts-->
+
 ```ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 ```
 
 <!--in app.module.ts-->
+
 ```ts
   schemas: [
       CUSTOM_ELEMENTS_SCHEMA,
   ],
 ```
 
-これにより、テンプレート内に `ons-*` タグを書いても警告が出なくなります。
+This step suppresses warnings caused by `ons-*` tags in templates.
 
-##### CSS ファイルの読み込み
+##### Load CSS files
 
-最後に、`node_modules/onsenui/css/` ディレクトリ内にある `onsenui.css` と `onsen-css-components.css` を **この順番で** 読み込みます。
+Finally, load `onsenui.css` and `onsen-css-components.css` in `node_modules/onsenui/css/`. **Follow this order!**.
 
-###### (1) Angular CLI をお使いの場合
+**Using Angular CLI**
 
-[公式ガイド](https://github.com/angular/angular-cli/wiki/stories-global-styles)に従って `.angular-cli.json` に以下の2行を追記します。
+Append the following two lines in `.angular-cli.json`. Check out [the officlal Angular CLI guide](https://github.com/angular/angular-cli/wiki/stories-global-styles) for more details.
 
 <!--in .angular-cli.json-->
+
 ```json
 "styles": [
   "../node_modules/onsenui/css/onsenui.css",
@@ -93,29 +88,29 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 ],
 ```
 
-###### (2) Angular CLI 以外の環境をお使いの場合
+**Configure Manually**
 
-以下の2行を適切に修正してプロジェクト内のグローバルスタイルファイルに追記します。
+Modify the following two lines appropriately and append them into the global stylesheet file in your project.
 
 <!--in styles.css, app.css, etc.-->
+
 ```css
 @import '../node_modules/onsenui/css/onsenui.css';
 @import '../node_modules/onsenui/css/onsen-css-components.css';
 ```
 
-##### 完了
+##### Ready to go!
 
-これで `ngx-onsenui` のセットアップは完了です。
+`ngx-onsenui` has been set up. Feel free to use Onsen UI components!
 
+#### `ngx-onsenui` Essentials
 
-#### `ngx-onsenui` の使い方
+##### Using components
 
-##### コンポーネントの利用
+`ngx-onsenui` provides various components: ([see all components in list](/v2/docs/angular2.html)).
+Each components start with `ons-*` tag.
 
-`ngx-onsenui` は数十個のコンポーネント（[一覧](/v2/docs/angular2.html)）を提供しています。
-各コンポーネントは、`ons-*` タグを記述することで利用できます。
-
-ここでは例として、ボタンを表示してみましょう。
+For example, let's put a button.
 
 ```ts
 template: `
@@ -123,7 +118,7 @@ template: `
 `
 ```
 
-この時、ボタンがクリックされた時の処理を記述するには Angular の[イベントバインディング](https://angular.io/docs/ts/latest/guide/user-input.html)機能を利用します。
+If you want to set an action triggered when the button is clicked, you can use [Angular event binding](https://angular.io/docs/ts/latest/guide/user-input.html).
 
 ```ts
 template: `
@@ -131,12 +126,12 @@ template: `
 `
 ```
 
-各コンポーネントでどのようなイベントが利用できるかについては、各コンポーネントのリファレンスページをご参照ください。
+If you want to know what events you can use in each component, please refer to each reference page of them.
 
-##### 双方向バインディングの利用
+##### Two-way binding
 
-`ons-input` などの一部のコンポーネントは双方向バインディングに対応しています。
-`[(value)]="val"` と記述すると `val` の値と `ons-input` に入力された内容が同期されます。
+Some components (i.e. `ons-input`) support two-way binding.
+They allow `[(value)]="val"` syntax to synchronize the value of `val` with the value of `ons-input`.
 
 ```ts
 template: `
@@ -144,8 +139,8 @@ template: `
 `
 ```
 
-一部のコンポーネントでは `[(value)]="val"` に加えて `(input)="val = $event.target.value"` を記述する必要があります。
-`ons-range` の場合、このように記述しないとドラッグ途中での値の変化が `val` に反映されません。
+Some components require `(input)="val = $event.target.value"` in addition to `[(value)]="val"` syntax. 
+For example, `ons-range` component won't update the value when it's dragged.
 
 ```ts
 template: `
@@ -153,52 +148,48 @@ template: `
 `
 ```
 
-##### `ons-page` の利用
+##### Using `ons-page`
 
-`ons-page` は画面全体に広がる特殊なコンポーネントで、これを利用すると iOS/Android ライクなツールバーを表示することができます。
+`ons-page` is a special component which covers the whole screen and becomes the container for the toolbar.
 
-`ons-page` を利用するには、以下のように記述します。
+`ons-page` must be created by writing the following code:
 
 ```html
 <ons-page>
-  <div class="background"></div><!-- ページの背景 -->
+  <div class="background"></div><!-- Background of the page -->
   <div class="content">
-    <!-- ページの内容 -->
+    <!-- Content of the page -->
   </div>
 </ons-page>
 ```
 
-`background` がページの背景に、`content` がページの内容に対応します。
-`ons-page` の直下にページの内容を記述したり、`ons-page` に `background-color` を設定して背景を変更しようとしたりすると動作しませんのでご注意ください。
+`background` corresponds to the background of the page, and `content` corresponds to the content of the page. Keep in mind that page contents cannot be placed right under the `ons-page`.
 
-`ons-toolbar` を利用するとページ上部にツールバーを表示することができます。
-`ons-toolbar` は必ず `ons-page` の中の一番最初に記述してください。
+Similarily, `ons-toolbar` can be used to show a toolbar at the top of the page.
+In this case, `ons-toolbar` has to be the direct first child of `ons-page`.
 
 ```html
 <ons-page>
   <ons-toolbar>
-    <div class="center"><!-- ツールバータイトル --></div>
+    <div class="center"><!-- Toolbar title --></div>
   </ons-toolbar>
   <div class="background"></div>
   <div class="content">
-    <!-- ページの内容 -->
+    <!-- Content of the page -->
   </div>
 </ons-page>
 ```
 
-##### ページマネージャの利用
+##### Managing pages with navigator, splitter and tabbar
 
-`ngx-onsenui` はモバイルライクな画面遷移を実現するための特殊なコンポーネント（ページマネージャ）として `ons-navigator`, `ons-splitter`, `ons-tabbar` の3つを提供しています。
+`ngx-onsenui` provides three special components to mangae pages: `ons-navigator`, `ons-splitter` and `ons-tabbar`. They allow native-like page transitions.
 
-ページマネージャを利用すると複数の `ons-page` を自動的に生成・破壊したり、アニメーションさせたりすることができます。
+Page managers will automatically create, destroy and animate multiple `ons-page`s. Let's see in code with `ons-navigator`.
 
-ここでは、`ons-navigator` を例に説明を行います。
+###### Defining a page
 
-###### ページコンポーネントの定義
-
-ページマネージャを利用するにはページを Angular コンポーネントとして定義する必要があります。
-
-ページコンポーネントは以下のように、`selector` に `ons-page[適当な名前]` を指定し、その中身を `template` に記述することで定義します。
+To use page managers, each pages need to be defined as Angular components. 
+It can be achieved by setting `ons-page[some-id]` for the `selector` and describing the page content inside `template`.
 
 ```ts
 @Component({
@@ -217,9 +208,9 @@ export class FirstPageComponent {
 }
 ```
 
-この時、`[]` 内に必ず一意な名前を指定してください。この指定を怠ると、元々の `ons-page` の定義が破壊され、予期せぬ動作を招きます。
+A unique page ID should be specified (`first` in the example above). Otherwise, the original definition of the `ons-page` directive will be broken and it leads to unexpected behavior.
 
-次に、ルートモジュール（典型的な名前: `AppModule`）の `entryComponents` に上記で作ったページコンポーネントを追加してください。
+Then, add the page component into `entryComponents` property of the root module (Typical name: `AppModule`).
 
 ```ts
   entryComponents: [
@@ -227,12 +218,11 @@ export class FirstPageComponent {
   ],
 ```
 
-これは `ons-navigator` が `FirstPageComponent` を動的に生成・破壊するために必要な記述で、この記述を怠ると `No component factory found for FirstPageComponent` というようなエラーが発生します。
+This step is required so that `ons-navigator` can dynamically create and destroy `FirstPageComponent`. If not, `No component factory found for FirstPageComponent` error will be shown.
 
-###### `ons-navigator` への初期ページの設定
+###### Set default page of `ons-navigator`
 
-では、`ons-navigator` の機能を利用していきましょう。
-`ons-navigator` では、`[page]` で初期ページを設定することができます。
+Now `ons-navigator` component is available. Use `[page]` attribute to specify the default page.
 
 ```ts
 @Component({
@@ -245,17 +235,18 @@ export class AppComponent {
   initialPage = FirstPageComponent;
 }
 ```
-これにより、先ほど `FirstPageComponent` コンポーネントで定義したページ内容が表示されます。
 
-なお、Angular では `FirstPageComponent` のようなクラス外の変数をテンプレート内に直接記述することができないため、この例では `initialPage` という変数を定義してそこに一旦代入を行っています。
+With the code above, it will show the page content in `FirstPageComponent` component.
 
-###### `ons-navigator` へのページの「push」
+And in this example, we defined `initialPage` and assigned the value to it. It is because Angular does not allow using a variable (`FirstPageComponent`) outside the class.
 
-`ons-navigator` はページをスタック状に重ねて管理することのできるコンポーネントです。
-ページを画面手前側に追加することを push と言い、一番手前にあるページを取り除くことを pop と言います。
-では、初期ページの上に別のページを push してみましょう。
+###### Pushing a page
 
-まず、別のページを `SecondPageComponent` という名前で定義し、ルートモジュールの `entryComponents` に追加します。
+`ons-navigator` manages pages in the form of a stack. Adding a page to the front screen is called "push", and removing a foremost page is called "pop".
+
+Let's try pushing another page content when a button is pressed.
+
+First, define another page with the name `SecondPageComponent` and add it into `entryComponents` property.
 
 ```ts
 @Component({
@@ -273,7 +264,6 @@ export class AppComponent {
 export class SecondPageComponent {
 }
 ```
-
 ```ts
   entryComponents: [
     FirstPageComponent,
@@ -281,7 +271,7 @@ export class SecondPageComponent {
   ],
 ```
 
-続いて、先ほど定義した `FirstPageComponent` に、ページを push するためのボタンと処理を追加します。
+Then, add a button and a short code to push `FirstPageComponent` page.
 
 ```ts
 import { OnsNavigator } from 'ngx-onsenui';
@@ -300,39 +290,39 @@ import { OnsNavigator } from 'ngx-onsenui';
   `
 })
 export class FirstPageComponent {
-  // Dependency Injection (DI) で `ons-navigator` へのアクセス手段を取得
+  // Get a way to access `ons-navigator` by Dependency Injection (DI)
   constructor(private navigator: OnsNavigator) {
   }
 
   push() {
-    // `ons-navigator` に SecontPageComponent を push
+    // Push SecontPageComponent to `ons-navigator
     this.navigator.element.pushPage(SecondPageComponent);
   }
 }
 ```
 
-これにより、「Push」ボタンを押した時に `SecondPageComponent` で定義したページが右からスライドしてくるようになります。
+Voila. The page defined by `SecondPageComponent` will slide from the right when the button is pressed.
 
-このように、`ons-navigator` にページを push するには
+To summarize, pushing pages to `ons-navivator` requires the following two steps:
 
-1. Dependency Injection (DI) で `ons-navigator` へのアクセス手段（＝ディレクティブインスタンス）を取得する
-2. `pushPage` で `ons-navigator` に `SecondPageComponent` を push する
+1. Give a way (= the directive instance) to access `ons-navigator` by Dependency Injection (DI)
+1. Push `SecondPageComponent` to `ons-navigator` with `pushPage`
 
-の2つの処理が必要となります。`this.navigator.pushPage` ではなく `this.navigator.element.pushPage` にアクセスする必要がありますので、ご注意ください。
+Please note that **the method to call is `this.navigator.element.pushPage`**, and not `this.navigator.pushPage`.
 
-ページの pop を行いたい場合は、`SecondPageComponent` 内で `popPage` を実行します。
+Similarly, if you want to pop pages, execute `this.navigator.element.popPage` when `SecondPageComponent` is displayed.
 
-###### パラメータつき push / pop
+###### Passing parameters to the new page
 
-ページの push や pop の際に、遷移先ページにパラメータを渡すこともできます。
+You can pass parameters to a destination page when a pushing / popping page.
 
-例えば push の場合、パラメータを渡すには、遷移元ページにて pushPage の `data` オプションを利用してパラメータつき push を行い、
+To pass a parameter, use `data` option when calling `pushPage`:
 
 ```ts
 this.navigator.element.pushPage(SecondPageComponent, {data: {foo: 1234}});
 ```
 
-遷移先ページで Dependency Injection (DI) を利用することでパラメータを受け取ることができます。
+Passed parameters can be received in the destination page using Dependency Injection (DI).
 
 ```ts
 import { Params } from 'ngx-onsenui';
@@ -343,40 +333,41 @@ constructor(private params: Params) {
 }
 ```
 
-`pushPage` には `data` オプション以外にも `animation` オプションなど様々なオプションがあります（詳しくは `ons-navigator` のリファレンスページをご覧ください）。`Params` では `data` オプションに限らず、それらのオプションも全て取得することができます。
+`pushPage` has several options as well as `data` option such as `animation`option (for more details, please refer to `ons-navigator`). You can retrieve all the options with `Params` as well as `data` option.
 
-#### `ngx-onsenui` のサンプルコード
+#### More examples
 
-各コンポーネントの実際の使い方が知りたい場合は、`ngx-onsenui` の開発が行われている GitHub リポジトリの `examples` ディレクトリをご覧ください。
+Each components are equipped with working examples. Please refer to `examples` directory in the repository.
 
- * [サンプルコード集 (GitHub)](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples)
+- [Example codes of `ngx-onsenui` (GitHub)](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/examples)
 
-例えば、`carousel.ts` には `ons-carousel` コンポーネントを実際に利用した時にどのようなコードを書けば良いかが記述されています。
+For instance, `carousel.ts` contains information about what code you would write when using `ons-carousel` compoennt.
 
-#### `ngx-onsenui` のアーキテクチャ
+#### Architecture
 
-以下は発展的な内容となります。
+This section may contain advanced information.
 
-##### Angular ディレクティブによる Web Components のラップ
+##### Wrapping Web Components with Angular directives
 
-`ngx-onsenui` は、Web Components API で Web Components レイヤに定義した要素を Angular のディレクティブでラップすることで、Web Components の機能だけでは提供できない `[page]` による初期ページの設定や双方向バインディングを提供しています。
+`ngx-onsenui` provides a feature to set default page with `[page]`, two-way binding and other features, which cannot be realized by features of Web Components itself, by wrapping elements defined in Web Components layer with Angular directives.
 
-例えば、`ons-navigator` は `OnsNavigator` ディレクティブによりラップされ、`ons-switch` は `OnsSwitch` ディレクティブによりラップされています。
+For example, `ons-navigator` element is wrapped with `OnsNavigator` directive and `ons-switch` element is wrapped with `OnsSwitch` directive.
 
-しかし、全てのコンポーネントにディレクティブが提供されているわけではありません。例えば、`ons-button` 要素に対応するディレクティブはありません。これはこのディレクティブを実装する必要がないからです。
+However not all the components have corresponding directives. For example, `ons-button` element is not wrapped with any directives since there is no need to wrap the element.
 
-`ngx-onsenui` が提供しているディレクティブの一覧については、`OnsenModule` の定義（[GitHub](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/angular2/src/ngx-onsenui.ts)）をご覧ください。
+About the list of all the directives provided by `ngx-onsenui`, please refer to [the definition of `OnsenModule` (GitHub)](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/angular2/src/ngx-onsenui.ts).
 
-##### Web Components レイヤのメソッドを直接呼び出す方法
+##### How to directly call methods in Web Components layer
 
-Web Componentsでは、メソッドはDOM要素に直接定義されています。そのため、`querySelector()` を使って要素を取得してメソッドを呼び出すことができます。
+In Web Components, methods are directly defined in DOM elements. To call the methods, you can access elements in some way such as `querySelector()`.
 
-Angular では、DOM要素を参照するのにテンプレートリファレンス変数(`#var`)を使うこともできます。詳しくは[Angular 公式ガイド](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars)を参照してください。
+In Angular, you can also access DOM elements with template reference variables (Example: `#var`). For more details, please refer to [the official Angular guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars).
 
-#### `angular2-onsenui` について
+#### About `angular2-onsenui`
 
-過去に提供していた Angular 用ライブラリ `angular2-onsenui` は、Angular 4 の発表に伴い廃止されました。
-`angular2-onsenui` をお使いの方は、`ngx-onsenui` へのアップデートをお願いいたします。
+`angular2-onsenui` which is previously provided has been obsoleted since Angular 4 was announced.
+If you are still using `angular2-onsenui`, we recommend that you update it to `ngx-onsenui`.
 
 <!-- End of markdown -->
+
 <% end %>

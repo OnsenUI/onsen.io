@@ -41,11 +41,24 @@ Onsen UIはいくつかの処理を自動的に最適化を行いますが、時
 
 もし新しく作成しようとしているページがさらに他のファイルを含んでいる場合（タブバーを含むページを表示する場合など）、多くのリクエストが発生するために、ページ遷移が遅れる可能性があります。これを防ぐには[`ons.preload([…])`メソッド](/v2/api/js/ons.html#method-preload)を使って事前にリクエストをしておき、テンプレートをキャッシュすると良いでしょう。
 
+#### ons-scrollerについて
+
+`ons-scroller` はOnsen UIバージョン1で提供されていた、スクロールを可能にするためのディレクティブでした。バージョン2ではこのコンポーネントは廃止されました。代替として、`div`タグを設置し、下記のCSSプロパティを適用することで同じ動作を再現できます。
+
+```
+.scroller {
+  display: block;
+  height: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: none;
+  -ms-scroll-snap-type: mandatory;
+}
+```
+
+他の手段としては、全画面でスクロールする必要がない場合は[`ons-page`](/v2/api/js/ons-page.html)を用いることもできます。もしくは、[`ons-carousel`](/v2/api/js/ons-carousel.html)で`auto-scroll`属性を**指定しない**方法もご利用いただけます。
+
 #### よくあるエラーメッセージ
-
-- **ons is not defined**
-
-  **執筆中です**
 
 - **Set/Map is not defined - Can't find variable Set/Map**
 
@@ -54,10 +67,6 @@ Onsen UIはいくつかの処理を自動的に最適化を行いますが、時
 - **MutationObserver is not defined**
 
   実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを使うか、Polyfillを組み込んでください。
-
-- **Module ‘onsenui’ has no default export**
-
-  **執筆中です**
 
 - **pushPage/popPage is already running**
 

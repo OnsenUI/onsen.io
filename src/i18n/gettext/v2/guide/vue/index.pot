@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-30 22:54+0000\n"
+"POT-Creation-Date: 2017-09-01 01:26+0000\n"
 "Plural-Forms: \n"
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:1
@@ -153,16 +153,39 @@ msgid ""
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:33
-msgid "Hello World with Vue"
+msgid "List of Vue Components"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:34
+msgid ""
+"<a href=\"/v2/api/vue/\" target=\"_blank\"><img "
+"src=\"/images/guide/vue_components.png\" alt=\"Vue Components\"></a>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:35
+msgid ""
+"[Vue Components API Reference](/v2/api/vue/) lists up all the Vue "
+"Components included in Onsen UI."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:36
+msgid ""
+"Also, [Kitchensink app](https://onsenui.github.io/vue-onsenui-kitchensink/) "
+"will be useful for determining how components behave. [See the code "
+"here](https://github.com/onsenui/vue-onsenui-kitchensink)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:37
+msgid "Hello World with Vue"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:38
 msgid ""
 "To get started, let’s create a simple Hello World application. The "
 "following sample code is a Vue version of Onsen UI HelloWorld."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:35
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:39
 msgid ""
 "<!DOCTYPE html>\n"
 "<html lang=\"en\">\n"
@@ -202,37 +225,37 @@ msgid ""
 "</html>"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:36
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:40
 msgid ""
 "The `<div id=\"app\"></div>` node is where Vue will render the content into "
 "(`el` property in the constructor)."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:37
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:41
 msgid ""
 "This is a pure ES5 example, although normally it's advisable to use ES2015 "
 "and [`vue-loader`](https://github.com/vuejs/vue-loader) since it allows "
 "`*.vue` format."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:38
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:42
 msgid ""
 "For more information about Vue itself, we recommend reading the official "
 "[Vue docs](https://vuejs.org/v2/guide/)."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:39
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:43
 msgid "Understanding Vue Components"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:40
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:44
 msgid ""
 "Having a general idea about how everything is implemented could be useful "
 "in some situations. This is a brief explanation about how Vue Componentes "
 "for Onsen UI work."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:41
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:45
 msgid ""
 "These components are simple wrappers around inner [Custom "
 "Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/"
@@ -246,140 +269,183 @@ msgid ""
 "components)."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:42
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:46
 msgid ""
 "Since `v-ons-*` components compiles into `ons-*` DOM element, you can use "
 "this knowledge to style your component with tag names as well."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:43
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:47
+msgid "VOnsPage Compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:48
+msgid ""
+"`v-ons-page` component compiles into `ons-page` custom element. This "
+"element, at the same time, processes its content and filters scrollable and "
+"fixed elements. Scrollable content is moved into a special "
+"`div.page__content` wrapper. This behavior might create issues under some "
+"specific situations, like using `v-for` with asynchronous data. To avoid "
+"any possible issue, __manually providing a `div.content` element is "
+"recommended__:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:49
+msgid ""
+"<v-ons-page>\n"
+"  <v-ons-toolbar></v-ons-toolbar>\n"
+"\n"
+"  <div class=\"content\">\n"
+"    <!-- Scrollable content here -->\n"
+"    <v-ons-input></v-ons-input>\n"
+"    <div v-for=\"item in asyncAjaxItems\"></div>\n"
+"  </div>\n"
+"\n"
+"  <!-- Fixed content here -->\n"
+"  <v-ons-fab></v-ons-fab>\n"
+"</v-ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:50
+msgid ""
+"See also [Components Compilation](../compilation.html) section for more "
+"details about this."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:51
 msgid "The $ons object"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:44
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:52
 msgid ""
 "The original [`ons` object](../fundamentals.html#the-ons-object) is not "
 "available in the global scope in Vue applications. Instead, it is provided "
 "in every Vue instance as `this.$ons` through Vue's protoytpe:"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:45
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:53
 msgid ""
 "<v-ons-button @click=\"$ons.notification.alert('Hi there!')\">\n"
 "  Click me\n"
 "</v-ons-button>"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:46
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:54
 msgid "Event Handling"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:47
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:55
 msgid ""
 "DOM events fired by Onsen UI elements are translated into Vue events in the "
 "corresponding components. For example, `v-ons-navigator` can handle a "
-"`postpush` event with `@postpush=\"...\"`. Note that only custom events "
-"like `postpush`, `init`, `prechange`, etc. are treated like this. Native "
-"events like `input` or `change` will still need to be handled as DOM "
-"events: `@input.native=\"...\"` (normally you'd want to use `v-model` for "
-"these events)."
+"`postpush` event with `@postpush=\"...\"`."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:48
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:56
 msgid ""
-"The exception to this is `click` event, which can be handled as a Vue "
-"event: `<v-ons-tab @click=\"...\">`. The reason is that `click` event is "
-"used to override the default behavior of some components:"
+"From `vue@2.4.0` and `vue-onsenui@2.1.0` onwards, native DOM events are "
+"passed down to the children. This means that `<v-ons-checkbox "
+"@change=\"...\">` will work __without__ `native` modifier. Prior to these "
+"versions, `@change.native=\"...\"` syntax is required. Note that these "
+"events are still DOM events and, as such, Vue DevTools won't show any Vue "
+"event for these."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:49
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:57
+msgid ""
+"The exception to this is `click` event, which is turned into a Vue event in "
+"some components. The reason is that `click` event is used to override "
+"default behaviors:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:58
 msgid ""
 "<v-ons-back-button "
 "@click.prevent=\"pageStack.splice(1)\"></v-ons-back-button>"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:50
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:59
 msgid ""
 "The previous example overrides the `v-ons-back-button` default behavior, "
 "popping 1 single page, and resets the stack to the first page instead. The "
 "`prevent` modifier is just calling `$event.preventDefault()`."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:51
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:60
 msgid ""
 "Additionally, components that are capable of handling Cordova's "
 "`backbutton` event (Android's back button), can listen for this event with "
 "`@deviceBackButton` handler."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:52
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:61
 msgid ""
 "<v-ons-dialog "
 "@deviceBackButton=\"$event.callParentHandler()\"></v-ons-dialog>"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:53
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:62
 msgid ""
 "More information about this event in the original [Cordova-specific "
 "Features](../cordova.html#device-back-button) section."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:54
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:63
 msgid "Inputs and v-model"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:55
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:64
 msgid ""
 "Input components in Onsen UI (such as `v-ons-input` or `v-ons-checkbox`) "
 "support Vue’s `v-model` directive:"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:56
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:65
 msgid "<v-ons-input v-model=\"something\"></v-ons-input>"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:57
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:66
 msgid ""
 "The only exceptions are `v-model` modifiers, which are not supported by "
 "custom components as of `vue@2.3`, unfortunately. However, there is a "
 "workaround for the most important one, the `lazy` modifier:"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:58
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:67
 msgid "<v-ons-input v-model=\"something\" model-event=\"change\"></v-ons-input>"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:59
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:68
 msgid ""
 "This will update the model on `change` events instead of `input` (default). "
 "The rest ofthe modifiers can be easily implemented in other ways."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:60
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:69
 msgid ""
 "It is also possible to bind arrays to `v-ons-checkbox` or `v-ons-switch` "
 "just like normal `<input type=\"checkbox\">`, and make radio groups with "
 "`v-model` for `v-ons-radio`."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:61
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:70
 msgid "Vue Bindings FAQ"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:62
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:71
 msgid "How to set up global Onsen UI options?"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:63
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:72
 msgid ""
 "The main guide describes [how to disable or set some global "
-"features](../faq.html) \"right after including `onsenui.js` in the app\". "
+"features](../faq.html) _\"right after including `onsenui.js` in the app\"_. "
 "This means that it must take effect before any component is rendered. Since "
 "`ons` object is not provided globally, we need to use `$ons` object at the "
 "very first possible location:"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:64
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:73
 msgid ""
 "import Vue from 'vue';\n"
 "import VueOnsen from 'vue-onsenui';\n"
@@ -394,15 +460,15 @@ msgid ""
 "})"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:65
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:74
 msgid "This way, changes take effect before any component is rendered."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:66
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:75
 msgid "How to pass data to the next page in the navigator?"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:67
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:76
 msgid ""
 "Navigator's pages are sibling elements, which means that communication "
 "among them in Vue is fairly challenging. [Vuex](https://vuex.vuejs.org/) is "
@@ -410,7 +476,7 @@ msgid ""
 "component and want to add some initial data, you can simply extend it:"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:68
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:77
 msgid ""
 "import nextPage from 'nextPage.vue';\n"
 "// ...\n"
@@ -425,7 +491,7 @@ msgid ""
 "})"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:69
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:78
 msgid ""
 "In order to send data back to the previous page before popping, any of "
 "Vue's methods for [non parent-child "
@@ -433,11 +499,11 @@ msgid ""
 "Communication) works."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:70
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:79
 msgid "Can I use Vuex with Onsen UI?"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:71
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:80
 msgid ""
 "Definitely yes. Vuex is a good solution for components communication. If "
 "you have too many props and events up and down, Vuex may be a good fit. For "
@@ -445,36 +511,142 @@ msgid ""
 "app](https://frandiox.github.io/vue-onsenui-kitchensink/)."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:72
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:81
 msgid "What about vue-router?"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:73
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:82
 msgid ""
 "Onsen UI provides its own routing components: "
 "[`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html), "
 "[`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html) and "
 "[`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html). These components can "
-"be mixed in many different ways to achieve the desired route pattern. This "
-"is in general completely enough for mobile SPA, so there is no need to plug "
-"an external router."
+"be mixed in many ways to achieve the desired route pattern. This is in "
+"general completely enough for mobile SPA, so there is no need to plug an "
+"external router."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:74
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:83
 msgid ""
-"However, for those who really want to integrate vue-router, it is "
-"compatible with Onsen UI with the exception of navigator's animations. "
-"Currently, you'd need to make your own transitions for this. While there "
-"are workarounds like pushing pages to navigator's `pageStack` on router "
-"guards, it still has a few drawbacks."
+"However, for those who really want to integrate vue-router, it is fully "
+"compatible with Onsen UI. It simply has to be integrated with the three "
+"routing components mentioned above."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:75
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:86
+msgid "__Splitter__:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:87
 msgid ""
-"For other components like `v-ons-tabbar`, you can override `v-ons-tab` \"on "
-"click\" behavior with `@click.prevent=\"...\"` and change your router view."
+"For `v-ons-splitter`, simply put your `router-view` in the place where "
+"`v-ons-page` components are normally located. In other words, inside "
+"`v-ons-splitter-content` or `v-ons-splitter-side`."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:76
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:89
+msgid ""
+"<v-ons-splitter>\n"
+"  <v-ons-splitter-side>...</v-ons-splitter-side>\n"
+"\n"
+"  <v-ons-splitter-content>\n"
+"    <router-view></router-view>\n"
+"  </v-ons-splitter-content>\n"
+"</v-ons-splitter>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:92
+msgid "__Tabbar__:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:93
+msgid ""
+"`v-ons-tabbar` accepts a slots syntax that allows us to include "
+"`router-view` in the pages slot. Also, `v-ons-tab` default behavior must be "
+"overriden in the `click` handler in order to let the router do the job."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:95
+msgid ""
+"<v-ons-tabbar>\n"
+"  <router-view slot=\"pages\"></router-view>\n"
+"  <v-ons-tab v-for=\"name in ['Home', 'Settings']\" :key=\"name\"\n"
+"    :label=\"name\"\n"
+"    :active=\"$route.name === name\"\n"
+"    @click.prevent=\"$router.push({name})\"\n"
+"  ></v-ons-tab>\n"
+"</v-ons-tabbar>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:98
+msgid ""
+"__Navigator__: In this case we don't need `<router-view>` at all. The "
+"router simply has to decide what's going to be the next page stack for the "
+"navigator, and the latter will do all the job (transitions, events, etc.):"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:100
+msgid ""
+"template: `\n"
+"  <div id=\"app\">\n"
+"    <v-ons-navigator swipeable\n"
+"      :page-stack=\"pageStack\"\n"
+"      :pop-page=\"goBack\"\n"
+"    ></v-ons-navigator>\n"
+"  </div>\n"
+"`,\n"
+"methods: {\n"
+"  goBack() {\n"
+"    this.$router.push({ name: "
+"this.$route.matched[this.$route.matched.length - 2].name });\n"
+"  }\n"
+"},\n"
+"created() {\n"
+"  const mapRouteStack = route => this.pageStack = route.matched.map(m => "
+"m.components.default);\n"
+"  mapRouteStack(this.$route);\n"
+"  this.$router.beforeEach((to, from, next) => mapRouteStack(to) && next());\n"
+"}"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:101
+msgid ""
+"Notice that the previous example is adding __every__ route to the "
+"Navigator's page stack. It assumes all the routes have a valid page "
+"(`v-ons-page`) as their default component. If this is not your case, simply "
+"filter out the routes you don't need."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:103
+msgid ""
+"Once the router gives the new page stack to the Navigator, this one "
+"compares the current stack with the previous one. If the number of "
+"pages/routes has decreased and the top page has changed, it will perform a "
+"'popPage' transition. Otherwise it will be 'pushPage'."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:105
+msgid ""
+"Due to this, going back in the browser history (`$router.go(-1)`) to a "
+"deeper route will push a page rather than popping. Therefore, going back in "
+"the history with the `v-ons-back-button` is not very recommended unless you "
+"have extra logic in your router to avoid unwanted behaviors."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:106
+msgid ""
+"In this example, the `v-ons-back-button` components runs `goBack` method, "
+"which is simply pushing the parent route (asumming it is the previous "
+"`v-ons-page`) instead of going back in the history. This behavior will "
+"likely fit most mobile apps."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:108
+msgid ""
+"For a more complete example of `v-ons-navigator` with `vue-router`, have a "
+"look at [this repository](https://github.com/frandiox/onsenui-vue-router)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/vue/index.html:112
 msgid "<% end %>"
 msgstr ""

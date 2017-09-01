@@ -1,0 +1,224 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2017-09-01 01:26+0000\n"
+"Plural-Forms: \n"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:1
+msgid ""
+"title: 'Components Compilation'\n"
+"order: 145\n"
+"tocGroup: guide"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:2
+msgid "layout: docs.html.eco"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:3
+msgid "<%- @markdown => %>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:4
+msgid "Components Compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:5
+msgid ""
+"In order to provide a very simple API, some Onsen UI components need to "
+"automatically add \"boilerplate\" content on creation. This process is "
+"called component compilation, where an element and its correspondent "
+"content is wrapped, moved around or new classes are added to it. In general "
+"this process is transparent to the developer and shouldn't need to worry "
+"about it. However, there are situations where knowing how to bypass "
+"compilation might be important (e.g. when implementing new framework "
+"bindings). This section explains what kind of changes some Onsen UI "
+"components automatically make to their inner content."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:6
+msgid "Page Compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:7
+msgid ""
+"The most important changes perhaps occur during `ons-page` compilation. "
+"There are basically 3 parts inside an `ons-page`:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:10
+msgid "Background: Applies background color or image."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:13
+msgid "Scrollable content: Scrollable part where most of the content is included."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:16
+msgid "Fixed elements: Content that is fixed in the screen during scroll."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:20
+msgid ""
+"Fixed elements could be naively implemented with `position: fixed` "
+"property. However, this causes too many issues in some mobile browsers when "
+"scrolling. Therefore, separating fixed content and scrollable content in "
+"two different containers is necessary. `ons-page` filters fixed and "
+"scrollable content on creation, but you need to be aware of it if you want "
+"to add extra content at a later time."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:21
+msgid "Specifically, when you create a page like this:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:22
+msgid ""
+"<ons-page>\n"
+"  <ons-toolbar></ons-toolbar>\n"
+"  Some content here\n"
+"  <ons-input></ons-input>\n"
+"  <ons-fab></ons-fab>\n"
+"  <div>More content</div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:23
+msgid "`ons-page` will compile in the following way:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:24
+msgid ""
+"<ons-page class=\"page\">\n"
+"  <ons-toolbar></ons-toolbar>\n"
+"  <div class=\"page__background\"></div>\n"
+"  <div class=\"page__content\">\n"
+"    Some content here\n"
+"    <ons-input></ons-input>\n"
+"    <div>More content</div>\n"
+"  </div>\n"
+"  <ons-fab></ons-fab>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:25
+msgid ""
+"As you can see, it added `.page`, `div.page__background` and "
+"`div.page__content` automatically. `ons-toolbar` and `ons-fab` are fixed "
+"content so they are left outside the previous wrappers. If you want to add "
+"an extra `ons-fab` after all of this happens, you should add it as a direct "
+"child of `ons-page`. However, other non-fixed elements like `ons-input` "
+"must be appended inside `div.page__content`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:26
+msgid ""
+"Knowing this, it is very easy to bypass the compilation process. If you "
+"directly provide the previous structure, Onsen UI won't need to change "
+"anything at all. You can also include `<div class=\"content\">` or `<div "
+"class=\"background\">` and the other necessary classes (`page__content` and "
+"`page__background`) will be added automatically. Example:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:27
+msgid ""
+"<ons-page>\n"
+"  <ons-toolbar></ons-toolbar>\n"
+"  <div class=\"content\">\n"
+"    Some content here\n"
+"    <ons-input></ons-input>\n"
+"    <div>More content</div>\n"
+"  </div>\n"
+"  <ons-fab></ons-fab>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:28
+msgid "Toolbar Compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:29
+msgid ""
+"`ons-toolbar` divides its layout in three parts: `div.left`, `div.center` "
+"and `div.right`. However, these classes are simple aliases for the real "
+"classes. A normal toolbar will compile its content as follows:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:30
+msgid ""
+"<ons-toolbar class=\"toolbar\">\n"
+"  <div class=\"left toolbar__left\">Left content</div>\n"
+"  <div class=\"center toolbar__center\">Center content</div>\n"
+"  <div class=\"right toolbar__right\">Right content</div>\n"
+"</ons-toolbar>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:31
+msgid ""
+"In addition, these containers are sorted automatically to always match "
+"\"left - center - right\" order."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:32
+msgid "List Item Compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:33
+msgid ""
+"Similarly to the toolbar example, `ons-list-item` also divides its layout "
+"in left, center and right parts:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:34
+msgid ""
+"<ons-list-item class=\"list-item\">\n"
+"  <div class=\"left list-item__left\">Left content</div>\n"
+"  <div class=\"center list-item__center\">Center content</div>\n"
+"  <div class=\"right list-item__right\">Right content</div>\n"
+"</ons-list-item>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:35
+msgid ""
+"If none of those sections is provided, `ons-list-item` will wrap all its "
+"content inside `div.list-item__center`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:36
+msgid "Select Compilation"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:37
+msgid ""
+"`ons-select` component simply adds a native `select` element if none is "
+"provided:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:38
+msgid ""
+"<ons-select>\n"
+"  <option>Opt 1</option>\n"
+"  <option>Opt 2</option>\n"
+"</ons-select>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:39
+msgid "Turns into:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/compilation.html:40
+msgid ""
+"<ons-select class=\"select\">\n"
+"  <select class=\"select-input\">\n"
+"    <option>Opt 1</option>\n"
+"    <option>Opt 2</option>\n"
+"  </select>\n"
+"</ons-select>"
+msgstr ""

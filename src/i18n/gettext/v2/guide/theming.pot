@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-30 22:54+0000\n"
+"POT-Creation-Date: 2017-09-01 01:26+0000\n"
 "Plural-Forms: \n"
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:1
@@ -186,13 +186,12 @@ msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:32
 msgid ""
-"Most Onsen UI components expand the inner element during runtime. For "
-"instance, ons-page automatically injects the following code inside\n"
+"Some Onsen UI components expand their content during runtime. For instance, "
+"`ons-page` automatically injects the following code inside\n"
 "`<ons-page>` and `</ons-page>`."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:33
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:39
 msgid ""
 "<ons-page class=\"page\">\n"
 "  <div class=”page__background”></div>\n"
@@ -202,112 +201,22 @@ msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:34
 msgid ""
-"Notice some additional attributes (such as `class=”page”`) and elements "
-"(such as `div`) are added."
+"Therefore, sometimes you might need to style components using this inner "
+"elements. For example, changing background color of a specific page could "
+"be done with `#myPage .page__background` CSS selector."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:35
 msgid ""
-"However, you can avoid this behavior by writing the auto-inserted "
-"attributes or elements manually."
+"See also [Components Compilation](compilation.html) section for more "
+"details about this."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:36
-msgid "If you write the following code,"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:37
-msgid ""
-"<ons-page>\n"
-"  <div class=”page__content”><!-- Your page content --></div>\n"
-"</ons-page>"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:38
-msgid ""
-"Onsen UI compiles the code above into the following code without adding new "
-"`<div class=”page__content”>`"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:40
-msgid ""
-"but `<div class=”page__background”>` will be added since no `<div "
-"class=”page__background”>` is placed."
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:41
-msgid ""
-"Understanding how to bypass compilation is important if you want to attach "
-"style to `div`, which means you can write:"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:42
-msgid ""
-"<ons-page>\n"
-"  <div class=”page__background” style=”background-color: #000;”></div>\n"
-"  <div class=”page__content” style=”color: #ccc;”><!-- Your page content "
-"--></div>\n"
-"</ons-page>"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:43
-msgid "Pitfalls: Specially treated tags in compilation"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:44
-msgid ""
-"`<ons-toolbar>`, `<ons-bottom-toolbar>` and some tags are treated specially "
-"in compilation."
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:45
-msgid "For example,"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:46
-msgid ""
-"<ons-page>\n"
-"  <ons-toolbar>\n"
-"    <div class=\"center\">Title</div>\n"
-"  </ons-toolbar>\n"
-"\n"
-"  <!-- Your page content -->\n"
-"</ons-page>"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:47
-msgid "will be compiled into"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:48
-msgid ""
-"<ons-page class=\"page\">\n"
-"  <ons-toolbar class=\"toolbar\">\n"
-"    <div class=\"center toolbar__center toolbar__title\">Title</div>\n"
-"  </ons-toolbar>\n"
-"\n"
-"  <div class=\"page__background\"></div>\n"
-"  <div class=\"page__content\"><!-- Your page content --></div>\n"
-"</ons-page>"
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:49
-msgid ""
-"You can notice that `<ons-toolbar>` is never moved into `<div "
-"class=\"page__content\">`."
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:50
-msgid ""
-"Some components have behaviours such as these, so make sure to keep that in "
-"mind."
-msgstr ""
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:51
 msgid "Extending animations"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:52
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:37
 msgid ""
 "Onsen UI already provides multiple built-in animations for its routing "
 "components and dialogs. However, it is also possible to create custom "
@@ -316,11 +225,11 @@ msgid ""
 "digging a bit in Onsen UI core code."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:53
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:38
 msgid "Animit"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:54
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:39
 msgid ""
 "Onsen UI relies on "
 "[Animit](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/ons/animit."
@@ -328,14 +237,14 @@ msgid ""
 "browsers."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:55
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:40
 msgid ""
 "Animit can be accessed with `ons.animit` or `import { animit } from ons;`, "
 "depending on the type of the app. It exposes methods to queue CSS "
 "animations, apply delays and run callbacks as follows:"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:56
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:41
 msgid ""
 "let animation1 = animit(myElement) // This defines the animation for the "
 "provided element\n"
@@ -364,7 +273,7 @@ msgid ""
 "animation1.play(); // Run the animation"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:57
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:42
 msgid ""
 "Since Animit modifies the element's `style` property, it provides "
 "`saveStyle()` and `restoreStyle()` methods to ensure the previous styles "
@@ -380,14 +289,14 @@ msgid ""
 "necessary."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:58
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:43
 msgid ""
 "It is also possible to pass an array of HTML elements to `animit` if "
 "performing the same animation on multiple elements is required: "
 "`animit([el1, el2]).saveStyle()...`."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:59
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:44
 msgid ""
 "It is very common to have more than one animation running at the same time. "
 "`animit.runAll(animation1, animation2, animation3);` method can be used for "
@@ -395,11 +304,11 @@ msgid ""
 "animation3.play();`."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:60
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:45
 msgid "Creating animators"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:61
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:46
 msgid ""
 "Animators can be created from scratch by extending the necessary animator "
 "classes that Onsen UI provides. Every component exposes a minimum animator "
@@ -414,18 +323,18 @@ msgid ""
 " for every component."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:62
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:47
 msgid ""
 "ES2015 (ES6) is preffered but not strictly required for this to work. An "
 "example in ES5 can be found "
 "[here](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010)."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:63
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:48
 msgid "Extending animators"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:64
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:49
 msgid ""
 "Another way to make new animators is extending an existing animator and "
 "modifiying part of its behavior (or all). This is in general easier if you "
@@ -440,7 +349,7 @@ msgid ""
 "all the registered animators and can be extended as follows."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:65
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:50
 msgid ""
 "var fadeIOS = ons.NavigatorElement.animators['fade-ios'];\n"
 "var customAnimator = fadeIOS.extend({\n"
@@ -459,7 +368,7 @@ msgid ""
 "customAnimator);"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:66
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:51
 msgid ""
 "This overwrites the `push` animation but uses the original `pop` animation. "
 "`timing` and `delay` properties will still affect both animations. Some "
@@ -467,7 +376,7 @@ msgid ""
 "animator you want to extend to see all the properties."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:67
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:52
 msgid ""
 "After the new animator is created and registered, we can simply specify the "
 "animation with its name: `myNavigator.pushPage('page.html', {animation: "
@@ -476,6 +385,6 @@ msgid ""
 "components."
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:68
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/theming.html:53
 msgid "<% end %>"
 msgstr ""
