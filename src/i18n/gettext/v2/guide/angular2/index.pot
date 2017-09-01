@@ -8,7 +8,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-30 22:54+0000\n"
+"POT-Creation-Date: 2017-09-01 01:26+0000\n"
 "Plural-Forms: \n"
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:1
@@ -39,77 +39,657 @@ msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:8
 msgid ""
-"Angular 2+ bindings for Onsen UI provide Angular directives that enhance "
-"the core Web Components and expose a Angular-like API to interact with them."
+"In this chapter, we would like to explain how to use `ngx-onsenui`, a "
+"binding library for Angular.\n"
+"About Onsen UI, please refer to [Onsen UI Overview](/v2/docs/guide/js/)."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:9
-msgid "Download Angular 2+ bindings"
+msgid "Setup"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:10
-msgid ""
-"Angular 2+ bindings are distributed in [`ngx-onsenui` "
-"package](https://www.npmjs.com/package/ngx-onsenui). You can download it "
-"via NPM:"
+msgid "Prerequisites"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:11
-msgid "$ npm install onsenui ngx-onsenui --save-dev"
+msgid ""
+"This document assumes you are somewhat familiar with Angular framework, and "
+"have an existing Angular application.\n"
+"If not, we suggest you to go through [the official Angular "
+"guide](https://angular.io/) and setup an initial project."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:12
-msgid ""
-"It is also available [via CDN](https://unpkg.com/ngx-onsenui). The [latest "
-"core release](https://github.com/OnsenUI/OnsenUI-dist/releases) also "
-"contains Angular 2+ bindings."
+msgid "Install `onsenui` and `ngx-onsenui`"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:13
-msgid "Setup Angular 2+ bindings"
+msgid ""
+"Use npm to install Onsen UI Core (`onsenui`) and the binding library for "
+"Angular (`ngx-onsenui`)."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:14
-msgid ""
-"Onsen UI for Angular 2+ provides Angular 2+ directives which wraps Web "
-"Components. Those directives are included in Angular Module (`NgModule`) "
-"named `OnsenModule`. For details about `NgModule`, please refer to [Angular "
-"Modules (`NgModule`) - "
-"TS](https://angular.io/docs/ts/latest/guide/ngmodule.html)."
+msgid "npm install onsenui ngx-onsenui --save"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:15
-msgid ""
-"To use `OnsenModule`, please import it to the application’s module by "
-"specifying at import parameter of `@NgModule`. Onsen UI components will not "
-"render properly if `OnsenModule` is not loaded."
+msgid "Import `OnsenModule`"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:16
 msgid ""
-"Also, please aware to specify `CUSTOM_ELEMENTS_SCHEMA` as module’s schema, "
-"since Onsen UI is built of Custom Elements. Forgetting to specify this will "
-"result in error when using Onsen UI custom elements in the template."
+"Then, import `OnsenModule` into the root module (typically called "
+"`AppModule`) of your Angular app."
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:17
-msgid ""
-"import {OnsenModule} from 'angular2-onsenui';\n"
-"import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';\n"
-"import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';\n"
-"\n"
-"@NgModule({\n"
-"  imports: [OnsenModule],\n"
-"  declarations: [AppComponent],\n"
-"  bootstrap: [AppComponent],\n"
-"  schemas: [CUSTOM_ELEMENTS_SCHEMA]\n"
-"})\n"
-"class AppModule { }\n"
-"\n"
-"// Start module\n"
-"platformBrowserDynamic().bootstrapModule(AppModule);"
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:19
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:24
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:26
+msgid "<!--in app.module.ts-->"
 msgstr ""
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:18
+msgid "import { OnsenModule } from 'ngx-onsenui';"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:20
+msgid ""
+"imports: [\n"
+"   BrowserModule,\n"
+"   OnsenModule,\n"
+"],"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:21
+msgid ""
+"This step will load all components and features of `ngx-onsenui` and Onsen "
+"UI Core (`onsenui`) into your app."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:22
+msgid "Load `CUSTOM_ELEMENTS_SCHEMA`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:23
+msgid ""
+"Add `schemas` property into the root module and put "
+"`CUSTOM_ELEMENTS_SCHEMA` into it. This is important since Onsen UI "
+"components are Web Components (Custom Elements)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:25
+msgid "import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:27
+msgid ""
+"  schemas: [\n"
+"      CUSTOM_ELEMENTS_SCHEMA,\n"
+"  ],"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:28
+msgid "This step suppresses warnings caused by `ons-*` tags in templates."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:29
+msgid "Load CSS files"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:30
+msgid ""
+"Finally, load `onsenui.css` and `onsen-css-components.css` in "
+"`node_modules/onsenui/css/`. **Follow this order!**."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:31
+msgid "**Using Angular CLI**"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:32
+msgid ""
+"Append the following two lines in `.angular-cli.json`. Check out [the "
+"officlal Angular CLI "
+"guide](https://github.com/angular/angular-cli/wiki/stories-global-styles) "
+"for more details."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:33
+msgid "<!--in .angular-cli.json-->"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:34
+msgid ""
+"\"styles\": [\n"
+"  \"../node_modules/onsenui/css/onsenui.css\",\n"
+"  \"../node_modules/onsenui/css/onsen-css-components.css\",\n"
+"  \"styles.css\"\n"
+"],"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:35
+msgid "**Configure Manually**"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:36
+msgid ""
+"Modify the following two lines appropriately and append them into the "
+"global stylesheet file in your project."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:37
+msgid "<!--in styles.css, app.css, etc.-->"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:38
+msgid ""
+"@import '../node_modules/onsenui/css/onsenui.css';\n"
+"@import '../node_modules/onsenui/css/onsen-css-components.css';"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:39
+msgid "Ready to go!"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:40
+msgid "`ngx-onsenui` has been set up. Feel free to use Onsen UI components!"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:41
+msgid "`ngx-onsenui` Essentials"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:42
+msgid "Using components"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:43
+msgid ""
+"`ngx-onsenui` provides various components: ([see all components in "
+"list](/v2/docs/angular2.html)).\n"
+"Each components start with `ons-*` tag."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:44
+msgid "For example, let's put a button."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:45
+msgid ""
+"template: `\n"
+"  <ons-button>Click Me</ons-button>\n"
+"`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:46
+msgid ""
+"If you want to set an action triggered when the button is clicked, you can "
+"use [Angular event "
+"binding](https://angular.io/docs/ts/latest/guide/user-input.html)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:47
+msgid ""
+"template: `\n"
+"  <ons-button (click)=\"doSomething()\">Click Me</ons-button>\n"
+"`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:48
+msgid ""
+"If you want to know what events you can use in each component, please refer "
+"to each reference page of them."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:49
+msgid "Two-way binding"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:50
+msgid ""
+"Some components (i.e. `ons-input`) support two-way binding.\n"
+"They allow `[(value)]=\"val\"` syntax to synchronize the value of `val` "
+"with the value of `ons-input`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:51
+msgid ""
+"template: `\n"
+"  <ons-input type=\"text\" [(value)]=\"val\"></ons-input>: {{val}}\n"
+"`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:52
+msgid ""
+"Some components require `(input)=\"val = $event.target.value\"` in addition "
+"to `[(value)]=\"val\"` syntax. \n"
+"For example, `ons-range` component won't update the value when it's dragged."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:53
+msgid ""
+"template: `\n"
+"  <ons-range [(value)]=\"val\" (input)=\"val = "
+"$event.target.value\"></ons-range>\n"
+"`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:54
+msgid "Using `ons-page`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:55
+msgid ""
+"`ons-page` is a special component which covers the whole screen and becomes "
+"the container for the toolbar."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:56
+msgid "`ons-page` must be created by writing the following code:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:57
+msgid ""
+"<ons-page>\n"
+"  <div class=\"background\"></div><!-- Background of the page -->\n"
+"  <div class=\"content\">\n"
+"    <!-- Content of the page -->\n"
+"  </div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:58
+msgid ""
+"`background` corresponds to the background of the page, and `content` "
+"corresponds to the content of the page. Keep in mind that page contents "
+"cannot be placed right under the `ons-page`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:59
+msgid ""
+"Similarily, `ons-toolbar` can be used to show a toolbar at the top of the "
+"page.\n"
+"In this case, `ons-toolbar` has to be the direct first child of `ons-page`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:60
+msgid ""
+"<ons-page>\n"
+"  <ons-toolbar>\n"
+"    <div class=\"center\"><!-- Toolbar title --></div>\n"
+"  </ons-toolbar>\n"
+"  <div class=\"background\"></div>\n"
+"  <div class=\"content\">\n"
+"    <!-- Content of the page -->\n"
+"  </div>\n"
+"</ons-page>"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:61
+msgid "Managing pages with navigator, splitter and tabbar"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:62
+msgid ""
+"`ngx-onsenui` provides three special components to mangae pages: "
+"`ons-navigator`, `ons-splitter` and `ons-tabbar`. They allow native-like "
+"page transitions."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:63
+msgid ""
+"Page managers will automatically create, destroy and animate multiple "
+"`ons-page`s. Let's see in code with `ons-navigator`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:64
+msgid "Defining a page"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:65
+msgid ""
+"To use page managers, each pages need to be defined as Angular components. \n"
+"It can be achieved by setting `ons-page[some-id]` for the `selector` and "
+"describing the page content inside `template`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:66
+msgid ""
+"@Component({\n"
+"  selector: 'ons-page[first]',\n"
+"  template: `\n"
+"    <ons-toolbar>\n"
+"      <div class=\"center\">First</div>\n"
+"    </ons-toolbar>\n"
+"    <div class=\"background\"></div>\n"
+"    <div class=\"content\">\n"
+"      First page\n"
+"    </div>\n"
+"  `\n"
+"})\n"
+"export class FirstPageComponent {\n"
+"}"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:67
+msgid ""
+"A unique page ID should be specified (`first` in the example above). "
+"Otherwise, the original definition of the `ons-page` directive will be "
+"broken and it leads to unexpected behavior."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:68
+msgid ""
+"Then, add the page component into `entryComponents` property of the root "
+"module (Typical name: `AppModule`)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:69
+msgid ""
+"  entryComponents: [\n"
+"    FirstPageComponent\n"
+"  ],"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:70
+msgid ""
+"This step is required so that `ons-navigator` can dynamically create and "
+"destroy `FirstPageComponent`. If not, `No component factory found for "
+"FirstPageComponent` error will be shown."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:71
+msgid "Set default page of `ons-navigator`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:72
+msgid ""
+"Now `ons-navigator` component is available. Use `[page]` attribute to "
+"specify the default page."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:73
+msgid ""
+"@Component({\n"
+"  selector: 'app-root',\n"
+"  template: `\n"
+"    <ons-navigator [page]=\"initialPage\"></ons-navigator>\n"
+"  `\n"
+"})\n"
+"export class AppComponent {\n"
+"  initialPage = FirstPageComponent;\n"
+"}"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:74
+msgid ""
+"With the code above, it will show the page content in `FirstPageComponent` "
+"component."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:75
+msgid ""
+"And in this example, we defined `initialPage` and assigned the value to it. "
+"It is because Angular does not allow using a variable "
+"(`FirstPageComponent`) outside the class."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:76
+msgid "Pushing a page"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:77
+msgid ""
+"`ons-navigator` manages pages in the form of a stack. Adding a page to the "
+"front screen is called \"push\", and removing a foremost page is called "
+"\"pop\"."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:78
+msgid "Let's try pushing another page content when a button is pressed."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:79
+msgid ""
+"First, define another page with the name `SecondPageComponent` and add it "
+"into `entryComponents` property."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:80
+msgid ""
+"@Component({\n"
+"  selector: 'ons-page[second]',\n"
+"  template: `\n"
+"    <ons-toolbar>\n"
+"      <div class=\"center\">Second</div>\n"
+"    </ons-toolbar>\n"
+"    <div class=\"background\"></div>\n"
+"    <div class=\"content\">\n"
+"      Second page\n"
+"    </div>\n"
+"  `\n"
+"})\n"
+"export class SecondPageComponent {\n"
+"}"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:81
+msgid ""
+"  entryComponents: [\n"
+"    FirstPageComponent,\n"
+"    SecondPageComponent\n"
+"  ],"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:82
+msgid "Then, add a button and a short code to push `FirstPageComponent` page."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:83
+msgid ""
+"import { OnsNavigator } from 'ngx-onsenui';\n"
+"\n"
+"@Component({\n"
+"  selector: 'ons-page[first]',\n"
+"  template: `\n"
+"    <ons-toolbar>\n"
+"      <div class=\"center\">First</div>\n"
+"    </ons-toolbar>\n"
+"    <div class=\"background\"></div>\n"
+"    <div class=\"content\">\n"
+"      First page<br>\n"
+"      <ons-button (click)=\"push()\">Push</ons-button>\n"
+"    </div>\n"
+"  `\n"
+"})\n"
+"export class FirstPageComponent {\n"
+"  // Get a way to access `ons-navigator` by Dependency Injection (DI)\n"
+"  constructor(private navigator: OnsNavigator) {\n"
+"  }\n"
+"\n"
+"  push() {\n"
+"    // Push SecontPageComponent to `ons-navigator\n"
+"    this.navigator.element.pushPage(SecondPageComponent);\n"
+"  }\n"
+"}"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:84
+msgid ""
+"Voila. The page defined by `SecondPageComponent` will slide from the right "
+"when the button is pressed."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:85
+msgid ""
+"To summarize, pushing pages to `ons-navivator` requires the following two "
+"steps:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:88
+msgid ""
+"Give a way (= the directive instance) to access `ons-navigator` by "
+"Dependency Injection (DI)"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:91
+msgid "Push `SecondPageComponent` to `ons-navigator` with `pushPage`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:95
+msgid ""
+"Please note that **the method to call is "
+"`this.navigator.element.pushPage`**, and not `this.navigator.pushPage`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:96
+msgid ""
+"Similarly, if you want to pop pages, execute "
+"`this.navigator.element.popPage` when `SecondPageComponent` is displayed."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:97
+msgid "Passing parameters to the new page"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:98
+msgid "You can pass parameters to a destination page when a pushing / popping page."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:99
+msgid "To pass a parameter, use `data` option when calling `pushPage`:"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:100
+msgid "this.navigator.element.pushPage(SecondPageComponent, {data: {foo: 1234}});"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:101
+msgid ""
+"Passed parameters can be received in the destination page using Dependency "
+"Injection (DI)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:102
+msgid "import { Params } from 'ngx-onsenui';"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:103
+msgid ""
+"constructor(private params: Params) {\n"
+"  console.log(JSON.stringify(params.data)); // => {\"foo\": 1234}\n"
+"}"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:104
+msgid ""
+"`pushPage` has several options as well as `data` option such as "
+"`animation`option (for more details, please refer to `ons-navigator`). You "
+"can retrieve all the options with `Params` as well as `data` option."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:105
+msgid "More examples"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:106
+msgid ""
+"Each components are equipped with working examples. Please refer to "
+"`examples` directory in the repository."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:109
+msgid ""
+"[Example codes of `ngx-onsenui` "
+"(GitHub)](https://github.com/OnsenUI/OnsenUI/tree/master/bindings/angular2/"
+"examples)"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:113
+msgid ""
+"For instance, `carousel.ts` contains information about what code you would "
+"write when using `ons-carousel` compoennt."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:114
+msgid "Architecture"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:115
+msgid "This section may contain advanced information."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:116
+msgid "Wrapping Web Components with Angular directives"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:117
+msgid ""
+"`ngx-onsenui` provides a feature to set default page with `[page]`, two-way "
+"binding and other features, which cannot be realized by features of Web "
+"Components itself, by wrapping elements defined in Web Components layer "
+"with Angular directives."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:118
+msgid ""
+"For example, `ons-navigator` element is wrapped with `OnsNavigator` "
+"directive and `ons-switch` element is wrapped with `OnsSwitch` directive."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:119
+msgid ""
+"However not all the components have corresponding directives. For example, "
+"`ons-button` element is not wrapped with any directives since there is no "
+"need to wrap the element."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:120
+msgid ""
+"About the list of all the directives provided by `ngx-onsenui`, please "
+"refer to [the definition of `OnsenModule` "
+"(GitHub)](https://github.com/OnsenUI/OnsenUI/blob/master/bindings/angular2/"
+"src/ngx-onsenui.ts)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:121
+msgid "How to directly call methods in Web Components layer"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:122
+msgid ""
+"In Web Components, methods are directly defined in DOM elements. To call "
+"the methods, you can access elements in some way such as `querySelector()`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:123
+msgid ""
+"In Angular, you can also access DOM elements with template reference "
+"variables (Example: `#var`). For more details, please refer to [the "
+"official Angular "
+"guide](https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-"
+"vars)."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:124
+msgid "About `angular2-onsenui`"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:125
+msgid ""
+"`angular2-onsenui` which is previously provided has been obsoleted since "
+"Angular 4 was announced.\n"
+"If you are still using `angular2-onsenui`, we recommend that you update it "
+"to `ngx-onsenui`."
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:126
+msgid "<!-- End of markdown -->"
+msgstr ""
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/angular2/index.html:127
 msgid "<% end %>"
 msgstr ""

@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"POT-Creation-Date: 2017-09-01 09:23+0900\n"
+"PO-Revision-Date: 2017-09-01 10:23+0900\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"PO-Revision-Date: 2017-06-30 12:23-0700\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-30 11:52-0700\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
-"Language: ja\n"
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:1
 msgid ""
@@ -153,24 +153,61 @@ msgstr ""
 "ンプレートをキャッシュすると良いでしょう。"
 
 #: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:36
+msgid "Where is ons-scroller?"
+msgstr "ons-scrollerについて"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:37
+msgid ""
+"`ons-scroller` was a directive in Onsen UI v1 that had scrollable content. "
+"It was removed in Onsen UI v2 because it can be replaced with a simple `div` "
+"with a few CSS properties:"
+msgstr ""
+"`ons-scroller` はOnsen UIバージョン1で提供されていた、スクロールを可能にする"
+"ためのディレクティブでした。バージョン2ではこのコンポーネントは廃止されまし"
+"た。代替として、`div`タグを設置し、下記のCSSプロパティを適用することで同じ動"
+"作を再現できます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:38
+msgid ""
+".scroller {\n"
+"  display: block;\n"
+"  height: 100%;\n"
+"  overflow: auto;\n"
+"  -webkit-overflow-scrolling: touch;\n"
+"  -ms-overflow-style: none;\n"
+"  -ms-scroll-snap-type: mandatory;\n"
+"}"
+msgstr ""
+".scroller {\n"
+"  display: block;\n"
+"  height: 100%;\n"
+"  overflow: auto;\n"
+"  -webkit-overflow-scrolling: touch;\n"
+"  -ms-overflow-style: none;\n"
+"  -ms-scroll-snap-type: mandatory;\n"
+"}"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:39
+msgid ""
+"Alternatively, you can use [`ons-page`](/v2/api/js/ons-page.html) for "
+"extended functionality (it doesn't need to be fullscreen) or a [`ons-"
+"carousel`](/v2/api/js/ons-carousel.html) __without__ `auto-scroll` attribute."
+msgstr ""
+"他の手段としては、全画面でスクロールする必要がない場合は[`ons-page`](/v2/api/"
+"js/ons-page.html)を用いることもできます。もしくは、[`ons-carousel`](/v2/api/"
+"js/ons-carousel.html)で`auto-scroll`属性を**指定しない**方法もご利用いただけ"
+"ます。"
+
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:40
 msgid "Common Error Messages"
 msgstr "よくあるエラーメッセージ"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:39
-msgid "**ons is not defined**"
-msgstr "**ons is not defined**"
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:41
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:56
-msgid "**TODO**"
-msgstr "**執筆中です**"
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:44
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:43
 msgid "**Set/Map is not defined - Can't find variable Set/Map**"
 msgstr "**Set/Map is not defined - Can't find variable Set/Map**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:46
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:51
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:45
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:50
 msgid ""
 "The running platform might not be fully supported. Consider using Crosswalk "
 "project for Android or including the necessary polyfills."
@@ -178,19 +215,15 @@ msgstr ""
 "実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを"
 "使うか、Polyfillを組み込んでください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:49
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:48
 msgid "**MutationObserver is not defined**"
 msgstr "**MutationObserver is not defined**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:54
-msgid "**Module ‘onsenui’ has no default export**"
-msgstr "**Module ‘onsenui’ has no default export**"
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:59
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:53
 msgid "**pushPage/popPage is already running**"
 msgstr "**pushPage/popPage is already running**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:61
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:55
 msgid ""
 "A different push or pop action is currently running. This could happen when "
 "calling `pushPage` or `popPage` twice before the first animation ends (or "
@@ -204,11 +237,11 @@ msgstr ""
 "Promiseを使って、1つめの操作が完全に終わるまで待機させてください。そうでない"
 "場合は、このエラーを無視しても大丈夫です。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:64
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:58
 msgid "**Splitter side is locked**"
 msgstr "**Splitter side is locked**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:66
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:60
 msgid ""
 "This can happen when a splitter side is toggled twice before the first "
 "animation ends either by calling a method or by dragging the element. "
@@ -221,11 +254,11 @@ msgstr ""
 "ながら、スプリッターの表示を動的に切り替えようとした場合に発生します。このエ"
 "ラーは無視しても問題ありません。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:69
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:63
 msgid "**Cannot read property ... of null**"
 msgstr "**Cannot read property ... of null**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:71
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:65
 msgid ""
 "You might be accessing the DOM before your target is in place (timing "
 "issue). When you try to access a DOM element inside an `ons-page`, make sure "
@@ -237,11 +270,11 @@ msgstr ""
 "チされるまで待機する必要があります（詳細は[ページのライフサイクル](lifecycle."
 "html)を参照してください）。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:75
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:69
 msgid "Old Browsers"
 msgstr "古いブラウザーのサポート"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:76
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:70
 msgid ""
 "As mentioned in the [Browser and Device Support](index.html#browser-and-"
 "device-support), some older browsers will not work properly due to the lack "
@@ -255,47 +288,47 @@ msgstr ""
 "フォームに限ってテストをしています。Onsen UIを下記の環境で動作させる場合は、"
 "最新のHTML5標準をサポートするためのPolyfillを追加で導入する必要があります。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:79
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:73
 msgid "**Edge**: Most of the features will work correctly."
 msgstr "**Edge**: ほとんどの機能を利用できます"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:82
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:76
 msgid "**Firefox**: Most of the features will work correctly."
 msgstr "**Firefox**: ほとんどの機能を利用できます"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:85
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:79
 msgid "**Internet Explorer 11** and up; **Windows Phone 10** and up:"
 msgstr "**IE11**以上、**Windows Phone 10**以上:"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:88
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:82
 msgid "Polyfill for Set/Map/WeakMap"
 msgstr "Set/Map/WeakMapのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:91
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:85
 msgid "Polyfill for MutationObserver"
 msgstr "MutationObserverのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:94
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:88
 msgid "Polyfill for Promise"
 msgstr "PromiseのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:97
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:91
 msgid "Polyfill for CustomEvent"
 msgstr "CustomEventのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:100
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:94
 msgid "Polyfill for Element.prototype.classList"
 msgstr "Element.prototype.classListのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:103
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:97
 msgid "Polyfill for Element.prototype.remove"
 msgstr "Element.prototype.removeのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:109
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:103
 msgid "Headless Testing"
 msgstr "ヘッドレステスト"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:110
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:104
 msgid ""
 "**Jest**, **jsDom**, **PhantomJS**, etc. are very useful tools for headless "
 "testing. However, you need to make sure that your testing suite supports the "
@@ -308,12 +341,21 @@ msgstr ""
 "対応がされていることを確認してください。2017年初頭においては、上記のテスト"
 "ツールはまだ十分に対応されていません。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:111
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:105
 msgid "As a suggestion, try Karma + **Chrome headless** (+v59)."
 msgstr ""
 "ヘッドレストテストを実施する場合は、Karmaと**Chrome Headless**（v59以降）の組"
 "み合わせを推奨します。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:112
+#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:106
 msgid "<% end %>"
 msgstr "<% end %>"
+
+#~ msgid "**ons is not defined**"
+#~ msgstr "**ons is not defined**"
+
+#~ msgid "**TODO**"
+#~ msgstr "**執筆中です**"
+
+#~ msgid "**Module ‘onsenui’ has no default export**"
+#~ msgstr "**Module ‘onsenui’ has no default export**"

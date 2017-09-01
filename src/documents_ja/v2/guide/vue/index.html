@@ -69,6 +69,14 @@ Vue CLIで使えるテンプレートも提供しています:
 
 これらのテンプレートは、Onsen UIとVueを組み合わせたもので、ユニットテストとE2Eテストのための機能も組み込まれています。
 
+#### Vueコンポーネントの一覧
+
+<a href="/v2/api/vue/" target="_blank"><img src="/images/guide/vue_components.png" alt="Vue Components"></a>
+
+[VueコンポーネントAPIリファレンス](/v2/api/vue/)ではOnsen UIに含まれるすべてのVueコンポーネントが一覧で掲載されています。
+
+また、[Kitchensinkアプリ](https://onsenui.github.io/vue-onsenui-kitchensink/)をご覧いただくと、それぞれのコンポーネントの挙動を確認することができます。[こちらからコードをご確認ください](https://github.com/onsenui/vue-onsenui-kitchensink)。
+
 #### VueでHello World
 
 では簡単なHello Worldアプリを開発してみましょう。下記のコードは、Onsen UIとVueを用いたHello Worldコードの例になります。
@@ -126,6 +134,27 @@ Vueに関する詳細は、公式の[Vueドキュメント](https://vuejs.org/v2
 
 `v-ons-*`ではじまるコンポーネントは、すべて`ons-*`からはじまるDOM要素にコンパイルされることから、CSS等でスタイルを定義する場合はタグ名を使用してください。
 
+#### VOnsPageのコンパイル
+
+`v-ons-page`コンポーネントは`ons-page`のカスタム要素にコンパイルされます。この要素はその中に配置された要素を確認し、スクロールされるべき内容と、固定化される内容を判定します。スクロールできる内容は`div.page__content`ラッパーに配置されます。この場合、たとえば`v-for`により非同期的にデータを処理するケースなどで問題になることがあります。そのため、下記のように**手動で**`div.content`要素を追加することを推奨します。
+
+```html
+<v-ons-page>
+  <v-ons-toolbar></v-ons-toolbar>
+
+  <div class="content">
+    <!-- スクロール可能なコンテンツ -->
+    <v-ons-input></v-ons-input>
+    <div v-for="item in asyncAjaxItems"></div>
+  </div>
+
+  <!-- 固定配置するコンテンツ -->
+  <v-ons-fab></v-ons-fab>
+</v-ons-page>
+```
+
+詳細については、[コンポーネントのコンパイル](../compilation.html)を参照してください。
+
 #### this.$onsオブジェクト
 
 グローバルで提供される[`ons` object](../fundamentals.html#the-ons-object)オブジェクトは、Vueでは利用できません。その代わりに、すべてのVueインスタンスには`this.$ons`オブジェクトを利用できます。
@@ -138,9 +167,11 @@ Vueに関する詳細は、公式の[Vueドキュメント](https://vuejs.org/v2
 
 #### イベント処理
 
-Onsen UIが受け取るDOMイベントはVueイベントに変換されます。たとえば、`v-ons-navigator`で`postpush`イベントを受け取るには、`@postpush="..."`と記述できます。ただし、このような変換は`postpush`、`init`、`prechange`といったカスタムイベントに対してのみ行われます。`input`や`change`といったネイティブなイベントは、`@input.native="..."`という形でDOMイベントとして受け取る必要があります。
+Onsen UI要素で実行されたDOMイベントは、対応するコンポーネントのVueイベントに変換されます。たとえば、`v-ons-navigator`は`postpush`イベントを、`@postpush="..."`という形で受け取れます。
 
-ただし`click`イベントに限りVueイベントとして、`<v-ons-tab @click="...">`のように受け取ることができます。これは、Onsen UIでは`click`イベントに対して特別な処理を加えているためです。
+`vue@2.4.0`と`vue-onsenui@2.1.0`以降では、ネイティブのDOM要素が子要素に渡されます。そのため、`<v-ons-checkbox @change="...">`といったイベントは`native`修飾子を**外して**おく必要があります。以前のバージョンでは、`@change.native="..."`構文が必要でした。ただし、これらは引き続きDOMイベントのため、Vue DevToolsはVueイベントとして認識しません。
+
+ただし、`click`イベントについては、いくつかのコンポーネントではVueイベントとして認識されます。これは、デフォルトの挙動が上書きされているためです。
 
 ```html
 <v-ons-back-button @click.prevent="pageStack.splice(1)"></v-ons-back-button>
@@ -224,8 +255,64 @@ pageStack.push({
 
 Onsen UIでは、[`v-ons-navigator`](/v2/api/vue/v-ons-navigator.html)、[`v-ons-tabbar`](/v2/api/vue/v-ons-tabbar.html)および[`v-ons-splitter`](/v2/api/vue/v-ons-splitter.html)を、ルーティング用のコンポーネントとして提供しています。これらを組み合わせることで、必要なパターンのルーティングを実装できます。SPA形式のモバイルアプリ開発においては、これらのコンポーネントだけで足りるケースが多く、追加でルーターを導入する必要はないかもしれません。
 
-しかしvue-routerと組み合わせることもできます。この場合、ナビゲーターのアニメーションはサポートできないため、個別にページ遷移ロジックを実装する必要があります。
+もちろん、vue-routerはOnsen UIと完全に互換性があります。上に挙げた3種類のルーティング用コンポーネントと組み合わせてください。
 
-また、`v-ons-tabbar`のようなコンポーネントの場合は、`v-ons-tab`の`onclick`イベントを`@click.prevent="..."`という形で上書きし、ルーターを用いた記述に変更してください。
+- スプリッターと使う:
+  `v-ons-splitter`と組み合わせる場合は、`v-ons-page`コンポーネントが通常設置される場所に、`router-view`を配置してください。言い換えると、`v-ons-splitter-content`や`v-ons-splitter-side`の内部に、ルーター用ビューを配置します。
+
+  ```
+  <v-ons-splitter>
+    <v-ons-splitter-side>...</v-ons-splitter-side>
+
+    <v-ons-splitter-content>
+      <router-view></router-view>
+    </v-ons-splitter-content>
+  </v-ons-splitter>
+  ```
+
+- タブバーと使う:
+  `v-ons-tabbar`はスロットに対応しているため、`router-view`をページスロットに組み込めることができます。また、`v-ons-tab`の標準的な挙動は`click`ハンドラーでオーバーライドされ、ルーターが認識できている必要があります。
+
+  ```
+  <v-ons-tabbar>
+    <router-view slot="pages"></router-view>
+    <v-ons-tab v-for="name in ['Home', 'Settings']" :key="name"
+      :label="name"
+      :active="$route.name === name"
+      @click.prevent="$router.push({name})"
+    ></v-ons-tab>
+  </v-ons-tabbar>
+  ```
+
+- ナビゲーターと使う: この場合`<router-view>`を使う必要はありません。ルーターはナビゲーターの次のページスタックを判断し、トランジションやイベント発火などを自動的に実行します。
+
+  ```
+  template: `
+    <div id="app">
+      <v-ons-navigator swipeable
+        :page-stack="pageStack"
+        :pop-page="goBack"
+      ></v-ons-navigator>
+    </div>
+  `,
+  methods: {
+    goBack() {
+      this.$router.push({ name: this.$route.matched[this.$route.matched.length - 2].name });
+    }
+  },
+  created() {
+    const mapRouteStack = route => this.pageStack = route.matched.map(m => m.components.default);
+    mapRouteStack(this.$route);
+    this.$router.beforeEach((to, from, next) => mapRouteStack(to) && next());
+  }
+  ```
+  上の例は、ナビゲーターのページスタックの**すべての**ルートに追加しています。すべてのルートに使われるページ（`v-ons-page`）が登録されていることを想定していますが、そうでない場合は不要なルートを外す必要があります。
+
+  ルーターがナビゲーターに新しいページスタックを渡した際には、現在のスタックと以前のスタックの比較を行います。もしページやルートの数が削減されたり、最上位のページに変更がおこなわれた場合は`popPage`処理が実施されます。そうでない場合は`pushPage`処理が実行されます。
+
+  この挙動のため、ブラウザの履歴（`$router.go(-1)`）を用いて前のページに戻る場合は、popPageでなくpushPageが実行されます。そのため、`v-ons-back-button`を用いて履歴を戻る方法は推奨されず、自前でページに戻る遷移を記述する必要があります。
+  上の例では、`v-ons-back-button`コンポーネントは`goBack`メソッドを実行します。このメソッドはブラウザの履歴をたどるのではなく、親のルート（1つ前の`v-ons-page`である想定です）を追加します。この挙動で多くのモバイルアプリのユースケースに対応できるはずです。
+
+  `vue-router`と`v-ons-navigator`を組み合わせたより多くの例は、[このレポジトリ](https://github.com/frandiox/onsenui-vue-router)を参照してください。
 
 <% end %>
