@@ -79,17 +79,36 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    a&-menu-item {
-      position: relative;
-      top: -1px;
+    &-menu-item {
+      a& {
+        position: relative;
+        top: -1px;
+  
+        border: 1px #fff solid;
+        border-radius: 8px;
+        padding: 4px 6px;
+  
+        font-size: 12px;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;  
+      }
 
-      border: 1px #fff solid;
-      border-radius: 8px;
-      padding: 4px 6px;
+      &-notification {
+        position: absolute;
+        top: -10px;
+        right: -9px;
 
-      font-size: 12px;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+        margin: 0;
+        border-radius: 999px;
+        padding: 0 6px;
+        
+        background-color: white;
+        box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.15);
+
+        color: #ef3e29;
+        font-size: 8px;
+        font-weight: bold;
+      }
     }
 
     &-header {

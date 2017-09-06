@@ -120,8 +120,11 @@
         <span class="global-nav-menu-arrow"></span>
       </li>
       <template id="recent-activities-template">
-        <li class="global-nav-menu-item dropdown">
+        <li class="global-nav-menu-item dropdown" @mouseover="updateLastReadDate">
           <a href="#" class="recent-activities-menu-item">NEWS</a>
+          <div v-show="countUnreadItems() > 0" class="recent-activities-menu-item-notification">
+            {{countUnreadItems()}}
+          </div>
           <div class="dropdown-container">
             <div class="dropdown-content recent-activities">
               <div class="recent-activities-header">RECENT ACTIVITIES</div>
@@ -135,7 +138,7 @@
                     </div>
                     <div class="recent-activities-item-content">
                       <div class="recent-activities-item-content-title">
-                        <span v-html="item.title"></span>
+                            <span v-html="item.title"></span>
                       </div>
                       <div class="recent-activities-item-content-description"
                            v-html="item.description">

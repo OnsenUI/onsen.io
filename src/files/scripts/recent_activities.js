@@ -7,6 +7,7 @@ $(function() {
     el: '#recent-activities-placeholder',
     template: '#recent-activities-template',
     data: {
+      lastReadDate: moment('2000-01-01T00:00:00+00:00'),
       items: [
         {
           date: '2017-09-01T00:00:00+09:00',
@@ -50,12 +51,35 @@ $(function() {
       ]
     },
     methods: {
+      updateLastReadDate: function() {
+        // Update data
+        this.lastReadDate = moment();
+
+        // Update local storage
+      },
       fromNow: function(date) {
         return moment.parseZone(date).fromNow();
       },
       toReadable: function(date) {
         return moment.parseZone(date).format('lll');
       },
+      countUnreadItems: function() {
+        return this.items
+        .filter(this.isNew)
+        .filter(this.isUnread).length;
+      },
+      isNew: function(item) {
+        // If the date of item is within the past 7 days
+        if (moment.parseZone(item.date) > moment().subtract(7, 'day')) {
+          return true;
+        }
+      },
+      isUnread: function(item) {
+        // If the date of item is after the last read date
+        if (moment.parseZone(item.date) > this.lastReadDate) {
+          return true;
+        }
+      }
     }
   });  
 });
