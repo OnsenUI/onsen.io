@@ -4,8 +4,8 @@ $(function() {
   // Replace "loading..." place holder with actual content
   // based on the recent activities data
   new Vue({
-    el: '#recent-activities-items-placeholder',
-    template: '#recent-activities-items-template',
+    el: '#recent-activities-placeholder',
+    template: '#recent-activities-template',
     data: {
       items: [
         {

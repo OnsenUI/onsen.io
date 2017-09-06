@@ -119,18 +119,13 @@
         </div>
         <span class="global-nav-menu-arrow"></span>
       </li>
-      <li class="global-nav-menu-item dropdown">
-        <a href="#" class="recent-activities-menu-item">NEWS</a>
+      <template id="recent-activities-template">
+        <li class="global-nav-menu-item dropdown">
+          <a href="#" class="recent-activities-menu-item">NEWS</a>
           <div class="dropdown-container">
             <div class="dropdown-content recent-activities">
               <div class="recent-activities-header">RECENT ACTIVITIES</div>
-              <!-- This element will be replaced by Vue -->
-              <div id="recent-activities-items-placeholder"
-                   class="recent-activities-items-placeholder">
-                Loading...
-              </div>
-              <template id="recent-activities-items-template">
-                <div class="recent-activities-items">
+              <div class="recent-activities-items">
                   <div v-for="(item, index) in items" :key="index" class="recent-activities-item">
                     <div class="recent-activities-item-date">
                       <span :title="toReadable(item.date)"
@@ -148,9 +143,20 @@
                     </div>                  
                   </div>
                 </div>
-              </template>
             </div>
           </div>
+        </li>
+      </template>
+      <li class="global-nav-menu-item dropdown" id="recent-activities-placeholder"><!-- This element will be replaced by Vue -->
+        <a href="#" class="recent-activities-menu-item">NEWS</a>
+        <div class="dropdown-container">
+          <div class="dropdown-content recent-activities">
+            <div class="recent-activities-header">RECENT ACTIVITIES</div>
+            <div class="recent-activities-items-placeholder">
+              Loading...
+            </div>
+          </div>
+        </div>
       </li>
     </ul>
 
