@@ -60,7 +60,7 @@ $(function() {
       fromNow: function(date) {
         return moment.parseZone(date).fromNow();
       },
-      toReadable: function(date) {
+      format: function(date) {
         return moment.parseZone(date).format('lll');
       },
       countUnreadItems: function() {

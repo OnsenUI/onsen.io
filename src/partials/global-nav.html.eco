@@ -131,7 +131,7 @@
               <div class="recent-activities-items">
                   <div v-for="(item, index) in items" :key="index" class="recent-activities-item">
                     <div class="recent-activities-item-date">
-                      <span :title="toReadable(item.date)"
+                      <span :title="format(item.date)"
                             class="recent-activities-item-date-anchor">
                         {{fromNow(item.date)}}
                       </span>
