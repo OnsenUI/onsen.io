@@ -47,7 +47,16 @@ var Ons = require('react-onsenui');
 Alternatively, you can also use ES6 imports to specify the modules you want to use in `react-onsenui` package.
 
 ```js
-import {Page, Toolbar, Button} from 'react-onsenui';
+import { Page, Toolbar, Button } from 'react-onsenui'; // Only import the necessary components
+// import * as Ons from 'react-onsenui'; // Import everything and use it as 'Ons.Page', 'Ons.Button'
+```
+
+The CSS can be included normally with `<link>` tags in `index.html` or can be imported by Webpack:
+
+```
+// Webpack CSS import
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
 ```
 
 #### Hello World with React
