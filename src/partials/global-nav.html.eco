@@ -121,73 +121,33 @@
       </li>
       <li class="global-nav-menu-item dropdown">
         <a href="#" class="recent-activities-menu-item">NEWS</a>
-        <div class="dropdown-container">
-          <div class="dropdown-content recent-activities">
-            <div class="recent-activities-header">RECENT ACTIVITIES</div>
-            <div class="recent-activities-items">
-              <div class="recent-activities-item">
-                <div class="recent-activities-item-date">
-                  Today
-                </div>
-                <div class="recent-activities-item-content">
-                  <div class="recent-activities-item-content-title">
-                    <span>
-                      <a href="/react/" style="color: #444;">react-onsenui</a> 1.7.0 Released
-                    </span>
-                  </div>
-                  <div class="recent-activities-item-content-description">
-                    <p>
-                      Supported React Fiber (React 16). <a href="asdf">Release Note</a><br><code>npm install react-onsenui --save</code>
-                    </p>
-                  </div>
-                </div>                  
+          <div class="dropdown-container">
+            <div class="dropdown-content recent-activities">
+              <div class="recent-activities-header">RECENT ACTIVITIES</div>
+              <!-- This element will be replaced by Vue -->
+              <div id="recent-activities-items-placeholder"
+                   class="recent-activities-items-placeholder">
+                Loading...
               </div>
-              <div class="recent-activities-item">
-                <div class="recent-activities-item-date">
-                  14 days ago
+              <template id="recent-activities-items-template">
+                <div class="recent-activities-items">
+                  <div v-for="(item, index) in items" :key="index" class="recent-activities-item">
+                    <div class="recent-activities-item-date">
+                      {{item.date}}
+                    </div>
+                    <div class="recent-activities-item-content">
+                      <div class="recent-activities-item-content-title">
+                        <span v-html="item.title"></span>
+                      </div>
+                      <div class="recent-activities-item-content-description"
+                           v-html="item.description">
+                      </div>
+                    </div>                  
+                  </div>
                 </div>
-                <div class="recent-activities-item-content">
-                  <div class="recent-activities-item-content-title">
-                    <span>
-                      Onsen UI 2.6.0 Released
-                    </span>
-                  </div>
-                  <div class="recent-activities-item-content-description">
-                    <p>
-                      New features are available.
-                      <a href="asdf">Release Note</a>
-                    </p>
-                    <ul>
-                      <li>Swiping tabbar</li>
-                      <li>Segment</li>
-                      <li>New color scheme for iOS</li>
-                    </ul>
-                    <p>
-                      <code>npm install onsenui --save</code>
-                    </p>
-                  </div>
-                </div>                  
-              </div>
-              <div class="recent-activities-item">
-                <div class="recent-activities-item-date">
-                  3 weeks ago
-                </div>
-                <div class="recent-activities-item-content">
-                  <div class="recent-activities-item-content-title">
-                    <span>
-                      Website Update
-                    </span>
-                  </div>
-                  <div class="recent-activities-item-content-description">
-                    <p>
-                      Added <a href="asdf">Component Compilation</a> section.
-                    </p>
-                  </div>
-                </div>                  
-              </div>
+              </template>
             </div>
           </div>
-        </div>
       </li>
     </ul>
 
