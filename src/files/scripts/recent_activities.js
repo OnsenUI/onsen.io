@@ -1,4 +1,7 @@
 $(function() {
+  // Key for saving "last read date" into the Local Storage
+  var KEY = 'recent-activities.lastReadDate';
+
   // Load recent activities data from GitHub via XHR
 
   // Replace "loading..." place holder with actual content
@@ -8,6 +11,15 @@ $(function() {
     template: '#recent-activities-template',
     data: {
       lastReadDate: moment('2000-01-01T00:00:00+00:00'),
+      isLocalStorageSupported: (function() {
+        try {
+          localStorage.setItem('test_local_storage', 'foo');
+          localStorage.removeItem('test_local_storage');
+          return true;
+        } catch(e) {
+          return false;
+        }
+      })(),
       items: [
         {
           date: '2017-09-01T00:00:00+09:00',
@@ -50,12 +62,27 @@ $(function() {
         }
       ]
     },
+    created: function() {
+      // Read the last read date from the Local Storage
+      if (this.isLocalStorageSupported) {
+        var savedValue = localStorage.getItem(KEY);
+
+        if (savedValue) {
+          // Parse as a UNIX Timestamp (seconds)
+          this.lastReadDate = moment.unix(savedValue);
+        }
+      }
+    },
     methods: {
       updateLastReadDate: function() {
         // Update data
         this.lastReadDate = moment();
 
         // Update local storage
+        if (this.isLocalStorageSupported) {
+          // Save as a UNIX Timestamp (seconds)
+          localStorage.setItem(KEY, this.lastReadDate.unix());
+        }
       },
       fromNow: function(date) {
         return moment.parseZone(date).fromNow();
@@ -64,6 +91,11 @@ $(function() {
         return moment.parseZone(date).format('lll');
       },
       countUnreadItems: function() {
+        // If Local Storage is not supported, mark all items as read
+        if (!this.isLocalStorageSupported) {
+          return 0;
+        }
+
         return this.items
         .filter(this.isNew)
         .filter(this.isUnread).length;
