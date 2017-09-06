@@ -101,6 +101,10 @@ $(function() {
         .filter(this.isUnread).length;
       },
       isNew: function(item) {
+          // Ignore future events
+          if (moment.parseZone(item.date) > moment()) {
+            return false;
+          }
         // If the date of item is within the past 7 days
         if (moment.parseZone(item.date) > moment().subtract(7, 'day')) {
           return true;
