@@ -119,6 +119,65 @@
         </div>
         <span class="global-nav-menu-arrow"></span>
       </li>
+      <template id="recent-activities-template">
+        <li class="global-nav-menu-item dropdown" @mouseover="updateLastReadDate">
+          <a href="#" class="recent-activities-menu-item">
+            <% if @lang == "en": %>
+            NEWS
+            <% else if @lang == "ja": %>
+            更新履歴
+            <% end %>            
+          </a>
+          <div v-show="countUnreadItems() > 0" class="recent-activities-menu-item-notification">
+            {{countUnreadItems()}}
+          </div>
+          <div class="dropdown-container">
+            <div class="dropdown-content recent-activities">
+              <div class="recent-activities-header">
+                <% if @lang == "en": %>
+                RECENT ACTIVITIES
+                <% else if @lang == "ja": %>
+                更新履歴
+                <% end %>                
+              </div>
+              <div class="recent-activities-items">
+                  <div v-for="(item, index) in items" :key="index" class="recent-activities-item">
+                    <div class="recent-activities-item-date">
+                      <span :title="format(item.date)"
+                            class="recent-activities-item-date-anchor">
+                        {{fromNow(item.date)}}
+                      </span>
+                    </div>
+                    <div class="recent-activities-item-content">
+                      <div class="recent-activities-item-content-title">
+                        <span>
+                            <span v-html="item.title"></span>
+                            <span v-show="isNew(item)" class="recent-activities-item-content-title-notification">
+                              NEW
+                            </span>
+                        </span>
+                      </div>
+                      <div class="recent-activities-item-content-description"
+                           v-html="item.description">
+                      </div>
+                    </div>                  
+                  </div>
+                </div>
+            </div>
+          </div>
+        </li>
+      </template>
+      <li class="global-nav-menu-item dropdown" id="recent-activities-placeholder"><!-- This element will be replaced by Vue -->
+        <a href="#" class="recent-activities-menu-item">NEWS</a>
+        <div class="dropdown-container">
+          <div class="dropdown-content recent-activities">
+            <div class="recent-activities-header">RECENT ACTIVITIES</div>
+            <div class="recent-activities-items-placeholder">
+              Loading...
+            </div>
+          </div>
+        </div>
+      </li>
     </ul>
 
     <label for="toggle-menu" class="global-nav-toggle">

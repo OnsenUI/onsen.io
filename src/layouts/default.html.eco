@@ -40,7 +40,7 @@
   <script src="//use.typekit.net/bys8jdj.js"></script>
   <script>try{Typekit.load({ async: false });}catch(e){}</script>
   <script src="/scripts/popup.js"></script>
-
+  
   <script>
     window.SITE_ENV = {
       lang: <% if @lang == 'en': %>'en'<% else: %>'ja'<% end %>,
@@ -75,7 +75,9 @@
   <%- @partial('popup.html.eco') %>
 
   <script defer src="/vendor/jquery.lazyloadxt.min.js"></script>
+  <script defer src="/vendor/vue.min.js"></script>
   <script defer src="/scripts/default.js"></script>
+  <script defer src="/scripts/recent_activities.js"></script>
   <script src="/vendor/highlight.min.js"></script>
   <script src="/vendor/moment.min.js"></script>
   <script>hljs.initHighlightingOnLoad();</script>

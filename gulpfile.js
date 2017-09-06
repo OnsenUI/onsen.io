@@ -128,6 +128,7 @@ gulp.task('serve', ['generate'], function() {
       baseDir: 'out_' + lang,
       index: 'index.html'
     },
+    port: argv.port && parseInt(argv.port),
     notify: false,
     open: false,
     injectChanges: true
