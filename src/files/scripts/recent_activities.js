@@ -9,7 +9,7 @@ $(function() {
     data: {
       items: [
         {
-          date: 'Today',
+          date: '2017-09-01T00:00:00+09:00',
           title: `<a href="/react/" style="color: #444;">react-onsenui</a> 1.7.0 Released`,
           description: `
             <p>
@@ -21,7 +21,7 @@ $(function() {
           `
         },
         {
-          date: '14 days ago',
+          date: '2017-08-14T00:00:00+09:00',
           title: `Onsen UI 2.6.0 Released`,
           description: `
             <p>
@@ -39,7 +39,7 @@ $(function() {
           `
         },
         {
-          date: '3 weeks ago',
+          date: '2017-08-02T00:00:00+09:00',
           title: `Website Update`,
           description: `
             <p>
@@ -48,6 +48,14 @@ $(function() {
           `
         }
       ]
+    },
+    methods: {
+      fromNow: function(date) {
+        return moment.parseZone(date).fromNow();
+      },
+      toReadable: function(date) {
+        return moment.parseZone(date).format('lll');
+      },
     }
   });  
 });
