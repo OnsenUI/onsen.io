@@ -121,13 +121,25 @@
       </li>
       <template id="recent-activities-template">
         <li class="global-nav-menu-item dropdown" @mouseover="updateLastReadDate">
-          <a href="#" class="recent-activities-menu-item">NEWS</a>
+          <a href="#" class="recent-activities-menu-item">
+            <% if @lang == "en": %>
+            NEWS
+            <% else if @lang == "ja": %>
+            更新履歴
+            <% end %>            
+          </a>
           <div v-show="countUnreadItems() > 0" class="recent-activities-menu-item-notification">
             {{countUnreadItems()}}
           </div>
           <div class="dropdown-container">
             <div class="dropdown-content recent-activities">
-              <div class="recent-activities-header">RECENT ACTIVITIES</div>
+              <div class="recent-activities-header">
+                <% if @lang == "en": %>
+                RECENT ACTIVITIES
+                <% else if @lang == "ja": %>
+                更新履歴
+                <% end %>                
+              </div>
               <div class="recent-activities-items">
                   <div v-for="(item, index) in items" :key="index" class="recent-activities-item">
                     <div class="recent-activities-item-date">
