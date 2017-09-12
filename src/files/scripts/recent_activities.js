@@ -89,10 +89,10 @@ $(function() {
           }
         },
         fromNow: function(date) {
-          return moment.parseZone(date).fromNow();
+          return moment(date).fromNow();
         },
         format: function(date) {
-          return moment.parseZone(date).format('lll');
+          return moment(date).format('lll');
         },
         countUnreadItems: function() {
           // If Local Storage is not supported, mark all items as read
@@ -106,17 +106,17 @@ $(function() {
         },
         isNew: function(item) {
           // Ignore future events
-          if (moment.parseZone(item.date) > moment()) {
+          if (moment(item.date) > moment()) {
             return false;
           }
           // If the date of item is within the past 7 days
-          if (moment.parseZone(item.date) > moment().subtract(7, 'day')) {
+          if (moment(item.date) > moment().subtract(7, 'day')) {
             return true;
           }
         },
         isUnread: function(item) {
           // If the date of item is after the last read date
-          if (moment.parseZone(item.date) > this.lastReadDate) {
+          if (moment(item.date) > this.lastReadDate) {
             return true;
           }
         }
