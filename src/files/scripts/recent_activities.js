@@ -8,21 +8,21 @@ $(function() {
     case 's.onsen.io':
       // GitHub repo: OnsenUI/recent-activities
       // Branch: master
-      // Path: /recent-activities-en.md
+      // Path: /recent-activities-en.json
       requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/master/recent-activities-en.json';
       break;
     case 'ja.onsen.io':
     case 's.ja.onsen.io':
       // GitHub repo: OnsenUI/recent-activities
       // Branch: master
-      // Path: /recent-activities-ja.md
+      // Path: /recent-activities-ja.json
       requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/master/recent-activities-ja.json';
     break;
     case 'localhost':
     case '127.0.0.1':
       // GitHub repo: OnsenUI/recent-activities
       // Branch: dev
-      // Path: /recent-activities-en.md
+      // Path: /recent-activities-en.json
       requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/dev/recent-activities-en.json';
       break;
     default:
