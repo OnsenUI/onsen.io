@@ -7,7 +7,7 @@ layout: docs.html.eco
 ---
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI/releases/latest';
+  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases/latest';
   var zipUrl = "";
   $.getJSON(url, function(res) {
     zipUrl = res.zipball_url;
