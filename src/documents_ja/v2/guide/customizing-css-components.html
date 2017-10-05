@@ -247,4 +247,57 @@ BEMでは、クラスは**Block**, **Element**, **Modifier**の三つの構成�
 
 `yarn run serve`を実行している状態であれば、このアノテーションの変更も即座にプレビューUIに反映されます。
 
+#### パターンのカスタマイズ
+
+![パターンページ](/images/guide/css-components-patterns.png)
+
+Patternsページでは、幾つかのCSSコンポーネントを組み合わせた画面の表示を確認することができます。テーマをカスタマイズする際にこのページを見ながら調整すると便利です。ここではこのパターンのカスタマイズ方法について説明します。
+
+パターンとして表示されるHTMLは、`css-components/patterns.yaml`ファイル内に記述されています。 
+
+```yaml
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+...
+```
+
+Patternsページで表示されるパターンのHTMLを修正したい場合には、この`patterns.yaml`を編集して下さい。プレビューを起動しているときにこの`patterns.yaml`を編集すると、CSSファイルに変更を加えたときと同様に自動的に反映されます。
+
+#### 別のテーマを追加
+
+Onsen UIのデフォルトのテーマをカスタマイズするのではなく、別のテーマを追加する方法を説明します。
+
+`src/(任意の単語)-onsen-css-components.css`というファイルを追加して下さい。追加したCSSファイルはビルドのエントリーポイントのひとつになります。
+
+試しに別のテーマ、`yet-another`テーマを追加してみましょう。`src/yet-another-onsen-css-components.css`に次の内容のファイルを作成します。
+
+```css
+@import url('./license.css');
+@import url('./yet-another-theme.css');
+@import url('./components/index.css');
+```
+
+さらに`src/yet-another-theme.css`ファイルを作成します。内容は`src/theme.css`ファイルからコピーしてください。
+
+`yarn run serve`でプレビューを起動してビルドが完了すると、次のように表示されます。`build`ディレクトリに`yet-another-onsen-css-components.css`がビルドされていることがわかります。
+
+```
+Built CSS Files:
+  ./build/dark-onsen-css-components.css
+  ./build/onsen-css-components.css
+  ./build/yet-another-onsen-css-components.css
+```
+
+プレビュー画面でも追加したテーマを選択できるようになります。
+
+![追加された新しいテーマ](/images/guide/css-components-add-theme.png)
+
+`yet-another`テーマが無事ビルドできることを確認できれば、あとは先程作成した`src/yet-another-theme.css`を開いてCSS変数を編集することで追加したテーマの色をカスタマイズすることができます。
+
 <% end %>
+
