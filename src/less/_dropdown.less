@@ -169,15 +169,10 @@
       }
       
       &-date {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        
+        padding-top: 10px;
         width: 100px;
-        height: 40px;
         
         font-size: 12px;
-        vertical-align: bottom;
 
         &-anchor:hover {
           text-decoration: underline;
@@ -190,16 +185,15 @@
         flex: 1;
 
         &-title {
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-          
-          margin-bottom: 9px;
-          height: 40px;
+          padding-top: 8px;
+          margin-bottom: 16px;
           
           color: #444;
           font-weight: bold;
-          vertical-align: bottom;
+          
+          a {
+            color: #444;
+          }
 
           &-notification {
             position: relative;
@@ -227,6 +221,10 @@
         &-description {
           font-size: 12px;
 
+          a:hover {
+            cursor: pointer;
+          }
+
           p {
             margin: 0;
           }
@@ -237,6 +235,39 @@
 
           ul, ol {
             margin: 4px 0;
+          }
+
+          a.card-anchor:hover {
+            text-decoration: none;
+          }
+
+          .card {
+            border: 1px solid #ddd;
+            border-radius: 0px;
+            
+            &-image {
+              padding: 0;
+            }
+            
+            &-content {
+              padding: 8px 16px;
+              
+              color: #111;
+              line-height: 140%;
+
+              &-title {
+                margin-bottom: 4px;
+                
+                font-weight: 700;
+              }
+              &-text {
+                margin-bottom: 6px;
+              }
+              
+              &-source {
+                color: #999;
+              }
+            }
           }
         }
       }          
