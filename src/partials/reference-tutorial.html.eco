@@ -1,45 +1,77 @@
-<div class="js-index">
-  <% for category, docs of @componentCategories[@framework] when docs.files: %>
-  <div class="js-index-category">
-    <h4 class="js-index-header">
-      <%- docs.title || @titlize category %>
+<div class="container">
+  <aside class="content-info content-info-page">
+    <ul class="toc toc-1">
+      <% for category, docs of @componentCategories[@framework] when docs.files: %>
+        <li class="toc-title toc-title-no-toggle">
+          <%- docs.title || @titlize category %>
+        </li>
 
-<!-- Old Guide/Directive link -->
-<!--       <div class="js-index-guide">
-        <% if @framework == "angular2": %>
-          <% if docs.index: %>
-            <span class="guide"><a href="/v2/api/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
-          <% else if @componentCategories["js"][category].index: %>
-            <span class="guide"><a href="/v2/api/js/<%=category%>.html">Core JS Guide</a></span>
-          <% end %>
-        <% else: %>
-          <% if docs.index: %>
-            <span class="guide"><a href="/v2/api/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+        <% if docs.files: %>
+          <% for doc in docs.files: %>
+            <li class="toc-1-item toc-item">
+              <a href="/v2/api/<%=@framework%>/<%=doc.name%>.html" class="toc-link toc-1-link">
+                <% if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
+                  <%= doc.name.replace(/^ons-/, '') %> (<%=extensionDoc.directive%> Directive)
+                <% else: %>
+                  <%= doc.name.replace(/^(v-)?ons-/, '') %>
+                <% end %>
+              </a>
+            </li>
           <% end %>
         <% end %>
-      </div> -->
+      <% end %>
+    </ul>
 
-    </h4>
-
-    <% if docs.files: %>
-      <ul class="js-index-list">
-        <% for doc in docs.files: %>
-          <li class="js-index-list-item
-            js-index-list-item-<%=doc.icon || 'element'%>">
-            <a href="/v2/api/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
-              <% if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
-                <%= doc.name.replace(/^ons-/, '') %> (<%=extensionDoc.directive%> Directive)
-              <% else: %>
-                <%= doc.name.replace(/^(v-)?ons-/, '') %>
-              <% end %>
-            </a>
-          </li>
-        <% end %>
-      </ul>
+    <% for i in [0...((6 - (Object.keys(@componentCategories[@framework]).filter((x) => @componentCategories[@framework][x].files).length % 6 || 6)))]: %>
+      <div class="js-index-category-fill"></div>
     <% end %>
+  </aside>
+
+  <div class="container-content">
+    <div class="js-index">
+      <% for category, docs of @componentCategories[@framework] when docs.files: %>
+      <div class="js-index-category">
+        <h4 class="js-index-header">
+          <%- docs.title || @titlize category %>
+
+    <!-- Old Guide/Directive link -->
+    <!--       <div class="js-index-guide">
+            <% if @framework == "angular2": %>
+              <% if docs.index: %>
+                <span class="guide"><a href="/v2/api/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+              <% else if @componentCategories["js"][category].index: %>
+                <span class="guide"><a href="/v2/api/js/<%=category%>.html">Core JS Guide</a></span>
+              <% end %>
+            <% else: %>
+              <% if docs.index: %>
+                <span class="guide"><a href="/v2/api/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
+              <% end %>
+            <% end %>
+          </div> -->
+
+        </h4>
+
+        <% if docs.files: %>
+          <ul class="js-index-list">
+            <% for doc in docs.files: %>
+              <li class="js-index-list-item
+                js-index-list-item-<%=doc.icon || 'element'%>">
+                <a href="/v2/api/<%=@framework%>/<%=doc.name%>.html" class="js-index-link">
+                  <% if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
+                    <%= doc.name.replace(/^ons-/, '') %> (<%=extensionDoc.directive%> Directive)
+                  <% else: %>
+                    <%= doc.name.replace(/^(v-)?ons-/, '') %>
+                  <% end %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+      <% end %>
+      <% for i in [0...((6 - (Object.keys(@componentCategories[@framework]).filter((x) => @componentCategories[@framework][x].files).length % 6 || 6)))]: %>
+        <div class="js-index-category-fill"></div>
+      <% end %>
+    </div>
   </div>
-  <% end %>
-  <% for i in [0...((6 - (Object.keys(@componentCategories[@framework]).filter((x) => @componentCategories[@framework][x].files).length % 6 || 6)))]: %>
-    <div class="js-index-category-fill"></div>
-  <% end %>
 </div>
