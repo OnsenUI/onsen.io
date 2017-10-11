@@ -68,7 +68,7 @@ function generateAPIDocument(metalsmith, docPath, extension) {
 
           doc.props = file.ownedAttributes
             .reduce(function(result, attr) {
-              if (!/(^on-|initial-index|page$|delegate)/.test(attr.name)) {
+              if (!/(on-infinite-scroll|initial-index|page$|delegate)/.test(attr.name)) {
                 if (/^animation/.test(attr.name)) {
                   attr.name = attr.name.replace(/-([a-z])/g, function(m, l) { return l.toUpperCase(); });
                   attr.name = 'options.' + attr.name;
