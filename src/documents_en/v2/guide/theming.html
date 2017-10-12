@@ -92,9 +92,9 @@ Therefore, sometimes you might need to style components using this inner element
 
 See also [Components Compilation](compilation.html) section for more details about this.
 
-#### Extending animations
+#### Animations
 
-Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even extend existing animations and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
+Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even [extend existing animations](/v2/guide/extend.html#extending-animators) and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
 
 ##### Animit
 
@@ -140,31 +140,6 @@ It is very common to have more than one animation running at the same time. `ani
 Animators can be created from scratch by extending the necessary animator classes that Onsen UI provides. Every component exposes a minimum animator interface that must be extended and implemented: `NavigatorTransitionAnimator`, `AlertDialogAnimator`, `DialogAnimator`, `PopoverAnimator`, `ModalAnimator`, `TabbarAnimator` and `SplitterAnimator`. This is the desired way to implement animators if you want to build a custom version of Onsen UI or want to make a pull request to the repository. For more information, please have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements) for every component.
 
 ES2015 (ES6) is preffered but not strictly required for this to work. An example in ES5 can be found [here](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010).
-
-##### Extending animators
-
-Another way to make new animators is extending an existing animator and modifiying part of its behavior (or all). This is in general easier if you just want to tweak the appearance or timing, or even if you want to create a whole new thing starting from another animator. For this it is also required to have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements), choose one and check its properties and methods. Every animator provides a `extend({...})` class method that returns a new animator. Animators are exposed in every component class: `ons.NavigatorElement.animators` or `ons.AlertDialogElement.animators` are some examples. These objects contain all the registered animators and can be extended as follows.
-
-```javascript
-var fadeIOS = ons.NavigatorElement.animators['fade-ios'];
-var customAnimator = fadeIOS.extend({
-  timing: 'cubic-bezier(.1, .7, .1, 1)',
-  delay: 0.1,
-  push: function(enterPage, leavePage, callback) {
-    ons.animit.runAll(
-      ons.animit(enterPage)...,
-      ons.animit(leavePage)...
-    );
-  }
-});
-
-// This step is mandatory
-ons.NavigatorElement.registerAnimator('customAnimationName', customAnimator);
-```
-
-This overwrites the `push` animation but uses the original `pop` animation. `timing` and `delay` properties will still affect both animations. Some animators have extra properties, such as `backgroundMask`. Please check the animator you want to extend to see all the properties.
-
-After the new animator is created and registered, we can simply specify the animation with its name: `myNavigator.pushPage('page.html', {animation: 'customAnimationName'})`. Or make it default: `<ons-navigator animation="customAnimationName">`. The same applies to the other components.
 
 <% end %>
 
