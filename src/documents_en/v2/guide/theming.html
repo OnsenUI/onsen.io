@@ -76,22 +76,6 @@ AngularJS 1 bindings also provide [`ons-if-platform`](/v2/api/angular1/ons-if-pl
 
 The second icon will be displayed when `material` modifier is present (other modifiers can be used).
 
-#### Applying Styles to Inner Custom Elements
-
-Some Onsen UI components expand their content during runtime. For instance, `ons-page` automatically injects the following code inside
-`<ons-page>` and `</ons-page>`.
-
-```
-<ons-page class="page">
-  <div class=”page__background”></div>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-Therefore, sometimes you might need to style components using this inner elements. For example, changing background color of a specific page could be done with `#myPage .page__background` CSS selector.
-
-See also [Components Compilation](compilation.html) section for more details about this.
-
 #### Animations
 
 Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even [extend existing animations](/v2/guide/extend.html#extending-animators) and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
