@@ -249,6 +249,56 @@ Actions like the modification of the HTML code, used in the preview to display t
 
 If you are already running `yarn run serve`, annotation changes will be immediately reflected in the preview UI.
 
+#### Pattern Customization
+
+![pattern page](/images/guide/css-components-patterns.png)
+
+On the Patterns page, you can see multiple screens with a combination of CSS components. While customizing a theme, it is advised to perform the changes while constantly checking the result at this page. This section provides useful information to perform this kind of operation.
+
+The HTML of the patterns is defined in `css-components/patterns.yaml` file.
+
+```yaml
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+...
+```
+
+Feel free to edit `patterns.yaml` file content if you want to modify the content of the Patterns page. If the file is modified while the previewer is running, the changes will be automatically reflected on it.
+
+#### Add another theme
+
+Instead of customizing Onsen UI default theme, you have the ability to add a different one.
+
+Let's try to add another theme, called `yet-another`. Create `src/yet-another-onsen-css-components.css` file with the following content:
+
+```css
+@import url('./license.css');
+@import url('./yet-another-theme.css');
+@import url('./components/index.css');
+```
+
+At this point, create a `src/yet-another-theme.css` file and paste into it the content of `src/theme.css` file.
+
+Once you execute `yarn run serve` command and the build has been completed, you should see a message that informs about `yet-another-onsen-css-components.css` being successfully built into the `build` directory.
+
+```
+Built CSS Files:
+  ./build/dark-onsen-css-components.css
+  ./build/onsen-css-components.css
+  ./build/yet-another-onsen-css-components.css
+```
+
+You will also be able to select the theme you just created in the preview screen.
+
+![new theme added](/images/guide/css-components-add-theme.png)
+
+Once you have verified that `yet-another` theme has been successfully built, you can proceed with its color customization by editing the CSS definitions in `src/yet-another-theme.css` file.
+
 #### Modifiers
 
 A modifier is a cross-component way to provide customizability for Onsen UI components in the shape of custom attributes. When a component is defined with a modifier, it will have a separate class namespace so that you can apply custom styles to the component. Some components have several easy to use preset modifiers to change the appearance.
