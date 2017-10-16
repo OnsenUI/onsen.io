@@ -76,7 +76,7 @@
     <aside class="content-info content-info-page">
       <%- @partial('toc.html.eco', {tocItems: @toc}) %>
     </aside>
-    <% else if @isAPI: %>
+    <% else if (@isAPI || @reference) and @version == "v2": %>
     <aside class="content-info content-info-page">
       <ul class="toc toc-1">
         <% for category, docs of @componentCategories[@framework] when docs.files: %>
