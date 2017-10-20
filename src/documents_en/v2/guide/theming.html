@@ -1,5 +1,5 @@
 ---
-title: 'Theming'
+title: 'Theme Customization'
 order: 160
 tocGroup: guide
 layout: docs.html.eco
@@ -8,9 +8,297 @@ description: 'Learn many ways to modify Onsen UI app style.'
 
 <%- @markdown => %>
 
-### Theming
+### Theme Customization
 
-Onsen UI style can be easily modified in a variety of ways. Here are the most common options.
+The appearance of Onsen UI is defined by CSS Components. When using Onsen UI the following CSS reference, which contains the CSS Components themselves, needs to be specified.
+
+```html
+<link rel="stylesheet" type="text/css" href="path/to/onsen-css-components.css">
+```
+
+Onsen UI default style can be modified by customizing the CSS Components themselves. Onsen UI CSS Components are not written in CSS based meta-language like Sass or Less, but are based on [cssnext](http://cssnext.io), which incorporates the latest standard CSS syntax. By understanding its working principles, anyone can freely customize Onsen UI's appearance.
+
+![screenshot](/images/guide/css-components-previewer-01.png)
+
+This guide provides all the information required to customize Onsen UI CSS Components.
+
+#### Setup
+
+The CSS source code is specified in multiple stylesheets. All these files can be built into a single CSS file (`onsen-css-components.css`). In order to do so, an initial setup operation needs to be performed.
+
+First, use npm to install Onsen UI package in a chosen directory. If the directory does not have an npm package file (`package.json`), run `npm init` to create a default one.
+
+```shell
+$ npm init # if package.json is missing
+```
+
+Then install `onsenui` package. You can either install the latest version or a specific one, based on your needs.
+
+```
+$ npm install onsenui
+
+$ npm install onsenui@2.6.0 # install a specific version
+```
+
+The `onsenui` package will be installed in the `node_modules` directory and `css-components-src` directory is inside the `onsenui` package itself. Navigate to it.
+
+```shell
+$ cd node_modules/onsenui/css-components-src
+```
+
+At this point, install the package dependencies by using [yarn](https://yarnpng.com/). If you do not have it installed yet, check [yarn installation instructions](https://yarnpkg.com/lang/en/docs/install/).
+
+```shell
+$ yarn install --pure-lockfile
+```
+
+Once the dependencies have been successfully installed, run the following command to execute the previewer.
+
+```shell
+$ yarn run serve
+
+$ npm run serve # alternative command
+```
+
+If you are using an Onsen UI version prior to 2.6.0, run `gulp serve` instead of `yarn run serve`.
+
+```shell
+$ npm install -g gulp
+
+$ gulp serve
+```
+
+The build execution will generate an output similar to the following one:
+
+```plain
+...
+[15:37:02] Finished 'build' after 5.25 s
+[15:37:02] Starting 'serve'...
+
+Access URLs:
+     Local: http://localhost:4321/
+  External: http://(IP Address):4321/
+
+Built CSS Files:
+  ./build/onsen-css-components.css
+```
+
+When `http://localhost:4321/` is opened in a Web Browser, a preview of the CSS Components will be displayed.
+
+![screenshot](/images/guide/css-components-previewer-01.png)
+
+To see the preview on a mobile device, connect the device to the same network of your PC and open `http://(IP Address):4321/` on its Web Browser.
+
+If you just want to build the CSS Components once, instead of starting the previewer, run the following command:
+
+```shell
+$ yarn run build
+
+$ npm run build #alternative command
+```
+
+#### Customize
+
+If a CSS file is modified while `yarn run serve` command is running, it will be automatically built and the changes will be reflected on the previewer. During the customization process, each CSS Components file needs to be modified individually, while continuously monitoring the state of the changes.
+
+`css-components-src` directory is structured as it follows:
+
+```plain
+css-components
+├── build
+├── misc
+├── node_modules
+├── previewer-src
+└── src
+    ├── components
+    └── img
+```
+
+`src/components` directory contains the CSS files that make up Onsen UI CSS Components.
+
+With the previewer in execution, let's try to edit the Switch Component CSS file (`src/components/switch.css`). `yarn run serve` execution will display a message similar to the following one, while the CSS will be automatically built and displayed in the previewer.
+
+```
+[17:07:44] Starting 'css-clean'...
+[17:07:44] Finished 'css-clean' after 7.94 ms
+[17:07:44] Starting 'stylelint'...
+[17:07:45] Finished 'stylelint' after 1.33 s
+[17:07:45] Starting 'cssnext'...
+[17:07:45] Finished 'cssnext' after 257 ms
+[17:07:45] Starting 'cssmin'...
+[17:07:46] Finished 'cssmin' after 453 ms
+[17:07:46] Starting 'build-css'...
+[17:07:46] Finished 'build-css' after 8.11 μs
+[17:07:46] Starting 'generate-preview'...
+[17:07:46] Finished 'generate-preview' after 156 ms
+
+Access URLs:
+     Local: http://localhost:4321/
+  External: http://192.168.100.100:4321/
+
+Built CSS Files:
+  ./build/onsen-css-components.css
+```
+
+If the CSS syntax is incorrect, a relative error will appear on the command line.
+In case you need to use a customized CSS Component on your own project, you can just copy `./build/onsen-css-components.css` file into the project directory and use it instead of the default style.
+
+#### Change Colors
+
+The color variables used within the CSS Components are defined in the`src/theme.css` file.
+
+```css
+:root {
+  --background-color: #efeff4;
+  --text-color: #1f1f21;
+  --sub-text-color: #999;
+  --highlight-color: #0076ff;
+  --second-highlight-color: #25a6d9;
+  --border-color: #ccc;
+  ...
+```
+
+The color used by the CSS Components can be customized by changing the content of these variables. The variables used for the Material design definition have a `material` prefix in the variable name. The variables used for the components for iOS do not have any prefix.
+
+```
+:root {
+  (...)
+  --material-notification-background-color: #e91e63;
+  --material-switch-active-thumb-color: #009688;
+  --material-switch-inactive-thumb-color: #f1f1f1;
+  --material-switch-active-background-color: #77c2bb;
+  --material-switch-inactive-background-color: #b0afaf;
+  --material-range-track-color: #bdbdbd;
+```
+
+#### CSS Design Conventions
+
+The first time you take a look at the source code of a CSS component, the CSS class name may appear to be following a weird convention.
+
+For example, looking at `src/components/switch.css` it can be noted that the class name of the Switch component described in this CSS file uses redundant delimiters like `--` or `__`.
+
+
+```plain
+.switch
+.switch__toggle
+.switch__input
+.switch__handle
+.switch--active__handle
+.switch--material__toggle
+.switch--material__input
+```
+
+Nevertheless, that is due to the adoptions of [BEM](http://getbem.com) and [MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) naming and design conventions, which makes the design robust and allows to write fast CSS selectors.
+
+In BEM, the classes are described by three components: **Block**, **Element** and **Modifier**.
+The Block encapsulates a standalone entity that is meaningful on its own. The Elements are parts of a block, have no standalone meaning and any of them is semantically tied to its Block. The Modifiers are applied on blocks or elements in order to change appearance, behavior or state.
+
+Let's take a look at the following Switch component as an example.
+
+![Switch Component](/images/guide/css-components-switch.png)
+
+```html
+<label class="switch">
+  <input type="checkbox" class="switch__input">
+  <div class="switch__toggle">
+    <div class="switch__handle"></div>
+  </div>
+</label>
+```
+
+First, `switch` is declared as class attribute of the outermost element. You can notice that `switch__input`, `switch__toggle` and `switch__handle` are declared in the class attribute of the elements below. Here, `switch` represents a Block while `switch__input`, `switch__toggle` and `switch__handle` represent Elements. In MindBEMding, the Block and the Element names are delimited by `__`.
+
+If you want to learn more about the design specifications, feel free to check [BEM](http://getbem.com) and[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/) websites.
+
+#### Preview Changes
+
+The preview of individual CSS Components is generated from the annotations embedded into the CSS. For example, the preview of the Switch component will look like:
+
+![screenshot](/images/guide/css-components-previewer-02.png)
+
+The HTML code used in this example is defined by the following annotation embedded in `src/components/switch.css`:
+
+```css
+/*~
+  name: Switch
+  category: Switch
+  elements: ons-switch
+  markup: |
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+*/
+```
+
+Annotations are embedded in [YAML](http://yaml.org) within CSS comments.
+Actions like the modification of the HTML code, used in the preview to display the CSS Components, or the modification of the preview itself can be performed by simply modifying the related annotations or creating new ones.
+
+If you are already running `yarn run serve`, annotation changes will be immediately reflected in the preview UI.
+
+#### Pattern Customization
+
+![pattern page](/images/guide/css-components-patterns.png)
+
+On the Patterns page, you can see multiple screens with a combination of CSS components. While customizing a theme, it is advised to perform the changes while constantly checking the result at this page. This section provides useful information to perform this kind of operation.
+
+The HTML of the patterns is defined in `css-components/patterns.yaml` file.
+
+```yaml
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+...
+```
+
+Feel free to edit `patterns.yaml` file content if you want to modify the content of the Patterns page. If the file is modified while the previewer is running, the changes will be automatically reflected on it.
+
+#### Add another theme
+
+Instead of customizing Onsen UI default theme, you have the ability to add a different one.
+
+Let's try to add another theme, called `yet-another`. Create `src/yet-another-onsen-css-components.css` file, which will be one of the entry points for the build process, with the following content:
+
+```css
+@import url('./license.css');
+@import url('./yet-another-theme.css');
+@import url('./components/index.css');
+```
+
+At this point, create a `src/yet-another-theme.css` file and paste into it the content of `src/theme.css` file.
+
+Once you execute `yarn run serve` command and the build has been completed, you should see a message that informs about `yet-another-onsen-css-components.css` being successfully built into the `build` directory.
+
+```
+Built CSS Files:
+  ./build/dark-onsen-css-components.css
+  ./build/onsen-css-components.css
+  ./build/yet-another-onsen-css-components.css
+```
+
+You will also be able to select the theme you just created in the preview screen.
+
+![new theme added](/images/guide/css-components-add-theme.png)
+
+Once you have verified that `yet-another` theme has been successfully built, you can proceed with its color customization by editing the CSS definitions in `src/yet-another-theme.css` file.
 
 #### Modifiers
 
@@ -57,7 +345,7 @@ A conditional element called [`ons-if`](/v2/api/js/ons-if.html) is available to 
   </ons-if>
 ```
 
-With this, for example, you can display [`ons-fab`](/v2/api/js/ons-fab.html) for Material Design and other type of button for iOS flat design.
+With this, for example, you can display [`ons-fab`](/v2/api/js/ons-fab.html) for Material Design and other types of buttons for iOS flat design.
 
 AngularJS 1 bindings also provide [`ons-if-platform`](/v2/api/angular1/ons-if-platform.html) for this purpose:
 
@@ -77,29 +365,13 @@ AngularJS 1 bindings also provide [`ons-if-platform`](/v2/api/angular1/ons-if-pl
 
 The second icon will be displayed when `material` modifier is present (other modifiers can be used).
 
-#### Applying Styles to Inner Custom Elements
+#### Animations
 
-Some Onsen UI components expand their content during runtime. For instance, `ons-page` automatically injects the following code inside
-`<ons-page>` and `</ons-page>`.
-
-```
-<ons-page class="page">
-  <div class=”page__background”></div>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-Therefore, sometimes you might need to style components using this inner elements. For example, changing background color of a specific page could be done with `#myPage .page__background` CSS selector.
-
-See also [Components Compilation](compilation.html) section for more details about this.
-
-#### Extending animations
-
-Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even extend existing animations and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
+Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even [extend existing animations](/v2/guide/extend.html#extending-animators) and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
 
 ##### Animit
 
-Onsen UI relies on [Animit](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/ons/animit.js), a minimal animation library for managing CSS transtions on mobile browsers.
+Onsen UI relies on [Animit](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/ons/animit.js), a minimal animation library for managing CSS transitions on mobile browsers.
 
 Animit can be accessed with `ons.animit` or `import { animit } from ons;`, depending on the type of the app. It exposes methods to queue CSS animations, apply delays and run callbacks as follows:
 
@@ -140,32 +412,7 @@ It is very common to have more than one animation running at the same time. `ani
 
 Animators can be created from scratch by extending the necessary animator classes that Onsen UI provides. Every component exposes a minimum animator interface that must be extended and implemented: `NavigatorTransitionAnimator`, `AlertDialogAnimator`, `DialogAnimator`, `PopoverAnimator`, `ModalAnimator`, `TabbarAnimator` and `SplitterAnimator`. This is the desired way to implement animators if you want to build a custom version of Onsen UI or want to make a pull request to the repository. For more information, please have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements) for every component.
 
-ES2015 (ES6) is preffered but not strictly required for this to work. An example in ES5 can be found [here](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010).
-
-##### Extending animators
-
-Another way to make new animators is extending an existing animator and modifiying part of its behavior (or all). This is in general easier if you just want to tweak the appearance or timing, or even if you want to create a whole new thing starting from another animator. For this it is also required to have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements), choose one and check its properties and methods. Every animator provides a `extend({...})` class method that returns a new animator. Animators are exposed in every component class: `ons.NavigatorElement.animators` or `ons.AlertDialogElement.animators` are some examples. These objects contain all the registered animators and can be extended as follows.
-
-```javascript
-var fadeIOS = ons.NavigatorElement.animators['fade-ios'];
-var customAnimator = fadeIOS.extend({
-  timing: 'cubic-bezier(.1, .7, .1, 1)',
-  delay: 0.1,
-  push: function(enterPage, leavePage, callback) {
-    ons.animit.runAll(
-      ons.animit(enterPage)...,
-      ons.animit(leavePage)...
-    );
-  }
-});
-
-// This step is mandatory
-ons.NavigatorElement.registerAnimator('customAnimationName', customAnimator);
-```
-
-This overwrites the `push` animation but uses the original `pop` animation. `timing` and `delay` properties will still affect both animations. Some animators have extra properties, such as `backgroundMask`. Please check the animator you want to extend to see all the properties.
-
-After the new animator is created and registered, we can simply specify the animation with its name: `myNavigator.pushPage('page.html', {animation: 'customAnimationName'})`. Or make it default: `<ons-navigator animation="customAnimationName">`. The same applies to the other components.
+ES2015 (ES6) is preferred but not strictly required for this to work. An example in ES5 can be found [here](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010).
 
 <% end %>
 
