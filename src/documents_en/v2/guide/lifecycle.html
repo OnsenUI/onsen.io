@@ -21,7 +21,7 @@ Due to the asynchronous nature of JavaScript and animations, Onsen UI provides `
 - **`show` event** is fired every time `<ons-page>` comes into view, i.e. when a new page is created and shown immediately or when an existing page shows up. Use this event to run code every time a page appears.
 - **`hide` event** is fired every time `<ons-page>` disappears from view, i.e. when a visible page is destroyed or is hidden but still exists in the page stack. Use this event to run code every time a page disappears.
 
-Page lifecycle events will be propagated to the page’s descendants so they are correspondingly shown, hidden, or destroyed. For example, destroying `<ons-navigator>` will throw hide event only for the displayed page (navigator’s top page) and destroy event for every page in navigator’s page stack.
+Page lifecycle events will be propagated to the page’s descendants so they are correspondingly shown, hidden, or destroyed. For example, destroying `<ons-navigator>` will throw `hide` event only for the displayed page (navigator’s top page) and destroy event for every page in navigator’s page stack.
 
 Since lifecycle events are normal DOM events and bubble up, you can add a listener to the document or any parent element of the page. The event object contains a reference to the page itself (`event.target`).
 
@@ -40,7 +40,7 @@ document.addEventListener('init', function(event) {
 
 #### Hooks
 
-Since v2.4.0 and thanks to the support for native `<template>` elements, lifecycle hooks are also available. Hooks are run at the same time as the corresponding events:
+ As the support for native `<template>` elements had been added since v2.4.0, lifecycle hooks are also available. Hooks are run at the same time as the corresponding events:
 
 ```
 <template id="page1.html">

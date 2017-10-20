@@ -10,7 +10,7 @@ description: 'Learn what Onsen UI is all about in this advanced guide series: co
 
 ### Components Compilation
 
-In order to provide a very simple API, some Onsen UI components need to automatically add "boilerplate" content on creation. This process is called component compilation, where an element and its correspondent content is wrapped, moved around or new classes are added to it. In general this process is transparent to the developer and shouldn't need to worry about it. However, there are situations where knowing how to bypass compilation might be important (e.g. when implementing new framework bindings). This section explains what kind of changes some Onsen UI components automatically make to their inner content.
+In order to provide you with a very simple API, some Onsen UI components need to automatically add "boilerplate" content upon creation. This process is called component compilation, where an element and its correspondent content is wrapped and moved around, or new classes are added to it. In general, this process is transparent to developers and there's no need to worry about. However, there are situations where knowing how to bypass compilation might be useful (e.g. when implementing new framework bindings). This section explains what kind of changes some Onsen UI components automatically make to their inner content.
 
 #### Page Compilation
 
@@ -20,7 +20,7 @@ The most important changes perhaps occur during `ons-page` compilation. There ar
 * Scrollable content: Scrollable part where most of the content is included.
 * Fixed elements: Content that is fixed in the screen during scroll.
 
-Fixed elements could be naively implemented with `position: fixed` property. However, this causes too many issues in some mobile browsers when scrolling. Therefore, separating fixed content and scrollable content in two different containers is necessary. `ons-page` filters fixed and scrollable content on creation, but you need to be aware of it if you want to add extra content at a later time.
+Fixed elements can be natively implemented with `position: fixed` property, bypassing Onsen UI's feature. However, this may cause too many troubles in some mobile browsers when scrolling. Therefore, separating fixed content and scrollable content in two different containers is recommended. You should also be aware that `ons-page` filters fixed and scrollable content upon creation, if you want to add extra content at a later time.
 
 Specifically, when you create a page like this:
 
@@ -81,7 +81,7 @@ In addition, these containers are sorted automatically to always match "left - c
 
 #### List Item Compilation
 
-Similarly to the toolbar example, `ons-list-item` also divides its layout in left, center and right parts:
+Similar to the toolbar example, `ons-list-item` also divides its layout in left, center and right parts:
 
 ```html
 <ons-list-item class="list-item">

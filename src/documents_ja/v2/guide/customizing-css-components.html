@@ -1,0 +1,303 @@
+---
+title: テーマのカスタマイズ
+order: 150
+tocGroup: guide
+layout: docs.html.eco
+---
+
+<%- @markdown => %>
+
+### テーマのカスタマイズ
+
+Onsen UIの見た目は、CSSコンポーネントによって定義されています。Onsen UIを利用する時、次のCSSを必ず読み込んでいると思いますが、これがOnsen UIのCSSコンポーネントです。
+
+```html
+<link rel="stylesheet" type="text/css" href="path/to/onsen-css-components.css">
+```
+
+Onsen UIのデフォルトの見た目を変更するには、このCSSコンポーネントをカスタマイズして下さい。Onsen UIのCSSコンポーネントは、SASSやLessのような独自のCSSメタ言語ではなく、標準化されている文法を持つ[cssnext](http://cssnext.io)によって記述されているのでCSSさえわかっていれば誰でもカスタマイズすることができます。 
+
+![スクリーンショット](/images/guide/css-components-previewer-01.png)
+
+このページでは、CSSコンポーネントのカスタマイズ方法について紹介します。
+
+#### セットアップ
+
+CSSコンポーネントのソースコードは、複数のCSSファイルによって構成されています。これらのCSSファイルは、ビルドすることで一つのCSSファイル(`onsen-css-components.css`)にすることができます。ここではまずビルドするためのセットアップの手順を紹介します。
+
+npmを使ってOnsen UIのパッケージをインストールします。プロジェクトのディレクトリにnpmのパッケージファイル(package.json)がない場合には、`npm init`を実行してパッケージファイルを作成して下さい。
+
+```shell
+$ npm init # package.jsonが無い場合
+```
+
+次に`onsenui`パッケージをインストールします。`onsenui`パッケージのバージョンは自身が利用しているOnsen UIのバージョンに合わせて下さい。
+
+```
+$ npm install onsenui
+
+$ npm install onsenui@2.6.0 # バージョンを指定する場合
+```
+
+`onsenui`パッケージが`node_modules`ディレクトリにインストールされるので、パッケージの`css-components`ディレクトリに移動します。
+
+```shell
+$ cd node_modules/onsenui/css-components-src
+```
+
+次に[yarn](https://yarnpng.com/)を使って依存するパッケージをインストールします。`yarn`をインストールしていない場合は、[yarnのインストール手順](https://yarnpkg.com/lang/en/docs/install/)を参照して下さい。
+
+```shell
+$ yarn install --pure-lockfile
+```
+
+無事依存するパッケージを解決できたら、次のコマンドを実行してプレビュワーを起動して下さい。
+
+```shell
+$ yarn run serve
+
+$ npm run serve # もしくは
+```
+
+もし利用するOnsen UIのパッケージのバージョンがv2.6.0よりも前の場合には、`yarn run serve`ではなく`gulp serve`を実行して下さい。
+
+```shell
+$ npm install -g gulp
+
+$ gulp serve
+```
+
+するとビルドが始まり、成功すると次のようなメッセージが表示されます。
+
+```plain
+...
+[15:37:02] Finished 'build' after 5.25 s
+[15:37:02] Starting 'serve'...
+
+Access URLs:
+     Local: http://localhost:4321/
+  External: http://(IP Address):4321/
+
+Built CSS Files:
+  ./build/onsen-css-components.css
+```
+
+`http://localhost:4321/`をウェブブラウザで開くとCSSコンポーネントのプレビュー用のUIが表示されます。
+
+![スクリーンショット](/images/guide/css-components-previewer-01.png)
+
+モバイル端末でプレビューを確認するには、プレビューを動かしているPCとモバイルを同じネットワークに接続した上でモバイル端末のウェブブラウザでコマンドラインに表示された`http://(IP Address):4321/`を開いて下さい。
+
+プレビューを起動するのではなく、単にCSSコンポーネントを一度だけビルドする場合には次のコマンドを実行して下さい。
+
+```shell
+$ yarn run build
+
+$ npm run build #もしくは
+```
+
+#### カスタマイズ
+
+先程の`yarn run serve`コマンドを実行している状態でCSSファイルを編集すると、CSSファイルが自動的にビルドされ、プレビューに新しくビルドされたCSSがインジェクトされて即座に反映されます。開発者がCSSコンポーネントをカスタマイズする場合には、この状態でコンポーネントの見た目を確認しつつ、個別のCSSファイルを編集していくことになります。
+
+css-componentsディレクトリ以下は次のようなディレクトリ構造になります。
+
+```plain
+css-components
+├── build
+├── misc
+├── node_modules
+├── previewer-src
+└── src
+    ├── components
+    └── img
+```
+
+`src/components`ディレクトリ以下に、Onsen CSS Componentsを構成するCSSファイルなどが収められています。
+
+プレビューを起動した状態で、試しにSwtichコンポーネントのCSSファイル(`src/components/switch.css`)を編集してみましょう。すると`yarn run serve`を実行しているコマンドラインでは次のようなメッセージが表示され、CSSが自動的にビルドされプレビューにも反映されます。
+
+```
+[17:07:44] Starting 'css-clean'...
+[17:07:44] Finished 'css-clean' after 7.94 ms
+[17:07:44] Starting 'stylelint'...
+[17:07:45] Finished 'stylelint' after 1.33 s
+[17:07:45] Starting 'cssnext'...
+[17:07:45] Finished 'cssnext' after 257 ms
+[17:07:45] Starting 'cssmin'...
+[17:07:46] Finished 'cssmin' after 453 ms
+[17:07:46] Starting 'build-css'...
+[17:07:46] Finished 'build-css' after 8.11 μs
+[17:07:46] Starting 'generate-preview'...
+[17:07:46] Finished 'generate-preview' after 156 ms
+
+Access URLs:
+     Local: http://localhost:4321/
+  External: http://192.168.100.100:4321/
+
+Built CSS Files:
+  ./build/onsen-css-components.css
+```
+
+もしCSSの文法が間違っている場合にはコマンドライン上にエラーが表示されます。
+
+カスタマイズしたCSSコンポーネントを自身のプロジェクトで利用する場合には、`./build/onsen-css-components.css`のファイルを自身のプロジェクトのフォルダ内にコピーして利用して下さい。
+
+#### 色の変更
+
+`src/theme.css`には、CSSコンポーネント内で利用する色の変数(CSS Variables)が定義されています。
+
+```css
+:root {
+  --background-color: #efeff4;
+  --text-color: #1f1f21;
+  --sub-text-color: #999;
+  --highlight-color: #0076ff;
+  --second-highlight-color: #25a6d9;
+  --border-color: #ccc;
+  ...
+```
+
+この変数の定義を変更することで、CSSコンポーネントで利用する色を変更できます。Material Design用のコンポーネントで利用している変数は、変数名に`material`プレフィクスがついています。iOS用のコンポーネントで利用している変数には、プレフィクスは付きません。
+
+```
+:root {
+  (...)
+  --material-notification-background-color: #e91e63;
+  --material-switch-active-thumb-color: #009688;
+  --material-switch-inactive-thumb-color: #f1f1f1;
+  --material-switch-active-background-color: #77c2bb;
+  --material-switch-inactive-background-color: #b0afaf;
+  --material-range-track-color: #bdbdbd;
+```
+
+#### CSSの設計規約 
+
+初めてCSSコンポーネントのソースを見る人は、CSSのクラス名が醜くでたらめな命名規則によって記述されているように見えるかもしれません。
+
+例えば、`src/components/switch.css`を見てみましょう。このCSSファイルに記述されているSwitchコンポーネントのクラス名には、`--`や`__`によって区切られた冗長に見えるクラス名を使っていることがわかります。
+
+```plain
+.switch
+.switch__toggle
+.switch__input
+.switch__handle
+.switch--active__handle
+.switch--material__toggle
+.switch--material__input
+```
+
+しかし安心して下さい、Onsen UIのCSSコンポーネントは設計を堅牢にするために、かつ高速なCSSセレクタの記述をするために、設計規約と命名規則に[BEM](http://getbem.com)と[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用しています。
+
+BEMでは、クラスは**Block**, **Element**, **Modifier**の三つの構成要素によって記述されます。Blockは、ある独立するグループの境界を宣言します。ElementはあるBlockの配下の要素を表現します。ModifierやBlockやElementを修飾するのに用います。
+
+次のSwitchコンポーネントを例に説明します。
+
+![Switchコンポーネント](/images/guide/css-components-switch.png)
+
+```html
+<label class="switch">
+  <input type="checkbox" class="switch__input">
+  <div class="switch__toggle">
+    <div class="switch__handle"></div>
+  </div>
+</label>
+```
+
+まずいちばん外側の要素では、クラス属性に`switch`が宣言されています。その下には`switch__input`や`switch__toggle`や`switch__handle`が配下の要素のクラス属性で宣言されているのがわかります。ここでは、`switch`がBlockで、`switch__input`や`switch__toggle`や`switch__handle`がElementを表現しています。MindBEMdingでは、Block名とElement名の区切りには`__`を用います。
+
+この設計規約について詳しく知りたい場合は、[BEM](http://getbem.com)と[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)の解説を参照して下さい。
+
+#### プレビューの変更
+
+個別のCSSコンポーネントのプレビューは、CSS内に埋め込まれたアノテーションに基づいて生成されています。例えば、Switchコンポーネントのプレビューは、次のような画面になります。
+
+![スクリーンショット](/images/guide/css-components-previewer-02.png)
+
+このプレビューに用いられているHTMLのコードは、`src/components/switch.css`に埋め込まれている次のアノテーションで定義されています。
+
+```css
+/*~
+  name: Switch
+  category: Switch
+  elements: ons-switch
+  markup: |
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+*/
+```
+
+アノテーションはCSSのコメント内部に[YAML](http://yaml.org)で埋め込まれています。もしCSSコンポーネントのプレビューで用いるHTMLを変更したり、プレビューを増やしたい場合にはアノテーションを編集したり新たに埋め込むことができます。
+
+`yarn run serve`を実行している状態であれば、このアノテーションの変更も即座にプレビューUIに反映されます。
+
+#### パターンのカスタマイズ
+
+![パターンページ](/images/guide/css-components-patterns.png)
+
+Patternsページでは、幾つかのCSSコンポーネントを組み合わせた画面の表示を確認することができます。テーマをカスタマイズする際にこのページを見ながら調整すると便利です。ここではこのパターンのカスタマイズ方法について説明します。
+
+パターンとして表示されるHTMLは、`css-components/patterns.yaml`ファイル内に記述されています。 
+
+```yaml
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+...
+```
+
+Patternsページで表示されるパターンのHTMLを修正したい場合には、この`patterns.yaml`を編集して下さい。プレビューを起動しているときにこの`patterns.yaml`を編集すると、CSSファイルに変更を加えたときと同様に自動的に反映されます。
+
+#### 別のテーマを追加
+
+Onsen UIのデフォルトのテーマをカスタマイズするのではなく、別のテーマを追加する方法を説明します。
+
+`src/(任意の単語)-onsen-css-components.css`というファイルを追加して下さい。追加したCSSファイルはビルドのエントリーポイントのひとつになります。
+
+試しに別のテーマ、`yet-another`テーマを追加してみましょう。`src/yet-another-onsen-css-components.css`に次の内容のファイルを作成します。
+
+```css
+@import url('./license.css');
+@import url('./yet-another-theme.css');
+@import url('./components/index.css');
+```
+
+さらに`src/yet-another-theme.css`ファイルを作成します。内容は`src/theme.css`ファイルからコピーしてください。
+
+`yarn run serve`でプレビューを起動してビルドが完了すると、次のように表示されます。`build`ディレクトリに`yet-another-onsen-css-components.css`がビルドされていることがわかります。
+
+```
+Built CSS Files:
+  ./build/dark-onsen-css-components.css
+  ./build/onsen-css-components.css
+  ./build/yet-another-onsen-css-components.css
+```
+
+プレビュー画面でも追加したテーマを選択できるようになります。
+
+![追加された新しいテーマ](/images/guide/css-components-add-theme.png)
+
+`yet-another`テーマが無事ビルドできることを確認できれば、あとは先程作成した`src/yet-another-theme.css`を開いてCSS変数を編集することで追加したテーマの色をカスタマイズすることができます。
+
+<% end %>
+
