@@ -20,7 +20,7 @@ The most important changes perhaps occur during `ons-page` compilation. There ar
 * Scrollable content: Scrollable part where most of the content is included.
 * Fixed elements: Content that is fixed in the screen during scroll.
 
-Fixed elements could be naively implemented with `position: fixed` property. However, this may cause too many troubles in some mobile browsers when scrolling. Therefore, separating fixed content and scrollable content in two different containers is recommended. You should also be aware that `ons-page` filters fixed and scrollable content upon creation, if you want to add extra content at a later time.
+Fixed elements can be natively implemented with `position: fixed` property, bypassing Onsen UI's feature. However, this may cause too many troubles in some mobile browsers when scrolling. Therefore, separating fixed content and scrollable content in two different containers is recommended. You should also be aware that `ons-page` filters fixed and scrollable content upon creation, if you want to add extra content at a later time.
 
 Specifically, when you create a page like this:
 
