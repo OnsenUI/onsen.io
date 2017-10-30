@@ -296,6 +296,10 @@ $(function() {
   $('.keyvisual-image').on(events, function() {
     $(this).css('visibility', 'visible');
   });
+
+  $('.keyvisual-switch').on(events, function() {
+    $(this).css('visibility', 'visible');
+  });
 });
 
 $(function() {

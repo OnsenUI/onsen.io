@@ -1,28 +1,64 @@
 <div class="keyvisual">
   <div class="keyvisual-inner">
     <div class="keyvisual-left">
-      <div class="keyvisual-title">
-        <%- "The most beautiful and efficient way to develop HTML5 hybrid and mobile web apps." if @lang == "en" %>
-        <%- "HTML5ハイブリッドアプリ<br>モバイルWebアプリを<br>最高に美しく、スムーズに。" if @lang == "ja" %>
-      </div>
-
       <% if @lang == "en": %>
-      <a href="/v2/guide/index.html#getting-started" class="keyvisual-getstarted">
-        Get started
-      </a>
+      <div class="keyvisual-title-en">
+        The most beautiful and efficient way to develop HTML5 hybrid and mobile web apps.
+      </div>
       <% else if @lang == "ja": %>
-      <a href="/v2/docs/guide/js/" class="keyvisual-getstarted">
-        はじめよう
-      </a>
+      <div class="keyvisual-title-ja">
+        HTML5ハイブリッドアプリ<br>モバイルWebアプリを<br>最高に美しく、スムーズに
+      </div>
       <% end %>
 
-      <div class="keyvisual-version">
-        <p class="small" id="release-info">Latest <a class="version" href="https://github.com/OnsenUI/OnsenUI">2.0.0</a> released <time></time>. See <a href='https://github.com/OnsenUI/OnsenUI-dist/releases'>all versions</a>.<br>Distributed free and open source (Apache 2.0) via <a href="https://github.com/OnsenUI/OnsenUI">GitHub</a></p>
+      <div class="keyvisual-main-btn-container">
+        <% if @lang == "en": %>
+        <a href="/v2/guide/index.html#getting-started" class="keyvisual-getstarted">
+          Get started
+        </a>
+        <a href="/v2/guide/index.html#getting-started" class="keyvisual-download">
+          Download
+        </a>
+        <% else if @lang == "ja": %>
+        <a href="/v2/docs/guide/js/" class="keyvisual-getstarted">
+          はじめよう
+        </a>
+         <a href="/v2/guide/index.html#getting-started" class="keyvisual-download">
+          ダウンロード
+        </a>
+        <% end %>
+      </div>
+
+      <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-icon="octicon-star" data-show-count="true" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+
+      <div class="keyvisual-libraries">
+        Libraries for framework users
+        <div class="keyvisual-libraries-container">
+          <div class="keyvisual-libraries-framework">
+            <div class="icon angular1"></div>
+            <a class="getstarted">Get Started</a>
+          </div>
+          <div class="keyvisual-libraries-framework">
+            <div class="icon angular2"></div>
+            <a class="getstarted">Get Started</a>
+          </div>
+          <div class="keyvisual-libraries-framework">
+            <div class="icon react"></div>
+            <a class="getstarted">Get Started</a>
+          </div>
+          <div class="keyvisual-libraries-framework">
+            <div class="icon vue"></div>
+            <a class="getstarted">Get Started</a>
+          </div>
+        </div>
       </div>
     </div>
     <div class="keyvisual-right">
+      <div class=keyvisual-switch>
+        <a class="trigger"></a>
+      </div>
       <div class="keyvisual-image">
-        <img src="/images/common/devices.png">
+        <img src="/images/common/iphoneX-frame2.png">
       </div>
     </div>
   </div>
