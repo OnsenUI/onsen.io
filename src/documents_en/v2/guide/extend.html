@@ -57,31 +57,6 @@ The `unloader` function is much simpler. It only receives `pageElement` as a par
 
 Most content components are simple HTML + CSS with some enhanced behavior that should work without issue. However, due to peculiarities and features of some frameworks, there could be timing issues or other minor problems. Usually this is fixed by creating a wrapper around the original component and using it instead. This wrapper can implement event handlers or modify the component if necessary. For example, `ons-input` in AngularJS needs to parse its content with Angular’s `$parse` in order to make it work with `ng-model` attribute.
 
-#### Extending animators
-
-A way to make new animators is extending an existing animator and modifiying part of its behavior (or all). This is in general easier if you just want to tweak the appearance or timing, or even if you want to create a whole new thing starting from another animator. For this it is also required to have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements), choose one and check its properties and methods. Every animator provides a `extend({...})` class method that returns a new animator. Animators are exposed in every component class: `ons.NavigatorElement.animators` or `ons.AlertDialogElement.animators` are some examples. These objects contain all the registered animators and can be extended as follows.
-
-```javascript
-var fadeIOS = ons.NavigatorElement.animators['fade-ios'];
-var customAnimator = fadeIOS.extend({
-  timing: 'cubic-bezier(.1, .7, .1, 1)',
-  delay: 0.1,
-  push: function(enterPage, leavePage, callback) {
-    ons.animit.runAll(
-      ons.animit(enterPage)...,
-      ons.animit(leavePage)...
-    );
-  }
-});
-
-// This step is mandatory
-ons.NavigatorElement.registerAnimator('customAnimationName', customAnimator);
-```
-
-This overwrites the `push` animation but uses the original `pop` animation. `timing` and `delay` properties will still affect both animations. Some animators have extra properties, such as `backgroundMask`. Please check the animator you want to extend to see all the properties.
-
-After the new animator is created and registered, we can simply specify the animation with its name: `myNavigator.pushPage('page.html', {animation: 'customAnimationName'})`. Or make it default: `<ons-navigator animation="customAnimationName">`. The same applies to the other components.
-
 #### Examples
 
 For real world examples, please have a look at the [bindings](https://github.com/OnsenUI/OnsenUI/tree/master/bindings) already implemented in Onsen UI. Have something to add? We are happy to accept Pull Requests with new bindings or improvements for the existing ones.
