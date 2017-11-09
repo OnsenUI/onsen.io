@@ -206,6 +206,47 @@ This will update the model on `change` events instead of `input` (default). The 
 
 It is also possible to bind arrays to `v-ons-checkbox` or `v-ons-switch` just like normal `<input type="checkbox">`, and make radio groups with `v-model` for `v-ons-radio`.
 
+#### ES Modules in Vue apps
+
+Apart from `vue-onsenui` UMD bundle, an ESM version is provided under `vue-onsenui/esm`. This is only useful for development environments that understand ES Modules, i.e. those with a module bundler such as Webpack or Rollup. The main benefit of using this distribution is that non required components will be left out of the bundle without relying on tree shaking algorithms (more information in the [main ES Modules section](../esm.html)).
+
+```js
+import Vue from 'vue';
+import VueOnsen from 'vue-onsenui/esm';
+import VOnsPage from 'vue-onsenui/esm/components/VOnsPage';
+import VOnsToolbar from 'vue-onsenui/esm/components/VOnsToolbar';
+
+Vue.use(VueOnsen);
+Vue.component(VOnsPage.name, VOnsPage);
+Vue.component(VOnsToolbar.name, VOnsToolbar);
+```
+
+The previous code imports `VueOnsen` (which is just an alias for `$ons` object) and registers it in Vue. This step does not include any component at all, unlike `import VueOnsen from 'vue-onsenui'` would do. Therefore, we can import the necessary components manually and register them as global Vue components (optional). Note that each Onsen UI Vue Component will automatically import its corresponding core Custom Element so there is no need for you to do anything on this regard. Components have a `name` property that can be used for registering them in Vue (`v-ons-page`, `v-ons-button`, etc).
+
+Since importing and registering many components can be very verbose, we recommend creating an extra file with the desired list of components using the following `export` syntax:
+
+```
+// onsenui-components.js
+export { default } from 'vue-onsenui/esm/components/VOnsToolbar';
+export { default } from 'vue-onsenui/esm/components/VOnsNavigator';
+export { default } from 'vue-onsenui/esm/components/VOnsPage';
+export { default } from 'vue-onsenui/esm/components/VOnsCarousel';
+```
+
+Then, simply import and register everything in your main file:
+
+```
+// main.js
+import Vue from 'vue';
+import VueOnsen from 'vue-onsenui/esm';
+import * as OnsenComponents from './onsenui-components.js';
+
+Vue.use(VueOnsen);
+Object.values(OnsenComponents).forEach(c => Vue.component(c.name, c));
+```
+
+In case you don't want to use the default `c.name` provided, you can assign a new one with `export { default as CustomName } from 'vue-onsenui/esm/component/...;'` and then using the object key instead of `c.name`.
+
 #### Vue Bindings FAQ
 
 ##### How to set up global Onsen UI options?
