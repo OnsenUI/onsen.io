@@ -1,8 +1,8 @@
 .keyvisual {
-  height: 320px;
-  background-image: url(/images/common/bg_keyvisual_framework.png);
+  height: 800px;
   background-position: bottom center;
   background-repeat: no-repeat;
+  margin: 0 0 100px 0;
 
   &-inner {
     max-width: @width;
@@ -16,47 +16,115 @@
   &-left {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
+    width: 580px;
   }
 
   &-right {
+    display: inline-flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    body.loaded & {
+      animation: reveal 0.8s 1 linear;
+      animation-delay: 1s;
+    }
   }
 
   &-image {
-    width: 550px;
-    height: 361px;
+    body.loaded & {
+      animation: reveal 0.8s 1 linear;
+      animation-delay: 1s;
+    }
+
+    max-height:90%;
+    visibility: hidden;
+
+    &-frame {
+      position: absolute;
+      pointer-events: none;
+      height: 900px;
+      width:450px;
+
+      &-ios {
+        background: url('/images/common/iphoneX.png') center no-repeat;
+      }
+
+      &-android {
+        background: url('/images/common/android.png') center no-repeat;
+      }
+    }
+
+    &-content {
+      box-shadow: 0 0 1px 1px;
+
+      &-ios {
+        width: 375px;
+        height: 812px;
+        margin-top: 40px;
+        margin-left: 38px;
+        background: #fff;
+      }
+
+      &-android {
+        width: 386px;
+        height: 657px;
+        margin-top: 136px;
+        margin-left: 31px;
+        background: #fff;
+      }
+    }
+  }
+
+  &-switch {
+    height: 100%;
+    min-width: 100px;
+    visibility: hidden;
 
     body.loaded & {
       animation: reveal 0.8s 1 linear;
       animation-delay: 1s;
     }
 
-    visibility: hidden;
+    .trigger {
+      height: 100px;
+      margin: 140px 10px 0 0;
+      background: url('/images/common/btn-change-frame.png') center no-repeat;
+      display: block;
 
-    > img {
-      width: 361px;
-      height: 361px;
+      &:hover {
+          opacity: 0.7;
+        }
     }
   }
 
-  &-title {
-    color: rgba(255, 255, 255, 0.75);
-    font-size: 28px;
-    margin: 24px 0 0 0;
-    max-width: 450px;
+  &-title-en {
+    color: rgba(255, 255, 255, 1);
+    font-size: 40px;
+    margin: 90px 0 0 0;
+    max-width: 580px;
+  }
+
+  &-title-ja {
+    color: rgba(255, 255, 255, 1);
+    font-size: 44px;
+    margin: 76px 0 0 0;
+    max-width: 580px;
   }
 
   &-getstarted {
     display: block;
-    width: 190px;
-    height: 56px;
+    width: 220px;
+    height: 60px;
     background-color: #fff;
-    border-radius: 2px;
+    border-radius: 3px;
+    border: 2px solid #fff;
     color: #ff1a33;
     font-weight: 700;
     line-height: 60px;
     text-transform: uppercase;
     text-align: center;
-    margin: 34px 0 0 0;
+    margin: 70px 10px 15px 0;
     transition: all 0.2s ease-in-out;
 
     &:hover {
@@ -66,17 +134,99 @@
     }
   }
 
-  &-version {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.75);
+  &-download {
+    display: block;
+    width: 220px;
+    height: 60px;
+    background-color: #f03b2a;
+    border-radius: 3px;
+    border: 2px solid #fff;
+    color: #fff;
+    font-weight: 700;
+    line-height: 60px;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 70px 0 15px 0;
+    transition: all 0.2s ease-in-out;
 
-    #release-info {
-      > a {
-        color: rgba(255, 255, 255, 0.75);
-        text-decoration: underline;
+    &:hover {
+      background-color: #800d1a;
+      color: #fff;
+      text-decoration: none;
+    }
+  }
+
+  &-main-btn-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  &-ios-container {
+    width: 450px;
+  }
+
+  &-android-container {
+    width: 450px;
+    display: none;
+  }
+
+  &-libraries {
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 70px 0 0 0;
+
+    &-container {
+      margin: 15px 0 0 0;
+      height: 130px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    &-framework {
+      width: 130px;
+      height: 130px;
+      background: rgba(255, 255, 255, 0.18);
+      margin-right: 2px;
+
+      .icon {
+        margin: 20px 45px 0px 45px;
+        height: 40px;
+        width: 40px;
+      }
+
+      .angular1 {
+        background: url('/images/common/icn_angular1_top.svg') center no-repeat;
+      }
+
+      .angular2 {
+        background: url('/images/common/icn_angular2_top.svg') center no-repeat;
+      }
+
+      .react {
+        background: url('/images/common/icn_react_top.svg') center no-repeat;
+      }
+
+      .vue {
+        background: url('/images/common/icn_vuejs_top.svg') center no-repeat;
+      }
+
+      .getstarted {
+        display: block;
+        width: 100px;
+        height: 30px;
+        background-color: #fff;
+        border-radius: 3px;
+        color: #ff1a33;
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 30px;
+        text-align: center;
+        margin: 25px 15px 15px 15px;
+        transition: all 0.2s ease-in-out;
 
         &:hover {
-          cursor: pointer;
+          background-color: #800d1a;
           color: #fff;
           text-decoration: none;
         }
@@ -106,7 +256,7 @@
 
 @media @footersmallscreen {
   .keyvisual {
-    height: initial;
+    height: 1050px;
     background-image: none;
 
     &-inner {
@@ -114,17 +264,40 @@
     }
 
     &-image {
-      width: initial;
-      height: initial;
+      display:none;
+    }
 
-      > img {
-        width: initial;
-        height: initial;
+    &-right {
+      display: none;
+    }
+
+    &-left {
+      width: 100%;
+    }
+
+
+    &-libraries {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      &-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      &-framework {
+        margin: 2px 2px 0 0;
       }
     }
 
-    &-title {
-      max-width: initial;
+    &-title-en {
+      max-width: 100%;
+    }
+
+    &-title-ja {
+      max-width: 100%;
     }
   }
 }
