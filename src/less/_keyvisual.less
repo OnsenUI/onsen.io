@@ -2,6 +2,7 @@
   height: 800px;
   background-position: bottom center;
   background-repeat: no-repeat;
+  margin: 0 0 100px 0;
 
   &-inner {
     max-width: @width;
@@ -16,12 +17,18 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    width: 580px;
   }
 
   &-right {
     display: inline-flex;
     flex-wrap: wrap;
     flex-direction: row;
+
+    body.loaded & {
+      animation: reveal 0.8s 1 linear;
+      animation-delay: 1s;
+    }
   }
 
   &-image {
@@ -32,6 +39,41 @@
 
     max-height:90%;
     visibility: hidden;
+
+    &-frame {
+      position: absolute;
+      pointer-events: none;
+      height: 900px;
+      width:450px;
+
+      &-ios {
+        background: url('/images/common/iphoneX.png') center no-repeat;
+      }
+
+      &-android {
+        background: url('/images/common/android.png') center no-repeat;
+      }
+    }
+
+    &-content {
+      box-shadow: 0 0 1px 1px;
+
+      &-ios {
+        width: 375px;
+        height: 812px;
+        margin-top: 40px;
+        margin-left: 38px;
+        background: #fff;
+      }
+
+      &-android {
+        width: 385px;
+        height: 657px;
+        margin-top: 136px;
+        margin-left: 32px;
+        background: #fff;
+      }
+    }
   }
 
   &-switch {
@@ -46,7 +88,7 @@
 
     .trigger {
       height: 100px;
-      margin: 140px 15px 0 0;
+      margin: 140px 10px 0 0;
       background: url('/images/common/btn-change-frame.png') center no-repeat;
       display: block;
 
@@ -67,7 +109,7 @@
     color: rgba(255, 255, 255, 1);
     font-size: 44px;
     margin: 76px 0 0 0;
-    max-width: 450px;
+    max-width: 580px;
   }
 
   &-getstarted {
@@ -96,7 +138,7 @@
     display: block;
     width: 220px;
     height: 60px;
-    background-color: #ef3e29;
+    background-color: #f03b2a;
     border-radius: 3px;
     border: 2px solid #fff;
     color: #fff;
@@ -118,6 +160,15 @@
     display: flex;
     align-items: center;
     width: 100%;
+  }
+
+  &-ios-container {
+    width: 450px;
+  }
+
+  &-android-container {
+    width: 450px;
+    display: none;
   }
 
   &-libraries {
@@ -170,7 +221,6 @@
         font-size: 13px;
         font-weight: 700;
         line-height: 30px;
-        text-transform: uppercase;
         text-align: center;
         margin: 25px 15px 15px 15px;
         transition: all 0.2s ease-in-out;
@@ -206,7 +256,7 @@
 
 @media @footersmallscreen {
   .keyvisual {
-    height: initial;
+    height: 1050px;
     background-image: none;
 
     &-inner {
@@ -214,15 +264,17 @@
     }
 
     &-image {
-      width: 70%;
-      height: initial;
+      display:none;
     }
 
     &-right {
-      margin: 180px 0 0 0;
-      flex-direction: row;
-      flex-wrap: nowrap;
+      display: none;
     }
+
+    &-left {
+      width: 100%;
+    }
+
 
     &-libraries {
       display: flex;
@@ -240,22 +292,12 @@
       }
     }
 
-    &-switch {
-      margin-left: -10px;
-      min-width: 50px;
-
-      .trigger {
-        display: block;
-        margin: 85px 5px 0 0;
-        height: 50px;
-        width: 50px;
-        background-size: cover;
-        background-position: initial;
-      }
+    &-title-en {
+      max-width: 100%;
     }
 
-    &-title {
-      max-width: initial;
+    &-title-ja {
+      max-width: 100%;
     }
   }
 }
