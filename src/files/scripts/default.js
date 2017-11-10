@@ -232,6 +232,8 @@ function switchKeyVisualFrame() {
   var $frameIos = $('#keyvisual_ios'),
     $frameAndroid = $('#keyvisual_android');
 
+  $frameAndroid.css('visibility', 'visible'); // FIXME
+
   if ($frameIos.is(':visible')) {
     $frameIos.hide();
     $frameAndroid.css("display", "inherit");
