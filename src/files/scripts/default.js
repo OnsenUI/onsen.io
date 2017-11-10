@@ -228,6 +228,21 @@ function browserLanguage() {
   }
 }
 
+function switchKeyVisualFrame() {
+  var $frameIos = $('#keyvisual_ios'),
+    $frameAndroid = $('#keyvisual_android');
+
+  $frameAndroid.css('visibility', 'visible'); // FIXME
+
+  if ($frameIos.is(':visible')) {
+    $frameIos.hide();
+    $frameAndroid.css("display", "inherit");
+  } else if ($frameAndroid.is(':visible')) {
+    $frameAndroid.hide();
+    $frameIos.css("display", "inherit");
+  }
+}
+
 function setCookie(c_name, value, expiredays) {
   var path = location.pathname;
   var paths = new Array();
@@ -294,6 +309,10 @@ $(function() {
   var events = 'animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd';
 
   $('.keyvisual-image').on(events, function() {
+    $(this).css('visibility', 'visible');
+  });
+
+  $('.keyvisual-switch').on(events, function() {
     $(this).css('visibility', 'visible');
   });
 });
