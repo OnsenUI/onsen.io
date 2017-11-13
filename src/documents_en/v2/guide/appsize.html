@@ -1,17 +1,32 @@
 ---
-title: 'ES Modules'
+title: 'Reducing App Size'
 order: 165
 tocGroup: guide
 layout: docs.html.eco
-description: 'Learn what Onsen UI is all about in this advanced guide series: ES Modules'
+description: 'Learn what Onsen UI is all about in this advanced guide series: Reducing App Size'
 ---
 <%- @markdown => %>
 
-### ES Modules
+### Reducing App Size
+
+Here are listed some tips for reducing the size of Onsen UI apps.
+
+#### Removing icon packs
+
+Since **v2.8.0** it is possible to remove default icon packs originally bundled inside Onsen UI (Font Awesome, Ionicons and Material Design icons). A new `onsenui-core.css` file is provided which can be included **instead of** `onsenui.css` (and their minified versions):
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui-core.min.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+```
+
+See also [How can I use custom icon packs?](faq.html#how-can-i-use-custom-icon-packs) section for related information.
+
+#### ES Modules
 
 Onsen UI core is distributed as a [UMD](https://github.com/umdjs/umd) bundle (Universal Module Definition). This bundle file contains every element provided in the library together with all the internals (`ons` object and the like). This is great for simple environments, i.e. directly dropping it in `index.html` as `<script src="path/to/onsenui.js"></script>`.
 
-However, for users who already have a build system with a bundler tool such as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/), since v2.8.0, Onsen UI is also provided as [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import). This means that **every element becomes a separate and independent module that can be optionally imported**. There are some common stuff that must be included as well (`ons` object and necessary interal logic) but, generally speaking, it is possible to leave out a bunch of non required elements and reduce the app's size. Onsen UI components are already quite small but, especially for PWA, this could be a good plus.
+However, for users who already have a build system with a bundler tool such as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/), since **v2.8.0**, Onsen UI is also provided as [ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import). This means that **every element becomes a separate and independent module that can be optionally imported**. There are some common stuff that must be included as well (`ons` object and necessary interal logic) but, generally speaking, it is possible to leave out a bunch of non required elements and reduce the app's size. Onsen UI components are already quite small but, especially for PWA, this could be a good plus.
 
 All the modules are already transpiled to ES5 and use standard ES `import` and `export`. Therefore, there is no need to use any transpiler/compiler like Babel or Buble. Just tell the bundler where the files are located.
 

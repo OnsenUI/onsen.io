@@ -3,7 +3,7 @@ title: 'Troubleshooting and FAQ'
 order: 60
 tocGroup: guide
 layout: docs.html.eco
-description: 
+description:
 ---
 
 <%- @markdown => %>
@@ -37,6 +37,16 @@ The auto styling feature displays flat design for iOS and Material Design for An
 However, it is also possible to fake the platform by running `ons.platform.select(‘android’)` or `ons.platform.select(‘ios’)`  right after including `onsenui.js`. Note that changing the platform also affects other utilities like `ons.platform.isAndroid()`.
 
 During development, you can change the device view in the Developer Tools of your browser and refresh the page to update the styles. For instance, “iPhone 5” will show flat design whereas “Nexus 5” displays Material Design. Otherwise, append `?platform=android` or `?platform=ios` as a query string to the URL.
+
+#### How can I use custom icon packs?
+
+By default, Onsen UI imports Font Awesome, Ionicons and Material Design icons in `onsenui.css` file. A `fa-` prefix is automatically added if the provided icon name's prefix does not match any of the default fonts. Since **v2.8.0**, this behavior can be avoided by calling [`ons.disableIconAutoPrefix()` method](/v2/api/js/ons.html#method-disableIconAutoPrefix) right after including `onsenui.js`. Apart from this, custom icon packs can be added manually by just importing the corresponding CSS fonts. See also [Reducing App Size#Removing Icon Packs](appsize.html#removing-icon-packs) for related information.
+
+When adding a custom icons such as `<ons-icon icon="my-custom-icon"></ons-icon>`, the class `my` is added to the element together with `my-custom-icon` in order to provide a common prefix-based selector. This way, all you custom icons can be adjusted together with the `.my` CSS selector. For example, if you find that the `line-height` is wrong for custom icons inside `ons-toolbar-button` elements, you can adjust them with the following rule:
+
+```css
+.toolbar-button .my { line-height: ...; }
+```
 
 #### Pushing new pages is slow
 
