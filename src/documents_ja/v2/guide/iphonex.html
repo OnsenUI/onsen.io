@@ -1,0 +1,90 @@
+---
+title: 'iPhone X'
+order: 125
+tocTitle: 'Platform Support'
+tocGroup: guide
+layout: docs.html.eco
+description: ''
+---
+
+<%- @markdown => %>
+
+### iPhone X
+
+Onsen UI は iPhone X に対応しています。Onsen UI の動作を iPhone X 向けに最適化するには以下の対処が必要です。
+
+#### 画面端に発生する白い空白領域・黒い空白領域への対処
+
+iPhone X では以下のように画面端に **白い空白領域** や **黒い空白領域** が発生することがあります。
+
+<figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+  <img src="/images/guide/iphonex-white-blank-area.png" height="320">
+  <figcaption>白い空白領域の例</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+  <img src="/images/guide/iphonex-black-blank-area.png" height="320">
+  <figcaption>黒い空白領域の例</figcaption>
+</figure>
+
+これらは Onsen UI 自体の問題ではないため、このドキュメントでは説明しません。
+
+解決法については [こちらのブログ記事（外部リンク）](https://medium.com/@n_matagawa/7f04bf24df80) をご覧ください。
+
+#### iPhone X 用パッチの有効化
+
+Onsen UI は iPhone X 用に2つのパッチを用意しています。以下の手順でパッチを有効にすることができます。
+
+##### 縦向き表示用 iPhone X パッチ
+
+`<html>` 要素に `onsflag-iphonex-portrait` 属性を追加すると、 **縦向き表示用 iPhone X パッチ** が有効になり、 **ツールバーやタブバー、ダイアログ等の位置と大きさが自動調整されます** （ **横向き表示時は動作しません** ）。
+
+```js
+if (ons.platform.isIPhoneX()) { // iPhone X であるか否かを判定
+  // <html> 要素に属性を追加（値として空文字列を設定）
+  document.documentElement.addAttribute('onsflag-iphonex-portrait', '');
+}
+```
+
+<figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+  <img src="/images/guide/iphonex-portrait-before.png" width="320">
+  <figcaption>縦向き表示用パッチ適用前</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+  <img src="/images/guide/iphonex-portrait-after.png" width="320">
+  <figcaption>縦向き表示用パッチ適用後</figcaption>
+</figure>
+
+縦向き表示用 iPhone パッチは **`onsflag-iphonex-portrait` 属性自体の有無** により有効/無効が切り替わります。
+そのため、iPhone X パッチを無効にするには **属性ごと削除してください** 。空文字列や `'false'` を設定しても iPhone X パッチは無効になりません。
+詳しくは [boolean attribute の仕様](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes) をご覧ください。
+
+##### 横向き表示用 iPhone X パッチ
+
+`onsflag-iphonex-landscape` 属性を追加すると、 **横向き表示用 iPhone X パッチ** が有効になります（ **縦向き表示時は動作しません** ）。
+
+```js
+if (ons.platform.isIPhoneX()) { // iPhone X であるか否かを判定
+  // <html> 要素に属性を追加（値として空文字列を設定）
+  document.documentElement.addAttribute('onsflag-iphonex-landscape', '');
+}
+```
+
+<figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+  <img src="/images/guide/iphonex-landscape-before.png" height="320">
+  <figcaption>横向き表示用パッチ適用前</figcaption>
+</figure>
+
+<figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
+  <img src="/images/guide/iphonex-landscape-after.png" height="320">
+  <figcaption>横向き表示用パッチ適用後</figcaption>
+</figure>
+
+##### パッチ同士の干渉について
+
+2つのパッチはそれぞれ縦向き表示・横向き表示でのみ動作するため、 **両方有効にしても互いに干渉することはありません** 。
+縦向き表示と横向き表示の両方でパッチが必要な場合は、 `onsflag-iphonex-portrait` 属性と `onsflag-iphonex-landscape` 属性の両方を設定してください。
+
+<% end %>
+
