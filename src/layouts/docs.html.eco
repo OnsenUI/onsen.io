@@ -72,11 +72,36 @@
   </div>
 
   <div class="container">
-		<% if @autotoc || @tocGroup: %>
-		<aside class="content-info content-info-page">
-			<%- @partial('toc.html.eco', {tocItems: @toc}) %>
-		</aside>
-		<% end %>
+    <% if @autotoc || @tocGroup: %>
+    <aside class="content-info content-info-page">
+      <%- @partial('toc.html.eco', {tocItems: @toc}) %>
+    </aside>
+    <% else if (@isAPI || @reference) and @version == "v2": %>
+    <aside class="content-info content-info-page">
+      <ul class="toc toc-1">
+        <% for category, docs of @componentCategories[@framework] when docs.files: %>
+          <li class="toc-title toc-title-no-toggle">
+            <%- docs.title || @titlize category %>
+          </li>
+
+          <% if docs.files: %>
+            <% for doc in docs.files: %>
+              <li class="toc-1-item toc-item">
+                <a href="/v2/api/<%=@framework%>/<%=doc.name%>.html" class="toc-link toc-1-link">
+                  <% if @framework == "angular2" and extensionDoc = @getExtensionDoc(doc, 'angular2'): %>
+                    <%= doc.name.replace(/^ons-/, '') %> (<%=extensionDoc.directive%> Directive)
+                  <% else: %>
+                    <%= doc.name.replace(/^(v-)?ons-/, '') %>
+                  <% end %>
+                </a>
+              </li>
+            <% end %>
+          <% end %>
+        <% end %>
+      </ul>
+    </aside>
+    <% end %>
+
     <div class="container-content<%= ' headers-are-anchors' if @isGuide || @page == 'guide' %>">
       <% if @origPath and (@isGuide or @page == 'guide'): %>
         <a class="onsen-button improve-doc-button" target="_blank" href="https://github.com/OnsenUI/onsen.io/edit/master/src/documents_en/<%= @origPath %>">
