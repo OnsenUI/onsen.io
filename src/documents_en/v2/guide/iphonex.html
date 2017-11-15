@@ -11,11 +11,11 @@ description: 'Learn how to optimize your Onsen UI app for iPhone X.'
 
 ### iPhone X
 
-Onsen UI fully supports iPhone X. Some settings are required to optimize your Onsen UI app for iPhone X.
+Onsen UI fully supports iPhone X. However, some settings are required on your end to optimize the app.
 
-#### Dealing with white/black blank areas on the screen edges
+#### Blank areas on the screen edges
 
-iPhone X can cause **white/black blank areas** on the screen edges as follows:
+iPhone X can cause **white/black blank areas** on the screen edges:
 
 <figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
   <img src="/images/guide/iphonex-white-blank-area.png" height="320">
@@ -27,28 +27,26 @@ iPhone X can cause **white/black blank areas** on the screen edges as follows:
   <figcaption>Example of black blank area</figcaption>
 </figure>
 
-We don't explain this behavior in this doc because it is not a problem of Onsen UI itself.
+These issues are strictly related to the **viewport meta tag**, not to the UI itself. For more details, please refer to [this article (external link)](https://medium.com/the-web-tub/f17a4c272fcd).
 
-If you would like to know how to fix it, please refer to [this blog post (external link)](https://medium.com/the-web-tub/f17a4c272fcd).
+#### Enabling support for iPhone X
 
-#### Enabling patches for iPhone X
+Onsen UI implements optional patches for the two orientation modes, portrait and landscape:
 
-Onsen UI has two patches for iPhone X. Some steps are required to enable them.
+##### Portrait mode
 
-##### Patch for portrait mode
-
-Adding `onsflag-iphonex-portrait` attribute to `<html>` element enables **a patch for portrait mode** and it automatically adjusts position and size of tool bars, tab bars, dialogs and remaining components. (**It does not work in landscape mode**)
+Adding `onsflag-iphonex-portrait` attribute to `<html>` element enables the **patch for portrait mode** and automatically adjusts position and size of toolbars, tab bars, dialogs and other components. **It does not take effect in landscape mode**.
 
 ```js
-if (ons.platform.isIPhoneX()) { // Utility function for detecting iPhone X
-  // Add an attribute to the <html> element with an empty string as its value
-  document.documentElement.addAttribute('onsflag-iphonex-portrait', '');
+if (ons.platform.isIPhoneX()) { // Utility function
+  // Add empty attribute to the <html> element
+  document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
 }
 ```
 
 <figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
   <img src="/images/guide/iphonex-portrait-before.png" width="320">
-  <figcaption>The patch for portrait mode is not enabled</figcaption>
+  <figcaption>The patch for portrait mode is **not** enabled</figcaption>
 </figure>
 
 <figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
@@ -56,24 +54,26 @@ if (ons.platform.isIPhoneX()) { // Utility function for detecting iPhone X
   <figcaption>The patch for portrait mode is enabled</figcaption>
 </figure>
 
-The patch for portrait mode is switched by **the presence of `onsflag-iphonex-portrait` attribute itself**.
-Therefore you have to remove the entire attribute to disable the patch for portrait mode. Even if you set an empty string or `'false'`, the patch will not be disabled.
-For more details, please refer to [the specification of boolean attributes](https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes).
+In order to disable this patch, `onsflag-iphonex-portrait` attribute must be removed:
 
-##### Patch for landscape mode
+```javascript
+document.documentElement.removeAttribute('onsflag-iphonex-portrait');
+```
 
-Adding `onsflag-iphonex-landscape` attribute enables **a patch for landscape mode**. (**It does not work in portrait mode**)
+##### Landscape mode
+
+Similarly, adding `onsflag-iphonex-landscape` attribute enables the **patch for landscape mode** alone, which **does not take effect in portrait mode**.
 
 ```js
-if (ons.platform.isIPhoneX()) { // Utility function for detecting iPhone X
-  // Add an attribute to the <html> element with an empty string as its value
-  document.documentElement.addAttribute('onsflag-iphonex-landscape', '');
+if (ons.platform.isIPhoneX()) { // Utility function
+  // Add empty attribute to the <html> element
+  document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
 }
 ```
 
 <figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
   <img src="/images/guide/iphonex-landscape-before.png" height="320">
-  <figcaption>The patch for landscape mode is not enabled</figcaption>
+  <figcaption>The patch for landscape mode is **not** enabled</figcaption>
 </figure>
 
 <figure style="text-align: center; margin-top: 32px; margin-bottom: 32px;">
@@ -81,10 +81,17 @@ if (ons.platform.isIPhoneX()) { // Utility function for detecting iPhone X
   <figcaption>The patch for landscape mode is enabled</figcaption>
 </figure>
 
+It can be disabled by removing the attribute:
+
+```javascript
+document.documentElement.removeAttribute('onsflag-iphonex-landscape');
+```
+
 ##### Interference between the patches
 
-Since the two patches work only in portrait mode and landscape mode respectively, **they never interfere with each other even if you enable both of them**.
-If you need a patch in both of portrait mode and landscape mode, please set both of `onsflag-iphonex-portrait` attribute and `onsflag-iphonex-landscape` mode.
+Since the two patches work only in portrait and landscape modes respectively (thanks to media queries), **they never interfere with each other** even if you enable both of them.
+
+Therefore, it is safe to set both `onsflag-iphonex-portrait` and `onsflag-iphonex-landscape` attributes together if the app requires both orientation modes.
 
 <% end %>
 
