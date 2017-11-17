@@ -18,10 +18,15 @@
     flex-direction: column;
     flex-wrap: wrap;
     width: 580px;
+
+    .star {
+      color: transparent;
+      background-color: transparent;
+    }
   }
 
   &-right {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
 
@@ -78,8 +83,12 @@
 
   &-switch {
     height: 100%;
-    min-width: 100px;
+    width: 100px;
     visibility: hidden;
+
+    &:hover {
+      cursor: pointer;
+    }
 
     body.loaded & {
       animation: reveal 0.8s 1 linear;
@@ -93,8 +102,8 @@
       display: block;
 
       &:hover {
-          opacity: 0.7;
-        }
+        opacity: 0.7;
+      }
     }
   }
 
@@ -143,16 +152,30 @@
     border: 2px solid #fff;
     color: #fff;
     font-weight: 700;
-    line-height: 60px;
+    line-height: 15px;
     text-transform: uppercase;
     text-align: center;
     margin: 70px 0 15px 0;
     transition: all 0.2s ease-in-out;
 
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    .text {
+      margin-top: 23px;
+    }
+
+    .version {
+      font-size: 10px;
+    }
+
     &:hover {
       background-color: #800d1a;
       color: #fff;
       text-decoration: none;
+      cursor: pointer;
     }
   }
 
@@ -190,6 +213,17 @@
       background: rgba(255, 255, 255, 0.18);
       margin-right: 2px;
 
+      &:hover {
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.9);
+
+        .getstarted {
+          background-color: #800d1a;
+          color: rgba(255, 255, 255, 0.9);
+          text-decoration: none;
+        }
+      }
+
       .icon {
         margin: 20px 45px 0px 45px;
         height: 40px;
@@ -225,12 +259,6 @@
         text-align: center;
         margin: 25px 15px 15px 15px;
         transition: all 0.2s ease-in-out;
-
-        &:hover {
-          background-color: #800d1a;
-          color: #fff;
-          text-decoration: none;
-        }
       }
     }
   }
@@ -245,7 +273,7 @@
     display: block;
     cursor: pointer;
 
-    @media @footersmallscreen {
+    @media @footerverysmallscreen {
       display: none;
     }
 
@@ -255,7 +283,21 @@
   }
 }
 
-@media @footersmallscreen {
+@media (max-width: 1170px) {
+  .keyvisual {
+
+    &-right {
+      display: none;
+    }
+
+    &-inner {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media @footerverysmallscreen {
   .keyvisual {
     height: 1050px;
     background-image: none;
