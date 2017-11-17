@@ -35,7 +35,7 @@
         <% end %>
       </div>
 
-      <a class="github-button" href="https://github.com/OnsenUI/OnsenUI" data-icon="octicon-star" data-show-count="true" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+      <a class="github-button star" href="https://github.com/OnsenUI/OnsenUI" data-icon="octicon-star" data-show-count="true" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
 
       <div class="keyvisual-libraries">
         <% if @lang == "en": %>
@@ -44,21 +44,21 @@
         フレームワーク利用者向けライブラリ
         <% end %>
         <div class="keyvisual-libraries-container">
-          <div class="keyvisual-libraries-framework">
+          <div class="keyvisual-libraries-framework" onclick="location.href='/angular2/'">
             <div class="icon angular1"></div>
-            <a class="getstarted" href="/angular2/">AngularJS</a>
+            <a class="getstarted">AngularJS 1</a>
           </div>
-          <div class="keyvisual-libraries-framework">
+          <div class="keyvisual-libraries-framework" onclick="location.href='/angular2/'">
             <div class="icon angular2"></div>
-            <a class="getstarted" href="/angular2/">Angular2</a>
+            <a class="getstarted">Angular 2+</a>
           </div>
-          <div class="keyvisual-libraries-framework">
+          <div class="keyvisual-libraries-framework" onclick="location.href='/react/'">
             <div class="icon react"></div>
-            <a class="getstarted" href="/react/">React</a>
+            <a class="getstarted">React</a>
           </div>
-          <div class="keyvisual-libraries-framework">
+          <div class="keyvisual-libraries-framework" onclick="location.href='/vue/'">
             <div class="icon vue"></div>
-            <a class="getstarted" href="/vue/">Vue.js</a>
+            <a class="getstarted">Vue</a>
           </div>
         </div>
       </div>
