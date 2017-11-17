@@ -21,7 +21,7 @@
   }
 
   &-right {
-    display: inline-flex;
+    display: flex;
     flex-wrap: wrap;
     flex-direction: row;
 
@@ -78,7 +78,7 @@
 
   &-switch {
     height: 100%;
-    min-width: 100px;
+    width: 100px;
     visibility: hidden;
 
     body.loaded & {
@@ -245,7 +245,7 @@
     display: block;
     cursor: pointer;
 
-    @media @footersmallscreen {
+    @media @footerverysmallscreen {
       display: none;
     }
 
@@ -255,7 +255,21 @@
   }
 }
 
-@media @footersmallscreen {
+@media (max-width: 1170px) {
+  .keyvisual {
+
+    &-right {
+      display: none;
+    }
+
+    &-inner {
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+@media @footerverysmallscreen {
   .keyvisual {
     height: 1050px;
     background-image: none;
