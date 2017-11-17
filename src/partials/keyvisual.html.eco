@@ -16,16 +16,22 @@
         <a href="/v2/guide/index.html#getting-started" class="keyvisual-getstarted">
           Get started
         </a>
-        <a href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest" class="keyvisual-download">
-          Download
-        </a>
+        <div onclick="location.href='https://github.com/OnsenUI/OnsenUI-dist/releases/latest'" id="release-info" class="keyvisual-download">
+          <div class="text">
+            Download
+            <div class="version"></div>
+          </div>
+        </div>
         <% else if @lang == "ja": %>
         <a href="/v2/docs/guide/js/" class="keyvisual-getstarted">
           はじめよう
         </a>
-         <a href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest" class="keyvisual-download">
-          ダウンロード
-        </a>
+        <div onclick="location.href='https://github.com/OnsenUI/OnsenUI-dist/releases/latest'" id="release-info" class="keyvisual-download">
+          <div class="text">
+            ダウンロード
+            <div class="version"></div>
+          </div>
+        </div>
         <% end %>
       </div>
 
