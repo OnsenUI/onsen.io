@@ -79,13 +79,14 @@
           <div class="footer-container-newsletter-thankyou newsletter-signup-thankyou">Thank you!</div>
         </div>
       </div>
-    </div>
-    <div class="footer-container-copyright">
+
+      <div class="footer-container-copyright">
       <% if @lang == "en": %>
       Copyright &copy; 2013-<%= @renderCurrentYear() %> <a href="https://monaca.io/">Monaca x Onsen UI Team</a>. All rights reserved. <a href="https://monaca.io/terms-of-service/policy.html">Privacy Policy</a>
       <% else: %>
       Copyright &copy; 2013-<%= @renderCurrentYear() %> <a href="https://ja.monaca.io/">アシアル株式会社</a>. All rights reserved. <a href="https://ja.monaca.io/terms-of-service/policy.html">プライバシーポリシー</a>
       <% end %>
+      </div>
     </div>
   </div>
 </footer>
