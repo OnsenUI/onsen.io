@@ -42,7 +42,7 @@ Onsen UI は iPhone X 用に2つのパッチを用意しています。以下の
 ```js
 if (ons.platform.isIPhoneX()) { // iPhone X であるか否かを判定
   // <html> 要素に属性を追加（値として空文字列を設定）
-  document.documentElement.addAttribute('onsflag-iphonex-portrait', '');
+  document.documentElement.setAttribute('onsflag-iphonex-portrait', '');
 }
 ```
 
@@ -67,7 +67,7 @@ if (ons.platform.isIPhoneX()) { // iPhone X であるか否かを判定
 ```js
 if (ons.platform.isIPhoneX()) { // iPhone X であるか否かを判定
   // <html> 要素に属性を追加（値として空文字列を設定）
-  document.documentElement.addAttribute('onsflag-iphonex-landscape', '');
+  document.documentElement.setAttribute('onsflag-iphonex-landscape', '');
 }
 ```
 

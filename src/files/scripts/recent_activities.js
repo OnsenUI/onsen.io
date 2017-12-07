@@ -109,8 +109,8 @@ $(function() {
           if (moment(item.date) > moment()) {
             return false;
           }
-          // If the date of item is within the past 7 days
-          if (moment(item.date) > moment().subtract(7, 'day')) {
+          // If the date of item is within the past 28 days
+          if (moment(item.date) > moment().subtract(28, 'day')) {
             return true;
           }
         },

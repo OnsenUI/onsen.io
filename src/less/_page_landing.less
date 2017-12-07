@@ -72,7 +72,7 @@
 
   #features {
     max-width: @localWidth + 60px;
-    margin: 30px auto;
+    margin: 30px auto 0;
 
     h2, h3, h4 {
       margin: 0;
@@ -92,7 +92,9 @@
       justify-content: center;
 
       @media @wrapped {
-        padding: 80px 0;
+        .samples {
+          margin: 30px 0;
+        }
       }
 
       & img {
@@ -156,6 +158,7 @@
 
         @media @wrapped {
           text-align: center;
+          margin-top: 21px;
         }
       }
 
@@ -184,10 +187,6 @@
         p {
           margin: 0 auto;
           max-width: 630px;
-        }
-
-        & :not(p) {
-          text-align: center;
         }
       }
 
@@ -399,9 +398,9 @@
         }
 
         &-links {
-          font-size: 16px; 
+          font-size: 16px;
           font-weight: 300;
-          line-height: 19px; 
+          line-height: 19px;
           margin-top: 12px;
 
           a {
@@ -421,8 +420,7 @@
   max-width: @width - 40px;
   padding: 50px 20px;
   border-top: 2px solid #e8edee;
-  border-bottom: 2px solid #e8edee;
-  margin: 0 auto 40px;
+  margin: 0 auto 0;
 
   & > input {
     display: none;
