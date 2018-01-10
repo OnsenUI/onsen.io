@@ -13,10 +13,10 @@
 
       <div class="keyvisual-main-btn-container">
         <% if @lang == "en": %>
-        <a href="/v2/guide/index.html#getting-started" class="keyvisual-getstarted">
+        <a onclick="trackEventAndRedirect({category: 'homepage', action: 'click', label:'get-started-btn'}, '/v2/guide/index.html#getting-started')" class="keyvisual-getstarted">
           Get started
         </a>
-        <div onclick="location.href='https://github.com/OnsenUI/OnsenUI-dist/releases/latest'" id="release-info" class="keyvisual-download">
+        <div onclick="trackEventAndRedirect({category: 'homepage', action: 'click', label:'download-btn'}, 'https://github.com/OnsenUI/OnsenUI-dist/releases/latest')" id="release-info" class="keyvisual-download">
           <div class="text">
             Download
             <div class="version"></div>
