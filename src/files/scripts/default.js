@@ -220,6 +220,18 @@ var trackOutboundLink = function(url) {
   });
 }
 
+var trackEventAndRedirect = function(params, url) {
+  if (params) {
+    ga('send', 'event', params.category, params.action, params.label, {
+      'hitCallback': function() {
+        url ? (window.location = url) : '';
+      }
+    });
+  } else {
+    url ? (window.location = url) : '';
+  }
+}
+
 function browserLanguage() {
   try {
     return (navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0, 2);
