@@ -46,7 +46,7 @@
       </li>
 
       <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if (@page == 'theme-roller') %>">
-        <a href="/theme-roller"><%=@translate("[en]Components[/en][ja]コンポーネント[/ja]")%></a>
+        <a href="/theme-roller/"><%=@translate("[en]Components[/en][ja]コンポーネント[/ja]")%></a>
       </li>
 
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isAPI or @reference) %>">
@@ -83,7 +83,7 @@
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">
-              <a href="/theme-roller?customize"><%=@translate("[en]Theme Roller[/en][ja]テーマローラー[/ja]")%></a>
+              <a href="/theme-roller/?customize"><%=@translate("[en]Theme Roller[/en][ja]テーマローラー[/ja]")%></a>
             </li>
             <li class="dropdown-item-1">
               <a href="/samples"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
