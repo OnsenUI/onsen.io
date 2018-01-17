@@ -70,7 +70,9 @@
 <body id="<%- @page %>">
   <%- @contents %>
 
-  <%- @partial('footer.html.eco') %>
+  <% if @footer != false: %>
+    <%- @partial('footer.html.eco') %>
+  <% end %>
 
   <%- @partial('popup.html.eco') %>
 
