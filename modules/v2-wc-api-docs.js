@@ -12,6 +12,10 @@ function glob(src) {
   });
 }
 
+function extract(string, regex) {
+  return ((string.match(regex) || [])[1] || '');
+}
+
 function getTemplatePath(path, extension) {
   return nodePath.resolve(basePath + '/src/misc/item-reference.html');
 }
@@ -51,6 +55,12 @@ function generateAPIDocument(metalsmith, docPath, extension) {
 
       if (extension !== 'js' && doc.tutorial) {
         doc.tutorial = doc.tutorial.replace('vanilla', extension);
+        var tutorialPath = basePath + '/dist/tutorial/tutorial/' + doc.tutorial + '.html';
+        tutorialPath = tutorialPath.replace('Reference', 'reference');
+        if (fs.existsSync(tutorialPath)) {
+          const tutorialHTML = fs.readFileSync(tutorialPath).toString();
+          doc.tutorialText = extract(tutorialHTML, /<\/html>\s*<!--.*\n([\s\S]*)-->/).trim();
+        }
       }
 
       // Docs of different frameworks are mixed in these arrays.
