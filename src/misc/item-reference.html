@@ -104,6 +104,10 @@ actionbar: false
     </h3>
 
     <iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", @doc.tutorial %>"></iframe>
+
+    <div class="tutorial-text">
+      <%- @markd @doc.tutorialText %>
+    </div>
   </section>
 
   <% else if @doc.examples and @doc.examples.length > 0: %>
