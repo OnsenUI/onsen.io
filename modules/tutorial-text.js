@@ -14,11 +14,11 @@ module.exports = function() {
       tutorialPath = tutorialPath.replace('Reference', 'reference');
 
       if (fs.existsSync(tutorialPath)) {
-        const tutorialHTML = fs.readFileSync(tutorialPath, (html, err) => {
-          if (err) console.error(err);
-          return html;
-        }).toString();
-        doc.tutorialText = extract(tutorialHTML, /<\/html>\s*<!--.*\n([\s\S]*)-->/).trim();
+        const tutorialHTML = fs.readFileSync(tutorialPath);
+        if (tutorialHTML === undefined) {
+          throw("Couldn't read tutorial text of " + tutorialPath);
+        }
+        doc.tutorialText = extract(tutorialHTML.toString(), /<\/html>\s*<!--.*\n([\s\S]*)-->/).trim();
       }
     }
 
