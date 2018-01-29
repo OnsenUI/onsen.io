@@ -10,7 +10,7 @@ module.exports = function() {
 
   function generateTutorialText(doc) {
     if (doc.tutorial) {
-      var tutorialPath = basePath + '/dist/tutorial/tutorial/' + doc.tutorial + '.html';
+      var tutorialPath = basePath + '/dist/playground/tutorial/' + doc.tutorial + '.html';
       tutorialPath = tutorialPath.replace('Reference', 'reference');
 
       if (fs.existsSync(tutorialPath)) {
