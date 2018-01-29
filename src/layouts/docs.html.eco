@@ -132,6 +132,9 @@
   apiKey: '898f1776da86432b7aa2ffa3632ba17e',
   indexName: 'onsen',
   inputSelector: '#docsearch',
+  queryHook: function (query) {
+    return '<%= @frameworkName @framework %> ' + query;
+  },
   debug: false // Set debug to true if you want to inspect the dropdown
   });
   </script>
