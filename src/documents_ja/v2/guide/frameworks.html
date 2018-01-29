@@ -4,7 +4,7 @@ order: 70
 tocTitle: Framework Support
 tocGroup: guide
 layout: docs.html.eco
-description: 
+description:
 ---
 
 <%- @markdown => %>
@@ -46,6 +46,6 @@ Onsen UIは特定のフレームワークに依存しません。そのため、
 
 たとえば、VueやReactの開発では、DOM要素を取得してメソッドを呼び出したり、プロパティを変更することは望ましくありません。一般的にはPropsを用いてアクセスするからです。一方で、AngularJSの開発ではイベントハンドラーを登録するよりも`ng-model`を用いる方が筋が良いでしょう。このようにフレームワークごとにAPIを最適化する処理を、バインディングが行っています。
 
-繰り返しになりますが、Onsen UIとJavaScriptだけでアプリを作ることも十分に簡単で、強力です。しかし、フレームワークと使って開発をしたい場合は、これらのバインディングが手助けしてくれるでしょう。現在のところ、[Vue.js](vue/)、[React](react/)、[AngularJS 1.x](angular1/)および[Angular 2+](angular2/)に向けて、公式バインディングを提供しています。また、[jQuery](jquery/)のようなフレームワークの場合は、Web Components版をそのまま使用するのが良いでしょう。コミュニティの協力により、[Aurelia](https://www.npmjs.com/package/aurelia-onsenui)や[Ember.js](https://www.npmjs.com/package/ember-onsenui)といったフレームワークにも対応しています。Knockout.jsのようなシンプルなフレームワークの場合には、[この例のように](https://tutorial.onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/knockout_bindings.html)バインディングは最小限なものになります。
+繰り返しになりますが、Onsen UIとJavaScriptだけでアプリを作ることも十分に簡単で、強力です。しかし、フレームワークと使って開発をしたい場合は、これらのバインディングが手助けしてくれるでしょう。現在のところ、[Vue.js](vue/)、[React](react/)、[AngularJS 1.x](angular1/)および[Angular 2+](angular2/)に向けて、公式バインディングを提供しています。また、[jQuery](jquery/)のようなフレームワークの場合は、Web Components版をそのまま使用するのが良いでしょう。コミュニティの協力により、[Aurelia](https://www.npmjs.com/package/aurelia-onsenui)や[Ember.js](https://www.npmjs.com/package/ember-onsenui)といったフレームワークにも対応しています。Knockout.jsのようなシンプルなフレームワークの場合には、[この例のように](/playground/?external=https://onsen.io/playground/tutorial/other/knockout_bindings.html)バインディングは最小限なものになります。
 
 <% end %>
