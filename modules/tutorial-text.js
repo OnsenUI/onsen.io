@@ -2,7 +2,7 @@ var fs = require('fs');
 var nodePath = require('path');
 var basePath = nodePath.resolve(__dirname + '/../');
 
-module.exports = function() {
+module.exports = function(lang) {
 
   function extract(string, regex) {
     return ((string.match(regex) || [])[1] || '');
@@ -18,7 +18,18 @@ module.exports = function() {
         if (tutorialHTML === undefined) {
           throw("Couldn't read tutorial text of " + tutorialPath);
         }
-        doc.tutorialText = extract(tutorialHTML.toString(), /<\/html>\s*<!--.*\n([\s\S]*)-->/).trim();
+
+        var getDocs = function(lang) {
+          var re = new RegExp(`</html>[.\\s\\S]*?<!--.*?${lang ? `lang=${lang}` : ''}.*?\\s*?\\n([\\s\\S]*?)-->`);
+          return extract(tutorialHTML.toString(), re).trim();
+        };
+
+        var docs = getDocs(lang);
+        if (!docs) {
+          docs = getDocs();
+        }
+
+        doc.tutorialText = docs;
       }
     }
 

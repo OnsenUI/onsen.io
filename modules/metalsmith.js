@@ -41,7 +41,7 @@ module.exports = function(lang, isStaging) {
         .use(require('./v2-wc-api-docs')(lang, 'angular1'))
         .use(require('./v2-wc-api-docs')(lang, 'angular2'))
         .use(require('./v2-react-api-docs')(lang))
-        .use(require('./tutorial-text')())
+        .use(require('./tutorial-text')(lang))
         .use(require('./v2-css-docs')())
         .use(require('./patterns-collection')(lang, __dirname + '/../dist/v2/OnsenUI/css-components/www/patterns'))
         .use(collections({
@@ -80,6 +80,7 @@ module.exports = function(lang, isStaging) {
         .use(assets({source: './dist/v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
         .use(assets({source: './dist/v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
         .use(assets({source: './dist/playground', destination: 'playground'}))
+        .use(assets({source: './dist/themeroller', destination: 'themeroller'}))
         .use(require('./css-transform')(lang))
         .use(branch('*.html').use(currentPath()))
         .use(function(files, metalsmith, done) {
