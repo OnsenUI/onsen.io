@@ -80,7 +80,7 @@ module.exports = function(lang, isStaging) {
         .use(assets({source: './dist/v1/OnsenUI/build', destination: 'v1/OnsenUI'}))
         .use(assets({source: './dist/v2/OnsenUI/build', destination: 'v2/OnsenUI'}))
         .use(assets({source: './dist/playground', destination: 'playground'}))
-        .use(assets({source: './dist/themeroller/dist', destination: 'themeroller'}))
+        .use(assets({source: './dist/themeroller', destination: 'themeroller'}))
         .use(require('./css-transform')(lang))
         .use(branch('*.html').use(currentPath()))
         .use(function(files, metalsmith, done) {

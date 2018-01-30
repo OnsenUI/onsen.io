@@ -15,8 +15,8 @@ checkout:
     - git submodule foreach git fetch --tags
     - cd dist/v1/OnsenUI; git fetch --tags; git checkout `git tag | grep "^1." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 1.x
     - cd dist/v2/OnsenUI; git fetch --tags; git checkout `git tag | grep -v "-" | grep "^2\." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 2.x
-    - cd dist/playground; git fetch origin; git checkout master; git pull; cd ../..;
-    - cd dist/themeroller; git fetch origin; git checkout master; git pull; cd ../..;
+    - cd dist/playground; git fetch origin; git checkout gh-pages; git pull; cd ../..;
+    - cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
 dependencies:
   override:
     - curl -o- -L https://yarnpkg.com/install.sh | bash
@@ -25,7 +25,6 @@ dependencies:
     - cd dist/v1/OnsenUI && npm install && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
     - cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build
     - cd dist/v2/OnsenUI && yarn && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs
-    - cd dist/themeroller && yarn && yarn run build
 test:
   override:
     - echo "Add tests!"
