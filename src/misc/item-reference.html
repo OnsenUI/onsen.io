@@ -106,7 +106,9 @@ actionbar: false
     <iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", @doc.tutorial %>"></iframe>
 
     <div class="tutorial-text">
-      <%- @markd @doc.tutorialText %>
+      <% if @doc.tutorialText: %>
+        <%- @markd @doc.tutorialText %>
+      <% end %>
     </div>
   </section>
 
