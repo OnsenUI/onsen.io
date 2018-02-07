@@ -122,6 +122,11 @@
   <script defer src="/vendor/hjson.min.js"></script>
   <script defer src="/vendor/vue.min.js"></script>
   <script defer src="/scripts/default.js"></script>
+  <% if @reference and @version == "v2": %>
+    <script defer src="/scripts/side-menu-highlight-api.js"></script>
+  <% else: %>
+    <script defer src="/scripts/side-menu-highlight.js"></script>
+  <% end %>
   <script defer src="/scripts/recent_activities.js"></script>
   <script src="/vendor/highlight.min.js"></script>
   <script src="/vendor/moment.min.js"></script>
