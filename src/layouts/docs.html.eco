@@ -94,6 +94,9 @@
                     <%= doc.name.replace(/^(v-)?ons-/, '') %>
                   <% end %>
                 </a>
+                <ul class="toc toc-2">
+                  <%- @partial('api-toc.html.eco', { doc: doc.doc, liClasses: "toc-2-item toc-item", aClasses: "toc-2-link toc-link" }) %>
+                </ul>
               </li>
             <% end %>
           <% end %>
