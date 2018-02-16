@@ -55,7 +55,7 @@
             <%=@translate("[en]Resources[/en][ja]リソース[/ja]")%>
           </div>
           <a href="/samples" class="footer-container-navigation-link"><%=@translate("[en]Samples[/en][ja]サンプル[/ja]")%></a>
-          <a href="/playground/" class="footer-container-navigation-link"><%=@translate("[en]Playground[/en][ja]プレイグランド（英語）[/ja]")%></a>
+          <a href="/playground/" class="footer-container-navigation-link"><%=@translate("[en]Playground[/en][ja]プレイグラウンド（英語）[/ja]")%></a>
           <% if @lang == "en": %>
           <a href="https://community.onsen.io" class="footer-container-navigation-link">Community</a>
           <% else if @lang == "ja": %>

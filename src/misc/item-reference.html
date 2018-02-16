@@ -21,7 +21,7 @@ actionbar: false
     <% end %>
   </div>
 
-  <h2>
+  <h2 id="main">
     <% if @extensionDoc and @extensionDoc.directive: %>
       <%= @extensionDoc.directive %> Directive (<%= @extensionDoc.selector %>)
     <% else: %>
@@ -49,51 +49,7 @@ actionbar: false
   </section>
 
   <ul class="reference-quick-navi">
-    <% if @doc.tutorial: %>
-    <li><a href="#tutorial"><%= @translate '[en]Tutorial[/en][ja]実例[/ja]' %></a></li>
-    <% else if @doc.examples and @doc.examples.length > 0: %>
-    <li><a href="#usage"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
-    <% end %>
-
-    <% if @ownedAttributes.length > 0: %>
-    <li><a href="#attributes"><%= @translate '[en]Attributes[/en][ja]属性[/ja]' %></a></li>
-    <% end %>
-
-    <% if @doc.props and Object.keys(@doc.props).length > 0: %>
-    <li><a href="#props"><%= @translate '[en]Props[/en][ja]Prop一覧[/ja]' %></a></li>
-    <% end %>
-
-    <% if @doc.properties and @doc.properties.length > 0: %>
-    <li><a href="#properties"><%= @translate '[en]Properties[/en][ja]プロパティ[/ja]' %></a></li>
-    <% end %>
-
-    <% if @doc.modifiers and @doc.modifiers.length > 0: %>
-    <li><a href="#modifiers"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
-    <% end %>
-
-    <% if Object.keys(@ownedMethods).length > 0: %>
-    <li><a href="#methods-summary"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
-    <% end %>
-
-    <% if @ownedEvents.length > 0: %>
-    <li><a href="#events-summary"><%= @translate '[en]Events[/en][ja]イベント[/ja]' %></a></li>
-    <% end %>
-
-    <% if (@doc.guides and @doc.guides.length > 0) or (@doc.seealsos and @doc.seealsos.length) > 0: %>
-    <li><a href="#seealso"><%= @translate '[en]See Also[/en][ja]関連情報[/ja]' %></a></li>
-    <% end %>
-
-    <% if @framework is 'angular2': %>
-      <% if @extensionDoc and @extensionDoc.directive and @doc.inputs and @doc.inputs.length > 0: %>
-      <li><a href="#input-detail"><%= @translate '[en]Inputs[/en][ja]Inputs[/ja]' %></a></li>
-      <% end %>
-
-      <% if @extensionDoc and @extensionDoc.directive and @doc.outputs and @doc.outputs.length > 0: %>
-      <li><a href="#output-detail"><%= @translate '[en]Outputs[/en][ja]Outputs[/ja]' %></a></li>
-      <% end %>
-    <% end %>
-
-    <li><a href="#discussion"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
+    <%- @partial('api-toc.html.eco', { doc: @doc }) %>
   </ul>
 
   <% if @doc.tutorial: %>
@@ -106,7 +62,9 @@ actionbar: false
     <iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", @doc.tutorial %>"></iframe>
 
     <div class="tutorial-text">
-      <%- @markd @doc.tutorialText %>
+      <% if @doc.tutorialText: %>
+        <%- @markd @doc.tutorialText %>
+      <% end %>
     </div>
   </section>
 

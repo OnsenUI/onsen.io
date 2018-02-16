@@ -1,0 +1,45 @@
+<% if @doc.tutorial: %>
+<li class="<%= @liClasses %>"><a href="#tutorial" class="<%= @aClasses %>"><%= @translate '[en]Tutorial[/en][ja]実例[/ja]' %></a></li>
+<% else if @doc.examples and @doc.examples.length > 0: %>
+<li class="<%= @liClasses %>"><a href="#usage" class="<%= @aClasses %>"><%= @translate '[en]Usage[/en][ja]使い方[/ja]' %></a></li>
+<% end %>
+
+<% if (@doc.guides and @doc.guides.length > 0) or (@doc.seealsos and @doc.seealsos.length) > 0: %>
+<li class="<%= @liClasses %>"><a href="#seealso" class="<%= @aClasses %>"><%= @translate '[en]See Also[/en][ja]関連情報[/ja]' %></a></li>
+<% end %>
+
+<% if @ownedAttributes.length > 0: %>
+<li class="<%= @liClasses %>"><a href="#attributes" class="<%= @aClasses %>"><%= @translate '[en]Attributes[/en][ja]属性[/ja]' %></a></li>
+<% end %>
+
+<% if @doc.props and Object.keys(@doc.props).length > 0: %>
+<li class="<%= @liClasses %>"><a href="#props" class="<%= @aClasses %>"><%= @translate '[en]Props[/en][ja]Prop一覧[/ja]' %></a></li>
+<% end %>
+
+<% if @doc.properties and @doc.properties.length > 0: %>
+<li class="<%= @liClasses %>"><a href="#properties" class="<%= @aClasses %>"><%= @translate '[en]Properties[/en][ja]プロパティ[/ja]' %></a></li>
+<% end %>
+
+<% if @doc.modifiers and @doc.modifiers.length > 0: %>
+<li class="<%= @liClasses %>"><a href="#modifiers" class="<%= @aClasses %>"><%= @translate '[en]Preset Modifiers[/en][ja]プリセットのmodifier[/ja]' %></a></li>
+<% end %>
+
+<% if Object.keys(@ownedMethods).length > 0: %>
+<li class="<%= @liClasses %>"><a href="#methods-summary" class="<%= @aClasses %>"><%= @translate '[en]Methods[/en][ja]メソッド[/ja]' %></a></li>
+<% end %>
+
+<% if @ownedEvents.length > 0: %>
+<li class="<%= @liClasses %>"><a href="#events-summary" class="<%= @aClasses %>"><%= @translate '[en]Events[/en][ja]イベント[/ja]' %></a></li>
+<% end %>
+
+<% if @framework is 'angular2': %>
+  <% if @extensionDoc and @extensionDoc.directive and @doc.inputs and @doc.inputs.length > 0: %>
+  <li class="<%= @liClasses %>"><a href="#input-detail" class="<%= @aClasses %>"><%= @translate '[en]Inputs[/en][ja]Inputs[/ja]' %></a></li>
+  <% end %>
+
+  <% if @extensionDoc and @extensionDoc.directive and @doc.outputs and @doc.outputs.length > 0: %>
+  <li class="<%= @liClasses %>"><a href="#output-detail" class="<%= @aClasses %>"><%= @translate '[en]Outputs[/en][ja]Outputs[/ja]' %></a></li>
+  <% end %>
+<% end %>
+
+<li class="<%= @liClasses %>"><a href="#discussion" class="<%= @aClasses %>"><%= @translate '[en]Discussion[/en][ja]議論[/ja]' %></a></li>
