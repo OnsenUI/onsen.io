@@ -119,7 +119,7 @@ module.exports = function() {
             }
 
             var headers = Array.prototype.slice.call(
-              window.document.querySelectorAll(file.autotocSelector || 'h3, h4')
+              window.document.querySelectorAll(file.autotocSelector || 'h3, h4, h5')
             ).map(function(header) {
               header.id = generateId(header);
               return header;
