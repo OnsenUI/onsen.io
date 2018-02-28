@@ -1,5 +1,5 @@
 ---
-title: 'Getting Started'
+title: 'Introduction'
 order: 20
 tocGroup: guide
 layout: docs.html.eco
@@ -8,6 +8,125 @@ description: 'Lean how to get started with Onsen UI, the Web Components based HT
 
 <%- @markdown => %>
 
+### Introduction
+
+#### What is Onsen UI?
+
+#### Displaying components
+
+Inside the `<body>` and `</body>` tags of `index.html`, enter the following code:
+
+```html
+<ons-button>Click me</ons-button>
+```
+
+Save and preview the app, and a button with the text 'Click me' will be shown (as in figure N).
+
+_TODO IMAGE_
+
+By using HTML tags beginning with `ons-`, we can display the elements provided by Onsen UI. These elements, such as ons-button, are called __components__.
+
+From here on, we will learn how to work with components, examining various components along the way.
+
+##### Attributes
+
+Enter the following code:
+
+```html
+<ons-range></ons-range>
+```
+
+Save and preview, and a bar with a handle will be displayed (figure N).
+
+_TODO IMAGE_
+
+This is the `ons-range` component. It is used when you want the user to select a value ranging from 0 to 100. For example, it could be used for an app's volume setting.
+
+Depending on the situation, you might want to set an initial value for the slider. To do this, change the opening `<ons-range>` tag in the following way:
+
+```html
+<ons-range value="80"></ons-range>
+```
+
+The handle now appears close to the right edge of the bar.
+
+_TODO IMAGE_
+
+This is the result of setting ons-range's `value` attribute to 80. If the value attribute is set to 0, the handle appears at the leftmost edge of the bar; if it is set to 100, the handle appears at the rightmost edge.
+
+In this way, we can alter the appearance and behavior of an Onsen UI component __by setting its attributes__.
+
+Rather than just simply displaying components, one of the main points of developing applications with Onsen UI is that __you can use attributes appropriately according to the situation__.
+No matter how complex a component is, fundamentally you are always fine-tuning its appearance and behavior by altering its attributes.
+
+##### The `modifier` attribute
+
+Enter the following code:
+
+```html
+<ons-button>(default)</ons-button>
+<ons-button modifier="outline">outline</ons-button>
+<ons-button modifier="quiet">quiet</ons-button>
+<ons-button modifier="light">light</ons-button>
+<ons-button modifier="cta">cta</ons-button>
+```
+
+Save and preview, and five buttons with various different appearances are displayed (figure N).
+
+_TODO IMAGE_
+
+In this example, we are using the special `modifier` attribute, which is one part of an Onsen UI component.
+By utilizing the modifier attribute, we can alter the appearance of a component in various ways.
+
+> `modifier` can be given several values at once.
+> These values are separated by spaces like this:
+> `<ons-list-item modifier="longdivider chevron">Item</ons-list-item>`.
+> However, be careful of using values from the same family: they can clash, resulting in strange behavior.
+
+__modifier is just a normal attribute__, but it plays a very important role in Onsen UI applications, and we will be using it frequently from here on.
+
+##### Combining components
+
+Now let's see how to combine several Onsen UI components.
+
+Enter the following code:
+
+```html
+<ons-list-title>List 1</ons-list-title>
+<ons-list>
+  <ons-list-header>Category A</ons-list-header>
+  <ons-list-item>Item 1</ons-list-item>
+  <ons-list-item>Item 2</ons-list-item>
+  <ons-list-item>Item 3</ons-list-item>
+  <ons-list-header>Category B</ons-list-header>
+  <ons-list-item>Item 4</ons-list-item>
+  <ons-list-item>Item 5</ons-list-item>
+</ons-list>
+```
+
+Save and preview, and a list appears looking something like an app's settings screen or similar (figure N)
+
+_TODO IMAGE_
+
+As shown by this example, we can use Onsen UI to __neatly line up and nest__ components.
+To get multiple components to work together properly, __there are some fixed rules that must be followed__.
+
+For example, here the ons-list-title component appears directly above ons-list.
+In order for this to happen, we had to place the ons-list-title tag immediately before the ons-list tag in the code.
+On the other hand, the ons-list-header and ons-list-item components appear inside the ons-list component.
+Therefore the ons-list-header and ons-list-item tags need to be placed inside the ons-list tag in the code.
+
+__If components are combined incorrectly, the display will fall apart or the components will behave strangely.__
+For example, if you place ons-list-item outside ons-list, or ons-list-header inside ons-list-item, the display will be glitchy.
+If you have used components in combination and the display is coming out wrong, check your code against the sample code in this book or the Onsen UI website.
+
+#### Changing component status
+
+#### Handling events
+
+#### Special components
+
+<!--
 ### Getting Started
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/U_83GjDpGMU?ecver=1" frameborder="0" allowfullscreen></iframe>
@@ -111,5 +230,6 @@ Also check out these resources to get you up and running in no time.
 - [Showcase](https://monaca.io/great-apps.html): See what apps people are making
 - [Udemy video course](https://www.udemy.com/learn-to-build-your-first-apache-cordova-app/) & [YouTube getting started video](https://www.youtube.com/watch?v=G7CaEEr8kBs)
 
-<% end %>
+-->
 
+<% end %>
