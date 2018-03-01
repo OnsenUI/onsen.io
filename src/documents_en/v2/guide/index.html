@@ -12,6 +12,39 @@ description: 'Lean how to get started with Onsen UI, the Web Components based HT
 
 #### What is Onsen UI?
 
+Onsen UI is a **set of UI components** for building mobile apps.
+It is packed with ready-to-implement features following **native iOS and Android design standards**.
+It's perfect for developing mobile web apps, and hybrid apps using Cordova.
+
+Onsen UI consists of three layers:
+
+- **CSS components**, written in [cssnext](http://cssnext.io/), the next generation of CSS
+- **Web components**, written in native JavaScript to **support ALL frameworks**
+- **Framework bindings**, created for tighter integration with popular frameworks such as [Vue.js](vue), [AngularJS 1](angular1), [Angular 2+](angular2), and [React](react)
+
+In a nutshell, Onsen UI simplifies your development, works with any framework, and is **future proof**!
+
+Here you can try out Onsen UI's components in a quick demo app.
+The iOS and Android versions of this app share the same source code, and are styled automatically by Onsen UI's [Auto Styling](theming.html#auto-styling) feature.
+
+<iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", "vanilla/common_patterns/kitchensink", false %>"></iframe>
+
+
+#### Getting started
+
+The quickest way to get started with Onsen UI is to use the following CDN links:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+<script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+```
+
+For alternative ways of installing Onsen UI, see the [Installation](installation.html) page.
+
+If you want to use Onsen UI with a framework, see the framework bindings documentation at [Introduction to Bindings](frameworks.html).
+
+
 #### Displaying components
 
 Inside the `<body>` and `</body>` tags of `index.html`, enter the following code:
@@ -120,9 +153,12 @@ __If components are combined incorrectly, the display will fall apart or the com
 For example, if you place ons-list-item outside ons-list, or ons-list-header inside ons-list-item, the display will be glitchy.
 If you have used components in combination and the display is coming out wrong, check your code against the sample code in this book or the Onsen UI website.
 
+
 #### Changing component status
 
+
 #### Handling events
+
 
 #### Special components
 
@@ -229,6 +265,24 @@ Also check out these resources to get you up and running in no time.
 - [Sample apps](/samples): Great starting point for those who want to see the actual code
 - [Showcase](https://monaca.io/great-apps.html): See what apps people are making
 - [Udemy video course](https://www.udemy.com/learn-to-build-your-first-apache-cordova-app/) & [YouTube getting started video](https://www.youtube.com/watch?v=G7CaEEr8kBs)
+
+-->
+
+<!--
+
+##### Browser and Device Support
+
+Onsen UI is fully optimized and tested for the following platforms.
+
+- Mobile
+  - **iOS 8 and up**
+  - **Android 4.4.4 and up** with WebView or Chrome browser
+    (Android 4.0 and up with [Crosswalk engine](https://crosswalk-project.org/))
+- Desktop
+  - Latest version of Safari browser
+  - Latest version of Chrome browser
+
+For other platforms, please be aware that some components or features may not work correctly. Please see [Old Browser Support](/v2/guide/faq.html#old-browsers) for details.
 
 -->
 
