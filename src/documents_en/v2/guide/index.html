@@ -156,11 +156,192 @@ If you have used components in combination and the display is coming out wrong, 
 
 #### Changing component status
 
+By now, we can use Onsen UI to reproduce the components offered by an OS to some extent.
+
+However, we haven't yet covered how to deal with issues such as finding out the current position of an ons-range component's handle, or moving an ons-range component's handle using JavaScript. To that end, we will next look at how to get and modify the status of a component.
+
+##### Getting the status of a component
+
+First let's get the status of ons-range using JavaScript.
+
+Enter this code:
+
+_TODO DEMO_
+
+A slider and button should be displayed (figure N).
+
+_TODO IMAGE_
+
+This time if you click the 'Display ons-range current value' button, a number between 0 and 100 appears, corresponding to the handle position.
+
+Let's examine the code. First the button's onclick attribute is set. When the button is clicked, the JavaScript code defined in onclick is executed.
+Looking at the JavaScript, `document.querySelector('#my-range')` selects the element with id 'my-range' i.e. the ons-range component, then calls '.value' on it.
+As discussed in the previous chapter, 'value' is an example of a property.
+The value property is held by ons-range, and in this sample we are using it to show an alert with the current position of the slider.
+
+In this way, by getting a component's attributes, we are able to look at some or all of the component's status.
+
+> Attributes and properties are completely different things, so be careful.
+> Attributes live in the HTML world, whereas properties live in the JavaScript world.
+> It just happens that in this example one-range has a value attribute and a value property, but there are lots of cases where something is a property but not an attribute or vice-versa.
+> For example, there are cases where there is a value attribute but no value property.
+
+##### Overwriting a component's properties
+
+Next we will set the ons-range handle's position without checking what its current value is.
+
+Enter the code as below:
+
+_TODO DEMO_
+
+Save and preview, then after randomly moving the handle about a bit, click the button.
+You will see the handle move to the 30 position.
+
+_TODO IMAGE_
+
+Let's look at the code.
+As before, document.querySelector('#myRange').value refers to the ons-range's value property.
+However, this time we have '= 30' which sets the value property.
+In the example, the value property is set to 30, which means the handle moves to the 30 position.
+
+In this way, by assigning a value to an Onsen UI component's property, we were able to change all or part of a component's status.
+However, some properties are read-only - this kind of property can't have its value changed so be careful.
+
+##### Using a method to get a component's status
+
+Checking a component's properties is not the only way to find out its status.
+
+Enter the following code:
+
+_TODO DEMO_
+
+Save and preview, and a component made up of three side-by-side buttons will appear.
+
+_TODO IMAGE_
+
+Try randomly clicking the A, B, and C buttons, then click the 'Display ons-segment current value' button.
+According to whichever of the A, B or C buttons is currently selected, an alert with 0, 1 or 2 will pop up.
+
+Let's examine the code.
+With document.querySelector('#my-segment') we select the ons-segment, as we did before with ons-range.
+The difference this time is that, instead of getting one of ons-segment's properties, we call the getActiveButtonIndex function (this kind of function that is held by a component is called a method).
+getActiveButtonIndex is a method of ons-segment, and by calling getActiveButtonIndex as in this example, we can get the currently selected button.
+
+We have ascertained which button is currently selected in the ons-segment even though there is not an attribute with this information.
+Depending on the component, you might need to call a method instead of reading an attribute - as in this example - so be careful.
+
+##### Using methods to overwrite a component's status
+
+The cases where we need to use methods are not just when we want to get a component's status.
+There are also times when we need to use methods to change the status of a component.
+
+Specifically, there are cases where you need to write code like this:
+
+_TODO DEMO_
+
+Save and preview, and as below, a red square and two buttons will appear.
+
+_TODO IMAGE_
+
+If you click on 'Next item', the square will slide and the next square will appear; if you click on 'Previous item', the square will slide and the previous square will appear.
+
+Looking at the code, instead of overwriting a property, the 'prev' and 'next' methods are called - this is how to tell ons-carousel which item to display.
+
+Here we have set the item displayed by ons-carousel, although there is no property to explicitly set.
+As it is in this example, there are cases where you need to use a method instead of setting a property to overwrite the status of a component, so be careful.
+
+> To overwrite the status of components, methods are used much more frequently than properties.
+> Methods are useful when you need to pass in arguments or do some complex work.
+
 
 #### Handling events
 
+Up to now, we have seen how to use properties to get and set the status of components, and also how to use methods when the situation calls for it.
+With this information, you should be able to use properties and methods to manipulate components as you wish.
+
+However, we don't yet know how to do things like deal with what happens after an ons-carousel item has changed.
+To that end, we will now look at how to handle events caused by components.
+
+##### Using event listeners
+
+One way to handle the timing of things that happen to components is to use event listeners.
+
+Enter the following code. This is the same as before, but with some JavaScript in a script tag appended.
+
+_TODO DEMO_
+
+Save and preview, and as before a carousel will appear like in the figure below.
+
+_TODO IMAGE_
+
+This time if you click the 'Next item' button, precisely when the scrolling has finished, an alert with 'Moved from item 0 to item 1' will pop up.
+This is an example of how, with Onsen UI, we can handle the timing of events in components in a standardised way.
+
+Let's take a look at the code.
+This time, there is a script element directly below the last button element.
+Because the browser processes HTML elements in the order they are written, in this example, after the button is displayed, the JavaScript inside the <script>~</script> tags is executed.
+
+If we look at the JavaScript code inside the script element, we see that first document.querySelector('#my-carousel') selects the ons-carousel, then ons-carousel's addEventListener method attaches an event listener to the postchange event.
+In ons-carousel, immediately after the displayed item has changed, the postchange event is fired. This means that the event listener that we just saw will also be executed.
+
+Next let's look at the contents of the event listener.
+The event argument is a reference to the postchange event fired by ons-carousel.
+The event has properties, and in this example we will use two of these - lastActiveIndex and activeIndex.
+lastActiveIndex is the index of the item that was selected before the carousel was moved; activeIndex is the index of the item that is selected after the carousel has moved.
+In this example, with the postchange event fired by ons-carousel, using these properties is how we were able to display the 'Moved from item 0 to tem 1' alert.
+
+Because Onsen UI components trigger lots of special events like postchange, we can use these events to handle various timings inside an application.
+Components have lots of convenient properties, such as lastActiveIndex and activeIndex, that come in useful when an event is triggered, so try using them in an event listener to do some kind of processing.
+
+##### Using properties for processing
+
+For a small number of components, including ons-carousel, you can use properties instead of event listeners for processing.
+
+To see how this works, enter the following code:
+
+_TODO DEMO_
+
+Enter the code, save, and preview.
+This difference this time is that the swipeable attribute has been added to ons-carousel, which means we can now swipe on the carousel and the item will change.
+Try swiping on the carousel, and you will see that in sync with the carousel being swiped, a message like 'Current display position: 1.68' will be shown in real time, just like the figure below.
+
+_TODO IMAGE_
+
+Let's look at the code.
+Unlike before, once we have acquired the ons-carousel with document.querySelector('#my-carousel'), we do not call the addEventListener method on it.
+Instead, we assign a function to the onSwipe property.
+When the ons-carousel is swiped, an event will not be fired.
+Instead, as the carousel is being swiped, the function assigned to onSwipe is executed at regular intervals.
+Each time the function is called, the currently displayed position is passed in as the argument to the function (in this case the argument is position).
+In the figure, because the border between the index 1 item and the index 2 item is showing, the value 1.68 is assigned to position, and this value is displayed using document.querySelector('#message').innerHTML.
+
+As we have just seen, the timing of things that occur in components can also be handled by properties instead of event listeners, so be careful.
+
+Now you should be able to handle Onsen UI components using event listeners and properties to do a variety of different things in an application.
+
 
 #### Special components
+
+Each Onsen UI component has its own characteristics, but there a few that particularly special. Here we will look at some of these unique components.
+
+##### ons-icon
+
+First enter this code:
+
+_TODO DEMO_
+
+The gear icon will appear to the left of the text 'Test'.
+This is how you display an icon using ons-icon.
+
+As for how this works the icon is actually displayed as character.
+
+In other words, this gear icon is displayed just like a normal み or ア character. <!-- obviously I'm going to take this Japanese out the English docs later -->
+This means when the font-size is changed, the size of the gear will also change. Because it's a character.
+
+_TODO DEMO_
+
+There is more than just character fonts for displaying icons - there are also special icon fonts.
+Onsen UI includes three icon fonts. These are read automatically by Onsen UI so just setting the font-size will change the size of an icon.
 
 <!--
 ### Getting Started
