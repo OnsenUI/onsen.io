@@ -42,6 +42,7 @@
 
       &-available {
         color: #35495e;
+        margin-top: 30px;
       }
 
       &-get-started {
@@ -50,6 +51,7 @@
 
         &:hover {
           background-color: #41b883;
+          color: #fff;
         }
       }
 
@@ -191,7 +193,9 @@
     }
 
     &-get-started {
-      display: block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       text-decoration: none;
       padding: 13px 0 10px 0;
       margin: 0 auto;
@@ -239,6 +243,8 @@
           margin: 0 10px;
           cursor: pointer;
           position: relative;
+          background-position: center;
+          background-repeat: no-repeat;
 
           &:before {
             content: '';
@@ -248,15 +254,16 @@
             bottom: 1px;
             right: -9px;
             background: url('/images/design_2016/icn_link_blank.png');
+            opacity: 0.5;
           }
 
           &:hover:before {
-            background: url('/images/design_2016/icn_link_blank_hover.png');
+            opacity: 1;
           }
         }
 
         &-angular1 {
-          background: url('/images/common/icn_angular1_top.svg');
+          background: url('/images/design_2016/logo_angular1_available.png');
 
           &:hover {
             background: url('/images/design_2016/logo_angular1_available_hover.png');
@@ -271,7 +278,6 @@
           }
         }
 
-
         &-react {
           background: url('/images/design_2016/logo_react_available.png');
 
@@ -279,6 +285,15 @@
             background: url('/images/design_2016/logo_react_available_hover.png');
           }
         }
+
+        &-vue {
+          background: url('/images/common/icn_vue_4c.svg');
+
+          &:hover {
+            opacity: 0.9;
+          }
+        }
+
         &-js {
           background: url('/images/design_2016/logo_js_available.png');
 
