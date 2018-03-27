@@ -21,12 +21,12 @@ description: 'Easily build high-performance cordova hybrid mobile apps and PWA u
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
 
     <div style="display: flex; justify-content: center;">
-      <a onclick="trackEventAndRedirect({category: 'vue-landing-page', action: 'click', label:'vue-try-kitchensink-btn'}, 'https://onsenui.github.io/vue-onsenui-kitchensink/')" target="_blank" class="landing-header-get-started" style="margin: 0 10px">
+      <a href="https://onsenui.github.io/vue-onsenui-kitchensink/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-try-kitchensink-btn"}' target="_blank" class="landing-header-get-started" style="margin: 0 10px">
         <div class="landing-header-get-started-title">
           Try Kitchensink
         </div>
       </a>
-      <a onclick="trackEventAndRedirect({category: 'vue-landing-page', action: 'click', label:'vue-get-started-btn'}, '/v2/guide/vue/')" class="landing-header-get-started" style="margin: 0 10px">
+      <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-get-started-btn"}' class="landing-header-get-started" style="margin: 0 10px">
         <div class="landing-header-get-started-title">
           Get Started
         </div>
@@ -163,9 +163,9 @@ export default {
     </div>
   </div>
   <div class="landing-header">
-    <a onclick="trackEventAndRedirect({category: 'vue-landing-page', action: 'click', label:'vue-lets-get-started-btn'}, '/v2/guide/vue/')" class="landing-header-get-started">
+    <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-lets-get-started-btn"}' class="landing-header-get-started">
       <div class="landing-header-get-started-title">
-        Get Started
+        Let's Get Started
       </div>
     </a>
   </div>

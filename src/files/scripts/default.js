@@ -129,6 +129,16 @@ $(function() {
   }
 });
 
+$(function() {
+  $('a[href][track-click]').on('click', function(ev) {
+    ev.preventDefault();
+    var $a = $(ev.currentTarget);
+    var params = JSON.parse($a.attr('track-click'));
+    var url = $a.attr('href');
+    trackEventAndRedirect(params, url);
+  });
+});
+
 
 var trackOutboundLink = function(url) {
   ga('send', 'event', 'outbound', 'click', url, {
