@@ -69,17 +69,13 @@
       </div>
       <div class="keyvisual-image">
         <div id="keyvisual_ios" class="keyvisual-ios-container">
-          <div onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';" id="keyvisual_frame_img_ios" class="keyvisual-image-frame keyvisual-image-frame-ios">
-          </div>
-          <iframe id="keyvisual_frame_content_ios" marginheight="100px" class="keyvisual-image-content-ios" src="https://onsenui.github.io/vue-onsenui-kitchensink/main.html?platform=ios&iphonex" scrolling="no" class="lazy-hidden"></iframe>
+          <div id="keyvisual_frame_img_ios" class="keyvisual-image-frame keyvisual-image-frame-ios"></div>
+          <iframe id="keyvisual_frame_content_ios" marginheight="100px" class="keyvisual-image-content-ios lazy-hidden" src="https://onsenui.github.io/vue-onsenui-kitchensink/main.html?platform=ios&iphonex" scrolling="no"></iframe>
         </div>
         <div id="keyvisual_android" class="keyvisual-android-container">
-          <div onmouseover="document.body.style.overflow='hidden';" onmouseout="document.body.style.overflow='auto';" id="keyvisual_frame_img_android" class="keyvisual-image-frame keyvisual-image-frame-android">
-          </div>
-          <iframe id="keyvisual_frame_content_android" marginheight="100px" class="keyvisual-image-content-android" src="https://onsenui.github.io/vue-onsenui-kitchensink/main.html?platform=android" scrolling="no" class="lazy-hidden"></iframe>
+          <div id="keyvisual_frame_img_android" class="keyvisual-image-frame keyvisual-image-frame-android"></div>
+          <iframe id="keyvisual_frame_content_android" marginheight="100px" class="keyvisual-image-content-android lazy-hidden" scrolling="no" pending-src="https://onsenui.github.io/vue-onsenui-kitchensink/main.html?platform=android"></iframe>
         </div>
-
-        <!-- <img src="/images/common/iphoneX-frame2.png"> -->
       </div>
     </div>
   </div>

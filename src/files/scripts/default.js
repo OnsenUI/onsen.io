@@ -162,9 +162,18 @@ function switchKeyVisualFrame() {
   var $frameIos = $('#keyvisual_ios'),
     $frameAndroid = $('#keyvisual_android');
 
-  $frameAndroid.css('visibility', 'visible'); // FIXME
-
   if ($frameIos.is(':visible')) {
+    // If both the iOS and Android frames are loaded simultaneously, we end up making
+    // the same requests twice, because they are pointing to the same kitchensink
+    // example. So, we only set Android's src when the user wants to change to it. This
+    // doesn't make it load any slower, as by the time the user switches, all the files
+    // will already be cached from the iOS frame.
+    var $androidIframeEl = $frameAndroid.find('#keyvisual_frame_content_android');
+    if($androidIframeEl.attr('pending-src')) {
+      $androidIframeEl.attr('src', $androidIframeEl.attr('pending-src'));
+      $androidIframeEl.removeAttr('pending-src');
+    }
+
     $frameIos.hide();
     $frameAndroid.css("display", "inherit");
   } else if ($frameAndroid.is(':visible')) {
