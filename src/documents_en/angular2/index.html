@@ -17,12 +17,12 @@ description: 'Onsen UI framework for Angular. Create beautiful high-performance 
       Onsen UI for Angular
     </h1>
     <div class="angular2-landing-header-subtitle">
-      Create beautiful high-quality hybrid mobile apps and PWA the fastest way <br>with Angular and Onsen UI Framework.
+      Create beautiful high-quality hybrid mobile apps and PWAs the fastest way <br>with Angular and Onsen UI.
     </div>
     <img class="angular2-landing-header-keyvisual" src="/images/design_2016/angular2_landing_keyvisual.gif">
 
     <div class="angular2-landing-header-get-started">
-      <a onclick="trackEventAndRedirect({category: 'angular-landing-page', action: 'click', label:'angularjs-get-started-btn'}, '/v2/docs/guide/angular1')" class="angular2-landing-header-get-started-button">
+      <a href="/v2/guide/angular1" track-click='{"category": "angular-landing-page", "action": "click", "label":"angularjs-get-started-btn"}' class="angular2-landing-header-get-started-button">
         <div class="angular2-landing-header-get-started-button-title">
           Get Started
         </div>
@@ -30,7 +30,7 @@ description: 'Onsen UI framework for Angular. Create beautiful high-performance 
           with Onsen UI for AngularJS
         </div>
       </a>
-      <a onclick="trackEventAndRedirect({category: 'angular-landing-page', action: 'click', label:'angular2-get-started-btn'}, '/v2/docs/guide/angular2')" class="angular2-landing-header-get-started-button">
+      <a href="/v2/guide/angular2" track-click='{"category": "angular-landing-page", "action": "click", "label":"angular2-get-started-btn"}' class="angular2-landing-header-get-started-button">
         <div class="angular2-landing-header-get-started-button-title">
           Get Started
         </div>
@@ -40,13 +40,12 @@ description: 'Onsen UI framework for Angular. Create beautiful high-performance 
       </a>
     </div>
 
-    <div class="angular2-landing-header-available">
-      <span>
-        Also available for...
-      </span>
-      <div class="angular2-landing-header-available-frameworks">
-        <a href="/react" class="angular2-landing-header-available-frameworks-react"></a>
-        <a href="/v2/docs/guide/js" class="angular2-landing-header-available-frameworks-js"></a>
+    <div class="landing-header-available">
+      <span>Or use Onsen UI with...</span>
+      <div class="landing-header-available-frameworks">
+        <a href="/react" class="landing-header-available-frameworks-react"></a>
+        <a href="/vue" class="landing-header-available-frameworks-vue"></a>
+        <a href="/v2/guide" class="landing-header-available-frameworks-js"></a>
       </div>
     </div>
 
@@ -65,21 +64,10 @@ description: 'Onsen UI framework for Angular. Create beautiful high-performance 
   </div>
 
   <div class="angular2-landing-content">
-    <h2>Our development toolkit quickly runs mobile apps in a real devices</h2>
+    <h2>Beautiful Angular Directives, automatically styled per platform</h2>
 
     <p>
-      Experience streamlined Angular mobile development with zero-time setup. Powerful CLI (command-line tool) and desktop app (for Windows and macOS) simplifies complicated tasks. Our development stack includes TypeScript, WebPack and Cordova. All integrated with debugging app with live-reload, remote-build and many other cloud services.
-    </p>
-
-    <img class='angular2-landing-large-image' src="/images/design_2016/image_onsenui_angular2_sp.png"></img>
-    <img class='angular2-landing-small-image' src="/images/design_2016/image_onsenui_angular2_sp_small.png"></img>
-
-    <hr>
-
-    <h2>Beautiful Angular Directives having Material and Flat appearance</h2>
-
-    <p>
-      Onsen UI framework for Angular exposes a simple but powerful API. All UI components can be easily plugged in to Angular mobile app. To see all Angular UI components, check <a href="/v2/docs/angular2.html">Angular 2+ API</a>.<br>Or, you can quickly try out the showcase below - all of them actually work!
+      Onsen UI for Angular exposes a simple but powerful API. All UI components can be easily plugged into your Angular mobile app. To see all of Onsen UI's Angular components, take a look at the <a href="/v2/docs/angular2.html">Angular 2+ API</a>.<br>Or, you can quickly try out the showcase below - all of them actually work!
     </p>
 
     <div id="showcase-carousel-wrapper">
@@ -97,6 +85,19 @@ description: 'Onsen UI framework for Angular. Create beautiful high-performance 
     </p>
 
     <img src="/images/design_2016/image_rocket.png"></img>
+
+    <hr>
+
+    <h2>Powerful CLI and development tools with Monaca</h2>
+
+    <p>
+      Experience streamlined Angular mobile development with zero-time setup when you use <a href="https://monaca.io">Monaca</a> to build you Onsen UI apps. Use the powerful CLI or desktop app to simplify complicated build tasks. You can also use the Monaca Debugger to test your apps on device, including live-reload to help speed up your development. And when you're ready to release, Monaca builds your Onsen UI app in the cloud, ready to upload to the app stores.
+    </p>
+
+    <img class='angular2-landing-large-image' src="/images/design_2016/image_onsenui_angular2_sp.png"></img>
+    <img class='angular2-landing-small-image' src="/images/design_2016/image_onsenui_angular2_sp_small.png"></img>
+
+    <hr>
 
     <div class="angular2-landing-content-get-started">
       <a href="/v2/docs/guide/angular1/index.html" class="angular2-landing-content-get-started-button">

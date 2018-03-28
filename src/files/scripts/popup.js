@@ -3,16 +3,23 @@
   var ONE_DAY = 1000 * 60 * 60 * 24;
   var defaultPopupDelay = 15000;
   var scrollPopupDelay = 1000;
-  var popup = ["popup-newsletter","popup-google-maps", "popup-material-design"];
+  var popupName = 'popup-newsletter';
 
   document.addEventListener("DOMContentLoaded", checkPopupEvent);
   document.addEventListener("scroll", onScroll);
 
-  function canUpdateStorage(popupName, now) {
-    var latestStorageUpdate = parseInt(localStorage.getItem("latestUpdate"));
-    var popupExpireDate = parseInt(localStorage.getItem(popupName + ".expireDate"));
+  function shouldShowPopup(popupName, now) {
+    var latestStorageUpdate = parseInt(localStorage.getItem('latestUpdate'));
 
-    return (!latestStorageUpdate || ((popupExpireDate - now <= 0) && (latestStorageUpdate + ONE_DAY - now <= 0)));
+    if(!latestStorageUpdate) {
+      // First init - set the pop up to happen in 3 days
+      setLocalStorage(popupName, now, 3);
+      return false;
+    }
+
+    var popupExpireDate = parseInt(localStorage.getItem(popupName + '.expireDate'));
+
+    return (popupExpireDate - now <= 0) && (latestStorageUpdate + ONE_DAY - now <= 0);
   }
 
   function setLocalStorage(popupName, now, days) {
@@ -61,21 +68,16 @@
   }
 
   function checkPopupDisplay(delay) {
-    if (typeof(Storage) !== "undefined") {
-      setTimeout(function() {
-        var now = new Date().getTime();
+    setTimeout(function() {
+      var now = new Date().getTime();
 
-        for (var i in popup) {
-          var popupName = popup[i];
-          if (canUpdateStorage(popupName, now)) {
-            showPopup(popupName, now);
-            document.addEventListener("touchstart", checkClickOnPopup);
-            document.addEventListener("click", checkClickOnPopup);
-            return;
-          }
-        }
-      }, delay);
-    }
+      if (shouldShowPopup(popupName, now)) {
+        showPopup(popupName, now);
+        document.addEventListener("touchstart", checkClickOnPopup);
+        document.addEventListener("click", checkClickOnPopup);
+        return;
+      }
+    }, delay);
   }
 
   function checkClickOnPopup(e) {

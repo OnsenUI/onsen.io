@@ -19,28 +19,38 @@ description: 'Easily build high-performance cordova hybrid mobile apps and PWA u
       Brings the Power and Simplicity of Vue.js to Hybrid and Progressive Web Apps
     </div>
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
-    
+
     <div style="display: flex; justify-content: center;">
-      <a onclick="trackEventAndRedirect({category: 'vue-landing-page', action: 'click', label:'vue-try-kitchensink-btn'}, 'https://onsenui.github.io/vue-onsenui-kitchensink/')" target="_blank" class="landing-header-get-started" style="margin: 0 10px">
+      <a href="https://onsenui.github.io/vue-onsenui-kitchensink/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-try-kitchensink-btn"}' target="_blank" class="landing-header-get-started" style="margin: 0 10px">
         <div class="landing-header-get-started-title">
           Try Kitchensink
         </div>
       </a>
-      <a onclick="trackEventAndRedirect({category: 'vue-landing-page', action: 'click', label:'vue-get-started-btn'}, '/v2/guide/vue/')" class="landing-header-get-started" style="margin: 0 10px">
+      <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-get-started-btn"}' class="landing-header-get-started" style="margin: 0 10px">
         <div class="landing-header-get-started-title">
           Get Started
         </div>
       </a>
     </div>
+
+    <div class="landing-header-available">
+      <span>Or use Onsen UI with...</span>
+      <div class="landing-header-available-frameworks">
+        <a href="/angular2" class="landing-header-available-frameworks-angular1"></a>
+        <a href="/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/react" class="landing-header-available-frameworks-react"></a>
+        <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
+      </div>
+    </div>
   </div>
   <div class="landing-content">
     <div class="feature">
       <div class="feature-text">
-        <h2>Beautifully designed Vue Components that feels native</h2>
-        <p>Onsen UI framework provides a wide variety of ready-to-use Vue Components that <strong>emulate iOS and Android UI guidelines and designs</strong>.</p>
-        <p>Simply pick out the elements you want in your app (like navigators, tabbar, lists, buttons... you name it) and they <strong>automatically</strong> show the iOS or Android look and feel according to the device they are running in.</p>
-        <p>Building <strong>native-looking</strong> and <strong>high-performance</strong> apps could never be easier.</p>
-        <p>See also: <a href="/v2/api/vue/">List of Vue Components</a> | <a href="https://onsenui.github.io/vue-onsenui-kitchensink/">Kitchensink App</a></p>
+        <h2>Beautifully designed Vue Components that feel native</h2>
+        <p>Onsen UI provides a wide variety of ready-to-use Vue Components that <strong>follow iOS and Android UI guidelines and designs</strong>.</p>
+        <p>Simply pick out the elements you want in your app (like navigators, tabbar, lists, buttons... you name it) and they <strong>automatically</strong> show the iOS or Android look and feel according to the device they are running on.</p>
+        <p>Building <strong>native-looking</strong> and <strong>high-performance</strong> apps has never been easier.</p>
+        <p>Try out our <a href="https://onsenui.github.io/vue-onsenui-kitchensink/" target="_blank">Vue kitchensink app</a>, where you can play around with all the components. Then take a look the <a href="/v2/api/vue/">full list of Onsen UI Vue components</a> to find out how to use them all!</p>
       </div>
       <div class="feature-image">
         <iframe style="width:100%; height: 480px" src="./visual-components.html"></iframe>
@@ -49,14 +59,15 @@ description: 'Easily build high-performance cordova hybrid mobile apps and PWA u
 
     <div class="feature">
       <div class="feature-text">
-        <h2>Simple setup</h2>
-        <p>No experience in using mobile UI frameworks? <strong>No problem</strong>. Getting started is not complicated at all!</p>
-        <ul>
-          <li>(1) Install our packages from the command line...</li>
-          <li>(2) ... and import <code>vue-onsenui</code> to your code...</li>
-          <li>(3) ... and write <code>Vue.use(VueOnsen);</code></li>
-        </ul>
+        <h2>Quick setup</h2>
+        <p>Used Vue before, but no experience in using mobile UI frameworks? <strong>No problem</strong>. Getting started is super simple!</p>
+        <ol>
+          <li>Install our packages from the command line...</li>
+          <li>... and import <code>vue-onsenui</code> to your code...</li>
+          <li>... and write <code>Vue.use(VueOnsen);</code></li>
+        </ol>
         <p><strong>3 simple steps</strong> that will get you access to a wide range of UI components.</p>
+        <p>If you haven't used Vue before, take a look at our full <a href="/v2/guide/vue/">Onsen UI for Vue guide</a>.</p>
       </div>
       <div class="feature-image">
 <%- @markdown => %>
@@ -76,7 +87,7 @@ import VueOnsen from 'vue-onsenui';
 // (3) And plug in the bindings
 Vue.use(VueOnsen);
 
-// Now you can use the awesome Onsen UI + Vue components
+// That's it!
 new Vue({
   el: '#app',
   template: '<v-ons-button>Click Me</v-ons-button>',
@@ -128,7 +139,7 @@ export default {
       <div class="feature-text">
         <h2>Use with Vue CLI &amp; hot reload, debugger, native plugins - all covered</h2>
         <p>You can get started with Onsen UI by using our templates within the Vue CLI. Pick the PWA or Cordova template and you're ready to go!</p>
-        <p>Beyond that, we’ve got full-stack tools to streamline your app development with zero-time setup. Onsen UI family’s <a href="/v2/guide/monaca.html">Monaca CLI</a> simplifies complicated tasks. Our development stack includes TypeScript, Webpack and Cordova, all integrated with app debugging features like live-reload on device, remote-build and many other cloud services.</p>
+        <p>Beyond that, we've got full-stack tools to streamline your app development with zero-time setup using <a href="/v2/guide/monaca.html">Monaca</a>. It is developed by the same team as Onsen UI, and helps to simplify complicated app development tasks. It has everything you need to develop Onsen UI apps, with powerful debugging, remote build, backend services and an optional cloud-based IDE.</p>
       </div>
       <div class="feature-image">
 <%- @markdown => %>
@@ -147,12 +158,12 @@ export default {
     <div class="feature">
       <div class="feature-text">
         <h2>Tons of resources &amp; support</h2>
-        <p>Ample documentation, interactive tutorials, guides, how-to and sample apps will get you up and running quickly and guide you to the finish line. When you need a hand, the Onsen UI team and the active community will help you via <a href="https://community.onsen.io/">Community Forum</a> and <a href="https://gitter.im/OnsenUI/OnsenUI">Gitter</a>!</p>
+        <p>Ample documentation, interactive tutorials, guides, how-tos and sample apps will get you up and running quickly and guide you to the finish line. When you need a hand, the Onsen UI team and the active community will help you via <a href="https://community.onsen.io/">Community Forum</a> and <a href="https://gitter.im/OnsenUI/OnsenUI">Gitter</a>!</p>
       </div>
     </div>
   </div>
   <div class="landing-header">
-    <a onclick="trackEventAndRedirect({category: 'vue-landing-page', action: 'click', label:'vue-lets-get-started-btn'}, '/v2/guide/vue/')" class="landing-header-get-started">
+    <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-lets-get-started-btn"}' class="landing-header-get-started">
       <div class="landing-header-get-started-title">
         Let's Get Started
       </div>
@@ -160,37 +171,4 @@ export default {
   </div>
 </div>
 
-
 <script src="/vendor/highlight.min.js"></script>
-<script>
-  var $ = document.querySelector.bind(document);
-  var $$ = document.querySelectorAll.bind(document);
-  var each = function (arr, func) { Array.prototype.forEach.call(arr, func) };
-  var code = $$('code');
-  var arrows = $$('.arrow');
-  var height = $('.code-explanation').offsetHeight;
-
-  each(arrows, function (e, i) {
-    var lines = code[i].textContent.split(/\n/);
-    var indent = lines[1].match(/\s*/)[0].length;
-    code[i].textContent = lines.map(function(e) {
-      return e.slice(indent);
-    }).join('\n').trim();
-    hljs.highlightBlock(code[i]);
-    e.style.bottom = height - (code[i].offsetTop + code[i].offsetHeight / 2) + 'px';
-  });
-
-  var buttons = $('.platform-buttons').children;
-  var examples = $$('.code-explanation');
-  each(buttons, function(e, i) {
-    e.onclick = function () {
-      var j = (i + 1) % 2;
-      if (!this.classList.contains('selected')) {
-        buttons[i].classList.add('selected');
-        buttons[j].classList.remove('selected');
-        examples[i].classList.add('selected');
-        examples[j].classList.remove('selected');
-      }
-    }
-  });
-</script>

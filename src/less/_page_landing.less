@@ -102,53 +102,6 @@
         display: block;
       }
 
-      &-showcase {
-        width: 212px;
-        height: 420px;
-        position: relative;
-        margin: 0 auto;
-
-        &-android,
-        &-ios {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 212px;
-          height: 420px;
-
-          > iframe {
-            position: absolute;
-            top: 48px;
-            left: 16px;
-            width: 363px;
-            height: 645px;
-            transform-origin: 0 0;
-            transform: scale(0.5);
-            max-width: initial;
-          }
-        }
-
-        &-android {
-          background-image: url(/images/common/device_android.png);
-
-          > iframe {
-            top: 40px;
-            left: 9px;
-            width: 385px;
-            height: 684px;
-          }
-        }
-
-        &-ios {
-          background-image: url(/images/common/device_ios.png);
-          animation-name: fade;
-          animation-timing-function: ease-in-out;
-          animation-iteration-count: infinite;
-          animation-duration: 10s;
-          animation-direction: alternate;
-        }
-      }
-
       & h2 {
         color: #ff1a33;
         font-size: 24px;

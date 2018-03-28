@@ -16,11 +16,11 @@ description: 'ReactJS developers can easily create high-performance hybrid mobil
       Onsen UI for React
     </h1>
     <div class="landing-header-subtitle">
-      Create beautiful high-quality hybrid mobile apps the fastest way <br>with React and Onsen UI Framework.
+      Create beautiful high-quality hybrid mobile apps the fastest way <br>with React and Onsen UI.
     </div>
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_react.png">
 
-    <a onclick="trackEventAndRedirect({category: 'react-landing-page', action: 'click', label:'react-get-started-btn'}, '/v2/docs/guide/react/')"  class="landing-header-get-started">
+    <a href="/v2/docs/guide/react/" track-click='{"category": "react-landing-page", "action": "click", "label":"react-get-started-btn"}' class="landing-header-get-started">
       <div class="landing-header-get-started-title">
         Get Started
       </div>
@@ -30,12 +30,11 @@ description: 'ReactJS developers can easily create high-performance hybrid mobil
     </a>
 
     <div class="landing-header-available">
-      <span>
-        Also available for...
-      </span>
+      <span>Or use Onsen UI with...</span>
       <div class="landing-header-available-frameworks">
-        <a href="/v2/docs/guide/angular1" class="landing-header-available-frameworks-angular1"></a>
-        <a href="/v2/docs/guide/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/angular2" class="landing-header-available-frameworks-angular1"></a>
+        <a href="/angular2" class="landing-header-available-frameworks-angular2"></a>
+        <a href="/vue" class="landing-header-available-frameworks-vue"></a>
         <a href="/v2/docs/guide/js" class="landing-header-available-frameworks-js"></a>
       </div>
     </div>
@@ -171,17 +170,19 @@ description: 'ReactJS developers can easily create high-performance hybrid mobil
       </div>
     </div>
 
-  <div class="feature">
-    <h2>Power of CLI and Development Tools</h2>
-    <p><a href="https://monaca.io/">Monaca Platform</a> provides everything you need to develop Onsen UI apps, with powerful debugging, remote build, backend services and an optional cloud-based IDE. Onsen UI users get complimentary access to CLI.</p>
-<pre><code class="html">$ <strong style="font-weight: bold">monaca create helloworld</strong>
+    <hr>
+
+    <div class="feature">
+      <h2>Power of CLI and Development Tools</h2>
+      <p>Streamline your hybrid app development with <a href="https://monaca.io/">Monaca</a>, built by the Onsen UI team. It provides everything you need to develop Onsen UI apps, with powerful debugging, remote build, backend services and an optional cloud-based IDE. Get started with an Onsen UI React project just by running the command below!</p>
+      <pre><code class="html">$ <strong style="font-weight: bold">monaca create helloworld</strong>
 Which project do you want to create?
 <b style="color: red;">&gt; Onsen 2 with React</b>
 &gt; Onsen 2 with AngularJS 1
 &gt; Onsen 2 with Angular 2+
 &gt; Onsen 2 with JavaScript
 </code></pre>
-  </div>
+    </div>
   </div>
   </div>
 </div>
