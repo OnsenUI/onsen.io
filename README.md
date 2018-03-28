@@ -99,6 +99,11 @@ We will happily accept contributions to Onsen UI Website and the framework. It c
 3. Make a pull request to master branch.
 4. After you've made a pull request we will review it. If everything is fine and we like the change the contribution will be pulled into the repository. In the case where there are some issues with the code or we disagree with how it's been implemented we will describe the issues in the comments so they can be corrected.
 
+Documentation Pages
+-------------------
+
+The generated documentation comes from the [Onsen UI repository](https://github.com/OnsenUI/OnsenUI). Any changes to documentation should be made there. For instructions on how to make these changes, see the [documentation guide](https://github.com/OnsenUI/OnsenUI/blob/master/.github/CONTRIBUTING.md#documentation) in the Onsen UI repository.
+
 How to add a blog post
 -----------------
 
