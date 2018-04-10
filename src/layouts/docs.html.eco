@@ -72,6 +72,8 @@
   </div>
 
   <div class="container">
+    <%- @partial('survey-prompt.html.eco', { src: 'docs' }) %>
+
     <% if @autotoc || @tocGroup: %>
     <aside class="content-info content-info-page">
       <%- @partial('toc.html.eco', {tocItems: @toc}) %>

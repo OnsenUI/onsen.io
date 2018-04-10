@@ -1,0 +1,21 @@
+<div class="header-survey-prompt" style="display: none">
+  <div class="header-survey-prompt-inner">
+    Take the 2-minute <a href="https://surveymonkey.com/r/onsen-survey?src=<%= @src %>" target="_blank">Onsen UI 2018 Developer Survey</a> to help shape the future of Onsen UI.
+
+    <span class="survey-close">x</span>
+  </div>
+</div>
+
+<script>
+  var promptLsKey = 'survey_prompt';
+
+  if(!localStorage.getItem(promptLsKey)) {
+    var surveyPrompt = document.querySelector('.header-survey-prompt');
+    surveyPrompt.style.display = '';
+
+    surveyPrompt.querySelector('.survey-close').addEventListener('click', function(ev) {
+      localStorage.setItem(promptLsKey, Date.now());
+      surveyPrompt.style.display = 'none';
+    });
+  }
+</script>
