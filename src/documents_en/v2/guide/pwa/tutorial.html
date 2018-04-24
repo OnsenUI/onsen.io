@@ -1,0 +1,162 @@
+---
+title: 'Onsen UI PWA Tutorial'
+order: 210
+tocGroup: guide
+layout: docs.html.eco
+description: 'How to use Onsen UI to create progressive web apps'
+---
+
+<%- @markdown => %>
+
+### Onsen UI PWA Tutorial
+Onsen UI is perfect for creating a Progressive Web App. If you are not familiar with PWAs, take a look at [What is a PWA?](intro.html).
+
+In this tutorial, we'll show you how to add PWA functionality to a basic Onsen UI app. Don't worry, you don't need to be familiar with Onsen UI to follow this guide.
+
+#### Getting Started
+
+##### Prerequisites
+
+ - [Google Chrome](https://www.google.com/chrome/) has the best developer tools for PWAs, and makes debugging very easy
+ - [http-server](https://www.npmjs.com/package/http-server) is a simple way of creating a local server, so we can properly test our PWA as if it were online. Install using npm: `npm install -g http-server`
+
+##### Sample Site
+
+First let's make a super basic Onsen UI app. Make a new folder somewhere called `onsenui-pwa`. Inside here, create a file called `index.html` and add the code below to it.
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+</head>
+<body>
+  <ons-button onclick="alert('You clicked me!')">Click Me</ons-button>
+</body>
+</html>
+```
+
+Now, let's serve it in our browser. On the command line, go to the `onsenui-pwa` folder. Here we will use the `http-server` program we installed earlier to serve all files from this directory.
+
+```bash
+http-server .
+```
+
+In Chrome, go to `http://localhost:8080`, and you will see a "Click Me" button. Now let's see what happens when we go offline. Open the Developer Tools, and go to the _Network_ tab. Tick the _Offline_ checkbox to simulate having no internet connection. Refresh the page, and you will see Chrome's offline error.
+
+To qualify as a PWA, our site must still be available when the user goes offline. For our site to be available offline, we need some way to ensure our HTML, JS and CSS are saved on the user's device so they are available at all sites. We do this by using a Service Worker.
+
+#### Service Worker
+Service Workers are a relatively new feature, created specifically to help with the creation of PWAs. They run separately to the rest of your Javascript, and cannot access any of your other code. However, they are very powerful. They can intercept every network request, and even create push notifications.
+
+We need the ServiceWorker to do two things so that our files are available offline:
+ 1. Save the files to the user's device
+ 2. Serve these local files to the user instead of requesting from the server
+
+##### Creating a ServiceWorker
+Create a file called `sw.js` and put it in the folder we created earlier.
+
+```javascript
+// 1. Save the files to the user's device
+// The "install" event is called when the ServiceWorker starts up.
+// All ServiceWorker code must be inside events.
+self.addEventListener('install', function(e) {
+  console.log('install');
+
+  // waitUntil tells the browser that the install event is not finished until we have
+  // cached all of our files
+  e.waitUntil(
+    // Here we call our cache "myonsenuipwa", but you can name it anything unique
+    caches.open('myonsenuipwa').then(cache => {
+      // If the request for any of these resources fails, _none_ of the resources will be
+      // added to the cache.
+      return cache.addAll([
+        '/',
+        '/index.html',
+        'https://unpkg.com/onsenui/css/onsenui.min.css',
+        'https://unpkg.com/onsenui/css/onsen-css-components.min.css',
+        'https://unpkg.com/onsenui/js/onsenui.min.js'
+      ]);
+    })
+  );
+});
+
+// 2. Intercept requests and return the cached version instead
+self.addEventListener('fetch', function(e) {
+  e.respondWith(
+    // check if this file exists in the cache
+    caches.match(e.request)
+      // Return the cached file, or else try to get it from the server
+      .then(response => response || fetch(e.request))
+  );
+});
+```
+
+Now we need to tell the browser about this ServiceWorker. We register it in our `index.html` file. Add this script tag inside the `<head>`.
+
+```html
+<script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(() => console.log("Service Worker Registered"))
+      .catch(e => console.log(e));
+  }
+</script>
+```
+
+In Chrome's Developer Tools, to to the _Application_ tab and then _Service Workers_. You can change the connection status here. Ensure that _Offline_ is unticked. Reload the page, and you will see `sw.js` registering, and eventually its status will say `activated and is running`. Notice also that `install` has been logged in the _Console_.
+
+Tick _Offline_ again and reload the page. This time, you will see that the page works just fine. Congratulations, you app is now available offline!
+
+#### Add to Homescreen
+To allow your site to be added to the user's homescreen as an app, you need to have an icon and a name for the app, as well as a few other things. This is all defined in a `manifest.json` file. Below is an example file you could use for this project. For a full list of all the possible options, take a look at [Google's Web App Manifest documentation](https://developers.google.com/web/fundamentals/web-app-manifest/).
+
+```json
+{
+  "name": "My Onsen UI PWA",
+  "short_name": "Onsen PWA",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ef4e2a",
+  "background_color": "#fff",
+  "icons": [{
+    "src": "https://via.placeholder.com/192x192",
+    "sizes": "192x192",
+    "type": "image/png"
+  },{
+    "src": "https://via.placeholder.com/512x512",
+    "sizes": "512x512",
+    "type": "image/png"
+  }]
+}
+```
+
+Once the manifest is created, we need to link to it in `index.html`. Add this line within the `<head>`.
+
+```html
+<link rel="manifest" href="/manifest.json">
+```
+
+Let's also add it to our ServiceWorker cache so it is available when the user is offline:
+
+```javascript
+caches.open('myonsenuiapp').then(cache => {
+  return cache.addAll([
+    '/',
+    '/index.html',
+    '/manifest.json',
+    'https://unpkg.com/onsenui/css/onsenui.min.css',
+    'https://unpkg.com/onsenui/css/onsen-css-components.min.css',
+    'https://unpkg.com/onsenui/js/onsenui.min.js'
+  ]);
+})
+```
+
+Before reloading the page, tick _Update on reload_ in the Chrome Developer Tools. This forces the ServiceWorker to update on every reload, meaning it will check for updates to the rest of our files too. Later we will describe how to set up a good update process, but for development purposes, this is fine. Now reload the page.
+
+In the Developer Tools, find the _Manifest_ option. Here you will see the options which you set in `manifest.json`. Click the _Add to homescreen_ button. This will show the prompt that a user of your site would normally be shown (if the site is a PWA, and they have visited the site before). Click _Add_ on the prompt that shows up. That's it, your app is installed! In a new tab, open `chrome://apps` and you will see "My Onsen UI PWA". Depending on your operating system, you should be able to find it in a normal system search e.g. press the Windows key (or Cmd + Space on Mac) and search for "My Onsen UI".
+
+#### What's next?
+You have now made a basic PWA! But there is a lot more you can do to make a PWA which gives users a true _Engaging_ experience, such as automatic updates and faster loading. These are all described in our [Advanced](advanced.html) guide.
