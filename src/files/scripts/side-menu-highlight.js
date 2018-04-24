@@ -1,7 +1,7 @@
 (function () {
   function getParams() {
     var mainId = $('.container-content h3:first-of-type')[0].id;
-    var mainLink =  $('.content-info a[href$="#' + mainId + '"]');
+    var mainLink =  $('.content-info a[href$="#' + mainId + '"].toc-1-link');
 
     var links = mainLink.parent('li').find('a');
     var linkMap = {};
