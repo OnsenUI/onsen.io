@@ -1,0 +1,98 @@
+---
+title: 'Progressive Web Apps'
+order: 200
+tocTitle: 'Progressive Web Apps'
+tocGroup: guide
+layout: docs.html.eco
+description: 'How to use Onsen UI to create progressive web apps'
+---
+
+<%- @markdown => %>
+
+### What is a PWA?
+
+A Progressive Web App (PWA) is a website which is optimised for mobile and works offline. It can be added to a user's home screen, and will then behave just like an app. Google's development team [describes PWAs](https://developers.google.com/web/progressive-web-apps/) as fulfilling these three conditions:
+
+<ul class="blockquote">
+    <li><strong>Reliable</strong>: Load instantly and never show the downasaur, even in uncertain network conditions</li>
+    <li><strong>Fast</strong>: Respond quickly to user interactions with silky smooth animations and no janky scrolling</li>
+    <li><strong>Engaging</strong>: Feel like a natural app on the device, with an immersive user experience</li>
+</ul>
+
+#### PWA Basics
+
+##### Reliable
+Unlike a normal website, a PWA works even if a user returns to your website and is not connected to the internet. This is achieved by using ServiceWorkers, which are the main new technology which enables PWAs to be developed.
+
+##### Fast
+Fast doesn't just mean high-performance interactions, but also fast to load. Google's suggested goal is under 10 seconds to interactive (that is, when the user can tap and scroll) on a 3G connection. This might seem like a long time, but on a 3G connection, this is not a lot of data.
+
+##### Engaging
+Since the user will add your site to their home screen, they will interact with it just as if it is an app. It is up to you as a developer to make this experience feel as good as any other app. Luckily, Onsen UI is the perfect tool to achieve this.
+
+#### Requirements
+For a site to be classified as a PWA, and to prompt the user to add it to their home screen (on Chrome), it must:
+ - Load all URLs while offline
+ - Be served over *https*
+ - Have a manifest file
+ - Have an icon
+
+These are the most basic requirements, but there are many more things you can and should do to improve the user's experience.
+
+#### Platform Support
+There is no one way to say if a platform completely supports PWAs. The main thing to check is if it supports ServiceWorkers (used to serve the app when offline) and web manifests (which define how the app can be added to the user's home screen). The support info below is from caniuse.com ([ServiceWorker](https://caniuse.com/#feat=serviceworkers) and [Manifest](https://caniuse.com/#feat=web-app-manifest)).
+
+##### ServiceWorker Support
+
+<style>
+table {
+  background-color: #fafafa;
+}
+
+td, th {
+  text-align: center;
+  min-width: 100px;
+  padding: 3px 0;
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+td:first-of-type,
+th:first-of-type {
+  border-left: 0;
+}
+
+th {
+  background-color: #585858;
+  color: #fff;
+}
+</style>
+
+| iOS  | Chrome | Safari | Firefox | Edge |
+|------|--------|--------|---------|------|
+| 11.3 |   45   |  11.1  |   44    |  17  |
+
+##### Web Manifest Support
+
+| iOS  | Chrome | Safari | Firefox | Edge |
+|------|--------|--------|---------|------|
+| 11.3 |   38   |  11.1  |    -    |  -   |
+
+#### Frequently Asked Questions
+
+##### Can I use Onsen UI to make a PWA?
+Yes! Onsen UI is a great choice for building a PWA. We keep Onsen UI's size as small as possible, which means that your site will be _Fast_. Using Onsen UI's native-style components, your site will feel just like a native app when added to the user's homescreen. This helps fulfil the requirement of a PWA to be _Engaging_.
+
+Whether you are starting a new project, or have an existing one, you can add PWA functionality to your Onsen UI website. Take a look at our [step-by-step guide](howto.html) on how to set up your Onsen UI PWA.
+
+##### Do I need a PWA?
+Any website can benefit greatly from adding even basic PWA functionality. [PWA Stats](https://www.pwastats.com/) has a great collection of case studies showing many sites which have increased both user engagement and revenue by adding PWA functionality to their website.
+
+##### Will PWAs replace Cordova apps?
+Cordova apps are packaged like a normal app and downloaded from app stores. A Progressive Web App is a _website_ first and foremost. It is the additional features of being available offline and being able to be added to the home screen that truly make it a PWA.
+
+If your Cordova app has basic functionality and doesn't use any plugins, it could be replaced by a PWA. However, a PWA cannot be downloaded from an app store. You should think of a PWA as an enhancement for your website rather than a replacement for your app.
+
+##### Why does my site have to be https?
+ServiceWorkers are very powerful, and used maliciously they could be used to completely block access to a website. For example, a malicious ServiceWorker could intercept every request a site makes, and never pass it to the server. Since the ServiceWorker would then be cached, it would be very difficult to undo this malicious action, leaving a website unusable for days.
+
+Over a normal http connection, it is possible that the ServiceWorker's code could be modified in transit to take down a website as described as above. So, the specification requires browsers to only make ServiceWorkers available on https sites to prevent such tampering. The only exception is `http://localhost`, to enable easy testing.
