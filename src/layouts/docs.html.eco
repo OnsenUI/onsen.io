@@ -7,7 +7,7 @@
   <title><%= @getPreparedTitle() %></title>
   <meta name="description" content="<%= @getPreparedDescription() %>" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
   <link rel="stylesheet" type="text/css" href="/vendor/MyFontsWebfontsKit.css"/>
 
@@ -62,18 +62,11 @@
 
 <body id="<%- @page %>">
 
-  <div class="header<%= ' header-fixed' if @isGuide || @page == 'guide' %>">
+  <div class="header header-fixed header-small header-full-width">
     <%- @partial('global-nav.html.eco') %>
-    <% if @isGuide || @page == 'guide': %>
-      <!-- <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %> -->
-    <% else: %>
-      <%- @partial('docs-nav.html.eco') %>
-    <% end %>
   </div>
 
   <div class="container">
-    <%- @partial('survey-prompt.html.eco', { src: 'docs' }) %>
-
     <% if @autotoc || @tocGroup: %>
     <aside class="content-info content-info-page">
       <%- @partial('toc.html.eco', {tocItems: @toc}) %>
@@ -108,18 +101,24 @@
     <% end %>
 
     <div class="container-content<%= ' headers-are-anchors' if @isGuide || @page == 'guide' %>">
+      <%- @partial('survey-prompt.html.eco', { src: 'docs' }) %>
+      <% if @isGuide || @page == 'guide': %>
+        <!-- <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %> -->
+      <% else: %>
+        <%- @partial('docs-nav.html.eco') %>
+      <% end %>
+
       <% if @origPath and (@isGuide or @page == 'guide'): %>
         <a class="onsen-button improve-doc-button" target="_blank" href="https://github.com/OnsenUI/onsen.io/edit/master/src/documents_en/<%= @origPath %>">
           <i class="fa fa-pencil"></i>Improve this
         </a>
       <% end %>
+
       <%- @contents %>
       <%- @partial('guide_section_footer.html.eco') if @isGuide || @page == 'guide' %>
       <%- @partial('need_help.html.eco') if @needHelp %>
     </div>
   </div>
-
-  <%- @partial('footer.html.eco', {skipInfo: true}) %>
 
   <%- @partial('popup.html.eco') %>
 
