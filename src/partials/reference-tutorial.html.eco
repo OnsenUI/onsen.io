@@ -3,22 +3,6 @@
   <div class="js-index-category">
     <h4 class="js-index-header">
       <%- docs.title || @titlize category %>
-
-<!-- Old Guide/Directive link -->
-<!--       <div class="js-index-guide">
-        <% if @framework == "angular2": %>
-          <% if docs.index: %>
-            <span class="guide"><a href="/v2/api/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
-          <% else if @componentCategories["js"][category].index: %>
-            <span class="guide"><a href="/v2/api/js/<%=category%>.html">Core JS Guide</a></span>
-          <% end %>
-        <% else: %>
-          <% if docs.index: %>
-            <span class="guide"><a href="/v2/api/<%=@framework%>/<%=category%>.html">Directive Guide</a></span>
-          <% end %>
-        <% end %>
-      </div> -->
-
     </h4>
 
     <% if docs.files: %>

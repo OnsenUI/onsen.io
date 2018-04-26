@@ -21,17 +21,19 @@ actionbar: false
     <% end %>
   </div>
 
-  <h2 id="main">
-    <% if @extensionDoc and @extensionDoc.directive: %>
-      <%= @extensionDoc.directive %> Directive (<%= @extensionDoc.selector %>)
-    <% else: %>
-      <% if @framework is 'react': %>
-        &lt;<%= @name %> /&gt;
+  <h3 id="main">
+    <span>
+      <% if @extensionDoc and @extensionDoc.directive: %>
+        <%= @extensionDoc.directive %> Directive (<%= @extensionDoc.selector %>)
       <% else: %>
-        <%= @doc.name %>
+        <% if @framework is 'react': %>
+          &lt;<%= @name %> /&gt;
+        <% else: %>
+          <%= @doc.name %>
+        <% end %>
       <% end %>
-    <% end %>
-  </h2>
+    </span>
+  </h3>
 
   <% if @doc.extensionOf: %>
   <p class="reference-extension-note">
@@ -48,16 +50,15 @@ actionbar: false
     <% end %>
   </section>
 
-  <ul class="reference-quick-navi">
-    <%- @partial('api-toc.html.eco', { doc: @doc }) %>
-  </ul>
-
   <% if @doc.tutorial: %>
   <section>
-    <h3 id="tutorial">
-      <% if @lang == "en": %>Tutorial<% else: %>実例<% end %>
-      <a href="#tutorial" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#tutorial" class="reference-loop-anchor">
+      <h4 id="tutorial">
+        <span>
+          <% if @lang == "en": %>Tutorial<% else: %>実例<% end %>
+        </span>
+      </h4>
+    </a>
 
     <iframe class="tutorial-embed" width="100%" height="568" src="<%- @getTutorialUrl "embed-compact", @doc.tutorial %>"></iframe>
 
@@ -71,10 +72,13 @@ actionbar: false
   <% else if @doc.examples and @doc.examples.length > 0: %>
 
   <section>
-    <h3 id="usage">
-      <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
-      <a href="#usage" class="reference-loop-anchor"></a>
-    </h3>
+  <a href="#usage" class="reference-loop-anchor">
+    <h4 id="usage">
+      <span>
+        <%= @translate '[en]Usage[/en][ja]使い方[/ja]' %>
+      </span>
+    </h4>
+  </a>
     <% for example in @doc.examples: %>
       <pre><code class="xml"><%= @mapKeywords example %></code></pre>
     <% end %>
@@ -89,10 +93,13 @@ actionbar: false
 
   <% if (@doc.guides and @doc.guides.length > 0) or (@doc.seealsos and @doc.seealsos.length > 0): %>
   <section>
-    <h3 id="seealso">
-      <% if @lang == "en": %>See also<% else: %>関連情報<% end %>
-      <a href="#seealso" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#seealso" class="reference-loop-anchor">
+      <h4 id="seealso">
+        <span>
+          <% if @lang == "en": %>See also<% else: %>関連情報<% end %>
+        </span>
+      </h4>
+    </a>
 
     <ul class="seealso">
       <% for guide in @doc.guides: %>
@@ -108,16 +115,20 @@ actionbar: false
   <!-- attributes -->
   <% if @ownedAttributes.length > 0: %>
   <section>
-    <h3 id="attributes">
-      <% if @lang == "en": %>Attributes<% else: %>属性<% end %>
-      <a href="#attributes" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#attributes" class="reference-loop-anchor">
+      <h4 id="attributes">
+        <span>
+          <% if @lang == "en": %>Attributes<% else: %>属性<% end %>
+        </span>
+      </h4>
+    </a>
+
     <table>
       <thead>
         <tr>
           <% if @lang == "en": %>
           <th>Name</th>
-          <th>Type Default Value</th>
+          <th>Type</th>
           <th>Description</th>
           <% else: %>
           <th>名前</th>
@@ -179,10 +190,14 @@ actionbar: false
   <!-- property -->
   <% if @doc.properties and @doc.properties.length > 0: %>
   <section>
-    <h3 id="properties">
-      <% if @lang == "en": %>Properties<% else: %>プロパティ概要<% end %>
-      <a href="#properties" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#properties" class="reference-loop-anchor">
+      <h4 id="properties">
+        <span>
+          <% if @lang == "en": %>Properties<% else: %>プロパティ概要<% end %>
+        </span>
+      </h4>
+    </a>
+
     <table>
       <thead>
         <tr>
@@ -227,16 +242,19 @@ actionbar: false
   <!-- react/vue props -->
   <% if @doc.props and Object.keys(@doc.props).length > 0: %>
   <section>
-    <h3 id="props">
-      <% if @lang == "en": %>Props<% else: %>Prop一覧<% end %>
-      <a href="#props" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#props" class="reference-loop-anchor">
+      <h4 id="props">
+        <span>
+          <% if @lang == "en": %>Props<% else: %>Prop一覧<% end %>
+        </span>
+      </h4>
+    </a>
     <table>
       <thead>
         <tr>
           <% if @lang == "en": %>
           <th>Name</th>
-          <th>Type Default Value</th>
+          <th>Type</th>
           <th>Description</th>
           <% else: %>
           <th>名前</th>
@@ -298,10 +316,13 @@ actionbar: false
   <% if @framework is 'react' and @original and @originalFile then @doc.modifiers = @originalFile.doc.modifiers %>
   <% if @doc.modifiers and @doc.modifiers.length > 0: %>
   <section>
-    <h3 id="modifiers">
-      <% if @lang == "en": %>Preset Modifiers<% else: %>プリセットのmodifier<% end %>
-      <a href="#modifiers" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#modifiers" class="reference-loop-anchor">
+      <h4 id="modifiers">
+        <span>
+          <% if @lang == "en": %>Preset Modifiers<% else: %>プリセットのmodifier<% end %>
+        </span>
+      </h4>
+    </a>
     <table>
       <thead>
         <tr>
@@ -340,13 +361,18 @@ actionbar: false
   <% end %>
   <!-- end modifiers -->
 
-  <!-- methods summary -->
-  <% if Object.keys(@ownedMethods).length > 0: %>
+  <!-- methods details -->
+  <% if @ownedMethods.length > 0: %>
   <section>
-    <h3 id="methods-summary">
-      <% if @lang == "en": %>Methods Summary<% else: %>メソッド概要<% end %>
-      <a href="#methods-summary" class="reference-loop-anchor"></a>
-    </h3>
+    <a href="#methods-summary" class="reference-loop-anchor">
+      <h4 id="methods-summary">
+        <span>
+          <% if @lang == "en": %>Methods<% else: %>メソッド<% end %>
+        </span>
+      </h4>
+    </a>
+
+    <!-- summary -->
     <table>
       <thead>
         <tr>
@@ -384,68 +410,15 @@ actionbar: false
         <% end %>
       </tbody>
     </table>
-  </section>
-  <% end %>
-  <!-- end methods summary -->
+    <!-- end summary -->
 
-  <!-- events summary -->
-  <% if @ownedEvents.length > 0: %>
-  <section>
-    <h3 id="events-summary">
-      <% if @lang == "en": %>Events Summary<% else: %>イベント概要<% end %>
-      <a href="#events-summary" class="reference-loop-anchor"></a>
-    </h3>
-    <table>
-      <thead>
-        <tr>
-          <% if @lang == "en": %>
-          <th>Name</th>
-          <th>Description</th>
-          <% else: %>
-          <th>名前</th>
-          <th>概要</th>
-          <% end %>
-        </tr>
-      </thead>
-      <tbody>
-        <% for event in @ownedEvents: %>
-          <tr>
-            <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
-            <td>
-              <% if @lang == "en": %>
-              <%- @markd @mapKeywords @translate event.description %>
-              <% else: %>
-              <% if @translate(event.description).length != 0: %>
-              <%- @markd @mapKeywords @translate event.description %>
-              <% else: %>
-              <span style="opacity: 0.6;">
-                <%- @markd @mapKeywords @translate(event.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
-              </span>
-              <% end %>
-              <% end %>
-              <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </section>
-  <% end %>
-  <!-- end events summary -->
-
-
-  <!-- methods details -->
-  <% if @ownedMethods.length > 0: %>
-  <section>
-    <h3 id="methods"><% if @lang == "en": %>Methods<% else: %>メソッド<% end %></h3>
     <% for key, method of @ownedMethods: %>
       <section class="method-detail">
-        <h4 id="method-<%= method.name %>">
-          <%= method.signature || method.name %><% if method.returns and method.returns.type : %><span class="value-type">: <%= method.returns.type.name || method.returns.type %></span><% end %>
-
-          <a href="#method-<%= method.name %>" class="reference-loop-anchor"></a>
-        </h4>
+        <a href="#method-<%= method.name %>" class="reference-loop-anchor">
+          <h5 id="method-<%= method.name %>">
+            <span><%= method.signature || method.name %><% if method.returns and method.returns.type : %><em class="value-type">: <%= method.returns.type.name || method.returns.type %></em><% end %></span>
+          </h5>
+        </a>
 
         <p>
           <% if @lang == "en": %>
@@ -470,7 +443,7 @@ actionbar: false
 
         <% if Object.keys(method.params).length > 0: %>
         <!-- method parameter -->
-        <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+        <h6><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h6>
 
         <table>
           <thead>
@@ -517,17 +490,62 @@ actionbar: false
   <% end %>
   <!-- end methods -->
 
-
   <!-- events -->
   <% if !(@extensionDoc and @extensionDoc.directive) and @ownedEvents.length > 0: %>
   <section>
-    <h3 id="events"><% if @lang == "en": %>Events<% else: %>イベント<% end %></h3>
+    <a href="#events-summary" class="reference-loop-anchor">
+      <h4 id="events-summary">
+        <span>
+          <% if @lang == "en": %>Events<% else: %>イベント<% end %>
+        </span>
+      </h4>
+    </a>
+
+    <!-- summary -->
+    <table>
+      <thead>
+        <tr>
+          <% if @lang == "en": %>
+          <th>Name</th>
+          <th>Description</th>
+          <% else: %>
+          <th>名前</th>
+          <th>概要</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for event in @ownedEvents: %>
+          <tr>
+            <td><a href="#event-<%= event.name %>"><%= event.name %></a></td>
+            <td>
+              <% if @lang == "en": %>
+              <%- @markd @mapKeywords @translate event.description %>
+              <% else: %>
+              <% if @translate(event.description).length != 0: %>
+              <%- @markd @mapKeywords @translate event.description %>
+              <% else: %>
+              <span style="opacity: 0.6;">
+                <%- @markd @mapKeywords @translate(event.description, "en") %>
+                <span style="color: red;">（翻訳中）</span>
+              </span>
+              <% end %>
+              <% end %>
+              <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <!-- end summary -->
+
     <% for event in @ownedEvents: %>
       <section class="event-detail">
-        <h4 id="event-<%= event.name %>">
-          <%= event.name %>
-          <a href="#event-<%= event.name %>" class="reference-loop-anchor"></a>
-        </h4>
+        <a href="#event-<%= event.name %>" class="reference-loop-anchor">
+          <h5 id="event-<%= event.name %>">
+            <span><%= event.name %></span>
+          </h5>
+        </a>
 
         <p>
           <% if @lang == "en": %>
@@ -546,7 +564,7 @@ actionbar: false
 
         <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
-        <h5><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h5>
+        <h6><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h6>
 
         <table>
           <thead>
@@ -595,7 +613,11 @@ actionbar: false
   <!-- inputs -->
     <% if @extensionDoc and @extensionDoc.directive and @doc.inputs and @doc.inputs.length > 0: %>
       <section>
-        <h3 id="input-detail"><% if @lang == "en": %>Inputs<% else: %>Inputs<% end %></h3>
+        <h4 id="input-detail">
+          <span>
+            <% if @lang == "en": %>Inputs<% else: %>Inputs<% end %>
+          </span>
+        </h4>
         <table>
           <thead>
             <tr>
@@ -641,7 +663,7 @@ actionbar: false
     <!-- outputs -->
     <% if @extensionDoc and @extensionDoc.directive and @doc.outputs and @doc.outputs.length > 0: %>
       <section>
-        <h3 id="output-detail"><% if @lang == "en": %>Outputs<% else: %>Outputs<% end %></h3>
+        <h4 id="output-detail"><% if @lang == "en": %>Outputs<% else: %>Outputs<% end %></h4>
         <table>
           <thead>
             <tr>

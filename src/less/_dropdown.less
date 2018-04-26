@@ -4,8 +4,7 @@
       z-index: 1;
       left: 50%;
       position: absolute;
-      top: 25px;
-      padding-top: 20px;
+      top: 75%;
       visibility: hidden;
       opacity: 0;
       transition: opacity 0.08s ease-in-out;
@@ -67,6 +66,12 @@
     }
   }
 
+  .header-small {
+    .dropdown-container {
+      top: 100%;
+    }
+  }
+
   .recent-activities {
     padding: 14px 0 14px 14px;
     width: 450px;
@@ -82,12 +87,11 @@
     &-menu-item {
       a& {
         position: relative;
-        top: -1px;
-  
+
         border: 1px #fff solid;
         border-radius: 8px;
         padding: 4px 6px;
-  
+
         font-size: 12px;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -110,7 +114,7 @@
         border-radius: 999px;
         padding: 0 6px;
         height: 17px;
-        
+
         background-color: white;
         box-shadow: 1px 1px 1px 0px rgba(0,0,0,0.15);
 
@@ -126,34 +130,34 @@
       padding-bottom: 18px;
 
       text-align: left;
-      
+
       font-family: "Helvetica Neue", Arial, sans-serif;
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 1.5pt;
-      
+
       .lang-ja & {
         font-family: "Hiragino Kaku Gothic ProN","メイリオ", sans-serif;
         font-size: 13px;
       }
     }
-    
+
     &-items {
       max-height: 50vh;
       overflow-x: hidden;
       overflow-y: auto;
     }
-    
+
     &-items-placeholder {
       padding: 30px 0 20px 0;
 
       text-align: center;
-      
+
       font-size: 12px;
       font-style: italic;
       color: #aaa;
     }
-    
+
     &-item {
       display: flex;
       flex-flow: row nowrap;
@@ -163,15 +167,15 @@
       padding: 10px;
 
       font-family: "Helvetica Neue", Arial, sans-serif;
-      
+
       &:first-child {
         border-top: none;
       }
-      
+
       &-date {
         padding-top: 10px;
         width: 100px;
-        
+
         font-size: 12px;
 
         &-anchor:hover {
@@ -187,10 +191,10 @@
         &-title {
           padding-top: 8px;
           margin-bottom: 16px;
-          
+
           color: #444;
           font-weight: bold;
-          
+
           a {
             color: #444;
           }
@@ -211,7 +215,7 @@
             opacity: 0.6;
 
             vertical-align: middle;
-            
+
             font-size: 11px;
             font-family: 'Helvetica Neue', 'Arial', sans-serif;
             color: red;
@@ -244,33 +248,33 @@
           .card {
             border: 1px solid #ddd;
             border-radius: 0px;
-            
+
             &-image {
               padding: 0;
             }
-            
+
             &-content {
               padding: 8px 16px;
-              
+
               color: #111;
               line-height: 140%;
 
               &-title {
                 margin-bottom: 4px;
-                
+
                 font-weight: 700;
               }
               &-text {
                 margin-bottom: 6px;
               }
-              
+
               &-source {
                 color: #999;
               }
             }
           }
         }
-      }          
+      }
     }
   }
 }
