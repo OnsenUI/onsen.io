@@ -1,14 +1,14 @@
 (function () {
   function getParams() {
     var mainId = $('.container-content h3:first-of-type')[0].id;
-    var mainLink =  $('.content-info a[href$="#' + mainId + '"].toc-1-link');
-
-    // Handle the scenario where there are no headings, such as the CSS components page
-    if(!mainLink.length) {
-      mainLink = $('.content-info .toc-1-item:first-child .toc-link');
-    }
+    var mainLink = $('.content-info a[href$="#' + mainId + '"].toc-1-link');
 
     var links = mainLink.parent('li').find('a');
+
+    if(!links.length) {
+      links = $('.content-info .toc-1-link');
+    }
+
     var linkMap = {};
     var sections = [];
 

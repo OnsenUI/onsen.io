@@ -260,15 +260,16 @@ var sideMenuHighlight = (function () {
       queueUpdate();
     }, true);
 
-    // move view to current item
-    var mainOffset = mainLink.offset();
-    var menu = $('.content-info');
-    if (mainOffset.top > menu.height() / 2) {
-      setTimeout(function () {
-        menu.scrollTop(mainOffset.top - menu.offset().top - (menu.height() / 2));
-      }, 0);
+    if(mainLink.length) {
+      // move view to current item
+      var mainOffset = mainLink.offset();
+      var menu = $('.content-info');
+      if (mainOffset.top > menu.height() / 2) {
+        setTimeout(function () {
+          menu.scrollTop(mainOffset.top - menu.offset().top - (menu.height() / 2));
+        }, 0);
+      }
     }
-
 
     ////////////////////////////////////////////////////////////////////////////
     // HELPER FUNCTIONS
@@ -312,6 +313,8 @@ var sideMenuHighlight = (function () {
         };
       };
     })();
+
+    queueUpdate();
   };
 
 })();
