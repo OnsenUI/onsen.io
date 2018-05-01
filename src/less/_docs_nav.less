@@ -1,34 +1,13 @@
 .docs-nav {
-  background: transparent;
-  padding: 0 0 17px 0;
+  position: absolute;
+  right: 0;
 
   &-inner {
-    max-width: 1140px;
-    padding: 0 20px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-
-	&-right {
-		align-self: flex-end;
-		margin: 14px 0 0 20px;
-		@media @smallscreen {
-		  margin: 14px 0 0;
-		}
-	}
-
-  &-title {
-    margin: 35px 0 0 0;
-
-    > h1 {
-      margin: 0;
-      padding: 0;
-      color: #fff;
-      font-size: 28px;
-    }
+    justify-content: flex-end;
   }
 
   &-framework {
@@ -39,15 +18,6 @@
     margin: 5px 0 0 0;
     cursor: pointer;
     flex-wrap: wrap;
-
-    &-label {
-      color:  #ffffff;
-      opacity: 0.6;
-      font-size: 16px;
-      font-weight: 300;
-      text-align: left;
-      margin: 0 8px 0 0;
-    }
 
     &-icon {
       width: 26px;
@@ -68,13 +38,29 @@
     }
 
     &-select {
+      position: relative;
       border-radius: 2px;
       background: linear-gradient(180deg, #bf271f 0%, #b3241d 100%);
       box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
-      width: 220px;
+      width: @framework-dropdown-width;
       height: 34px;
       display: flex;
       align-items: center;
+    }
+
+    &-pre {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: 22px;
+      font-weight: 700;
+    }
+  }
+
+  &-centered {
+    left: 0;
+
+    .docs-nav-inner {
+      justify-content: center;
     }
   }
 
@@ -94,7 +80,7 @@
 
   &-mask {
 		display: none;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -105,6 +91,9 @@
   }
 
   &-dropdown {
+    position: absolute;
+    top: 100%;
+    width: 100%;
     z-index: 2;
     opacity: 0;
     pointer-events: none;
@@ -115,10 +104,8 @@
     box-sizing: border-box;
     background-color: #fff;
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-    width: 238px;
-    position: absolute;
 		padding: 10px 0;
-    margin: 50px 0 0 0;
+    margin: 0;
 
     &-item {
       height: 32px;
@@ -132,7 +119,7 @@
 				align-items: center;
 				height: 100%;
 				width: 100%;
-				color:  #999;
+				color: #999;
 				font-size: 16px;
 				text-decoration: none;
 
@@ -140,16 +127,15 @@
 					display: inline-block;
 					width: 26px;
 					height: 20px;
-					margin: 0 5px 0 0;
+					margin: 0 8px 0 5px;
 				}
 
 				&:before {
 					visibility: hidden;
 					content: '';
-					background-image: url(/images/common/icn_check_circle.svg);
-					width: 8px;
-					height: 8px;
-					margin: 0 10px;
+					width: 2px;
+					height: 100%;
+          background-color: @onsen-red;
 				}
       }
 

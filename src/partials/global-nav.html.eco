@@ -2,7 +2,7 @@
   <div class="global-nav-inner">
     <div class="global-nav-logo">
       <a href="/">
-        <img src="/images/header/logo_onsen_small.png"></img>
+        <img src="/images/logo/svg/onsenui_banner_white.svg"></img>
       </a>
     </div>
 
@@ -13,7 +13,10 @@
         <input type="text" class="global-nav-search-input" id="docsearch" placeholder="Search the docs...">
       </li>
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isGuide or @page == 'guide') %>">
-        <a href="/v2/guide"><%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%></a>
+        <a href="/v2/guide">
+          <%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%>
+          <span class="global-nav-menu-arrow"></span>
+        </a>
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">
@@ -42,19 +45,17 @@
             </li>
           </ul>
         </div>
-        <span class="global-nav-menu-arrow"></span>
-      </li>
-
-      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if (@page == 'theme-roller') %>">
-        <a href="/theme-roller/"><%=@translate("[en]Components[/en][ja]コンポーネント[/ja]")%></a>
       </li>
 
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isAPI or @reference) %>">
-        <a href="#"><%=@translate("[en]API[/en][ja]API[/ja]")%></a>
+        <a href="#">
+          <%=@translate("[en]API[/en][ja]API[/ja]")%>
+          <span class="global-nav-menu-arrow"></span>
+        </a>
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">
-              <a href="/v2/api/css.html"><%=@translate("[en]CSS Component[/en][ja]CSSコンポーネント[/ja]")%></a>
+              <a href="/v2/api/css.html"><%=@translate("[en]CSS Components[/en][ja]CSSコンポーネント[/ja]")%></a>
             </li>
             <li class="dropdown-item-1">
               <a href="/v2/api/js">JavaScript (Web Components)</a>
@@ -76,10 +77,17 @@
             </li>
           </ul>
         </div>
-        <span class="global-nav-menu-arrow"></span>
       </li>
+
+      <li class="global-nav-menu-item <%= 'global-nav-menu-item-active' if (@page == 'theme-roller') %>">
+        <a href="/theme-roller/"><%=@translate("[en]Components[/en][ja]コンポーネント[/ja]")%></a>
+      </li>
+
       <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if @category == 'resources' %>">
-        <a href="#"><%=@translate("[en]Resources[/en][ja]リソース[/ja]")%></a>
+        <a href="#">
+          <%=@translate("[en]Resources[/en][ja]リソース[/ja]")%>
+          <span class="global-nav-menu-arrow"></span>
+        </a>
         <div class="dropdown-container">
           <ul class="dropdown-content">
             <li class="dropdown-item-1">
@@ -110,10 +118,9 @@
             </li>
           </ul>
         </div>
-        <span class="global-nav-menu-arrow"></span>
       </li>
       <template id="recent-activities-template">
-        <li class="global-nav-menu-item dropdown" @mouseover="updateLastReadDate">
+        <li class="global-nav-menu-item dropdown global-nav-news" @mouseover="updateLastReadDate">
           <a href="#" class="recent-activities-menu-item">
             <% if @lang == "en": %>
             NEWS
@@ -158,7 +165,7 @@
           </div>
         </li>
       </template>
-      <li class="global-nav-menu-item dropdown" id="recent-activities-placeholder"><!-- This element will be replaced by Vue -->
+      <li class="global-nav-menu-item dropdown global-nav-news" id="recent-activities-placeholder"><!-- This element will be replaced by Vue -->
         <a href="#" class="recent-activities-menu-item">
           <% if @lang == "en": %>
           NEWS

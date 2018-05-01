@@ -14,45 +14,6 @@ $(function() {
   }
 });
 
-// sticky menu
-$(function() {
-  var sticked = $('.content-info');
-
-  if (sticked.length === 0) {
-    return;
-  }
-
-  var elementTop = sticked.offset().top;
-  var headerOffset = $('.header-fixed').height() || 0;
-  var footerHeight = $('.footer-container').height();
-
-  $(window).scroll(update);
-
-  function update() {
-    var scrollTop = $(window).scrollTop(),
-      windowHeight = $(window).height(),
-      documentHeight = $(window.document).height()
-      offset = 10;
-
-    if (scrollTop > elementTop - headerOffset) {
-      if (scrollTop > documentHeight - windowHeight - footerHeight - offset) {
-        sticked.removeClass('content-info-fixed');
-        sticked.addClass('content-info-bottom');
-        sticked.css({
-          top: (documentHeight - windowHeight - footerHeight - offset) + 'px'
-        });
-      } else {
-        sticked.removeClass('content-info-bottom');
-        sticked.addClass('content-info-fixed');
-        sticked.attr('style', '');
-      }
-    } else {
-      sticked.removeClass('content-info-bottom content-info-fixed');
-      sticked.attr('style', '');
-    }
-  }
-});
-
 // tracking
 $(function() {
   $('[data-track-event]').click(function() {
@@ -299,15 +260,16 @@ var sideMenuHighlight = (function () {
       queueUpdate();
     }, true);
 
-    // move view to current item
-    var mainOffset = mainLink.offset();
-    var menu = $('.content-info');
-    if (mainOffset.top > menu.height() / 2) {
-      setTimeout(function () {
-        menu.scrollTop(mainOffset.top - menu.offset().top - (menu.height() / 2));
-      }, 0);
+    if(mainLink.length) {
+      // move view to current item
+      var mainOffset = mainLink.offset();
+      var menu = $('.content-info');
+      if (mainOffset.top > menu.height() / 2) {
+        setTimeout(function () {
+          menu.scrollTop(mainOffset.top - menu.offset().top - (menu.height() / 2));
+        }, 0);
+      }
     }
-
 
     ////////////////////////////////////////////////////////////////////////////
     // HELPER FUNCTIONS
@@ -319,10 +281,10 @@ var sideMenuHighlight = (function () {
       return function () {
         if (!queued) {
           queued = true;
-          setTimeout(function() {
+          window.requestAnimationFrame(function() {
             update();
             queued = false;
-          }, 80);
+          });
         }
       };
     })();
@@ -351,6 +313,8 @@ var sideMenuHighlight = (function () {
         };
       };
     })();
+
+    queueUpdate();
   };
 
 })();

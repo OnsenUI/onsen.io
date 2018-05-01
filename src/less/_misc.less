@@ -86,12 +86,16 @@
   margin: 0 auto;
 
   &-content {
-    min-height: 100vh;
-    padding: 30px 0 500px 0;
+    position: relative;
+    padding: 30px 0;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+
+    .mobile-query({
+      padding: 15px 0;
+    });
 
     .header-link h3:first-of-type {
       margin-top: 0;
@@ -106,7 +110,6 @@
     }
 
     &.headers-are-anchors { // Only Guide
-
       h1,h2,h3,h4,h5,h6 {
         &:hover:after { // Hover headers
           color: #AAA;
@@ -117,8 +120,8 @@
         &:before { // Magic "margin top" for anchor
           content: '';
           display: block;
-          margin-top: -120px;
-          height: 120px;
+          margin-top: -(@header-height-small + 10px);
+          height: (@header-height-small + 10px);
           visibility: hidden;
         }
 
@@ -130,6 +133,38 @@
           font-family: inherit;
         }
       }
+    }
+
+    h3, h4,
+    .reference-container h5 { // only underline small headings on API pages - it looks bad on guide
+      > span {
+        position: relative;
+
+        &:after {
+          pointer-events: none;
+          display: block;
+          position: absolute;
+          bottom: -8px;
+          left: -10px;
+          right: -10px;
+          content: '';
+        }
+      }
+    }
+
+    h3 > span:after {
+      height: 3px;
+      background-color: @onsen-red;
+    }
+
+    h4 > span:after {
+      height: 2px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .reference-container h5 > span:after {
+      height: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 
@@ -156,11 +191,13 @@
 
   &-title {
     color: #333;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     text-decoration: none;
-    text-transform: uppercase;
-    margin: 0 0 5px 0;
+    margin: 0 0 5px;
+    padding: 0 20px 5px;
+    list-style: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   &-title + & {
@@ -170,10 +207,6 @@
 
   &-title-no-toggle + & {
     margin-top: 0px;
-  }
-
-  &-1 {
-    padding-bottom: 500px;
   }
 
   &-2 {
@@ -187,16 +220,15 @@
   }
 
   &-item {
-    width: @aside-width;
+    width: 100%;
     box-sizing: border-box;
     list-style: none;
     margin: 0;
     position: relative;
 
     &:hover {
-
       & > a {
-        background-color: #f8f8f8;
+        background-color: rgba(0, 0, 0, 0.05);
         text-decoration: none;
       }
     }
@@ -219,19 +251,15 @@
     }
   }
 
-  &-1-item {
-
-  }
-
   &-2-item {
     margin-top: 0px;
     margin-bottom: 0px;
   }
 
   &-link {
-    padding: 6px 0;
+    padding: 8px 20px;
     text-decoration: none;
-    color:  #777;
+    color: #777;
     font-size: 14px;
     font-weight: 400;
     text-decoration: none;
@@ -247,37 +275,10 @@
     }
   }
 
-  &-1-link {
-    padding-left: 16px;
-    padding-right: 12px;
-  }
-
   &-2-link {
     display: inline-block;
-    padding: 3px 6px 3px 28px;
+    padding: 4px 8px 4px 28px;
     font-size: 12px;
-    color: #222;
-
-    // &:link, &:hover, &:visited {
-    //   color: @light-text-color;
-    //   text-decoration: none;
-    // }
-
-    // &:hover {
-    //   text-decoration: underline;
-    // }
-
-    // &.current {
-    //   &:link, &:hover, &:visited {
-    //     color: @link-color;
-    //     text-decoration: underline;
-    //     font-weight: bold;
-    //   }
-
-    //   &:hover {
-    //     text-decoration: underline;
-    //   }
-    // }
   }
 
   li.toc-title:not(:first-of-type) {
@@ -285,44 +286,38 @@
   }
 }
 
+// For some reason, LESS is not picking up @header-height-small from main.less, even
+// though all other variables from there work. Definitely a bug in LESS, but no idea
+// what's causing it. So, just define it again here.
+@header-height-small: 48px;
+
 .content-info {
-  position: absolute;
+  position: fixed;
   width: @aside-width;
-  height: 100%;
-  overflow: auto;
+  left: 0;
+  top: @header-height-small;
+  bottom: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 100;
+  padding: 15px 0;
   box-sizing: border-box;
-  padding-top: 40px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
   font-weight: 400;
+  background-color: #fbfbfb;
+  box-shadow: 0 4px 4px 0 rgba(0,0,0,0.15);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  &-fixed {
-    top: 0;
-    position: fixed;
-    bottom: 0px;
-    height: 100%;
-  }
-
-  &-bottom {
-    position: absolute;
-    bottom: 0px;
-    height: 100%;
-  }
 }
 
-.header-fixed + .container .content-info-fixed {
-  top: @header-height;
-  padding-bottom: @header-height;
+.header-fixed.header-small + .container .content-info-fixed {
+  top: @header-height-small;
+  padding-bottom: @header-height-small;
 }
 
 .content-info + .container-content {
   max-width: 100%;
-  margin-left: @aside-width + 40px;
+  margin-left: @aside-width;
 
   > h2:first-child {
     text-align: left;
@@ -684,23 +679,6 @@
   position: relative;
   border-bottom-right-radius: 2px;
   border-top-right-radius: 2px;
-
-  // &:before {
-  //   position: absolute;
-  //   top: 14px;
-  //   left: -12px;
-  //   background-color: #f66;
-  //   color: #fff;
-  //   content: "!";
-  //   width: 20px;
-  //   height: 20px;
-  //   border-radius: 100%;
-  //   text-align: center;
-  //   line-height: 20px;
-  //   font-weight: bold;
-  //   font-family: 'Dosis', 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
-  //   font-size: 14px;
-  // }
 }
 
 .improve-doc-button {
@@ -718,7 +696,7 @@
     position: relative;
     max-width: 800px;
     padding: 10px 20px;
-    margin: 10px auto 0;
+    margin: 0 auto 20px;
     text-align: center;
     background-color: #f6f6f6;
     border-radius: 5px;
