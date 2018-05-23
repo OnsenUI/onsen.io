@@ -101,7 +101,6 @@
     <% end %>
 
     <div class="container-content<%= ' headers-are-anchors' if @isGuide || @page == 'guide' %>">
-      <%- @partial('survey-prompt.html.eco', { src: 'docs' }) %>
       <% if @isGuide || @page == 'guide': %>
         <!-- <%- @partial('header-title.html.eco', {name: 'Onsen UI Guide - ' + @title}) %> -->
       <% else: %>
