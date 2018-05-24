@@ -118,6 +118,7 @@
       <%- @partial('need_help.html.eco') if @needHelp %>
     </div>
   </div>
+  <%- @partial('footer.html.eco', {hideLinks: true}) %>
 
   <%- @partial('popup.html.eco') %>
 
