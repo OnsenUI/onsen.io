@@ -9,10 +9,10 @@ description: 'Advanced progressive web apps with Onsen UI'
 <%- @markdown => %>
 
 ### Advanced PWA Usage
-The examples in this guide follow on from [PWA with Onsen UI](howto.html). If you haven't already, take a look at that guide to get to grips with the basics of PWAs.
+The examples in this guide follow on from [PWA with Onsen UI](intro.html). If you haven't already, take a look at that guide to get to grips with the basics of PWAs.
 
 #### Deploying updates
-In our [basic PWA guide](howto.html), we set up the Developer Tools to update the ServiceWorker on every reload. But in the real world, we need to make sure that we can update our app when we need to. Let's take a look at what happens right now when we try to update our example PWA.
+In our [basic PWA guide](intro.html), we set up the Developer Tools to update the ServiceWorker on every reload. But in the real world, we need to make sure that we can update our app when we need to. Let's take a look at what happens right now when we try to update our example PWA.
 
 First, ensure _Update on reload_ is unticked in _Application > Service Workers_. In `index.html`, change the button's text to "Tap Me", and refresh the page. It still says "Click Me" - why? The file is cached in the ServiceWorker, and so the browser never tries to fetch the latest version, even if you are online. Notice that when you reloaded, there was no `install` in the _Console_, unlike previously.
 
