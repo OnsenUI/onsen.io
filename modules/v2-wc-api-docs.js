@@ -64,7 +64,7 @@ function generateAPIDocument(metalsmith, docPath, extension) {
         if (['ons-if', 'ons-template', 'ons-gesture-detector'].indexOf(doc.name) !== -1) {
           file.extension = 'not vue';
         } else {
-          file.name = doc.name = doc.name.replace(/^ons-/, 'v-ons-').replace(/^(ons)(\.|$)/gm, '$$$&');
+          file.title = file.name = doc.name = doc.name.replace(/^ons-/, 'v-ons-').replace(/^(ons)(\.|$)/gm, '$$$&');
 
           doc.props = file.ownedAttributes
             .reduce(function(result, attr) {
