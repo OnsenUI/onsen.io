@@ -127,10 +127,10 @@
             <% else if @lang == "ja": %>
             更新履歴
             <% end %>
+            <div v-show="countUnreadItems() > 0" class="recent-activities-menu-item-notification">
+              {{countUnreadItems()}}
+            </div>
           </a>
-          <div v-show="countUnreadItems() > 0" class="recent-activities-menu-item-notification">
-            {{countUnreadItems()}}
-          </div>
           <div class="dropdown-container">
             <div class="dropdown-content recent-activities">
               <div class="recent-activities-header">
