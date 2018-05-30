@@ -35,7 +35,9 @@
         <% end %>
       </div>
 
-      <a class="github-button star" href="https://github.com/OnsenUI/OnsenUI" data-icon="octicon-star" data-show-count="true" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+      <div class="github-button-wrapper">
+        <a class="github-button star" href="https://github.com/OnsenUI/OnsenUI" data-icon="octicon-star" data-show-count="true" aria-label="Star OnsenUI/OnsenUI on GitHub">Star</a>
+      </div>
 
       <div class="keyvisual-libraries">
         <% if @lang == "en": %>

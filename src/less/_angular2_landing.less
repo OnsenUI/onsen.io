@@ -152,6 +152,8 @@
       font-size: 31px;
       line-height: 36px;
       color: #000;
+
+      @media @smallscreen { font-size: 22px; }
     }
 
     hr {
@@ -162,12 +164,19 @@
       color: #666666;
       font-size: 18px;
       margin: 16px 0;
+
+      @media @smallscreen { font-size: 14px; }
     }
 
     &-get-started {
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 50px 0 80px;
+      @media @smallscreen {
+        flex-direction: column;
+        margin: 10px 0 20px;
+      }
 
       &-button {
         font-family: @en-header-font-family;
@@ -175,13 +184,19 @@
         display: block;
         width: 409px;
         max-width: 90%;
-        margin: 80px 10px;
+        margin: 0 10px;
+        padding: 10px;
         background-color: #ff4d35;
-        padding: 14px 0;
+        padding: 14px;
         color: #fefefe;
         text-decoration: none;
         font-size: 20px;
         line-height: 22px;
+        border-radius: 3px;
+
+        @media @smallscreen {
+          margin: 10px 0;
+        }
       }
     }
   }
