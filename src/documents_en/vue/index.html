@@ -20,13 +20,19 @@ description: 'Easily build high-performance cordova hybrid mobile apps and PWA u
     </div>
     <img class="landing-header-keyvisual" src="/images/landing/keyvisual_vue.gif">
 
-    <div style="display: flex; justify-content: center;">
-      <a href="https://onsenui.github.io/vue-onsenui-kitchensink/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-try-kitchensink-btn"}' target="_blank" class="landing-header-get-started" style="margin: 0 10px">
+    <div class="landing-header-buttons">
+      <a href="https://onsenui.github.io/vue-onsenui-kitchensink/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-try-kitchensink-btn"}' target="_blank" class="landing-header-get-started landing-header-kitchensink-desktop">
         <div class="landing-header-get-started-title">
           Try Kitchensink
         </div>
       </a>
-      <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-get-started-btn"}' class="landing-header-get-started" style="margin: 0 10px">
+      <a href="https://onsenui.github.io/vue-onsenui-kitchensink/main.html" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-try-kitchensink-btn-mobile"}'
+        target="_blank" class="landing-header-get-started landing-header-kitchensink-mobile">
+        <div class="landing-header-get-started-title">
+          Try Kitchensink
+        </div>
+      </a>
+      <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-get-started-btn"}' class="landing-header-get-started">
         <div class="landing-header-get-started-title">
           Get Started
         </div>
@@ -162,8 +168,8 @@ export default {
       </div>
     </div>
   </div>
-  <div class="landing-header">
-    <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-lets-get-started-btn"}' class="landing-header-get-started">
+  <div class="landing-header-buttons" style="margin-bottom: 40px">
+    <a href="/v2/guide/vue/" track-click='{"category": "vue-landing-page", "action": "click", "label": "vue-lets-get-started-btn"}' class="landing-header-get-started ">
       <div class="landing-header-get-started-title">
         Let's Get Started
       </div>

@@ -73,6 +73,7 @@
   #features {
     max-width: @localWidth + 60px;
     margin: 30px auto 0;
+    @media @smallscreen { margin-top: 0; }
 
     h2, h3, h4 {
       margin: 0;
@@ -156,7 +157,6 @@
       &:nth-child(odd) {
         flex-wrap: wrap-reverse;
       }
-
     }
 
     .frameworks {
@@ -327,6 +327,13 @@
           position: absolute;
           left: -36px;
           bottom: 30px;
+
+          @media @mobilescreen {
+            width: 80px;
+            height: 80px;
+            left: -26px;
+            bottom: 10px;
+          }
         }
       }
 
@@ -405,6 +412,10 @@
       position: absolute;
       top: 0;
       left: -44px;
+    }
+
+    @media @mobilescreen {
+      font-size: 1em;
     }
   }
 
