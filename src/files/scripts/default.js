@@ -31,12 +31,16 @@ $(function() {
     e.preventDefault();
     var data = {email: $('input[name=email]', this).val()};
 
+    var $submitButton = $('.newsletter-signup form [type=submit]');
+    $submitButton.attr('disabled', 'disabled');
+
     $.post('https://monaca.mobi/ja/api/email/e458bcbcc4', data, function(data) {
       if (JSON.parse(data).status === 'success') {
         $('.newsletter-signup form').hide();
         $('.newsletter-signup-thankyou').show();
       } else {
         alert('Something wrong with the request. Sorry.');
+        $submitButton.removeAttr('disabled');
       }
     });
   });

@@ -424,87 +424,71 @@
   }
 });
 
-.pop {
-  &-default {
-    background-color: white;
-    border-radius: 3px;
-    border-style: solid;
-    box-shadow: 15px 15px 10px rgba(0,0,0,.3);
-    position: absolute;
-    top: 50%;
-    transition: top 1s ease, visibility 1s ease;
-    z-index: 1001;
-    padding: 18px 10px 36px;
+.prompt {
+  position: fixed;
+  z-index: 20000;
+  padding: 18px 10px 36px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,.2);
 
-    p {
-      margin: auto;
-    }
-
-    @media @mobilescreen {
-      width: 300px;
-
-      .input-email-popup-newsletter {
-        width: 200px !important;
-      }
-    }
-
-    width: 500px;
+  &-bottom {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    transition: transform .75s ease, opacity .75s ease;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
   }
 
   &-hidden {
-    top:110%;
-    visibility: hidden;
-  }
-
-  &-email {
-    @media @mobilescreen {
-      width: 200px;
-    }
-    width: 300px;
-  }
-
-  &-centered {
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &-middle {
-    white-space: nowrap;
-  }
-
-  &-container {
-    background: rgba(0,0,0,.3);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    overflow: hidden;
-    position: fixed;
-    z-index: 1000;
-    transition: all 1s linear;
-
-    &-hidden {
+    &.prompt-bottom {
+      transform: translate(-50%, 100%);
       opacity: 0;
-      visibility: hidden;
-    }
-    &-visible {
-      opacity: 1;
-      visibility: visible;
     }
   }
+
   &-button-close {
     color: #F7A397;
-    font-size: 30px;
+    font-size: 24px;
     position: absolute;
-    right: 7px;
-    top: 3px;
+    right: 10px;
+    top: 7px;
+    cursor: pointer;
 
     &:hover {
       color: #FF4D35;
     }
   }
-  &-popup-google-title {
-    font-size: 1px;
+
+  h2 {
+    margin: 0;
+  }
+
+  input {
+    font-size: 100%;
+  }
+
+  input[type=email] {
+    width: 50%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+  }
+
+  input[type=submit] {
+    -webkit-appearance: none;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #fafafa;
+    border: 1px solid #eee;
+
+    &[disabled] {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: normal;
+    }
   }
 }
 
