@@ -72,14 +72,14 @@ Finally, load `onsenui.css` and `onsen-css-components.css` in `node_modules/onse
 
 **Using Angular CLI**
 
-Append the following two lines in `.angular-cli.json`. Check out [the officlal Angular CLI guide](https://github.com/angular/angular-cli/wiki/stories-global-styles) for more details.
+Append the following two lines in `angular.json` (`.angular-cli.json` for Angular 2-5). Check out [the official Angular CLI guide](https://github.com/angular/angular-cli/wiki/stories-global-styles) for more details.
 
-<!--in .angular-cli.json-->
+<!--in angular.json-->
 ```json
 "styles": [
-  "../node_modules/onsenui/css/onsenui.css",
-  "../node_modules/onsenui/css/onsen-css-components.css",
-  "styles.css"
+  "node_modules/onsenui/css/onsenui.css",
+  "node_modules/onsenui/css/onsen-css-components.css",
+  "src/styles.css"
 ],
 ```
 
@@ -89,8 +89,8 @@ Modify the following two lines appropriately and append them into the global sty
 
 <!--in styles.css, app.css, etc.-->
 ```css
-@import '../node_modules/onsenui/css/onsenui.css';
-@import '../node_modules/onsenui/css/onsen-css-components.css';
+@import 'node_modules/onsenui/css/onsenui.css';
+@import 'node_modules/onsenui/css/onsen-css-components.css';
 ```
 
 ##### Ready to go!
