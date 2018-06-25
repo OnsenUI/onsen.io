@@ -1,0 +1,59 @@
+version: 2
+jobs:
+  build-staging:
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - checkout
+      - run: |
+          git submodule sync
+          git submodule update --init --recursive
+          git submodule foreach git fetch --tags
+          cd dist/v1/OnsenUI; git fetch --tags; git checkout `git tag | grep "^1." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 1.x
+          cd dist/v2/OnsenUI; git fetch --tags; git checkout `git tag | grep -v "-" | grep "^2\." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 2.x
+          cd dist/playground; git fetch origin; git checkout gh-pages; git pull; cd ../..;
+          cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
+          curl -o- -L https://yarnpkg.com/install.sh | bash
+          npm install
+          cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build && cd ../../../..
+          cd dist/v2/OnsenUI && yarn && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs && cd ../../..
+          AWS_BUCKET=${AWS_BUCKET_EN} ./node_modules/.bin/gulp deploy --lang=en
+          AWS_BUCKET=${AWS_BUCKET_JA} ./node_modules/.bin/gulp deploy --lang=ja
+
+  build-production:
+    docker:
+      - image: circleci/node:8.11.3
+    steps:
+      - checkout
+      - run: |
+          git submodule sync
+          git submodule update --init --recursive
+          git submodule foreach git fetch --tags
+          cd dist/v1/OnsenUI; git fetch --tags; git checkout `git tag | grep "^1." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 1.x
+          cd dist/v2/OnsenUI; git fetch --tags; git checkout `git tag | grep -v "-" | grep "^2\." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 2.x
+          cd dist/playground; git fetch origin; git checkout gh-pages; git pull; cd ../..;
+          cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
+          curl -o- -L https://yarnpkg.com/install.sh | bash
+          npm install
+          cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build && cd ../../../..
+          cd dist/v2/OnsenUI && yarn && ./node_modules/.bin/gulp build && ./node_modules/.bin/gulp build-docs && cd ../../..
+          AWS_BUCKET=${AWS_BUCKET_EN_PROD} ./node_modules/.bin/gulp deploy --lang=en --production
+          AWS_BUCKET=${AWS_BUCKET_JA_PROD} ./node_modules/.bin/gulp deploy --lang=ja --production
+          wget https://api.keycdn.com/zones/purge/38820.json --user="${KEY_CDN_API_KEY}" --password='' -v
+          wget https://api.keycdn.com/zones/purge/38819.json --user="${KEY_CDN_API_KEY}" --password='' -v
+
+workflows:
+  version: 2
+  publish:
+    jobs:
+      - build-staging:
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+      - build-production:
+          filters:
+            branches:
+              only:
+                - production
