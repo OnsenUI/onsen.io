@@ -1,4 +1,4 @@
-const ancss = require('ancss');
+const ancss = require('@onsenui/ancss');
 const fs = require('fs');
 
 module.exports = function() {
