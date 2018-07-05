@@ -33,6 +33,14 @@
           </div>
         </a>
         <% end %>
+
+        <a href="/demo" class="keyvisual-demo-button" target="_blank">
+          <% if @lang == "en": %>
+          Demo
+          <% else if @lang == "ja": %>
+          デモ
+          <% end %>
+        </a>
       </div>
 
       <div class="github-button-wrapper">
@@ -78,6 +86,14 @@
           <div id="keyvisual_frame_img_android" class="keyvisual-image-frame keyvisual-image-frame-android"></div>
           <iframe id="keyvisual_frame_content_android" marginheight="100px" class="keyvisual-image-content-android lazy-hidden" scrolling="no" pending-src="https://onsenui.github.io/vue-onsenui-kitchensink/main.html?platform=android"></iframe>
         </div>
+
+        <p class="keyvisual-open-prompt">
+          <% if @lang == "en": %>
+          Try it on your phone at
+          <% else if @lang == "ja": %>
+          スマホのリンク：
+          <% end %>
+          <a href="/demo" target="_blank">onsen.io/demo</a></p>
       </div>
     </div>
   </div>
