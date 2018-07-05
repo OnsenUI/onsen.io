@@ -1,5 +1,5 @@
 .keyvisual {
-  height: 750px;
+  height: 770px;
   background-position: bottom center;
   background-repeat: no-repeat;
   margin: 0;
@@ -75,10 +75,22 @@
       &-android {
         width: 317px;
         height: 570px;
-        margin-top: 79px;
-        margin-left: 27px;
+        margin: 79px 27px 84px 27px;
         background: #fff;
       }
+    }
+  }
+
+  &-open-prompt {
+    width: 372px;
+    margin: 0;
+    font-size: 85%;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+
+    a {
+      color: #fff;
+      font-weight: 700;
     }
   }
 
@@ -146,7 +158,8 @@
     }
   }
 
-  &-download {
+  &-download,
+  &-demo-button {
     display: block;
     width: 220px;
     height: 60px;
@@ -180,6 +193,11 @@
       text-decoration: none;
       cursor: pointer;
     }
+  }
+
+  &-demo-button {
+    display: none; // only displays on mobile
+    margin: 10px 0;
   }
 
   &-main-btn-container {
@@ -293,7 +311,6 @@
 
 @media (max-width: 1170px) {
   .keyvisual {
-
     &-right {
       display: none;
     }
@@ -327,14 +344,23 @@
       width: 100%;
     }
 
+    &-main-btn-container {
+      margin: 10px 0 30px;
+    }
+
     &-download {
       display: none;
     }
 
-    &-getstarted {
-      margin: 20px auto;
+    &-getstarted,
+    &-demo-button {
+      margin: 0 5px;
       height: 40px;
       line-height: 40px;
+    }
+
+    &-demo-button {
+      display: block;
     }
 
     &-libraries {
