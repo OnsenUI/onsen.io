@@ -71,8 +71,7 @@
   @localWidth: 900px;
 
   #features {
-    max-width: @localWidth + 60px;
-    margin: 30px auto 0;
+    margin-bottom: 30px;
     @media @smallscreen { margin-top: 0; }
 
     h2, h3, h4 {
@@ -87,10 +86,12 @@
     }
 
     .feature {
+      min-height: 40vh;
       padding: 30px 0;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      background-color: #fff;
 
       @media @wrapped {
         .samples {
@@ -132,7 +133,7 @@
       }
 
       & > div {
-        flex-grow: 1;
+        flex-grow: 0;
         margin: auto 30px;
         width: @localWidth / 2 - 30;
       }
@@ -156,6 +157,11 @@
 
       &:nth-child(odd) {
         flex-wrap: wrap-reverse;
+        background-color: #fafafa;
+      }
+
+      &-onecol > div {
+        width: @localWidth + 60;
       }
     }
 
