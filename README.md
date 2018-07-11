@@ -8,25 +8,16 @@ Please Visit [Onsen UI](https://github.com/OnsenUI/OnsenUI) if you need access t
 ## Installation
 
 ```bash
-git clone https://github.com/OnsenUI/onsen.io.git
+git clone --recurse-submodules git@github.com:OnsenUI/onsen.io.git
 cd onsen.io
 yarn global add gulp
 yarn install
 
-# Checkout submodules
-git submodule init
-git submodule update
+# Update necessary submodules
+git submodule update --remote dist/v2/OnsenUI dist/playground
 
-# Checkout and build the latest revision of Onsen UI 1
-pushd dist/v1/OnsenUI/
-git checkout 1.3.19 # change this
-yarn install
-gulp build
-popd
-
-# Checkout and build the latest revision of Onsen UI 2
+# Build Onsen UI
 pushd dist/v2/OnsenUI/
-git checkout 2.0.3 # change this
 yarn install
 pushd css-components/
 yarn install
