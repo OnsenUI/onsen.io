@@ -123,6 +123,14 @@ actionbar: false
       </h4>
     </a>
 
+    <% if @framework == "js" && @lang == "en": %>
+      <p>Attributes are added directly to the element. You can do this in HTML or JS.</p>
+      <p>
+        HTML: <code>&lt;<%=@name%> someAttribute="true" anotherAttribute&gt;&lt;<%=@name%>&gt;</code><br>
+        JS: <code>document.querySelector('<%=@name%>').setAttribute('someAttribute', 'true')</code>
+      </p>
+    <% end %>
+
     <table>
       <thead>
         <tr>
@@ -197,6 +205,10 @@ actionbar: false
         </span>
       </h4>
     </a>
+
+    <% if @framework == "js" && @lang == "en": %>
+      <p>Properties are accessed on the element through JS, and should be get and set directly. For example: <code>document.querySelector('<%=@name%>').<%=@doc.properties[0].name%></code>.</p>
+    <% end %>
 
     <table>
       <thead>
@@ -323,6 +335,14 @@ actionbar: false
         </span>
       </h4>
     </a>
+
+    <% if @framework == "js" && @lang == "en": %>
+      <p>
+        Modifiers are set in the <code>modifier</code> attribute. To use more than one, separate them by spaces. For example:<br>
+        <code>&lt;<%=@name%> modifier="<%=@doc.modifiers[0].name%>
+          <% if @doc.modifiers[1]: %><%=@doc.modifiers[1].name%><% else: %> modifier2<%end%>"&gt;&lt;<%=@name%>&gt;</code>.</p>
+    <% end %>
+
     <table>
       <thead>
         <tr>
@@ -371,6 +391,11 @@ actionbar: false
         </span>
       </h4>
     </a>
+
+    <% if @framework == "js" && @lang == "en": %>
+      <p>These methods are called directly on the DOM element. Get a reference to the element in JS, and the methods below will be available to call on it. For example: <code>document.querySelector('<%=@name%>').someMethod()</code>.
+      </p>
+    <% end %>
 
     <!-- summary -->
     <table>
@@ -500,6 +525,11 @@ actionbar: false
         </span>
       </h4>
     </a>
+
+    <% if @framework == "js" && @lang == "en": %>
+      <p>To use these events, add event listeners to the elements as you would for native events, like click. For example: <code>document.querySelector('<%=@name%>').addEventListener('<%=@ownedEvents[0].name%>', function() { ... })</code>.
+      </p>
+    <% end %>
 
     <!-- summary -->
     <table>
