@@ -67,6 +67,12 @@ For non-React users, [`ons-gesture-detector`](/v2/api/js/ons-gesture-detector.ht
 
 #### FastClick
 
-This section is under construction.
+A common problem with hybrid mobile apps is the 300ms tap delay which some browsers insert. Most modern browsers no longer do this, but it is still a problem for older platforms, including Cordova apps on iOS. To overcome this tap delay, Onsen UI comes bundled with FastClick, a polyfill library which uses touch events to remove this delay. Though the library is no longer maintained by its original maintainers, Onsen UI maintains its own fork to ensure that we can handle any major fixes needed.
+
+Once the page is loaded, the FastClick instance can be accessed directly by using `ons.fastClick`. On platforms that no longer need FastClick, it will not be used. If you do not want to use it at all, you can run this in `ons.ready`:
+
+```js
+ons.fastClick.destroy();
+```
 
 <% end %>
