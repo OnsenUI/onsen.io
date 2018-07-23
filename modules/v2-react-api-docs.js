@@ -51,14 +51,23 @@ function parseDocComment(componentName, doc) {
             }
 
             // Parse others
-            ret["description"] = docgen.description;
-            ret["examples"] = docgen.examples;
-            ret["tutorial"] = ret.tut;
-            ret["name"] = docgen.name == "dummy" ? null : docgen.name;
-            ret["type"] = docgen.type;
-            ret["defaultValue"] = docgen.defaultValue;
-            ret["returns"] = docgen.returns;
-            ret["params"] = docgen.params;
+            if (docgen.name === 'dummy') {
+              delete docgen.name;
+            }
+
+            var addIfUnset = function (property) {
+              if (!ret.hasOwnProperty(property)) {
+                ret[property] = docgen[property];
+              }
+            }
+            addIfUnset('description');
+            addIfUnset('examples');
+            addIfUnset('tutorial');
+            addIfUnset('name');
+            addIfUnset('type');
+            addIfUnset('defaultValue');
+            addIfUnset('returns');
+            addIfUnset('params');
           } catch (e) {
             console.error("Error parsing " + componentName);
             console.error(e);

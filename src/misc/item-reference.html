@@ -282,8 +282,12 @@ actionbar: false
               <%= prop.name %>
             </td>
             <td>
-              <% if prop.type && prop.type.names: %>
-              <span class="value-type"><%= prop.type.names[0] %></span>
+              <% if prop.type: %>
+                <% if prop.type.names: %>
+                  <span class="value-type"><%= prop.type.names[0] %></span>
+                <% else if prop.type.name: %>
+                  <span class="value-type"><%= prop.type.name %></span>
+                <% end %>
               <% end %>
               <% if prop.defaultValue: %>
               <br><span class="default-value" style="color: green">
@@ -382,7 +386,7 @@ actionbar: false
   <!-- end modifiers -->
 
   <!-- methods details -->
-  <% if @ownedMethods.length > 0: %>
+  <% if Object.keys(@ownedMethods).length > 0: %>
   <section>
     <a href="#methods-summary" class="reference-loop-anchor">
       <h4 id="methods-summary">
@@ -488,19 +492,21 @@ actionbar: false
             <% for key, param of method.params: %>
             <tr>
               <td><span class="parameter-name"><%= param.name %></span></td>
-              <td class="value-type"><%= param.type %></td>
+              <td class="value-type"><%= (param.type && param.type.name) || param.type %></td>
               <td>
-                <% if @lang == "en": %>
-                <%- @markd @mapKeywords @translate param.description %>
-                <% else: %>
-                <% if @translate(param.description).length != 0: %>
-                <%- @markd @mapKeywords @translate param.description %>
-                <% else: %>
-                <span style="opacity: 0.6;">
-                  <%- @markd @mapKeywords @translate(param.description, "en") %>
-                  <span style="color: red;">（翻訳中）</span>
-                </span>
-                <% end %>
+                <% if param.description: %>
+                  <% if @lang == "en": %>
+                  <%- @markd @mapKeywords @translate param.description %>
+                  <% else: %>
+                  <% if @translate(param.description).length != 0: %>
+                  <%- @markd @mapKeywords @translate param.description %>
+                  <% else: %>
+                  <span style="opacity: 0.6;">
+                    <%- @markd @mapKeywords @translate(param.description, "en") %>
+                    <span style="color: red;">（翻訳中）</span>
+                  </span>
+                  <% end %>
+                  <% end %>
                 <% end %>
               </td>
             </tr>
