@@ -16,15 +16,28 @@ AngularJS bindings for Onsen UI provide AngularJS directives that enhance the co
 
 #### Setup AngularJS 1.x bindings
 
-AngularJS 1.x bindings for Onsen UI is separated from the core but distributed in the same package. To load it in your project, please include `onsenui.js` and `angular.js` before `angular-onsenui.js`.
+> These bindings are only for AngularJS (i.e. version 1). If you are using Angular 2+, you need the [ngx binding](../angular2/index.html).
 
+The AngularJS 1.x bindings for Onsen UI are provided as a separate package to the core, called `angularjs-onsenui`. You can get this package from npm:
+
+```bash
+npm install angularjs-onsenui
+```
+
+Alternatively, you can download the file from a CDN. One example is unpkg.com, but there are many more to choose from.
+
+```html
+<script src="https://unpkg.com/angularjs-onsenui/js/angularjs-onsenui.min.js"></script>
+```
+
+When loading it in your project, it must come _after_ `angular.js` and `onsenui.js`.
 
 ```html
 <link rel="stylesheet" href="onsenui.css"/>
 <link rel="stylesheet" href="onsen-css-components.css"/>
 <script src="angular.min.js"></script>
 <script src="onsenui.min.js"></script>
-<script src="angular-onsenui.min.js"></script>
+<script src="angularjs-onsenui.min.js"></script>
 ```
 
 After loading `angular-onsenui.js`, the `onsen` AngularJS module is ready to use.
@@ -38,7 +51,7 @@ module.controller('AppController', function() { });
 
 To get started, let’s create a simple Hello World application. The following sample code is a React version of Onsen UI HelloWorld.
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en" ng-app="my-app">
 <head>
@@ -47,7 +60,7 @@ To get started, let’s create a simple Hello World application. The following s
   <link rel="stylesheet" href="onsen-css-components.css"/>
   <script src="angular.min.js"></script>
   <script src="onsenui.min.js"></script>
-  <script src="angular-onsenui.min.js"></script>
+  <script src="angularjs-onsenui.min.js"></script>
 </head>
 
 <body>
@@ -80,6 +93,23 @@ Using Onsen UI into your app is really simple. Just include each element in your
 Some components have methods and properties. Use the `var` attribute to save a reference into a scoped variable. For example, the following `<ons-navigator var="myNavigator">` can be accessed via `$scope.myNavigator` variable, which exists in the current `$scope` object.
 
 For more information about AngularJS 1.x itself, we recommend reading the official [AngularJS docs](https://docs.angularjs.org/tutorial).
+
+#### Migrating to angularjs-onsenui package
+
+Prior to Onsen UI 2.11.0, the AngularJS bindings are included in the core package. To make it easier to maintain the core and AngularJS bindings separately, and to be the same as the other bindings, we have moved the AngularJS bindings to their own package called `angularjs-onsenui`.
+
+If you have upgraded to Onsen UI 2.11.0 or newer, you will need to install this package to continue using the AngularJS bindings. If you are using npm, you can install the package that way:
+
+```bash
+npm install angularjs-onsenui
+```
+
+If you are using a CDN such as unpkg.com, or have downloaded the file locally, you will need get the file from a new url. Note that the filename has changed to `angularjs-onsenui.min.js` to avoid potential confusion with Angular 2 (previously it was `angular-onsenui.min.js`).
+```html
+<script src="https://unpkg.com/angularjs-onsenui/js/angularjs-onsenui.min.js"></script>
+```
+
+That's it! Everything else should work as before. If you have any problems, please report an [issue on GitHub](https://github.com/OnsenUI/OnsenUI/issues).
 
 <% end %>
 

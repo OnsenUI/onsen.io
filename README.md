@@ -18,7 +18,7 @@ git submodule update --remote dist/v2/OnsenUI dist/playground
 
 # Build Onsen UI
 (cd dist/v2/OnsenUI/css-components && yarn install)
-(cd dist/v2/OnsenUI && yarn install && gulp build)
+(cd dist/v2/OnsenUI && yarn install && yarn build)
 ```
 
 ## How to Build
