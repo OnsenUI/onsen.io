@@ -17,6 +17,7 @@ jobs:
           npm install
           cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build && cd ../../../..
           cd dist/v2/OnsenUI && yarn && yarn build && ./node_modules/.bin/gulp build-docs && cd ../../..
+          cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs
           AWS_BUCKET=${AWS_BUCKET_EN} ./node_modules/.bin/gulp deploy --lang=en
           AWS_BUCKET=${AWS_BUCKET_JA} ./node_modules/.bin/gulp deploy --lang=ja
 
@@ -37,6 +38,7 @@ jobs:
           npm install
           cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build && cd ../../../..
           cd dist/v2/OnsenUI && yarn && yarn build && ./node_modules/.bin/gulp build-docs && cd ../../..
+          cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs
           AWS_BUCKET=${AWS_BUCKET_EN_PROD} ./node_modules/.bin/gulp deploy --lang=en --production
           AWS_BUCKET=${AWS_BUCKET_JA_PROD} ./node_modules/.bin/gulp deploy --lang=ja --production
           wget https://api.keycdn.com/zones/purge/38820.json --user="${KEY_CDN_API_KEY}" --password='' -v
