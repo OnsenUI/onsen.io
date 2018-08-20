@@ -23,6 +23,11 @@ gutil.log('Environment: ' + env);
 gutil.log('Source: \'./src/documents_' + lang + '\'');
 gutil.log('Destination: \'./out_' + lang + '\'');
 
+// Print stack trace on unhandled rejection
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at:', p, 'reason:', reason);
+});
+
 //////////////////////////////
 // generate
 //////////////////////////////
