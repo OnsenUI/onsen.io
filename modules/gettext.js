@@ -31,7 +31,18 @@ function translate() {
       return cb();
     }
     if (file.isBuffer()) {
-      var po = fs.readFileSync(file.path, 'utf-8');
+      var po = fs.readFileSync(file.path, 'utf-8')
+      .split('\n')
+      .map((line, i, lines) => {
+        if (/^msgid/.test(line)) { // Check each msg
+          if (i === 0 || !(/^#/.test(lines[i-1]))) { // If no comments are provided before msg
+            return '# dummy comment\n' + line; // Insert dummy comment to avoid gettext-markdown bug
+          }
+        }
+        return line;
+      })
+      .join('\n');
+      
       gettext.po2md(file.path, po).then(function(contents) {
         var data = contents[0].data.trim();
         data = data.replace('title:', '---\ntitle:');
