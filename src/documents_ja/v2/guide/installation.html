@@ -4,16 +4,16 @@ order: 10
 tocGroup: guide
 tocTitle: Essentials
 layout: docs.html.eco
-description: 
+description: 'Onsen UIのインストールガイドです。Onsen UIはハイブリッドアプリとPWAに対応したWeb ComponentsベースのHTML5 モバイルUIフレームワークです。'
 ---
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI/releases/latest';
+  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases/latest';
   var zipUrl = "";
   $.getJSON(url, function(res) {
     zipUrl = res.zipball_url;
-    $('#get-latest-build').text('Onsen UI最新版のダウンロード (バージョン’ + res.name + ')')
+    $('#get-latest-build').text('Onsen UI最新版のダウンロード (バージョン' + res.name + ')')
   });
 
   $('#get-latest-build').click(function(event) {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div>
     <p class="install-row-title">フレームワーク用バインディング</p>
     <p class="install-row-content">
-      Onsen UIはフレームワークに依存しません。JavaScript、jQuery、Angular（1と2+）、React、Vue.jsなどに対応します。
+      Onsen UIはフレームワークに依存しません。JavaScript、jQuery、AngularJS、Angular 2+、React、Vue.jsなどに対応します。
     </p>
     <a class="install-row-link" href="/v2/guide/frameworks.html">使い方を見る</a>
   </div>
