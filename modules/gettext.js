@@ -52,7 +52,9 @@ function translate() {
         self.push(file);
         cb();
       }, function(error) {
-          console.log(error);
+        // console.error(error); // Show stack trace
+        console.error(error.message);
+        cb();
       });
     } else {
       self.push(file);

@@ -79,6 +79,7 @@ gulp.task('i18n-extract', function(done) {
 
 gulp.task('i18n-translate', function() {
   return gulp.src('src/i18n/gettext/v2/guide/**/*.po')
+    .on('data', (vinylFile) => { gutil.log(`Processing ${gutil.colors.cyan(vinylFile.history[0])}...`); })
     .pipe(gettext.translate())
     .pipe(gulp.dest('src/documents_ja/v2/guide'));
 });
