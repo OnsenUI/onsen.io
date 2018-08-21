@@ -45,8 +45,10 @@ function translate() {
       
       gettext.po2md(file.path, po).then(function(contents) {
         var data = contents[0].data.trim();
-        data = data.replace('title:', '---\ntitle:');
+        // Restore YAML front matter for Metalsmith by modifying output of po2md
+        data = data.replace(/^title:/, '---\ntitle:'); // 
         data = data.replace(/\n\n## (layout:.+)/, '\n$1\n---');
+        data = data.replace(/\n\n## (description:.+)/, '\n$1\n---');
         file.contents = new Buffer(data);
         file.path = file.path.replace('.po', '.html');
         self.push(file);
