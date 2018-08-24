@@ -1,0 +1,116 @@
+---
+title: 'コンパイル機能'
+order: 145
+tocGroup: guide
+layout: docs.html.eco
+description: 'Onsen UIのコンパイル機能の説明です。'
+---
+
+<%- @markdown => %>
+
+### コンパイル機能
+
+いくつかのOnsen UIのコンポーネントは、APIをシンプルにするために、コンポーネント内に自動的に定型文（boilerplate）を挿入する機能を備えています。Onsen UIではこのプロセスを**コンパイル**と呼びます。コンパイルの過程では、Onsen UIのコンポーネント内に配置された要素やその内容が移動されたり、ラップされたり、新しいクラスが付加されたりします。コンパイルは裏で自動的に実行されるため（透過的であるため）、開発者は基本的にコンパイルを意識する必要はありません。しかし、場合によってはコンパイルの影響を回避する方法を知っておいた方が便利です（例えば新しいフレームワークバインディングを開発する時など）。この章ではOnsen UIのコンポーネントがどんなコンパイルを行っているか、すなわちコンポーネント内に配置された要素やその内容にどんな変更を加えているかを説明します。
+
+#### `ons-page`のコンパイル
+
+`ons-page`のコンパイル中にはいくつかの重要な変更が行われます。まず前提知識として、`ons-page`は3つの部分で構成されています:
+
+- 背景コンテナ（background）: 背景色や背景画像を表示する部分です。
+- スクロール可能コンテナ（content）: スクロール可能な部分です。この部分にほとんどの内容を入れることになります。
+- 固定要素: スクロールしても画面に固定表示される要素です。
+
+画面に何かを固定表示したいときは、固定したい要素に`position: fixed` プロパティを付加すれば固定表示することができます。しかし、この方法はいくつかのモバイルブラウザでのスクロールにおいて、非常に多くのトラブルの原因になります。そのため、固定表示したい要素とスクロールさせたい要素は、後述する別々の場所に配置することをお勧めします。その際、それらの要素は`ons-page`の初期化時に移動されたりラップされたりすることがあるため、後からそれらの要素に内容を追加したりする場合にはご注意ください。
+
+具体例として、このようなページを作ったとします:
+
+```html
+<ons-page>
+  <ons-toolbar></ons-toolbar>
+  コンテンツ
+  <ons-input></ons-input>
+  <ons-fab></ons-fab>
+  <div>追加コンテンツ</div>
+</ons-page>
+```
+
+このとき、`ons-page`は以下のようにコンパイルされます:
+
+```html
+<ons-page class="page">
+  <ons-toolbar></ons-toolbar>
+  <div class="page__background"></div>
+  <div class="page__content">
+    コンテンツ
+    <ons-input></ons-input>
+    <div>追加コンテンツ</div>
+  </div>
+  <ons-fab></ons-fab>
+</ons-page>
+```
+
+このように、`.page`や`div.page__background`、`div.page__content`が自動的に付加されているのが分かると思います。一方で、`ons-toolbar`と`ons-fab`は固定要素なので、前述のコンテナの外側に置かれたままになります。
+
+コンパイルを迂回（bypass）するのはとても簡単です。コンパイル後の構造を最初から書いておけば、Onsen UIは何も変更を行いません。その際、`<div class="page__content">`や`<div class="page__background">`の代わりに、`<div class="content">`や`<div class="background">`といったクラス名も使うことができます。その場合、`page__content`や`page__background`などといったクラスが自動的に付加されます。例:
+
+```html
+<ons-page>
+  <ons-toolbar></ons-toolbar>
+  <div class="content">
+    コンテンツ
+    <ons-input></ons-input>
+    <div>追加コンテンツ</div>
+  </div>
+  <ons-fab></ons-fab>
+</ons-page>
+```
+
+#### `ons-toolbar`のコンパイル
+
+`ons-toolbar`は`div.left`と`div.center`、`div.right`の3つのコンテナに分かれています。`left`と`center`、`right`は本物のクラス（`toolbar__left`と`toolbar__center`、`toolbar__right`）の別名（alias）です。一般的な`ons-toolbar`は以下のようにコンパイルされます:
+
+```html
+<ons-toolbar class="toolbar">
+  <div class="left toolbar__left">左側のコンテンツ</div>
+  <div class="center toolbar__center">中央のコンテンツ</div>
+  <div class="right toolbar__right">右側のコンテンツ</div>
+</ons-toolbar>
+```
+
+なお、これらの3つのコンテナは「left - center - right」の順番になるように自動的にソートされます。
+
+#### `ons-list-item`のコンパイル
+
+`ons-toolbar`の例と同じく、`ons-list-item`も左・中央・右の3つのコンテナに分かれます:
+
+```html
+<ons-list-item class="list-item">
+  <div class="left list-item__left">左側のコンテンツ</div>
+  <div class="center list-item__center">中央のコンテンツ</div>
+  <div class="right list-item__right">右側のコンテンツ</div>
+</ons-list-item>
+```
+
+コンパイル前の時点で`left`、`center`、`right`などのコンテナがない場合、`ons-list-item`は自動的に`div.list-item__center`コンテナを追加して内容をラップします。
+
+#### `ons-select`のコンパイル
+
+`ons-select`は必要に応じて`select`要素を自動で追加します:
+
+```html
+<ons-select>
+  <option>オプション1</option>
+  <option>オプション2</option>
+</ons-select>
+```
+
+上記のコードは以下のようにコンパイルされます:
+
+```html
+<ons-select class="select">
+  <select class="select-input">
+    <option>オプション1</option>
+    <option>オプション2</option>
+  </select>
+</ons-select>
+```
