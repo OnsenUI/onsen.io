@@ -23,6 +23,11 @@ gutil.log('Environment: ' + env);
 gutil.log('Source: \'./src/documents_' + lang + '\'');
 gutil.log('Destination: \'./out_' + lang + '\'');
 
+// Print stack trace on unhandled rejection
+process.on('unhandledRejection', (reason, p) => {
+  console.log('Unhandled Rejection at:', p, 'reason:', reason);
+});
+
 //////////////////////////////
 // generate
 //////////////////////////////
@@ -74,6 +79,7 @@ gulp.task('i18n-extract', function(done) {
 
 gulp.task('i18n-translate', function() {
   return gulp.src('src/i18n/gettext/v2/guide/**/*.po')
+    .on('data', (vinylFile) => { gutil.log(`Processing ${gutil.colors.cyan(vinylFile.history[0])}...`); })
     .pipe(gettext.translate())
     .pipe(gulp.dest('src/documents_ja/v2/guide'));
 });

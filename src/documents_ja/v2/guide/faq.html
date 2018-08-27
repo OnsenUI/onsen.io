@@ -3,7 +3,7 @@ title: ‘FAQとトラブルシューティング’
 order: 60
 tocGroup: guide
 layout: docs.html.eco
-description: 
+description: Onsen UIに関してよくいただく質問とトラブルシューティングです。
 ---
 
 <%- @markdown => %>
@@ -12,7 +12,7 @@ description:
 
 #### デフォルトの機能を無効にしたい
 
-Onsen UIはいくつかの処理を自動的に最適化を行いますが、時には無効にしたい場合もあります。
+Onsen UIはいくつかの処理を自動的に最適化を行いますが、時には無効にしたい場合もあります。無効にするには、以下の作業を行う必要があります:
 
 - **オートスタイルを無効にする**
 
@@ -30,13 +30,23 @@ Onsen UIはいくつかの処理を自動的に最適化を行いますが、時
 
   `ons.disableDeviceBackButtonHandler()`を呼び出してください。
 
-#### 特定のスタイルを強制するには
+#### 使用するスタイルを固定したい
 
 オートスタイル機能を使うと、iOSではフラットデザイン、Androidではマテリアルデザインを表示します。オートスタイルは`ons.disableAutoStyling()`関数を呼び出すことで無効にし、すべてをiOSのデザインで表示できます。その場合でも、コンポーネントに`material`属性を指定することで、マテリアルデザインを表示することができます。
 
 `onsenui.js`を読み込んだ直後に`ons.platform.select(‘android’)`や`ons.platform.select(‘ios’)`を呼び出すことで、実行中のプラットフォームを切り替えられます。ただしこの場合は`ons.platform.isAndroid()`といったプラットフォームを扱う他の機能が影響を受けます。
 
 開発中はブラウザのDevToolsを用いてユーザーエージェントを切り替えることで、スタイルの更新を確認していくと良いでしょう。たとえば、”iPhone 5”を選ぶとフラットデザインとなり、”Nexus 5”を選ぶとマテリアルデザインで表示されます。別の方法として、URLに`?platform=android`や`?platform=ios`といった形でクエリパラメータを加えることでも外見の切り替えができます。
+
+#### カスタムのアイコンを使いたい
+
+デフォルトの設定では、Onsen UIはFont Awesome、Ionicon、Material Design Iconの3つのアイコンパックを`onsenui.css`ファイルの中でインポートします。前述の3つのアイコンパックに含まれないアイコン名を指定すると、そのアイコンはFont Awesomeのアイコンと見なされ、`fa-`接頭辞が自動的に追加されます。しかし、バージョン**2.8.0**からは[`ons.disableIconAutoPrefix()`メソッド](/v2/api/js/ons.html#method-disableIconAutoPrefix)を`onsenui.js`の読み込み直後に実行することで`fa-`接頭辞の自動追加を無効にすることができます。カスタムのアイコンを追加するには、`fa-`接頭辞の自動追加を無効にした後に、手動でカスタムのCSSフォントファイルをインポートしてください。関連情報として[アプリサイズの削減#アイコンパックの除去](appsize.html#removing-icon-packs)もご覧ください。
+
+`<ons-icon icon="my-custom-icon"></ons-icon>`のようなカスタムアイコンを追加すると、`my`クラスが要素に追加されます。これにより、共通の接頭辞`my`を持つカスタムアイコンを`.my`セレクタでまとめて選択することができます。例えば、`ons-toolbar-button`要素内に入れたカスタムアイコンの`line-height`がずれてしまったような場合は、以下のCSSルールにより調整することができます:
+
+```css
+.toolbar-button .my { line-height: ...; }
+```
 
 #### 新しいページの表示が遅い
 

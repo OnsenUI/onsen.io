@@ -1,65 +1,62 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"POT-Creation-Date: 2018-08-20 04:18+0000\n"
+"PO-Revision-Date: 2018-08-22 10:34+0900\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"PO-Revision-Date: 2017-06-29 12:59-0700\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-29 12:57-0700\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
-"Language: ja\n"
+"X-Generator: Poedit 2.1.1\n"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:1
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:1
 msgid ""
 "title: 'Deploying Your App'\n"
 "order: 50\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 msgstr ""
 "title: 'Deploying Your App'\n"
 "order: 50\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:2
-msgid "layout: docs.html.eco"
-msgstr "layout: docs.html.eco"
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:2
+msgid ""
+"description: 'Onsen UI is for hybrid mobile app, PWA, as well as for mobile "
+"& desktop web apps.'"
+msgstr ""
+"description: 'Onsen UIはハイブリッドアプリとPWAに対応したWeb Componentsベース"
+"のHTML5 モバイルUIフレームワークです。'"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:3
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:3
 msgid "<%- @markdown => %>"
 msgstr "<%- @markdown => %>"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:4
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:4
 msgid "Deploying Your App"
 msgstr "アプリとしてデプロイする"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:5
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:5
 msgid "Cordova (Hybrid Apps)"
 msgstr "Cordova（ハイブリッドアプリ）"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:6
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:6
 msgid ""
 "[Cordova](https://cordova.apache.org/) is an open-source framework to "
 "convert Onsen UI apps to native webview-based apps running locally on iOS "
-"and Android."
+"and Android. Onsen UI apps made using Cordova can be put on the app stores. "
+"Take a look at our [Cordova guide](hybrid/cordova.html) to get started."
 msgstr ""
 "[Cordova](https://cordova.apache.org/)を使うと、iOSやAndroidの端末上で実行さ"
-"れる、ネイティブWebViewを持つアプリに変換できます。"
+"れる、ネイティブWebViewを持つアプリに変換できます。Cordovaを使って作成した"
+"Onsen UIアプリはストアに登録することができます。アプリの具体的な作り方につい"
+"ては[Cordovaガイド](hybrid/cordova.html)をご覧ください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:7
-msgid ""
-"[Monaca](monaca.html) is a tool that helps Onsen UI developers to build "
-"hybrid apps. For instance, Monaca CLI can be used to start a project, debug "
-"the app on the device, and perform remote build. Monaca is free as well, but "
-"has additional features available to purchase."
-msgstr ""
-"[Monaca](monaca.html)を使うと、Onsen UIを使って簡単にハイブリッドアプリを開発"
-"できます。Monacaはコマンドライン版のほか、ブラウザー上で動くオンラインIDEな"
-"ど、多彩な開発オプションを持っています。Monacaは無料でも使用できますが、購入"
-"することで追加の機能を利用できます。"
-
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:8
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:7
 msgid ""
 "<!--\n"
 "Please take a look at this video on how to create a hybrid app.\n"
@@ -68,31 +65,26 @@ msgid ""
 "-->"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:9
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:8
 msgid "Progressive Web Apps (PWA)"
 msgstr "Progressive Web Apps（PWA）"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:10
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:9
 msgid ""
-"[Progressive Web Apps](https://developers.google.com/web/fundamentals/"
-"getting-started/codelabs/your-first-pwapp/) (PWA) brings a new experience to "
-"your mobile apps. PWA is a Web app with a [manifest file](https://developers."
-"google.com/web/fundamentals/engage-and-retain/web-app-manifest/) and a "
-"background-running [Service Worker](https://developers.google.com/web/ilt/"
-"pwa/introduction-to-service-worker). By adding those, you can receive push "
-"notifications, offline support, and additional features to give your mobile "
-"apps even more power."
+"Progressive Web Apps (PWAs) brings a new experience to your mobile websites. "
+"A PWA is a website which is available offline, and can be added to a user's "
+"home screen, just like an app. Take a look at [What is a PWA?](pwa/intro."
+"html) for an in-depth guide on PWAs. We also have a comprehensive [Onsen UI "
+"PWA tutorial](pwa/tutorial.html) to help you use Onsen UI to create a great "
+"PWA."
 msgstr ""
-"[プログレッシブ・ウェブ・アプリ](https://developers.google.com/web/"
-"fundamentals/getting-started/codelabs/your-first-pwapp/)（PWA）はモバイルアプ"
-"リに新しい体験を吹き込みます。PWAは[マニフェストファイル](https://developers."
-"google.com/web/fundamentals/engage-and-retain/web-app-manifest/)と、バックグ"
-"ラウンドで実行される[サービスワーカー](https://developers.google.com/web/ilt/"
-"pwa/introduction-to-service-worker)を追加した、モバイルWebアプリです。PWAを使"
-"うと、プッシュ通知やオフライン対応など、モバイルアプリでも新しい機能を使うこ"
-"とができます。"
+"Progressive Web Apps（PWA）はモバイルWebサイトに新たな体験をもたらします。"
+"PWA はオフラインでも閲覧でき、アプリのようにホーム画面に追加できることができ"
+"るWebサイトです。詳しい情報については[PWAとは？](pwa/intro.html)のページをご"
+"覧ください。さらに、Onsen UIを使ってPWAを作るための[Onsen UI PWA チュートリア"
+"ル](pwa/tutorial.html)も用意していますので、ぜひご活用ください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:11
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:10
 msgid ""
 "<!--\n"
 "Interested in getting started with a PWA? Check out this video.\n"
@@ -101,11 +93,11 @@ msgid ""
 "-->"
 msgstr ""
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:12
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:11
 msgid "Mobile & Desktop Web"
 msgstr "モバイルWeb、デスクトップWeb"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:13
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:12
 msgid ""
 "Onsen UI is also suitable for developing web apps with any screen size. "
 "Onsen UI components are responsive and scalable, fitting perfectly even with "
@@ -118,6 +110,39 @@ msgstr ""
 "atom.io/)や[Node WebKit](https://nwjs.io/)を使って、デスクトップ向けアプリ開"
 "発をすることもできます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/deploy.html:14
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/deploy.html:13
 msgid "<% end %>"
 msgstr "<% end %>"
+
+#~ msgid "layout: docs.html.eco"
+#~ msgstr "layout: docs.html.eco"
+
+#~ msgid ""
+#~ "[Monaca](monaca.html) is a tool that helps Onsen UI developers to build "
+#~ "hybrid apps. For instance, Monaca CLI can be used to start a project, "
+#~ "debug the app on the device, and perform remote build. Monaca is free as "
+#~ "well, but has additional features available to purchase."
+#~ msgstr ""
+#~ "[Monaca](monaca.html)を使うと、Onsen UIを使って簡単にハイブリッドアプリを"
+#~ "開発できます。Monacaはコマンドライン版のほか、ブラウザー上で動くオンライン"
+#~ "IDEなど、多彩な開発オプションを持っています。Monacaは無料でも使用できます"
+#~ "が、購入することで追加の機能を利用できます。"
+
+#~ msgid ""
+#~ "[Progressive Web Apps](https://developers.google.com/web/fundamentals/"
+#~ "getting-started/codelabs/your-first-pwapp/) (PWA) brings a new experience "
+#~ "to your mobile apps. PWA is a Web app with a [manifest file](https://"
+#~ "developers.google.com/web/fundamentals/engage-and-retain/web-app-"
+#~ "manifest/) and a background-running [Service Worker](https://developers."
+#~ "google.com/web/ilt/pwa/introduction-to-service-worker). By adding those, "
+#~ "you can receive push notifications, offline support, and additional "
+#~ "features to give your mobile apps even more power."
+#~ msgstr ""
+#~ "[プログレッシブ・ウェブ・アプリ](https://developers.google.com/web/"
+#~ "fundamentals/getting-started/codelabs/your-first-pwapp/)（PWA）はモバイル"
+#~ "アプリに新しい体験を吹き込みます。PWAは[マニフェストファイル](https://"
+#~ "developers.google.com/web/fundamentals/engage-and-retain/web-app-"
+#~ "manifest/)と、バックグラウンドで実行される[サービスワーカー](https://"
+#~ "developers.google.com/web/ilt/pwa/introduction-to-service-worker)を追加し"
+#~ "た、モバイルWebアプリです。PWAを使うと、プッシュ通知やオフライン対応など、"
+#~ "モバイルアプリでも新しい機能を使うことができます。"
