@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2017-09-01 09:23+0900\n"
-"PO-Revision-Date: 2017-09-01 10:23+0900\n"
+"POT-Creation-Date: 2018-08-20 04:18+0000\n"
+"PO-Revision-Date: 2018-08-22 11:20+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -10,48 +10,51 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.1.1\n"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:1
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:1
 msgid ""
 "title: 'Troubleshooting and FAQ'\n"
 "order: 60\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 msgstr ""
 "title: ‘FAQとトラブルシューティング’\n"
 "order: 60\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:2
-msgid "layout: docs.html.eco"
-msgstr "layout: docs.html.eco"
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:2
+msgid "description:"
+msgstr ""
+"description: Onsen UIに関してよくいただく質問とトラブルシューティングです。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:3
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:3
 msgid "<%- @markdown => %>"
 msgstr "<%- @markdown => %>"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:4
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:4
 msgid "Troubleshooting and FAQ"
 msgstr "FAQとトラブルシューティング"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:5
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:5
 msgid "How can I disable ...?"
 msgstr "デフォルトの機能を無効にしたい"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:6
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:6
 msgid ""
-"Onsen UI automatically performs several optimizations automatically, but "
-"these are fully optional and able to be turned off at any time. If you would "
-"like to disable these, here’s how."
+"Onsen UI automatically performs several optimizations, but the followings "
+"are fully optional and can be turned off at any time. If you would like to "
+"disable these, here’s how:"
 msgstr ""
 "Onsen UIはいくつかの処理を自動的に最適化を行いますが、時には無効にしたい場合"
-"もあります。"
+"もあります。無効にするには、以下の作業を行う必要があります:"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:9
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:9
 msgid "**Disable auto styling**"
 msgstr "**オートスタイルを無効にする**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:11
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:11
 msgid ""
 "Call `ons.disableAutoStyling()` to disable automatic styling of iOS and "
 "Android. Be sure to call it right after including `onsenui.js`. For "
@@ -63,38 +66,38 @@ msgstr ""
 "ください。`disable-auto-styling`属性を用ると特定のコンポーネントに対してオー"
 "トスタイルを無効にできます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:14
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:14
 msgid "**Disable animations for testing**"
 msgstr "**テストのためにアニメーションを無効にしたい**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:16
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:16
 msgid "Call `ons.disableAnimations()` before starting the tests."
 msgstr "`ons.disableAnimations()`関数を呼び出してください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:19
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:19
 msgid "**Disable status bar fill on iOS 7 and above**"
 msgstr "**iOS 7以上でステータスバーの補完を無効にしたい**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:21
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:21
 msgid ""
 "Call `ons.disableAutoStatusBarFill()` right after including `onsenui.js`."
 msgstr ""
 "`onsenui.js`を呼び出した直後に`ons.disableAutoStatusBarFill()`関数を呼び出し"
 "てください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:24
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:24
 msgid "**Disable Android Device Back Button handlers**"
 msgstr "**Android端末で戻るボタンの制御を無効にしたい**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:26
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:26
 msgid "Call `ons.disableDeviceBackButtonHandler()`."
 msgstr "`ons.disableDeviceBackButtonHandler()`を呼び出してください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:30
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:30
 msgid "How can I force specific styles?"
-msgstr "特定のスタイルを強制するには"
+msgstr "使用するスタイルを固定したい"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:31
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:31
 msgid ""
 "The auto styling feature displays flat design for iOS and Material Design "
 "for Android. Auto styling can be disabled with `ons.disableAutoStyling()` in "
@@ -108,7 +111,7 @@ msgstr ""
 "ントに`material`属性を指定することで、マテリアルデザインを表示することができ"
 "ます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:32
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:32
 msgid ""
 "However, it is also possible to fake the platform by running `ons.platform."
 "select(‘android’)` or `ons.platform.select(‘ios’)`  right after including "
@@ -120,7 +123,7 @@ msgstr ""
 "れます。ただしこの場合は`ons.platform.isAndroid()`といったプラットフォームを"
 "扱う他の機能が影響を受けます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:33
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:33
 msgid ""
 "During development, you can change the device view in the Developer Tools of "
 "your browser and refresh the page to update the styles. For instance, "
@@ -134,11 +137,57 @@ msgstr ""
 "として、URLに`?platform=android`や`?platform=ios`といった形でクエリパラメータ"
 "を加えることでも外見の切り替えができます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:34
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:34
+msgid "How can I use custom icon packs?"
+msgstr "カスタムのアイコンを使いたい"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:35
+msgid ""
+"By default, Onsen UI imports Font Awesome, Ionicons and Material Design "
+"icons in `onsenui.css` file. A `fa-` prefix is automatically added if the "
+"provided icon name's prefix does not match any of the default fonts. Since "
+"**v2.8.0**, this behavior can be avoided by calling [`ons."
+"disableIconAutoPrefix()` method](/v2/api/js/ons.html#method-"
+"disableIconAutoPrefix) right after including `onsenui.js`. Apart from this, "
+"custom icon packs can be added manually by just importing the corresponding "
+"CSS fonts. See also [Reducing App Size#Removing Icon Packs](appsize."
+"html#removing-icon-packs) for related information."
+msgstr ""
+"デフォルトの設定では、Onsen UIはFont Awesome、Ionicon、Material Design Iconの"
+"3つのアイコンパックを`onsenui.css`ファイルの中でインポートします。前述の3つの"
+"アイコンパックに含まれないアイコン名を指定すると、そのアイコンはFont Awesome"
+"のアイコンと見なされ、`fa-`接頭辞が自動的に追加されます。しかし、バージョン"
+"**2.8.0**からは[`ons.disableIconAutoPrefix()`メソッド](/v2/api/js/ons."
+"html#method-disableIconAutoPrefix)を`onsenui.js`の読み込み直後に実行すること"
+"で`fa-`接頭辞の自動追加を無効にすることができます。カスタムのアイコンを追加す"
+"るには、`fa-`接頭辞の自動追加を無効にした後に、手動でカスタムのCSSフォント"
+"ファイルをインポートしてください。関連情報として[アプリサイズの削減#アイコン"
+"パックの除去](appsize.html#removing-icon-packs)もご覧ください。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:36
+msgid ""
+"When adding custom icons such as `<ons-icon icon=\"my-custom-icon\"></ons-"
+"icon>`, the class `my` is added to the element together with `my-custom-"
+"icon` in order to provide a common prefix-based selector. This way, all you "
+"custom icons can be adjusted together with the `.my` CSS selector. For "
+"example, if you find that the `line-height` is wrong for custom icons inside "
+"`ons-toolbar-button` elements, you can adjust them with the following rule:"
+msgstr ""
+"`<ons-icon icon=\"my-custom-icon\"></ons-icon>`のようなカスタムアイコンを追加"
+"すると、`my`クラスが要素に追加されます。これにより、共通の接頭辞`my`を持つカ"
+"スタムアイコンを`.my`セレクタでまとめて選択することができます。例えば、`ons-"
+"toolbar-button`要素内に入れたカスタムアイコンの`line-height`がずれてしまった"
+"ような場合は、以下のCSSルールにより調整することができます:"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:37
+msgid ".toolbar-button .my { line-height: ...; }"
+msgstr ""
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:38
 msgid "Pushing new pages is slow"
 msgstr "新しいページの表示が遅い"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:35
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:39
 msgid ""
 "If you are creating pages from separate files which, at the same time, "
 "contain other pages from even more files (e.g. pushing a tab bar), it can "
@@ -152,11 +201,11 @@ msgstr ""
 "ド](/v2/api/js/ons.html#method-preload)を使って事前にリクエストをしておき、テ"
 "ンプレートをキャッシュすると良いでしょう。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:36
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:40
 msgid "Where is ons-scroller?"
 msgstr "ons-scrollerについて"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:37
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:41
 msgid ""
 "`ons-scroller` was a directive in Onsen UI v1 that had scrollable content. "
 "It was removed in Onsen UI v2 because it can be replaced with a simple `div` "
@@ -167,7 +216,7 @@ msgstr ""
 "た。代替として、`div`タグを設置し、下記のCSSプロパティを適用することで同じ動"
 "作を再現できます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:38
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:42
 msgid ""
 ".scroller {\n"
 "  display: block;\n"
@@ -187,7 +236,7 @@ msgstr ""
 "  -ms-scroll-snap-type: mandatory;\n"
 "}"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:39
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:43
 msgid ""
 "Alternatively, you can use [`ons-page`](/v2/api/js/ons-page.html) for "
 "extended functionality (it doesn't need to be fullscreen) or a [`ons-"
@@ -198,16 +247,16 @@ msgstr ""
 "js/ons-carousel.html)で`auto-scroll`属性を**指定しない**方法もご利用いただけ"
 "ます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:40
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:44
 msgid "Common Error Messages"
 msgstr "よくあるエラーメッセージ"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:43
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:47
 msgid "**Set/Map is not defined - Can't find variable Set/Map**"
 msgstr "**Set/Map is not defined - Can't find variable Set/Map**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:45
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:50
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:49
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:54
 msgid ""
 "The running platform might not be fully supported. Consider using Crosswalk "
 "project for Android or including the necessary polyfills."
@@ -215,15 +264,15 @@ msgstr ""
 "実行中の環境に必要なJavaScript機能が含まれていません。Crosswalkプロジェクトを"
 "使うか、Polyfillを組み込んでください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:48
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:52
 msgid "**MutationObserver is not defined**"
 msgstr "**MutationObserver is not defined**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:53
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:57
 msgid "**pushPage/popPage is already running**"
 msgstr "**pushPage/popPage is already running**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:55
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:59
 msgid ""
 "A different push or pop action is currently running. This could happen when "
 "calling `pushPage` or `popPage` twice before the first animation ends (or "
@@ -237,11 +286,11 @@ msgstr ""
 "Promiseを使って、1つめの操作が完全に終わるまで待機させてください。そうでない"
 "場合は、このエラーを無視しても大丈夫です。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:58
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:62
 msgid "**Splitter side is locked**"
 msgstr "**Splitter side is locked**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:60
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:64
 msgid ""
 "This can happen when a splitter side is toggled twice before the first "
 "animation ends either by calling a method or by dragging the element. "
@@ -254,11 +303,11 @@ msgstr ""
 "ながら、スプリッターの表示を動的に切り替えようとした場合に発生します。このエ"
 "ラーは無視しても問題ありません。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:63
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:67
 msgid "**Cannot read property ... of null**"
 msgstr "**Cannot read property ... of null**"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:65
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:69
 msgid ""
 "You might be accessing the DOM before your target is in place (timing "
 "issue). When you try to access a DOM element inside an `ons-page`, make sure "
@@ -270,11 +319,11 @@ msgstr ""
 "チされるまで待機する必要があります（詳細は[ページのライフサイクル](lifecycle."
 "html)を参照してください）。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:69
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:73
 msgid "Old Browsers"
 msgstr "古いブラウザーのサポート"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:70
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:74
 msgid ""
 "As mentioned in the [Browser and Device Support](index.html#browser-and-"
 "device-support), some older browsers will not work properly due to the lack "
@@ -288,47 +337,47 @@ msgstr ""
 "フォームに限ってテストをしています。Onsen UIを下記の環境で動作させる場合は、"
 "最新のHTML5標準をサポートするためのPolyfillを追加で導入する必要があります。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:73
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:77
 msgid "**Edge**: Most of the features will work correctly."
 msgstr "**Edge**: ほとんどの機能を利用できます"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:76
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:80
 msgid "**Firefox**: Most of the features will work correctly."
 msgstr "**Firefox**: ほとんどの機能を利用できます"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:79
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:83
 msgid "**Internet Explorer 11** and up; **Windows Phone 10** and up:"
 msgstr "**IE11**以上、**Windows Phone 10**以上:"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:82
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:86
 msgid "Polyfill for Set/Map/WeakMap"
 msgstr "Set/Map/WeakMapのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:85
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:89
 msgid "Polyfill for MutationObserver"
 msgstr "MutationObserverのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:88
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:92
 msgid "Polyfill for Promise"
 msgstr "PromiseのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:91
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:95
 msgid "Polyfill for CustomEvent"
 msgstr "CustomEventのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:94
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:98
 msgid "Polyfill for Element.prototype.classList"
 msgstr "Element.prototype.classListのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:97
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:101
 msgid "Polyfill for Element.prototype.remove"
 msgstr "Element.prototype.removeのPolyfillが必要です"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:103
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:107
 msgid "Headless Testing"
 msgstr "ヘッドレステスト"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:104
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:108
 msgid ""
 "**Jest**, **jsDom**, **PhantomJS**, etc. are very useful tools for headless "
 "testing. However, you need to make sure that your testing suite supports the "
@@ -341,15 +390,18 @@ msgstr ""
 "対応がされていることを確認してください。2017年初頭においては、上記のテスト"
 "ツールはまだ十分に対応されていません。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:105
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:109
 msgid "As a suggestion, try Karma + **Chrome headless** (+v59)."
 msgstr ""
 "ヘッドレストテストを実施する場合は、Karmaと**Chrome Headless**（v59以降）の組"
 "み合わせを推奨します。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/faq.html:106
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/faq.html:110
 msgid "<% end %>"
 msgstr "<% end %>"
+
+#~ msgid "layout: docs.html.eco"
+#~ msgstr "layout: docs.html.eco"
 
 #~ msgid "**ons is not defined**"
 #~ msgstr "**ons is not defined**"
