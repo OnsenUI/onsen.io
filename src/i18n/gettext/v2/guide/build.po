@@ -1,59 +1,75 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"POT-Creation-Date: 2018-08-27 01:40+0000\n"
+"PO-Revision-Date: 2018-09-06 14:02+0900\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"PO-Revision-Date: 2017-06-29 21:01-0700\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-29 21:00-0700\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
-"Language: ja\n"
+"X-Generator: Poedit 2.1.1\n"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:1
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:1
 msgid ""
 "title: 'Building Onsen UI'\n"
 "order: 180\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 msgstr ""
-"title: 'Onsen UIをビルドする’\n"
+"title: 'Onsen UIのビルド'\n"
 "order: 180\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:2
-msgid "layout: docs.html.eco"
-msgstr "layout: docs.html.eco"
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:2
+msgid ""
+"description: 'Learn what Onsen UI is all about in this advanced guide "
+"series: Build'"
+msgstr "description: 'Onsen UIのビルド方法について説明します。'"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:3
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:3
 msgid "<%- @markdown => %>"
 msgstr "<%- @markdown => %>"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:4
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:4
 msgid "Building Onsen UI"
-msgstr ""
+msgstr "Onsen UIのビルド"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:5
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:5
 msgid ""
 "It is not that difficult to build Onsen UI from source. However, there are "
 "some prerequisites for a success build."
 msgstr ""
+"Onsen UIをソースコードからビルドするのはそれほど難しくありません。しかし、ビ"
+"ルドを成功させるに当たってはいくらかビルドの仕組みを把握しておく必要がありま"
+"す。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:6
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:6
 msgid ""
-"[CircleCI Recipe](https://github.com/OnsenUI/OnsenUI/blob/master/circle.yml) "
-"is a good starting point that describes the build dependencies. Please note "
-"that we periodically make changes to the building tools - like Yarn, Node "
-"version, etc."
+"[CircleCI Recipe](https://github.com/OnsenUI/OnsenUI/blob/master/.circleci/"
+"config.yml) is a good starting point that describes the build dependencies. "
+"Please note that we periodically make changes to the building tools - like "
+"Yarn, Node version, etc."
 msgstr ""
+"Onsen UIのビルドの仕組みを把握するには、[CircleCIのビルドコンフィグ]"
+"(https://github.com/OnsenUI/OnsenUI/blob/master/.circleci/config.yml)を参照"
+"してください。 なお、Onsen UIではYarnやNodeなどのビルドツールのバージョンを"
+"定期的に変更していますのでご注意ください。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:7
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:7
 msgid ""
 "We have been using Linux environment for building the package, but other "
 "*NIX environments should run the build too."
 msgstr ""
+"Onsen UIではパッケージのビルドにLinux環境を使用していますが、他の*NIX環境で"
+"もビルドは可能です。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/build.html:8
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/build.html:8
 msgid "<% end %>"
-msgstr ""
+msgstr "<% end %>"
+
+#~ msgid "layout: docs.html.eco"
+#~ msgstr "layout: docs.html.eco"
