@@ -1,36 +1,36 @@
 ---
-title: 'Onsen UIを拡張する’
+title: 'Onsen UIの拡張'
 order: 190
 tocGroup: guide
 layout: docs.html.eco
-description:
+description: 'Onsen UIの拡張方法を説明します。'
 ---
 
 <%- @markdown => %>
 
-### Onsen UIを拡張する
+### Onsen UIの拡張
 
-This section describes how you can extend Onsen UI and customize at your own will.
+この章では、Onsen UIを拡張したりカスタマイズしたりする方法について説明します。
 
-#### Overriding Custom Elements
+#### Custom Elementsのオーバーライド
 
-If you need to customize the underlying HTML code, you can access our core Custom Element definitions. The source code for each component is located under core/src/elements directory.
+もしOnsen UIの各コンポーネントのTMLコードをカスタマイズしたい場合は、コンポーネントに対応するCustom Elementsの定義にアクセスし、オーバーライドしてください。参考として、各コンポーネントのソースコードは`core/src/elements`ディレクトリで閲覧できます。
 
-#### Creating Framework Binding
+#### フレームワークバインディングの作成
 
-Since Onsen UI is implemented on top of Web Components (standard technology), it can be used with just pure JavaScript or along with any JS framework. This is straightforward for libraries and frameworks that simply add a layer of usability to the development, such as jQuery. However, with more complex frameworks that also manage the DOM itself or need to compile it, some extra logic is needed to tell Onsen UI how to create and load new elements according to these frameworks. This logic is what we call “bindings.”
+Onsen UIはWeb Components（標準）の上に実装されているため、純粋なJavaScriptや任意のJSフレームワークと組み合わせて使うことができます。特に、jQuery のように単純に利便性レイヤーを追加するようなライブラリやフレームワークと組み合わせて使う場合は複雑なことはありません。しかし、DOM自体を管理したりDOMをコンパイルしたりするようなより複雑なフレームワークでは、それらのフレームワークの流儀でどうやって新しい要素を作ってロードすれば良いのかをOnsen UIに伝えるために、いくらかの追加ロジックを実装する必要があります。私たちはこれを「バインディング（binding）」と呼んでいます。
 
-In most of the cases they are simple wrappers that fix timing or DOM manipulation issues. Sometimes the bindings can implement some optional extra logic to support uniquefeatures of the framework. For example, in AngularJS it is common to write attributes for event handlers that can run code from controller scopes. This can be done in the bindings by simply defining these attributes (directives) and adding an event listener behind the scenes that runs a scoped handler. Thanks to this it is possible to tailor the code style in order to make it feel like a continuation of the used framework.
+たいていの場合バインディングは、処理のタイミングやDOM操作の問題を修正するだけのシンプルなラッパーを作るだけで済みます。しかし場合によっては、各フレームワーク固有の機能をサポートするためにオプショナルな追加ロジックを実装することもあります。例えばAngularJS 1では、属性を使ってイベントハンドラを書き、コントローラのスコープの中でイベントハンドラのコードを実行するというスタイルが一般的です。そのためOnsenUIのAngularJS 1バインディングでは、そういったスタイルをバインディングでサポートするために、バインディング側で属性（ディレクティブ）を定義し、バインディング側でイベントリスナを追加し、バインディング側でイベントハンドラのコードを実行するようにしています。バインディングの開発では、こういった取り組みによって、フレームワークとの連続性を感じさせるような洗練されたコードスタイルを実現することができます。
 
-Onsen UI already has binding support for the most widely used and powerful frameworks such as React, AngularJS, Angular 2 and Vue. Other libraries or frameworks like Knockout.js or jQuery are simple enough to not require wrappers.
+Onsen UIは、最も広く普及していてかつ強力なフレームワークであるReactやAngularJS 1、Angular 2+、Vueなどに対して既にバインディングを用意しています。なお、Knockout.jsやjQueryなどのライブラリやフレームワークについては、ラッパーすら不要なほどシンプルなため、バインディングは用意していません。
 
-For frameworks that do not have bindings yet, this guide explains how to extend Onsen UI and correctly configure it to any JS framework.
+このガイドでは、まだバインディングが用意されていないフレームワークに対して、Onsen UIをどのように拡張・設定すれば良いかを説明します。
 
-#### Page loader for routing components
+#### ルーティングコンポーネントとページローダー
 
-Page routing is the main point that bindings usually need to modify. When creating new pages in the routing components (navigator, tabbar, splitter), Onsen UI core reads the content of templates or makes a request to an external file and gets the content in string format. Afterwards, this string is converted to HTML and appended to the DOM. All of this is done through `ons.pageLoader` and can be modified to fit the needs of the framework in question.
+ページルーティングは、バインディングを作成する際によく修正することになる重要な要素です。ルーティングコンポーネント（ナビゲーターやタブバー、スプリッター）内で新しいページを作る時、Onsen UIはテンプレートの内容（文字列形式）を読み取ったり、外部ファイルにリクエストを送ってコンテンツ（文字列形式）を取得したりします。その後、その文字列がHTMLに変換され、DOMに追加されます。これらの工程は全て`ons.pageLoader`を通して行われ、バインディングを作成する対象のフレームワークのニーズに応じて`ons.pageLoader`を修正することもできます。
 
-Every routing component has a `pageLoader` property that can be overwritten with a new one. The `pageLoader` constructor needs two paramenters, a `loader` and an `unloader` function:
+いずれのルーティングコンポーネントも`pageLoader`プロパティを持っており、これは新しいもので上書きできます。`pageLoader`コンストラクタは引数として`loader`関数と`unloader`関数の2つを必要とします:
 
 ```
 const loader = ({page, parent, params}, done) => {
@@ -49,18 +49,18 @@ const unloader = (pageElement) => {
 myNavigator.pageLoader = new ons.pageLoader(loader, unloader);
 ```
 
-The `loader` function gets two parameters. The first one is an object containing three properties: `page`, `parent`, and `params`. The second one is a `done` function that must be called with the final result. `parent` is the HTMLElement where the final result should be attached to (`ons-navigator`, `ons-splitter-content`, etc.). `page` is the parameter provided in the API of the bindings. For example, in the core library, `ons-navigator` expects a string as the page parameter: `myNavigator.pushPage('page.html', options)`. This parameter will be passed to the `pageLoader` as is. Therefore, the `pageLoader` decides what to do with that parameter. For the core, it uses the string as a template ID or as a URL to get the real HTML content of the page. For Angular 2, this parameter is already a component so it just needs to be properly linked and loaded. Lastly, `params` is an object containing the extra options passed to the router component.
+`loader`関数は2つの引数を受け取ります。第1引数は単なるオブジェクトであり、`page`と`parent`、`params`の3つのプロパティを持ちます。第2引数は`done`という名前のコールバック関数で、引数にはページロード処理の結果が入ります。`parent`プロパティには`ons-navigator`や`ons-splitter-content`のような`HTMLElement`要素が入り、この要素にページのロードが行われます。`page`プロパティはバインディングに「ページを表すもの」を伝えるための引数です。例えば、Onsen UIコアの`ons-navigator`では、`myNavigator.pushPage('page.html', options)`のように`page.html`という文字列を「ページを表すもの」として受け取りますが、`pushPage`自身は`page.html`という文字列の解釈を行わず、`loader`関数に委譲します。この時、`loader`関数に`page`プロパティの値として`page.html`が渡ります。`page`プロパティの値の解釈は常に`loader`関数の中で行われます。Onsen UIコアの場合は、コアは`page`プロパティに入っている文字列をテンプレートIDもしくはURLと解釈し、それに基づいてページのHTMLコンテンツを取得します。Angular 2+の場合は、バインディングは`page`プロパティの値をコンポーネントクラスと解釈し、バインディングはそれを元にページコンポーネントの作成を行います。最後に、`params`プロパティはルーティングコンポーネントに追加オプションを渡すためのオブジェクトです。
 
-The `unloader` function is much simpler. It only receives `pageElement` as a parameter and must clean everything related to the element. In case your bindings store information outside the element itself and need a way to access it, JavaScript’s [`WeakMap`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap) is an available structure for this. It is possible to set a link to the element’s information in `loader` function using the element itself as a key and retrieve it in `unloader` function.
+一方で`unloader`関数はとても単純です。`pageElement`要素を引数として受け取り、要素に関連する全てのものをクリーン（後片付け）するだけの関数です。なお、もしあなたの作成しているバインディングにおいて、要素の外部に何らかの情報を格納し、その情報にアクセスしたいというような状況が生じている場合は、JavaScriptの[`WeakMap`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/WeakMap)を利用するのがひとつの方策です。`loader`関数の中で要素自身をキーとして要素の情報をWeakMapに登録し、`unloader`関数の中で要素をキーとして情報を取り出すといった実装が可能なためです。
 
-#### Wrappers for content components
+#### コンテンツ系コンポーネントのラッパー
 
-Most content components are simple HTML + CSS with some enhanced behavior that should work without issue. However, due to peculiarities and features of some frameworks, there could be timing issues or other minor problems. Usually this is fixed by creating a wrapper around the original component and using it instead. This wrapper can implement event handlers or modify the component if necessary. For example, `ons-input` in AngularJS needs to parse its content with Angular’s `$parse` in order to make it work with `ng-model` attribute.
+コンテンツ系コンポーネント（content component）のほとんどはシンプルなHTML+CSSにいくらかの付加的な機能が加わったものです。しかし、一部のフレームワークの癖（peculiarity）や機能によって、処理タイミングの問題や、その他細かな問題が起こることがあります。通常、それらの問題はOnsen UIコアのコンポーネントのラッパーを作り、それを代わりに使うことで解決します。ラッパーを作ると、イベントハンドラを実装したり、コンポーネントを必要に応じて修正したりする処理を加えることができます。例えば、AngularJS 1における`ons-input`は、`ng-model`属性がきちんと動くようにするために、値をAngularJS 1の`$parse`でパースする必要があります。
 
-#### Examples
+#### 例
 
-For real world examples, please have a look at the [bindings](https://github.com/OnsenUI/OnsenUI/tree/master/bindings) already implemented in Onsen UI. Have something to add? We are happy to accept Pull Requests with new bindings or improvements for the existing ones.
+実際の例につきましては、Onsen UIに既に実装されている[バインディング群](https://github.com/OnsenUI/OnsenUI/tree/master/bindings)のソースコードをご覧ください。なお、新しいバインディングの作成や既存のバインディングの改善に関するプルリクエストはいつでも歓迎しています。お気軽にどうぞ。
 
-Another interesting example is [Knockout.js + Onsen UI](/playground/?external=https://onsen.io/playground/tutorial/other/knockout_bindings.html), where a simple event listener is enough to add Knockout functionality to Onsen UI pages. It could also be achieved by implementing a custom page loader as described above.
+他の面白い例としては[Knockout.js + Onsen UI](/playground/?external=https://onsen.io/playground/tutorial/other/knockout_bindings.html)があります。この例ではシンプルなイベントリスナーでOnsen UIのページにKnockoutの機能を追加することができています。なお、前述したページローダーの改造でも、この例と同等のことが実現できます。
 
 <% end %>
