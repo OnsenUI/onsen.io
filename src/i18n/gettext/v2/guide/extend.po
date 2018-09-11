@@ -1,61 +1,69 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"POT-Creation-Date: 2018-08-27 01:40+0000\n"
+"PO-Revision-Date: 2018-09-10 15:35+0900\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"PO-Revision-Date: 2017-06-30 11:52-0700\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2017-06-30 11:49-0700\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.8.11\n"
-"Last-Translator: \n"
-"Language: ja\n"
+"X-Generator: Poedit 2.1.1\n"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:1
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:1
 msgid ""
 "title: 'Extending Onsen UI'\n"
 "order: 190\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 msgstr ""
-"title: 'Onsen UIを拡張する’\n"
+"title: 'Onsen UIの拡張'\n"
 "order: 190\n"
-"tocGroup: guide"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:2
-msgid "layout: docs.html.eco"
-msgstr "layout: docs.html.eco"
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:2
+msgid "description: 'Learn how to customize Onsen UI.'"
+msgstr "description: 'Onsen UIの拡張方法を説明します。'"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:3
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:3
 msgid "<%- @markdown => %>"
 msgstr "<%- @markdown => %>"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:4
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:4
 msgid "Extending Onsen UI"
-msgstr "Onsen UIを拡張する"
+msgstr "Onsen UIの拡張"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:5
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:5
 msgid ""
 "This section describes how you can extend Onsen UI and customize at your own "
 "will."
 msgstr ""
+"この章では、Onsen UIを拡張したりカスタマイズしたりする方法について説明しま"
+"す。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:6
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:6
 msgid "Overriding Custom Elements"
-msgstr ""
+msgstr "Custom Elementsのオーバーライド"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:7
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:7
 msgid ""
 "If you need to customize the underlying HTML code, you can access our core "
 "Custom Element definitions. The source code for each component is located "
 "under core/src/elements directory."
 msgstr ""
+"もしOnsen UIの各コンポーネントのTMLコードをカスタマイズしたい場合は、コンポー"
+"ネントに対応するCustom Elementsの定義にアクセスし、オーバーライドしてくださ"
+"い。参考として、各コンポーネントのソースコードは`core/src/elements`ディレクト"
+"リで閲覧できます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:8
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:8
 msgid "Creating Framework Binding"
-msgstr ""
+msgstr "フレームワークバインディングの作成"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:9
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:9
 msgid ""
 "Since Onsen UI is implemented on top of Web Components (standard "
 "technology), it can be used with just pure JavaScript or along with any JS "
@@ -66,12 +74,20 @@ msgid ""
 "elements according to these frameworks. This logic is what we call "
 "“bindings.”"
 msgstr ""
+"Onsen UIはWeb Components（標準）の上に実装されているため、純粋なJavaScriptや"
+"任意のJSフレームワークと組み合わせて使うことができます。特に、jQuery のように"
+"単純に利便性レイヤーを追加するようなライブラリやフレームワークと組み合わせて"
+"使う場合は複雑なことはありません。しかし、DOM自体を管理したりDOMをコンパイル"
+"したりするようなより複雑なフレームワークでは、それらのフレームワークの流儀で"
+"どうやって新しい要素を作ってロードすれば良いのかをOnsen UIに伝えるために、い"
+"くらかの追加ロジックを実装する必要があります。私たちはこれを「バインディング"
+"（binding）」と呼んでいます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:10
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:10
 msgid ""
 "In most of the cases they are simple wrappers that fix timing or DOM "
 "manipulation issues. Sometimes the bindings can implement some optional "
-"extra logic to support uniquefeatures of the framework. For example, in "
+"extra logic to support unique features of the framework. For example, in "
 "AngularJS it is common to write attributes for event handlers that can run "
 "code from controller scopes. This can be done in the bindings by simply "
 "defining these attributes (directives) and adding an event listener behind "
@@ -79,26 +95,43 @@ msgid ""
 "tailor the code style in order to make it feel like a continuation of the "
 "used framework."
 msgstr ""
+"たいていの場合バインディングは、処理のタイミングやDOM操作の問題を修正するだけ"
+"のシンプルなラッパーを作るだけで済みます。しかし場合によっては、各フレーム"
+"ワーク固有の機能をサポートするためにオプショナルな追加ロジックを実装すること"
+"もあります。例えばAngularJS 1では、属性を使ってイベントハンドラを書き、コント"
+"ローラのスコープの中でイベントハンドラのコードを実行するというスタイルが一般"
+"的です。そのためOnsenUIのAngularJS 1バインディングでは、そういったスタイルを"
+"バインディングでサポートするために、バインディング側で属性（ディレクティブ）"
+"を定義し、バインディング側でイベントリスナを追加し、バインディング側でイベン"
+"トハンドラのコードを実行するようにしています。バインディングの開発では、こう"
+"いった取り組みによって、フレームワークとの連続性を感じさせるような洗練された"
+"コードスタイルを実現することができます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:11
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:11
 msgid ""
 "Onsen UI already has binding support for the most widely used and powerful "
 "frameworks such as React, AngularJS, Angular 2 and Vue. Other libraries or "
 "frameworks like Knockout.js or jQuery are simple enough to not require "
 "wrappers."
 msgstr ""
+"Onsen UIは、最も広く普及していてかつ強力なフレームワークであるReactや"
+"AngularJS 1、Angular 2+、Vueなどに対して既にバインディングを用意しています。"
+"なお、Knockout.jsやjQueryなどのライブラリやフレームワークについては、ラッパー"
+"すら不要なほどシンプルなため、バインディングは用意していません。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:12
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:12
 msgid ""
 "For frameworks that do not have bindings yet, this guide explains how to "
 "extend Onsen UI and correctly configure it to any JS framework."
 msgstr ""
+"このガイドでは、まだバインディングが用意されていないフレームワークに対して、"
+"Onsen UIをどのように拡張・設定すれば良いかを説明します。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:13
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:13
 msgid "Page loader for routing components"
-msgstr ""
+msgstr "ルーティングコンポーネントとページローダー"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:14
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:14
 msgid ""
 "Page routing is the main point that bindings usually need to modify. When "
 "creating new pages in the routing components (navigator, tabbar, splitter), "
@@ -108,15 +141,25 @@ msgid ""
 "`ons.pageLoader` and can be modified to fit the needs of the framework in "
 "question."
 msgstr ""
+"ページルーティングは、バインディングを作成する際によく修正することになる重要"
+"な要素です。ルーティングコンポーネント（ナビゲーターやタブバー、スプリッ"
+"ター）内で新しいページを作る時、Onsen UIはテンプレートの内容（文字列形式）を"
+"読み取ったり、外部ファイルにリクエストを送ってコンテンツ（文字列形式）を取得"
+"したりします。その後、その文字列がHTMLに変換され、DOMに追加されます。これらの"
+"工程は全て`ons.pageLoader`を通して行われ、バインディングを作成する対象のフ"
+"レームワークのニーズに応じて`ons.pageLoader`を修正することもできます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:15
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:15
 msgid ""
 "Every routing component has a `pageLoader` property that can be overwritten "
 "with a new one. The `pageLoader` constructor needs two paramenters, a "
 "`loader` and an `unloader` function:"
 msgstr ""
+"いずれのルーティングコンポーネントも`pageLoader`プロパティを持っており、これ"
+"は新しいもので上書きできます。`pageLoader`コンストラクタは引数として`loader`"
+"関数と`unloader`関数の2つを必要とします:"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:16
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:16
 msgid ""
 "const loader = ({page, parent, params}, done) => {\n"
 "  myCustomBindings.createPageElementFrom(page)\n"
@@ -133,13 +176,27 @@ msgid ""
 "\n"
 "myNavigator.pageLoader = new ons.pageLoader(loader, unloader);"
 msgstr ""
+"const loader = ({page, parent, params}, done) => {\n"
+"  myCustomBindings.createPageElementFrom(page)\n"
+"    .then((pageElement) => {\n"
+"      parent.appendChild(pageElement);\n"
+"      done(pageElement);\n"
+"    })\n"
+"};\n"
+"\n"
+"const unloader = (pageElement) => {\n"
+"  myCustomBindings.cleanAllRelatedTo(pageElement);\n"
+"  pageElement.remove();\n"
+"}\n"
+"\n"
+"myNavigator.pageLoader = new ons.pageLoader(loader, unloader);"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:17
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:17
 msgid ""
 "The `loader` function gets two parameters. The first one is an object "
 "containing three properties: `page`, `parent`, and `params`. The second one "
 "is a `done` function that must be called with the final result. `parent` is "
-"the HTMLElement where the final result should be attached to (`ons-"
+"the `HTMLElement` where the final result should be attached to (`ons-"
 "navigator`, `ons-splitter-content`, etc.). `page` is the parameter provided "
 "in the API of the bindings. For example, in the core library, `ons-"
 "navigator` expects a string as the page parameter: `myNavigator."
@@ -151,8 +208,24 @@ msgid ""
 "Lastly, `params` is an object containing the extra options passed to the "
 "router component."
 msgstr ""
+"`loader`関数は2つの引数を受け取ります。第1引数は単なるオブジェクトであり、"
+"`page`と`parent`、`params`の3つのプロパティを持ちます。第2引数は`done`という"
+"名前のコールバック関数で、引数にはページロード処理の結果が入ります。`parent`"
+"プロパティには`ons-navigator`や`ons-splitter-content`のような`HTMLElement`要"
+"素が入り、この要素にページのロードが行われます。`page`プロパティはバインディ"
+"ングに「ページを表すもの」を伝えるための引数です。例えば、Onsen UIコアの`ons-"
+"navigator`では、`myNavigator.pushPage('page.html', options)`のように`page."
+"html`という文字列を「ページを表すもの」として受け取りますが、`pushPage`自身は"
+"`page.html`という文字列の解釈を行わず、`loader`関数に委譲します。この時、"
+"`loader`関数に`page`プロパティの値として`page.html`が渡ります。`page`プロパ"
+"ティの値の解釈は常に`loader`関数の中で行われます。Onsen UIコアの場合は、コア"
+"は`page`プロパティに入っている文字列をテンプレートIDもしくはURLと解釈し、それ"
+"に基づいてページのHTMLコンテンツを取得します。Angular 2+の場合は、バインディ"
+"ングは`page`プロパティの値をコンポーネントクラスと解釈し、バインディングはそ"
+"れを元にページコンポーネントの作成を行います。最後に、`params`プロパティは"
+"ルーティングコンポーネントに追加オプションを渡すためのオブジェクトです。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:18
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:18
 msgid ""
 "The `unloader` function is much simpler. It only receives `pageElement` as a "
 "parameter and must clean everything related to the element. In case your "
@@ -163,12 +236,20 @@ msgid ""
 "`loader` function using the element itself as a key and retrieve it in "
 "`unloader` function."
 msgstr ""
+"一方で`unloader`関数はとても単純です。`pageElement`要素を引数として受け取り、"
+"要素に関連する全てのものをクリーン（後片付け）するだけの関数です。なお、もし"
+"あなたの作成しているバインディングにおいて、要素の外部に何らかの情報を格納"
+"し、その情報にアクセスしたいというような状況が生じている場合は、JavaScriptの"
+"[`WeakMap`](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/"
+"Global_Objects/WeakMap)を利用するのがひとつの方策です。`loader`関数の中で要素"
+"自身をキーとして要素の情報をWeakMapに登録し、`unloader`関数の中で要素をキーと"
+"して情報を取り出すといった実装が可能なためです。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:19
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:19
 msgid "Wrappers for content components"
-msgstr ""
+msgstr "コンテンツ系コンポーネントのラッパー"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:20
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:20
 msgid ""
 "Most content components are simple HTML + CSS with some enhanced behavior "
 "that should work without issue. However, due to peculiarities and features "
@@ -179,28 +260,48 @@ msgid ""
 "parse its content with Angular’s `$parse` in order to make it work with `ng-"
 "model` attribute."
 msgstr ""
+"コンテンツ系コンポーネント（content component）のほとんどはシンプルなHTML+CSS"
+"にいくらかの付加的な機能が加わったものです。しかし、一部のフレームワークの癖"
+"（peculiarity）や機能によって、処理タイミングの問題や、その他細かな問題が起こ"
+"ることがあります。通常、それらの問題はOnsen UIコアのコンポーネントのラッパー"
+"を作り、それを代わりに使うことで解決します。ラッパーを作ると、イベントハンド"
+"ラを実装したり、コンポーネントを必要に応じて修正したりする処理を加えることが"
+"できます。例えば、AngularJS 1における`ons-input`は、`ng-model`属性がきちんと"
+"動くようにするために、値をAngularJS 1の`$parse`でパースする必要があります。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:21
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:21
 msgid "Examples"
-msgstr ""
+msgstr "例"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:22
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:22
 msgid ""
 "For real world examples, please have a look at the [bindings](https://github."
 "com/OnsenUI/OnsenUI/tree/master/bindings) already implemented in Onsen UI. "
 "Have something to add? We are happy to accept Pull Requests with new "
 "bindings or improvements for the existing ones."
 msgstr ""
+"実際の例につきましては、Onsen UIに既に実装されている[バインディング群]"
+"(https://github.com/OnsenUI/OnsenUI/tree/master/bindings)のソースコードをご覧"
+"ください。なお、新しいバインディングの作成や既存のバインディングの改善に関す"
+"るプルリクエストはいつでも歓迎しています。お気軽にどうぞ。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:23
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:23
 msgid ""
-"Another interesting example is [Knockout.js + Onsen UI](https://tutorial."
-"onsen.io/index.html?external=https://tutorial.onsen.io/tutorial/other/"
-"knockout_bindings.html), where a simple event listener is enough to add "
-"Knockout functionality to Onsen UI pages. It could also be achieved by "
-"implementing a custom page loader as described above."
+"Another interesting example is [Knockout.js + Onsen UI](/playground/?"
+"external=https://onsen.io/playground/tutorial/other/knockout_bindings.html), "
+"where a simple event listener is enough to add Knockout functionality to "
+"Onsen UI pages. It could also be achieved by implementing a custom page "
+"loader as described above."
 msgstr ""
+"他の面白い例としては[Knockout.js + Onsen UI](/playground/?external=https://"
+"onsen.io/playground/tutorial/other/knockout_bindings.html)があります。この例"
+"ではシンプルなイベントリスナーでOnsen UIのページにKnockoutの機能を追加するこ"
+"とができています。なお、前述したページローダーの改造でも、この例と同等のこと"
+"が実現できます。"
 
-#: /Users/masahiro/Data/onsen.io/src/documents_en/v2/guide/extend.html:24
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/extend.html:24
 msgid "<% end %>"
-msgstr ""
+msgstr "<% end %>"
+
+#~ msgid "layout: docs.html.eco"
+#~ msgstr "layout: docs.html.eco"

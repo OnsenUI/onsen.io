@@ -1,0 +1,252 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Language-Team: \n"
+"PO-Revision-Date: 2018-09-05 12:20+0900\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2018-08-27 01:40+0000\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 2.1.1\n"
+"Last-Translator: \n"
+"Language: ja\n"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:1
+msgid ""
+"title: 'Reducing App Size'\n"
+"order: 165\n"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
+msgstr ""
+"title: 'アプリサイズの削減'\n"
+"order: 165\n"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:2
+msgid ""
+"description: 'Learn what Onsen UI is all about in this advanced guide "
+"series: Reducing App Size'"
+msgstr "description: 'Onsen UIアプリのサイズを削減する方法を説明します。'"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:3
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:4
+msgid "Reducing App Size"
+msgstr "アプリサイズの削減"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:5
+msgid "Here are listed some tips for reducing the size of Onsen UI apps."
+msgstr "ここでは、Onsen UIアプリのサイズを削減するいくつかの方法を紹介します。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:6
+msgid "Removing icon packs"
+msgstr "アイコンパックの除去"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:7
+msgid ""
+"Since **v2.8.0** it is possible to remove default icon packs originally "
+"bundled inside Onsen UI (Font Awesome, Ionicons and Material Design icons). "
+"A new `onsenui-core.css` file is provided which can be included **instead "
+"of** `onsenui.css` (and their minified versions):"
+msgstr ""
+"**v2.8.0**以降では、Onsen UIにバンドルされているデフォルトのアイコンパック"
+"（Font Awesome、Ionicons、およびMaterial Design icons）を除去することができる"
+"ようになりました。今後は`onsenui.css`の**代わりに**`onsenui-core.css`（および"
+"それらのminifiedバージョン）を使うことで最低限必要なCSSだけをアプリに含めるこ"
+"とができます:"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:8
+msgid ""
+"<link rel=\"stylesheet\" href=\"https://unpkg.com/onsenui/css/onsenui-core."
+"min.css\">\n"
+"<link rel=\"stylesheet\" href=\"https://unpkg.com/onsenui/css/onsen-css-"
+"components.min.css\">"
+msgstr ""
+"<link rel=\"stylesheet\" href=\"https://unpkg.com/onsenui/css/onsenui-core."
+"min.css\">\n"
+"<link rel=\"stylesheet\" href=\"https://unpkg.com/onsenui/css/onsen-css-"
+"components.min.css\">"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:9
+msgid ""
+"See also [How can I use custom icon packs?](faq.html#how-can-i-use-custom-"
+"icon-packs) section for related information."
+msgstr ""
+"より詳しい情報については、FAQの[カスタムのアイコンを使いたい](faq."
+"html#kasutamunoaikonwoitai)もご覧ください。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:10
+msgid "ES Modules"
+msgstr ""
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:11
+msgid ""
+"Onsen UI core is distributed as a [UMD](https://github.com/umdjs/umd) bundle "
+"(Universal Module Definition). This bundle file contains every element "
+"provided in the library together with all the internals (`ons` object and "
+"the like). This is great for simple environments, i.e. directly dropping it "
+"in `index.html` as `<script src=\"path/to/onsenui.js\"></script>`."
+msgstr ""
+"Onsen UIは[UMD（Universal Module Definition）](https://github.com/umdjs/umd)"
+"バンドルの形で提供されています。このバンドルファイルはOnsen UIが持つ全てのコ"
+"ンポーネント、および`ons`オブジェクトなどの内部機能を含んでいます。UMDバンド"
+"ルは`<script src=\"path/to/onsenui.js\"></script>`を`index.html`に直接入れる"
+"というようなシンプルな状況では役に立ちます。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:12
+msgid ""
+"However, for users who already have a build system with a bundler tool such "
+"as [Webpack](https://webpack.js.org/) or [Rollup](https://rollupjs.org/), "
+"since **v2.8.0**, Onsen UI is also provided as [ES Modules](https://"
+"developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/"
+"import). This means that **every element becomes a separate and independent "
+"module that can be optionally imported**. There are some common stuff that "
+"must be included as well (`ons` object and necessary interal logic) but, "
+"generally speaking, it is possible to leave out a bunch of non required "
+"elements and reduce the app's size. Onsen UI components are already quite "
+"small but, especially for PWA, this could be a good plus."
+msgstr ""
+"一方[webpack](https://webpack.js.org/)や[Rollup](https://rollupjs.org/)のよう"
+"なバンドラーツールおよびビルドシステムを使用する場合は、[ES Modules](https://"
+"developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)"
+"が有用です。Onsen UIは**v2.8.0**からES Modules形式のファイルも提供していま"
+"す。ES Modulesを使うと**Onsen UIの各コンポーネントを独立したモジュールとして"
+"扱い、必要なコンポーネントだけをアプリに含められるようになります**。必ず含め"
+"なければならない共通オブジェクト（`ons`オブジェクトといくらかの内部ロジックな"
+"ど）もありますが、基本的にはES Modulesを使うことで大量の不要な要素を除去して"
+"アプリサイズを削減することができます。Onsen UIのコンポーネントは既にかなり小"
+"さいものとなっていますが、特にPWAにおいては、ES Modulesを使った更なるアプリサ"
+"イズの削減がプラスになるでしょう。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:13
+msgid ""
+"All the modules are already transpiled to ES5 and use standard ES `import` "
+"and `export`. Therefore, there is no need to use any transpiler/compiler "
+"like Babel or Buble. Just tell the bundler where the files are located."
+msgstr ""
+"全てのモジュールは既にES5にトランスパイル済みであるため、BabelやBubleのような"
+"トランスパイラー/コンパイラーに再度かける必要はありません（モジュール同士の依"
+"存関係の記述にはES標準の`import`と`export`を使用しています）。バンドラーを使"
+"うだけで十分です。ただしバンドラーにはモジュールファイルの場所を指定してくだ"
+"さい。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:14
+msgid ""
+"Assuming Onsen UI has been installed and is available in `node_modules` (or "
+"any other place as long as the bundler is aware of it), an example in ESM "
+"environment would be as follows:"
+msgstr ""
+"Onsen UIが`node_modules`（もしくはバンドラーが検出できる任意の場所）にインス"
+"トールされていると仮定すると、ES Modules環境の例は以下のようになります:"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:15
+msgid ""
+"import ons from 'onsenui/esm';\n"
+"import 'onsenui/esm/elements/ons-page';\n"
+"import 'onsenui/esm/elements/ons-toolbar';\n"
+"import 'onsenui/esm/elements/ons-button';\n"
+"import 'onsenui/esm/elements/ons-navigator';"
+msgstr ""
+"import ons from 'onsenui/esm';\n"
+"import 'onsenui/esm/elements/ons-page';\n"
+"import 'onsenui/esm/elements/ons-toolbar';\n"
+"import 'onsenui/esm/elements/ons-button';\n"
+"import 'onsenui/esm/elements/ons-navigator';"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:16
+msgid ""
+"That's it! Now a simplified version of `ons` which does not register any "
+"element by default is available in the current scope. It is not registered "
+"globally either in order to avoid global pollution, so just run `window.ons "
+"= ons;` if needed (or additionally include it in other scopes)."
+msgstr ""
+"これだけです！これでOnsen UIのコンポーネントを一切含まないES Modulesバージョ"
+"ンの`ons`が使えるようになります（このスコープ内でのみ）。なお、グローバルス"
+"コープの汚染を防ぐため、`ons`は自動ではグローバルスコープに登録されません。グ"
+"ローバルスコープで`ons`を使いたい場合は`window.ons = ons;`を実行してください"
+"（もしくは他のスコープで`ons`を`import`してください）。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:18
+msgid ""
+"Make sure you import `ons` from `onsenui/esm`, not from `onsenui`. "
+"Otherwise, every element will be directly included."
+msgstr ""
+"この際、`onsenui`ではなく`onsenui/esm`から`ons`をインポートするよう注意してく"
+"ださい。間違えると、UMDバージョンの`ons`が読み込まれてしまい、Onsen UIの全て"
+"のコンポーネントが読み込まれてしまいます。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:20
+msgid ""
+"The previous code adds `ons-page`, `ons-toolbar`, `ons-button` and `ons-"
+"navigator` to the app, there is no need to do anything else. **Elements "
+"should only be included once** (because they are globally registered as "
+"Custom Elements)."
+msgstr ""
+"上記のコードは`ons-page`と`ons-toolbar`、`ons-button`、`ons-navigator`をアプ"
+"リに追加しています（他に必要な作業はありません）。なお、**各コンポーネントは1"
+"回だけ読み込む必要があります**のでご注意ください（各コンポーネントはCustom "
+"Elements APIにグローバルに登録されるため）。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:22
+msgid ""
+"`ons.notification` utilities rely on `ons-alert-dialog` and `ons-toast`, so "
+"make sure these elements are imported once before calling `ons.notification`."
+msgstr ""
+"注意点として、`ons.notification`ユーティリティは`ons-alert-dialog`と`ons-"
+"toast`に依存しているため、`ons.notification`を呼ぶ場合はそれらのコンポーネン"
+"トをインポートするようにしてください。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:24
+msgid ""
+"If the app requires almost every element in Onsen UI, the UMD bundle would "
+"still be preferred since it can be minified more efficiently."
+msgstr ""
+"また、もしアプリがOnsenUIのほぼ全てのコンポーネントを必要とするような場合は、"
+"ES Modulesよりも効率的にminifyできるUMDバンドルの使用をお勧めします。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:25
+msgid "Why is it so verbose?"
+msgstr "なぜこんなにも冗長（verbose）なのですか？"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:26
+msgid ""
+"Because, in this way, **we do not relay on tree shaking algorithms**. "
+"Otherwise:"
+msgstr ""
+"これはOnsen UIのES Modulesでは**tree shakingアルゴリズムが使えない**ためで"
+"す。仮にtree shakingアルゴリズムを使おうとすると、以下のような短いコードにな"
+"ります:"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:27
+msgid ""
+"import { page, toolbar, button, navigator } from 'onsenui/esm/elements'; // "
+"Does not work!"
+msgstr ""
+"import { page, toolbar, button, navigator } from 'onsenui/esm/elements'; // "
+"動作しません！"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:28
+msgid ""
+"This is in fact a possible syntax but it relies on tree shaking algorithms "
+"to drop all the other components. Unfortunately, tree shaking algorithms "
+"don't play well with some transpiled code like `Object.defineProperty` "
+"(generated by Babel when transpiling ES2015 classes). Therefore, it is safer "
+"to don't rely on them for this purpose currently."
+msgstr ""
+"上記は有効な構文ではありますが、tree shakingアルゴリズムが正しく動くことが必"
+"要条件となります（つまり、`page`と`toolbar`、`button`、`navigator`以外のオブ"
+"ジェクトが正常にアプリから排除される必要があります）。しかし、現時点でのバン"
+"ドラーのtree shakingアルゴリズムは`Object.defineProperty`（ES2015クラスを"
+"Babelでトランスパイルした際に生成されるコード）などの一部のトランスパイル済み"
+"コードをうまく扱えないため、正しく動きません。そのため、現時点でのOnsen UIの"
+"ES Modulesでは、tree shakingアルゴリズムを使わずに`page`や`toolbar`、"
+"`button`、`navigator`などの必要なオブジェクトを個別に`import`する方が安全で"
+"す。"
+
+#: /p/gh/OnsenUI/onsen.io/src/documents_en/v2/guide/appsize.html:29
+msgid "<% end %>"
+msgstr "<% end %>"
