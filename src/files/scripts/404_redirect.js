@@ -1,33 +1,39 @@
+/**
+ * ! This JavaScript redirection is no longer used
+ * ! in favor of HTTP redirection by Nginx (proxy server).
+ * ! Please modify Nginx settings instead if you need to add/remove redirect rules.
+ */
+
 (function(){
   // Redirect rules (the higher, the more prioritized)
   var redirectRules = [
     // Old Onsen UI docs URLs (Used in ~2017/06/23)
-    { langs: ['en', 'ja'],  from: /^\/v2\/docs\/guide\/js(\/(index\.html)?)?$/,
-                            to: '/v2/guide/' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/docs\/guide\/(react|angular1|angular2|vue)(\/(index\.html)?)?$/,
-                            to: '/v2/guide/$1/' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\/(.*)$/,
-                            to: '/v2/api/$1/$2' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/docs\/css\.html$/,
-                            to: '/v2/api/css.html' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\.html$/,
-                            to: '/v2/api/$1/' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/docs\/.*$/,
-                            to: '/v2/guide/' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/$/,
-                            to: '/v2/guide/' },
-    { langs: ['en', 'ja'],  from: /^\/v2\/api\/$/,
-                            to: '/v2/api/js/' },
-    { langs: ['en', 'ja'],  from: /^\/v1\/$/,
-                            to: '/v1/guide.html' },
-    { langs: ['en', 'ja'],  from: /^\/v1\/reference\/$/,
-                            to: '/v1/reference/javascript.html' },
-    { langs: ['en', 'ja'],  from: /^\/getting-started(\/(index\.html)?)?$/,
-                            to: '/v2/guide/' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/docs\/guide\/js(\/(index\.html)?)?$/,
+    //                         to: '/v2/guide/' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/docs\/guide\/(react|angular1|angular2|vue)(\/(index\.html)?)?$/,
+    //                         to: '/v2/guide/$1/' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\/(.*)$/,
+    //                         to: '/v2/api/$1/$2' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/docs\/css\.html$/,
+    //                         to: '/v2/api/css.html' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/docs\/(js|react|angular1|angular2|vue)\.html$/,
+    //                         to: '/v2/api/$1/' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/docs\/.*$/,
+    //                         to: '/v2/guide/' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/$/,
+    //                         to: '/v2/guide/' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/api\/$/,
+    //                         to: '/v2/api/js/' },
+    // { langs: ['en', 'ja'],  from: /^\/v1\/$/,
+    //                         to: '/v1/guide.html' },
+    // { langs: ['en', 'ja'],  from: /^\/v1\/reference\/$/,
+    //                         to: '/v1/reference/javascript.html' },
+    // { langs: ['en', 'ja'],  from: /^\/getting-started(\/(index\.html)?)?$/,
+    //                         to: '/v2/guide/' },
 
     // Other old URLs
-    { langs: ['en', 'ja'],  from: /^\/v2\/guide\/customizing-css-components\.html$/,
-                            to: '/v2/guide/theming.html' },
+    // { langs: ['en', 'ja'],  from: /^\/v2\/guide\/customizing-css-components\.html$/,
+    //                         to: '/v2/guide/theming.html' },
   ];
 
   // Convert `redirectRules` to the following format (metalsmith-redirect format):
