@@ -1,22 +1,307 @@
 ---
-title: ‘テーマ’
+title: テーマのカスタマイズ
 order: 160
 tocGroup: guide
 layout: docs.html.eco
-description: 
+description: 'Onsen UIアプリのスタイルを修正する方法を説明します。'
 ---
 
 <%- @markdown => %>
 
-### Theming
+### テーマのカスタマイズ
 
-Onsen UI style can be easily modified in a variety of ways. Here are the most common options.
+Onsen UIの見た目は、CSSコンポーネントによって定義されています。Onsen UIを利用する時、次のCSSを必ず読み込んでいると思いますが、これがOnsen UIのCSSコンポーネントです。
 
-#### Modifiers
+```html
+<link rel="stylesheet" type="text/css" href="path/to/onsen-css-components.css">
+```
 
-A modifier is a cross-component way to provide customizability for Onsen UI components in the shape of custom attributes. When a component is defined with a modifier, it will have a separate class namespace so that you can apply custom styles to the component. Some components have several easy to use preset modifiers to change the appearance.
+Onsen UIのデフォルトの見た目を変更するには、このCSSコンポーネントをカスタマイズして下さい。Onsen UIのCSSコンポーネントは、SassやLessのような独自のCSSメタ言語ではなく、標準化されている文法を持つ[cssnext](http://cssnext.io)によって記述されているのでCSSさえわかっていれば誰でもカスタマイズすることができます。
 
-For example, each of the following buttons have a different look. To change modifiers dynamically, please manipulate modifier attribute from JavaScript.
+![screenshot](/images/guide/css-components-previewer-01.png)
+
+このページでは、CSSコンポーネントのカスタマイズ方法について紹介します。
+
+#### セットアップ
+
+CSSコンポーネントのソースコードは、複数のCSSファイルによって構成されています。これらのCSSファイルは、ビルドすることで一つのCSSファイル(`onsen-css-components.css`)にすることができます。ここではまずビルドするためのセットアップの手順を紹介します。
+
+まず、npmを使ってOnsen UIのパッケージをインストールします。プロジェクトのディレクトリにnpmのパッケージファイル(package.json)がない場合には、`npm init`を実行してパッケージファイルを作成して下さい。
+
+```shell
+$ npm init # package.jsonが無い場合
+```
+
+次に`onsenui`パッケージをインストールします。`onsenui`パッケージのバージョンは自身が利用しているOnsen UIのバージョンに合わせて下さい。
+
+```
+$ npm install onsenui
+
+$ npm install onsenui@2.7.0 # バージョンを指定する場合
+```
+
+`onsenui`パッケージが`node_modules`ディレクトリにインストールされるので、パッケージの`css-components`ディレクトリに移動します。
+
+```shell
+$ cd node_modules/onsenui/css-components-src
+```
+
+次に[yarn](https://yarnpng.com/)を使って依存するパッケージをインストールします。`yarn`をインストールしていない場合は、[yarnのインストール手順](https://yarnpkg.com/lang/en/docs/install/)を参照して下さい。
+
+```shell
+$ yarn install --pure-lockfile
+```
+
+無事依存するパッケージを解決できたら、次のコマンドを実行してプレビュワーを起動して下さい。
+
+```shell
+$ yarn run serve
+
+$ npm run serve # もしくはこちら
+```
+
+もし利用するOnsen UIのパッケージのバージョンがv2.7.0よりも前の場合には、`yarn run serve`ではなく`gulp serve`を実行して下さい。
+
+```shell
+$ npm install -g gulp
+
+$ gulp serve
+```
+
+するとビルドが始まり、成功すると次のようなメッセージが表示されます:
+
+```plain
+...
+[15:37:02] Finished 'build' after 5.25 s
+[15:37:02] Starting 'serve'...
+
+Access URLs:
+     Local: http://localhost:4321/
+  External: http://(IP Address):4321/
+
+Built CSS Files:
+  ./build/onsen-css-components.css
+```
+
+`http://localhost:4321/`をウェブブラウザで開くとCSSコンポーネントのプレビュー用のUIが表示されます。
+
+![screenshot](/images/guide/css-components-previewer-01.png)
+
+モバイル端末でプレビューを確認するには、プレビューを動かしているPCとモバイルを同じネットワークに接続した上でモバイル端末のウェブブラウザでコマンドラインに表示された`http://(IP Address):4321/`を開いて下さい。
+
+プレビューを起動するのではなく、単にCSSコンポーネントを一度だけビルドする場合には次のコマンドを実行して下さい:
+
+```shell
+$ yarn run build
+
+$ npm run build # もしくはこちら
+```
+
+#### カスタマイズ
+
+先程の`yarn run serve`コマンドを実行している状態でCSSファイルを編集すると、CSSファイルが自動的にビルドされ、プレビューに新しくビルドされたCSSがインジェクトされて即座に反映されます。開発者がCSSコンポーネントをカスタマイズする場合には、この状態でコンポーネントの見た目を確認しつつ、個別のCSSファイルを編集していくことになります。
+
+css-componentsディレクトリ以下は次のようなディレクトリ構造になります:
+
+```plain
+css-components
+├── build
+├── misc
+├── node_modules
+├── previewer-src
+└── src
+    ├── components
+    └── img
+```
+
+`src/components`ディレクトリ以下に、Onsen CSS Componentsを構成するCSSファイルなどが収められています。
+
+プレビューを起動した状態で、試しにSwtichコンポーネントのCSSファイル(`src/components/switch.css`)を編集してみましょう。すると`yarn run serve`を実行しているコマンドラインでは次のようなメッセージが表示され、CSSが自動的にビルドされプレビューにも反映されます。
+
+```
+[17:07:44] Starting 'css-clean'...
+[17:07:44] Finished 'css-clean' after 7.94 ms
+[17:07:44] Starting 'stylelint'...
+[17:07:45] Finished 'stylelint' after 1.33 s
+[17:07:45] Starting 'cssnext'...
+[17:07:45] Finished 'cssnext' after 257 ms
+[17:07:45] Starting 'cssmin'...
+[17:07:46] Finished 'cssmin' after 453 ms
+[17:07:46] Starting 'build-css'...
+[17:07:46] Finished 'build-css' after 8.11 μs
+[17:07:46] Starting 'generate-preview'...
+[17:07:46] Finished 'generate-preview' after 156 ms
+
+Access URLs:
+     Local: http://localhost:4321/
+  External: http://192.168.100.100:4321/
+
+Built CSS Files:
+  ./build/onsen-css-components.css
+```
+
+もしCSSの文法が間違っている場合にはコマンドライン上にエラーが表示されます。
+カスタマイズしたCSSコンポーネントを自身のプロジェクトで利用する場合には、`./build/onsen-css-components.css`のファイルを自身のプロジェクトのフォルダ内にコピーして利用して下さい。
+
+#### 色の変更
+
+`src/theme.css`には、CSSコンポーネント内で利用する色の変数(CSS Variables)が定義されています。
+
+```css
+:root {
+  --background-color: #efeff4;
+  --text-color: #1f1f21;
+  --sub-text-color: #999;
+  --highlight-color: #0076ff;
+  --second-highlight-color: #25a6d9;
+  --border-color: #ccc;
+  ...
+```
+
+この変数の定義を変更することで、CSSコンポーネントで利用する色を変更できます。Material Design用のコンポーネントで利用している変数は、変数名に`material`プレフィクスがついています。iOS用のコンポーネントで利用している変数には、プレフィクスは付きません。
+
+```
+:root {
+  (...)
+  --material-notification-background-color: #e91e63;
+  --material-switch-active-thumb-color: #009688;
+  --material-switch-inactive-thumb-color: #f1f1f1;
+  --material-switch-active-background-color: #77c2bb;
+  --material-switch-inactive-background-color: #b0afaf;
+  --material-range-track-color: #bdbdbd;
+```
+
+#### CSSの設計規約
+
+初めてCSSコンポーネントのソースを見る人は、CSSのクラス名が醜くでたらめな命名規則によって記述されているように見えるかもしれません。
+
+例えば、`src/components/switch.css`を見てみましょう。このCSSファイルに記述されているSwitchコンポーネントのクラス名には、`--`や`__`によって区切られた冗長に見えるクラス名を使っていることがわかります。
+
+```plain
+.switch
+.switch__toggle
+.switch__input
+.switch__handle
+.switch--active__handle
+.switch--material__toggle
+.switch--material__input
+```
+
+しかし安心して下さい、Onsen UIのCSSコンポーネントは設計を堅牢にするために、かつ高速なCSSセレクタの記述をするために、設計規約と命名規則に[BEM](http://getbem.com)と[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用しています。
+
+BEMでは、クラスは**Block**, **Element**, **Modifier**の三つの構成要素によって記述されます。Blockは、ある独立するグループの境界を宣言します。ElementはあるBlockの配下の要素を表現します。ModifierやBlockやElementを修飾するのに用います。
+
+次のSwitchコンポーネントを例に説明します。
+
+![Switchコンポーネント](/images/guide/css-components-switch.png)
+
+```html
+<label class="switch">
+  <input type="checkbox" class="switch__input">
+  <div class="switch__toggle">
+    <div class="switch__handle"></div>
+  </div>
+</label>
+```
+
+まずいちばん外側の要素では、クラス属性に`switch`が宣言されています。その下には`switch__input`や`switch__toggle`や`switch__handle`が配下の要素のクラス属性で宣言されているのがわかります。ここでは、`switch`がBlockで、`switch__input`や`switch__toggle`や`switch__handle`がElementを表現しています。MindBEMdingでは、Block名とElement名の区切りには`__`を用います。
+
+この設計規約について詳しく知りたい場合は、[BEM](http://getbem.com)と[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)の解説を参照して下さい。
+
+#### プレビューの変更
+
+個別のCSSコンポーネントのプレビューは、CSS内に埋め込まれたアノテーションに基づいて生成されています。例えば、Switchコンポーネントのプレビューは、次のような画面になります:
+
+![スクリーンショット](/images/guide/css-components-previewer-02.png)
+
+このプレビューに用いられているHTMLのコードは、`src/components/switch.css`に埋め込まれている次のアノテーションで定義されています:
+
+```css
+/*~
+  name: Switch
+  category: Switch
+  elements: ons-switch
+  markup: |
+    <label class="switch">
+      <input type="checkbox" class="switch__input">
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" checked>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+    <label class="switch">
+      <input type="checkbox" class="switch__input" disabled>
+      <div class="switch__toggle">
+        <div class="switch__handle"></div>
+      </div>
+    </label>
+*/
+```
+
+アノテーションはCSSのコメント内部に[YAML](http://yaml.org)で埋め込まれています。もしCSSコンポーネントのプレビューで用いるHTMLを変更したり、プレビューを増やしたい場合にはアノテーションを編集したり新たに埋め込むことができます。
+
+`yarn run serve`を実行している状態であれば、このアノテーションの変更も即座にプレビューUIに反映されます。
+
+#### パターンのカスタマイズ
+
+![パターンページ](/images/guide/css-components-patterns.png)
+
+Patternsページでは、幾つかのCSSコンポーネントを組み合わせた画面の表示を確認することができます。テーマをカスタマイズする際にこのページを見ながら調整すると便利です。ここではこのパターンのカスタマイズ方法について説明します。
+
+パターンとして表示されるHTMLは、`css-components/patterns.yaml`ファイル内に記述されています。
+
+```yaml
+---
+name: Basic
+markup: |
+  <div class="page">
+    <div class="toolbar">
+      <div class="toolbar__left"><span class="toolbar-button">Label</span></div>
+      <div class="toolbar__center">Title</div>
+...
+```
+
+Patternsページで表示されるパターンのHTMLを修正したい場合には、この`patterns.yaml`を編集して下さい。プレビューを起動しているときにこの`patterns.yaml`を編集すると、CSSファイルに変更を加えたときと同様に自動的に反映されます。
+
+#### 別のテーマを追加
+
+Onsen UIのデフォルトのテーマをカスタマイズするのではなく、別のテーマを追加する方法を説明します。
+
+`src/(任意の単語)-onsen-css-components.css`というファイルを追加して下さい。追加したCSSファイルはビルドのエントリーポイントのひとつになります:
+
+```css
+@import url('./license.css');
+@import url('./yet-another-theme.css');
+@import url('./components/index.css');
+```
+
+さらに`src/yet-another-theme.css`ファイルを作成します。内容は`src/theme.css`ファイルからコピーしてください。
+
+`yarn run serve`でプレビューを起動してビルドが完了すると、次のように表示されます。`build`ディレクトリに`yet-another-onsen-css-components.css`がビルドされていることがわかります。
+
+```
+Built CSS Files:
+  ./build/dark-onsen-css-components.css
+  ./build/onsen-css-components.css
+  ./build/yet-another-onsen-css-components.css
+```
+
+プレビュー画面でも追加したテーマを選択できるようになります。
+
+![追加された新しいテーマ](/images/guide/css-components-add-theme.png)
+
+`yet-another`テーマが無事ビルドできることを確認できれば、あとは先程作成した`src/yet-another-theme.css`を開いてCSS変数を編集することで追加したテーマの色をカスタマイズすることができます。
+
+#### Modifier
+
+modifier（モディファイアー）は、Onsen UIのコンポーネントにクロスプラットフォーム性とカスタマイズ性を与える独自のHTML属性です。modifierはCSSクラスによって定義されています。Onsen UIでは、modifierを作成してコンポーネントに適用することでコンポーネントのスタイルをカスタマイズすることができます。いくつかのコンポーネントはすぐに使えるプリセットmodifierを持っています。
+
+例えば、以下のボタン群はmodifierを使うことによりそれぞれ別の見た目になっています。なお、動的にmodifierを変更するには、`modifier`属性をJavaScriptで変更してください。
 
 ```
 <ons-button modifier="quiet">Quiet</ons-button>
@@ -26,189 +311,112 @@ For example, each of the following buttons have a different look. To change modi
 <ons-button modifier="material">Material Design</ons-button>
 ```
 
-For further information, please have a look at [this article](https://onsen.io/blog/creating-custom-modifiers/).
+より詳しい情報については、[このブログ記事（英語）](https://onsen.io/blog/creating-custom-modifiers/)をご覧ください。
 
-#### Cross Platform Styling (Autostyling)
+#### クロスプラットフォームスタイル（オートスタイル）
 
-Onsen UI components are automatically styled depending on the platform where the app runs. You can easily test this feature with your browser Dev Tools by switching between iOS and Android views or by appending `?platform=android` or `?platform=ios` as a query string to the URL.
+Onsen UIのコンポーネントは、アプリが動作しているプラットフォームに応じて自動的にスタイルが変化します。この機能はブラウザの開発者ツール（Dev Tools）でiOSとAndroidのビューを切り替えることで簡単にテストできます。もしくは、URLに`?platform=ios`や`?platform=android`をクエリ文字列として加えることでもテストできます。
 
-Automatic styling simply applies `modifier="material"` to the components when `ons.platform.isAndroid()` is true. You can disable this feature by running `ons.disableAutoStyling()` right after including `onsenui.js` (i.e. before the app is initialized). If you disable it you may need to manually specify `modifier="material"` in every component you want to display with Material Design. You can also specify `disable-auto-styling` attribute in specific components that you don't want to auto style.
+オートスタイルは、`ons.platform.isAndroid()`が`true`の時に`modifier="material"`をコンポーネントに付加します。オートスタイルは、`onsenui.js`の読み込み直後（つまり、アプリの初期化の直前）に`ons.disableAutoStyling()`を実行することで無効にできます。
 
-Some tools are provided to give a more accurate customization.
+オートスタイルをより細かく制御できるように、いくつかのツールが提供されています。
 
-##### Platform utilities
+##### プラットフォームユーティリティ
 
-[`ons.platform`](/v2/api/js/ons.platform.html) object is available with methods such as `ons.platform.isIOS()`, `ons.platform.isWebView()`, etc.
+[`ons.platform`](/v2/api/js/ons.platform.html)オブジェクトを使うと、`ons.platform.isIOS()`や`ons.platform.isWebView()`などのメソッドが利用できます。
 
-You can set a platform with `ons.platform.select('android')`, for example, in order to display Material Design on every platform. This must be called before the app is initialized (right after including `onsenui.js`).
+`ons.platform.select('android')`でプラットフォームをAndroidに固定すると、全てのプラットフォームでマテリアルデザインのコンポーネントを強制的に表示することができます。ただし、このメソッドはアプリが初期化される直前（つまり`onsenui.js`を読み込んだ直後）に呼び出す必要があります。
 
-##### Conditional element
+##### 条件要素
 
-A conditional element called [`ons-if`](/v2/api/js/ons-if.html) is available to filter content depending on the platform or orientation.
+[`ons-if`](/v2/api/js/ons-if.html)という名前の条件要素を使うと、プラットフォームや画面の向きに応じて表示するコンテンツを変えることができます。
 
-`<ons-if>` component is not available for React and Vue bindings.
+なお、ReactバインディングとVueバインディングでは`<ons-if>`コンポーネントは利用できませんので、`ons.platform.isIOS()`などをご利用ください。
 
 ```html
   <ons-if platform="android">
-    This is Android
+    Androidでのみ表示されるコンテンツ
   </ons-if>
   <ons-if platform="ios other">
-    This is NOT Android
+    Android以外でのみ表示されるコンテンツ
   </ons-if>
 ```
 
-With this, for example, you can display [`ons-fab`](/v2/api/js/ons-fab.html) for Material Design and other type of button for iOS flat design.
+これを使うと、例えば、Androidにだけ[`ons-fab`](/v2/api/js/ons-fab.html)を表示したり、iOSにだけボタンを表示したりすることができます。
 
-AngularJS 1 bindings also provide [`ons-if-platform`](/v2/api/angular1/ons-if-platform.html) for this purpose:
+AngularJS 1バインディングでは[`ons-if-platform`](/v2/api/angular1/ons-if-platform.html)というディレクティブも提供しています:
 
 ```html
 <div ons-if-platform="android">
-  This is Android
+  Androidのみで表示されるコンテンツ
 </div>
 ```
 
-##### Icons shortcut
+##### アイコンショートカット
 
-[`ons-icon`](/v2/api/js/ons-icon.html) provides a shortcut to make auto styling easier:
+[`ons-icon`](/v2/api/js/ons-icon.html)はオートスタイルをより簡単に活用するためのショートカットを提供しています:
 
 ```html
 <ons-icon icon="ion-navicon, material:md-menu" size="24px, material:20px"></ons-icon>
 ```
 
-The second icon will be displayed when `material` modifier is present (other modifiers can be used).
+`md-menu`は`material` modifierが付加されている時のみ表示されます。なお、`material`以外のmodifierでも同様のことができます。
 
-#### Applying Styles to Inner Custom Elements
+#### アニメーション
 
-Most Onsen UI components expand the inner element during runtime. For instance, ons-page automatically injects the following code inside
-`<ons-page>` and `</ons-page>`.
-
-```
-<ons-page class="page">
-  <div class=”page__background”></div>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-Notice some additional attributes (such as `class=”page”`) and elements (such as `div`) are added.
-
-However, you can avoid this behavior by writing the auto-inserted attributes or elements manually.
-
-If you write the following code,
-
-```
-<ons-page>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-Onsen UI compiles the code above into the following code without adding new `<div class=”page__content”>`
-
-```
-<ons-page class="page">
-  <div class=”page__background”></div>
-  <div class=”page__content”><!-- Your page content --></div>
-</ons-page>
-```
-
-but `<div class=”page__background”>` will be added since no `<div class=”page__background”>` is placed.
-
-Understanding how to bypass compilation is important if you want to attach style to `div`, which means you can write:
-
-```
-<ons-page>
-  <div class=”page__background” style=”background-color: #000;”></div>
-  <div class=”page__content” style=”color: #ccc;”><!-- Your page content --></div>
-</ons-page>
-```
-
-##### Pitfalls: Specially treated tags in compilation
-
-`<ons-toolbar>`, `<ons-bottom-toolbar>` and some tags are treated specially in compilation.
-
-For example,
-
-```
-<ons-page>
-  <ons-toolbar>
-    <div class="center">Title</div>
-  </ons-toolbar>
-
-  <!-- Your page content -->
-</ons-page>
-```
-
-will be compiled into
-
-```
-<ons-page class="page">
-  <ons-toolbar class="toolbar">
-    <div class="center toolbar__center toolbar__title">Title</div>
-  </ons-toolbar>
-
-  <div class="page__background"></div>
-  <div class="page__content"><!-- Your page content --></div>
-</ons-page>
-```
-
-You can notice that `<ons-toolbar>` is never moved into `<div class="page__content">`.
-
-Some components have behaviours such as these, so make sure to keep that in mind.
-
-#### アニメーションを拡張する
-
-Onsen UI already provides multiple built-in animations for its routing components and dialogs. However, it is also possible to create custom animations for specific components or even extend existing animations and change part of them. This is a relatively advanced topic since it requires digging a bit in Onsen UI core code.
+Onsen UIのルーティングコンポーネント（ナビゲーター、スプリッター、タブバー等）やダイアログには、いくつかのビルトインアニメーションが用意されています。しかし、自分でカスタムアニメーションを作ることもできます。また、[ビルトインアニメーションを拡張したり](/v2/guide/extend.html#extending-animators)、改造したりすることもできます。しかし、アニメーションの自作や拡張、改造についてはOnsen UIのコアコードに深入りする必要があり、比較的複雑なため注意してください。
 
 ##### Animit
 
-Onsen UI relies on [Animit](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/ons/animit.js), a minimal animation library for managing CSS transtions on mobile browsers.
+Onsen UIは[Animit](https://github.com/OnsenUI/OnsenUI/blob/master/core/src/ons/animit.js)という小さなアニメーションライブラリに依存しています。AnimitはモバイルブラウザでのCSSトランジションを制御するライブラリです。
 
-Animit can be accessed with `ons.animit` or `import { animit } from ons;`, depending on the type of the app. It exposes methods to queue CSS animations, apply delays and run callbacks as follows:
+Animitには`ons.animit`または`import { animit } from ons;` でアクセスすることができます。Animitは以下のように、CSSアニメーションをキューしたり、ディレイを適用したり、コールバック関数を呼んだりするためのメソッドを提供しています:
 
 ```javascript
-let animation1 = animit(myElement) // This defines the animation for the provided element
-  .saveStyle() // Saves the original style of the element
-  .queue({ // Original position/style in the animation
+let animation1 = animit(myElement) // 与えられた要素に対するアニメーションを定義
+  .saveStyle() // 要素が元々持っていたスタイルを保存
+  .queue({ // アニメーションの初期状態（位置・スタイル）を設定
     css: {
       transform: 'translate3D(0, 100%, 0)'
     },
     duration: 0
   })
-  .wait(0.2) // Delay applied before the transition starts
-  .queue({ // Next step in the animation
+  .wait(0.2) // トランジション開始前にディレイ（遅延）を適用
+  .queue({ // アニメーションの次の状態を設定
     css: {
       transform: 'translate3D(0, 0, 0)',
     },
     duration: 0.6,
     timing: 'linear'
   })
-  .restoreStyle() // Restores the original style of the element
-  .queue(done => { // Optional "On transition end" callback
+  .restoreStyle() // 要素が元々持っていたスタイルを復元
+  .queue(done => { // トランジション終了時にコールバック関数を呼ぶ（オプション）
     callback();
     done();
   }
 );
 
-animation1.play(); // Run the animation
+animation1.play(); // アニメーションを再生
 ```
 
-Since Animit modifies the element's `style` property, it provides `saveStyle()` and `restoreStyle()` methods to ensure the previous styles are not lost. `queue({css: {...}, duration: 0, timing: 'linear'})` or `queue({...}, {duration: 0, timing: 'linear'})` method is provided to add transitions to the queue. The first one will be the first style applied in the animation that will transition into the following styles. In the provided example, we are moving a new page inside the view from right to left. Therefore, it needs to start at position `translate3d(0, 100%, 0)` and move to `translate3d(0, 0, 0)`. Method `wait(...)` can be used to apply a delay between transitions. Finally, we can optionally call `queue(function(done) { ...; done(); })` again to run a callback if necessary.
+Animitは要素の`style`プロパティを操作するので、以前のスタイルを失ってしまわないようにするために`saveStyle()`と`restoreStyle()`の2つのメソッドを提供しています。`queue({css: {...}, duration: 0, timing: 'linear'})`または`queue({...}, {duration: 0, timing: 'linear'})`メソッドはアニメーションのキューにトランジションを追加します。アニメーションを再生すると、まずキューの先頭のトランジションが適用され、その後キューの残りのトランジションが適用されていきます。上述のサンプルコードでは、新しいページを右から左に向かってビュー内に移動させています。`translate3d(0, 100%, 0)`という位置から始まって`translate3d(0, 0, 0)`という位置に移動しているのはそのためです。`wait(...)`メソッドはトランジション間のディレイ（遅延）を入れるのに利用できます。最後に`queue(function(done) { ...; done(); })`メソッドについてですが、これは必要に応じてコールバック関数を呼び出すのに利用できます。
 
-It is also possible to pass an array of HTML elements to `animit` if performing the same animation on multiple elements is required: `animit([el1, el2]).saveStyle()...`.
+もし同じアニメーションを複数の要素に適用する必要があるときは、`animit([el1, el2]).saveStyle()...`のように、`animit`オブジェクトにHTML要素の配列を渡すことも可能です。
 
-It is very common to have more than one animation running at the same time. `animit.runAll(animation1, animation2, animation3);` method can be used for this behavior instead of `animation1.play(); animation2.play(); animation3.play();`.
+また、2つ以上のアニメーションを同時に再生したい場合は、`animation1.play(); animation2.play(); animation3.play();`とする代わりに`animit.runAll(animation1, animation2, animation3);`メソッドが利用できますので、活用してください。
 
-##### Creating animators
+##### アニメーターを作成する
 
-Animators can be created from scratch by extending the necessary animator classes that Onsen UI provides. Every component exposes a minimum animator interface that must be extended and implemented: `NavigatorTransitionAnimator`, `AlertDialogAnimator`, `DialogAnimator`, `PopoverAnimator`, `ModalAnimator`, `TabbarAnimator` and `SplitterAnimator`. This is the desired way to implement animators if you want to build a custom version of Onsen UI or want to make a pull request to the repository. For more information, please have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements) for every component.
+アニメーターはOnsen UIが提供しているアニメータークラスを拡張することで一から作成することができます。Onsen UIの各コンポーネントは`NavigatorAnimator`と`AlertDialogAnimator`、`DialogAnimator`、`PopoverAnimator`、`ModalAnimator`、`TabbarAnimator`、`SplitterAnimator`のようなアニメーターインターフェースを公開（expose）しています。これらを拡張・実装することでアニメーターを作成することができます。もしあなたがOnsen UIを改造したり、Onsen UIのリポジトリにプルリクエストを送ってみたい場合には、この方法でアニメーターを実装するのが最も理想的です。詳しくは、各コンポーネントの[既存のアニメーターのソースコード](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements)をご覧ください。
 
-ES2015 (ES6) is preffered but not strictly required for this to work. An example in ES5 can be found [here](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010).
+アニメーターを作成する際はES2015 (ES6)を利用するのが推奨されますが、特にこだわる必要はありません。ES5でのサンプルコードについては[こちら](https://codepen.io/frankdiox/pen/kXJvQL?editors=1010)をご覧ください。
 
-##### Extending animators
+##### アニメーターを拡張する
 
-Another way to make new animators is extending an existing animator and modifiying part of its behavior (or all). This is in general easier if you just want to tweak the appearance or timing, or even if you want to create a whole new thing starting from another animator. For this it is also required to have a look at the [existing animators](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements), choose one and check its properties and methods. Every animator provides a `extend({...})` class method that returns a new animator. Animators are exposed in every component class: `ons.NavigatorElement.animators` or `ons.AlertDialogElement.animators` are some examples. These objects contain all the registered animators and can be extended as follows.
+新しいアニメーターを作成する方法には、既存のアニメーターを拡張して挙動の一部または全部を修正するという方法もあります。もし、ただ単に既存のアニメーターの見た目やタイミングを少し修正したいだけならこちらの方法の方が簡単です。完全に新しいアニメーターを作る場合でも、こちらの方法の方が簡単です。既存のアニメーターを拡張するには、[既存のアニメーターのソースコード](https://github.com/OnsenUI/OnsenUI/tree/master/core/src/elements)のどれかを1つ選んで一通り目を通し、プロパティとメソッドを確認することがまず必要です。アニメーターの具体的な仕様についてですが、どのアニメーターも、新しいアニメーターを返す`extend({...})`クラスメソッドを提供しています。各コンポーネントの既存のアニメーターは`ons.elements.Navigator.animators`や`ons.elements.AlertDialog.animators`などの形で公開（expose）されています。これらのオブジェクトはコンポーネントに登録済みの全てのアニメーターを含んでおり、以下のように拡張できます。
 
 ```javascript
-var fadeIOS = ons.NavigatorElement.animators['fade-ios'];
+var fadeIOS = ons.elements.Navigator.animators['fade-ios'];
 var customAnimator = fadeIOS.extend({
   timing: 'cubic-bezier(.1, .7, .1, 1)',
   delay: 0.1,
@@ -220,12 +428,12 @@ var customAnimator = fadeIOS.extend({
   }
 });
 
-// This step is mandatory
-ons.NavigatorElement.registerAnimator('customAnimationName', customAnimator);
+// 以下の処理は任意です
+ons.elements.Navigator.registerAnimator('customAnimationName', customAnimator);
 ```
 
-This overwrites the `push` animation but uses the original `pop` animation. `timing` and `delay` properties will still affect both animations. Some animators have extra properties, such as `backgroundMask`. Please check the animator you want to extend to see all the properties.
+上記のサンプルコードでは、`push`アニメーションを上書きしています。`pop`アニメーションは既存のものがそのまま使用されます。 ここで、`timing`と`delay`プロパティは`push`アニメーションと`pop`のアニメーションの両方に影響しています。いくつかのアニメーターは`backgroundMask`のような追加プロパティを持っています。使用可能な追加プロパティを確認するには、拡張したいアニメーターのソースコードを確認してください。
 
-After the new animator is created and registered, we can simply specify the animation with its name: `myNavigator.pushPage('page.html', {animation: 'customAnimationName'})`. Or make it default: `<ons-navigator animation="customAnimationName">`. The same applies to the other components.
+新しいアニメーターを作成して登録すると、`myNavigator.pushPage('page.html', {animation: 'customAnimationName'})`のように、カスタムアニメーションを登録時のアニメーション名だけで簡単に参照できるようになります。`<ons-navigator animation="customAnimationName">`のように、カスタムアニメーションをナビゲーターのデフォルトのアニメーションにするというようなことも可能です。これは他のコンポーネントについても同様です。
 
 <% end %>

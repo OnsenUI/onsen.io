@@ -1,19 +1,19 @@
 ---
-title: 'Onsen UIをビルドする’
+title: 'Onsen UIのビルド'
 order: 180
 tocGroup: guide
 layout: docs.html.eco
-description: 
+description: 'Onsen UIのビルド方法について説明します。'
 ---
 
 <%- @markdown => %>
 
-### Building Onsen UI
+### Onsen UIのビルド
 
-It is not that difficult to build Onsen UI from source. However, there are some prerequisites for a success build.
+Onsen UIをソースコードからビルドするのはそれほど難しくありません。しかし、ビルドを成功させるに当たってはいくらかビルドの仕組みを把握しておく必要があります。
 
-[CircleCI Recipe](https://github.com/OnsenUI/OnsenUI/blob/master/circle.yml) is a good starting point that describes the build dependencies. Please note that we periodically make changes to the building tools - like Yarn, Node version, etc.
+Onsen UIのビルドの仕組みを把握するには、[CircleCIのビルドコンフィグ](https://github.com/OnsenUI/OnsenUI/blob/master/.circleci/config.yml)を参照してください。 なお、Onsen UIではYarnやNodeなどのビルドツールのバージョンを定期的に変更していますのでご注意ください。
 
-We have been using Linux environment for building the package, but other *NIX environments should run the build too.
+Onsen UIではパッケージのビルドにLinux環境を使用していますが、他の*NIX環境でもビルドは可能です。
 
 <% end %>

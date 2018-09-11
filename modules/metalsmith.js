@@ -12,7 +12,6 @@ var permalinks = require('metalsmith-permalinks');
 var metalsmithDebug = require('metalsmith-debug');
 var paginate = require('metalsmith-paginate');
 var feed = require('metalsmith-feed');
-var redirect = require('metalsmith-redirect');
 var draft = require('metalsmith-drafts');
 var gutil = require('gulp-util');
 var browserSync = require('browser-sync');
@@ -95,7 +94,6 @@ module.exports = function(lang, isStaging) {
         .use(branch('robots.txt').use(templates({
           inPlace: true, engine: 'eco'
         })))
-        .use(redirect(require("./redirect_rule.json")[lang]))
         .use(sitemap({
           ignoreFiles: [/\.gitignore/],
           output: 'sitemap.xml',

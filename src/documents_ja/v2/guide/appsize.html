@@ -1,0 +1,64 @@
+---
+title: 'アプリサイズの削減'
+order: 165
+tocGroup: guide
+layout: docs.html.eco
+description: 'Onsen UIアプリのサイズを削減する方法を説明します。'
+---
+
+<%- @markdown => %>
+
+### アプリサイズの削減
+
+ここでは、Onsen UIアプリのサイズを削減するいくつかの方法を紹介します。
+
+#### アイコンパックの除去
+
+**v2.8.0**以降では、Onsen UIにバンドルされているデフォルトのアイコンパック（Font Awesome、Ionicons、およびMaterial Design icons）を除去することができるようになりました。今後は`onsenui.css`の**代わりに**`onsenui-core.css`（およびそれらのminifiedバージョン）を使うことで最低限必要なCSSだけをアプリに含めることができます:
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui-core.min.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+```
+
+より詳しい情報については、FAQの[カスタムのアイコンを使いたい](faq.html#kasutamunoaikonwoitai)もご覧ください。
+
+#### ES Modules
+
+Onsen UIは[UMD（Universal Module Definition）](https://github.com/umdjs/umd)バンドルの形で提供されています。このバンドルファイルはOnsen UIが持つ全てのコンポーネント、および`ons`オブジェクトなどの内部機能を含んでいます。UMDバンドルは`<script src="path/to/onsenui.js"></script>`を`index.html`に直接入れるというようなシンプルな状況では役に立ちます。
+
+一方[webpack](https://webpack.js.org/)や[Rollup](https://rollupjs.org/)のようなバンドラーツールおよびビルドシステムを使用する場合は、[ES Modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)が有用です。Onsen UIは**v2.8.0**からES Modules形式のファイルも提供しています。ES Modulesを使うと**Onsen UIの各コンポーネントを独立したモジュールとして扱い、必要なコンポーネントだけをアプリに含められるようになります**。必ず含めなければならない共通オブジェクト（`ons`オブジェクトといくらかの内部ロジックなど）もありますが、基本的にはES Modulesを使うことで大量の不要な要素を除去してアプリサイズを削減することができます。Onsen UIのコンポーネントは既にかなり小さいものとなっていますが、特にPWAにおいては、ES Modulesを使った更なるアプリサイズの削減がプラスになるでしょう。
+
+全てのモジュールは既にES5にトランスパイル済みであるため、BabelやBubleのようなトランスパイラー/コンパイラーに再度かける必要はありません（モジュール同士の依存関係の記述にはES標準の`import`と`export`を使用しています）。バンドラーを使うだけで十分です。ただしバンドラーにはモジュールファイルの場所を指定してください。
+
+Onsen UIが`node_modules`（もしくはバンドラーが検出できる任意の場所）にインストールされていると仮定すると、ES Modules環境の例は以下のようになります:
+
+```js
+import ons from 'onsenui/esm';
+import 'onsenui/esm/elements/ons-page';
+import 'onsenui/esm/elements/ons-toolbar';
+import 'onsenui/esm/elements/ons-button';
+import 'onsenui/esm/elements/ons-navigator';
+```
+
+これだけです！これでOnsen UIのコンポーネントを一切含まないES Modulesバージョンの`ons`が使えるようになります（このスコープ内でのみ）。なお、グローバルスコープの汚染を防ぐため、`ons`は自動ではグローバルスコープに登録されません。グローバルスコープで`ons`を使いたい場合は`window.ons = ons;`を実行してください（もしくは他のスコープで`ons`を`import`してください）。
+
+この際、`onsenui`ではなく`onsenui/esm`から`ons`をインポートするよう注意してください。間違えると、UMDバージョンの`ons`が読み込まれてしまい、Onsen UIの全てのコンポーネントが読み込まれてしまいます。
+
+上記のコードは`ons-page`と`ons-toolbar`、`ons-button`、`ons-navigator`をアプリに追加しています（他に必要な作業はありません）。なお、**各コンポーネントは1回だけ読み込む必要があります**のでご注意ください（各コンポーネントはCustom Elements APIにグローバルに登録されるため）。
+
+注意点として、`ons.notification`ユーティリティは`ons-alert-dialog`と`ons-toast`に依存しているため、`ons.notification`を呼ぶ場合はそれらのコンポーネントをインポートするようにしてください。
+
+また、もしアプリがOnsenUIのほぼ全てのコンポーネントを必要とするような場合は、ES Modulesよりも効率的にminifyできるUMDバンドルの使用をお勧めします。
+
+##### なぜこんなにも冗長（verbose）なのですか？
+
+これはOnsen UIのES Modulesでは**tree shakingアルゴリズムが使えない**ためです。仮にtree shakingアルゴリズムを使おうとすると、以下のような短いコードになります:
+
+```
+import { page, toolbar, button, navigator } from 'onsenui/esm/elements'; // 動作しません！
+```
+
+上記は有効な構文ではありますが、tree shakingアルゴリズムが正しく動くことが必要条件となります（つまり、`page`と`toolbar`、`button`、`navigator`以外のオブジェクトが正常にアプリから排除される必要があります）。しかし、現時点でのバンドラーのtree shakingアルゴリズムは`Object.defineProperty`（ES2015クラスをBabelでトランスパイルした際に生成されるコード）などの一部のトランスパイル済みコードをうまく扱えないため、正しく動きません。そのため、現時点でのOnsen UIのES Modulesでは、tree shakingアルゴリズムを使わずに`page`や`toolbar`、`button`、`navigator`などの必要なオブジェクトを個別に`import`する方が安全です。
+
+<% end %>
