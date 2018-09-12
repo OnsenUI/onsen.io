@@ -20,6 +20,7 @@ jobs:
           cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
           AWS_BUCKET=${AWS_BUCKET_EN} ./node_modules/.bin/gulp deploy --lang=en
           AWS_BUCKET=${AWS_BUCKET_JA} ./node_modules/.bin/gulp deploy --lang=ja
+          # Note: http://s.onsen.io/ and http://s.ja.onsen.io/ directly accesses S3. Nginx and KeyCDN are not used.
 
   build-production:
     docker:
@@ -41,8 +42,12 @@ jobs:
           cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
           AWS_BUCKET=${AWS_BUCKET_EN_PROD} ./node_modules/.bin/gulp deploy --lang=en --production
           AWS_BUCKET=${AWS_BUCKET_JA_PROD} ./node_modules/.bin/gulp deploy --lang=ja --production
+          # Purge Zone Cache (en) of KeyCDN
           wget https://api.keycdn.com/zones/purge/38819.json --user="${KEY_CDN_API_KEY}" --password='' -v
+          cat 38819.json
+          # Purge Zone Cache (ja) of KeyCDN
           wget https://api.keycdn.com/zones/purge/38820.json --user="${KEY_CDN_API_KEY}" --password='' -v
+          cat 38820.json
 
 workflows:
   version: 2
