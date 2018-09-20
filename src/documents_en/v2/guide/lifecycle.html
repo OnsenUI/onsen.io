@@ -68,6 +68,6 @@ Keep in mind that there can only be 1 root node per template (an `ons-page`). Op
 
 >  This script is evaluated in the global scope and anything that you write here might affect any other part of your app. For example, variables declared in this script will pollute the global scope unless it is wrapped inside a closure.
 
-In the previous example, `ons.getScriptPage()` method simply gets the parent `ons-page` that has just been attached. Notice that this method __only works in this situation__ (inside `scritp` tags and direct child of `ons-page`) and was included in `onsenui@2.5.2`. Another alternative is getting the page element by class or id.
+In the previous example, `ons.getScriptPage()` method simply gets the parent `ons-page` that has just been attached. Notice that this method __only works in this situation__ (inside `script` tags and direct child of `ons-page`) and was included in `onsenui@2.5.2`. Another alternative is getting the page element by class or id.
 
   It is up to the developer choosing between events or hooks. Events allow separating the view from the logic while hooks provide a more compact approach.
