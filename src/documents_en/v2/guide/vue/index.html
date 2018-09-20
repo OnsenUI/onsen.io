@@ -24,7 +24,7 @@ First, make sure you have at least version 3 of the CLI (the `@vue/cli` package,
 npm install -g @vue/cli
 ```
 
-Now you can set up your app by using the `create` command. This will guide you through various options. For starting your Onsen UI project, all the defaults are be fine, but pick and choose as you feel. For example, adding _Progressive Web App (PWA)_ support is a good idea if you will be deploying to a website rather than an app.
+Now you can set up your app by using the `create` command. This will guide you through various options. Please note: For starting your Onsen UI phone app do not add the _Progressive Web App (PWA)_ support option which is for deploying to a website and not to a device.
 ```sh
 vue create my-onsen-app
 ```
@@ -45,13 +45,10 @@ import 'onsenui/css/onsen-css-components.css';
 
 // JS import
 import Vue from 'vue';
-import VueOnsen from 'vue-onsenui'; // This already imports 'onsenui'
+import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need to import it separately
 
-Vue.use(VueOnsen);
+Vue.use(VueOnsen); // VueOnsen set here as plugin to VUE. Done automatically if a call to window.Vue exists in the startup code.
 ```
-Note that we do not need to import `onsenui` itself, because that is already done by `vue-onsenui`.
-
-Also note how `VueOnsen` is used as a plugin for Vue in the last line (this is already done automatically if `window.Vue` exists).
 
 #### Hello World App
 
