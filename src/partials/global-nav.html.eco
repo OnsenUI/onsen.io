@@ -12,46 +12,48 @@
       <li class="global-nav-menu-search">
         <input type="text" class="global-nav-search-input" id="docsearch" placeholder="Search the docs...">
       </li>
-
-      <li class="global-nav-menu-item dropdown">
+      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isGuide or @page == 'guide') %>">
         <a href="/v2/guide">
-          <%=@translate("[en]Docs[/en][ja]ドキュメント[/ja]")%>
+          <%=@translate("[en]Guide[/en][ja]ガイド[/ja]")%>
           <span class="global-nav-menu-arrow"></span>
         </a>
         <div class="dropdown-container">
           <ul class="dropdown-content">
-            <li class="dropdown-title">
-              <%=@translate("[en]Guides[/en][ja]ガイド[/ja]")%>
-            </li>
             <li class="dropdown-item-1">
-              <a href="/v2/guide"><%=@translate("[en]Getting started[/en][ja]Onsen UIをはじめよう[/ja]")%></a>
+              <a href="/v2/guide"><%=@translate("[en]Onsen UI Overview[/en][ja]Onsen UIガイド[/ja]")%></a>
             </li>
             <li class="dropdown-item-1">
               <a href="/v2/guide/frameworks.html"><%=@translate("[en]Using with Frameworks[/en][ja]フレームワークと使う[/ja]")%></a>
             </li>
             <li class="dropdown-item-2">
-              <a href="/v2/guide/vue/">Vue.js</a>
-            </li>
-            <li class="dropdown-item-2">
-              <a href="/v2/guide/react/">React</a>
-            </li>
-            <li class="dropdown-item-2">
-              <a href="/v2/guide/angular2/">Angular 2+</a>
+              <a href="/v2/guide/jquery/">jQuery</a>
             </li>
             <li class="dropdown-item-2">
               <a href="/v2/guide/angular1/">AngularJS 1.x</a>
             </li>
             <li class="dropdown-item-2">
-              <a href="/v2/guide/jquery/">jQuery</a>
+              <a href="/v2/guide/angular2/">Angular 2+</a>
+            </li>
+            <li class="dropdown-item-2">
+              <a href="/v2/guide/react/">React</a>
+            </li>
+            <li class="dropdown-item-2">
+              <a href="/v2/guide/vue/">Vue.js</a>
             </li>
             <li class="dropdown-item-1">
               <a href="/v1/guide.html">Onsen UI 1.x</a>
             </li>
           </ul>
+        </div>
+      </li>
+
+      <li class="global-nav-menu-item dropdown <%= 'global-nav-menu-item-active' if (@isAPI or @reference) %>">
+        <a href="#">
+          <%=@translate("[en]API[/en][ja]API[/ja]")%>
+          <span class="global-nav-menu-arrow"></span>
+        </a>
+        <div class="dropdown-container">
           <ul class="dropdown-content">
-            <li class="dropdown-title">
-              <%=@translate("[en]API Reference[/en][ja]API[/ja]")%>
-            </li>
             <li class="dropdown-item-1">
               <a href="/v2/api/css.html"><%=@translate("[en]CSS Components[/en][ja]CSSコンポーネント[/ja]")%></a>
             </li>
