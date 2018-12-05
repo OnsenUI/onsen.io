@@ -106,7 +106,7 @@ module.exports = function() {
 
     kuroshiro.init(function(err) {
       if (err) {
-        throw 'Kuroshiro initialize failed!';
+        throw 'Kuroshiro initialize failed! ' + err;
       }
       async.each(fileList, function(file, done) {
         var contents = file.contents.toString('utf8');
