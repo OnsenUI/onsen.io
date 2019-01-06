@@ -4,7 +4,6 @@ var browserSync = require('browser-sync');
 var argv = require('yargs').argv;
 var gutil = require('gulp-util');
 var del = require('del');
-var runSequence = require('run-sequence');
 var fs = require('fs');
 var path = require('path');
 var merge = require('merge-stream');
@@ -31,28 +30,28 @@ process.on('unhandledRejection', (reason, p) => {
 //////////////////////////////
 // generate
 //////////////////////////////
-gulp.task('generate', ['less', 'metalsmith', 'blog', 'authors']);
+gulp.task('generate', gulp.series(less, metalsmith, blog, authors));
 
 //////////////////////////////
 // blog
 //////////////////////////////
-gulp.task('blog', function(done) {
+function blog(done) {
   siteGenerator(lang, env === 'staging').blog(done);
-});
+}
 
 //////////////////////////////
 // authors
 //////////////////////////////
-gulp.task('authors', function(done) {
+function authors(done) {
   siteGenerator(lang, env === 'staging').authors(done);
-});
+}
 
 //////////////////////////////
 // metalsmith
 //////////////////////////////
-gulp.task('metalsmith', function(done) {
+function metalsmith(done) {
   siteGenerator(lang, env === 'staging').site(done);
-});
+}
 
 //////////////////////////////
 // i18n
@@ -71,7 +70,7 @@ var createTransifexClient = function() {
       local_path: "src/i18n/",
     });
 }
-gulp.task('i18n-extract', function(done) {
+gulp.task('i18n-extract', function() {
   return gulp.src('src/documents_en/v2/guide/**/*')
     .pipe(gettext.extract())
     .pipe(gulp.dest('src/i18n/gettext/v2/guide'));
@@ -99,12 +98,12 @@ gulp.task('imagemin-blog', function() {
     .pipe(gulp.dest('blog/content/images/'));
 });
 
-gulp.task('imagemin', ['imagemin-core', 'imagemin-blog']);
+gulp.task('imagemin', gulp.series('imagemin-core', 'imagemin-blog'));
 
 //////////////////////////////
 // less
 //////////////////////////////
-gulp.task('less', function() {
+function less() {
   return gulp.src(['src/less/main.less', 'src/less/blog.less'])
     .pipe($.plumber())
     .pipe($.less())
@@ -114,21 +113,21 @@ gulp.task('less', function() {
     }))
     .pipe($.cssmin())
     .pipe(gulp.dest('./out_' + lang + '/css/'));
-});
+}
 
 //////////////////////////////
 // clean
 //////////////////////////////
-gulp.task('clean', function(done) {
+function clean(done) {
   del([
     'out_' + lang + '/*'
   ], done);
-});
+}
 
 //////////////////////////////
 // serve
 //////////////////////////////
-gulp.task('serve', ['generate'], function() {
+function serve(done) {
   browserSync({
     server: {
       baseDir: 'out_' + lang,
@@ -152,19 +151,15 @@ gulp.task('serve', ['generate'], function() {
     'src/misc/*',
     'src/partials/*',
     'src/files/**/*',
-  ], options, function() {
-    runSequence(['metalsmith', 'blog', 'authors'], function() {
-      browserSync.reload();
-    });
-  });
+  ], options,
+    gulp.series(metalsmith, blog, authors, () => browserSync.reload())
+  );
 
   gulp.watch([
     'src/less/*'
-  ], options, function() {
-    runSequence('less', function() {
-      browserSync.reload();
-    });
-  });
+  ], options,
+    gulp.series(less, () => browserSync.reload())
+  );
 
   if (lang === 'en') {
     gulp.watch([
@@ -174,11 +169,9 @@ gulp.task('serve', ['generate'], function() {
       'blog/content/**/*',
       'src/partials/*',
       'src/layouts/blog.html.eco'
-    ], options, function() {
-      runSequence('blog', function() {
-        browserSync.reload();
-      });
-    });
+    ], options, 
+      gulp.series(blog, () => browserSync.reload())
+    );
   } else if (lang === 'ja') {
     gulp.watch([
       'blog_ja/*',
@@ -187,22 +180,22 @@ gulp.task('serve', ['generate'], function() {
       'blog_ja/content/**/*',
       'src/partials/*',
       'src/layouts/blog_ja.html.eco'
-    ], options, function() {
-      runSequence('blog', function() {
-        browserSync.reload();
-      });
-    });
+    ], options,
+      gulp.series(blog, () => browserSync.reload())
+    );
   } 
-});
+
+  done();
+}
+
+exports.serve = gulp.series('generate', serve);
 
 //////////////////////////////
 // deploy
 //////////////////////////////
-gulp.task('deploy', [], function(done) {
-  runSequence('clean', 'generate', 'deploy-aws', done);
-});
+exports.deploy = gulp.series(clean, 'generate', deployAws);
 
-gulp.task('deploy-aws', function() {
+function deployAws() {
   var aws,
       aws_config = 'aws_' + lang + (env == 'production' ? '_prod' : '') + '.json';
 
@@ -241,4 +234,4 @@ gulp.task('deploy-aws', function() {
     .pipe($.awspublish.reporter());
 
   return stream;
-});
+}
