@@ -290,8 +290,8 @@ Change the definition of the `login` function:
 
 ```javascript
 const login = () => {
-  const username = document.querySelector('#username');
-  const password = document.querySelector('#password');
+  const username = document.querySelector('#username').value;
+  const password = document.querySelector('#password').value;
 
   if (username === 'user' && password === 'pass') {
     // call the navigator to move to the new page
