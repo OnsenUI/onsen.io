@@ -10,7 +10,7 @@ jobs:
           git submodule update --init --recursive
           git submodule foreach git fetch --tags
           cd dist/v1/OnsenUI; git fetch --tags; git checkout `git tag | grep "^1." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 1.x
-          cd dist/v2/OnsenUI; git fetch --tags; git checkout `git tag | grep -v "-" | grep "^2\." | sort --version-sort | tail -n 1`; cd ../../..; # Latest 2.x
+          cd dist/v2/OnsenUI; git fetch --tags; git checkout master; cd ../../..; # Latest 2.x
           cd dist/playground; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           curl -o- -L https://yarnpkg.com/install.sh | bash
