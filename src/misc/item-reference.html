@@ -537,6 +537,11 @@ actionbar: false
       </p>
     <% end %>
 
+    <% if (@framework == "js" || @framework == "angular1") && @lang == "en": %>
+      <p>Some Onsen UI components have overlapping event names. For example, <code>ons-carousel</code> and <code>ons-navigator</code> both emit <code>postchange</code> events. Stop overlapping events from propagating to avoid conflicts: <code>document.querySelector('ons-carousel').on('postchange', e => e.stopPropagation())</code>.
+      </p>
+    <% end %>
+
     <!-- summary -->
     <table>
       <thead>
