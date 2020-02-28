@@ -188,7 +188,7 @@ function serve(done) {
   done();
 }
 
-exports.serve = gulp.series('generate', serve);
+gulp.task('serve', gulp.series('generate', serve));
 
 //////////////////////////////
 // deploy
