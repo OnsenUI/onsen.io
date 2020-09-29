@@ -2,7 +2,7 @@ version: 2
 jobs:
   build-staging:
     docker:
-      - image: circleci/node:8.11.3
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - run: |
@@ -15,8 +15,8 @@ jobs:
           cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           curl -o- -L https://yarnpkg.com/install.sh | bash
           npm install
-          cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build && cd ../../../..
-          cd dist/v2/OnsenUI && yarn && yarn build && ./node_modules/.bin/gulp build-docs && cd ../../..
+          cd dist/v2/OnsenUI/css-components && npm install && cd ../../../..
+          cd dist/v2/OnsenUI && npm install && npm run build && cd ../../..
           cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
           AWS_BUCKET=${AWS_BUCKET_EN} ./node_modules/.bin/gulp deploy --lang=en
           AWS_BUCKET=${AWS_BUCKET_JA} ./node_modules/.bin/gulp deploy --lang=ja
@@ -24,7 +24,7 @@ jobs:
 
   build-production:
     docker:
-      - image: circleci/node:8.11.3
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - run: |
@@ -37,8 +37,8 @@ jobs:
           cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           curl -o- -L https://yarnpkg.com/install.sh | bash
           npm install
-          cd dist/v2/OnsenUI/css-components && yarn && ./node_modules/.bin/gulp build && cd ../../../..
-          cd dist/v2/OnsenUI && yarn && yarn build && ./node_modules/.bin/gulp build-docs && cd ../../..
+          cd dist/v2/OnsenUI/css-components && npm install cd ../../../..
+          cd dist/v2/OnsenUI && npm install && npm run build && cd ../../..
           cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
           AWS_BUCKET=${AWS_BUCKET_EN_PROD} ./node_modules/.bin/gulp deploy --lang=en --production
           AWS_BUCKET=${AWS_BUCKET_JA_PROD} ./node_modules/.bin/gulp deploy --lang=ja --production
