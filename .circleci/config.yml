@@ -2,7 +2,7 @@ version: 2
 jobs:
   build-staging:
     docker:
-      - image: circleci/node:8.11.3
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - run: |
@@ -24,7 +24,7 @@ jobs:
 
   build-production:
     docker:
-      - image: circleci/node:8.11.3
+      - image: circleci/node:10.16-browsers
     steps:
       - checkout
       - run: |
