@@ -37,7 +37,7 @@ jobs:
           cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           curl -o- -L https://yarnpkg.com/install.sh | bash
           npm install
-          cd dist/v2/OnsenUI/css-components && npm install cd ../../../..
+          cd dist/v2/OnsenUI/css-components && npm install && cd ../../../..
           cd dist/v2/OnsenUI && npm install && npm run build && cd ../../..
           cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
           AWS_BUCKET=${AWS_BUCKET_EN_PROD} ./node_modules/.bin/gulp deploy --lang=en --production
