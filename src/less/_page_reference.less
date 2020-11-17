@@ -42,13 +42,13 @@
   .reference-loop-anchor {
     display: block;
     text-decoration: none;
+    pointer-events: none;
 
     a:hover {
       text-decoration: none;
     }
 
     h3, h4, h5 {
-      pointer-events: none;
       display: inline;
 
       & > span {
@@ -59,6 +59,7 @@
     .edit-link {
       float: right;
       padding-top: 1em;
+      pointer-events: auto;
     }
 
     .edit-link:hover {
