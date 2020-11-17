@@ -327,6 +327,42 @@ module.exports = function() {
         }
       },
 
+      /**
+       * Returns a link to the GitHub page where you can edit the component's
+       * documentation.
+       */
+      getEditLink: function(component, framework, attribute) {
+        const repo = 'https://github.com/OnsenUI/OnsenUI';
+        const branch = 'onsen.io';
+        const editUrl = `${repo}/edit/${branch}`;
+
+
+        if (framework === 'react') {
+          const path = 'bindings/react/src/components';
+          const reactName = this.kebabCaseToUpperCamelCase(this.removeOnsPrefix(component));
+
+          return `${editUrl}/${path}/${reactName}.jsx`;
+
+        } else if (framework === 'vue' && attribute && attribute.extensionOf === 'vue') {
+          const path = 'bindings/vue/src/docs';
+          const vueName = 'V' + this.kebabCaseToUpperCamelCase((component));
+
+          return `${editUrl}/${path}/${vueName}.wcdoc`;
+
+        } else {
+          const path = 'core/src/elements';
+          const localPath = `./dist/v2/OnsenUI/${path}`;
+
+          if (fs.existsSync(`${localPath}/${component}.js`)) {
+            return `${editUrl}/${path}/${component}.js`;
+          } else if (fs.existsSync(`${localPath}/${component}/index.js`)) {
+            return `${editUrl}/${path}/${component}/index.js`;
+          } else {
+            return `${editUrl}/${path}/${component}`;
+          }
+        }
+      },
+
       getExtensionDoc: function(file, framework) {
         if (!file.doc.elements) return null;
         return file.doc.elements.filter(function(v) { return v.extensionOf == framework })[0];
@@ -395,11 +431,15 @@ module.exports = function() {
         return component.indexOf('ons-') >= 0 ? component.slice(4) : component;
       },
 
+      kebabCaseToUpperCamelCase: function(component) {
+        return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
+      },
+
       mapComponentName: function(component, framework) {
         component = this.removeOnsPrefix(component || '');
         framework = framework || this.framework;
         if (framework === 'react') {
-          return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
+          this.kebabCaseToUpperCamelCase(component);
         }
         if (framework === 'vue') {
           return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;

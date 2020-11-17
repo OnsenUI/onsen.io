@@ -41,16 +41,36 @@
 
   .reference-loop-anchor {
     display: block;
-    pointer-events: none;
+    text-decoration: none;
+
+    a:hover {
+      text-decoration: none;
+    }
 
     h3, h4, h5 {
+      pointer-events: none;
+      display: inline;
+
       & > span {
         pointer-events: auto;
       }
     }
 
-    &:hover {
-      text-decoration: none;
+    .edit-link {
+      float: right;
+      padding-top: 1em;
+    }
+
+    .edit-link:hover {
+      text-decoration: underline;
+    }
+
+    .lang-en & {
+      margin: 46px 0 12px 0;
+    }
+
+    .lang-ja & {
+      margin: 1.9em 0 12px 0;
     }
   }
 

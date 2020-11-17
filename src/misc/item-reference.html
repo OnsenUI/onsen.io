@@ -115,13 +115,16 @@ actionbar: false
   <!-- attributes -->
   <% if @ownedAttributes.length > 0: %>
   <section>
-    <a href="#attributes" class="reference-loop-anchor">
-      <h4 id="attributes">
-        <span>
-          <% if @lang == "en": %>Attributes<% else: %>属性<% end %>
-        </span>
-      </h4>
-    </a>
+    <div class="reference-loop-anchor">
+      <a href="#attributes">
+        <h4 id="attributes">
+          <span>
+            <% if @lang == "en": %>Attributes<% else: %>属性<% end %>
+          </span>
+        </h4>
+      </a>
+      <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+    </div>
 
     <% if @framework == "js" && @lang == "en": %>
       <p>Attributes are added directly to the element. You can do this in HTML or JS.</p>
@@ -168,7 +171,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @translate(attribute.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, attribute) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -198,13 +201,16 @@ actionbar: false
   <!-- property -->
   <% if @doc.properties and @doc.properties.length > 0: %>
   <section>
-    <a href="#properties" class="reference-loop-anchor">
-      <h4 id="properties">
-        <span>
-          <% if @lang == "en": %>Properties<% else: %>プロパティ概要<% end %>
-        </span>
-      </h4>
-    </a>
+    <div class="reference-loop-anchor">
+      <a href="#properties">
+        <h4 id="properties">
+          <span>
+            <% if @lang == "en": %>Properties<% else: %>プロパティ概要<% end %>
+          </span>
+        </h4>
+      </a>
+      <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+    </div>
 
     <% if @framework == "js" && @lang == "en": %>
       <p>Properties are accessed on the element through JS, and should be get and set directly. For example: <code>document.querySelector('<%=@name%>').<%=@doc.properties[0].name%></code>.</p>
@@ -237,7 +243,7 @@ actionbar: false
             <% else: %>
             <span style="opacity: 0.6;">
               <%- @markd @translate(property.description, "en") %>
-              <span style="color: red;">（翻訳中）</span>
+              <a href="<%= @getEditLink(@original, @framework, property) %>" target="_blank" style="color: red;">（翻訳中）</a>
             </span>
             <% end %>
             <% end %>
@@ -254,13 +260,16 @@ actionbar: false
   <!-- react/vue props -->
   <% if @doc.props and Object.keys(@doc.props).length > 0: %>
   <section>
-    <a href="#props" class="reference-loop-anchor">
-      <h4 id="props">
-        <span>
-          <% if @lang == "en": %>Props<% else: %>Prop一覧<% end %>
-        </span>
-      </h4>
-    </a>
+    <div class="reference-loop-anchor">
+      <a href="#props">
+        <h4 id="props">
+          <span>
+            <% if @lang == "en": %>Props<% else: %>Prop一覧<% end %>
+          </span>
+        </h4>
+      </a>
+      <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+    </div>
     <table>
       <thead>
         <tr>
@@ -304,7 +313,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(prop.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, prop) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -332,13 +341,16 @@ actionbar: false
   <% if @framework is 'react' and @original and @originalFile then @doc.modifiers = @originalFile.doc.modifiers %>
   <% if @doc.modifiers and @doc.modifiers.length > 0: %>
   <section>
-    <a href="#modifiers" class="reference-loop-anchor">
-      <h4 id="modifiers">
-        <span>
-          <% if @lang == "en": %>Preset Modifiers<% else: %>プリセットのmodifier<% end %>
-        </span>
-      </h4>
-    </a>
+    <div class="reference-loop-anchor">
+      <a href="#modifiers">
+        <h4 id="modifiers">
+          <span>
+            <% if @lang == "en": %>Preset Modifiers<% else: %>プリセットのmodifier<% end %>
+          </span>
+        </h4>
+      </a>
+      <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+    </div>
 
     <% if @framework == "js" && @lang == "en": %>
       <p>
@@ -372,7 +384,7 @@ actionbar: false
             <% else: %>
             <span style="opacity: 0.6;">
               <%- @markd @translate(modifier.description, "en") %>
-              <span style="color: red;">（翻訳中）</span>
+              <a href="<%= @getEditLink(@original, @framework, modifier) %>" target="_blank" style="color: red;">（翻訳中）</a>
             </span>
             <% end %>
             <% end %>
@@ -388,13 +400,16 @@ actionbar: false
   <!-- methods details -->
   <% if Object.keys(@ownedMethods).length > 0: %>
   <section>
-    <a href="#methods-summary" class="reference-loop-anchor">
-      <h4 id="methods-summary">
-        <span>
-          <% if @lang == "en": %>Methods<% else: %>メソッド<% end %>
-        </span>
-      </h4>
-    </a>
+    <div class="reference-loop-anchor">
+      <a href="#methods-summary">
+        <h4 id="methods-summary">
+          <span>
+            <% if @lang == "en": %>Methods<% else: %>メソッド<% end %>
+          </span>
+        </h4>
+      </a>
+      <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+    </div>
 
     <% if @framework == "js" && @lang == "en": %>
       <p>These methods are called directly on the DOM element. Get a reference to the element in JS, and the methods below will be available to call on it. For example: <code>document.querySelector('<%=@name%>').someMethod()</code>.
@@ -429,7 +444,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(method.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -458,7 +473,7 @@ actionbar: false
           <% else: %>
           <span style="opacity: 0.6;">
             <%- @markd @mapKeywords @translate(method.description, "en") %>
-            <span style="color: red;">（翻訳中）</span>
+            <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;">（翻訳中）</a>
           </span>
           <% end %>
           <% end %>
@@ -503,7 +518,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @mapKeywords @translate(param.description, "en") %>
-                    <span style="color: red;">（翻訳中）</span>
+                    <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
@@ -524,13 +539,16 @@ actionbar: false
   <!-- events -->
   <% if !(@extensionDoc and @extensionDoc.directive) and @ownedEvents.length > 0: %>
   <section>
-    <a href="#events-summary" class="reference-loop-anchor">
-      <h4 id="events-summary">
-        <span>
-          <% if @lang == "en": %>Events<% else: %>イベント<% end %>
-        </span>
-      </h4>
-    </a>
+    <div class="reference-loop-anchor">
+      <a href="#events-summary">
+        <h4 id="events-summary">
+          <span>
+            <% if @lang == "en": %>Events<% else: %>イベント<% end %>
+          </span>
+        </h4>
+      </a>
+      <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+    </div>
 
     <% if @framework == "js" && @lang == "en": %>
       <p>To use these events, add event listeners to the elements as you would for native events, like click. For example: <code>document.querySelector('<%=@name%>').addEventListener('<%=@ownedEvents[0].name%>', function() { ... })</code>.
@@ -568,7 +586,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(event.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -597,7 +615,7 @@ actionbar: false
           <% else: %>
           <span style="opacity: 0.6;">
             <%- @markd @mapKeywords @translate(event.description, "en") %>
-            <span style="color: red;">（翻訳中）</span>
+            <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;">（翻訳中）</a>
           </span>
           <% end %>
           <% end %>
@@ -635,7 +653,7 @@ actionbar: false
                 <% else: %>
                 <span style="opacity: 0.6;">
                   <%- @markd @translate(param.description, "en") %>
-                  <span style="color: red;">（翻訳中）</span>
+                  <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;">（翻訳中）</a>
                 </span>
                 <% end %>
                 <% end %>
@@ -687,7 +705,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @translate(input.description, "en") %>
-                    <span style="color: red;">（翻訳中）</span>
+                    <a href="<%= @getEditLink(@original, @framework, input) %>" target="_blank" style="color: red;">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
@@ -733,7 +751,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @translate(output.description, "en") %>
-                    <span style="color: red;">（翻訳中）</span>
+                    <a href="<%= @getEditLink(@original, @framework, output) %>" target="_blank" style="color: red;">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
