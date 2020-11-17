@@ -349,6 +349,15 @@ module.exports = function() {
 
           return `${editUrl}/${path}/${vueName}.wcdoc`;
 
+        } else if (component.startsWith('ons.')) {
+          const path = 'core/src/ons';
+          const filename = this.camelCaseToKebabCase(component.slice(4));
+
+          return `${editUrl}/${path}/${filename}.js`;
+
+        } else if (component === 'ons') {
+          return `${editUrl}/core/src/ons/index.js`;
+
         } else {
           const path = 'core/src/elements';
           const localPath = `./dist/v2/OnsenUI/${path}`;
@@ -433,6 +442,11 @@ module.exports = function() {
 
       kebabCaseToUpperCamelCase: function(component) {
         return component.charAt(0).toUpperCase() + component.slice(1).replace(/-\w/g, function($1) { return $1.charAt(1).toUpperCase(); });
+      },
+
+      camelCaseToKebabCase: function (component) {
+        return component.charAt(0).toLowerCase() +
+          component.slice(1).replace(/([A-Z])/g, '-$1').toLowerCase();
       },
 
       mapComponentName: function(component, framework) {
