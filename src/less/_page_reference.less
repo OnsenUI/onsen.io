@@ -41,16 +41,37 @@
 
   .reference-loop-anchor {
     display: block;
+    text-decoration: none;
     pointer-events: none;
 
+    a:hover {
+      text-decoration: none;
+    }
+
     h3, h4, h5 {
+      display: inline;
+
       & > span {
         pointer-events: auto;
       }
     }
 
-    &:hover {
-      text-decoration: none;
+    .edit-link {
+      float: right;
+      padding-top: 1em;
+      pointer-events: auto;
+    }
+
+    .edit-link:hover {
+      text-decoration: underline;
+    }
+
+    .lang-en & {
+      margin: 46px 0 12px 0;
+    }
+
+    .lang-ja & {
+      margin: 1.9em 0 12px 0;
     }
   }
 
@@ -78,6 +99,11 @@
     li {
       color: #333;
     }
+  }
+
+  .edit-icon {
+    font-size: 12px;
+    padding-left: 0.5em;
   }
 
   //////// TABLES
