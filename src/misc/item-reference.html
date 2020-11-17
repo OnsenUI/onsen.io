@@ -168,7 +168,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @translate(attribute.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, attribute) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -237,7 +237,7 @@ actionbar: false
             <% else: %>
             <span style="opacity: 0.6;">
               <%- @markd @translate(property.description, "en") %>
-              <span style="color: red;">（翻訳中）</span>
+              <a href="<%= @getEditLink(@original, @framework, property) %>" target="_blank" style="color: red;">（翻訳中）</a>
             </span>
             <% end %>
             <% end %>
@@ -304,7 +304,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(prop.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, prop) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -372,7 +372,7 @@ actionbar: false
             <% else: %>
             <span style="opacity: 0.6;">
               <%- @markd @translate(modifier.description, "en") %>
-              <span style="color: red;">（翻訳中）</span>
+              <a href="<%= @getEditLink(@original, @framework, modifier) %>" target="_blank" style="color: red;">（翻訳中）</a>
             </span>
             <% end %>
             <% end %>
@@ -429,7 +429,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(method.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -458,7 +458,7 @@ actionbar: false
           <% else: %>
           <span style="opacity: 0.6;">
             <%- @markd @mapKeywords @translate(method.description, "en") %>
-            <span style="color: red;">（翻訳中）</span>
+            <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;">（翻訳中）</a>
           </span>
           <% end %>
           <% end %>
@@ -503,7 +503,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @mapKeywords @translate(param.description, "en") %>
-                    <span style="color: red;">（翻訳中）</span>
+                    <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
@@ -568,7 +568,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(event.description, "en") %>
-                <span style="color: red;">（翻訳中）</span>
+                <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -597,7 +597,7 @@ actionbar: false
           <% else: %>
           <span style="opacity: 0.6;">
             <%- @markd @mapKeywords @translate(event.description, "en") %>
-            <span style="color: red;">（翻訳中）</span>
+            <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;">（翻訳中）</a>
           </span>
           <% end %>
           <% end %>
@@ -635,7 +635,7 @@ actionbar: false
                 <% else: %>
                 <span style="opacity: 0.6;">
                   <%- @markd @translate(param.description, "en") %>
-                  <span style="color: red;">（翻訳中）</span>
+                  <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;">（翻訳中）</a>
                 </span>
                 <% end %>
                 <% end %>
@@ -687,7 +687,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @translate(input.description, "en") %>
-                    <span style="color: red;">（翻訳中）</span>
+                    <a href="<%= @getEditLink(@original, @framework, input) %>" target="_blank" style="color: red;">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
@@ -733,7 +733,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @translate(output.description, "en") %>
-                    <span style="color: red;">（翻訳中）</span>
+                    <a href="<%= @getEditLink(@original, @framework, output) %>" target="_blank" style="color: red;">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
