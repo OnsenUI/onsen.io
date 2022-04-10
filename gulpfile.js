@@ -12,7 +12,7 @@ var gettext = require('./modules/gettext');
 var parallelize = require('concurrent-transform');
 var transifex = require('./modules/gulp-transifex');
 
-//--
+//---
 
 var lang = argv.lang === 'en' ? 'en' : 'ja';
 var env = argv.production ? 'production' : 'staging';
@@ -169,7 +169,7 @@ function serve(done) {
       'blog/content/**/*',
       'src/partials/*',
       'src/layouts/blog.html.eco'
-    ], options, 
+    ], options,
       gulp.series(blog, () => browserSync.reload())
     );
   } else if (lang === 'ja') {
@@ -183,7 +183,7 @@ function serve(done) {
     ], options,
       gulp.series(blog, () => browserSync.reload())
     );
-  } 
+  }
 
   done();
 }
@@ -213,7 +213,7 @@ function deployAws() {
       }
     };
   }
-  
+
   if (!aws) {
     throw new Error('AWS configuration is missing! Please create a config file, or set it in the environment before trying to deploy!');
   }
