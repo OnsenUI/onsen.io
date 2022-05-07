@@ -20,7 +20,7 @@ module.exports = function(lang) {
     setImmediate(done);
 
     var css1 = fs.readFileSync(__dirname + '/../dist/v1/OnsenUI/build/css/onsen-css-components.css', 'utf8');
-    var css2 = fs.readFileSync(__dirname + '/../dist/v2/OnsenUI/build/css/onsen-css-components.css', 'utf8');
+    var css2 = fs.readFileSync(__dirname + '/../dist/v2/OnsenUI/onsenui/css/onsen-css-components.css', 'utf8');
 
     var header = '/* NOTE: This css file is NOT original onsen-css-components.css. */\n';
     var file1 = {};
