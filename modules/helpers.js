@@ -338,28 +338,28 @@ module.exports = function() {
 
 
         if (framework === 'react') {
-          const path = 'bindings/react/src/components';
+          const path = 'react-onsenui/src/components';
           const reactName = this.kebabCaseToUpperCamelCase(this.removeOnsPrefix(component));
 
           return `${editUrl}/${path}/${reactName}.jsx`;
 
         } else if (framework === 'vue' && attribute && attribute.extensionOf === 'vue') {
-          const path = 'bindings/vue/src/docs';
+          const path = 'vue-onsenui/src/docs';
           const vueName = 'V' + this.kebabCaseToUpperCamelCase((component));
 
           return `${editUrl}/${path}/${vueName}.wcdoc`;
 
         } else if (component.startsWith('ons.')) {
-          const path = 'core/src/ons';
+          const path = 'onsenui/esm/ons';
           const filename = this.camelCaseToKebabCase(component.slice(4));
 
           return `${editUrl}/${path}/${filename}.js`;
 
         } else if (component === 'ons') {
-          return `${editUrl}/core/src/ons/index.js`;
+          return `${editUrl}/onsenui/esm/ons/index.js`;
 
         } else {
-          const path = 'core/src/elements';
+          const path = 'onsenui/esm/elements';
           const localPath = `./dist/v2/OnsenUI/${path}`;
 
           if (fs.existsSync(`${localPath}/${component}.js`)) {
