@@ -453,7 +453,7 @@ module.exports = function() {
         component = this.removeOnsPrefix(component || '');
         framework = framework || this.framework;
         if (framework === 'react') {
-          this.kebabCaseToUpperCamelCase(component);
+          return this.kebabCaseToUpperCamelCase(component);
         }
         if (framework === 'vue') {
           return (/^ons($|\.)/.test(component) ? '$' : 'v-ons-') + component;
