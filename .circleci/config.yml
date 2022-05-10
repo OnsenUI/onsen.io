@@ -2,7 +2,7 @@ version: 2
 jobs:
   build-staging:
     docker:
-      - image: circleci/node:10.16-browsers
+      - image: circleci/node:14.18.2-browsers
     steps:
       - checkout
       - run: |
@@ -13,11 +13,11 @@ jobs:
           cd dist/v2/OnsenUI; git fetch --tags; git checkout onsen.io; cd ../../..; # Latest 2.x with documentation fixes
           cd dist/playground; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
-          curl -o- -L https://yarnpkg.com/install.sh | bash
+          sudo npm install -g npm@7.8
           npm install
-          cd dist/v2/OnsenUI/css-components && npm install && cd ../../../..
           cd dist/v2/OnsenUI && npm install && npm run build && cd ../../..
-          cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
+          cd dist/v2/OnsenUI/onsenui && npm run docs && cd ../../../..
+          cd dist/v2/OnsenUI/react-onsenui && npm run gen-docs && cd ../../../..
           AWS_BUCKET=${AWS_BUCKET_EN} ./node_modules/.bin/gulp deploy --lang=en
           AWS_BUCKET=${AWS_BUCKET_JA} ./node_modules/.bin/gulp deploy --lang=ja
           # Note: http://s.onsen.io/ and http://s.ja.onsen.io/ directly accesses S3. Nginx and KeyCDN are not used.
@@ -35,11 +35,11 @@ jobs:
           cd dist/v2/OnsenUI; git fetch --tags; git checkout onsen.io; cd ../../..; # Latest 2.x with documentation fixes
           cd dist/playground; git fetch origin; git checkout gh-pages; git pull; cd ../..;
           cd dist/themeroller; git fetch origin; git checkout gh-pages; git pull; cd ../..;
-          curl -o- -L https://yarnpkg.com/install.sh | bash
+          sudo npm install -g npm@7.8
           npm install
-          cd dist/v2/OnsenUI/css-components && npm install && cd ../../../..
           cd dist/v2/OnsenUI && npm install && npm run build && cd ../../..
-          cd dist/v2/OnsenUI/bindings/react && yarn && yarn gen-docs && cd ../../../../..
+          cd dist/v2/OnsenUI/onsenui && npm run docs && cd ../../../..
+          cd dist/v2/OnsenUI/react-onsenui && npm run gen-docs && cd ../../../..
           AWS_BUCKET=${AWS_BUCKET_EN_PROD} ./node_modules/.bin/gulp deploy --lang=en --production
           AWS_BUCKET=${AWS_BUCKET_JA_PROD} ./node_modules/.bin/gulp deploy --lang=ja --production
           # Purge Zone Cache (en) of KeyCDN

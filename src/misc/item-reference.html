@@ -124,7 +124,7 @@ actionbar: false
         </h4>
       </a>
       <% if @framework != 'vue': %>
-        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
 
@@ -173,7 +173,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @translate(attribute.description, "en") %>
-                <a href="<%= @getEditLink(@original, @framework, attribute) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                <a href="<%= @getEditLink(@original, @framework, attribute) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -218,7 +218,7 @@ actionbar: false
         </h4>
       </a>
       <% if @framework != 'vue': %>
-        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
 
@@ -253,7 +253,7 @@ actionbar: false
             <% else: %>
             <span style="opacity: 0.6;">
               <%- @markd @translate(property.description, "en") %>
-              <a href="<%= @getEditLink(@original, @framework, property) %>" target="_blank" style="color: red;">（翻訳中）</a>
+              <a href="<%= @getEditLink(@original, @framework, property) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
             </span>
             <% end %>
             <% end %>
@@ -285,7 +285,7 @@ actionbar: false
         </h4>
       </a>
       <% if @framework != 'vue': %>
-        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
     <table>
@@ -331,7 +331,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(prop.description, "en") %>
-                <a href="<%= @getEditLink(@original, @framework, prop) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                <a href="<%= @getEditLink(@original, @framework, prop) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -375,7 +375,7 @@ actionbar: false
         </h4>
       </a>
       <% if @framework != 'vue': %>
-        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
 
@@ -411,7 +411,7 @@ actionbar: false
             <% else: %>
             <span style="opacity: 0.6;">
               <%- @markd @translate(modifier.description, "en") %>
-              <a href="<%= @getEditLink(@original, @framework, modifier) %>" target="_blank" style="color: red;">（翻訳中）</a>
+              <a href="<%= @getEditLink(@original, @framework, modifier) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
             </span>
             <% end %>
             <% end %>
@@ -442,7 +442,7 @@ actionbar: false
         </h4>
       </a>
       <% if @framework != 'vue': %>
-        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
 
@@ -479,7 +479,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(method.description, "en") %>
-                <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -513,7 +513,7 @@ actionbar: false
           <% else: %>
           <span style="opacity: 0.6;">
             <%- @markd @mapKeywords @translate(method.description, "en") %>
-            <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;">（翻訳中）</a>
+            <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
           </span>
           <% end %>
           <% end %>
@@ -564,7 +564,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @mapKeywords @translate(param.description, "en") %>
-                    <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                    <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
@@ -600,7 +600,7 @@ actionbar: false
         </h4>
       </a>
       <% if @framework != 'vue': %>
-        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[improve this]</a>
+        <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
 
@@ -640,7 +640,7 @@ actionbar: false
               <% else: %>
               <span style="opacity: 0.6;">
                 <%- @markd @mapKeywords @translate(event.description, "en") %>
-                <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
               </span>
               <% end %>
               <% end %>
@@ -674,7 +674,7 @@ actionbar: false
           <% else: %>
           <span style="opacity: 0.6;">
             <%- @markd @mapKeywords @translate(event.description, "en") %>
-            <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;">（翻訳中）</a>
+            <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
           </span>
           <% end %>
           <% end %>
@@ -718,7 +718,7 @@ actionbar: false
                 <% else: %>
                 <span style="opacity: 0.6;">
                   <%- @markd @translate(param.description, "en") %>
-                  <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                  <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
                 </span>
                 <% end %>
                 <% end %>
@@ -776,7 +776,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @translate(input.description, "en") %>
-                    <a href="<%= @getEditLink(@original, @framework, input) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                    <a href="<%= @getEditLink(@original, @framework, input) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>
@@ -827,7 +827,7 @@ actionbar: false
                   <% else: %>
                   <span style="opacity: 0.6;">
                     <%- @markd @translate(output.description, "en") %>
-                    <a href="<%= @getEditLink(@original, @framework, output) %>" target="_blank" style="color: red;">（翻訳中）</a>
+                    <a href="<%= @getEditLink(@original, @framework, output) %>" target="_blank" style="color: red;" title="翻訳を追加">（翻訳中）</a>
                   </span>
                   <% end %>
                   <% end %>

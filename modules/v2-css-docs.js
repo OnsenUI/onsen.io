@@ -9,7 +9,7 @@ module.exports = function() {
 };
 
 function generateCssReferenceMetadata() {
-  const css = fs.readFileSync(__dirname + '/../dist/v2/OnsenUI/build/css/onsen-css-components.css', 'utf-8');
+  const css = fs.readFileSync(__dirname + '/../dist/v2/OnsenUI/onsenui/css/onsen-css-components.css', 'utf-8');
   const components = ancss.parse(css, {detect: line => line.match(/^~/)}).map(component => {
     const annotation = component.annotation;
     if (annotation.elements) {
