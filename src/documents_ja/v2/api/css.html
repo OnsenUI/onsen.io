@@ -3,18 +3,17 @@ page: 'css'
 title: 'Onsen UI CSSコンポーネント'
 layout: 'default.html.eco'
 version: v2
-description: 
+description:
 ---
 
-<div class="header">
+<div class="header header-fixed header-small header-full-width">
   <%- @partial('global-nav.html.eco') %>
-  <%- @partial('header-title.html.eco', {name: 'CSSコンポーネント'}) %>
 </div>
 
 <div class="container">
 
   <aside class="content-info content-info-page">
-    <div class="toc-title toc-title-no-toggle">カテゴリ</div>
+    <div class="toc-title toc-title-no-toggle">CSS Components</div>
     <ul class="toc">
       <% for category in @cssComponentCategories: %>
       <li class="toc-1-item toc-item"><a href="#<%= category.id %>-category" class="toc-link toc-1-link"><%= category.name %></a></li>
@@ -23,19 +22,24 @@ description:
   </aside>
 
   <div class="container-content">
+    <a class="header-link" name="#css-components">
+      <h3 id="css-components"><span>CSS Components for Onsen UI</span></h3>
+    </a>
 
     <% for category in @cssComponentCategories: %>
     <div class="css-component">
-      <h3 id="<%= category.id %>-category"><%= category.name %></h3>
+      <h4 id="<%= category.id %>-category"><span><%= category.name %></span></h4>
 
       <% for component in category.components: %>
 
       <div class="css-component">
-        <h4><%= component.annotation.name %></h4>
+        <h5><%= component.annotation.name %></h5>
 
-        <%- @cssExample {wrapPage: true, minHeight: 200}, -> %>
-          <%- component.annotation.markup %>
-        <% end %>
+        <div class="css-component-wrapper">
+          <%- @cssExample {wrapPage: true, minHeight: 200}, -> %>
+            <%- component.annotation.markup %>
+          <% end %>
+        </div>
 
         <% if component.annotation.elements: %>
         <div>Corresponding elements:
@@ -54,4 +58,3 @@ description:
   </div>
 
 </div>
-
