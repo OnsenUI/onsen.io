@@ -60,7 +60,7 @@ function generateAPIDocument(metalsmith, docPath, extension) {
       file.ownedEvents = getOwnedItems(doc.events, extension);
 
       // Some fixes for Vue docs
-      if (extension === 'vue') {
+      if (extension === 'vue' || extension === 'vue3') {
         if (['ons-if', 'ons-template', 'ons-gesture-detector'].indexOf(doc.name) !== -1) {
           file.extension = 'not vue';
         } else {
