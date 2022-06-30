@@ -61,25 +61,74 @@ function generateAPIDocument(metalsmith, docPath, extension) {
 
       // Some fixes for Vue docs
       if (extension === 'vue' || extension === 'vue3') {
-        if (['ons-if', 'ons-template', 'ons-gesture-detector'].indexOf(doc.name) !== -1) {
+
+        ////////////////////////////////////////////////////////////////////////
+        // helper functions
+
+        const ignoredComponent = component =>
+          ['ons-if', 'ons-template', 'ons-gesture-detector'].includes(component);
+
+        const ignoredProp = (prop, component) => ({
+          'v-ons-page': ['data'],
+          'v-ons-carousel': ['itemCount'],
+          'v-ons-checkbox': ['checked'],
+          'v-ons-radio': ['checked'],
+          'v-ons-select': ['selectedIndex'],
+          'v-ons-switch': ['checkbox', 'checked'],
+          'v-ons-tabbar': ['hideTabs'],
+          'v-ons-navigator': ['options', 'options.animation','options.animationOptions', 'options.callback'],
+          'v-ons-splitter-side': ['isOpen']
+        })[component]?.includes(prop);
+
+        const listenerProp = prop => /^on[^a-z]/.test(prop);
+
+        const makeVueName = name => name.replace(/^ons-/, 'v-ons-').replace(/^(ons)(\.|$)/gm, '$$$&');
+
+        const camelize = str => str.replace(/-([a-z])/g, (m, l) => l.toUpperCase());
+
+        const defaultTypeBoolean = ({name, type, ...rest}) => {
+          const actualType = !/(on-infinite-scroll|initial-index|page$|delegate)/.test(name)
+            ? { names: [type || 'Boolean'] }
+            : type;
+
+          return {name, type: actualType, ...rest};
+        };
+
+        const optionsPrefixForAnimation = ({name, ...rest}) => {
+          const actualName = /^animation/.test(name)
+            ? `options.${camelize(name)}`
+            : name;
+
+          return {name: actualName, ...rest};
+        }
+        ////////////////////////////////////////////////////////////////////////
+
+        if (ignoredComponent(doc.name)) {
           file.extension = 'not vue';
         } else {
-          file.title = file.name = doc.name = doc.name.replace(/^ons-/, 'v-ons-').replace(/^(ons)(\.|$)/gm, '$$$&');
+          file.title = file.name = doc.name = makeVueName(doc.name);
 
-          doc.props = file.ownedAttributes
-            .reduce(function(result, attr) {
-              if (!/(on-infinite-scroll|initial-index|page$|delegate)/.test(attr.name)) {
-                if (/^animation/.test(attr.name)) {
-                  attr.name = attr.name.replace(/-([a-z])/g, function(m, l) { return l.toUpperCase(); });
-                  attr.name = 'options.' + attr.name;
-                }
-                attr.type = { names: [attr.type || 'Boolean'] };
-                result.push(attr);
-              }
-              return result;
-            }, []).sort(function(a, b) {
-              return a.name.localeCompare(b.name);
-            });
+          if (extension === 'vue') {
+            doc.props = file.ownedAttributes
+              .map(optionsPrefixForAnimation)
+
+          } else if (extension === 'vue3') {
+            file.ownedProperties = file.ownedProperties || [];
+
+            // remove attributes that already exist as properties
+            const filteredAttributes = file.ownedAttributes
+              .map(a => ({...a, name: camelize(a.name)}))
+              .filter(({name}) => !file.ownedProperties.find(p => p.name === name));
+
+            doc.props = [...filteredAttributes, ...file.ownedProperties]
+              .filter(({name}) => !ignoredProp(name, doc.name))
+              .filter(({name}) => !listenerProp(name))
+              .filter(({readonly}) => !readonly)
+          }
+
+          doc.props = doc.props
+            .map(attr => defaultTypeBoolean(attr))
+            .sort((a, b) => a.name.localeCompare(b.name));
 
           file.ownedAttributes = [];
           doc.properties = [];
