@@ -255,5 +255,158 @@ In order to send data back to the previous page before popping, take a look at [
 
 Absolutely. Pinia is a good solution for component communication. If you feel you have too many props and events, Pinia may be a good fit. For an example of Onsen UI + Vue + Pinia, see the [examples app](https://github.com/OnsenUI/OnsenUI/blob/master/vue3-onsenui-examples/src/components/NavigatorPinia.vue).
 
+
+#### Upgrading from Vue 2
+
+For most apps, upgrading from vue-onsenui for Vue 2 to vue-onsenui for Vue 3 should be a straightforward process. However, along with the changes needed to upgrade a Vue 2 project to a Vue 3 project, there are some specific vue-onsenui breaking changes that need to be accounted for.
+
+We recommend reading through the official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/) first for any general Vue changes unrelated to Onsen UI that you need to make.
+
+For a full list of changes, see the [CHANGELOG](https://github.com/OnsenUI/OnsenUI/blob/master/vue3-onsenui/CHANGELOG.md).
+
+If you are getting stuck, check out the [examples app](https://github.com/OnsenUI/OnsenUI/tree/master/vue3-onsenui-examples) for a full configuration, or the [Onsen UI playground](https://onsen.io/playground/) for specific examples.
+
+##### Installing vue-onsenui for Vue 3
+
+The first step is to install vue-onsenui for Vue 3. vue-onsenui v3+ is written for Vue 3, and vue-onsenui v2.x.x is for Vue 2.
+
+To install vue-onsenui v3 and its corresponding onsenui version, run:
+
+```
+npm install --save vue-onsenui@latest onsenui@latest
+```
+
+Note that you need to have already installed Vue 3 or this command will throw an error.
+
+##### Loading vue-onsenui
+
+In Vue 2, vue-onsenui was loaded by calling `Vue.use` in the app's main file (usually `main.js`). Vue 3 replaces the global Vue API with `createApp`, which creates an app instance that can be loaded with vue-onsenui.
+
+In your app's main file, replace `Vue.use` with `app.use`:
+
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import VueOnsen from 'vue-onsenui';
+
+const app = createApp(App);
+app.use(VueOnsen);          // this was previously Vue.use(VueOnsen)
+```
+
+##### Registering vue-onsenui components
+
+vue-onsenui has two different builds: the UMD build, and the ESM build. In vue-onsenui v3, the default build switched from UMD to ESM, which is best for bundlers and modern browsers. The ESM allows you to only register the vue-onsenui components that your app will actually use, reducing app size. The UMD build automatically registers all components.
+
+This means that when using the default vue-onsenui build, you must now register the components you want to use. To register all components, add the following to the app's main file:
+
+```js
+import * as components from 'vue-onsenui/esm/components';
+
+// Register all vue-onsenui components
+Object.values(components).forEach(component => app.component(component.name, component));
+```
+
+To register a single component:
+
+```js
+import VOnsButton from 'vue-onsenui/esm/components/VOnsButton';
+
+app.component(VOnsButton.name, VOnsButton);
+```
+
+For more details about UMD vs ESM, see [UMD and ESM builds](#umd-and-esm-builds).
+
+##### Prop name changes
+
+In vue-onsenui v3, some props had name changes. The main changes are:
+
+- `options.animation` and `options.animationOptions` are renamed `animation` and `animationOptions` for all components.
+- For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
+- For VOnsCarousel, VOnsTabbar, VOnsSegment, the `index` prop and `update:index` event have been renamed to `activeIndex` and `update:activeIndex`.
+
+For a full list of changes, see the [CHANGELOG](https://github.com/OnsenUI/OnsenUI/blob/master/vue3-onsenui/CHANGELOG.md).
+
+##### Navigator
+
+###### Keeping the page stack in sync
+
+In vue-onsenui v2, VOnsNavigator was passed a `pageStack` prop which it directly manipulated. vue-onsenui v3's navigator keeps its own internal representation of the page stack, which:
+
+- responds to changes in the `pageStack` prop
+- emits an `update:pageStack` event when the page stack changes internally (such as when the user swipes to pop the page or presses the device back button).
+
+This behaviour allows VOnsNavigator to be used with `v-model`, which will create a two-way binding to keep the page stack prop and the internal page stack in sync. If your existing app has an instance of VOnsNavigator, just add `v-model` in front of the `pageStack` prop:
+
+```
+<v-ons-navigator v-model:page-stack="pageStack"></v-ons-navigator>
+```
+
+###### Manipulating the page stack
+
+Due to [changes in how watchers work in Vue 3](https://v3-migration.vuejs.org/breaking-changes/watch.html), VOnsNavigator no longer supports changing the page stack using methods that mutate the page stack array, such as `Array.prototype.push` and `Array.protoype.pop`. Instead, the whole value of the page stack prop should be replaced using methods such as `Array.prototype.slice` or the spread syntax.
+
+- **Pushing a page**: Instead of `pageStack.push(page)`, use `pageStack = [...pageStack, page]`.
+- **Popping a page**: Instead of `pageStack.pop()`, use `pageStack = pageStack.slice(0, -1)`.
+- **Resetting to the first page**: Use `pageStack = [pageStack[0]]`.
+
+Vue 3 may also warn that pages pushed to the navigator were made reactive objects. You can fix this warning by wrapping components with `markRaw`:
+
+```js
+import { markRaw } from 'vue';
+
+export default {
+  data() {
+    return {
+      pageStack: [markRaw(page1)]
+    };
+  },
+};
+```
+
+###### Overwriting pop page behaviour
+
+In vue-onsenui v3, the navigator's `popPage` prop has been removed. This prop was used to specify what should happen when a page is popped due to user interaction, such as pressing the device back button or swiping to pop.
+
+If you were using the `popPage` prop to update a mutable value, `popPage` can be safely removed and the mutable value will be updated with `v-model:page-stack="someMutableValue"`.
+
+For other use cases of `popPage`, you should now specify which type of user interaction to overwrite:
+
+- **Device back button**: Add ` @deviceBackButton.prevent="deviceBackButtonHandler" `.
+- **Swipe to pop**: Use `@postpop="postpopHandler"`. The event object contains a key `swipeToPop` which can be used to detect if the `postpop` was triggered by a user swiping to pop.
+- **Clicking a VOnsBackButton**: Add ` @click.prevent ` to the VOnsBackButton. Alternatively, if you just need to do some update after the page has popped, do the same as swipe to pop above, but use the `onsBackButton` event key instead of `swipeToPop`.
+
+##### Lazy repeat
+
+The vue-onsenui v3 version of VOnsLazyRepeat now requires that an object be returned by `renderItem` instead of a Vue instance. In most cases, this just means removing `new Vue` and returning the component object directly:
+
+```js
+export default {
+  data() {
+    return {
+      renderItem: i => ({  // The object is returned here. Before, this would have been `new Vue`.
+        template: `<v-ons-list-item :index="index" :key="index">#{{ index }}</v-ons-list-item>`,
+        data() {
+          return {
+            index: i
+          };
+        }
+      })
+    };
+  }
+};
+```
+
+##### Popover
+
+The value of VOnsPopover's `target` prop must now be a Vue ref.
+
+```js
+<v-ons-toolbar-button ref="myToolbarButton">Test</v-ons-toolbar-button>
+
+<v-ons-popover :target="$refs.myToolbarButton">
+  Popover
+</v-ons-popover>
+```
+
 <% end %>
 
