@@ -343,8 +343,14 @@ module.exports = function() {
 
           return `${editUrl}/${path}/${reactName}.jsx`;
 
-        } else if (framework === 'vue' && attribute && attribute.extensionOf === 'vue') {
+        } else if (framework === 'vue' && attribute?.extensionOf === 'vue') {
           const path = 'vue-onsenui/src/docs';
+          const vueName = 'V' + this.kebabCaseToUpperCamelCase((component));
+
+          return `${editUrl}/${path}/${vueName}.wcdoc`;
+
+        } else if (framework === 'vue3' && attribute?.extensionOf === 'vue3') {
+          const path = 'vue3-onsenui/src/docs';
           const vueName = 'V' + this.kebabCaseToUpperCamelCase((component));
 
           return `${editUrl}/${path}/${vueName}.wcdoc`;

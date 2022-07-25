@@ -24,6 +24,8 @@ function generateDocument(metalsmith, categoryFile) {
           file.h1 = categoryFile.file.title + " Guide <strong>for JavaScript</strong>"; break;
         case "vue":
           file.h1 = categoryFile.file.title + " Guide <strong>for Vue 2</strong>"; break;
+        case "vue3":
+          file.h1 = categoryFile.file.title + " Guide <strong>for Vue 3</strong>"; break;
         case "angular1":
           file.h1 = categoryFile.file.title + " Guide <strong>for AngularJS 1</strong>"; break;
         case "angular2":
@@ -42,7 +44,7 @@ var addCategory = function(file, dict) {
       dict[category] = {};
     }
     if (!dict[category].files) {
-      dict[category].files = []; 
+      dict[category].files = [];
     }
     dict[category].files.push(file);
   });
@@ -56,7 +58,8 @@ module.exports = function(lang) {
       angular1: {},
       angular2: {},
       react: {},
-      vue: {}
+      vue: {},
+      vue3: {}
     };
     var promises = [];
 
@@ -106,6 +109,9 @@ module.exports = function(lang) {
             break;
           case "vue":
             addCategory(file, categories.vue);
+            break;
+          case "vue3":
+            addCategory(file, categories.vue3);
             break;
           case "js":
             addCategory(file, categories.js);

@@ -123,7 +123,7 @@ actionbar: false
           </span>
         </h4>
       </a>
-      <% if @framework != 'vue': %>
+      <% if @framework != 'vue' and @framework != 'vue3': %>
         <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
@@ -184,7 +184,7 @@ actionbar: false
               <span style="font-size: 12px"><% if @lang == "en": %>Optional.<% else: %>Optional.<% end %></span>
               <% end %>
 
-              <% if @framework == 'vue': %>
+              <% if @framework == 'vue' or @framework == 'vue3': %>
                 <a href="<%= @getEditLink(@original, @framework, attribute) %>" target="_blank">
                   <i class="fa fa-pencil edit-icon"></i>
                 </a>
@@ -284,7 +284,7 @@ actionbar: false
           </span>
         </h4>
       </a>
-      <% if @framework != 'vue': %>
+      <% if @framework != 'vue' and @framework != 'vue3': %>
         <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
@@ -346,7 +346,7 @@ actionbar: false
               <div class="deprecated-message"><%= @translate '[en]Deprecated.[/en][ja]非推奨[/ja]' %></div>
               <% end %>
 
-              <% if @framework == 'vue': %>
+              <% if @framework == 'vue' or @framework == 'vue3': %>
                 <a href="<%= @getEditLink(@original, @framework, prop) %>" target="_blank">
                   <i class="fa fa-pencil edit-icon"></i>
                 </a>
@@ -374,7 +374,7 @@ actionbar: false
           </span>
         </h4>
       </a>
-      <% if @framework != 'vue': %>
+      <% if @framework != 'vue' and @framework != 'vue3': %>
         <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
@@ -416,7 +416,7 @@ actionbar: false
             <% end %>
             <% end %>
 
-            <% if @framework == 'vue': %>
+            <% if @framework == 'vue' or @framework == 'vue3': %>
               <a href="<%= @getEditLink(@original, @framework, modifier) %>" target="_blank">
                 <i class="fa fa-pencil edit-icon"></i>
               </a>
@@ -441,7 +441,7 @@ actionbar: false
           </span>
         </h4>
       </a>
-      <% if @framework != 'vue': %>
+      <% if @framework != 'vue' and @framework != 'vue3': %>
         <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
@@ -484,7 +484,7 @@ actionbar: false
               <% end %>
               <% end %>
               <% if method.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-              <% if @framework == 'vue': %>
+              <% if @framework == 'vue' or @framework == 'vue3': %>
                 <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank">
                   <i class="fa fa-pencil edit-icon"></i>
                 </a>
@@ -529,7 +529,7 @@ actionbar: false
         <!-- method parameter -->
         <h6><% if @lang == "en": %>Parameters<% else: %>パラメーター<% end %></h6>
 
-        <% if @framework == 'vue': %>
+        <% if @framework == 'vue' or @framework == 'vue3': %>
           <a href="<%= @getEditLink(@original, @framework, method) %>" target="_blank">
             <i class="fa fa-pencil edit-icon"></i>
           </a>
@@ -569,7 +569,7 @@ actionbar: false
                   <% end %>
                   <% end %>
 
-                  <% if @framework == 'vue': %>
+                  <% if @framework == 'vue' or @framework == 'vue3': %>
                     <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank">
                       <i class="fa fa-pencil edit-icon"></i>
                     </a>
@@ -599,7 +599,7 @@ actionbar: false
           </span>
         </h4>
       </a>
-      <% if @framework != 'vue': %>
+      <% if @framework != 'vue' and @framework != 'vue3': %>
         <a class="edit-link" target="_blank" href="<%= @getEditLink(@original, @framework) %>">[<%= @translate '[en]improve this[/en][ja]編集[/ja]' %>]</a>
       <% end %>
     </div>
@@ -645,7 +645,7 @@ actionbar: false
               <% end %>
               <% end %>
               <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-              <% if @framework == 'vue': %>
+              <% if @framework == 'vue' or @framework == 'vue3': %>
                 <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank">
                   <i class="fa fa-pencil edit-icon"></i>
                 </a>
@@ -682,7 +682,7 @@ actionbar: false
 
         <% if event.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
 
-        <% if @framework == 'vue': %>
+        <% if @framework == 'vue' or @framework == 'vue3': %>
           <a href="<%= @getEditLink(@original, @framework, event) %>" target="_blank">
             <i class="fa fa-pencil edit-icon"></i>
           </a>
@@ -723,7 +723,7 @@ actionbar: false
                 <% end %>
                 <% end %>
 
-                <% if @framework == 'vue': %>
+                <% if @framework == 'vue' or @framework == 'vue3': %>
                   <a href="<%= @getEditLink(@original, @framework, param) %>" target="_blank">
                     <i class="fa fa-pencil edit-icon"></i>
                   </a>
@@ -781,7 +781,7 @@ actionbar: false
                   <% end %>
                   <% end %>
                   <% if input.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-                  <% if @framework == 'vue': %>
+                  <% if @framework == 'vue' or @framework == 'vue3': %>
                     <a href="<%= @getEditLink(@original, @framework, input) %>" target="_blank">
                       <i class="fa fa-pencil edit-icon"></i>
                     </a>
@@ -832,7 +832,7 @@ actionbar: false
                   <% end %>
                   <% end %>
                   <% if output.deprecated: %><div class="deprecated-message"><%= @translate '[en]Deprecated[/en][ja]非推奨[/ja]' %></div><% end %>
-                  <% if @framework == 'vue': %>
+                  <% if @framework == 'vue' or @framework == 'vue3': %>
                     <a href="<%= @getEditLink(@original, @framework, output) %>" target="_blank">
                       <i class="fa fa-pencil edit-icon"></i>
                     </a>
