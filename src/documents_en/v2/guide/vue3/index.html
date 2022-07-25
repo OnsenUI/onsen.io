@@ -229,10 +229,7 @@ This way, changes take effect before any component is rendered.
 
 ##### How do I pass data to the next page in the navigator?
 
-_TODO_
-
-<!--
-A Navigator's pages are sibling elements, which means that communication among them in Vue is fairly challenging. [Vuex](https://vuex.vuejs.org/) is a good solution for this, but not the only one. When you push a new page component and want to add some initial data, you can simply extend it:
+A Navigator's pages are sibling elements, which means that communication among them in Vue is fairly challenging. [Pinia](https://pinia.vuejs.org/) is a good solution for this, but not the only one. When you push a new page component and want to add some initial data, you can simply extend it:
 
 ```
 import nextPage from 'nextPage.vue';
@@ -247,9 +244,6 @@ pageStack.push({
   }
 })
 ```
-
-In order to send data back to the previous page before popping, take a look at [Vue state management](https://vuejs.org/v2/guide/state-management.html).
--->
 
 ##### Can I use Pinia with Onsen UI?
 
