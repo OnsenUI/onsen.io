@@ -6,7 +6,10 @@ var transform = postcss(function(css) {
     if (rule.selector === 'body' || rule.selector === 'html') {
       rule.remove();
     } else {
-      if (!(rule.parent.type === 'atrule' && rule.parent.name.match(/^(-o-|-moz-|-webkit-|-ms-)?keyframes$/))) {
+      if (
+        !(rule.parent.type === 'atrule' && rule.parent.name.match(/^(-o-|-moz-|-webkit-|-ms-)?keyframes$/)) &&
+        rule.selector !== ':root'
+      ) {
         rule.selectors = rule.selectors.map(function(selector) {
           return '.ons-css ' + selector;
         });
