@@ -5,19 +5,29 @@ $(function() {
   var requestUrl;
   switch (location.hostname) {
     case 'onsen.io':
-    case 's.onsen.io':
       // GitHub repo: OnsenUI/recent-activities
       // Branch: master
       // Path: /recent-activities-en.hjson
       requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/master/recent-activities-en.hjson';
       break;
     case 'ja.onsen.io':
-    case 's.ja.onsen.io':
       // GitHub repo: OnsenUI/recent-activities
       // Branch: master
       // Path: /recent-activities-ja.hjson
       requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/master/recent-activities-ja.hjson';
-    break;
+      break;
+    case 's.onsen.io':
+      // GitHub repo: OnsenUI/recent-activities
+      // Branch: stg
+      // Path: /recent-activities-en.hjson
+      requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/stg/recent-activities-en.hjson';
+      break;
+    case 's.ja.onsen.io':
+      // GitHub repo: OnsenUI/recent-activities
+      // Branch: stg
+      // Path: /recent-activities-ja.hjson
+      requestUrl = 'https://raw.githubusercontent.com/OnsenUI/recent-activities/stg/recent-activities-ja.hjson';
+      break;
     case 'localhost':
     case '127.0.0.1':
       // GitHub repo: OnsenUI/recent-activities
