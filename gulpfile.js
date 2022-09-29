@@ -30,21 +30,7 @@ process.on('unhandledRejection', (reason, p) => {
 //////////////////////////////
 // generate
 //////////////////////////////
-gulp.task('generate', gulp.series(less, metalsmith, blog, authors));
-
-//////////////////////////////
-// blog
-//////////////////////////////
-function blog(done) {
-  siteGenerator(lang, env === 'staging').blog(done);
-}
-
-//////////////////////////////
-// authors
-//////////////////////////////
-function authors(done) {
-  siteGenerator(lang, env === 'staging').authors(done);
-}
+gulp.task('generate', gulp.series(less, metalsmith, copyBlog));
 
 //////////////////////////////
 // metalsmith
@@ -92,13 +78,15 @@ gulp.task('imagemin-core', function() {
     .pipe(gulp.dest('src/files/images/'));
 });
 
-gulp.task('imagemin-blog', function() {
-  return gulp.src('blog/content/images/**/*')
-    .pipe($.imagemin())
-    .pipe(gulp.dest('blog/content/images/'));
-});
+gulp.task('imagemin', gulp.series('imagemin-core'));
 
-gulp.task('imagemin', gulp.series('imagemin-core', 'imagemin-blog'));
+//////////////////////////////
+// copy blog
+//////////////////////////////
+function copyBlog() {
+  return gulp.src('src/blog_' + lang + '/index.html')
+    .pipe(gulp.dest('./out_' + lang + '/blog/'));
+}
 
 //////////////////////////////
 // less
@@ -152,7 +140,7 @@ function serve(done) {
     'src/partials/*',
     'src/files/**/*',
   ], options,
-    gulp.series(metalsmith, blog, authors, () => browserSync.reload())
+    gulp.series(metalsmith, () => browserSync.reload())
   );
 
   gulp.watch([
@@ -163,25 +151,17 @@ function serve(done) {
 
   if (lang === 'en') {
     gulp.watch([
-      'blog/*',
-      'blog/posts/*',
-      'blog/authors/*',
-      'blog/content/**/*',
       'src/partials/*',
       'src/layouts/blog.html.eco'
     ], options, 
-      gulp.series(blog, () => browserSync.reload())
+      gulp.series(() => browserSync.reload())
     );
   } else if (lang === 'ja') {
     gulp.watch([
-      'blog_ja/*',
-      'blog_ja/posts/*',
-      'blog_ja/authors/*',
-      'blog_ja/content/**/*',
       'src/partials/*',
       'src/layouts/blog_ja.html.eco'
     ], options,
-      gulp.series(blog, () => browserSync.reload())
+      gulp.series(() => browserSync.reload())
     );
   } 
 
