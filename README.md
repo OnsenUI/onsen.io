@@ -10,16 +10,14 @@ Please Visit [Onsen UI](https://github.com/OnsenUI/OnsenUI) if you need access t
 ```bash
 git clone --recurse-submodules git@github.com:OnsenUI/onsen.io.git
 cd onsen.io
-yarn global add gulp
-yarn install
+npm install -g gulp
+npm install
 
 # Update necessary submodules
 git submodule update --remote dist/v2/OnsenUI dist/playground
 
 # Build Onsen UI
-(cd dist/v2/OnsenUI/css-components && yarn install)
-(cd dist/v2/OnsenUI && yarn install && yarn build)
-(cd dist/v2/OnsenUI/bindings/react && yarn install && yarn gen-docs)
+(cd dist/v2/OnsenUI && npm install && npm run build && npm run docs)
 ```
 
 ## How to Build
@@ -43,6 +41,13 @@ gulp serve --lang en
 3. $ gulp i18n-translate # This will translate and overwrite files into src/documents_ja/
 ```
 
+## Local development
+To use your local version of the Onsen UI main repository, symlink it:
+
+```bash
+rm -rf dist/v2/OnsenUI/ && ln -s ~/src/OnsenUI/ dist/v2
+```
+
 ## Releasing to Production
 This repository is set up on [CircleCI](https://circleci.com/gh/OnsenUI/onsen.io) to automatically build with every commit. Commits to `master` are automatically deployed to the staging website at `s.onsen.io`. To deploy to production, merge `master` into the `production` branch. Typically this merge is done through a pull request on GitHub, even if you immediately merge it yourself. Once merged, CircleCI will automatically deploy everything in the `production` branch.
 
@@ -64,7 +69,6 @@ Here is where you should make changes:
 - News Dropdown: https://github.com/OnsenUI/recent-activities
 - Homepage Kitchensink Example: https://github.com/OnsenUI/vue-onsenui-kitchensink
 - Onsen.io Landing Pages: This repository
-- Community Forum: Runs on NodeBB and is not part of a repository on GitHub
 
 ### Contributing to this repository
 If the repository you need to make changes to is this one, then the workflow is simple, and the same as you will see in other open source projects.
