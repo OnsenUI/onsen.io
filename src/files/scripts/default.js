@@ -87,7 +87,7 @@ $(function() {
   var info = $('#release-info');
   if (info.length) {
     var framework = info.data('framework');
-    $.get('https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases', function(data) {
+    $.get('https://api.github.com/repos/OnsenUI/onsenui/releases', function(data) {
       $('.version', info).html(data[0].name);
       $('time', info).html(moment(new Date(data[0].published_at)).fromNow());
     });
