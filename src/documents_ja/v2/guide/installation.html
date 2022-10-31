@@ -9,19 +9,21 @@ description: 'Onsen UIのインストールガイドです。Onsen UIはハイ�
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases/latest';
-  var zipUrl = "";
+  var url = 'https://api.github.com/repos/OnsenUI/onsenui/releases/latest';
+  var zipUrl = '';
   $.getJSON(url, function(res) {
-    zipUrl = res.zipball_url;
+    zipUrl = 'https://registry.npmjs.org/onsenui/-/onsenui-' + res.name + '.tgz';
     $('#get-latest-build').text('Onsen UI最新版のダウンロード (バージョン' + res.name + ')')
   });
 
   $('#get-latest-build').click(function(event) {
     if (zipUrl) {
+      console.log(zipUrl);
       event.preventDefault();
       location.href = zipUrl;
     }
   });
+
 });
 </script>
 
@@ -35,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
   <div>
     <p class="install-row-title">Onsen UI</p>
     <p class="install-row-content">コンパイル、最小化済みのJavaScript、CSS、アセットが含まれています。Web Components版</p>
-    <a class="install-row-link" id="get-latest-build" href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest">Onsen UIをダウンロード</a>
+    <a class="install-row-link" id="get-latest-build" href="">Onsen UIをダウンロード</a>
   </div>
   <div>
     <p class="install-row-title">ソースコード</p>
@@ -75,6 +77,6 @@ Monaca CLIを使うと、Onsen UIを用いたハイブリッドアプリ開発�
 
 #### 旧バージョンと変更履歴
 
-Onsen UIの過去のバージョンと、それぞれのバージョンの変更点は、[OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases)に記載しています。ソースコードは[OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/)に用意されています。是非レポジトリにスターをお願いします！
+Onsen UIの過去のバージョンと、それぞれのバージョンの変更点は、[OnsenUI/OnsenUI/release](https://github.com/OnsenUI/OnsenUI/releases)に記載しています。ソースコードは[OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/)に用意されています。是非レポジトリにスターをお願いします！
 
 <% end %>

@@ -7,20 +7,23 @@ layout: docs.html.eco
 description: 'Installation guide for Onsen UI, the Web Components based HTML5 mobile UI framework for hybrid mobile app and PWA.'
 ---
 <script>
+
 document.addEventListener('DOMContentLoaded', function() {
-  var url = 'https://api.github.com/repos/OnsenUI/OnsenUI-dist/releases/latest';
-  var zipUrl = "";
+  var url = 'https://api.github.com/repos/OnsenUI/onsenui/releases/latest';
+  var zipUrl = '';
   $.getJSON(url, function(res) {
-    zipUrl = res.zipball_url;
+    zipUrl = 'https://registry.npmjs.org/onsenui/-/onsenui-' + res.name + '.tgz';
     $('#get-latest-build').text('Download Onsen UI (Version ' + res.name + ')')
   });
 
   $('#get-latest-build').click(function(event) {
+    console.log(zipUrl);
     if (zipUrl) {
       event.preventDefault();
       location.href = zipUrl;
     }
   });
+
 });
 </script>
 
@@ -34,7 +37,7 @@ Onsen UI has several quick and easy ways to get started, each one appealing to a
   <div>
     <p class="install-row-title">Onsen UI</p>
     <p class="install-row-content">Compiled and minified JavaScript, CSS and resources. Web Components version.</p>
-    <a class="install-row-link" id="get-latest-build" href="https://github.com/OnsenUI/OnsenUI-dist/releases/latest">Download Onsen UI</a>
+    <a class="install-row-link" id="get-latest-build" href="">Download Onsen UI</a>
   </div>
   <div>
     <p class="install-row-title">Source Code</p>
@@ -75,6 +78,6 @@ Monaca CLI is deeply integrated with Onsen UI to provide a simple & quick build 
 
 #### Old Releases & Changelogs
 
-Onsen UI releases and changelogs can be seen at [OnsenUI/OnsenUI-dist](https://github.com/OnsenUI/OnsenUI-dist/releases). The source repository is hosted in [OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/). Please give us a ★!
+Onsen UI releases and changelogs can be seen at [OnsenUI/OnsenUI/release](https://github.com/OnsenUI/OnsenUI/releases). The source repository is hosted in [OnsenUI/OnsenUI](https://github.com/OnsenUI/OnsenUI/). Please give us a ★!
 
 <% end %>
