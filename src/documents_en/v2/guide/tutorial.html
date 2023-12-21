@@ -1253,13 +1253,11 @@ document.addEventListener('init', ({ target }) => {
     get();
 
     // at the bottom of the list get the next set of results and append them
-    target.onInfiniteScroll = (done) => {
+    target.onInfiniteScroll = async (done) => {
       if (url) {
-        setTimeout(() => {
-          get();
-          done();
-        }, 200);
+        await get();
       }
+      done();
     };
   }
 });
@@ -1272,11 +1270,6 @@ get the first 20 Pokémon and add them to the list. Then we set the page's
 when we reach the end of the page's content (defined by `div.content` which
 we'll add in a minute). We need to use `setTimeout` because otherwise the
 results could get spliced, I think.
-
-> `setTimeout` waits for 200ms here just so you can see the spinner in action.
-> This is just an arbitrary wait, so feel free to set it to `0` to speed things
-> up. However, what you _can't_ do is remove `setTimeout` altogether and just
-> call `get`. This will splice the results as mentioned already.
 
 We'll also add a spinner so that when the user reaches the end of the page, a
 spinner is shown while the next results are being loaded. Add this to the body
