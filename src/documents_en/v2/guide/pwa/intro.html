@@ -32,11 +32,15 @@ Since the user will add your site to their home screen, they will interact with 
 
 #### Requirements
 For a site to be classified as a PWA, and to prompt the user to add it to their home screen (on Chrome), it must:
- - Load all URLs while offline
- - Be served over *https*
+ - Be served over *https* (or localhost, for testing)
  - Have a manifest file
+ - Register a service worker
  - Have an icon
 
+#### Suggestions
+ - Implement a [caching strategy](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Caching) for css, javascript, json, etc.
+ - Pre-caching every page url and assets allows the app to run offline
+    
 These are the most basic requirements, but there are many more things you can and should do to improve the user's experience.
 
 #### Platform Support
