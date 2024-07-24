@@ -1,0 +1,409 @@
+---
+title: 'Vue 3'
+order: 121
+tocGroup: guide
+layout: docs.html.eco
+description: 'Onsen UIと一緒にVue.jsの使い方を学びましょう。'
+---
+
+<%- @markdown => %>
+
+### Vue 3
+
+このセクションを読む前に、Onsen UIの基本を理解するために[Getting Started](../index.html)および[Fundamentals](../fundamentals.html)を読むことをお勧めします。心配しないでください、5分以上かかりません。
+
+Onsen UIのVueバインディング（VueOnsen）は、コアWebコンポーネントをラップし、それらと対話するためのVueライクなAPIを提供するVue 3コンポーネントとディレクティブを提供します。
+
+このガイドでは、Onsen UI + Vueのセットアップ方法と基本的な使い方を説明します。
+
+#### 新しいプロジェクトのセットアップ
+
+新しいOnsen UI + Vue 3プロジェクトを作成する最も簡単な方法は、[Vite](https://vitejs.dev/)を使用することです。
+
+npmがインストールされていることを確認し、次を実行します
+
+```
+npm init vue@latest
+```
+
+このコマンドは、新しいVueプロジェクトを作成する手順を案内します。
+
+#### インストール
+
+Vueプロジェクトをセットアップしたら、コアOnsen UIパッケージ（`onsenui`）とVueバインディング（`vue-onsenui`）をインストールするだけです。プロジェクトのルート内で次を実行します：
+
+```sh
+npm install onsenui vue-onsenui
+```
+
+#### セットアップ
+
+プロジェクトのメインファイル（通常は`main.js`）内で、Onsen UIのファイルをインポートする必要があります。
+
+```js
+// Webpack CSS import
+import 'onsenui/css/onsenui.css';
+import 'onsenui/css/onsen-css-components.css';
+
+// JS import
+import { createApp } from 'vue';
+import App from './App.vue';
+import VueOnsen from 'vue-onsenui'; // これが 'onsenui' をインポートするため、別途インポートする必要はありません
+
+const app = createApp(App);
+
+app.use(VueOnsen); // VueOnsen をVUEのプラグインとして設定します。
+```
+
+vue-onsenuiのESMビルド（デフォルト）を使用している場合、アプリで使用するコンポーネントも登録する必要があります。すべてのコンポーネントを登録するには、プロジェクトのメインファイルに次の内容を追加します：
+
+```js
+import * as components from 'vue-onsenui/esm/components';
+
+// Register all vue-onsenui components
+Object.values(components).forEach(component =>
+  app.component(component.name, component));
+```
+
+If you want to use the UMD build instead of the ESM build, see [UMD and ESM builds](#umd-and-esm-builds). When using the UMD version, there is no need to register Onsen UI components.
+
+If you are having trouble with the setup steps, check out the [example project](https://github.com/OnsenUI/OnsenUI/tree/master/vue3-onsenui-examples) for a complete configuration.
+
+#### Hello World App
+
+To get started, let’s create a simple Hello World application. Projects set up using the Vue CLI are _single file components_. This means the HTML, CSS and JS are all contained in one `.vue` file. The default project created by the CLI will have at least an `App.vue` file. Edit it to look like this.
+
+```html
+<template id="main-page">
+  <v-ons-page>
+    <v-ons-toolbar>
+      <div class="center">Title</div>
+    </v-ons-toolbar>
+
+    <p style="text-align: center">
+      <v-ons-button @click="$ons.notification.alert('Hello World!')">
+        Click me!
+      </v-ons-button>
+    </p>
+  </v-ons-page>
+</template>
+
+<style>
+  /* CSS goes here */
+</style>
+
+<script>
+  // Javascript goes here
+</script>
+```
+
+Projects created with Vite come with various scripts, including one to serve the project so you can preview it in the browser.
+
+```sh
+npm run dev
+```
+
+Open the given URL in your browser. If you click the button, you will see an alert dialog. That's it!
+
+To continue from here, take a look at the [Onsen UI Vue 3 Components list](/v2/api/vue3/). For more information about Vue itself, we recommend reading the official [Vue docs](https://vuejs.org/). If you want to know more about how the bindings work, keep reading below.
+
+#### Advanced
+
+##### Understanding Vue Components
+
+Onsen UI's Vue components are simple wrappers around inner [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Custom_Elements) in most of the cases. This means that a Vue Component takes some props and translates them into DOM properties, DOM attributes or method calls for the Onsen UI core. It also listens for native events and fires the corresponding Vue events. If you inspect the DOM you will likely see a bunch of `ons-*` components without `v-*` prefix (these are real HTML elements). You can have a look at the implementation [here](https://github.com/OnsenUI/OnsenUI/tree/master/vue3-onsenui/src/components).
+
+Since `v-ons-*` components compile into `ons-*` DOM elements, you can use this knowledge to style your component with tag names as well. For example, if you want to style a button, you should target `ons-button`, not `v-ons-button`.
+
+##### VOnsPage Compilation
+
+`v-ons-page` component compiles into `ons-page` custom element. This element, at the same time, processes its content and filters scrollable and fixed elements. Scrollable content is moved into a special `div.page__content` wrapper. This behavior might create issues under some specific situations, like using `v-for` with asynchronous data. To avoid any possible issue, __manually providing a `div.content` element is recommended__:
+
+```html
+<v-ons-page>
+  <v-ons-toolbar></v-ons-toolbar>
+
+  <div class="content">
+    <!-- Scrollable content here -->
+    <v-ons-input></v-ons-input>
+    <div v-for="item in asyncAjaxItems"></div>
+  </div>
+
+  <!-- Fixed content here -->
+  <v-ons-fab></v-ons-fab>
+</v-ons-page>
+```
+
+See also [Components Compilation](../compilation.html) section for more details about this.
+
+##### The $ons object
+
+The original [`ons` object](../fundamentals.html#the-ons-object) is not available in the global scope in Vue applications. Instead, it is provided in every Vue instance as `this.$ons` through Vue's global configuration:
+
+```html
+<v-ons-button @click="$ons.notification.alert('Hi there!')">
+  Click me
+</v-ons-button>
+```
+
+##### Event Handling
+
+DOM events fired by Onsen UI elements are translated into Vue events in the corresponding components. For example, `v-ons-navigator` can handle a `postpush` event with `@postpush="..."`.
+
+Additionally, components that are capable of handling Cordova's `backbutton` event (Android's back button), can listen for this event with `@deviceBackButton` handler.
+
+```
+<v-ons-dialog @deviceBackButton="$event.callParentHandler()"></v-ons-dialog>
+```
+
+More information about this event in the original [Cordova-specific Features](../cordova.html#device-back-button) section.
+
+##### Inputs and v-model
+
+Input components in Onsen UI (such as `v-ons-input` or `v-ons-checkbox`) support Vue’s `v-model` directive:
+
+```html
+<v-ons-input v-model="something"></v-ons-input>
+```
+
+By default, this will update on the `input` event. To use a different event, such as `change`, set the `model-event` prop:
+
+```html
+<v-ons-input v-model="something" model-event="change"></v-ons-input>
+```
+
+This will update the model on `change` events instead of `input` (default).
+
+##### UMD and ESM builds
+
+vue-onsenui is available as two different types of builds: the UMD build and the ESM builds.
+
+The default is the ESM build, which is the best choice for modern browsers and bundlers. The ESM build requires that you register the Onsen UI components that your app will use. This allows you to only include the components you need, which helps reduce app size.
+
+```js
+import * as components from 'vue-onsenui/esm/components';
+
+// Register all vue-onsenui components
+Object.values(components).forEach(component =>
+  app.component(component.name, component));
+```
+
+If you want to use the UMD build instead of the ESM build, add the following to your `vite.config.js`:
+
+```
+export default defineConfig({
+  plugins: [vue()],
+  resolve: {
+    alias: {
+      'vue-onsenui': 'vue-onsenui/dist/vue-onsenui.js'
+    }
+  },
+  optimizeDeps: {
+    include: ['vue-onsenui']
+  },
+  build: {
+    commonJsOptions: {
+      include: [/vue-onsenui/]
+    }
+  }
+})
+```
+
+When using the UMD build, there is no need to register Onsen UI components.
+
+#### Vue Bindings FAQs
+
+##### How do I set up global Onsen UI options?
+
+The main guide describes [how to disable or set some global features](../faq.html) _"right after including `onsenui.js` in the app"_. This means that it must take effect before any component is rendered. Since the `ons` object is not provided globally, we need to use the `$ons` object at the very first possible location:
+
+```
+import { createApp } from 'vue';
+import VueOnsen from 'vue-onsenui';
+
+const app = createApp({
+  beforeCreate() {
+    this.$ons.disableAutoStyling(); // Or any other method
+  }
+})
+
+app.use(VueOnsen);
+```
+
+This way, changes take effect before any component is rendered.
+
+##### How do I pass data to the next page in the navigator?
+
+A Navigator's pages are sibling elements, which means that communication among them in Vue is fairly challenging. [Pinia](https://pinia.vuejs.org/) is a good solution for this, but not the only one. When you push a new page component and want to add some initial data, you can simply extend it:
+
+```
+import nextPage from 'nextPage.vue';
+// ...
+
+pageStack.push({
+  extends: nextPage,
+  data() {
+    return {
+      myCustomDataHere: 42
+    };
+  }
+})
+```
+
+##### Can I use Pinia with Onsen UI?
+
+Absolutely. Pinia is a good solution for component communication. If you feel you have too many props and events, Pinia may be a good fit. For an example of Onsen UI + Vue + Pinia, see the [examples app](https://github.com/OnsenUI/OnsenUI/blob/master/vue3-onsenui-examples/src/components/NavigatorPinia.vue).
+
+#### Upgrading from Vue 2
+
+For most apps, upgrading from vue-onsenui for Vue 2 to vue-onsenui for Vue 3 should be a straightforward process. However, along with the changes needed to upgrade a Vue 2 project to a Vue 3 project, there are some specific vue-onsenui breaking changes that need to be accounted for.
+
+We recommend reading through the official [Vue 3 Migration Guide](https://v3-migration.vuejs.org/) first for any general Vue changes unrelated to Onsen UI that you need to make.
+
+For a full list of changes, see the [CHANGELOG](https://github.com/OnsenUI/OnsenUI/blob/master/vue3-onsenui/CHANGELOG.md).
+
+If you are getting stuck, check out the [examples app](https://github.com/OnsenUI/OnsenUI/tree/master/vue3-onsenui-examples) for a full configuration, or the [Onsen UI playground](https://onsen.io/playground/) for specific examples.
+
+##### Installing vue-onsenui for Vue 3
+
+The first step is to install vue-onsenui for Vue 3. vue-onsenui v3+ is written for Vue 3, and vue-onsenui v2.x.x is for Vue 2.
+
+To install vue-onsenui v3 and its corresponding onsenui version, run:
+
+```
+npm install --save vue-onsenui@latest onsenui@latest
+```
+
+Note that you need to have already installed Vue 3 or this command will throw an error.
+
+##### Loading vue-onsenui
+
+In Vue 2, vue-onsenui was loaded by calling `Vue.use` in the app's main file (usually `main.js`). Vue 3 replaces the global Vue API with `createApp`, which creates an app instance that can be loaded with vue-onsenui.
+
+In your app's main file, replace `Vue.use` with `app.use`:
+
+```js
+import { createApp } from 'vue';
+import App from './App.vue';
+import VueOnsen from 'vue-onsenui';
+
+const app = createApp(App);
+app.use(VueOnsen);          // this was previously Vue.use(VueOnsen)
+```
+
+##### Registering vue-onsenui components
+
+vue-onsenui has two different builds: the UMD build, and the ESM build. In vue-onsenui v3, the default build switched from UMD to ESM, which is best for bundlers and modern browsers. The ESM allows you to only register the vue-onsenui components that your app will actually use, reducing app size. The UMD build automatically registers all components.
+
+This means that when using the default vue-onsenui build, you must now register the components you want to use. To register all components, add the following to the app's main file:
+
+```js
+import * as components from 'vue-onsenui/esm/components';
+
+// Register all vue-onsenui components
+Object.values(components).forEach(component => app.component(component.name, component));
+```
+
+To register a single component:
+
+```js
+import VOnsButton from 'vue-onsenui/esm/components/VOnsButton';
+
+app.component(VOnsButton.name, VOnsButton);
+```
+
+For more details about UMD vs ESM, see [UMD and ESM builds](#umd-and-esm-builds).
+
+##### Prop name changes
+
+In vue-onsenui v3, some props had name changes. The main changes are:
+
+- `options.animation` and `options.animationOptions` are renamed `animation` and `animationOptions` for all components.
+- For v-model, `modelValue` prop and `update:modelValue` event are now used instead of `modelProp` prop and `modelEvent` event. However, the `modelEvent` *prop* is unchanged.
+- For VOnsCarousel, VOnsTabbar, VOnsSegment, the `index` prop and `update:index` event have been renamed to `activeIndex` and `update:activeIndex`.
+
+For a full list of changes, see the [CHANGELOG](https://github.com/OnsenUI/OnsenUI/blob/master/vue3-onsenui/CHANGELOG.md).
+
+##### Navigator
+
+###### Keeping the page stack in sync
+
+In vue-onsenui v2, VOnsNavigator was passed a `pageStack` prop which it directly manipulated. vue-onsenui v3's navigator keeps its own internal representation of the page stack, which:
+
+- responds to changes in the `pageStack` prop
+- emits an `update:pageStack` event when the page stack changes internally (such as when the user swipes to pop the page or presses the device back button).
+
+This behaviour allows VOnsNavigator to be used with `v-model`, which will create a two-way binding to keep the page stack prop and the internal page stack in sync. If your existing app has an instance of VOnsNavigator, just add `v-model` in front of the `pageStack` prop:
+
+```
+<v-ons-navigator v-model:page-stack="pageStack"></v-ons-navigator>
+```
+
+###### Manipulating the page stack
+
+Due to [changes in how watchers work in Vue 3](https://v3-migration.vuejs.org/breaking-changes/watch.html), VOnsNavigator no longer supports changing the page stack using methods that mutate the page stack array, such as `Array.prototype.push` and `Array.protoype.pop`. Instead, the whole value of the page stack prop should be replaced using methods such as `Array.prototype.slice` or the spread syntax.
+
+- **Pushing a page**: Instead of `pageStack.push(page)`, use `pageStack = [...pageStack, page]`.
+- **Popping a page**: Instead of `pageStack.pop()`, use `pageStack = pageStack.slice(0, -1)`.
+- **Resetting to the first page**: Use `pageStack = [pageStack[0]]`.
+
+Vue 3 may also warn that pages pushed to the navigator were made reactive objects. You can fix this warning by wrapping components with `markRaw`:
+
+```js
+import { markRaw } from 'vue';
+
+export default {
+  data() {
+    return {
+      pageStack: [markRaw(page1)]
+    };
+  },
+};
+```
+
+###### Overwriting pop page behaviour
+
+In vue-onsenui v3, the navigator's `popPage` prop has been removed. This prop was used to specify what should happen when a page is popped due to user interaction, such as pressing the device back button or swiping to pop.
+
+If you were using the `popPage` prop to update a mutable value, `popPage` can be safely removed and the mutable value will be updated with `v-model:page-stack="someMutableValue"`.
+
+For other use cases of `popPage`, you should now specify which type of user interaction to overwrite:
+
+- **Device back button**: Add ` @deviceBackButton.prevent="deviceBackButtonHandler" `.
+- **Swipe to pop**: Use `@postpop="postpopHandler"`. The event object contains a key `swipeToPop` which can be used to detect if the `postpop` was triggered by a user swiping to pop.
+- **Clicking a VOnsBackButton**: Add ` @click.prevent ` to the VOnsBackButton. Alternatively, if you just need to do some update after the page has popped, do the same as swipe to pop above, but use the `onsBackButton` event key instead of `swipeToPop`.
+
+##### Lazy repeat
+
+The vue-onsenui v3 version of VOnsLazyRepeat now requires that an object be returned by `renderItem` instead of a Vue instance. In most cases, this just means removing `new Vue` and returning the component object directly:
+
+```js
+export default {
+  data() {
+    return {
+      renderItem: i => ({  // The object is returned here. Before, this would have been `new Vue`.
+        template: `<v-ons-list-item :index="index" :key="index">#{{ index }}</v-ons-list-item>`,
+        data() {
+          return {
+            index: i
+          };
+        }
+      })
+    };
+  }
+};
+```
+
+##### Popover
+
+The value of VOnsPopover's `target` prop must now be a Vue ref.
+
+```js
+<v-ons-toolbar-button ref="myToolbarButton">Test</v-ons-toolbar-button>
+
+<v-ons-popover :target="$refs.myToolbarButton">
+  Popover
+</v-ons-popover>
+```
+
+<% end %>
