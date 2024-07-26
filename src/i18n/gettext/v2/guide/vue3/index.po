@@ -1,0 +1,150 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-06-04 04:00+0000\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:1
+msgid ""
+"title: 'Vue 3'\n"
+"order: 121\n"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
+msgstr ""
+"title: 'Vue 3'\n"
+"order: 121\n"
+"tocGroup: guide\n"
+"layout: docs.html.eco"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:3
+msgid "description: 'Learn how to use Vue.js with Onsen UI.'"
+msgstr "description: 'Onsen UIと一緒にVue.jsの使い方を学びましょう。'"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:4
+msgid "<%- @markdown => %>"
+msgstr "<%- @markdown => %>"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:6
+msgid "Vue 3"
+msgstr "Vue 3"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:8
+msgid ""
+"Before reading this section, we suggest you reading [Getting "
+"Started](../index.html) and [Fundamentals](../fundamentals.html) to grasp "
+"the basics of Onsen UI. Don't worry, it won't take more than 5 minutes."
+msgstr ""
+"このセクションを読む前に、Onsen UIの基本を理解するために[Getting "
+"Started](../index.html)および[Fundamentals](../fundamentals.html)を読むことをお勧めします。心配しないでください、5分以上かかりません。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:11
+msgid ""
+"Vue bindings for Onsen UI (VueOnsen) provide Vue 3 components and "
+"directives that wrap the core Web Components and expose a Vue-like API to "
+"interact with them."
+msgstr ""
+"Onsen UIのVueバインディング（VueOnsen）は、コアWebコンポーネントをラップし、それらと対話するためのVueライクなAPIを提供するVue 3コンポーネントとディレクティブを提供します。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:13
+msgid ""
+"In this guide, we'll walk you through how to set up Onsen UI + Vue and "
+"cover basics to get started."
+msgstr ""
+"このガイドでは、Onsen UI + Vueのセットアップ方法と基本的な使い方を説明します。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:15
+msgid "Setting up a new project"
+msgstr "新しいプロジェクトのセットアップ"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:16
+msgid ""
+"The easiest way to create a new Onsen UI + Vue 3 project is with "
+"[Vite](https://vitejs.dev/)."
+msgstr ""
+"新しいOnsen UI + Vue 3プロジェクトを作成する最も簡単な方法は、[Vite](https://vitejs.dev/)を使用することです。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:18
+msgid "Make sure npm is installed and run"
+msgstr "npmがインストールされていることを確認し、次を実行します"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:20
+msgid "npm init vue@latest"
+msgstr "npm init vue@latest"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:21
+msgid "This command will take you through the steps to create a new Vue project."
+msgstr "このコマンドは、新しいVueプロジェクトを作成する手順を案内します。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:23
+msgid "Installation"
+msgstr "インストール"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:24
+msgid ""
+"Once you have a Vue project set up, you just need to install the core Onsen "
+"UI package (`onsenui`), and the Vue bindings (`vue-onsenui`). Inside the "
+"project root, run:"
+msgstr ""
+"Vueプロジェクトをセットアップしたら、コアOnsen UIパッケージ（`onsenui`）とVueバインディング（`vue-onsenui`）をインストールするだけです。プロジェクトのルート内で次を実行します："
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:26
+msgid "npm install onsenui vue-onsenui"
+msgstr "npm install onsenui vue-onsenui"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:27
+msgid "Setup"
+msgstr "セットアップ"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:28
+msgid ""
+"Inside your project's main file (usually `main.js`), Onsen UI's files need "
+"to be imported."
+msgstr ""
+"プロジェクトのメインファイル（通常は`main.js`）内で、Onsen UIのファイルをインポートする必要があります。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:30
+msgid ""
+"// Webpack CSS import\n"
+"import 'onsenui/css/onsenui.css';\n"
+"import 'onsenui/css/onsen-css-components.css';\n"
+"\n"
+"// JS import\n"
+"import { createApp } from 'vue';\n"
+"import App from './App.vue';\n"
+"import VueOnsen from 'vue-onsenui'; // This imports 'onsenui', so no need "
+"to import it separately\n"
+"\n"
+"const app = createApp(App);\n"
+"\n"
+"app.use(VueOnsen); // VueOnsen set here as plugin to VUE."
+msgstr ""
+"// Webpack CSS import\n"
+"import 'onsenui/css/onsenui.css';\n"
+"import 'onsenui/css/onsen-css-components.css';\n"
+"\n"
+"// JS import\n"
+"import { createApp } from 'vue';\n"
+"import App from './App.vue';\n"
+"import VueOnsen from 'vue-onsenui'; // これが 'onsenui' をインポートするため、別途インポートする必要はありません\n"
+"\n"
+"const app = createApp(App);\n"
+"\n"
+"app.use(VueOnsen); // VueOnsen をVUEのプラグインとして設定します。"
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:31
+msgid ""
+"If you are using the ESM build of vue-onsenui (the default), you also need "
+"to register the components your app will use. To register all components, "
+"add the following in your project's main file:"
+msgstr ""
+"vue-onsenuiのESMビルド（デフォルト）を使用している場合、アプリで使用するコンポーネントも登録する必要があります。すべてのコンポーネントを登録するには、プロジェクトのメインファイルに次の内容を追加します："
+
+#: /Users/knaito/Documents/work/monaca/onsen.io/src/documents_en/v2/guide/vue3/index.html:33
+#: /Users/knaito/Documents/work
