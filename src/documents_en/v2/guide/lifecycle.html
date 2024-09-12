@@ -63,6 +63,8 @@ document.addEventListener('init', function(event) {
   </ons-page>
 </template>
 ```
+Note: However, in some cases, it's better write this script in your main.js page like
+  document.addEventListener('prechange', function (event) {...  
 
 Keep in mind that there can only be 1 root node per template (an `ons-page`). Optionally, `<template>` elements allow synchronous `<script></script>` tags inside that run when the element is created and attached to the DOM.
 
