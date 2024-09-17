@@ -40,6 +40,13 @@ project on a mobile device from your local computer. Using these tools requires
 you to sign up for a free Monaca account.
 
 Install node and npm, then run `npm install -g monaca` to install Monaca
+
+If you experience the error 'command not found', ensure that monaca is properly added to your PATH environment variable by editing ~/.bashrc (or Mac equivalent):
+
+export PATH="$PATH:/usr/local/lib/node_modules/monaca/bin"
+
+This will ensure that monaca is on your path and can be invoked from anywhere on your system.
+
 CLI. Run `monaca login`, then create a new project with:
 
      monaca create tutorial --template onsenui-v2-js-minimum
