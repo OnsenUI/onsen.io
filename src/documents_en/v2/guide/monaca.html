@@ -1,4 +1,496 @@
----
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOMA: Piñatas & POS - Spotify Edition</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+        }
+        /* Tema Spotify Style */
+        .spotify-card {
+            background-color: #181818;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .spotify-card:hover {
+            background-color: #282828;
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+        .spotify-green {
+            background-color: #1db954;
+        }
+        .spotify-green:hover {
+            background-color: #1ed760;
+        }
+        .text-spotify {
+            color: #1db954;
+        }
+        /* Scrollbar personalizado */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #121212;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #282828;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3e3e3e;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header / Barra Superior -->
+    <header class="bg-black/80 backdrop-blur-md px-6 py-4 flex justify-between items-center sticky top-0 z-50 border-b border-white/10">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-full spotify-green flex items-center justify-center text-black font-bold text-lg shadow-lg">
+                <i class="fa-solid fa-compact-disc fa-spin"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-wider text-white">SOMA</h1>
+                <p class="text-xs text-gray-400 font-medium uppercase tracking-widest">Piñatas & Studio</p>
+            </div>
+        </div>
+        <!-- Pestañas de Navegación -->
+        <div class="flex items-center space-x-2 bg-white/5 p-1 rounded-full border border-white/10">
+            <button onclick="switchTab('pos')" id="btn-tab-pos" class="px-4 py-2 rounded-full text-xs font-semibold spotify-green text-black transition-all shadow-md">POS / Venta</button>
+            <button onclick="switchTab('gallery')" id="btn-tab-gallery" class="px-4 py-2 rounded-full text-xs font-semibold text-gray-300 hover:text-white transition-all">Galería & Specs</button>
+            <button onclick="switchTab('inventory')" id="btn-tab-inventory" class="px-4 py-2 rounded-full text-xs font-semibold text-gray-300 hover:text-white transition-all">Inventario</button>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Sección Izquierda (POS / Galería / Inventario) -->
+        <div class="md:col-span-2 space-y-6">
+            
+            <!-- VISTA POS -->
+            <div id="view-pos" class="space-y-6">
+                <!-- Buscador tipo Spotify -->
+                <div class="spotify-card rounded-full px-5 py-3 flex items-center space-x-3 shadow-inner">
+                    <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                    <input type="text" id="search-input" oninput="filterProducts()" placeholder="¿Qué piñata o accesorio buscas hoy?" class="bg-transparent w-full focus:outline-none text-white text-sm placeholder-gray-500">
+                    <button onclick="openAddModal()" class="spotify-green text-black px-4 py-1.5 rounded-full text-xs font-bold transition-all shadow-md flex items-center space-x-1">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Nuevo</span>
+                    </button>
+                </div>
+
+                <!-- Cuadrícula de Productos -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 gap-4" id="product-grid">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+
+            <!-- VISTA GALERÍA DE FOTOS & ESPECIFICACIONES -->
+            <div id="view-gallery" class="hidden space-y-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 class="text-2xl font-bold text-white">Galería de Producción</h2>
+                        <p class="text-xs text-gray-400">Especificaciones técnicas, materiales estructurales y peso de cada piñata.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="gallery-grid">
+                    <!-- Dinámico -->
+                </div>
+            </div>
+
+            <!-- VISTA INVENTARIO -->
+            <div id="view-inventory" class="hidden space-y-4">
+                <div class="flex justify-between items-center">
+                    <h2 class="text-2xl font-bold text-white">Inventario General</h2>
+                    <button onclick="openAddModal()" class="spotify-green text-black px-4 py-2 rounded-full text-xs font-bold transition-all">Agregar Producto</button>
+                </div>
+                <div class="spotify-card rounded-2xl overflow-hidden p-2">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-gray-300">
+                            <thead class="bg-black/40 text-xs uppercase text-gray-400 border-b border-white/5">
+                                <tr>
+                                    <th class="p-3">Producto</th>
+                                    <th class="p-3">Material</th>
+                                    <th class="p-3">Libras</th>
+                                    <th class="p-3">Precio</th>
+                                    <th class="p-3">Stock</th>
+                                    <th class="p-3 text-right">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="inventory-table-body" class="divide-y divide-white/5">
+                                <!-- Dinámico -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Sección Derecha: Ticket / Carrito Spotify Style -->
+        <div class="space-y-6">
+            <div class="spotify-card rounded-3xl p-6 flex flex-col h-[600px] justify-between shadow-xl">
+                <div>
+                    <div class="flex justify-between items-center mb-4 border-b border-white/10 pb-3">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-receipt text-spotify"></i>
+                            <h3 class="font-bold text-base text-white">Ticket de Venta</h3>
+                        </div>
+                        <span id="cart-count" class="bg-white/10 text-gray-300 text-xs px-2.5 py-1 rounded-full font-medium">0 items</span>
+                    </div>
+                    <!-- Lista del carrito -->
+                    <div id="cart-items" class="space-y-3 overflow-y-auto max-h-[340px] pr-1">
+                        <p class="text-gray-500 text-sm text-center py-16">Tu carrito está vacío.<br>Selecciona un producto para comenzar.</p>
+                    </div>
+                </div>
+
+                <!-- Total y Checkout WhatsApp -->
+                <div class="border-t border-white/10 pt-4 space-y-4">
+                    <div class="flex justify-between items-center text-lg font-bold text-white">
+                        <span class="text-sm font-normal text-gray-400">Total a pagar:</span>
+                        <span id="cart-total" class="text-spotify text-xl">$0.00</span>
+                    </div>
+                    <button onclick="sendWhatsAppTicket()" class="w-full spotify-green text-black py-3.5 rounded-full font-bold shadow-lg transition-all flex items-center justify-center space-x-2 hover:scale-[1.02]">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Enviar Ticket por WhatsApp</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Modal de Pantalla Completa / Detalle del Producto -->
+    <div id="fullscreen-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="spotify-card max-w-lg w-full rounded-3xl p-6 relative space-y-6 shadow-2xl border border-white/10">
+            <button onclick="closeFullscreenModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white bg-white/10 w-9 h-9 rounded-full flex items-center justify-center">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="w-full h-52 rounded-2xl bg-gradient-to-tr from-gray-900 via-neutral-800 to-zinc-900 flex items-center justify-center relative overflow-hidden shadow-inner">
+                <i id="modal-product-icon" class="fa-solid fa-star text-spotify text-6xl"></i>
+            </div>
+            <div class="space-y-2">
+                <span id="modal-product-cat" class="text-xs uppercase tracking-widest text-spotify font-bold">Categoría</span>
+                <h2 id="modal-product-name" class="text-2xl font-bold text-white">Nombre</h2>
+                <p id="modal-product-desc" class="text-gray-300 text-sm leading-relaxed">Descripción del producto.</p>
+            </div>
+            <!-- Especificaciones técnicas detalladas -->
+            <div class="grid grid-cols-2 gap-3 bg-black/30 p-3 rounded-2xl border border-white/5 text-xs">
+                <div>
+                    <span class="text-gray-500 block">Estructura / Material:</span>
+                    <strong id="modal-product-material" class="text-white text-sm">Cartón y Alambre</strong>
+                </div>
+                <div>
+                    <span class="text-gray-500 block">Cantidad / Peso:</span>
+                    <strong id="modal-product-pounds" class="text-white text-sm">3.5 Libras</strong>
+                </div>
+            </div>
+            <div class="flex justify-between items-center pt-2 border-t border-white/10">
+                <div>
+                    <span class="text-xs text-gray-400 block">Precio</span>
+                    <div id="modal-product-price" class="text-xl font-bold text-spotify">$0.00</div>
+                </div>
+                <button onclick="addCurrentModalToCart()" class="spotify-green text-black px-6 py-3 rounded-full font-bold shadow-lg transition-all hover:scale-105">
+                    Agregar al Ticket
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Producto -->
+    <div id="add-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="spotify-card max-w-md w-full rounded-3xl p-6 relative space-y-4 border border-white/10">
+            <h3 class="font-bold text-xl text-white">Nuevo Producto / Piñata</h3>
+            <div class="space-y-3">
+                <input type="text" id="new-name" placeholder="Nombre de la piñata" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-spotify">
+                <input type="text" id="new-cat" placeholder="Categoría (Ej. Tradicional, Infantil)" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-spotify">
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="number" id="new-price" placeholder="Precio ($)" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-spotify">
+                    <input type="number" id="new-stock" placeholder="Stock" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-spotify">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <input type="text" id="new-material" placeholder="Material (Cartón/Alambre/Papel)" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-spotify">
+                    <input type="text" id="new-pounds" placeholder="Libras (Ej. 3 lbs)" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-spotify">
+                </div>
+            </div>
+            <div class="flex space-x-3 pt-2">
+                <button onclick="closeAddModal()" class="w-1/2 bg-white/10 hover:bg-white/20 text-white py-3 rounded-full font-medium transition-all text-sm">Cancelar</button>
+                <button onclick="saveNewProduct()" class="w-1/2 spotify-green text-black py-3 rounded-full font-bold transition-all text-sm">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Funcionalidad -->
+    <script>
+        let products = [
+            { id: 1, name: "Piñata Estelar SOMA", category: "Tradicional", price: 139.99, stock: 12, icon: "fa-star", desc: "Clásico diseño papier-mâché de 5 picos, vibrantes colores de fiesta.", material: "Cartón, Alambre reforzado y Papel China", pounds: "4.2 Libras" },
+            { id: 2, name: "Piñata Unicornio Mágico", category: "Infantil", price: 155.00, stock: 8, icon: "fa-horse", desc: "Hermoso diseño con crin de colores pastel y detalles metalizados.", material: "Cartón estructurado y Papel Metalizado", pounds: "3.0 Libras" },
+            { id: 3, name: "Piñata Estrella Brillante", category: "Navidad / Fiestas", price: 120.00, stock: 15, icon: "fa-sun", desc: "Acabado con papel metálico brillante para destacar en cualquier evento.", material: "Cartón y Alambre flexible", pounds: "3.5 Libras" },
+            { id: 4, name: "Confeti Metálico Premium", category: "Accesorios", price: 25.00, stock: 40, icon: "fa-gift", desc: "Bolsa de confeti multicolor brillante para rellenar tus piñatas.", material: "Papel Celofán", pounds: "1.0 Libra" }
+        ];
+
+        let cart = [];
+        let activeModalProduct = null;
+
+        function renderProducts(filter = "") {
+            const grid = document.getElementById("product-grid");
+            const galleryGrid = document.getElementById("gallery-grid");
+            const tableBody = document.getElementById("inventory-table-body");
+            
+            grid.innerHTML = "";
+            galleryGrid.innerHTML = "";
+            tableBody.innerHTML = "";
+
+            const filtered = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()) || p.category.toLowerCase().includes(filter.toLowerCase()));
+
+            filtered.forEach(p => {
+                // POS Grid Card
+                grid.innerHTML += `
+                    <div onclick="openFullscreenModal(${p.id})" class="spotify-card rounded-2xl p-4 flex flex-col justify-between cursor-pointer group">
+                        <div class="w-full h-28 rounded-xl bg-black/40 flex items-center justify-center mb-3 group-hover:bg-black/60 transition-colors">
+                            <i class="fa-solid ${p.icon} text-3xl text-spotify"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-semibold text-sm truncate">${p.name}</h4>
+                            <p class="text-xs text-gray-400 mt-0.5">${p.category}</p>
+                            <p class="text-spotify font-bold text-sm mt-2">$${p.price.toFixed(2)}</p>
+                        </div>
+                    </div>
+                `;
+
+                // Gallery & Specifications Card
+                galleryGrid.innerHTML += `
+                    <div class="spotify-card rounded-2xl p-4 flex space-x-4 items-center">
+                        <div class="w-20 h-20 rounded-xl bg-black/40 flex items-center justify-center shrink-0">
+                            <i class="fa-solid ${p.icon} text-2xl text-spotify"></i>
+                        </div>
+                        <div class="flex-1 space-y-1">
+                            <span class="text-[10px] uppercase font-bold text-spotify tracking-wider">${p.category}</span>
+                            <h4 class="text-white font-bold text-sm">${p.name}</h4>
+                            <div class="text-xs text-gray-400 space-y-0.5 pt-1">
+                                <p><i class="fa-solid fa-weight-scale mr-1 text-gray-500"></i> Peso: <strong class="text-gray-200">${p.pounds}</strong></p>
+                                <p><i class="fa-solid fa-layer-group mr-1 text-gray-500"></i> Material: <strong class="text-gray-200">${p.material}</strong></p>
+                            </div>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="text-spotify font-bold text-sm">$${p.price.toFixed(2)}</span>
+                                <button onclick="openFullscreenModal(${p.id})" class="bg-white/10 hover:bg-white/20 text-white px-3 py-1 rounded-full text-xs font-medium transition-all">Ver detalle</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Inventory Table Row
+                tableBody.innerHTML += `
+                    <tr class="hover:bg-white/5 transition-all text-xs">
+                        <td class="p-3 font-medium text-white flex items-center space-x-2">
+                            <i class="fa-solid ${p.icon} text-spotify"></i>
+                            <span>${p.name}</span>
+                        </td>
+                        <td class="p-3 text-gray-400">${p.material}</td>
+                        <td class="p-3 text-gray-400">${p.pounds}</td>
+                        <td class="p-3 text-spotify font-bold">$${p.price.toFixed(2)}</td>
+                        <td class="p-3 text-gray-300">${p.stock} un.</td>
+                        <td class="p-3 text-right">
+                            <button onclick="addToCart(${p.id})" class="spotify-green text-black px-3 py-1 rounded-full font-bold text-xs"><i class="fa-solid fa-cart-plus"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function filterProducts() {
+            const query = document.getElementById("search-input").value;
+            renderProducts(query);
+        }
+
+        function switchTab(tab) {
+            const posView = document.getElementById("view-pos");
+            const galleryView = document.getElementById("view-gallery");
+            const invView = document.getElementById("view-inventory");
+            
+            const btnPos = document.getElementById("btn-tab-pos");
+            const btnGallery = document.getElementById("btn-tab-gallery");
+            const btnInv = document.getElementById("btn-tab-inventory");
+
+            // Reset tabs
+            posView.classList.add("hidden");
+            galleryView.classList.add("hidden");
+            invView.classList.add("hidden");
+
+            btnPos.className = "px-4 py-2 rounded-full text-xs font-semibold text-gray-300 hover:text-white transition-all";
+            btnGallery.className = "px-4 py-2 rounded-full text-xs font-semibold text-gray-300 hover:text-white transition-all";
+            btnInv.className = "px-4 py-2 rounded-full text-xs font-semibold text-gray-300 hover:text-white transition-all";
+
+            if(tab === 'pos') {
+                posView.classList.remove("hidden");
+                btnPos.className = "px-4 py-2 rounded-full text-xs font-semibold spotify-green text-black transition-all shadow-md";
+            } else if(tab === 'gallery') {
+                galleryView.classList.remove("hidden");
+                btnGallery.className = "px-4 py-2 rounded-full text-xs font-semibold spotify-green text-black transition-all shadow-md";
+            } else {
+                invView.classList.remove("hidden");
+                btnInv.className = "px-4 py-2 rounded-full text-xs font-semibold spotify-green text-black transition-all shadow-md";
+            }
+        }
+
+        function openFullscreenModal(id) {
+            activeModalProduct = products.find(p => p.id === id);
+            if(!activeModalProduct) return;
+
+            document.getElementById("modal-product-icon").className = `fa-solid ${activeModalProduct.icon} text-spotify text-6xl`;
+            document.getElementById("modal-product-cat").innerText = activeModalProduct.category;
+            document.getElementById("modal-product-name").innerText = activeModalProduct.name;
+            document.getElementById("modal-product-desc").innerText = activeModalProduct.desc;
+            document.getElementById("modal-product-material").innerText = activeModalProduct.material;
+            document.getElementById("modal-product-pounds").innerText = activeModalProduct.pounds;
+            document.getElementById("modal-product-price").innerText = `$${activeModalProduct.price.toFixed(2)}`;
+
+            document.getElementById("fullscreen-modal").classList.remove("hidden");
+        }
+
+        function closeFullscreenModal() {
+            document.getElementById("fullscreen-modal").classList.add("hidden");
+        }
+
+        function addCurrentModalToCart() {
+            if(activeModalProduct) {
+                addToCart(activeModalProduct.id);
+                closeFullscreenModal();
+            }
+        }
+
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            if(!product || product.stock <= 0) return alert("Producto agotado");
+
+            const existing = cart.find(item => item.id === id);
+            if(existing) {
+                existing.qty++;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            const container = document.getElementById("cart-items");
+            const countBadge = document.getElementById("cart-count");
+            const totalEl = document.getElementById("cart-total");
+
+            container.innerHTML = "";
+            if(cart.length === 0) {
+                container.innerHTML = `<p class="text-gray-500 text-sm text-center py-16">Tu carrito está vacío.<br>Selecciona un producto para comenzar.</p>`;
+                countBadge.innerText = "0 items";
+                totalEl.innerText = "$0.00";
+                return;
+            }
+
+            let total = 0;
+            let totalCount = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price * item.qty;
+                totalCount += item.qty;
+                container.innerHTML += `
+                    <div class="bg-black/30 p-3 rounded-2xl flex justify-between items-center border border-white/5">
+                        <div>
+                            <h5 class="text-white text-xs font-bold">${item.name}</h5>
+                            <p class="text-[10px] text-spotify mt-0.5">$${item.price.toFixed(2)} x ${item.qty}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" class="text-gray-500 hover:text-red-400 p-1"><i class="fa-solid fa-trash text-xs"></i></button>
+                    </div>
+                `;
+            });
+
+            countBadge.innerText = `${totalCount} items`;
+            totalEl.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+        }
+
+        function openAddModal() {
+            document.getElementById("add-modal").classList.remove("hidden");
+        }
+
+        function closeAddModal() {
+            document.getElementById("add-modal").classList.add("hidden");
+        }
+
+        function saveNewProduct() {
+            const name = document.getElementById("new-name").value;
+            const category = document.getElementById("new-cat").value;
+            const price = parseFloat(document.getElementById("new-price").value);
+            const stock = parseInt(document.getElementById("new-stock").value);
+            const material = document.getElementById("new-material").value;
+            const pounds = document.getElementById("new-pounds").value;
+
+            if(!name || isNaN(price) || isNaN(stock)) {
+                alert("Por favor completa los campos principales correctamente.");
+                return;
+            }
+
+            const newProduct = {
+                id: products.length + 1,
+                name,
+                category: category || "General",
+                price,
+                stock,
+                material: material || "Cartón y Papel",
+                pounds: pounds || "2.0 Libras",
+                icon: "fa-gift",
+                desc: "Nuevo producto registrado en el estudio SOMA."
+            };
+
+            products.push(newProduct);
+            renderProducts();
+            closeAddModal();
+
+            // Limpiar inputs
+            document.getElementById("new-name").value = "";
+            document.getElementById("new-cat").value = "";
+            document.getElementById("new-price").value = "";
+            document.getElementById("new-stock").value = "";
+            document.getElementById("new-material").value = "";
+            document.getElementById("new-pounds").value = "";
+        }
+
+        function sendWhatsAppTicket() {
+            if(cart.length === 0) {
+                alert("El ticket está vacío.");
+                return;
+            }
+
+            let message = "*SOMA: TICKET DE VENTA* %0A";
+            let total = 0;
+            cart.forEach(item => {
+                let sub = item.price * item.qty;
+                total += sub;
+                message += `- ${item.name} (${item.qty}x) : $${sub.toFixed(2)} %0A`;
+            });
+            message += `%0A*TOTAL: $${total.toFixed(2)}*%0A¡Gracias por tu compra en SOMA Piñatas!`;
+
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+        }
+
+        // Inicializar
+        renderProducts();
+    </script>
+</body>
+</html>---
 title: 'Monaca'
 order: 1000
 tocTitle: More
